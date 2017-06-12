@@ -11,13 +11,13 @@
 <script>
 
 /**
- * The only true button. Another example
+ * The only true button.
  */
 export default {
 	name: 'ButtonComponent',
 	props: {
 		/**
-		 * The color for the button. True
+		 * The color for the button.
 		 */
 		color: {
 			type: String,

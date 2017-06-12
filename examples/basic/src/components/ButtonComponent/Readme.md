@@ -1,6 +1,6 @@
 Basic button:
 
-    <ButtonComponent>Push Me Enter Example</ButtonComponent>
+    <ButtonComponent>Push Me</ButtonComponent>
 
 Big pink button:
 
