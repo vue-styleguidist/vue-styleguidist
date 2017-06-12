@@ -1,4 +1,4 @@
-Each example has its own state that you can access at the `state` variable and change with the `setState` function. Default state is `{}`.
+You can modify the code through the playground
 
     let isOpen = false;
 
@@ -10,7 +10,7 @@ Each example has its own state that you can access at the `state` variable and 
       </Modal>
     </div>
 
-If you want to set the default state you can do something like that:
+The variables are reactive:
 
     let count = 1;
 

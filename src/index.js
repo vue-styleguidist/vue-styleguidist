@@ -1,0 +1,85 @@
+import './polyfills';
+import './styles';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import isFinite from 'lodash/isFinite';
+import {
+	getInfoFromHash,
+	filterComponentExamples,
+	filterComponentsInSectionsByExactName,
+	findSection,
+	processSections,
+	setSlugs,
+	slugger,
+} from './utils/utils';
+import StyleGuide from 'rsg-components/StyleGuide';
+
+// Examples code revision to rerender only code examples (not the whole page) when code changes
+let codeKey = 0;
+
+function renderStyleguide() {
+	const styleguide = require('!!../loaders/styleguide-loader!./index.js');
+
+	let sections = processSections(styleguide.sections, styleguide.vuex);
+
+	// Parse URL hash to check if the components list must be filtered
+	const {
+		// Name of the filtered component/section to show isolated (/#!/Button → Button)
+		targetName,
+		// Index of the fenced block example of the filtered component isolate (/#!/Button/1 → 1)
+		targetIndex,
+	} = getInfoFromHash();
+
+	let isolatedComponent = false;
+	let isolatedExample = false;
+	let isolatedSection = false;
+
+	// Filter the requested component id required
+	if (targetName) {
+		const filteredComponents = filterComponentsInSectionsByExactName(sections, targetName);
+		if (filteredComponents.length) {
+			sections = [{ components: filteredComponents }];
+			isolatedComponent = true;
+		} else {
+			const section = findSection(sections, targetName);
+			sections = section ? [section] : [];
+			isolatedSection = true;
+		}
+
+		// If a single component is filtered and a fenced block index is specified hide the other examples
+		if (filteredComponents.length === 1 && isFinite(targetIndex)) {
+			filteredComponents[0] = filterComponentExamples(filteredComponents[0], targetIndex);
+			isolatedExample = true;
+		}
+	}
+
+	// Reset slugger for each render to be deterministic
+	slugger.reset();
+	sections = setSlugs(sections);
+
+	ReactDOM.render(
+		<StyleGuide
+			codeKey={codeKey}
+			config={styleguide.config}
+			welcomeScreen={styleguide.welcomeScreen}
+			patterns={styleguide.patterns}
+			sections={sections}
+			isolatedComponent={isolatedComponent}
+			isolatedExample={isolatedExample}
+			isolatedSection={isolatedSection}
+		/>,
+		document.getElementById('app')
+	);
+}
+
+window.addEventListener('hashchange', renderStyleguide);
+
+/* istanbul ignore if */
+if (module.hot) {
+	module.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
+		codeKey += 1;
+		renderStyleguide();
+	});
+}
+
+renderStyleguide();
