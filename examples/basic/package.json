@@ -19,7 +19,7 @@
     "webpack": "^2.2.1"
   },
   "scripts": {
-    "vue-styleguide": "vue-styleguidist server",
-    "vue-styleguide:build": "vue-styleguidist build"
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
   }
 }

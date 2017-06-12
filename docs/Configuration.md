@@ -233,6 +233,12 @@ Type: `Boolean`, default: `false`
 
 Print debug information. Same as `--verbose` command line switch.
 
+#### `vuex`
+
+Type: `String`, optional
+
+For implementations with vuex, you can add the path where the store exports.
+
 #### `webpackConfig`
 
 Type: `Object` or `Function`, optional

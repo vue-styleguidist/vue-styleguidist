@@ -78,6 +78,25 @@ Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the co
     <Button size="large">Push Me</Button>
     ```
 
+    You can also initialize vue to construct more complex examples
+
+    ```
+    const names = require('dog-names').all;
+
+    new Vue({
+      data(){
+        return {
+          list: names
+        }
+      },
+      template: `
+        <div>
+          <RandomButton :variants="list" />
+        </div>
+      `
+    })
+    ```
+
     This example is rendered only as highlighted source code, not an actual component:
 
     ```html
