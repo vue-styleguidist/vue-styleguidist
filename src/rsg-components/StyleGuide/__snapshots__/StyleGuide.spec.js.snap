@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderer should render logo, table of contents and passed children 1`] = `
+<div
+  className=""
+>
+  <main>
+    <h1>
+      Content
+    </h1>
+    <footer>
+      <_class
+        text="Generated with [Vue Styleguidist](http://vue-styleguidist.js.org/)"
+      />
+    </footer>
+  </main>
+  <div>
+    <div>
+      <_class>
+        Hello
+      </_class>
+    </div>
+    <TableOfContents
+      sections={
+        Array [
+          Object {
+            "components": Array [
+              Object {
+                "filepath": "components/foo.js",
+                "name": "Foo",
+                "pathLine": "components/foo.js",
+                "props": Object {
+                  "description": "Foo foo",
+                },
+              },
+              Object {
+                "filepath": "components/bar.js",
+                "name": "Bar",
+                "pathLine": "components/bar.js",
+                "props": Object {
+                  "description": "Bar bar",
+                },
+              },
+            ],
+          },
+        ]
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`should render components list 1`] = `
+<_class
+  hasSidebar={true}
+  homepageUrl="https://github.com/vue-styleguidist/vue-styleguidist/"
+  title="Hello"
+  toc={
+    <TableOfContents
+      sections={
+        Array [
+          Object {
+            "components": Array [
+              Object {
+                "filepath": "components/foo.js",
+                "name": "Foo",
+                "pathLine": "components/foo.js",
+                "props": Object {
+                  "description": "Foo foo",
+                },
+              },
+              Object {
+                "filepath": "components/bar.js",
+                "name": "Bar",
+                "pathLine": "components/bar.js",
+                "props": Object {
+                  "description": "Bar bar",
+                },
+              },
+            ],
+          },
+        ]
+      }
+    />
+  }
+>
+  <Sections
+    sections={
+      Array [
+        Object {
+          "components": Array [
+            Object {
+              "filepath": "components/foo.js",
+              "name": "Foo",
+              "pathLine": "components/foo.js",
+              "props": Object {
+                "description": "Foo foo",
+              },
+            },
+            Object {
+              "filepath": "components/bar.js",
+              "name": "Bar",
+              "pathLine": "components/bar.js",
+              "props": Object {
+                "description": "Bar bar",
+              },
+            },
+          ],
+        },
+      ]
+    }
+  />
+</_class>
+`;
+
+exports[`should render welcome screen 1`] = `<_class />`;
