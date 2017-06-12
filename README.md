@@ -20,6 +20,10 @@ Vue Styleguidist is a style guide generator for Vue components. It lists compone
 * [Locating components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Components.md): point Styleguidist to your Vue components
 * [Configuring webpack](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Webpack.md): tell Styleguidist how to load your code
 
+## Showcases
+
+If you have a project published, you can share it here
+
 ## Examples
 
 * [Basic style guide](http://rafaelescala.com/vue-styleguide/), [source](./examples/basic)
