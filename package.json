@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "scripts/index.js",
   "bin": {
     "vue-styleguidist": "bin/styleguidist.js"
   },

@@ -1,5 +1,7 @@
 # Vue Styleguidist
 
+[![npm](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
+
 **Style guide — documentation — component workbench**
 
 >Project was started when not finding a tool that generates documentation of components with hot reloading, read documentation and have a playground. Created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files. Only supports 2.x.
