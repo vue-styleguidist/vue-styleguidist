@@ -7,5 +7,5 @@ module.exports = {
 			loaders,
 		},
 	},
-	vuex: 'examples/basic/src/store/index.js',
+	vuex: 'src/store/index.js',
 };
