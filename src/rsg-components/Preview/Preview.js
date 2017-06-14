@@ -83,7 +83,7 @@ export default class Preview extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
 		evalInContext: PropTypes.func.isRequired,
-		vuex: PropTypes.object.isRequired,
+		vuex: PropTypes.object,
 	};
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
@@ -163,9 +163,9 @@ export default class Preview extends Component {
 		}
 
 		if (vuex) {
-			extendsComponent = { el, store: vuex.default };
+			extendsComponent = { store: vuex.default };
 		}
-		component = Object.assign(extendsComponent, component);
+		component = Object.assign({ el }, extendsComponent, component);
 		new Vue(component);
 	}
 

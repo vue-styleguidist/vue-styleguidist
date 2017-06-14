@@ -109,7 +109,7 @@ PlaygroundRenderer.propTypes = {
 	showCode: PropTypes.bool.isRequired,
 	index: PropTypes.number.isRequired,
 	evalInContext: PropTypes.func.isRequired,
-	vuex: PropTypes.object.isRequired,
+	vuex: PropTypes.object,
 	onChange: PropTypes.func.isRequired,
 	onCodeToggle: PropTypes.func.isRequired,
 	name: PropTypes.string,

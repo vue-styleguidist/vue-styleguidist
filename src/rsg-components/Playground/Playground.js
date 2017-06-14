@@ -7,7 +7,7 @@ export default class Playground extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
 		evalInContext: PropTypes.func.isRequired,
-		vuex: PropTypes.object.isRequired,
+		vuex: PropTypes.object,
 		index: PropTypes.number.isRequired,
 		name: PropTypes.string,
 	};
