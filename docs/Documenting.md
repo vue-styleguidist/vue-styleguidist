@@ -62,6 +62,8 @@ export default {
 
 Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block without a language tag will be rendered as a  Vue component with live editable preview.
 
+> **Note:** [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) The default name of the component is the name of the .vue file. If you need a custom name configuration, type as an issue in [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api)
+
     Vue component example:
 
         <Button size="large">Push Me</Button>
@@ -148,14 +150,14 @@ insertAtCursor(text) {
 By default, all props your components have are considered to be public and are published. In some rare cases you might want to remove a prop from the documentation while keeping it in the code. To do so, mark the prop with JSDoc [`@ignore`](http://usejsdoc.org/tags-ignore.html) tag to remove it from the docs:
 
 ```javascript
-MyComponent.propTypes = {
-  /**
-   * A prop that should not be visible in the documentation.
-   *
-   * @ignore
-   */
-  hiddenProp: React.PropTypes.string
-}
+  props: {
+    /**
+    * @ignore
+    */
+    color: {
+      type: String,
+      default: '#333'
+    }
 ```
 
 ## Using JSDoc tags
