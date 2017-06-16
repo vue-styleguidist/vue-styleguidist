@@ -9,6 +9,7 @@ import {
 	filterComponentsInSectionsByExactName,
 	findSection,
 	processSections,
+	processMixins,
 	setSlugs,
 	slugger,
 } from './utils/utils';
@@ -21,7 +22,7 @@ function renderStyleguide() {
 	const styleguide = require('!!../loaders/styleguide-loader!./index.js');
 
 	let sections = processSections(styleguide.sections, styleguide.vuex);
-
+	processMixins(styleguide.mixins);
 	// Parse URL hash to check if the components list must be filtered
 	const {
 		// Name of the filtered component/section to show isolated (/#!/Button → Button)

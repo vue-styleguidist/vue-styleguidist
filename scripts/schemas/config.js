@@ -72,6 +72,11 @@ module.exports = {
 		type: 'string',
 		default: 'base16-light',
 	},
+	mixins: {
+		type: 'array',
+		default: [],
+		example: ['path/to/mixin.js', 'path/to/created.js'],
+	},
 	previewDelay: {
 		type: 'number',
 		default: 500,

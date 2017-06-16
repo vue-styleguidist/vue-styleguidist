@@ -62,8 +62,6 @@ export default {
 
 Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block without a language tag will be rendered as a  Vue component with live editable preview.
 
-> **Note:** [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) The default name of the component is the name of the .vue file. If you need a custom name configuration, type as an issue in [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api)
-
     Vue component example:
 
         <Button size="large">Push Me</Button>

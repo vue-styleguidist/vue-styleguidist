@@ -221,3 +221,17 @@ export function filterComponentExamples(component, index) {
 	newComponent.props.examples = [component.props.examples[index]];
 	return newComponent;
 }
+
+export function processMixins(mixins) {
+	mixins.forEach(mixin => {
+		if (mixin.default) {
+			globalizeMixin(mixin.default);
+		} else {
+			globalizeMixin(mixin);
+		}
+	});
+}
+
+export function globalizeMixin(mixin) {
+	Vue.mixin(mixin);
+}

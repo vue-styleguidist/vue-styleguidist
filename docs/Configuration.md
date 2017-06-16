@@ -114,6 +114,29 @@ Type: `String`, default: `base16-light`
 
 [CodeMirror theme](http://codemirror.net/demo/theme.html) name to use for syntax highlighting in the editor.
 
+#### `mixins`
+
+Type: `Array`, default: `[]`
+
+Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components.
+
+For example:
+
+```javascript
+module.exports = {
+  mixins: [
+    'src/mixins/logger.js',
+    'src/mixins/global.js',
+    // another mixin
+    {
+      created() {
+        console.log('component created')
+      }
+    }
+  ]
+};
+```
+
 #### `ignore`
 
 Type: `String[]`, default: `['**/__tests__/**', '**/*.test.js', '**/*.test.jsx', '**/*.spec.js', '**/*.spec.jsx']`

@@ -1,6 +1,7 @@
 'use strict';
 
 const pick = require('lodash/pick');
+const path = require('path');
 const commonDir = require('common-dir');
 const generate = require('escodegen').generate;
 const toAst = require('to-ast');
@@ -50,6 +51,13 @@ module.exports.pitch = function() {
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0;
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined;
 	const vuex = config.vuex ? requireIt(config.vuex) : undefined;
+	const mixins = config.mixins.map(mixin => {
+		if (typeof mixin === 'string') {
+			mixin = path.resolve(config.configDir, mixin);
+			return requireIt(mixin);
+		}
+		return mixin;
+	});
 
 	/* istanbul ignore if */
 	if (config.verbose) {
@@ -73,6 +81,7 @@ module.exports.pitch = function() {
 		patterns,
 		sections,
 		vuex,
+		mixins,
 	};
 
 	return `

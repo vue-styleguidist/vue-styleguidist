@@ -1,10 +1,10 @@
 Basic button:
 
-    <ButtonComponent>Push Me</ButtonComponent>
+    <Button>Push Me</Button>
 
 Big pink button:
 
-    <ButtonComponent size="large" color="deeppink">Lick Me</ButtonComponent>
+    <Button size="large" color="deeppink">Lick Me</Button>
 
 And you *can* **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
 
