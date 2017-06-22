@@ -10,11 +10,14 @@
 
 <script>
 
+import loggerMixin from '../../mixins/loggerMixin';
+
 /**
  * The only true button.
  */
 export default {
 	name: 'Button',
+	mixins: [loggerMixin],
 	props: {
 		/**
 		 * The color for the button.
@@ -33,6 +36,7 @@ export default {
 		},
 		/**
 		 * Gets called when the user clicks on the button
+		 * @ignore
 		 */
 		onClick: {
 			type:Function,

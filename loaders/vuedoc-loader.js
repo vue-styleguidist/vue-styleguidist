@@ -18,7 +18,7 @@ module.exports = function(source) {
 	const file = this.request.split('!').pop();
 	const config = this._styleguidist;
 	let componentInfo = {};
-	const defaultParser = filePath => vueDocs.parse(filePath);
+	const defaultParser = file => vueDocs.parse(file);
 	const propsParser = config.propsParser || defaultParser;
 
 	try {
@@ -56,6 +56,14 @@ module.exports = function(source) {
 			const examplePath = examples[examples.length - 1].description;
 			componentInfo.example = requireIt(`!!${examplesLoader}!${examplePath}`);
 		}
+	}
+	if (componentInfo.props) {
+		const props = componentInfo.props;
+		Object.keys(props).forEach(key => {
+			if (props[key].tags && props[key].tags.ignore) {
+				delete props[key];
+			}
+		});
 	}
 	const examplesFile = config.getExampleFilename(file);
 	componentInfo.examples = getExamples(

@@ -157,8 +157,8 @@ Function that allows you to override the mechanism used to parse props from a so
 
 ```javascript
 module.exports = {
-  propsParser(filePath, source) {
-    return require('vue-docgen-api').parse(filePath);
+  propsParser(file, source) {
+    return require('vue-docgen-api').parse(file);
   }
 };
 ```

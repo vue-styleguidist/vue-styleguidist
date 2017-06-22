@@ -21,17 +21,17 @@ Add these scripts to your `package.json`:
 ```json
 {
   "scripts": {
-    "vue-styleguide": "vue-styleguidist server",
-    "vue-styleguide:build": "vue-styleguidist build"
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
   }
 }
 ```
 
 ## 3. Start your style guide
 
-Run **`npm run vue-styleguide`** to start style a guide dev server.
+Run **`npm run styleguide`** to start style a guide dev server.
 
-Run **`npm run vue-styleguide:build`** to build a static version.
+Run **`npm run styleguide:build`** to build a static version.
 
 ## 4. Start documenting your components
 

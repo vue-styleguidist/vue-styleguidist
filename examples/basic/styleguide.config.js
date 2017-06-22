@@ -7,6 +7,5 @@ module.exports = {
 			loaders,
 		},
 	},
-	mixins: ['src/mixins/logger.js'],
 	vuex: 'src/store/index.js',
 };
