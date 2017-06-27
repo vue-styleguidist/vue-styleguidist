@@ -1,6 +1,7 @@
 # Vue Styleguidist
 
 [![npm](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
+<span class="badge-npmdownloads"><a href="https://npmjs.org/package/vue-styleguidist" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/vue-styleguidist.svg" alt="NPM downloads" /></a></span>
 
 **Style guide — documentation — component workbench**
 
