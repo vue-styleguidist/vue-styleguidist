@@ -28,6 +28,7 @@ If you have a project published, you can share it here
 ## Examples
 
 * [Basic style guide](http://rafaelescala.com/vue-styleguide/), [source](./examples/basic)
+* [Buefy style guide with sections, customized styles](http://rafaelescala.com/buefy-example/), [source](https://github.com/vue-styleguidist/buefy-styleguide-example)
 
 ## Advanced documentation
 
