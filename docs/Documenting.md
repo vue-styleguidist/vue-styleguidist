@@ -58,6 +58,8 @@ export default {
 
 > **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) library.
 
+> **Note:** The 'name' property in the component is mandatory, as it will be the component name to use in the examples. If you need to configure the component name before you document it, you can review the following [example](https://github.com/vue-styleguidist/buefy-styleguide-example/blob/master/styleguide.config.js#L43)
+
 ## Usage examples and Readme files
 
 Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block without a language tag will be rendered as a  Vue component with live editable preview.
