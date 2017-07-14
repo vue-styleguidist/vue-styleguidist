@@ -1,11 +1,15 @@
+/* eslint-disable import/first */
+
 import './polyfills';
-import './styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import isFinite from 'lodash/isFinite';
+import slots from 'rsg-components/slots';
+import StyleGuide from 'rsg-components/StyleGuide';
 import {
 	getInfoFromHash,
 	filterComponentExamples,
+	filterSectionExamples,
 	filterComponentsInSectionsByExactName,
 	findSection,
 	processSections,
@@ -13,12 +17,13 @@ import {
 	setSlugs,
 	slugger,
 } from './utils/utils';
-import StyleGuide from 'rsg-components/StyleGuide';
+import './styles';
 
 // Examples code revision to rerender only code examples (not the whole page) when code changes
-let codeKey = 0;
+let codeRevision = 0;
 
 function renderStyleguide() {
+	// eslint-disable-next-line import/no-unresolved
 	const styleguide = require('!!../loaders/styleguide-loader!./index.js');
 
 	let sections = processSections(styleguide.sections, styleguide.vuex);
@@ -47,10 +52,15 @@ function renderStyleguide() {
 			isolatedSection = true;
 		}
 
-		// If a single component is filtered and a fenced block index is specified hide the other examples
-		if (filteredComponents.length === 1 && isFinite(targetIndex)) {
-			filteredComponents[0] = filterComponentExamples(filteredComponents[0], targetIndex);
-			isolatedExample = true;
+		// If a single component or section is filtered and a fenced block index is specified hide all other examples
+		if (isFinite(targetIndex)) {
+			if (filteredComponents.length === 1) {
+				filteredComponents[0] = filterComponentExamples(filteredComponents[0], targetIndex);
+				isolatedExample = true;
+			} else if (sections.length === 1) {
+				sections[0] = filterSectionExamples(sections[0], targetIndex);
+				isolatedExample = true;
+			}
 		}
 	}
 
@@ -58,10 +68,19 @@ function renderStyleguide() {
 	slugger.reset();
 	sections = setSlugs(sections);
 
+	let documentTitle = styleguide.config.title;
+	if (isolatedComponent || isolatedExample) {
+		documentTitle = sections[0].components[0].name + ' — ' + documentTitle;
+	} else if (isolatedSection) {
+		documentTitle = sections[0].name + ' — ' + documentTitle;
+	}
+	document.title = documentTitle;
+
 	ReactDOM.render(
 		<StyleGuide
-			codeKey={codeKey}
+			codeRevision={codeRevision}
 			config={styleguide.config}
+			slots={slots}
 			welcomeScreen={styleguide.welcomeScreen}
 			patterns={styleguide.patterns}
 			sections={sections}
@@ -78,7 +97,7 @@ window.addEventListener('hashchange', renderStyleguide);
 /* istanbul ignore if */
 if (module.hot) {
 	module.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
-		codeKey += 1;
+		codeRevision += 1;
 		renderStyleguide();
 	});
 }

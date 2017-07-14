@@ -1,10 +1,16 @@
 /* eslint-disable no-console */
 
-// Make Enzyme functions available in all test files without importing
 import { shallow, render, mount } from 'enzyme';
+import keymirror from 'keymirror';
+import * as theme from '../src/styles/theme';
+
+// Make Enzyme functions available in all test files without importing
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
+
+// Get class names from styles function
+global.classes = styles => keymirror(styles(theme));
 
 // Skip createElement warnings but fail tests on any other warning
 console.error = message => {
@@ -18,11 +24,10 @@ console.error = message => {
 };
 
 // document.createRange “polyfill” for CodeMirror
-import noop from 'lodash/noop';
 document.createRange = function() {
 	return {
-		setEnd: noop,
-		setStart: noop,
+		setEnd: () => {},
+		setStart: () => {},
 		getBoundingClientRect() {
 			return {
 				right: 0,
@@ -37,7 +42,7 @@ document.createRange = function() {
 };
 
 // requestAnimationFrame “polyfill”
-window.requestAnimationFrame = a => a;
+window.requestAnimationFrame = a => a();
 
 jest.mock('react-scripts/config/webpack.config.dev', () => ({ cra: true }), { virtual: true });
 jest.mock('webpack-dev-server', function() {

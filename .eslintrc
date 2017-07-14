@@ -8,12 +8,10 @@
 	"rules": {
 		"compat/compat": 2
 	},
-	"globals": {
-		"jest": false,
-		"expect": false,
-		"shallow": false,
-		"render": false,
-		"mount": false,
-		"html": false
-	}
+  "globals": {
+    "classes": false,
+    "shallow": false,
+    "render": false,
+    "mount": false
+  }
 }

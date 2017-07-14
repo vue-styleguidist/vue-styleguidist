@@ -9,4 +9,5 @@ module.exports = {
 	DOCS_COMPONENTS: GITHUB_HOMEPAGE + 'blob/master/docs/Components.md',
 	DOCS_WEBPACK: GITHUB_HOMEPAGE + 'blob/master/docs/Webpack.md',
 	DOCS_DOCUMENTING: GITHUB_HOMEPAGE + 'blob/master/docs/Documenting.md',
+	DOCS_THIRDPARTIES: '',
 };

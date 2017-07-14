@@ -1,18 +1,23 @@
 'use strict';
 
+// Make sure user has webpack installed
+require('./utils/ensureWebpack');
+
 const build = require('./build');
 const server = require('./server');
 const makeWebpackConfig = require('./make-webpack-config');
 const getConfig = require('./config');
+const setupLogger = require('./logger');
 
 /**
  * Initialize Vue Styleguide API.
  *
- * @param {object} [config] Vue Styleguidist config.
+ * @param {object} [config] Styleguidist config.
  * @returns {object} API.
  */
 module.exports = function(config) {
 	config = getConfig(config);
+	setupLogger(config.logger, config.verbose, {});
 
 	return {
 		/**

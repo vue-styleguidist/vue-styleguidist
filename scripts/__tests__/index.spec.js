@@ -1,9 +1,9 @@
+import last from 'lodash/last';
+import styleguidist from '../index';
+
 jest.mock('../build');
 jest.mock('../server');
 jest.mock('../utils/getWebpackVersion');
-
-import last from 'lodash/last';
-import styleguidist from '../index';
 
 const getDefaultWebpackConfig = () => styleguidist().makeWebpackConfig();
 
@@ -85,10 +85,6 @@ describe('makeWebpackConfig', () => {
 	});
 
 	it('should apply updateWebpackConfig config option', () => {
-		/* eslint-disable no-console */
-		const originalWarn = console.warn;
-
-		console.warn = jest.fn();
 		const defaultWebpackConfig = getDefaultWebpackConfig();
 		const api = styleguidist({
 			dangerouslyUpdateWebpackConfig: (webpackConfig, env) => {
@@ -103,18 +99,15 @@ describe('makeWebpackConfig', () => {
 			defaultWebpackConfig.resolve.extensions.length + 1
 		);
 		expect(last(result.resolve.extensions)).toEqual('production');
-
-		console.warn = originalWarn;
-		/* eslint-enable no-console */
 	});
 
 	it('should merge Create React App Webpack config', () => {
-		process.chdir('test/apps/cra');
+		process.chdir('test/apps/basic');
 		const api = styleguidist();
 		const result = api.makeWebpackConfig();
 
 		expect(result).toBeTruthy();
-		expect(result.cra).toBeTruthy();
+		expect(result.module).toBeTruthy();
 	});
 
 	it('should add json-loader', () => {
@@ -133,6 +126,21 @@ describe('makeWebpackConfig', () => {
 		const result = api.makeWebpackConfig();
 
 		expect(result.entry).toEqual(expect.arrayContaining(modules));
+	});
+
+	it('should add webpack alias for each styleguideComponents config option item', () => {
+		const api = styleguidist({
+			styleguideComponents: {
+				Logo: 'styleguide/components/Logo',
+				StyleGuideRenderer: 'styleguide/components/StyleGuide',
+			},
+		});
+		const result = api.makeWebpackConfig();
+
+		expect(result.resolve.alias).toMatchObject({
+			'rsg-components/Logo': 'styleguide/components/Logo',
+			'rsg-components/StyleGuide/StyleGuideRenderer': 'styleguide/components/StyleGuide',
+		});
 	});
 });
 
