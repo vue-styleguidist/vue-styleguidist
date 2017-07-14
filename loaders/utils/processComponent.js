@@ -3,10 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 const requireIt = require('./requireIt');
-
+const logger = require('glogg')('rsg');
 const vueDocLoader = path.resolve(__dirname, '../vuedoc-loader.js');
 
-/* eslint-disable no-console */
 /**
  * References the filepath of the metadata file.
  *
@@ -44,7 +43,7 @@ module.exports = function processComponent(filepath, config) {
 		const message =
 			`Error when parsing ${filepath}:\n\n` +
 			'Only can parse files .vue:\n' +
-			console.log(`\n${message}\n`);
+			logger.debug(message);
 		throw new Error(message);
 	}
 	const examplesFile = config.getExampleFilename(filepath);
