@@ -92,13 +92,26 @@ function renderType(type) {
 
 function renderEnum(prop) {
 	if (!Array.isArray(getType(prop).value)) {
-		return <span>{getType(prop).value}</span>;
+		return (
+			<span>
+				{getType(prop).value}
+			</span>
+		);
 	}
 
 	const values = getType(prop).value.map(({ value }) =>
-		<Code key={value}>{showSpaces(unquote(value))}</Code>
+		<Code key={value}>
+			{showSpaces(unquote(value))}
+		</Code>
 	);
-	return <span>One of: <Group separator=", " inline>{values}</Group></span>;
+	return (
+		<span>
+			One of:{' '}
+			<Group separator=", " inline>
+				{values}
+			</Group>
+		</span>
+	);
 }
 
 export function PropsRenderer({ classes, props }) {
@@ -110,10 +123,16 @@ export function PropsRenderer({ classes, props }) {
 					<Name name={name} deprecated={deprecated} />
 				</td>
 				<td className={classes.cell}>
-					<Code className={classes.type}>{renderType(getType(prop))}</Code>
+					<Code className={classes.type}>
+						{renderType(getType(prop))}
+					</Code>
 				</td>
-				<td className={classes.cell}>{renderDefault(prop)}</td>
-				<td className={classes.cell + ' ' + classes.cellDesc}>{renderDescription(prop)}</td>
+				<td className={classes.cell}>
+					{renderDefault(prop)}
+				</td>
+				<td className={classes.cell + ' ' + classes.cellDesc}>
+					{renderDescription(prop)}
+				</td>
 			</tr>
 		);
 	}
@@ -121,7 +140,7 @@ export function PropsRenderer({ classes, props }) {
 	function renderDefault(prop) {
 		if (prop.required) {
 			return <span className={classes.required}>Required</span>;
-		} else if (prop.defaultValue) {
+		} else if (prop.defaultValue || prop.defaultValue === false) {
 			if (prop.type && prop.type.name === 'func') {
 				return (
 					<span className={classes.function} title={showSpaces(unquote(prop.defaultValue.value))}>
@@ -130,7 +149,11 @@ export function PropsRenderer({ classes, props }) {
 				);
 			}
 
-			return <Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>;
+			return (
+				<Code>
+					{showSpaces(unquote(prop.defaultValue.value))}
+				</Code>
+			);
 		}
 		return '';
 	}
@@ -142,7 +165,10 @@ export function PropsRenderer({ classes, props }) {
 		return (
 			<div>
 				{description && <Markdown text={description} />}
-				{extra && <div className={classes.para}>{extra}</div>}
+				{extra &&
+					<div className={classes.para}>
+						{extra}
+					</div>}
 				<JsDoc {...tags} />
 				{args.length > 0 &&
 					<div>
@@ -183,13 +209,26 @@ export function PropsRenderer({ classes, props }) {
 
 	function renderUnion(prop) {
 		if (!Array.isArray(getType(prop).value)) {
-			return <span>{getType(prop).value}</span>;
+			return (
+				<span>
+					{getType(prop).value}
+				</span>
+			);
 		}
 
 		const values = getType(prop).value.map(value =>
-			<Code key={value.name} className={classes.type}>{renderType(value)}</Code>
+			<Code key={value.name} className={classes.type}>
+				{renderType(value)}
+			</Code>
 		);
-		return <span>One of type: <Group separator=", " inline>{values}</Group></span>;
+		return (
+			<span>
+				One of type:{' '}
+				<Group separator=", " inline>
+					{values}
+				</Group>
+			</span>
+		);
 	}
 
 	function renderShape(props) {
@@ -200,9 +239,15 @@ export function PropsRenderer({ classes, props }) {
 			const description = prop.description;
 			rows.push(
 				<div key={name}>
-					<Code className={classes.name}>{name}</Code>{': '}
-					<Code className={classes.type}>{renderType(prop)}</Code>
-					{defaultValue && ' — '}{defaultValue}
+					<Code className={classes.name}>
+						{name}
+					</Code>
+					{': '}
+					<Code className={classes.type}>
+						{renderType(prop)}
+					</Code>
+					{defaultValue && ' — '}
+					{defaultValue}
 					{description && ' — '}
 					{description && <Markdown text={description} inline />}
 				</div>
