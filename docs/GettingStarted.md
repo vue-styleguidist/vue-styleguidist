@@ -12,8 +12,6 @@
 
 3. [Tell Styleguidist how to load your code](Webpack.md)
 
-> **Note:** Webpack is a peer dependency but your project doesn’t have to use it. Styleguidist works with webpack 1 and webpack 2.
-
 ## 2. Add npm scripts for convenience (optional)
 
 Add these scripts to your `package.json`:

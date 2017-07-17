@@ -7,6 +7,6 @@ module.exports = {
 			loaders,
 		},
 	},
-	serverPort: 6061,
+	serverPort: 6060,
 	vuex: 'src/store/index.js',
 };

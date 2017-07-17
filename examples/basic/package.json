@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue-styleguidist": "^1.1.12",
+    "vue-styleguidist": "^1.2.0",
     "vue-webpack-loaders": "^1.0.5",
     "webpack": "^2.2.1"
   },

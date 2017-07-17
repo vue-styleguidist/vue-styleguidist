@@ -24,14 +24,25 @@ export default class Playground extends Component {
 		const { code } = props;
 		const { previewDelay, showCode } = context.config;
 
+		this.showCode = showCode;
 		this.handleChange = this.handleChange.bind(this);
 		this.handleTabChange = this.handleTabChange.bind(this);
 		this.handleChange = debounce(this.handleChange, previewDelay);
 
 		this.state = {
 			code,
-			activeTab: showCode ? EXAMPLE_TAB_CODE_EDITOR : undefined,
+			activeTab: undefined,
 		};
+	}
+
+	componentDidMount() {
+		if (this.showCode) {
+			setTimeout(() => {
+				this.setState({
+					activeTab: EXAMPLE_TAB_CODE_EDITOR,
+				});
+			}, 0);
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
