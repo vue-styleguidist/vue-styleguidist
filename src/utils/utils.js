@@ -31,7 +31,8 @@ export function globalizeComponent(component) {
 	if (!component.name) {
 		return;
 	}
-	Vue.component(displayName, component.module);
+	const configComponent = component.module.default || component.module;
+	Vue.component(displayName, configComponent);
 }
 
 /**
