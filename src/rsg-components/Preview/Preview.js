@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { transform } from 'buble';
 import PlaygroundError from 'rsg-components/PlaygroundError';
-import esprima from 'esprima';
+import { parse } from 'esprima';
 import Vue from 'vue';
 
 /* eslint-disable react/no-multi-comp */
@@ -129,7 +129,7 @@ export default class Preview extends Component {
 			if (compuse.vueComponent) {
 				configComponent = this.compileCode(compuse.vueComponent);
 			}
-			syntaxTree = esprima.parse(compuse.js);
+			syntaxTree = parse(compuse.js);
 			listVars = getVars(syntaxTree);
 		} catch (err) {
 			this.handleError(err);
