@@ -12,7 +12,7 @@ const styleguide = styleguidist({
   components: './lib/components/**/*.vue',
   webpackConfig: {
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.vue$/,
           exclude: /node_modules/,

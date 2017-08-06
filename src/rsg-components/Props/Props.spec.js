@@ -98,6 +98,55 @@ describe('props columns', () => {
 		expect(actual).toMatchSnapshot();
 	});
 
+	it('should render PropTypes.shape with formatted defaultProps', () => {
+		const actual = render(
+			[
+				`
+				foo: PropTypes.shape({
+					bar: PropTypes.number.isRequired,
+					baz: PropTypes.any,
+				})
+			`,
+			],
+			[
+				`
+				foo: {
+					bar: 123, baz() {
+						return 'foo';
+					},
+					bing() {
+						return 'badaboom';
+					},
+					trotskij: () => 1935,
+					qwarc: { si: 'señor', },
+				}
+			`,
+			]
+		);
+
+		expect(actual).toMatchSnapshot();
+	});
+
+	it('should render PropTypes.shape defaultProps, falling back to Object', () => {
+		const actual = render(
+			[
+				`
+				foo: PropTypes.shape({
+					bar: PropTypes.number.isRequired,
+					baz: PropTypes.any,
+				})
+			`,
+			],
+			[
+				`
+				foo: somethingThatDoesntExist
+			`,
+			]
+		);
+
+		expect(actual).toMatchSnapshot();
+	});
+
 	it('should render PropTypes.shape with description', () => {
 		const actual = render([
 			`foo: PropTypes.shape({
@@ -158,6 +207,18 @@ describe('props columns', () => {
 
 	it('should render function body in tooltip', () => {
 		const actual = render(['fn: PropTypes.func'], ['fn: (e) => console.log(e)']);
+
+		expect(actual).toMatchSnapshot();
+	});
+
+	it('should render function defaultValue as code when undefined', () => {
+		const actual = render(['fn: PropTypes.func'], ['fn: undefined']);
+
+		expect(actual).toMatchSnapshot();
+	});
+
+	it('should render function defaultValue as code when null', () => {
+		const actual = render(['fn: PropTypes.func'], ['fn: null']);
 
 		expect(actual).toMatchSnapshot();
 	});

@@ -10,7 +10,7 @@ exports[`renderer should render logo, table of contents and passed children 1`] 
     </h1>
     <footer>
       <Styled(Markdown)
-        text="Generated with [Vue Styleguidist](http://vue-styleguidist.js.org/)"
+        text="Generated with [Vue Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist)"
       />
     </footer>
   </main>
@@ -85,6 +85,7 @@ exports[`should render components list 1`] = `
   }
 >
   <Sections
+    root={true}
     sections={
       Array [
         Object {

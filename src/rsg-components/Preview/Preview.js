@@ -7,7 +7,12 @@ import Vue from 'vue';
 
 /* eslint-disable react/no-multi-comp */
 const nameVarComponent = '__component__';
-const separateScript = code => {
+
+/*
+ * Reads the code in string and separates the javascript part and the html part
+ * @param {string} code
+ */
+const separateScript = function separateScript(code) {
 	let index;
 	let lines = code.split('\n');
 
@@ -37,8 +42,8 @@ const separateScript = code => {
 			const componentLines = lines.slice(indexVueBegin);
 			const setVue = `
 
-
-			function Vue(params){ ${nameVarComponent} = params }`;
+	// Extract the configuration of the example component
+	function Vue(params){ ${nameVarComponent} = params }`;
 			return {
 				js: lines.slice(0, indexVueBegin).join('\n'),
 				vueComponent: componentLines.join('\n') + setVue,
@@ -57,6 +62,7 @@ const separateScript = code => {
 		html: lines.slice(index).join('\n'),
 	};
 };
+
 const getVars = syntaxTree => {
 	let arr = [];
 	arr = syntaxTree.body.filter(syntax => {
@@ -118,6 +124,7 @@ export default class Preview extends Component {
 		let configComponent;
 		let syntaxTree;
 		let listVars = [];
+		let exampleComponent;
 		if (!code) {
 			return;
 		}
@@ -131,12 +138,12 @@ export default class Preview extends Component {
 			}
 			syntaxTree = parse(compuse.js);
 			listVars = getVars(syntaxTree);
+			exampleComponent = this.evalInContext(compiledCode, listVars, configComponent);
 		} catch (err) {
 			this.handleError(err);
 			compuse.html = '';
 		}
 
-		const exampleComponent = this.evalInContext(compiledCode, listVars, configComponent);
 		let el = this.mountNode.children[0];
 		if (!el) {
 			this.mountNode.innerHTML = ' ';
@@ -183,8 +190,11 @@ export default class Preview extends Component {
 		if (configComponent) {
 			exampleComponentCode = `
 				function getConfig() {
-					eval(${JSON.stringify(compiledCode)});
-					eval(${JSON.stringify(configComponent)});
+					eval(
+						${JSON.stringify(compiledCode)}
+						 + ";" +
+						${JSON.stringify(configComponent)}
+					);
 					return ${nameVarComponent};
 				}
 				return getConfig();

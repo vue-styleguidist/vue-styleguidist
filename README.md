@@ -20,6 +20,7 @@ Vue Styleguidist is a style guide generator for Vue components. It lists compone
 * [Documenting components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Documenting.md): how to write documentation
 * [Locating components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Components.md): point Vue Styleguidist to your Vue components
 * [Configuring webpack](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Webpack.md): tell Vue Styleguidist how to load your code
+* [Cookbook](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Cookbook.md): how to solve common tasks with Vue Styleguidist
 
 ## Showcases
 
@@ -36,6 +37,9 @@ If you have a project published, you can share it here
 * [CLI commands and options](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/CLI.md)
 * [Node API](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/API.md)
 
+## Change log
+
+The change log can be found on the [Releases page](https://github.com/vue-styleguidist/vue-styleguidist/releases).
 
 ## Authors and license
 

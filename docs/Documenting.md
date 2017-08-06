@@ -62,11 +62,13 @@ export default {
 
 ## Usage examples and Readme files
 
-Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block without a language tag will be rendered as a  Vue component with live editable preview.
+Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
 
     Vue component example:
 
+    ```jsx
         <Button size="large">Push Me</Button>
+    ```
 
     One more with generic code fence:
 
@@ -74,15 +76,21 @@ Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the co
     <Button size="large">Push Me</Button>
     ```
 
-    One more with `example` code fence (text editors may alias to `jsx` or `javascript`):
+    You can disable an editor by passing a `noeditor` modifier:
 
-    ```example
-    <Button size="large">Push Me</Button>
+    ```jsx noeditor
+    <Button>Push Me</Button>
+    ```
+
+    To render an example as highlighted source code add a `static` modifier:
+
+    ```jsx static
+    <Button>Push Me</Button>
     ```
 
     You can also initialize vue to construct more complex examples
 
-    ```
+    ```js
     const names = require('dog-names').all;
 
     new Vue({
@@ -99,7 +107,7 @@ Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the co
     })
     ```
 
-    This example is rendered only as highlighted source code, not an actual component:
+    Examples with all other languages are rendered only as highlighted source code, not an actual component:
 
     ```html
     <Button size="large">Push Me</Button>
@@ -233,3 +241,28 @@ export default {
 }
 </script>
 ```
+
+## Writing code examples
+
+Code examples in Markdown use the ES6 syntax. They can access all the components of your style guide using global variables:
+
+```jsx
+<Panel>
+  <p>Using the Button component in the example of the Panel component:</p>
+  <Button>Push Me</Button>
+</Panel>
+```
+
+> **Note:** Styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend, it supports [most of the ES6 features](https://buble.surge.sh/guide/#unsupported-features).
+
+
+You can also `require` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
+
+```jsx
+const mockData = require('./mocks');
+<Message content={mockData.hello}></Message>
+```
+
+> **Note:** You can `require` only from examples in Markdown files. ES6 `import` syntax isn’t supported.
+
+> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `require` it in Markdown

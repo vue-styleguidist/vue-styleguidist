@@ -18,6 +18,7 @@ export default function Examples({ examples, name }, { codeRevision }) {
 								key={`${codeRevision}/${index}`}
 								name={name}
 								index={index}
+								settings={example.settings}
 							/>
 						);
 					case 'markdown':

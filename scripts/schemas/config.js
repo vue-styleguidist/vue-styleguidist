@@ -29,6 +29,9 @@ module.exports = {
 		type: ['string', 'function'],
 		example: 'components/**/[A-Z]*.vue',
 	},
+	contextDependencies: {
+		type: 'array',
+	},
 	configureServer: {
 		type: 'function',
 	},
@@ -181,6 +184,19 @@ module.exports = {
 		},
 		example: 'My Style Guide',
 	},
+	updateExample: {
+		type: 'function',
+		default: props => {
+			if (props.lang === 'example') {
+				props.lang = 'js';
+				logger.warn(
+					'"example" code block language is deprecated. Use "js", "jsx" or "javascript" instead:\n' +
+						consts.DOCS_DOCUMENTING
+				);
+			}
+			return props;
+		},
+	},
 	updateWebpackConfig: {
 		type: 'function',
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`,
@@ -216,7 +232,7 @@ module.exports = {
 		},
 		example: {
 			module: {
-				loaders: [
+				rules: [
 					{
 						test: /\.vue$/,
 						exclude: /node_modules/,

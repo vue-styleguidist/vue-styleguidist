@@ -25,6 +25,22 @@ All paths are relative to config folder.
 
 See examples in the [Components section](Components.md#components).
 
+#### `contextDependencies`
+
+Type: `String[]`, optional
+
+Array of absolute paths that allow you to specify absolute paths of directories to watch for additions or removals of components.
+
+By default Styleguidist uses common parent directory of your components.
+
+```javascript
+module.exports = {
+  contextDependencies: [
+    path.resolve(__dirname, 'lib/components')
+  ]
+}
+```
+
 #### `configureServer`
 
 Type: `Function`, optional
@@ -55,7 +71,7 @@ Allows you to modify webpack config without any restrictions.
 ```javascript
 module.exports = {
   dangerouslyUpdateWebpackConfig(webpackConfig, env) {
-    // WARNING: inspect Styleguidist Webpack config before modifying it, otherwise you may break Styleguidist
+    // WARNING: inspect Vue Styleguidist Webpack config before modifying it, otherwise you may break Styleguidist
     console.log(webpackConfig);
     webpackConfig.externals = {
         jquery: 'jQuery'
@@ -220,7 +236,7 @@ Dev server port.
 
 Type: `Boolean`, default: `false`
 
-Show or hide example code initially. It can be toggled in the UI by clicking the the Code button after each example.
+Show or hide example code initially. It can be toggled in the UI by clicking the Code button after each example.
 
 #### `showUsage`
 
@@ -289,6 +305,49 @@ Type: `String`, default: `<app name from package.json> Style Guide`
 
 Style guide title.
 
+#### `updateExample`
+
+Type: `Function`, optional
+
+Function that modifies code example (Markdown fenced code block). For example you can use it to load examples from files:
+
+```javascript
+module.exports = {
+  updateExample: function(props) {
+    const { settings, lang } = props;
+    if (typeof settings.file === 'string') {
+      const filepath = settings.file;
+      delete settings.file;
+      return {
+        content: fs.readFileSync(filepath),
+        settings,
+        lang,
+      }
+    }
+    return props;
+  }
+};
+```
+
+Use it like this in you Markdown files:
+
+    ```js { "file": "./some/file.js" }
+    ```
+
+You can also use this function to dynamically update some of your fenced code blocks that you do not want to be interpreted as React components by using the [static modifier](Documenting.md#usage-examples-and-readme-files).
+
+```javascript
+module.exports = {
+  updateExample: function(props) {
+    const { settings, lang } = props;
+    if (lang === 'javascript' || lang === 'js' || lang === 'jsx') {
+      settings.static = true;
+    }
+    return props;
+  }
+};
+```
+
 #### `verbose`
 
 Type: `Boolean`, default: `false`
@@ -316,7 +375,7 @@ module.exports = {
       resolve: {
         extensions: ['.es6']
       },
-      loaders: [
+      rules: [
         {
           test: /\.vue$/,
           exclude: /node_modules/,

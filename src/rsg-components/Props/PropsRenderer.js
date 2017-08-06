@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Group from 'react-group';
+import objectToString from 'javascript-stringify';
 import Arguments from 'rsg-components/Arguments';
 import Code from 'rsg-components/Code';
 import JsDoc from 'rsg-components/JsDoc';
@@ -81,16 +82,50 @@ function renderShape(props) {
 	return rows;
 }
 
+const defaultValueBlacklist = ['null', 'undefined'];
+
 function renderDefault(prop) {
 	if (prop.required) {
 		return <Text>Required</Text>;
 	} else if (prop.defaultValue) {
-		if (prop.type && prop.type.name === 'func') {
-			return (
-				<Text underlined title={showSpaces(unquote(prop.defaultValue.value))}>
-					Function
-				</Text>
-			);
+		if (prop.type) {
+			const propName = prop.type.name;
+
+			if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
+				return (
+					<Code>
+						{showSpaces(unquote(prop.defaultValue.value))}
+					</Code>
+				);
+			} else if (propName === 'func') {
+				return (
+					<Text underlined title={showSpaces(unquote(prop.defaultValue.value))}>
+						Function
+					</Text>
+				);
+			} else if (propName === 'shape' || propName === 'object') {
+				try {
+					// We eval source code to be able to format the defaultProp here. This
+					// can be considered safe, as it is the source code that is evaled,
+					// which is from a known source and safe by default
+					// eslint-disable-next-line no-eval
+					const object = eval(`(${prop.defaultValue.value})`);
+					return (
+						<Text underlined title={objectToString(object, null, 2)}>
+							Shape
+						</Text>
+					);
+				} catch (e) {
+					// eval will throw if it contains a reference to a property not in the
+					// local scope. To avoid any breakage we fall back to rendering the
+					// prop without any formatting
+					return (
+						<Text underlined title={prop.defaultValue.value}>
+							Shape
+						</Text>
+					);
+				}
+			}
 		}
 
 		return (

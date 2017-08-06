@@ -11,13 +11,13 @@ const getProps = require('./utils/getProps');
 const consts = require('../scripts/consts');
 
 module.exports = function(source) {
-	/* istanbul ignore if */
-	if (this.cacheable) {
-		this.cacheable();
-	}
-
 	const file = this.request.split('!').pop();
 	const config = this._styleguidist;
+
+	// Setup Webpack context dependencies to enable hot reload when adding new files or updating any of component dependencies
+	if (config.contextDependencies) {
+		config.contextDependencies.forEach(dir => this.addContextDependency(dir));
+	}
 
 	const defaultParser = (filePath, source, resolver, handlers) =>
 		reactDocs.parse(source, resolver, handlers);

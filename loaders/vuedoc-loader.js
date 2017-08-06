@@ -10,14 +10,15 @@ const examplesLoader = path.resolve(__dirname, './examples-loader.js');
 
 /* eslint-disable no-console */
 module.exports = function(source) {
-	/* istanbul ignore if */
-	if (this.cacheable) {
-		this.cacheable();
-	}
-
 	const file = this.request.split('!').pop();
 	const config = this._styleguidist;
 	let componentInfo = {};
+
+	// Setup Webpack context dependencies to enable hot reload when adding new files or updating any of component dependencies
+	if (config.contextDependencies) {
+		config.contextDependencies.forEach(dir => this.addContextDependency(dir));
+	}
+
 	const defaultParser = file => vueDocs.parse(file);
 	const propsParser = config.propsParser || defaultParser;
 
@@ -27,8 +28,8 @@ module.exports = function(source) {
 		/* istanbul ignore next */
 		const componentPath = path.relative(process.cwd(), file);
 		const message =
-			`Error when parsing ${componentPath}: ${err}\n\n` +
-			'It usually means that vue-docgen-api cannot parse your source code, try to file an issue here:\n' +
+			`Cannot parse ${componentPath}: ${err}\n\n` +
+			'It usually means that vue-docgen-api don’t understand your source code or when using third-party libraries, try to file an issue here:\n' +
 			'https://github.com/vue-styleguidist/vue-docgen-api/issues';
 		console.log(`\n${message}\n`);
 	}

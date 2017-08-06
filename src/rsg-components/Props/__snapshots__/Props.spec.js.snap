@@ -343,6 +343,62 @@ exports[`props columns should render PropTypes.shape 1`] = `
 </ul>
 `;
 
+exports[`props columns should render PropTypes.shape defaultProps, falling back to Object 1`] = `
+<ul>
+  <li>
+    <div>
+      <Styled(Name)
+        deprecated={false}
+      >
+        foo
+      </Styled(Name)>
+    </div>
+    <div>
+      <Styled(Type)>
+        shape
+      </Styled(Type)>
+    </div>
+    <div>
+      <Styled(Text)
+        title="somethingThatDoesntExist"
+        underlined={true}
+      >
+        Shape
+      </Styled(Text)>
+    </div>
+    <div>
+      <div>
+        <Styled(Para)>
+          <div>
+            <Styled(Name)>
+              bar
+            </Styled(Name)>
+            : 
+            <Styled(Type)>
+              number
+            </Styled(Type)>
+             — 
+            <Styled(Text)>
+              Required
+            </Styled(Text)>
+          </div>
+          <div>
+            <Styled(Name)>
+              baz
+            </Styled(Name)>
+            : 
+            <Styled(Type)>
+              any
+            </Styled(Type)>
+          </div>
+        </Styled(Para)>
+        <JsDoc />
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
 exports[`props columns should render PropTypes.shape with description 1`] = `
 <ul>
   <li>
@@ -393,6 +449,74 @@ exports[`props columns should render PropTypes.shape with description 1`] = `
               inline={true}
               text="Any"
             />
+          </div>
+        </Styled(Para)>
+        <JsDoc />
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`props columns should render PropTypes.shape with formatted defaultProps 1`] = `
+<ul>
+  <li>
+    <div>
+      <Styled(Name)
+        deprecated={false}
+      >
+        foo
+      </Styled(Name)>
+    </div>
+    <div>
+      <Styled(Type)>
+        shape
+      </Styled(Type)>
+    </div>
+    <div>
+      <Styled(Text)
+        title="{
+        bar: 123,
+        baz: baz() {
+                return 'foo';
+            },
+        bing: bing() {
+                return 'badaboom';
+            },
+        trotskij: () => 1935,
+        qwarc: {
+          si: 'señor'
+        }
+      }"
+        underlined={true}
+      >
+        Shape
+      </Styled(Text)>
+    </div>
+    <div>
+      <div>
+        <Styled(Para)>
+          <div>
+            <Styled(Name)>
+              bar
+            </Styled(Name)>
+            : 
+            <Styled(Type)>
+              number
+            </Styled(Type)>
+             — 
+            <Styled(Text)>
+              Required
+            </Styled(Text)>
+          </div>
+          <div>
+            <Styled(Name)>
+              baz
+            </Styled(Name)>
+            : 
+            <Styled(Type)>
+              any
+            </Styled(Type)>
           </div>
         </Styled(Para)>
         <JsDoc />
@@ -599,6 +723,64 @@ exports[`props columns should render function body in tooltip 1`] = `
       >
         Function
       </Styled(Text)>
+    </div>
+    <div>
+      <div>
+        <JsDoc />
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`props columns should render function defaultValue as code when null 1`] = `
+<ul>
+  <li>
+    <div>
+      <Styled(Name)
+        deprecated={false}
+      >
+        fn
+      </Styled(Name)>
+    </div>
+    <div>
+      <Styled(Type)>
+        func
+      </Styled(Type)>
+    </div>
+    <div>
+      <Styled(Code)>
+        null
+      </Styled(Code)>
+    </div>
+    <div>
+      <div>
+        <JsDoc />
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`props columns should render function defaultValue as code when undefined 1`] = `
+<ul>
+  <li>
+    <div>
+      <Styled(Name)
+        deprecated={false}
+      >
+        fn
+      </Styled(Name)>
+    </div>
+    <div>
+      <Styled(Type)>
+        func
+      </Styled(Type)>
+    </div>
+    <div>
+      <Styled(Code)>
+        undefined
+      </Styled(Code)>
     </div>
     <div>
       <div>
