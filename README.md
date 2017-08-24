@@ -22,20 +22,20 @@ Vue Styleguidist is a style guide generator for Vue components. It lists compone
 * [Configuring webpack](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Webpack.md): tell Vue Styleguidist how to load your code
 * [Cookbook](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Cookbook.md): how to solve common tasks with Vue Styleguidist
 
-## Showcases
+## Advanced documentation
 
-If you have a project published, you can share it here
+* [Configuration](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Configuration.md)
+* [CLI commands and options](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/CLI.md)
+* [Node API](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/API.md)
 
 ## Examples
 
 * [Basic style guide](http://rafaelescala.com/vue-styleguide/), [source](./examples/basic)
 * Buefy style guide with sections, customized styles. [source](https://github.com/vue-styleguidist/buefy-styleguide-example)
 
-## Advanced documentation
+## Showcases
 
-* [Configuration](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Configuration.md)
-* [CLI commands and options](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/CLI.md)
-* [Node API](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/API.md)
+If you have a project published, you can share it here
 
 ## Change log
 

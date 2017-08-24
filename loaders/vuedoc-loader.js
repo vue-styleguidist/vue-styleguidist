@@ -5,6 +5,7 @@ const generate = require('escodegen').generate;
 const toAst = require('to-ast');
 const getExamples = require('./utils/getExamples');
 const requireIt = require('./utils/requireIt');
+const getComponentVueDoc = require('./utils/getComponentVueDoc');
 const vueDocs = require('vue-docgen-api');
 const examplesLoader = path.resolve(__dirname, './examples-loader.js');
 
@@ -51,7 +52,10 @@ module.exports = function(source) {
 			return method;
 		});
 	}
-	if (componentInfo.tags) {
+	const componentVueDoc = getComponentVueDoc(source, file);
+	if (componentVueDoc) {
+		componentInfo.example = requireIt(`!!${examplesLoader}!${file}`);
+	} else if (componentInfo.tags) {
 		const examples = componentInfo.tags.examples;
 		if (examples) {
 			const examplePath = examples[examples.length - 1].description;

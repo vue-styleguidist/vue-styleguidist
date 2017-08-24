@@ -1,4 +1,4 @@
-import jss from 'jss';
+import { create } from 'jss';
 import global from 'jss-global';
 import isolate from 'jss-isolate';
 import nested from 'jss-nested';
@@ -7,7 +7,13 @@ import defaultUnit from 'jss-default-unit';
 import compose from 'jss-compose';
 import nonInheritedProps from './nonInheritedProps';
 
-jss.setup({
+const createGenerateClassName = () => {
+	let counter = 0;
+	return rule => `rsg--${rule.key}-${counter++}`;
+};
+
+const jss = create({
+	createGenerateClassName,
 	plugins: [
 		global(),
 		isolate({
@@ -21,6 +27,7 @@ jss.setup({
 				// Allow inheritance because it may be set on body and should be available for user components
 				fontFamily: 'inherit',
 				lineHeight: 'inherit',
+				fontSize: 'inherit',
 			},
 		}),
 		nested(),
@@ -29,3 +36,5 @@ jss.setup({
 		compose(),
 	],
 });
+
+export default jss;

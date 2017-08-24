@@ -11,7 +11,7 @@ import sample from 'lodash/sample';
 
 /**
  * An example-less button.
- * @deprecated Use the [only true button component](#buttoncomponent) instead
+ * @deprecated Use the [only true button component](#button) instead
  */
 export default {
 	name: 'RandomButton',

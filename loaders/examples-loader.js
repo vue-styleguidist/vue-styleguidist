@@ -12,10 +12,19 @@ const chunkify = require('./utils/chunkify');
 const expandDefaultComponent = require('./utils/expandDefaultComponent');
 const getRequires = require('./utils/getRequires');
 const requireIt = require('./utils/requireIt');
+const getComponentVueDoc = require('./utils/getComponentVueDoc');
 
 const absolutize = filepath => path.resolve(__dirname, filepath);
 
+function isVueFile(filepath) {
+	return /.vue$/.test(filepath);
+}
+
 function examplesLoader(source) {
+	const file = this.request.split('!').pop();
+	if (isVueFile(file)) {
+		source = getComponentVueDoc(source, file);
+	}
 	const query = loaderUtils.getOptions(this) || {};
 	const config = this._styleguidist;
 
@@ -27,8 +36,12 @@ function examplesLoader(source) {
 		source = expandDefaultComponent(source, query.componentName);
 	}
 
+	const updateExample = config.updateExample
+		? props => config.updateExample(props, this.resourcePath)
+		: undefined;
+
 	// Load examples
-	const examples = chunkify(source, config.updateExample);
+	const examples = chunkify(source, updateExample);
 
 	// We're analysing the examples' source code to figure out the require statements. We do it manually with regexes,
 	// because webpack unfortunately doesn't expose its smart logic for rewriting requires

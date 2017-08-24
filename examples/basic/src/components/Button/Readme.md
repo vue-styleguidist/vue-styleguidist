@@ -8,4 +8,8 @@ Big pink button:
 
 And you *can* **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
 
-If you define a fenced code block with a language flag it will be rendered as a regular Markdown code snippet:
+Fenced code blocks with `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
+
+```jsx
+<Button>Push Me</Button>
+```

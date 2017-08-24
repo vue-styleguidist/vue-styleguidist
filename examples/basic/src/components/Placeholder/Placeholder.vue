@@ -57,3 +57,10 @@ export default {
 	background: #ccc;
 }
 </style>
+<docs>
+
+Another example with custom blocks inside `*.vue` files.
+
+    <Placeholder type="animal"/>
+
+</docs>
