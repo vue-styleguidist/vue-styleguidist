@@ -47,7 +47,8 @@ Vue Styleguidist is a style guide generator for Vue components. It lists compone
 
 ## Showcases
 
-If you have a project published, you can share it here
+Real projects using Vue Styleguidist:
+* [Croud Style Guide](https://croudsupport.github.io/Croud-Style-Guide/technical/)
 
 ## Change log
 
