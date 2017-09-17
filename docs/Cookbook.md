@@ -1,5 +1,43 @@
 # Cookbook
 
+## How to add mixins or third-party plugins to the style guide?
+
+If you need to have default data for use in the examples of your components, you can import mixins to the style guide. Creating a .js file that exports the mixins or adding it directly to the `styleguide.config.js` file
+
+Use [mixins](Configuration.md#mixins) option to customize this behavior:
+
+```javascript
+// mixin file
+export default {
+  data() {
+    return {
+      colorDemo: 'blue',
+      sizeDemo: 'large',
+    }
+  }
+  /* ... */
+}
+```
+
+````jsx
+// example component
+
+<Button size="colorDemo" color="sizeDemo">Lick Me</Button>
+````
+
+Also if you need to load a vue plugin from a third party, you can add it in the mixin file so that it is installed in the style guide
+
+```javascript
+// mixin file
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
+
+export default {
+  /* ... */
+}
+```
+
 ## How to exclude some components from style guide?
 
 Vue Styleguidist will ignore tests (`__tests__` folder and file names containing `.test.js` or `.spec.js`) by default.

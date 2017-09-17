@@ -1,7 +1,19 @@
 # Vue Styleguidist
 
-[![npm](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
-<span class="badge-npmdownloads"><a href="https://npmjs.org/package/vue-styleguidist" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/vue-styleguidist.svg" alt="NPM downloads" /></a></span>
+<span class="badge-npmdownloads">
+  <a href="https://www.npmjs.com/package/vue-styleguidist">
+    <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version">
+  </a>
+  <a href="https://www.npmjs.com/package/vue-styleguidist">
+    <img src="https://img.shields.io/npm/dt/vue-styleguidist.svg" alt="downloads">
+  </a>
+  <a href="https://npmjs.org/package/vue-styleguidist" title="View this project on NPM">
+    <img src="https://img.shields.io/npm/dm/vue-styleguidist.svg" alt="NPM downloads" />
+  </a>
+  <a href="https://www.npmjs.com/package/vue-styleguidist">
+    <img src="https://img.shields.io/npm/l/vue-styleguidist.svg" alt="License">
+  </a>
+  </span>
 
 **Style guide — documentation — component workbench**
 
@@ -43,6 +55,6 @@ The change log can be found on the [Releases page](https://github.com/vue-styleg
 
 ## Authors and license
 
-[Artem Sapegin](http://sapegin.me), [contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors) and [Rafael Escala](https://github.com/rafaesc92). Thanks to the team of react-styleguidist by the amazing tool.
+[Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc92) and [contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist by the amazing tool.
 
 MIT License

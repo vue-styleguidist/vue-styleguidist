@@ -134,7 +134,8 @@ Type: `String`, default: `base16-light`
 
 Type: `Array`, default: `[]`
 
-Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components.
+Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components of examples in the style guide.
+See example in the [cookbook](Cookbook.md#how-to-add-mixins-or-third-party-plugins-to-the-style-guide).
 
 For example:
 
