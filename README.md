@@ -55,6 +55,6 @@ The change log can be found on the [Releases page](https://github.com/vue-styleg
 
 ## Authors and license
 
-[Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc92) and [contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist by the amazing tool.
+[Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc92), [react-styleguidist contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors) and [vue-styleguidist contributors](https://github.com/vue-styleguidist/vue-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist by the amazing tool.
 
 MIT License
