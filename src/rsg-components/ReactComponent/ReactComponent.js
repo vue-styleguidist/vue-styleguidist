@@ -16,6 +16,7 @@ const ExamplePlaceholder =
 export default class ReactComponent extends Component {
 	static propTypes = {
 		component: PropTypes.object.isRequired,
+		depth: PropTypes.number.isRequired,
 	};
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
@@ -42,7 +43,7 @@ export default class ReactComponent extends Component {
 	render() {
 		const { activeTab } = this.state;
 		const { isolatedComponent } = this.context;
-		const { component } = this.props;
+		const { component, depth } = this.props;
 		const { name, slug, pathLine } = component;
 		const { description, examples = [], tags = {} } = component.props;
 		if (!name) {
@@ -65,14 +66,17 @@ export default class ReactComponent extends Component {
 							...component,
 							isolated: isolatedComponent,
 						}}
+						depth={depth}
 					>
 						{name}
 					</SectionHeading>
 				}
 				examples={
-					examples.length > 0
-						? <Examples examples={examples} name={name} />
-						: <ExamplePlaceholder name={name} />
+					examples.length > 0 ? (
+						<Examples examples={examples} name={name} />
+					) : (
+						<ExamplePlaceholder name={name} />
+					)
 				}
 				tabButtons={
 					<Slot

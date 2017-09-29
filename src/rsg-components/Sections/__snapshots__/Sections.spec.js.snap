@@ -3,6 +3,8 @@
 exports[`render should render component 1`] = `
 <section>
   <Section
+    depth={3}
+    key="0"
     section={
       Object {
         "components": Array [],
@@ -18,6 +20,8 @@ exports[`render should render component 1`] = `
     }
   />
   <Section
+    depth={3}
+    key="1"
     section={
       Object {
         "components": Array [],
@@ -32,6 +36,8 @@ exports[`render should render component 1`] = `
     }
   />
   <Section
+    depth={3}
+    key="2"
     section={
       Object {
         "sections": Array [
@@ -59,6 +65,8 @@ exports[`render should render styled component 1`] = `
   }
 >
   <Section
+    depth={3}
+    key="0"
     section={
       Object {
         "components": Array [],
@@ -74,6 +82,8 @@ exports[`render should render styled component 1`] = `
     }
   />
   <Section
+    depth={3}
+    key="1"
     section={
       Object {
         "components": Array [],
@@ -88,6 +98,8 @@ exports[`render should render styled component 1`] = `
     }
   />
   <Section
+    depth={3}
+    key="2"
     section={
       Object {
         "sections": Array [
@@ -109,6 +121,8 @@ exports[`render should render styled component 1`] = `
 exports[`should render component renderer 1`] = `
 <Styled(Sections)>
   <Section
+    depth={3}
+    key="0"
     section={
       Object {
         "components": Array [],
@@ -124,6 +138,8 @@ exports[`should render component renderer 1`] = `
     }
   />
   <Section
+    depth={3}
+    key="1"
     section={
       Object {
         "components": Array [],
@@ -138,59 +154,8 @@ exports[`should render component renderer 1`] = `
     }
   />
   <Section
-    section={
-      Object {
-        "sections": Array [
-          Object {
-            "content": Array [],
-            "name": "One",
-          },
-          Object {
-            "content": Array [],
-            "name": "Two",
-          },
-        ],
-      }
-    }
-  />
-</Styled(Sections)>
-`;
-
-exports[`should render component renderer with primary sections if root is true 1`] = `
-<Styled(Sections)>
-  <Section
-    primary={true}
-    section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
-            "content": "<button>OK</button>",
-            "evalInContext": [Function],
-            "type": "code",
-          },
-        ],
-        "name": "Foo",
-      }
-    }
-  />
-  <Section
-    primary={true}
-    section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
-            "content": "Hello *world*!",
-            "type": "markdown",
-          },
-        ],
-        "name": "Bar",
-      }
-    }
-  />
-  <Section
-    primary={true}
+    depth={3}
+    key="2"
     section={
       Object {
         "sections": Array [

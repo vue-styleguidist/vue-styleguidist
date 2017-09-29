@@ -9,12 +9,12 @@ export function SectionHeadingRenderer({
 	toolbar,
 	id,
 	href,
-	primary,
+	depth,
 	deprecated,
 }) {
-	const Tag = primary ? 'h1' : 'h2';
-	const headingClasses = cx(classes.heading, {
-		[classes.isPrimary]: primary,
+	const headingLevel = Math.min(6, depth);
+	const Tag = `h${headingLevel}`;
+	const headingClasses = cx(classes.heading, classes[`heading${headingLevel}`], {
 		[classes.isDeprecated]: deprecated,
 	});
 	return (
@@ -22,9 +22,7 @@ export function SectionHeadingRenderer({
 			<a href={href} className={headingClasses}>
 				{children}
 			</a>
-			<div className={classes.toolbar}>
-				{toolbar}
-			</div>
+			<div className={classes.toolbar}>{toolbar}</div>
 		</Tag>
 	);
 }
@@ -37,7 +35,6 @@ export const styles = ({ color, space, fontSize, fontFamily }) => ({
 	},
 	heading: {
 		color: color.base,
-		fontSize: fontSize.h2,
 		fontFamily: fontFamily.base,
 		fontWeight: 'normal',
 		'&:hover, &:active': {
@@ -45,8 +42,23 @@ export const styles = ({ color, space, fontSize, fontFamily }) => ({
 			textDecoration: 'underline',
 		},
 	},
-	isPrimary: {
+	heading1: {
 		fontSize: fontSize.h1,
+	},
+	heading2: {
+		fontSize: fontSize.h2,
+	},
+	heading3: {
+		fontSize: fontSize.h3,
+	},
+	heading4: {
+		fontSize: fontSize.h4,
+	},
+	heading5: {
+		fontSize: fontSize.h5,
+	},
+	heading6: {
+		fontSize: fontSize.h6,
 	},
 	isDeprecated: {
 		textDecoration: 'line-through',
@@ -63,7 +75,7 @@ SectionHeadingRenderer.propTypes = {
 	toolbar: PropTypes.node,
 	id: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
-	primary: PropTypes.bool,
+	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
 };
 
