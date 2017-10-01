@@ -25,6 +25,12 @@ export default {
 		*/
 		increment() {
 			this.value++;
+			/**
+			 * After increment event
+			 * @event after
+			 * @type {number}
+			 */
+			this.$emit('after', this.value);
 		},
 		/**
 		* Sets the counter to a particular value.

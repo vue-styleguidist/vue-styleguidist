@@ -31,7 +31,7 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 		fontSize: fontSize.small,
 		'&:last-child': {
 			isolate: false,
-			width: '99%',
+			width: '80%',
 			paddingRight: 0,
 		},
 		'& p:last-child': {

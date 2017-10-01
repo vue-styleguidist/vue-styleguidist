@@ -54,6 +54,36 @@ export default {
 
 ```
 
+If you want create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
+
+```html
+<script>
+export default {
+  name: 'my-checkbox',
+  props: {
+    /**
+     * @model
+     */
+    value: String
+  }
+}
+</script>
+```
+
+For events documentation
+
+```js
+/**
+ * Success event.
+ *
+ * @event success
+ * @type {object}
+ */
+this.$emit('success', {
+  demo: 'example',
+})
+```
+
 > **Note:** You can change its behavior using [propsParser](Configuration.md#propsparser) options.
 
 > **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) library.
@@ -180,9 +210,17 @@ You can use the following [JSDoc](http://usejsdoc.org/) tags when documenting co
 - [@since](http://usejsdoc.org/tags-since.html)
 - [@version](http://usejsdoc.org/tags-version.html)
 
-When documenting props you can also use:
+When documenting methods you can also use:
 
 - [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
+
+Documenting events:
+
+- [@event, @type](http://usejsdoc.org/tags-event.html)
+
+Documenting v-model:
+
+- @model
 
 All tags can render Markdown.
 
@@ -237,6 +275,16 @@ export default {
      */
     launch(event, num){
       /* ... */
+    },
+    // ...
+    ignoreMethod(){
+      /**
+      * Success event.
+      *
+      * @event success
+      * @type {object}
+      */
+      this.$emit('success', {})
     }
   },
   /* ... */
