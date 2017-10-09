@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
     "type": "git",
@@ -64,10 +64,9 @@
     "lowercase-keys": "^1.0.0",
     "markdown-to-jsx": "^5.4.2",
     "minimist": "^1.2.0",
-    "pretty-format": "^20.0.3",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
     "q-i": "^1.1.4",
+    "react": "^15.6.1",
     "react-codemirror2": "2.0.0",
     "react-dev-utils": "^3.0.2",
     "react-docgen": "^3.0.0-beta7",
