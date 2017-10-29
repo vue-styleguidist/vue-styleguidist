@@ -54,6 +54,7 @@ try {
 		);
 		process.exit(1);
 	} else {
+		logger.info(err);
 		throw err;
 	}
 }
