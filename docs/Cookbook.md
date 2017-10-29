@@ -1,5 +1,23 @@
 # Cookbook
 
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Cookbook.md -->
+
+<!-- toc -->
+
+- [How to add mixins or third-party plugins to the style guide?](#how-to-add-mixins-or-third-party-plugins-to-the-style-guide)
+- [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
+- [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
+- [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
+- [How to change styles of a style guide?](#how-to-change-styles-of-a-style-guide)
+- [How to change the layout of a style guide?](#how-to-change-the-layout-of-a-style-guide)
+- [How to change style guide dev server logs output?](#how-to-change-style-guide-dev-server-logs-output)
+- [How to debug my components and examples?](#how-to-debug-my-components-and-examples)
+- [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
+- [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
+- [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
+
+<!-- tocstop -->
+
 ## How to add mixins or third-party plugins to the style guide?
 
 If you need to have default data for use in the examples of your components, you can import mixins to the style guide. Creating a .js file that exports the mixins or adding it directly to the `styleguide.config.js` file
@@ -40,16 +58,30 @@ export default {
 
 ## How to exclude some components from style guide?
 
-Vue Styleguidist will ignore tests (`__tests__` folder and file names containing `.test.js` or `.spec.js`) by default.
+Vue Styleguidist will ignore tests (`__tests__` folder) by default.
 
 Use [ignore](Configuration.md#ignore) option to customize this behavior:
 
 ```javascript
 module.exports = {
   ignore: [
-    'src/components/Button.vue'
+    '**/*.spec.vue',
+    '**/components/Button.vue'
   ]
 };
+```
+
+> **Note:** You should pass glob patterns, for example, use `**/components/Button.vue` instead of `components/Button.vue`.
+
+## How to hide some components in style guide but make them available in examples?
+
+Enable [skipComponentsWithoutExample](Configuration.md#skipcomponentswithoutexample) option and do not add example file (`Readme.md` by default) to components you want to ignore.
+
+Require these components in your examples:
+
+```jsx
+const Button = require('../common/Button');
+<Button>Push Me Tender</Button>
 ```
 
 ## How to add custom JavaScript and CSS or polyfills?
@@ -69,7 +101,13 @@ module.exports = {
 
 ## How to change styles of a style guide?
 
-Use config option [theme](Configuration.md#theme) to change fonts, colors, etc. and option [styles](Configuration.md#styles) to tweak style of particular Vue Styleguidist’s components:
+There are two config options to change your style guide UI: [theme](Configuration.md#theme) and [styles](Configuration.md#styles).
+
+Use [theme](Configuration.md#theme) to change fonts, colors, etc.
+
+Use [styles](Configuration.md#styles) to tweak the style of any particular Styleguidist component.
+
+As an example:
 
 ```javascript
 module.exports = {
@@ -197,7 +235,6 @@ module.exports = {
 1. Open your browser’s developer tools
 2. Write `debugger;` statement wherever you want: in a component source, a Markdown example or even in an editor in a browser.
 
-![](http://rafaelescala.com/vue-styleguide/debug.png)
 
 ## How to debug the exceptions thrown from my components?
 

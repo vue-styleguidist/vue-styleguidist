@@ -1,8 +1,20 @@
 # Configuring webpack
 
-Styleguidist uses [webpack](https://webpack.js.org/) under the hood and it needs to know how to load your project’s files.
+Vue styleguidist uses [webpack](https://webpack.js.org/) under the hood and it needs to know how to load your project’s files.
 
-*Webpack is required to run Styleguidist but your project doesn’t have to use it.
+*Webpack is required to run Vue styleguidist but your project doesn’t have to use it.*
+
+> **Note:** See [cookbook](Cookbook.md) for more examples.
+
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Webpack.md -->
+
+<!-- toc -->
+
+- [Reusing your project’s webpack config](#reusing-your-projects-webpack-config)
+- [Custom webpack config](#custom-webpack-config)
+- [When nothing else works](#when-nothing-else-works)
+
+<!-- tocstop -->
 
 ## Reusing your project’s webpack config
 
@@ -23,13 +35,13 @@ module.exports = {
   webpackConfig: Object.assign({},
     require('./configs/webpack.js'),
     {
-        /* Custom config options */
+      /* Custom config options */
     }
   )
 };
 ```
 
-> **Note:** `entry`, `externals`, `output`, `watch`, `stats` and `devtool` options will be ignored.
+> **Note:** `entry`, `externals`, `output`, `watch`, and `stats` options will be ignored. For production builds, `devtool` will also be ignored.
 
 > **Note:** `CommonsChunkPlugins`, `HtmlWebpackPlugin`, `UglifyJsPlugin`, `HotModuleReplacementPlugin` plugins will be ignored because Styleguidist already includes them or they may break Styleguidist.
 
@@ -47,13 +59,12 @@ Add a `webpackConfig` section to your `styleguide.config.js`:
 module.exports = {
   webpackConfig: {
     module: {
-      loaders: [
+      rules: [
         // Vue loader
         {
           test: /\.vue$/,
           exclude: /node_modules/,
-          loader: 'vue-loader',
-          options: vueLoaderConfig
+          loader: 'vue-loader'
         },
         // Babel loader, will use your project’s .babelrc
         {
@@ -74,7 +85,7 @@ module.exports = {
 
 > **Warning:** This option disables config load from `webpack.config.js`, see above how to load your config manually.
 
-> **Note:** `entry`, `externals`, `output`, `watch`, `stats` and `devtool` options will be ignored.
+> **Note:** `entry`, `externals`, `output`, `watch`, and `stats` options will be ignored. For production builds, `devtool` will also be ignored.
 
 > **Note:** `CommonsChunkPlugins`, `HtmlWebpackPlugin`, `UglifyJsPlugin`, `HotModuleReplacementPlugin` plugins will be ignored because Styleguidist already includes them or they may break Styleguidist.
 

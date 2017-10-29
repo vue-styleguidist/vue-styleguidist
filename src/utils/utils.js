@@ -91,7 +91,10 @@ export function processSections(sections, vuex) {
  * @return {RegExp}
  */
 export function getFilterRegExp(query) {
-	query = query.replace(/[^a-z0-9]/gi, '').split('').join('.*');
+	query = query
+		.replace(/[^a-z0-9]/gi, '')
+		.split('')
+		.join('.*');
 	return new RegExp(query, 'i');
 }
 

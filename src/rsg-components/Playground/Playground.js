@@ -82,11 +82,7 @@ export default class Playground extends Component {
 		const { isolatedExample } = this.context;
 		const preview = <Preview code={code} vuex={vuex} evalInContext={evalInContext} />;
 		if (settings.noeditor) {
-			return (
-				<Para>
-					{preview}
-				</Para>
-			);
+			return <Para>{preview}</Para>;
 		}
 		if (settings.classname) {
 			settings.props = {

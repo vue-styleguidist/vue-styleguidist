@@ -1,11 +1,19 @@
 # Locating your components and organizing your style guide
 
-## Components
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Components.md -->
+
+<!-- toc -->
+
+- [Finding components](#finding-components)
+- [Sections](#sections)
+
+<!-- tocstop -->
+
+## Finding components
 
 By default Styleguidist will search components using this [glob pattern](https://github.com/isaacs/node-glob#glob-primer): `src/components/**/*.vue`. It will pick up paths like `src/components/Button.vue`. It will also ignore test files (`__tests__` folder and file names containing `.test.js` and `.spec.js`). If it doesn’t work for you, create a `styleguide.config.js` file in your project’s root folder and configure the patterns to fit your project structure.
 
 For example, if your components look like `components/Button/Button.vue`:
-
 ```javascript
 module.exports = {
   components: 'src/components/**/[A-Z]*.vue'

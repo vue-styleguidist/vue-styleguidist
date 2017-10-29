@@ -10,7 +10,7 @@ exports[`renderer should render logo, table of contents and passed children 1`] 
     </h1>
     <footer>
       <Styled(Markdown)
-        text="Generated with [Vue Styleguidist](https://github.com/vue-styleguidist/vue-styleguidist)"
+        text="Generated with [React Styleguidist](http://react-styleguidist.js.org/)"
       />
     </footer>
   </main>
@@ -50,10 +50,27 @@ exports[`renderer should render logo, table of contents and passed children 1`] 
 </div>
 `;
 
+exports[`should render an error when componentDidCatch() is triggered 1`] = `
+<Styled(Error)
+  error={
+    Object {
+      "toString": [Function],
+    }
+  }
+  info={
+    Object {
+      "componentStack": Object {
+        "toString": [Function],
+      },
+    }
+  }
+/>
+`;
+
 exports[`should render components list 1`] = `
 <Styled(StyleGuide)
   hasSidebar={true}
-  homepageUrl="https://github.com/vue-styleguidist/vue-styleguidist/"
+  homepageUrl="https://react-styleguidist.js.org/"
   title="Hello"
   toc={
     <TableOfContents

@@ -2,6 +2,18 @@
 
 >Vue Styleguidist created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files.
 
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/API.md -->
+
+<!-- toc -->
+
+- [How it works](#how-it-works)
+- [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
+- [React components](#react-components)
+- [Styles](#styles)
+- [Render components vue](#render-components-vue)
+
+<!-- tocstop -->
+
 Styleguidist isn’t an ordinary single page app and some design decisions may look confusing to an outsider. In this guide we’ll explain these decisions to un-confuse potential contributors.
 
 The main thing is that we’re running two apps at the same time: user’s components and Styleguidist UI. They share a webpack configuration and have styles in the same scope (there’s only one scope in CSS). And we can control only one of these two apps: Styleguidist UI. That puts us under some restrictions:

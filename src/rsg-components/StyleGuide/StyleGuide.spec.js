@@ -46,6 +46,15 @@ it('should render welcome screen', () => {
 	expect(actual).toMatchSnapshot();
 });
 
+it('should render an error when componentDidCatch() is triggered', () => {
+	const wrapper = shallow(<StyleGuide codeRevision={1} config={config} sections={[]} slots={{}} />);
+	wrapper
+		.instance()
+		.componentDidCatch({ toString: () => 'error' }, { componentStack: { toString: () => 'info' } });
+	wrapper.update();
+	expect(wrapper).toMatchSnapshot();
+});
+
 describe('sidebar rendering', () => {
 	it('renderer should have sidebar if showSidebar is not set', () => {
 		const wrapper = shallow(
@@ -92,7 +101,7 @@ it('renderer should render logo, table of contents and passed children', () => {
 			classes={{}}
 			title={config.title}
 			toc={<TableOfContents sections={sections} />}
-			homepageUrl="https://github.com/vue-styleguidist/vue-styleguidist"
+			homepageUrl="http://react-styleguidist.js.org/"
 			hasSidebar
 		>
 			<h1>Content</h1>

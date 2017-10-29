@@ -1,12 +1,26 @@
 # Documenting components
 
-Styleguidist generates documentation for your components based on the comments in your source code and Readme files.
+Vue styleguidist generates documentation for your components based on the comments in your source code declarations and Readme files.
 
 > **Note:** [See examples](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/basic/src/components) of documented components in our demo style guide.
 
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Documenting.md -->
+
+<!-- toc -->
+
+- [Code comments](#code-comments)
+- [Usage examples and Readme files](#usage-examples-and-readme-files)
+- [External examples using doclet tags](#external-examples-using-doclet-tags)
+- [Public methods](#public-methods)
+- [Ignoring props](#ignoring-props)
+- [Using JSDoc tags](#using-jsdoc-tags)
+- [Writing code examples](#writing-code-examples)
+
+<!-- tocstop -->
+
 ## Code comments
 
-Styleguidist will display your components’ JSDoc comment blocks.
+Vue styleguidist will display your components’ JSDoc comment blocks.
 
 ```html
 <template>
@@ -92,7 +106,7 @@ this.$emit('success', {
 
 ## Usage examples and Readme files
 
-Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
 
     Vue component example:
 
@@ -147,7 +161,7 @@ Styleguidist will look for any `Readme.md` or `ComponentName.md` files in the co
 
 > **Note:** You can configure examples file name with the [getExampleFilename](Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) ```<docs></docs>```  inside ```*.vue``` files, so that styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) ```<docs></docs>```  inside ```*.vue``` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
 
 ## External examples using doclet tags
 
@@ -303,7 +317,7 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 </Panel>
 ```
 
-> **Note:** Styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend, it supports [most of the ES6 features](https://buble.surge.sh/guide/#unsupported-features).
+> **Note:** Vue styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend, it supports [most of the ES6 features](https://buble.surge.sh/guide/#unsupported-features).
 
 
 You can also `require` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:

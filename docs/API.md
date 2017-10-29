@@ -1,4 +1,25 @@
-# Node API
+# Node.js API
+
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/API.md -->
+
+<!-- toc -->
+
+- [Initialization](#initialization)
+- [Methods](#methods)
+  * [`build(callback)`](#buildcallback)
+    + [Arguments](#arguments)
+    + [Returns](#returns)
+    + [Example](#example)
+  * [`server(callback)`](#servercallback)
+    + [Arguments](#arguments-1)
+    + [Returns](#returns-1)
+    + [Example](#example-1)
+  * [`makeWebpackConfig([env])`](#makewebpackconfigenv)
+    + [Arguments](#arguments-2)
+    + [Returns](#returns-2)
+    + [Example](#example-2)
+
+<!-- tocstop -->
 
 ## Initialization
 
@@ -9,6 +30,11 @@ Using a JavaScript object:
 ```javascript
 const styleguidist = require('vue-styleguidist');
 const styleguide = styleguidist({
+  logger: {
+		warn: console.warn,
+		info: console.log,
+		debug: console.log,
+	},
   components: './lib/components/**/*.vue',
   webpackConfig: {
     module: {
@@ -32,6 +58,8 @@ const styleguide = styleguidist({
   },
 });
 ```
+
+**Note:** any output is disabled by default, you may need to define your own [logger](Configuration.md#logger).
 
 Using a config file:
 

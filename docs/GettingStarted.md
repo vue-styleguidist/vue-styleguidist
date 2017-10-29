@@ -2,36 +2,36 @@
 
 ## 1. Install Styleguidist
 
-1. Install Styleguidist and peer dependencies from npm:
+Install Styleguidist:
 
-   ```bash
-   npm install --save-dev vue-styleguidist webpack
-   ```
+```bash
+npm install --save-dev vue-styleguidist
+```
 
-2. [Point Styleguidist to your Vue components](Components.md)
+## 2. Configure your style guide
 
-3. [Tell Styleguidist how to load your code](Webpack.md)
+[Point Styleguidist to your React components](Components.md) and [tell how to load your code](Webpack.md).
 
-## 2. Add npm scripts for convenience (optional)
+## 3. Add npm scripts for convenience
 
 Add these scripts to your `package.json`:
 
-```json
+```diff
 {
   "scripts": {
-    "styleguide": "vue-styleguidist server",
-    "styleguide:build": "vue-styleguidist build"
++    "styleguide": "vue-styleguidist server",
++    "styleguide:build": "vue-styleguidist build"
   }
 }
 ```
 
-## 3. Start your style guide
+## 4. Start your style guide
 
 Run **`npm run styleguide`** to start style a guide dev server.
 
 Run **`npm run styleguide:build`** to build a static version.
 
-## 4. Start documenting your components
+## 5. Start documenting your components
 
 See how to [document your components](Documenting.md)
 
