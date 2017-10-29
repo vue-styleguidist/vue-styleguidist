@@ -5,8 +5,10 @@ You can modify the code through the playground
     <div>
       <button @click.prevent="isOpen = true">Open</button>
       <Modal :showModal="isOpen">
-        <h1>Hallo!</h1>
-        <button  @click.prevent="isOpen = false">Close</button>
+        <h1 slot="head">Hallo!</h1>
+        <div slot="body">
+          <button  @click.prevent="isOpen = false">Close</button>
+        </div>
       </Modal>
     </div>
 
@@ -45,7 +47,10 @@ You can also develop more complex examples, instantiating Vue
         <div>
           <button @click.prevent="showModal = true">Open Modal</button>
           <Modal :showModal="showModal">
-            <h1>Countdown to close mode {{ countdown }}</h1>
+            <h1 slot="head">Title</h1>
+            <div slot="body">
+              Countdown to close mode {{ countdown }}
+            </div>
           </Modal>
         </div>
       `

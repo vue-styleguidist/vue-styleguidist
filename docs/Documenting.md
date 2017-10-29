@@ -9,6 +9,7 @@ Vue styleguidist generates documentation for your components based on the commen
 <!-- toc -->
 
 - [Code comments](#code-comments)
+- [Slots documentation](#slots-documentation)
 - [Usage examples and Readme files](#usage-examples-and-readme-files)
 - [External examples using doclet tags](#external-examples-using-doclet-tags)
 - [Public methods](#public-methods)
@@ -103,6 +104,27 @@ this.$emit('success', {
 > **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) library.
 
 > **Note:** The 'name' property in the component is mandatory, as it will be the component name to use in the examples. If you need to configure the component name before you document it, you can review the following [example](https://github.com/vue-styleguidist/buefy-styleguide-example/blob/master/styleguide.config.js#L43)
+
+## Slots documentation
+
+For default, Vue styleguidist doesn't document the slots, you need to add a comment before of slot inside of the template.
+
+```html
+<template>
+  <div class="modal">
+    <div class="modal-container">
+      <div class="modal-head">
+        <!-- Use this slot header -->
+        <slot name="head"></slot>
+      </div>
+      <div class="modal-body">
+        <!-- Use this slot body -->
+        <slot name="body"></slot>
+      </div>
+    </div>
+  </div>
+</template>
+```
 
 ## Usage examples and Readme files
 

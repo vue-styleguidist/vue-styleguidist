@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Group from 'react-group';
-import objectToString from 'javascript-stringify';
 import Arguments from 'rsg-components/Arguments';
 import Code from 'rsg-components/Code';
 import JsDoc from 'rsg-components/JsDoc';
 import Markdown from 'rsg-components/Markdown';
 import Name from 'rsg-components/Name';
 import Type from 'rsg-components/Type';
-import Text from 'rsg-components/Text';
 import Para from 'rsg-components/Para';
 import Table from 'rsg-components/Table';
 import map from 'lodash/map';
-import { unquote, getType, showSpaces } from './util';
+import { unquote, getType, showSpaces } from '../../utils/utils';
 
 function renderType(type) {
 	if (!type) {
