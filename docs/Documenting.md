@@ -10,6 +10,7 @@ Vue styleguidist generates documentation for your components based on the commen
 
 - [Code comments](#code-comments)
 - [Slots documentation](#slots-documentation)
+- [Include Mixins](#include-mixins)
 - [Usage examples and Readme files](#usage-examples-and-readme-files)
 - [External examples using doclet tags](#external-examples-using-doclet-tags)
 - [Public methods](#public-methods)
@@ -124,6 +125,61 @@ For default, Vue styleguidist doesn't document the slots, you need to add a comm
     </div>
   </div>
 </template>
+```
+
+## Include Mixins
+
+If you import a mixin, for it to be documented you need to add in the header the mixin tag @mixin, for example
+
+
+```javascript
+// src/mixins/colorMixin.js
+
+/**
+ * @mixin
+ */
+module.exports = {
+  props: {
+    /**
+    * The color for the button example
+    */
+    color: {
+      type: String,
+      default: '#333'
+    },
+  }
+}
+```
+
+```html
+<template>
+<!-- -->
+</template>
+<script>
+// src/components/Button/Button.vue
+
+import colorMixin from '../../mixins/colorMixin';
+
+export default {
+  name: 'Button',
+  mixins: [colorMixin],
+  props: {
+    /**
+    * The size of the button
+    * `small, normal, large`
+    */
+    size: {
+      default: 'normal'
+    },
+    /**
+    * Add custom click actions.
+    **/
+    onCustomClick: {
+      default: () => () => null,
+    },
+  },
+}
+</script>
 ```
 
 ## Usage examples and Readme files
