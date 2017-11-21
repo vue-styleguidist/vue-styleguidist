@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<input :value="value" @input="updateValue($event.target.value)" @change="emitChange" v-model="val" ref="input">
+		<input @input="updateValue($event.target.value)" @change="emitChange" v-model="val" ref="input">
 		<button @click="fireEvent()">Fire example event!</button>
 	</div>
 </template>
