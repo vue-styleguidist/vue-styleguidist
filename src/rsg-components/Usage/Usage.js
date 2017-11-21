@@ -19,7 +19,7 @@ export default function Usage({ props: { props, methods, events, slots } }) {
 	}
 	const methodsNode = methods && methods.length > 0 && <Methods methods={methods} />;
 
-	if (!propsNode && !methodsNode) {
+	if (!propsNode && !methodsNode && !slotsNode && !eventsNode) {
 		return null;
 	}
 
