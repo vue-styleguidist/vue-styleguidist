@@ -108,18 +108,18 @@ this.$emit('success', {
 
 ## Slots documentation
 
-For default, Vue styleguidist doesn't document the slots, you need to add a comment before of slot inside of the template.
+For default, Vue styleguidist doesn't document the slots, you need to add a comment before slot inside of the template using the @slot notation.
 
 ```html
 <template>
   <div class="modal">
     <div class="modal-container">
       <div class="modal-head">
-        <!-- Use this slot header -->
+        <!-- @slot Use this slot header -->
         <slot name="head"></slot>
       </div>
       <div class="modal-body">
-        <!-- Use this slot body -->
+        <!-- @slot Use this slot body -->
         <slot name="body"></slot>
       </div>
     </div>
