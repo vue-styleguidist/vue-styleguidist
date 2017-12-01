@@ -1,0 +1,32 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+        },
+        "modules": false
+      }
+    ],
+    "react",
+    ["es2015", { "modules": false }],
+    ["stage-2"]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "test": {
+      "presets": ["env", "stage-2", "react"],
+      "plugins": [
+        "istanbul",
+        "system-import-transformer",
+        "transform-class-properties",
+        "transform-object-rest-spread"
+      ]
+    }
+  }
+}
