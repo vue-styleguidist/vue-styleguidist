@@ -40,10 +40,8 @@ module.exports = function processComponent(filepath, config) {
 	if (isVueFile(filepath)) {
 		props = requireIt(`!!${vueDocLoader}!${filepath}`);
 	} else {
-		const message =
-			`Error when parsing ${filepath}:\n\n` +
-			'Only can parse files .vue:\n' +
-			logger.debug(message);
+		const message = `Error when parsing ${filepath}:\n\n` + 'Only can parse files .vue:\n';
+		logger.debug(message);
 		throw new Error(message);
 	}
 	const examplesFile = config.getExampleFilename(filepath);
