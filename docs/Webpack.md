@@ -20,9 +20,10 @@ Vue styleguidist uses [webpack](https://webpack.js.org/) under the hood and it n
 
 By default Styleguidist will try to find `webpack.config.js` in your project’s root directory and use it.
 
-If your webpack config is located somewhere else, you need to load it manually:
+If your webpack config is located somewhere else, you need to load it manually from your `styleguide.config.js`:
 
 ```javascript
+// ./styleguide.config.js
 module.exports = {
   webpackConfig: require('./configs/webpack.js')
 };
@@ -31,6 +32,7 @@ module.exports = {
 Or if you want to merge it with other options:
 
 ```javascript
+// ./styleguide.config.js
 module.exports = {
   webpackConfig: Object.assign({},
     require('./configs/webpack.js'),
@@ -56,6 +58,7 @@ module.exports = {
 Add a `webpackConfig` section to your `styleguide.config.js`:
 
 ```javascript
+// ./styleguide.config.js
 module.exports = {
   webpackConfig: {
     module: {
