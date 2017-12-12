@@ -83,7 +83,7 @@ function renderDefault(prop) {
 
 			if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
 				return <Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>;
-			} else if (propName === 'func') {
+			} else if (propName === 'func' || prop.defaultValue.func) {
 				return (
 					<Text underlined title={showSpaces(unquote(prop.defaultValue.value))}>
 						Function
