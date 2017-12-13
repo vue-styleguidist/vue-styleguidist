@@ -1,4 +1,4 @@
-# Vue Styleguidist NuxtJs example style guide
+# Vue Styleguidist Nuxt.js example style guide
 
 ## Styleguide
 
@@ -6,7 +6,7 @@ How to start locally:
 
 ```
 git clone https://github.com/vue-styleguidist/vue-styleguidist.git
-cd vue-styleguidist/examples/nuxjs
+cd vue-styleguidist/examples/nuxtjs
 npm install
 npm run styleguide
 ```

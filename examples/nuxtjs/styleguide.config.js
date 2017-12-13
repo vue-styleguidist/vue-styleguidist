@@ -5,16 +5,16 @@ module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	webpackConfig: {
 		resolve: {
-      extensions: ['.js', '.json', '.vue', '.ts'],
-      alias: {
-        '~': resolve(__dirname, 'src'),
-        '@': resolve(__dirname, 'src')
-      },
+			extensions: ['.js', '.json', '.vue', '.ts'],
+			alias: {
+				'~': resolve(__dirname, 'src'),
+				'@': resolve(__dirname, 'src'),
+			},
 		},
 		module: {
-			rules
+			rules,
 		},
 	},
 	showUsage: true,
-	vuex: './src/store/index'
+	vuex: './src/store/index',
 };
