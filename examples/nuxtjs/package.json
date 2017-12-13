@@ -1,0 +1,22 @@
+{
+  "name": "styleguide",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "Knovour <knovour@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
+  },
+  "dependencies": {
+    "nuxt": "^1.0.0-rc11",
+    "vue-styleguidist": "^1.3.8"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.24.1"
+  }
+}
