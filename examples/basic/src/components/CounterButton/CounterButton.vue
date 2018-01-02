@@ -29,8 +29,10 @@ export default {
 			 * After increment event
 			 * @event after
 			 * @type {number}
+			 * @called {number}
+			 * @notice {string}
 			 */
-			this.$emit('after', this.value);
+			this.$emit('after', this.value, 1, "test");
 		},
 		/**
 		* Sets the counter to a particular value.
