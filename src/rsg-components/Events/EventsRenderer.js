@@ -71,15 +71,33 @@ function renderShape(props) {
 }
 
 function renderDescription(prop) {
-	const { description, tags = {} } = prop;
+	const { description } = prop;
+	let { tags = {} } = prop;
 	const extra = renderExtra(prop);
-	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])];
+	if (Array.isArray(tags)) {
+		tags = tags.reduce((total, current) => {
+			total.push({
+				name: current.title,
+				type: {
+					name: current.value,
+				},
+			});
+			return total;
+		}, []);
+	}
+	const args = [
+		...(tags.arg || []),
+		...(tags.argument || []),
+		...(tags.param || []),
+		...(tags || []),
+	];
+
 	return (
 		<div>
 			{description && <Markdown text={description} />}
 			{extra && <Para>{extra}</Para>}
 			<JsDoc {...tags} />
-			{args.length > 0 && <Arguments args={args} heading />}
+			{args && args.length > 0 && <Arguments args={args} heading />}
 		</div>
 	);
 }
