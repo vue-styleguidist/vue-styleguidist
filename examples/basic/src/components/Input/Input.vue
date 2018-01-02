@@ -58,9 +58,10 @@ export default {
 			/**
 			 * Input event
 			 * @event input
-			 * @type {number|string}
+			 * @property {number} called - test called
+			 * @property {boolean} isPacked - Indicates whether the snowball is tightly packed.
 			 */
-			this.$emit('input', val);
+			this.$emit('input', val, 1, false);
 		},
 
 		// emit change event
