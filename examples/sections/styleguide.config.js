@@ -5,12 +5,14 @@ module.exports = {
 	sections: [
 		{
 			name: 'Documentation',
+			content: 'docs/Documentation.md',
 			sections: [
 				{
 					name: 'Files',
+					content: 'docs/Files.md',
 					sections: [
 						{
-							name: 'First File',
+							name: 'First',
 							content: 'docs/One.md',
 							description: 'This is the first section description',
 						},
