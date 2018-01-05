@@ -20,4 +20,5 @@ module.exports = {
 		},
 	},
 	showUsage: true,
+	showCode: true,
 };

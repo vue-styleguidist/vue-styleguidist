@@ -3,6 +3,7 @@
 // If you want to access any of these options in React, don’t forget to update CLIENT_CONFIG_OPTIONS array
 // in loaders/styleguide-loader.js
 
+const EXTENSIONS = 'js,jsx,ts,tsx';
 const DEFAULT_COMPONENTS_PATTERN = 'src/@(components|Components)/**/*.vue';
 
 const path = require('path');
@@ -27,7 +28,17 @@ module.exports = {
 	// `components` is a shortcut for { sections: [{ components }] }, see `sections` below
 	components: {
 		type: ['string', 'function'],
-		example: 'components/**/[A-Z]*.vue',
+		example: 'components/**/[A-Z]*.js',
+	},
+	configDir: {
+		process: (value, config, rootDir) => rootDir,
+	},
+	context: {
+		type: 'object',
+		default: {},
+		example: {
+			map: 'lodash/map',
+		},
 	},
 	contextDependencies: {
 		type: 'array',
@@ -65,15 +76,41 @@ module.exports = {
 
 			return false;
 		},
-		example: componentPath => componentPath.replace(/\.vue?$/, '.examples.md'),
+		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md'),
 	},
 	ignore: {
 		type: 'array',
-		default: ['**/__tests__/**', '**/*.test.js', '**/*.spec.js', '**/*.test.jsx', '**/*.spec.jsx'],
+		default: [
+			'**/__tests__/**',
+			`**/*.test.{${EXTENSIONS}}`,
+			`**/*.spec.{${EXTENSIONS}}`,
+			'**/*.d.ts',
+		],
 	},
 	highlightTheme: {
 		type: 'string',
 		default: 'base16-light',
+		deprecated: 'Use the theme property in the editorConfig option instead',
+	},
+	editorConfig: {
+		type: 'object',
+		process: (value, config) => {
+			const defaults = {
+				theme: 'base16-light',
+				mode: 'jsx',
+				lineWrapping: true,
+				smartIndent: false,
+				matchBrackets: true,
+				viewportMargin: Infinity,
+				lineNumbers: false,
+			};
+			return Object.assign(
+				{},
+				defaults,
+				config.highlightTheme && { theme: config.highlightTheme },
+				value
+			);
+		},
 	},
 	mixins: {
 		type: 'array',

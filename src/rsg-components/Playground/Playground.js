@@ -6,6 +6,7 @@ import Para from 'rsg-components/Para';
 import Slot from 'rsg-components/Slot';
 import PlaygroundRenderer from 'rsg-components/Playground/PlaygroundRenderer';
 import { EXAMPLE_TAB_CODE_EDITOR } from '../slots';
+import { DisplayModes } from '../../consts';
 
 export default class Playground extends Component {
 	static propTypes = {
@@ -19,18 +20,18 @@ export default class Playground extends Component {
 
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
-		isolatedExample: PropTypes.bool,
+		displayMode: PropTypes.string,
 	};
 
 	constructor(props, context) {
 		super(props, context);
-		const { code } = props;
+		const { code, settings } = props;
 		const { config } = context;
+		const showCode = settings.showcode !== undefined ? settings.showcode : config.showCode;
 
-		this.showCode = config.showCode;
-		this.handleChange = this.handleChange.bind(this);
+		this.showCode = showCode;
 		this.handleTabChange = this.handleTabChange.bind(this);
-		this.handleChange = debounce(this.handleChange, config.previewDelay);
+		this.handleChange = debounce(this.handleChange.bind(this), config.previewDelay);
 
 		this.state = {
 			code,
@@ -71,15 +72,23 @@ export default class Playground extends Component {
 	}
 
 	handleTabChange(name) {
-		this.setState(state => ({
-			activeTab: state.activeTab !== name ? name : undefined,
-		}));
+		this.setState(
+			state => ({
+				activeTab: state.activeTab !== name ? name : undefined,
+			}),
+			() => {
+				setTimeout(() => {
+					// eslint-disable-next-line no-console
+					console.clear();
+				}, 0);
+			}
+		);
 	}
 
 	render() {
 		const { code, activeTab } = this.state;
 		const { evalInContext, index, name, vuex, settings } = this.props;
-		const { isolatedExample } = this.context;
+		const { displayMode } = this.context;
 		const preview = <Preview code={code} vuex={vuex} evalInContext={evalInContext} />;
 		if (settings.noeditor) {
 			return <Para>{preview}</Para>;
@@ -110,7 +119,10 @@ export default class Playground extends Component {
 					/>
 				}
 				toolbar={
-					<Slot name="exampleToolbar" props={{ name, isolated: isolatedExample, example: index }} />
+					<Slot
+						name="exampleToolbar"
+						props={{ name, isolated: displayMode === DisplayModes.example, example: index }}
+					/>
 				}
 			/>
 		);

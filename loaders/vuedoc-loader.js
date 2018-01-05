@@ -7,6 +7,7 @@ const getExamples = require('./utils/getExamples');
 const requireIt = require('./utils/requireIt');
 const getComponentVueDoc = require('./utils/getComponentVueDoc');
 const vueDocs = require('vue-docgen-api');
+
 const examplesLoader = path.resolve(__dirname, './examples-loader.js');
 
 /* eslint-disable no-console */
@@ -30,7 +31,7 @@ module.exports = function(source) {
 		const componentPath = path.relative(process.cwd(), file);
 		const message =
 			`Cannot parse ${componentPath}: ${err}\n\n` +
-			'It usually means that vue-docgen-api don’t understand your source code or when using third-party libraries, try to file an issue here:\n' +
+			'It usually means that vue-docgen-api does not understand your source code or when using third-party libraries, try to file an issue here:\n' +
 			'https://github.com/vue-styleguidist/vue-docgen-api/issues';
 		console.log(`\n${message}\n`);
 	}

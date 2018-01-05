@@ -2,19 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compiler } from 'markdown-to-jsx';
 import mapValues from 'lodash/mapValues';
-// import memoize from 'lodash/memoize';
+import memoize from 'lodash/memoize';
 import Styled from 'rsg-components/Styled';
 import Link from 'rsg-components/Link';
-import { styles as paraStyles } from 'rsg-components/Para';
+import Text from 'rsg-components/Text';
+import Para, { styles as paraStyles } from 'rsg-components/Para';
+import MarkdownHeading from 'rsg-components/Markdown/MarkdownHeading';
 
 // We’re explicitly specifying Webpack loaders here so we could skip specifying them in Webpack configuration.
 // That way we could avoid clashes between our loaders and user loaders.
 // eslint-disable-next-line import/no-unresolved
 require('!!../../../loaders/style-loader!../../../loaders/css-loader!highlight.js/styles/tomorrow.css');
-
-// Temporary disable memoization to fix: https://github.com/styleguidist/react-styleguidist/issues/348
-// TODO: Remove after merge: https://github.com/probablyup/markdown-to-jsx/pull/96
-const memoize = a => a;
 
 // Code blocks with server-side syntax highlight
 function Code({ children, className }) {
@@ -42,6 +40,60 @@ const getBaseOverrides = memoize(classes => {
 		a: {
 			component: Link,
 		},
+		h1: {
+			component: MarkdownHeading,
+			props: {
+				level: 1,
+			},
+		},
+		h2: {
+			component: MarkdownHeading,
+			props: {
+				level: 2,
+			},
+		},
+		h3: {
+			component: MarkdownHeading,
+			props: {
+				level: 3,
+			},
+		},
+		h4: {
+			component: MarkdownHeading,
+			props: {
+				level: 4,
+			},
+		},
+		h5: {
+			component: MarkdownHeading,
+			props: {
+				level: 5,
+			},
+		},
+		h6: {
+			component: MarkdownHeading,
+			props: {
+				level: 6,
+			},
+		},
+		p: {
+			component: Para,
+			props: {
+				semantic: 'p',
+			},
+		},
+		em: {
+			component: Text,
+			props: {
+				semantic: 'em',
+			},
+		},
+		strong: {
+			component: Text,
+			props: {
+				semantic: 'strong',
+			},
+		},
 		code: {
 			component: Code,
 			props: {
@@ -58,10 +110,7 @@ const getInlineOverrides = memoize(classes => {
 	return {
 		...overrides,
 		p: {
-			component: 'span',
-			props: {
-				className: classes.base,
-			},
+			component: Text,
 		},
 	};
 }, () => 'getInlineOverrides');
@@ -73,40 +122,6 @@ const styles = ({ space, fontFamily, fontSize, color, borderRadius }) => ({
 		fontSize: 'inherit',
 	},
 	para: paraStyles({ space, color, fontFamily }).para,
-	h1: {
-		composes: '$para',
-		fontSize: fontSize.h1,
-		fontWeight: 'normal',
-	},
-	h2: {
-		composes: '$para',
-		fontSize: fontSize.h2,
-		fontWeight: 'normal',
-	},
-	h3: {
-		composes: '$para',
-		fontSize: fontSize.h3,
-		fontWeight: 'normal',
-	},
-	h4: {
-		composes: '$para',
-		fontSize: fontSize.h4,
-		fontWeight: 'normal',
-	},
-	h5: {
-		composes: '$para',
-		fontSize: fontSize.h5,
-		fontWeight: 'normal',
-	},
-	h6: {
-		composes: '$para',
-		fontSize: fontSize.h6,
-		fontWeight: 'normal',
-		fontStyle: 'italic',
-	},
-	p: {
-		composes: '$para',
-	},
 	ul: {
 		composes: '$para',
 		paddingLeft: space[3],
@@ -121,9 +136,8 @@ const styles = ({ space, fontFamily, fontSize, color, borderRadius }) => ({
 		listStyleType: 'inherit',
 	},
 	input: {
-		color: color.base,
+		isolate: false,
 		display: 'inline-block',
-		margin: [[0, '0.35em', '0.25em', '-1.2em']],
 		verticalAlign: 'middle',
 	},
 	blockquote: {
@@ -137,14 +151,6 @@ const styles = ({ space, fontFamily, fontSize, color, borderRadius }) => ({
 		borderWidth: [[0, 0, 1, 0]],
 		borderColor: color.border,
 		borderStyle: 'solid',
-	},
-	em: {
-		composes: '$base',
-		fontStyle: 'italic',
-	},
-	strong: {
-		composes: '$base',
-		fontWeight: 'bold',
 	},
 	code: {
 		fontFamily: fontFamily.monospace,
@@ -184,7 +190,7 @@ const styles = ({ space, fontFamily, fontSize, color, borderRadius }) => ({
 
 function Markdown({ classes, text, inline }) {
 	const overrides = inline ? getInlineOverrides(classes) : getBaseOverrides(classes);
-	return compiler(text, { overrides });
+	return compiler(text, { overrides, forceBlock: true });
 }
 
 Markdown.propTypes = {

@@ -12,6 +12,6 @@ exports[`should renderer a button 1`] = `
     }
   }
 >
-  Props, methods, events & slots
+  Props & methods
 </Styled(TabButton)>
 `;

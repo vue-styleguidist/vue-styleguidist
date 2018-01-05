@@ -2,8 +2,11 @@
 
 const fs = require('fs');
 const path = require('path');
+const getNameFromFilePath = require('./getNameFromFilePath');
 const requireIt = require('./requireIt');
+const slugger = require('./slugger');
 const logger = require('glogg')('rsg');
+
 const vueDocLoader = path.resolve(__dirname, '../vuedoc-loader.js');
 
 /**
@@ -37,6 +40,7 @@ function isVueFile(filepath) {
 module.exports = function processComponent(filepath, config) {
 	let props;
 	const componentPath = path.relative(config.configDir, filepath);
+	const componentName = getNameFromFilePath(filepath);
 	if (isVueFile(filepath)) {
 		props = requireIt(`!!${vueDocLoader}!${filepath}`);
 	} else {
@@ -48,6 +52,7 @@ module.exports = function processComponent(filepath, config) {
 	const componentMetadataPath = getComponentMetadataPath(filepath);
 	return {
 		filepath: componentPath,
+		slug: slugger.slug(componentName),
 		pathLine: config.getComponentPathLine(componentPath),
 		module: requireIt(filepath),
 		props,

@@ -44,9 +44,8 @@ module.exports = function(config, env) {
 				inject: true,
 			}),
 			new webpack.DefinePlugin({
-				'process.env': {
-					NODE_ENV: JSON.stringify(env),
-				},
+				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
 			}),
 		],
 		performance: {
@@ -78,7 +77,7 @@ module.exports = function(config, env) {
 				}),
 				new CleanWebpackPlugin(['build'], {
 					root: config.styleguideDir,
-					verbose: config.verbose,
+					verbose: config.verbose === true,
 				}),
 				new CopyWebpackPlugin(
 					config.assetsDir

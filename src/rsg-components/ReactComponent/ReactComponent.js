@@ -7,9 +7,10 @@ import Markdown from 'rsg-components/Markdown';
 import Slot from 'rsg-components/Slot';
 import ReactComponentRenderer from 'rsg-components/ReactComponent/ReactComponentRenderer';
 import { DOCS_TAB_USAGE } from '../slots';
+import { DisplayModes } from '../../consts';
 
 const ExamplePlaceholder =
-	process.env.NODE_ENV !== 'production'
+	process.env.STYLEGUIDIST_ENV !== 'production'
 		? require('rsg-components/ExamplePlaceholder').default
 		: () => <div />;
 
@@ -20,7 +21,7 @@ export default class ReactComponent extends Component {
 	};
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
-		isolatedComponent: PropTypes.bool,
+		displayMode: PropTypes.string,
 	};
 
 	constructor(props, context) {
@@ -42,7 +43,7 @@ export default class ReactComponent extends Component {
 
 	render() {
 		const { activeTab } = this.state;
-		const { isolatedComponent } = this.context;
+		const { displayMode } = this.context;
 		const { component, depth } = this.props;
 		const { name, slug, pathLine } = component;
 		const { description, examples = [], tags = {} } = component.props;
@@ -64,7 +65,7 @@ export default class ReactComponent extends Component {
 						slotName="componentToolbar"
 						slotProps={{
 							...component,
-							isolated: isolatedComponent,
+							isolated: displayMode !== DisplayModes.all,
 						}}
 						depth={depth}
 					>

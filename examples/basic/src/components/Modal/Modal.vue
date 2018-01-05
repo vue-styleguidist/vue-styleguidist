@@ -4,11 +4,11 @@
 		<div class="modal-wrapper">
 			<div class="modal-container">
 				<div class="modal-head">
-					<!-- Use this slot header -->
+					<!-- @slot Use this slot header -->
 					<slot name="head"></slot>
 				</div>
 				<div class="modal-body">
-					<!-- Use this slot body -->
+					<!-- @slot Use this slot body -->
 					<slot name="body"></slot>
 				</div>
 			</div>

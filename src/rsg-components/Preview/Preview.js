@@ -100,7 +100,9 @@ export default class Preview extends Component {
 	};
 
 	componentDidMount() {
-		console.clear(); // eslint-disable-line no-console
+		// Clear console after hot reload, do not clear on the first load to keep any warnings
+		// eslint-disable-next-line no-console
+		console.clear();
 		this.executeCode();
 	}
 

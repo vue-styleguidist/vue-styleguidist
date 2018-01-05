@@ -2,7 +2,8 @@
 
 const path = require('path');
 const isArray = require('lodash/isArray');
-const reactDocs = require('react-docgen');
+// const reactDocs = require('react-docgen');
+const reactDocs = {};
 const generate = require('escodegen').generate;
 const toAst = require('to-ast');
 const logger = require('glogg')('rsg');
@@ -46,7 +47,7 @@ module.exports = function(source) {
 					'It usually happens when using third-party libraries, see possible solutions here:\n' +
 					`${consts.DOCS_THIRDPARTIES}`
 				: `Cannot parse ${componentPath}: ${err}\n\n` +
-					'It usually means that react-docgen don’t understand your source code, try to file an issue here:\n' +
+					'It usually means that react-docgen does not understand your source code, try to file an issue here:\n' +
 					'https://github.com/reactjs/react-docgen/issues';
 		logger.warn(message);
 	}

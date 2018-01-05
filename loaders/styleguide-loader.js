@@ -12,6 +12,7 @@ const getComponentFilesFromSections = require('./utils/getComponentFilesFromSect
 const getComponentPatternsFromSections = require('./utils/getComponentPatternsFromSections');
 const getSections = require('./utils/getSections');
 const filterComponentsWithExample = require('./utils/filterComponentsWithExample');
+const slugger = require('./utils/slugger');
 const requireIt = require('./utils/requireIt');
 
 // Config options that should be passed to the client
@@ -25,12 +26,16 @@ const CLIENT_CONFIG_OPTIONS = [
 	'theme',
 	'styles',
 	'compilerConfig',
+	'editorConfig',
 ];
 
 module.exports = function() {};
 module.exports.pitch = function() {
 	// Clear cache so it would detect new or renamed files
 	fileExistsCaseInsensitive.clearCache();
+
+	// Reset slugger for each code reload to be deterministic
+	slugger.reset();
 
 	const config = this._styleguidist;
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Group from 'react-group';
 import objectToString from 'javascript-stringify';
 import Arguments from 'rsg-components/Arguments';
+import Argument from 'rsg-components/Argument';
 import Code from 'rsg-components/Code';
 import JsDoc from 'rsg-components/JsDoc';
 import Markdown from 'rsg-components/Markdown';
@@ -76,7 +77,11 @@ const defaultValueBlacklist = ['null', 'undefined'];
 
 function renderDefault(prop) {
 	if (prop.required) {
-		return <Text>Required</Text>;
+		return (
+			<Text size="small" color="light">
+				Required
+			</Text>
+		);
 	} else if (prop.defaultValue) {
 		if (prop.type) {
 			const propName = prop.type.name;
@@ -85,7 +90,12 @@ function renderDefault(prop) {
 				return <Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>;
 			} else if (propName === 'func' || prop.defaultValue.func) {
 				return (
-					<Text underlined title={showSpaces(unquote(prop.defaultValue.value))}>
+					<Text
+						size="small"
+						color="light"
+						underlined
+						title={showSpaces(unquote(prop.defaultValue.value))}
+					>
 						Function
 					</Text>
 				);
@@ -97,7 +107,7 @@ function renderDefault(prop) {
 					// eslint-disable-next-line no-eval
 					const object = eval(`(${prop.defaultValue.value})`);
 					return (
-						<Text underlined title={objectToString(object, null, 2)}>
+						<Text size="small" color="light" underlined title={objectToString(object, null, 2)}>
 							Shape
 						</Text>
 					);
@@ -106,7 +116,7 @@ function renderDefault(prop) {
 					// local scope. To avoid any breakage we fall back to rendering the
 					// prop without any formatting
 					return (
-						<Text underlined title={prop.defaultValue.value}>
+						<Text size="small" color="light" underlined title={prop.defaultValue.value}>
 							Shape
 						</Text>
 					);
@@ -123,12 +133,15 @@ function renderDescription(prop) {
 	const { description, tags = {} } = prop;
 	const extra = renderExtra(prop);
 	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])];
+	const returnDocumentation = (tags.return && tags.return[0]) || (tags.returns && tags.returns[0]);
+
 	return (
 		<div>
 			{description && <Markdown text={description} />}
 			{extra && <Para>{extra}</Para>}
 			<JsDoc {...tags} />
 			{args.length > 0 && <Arguments args={args} heading />}
+			{returnDocumentation && <Argument {...returnDocumentation} returns />}
 		</div>
 	);
 }

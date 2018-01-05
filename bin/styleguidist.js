@@ -4,14 +4,16 @@
 
 const minimist = require('minimist');
 const chalk = require('chalk');
+const ora = require('ora');
+const opn = require('opn');
 const stringify = require('q-i').stringify;
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const webpackDevServerUtils = require('react-dev-utils/WebpackDevServerUtils');
 const logger = require('glogg')('rsg');
 const getConfig = require('../scripts/config');
 const setupLogger = require('../scripts/logger');
 const consts = require('../scripts/consts');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const StyleguidistError = require('../scripts/utils/error');
-const devServerUtils = require('../scripts/utils/devServerUtils');
 
 const argv = minimist(process.argv.slice(2));
 const command = argv._[0];
@@ -27,9 +29,9 @@ process.on('uncaughtException', err => {
 	} else if (err instanceof StyleguidistError) {
 		console.error(chalk.bold.red(err.message));
 		logger.debug(err.stack);
-		process.exit(1);
 	} else {
-		throw err;
+		console.error(err.toString());
+		console.error(err.stack);
 	}
 	process.exit(1);
 });
@@ -44,7 +46,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || env;
 // Load style guide config
 let config;
 try {
-	config = getConfig(argv.config);
+	config = getConfig(argv.config, updateConfig);
 } catch (err) {
 	if (err instanceof StyleguidistError) {
 		printErrorWithLink(
@@ -54,15 +56,9 @@ try {
 		);
 		process.exit(1);
 	} else {
-		logger.info(err);
 		throw err;
 	}
 }
-
-// Set verbose mode
-config.verbose = config.verbose || argv.verbose;
-
-setupLogger(config.logger, config.verbose);
 
 verbose('Styleguidist config:', config);
 
@@ -77,8 +73,22 @@ switch (command) {
 		commandHelp();
 }
 
+/**
+ * @param {object} config
+ * @return {object}
+ */
+function updateConfig(config) {
+	// Set verbose mode from config option or command line switch
+	config.verbose = config.verbose || argv.verbose;
+
+	// Setup logger *before* config validation (because validations may use logger to print warnings)
+	setupLogger(config.logger, config.verbose);
+
+	return config;
+}
+
 function commandBuild() {
-	logger.info('Building style guide...');
+	console.log('Building style guide...');
 
 	const build = require('../scripts/build');
 	const compiler = build(config, err => {
@@ -86,7 +96,7 @@ function commandBuild() {
 			console.error(err);
 			process.exit(1);
 		} else {
-			logger.info('Style guide published to:\n' + chalk.underline(config.styleguideDir));
+			console.log('Style guide published to:\n' + chalk.underline(config.styleguideDir));
 		}
 	});
 
@@ -103,29 +113,42 @@ function commandBuild() {
 }
 
 function commandServer() {
+	let spinner;
+
 	const server = require('../scripts/server');
 	const compiler = server(config, err => {
 		if (err) {
 			console.error(err);
 		} else {
 			const isHttps = compiler.options.devServer && compiler.options.devServer.https;
-			devServerUtils.printInstructions(isHttps, config.serverHost, config.serverPort);
+			const host = config.serverHost;
+			const port = config.serverPort;
+			const urls = webpackDevServerUtils.prepareUrls(isHttps ? 'https' : 'http', host, port);
+			printInstructions(urls.localUrlForTerminal, urls.lanUrlForTerminal);
+			if (argv.open) {
+				opn(urls.localUrlForTerminal.slice(0, -1));
+			}
 		}
 	});
 
 	verbose('Webpack config:', compiler.options);
 
-	// Show message when Webpack is recompiling the bundle
+	// Show message when webpack is recompiling the bundle
 	compiler.plugin('invalid', function() {
-		logger.info('Compiling…');
+		console.log();
+		spinner = ora('Compiling...').start();
 	});
 
 	// Custom error reporting
 	compiler.plugin('done', function(stats) {
+		if (spinner) {
+			spinner.stop();
+		}
+
 		const messages = formatWebpackMessages(stats.toJson({}, true));
 
 		if (!messages.errors.length && !messages.warnings.length) {
-			logger.info(chalk.green('Compiled successfully!'));
+			printStatus('Compiled successfully!', 'success');
 		}
 
 		printAllErrorsAndWarnings(messages, stats.compilation);
@@ -133,7 +156,7 @@ function commandServer() {
 }
 
 function commandHelp() {
-	logger.info(
+	console.log(
 		[
 			chalk.underline('Usage'),
 			'',
@@ -158,26 +181,69 @@ function commandHelp() {
 	);
 }
 
+/**
+ * @param {string} localUrlForTerminal
+ * @param {string} lanUrlForTerminal
+ */
+function printInstructions(localUrlForTerminal, lanUrlForTerminal) {
+	console.log(`You can now view your style guide in the browser:`);
+	console.log();
+	console.log(`  ${chalk.bold('Local:')}            ${localUrlForTerminal}`);
+	console.log(`  ${chalk.bold('On your network:')}  ${lanUrlForTerminal}`);
+	console.log();
+}
+
+/**
+ * @param {string} message
+ * @param {string} linkTitle
+ * @param {string} linkUrl
+ */
 function printErrorWithLink(message, linkTitle, linkUrl) {
 	console.error(`${chalk.bold.red(message)}\n\n${linkTitle}\n${chalk.underline(linkUrl)}\n`);
 }
 
-function printErrors(header, errors, originalErrors, printer) {
-	console.error(printer(header));
+/**
+ * @param {string} header
+ * @param {object} errors
+ * @param {object} originalErrors
+ * @param {'success'|'error'|'warning'} type
+ */
+function printErrors(header, errors, originalErrors, type) {
+	printStatus(header, type);
+	console.error();
 	const messages = argv.verbose ? originalErrors : errors;
 	messages.forEach(message => {
 		console.error(message.message || message);
 	});
 }
 
+/**
+ * @param {string} text
+ * @param {'success'|'error'|'warning'} type
+ */
+function printStatus(text, type) {
+	if (type === 'success') {
+		console.log(chalk.inverse.bold.green(' DONE ') + ' ' + text);
+	} else if (type === 'error') {
+		console.error(chalk.reset.inverse.bold.red(' FAIL ') + ' ' + chalk.reset.red(text));
+	} else {
+		console.error(chalk.reset.inverse.bold.yellow(' WARN ') + ' ' + chalk.reset.yellow(text));
+	}
+}
+
+/**
+ * @param {object} messages
+ * @param {object} compilation
+ * @return {boolean}
+ */
 function printAllErrorsAndWarnings(messages, compilation) {
-	// If errors exist, only show errors.
+	// If errors exist, only show errors
 	if (messages.errors.length) {
 		printAllErrors(messages.errors, compilation.errors);
 		return true;
 	}
 
-	// Show warnings if no errors were found.
+	// Show warnings if no errors were found
 	if (messages.warnings.length) {
 		printAllWarnings(messages.warnings, compilation.warnings);
 	}
@@ -185,16 +251,27 @@ function printAllErrorsAndWarnings(messages, compilation) {
 	return false;
 }
 
+/**
+ * @param {object} errors
+ * @param {object} originalErrors
+ */
 function printAllErrors(errors, originalErrors) {
 	printStyleguidistError(errors);
 	printNoLoaderError(errors);
-	printErrors('Failed to compile.', errors, originalErrors, chalk.red);
+	printErrors('Failed to compile', errors, originalErrors, 'error');
 }
 
+/**
+ * @param {object} warnings
+ * @param {object} originalWarnings
+ */
 function printAllWarnings(warnings, originalWarnings) {
-	printErrors('Compiled with warnings.', warnings, originalWarnings, chalk.yellow);
+	printErrors('Compiled with warnings', warnings, originalWarnings, 'warning');
 }
 
+/**
+ * @param {object} errors
+ */
 function printStyleguidistError(errors) {
 	const styleguidistError = errors.find(message =>
 		message.includes('Module build failed: Error: Styleguidist:')
@@ -208,6 +285,9 @@ function printStyleguidistError(errors) {
 	process.exit(1);
 }
 
+/**
+ * @param {object} errors
+ */
 function printNoLoaderError(errors) {
 	if (argv.verbose) {
 		return;
@@ -228,6 +308,10 @@ function printNoLoaderError(errors) {
 	process.exit(1);
 }
 
+/**
+ * @param {string} header
+ * @param {object} object
+ */
 function verbose(header, object) {
 	logger.debug(chalk.bold(header) + '\n\n' + stringify(object));
 }

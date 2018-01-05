@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import CodeMirror from 'react-codemirror2';
+import { UnControlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/mode/jsx/jsx';
 
 // We’re explicitly specifying Webpack loaders here so we could skip specifying them in Webpack configuration.
@@ -10,15 +10,6 @@ import 'codemirror/mode/jsx/jsx';
 require('!!../../../loaders/style-loader!../../../loaders/css-loader!codemirror/lib/codemirror.css');
 // eslint-disable-next-line import/no-unresolved
 require('!!../../../loaders/style-loader!../../../loaders/css-loader!rsg-codemirror-theme.css');
-
-const codemirrorOptions = {
-	mode: 'jsx',
-	lineNumbers: false,
-	lineWrapping: true,
-	smartIndent: false,
-	matchBrackets: true,
-	viewportMargin: Infinity,
-};
 
 const UPDATE_DELAY = 10;
 
@@ -46,11 +37,7 @@ export default class Editor extends Component {
 
 	render() {
 		const { code } = this.props;
-		const { highlightTheme } = this.context.config;
-		const options = {
-			...codemirrorOptions,
-			theme: highlightTheme,
-		};
-		return <CodeMirror value={code} onChange={this.handleChange} options={options} />;
+		const { editorConfig } = this.context.config;
+		return <CodeMirror value={code} onChange={this.handleChange} options={editorConfig} />;
 	}
 }
