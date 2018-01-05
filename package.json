@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "1.3.9",
+  "version": "1.3.10-beta",
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
     "type": "git",
@@ -153,6 +153,8 @@
     "compile": "babel --ignore '*.spec.js' -d lib/ src/ --plugins=transform-class-properties,transform-object-rest-spread --presets=env,react",
     "compile:watch": "babel --ignore '*.spec.js' --watch -d lib/ src/ --plugins=transform-class-properties,transform-object-rest-spread --presets=env,react",
     "build": "node bin/styleguidist.js build --config examples/basic/styleguide.config.js",
+    "build:vuex": "node bin/styleguidist.js build --config examples/vuex/styleguide.config.js",
+    "build:nuxtjs": "node bin/styleguidist.js build --config examples/nuxtjs/styleguide.config.js",
     "prepublish": "npm run compile",
     "publish": "npm run build",
     "precommit": "lint-staged",

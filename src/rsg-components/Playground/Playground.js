@@ -72,17 +72,9 @@ export default class Playground extends Component {
 	}
 
 	handleTabChange(name) {
-		this.setState(
-			state => ({
-				activeTab: state.activeTab !== name ? name : undefined,
-			}),
-			() => {
-				setTimeout(() => {
-					// eslint-disable-next-line no-console
-					console.clear();
-				}, 0);
-			}
-		);
+		this.setState(state => ({
+			activeTab: state.activeTab !== name ? name : undefined,
+		}));
 	}
 
 	render() {
