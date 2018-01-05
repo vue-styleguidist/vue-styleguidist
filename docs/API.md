@@ -4,20 +4,8 @@
 
 <!-- toc -->
 
-- [Initialization](#initialization)
-- [Methods](#methods)
-  * [`build(callback)`](#buildcallback)
-    + [Arguments](#arguments)
-    + [Returns](#returns)
-    + [Example](#example)
-  * [`server(callback)`](#servercallback)
-    + [Arguments](#arguments-1)
-    + [Returns](#returns-1)
-    + [Example](#example-1)
-  * [`makeWebpackConfig([env])`](#makewebpackconfigenv)
-    + [Arguments](#arguments-2)
-    + [Returns](#returns-2)
-    + [Example](#example-2)
+* [Initialization](#initialization)
+* [Methods](#methods)
 
 <!-- tocstop -->
 
@@ -83,74 +71,78 @@ See all available [config options](Configuration.md).
 
 #### Arguments
 
-1. `callback(err, config, stats)` (*Function*): A callback to be invoked when style guide is built:
-  1. `err` (*Object*): error details.
-  2. `config` (*Object*): normalized style guide config.
-  3. `stats` (*Object*): webpack build stats.
+1. `callback(err, config, stats)` (_Function_): A callback to be invoked when style guide is built:
+
+   1. `err` (_Object_): error details.
+   2. `config` (_Object_): normalized style guide config.
+   3. `stats` (_Object_): webpack build stats.
 
 #### Returns
 
-(*Compiler*): webpack `Compiler` instance.
+(_Compiler_): webpack `Compiler` instance.
 
 #### Example
 
 ```javascript
-const styleguidist = require('vue-styleguidist');
-styleguidist(require('../styleguide.config.js')).build((err, config) => {
-  if (err) {
-    console.log(err);
+const styleguidist = require('vue-styleguidist')
+styleguidist(require('../styleguide.config.js')).build(
+  (err, config) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('Style guide published to', config.styleguideDir)
+    }
   }
-  else {
-    console.log('Style guide published to', config.styleguideDir);
-  }
-});
+)
 ```
-
 
 ### `server(callback)`
 
 #### Arguments
 
-1. `callback(err, config)` (*Function*): A callback to be invoked when style guide is built:
-  1. `err` (*Object*): error details.
-  2. `config` (*Object*): normalized style guide config.
+1. `callback(err, config)` (_Function_): A callback to be invoked when style guide is built:
+
+   1. `err` (_Object_): error details.
+   2. `config` (_Object_): normalized style guide config.
 
 #### Returns
 
-(*Compiler*): webpack `Compiler` instance.
+(_Compiler_): webpack `Compiler` instance.
 
 #### Example
 
 ```javascript
-const styleguidist = require('vue-styleguidist');
-styleguidist(require('../styleguide.config.js')).server((err, config) => {
-  if (err) {
-    console.log(err);
+const styleguidist = require('vue-styleguidist')
+styleguidist(require('../styleguide.config.js')).server(
+  (err, config) => {
+    if (err) {
+      console.log(err)
+    } else {
+      const url = `http://${config.serverHost}:${config.serverPort}`
+      console.log(`Listening at ${url}`)
+    }
   }
-  else {
-    console.log('Listening at http://' + config.serverHost + ':' + config.serverPort);
-  }
-});
+)
 ```
 
 ### `makeWebpackConfig([env])`
 
 #### Arguments
 
-1. \[`env`=`'production'`\] (*String*): `production` or `development`.
+1. \[`env`=`'production'`\] (_String_): `production` or `development`.
 
 #### Returns
 
-(*Object*): webpack config.
+(_Object_): webpack config.
 
 #### Example
 
 ```javascript
 // webpack.config.js
 module.exports = [
-    {
-      // User webpack config
-    },
-    require('vue-styleguidist')().makeWebpackConfig(),
-];
+  {
+    // User webpack config
+  },
+  require('vue-styleguidist')().makeWebpackConfig()
+]
 ```

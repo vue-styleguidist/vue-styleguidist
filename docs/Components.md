@@ -4,21 +4,27 @@
 
 <!-- toc -->
 
-- [Finding components](#finding-components)
-- [Sections](#sections)
+* [Finding components](#finding-components)
+* [Sections](#sections)
+* [Limitations](#limitations)
 
 <!-- tocstop -->
 
 ## Finding components
 
-By default Styleguidist will search components using this [glob pattern](https://github.com/isaacs/node-glob#glob-primer): `src/components/**/*.vue`. It will pick up paths like `src/components/Button.vue`. It will also ignore test files (`__tests__` folder and file names containing `.test.js` and `.spec.js`). If it doesn’t work for you, create a `styleguide.config.js` file in your project’s root folder and configure the patterns to fit your project structure.
+By default Styleguidist will search components using this [glob pattern](https://github.com/isaacs/node-glob#glob-primer): `src/components/**/*.vue`.
 
 For example, if your components look like `components/Button/Button.vue`:
+
 ```javascript
 module.exports = {
   components: 'src/components/**/[A-Z]*.vue'
-};
+}
 ```
+
+But will ignore tests:
+
+* `__tests__` folder
 
 > **Note:** All paths are relative to the config folder.
 
@@ -32,10 +38,12 @@ Group components into sections or add extra Markdown documents to your style gui
 
 Each section consists of (all fields are optional):
 
-- `name` — section title.
-- `content` — location of a Markdown file containing the overview content.
-- `components` — a glob pattern string or a function returning a list of components. The same rules apply as for the root `components` option.
-- `sections` — array of subsections (can be nested).
+* `name` — section title.
+* `content` — location of a Markdown file containing the overview content.
+* `components` — a glob pattern string or a function returning a list of components. The same rules apply as for the root `components` option.
+* `sections` — array of subsections (can be nested).
+* `description` — A small description of this section.
+* `ignore` — string/array of globs that should not be included in the section.
 
 Configuring a style guide with textual documentation section and a list of components would look like:
 
@@ -51,7 +59,8 @@ module.exports = {
       sections: [
         {
           name: 'Installation',
-          content: 'docs/installation.md'
+          content: 'docs/installation.md',
+          description: 'The description for the installation section'
         },
         {
           name: 'Configuration',
@@ -65,5 +74,5 @@ module.exports = {
       components: 'lib/components/ui/*.vue'
     }
   ]
-};
+}
 ```

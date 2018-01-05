@@ -4,17 +4,17 @@
 
 <!-- toc -->
 
-- [How to add mixins or third-party plugins to the style guide?](#how-to-add-mixins-or-third-party-plugins-to-the-style-guide)
-- [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
-- [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
-- [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
-- [How to change styles of a style guide?](#how-to-change-styles-of-a-style-guide)
-- [How to change the layout of a style guide?](#how-to-change-the-layout-of-a-style-guide)
-- [How to change style guide dev server logs output?](#how-to-change-style-guide-dev-server-logs-output)
-- [How to debug my components and examples?](#how-to-debug-my-components-and-examples)
-- [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
-- [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
-- [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
+* [How to add mixins or third-party plugins to the style guide?](#how-to-add-mixins-or-third-party-plugins-to-the-style-guide)
+* [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
+* [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
+* [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
+* [How to change styles of a style guide?](#how-to-change-styles-of-a-style-guide)
+* [How to change the layout of a style guide?](#how-to-change-the-layout-of-a-style-guide)
+* [How to change style guide dev server logs output?](#how-to-change-style-guide-dev-server-logs-output)
+* [How to debug my components and examples?](#how-to-debug-my-components-and-examples)
+* [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
+* [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
+* [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
 
 <!-- tocstop -->
 
@@ -89,14 +89,14 @@ const Button = require('../common/Button');
 In your style guide config:
 
 ```javascript
-const path = require('path');
+const path = require('path')
 module.exports = {
   require: [
     'babel-polyfill',
     path.join(__dirname, 'path/to/script.js'),
-    path.join(__dirname, 'path/to/styles.css'),
+    path.join(__dirname, 'path/to/styles.css')
   ]
-};
+}
 ```
 
 ## How to change styles of a style guide?
@@ -114,7 +114,7 @@ module.exports = {
   theme: {
     color: {
       link: 'firebrick',
-      linkHover: 'salmon',
+      linkHover: 'salmon'
     },
     fontFamily: {
       base: '"Comic Sans MS", "Comic Sans", cursive'
@@ -130,7 +130,7 @@ module.exports = {
       }
     }
   }
-};
+}
 ```
 
 > **Note:** See available [theme variables](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/src/styles/theme.js).
@@ -151,25 +151,23 @@ For example you can replace the `Wrapper` component to wrap any example in the [
 
 ```javascript
 // styleguide.config.js
-const path = require('path');
+const path = require('path')
 module.exports = {
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'lib/styleguide/Wrapper')
   }
-};
+}
 ```
 
 ```jsx
 // lib/styleguide/Wrapper.js
-import React, { Component } from 'react';
-import { IntlProvider } from 'react-intl';
+import React, { Component } from 'react'
+import { IntlProvider } from 'react-intl'
 export default class Wrapper extends Component {
   render() {
     return (
-      <IntlProvider locale="en">
-        {this.props.children}
-      </IntlProvider>
-    );
+      <IntlProvider locale="en">{this.props.children}</IntlProvider>
+    )
   }
 }
 ```
@@ -178,35 +176,42 @@ You can replace the `StyleGuideRenderer` component like this:
 
 ```javascript
 // styleguide.config.js
-const path = require('path');
+const path = require('path')
 module.exports = {
   styleguideComponents: {
-    StyleGuideRenderer: path.join(__dirname, 'lib/styleguide/StyleGuideRenderer')
+    StyleGuideRenderer: path.join(
+      __dirname,
+      'lib/styleguide/StyleGuideRenderer'
+    )
   }
-};
+}
 ```
 
 ```jsx
 // lib/styleguide/StyleGuideRenderer.js
-import React from 'react';
-const StyleGuideRenderer = ({ title, homepageUrl, components, toc, hasSidebar }) => (
+import React from 'react'
+const StyleGuideRenderer = ({
+  title,
+  homepageUrl,
+  components,
+  toc,
+  hasSidebar
+}) => (
   <div className="root">
     <h1>{title}</h1>
     <main className="wrapper">
       <div className="content">
         {components}
         <footer className="footer">
-          <Markdown text={`Generated with [React Styleguidist](${homepageUrl})`} />
+          <Markdown
+            text={`Generated with [React Styleguidist](${homepageUrl})`}
+          />
         </footer>
       </div>
-      {hasSidebar &&
-        <div className="sidebar">
-          {toc}
-        </div>
-      }
+      {hasSidebar && <div className="sidebar">{toc}</div>}
     </main>
   </div>
-);
+)
 ```
 
 ## How to change style guide dev server logs output?
@@ -221,20 +226,19 @@ module.exports = {
         stats: {
           chunks: false,
           chunkModules: false,
-          chunkOrigins: false,
-        },
-      };
+          chunkOrigins: false
+        }
+      }
     }
-    return {};
+    return {}
   }
-};
+}
 ```
 
 ## How to debug my components and examples?
 
 1. Open your browser’s developer tools
 2. Write `debugger;` statement wherever you want: in a component source, a Markdown example or even in an editor in a browser.
-
 
 ## How to debug the exceptions thrown from my components?
 

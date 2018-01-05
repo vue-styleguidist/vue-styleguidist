@@ -6,11 +6,11 @@
 
 <!-- toc -->
 
-- [How it works](#how-it-works)
-- [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
-- [React components](#react-components)
-- [Styles](#styles)
-- [Render components vue](#render-components-vue)
+* [How it works](#how-it-works)
+* [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
+* [React components](#react-components)
+* [Styles](#styles)
+* [Render components vue](#render-components-vue)
 
 <!-- tocstop -->
 
