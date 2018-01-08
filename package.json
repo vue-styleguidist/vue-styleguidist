@@ -148,6 +148,7 @@
     "start:vuex": "node bin/styleguidist.js server --config examples/vuex/styleguide.config.js",
     "start:nuxtjs": "node bin/styleguidist.js server --config examples/nuxtjs/styleguide.config.js",
     "start:sections": "node bin/styleguidist.js server --config examples/sections/styleguide.config.js",
+    "start:paginations": "node bin/styleguidist.js server --config examples/paginations/styleguide.config.js",
     "lint": "eslint . --cache --fix",
     "lint-staged": "lint-staged",
     "precompile": "rimraf lib/",
