@@ -7,6 +7,8 @@ import Welcome from 'rsg-components/Welcome';
 import Error from 'rsg-components/Error';
 import { HOMEPAGE } from '../../../scripts/consts';
 import { DisplayModes } from '../../consts';
+import getIdParam from '../../utils/getIdParam';
+import scrollTo from '../../utils/scrollTo';
 
 export default class StyleGuide extends Component {
 	static propTypes = {
@@ -14,6 +16,7 @@ export default class StyleGuide extends Component {
 		config: PropTypes.object.isRequired,
 		slots: PropTypes.object.isRequired,
 		sections: PropTypes.array.isRequired,
+		allSections: PropTypes.array.isRequired,
 		welcomeScreen: PropTypes.bool,
 		patterns: PropTypes.array,
 		displayMode: PropTypes.string,
@@ -44,6 +47,14 @@ export default class StyleGuide extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.scrollToId();
+	}
+
+	componentDidUpdate() {
+		this.scrollToId();
+	}
+
 	componentDidCatch(error, info) {
 		this.setState({
 			error,
@@ -51,8 +62,19 @@ export default class StyleGuide extends Component {
 		});
 	}
 
+	scrollToId() {
+		if (this.props.config.navigation) {
+			const id = getIdParam();
+			if (id) {
+				scrollTo(id);
+			} else {
+				scrollTo();
+			}
+		}
+	}
+
 	render() {
-		const { config, sections, welcomeScreen, patterns, displayMode } = this.props;
+		const { config, sections, welcomeScreen, patterns, allSections, displayMode } = this.props;
 
 		if (this.state.error) {
 			return <Error error={this.state.error} info={this.state.info} />;
@@ -66,8 +88,8 @@ export default class StyleGuide extends Component {
 			<StyleGuideRenderer
 				title={config.title}
 				homepageUrl={HOMEPAGE}
-				toc={<TableOfContents sections={sections} />}
-				hasSidebar={config.showSidebar && displayMode === DisplayModes.all}
+				toc={<TableOfContents sections={config.navigation ? allSections : sections} />}
+				hasSidebar={config.navigation || (config.showSidebar && displayMode === DisplayModes.all)}
 			>
 				<Sections sections={sections} depth={1} />
 			</StyleGuideRenderer>

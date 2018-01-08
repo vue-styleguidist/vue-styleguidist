@@ -4,7 +4,16 @@ import cx from 'classnames';
 import Heading from 'rsg-components/Heading';
 import Styled from 'rsg-components/Styled';
 
-function SectionHeadingRenderer({ classes, children, toolbar, id, href, depth, deprecated }) {
+function SectionHeadingRenderer({
+	classes,
+	children,
+	toolbar,
+	id,
+	href,
+	depth,
+	deprecated,
+	navigation,
+}) {
 	const headingLevel = Math.min(6, depth);
 	const sectionNameClasses = cx(classes.sectionName, {
 		[classes.isDeprecated]: deprecated,
@@ -17,7 +26,7 @@ function SectionHeadingRenderer({ classes, children, toolbar, id, href, depth, d
 					{children}
 				</a>
 			</Heading>
-			<div className={classes.toolbar}>{toolbar}</div>
+			{!navigation ? <div className={classes.toolbar}>{toolbar}</div> : null}
 		</div>
 	);
 }
@@ -53,6 +62,7 @@ SectionHeadingRenderer.propTypes = {
 	href: PropTypes.string.isRequired,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
+	navigation: PropTypes.bool.isRequired,
 };
 
 export default Styled(styles)(SectionHeadingRenderer);

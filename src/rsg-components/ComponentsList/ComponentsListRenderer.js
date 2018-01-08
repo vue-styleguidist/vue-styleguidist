@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Link from 'rsg-components/Link';
 import Styled from 'rsg-components/Styled';
+import getUrl from '../../utils/getUrl';
 
 const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
 	list: {
@@ -33,21 +34,34 @@ const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
 	},
 });
 
-export function ComponentsListRenderer({ classes, items }) {
+export function ComponentsListRenderer({ classes, items }, { config }) {
 	items = items.filter(item => item.name);
 
 	if (!items.length) {
 		return null;
 	}
+	const navigation = config.navigation;
+
+	function getHref(slug, name, nameParent, level) {
+		if (navigation) {
+			return level < 2
+				? getUrl({ name, isolated: true })
+				: getUrl({ name: nameParent, id: slug, isolated: true });
+		}
+		return `#${slug}`;
+	}
 
 	return (
 		<ul className={classes.list}>
-			{items.map(({ heading, name, slug, content }) => (
+			{items.map(({ heading, name, slug, nameParent, content, level }) => (
 				<li
 					className={cx(classes.item, (!content || !content.props.items.length) && classes.isChild)}
 					key={name}
 				>
-					<Link className={cx(heading && classes.heading)} href={`#${slug}`}>
+					<Link
+						className={cx(heading && classes.heading)}
+						href={getHref(slug, name, nameParent, level)}
+					>
 						{name}
 					</Link>
 					{content}
@@ -60,6 +74,10 @@ export function ComponentsListRenderer({ classes, items }) {
 ComponentsListRenderer.propTypes = {
 	items: PropTypes.array.isRequired,
 	classes: PropTypes.object.isRequired,
+};
+
+ComponentsListRenderer.contextTypes = {
+	config: PropTypes.object,
 };
 
 export default Styled(styles)(ComponentsListRenderer);

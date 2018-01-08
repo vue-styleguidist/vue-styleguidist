@@ -22,16 +22,12 @@ export const styles = ({ space, color, borderRadius }) => ({
 	tab: {}, // expose className to allow using it in 'styles' settings
 });
 
-export function PlaygroundRenderer({
-	classes,
-	name,
-	preview,
-	previewProps,
-	tabButtons,
-	tabBody,
-	toolbar,
-}) {
+export function PlaygroundRenderer(
+	{ classes, name, preview, previewProps, tabButtons, tabBody, toolbar },
+	{ config }
+) {
 	const { className, ...props } = previewProps;
+	const navigation = config.navigation;
 	return (
 		<div className={classes.root}>
 			<div className={cx(classes.preview, className)} {...props} data-preview={name}>
@@ -39,7 +35,7 @@ export function PlaygroundRenderer({
 			</div>
 			<div className={classes.controls}>
 				<div className={classes.tabs}>{tabButtons}</div>
-				<div className={classes.toolbar}>{toolbar}</div>
+				{!navigation ? <div className={classes.toolbar}>{toolbar}</div> : null}
 			</div>
 			<div className={classes.tab}>{tabBody}</div>
 		</div>
@@ -54,6 +50,10 @@ PlaygroundRenderer.propTypes = {
 	tabButtons: PropTypes.node.isRequired,
 	tabBody: PropTypes.node.isRequired,
 	toolbar: PropTypes.node.isRequired,
+};
+
+PlaygroundRenderer.contextTypes = {
+	config: PropTypes.object,
 };
 
 export default Styled(styles)(PlaygroundRenderer);

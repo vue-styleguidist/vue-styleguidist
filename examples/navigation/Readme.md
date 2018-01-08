@@ -1,10 +1,10 @@
-# Vue Styleguidist basic example style guide with sections
+# Vue Styleguidist basic example style guide with navigation
 
 How to start locally:
 
 ```
 git clone https://github.com/vue-styleguidist/vue-styleguidist.git
-cd vue-styleguidist/examples/sections
+cd vue-styleguidist/examples/navigation
 npm install
 npm run styleguide
 ```

@@ -2,9 +2,11 @@ import isFinite from 'lodash/isFinite';
 import filterComponentExamples from './filterComponentExamples';
 import filterComponentsInSectionsByExactName from './filterComponentsInSectionsByExactName';
 import filterSectionExamples from './filterSectionExamples';
+import filterSectionByLevel from './filterSectionByLevel';
 import findSection from './findSection';
 import getInfoFromHash from './getInfoFromHash';
 import { DisplayModes } from '../consts';
+import getUrl from './getUrl';
 
 /**
  * Return sections / components / examples to show on a screen according to a current route.
@@ -15,9 +17,10 @@ import { DisplayModes } from '../consts';
  *
  * @param {object} sections
  * @param {string} hash
+ * @param {boolean} navigation
  * @returns {object}
  */
-export default function getRouteData(sections, hash) {
+export default function getRouteData(sections, hash, navigation) {
 	// Parse URL hash to check if the components list must be filtered
 	const {
 		// Name of the filtered component/section to show isolated (/#!/Button → Button)
@@ -28,6 +31,11 @@ export default function getRouteData(sections, hash) {
 
 	let displayMode = DisplayModes.all;
 
+	if (navigation && !targetName && sections[0]) {
+		const name = sections[0].name;
+		window.location.href = getUrl({ name, isolated: true });
+	}
+
 	// Filter the requested component if required
 	if (targetName) {
 		const filteredComponents = filterComponentsInSectionsByExactName(sections, targetName);
@@ -35,7 +43,12 @@ export default function getRouteData(sections, hash) {
 			sections = [{ components: filteredComponents }];
 			displayMode = DisplayModes.component;
 		} else {
-			const section = findSection(sections, targetName);
+			let section;
+			if (navigation) {
+				section = filterSectionByLevel(findSection(sections, targetName));
+			} else {
+				section = findSection(sections, targetName);
+			}
 			sections = section ? [section] : [];
 			displayMode = DisplayModes.section;
 		}

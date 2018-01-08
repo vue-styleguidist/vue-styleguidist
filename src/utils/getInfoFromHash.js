@@ -11,7 +11,11 @@ import isNaN from 'lodash/isNaN';
  */
 export default function getInfoFromHash(hash) {
 	if (hash.substr(0, 3) === '#!/') {
-		const tokens = hash.substr(3).split('/');
+		let path = hash.substr(3);
+		if (path.indexOf('?id') > -1) {
+			path = path.replace(path.slice(path.indexOf('?id')), '');
+		}
+		const tokens = path.split('/');
 		const index = parseInt(tokens[1], 10);
 		return {
 			targetName: tokens[0],

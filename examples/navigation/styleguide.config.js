@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
 	title: 'Vue Style Guide Example',
+	navigation: true,
 	sections: [
 		{
 			name: 'Documentation',

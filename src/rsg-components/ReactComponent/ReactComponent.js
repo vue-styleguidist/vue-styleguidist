@@ -45,7 +45,7 @@ export default class ReactComponent extends Component {
 		const { activeTab } = this.state;
 		const { displayMode } = this.context;
 		const { component, depth } = this.props;
-		const { name, slug, pathLine } = component;
+		const { name, level, nameParent, slug, pathLine } = component;
 		const { description, examples = [], tags = {} } = component.props;
 		if (!name) {
 			return null;
@@ -61,6 +61,9 @@ export default class ReactComponent extends Component {
 				heading={
 					<SectionHeading
 						id={slug}
+						name={name}
+						level={level}
+						nameParent={nameParent}
 						deprecated={!!tags.deprecated}
 						slotName="componentToolbar"
 						slotProps={{

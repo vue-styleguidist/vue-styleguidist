@@ -22,12 +22,13 @@ export default function renderStyleguide(
 	hist = window.history
 ) {
 	const allSections = processSections(styleguide.sections, styleguide.vuex);
+	const navigation = styleguide.config.navigation;
 
 	// Globalize all components, not just ones we see on the screen, to make
 	// all components accessible to all examples
 	globalizeComponents(allSections);
 
-	const { sections, displayMode } = getRouteData(allSections, loc.hash);
+	const { sections, displayMode } = getRouteData(allSections, loc.hash, navigation);
 
 	// Update page title
 	doc.title = getPageTitle(sections, styleguide.config.title, displayMode);
@@ -47,6 +48,7 @@ export default function renderStyleguide(
 			welcomeScreen={styleguide.welcomeScreen}
 			patterns={styleguide.patterns}
 			sections={sections}
+			allSections={allSections}
 			displayMode={displayMode}
 		/>
 	);

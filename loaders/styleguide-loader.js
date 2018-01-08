@@ -24,6 +24,7 @@ const CLIENT_CONFIG_OPTIONS = [
 	'showSidebar',
 	'previewDelay',
 	'theme',
+	'navigation',
 	'styles',
 	'compilerConfig',
 	'editorConfig',

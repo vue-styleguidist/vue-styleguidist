@@ -17,6 +17,7 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`editorConfig`](#editorConfig)
 * [`getComponentPathLine`](#getcomponentpathline)
 * [`getExampleFilename`](#getexamplefilename)
+* [`navigation`](#navigation)
 * [`mixins`](#mixins)
 * [`ignore`](#ignore)
 * [`logger`](#logger)
@@ -188,6 +189,36 @@ module.exports = {
     return componentPath.replace(/\.jsx?$/, '.examples.md')
   }
 }
+```
+
+#### `navigation`
+
+Type: `Boolean`, default: `false`
+
+Generates a navigation of the sections.
+
+#### `mixins`
+
+Type: `Array`, default: `[]`
+
+Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components of examples in the style guide.
+See example in the [cookbook](Cookbook.md#how-to-add-mixins-or-third-party-plugins-to-the-style-guide).
+
+For example:
+
+```javascript
+module.exports = {
+  mixins: [
+    'src/mixins/logger.js',
+    'src/mixins/global.js',
+    // another mixin
+    {
+      created() {
+        console.log('component created')
+      }
+    }
+  ]
+};
 ```
 
 #### `ignore`

@@ -112,6 +112,10 @@ module.exports = {
 			);
 		},
 	},
+	navigation: {
+		type: 'boolean',
+		default: false,
+	},
 	mixins: {
 		type: 'array',
 		default: [],
