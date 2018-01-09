@@ -27,21 +27,9 @@ module.exports = {
 		},
 		{
 			name: 'Components',
-			sections: [
-				{
-					name: 'Buttons',
-					components: () => [
-						'./src/components/Button/Button.vue',
-						'./src/components/RandomButton/RandomButton.vue',
-					],
-				},
-				{
-					name: 'Fields',
-					components: () => [
-						'./src/components/Label/Label.vue',
-						'./src/components/Placeholder/Placeholder.vue',
-					],
-				},
+			components: () => [
+				'./src/components/Label/Label.vue',
+				'./src/components/Placeholder/Placeholder.vue',
 			],
 		},
 	],

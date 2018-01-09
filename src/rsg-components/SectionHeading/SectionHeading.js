@@ -2,23 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slot from 'rsg-components/Slot';
 import SectionHeadingRenderer from 'rsg-components/SectionHeading/SectionHeadingRenderer';
-import getUrl from '../../utils/getUrl';
+import { getUrlNavigation } from '../../utils/utils';
 
 export default function SectionHeading(
-	{ slotName, slotProps, children, id, level, name, nameParent, ...rest },
+	{ slotName, slotProps, children, id, level, name, nameParent, collection = {}, ...rest },
 	{ config }
 ) {
-	let href;
 	const navigation = config.navigation;
-	if (navigation) {
-		if (level < 2) {
-			href = getUrl({ name, isolated: true });
-		} else {
-			href = getUrl({ name: nameParent, id, isolated: true });
-		}
-	} else {
-		href = getUrl({ slug: id, anchor: true });
-	}
+	const href = getUrlNavigation(navigation, {
+		level,
+		sections: collection.sections,
+		components: collection.components,
+		nameParent,
+		name,
+		slug: id,
+	});
 	return (
 		<SectionHeadingRenderer
 			toolbar={<Slot name={slotName} props={slotProps} />}
@@ -42,6 +40,7 @@ SectionHeading.propTypes = {
 	slotProps: PropTypes.object.isRequired,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
+	collection: PropTypes.object,
 };
 
 SectionHeading.contextTypes = {
