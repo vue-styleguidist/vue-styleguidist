@@ -126,7 +126,7 @@ function commandServer() {
 			const urls = webpackDevServerUtils.prepareUrls(isHttps ? 'https' : 'http', host, port);
 			printInstructions(urls.localUrlForTerminal, urls.lanUrlForTerminal);
 			if (argv.open) {
-				opn(urls.localUrlForTerminal.slice(0, -1));
+				opn(urls.localUrlForBrowser);
 			}
 		}
 	});
