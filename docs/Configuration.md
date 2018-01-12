@@ -14,7 +14,7 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`configureServer`](#configureserver)
 * [`dangerouslyUpdateWebpackConfig`](#dangerouslyupdatewebpackconfig)
 * [`defaultExample`](#defaultexample)
-* [`editorConfig`](#editorConfig)
+* [`editorConfig`](#editorconfig)
 * [`getComponentPathLine`](#getcomponentpathline)
 * [`getExampleFilename`](#getexamplefilename)
 * [`navigation`](#navigation)
