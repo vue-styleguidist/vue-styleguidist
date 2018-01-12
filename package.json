@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "1.4.2",
+  "version": "1.4.4",
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
     "type": "git",
@@ -157,6 +157,8 @@
     "build": "node bin/styleguidist.js build --config examples/basic/styleguide.config.js",
     "build:vuex": "node bin/styleguidist.js build --config examples/vuex/styleguide.config.js",
     "build:nuxtjs": "node bin/styleguidist.js build --config examples/nuxtjs/styleguide.config.js",
+    "build:sections": "node bin/styleguidist.js build --config examples/sections/styleguide.config.js",
+    "build:navigation": "node bin/styleguidist.js build --config examples/navigation/styleguide.config.js",
     "prepublish": "npm run compile",
     "publish": "npm run build",
     "precommit": "lint-staged",

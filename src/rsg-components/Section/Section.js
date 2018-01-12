@@ -12,6 +12,7 @@ export default function Section({ section, depth }, { displayMode }) {
 	const contentJsx = content && <Examples examples={content} name={name} />;
 	const componentsJsx = components && <Components components={components} depth={depth + 1} />;
 	const sectionsJsx = sections && <Sections sections={sections} depth={depth + 1} />;
+	const collection = { components, sections };
 
 	return (
 		<SectionRenderer
@@ -23,6 +24,7 @@ export default function Section({ section, depth }, { displayMode }) {
 			content={contentJsx}
 			components={componentsJsx}
 			sections={sectionsJsx}
+			collection={collection}
 			isolated={displayMode !== DisplayModes.all}
 			depth={depth}
 		/>

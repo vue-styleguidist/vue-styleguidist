@@ -18,6 +18,7 @@ export function SectionRenderer(allProps) {
 		content,
 		components,
 		sections,
+		collection,
 		depth,
 		description,
 		nameParent,
@@ -33,6 +34,7 @@ export function SectionRenderer(allProps) {
 					level={level}
 					depth={depth}
 					id={slug}
+					collection={collection}
 					slotName="sectionToolbar"
 					slotProps={allProps}
 				>
@@ -58,6 +60,7 @@ SectionRenderer.propTypes = {
 	components: PropTypes.node,
 	sections: PropTypes.node,
 	isolated: PropTypes.bool,
+	collection: PropTypes.object,
 	depth: PropTypes.number.isRequired,
 };
 

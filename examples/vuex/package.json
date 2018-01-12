@@ -13,7 +13,7 @@
     "node": ">=4"
   },
   "dependencies": {
-    "vue-styleguidist": "^1.4.2"
+    "vue-styleguidist": "^1.4.4"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",

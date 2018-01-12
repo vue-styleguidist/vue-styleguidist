@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Link from 'rsg-components/Link';
 import Styled from 'rsg-components/Styled';
-import getUrl from '../../utils/getUrl';
+import { getUrlNavigation } from '../../utils/utils';
 
 const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
 	list: {
@@ -42,25 +42,23 @@ export function ComponentsListRenderer({ classes, items }, { config }) {
 	}
 	const navigation = config.navigation;
 
-	function getHref(slug, name, nameParent, level) {
-		if (navigation) {
-			return level < 2
-				? getUrl({ name, isolated: true })
-				: getUrl({ name: nameParent, id: slug, isolated: true });
-		}
-		return `#${slug}`;
-	}
-
 	return (
 		<ul className={classes.list}>
-			{items.map(({ heading, name, slug, nameParent, content, level }) => (
+			{items.map(({ heading, name, slug, nameParent, content, level, sections, components }) => (
 				<li
 					className={cx(classes.item, (!content || !content.props.items.length) && classes.isChild)}
 					key={name}
 				>
 					<Link
 						className={cx(heading && classes.heading)}
-						href={getHref(slug, name, nameParent, level)}
+						href={getUrlNavigation(navigation, {
+							slug,
+							name,
+							nameParent,
+							level,
+							sections,
+							components,
+						})}
 					>
 						{name}
 					</Link>
