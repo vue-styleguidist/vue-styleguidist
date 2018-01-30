@@ -43,7 +43,7 @@ Vue Styleguidist is a style guide generator for Vue components. It lists compone
 ## Examples
 
 * [Basic style guide](http://rafaelescala.com/vue-styleguide/), [source](./examples/basic)
-* Buefy style guide with sections, customized styles. [source](https://github.com/vue-styleguidist/buefy-styleguide-example)
+* [Buefy style guide with sections, customized styles](http://rafaelescala.com/buefy-example/). [source](https://github.com/vue-styleguidist/buefy-styleguide-example)
 * Style guide with sections, [source](./examples/sections)
 * Style guide with navigation, [source](./examples/navigation)
 * Style guide with Vuex, [source](./examples/vuex)
