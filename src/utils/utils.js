@@ -42,3 +42,14 @@ export function getUrlNavigation(
 	}
 	return `#${slug}`;
 }
+
+/**
+ * Replace all instances of target in str with replacement.
+ * @param {string} str the string to replace from
+ * @param {string} target the character or substring to replace
+ * @param {string} replacement the replacement charcter or string
+ * @returns {string} the string with replacements made
+ */
+export function replaceAll(str, target, replacement) {
+	return str.split(target).join(replacement);
+}
