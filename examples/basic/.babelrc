@@ -1,9 +1,5 @@
 {
-  "presets": [
-    "env",
-    "react"
-  ],
-  "plugins": [
-    "transform-class-properties"
-  ]
+  "presets": ["es2015", "stage-2"],
+  "plugins": ["transform-runtime"],
+  "comments": false
 }
