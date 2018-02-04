@@ -5,7 +5,7 @@ const visit = require('unist-util-visit');
 const highlightCode = require('./highlightCode');
 const parseExample = require('./parseExample');
 
-const PLAYGROUND_LANGS = ['javascript', 'js', 'jsx'];
+const PLAYGROUND_LANGS = ['javascript', 'js', 'jsx', 'vue'];
 const CODE_PLACEHOLDER = '<%{#code#}%>';
 
 /**
