@@ -184,7 +184,7 @@ export default {
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
 
     Vue component example:
 
@@ -210,7 +210,9 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
     <Button>Push Me</Button>
     ```
 
-    You can also initialize vue to construct more complex examples
+    You can also initialize vue to construct more complex examples in two ways:
+
+    1. Create a new Vue instance
 
     ```js
     const names = require('dog-names').all;
@@ -227,6 +229,36 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
         </div>
       `
     })
+    ```
+
+    2. Single-file components with a language tag of vue
+
+    ```vue
+      <template>
+        <div>
+          <Button @click.native="pushButton">Push Me</Button>
+          <hr />
+          <p>Next Dog Name: {{ dogName }}</p>
+        </div>
+      </template>
+
+      <script>
+        const dogNames = require('dog-names').all;
+
+        // You can also use 'exports.default = {}' style module exports.
+        export default {
+          name: 'ButtonExample',
+          data() {
+            return { numClicks: 0, dogName: dogNames[0] };
+          },
+          methods: {
+            pushButton() {
+              this.numClicks += 1;
+              this.dogName = dogNames[this.numClicks];
+            }
+          }
+        }
+      </script>
     ```
 
     Examples with all other languages are rendered only as highlighted source code, not an actual component:

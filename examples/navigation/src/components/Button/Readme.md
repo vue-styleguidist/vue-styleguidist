@@ -12,7 +12,7 @@ Big pink button:
 
 And you *can* **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
 
-Fenced code blocks with `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
+Fenced code blocks with `vue`, `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
 
 ```jsx
 <Button>Push Me</Button>

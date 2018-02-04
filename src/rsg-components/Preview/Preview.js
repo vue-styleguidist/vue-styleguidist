@@ -4,6 +4,10 @@ import { transform } from 'buble';
 import PlaygroundError from 'rsg-components/PlaygroundError';
 import { parse } from 'esprima';
 import Vue from 'vue';
+import {
+	isSingleFileComponent,
+	transformSingleFileComponent,
+} from '../../utils/singleFileComponentUtils';
 
 /* eslint-disable react/no-multi-comp */
 const nameVarComponent = '__component__';
@@ -38,7 +42,7 @@ const separateScript = function separateScript(code) {
 		// Valid
 		const lineVueBegin = lines[indexVueBegin];
 		const parseLine = lineVueBegin.split(' ').filter(v => v !== '');
-		if (parseLine[0] === 'new' && parseLine[1].indexOf('Vue') === 0) {
+		if (parseLine[0].trim() === 'new' && parseLine[1].indexOf('Vue') === 0) {
 			const componentLines = lines.slice(indexVueBegin);
 			const setVue = `
 
@@ -50,6 +54,9 @@ const separateScript = function separateScript(code) {
 			};
 		}
 		throw new Error('Error');
+	} else if (isSingleFileComponent(code)) {
+		const transformed = transformSingleFileComponent(code);
+		return separateScript(transformed);
 	}
 	for (let id = 0; id < lines.length; id++) {
 		if (lines[id].trim().charAt(0) === '<') {
@@ -122,7 +129,7 @@ export default class Preview extends Component {
 		});
 
 		const { code, vuex } = this.props;
-		let compuse;
+		let compuse = {};
 		let compiledCode;
 		let configComponent;
 		let syntaxTree;
@@ -153,30 +160,32 @@ export default class Preview extends Component {
 			this.mountNode.append(document.createElement('div'));
 			el = this.mountNode.children[0];
 		}
-		let extendsComponent = {};
-		let component = {};
-		if (configComponent) {
-			component = exampleComponent();
+		if (exampleComponent) {
+			let extendsComponent = {};
+			let component = {};
+			if (configComponent) {
+				component = exampleComponent();
 
-			Object.keys(component).forEach(key => {
-				if (key === 'el') {
-					delete component.el;
-				}
-			});
-		} else {
-			const data = exampleComponent();
-			const template = compuse.html;
-			component = {
-				data,
-				template,
-			};
-		}
+				Object.keys(component).forEach(key => {
+					if (key === 'el') {
+						delete component.el;
+					}
+				});
+			} else {
+				const data = exampleComponent();
+				const template = compuse.html;
+				component = {
+					data,
+					template,
+				};
+			}
 
-		if (vuex) {
-			extendsComponent = { store: vuex.default };
+			if (vuex) {
+				extendsComponent = { store: vuex.default };
+			}
+			component = Object.assign({ el }, extendsComponent, component);
+			new Vue(component);
 		}
-		component = Object.assign({ el }, extendsComponent, component);
-		new Vue(component);
 	}
 
 	compileCode(code) {
