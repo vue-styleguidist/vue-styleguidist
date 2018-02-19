@@ -5,6 +5,7 @@ import getPageTitle from './getPageTitle';
 import getRouteData from './getRouteData';
 import globalizeComponents from './globalizeComponents';
 import processSections from './processSections';
+import processMixins from './processMixins';
 
 /**
  * @param {object} styleguide An object returned by styleguide-loader
@@ -22,6 +23,7 @@ export default function renderStyleguide(
 	hist = window.history
 ) {
 	const allSections = processSections(styleguide.sections, styleguide.vuex);
+	processMixins(styleguide.mixins);
 	const navigation = styleguide.config.navigation;
 
 	// Globalize all components, not just ones we see on the screen, to make
