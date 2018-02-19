@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
     "type": "git",
