@@ -25,7 +25,7 @@ You can also use the Single File Component Format
     <div>
         <Button @click.native="pushButton">Push Me</Button>
         <hr />
-        <p>Next Dog Name: {{ dogName }}</p>
+        <p id="dog-name-label">Next Dog Name: {{ dogName }}</p>
     </div>
 </template>
 <script>
@@ -45,4 +45,7 @@ export default {
 	}
 }
 </script>
+<style scoped>
+    #dog-name-label { color: red; }
+</style>
 ```
