@@ -2173,9 +2173,9 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
-css-initials@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/css-initials/-/css-initials-0.1.1.tgz#cc6dcdb70dc6038c6cf494dd4980f001b824a4ab"
+css-initials@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/css-initials/-/css-initials-0.2.0.tgz#14c225bd8656255a6baee07231ef82fa55aacaa3"
 
 css-loader@^0.28.4, css-loader@^0.28.7:
   version "0.28.7"
@@ -5142,11 +5142,11 @@ jss-global@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/jss-global/-/jss-global-3.0.0.tgz#e19e5c91ab2b96353c227e30aa2cbd938cdaafa2"
 
-jss-isolate@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/jss-isolate/-/jss-isolate-5.0.0.tgz#89069d58af0b086b4f989d9aff718733f0f7a8f7"
+jss-isolate@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/jss-isolate/-/jss-isolate-5.1.0.tgz#8eff1294c3659f86535852f4aeb79370743d890e"
   dependencies:
-    css-initials "^0.1.0"
+    css-initials "^0.2.0"
 
 jss-nested@^6.0.1:
   version "6.0.1"
