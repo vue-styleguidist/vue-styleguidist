@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Nuxt.js project",
   "author": "Knovour <knovour@gmail.com>",
   "private": true,
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "nuxt": "^1.0.0-rc11",
-    "vue-styleguidist": "1.4.8"
+    "vue-styleguidist": "1.4.9"
   },
   "devDependencies": {
     "babel-preset-react": "^6.24.1"
