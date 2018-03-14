@@ -190,6 +190,10 @@ module.exports = {
 		type: 'directory path',
 		default: 'styleguide',
 	},
+	styleguidePublicPath: {
+		type: 'directory path',
+		default: '',
+	},
 	styles: {
 		type: 'object',
 		default: {},
