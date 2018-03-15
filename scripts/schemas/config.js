@@ -191,7 +191,7 @@ module.exports = {
 		default: 'styleguide',
 	},
 	styleguidePublicPath: {
-		type: 'directory path',
+		type: 'string',
 		default: '',
 	},
 	styles: {
