@@ -58,6 +58,7 @@ module.exports = function(config, env) {
 			output: {
 				filename: 'build/bundle.[chunkhash:8].js',
 				chunkFilename: 'build/[name].[chunkhash:8].js',
+				publicPath: config.styleguidePublicPath,
 			},
 			plugins: [
 				new UglifyJSPlugin({
