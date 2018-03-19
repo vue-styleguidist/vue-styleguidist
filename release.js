@@ -24,6 +24,10 @@ const pkgExamples = [
 		json: require('./examples/sections/package.json'),
 	},
 	{
+		url: './examples/customised/package.json',
+		json: require('./examples/sections/package.json'),
+	},
+	{
 		url: './examples/vuex/package.json',
 		json: require('./examples/vuex/package.json'),
 	},
