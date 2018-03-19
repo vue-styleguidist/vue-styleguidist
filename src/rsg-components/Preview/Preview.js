@@ -8,6 +8,7 @@ import {
 	isSingleFileComponent,
 	transformSingleFileComponent,
 } from '../../utils/singleFileComponentUtils';
+import styleScoper from '../../utils/styleScoper';
 
 /* eslint-disable react/no-multi-comp */
 const nameVarComponent = '__component__';
@@ -192,6 +193,7 @@ export default class Preview extends Component {
 				vueInstance.$el.appendChild(styleContainer.firstChild);
 			}
 		}
+		styleScoper();
 	}
 
 	compileCode(code) {
