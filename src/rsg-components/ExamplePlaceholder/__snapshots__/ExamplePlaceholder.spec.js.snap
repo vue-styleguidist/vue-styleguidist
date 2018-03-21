@@ -9,19 +9,19 @@ exports[`should render a link 1`] = `
 `;
 
 exports[`should render an example placeholder after click 1`] = `
-<Styled(Markdown)
+<Markdown
   text="
 Create **Readme.md** or **Pizza.md** file in the component’s folder like this:
 
     Pizza example:
 
     \`\`\`js
-    &lt;Pizza pizza=\\"&#x1f355;\\" /&gt;
+    <Pizza pizza=\\"🍕\\" />
 	\`\`\`
 
 You may need to **restart** the style guide server after adding an example file.
 
-Read more in the [documenting components guide](https://vue-styleguidist.js.org/docs/documenting.html).
+Read more in the [documenting components guide](https://react-styleguidist.js.org/docs/documenting.html).
 					"
 />
 `;

@@ -4,6 +4,6 @@ exports[`renderer should render header 1`] = `
 <h1
   class="rsg--logo-0"
 >
-  Vue Styleguidist
+  React Styleguidist
 </h1>
 `;
