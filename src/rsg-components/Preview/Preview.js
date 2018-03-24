@@ -8,6 +8,7 @@ import {
 	isSingleFileComponent,
 	transformSingleFileComponent,
 } from '../../utils/singleFileComponentUtils';
+import styleScoper from '../../utils/styleScoper';
 
 /* eslint-disable react/no-multi-comp */
 const nameVarComponent = '__component__';
@@ -16,7 +17,7 @@ const nameVarComponent = '__component__';
  * Reads the code in string and separates the javascript part and the html part
  * @param {string} code
  */
-const separateScript = function separateScript(code) {
+const separateScript = function separateScript(code, style) {
 	let index;
 	let lines = code.split('\n');
 
@@ -51,12 +52,13 @@ const separateScript = function separateScript(code) {
 			return {
 				js: lines.slice(0, indexVueBegin).join('\n'),
 				vueComponent: componentLines.join('\n') + setVue,
+				style,
 			};
 		}
 		throw new Error('Error');
 	} else if (isSingleFileComponent(code)) {
 		const transformed = transformSingleFileComponent(code);
-		return separateScript(transformed);
+		return separateScript(transformed.component, transformed.style);
 	}
 	for (let id = 0; id < lines.length; id++) {
 		if (lines[id].trim().charAt(0) === '<') {
@@ -184,8 +186,14 @@ export default class Preview extends Component {
 				extendsComponent = { store: vuex.default };
 			}
 			component = Object.assign({ el }, extendsComponent, component);
-			new Vue(component);
+			const vueInstance = new Vue(component);
+			if (compuse.style) {
+				const styleContainer = document.createElement('div');
+				styleContainer.innerHTML = compuse.style;
+				vueInstance.$el.appendChild(styleContainer.firstChild);
+			}
 		}
+		styleScoper();
 	}
 
 	compileCode(code) {

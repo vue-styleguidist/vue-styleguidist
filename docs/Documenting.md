@@ -231,14 +231,14 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
     })
     ```
 
-    2. Single-file components with a language tag of vue
+    2. Single-file components with a language tag of vue (supports <style scoped>)
 
     ```vue
       <template>
         <div>
-          <Button @click.native="pushButton">Push Me</Button>
+          <Button id="dog-name-button" @click.native="pushButton">Push Me</Button>
           <hr />
-          <p>Next Dog Name: {{ dogName }}</p>
+          <p id="dog-name-label">Next Dog Name: {{ dogName }}</p>
         </div>
       </template>
 
@@ -259,6 +259,11 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
           }
         }
       </script>
+      
+      <style scoped>
+        #dog-name-button" { color: red; }
+        #dog-name-label { color: blue; }
+      </style>
     ```
 
     Examples with all other languages are rendered only as highlighted source code, not an actual component:
