@@ -13,6 +13,7 @@
     "node": ">=4"
   },
   "dependencies": {
+    "babel-preset-react": "^6.24.1",
     "dog-names": "^1.0.2",
     "vue-styleguidist": "1.6.0"
   },
