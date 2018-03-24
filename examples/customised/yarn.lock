@@ -1541,9 +1541,9 @@ commander@~2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
 
-commander@~2.13.0:
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
+commander@~2.12.1:
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
 
 common-dir@^1.0.1:
   version "1.0.1"
@@ -3945,9 +3945,9 @@ markdown-table@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.1.tgz#4b3dd3a133d1518b8ef0dbc709bf2a1b4824bc8c"
 
-markdown-to-jsx@^6.3.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-6.4.1.tgz#95fe617b5790fec6f4e0399a296e3a2f10fffaad"
+markdown-to-jsx@^6.4.1:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-6.6.0.tgz#311f5b7b3c18cefd066a07800531730d3a62b029"
   dependencies:
     prop-types "^15.5.10"
     unquote "^1.1.0"
@@ -6283,11 +6283,11 @@ ua-parser-js@^0.7.9:
   version "0.7.17"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
 
-uglify-es@^3.2.1:
-  version "3.3.9"
-  resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.3.9.tgz#0c1c4f0700bed8dbc124cdb304d2592ca203e677"
+uglify-es@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.2.2.tgz#15c62b7775002c81b7987a1c49ecd3f126cace73"
   dependencies:
-    commander "~2.13.0"
+    commander "~2.12.1"
     source-map "~0.6.1"
 
 uglify-js@3.1.x:
@@ -6310,16 +6310,16 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
-uglifyjs-webpack-plugin@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.1.4.tgz#e43ad6e736c315024eb99481a7cc9362d6a066be"
+uglifyjs-webpack-plugin@1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.1.5.tgz#5ec4a16da0fd10c96538f715caed10dbdb180875"
   dependencies:
     cacache "^10.0.0"
     find-cache-dir "^1.0.0"
     schema-utils "^0.3.0"
     serialize-javascript "^1.4.0"
     source-map "^0.6.1"
-    uglify-es "^3.2.1"
+    uglify-es "3.2.2"
     webpack-sources "^1.0.1"
     worker-farm "^1.4.1"
 
@@ -6586,9 +6586,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-docgen-api@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/vue-docgen-api/-/vue-docgen-api-2.2.3.tgz#27c8894858c112534632c2b1b8f7a22f720d0067"
+vue-docgen-api@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/vue-docgen-api/-/vue-docgen-api-2.3.3.tgz#b904bd1373fcc131503b9bbed97b591b1c91303b"
   dependencies:
     babel-core "^6.25.0"
     babel-plugin-transform-object-rest-spread "^6.23.0"
@@ -6605,8 +6605,8 @@ vue-docgen-api@^2.2.3:
     htmlparser2 "^3.9.2"
     jsdoc-api "^3.0.0"
     lru-cache "^4.1.0"
-    vue "^2.5.2"
-    vue-template-compiler "^2.5.2"
+    vue "^2.4.2"
+    vue-template-compiler "^2.4.2"
 
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"
@@ -6637,9 +6637,9 @@ vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-styleguidist@1.4.8:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/vue-styleguidist/-/vue-styleguidist-1.4.8.tgz#91b148e5d20cd00db8ef831f5040343b42742584"
+vue-styleguidist@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/vue-styleguidist/-/vue-styleguidist-1.5.0.tgz#27e31016a53732c87de650792dea07a8d7490953"
   dependencies:
     ast-types "^0.10.1"
     buble "^0.18.0"
@@ -6677,7 +6677,7 @@ vue-styleguidist@1.4.8:
     loader-utils "^1.1.0"
     lodash "^4.17.4"
     lowercase-keys "^1.0.0"
-    markdown-to-jsx "^6.3.1"
+    markdown-to-jsx "^6.4.1"
     marked "^0.3.9"
     minimist "^1.2.0"
     opn "^5.1.0"
@@ -6696,10 +6696,10 @@ vue-styleguidist@1.4.8:
     style-loader "^0.19.1"
     to-ast "^1.0.0"
     type-detect "^4.0.5"
-    uglifyjs-webpack-plugin "1.1.4"
+    uglifyjs-webpack-plugin "1.1.5"
     unist-util-visit "^1.3.0"
     vue "^2.4.2"
-    vue-docgen-api "^2.2.3"
+    vue-docgen-api "^2.3.3"
     vue-loader "^13.3.0"
     vue-template-compiler "^2.4.2"
     vue-webpack-loaders "^1.0.5"
@@ -6707,7 +6707,7 @@ vue-styleguidist@1.4.8:
     webpack-dev-server "^2.9.7"
     webpack-merge "^4.1.1"
 
-vue-template-compiler@^2.4.2, vue-template-compiler@^2.5.2:
+vue-template-compiler@^2.4.2:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.6.tgz#93f062a230a4437ef16064f1eef9cf3797d34bb4"
   dependencies:
@@ -6739,7 +6739,7 @@ vue-webpack-loaders@^1.0.5:
     vue-style-loader "^3.0.1"
     vue-template-compiler "^2.4.2"
 
-vue@^2.4.2, vue@^2.5.2:
+vue@^2.4.2:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.6.tgz#73654fefa4b37f25dfc657b8b834b44c90822cd7"
 
