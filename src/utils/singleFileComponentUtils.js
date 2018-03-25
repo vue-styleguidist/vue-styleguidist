@@ -3,6 +3,21 @@ import { replaceAll } from './utils';
 const compiler = require('vue-template-compiler');
 const stripComments = require('strip-comments');
 
+const buildStyles = function(styles) {
+	let _styles = '';
+	if (styles) {
+		styles.forEach(it => {
+			if (it.content) {
+				_styles += it.content;
+			}
+		});
+	}
+	if (_styles !== '') {
+		return `<style scoped>${_styles.trim()}</style>`;
+	}
+	return undefined;
+};
+
 const getSingleFileComponentParts = function(code) {
 	const parts = compiler.parseComponent(code, { pad: 'line' });
 	parts.script.content = stripComments(parts.script.content, { preserveNewLines: true });
@@ -53,8 +68,11 @@ module.exports.isSingleFileComponent = function isSingleFileComponent(code) {
 module.exports.transformSingleFileComponent = function transformSingleFileComponent(code) {
 	const parts = getSingleFileComponentParts(code);
 	const templateAdded = injectTemplateAndParseExport(parts);
-	return `
-		${extractImports(parts.script.content)}
-		new Vue(${templateAdded});
-	`;
+	return {
+		component: `
+			${extractImports(parts.script.content)}
+			new Vue(${templateAdded});
+		`,
+		style: buildStyles(parts.styles),
+	};
 };

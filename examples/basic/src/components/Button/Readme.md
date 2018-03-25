@@ -22,10 +22,10 @@ You can also use the Single File Component Format
 
 ```vue
 <template>
-    <div>
+    <div class="wrapper">
         <Button @click.native="pushButton">Push Me</Button>
         <hr />
-        <p>Next Dog Name: {{ dogName }}</p>
+        <p class="text-name">Next Dog Name: {{ dogName }}</p>
     </div>
 </template>
 <script>
@@ -33,7 +33,6 @@ const dogNames = require('dog-names').all;
 
 // You can also use 'exports.default = {}' style module exports.
 export default {
-	name: 'ButtonExample',
 	data() {
 		return { numClicks: 0, dogName: dogNames[0] };
 	},
@@ -45,4 +44,12 @@ export default {
 	}
 }
 </script>
+<style scoped>
+    .wrapper {
+      padding: 10px;
+    }
+    .text-name {
+      color: red;
+    }
+</style>
 ```

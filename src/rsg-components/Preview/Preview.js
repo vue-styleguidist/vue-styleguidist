@@ -8,6 +8,7 @@ import {
 	isSingleFileComponent,
 	transformSingleFileComponent,
 } from '../../utils/singleFileComponentUtils';
+import styleScoper from '../../utils/styleScoper';
 
 /* eslint-disable react/no-multi-comp */
 const nameVarComponent = '__component__';
@@ -16,47 +17,26 @@ const nameVarComponent = '__component__';
  * Reads the code in string and separates the javascript part and the html part
  * @param {string} code
  */
-const separateScript = function separateScript(code) {
+const separateScript = function separateScript(code, style) {
 	let index;
-	let lines = code.split('\n');
-
+	const lines = code.split('\n');
 	if (code.indexOf('new Vue') > -1) {
-		lines.unshift([]);
-		lines = lines.reduce((total, next) => {
-			function getId(str) {
-				const arrSemi = str.split(';');
-				if (arrSemi.length > 0) {
-					return arrSemi;
-				}
-				return [str];
-			}
-			return total.concat(getId(next));
-		});
-		let indexVueBegin;
-		lines.some((line, index) => {
-			if (line.indexOf('new Vue') > -1) {
-				indexVueBegin = index;
-			}
-			return false;
-		});
-		// Valid
-		const lineVueBegin = lines[indexVueBegin];
-		const parseLine = lineVueBegin.split(' ').filter(v => v !== '');
-		if (parseLine[0].trim() === 'new' && parseLine[1].indexOf('Vue') === 0) {
-			const componentLines = lines.slice(indexVueBegin);
-			const setVue = `
+		const indexVueBegin = code.indexOf('new Vue');
+		const setVue = `
 
-	// Extract the configuration of the example component
-	function Vue(params){ ${nameVarComponent} = params }`;
-			return {
-				js: lines.slice(0, indexVueBegin).join('\n'),
-				vueComponent: componentLines.join('\n') + setVue,
-			};
-		}
-		throw new Error('Error');
+
+
+
+		// Ignore: Extract the configuration of the example component
+		function Vue(params){ ${nameVarComponent} = params }`;
+		return {
+			js: code.slice(0, indexVueBegin),
+			vueComponent: code.slice(indexVueBegin) + setVue,
+			style,
+		};
 	} else if (isSingleFileComponent(code)) {
 		const transformed = transformSingleFileComponent(code);
-		return separateScript(transformed);
+		return separateScript(transformed.component, transformed.style);
 	}
 	for (let id = 0; id < lines.length; id++) {
 		if (lines[id].trim().charAt(0) === '<') {
@@ -184,8 +164,18 @@ export default class Preview extends Component {
 				extendsComponent = { store: vuex.default };
 			}
 			component = Object.assign({ el }, extendsComponent, component);
-			new Vue(component);
+			const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1;
+			component._scopeId = moduleId;
+			const vueInstance = new Vue(component);
+
+			if (compuse.style) {
+				const styleContainer = document.createElement('div');
+				styleContainer.innerHTML = compuse.style;
+				styleContainer.firstChild.id = moduleId;
+				vueInstance.$el.appendChild(styleContainer.firstChild);
+			}
 		}
+		styleScoper();
 	}
 
 	compileCode(code) {
