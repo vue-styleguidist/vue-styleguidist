@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-basic",
   "description": "Vue styleguidist basic example",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -13,9 +13,8 @@
     "node": ">=4"
   },
   "dependencies": {
-    "babel-preset-react": "^6.24.1",
     "dog-names": "^1.0.2",
-    "vue-styleguidist": "1.6.0"
+    "vue-styleguidist": "1.6.1"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
