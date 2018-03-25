@@ -1,5 +1,5 @@
 export default function scrollTo(id) {
-	const element = document.querySelector('html');
+	const element = document.scrollingElement || document.documentElement;
 	let to = 0;
 	if (id) {
 		to = document.getElementById(id).offsetTop;
