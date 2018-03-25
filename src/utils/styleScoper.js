@@ -1,8 +1,6 @@
 /* eslint-disable no-control-regex */
 
 // used to make CSS selectors remain scoped properly
-let processOffset = 0;
-
 function init() {
 	const style = document.createElement('style');
 	style.appendChild(document.createTextNode(''));
@@ -10,7 +8,7 @@ function init() {
 	style.sheet.insertRule('body { visibility: hidden; }', 0);
 }
 
-function scoper(css, prefix) {
+function scoper(css, suffix) {
 	const re = new RegExp('([^\r\n,{}]+)(,(?=[^}]*{)|s*{)', 'g');
 	css = css.replace(re, function(g0, g1, g2) {
 		if (g1.match(/^\s*(@media|@keyframes|to|from|@font-face)/)) {
@@ -25,9 +23,8 @@ function scoper(css, prefix) {
 				return '> ' + h1;
 			});
 		}
-
-		g1 = g1.replace(/^(\s*)/, '$1' + prefix + ' ');
-
+		g1 = g1.trim() + ' ';
+		g1 = g1.replace(/ /g, suffix + ' ');
 		return g1 + g2;
 	});
 
@@ -50,35 +47,24 @@ function process() {
 	let idx;
 	for (idx = 0; idx < styles.length; idx++) {
 		const style = styles[idx];
+		const moduleId = style.id;
 		const css = style.innerHTML;
 
 		if (css && style.parentElement.nodeName !== 'BODY') {
-			const id = 'scoper-' + (idx + processOffset);
-			const prefix = '#' + id;
-
-			const wrapper = document.createElement('span');
-			wrapper.id = id;
-
-			const parent = style.parentNode;
-			const grandparent = parent.parentNode;
-
-			grandparent.replaceChild(wrapper, parent);
-			wrapper.appendChild(parent);
+			const suffix = '[' + moduleId + ']';
 			style.parentNode.removeChild(style);
 
-			csses = csses + scoper(css, prefix);
+			csses = csses + scoper(css, suffix);
 		}
 	}
-
-	processOffset += idx + 1;
 
 	if (newstyle.styleSheet) {
 		newstyle.styleSheet.cssText = csses;
 	} else {
 		newstyle.appendChild(document.createTextNode(csses));
 	}
-
 	head.appendChild(newstyle);
+
 	document.getElementsByTagName('body')[0].style.visibility = 'visible';
 }
 

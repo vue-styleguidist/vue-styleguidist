@@ -235,10 +235,10 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
 
     ```vue
       <template>
-        <div>
+        <div class="wrapper">
           <Button id="dog-name-button" @click.native="pushButton">Push Me</Button>
           <hr />
-          <p id="dog-name-label">Next Dog Name: {{ dogName }}</p>
+          <p class="text-name">Next Dog Name: {{ dogName }}</p>
         </div>
       </template>
 
@@ -247,7 +247,6 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
 
         // You can also use 'exports.default = {}' style module exports.
         export default {
-          name: 'ButtonExample',
           data() {
             return { numClicks: 0, dogName: dogNames[0] };
           },
@@ -259,10 +258,14 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
           }
         }
       </script>
-      
+
       <style scoped>
-        #dog-name-button" { color: red; }
-        #dog-name-label { color: blue; }
+        .wrapper {
+          background: blue;
+        }
+        .text-name {
+          color: red;
+        }
       </style>
     ```
 

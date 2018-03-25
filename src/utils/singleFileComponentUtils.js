@@ -13,7 +13,7 @@ const buildStyles = function(styles) {
 		});
 	}
 	if (_styles !== '') {
-		return `<style scoped>${_styles}</style>`;
+		return `<style scoped>${_styles.trim()}</style>`;
 	}
 	return undefined;
 };
