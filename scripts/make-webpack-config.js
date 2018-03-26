@@ -23,6 +23,7 @@ module.exports = function(config, env) {
 	const isProd = env === 'production';
 
 	let webpackConfig = {
+		mode: isProd ? 'production' : 'development',
 		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
 		output: {
 			path: config.styleguideDir,
