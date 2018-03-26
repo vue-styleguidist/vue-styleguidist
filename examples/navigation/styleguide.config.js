@@ -9,11 +9,11 @@ module.exports = {
 			content: 'docs/Documentation.md',
 			sections: [
 				{
-					name: 'Files Test',
+					name: 'Files',
 					content: 'docs/Files.md',
 					sections: [
 						{
-							name: 'First Test',
+							name: 'First',
 							content: 'docs/One.md',
 							description: 'This is the first section description',
 						},
@@ -26,7 +26,7 @@ module.exports = {
 			],
 		},
 		{
-			name: 'Components Test',
+			name: 'Components',
 			components: () => [
 				'./src/components/Label/Label.vue',
 				'./src/components/Placeholder/Placeholder.vue',
