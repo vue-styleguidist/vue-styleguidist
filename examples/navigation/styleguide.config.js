@@ -5,15 +5,15 @@ module.exports = {
 	navigation: true,
 	sections: [
 		{
-			name: 'Documentation',
+			name: 'Documentation Test',
 			content: 'docs/Documentation.md',
 			sections: [
 				{
-					name: 'Files',
+					name: 'Files Test',
 					content: 'docs/Files.md',
 					sections: [
 						{
-							name: 'First',
+							name: 'First Test',
 							content: 'docs/One.md',
 							description: 'This is the first section description',
 						},
@@ -26,7 +26,7 @@ module.exports = {
 			],
 		},
 		{
-			name: 'Components',
+			name: 'Components Test',
 			components: () => [
 				'./src/components/Label/Label.vue',
 				'./src/components/Placeholder/Placeholder.vue',
