@@ -5,7 +5,7 @@ module.exports = {
 	navigation: true,
 	sections: [
 		{
-			name: 'Documentation Test',
+			name: 'Documentation',
 			content: 'docs/Documentation.md',
 			sections: [
 				{
