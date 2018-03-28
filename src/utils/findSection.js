@@ -6,7 +6,10 @@
  * @return {object}
  */
 export default function findSection(sections, name) {
-	const found = sections.find(section => section.name === name);
+	const found = sections.find(
+		// Need to replace whitespace in order to get a match in all browsers
+		section => section.name.replace(/\s/g, '%20') === name.replace(/\s/g, '%20')
+	);
 	if (found) {
 		return found;
 	}
