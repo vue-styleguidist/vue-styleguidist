@@ -60,8 +60,8 @@ module.exports = {
 			env === 'development'
 				? false
 				: {
-						maxAssetSize: 685000, // bytes
-						maxEntrypointSize: 685000, // bytes
+						maxAssetSize: 2685000, // bytes
+						maxEntrypointSize: 2685000, // bytes
 						hints: 'error',
 				  },
 	}),

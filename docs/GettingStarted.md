@@ -2,6 +2,12 @@
 
 ## 1. Install Styleguidist
 
+Install webpack if you don’t have it already:
+
+```bash
+npm install --save-dev webpack
+```
+
 Install Styleguidist:
 
 ```bash

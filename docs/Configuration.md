@@ -21,9 +21,12 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`mixins`](#mixins)
 * [`ignore`](#ignore)
 * [`logger`](#logger)
+* [`printBuildInstructions`](#printbuildinstructions)
+* [`printServerInstructions`](#printserverinstructions)
 * [`previewDelay`](#previewdelay)
 * [`propsParser`](#propsparser)
 * [`require`](#require)
+* [`ribbon`](#ribbon)
 * [`sections`](#sections)
 * [`serverHost`](#serverhost)
 * [`serverPort`](#serverport)
@@ -31,12 +34,14 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`showUsage`](#showusage)
 * [`showSidebar`](#showsidebar)
 * [`skipComponentsWithoutExample`](#skipcomponentswithoutexample)
+* [`sortProps`](#sortprops)
 * [`styleguideComponents`](#styleguidecomponents)
 * [`styleguideDir`](#styleguidedir)
 * [`styles`](#styles)
 * [`template`](#template)
 * [`theme`](#theme)
 * [`title`](#title)
+* [`updateDocs`](#updatedocs)
 * [`updateExample`](#updateexample)
 * [`verbose`](#verbose)
 * [`vuex`](#vuex)
@@ -58,10 +63,11 @@ Styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the
 
 #### `components`
 
-Type: `String` or `Function`, default: `src/components/**/*.vue`
+Type: `String`, `Function` or `Array`, default: `src/components/**/*.vue`
 
 * when `String`: a [glob pattern](https://github.com/isaacs/node-glob#glob-primer) that matches all your component modules.
 * when `Function`: a function that returns an array of module paths.
+* when `Array`: an array of module paths.
 
 All paths are relative to config folder.
 
@@ -171,7 +177,7 @@ module.exports = {
 
 #### `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/scripts/schemas/config.js#L95)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/scripts/schemas/config.js#L96)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
 
@@ -195,14 +201,23 @@ module.exports = {
 
 Type: `Boolean`, default: `false`
 
-Generates a navigation of the sections.
+Render one section or component per page, starting with the first.
+
+If set to `true`, the sidebar will be visible on each page, except for the examples.
+
+The value may be differ on each environment.
+
+```javascript
+module.exports = {
+  navigation: process.env.NODE_ENV !== 'production'
+}
+```
 
 #### `mixins`
 
 Type: `Array`, default: `[]`
 
-Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components of examples in the style guide.
-See example in the [cookbook](Cookbook.md#how-to-add-mixins-or-third-party-plugins-to-the-style-guide).
+Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components of examples in the style guide. See example in the [cookbook](Cookbook.md#how-to-add-mixins-or-third-party-plugins-to-the-style-guide).
 
 For example:
 
@@ -218,7 +233,7 @@ module.exports = {
       }
     }
   ]
-};
+}
 ```
 
 #### `ignore`
@@ -243,6 +258,39 @@ module.exports = {
     info: () => {},
     // Override display function
     warn: message => console.warn(`NOOOOOO: ${message}`)
+  }
+}
+```
+
+#### `printBuildInstructions`
+
+Type: `Function`, optional
+
+Function that allows you to override the printing of build messages to console.log.
+
+```javascript
+module.exports = {
+  printBuildInstructions(config) {
+    console.log(
+      `Style guide published to ${
+        config.styleguideDir
+      }. Something else interesting.`
+    )
+  }
+}
+```
+
+#### `printServerInstructions`
+
+Type: `Function`, optional
+
+Function that allows you to override the printing of local dev server messages to console.log.
+
+```javascript
+module.exports = {
+  serverHost: 'your-domain',
+  printServerInstructions(config, { isHttps }) {
+    console.log(`Local style guide: http://${config.serverHost}`)
   }
 }
 ```
@@ -302,6 +350,21 @@ module.exports = {
 ```
 
 See [Configuring webpack](Webpack.md) for mode details.
+
+#### `ribbon`
+
+Type: `Object`, optional
+
+Shows 'Fork Me' ribbon in the top-right corner. If `ribbon` key is present, then it's required to add `url` property; `text` property is optional. If you want to change styling of the ribbon, please, refer to the [theme section](#theme).
+
+```javascript
+module.exports = {
+  ribbon: {
+    url: 'http://example.com/',
+    text: 'Fork me on GitHub'
+  }
+}
+```
 
 #### `sections`
 
@@ -387,9 +450,21 @@ See example in the [cookbook](Cookbook.md#how-to-change-styles-of-a-style-guide)
 
 #### `template`
 
-Type: `String`, default: [src/templates/index.html](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/scripts/templates/index.html)
+Type: `Object` or `Function`, optional.
 
-HTML file to use as the template for the style guide. HTML webpack Plugin is used under the hood, see [their docs for details](https://github.com/jantimon/html-webpack-plugin/blob/master/docs/template-option.md).
+Change HTML for the style guide app.
+
+An object with options to add a favicon, meta tags, inline JavaScript or CSS, etc. See [@vxna/mini-html-webpack-template docs](https://www.npmjs.com/package/@vxna/mini-html-webpack-template).
+
+```javascript
+module.exports = {
+  template: {
+    favicon: 'https://assets-cdn.github.com/favicon.ico'
+  }
+}
+```
+
+A function that returns an HTML string, see [mini-html-webpack-plugin docs](https://github.com/styleguidist/mini-html-webpack-plugin#custom-templates).
 
 #### `theme`
 
@@ -405,6 +480,45 @@ Type: `String`, default: `<app name from package.json> Style Guide`
 
 Style guide title.
 
+#### `sortProps`
+
+Type: `Function`, optional
+
+Function that sorts component props. By default props are sorted such that required props come first, optional props come second. Props in both groups are sorted by their property names.
+
+To disable sorting, use the identity function:
+
+```javascript
+module.exports = {
+  sortProps: props => props
+}
+```
+
+#### `updateDocs`
+
+Type: `Function`, optional
+
+Function that modifies props, methods, and metadata after parsing a source file. For example, load a component version from a JSON file:
+
+```javascript
+module.exports = {
+  updateDocs(docs) {
+    if (docs.doclets.version) {
+      const versionFilePath = path.resolve(
+        path.dirname(file),
+        docs.doclets.version
+      )
+      const version = require(versionFilePath).version
+
+      docs.doclets.version = version
+      docs.tags.version[0].description = version
+    }
+
+    return docs
+  }
+}
+```
+
 #### `updateExample`
 
 Type: `Function`, optional
@@ -413,7 +527,7 @@ Function that modifies code example (Markdown fenced code block). For example yo
 
 ```javascript
 module.exports = {
-  updateExample: function(props, exampleFilePath) {
+  updateExample(props, exampleFilePath) {
     const { settings, lang } = props
     if (typeof settings.file === 'string') {
       const filepath = path.resolve(exampleFilePath, settings.file)
@@ -438,7 +552,7 @@ You can also use this function to dynamically update some of your fenced code bl
 
 ```javascript
 module.exports = {
-  updateExample: function(props) {
+  updateExample(props) {
     const { settings, lang } = props
     if (lang === 'javascript' || lang === 'js' || lang === 'jsx') {
       settings.static = true
@@ -479,16 +593,20 @@ module.exports = {
         {
           test: /\.vue$/,
           exclude: /node_modules/,
-          loader: 'vue-loader',
+          loader: 'vue-loader'
         },
         {
           test: /\.js?$/,
           exclude: /node_modules/,
-          loader: 'babel-loader',
+          loader: 'babel-loader'
         },
         {
           test: /\.scss$/,
-          loaders: ['style-loader', 'css-loader', 'sass-loader?precision=10']
+          loaders: [
+            'style-loader',
+            'css-loader',
+            'sass-loader?precision=10'
+          ]
         }
       ]
     }
@@ -517,6 +635,6 @@ module.exports = {
 
 > **Note:** `CommonsChunkPlugins`, `HtmlWebpackPlugin`, `UglifyJsPlugin`, `HotModuleReplacementPlugin` plugins will be ignored because Styleguidist already includes them or they may break Styleguidist.
 
-> **Note:** Run style guide in verbose mode to see the actual webpack config used by Styleguidist: `npm run styleguide -- --verbose`.
+> **Note:** Run style guide in verbose mode to see the actual webpack config used by vue-styleguidist: `npx vue-styleguidist server --verbose`.
 
 See [Configuring webpack](Webpack.md) for examples.
