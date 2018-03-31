@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-basic",
   "description": "Vue styleguidist basic example",
-  "version": "1.6.1",
+  "version": "1.7.1",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue-styleguidist": "1.6.1"
+    "vue-styleguidist": "1.7.1"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
@@ -24,7 +24,6 @@
     "css-loader": "^0.28.7",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "vue-loader": "^13.5.0",
-    "webpack": "^3.10.0"
+    "webpack": "^4.4.1"
   }
 }
