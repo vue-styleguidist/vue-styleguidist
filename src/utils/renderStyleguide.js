@@ -34,7 +34,6 @@ export default function renderStyleguide(
 
 	// Update page title
 	doc.title = getPageTitle(sections, title, displayMode);
-
 	// If the current hash location was set to just `/` (e.g. when navigating back from isolated view to overview)
 	// replace the URL with one without hash, to present the user with a single address of the overview screen
 	if (loc.hash === '#/') {

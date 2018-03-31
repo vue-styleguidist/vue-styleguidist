@@ -15,7 +15,11 @@ export default function getPageTitle(sections, baseTitle, displayMode) {
 	if (!sections[0]) {
 		return '';
 	}
-	if (displayMode === DisplayModes.component || displayMode === DisplayModes.example) {
+	if (
+		displayMode === DisplayModes.component ||
+		displayMode === DisplayModes.example ||
+		!sections[0].name
+	) {
 		return `${sections[0].components[0].name} — ${baseTitle}`;
 	} else if (displayMode === DisplayModes.section) {
 		return `${sections[0].name} — ${baseTitle}`;
