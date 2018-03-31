@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const isDirectory = require('is-directory');
@@ -86,7 +84,7 @@ module.exports = function sanitizeConfig(config, schema, rootDir) {
 				const message = isString(isRequired)
 					? isRequired
 					: `${chalk.bold(key)} config option is required.`;
-				throw new StyleguidistError(message);
+				throw new StyleguidistError(message, key);
 			}
 		} else if (props.deprecated) {
 			logger.warn(`${key} config option is deprecated. ${props.deprecated}`);
@@ -119,7 +117,8 @@ module.exports = function sanitizeConfig(config, schema, rootDir) {
 Example:
 
 ${stringify(example)}`
-							: '')
+							: '',
+						key)
 				);
 			}
 
@@ -131,12 +130,14 @@ ${stringify(example)}`
 				if (shouldExist(types)) {
 					if (shouldBeFile(types) && !fs.existsSync(value)) {
 						throw new StyleguidistError(
-							`A file specified in ${chalk.bold(key)} config option does not exist:\n${value}`
+							`A file specified in ${chalk.bold(key)} config option does not exist:\n${value}`,
+							key
 						);
 					}
 					if (shouldBeDirectory(types) && !isDirectory.sync(value)) {
 						throw new StyleguidistError(
-							`A directory specified in ${chalk.bold(key)} config option does not exist:\n${value}`
+							`A directory specified in ${chalk.bold(key)} config option does not exist:\n${value}`,
+							key
 						);
 					}
 				}

@@ -3,6 +3,9 @@ const path = require('path');
 module.exports = {
 	title: 'Vue Style Guide Example',
 	navigation: true,
+	ribbon: {
+		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
+	},
 	sections: [
 		{
 			name: 'Getting Started',
@@ -60,6 +63,6 @@ module.exports = {
 						maxAssetSize: 685000, // bytes
 						maxEntrypointSize: 685000, // bytes
 						hints: 'error',
-					},
+				  },
 	}),
 };

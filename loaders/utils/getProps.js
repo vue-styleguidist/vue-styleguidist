@@ -1,9 +1,5 @@
-'use strict';
-
 const path = require('path');
 const fs = require('fs');
-// const reactDocs = require('react-docgen');
-const reactDocs = {};
 const highlightCodeInMarkdown = require('./highlightCodeInMarkdown');
 const removeDoclets = require('./removeDoclets');
 const requireIt = require('./requireIt');
@@ -12,6 +8,7 @@ const doctrine = require('doctrine');
 const _ = require('lodash');
 const logger = require('glogg')('rsg');
 
+const reactDocs = () => {};
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js');
 
 // HACK: We have to make sure that doclets is a proper object with correct prototype to

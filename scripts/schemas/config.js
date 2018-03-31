@@ -1,17 +1,17 @@
-'use strict';
-
 // If you want to access any of these options in React, don’t forget to update CLIENT_CONFIG_OPTIONS array
 // in loaders/styleguide-loader.js
 
-const EXTENSIONS = 'js,jsx,ts,tsx';
+const EXTENSIONS = 'vue';
 const DEFAULT_COMPONENTS_PATTERN = 'src/@(components|Components)/**/*.vue';
 
 const path = require('path');
 const startCase = require('lodash/startCase');
+const chalk = require('chalk');
 const logger = require('glogg')('rsg');
 const findUserWebpackConfig = require('../utils/findUserWebpackConfig');
 const getUserPackageJson = require('../utils/getUserPackageJson');
 const fileExistsCaseInsensitive = require('../utils/findFileCaseInsensitive');
+const StyleguidistError = require('../utils/error');
 const consts = require('../consts');
 
 module.exports = {
@@ -25,9 +25,10 @@ module.exports = {
 			objectAssign: 'Object.assign',
 		},
 	},
-	// `components` is a shortcut for { sections: [{ components }] }, see `sections` below
+	// `components` is a shortcut for { sections: [{ components }] },
+	// see `sections` below
 	components: {
-		type: ['string', 'function'],
+		type: ['string', 'function', 'array'],
 		example: 'components/**/[A-Z]*.vue',
 	},
 	configDir: {
@@ -107,7 +108,9 @@ module.exports = {
 			return Object.assign(
 				{},
 				defaults,
-				config.highlightTheme && { theme: config.highlightTheme },
+				config.highlightTheme && {
+					theme: config.highlightTheme,
+				},
 				value
 			);
 		},
@@ -128,6 +131,12 @@ module.exports = {
 		type: 'number',
 		default: 500,
 	},
+	printBuildInstructions: {
+		type: 'function',
+	},
+	printServerInstructions: {
+		type: 'function',
+	},
 	propsParser: {
 		type: 'function',
 	},
@@ -135,6 +144,13 @@ module.exports = {
 		type: 'array',
 		default: [],
 		example: ['babel-polyfill', 'path/to/styles.css'],
+	},
+	ribbon: {
+		type: 'object',
+		example: {
+			url: 'http://example.com/',
+			text: 'Fork me on GitHub',
+		},
 	},
 	sections: {
 		type: 'array',
@@ -144,7 +160,11 @@ module.exports = {
 				// If root `components` isn't empty, make it a first section
 				// If `components` and `sections` weren’t specified, use default pattern
 				const components = config.components || DEFAULT_COMPONENTS_PATTERN;
-				return [{ components }];
+				return [
+					{
+						components,
+					},
+				];
 			}
 			return val;
 		},
@@ -183,6 +203,9 @@ module.exports = {
 		type: 'boolean',
 		default: false,
 	},
+	sortProps: {
+		type: 'function',
+	},
 	styleguideComponents: {
 		type: 'object',
 	},
@@ -206,9 +229,19 @@ module.exports = {
 		},
 	},
 	template: {
-		type: 'existing file path',
-		default: path.resolve(__dirname, '../templates/index.html'),
-		example: 'templates/styleguide.html',
+		type: ['object', 'function'],
+		default: {},
+		process: val => {
+			if (typeof val === 'string') {
+				throw new StyleguidistError(
+					`${chalk.bold(
+						'template'
+					)} config option format has been changed, you need to update your config.`,
+					'template'
+				);
+			}
+			return val;
+		},
 	},
 	theme: {
 		type: 'object',
@@ -228,6 +261,9 @@ module.exports = {
 			return `${startCase(name)} Style Guide`;
 		},
 		example: 'My Style Guide',
+	},
+	updateDocs: {
+		type: 'function',
 	},
 	updateExample: {
 		type: 'function',

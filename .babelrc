@@ -1,28 +1,29 @@
 {
 	"presets": [
-    ["@babel/preset-env", {
-      "targets": {
-        "uglify": true
-      },
-      "modules": false
-    }],
-		"@babel/preset-react"
+		[
+			"env",
+			{
+				"targets": {
+					"uglify": true
+				},
+				"modules": false
+			}
+		],
+		"react"
 	],
 	"plugins": [
 		"transform-class-properties",
-		"transform-object-rest-spread"
+		"transform-object-rest-spread",
+		"syntax-dynamic-import"
 	],
 	"env": {
-	  "test": {
-	    "presets": [
-	      "@babel/preset-env",
-	      "@babel/preset-react"
-	    ],
-      "plugins": [
-        "system-import-transformer",
-        "transform-class-properties",
-        "transform-object-rest-spread"
-      ]
-    }
-  }
+		"test": {
+			"presets": ["env", "react"],
+			"plugins": [
+				"system-import-transformer",
+				"transform-class-properties",
+				"transform-object-rest-spread"
+			]
+		}
+	}
 }

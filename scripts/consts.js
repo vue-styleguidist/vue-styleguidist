@@ -1,5 +1,3 @@
-'use strict';
-
 const GITHUB_HOMEPAGE = 'https://github.com/vue-styleguidist/vue-styleguidist/';
 
 module.exports = {

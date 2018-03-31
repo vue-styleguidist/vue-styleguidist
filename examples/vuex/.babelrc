@@ -1,5 +1,5 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-stage-2"],
-  "plugins": ["@babel/transform-runtime"],
+  "presets": ["env", "stage-2"],
+  "plugins": ["transform-runtime"],
   "comments": false
 }

@@ -2,9 +2,6 @@ import findSection from '../findSection';
 
 const sections = [
 	{
-		name: 'Getting Started',
-	},
-	{
 		name: 'General',
 		sections: [
 			{
@@ -25,11 +22,6 @@ const sections = [
 describe('findSection', () => {
 	it('should return top level section', () => {
 		const result = findSection(sections, 'General');
-		expect(result).toEqual(sections[0]);
-	});
-
-	it('should return top level section when there is whitespace in name', () => {
-		const result = findSection(sections, 'Getting Started');
 		expect(result).toEqual(sections[0]);
 	});
 

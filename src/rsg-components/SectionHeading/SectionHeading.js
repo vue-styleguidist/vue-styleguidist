@@ -16,12 +16,12 @@ export default function SectionHeading(
 		nameParent,
 		name,
 		slug: id,
+		anchor: true,
 	});
 	return (
 		<SectionHeadingRenderer
 			toolbar={<Slot name={slotName} props={slotProps} />}
 			id={id}
-			navigation={navigation}
 			href={href}
 			{...rest}
 		>

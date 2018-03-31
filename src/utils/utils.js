@@ -32,7 +32,7 @@ export function showSpaces(string) {
 
 export function getUrlNavigation(
 	navigation,
-	{ level, sections, components, nameParent, name, slug }
+	{ level, sections, components, nameParent, name, slug, anchor, isolated }
 ) {
 	if (navigation) {
 		if (level < 2 && (sections || components)) {
@@ -40,7 +40,12 @@ export function getUrlNavigation(
 		}
 		return getUrl({ name: nameParent, id: slug, isolated: true });
 	}
-	return `#${slug}`;
+	return getUrl({
+		name,
+		slug,
+		anchor,
+		isolated,
+	});
 }
 
 /**

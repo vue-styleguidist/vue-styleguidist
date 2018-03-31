@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const findup = require('findup');
@@ -49,7 +47,8 @@ function getConfig(config, update) {
 		if (exception instanceof StyleguidistError) {
 			throw new StyleguidistError(
 				'Something is wrong with your style guide config',
-				exception.message
+				exception.message,
+				exception.extra
 			);
 		} else {
 			throw exception;

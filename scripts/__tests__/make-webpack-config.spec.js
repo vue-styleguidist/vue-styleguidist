@@ -4,10 +4,13 @@ import makeWebpackConfig from '../make-webpack-config';
 const styleguideConfig = {
 	styleguideDir: __dirname,
 	require: [],
-	highlightTheme: 'hl-theme',
+	editorConfig: {
+		theme: 'hl-theme',
+	},
 	title: 'Style Guide',
-	template: 'template.html',
 };
+
+const getPluign = (config, name) => config.plugins.filter(x => x.constructor.name === name);
 
 const process$env$nodeEnv = process.env.NODE_ENV;
 
@@ -33,9 +36,17 @@ it('should prepend requires as webpack entries', () => {
 	expect(result.entry).toMatchSnapshot();
 });
 
+it('should use editorConfig theme over highlightTheme', () => {
+	const result = makeWebpackConfig(
+		{ ...styleguideConfig, highlightTheme: 'deprecated' },
+		'development'
+	);
+	expect(result.resolve.alias).toMatchSnapshot();
+});
+
 it('should enable verbose mode in CleanWebpackPlugin', () => {
 	const result = makeWebpackConfig({ ...styleguideConfig, verbose: true }, 'production');
-	expect(result.plugins.filter(x => x.constructor.name === 'CleanWebpackPlugin')).toMatchSnapshot();
+	expect(getPluign(result, 'CleanWebpackPlugin')).toMatchSnapshot();
 });
 
 it('should merge user webpack config', () => {
@@ -61,9 +72,10 @@ it('should not owerwrite user DefinePlugin', () => {
 		'development'
 	);
 
-	// Doesn’t really test that values won’t be overwritten, just that DefinePlugin is applied twice
-	// To write a real test we’d have to run webpack
-	expect(result.plugins.filter(x => x.constructor.name === 'DefinePlugin')).toMatchSnapshot();
+	// Doesn’t really test that values won’t be overwritten, just that
+	// DefinePlugin is applied twice. To write a real test we’d have to run
+	// webpack
+	expect(getPluign(result, 'DefinePlugin')).toMatchSnapshot();
 });
 
 it('should update webpack config', () => {
@@ -79,6 +91,42 @@ it('should update webpack config', () => {
 		'development'
 	);
 	expect(result.resolve.extensions).toEqual(extensions);
+});
+
+it('should pass template context to HTML plugin', () => {
+	const template = {
+		pizza: 'salami',
+	};
+	const result = makeWebpackConfig(
+		{
+			...styleguideConfig,
+			template,
+		},
+		'development'
+	);
+	expect(getPluign(result, 'MiniHtmlWebpackPlugin')[0]).toMatchObject({
+		options: {
+			context: template,
+			template: expect.any(Function),
+		},
+	});
+});
+
+it('should pass template function to HTML plugin', () => {
+	const template = () => '<html />';
+	const result = makeWebpackConfig(
+		{
+			...styleguideConfig,
+			template,
+		},
+		'development'
+	);
+	expect(getPluign(result, 'MiniHtmlWebpackPlugin')[0]).toMatchObject({
+		options: {
+			context: expect.any(Object),
+			template,
+		},
+	});
 });
 
 it('should update NODE_ENV', () => {

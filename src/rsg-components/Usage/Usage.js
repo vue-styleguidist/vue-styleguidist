@@ -35,7 +35,7 @@ export default function Usage({ props: { props, methods, events, slots } }) {
 
 Usage.propTypes = {
 	props: PropTypes.shape({
-		props: PropTypes.object,
+		props: PropTypes.array,
 		methods: PropTypes.array,
 		eventsNode: PropTypes.object,
 		slotsNode: PropTypes.object,

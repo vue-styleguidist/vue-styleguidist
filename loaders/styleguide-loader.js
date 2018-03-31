@@ -1,5 +1,3 @@
-'use strict';
-
 const pick = require('lodash/pick');
 const path = require('path');
 const commonDir = require('common-dir');
@@ -27,6 +25,7 @@ const CLIENT_CONFIG_OPTIONS = [
 	'styles',
 	'compilerConfig',
 	'editorConfig',
+	'ribbon',
 ];
 
 module.exports = function() {};

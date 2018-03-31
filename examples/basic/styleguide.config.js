@@ -1,6 +1,9 @@
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
+	ribbon: {
+		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
+	},
 	webpackConfig: {
 		module: {
 			rules: [

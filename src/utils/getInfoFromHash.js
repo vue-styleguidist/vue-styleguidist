@@ -18,7 +18,7 @@ export default function getInfoFromHash(hash) {
 		const tokens = path.split('/');
 		const index = parseInt(tokens[1], 10);
 		return {
-			targetName: tokens[0],
+			targetName: decodeURIComponent(tokens[0]),
 			targetIndex: isNaN(index) ? undefined : index,
 		};
 	}
