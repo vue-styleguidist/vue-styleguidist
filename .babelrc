@@ -1,12 +1,12 @@
 {
 	"presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "targets": {
         "uglify": true
       },
       "modules": false
     }],
-		"react"
+		"@babel/preset-react"
 	],
 	"plugins": [
 		"transform-class-properties",
@@ -15,8 +15,8 @@
 	"env": {
 	  "test": {
 	    "presets": [
-	      "env",
-	      "react"
+	      "@babel/preset-env",
+	      "@babel/preset-react"
 	    ],
       "plugins": [
         "system-import-transformer",
