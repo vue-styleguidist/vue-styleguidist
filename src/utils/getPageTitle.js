@@ -12,6 +12,9 @@ import { DisplayModes } from '../consts';
  * @return {string}
  */
 export default function getPageTitle(sections, baseTitle, displayMode) {
+	if (!sections[0]) {
+		return '';
+	}
 	if (displayMode === DisplayModes.component || displayMode === DisplayModes.example) {
 		return `${sections[0].components[0].name} — ${baseTitle}`;
 	} else if (displayMode === DisplayModes.section) {

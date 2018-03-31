@@ -5,6 +5,10 @@ module.exports = {
 	navigation: true,
 	sections: [
 		{
+			name: 'Getting Started',
+			content: 'docs/Getting-Started.md',
+		},
+		{
 			name: 'Documentation',
 			content: 'docs/Documentation.md',
 			sections: [
@@ -27,6 +31,7 @@ module.exports = {
 		},
 		{
 			name: 'Components',
+			content: 'docs/Components.md',
 			components: () => [
 				'./src/components/Label/Label.vue',
 				'./src/components/Placeholder/Placeholder.vue',

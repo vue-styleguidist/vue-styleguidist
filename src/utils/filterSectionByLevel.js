@@ -2,9 +2,11 @@ export default function filterSectionByLevel(section) {
 	if (!section) {
 		return section;
 	}
-	const sections = section.level === 0 ? [] : section.sections;
+	const sections = [];
+	const components = [];
 	return {
 		...section,
 		sections,
+		components,
 	};
 }

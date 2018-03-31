@@ -4,7 +4,9 @@ import filterComponentsInSectionsByExactName from './filterComponentsInSectionsB
 import filterSectionExamples from './filterSectionExamples';
 import filterSectionByLevel from './filterSectionByLevel';
 import findSection from './findSection';
+import findSectionForSlug from './findSectionForSlug';
 import getInfoFromHash from './getInfoFromHash';
+import getIdParam from './getIdParam';
 import { DisplayModes } from '../consts';
 import getUrl from './getUrl';
 
@@ -28,7 +30,7 @@ export default function getRouteData(sections, hash, navigation) {
 		// Index of the fenced block example of the filtered component isolate (/#!/Button/1 → 1)
 		targetIndex,
 	} = getInfoFromHash(hash);
-
+	const id = getIdParam();
 	let displayMode = DisplayModes.all;
 
 	if (navigation && !targetName && sections[0]) {
@@ -44,10 +46,17 @@ export default function getRouteData(sections, hash, navigation) {
 			displayMode = DisplayModes.component;
 		} else {
 			let section;
-			if (navigation) {
-				section = filterSectionByLevel(findSection(sections, targetName));
-			} else {
-				section = findSection(sections, targetName);
+
+			section = findSection(sections, targetName);
+			if (section && navigation && !id) {
+				section = filterSectionByLevel(section);
+			} else if (section && navigation && id) {
+				const sectionSlug = findSectionForSlug(section, id);
+				if (sectionSlug) {
+					section = sectionSlug;
+				} else {
+					window.location.href = getUrl({ name, isolated: true });
+				}
 			}
 			sections = section ? [section] : [];
 			displayMode = DisplayModes.section;

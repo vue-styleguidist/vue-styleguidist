@@ -7,7 +7,6 @@ import Welcome from 'rsg-components/Welcome';
 import Error from 'rsg-components/Error';
 import { HOMEPAGE } from '../../../scripts/consts';
 import { DisplayModes } from '../../consts';
-import getIdParam from '../../utils/getIdParam';
 import scrollTo from '../../utils/scrollTo';
 
 export default class StyleGuide extends Component {
@@ -64,12 +63,7 @@ export default class StyleGuide extends Component {
 
 	scrollToId() {
 		if (this.props.config.navigation) {
-			const id = getIdParam();
-			if (id) {
-				scrollTo(id);
-			} else {
-				scrollTo();
-			}
+			scrollTo();
 		}
 	}
 

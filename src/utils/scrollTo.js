@@ -1,10 +1,4 @@
-export default function scrollTo(id) {
+export default function scrollTo() {
 	const element = document.scrollingElement || document.documentElement;
-	let to = 0;
-	if (id) {
-		to = document.getElementById(id).offsetTop;
-		element.scrollTop = to;
-	} else {
-		element.scrollTop = 0;
-	}
+	element.scrollTop = 0;
 }
