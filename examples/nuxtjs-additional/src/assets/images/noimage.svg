@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="381px" height="760px" viewBox="0 0 381 760" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="dots" opacity="0.459578804" transform="translate(36.000000, 34.000000)" fill="#EBD5B5">
+                <circle id="Oval" cx="33" cy="33" r="33"></circle>
+                <circle id="Oval" cx="153" cy="33" r="33"></circle>
+                <circle id="Oval" cx="272" cy="33" r="33"></circle>
+                <circle id="Oval" cx="33" cy="161" r="33"></circle>
+                <circle id="Oval" cx="153" cy="161" r="33"></circle>
+                <circle id="Oval" cx="272" cy="161" r="33"></circle>
+                <circle id="Oval" cx="33" cy="289" r="33"></circle>
+                <circle id="Oval" cx="153" cy="289" r="33"></circle>
+                <circle id="Oval" cx="272" cy="289" r="33"></circle>
+                <circle id="Oval" cx="33" cy="416" r="33"></circle>
+                <circle id="Oval" cx="153" cy="416" r="33"></circle>
+                <circle id="Oval" cx="272" cy="416" r="33"></circle>
+                <circle id="Oval" cx="33" cy="544" r="33"></circle>
+                <circle id="Oval" cx="153" cy="544" r="33"></circle>
+                <circle id="Oval" cx="272" cy="544" r="33"></circle>
+                <circle id="Oval" cx="33" cy="671" r="33"></circle>
+                <circle id="Oval" cx="153" cy="671" r="33"></circle>
+                <circle id="Oval" cx="272" cy="671" r="33"></circle>
+            </g>
+            <path d="M282.876191,369.836916 C282.85003,370.051492 282.493598,476.783381 281.806894,690.032584 C281.806894,715.391527 270.093684,720.453562 269.848433,720.570603 C269.102868,720.814439 268.386734,721.15581 267.72946,721.594715 C250.149835,733.308596 207.937152,737.40504 185.776229,738 C185.521168,738 185.256296,738 185.020855,738 C162.850122,737.414794 120.647249,733.308596 103.057814,721.594715 C102.567311,721.272851 101.743266,720.87296 101.203713,720.638878 C100.7034,720.443809 89,715.381774 89,690.061844 L90.000626,370.880534 C89.8927153,369.534559 86.5867256,338.11873 117.606131,309.814249 C121.157372,306.780929 130.319967,294.189239 138.619277,242.222912 L158.749518,32.1143169 C159.004579,29.432121 157.680221,26.3597875 155.669159,24.418853 C160.515328,23.5605503 170.89437,22 181.263602,22 C182.823402,22 184.393011,22.0390138 186.865146,22.1170413 C198.813797,21.5220815 211.831745,23.4922763 217.315568,24.4383599 C215.010204,26.2915134 213.774137,29.1785315 214.058629,32.1143169 L234.130009,241.413377 C234.130009,289.45882 254.034618,308.731617 254.986194,309.628933 C285.878068,337.796867 283.003721,368.607983 282.876191,369.836916 Z" id="Path" fill="#F1E4CF"></path>
+            <text id="No-IMAGE" font-family="Archive" font-size="100" font-weight="normal" letter-spacing="6.3083334" fill="#5B574F">
+                <tspan x="117.841667" y="372">No</tspan>
+                <tspan x="17.7791665" y="493">IMAGE</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

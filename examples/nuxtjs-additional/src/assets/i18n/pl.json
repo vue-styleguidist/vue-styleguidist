@@ -1,0 +1,30 @@
+{
+    "beer": {
+      "title": "Piwo",
+      "buttons": {
+        "change": "Weź kolejne",
+        "more": "Więcej"
+      }
+    },
+    "character": {
+      "title": "Postać",
+      "buttons": {
+        "change": "Inny",
+        "more": "Więcej"
+      },
+      "description": {
+        "height": "Wysokość",
+        "mass": "Masa",
+        "gender": "Płeć"
+      }
+    },
+    "error": {
+      "message": "Przepraszamy tu jest błąd",
+      "back": "Wróć",
+      "home": "Od początku"
+    },
+    "language": {
+      "english": "Angielski",
+      "polish": "Polski"
+    }
+}
