@@ -1,0 +1,30 @@
+{
+    "beer": {
+      "title": "Beer",
+      "buttons": {
+        "change": "Get another",
+        "more": "Read more"
+      }
+    },
+    "character": {
+      "title": "Character",
+      "buttons": {
+        "change": "Get character",
+        "more": "Go somewhere"
+      },
+      "description": {
+        "height": "Height",
+        "mass": "Mass",
+        "gender": "Gender"
+      }
+    },
+    "error": {
+      "message": "Err, there is an error right here",
+      "back": "Go back",
+      "home": "Start over"
+    },
+    "language": {
+      "english": "English",
+      "polish": "Polish"
+    }
+}
