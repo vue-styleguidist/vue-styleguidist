@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-vuex",
   "description": "Vue styleguidist vuex example",
-  "version": "1.7.3-beta.1",
+  "version": "1.7.3",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -13,7 +13,7 @@
     "node": ">=4"
   },
   "dependencies": {
-    "vue-styleguidist": "1.7.3-beta.1"
+    "vue-styleguidist": "1.7.3"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
