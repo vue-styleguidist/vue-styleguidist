@@ -89,7 +89,7 @@
     "vue-template-compiler": "^2.4.2",
     "vue-webpack-loaders": "^1.0.5",
     "vuex": "^3.0.0",
-    "webpack-dev-server": "^3.1.1",
+    "webpack-dev-server": "^2.9.7",
     "webpack-merge": "^4.1.2"
   },
   "peerDependencies": {
