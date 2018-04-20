@@ -10,7 +10,7 @@ Vue styleguidist generates documentation for your components based on the commen
 
 * [Code comments](#code-comments)
 * [Slots documentation](#slots-documentation)
-* [Include Mixins](#include-mixins)
+* [Include Mixins and Extends](#include-mixins-and-extends)
 * [Usage examples and Readme files](#usage-examples-and-readme-files)
 * [External examples using doclet tags](#external-examples-using-doclet-tags)
 * [Public methods](#public-methods)
@@ -67,7 +67,6 @@ export default {
   /* ... */
 }
 </script>
-
 ```
 
 If you want create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
@@ -96,7 +95,7 @@ For events documentation
  * @type {object}
  */
 this.$emit('success', {
-  demo: 'example',
+  demo: 'example'
 })
 ```
 
@@ -127,10 +126,11 @@ For default, Vue styleguidist doesn't document the slots, you need to add a comm
 </template>
 ```
 
-## Include Mixins
+## Include Mixins and Extends
 
-If you import a mixin, for it to be documented you need to add in the header the mixin tag @mixin, for example
+If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends), for it to be documented you need to add in the header the mixin tag **@mixin**, for example
 
+Case Mixin:
 
 ```javascript
 // src/mixins/colorMixin.js
@@ -141,14 +141,43 @@ If you import a mixin, for it to be documented you need to add in the header the
 module.exports = {
   props: {
     /**
-    * The color for the button example
-    */
+     * The color for the button example
+     */
     color: {
       type: String,
       default: '#333'
-    },
+    }
   }
 }
+```
+
+Case Extends:
+
+```vue
+// src/extends/Base.vue
+
+<template>
+  <div>
+    <h4>{{ color }}</h4>
+    <!--the appropriate input should go here-->
+  </div>
+</template>
+<script>
+/**
+ * @mixin
+ */
+export default {
+  props: {
+    /**
+     * The color for the button example
+     */
+    colorExtends: {
+      type: String,
+      default: '#333'
+    }
+  }
+}
+</script>
 ```
 
 ```html
@@ -159,10 +188,11 @@ module.exports = {
 // src/components/Button/Button.vue
 
 import colorMixin from '../../mixins/colorMixin';
-
+import Base from '../../extends/Base';
 export default {
   name: 'Button',
   mixins: [colorMixin],
+  extends: Base,
   props: {
     /**
     * The size of the button
@@ -178,6 +208,7 @@ export default {
       default: () => () => null,
     },
   },
+  /* ... */
 }
 </script>
 ```
@@ -279,7 +310,7 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
 
 > **Note:** You can configure examples file name with the [getExampleFilename](Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) ```<docs></docs>```  inside ```*.vue``` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
 
 ## External examples using doclet tags
 
@@ -294,7 +325,7 @@ The following component will also have an example loaded from the `extra.example
  * @example ./extra.examples.md
  */
 export default {
-  name: 'Button',
+  name: 'Button'
   // ...
 }
 ```
@@ -336,23 +367,23 @@ By default, all props your components have are considered to be public and are p
 
 You can use the following [JSDoc](http://usejsdoc.org/) tags when documenting components, props and methods:
 
-- [@deprecated](http://usejsdoc.org/tags-deprecated.html)
-- [@see, @link](http://usejsdoc.org/tags-see.html)
-- [@author](http://usejsdoc.org/tags-author.html)
-- [@since](http://usejsdoc.org/tags-since.html)
-- [@version](http://usejsdoc.org/tags-version.html)
+* [@deprecated](http://usejsdoc.org/tags-deprecated.html)
+* [@see, @link](http://usejsdoc.org/tags-see.html)
+* [@author](http://usejsdoc.org/tags-author.html)
+* [@since](http://usejsdoc.org/tags-since.html)
+* [@version](http://usejsdoc.org/tags-version.html)
 
 When documenting methods you can also use:
 
-- [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
+* [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
 
 Documenting events:
 
-- [@event, @type](http://usejsdoc.org/tags-event.html)
+* [@event, @type](http://usejsdoc.org/tags-event.html)
 
 Documenting v-model:
 
-- @model
+* @model
 
 All tags can render Markdown.
 
@@ -430,19 +461,20 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 
 ```jsx
 <Panel>
-  <p>Using the Button component in the example of the Panel component:</p>
+  <p>
+    Using the Button component in the example of the Panel component:
+  </p>
   <Button>Push Me</Button>
 </Panel>
 ```
 
 > **Note:** Vue styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend, it supports [most of the ES6 features](https://buble.surge.sh/guide/#unsupported-features).
 
-
 You can also `require` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
 
 ```jsx
-const mockData = require('./mocks');
-<Message content={mockData.hello}></Message>
+const mockData = require('./mocks')
+;<Message content={mockData.hello} />
 ```
 
 > **Note:** You can `require` only from examples in Markdown files. ES6 `import` syntax isn’t supported.
