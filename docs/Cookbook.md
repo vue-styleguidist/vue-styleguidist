@@ -4,7 +4,7 @@
 
 <!-- toc -->
 
-* [How to add mixins or third-party plugins to the style guide?](#how-to-add-mixins-or-third-party-plugins-to-the-style-guide)
+* [How to add data dummy and third-party plugins to the style guide?](#how-to-add-data-dummy-and-third-party-plugins-to-the-style-guide)
 * [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
 * [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
 * [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
