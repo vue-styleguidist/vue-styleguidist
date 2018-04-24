@@ -145,6 +145,9 @@ module.exports = {
 		default: [],
 		example: ['babel-polyfill', 'path/to/styles.css'],
 	},
+	renderRootJsx: {
+		type: 'function',
+	},
 	ribbon: {
 		type: 'object',
 		example: {

@@ -109,6 +109,7 @@ export default class Preview extends Component {
 		});
 
 		const { code, vuex } = this.props;
+		const { config } = this.context;
 		let compuse = {};
 		let compiledCode;
 		let configComponent;
@@ -142,19 +143,19 @@ export default class Preview extends Component {
 		}
 		if (exampleComponent) {
 			let extendsComponent = {};
-			let component = {};
+			let previewComponent = {};
 			if (configComponent) {
-				component = exampleComponent();
+				previewComponent = exampleComponent();
 
-				Object.keys(component).forEach(key => {
+				Object.keys(previewComponent).forEach(key => {
 					if (key === 'el') {
-						delete component.el;
+						delete previewComponent.el;
 					}
 				});
 			} else {
 				const data = exampleComponent();
 				const template = compuse.html;
-				component = {
+				previewComponent = {
 					data,
 					template,
 				};
@@ -163,10 +164,20 @@ export default class Preview extends Component {
 			if (vuex) {
 				extendsComponent = { store: vuex.default };
 			}
-			component = Object.assign({ el }, extendsComponent, component);
 			const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1;
-			component._scopeId = moduleId;
-			const vueInstance = new Vue(component);
+			previewComponent._scopeId = moduleId;
+			const rootComponent = config.renderRootJsx
+				? config.renderRootJsx(previewComponent)
+				: {
+						render(createElement) {
+							return createElement(previewComponent);
+						},
+				  };
+			const vueInstance = new Vue(
+				Object.assign(extendsComponent, rootComponent, {
+					el,
+				})
+			);
 
 			if (compuse.style) {
 				const styleContainer = document.createElement('div');
@@ -208,9 +219,9 @@ export default class Preview extends Component {
 			exampleComponentCode = `
 				function getData() {
 					eval(${JSON.stringify(compiledCode)})
-					return {
+					return () => ({
 						${listVars.join(',')}
-					}
+					})
 				}
 				return getData();
 			`;

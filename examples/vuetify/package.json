@@ -1,0 +1,32 @@
+{
+  "name": "vue-styleguidist-example-basic",
+  "description": "Vue styleguidist basic example",
+  "version": "1.7.3",
+  "private": true,
+  "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/styleguidist/vue-styleguidist.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4"
+  },
+  "dependencies": {
+    "dog-names": "^1.0.2",
+    "vue-styleguidist": "1.7.3",
+    "vue": "^2.5.16",
+    "vuetify": "^1.0.17"
+  },
+  "scripts": {
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "vue-loader": "^13.5.0",
+    "webpack": "^3.10.0"
+  }
+}

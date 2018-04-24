@@ -23,6 +23,7 @@ const CLIENT_CONFIG_OPTIONS = [
 	'theme',
 	'navigation',
 	'styles',
+	'renderRootJsx',
 	'compilerConfig',
 	'editorConfig',
 	'ribbon',
