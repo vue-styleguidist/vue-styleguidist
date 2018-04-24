@@ -1,14 +1,14 @@
 Basic button:
 
 ```jsx
-<Button>Push Me</Button>
+<Button>{{$t("message.hello")}}</Button>
 ```
 
 Big pink button:
 
 ```jsx
 <Button size="large" color="warning">
-  Lick Me
+  {{$t("message.hello")}}
 </Button>
 ```
 
@@ -17,7 +17,7 @@ And you _can_ **use** `any` [Markdown](http://daringfireball.net/projects/markdo
 Fenced code blocks with `vue`, `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
 
 ```jsx
-<Button>Push Me</Button>
+<Button>{{$t("message.hello")}}</Button>
 ```
 
 You can also use the Single File Component Format
@@ -25,7 +25,7 @@ You can also use the Single File Component Format
 ```vue
 <template>
     <div class="wrapper">
-        <Button @click.native="pushButton">Push Me</Button>
+        <Button @click.native="pushButton">{{$t("message.hello")}}</Button>
         <hr />
         <p class="text-name">Next Dog Name: {{ dogName }}</p>
     </div>

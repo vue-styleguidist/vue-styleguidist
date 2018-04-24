@@ -23,7 +23,6 @@ const CLIENT_CONFIG_OPTIONS = [
 	'theme',
 	'navigation',
 	'styles',
-	'renderRootJsx',
 	'compilerConfig',
 	'editorConfig',
 	'ribbon',
@@ -54,6 +53,7 @@ module.exports.pitch = function() {
 	// Nothing to show in the style guide
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0;
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined;
+	const renderRootJsx = config.renderRootJsx ? requireIt(config.renderRootJsx) : undefined;
 	const vuex = config.vuex ? requireIt(config.vuex) : undefined;
 	const mixins = config.mixins.map(mixin => {
 		if (typeof mixin === 'string') {
@@ -79,6 +79,7 @@ module.exports.pitch = function() {
 		patterns,
 		sections,
 		vuex,
+		renderRootJsx,
 		mixins,
 	};
 

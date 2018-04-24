@@ -16,6 +16,7 @@ export default class StyleGuide extends Component {
 		slots: PropTypes.object.isRequired,
 		sections: PropTypes.array.isRequired,
 		welcomeScreen: PropTypes.bool,
+		renderRootJsx: PropTypes.object,
 		patterns: PropTypes.array,
 		displayMode: PropTypes.string,
 		allSections: PropTypes.array.isRequired,
@@ -26,6 +27,7 @@ export default class StyleGuide extends Component {
 		config: PropTypes.object.isRequired,
 		slots: PropTypes.object.isRequired,
 		displayMode: PropTypes.string,
+		renderRootJsx: PropTypes.object,
 	};
 
 	static defaultProps = {
@@ -43,6 +45,7 @@ export default class StyleGuide extends Component {
 			config: this.props.config,
 			slots: this.props.slots,
 			displayMode: this.props.displayMode,
+			renderRootJsx: this.props.renderRootJsx,
 		};
 	}
 

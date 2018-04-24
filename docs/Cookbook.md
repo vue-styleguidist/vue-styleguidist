@@ -18,7 +18,7 @@
 
 <!-- tocstop -->
 
-## How to add mixins or third-party plugins to the style guide?
+## How to add data dummy and third-party plugins to the style guide?
 
 If you need to have default data for use in the examples of your components, you can import mixins to the style guide. Creating a .js file that exports the mixins or adding it directly to the `styleguide.config.js` file
 
@@ -30,31 +30,87 @@ export default {
   data() {
     return {
       colorDemo: 'blue',
-      sizeDemo: 'large',
+      sizeDemo: 'large'
     }
   }
   /* ... */
 }
 ```
 
-````jsx
+```jsx
 // example component
 
-<Button size="colorDemo" color="sizeDemo">Lick Me</Button>
-````
+<Button size="colorDemo" color="sizeDemo">
+  Lick Me
+</Button>
+```
 
-Also if you need to load a vue plugin from a third party, you can add it in the mixin file so that it is installed in the style guide
+If you need to load vue plugins from a third party. You can add it, creating a .js file that installs the plugins and then adds it into the `styleguide.config.js` file
+
+Use [require](Configuration.md#require) option:
 
 ```javascript
-// mixin file
-import VeeValidate from 'vee-validate';
+// styleguide/global.requires.js
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import VeeValidate from 'vee-validate'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
-Vue.use(VeeValidate);
+Vue.use(VueI18n)
+Vue.use(VeeValidate)
+Vue.use(Vuetify)
+```
 
-export default {
-  /* ... */
+```javascript
+// styleguide.config.js
+module.exports = {
+  require: [path.join(__dirname, 'styleguide/global.requires.js')]
 }
 ```
+
+If you need to change the root component of each preview example, you can change the root component of preview. Creating a .js file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
+
+Use [renderRootJsx](Configuration.md#renderrootjsx) option:
+
+```javascript
+// config/styleguide.root.js
+import VueI18n from 'vue-i18n'
+import messages from './i18n'
+
+const i18n = new VueI18n({
+  locale: 'en',
+  messages
+})
+
+export default previewComponent => {
+  // https://vuejs.org/v2/guide/render-function.html
+  return {
+    i18n,
+    render(createElement) {
+      // v-app to support vuetify plugin
+      return createElement(
+        'v-app',
+        {
+          props: {
+            id: 'v-app'
+          }
+        },
+        [createElement(Object.assign(previewComponent))]
+      )
+    }
+  }
+}
+```
+
+```javascript
+// styleguide.config.js
+module.exports = {
+  renderRootJsx: path.join(__dirname, 'config/styleguide.root.js')
+}
+```
+
+See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuetify).
 
 ## How to exclude some components from style guide?
 
@@ -64,11 +120,8 @@ Use [ignore](Configuration.md#ignore) option to customize this behavior:
 
 ```javascript
 module.exports = {
-  ignore: [
-    '**/*.spec.vue',
-    '**/components/Button.vue'
-  ]
-};
+  ignore: ['**/*.spec.vue', '**/components/Button.vue']
+}
 ```
 
 > **Note:** You should pass glob patterns, for example, use `**/components/Button.vue` instead of `components/Button.vue`.
@@ -80,8 +133,8 @@ Enable [skipComponentsWithoutExample](Configuration.md#skipcomponentswithoutexam
 Require these components in your examples:
 
 ```jsx
-const Button = require('../common/Button');
-<Button>Push Me Tender</Button>
+const Button = require('../common/Button')
+;<Button>Push Me Tender</Button>
 ```
 
 ## How to add custom JavaScript and CSS or polyfills?
@@ -237,14 +290,14 @@ module.exports = {
 
 ## How to debug my components and examples?
 
-1. Open your browser’s developer tools
-2. Write `debugger;` statement wherever you want: in a component source, a Markdown example or even in an editor in a browser.
+1.  Open your browser’s developer tools
+2.  Write `debugger;` statement wherever you want: in a component source, a Markdown example or even in an editor in a browser.
 
 ## How to debug the exceptions thrown from my components?
 
-1. Put `debugger;` statement at the beginning of your code.
-2. Press the ![Debugger](https://d3vv6lp55qjaqc.cloudfront.net/items/2h2q3N123N3G3R252o41/debugger.png) button in your browser’s developer tools.
-3. Press the ![Continue](https://d3vv6lp55qjaqc.cloudfront.net/items/3b3c1P3g3O1h3q111I2l/continue.png) button and the debugger will stop execution at the next exception.
+1.  Put `debugger;` statement at the beginning of your code.
+2.  Press the ![Debugger](https://d3vv6lp55qjaqc.cloudfront.net/items/2h2q3N123N3G3R252o41/debugger.png) button in your browser’s developer tools.
+3.  Press the ![Continue](https://d3vv6lp55qjaqc.cloudfront.net/items/3b3c1P3g3O1h3q111I2l/continue.png) button and the debugger will stop execution at the next exception.
 
 ## How to use Vagrant with Styleguidist?
 

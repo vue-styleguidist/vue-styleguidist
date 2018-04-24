@@ -14,8 +14,8 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`configureServer`](#configureserver)
 * [`dangerouslyUpdateWebpackConfig`](#dangerouslyupdatewebpackconfig)
 * [`defaultExample`](#defaultexample)
-* [`editorConfig`](#editorconfig)
 * [`getComponentPathLine`](#getcomponentpathline)
+* [`editorConfig`](#editorconfig)
 * [`getExampleFilename`](#getexamplefilename)
 * [`navigation`](#navigation)
 * [`mixins`](#mixins)
@@ -26,6 +26,7 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`previewDelay`](#previewdelay)
 * [`propsParser`](#propsparser)
 * [`require`](#require)
+* [`renderRootJsx`](#renderrootjsx)
 * [`ribbon`](#ribbon)
 * [`sections`](#sections)
 * [`serverHost`](#serverhost)
@@ -34,13 +35,13 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 * [`showUsage`](#showusage)
 * [`showSidebar`](#showsidebar)
 * [`skipComponentsWithoutExample`](#skipcomponentswithoutexample)
-* [`sortProps`](#sortprops)
 * [`styleguideComponents`](#styleguidecomponents)
 * [`styleguideDir`](#styleguidedir)
 * [`styles`](#styles)
 * [`template`](#template)
 * [`theme`](#theme)
 * [`title`](#title)
+* [`sortProps`](#sortprops)
 * [`updateDocs`](#updatedocs)
 * [`updateExample`](#updateexample)
 * [`verbose`](#verbose)
@@ -350,6 +351,29 @@ module.exports = {
 ```
 
 See [Configuring webpack](Webpack.md) for mode details.
+
+#### `renderRootJsx`
+
+Type: `String`, optional
+
+Modifies the root component of the previews of the examples, receives as a parameter the preview component, must return a [component jsx](https://vuejs.org/v2/guide/render-function.html). It is useful when you want to create a container to all your examples by default, especially when you use a third library.
+
+An example
+
+```javascript
+// config/styleguide.root.js
+export default function (previewComponent) {
+  render(createElement) {
+    return createElement(previewComponent);
+  },
+}
+```
+
+```javascript
+module.exports = {
+  renderRootJsx: path.join(__dirname, 'config/styleguide.root.js')
+}
+```
 
 #### `ribbon`
 

@@ -80,6 +80,7 @@ export default class Preview extends Component {
 	};
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
+		renderRootJsx: PropTypes.object,
 	};
 
 	state = {
@@ -109,7 +110,7 @@ export default class Preview extends Component {
 		});
 
 		const { code, vuex } = this.props;
-		const { config } = this.context;
+		const { renderRootJsx } = this.context;
 		let compuse = {};
 		let compiledCode;
 		let configComponent;
@@ -166,8 +167,9 @@ export default class Preview extends Component {
 			}
 			const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1;
 			previewComponent._scopeId = moduleId;
-			const rootComponent = config.renderRootJsx
-				? config.renderRootJsx(previewComponent)
+
+			const rootComponent = renderRootJsx
+				? renderRootJsx.default(previewComponent)
 				: {
 						render(createElement) {
 							return createElement(previewComponent);

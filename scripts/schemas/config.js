@@ -146,7 +146,7 @@ module.exports = {
 		example: ['babel-polyfill', 'path/to/styles.css'],
 	},
 	renderRootJsx: {
-		type: 'function',
+		type: 'directory path',
 	},
 	ribbon: {
 		type: 'object',

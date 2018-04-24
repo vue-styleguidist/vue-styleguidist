@@ -45,6 +45,7 @@ export default function renderStyleguide(
 		<StyleGuide
 			codeRevision={codeRevision}
 			config={styleguide.config}
+			renderRootJsx={styleguide.renderRootJsx}
 			slots={slots(styleguide.config)}
 			welcomeScreen={styleguide.welcomeScreen}
 			patterns={styleguide.patterns}

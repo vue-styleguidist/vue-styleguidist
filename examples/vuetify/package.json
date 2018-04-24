@@ -14,8 +14,9 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue-styleguidist": "1.7.3",
     "vue": "^2.5.16",
+    "vue-i18n": "^7.6.0",
+    "vue-styleguidist": "1.7.3",
     "vuetify": "^1.0.17"
   },
   "scripts": {

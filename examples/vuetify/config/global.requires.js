@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueI18n from 'vue-i18n';
 import 'vuetify/dist/vuetify.min.css';
 
+Vue.use(VueI18n);
 Vue.use(Vuetify, {
 	theme: {
-		primary: '#ee44aa',
+		primary: '#5656ca',
 		secondary: '#424242',
 		accent: '#82B1FF',
 		error: '#FF5252',
