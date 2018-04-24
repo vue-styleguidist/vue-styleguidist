@@ -188,7 +188,7 @@ export default {
 // src/components/Button/Button.vue
 
 import colorMixin from '../../mixins/colorMixin';
-import Base from '../../extends/Base';
+import Base from '../../extends/Base.vue';
 export default {
   name: 'Button',
   mixins: [colorMixin],
