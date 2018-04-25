@@ -40,7 +40,10 @@ const injectTemplateAndParseExport = function(parts) {
 	if (index === -1) {
 		throw new Error('Failed to parse single file component: ' + code);
 	}
-	const right = code.substr(index);
+	let right = code.substr(index).trim();
+	if (right[right.length - 1] === ';') {
+		right = right.slice(0, -1);
+	}
 	const templateString = replaceAll(`${parts.template.content}`, '`', '\\`');
 	return `{\ntemplate: \`${templateString}\`,\n${right}`;
 };
