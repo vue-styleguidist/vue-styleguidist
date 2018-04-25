@@ -96,7 +96,7 @@ export default previewComponent => {
             id: 'v-app'
           }
         },
-        [createElement(Object.assign(previewComponent))]
+        [createElement(previewComponent)]
       )
     }
   }
