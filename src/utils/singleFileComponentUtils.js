@@ -3,6 +3,10 @@ import { replaceAll } from './utils';
 const compiler = require('vue-template-compiler');
 const stripComments = require('strip-comments');
 
+const startsWith = function(str, searchString) {
+	return str.indexOf(searchString, 0) === 0;
+};
+
 const buildStyles = function(styles) {
 	let _styles = '';
 	if (styles) {
@@ -52,7 +56,7 @@ const extractImports = function(code) {
 	let imports = '';
 	const lines = code.split('\n');
 	lines.forEach(it => {
-		if (it.startsWith('import') || it.indexOf('require(') !== -1) {
+		if (startsWith(it, 'import') || it.indexOf('require(') !== -1) {
 			imports += it + '\n';
 		}
 	});

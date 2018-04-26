@@ -139,7 +139,7 @@ export default class Preview extends Component {
 		let el = this.mountNode.children[0];
 		if (!el) {
 			this.mountNode.innerHTML = ' ';
-			this.mountNode.append(document.createElement('div'));
+			this.mountNode.appendChild(document.createElement('div'));
 			el = this.mountNode.children[0];
 		}
 		if (exampleComponent) {
@@ -221,9 +221,11 @@ export default class Preview extends Component {
 			exampleComponentCode = `
 				function getData() {
 					eval(${JSON.stringify(compiledCode)})
-					return () => ({
-						${listVars.join(',')}
-					})
+					return function() {
+						return {
+							${listVars.join(',')}
+						}
+					}
 				}
 				return getData();
 			`;
@@ -237,7 +239,7 @@ export default class Preview extends Component {
 			let el = this.mountNode.children[0];
 			if (!el) {
 				this.mountNode.innerHTML = ' ';
-				this.mountNode.append(document.createElement('div'));
+				this.mountNode.appendChild(document.createElement('div'));
 				el = this.mountNode.children[0];
 			}
 			el = new Vue({
