@@ -43,18 +43,9 @@ module.exports = function(config, env) {
 			extensions: ['.js', '.jsx', '.json'],
 			alias: {
 				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
-				vue$: 'vue/dist/vue.esm.js',
 				'@': path.resolve(__dirname, '../src'),
 			},
 		},
-		plugins: [
-			new StyleguidistOptionsPlugin(config),
-			new MiniHtmlWebpackPlugin(htmlPluginOptions),
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-			}),
-		],
 		performance: {
 			hints: false,
 		},
@@ -116,8 +107,28 @@ module.exports = function(config, env) {
 	}
 
 	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
+		webpackConfig = mergeWebpackConfig(config.webpackConfig, webpackConfig, env);
 	}
+
+	webpackConfig = merge(webpackConfig, {
+		resolve: {
+			alias: {
+				// allows us to use the compiler
+				vue$: 'vue/dist/vue.esm.js',
+			},
+		},
+		plugins: [
+			// in order to avoid collision with the preload plugins
+			// that are loaded by the vue cli
+			// we have to load these plugins last
+			new StyleguidistOptionsPlugin(config),
+			new MiniHtmlWebpackPlugin(htmlPluginOptions),
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
+			}),
+		],
+	});
 
 	// Custom style guide components
 	if (config.styleguideComponents) {
