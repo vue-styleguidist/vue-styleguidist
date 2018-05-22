@@ -72,15 +72,6 @@ export default {
 # links to the rest of the documentation.
 Please do not click on any of those links or you will be taken away from your localhost.
 But you can try editing the code at the bottom of the page.
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>
 
 ```vue
 <HelloWorld msg="Example"/>
