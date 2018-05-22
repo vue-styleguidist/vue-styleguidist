@@ -33,7 +33,6 @@ module.exports = function(config, env) {
 	};
 
 	let webpackConfig = {
-		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
 		output: {
 			path: config.styleguideDir,
 			filename: 'build/[name].bundle.js',
@@ -76,6 +75,32 @@ module.exports = function(config, env) {
 		webpackConfig.plugins.unshift(uglifier);
 	}
 
+	if (config.webpackConfig) {
+		delete config.webpackConfig.entry;
+		webpackConfig = mergeWebpackConfig(config.webpackConfig, webpackConfig, env);
+	}
+
+	webpackConfig = merge(webpackConfig, {
+		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
+		resolve: {
+			alias: {
+				// allows us to use the compiler
+				vue$: 'vue/dist/vue.esm.js',
+			},
+		},
+		plugins: [
+			// in order to avoid collision with the preload plugins
+			// that are loaded by the vue cli
+			// we have to load these plugins last
+			new StyleguidistOptionsPlugin(config),
+			new MiniHtmlWebpackPlugin(htmlPluginOptions),
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
+			}),
+		],
+	});
+
 	if (isProd) {
 		webpackConfig = merge(webpackConfig, {
 			output: {
@@ -105,30 +130,6 @@ module.exports = function(config, env) {
 			plugins: [new webpack.HotModuleReplacementPlugin()],
 		});
 	}
-
-	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(config.webpackConfig, webpackConfig, env);
-	}
-
-	webpackConfig = merge(webpackConfig, {
-		resolve: {
-			alias: {
-				// allows us to use the compiler
-				vue$: 'vue/dist/vue.esm.js',
-			},
-		},
-		plugins: [
-			// in order to avoid collision with the preload plugins
-			// that are loaded by the vue cli
-			// we have to load these plugins last
-			new StyleguidistOptionsPlugin(config),
-			new MiniHtmlWebpackPlugin(htmlPluginOptions),
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-			}),
-		],
-	});
 
 	// Custom style guide components
 	if (config.styleguideComponents) {
