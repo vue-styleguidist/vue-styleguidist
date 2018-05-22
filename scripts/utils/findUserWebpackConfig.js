@@ -1,7 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const USER_WEBPACK_CONFIG_NAMES = ['webpack.config.js', 'webpackfile.js'];
+const USER_WEBPACK_CONFIG_NAMES = [
+	'node_modules/@vue/cli-service/webpack.config.js',
+	'webpack.config.js',
+	'webpackfile.js',
+];
 
 const absolutize = filePath => path.resolve(process.cwd(), filePath);
 
