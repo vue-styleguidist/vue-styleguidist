@@ -1,5 +1,3 @@
-'use strict';
-
 const parseVue = require('./parseVue');
 const path = require('path');
 const fs = require('fs');

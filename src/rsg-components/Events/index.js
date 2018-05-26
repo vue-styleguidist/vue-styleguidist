@@ -1,1 +1,1 @@
-export { default } from './EventsRenderer.js';
+export { default } from './EventsRenderer';

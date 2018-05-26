@@ -9,12 +9,12 @@ afterEach(() => {
 
 it('should read a config file', () => {
 	const result = getConfig('./test/data/styleguide.config.js');
-	expect(result).toMatchObject({ title: 'React Style Guide Example' });
+	expect(result).toMatchObject({ title: 'Vue Style Guide Example' });
 });
 
 it('should accept absolute path', () => {
 	const result = getConfig(path.join(__dirname, '../../test/data/styleguide.config.js'));
-	expect(result).toMatchObject({ title: 'React Style Guide Example' });
+	expect(result).toMatchObject({ title: 'Vue Style Guide Example' });
 });
 
 it('should throw when passed config file not found', () => {
@@ -25,7 +25,7 @@ it('should throw when passed config file not found', () => {
 it('should find config file automatically', () => {
 	process.chdir('test/apps/basic');
 	const result = getConfig({});
-	expect(result).toMatchObject({ title: 'React Style Guide Example' });
+	expect(result).toMatchObject({ title: 'Vue Style Guide Example' });
 });
 
 it('should accept config as an object', () => {
@@ -90,7 +90,7 @@ it('should have default getComponentPathLine implementation', () => {
 
 it('should have default title based on package.json name', () => {
 	const result = getConfig();
-	expect(result.title).toEqual('React Styleguidist Style Guide');
+	expect(result.title).toEqual('Vue Styleguidist Style Guide');
 });
 
 it('configDir option should be a directory of a passed config', () => {

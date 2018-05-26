@@ -18,9 +18,11 @@ Array [
 
 exports[`should merge user webpack config 1`] = `
 Object {
+  "@": "~/src",
   "foo": "bar",
   "rsg-codemirror-theme.css": "codemirror/theme/hl-theme.css",
   "rsg-components": "~/lib/rsg-components",
+  "vue$": "vue/dist/vue.esm.js",
 }
 `;
 
@@ -132,8 +134,10 @@ Object {
   ],
   "resolve": Object {
     "alias": Object {
+      "@": "~/src",
       "rsg-codemirror-theme.css": "codemirror/theme/hl-theme.css",
       "rsg-components": "~/lib/rsg-components",
+      "vue$": "vue/dist/vue.esm.js",
     },
     "extensions": Array [
       ".js",
@@ -184,6 +188,7 @@ Object {
     "chunkFilename": "build/[name].[chunkhash:8].js",
     "filename": "build/bundle.[chunkhash:8].js",
     "path": "~/scripts/__tests__",
+    "publicPath": undefined,
   },
   "performance": Object {
     "hints": false,
@@ -234,8 +239,10 @@ Object {
   ],
   "resolve": Object {
     "alias": Object {
+      "@": "~/src",
       "rsg-codemirror-theme.css": "codemirror/theme/hl-theme.css",
       "rsg-components": "~/lib/rsg-components",
+      "vue$": "vue/dist/vue.esm.js",
     },
     "extensions": Array [
       ".js",
@@ -248,7 +255,9 @@ Object {
 
 exports[`should use editorConfig theme over highlightTheme 1`] = `
 Object {
+  "@": "~/src",
   "rsg-codemirror-theme.css": "codemirror/theme/hl-theme.css",
   "rsg-components": "~/lib/rsg-components",
+  "vue$": "vue/dist/vue.esm.js",
 }
 `;

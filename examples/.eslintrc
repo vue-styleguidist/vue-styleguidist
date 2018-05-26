@@ -1,6 +1,10 @@
 {
-	"parser": "babel-eslint",
-	"extends": "tamia/react",
+	"extends": ["plugin:vue/recommended"],
+	"parserOptions": {
+		"parser": "babel-eslint",
+		"ecmaVersion": 2017,
+		"sourceType": "module"
+	},
 	"rules": {
 		"valid-jsdoc": 0,
 		"react/prefer-stateless-function": 0

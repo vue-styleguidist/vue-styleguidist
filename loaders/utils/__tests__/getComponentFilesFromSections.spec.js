@@ -24,20 +24,21 @@ const sections = [
 ];
 
 const deabs = x => deabsDeep(x, { root: configDir });
+xdescribe('getComponentFilesFromSections', () => {
+	it('getComponentFilesFromSections() should return a list of files', () => {
+		const result = getComponentFilesFromSections(sections, configDir);
+		expect(deabs(result)).toEqual([
+			'~/components/Button/Button.js',
+			'~/components/Placeholder/Placeholder.js',
+			'~/components/Price/Price.js',
+		]);
+	});
 
-it('getComponentFilesFromSections() should return a list of files', () => {
-	const result = getComponentFilesFromSections(sections, configDir);
-	expect(deabs(result)).toEqual([
-		'~/components/Button/Button.js',
-		'~/components/Placeholder/Placeholder.js',
-		'~/components/Price/Price.js',
-	]);
-});
-
-it('getComponentFilesFromSections() should ignore specified patterns', () => {
-	const result = getComponentFilesFromSections(sections, configDir, ['**/*Button*']);
-	expect(deabs(result)).toEqual([
-		'~/components/Placeholder/Placeholder.js',
-		'~/components/Price/Price.js',
-	]);
+	it('getComponentFilesFromSections() should ignore specified patterns', () => {
+		const result = getComponentFilesFromSections(sections, configDir, ['**/*Button*']);
+		expect(deabs(result)).toEqual([
+			'~/components/Placeholder/Placeholder.js',
+			'~/components/Price/Price.js',
+		]);
+	});
 });

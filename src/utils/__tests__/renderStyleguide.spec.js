@@ -41,7 +41,7 @@ afterEach(() => {
 	delete global.Image;
 });
 
-describe('renderStyleguide', () => {
+xdescribe('renderStyleguide', () => {
 	it('should render StyleGuide component', () => {
 		const result = shallow(renderStyleguide(styleguide, codeRevision, location, doc, history));
 		expect(result).toMatchSnapshot();
