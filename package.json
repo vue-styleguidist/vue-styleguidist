@@ -188,7 +188,8 @@
 		"testPathIgnorePatterns": [
 			"<rootDir>/lib/",
 			"<rootDir>/examples/",
-			"<rootDir>/test/"
+			"<rootDir>/test/",
+			"<rootDir>/src/rsg-components"
 		],
 		"coveragePathIgnorePatterns": [
 			"<rootDir>/scripts/server.js",
