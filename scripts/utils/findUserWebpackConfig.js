@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const VUE_CLI_WEBPACK_CONFIG = '@vue/cli-service/webpack.config.js';
 const USER_WEBPACK_CONFIG_NAMES = ['webpack.config.js', 'webpackfile.js'];
 
 const absolutize = filePath => path.resolve(process.cwd(), filePath);
@@ -12,12 +13,18 @@ const absolutize = filePath => path.resolve(process.cwd(), filePath);
  *
  * @return {string|boolean}
  */
-module.exports = function findUserWebpackConfig() {
-	// Check in the root folder
-	for (const configFile of USER_WEBPACK_CONFIG_NAMES) {
-		const absoluteConfigFile = absolutize(configFile);
-		if (fs.existsSync(absoluteConfigFile)) {
-			return absoluteConfigFile;
+module.exports = function findUserWebpackConfig(resolve) {
+	resolve = resolve || require.resolve;
+	try {
+		// Vue CLI
+		return resolve(VUE_CLI_WEBPACK_CONFIG);
+	} catch (err) {
+		// Check in the root folder
+		for (const configFile of USER_WEBPACK_CONFIG_NAMES) {
+			const absoluteConfigFile = absolutize(configFile);
+			if (fs.existsSync(absoluteConfigFile)) {
+				return absoluteConfigFile;
+			}
 		}
 	}
 

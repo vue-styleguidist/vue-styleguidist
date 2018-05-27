@@ -11,9 +11,11 @@ const isFunction = require('lodash/isFunction');
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
 const StyleguidistOptionsPlugin = require('./utils/StyleguidistOptionsPlugin');
 const getWebpackVersion = require('./utils/getWebpackVersion');
+const existsVueCLI = require('./utils/existsVueCLI');
 
 const RENDERER_REGEXP = /Renderer$/;
 
+const isWebpack4 = getWebpackVersion() >= 4;
 const sourceDir = path.resolve(__dirname, '../lib');
 
 module.exports = function(config, env) {
@@ -33,7 +35,6 @@ module.exports = function(config, env) {
 	};
 
 	let webpackConfig = {
-		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
 		output: {
 			path: config.styleguideDir,
 			filename: 'build/[name].bundle.js',
@@ -43,11 +44,37 @@ module.exports = function(config, env) {
 			extensions: ['.js', '.jsx', '.json'],
 			alias: {
 				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
+			},
+		},
+		performance: {
+			hints: false,
+		},
+	};
+
+	/* istanbul ignore if */
+	if (isWebpack4) {
+		webpackConfig.mode = env;
+	}
+
+	if (config.webpackConfig) {
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, existsVueCLI() ? 'vueCLI' : env);
+	}
+
+	webpackConfig = merge(webpackConfig, {
+		// we need to follow our own entry point
+		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
+		resolve: {
+			alias: {
+				// allows to use the compiler
+				// without this, cli will overload the alias and use runtime esm
 				vue$: 'vue/dist/vue.esm.js',
 				'@': path.resolve(__dirname, '../src'),
 			},
 		},
 		plugins: [
+			// in order to avoid collision with the preload plugins
+			// that are loaded by the vue cli
+			// we have to load these plugins last
 			new StyleguidistOptionsPlugin(config),
 			new MiniHtmlWebpackPlugin(htmlPluginOptions),
 			new webpack.DefinePlugin({
@@ -55,36 +82,11 @@ module.exports = function(config, env) {
 				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
 			}),
 		],
-		performance: {
-			hints: false,
-		},
-	};
-
-	const uglifier = new UglifyJSPlugin({
-		parallel: true,
-		cache: true,
-		uglifyOptions: {
-			ie8: false,
-			ecma: 5,
-			compress: {
-				keep_fnames: true,
-				warnings: false,
-			},
-			mangle: {
-				keep_fnames: true,
-			},
-		},
 	});
 
-	if (getWebpackVersion() >= 4) {
-		webpackConfig.mode = env;
-		webpackConfig.optimization = {
-			minimizer: [uglifier],
-		};
-	} else {
-		webpackConfig.plugins.unshift(uglifier);
-	}
-
+	// To have the hot-reload work on vue-styleguide
+	// the HMR has to be loaded after the html plugin. 
+	// Hence this piece added last to the list of plugins.
 	if (isProd) {
 		webpackConfig = merge(webpackConfig, {
 			output: {
@@ -108,15 +110,36 @@ module.exports = function(config, env) {
 				),
 			],
 		});
+
+		const uglifier = new UglifyJSPlugin({
+			parallel: true,
+			cache: true,
+			uglifyOptions: {
+				ie8: false,
+				ecma: 5,
+				compress: {
+					keep_fnames: true,
+					warnings: false,
+				},
+				mangle: {
+					keep_fnames: true,
+				},
+			},
+		});
+
+		/* istanbul ignore if */
+		if (isWebpack4) {
+			webpackConfig.optimization = {
+				minimizer: [uglifier],
+			};
+		} else {
+			webpackConfig.plugins.unshift(uglifier);
+		}
 	} else {
 		webpackConfig = merge(webpackConfig, {
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')],
 			plugins: [new webpack.HotModuleReplacementPlugin()],
 		});
-	}
-
-	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
 	}
 
 	// Custom style guide components

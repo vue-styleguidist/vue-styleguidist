@@ -1,0 +1,26 @@
+{
+	"name": "vuecli3",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve --open",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint",
+		"styleguide": "vue-styleguidist server",
+		"styleguide:build": "vue-styleguidist build"
+	},
+	"dependencies": {
+		"vue": "^2.5.16",
+		"vue-styleguidist": "1.7.7"
+	},
+	"devDependencies": {
+		"@vue/cli-service": "^3.0.0-beta.11",
+		"vue-template-compiler": "^2.5.16"
+	},
+	"postcss": {
+		"plugins": {
+			"autoprefixer": {}
+		}
+	},
+	"browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+}
