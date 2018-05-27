@@ -33,7 +33,6 @@ module.exports = function(config, env) {
 	};
 
 	let webpackConfig = {
-		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
 		output: {
 			path: config.styleguideDir,
 			filename: 'build/[name].bundle.js',
@@ -43,18 +42,9 @@ module.exports = function(config, env) {
 			extensions: ['.js', '.jsx', '.json'],
 			alias: {
 				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
-				vue$: 'vue/dist/vue.esm.js',
 				'@': path.resolve(__dirname, '../src'),
 			},
 		},
-		plugins: [
-			new StyleguidistOptionsPlugin(config),
-			new MiniHtmlWebpackPlugin(htmlPluginOptions),
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-			}),
-		],
 		performance: {
 			hints: false,
 		},
@@ -85,6 +75,39 @@ module.exports = function(config, env) {
 		webpackConfig.plugins.unshift(uglifier);
 	}
 
+	if (config.webpackConfig) {
+		// if an extra entry is given it will be ignored
+		delete config.webpackConfig.entry;
+		// our config takes priority over the customizations
+		webpackConfig = mergeWebpackConfig(config.webpackConfig, webpackConfig, env);
+	}
+
+	webpackConfig = merge(webpackConfig, {
+		// we need to follow our own entry point
+		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
+		resolve: {
+			alias: {
+				// allows to use the compiler
+				// without this, cli will overload the alias and use runtime esm
+				vue$: 'vue/dist/vue.esm.js',
+			},
+		},
+		plugins: [
+			// in order to avoid collision with the preload plugins
+			// that are loaded by the vue cli
+			// we have to load these plugins last
+			new StyleguidistOptionsPlugin(config),
+			new MiniHtmlWebpackPlugin(htmlPluginOptions),
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
+			}),
+		],
+	});
+
+	// To have the hot-reload work on vue-styleguide
+	// the HMR has to be loaded after the html plugin. 
+	// Hence this piece added last to the list of plugins.
 	if (isProd) {
 		webpackConfig = merge(webpackConfig, {
 			output: {
@@ -113,10 +136,6 @@ module.exports = function(config, env) {
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')],
 			plugins: [new webpack.HotModuleReplacementPlugin()],
 		});
-	}
-
-	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
 	}
 
 	// Custom style guide components
