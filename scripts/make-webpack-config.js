@@ -11,9 +11,11 @@ const isFunction = require('lodash/isFunction');
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
 const StyleguidistOptionsPlugin = require('./utils/StyleguidistOptionsPlugin');
 const getWebpackVersion = require('./utils/getWebpackVersion');
+const existsVueCLI = require('./utils/existsVueCLI');
 
 const RENDERER_REGEXP = /Renderer$/;
 
+const isWebpack4 = getWebpackVersion() >= 4;
 const sourceDir = path.resolve(__dirname, '../lib');
 
 module.exports = function(config, env) {
@@ -42,7 +44,6 @@ module.exports = function(config, env) {
 			extensions: ['.js', '.jsx', '.json'],
 			alias: {
 				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
-				'@': path.resolve(__dirname, '../src'),
 			},
 		},
 		performance: {
@@ -50,36 +51,13 @@ module.exports = function(config, env) {
 		},
 	};
 
-	const uglifier = new UglifyJSPlugin({
-		parallel: true,
-		cache: true,
-		uglifyOptions: {
-			ie8: false,
-			ecma: 5,
-			compress: {
-				keep_fnames: true,
-				warnings: false,
-			},
-			mangle: {
-				keep_fnames: true,
-			},
-		},
-	});
-
-	if (getWebpackVersion() >= 4) {
+	/* istanbul ignore if */
+	if (isWebpack4) {
 		webpackConfig.mode = env;
-		webpackConfig.optimization = {
-			minimizer: [uglifier],
-		};
-	} else {
-		webpackConfig.plugins.unshift(uglifier);
 	}
 
 	if (config.webpackConfig) {
-		// if an extra entry is given it will be ignored
-		delete config.webpackConfig.entry;
-		// our config takes priority over the customizations
-		webpackConfig = mergeWebpackConfig(config.webpackConfig, webpackConfig, env);
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, existsVueCLI() ? 'vueCLI' : env);
 	}
 
 	webpackConfig = merge(webpackConfig, {
@@ -90,6 +68,7 @@ module.exports = function(config, env) {
 				// allows to use the compiler
 				// without this, cli will overload the alias and use runtime esm
 				vue$: 'vue/dist/vue.esm.js',
+				'@': path.resolve(__dirname, '../src'),
 			},
 		},
 		plugins: [
@@ -131,6 +110,31 @@ module.exports = function(config, env) {
 				),
 			],
 		});
+
+		const uglifier = new UglifyJSPlugin({
+			parallel: true,
+			cache: true,
+			uglifyOptions: {
+				ie8: false,
+				ecma: 5,
+				compress: {
+					keep_fnames: true,
+					warnings: false,
+				},
+				mangle: {
+					keep_fnames: true,
+				},
+			},
+		});
+
+		/* istanbul ignore if */
+		if (isWebpack4) {
+			webpackConfig.optimization = {
+				minimizer: [uglifier],
+			};
+		} else {
+			webpackConfig.plugins.unshift(uglifier);
+		}
 	} else {
 		webpackConfig = merge(webpackConfig, {
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')],

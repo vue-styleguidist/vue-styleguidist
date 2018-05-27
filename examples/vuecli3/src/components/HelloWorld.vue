@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+        <h1>{{ msg }}</h1>
     <p>
       For guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -56,22 +56,7 @@ a {
 }
 </style>
 
-<script>
-export default {
-  name: 'HelloWorld',
-	props: {
-    /**
-     * the message to display on top of the compon
-     */
-		msg: String,
-	},
-};
-</script>
-
 <docs>
-# links to the rest of the documentation.
-Please do not click on any of those links or you will be taken away from your localhost.
-But you can try editing the code at the bottom of the page.
 
 ```vue
 <HelloWorld msg="Example"/>

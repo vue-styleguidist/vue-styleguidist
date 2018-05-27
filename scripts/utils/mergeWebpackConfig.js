@@ -8,6 +8,7 @@ const IGNORE_SECTIONS_ENV = {
 	// For production builds, we'll ignore devtool settings to avoid
 	// source mapping bloat.
 	production: ['devtool'],
+	vueCLI: ['devtool', 'plugins']
 };
 
 const IGNORE_PLUGINS = [
