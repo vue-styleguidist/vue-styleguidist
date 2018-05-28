@@ -96,6 +96,7 @@
     "vue": ">=2.0.0"
   },
   "devDependencies": {
+    "@vue/cli-service": "3.0.0-beta.11",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.3",
@@ -148,6 +149,7 @@
     "start:navigation": "node bin/styleguidist.js server --config examples/navigation/styleguide.config.js",
     "start:customised": "node bin/styleguidist.js server --config examples/customised/styleguide.config.js",
     "start:sections": "node bin/styleguidist.js server --config examples/sections/styleguide.config.js",
+    "start:vuecli3": "node bin/styleguidist.js server --config examples/vuecli3/styleguide.config.js",
     "lint": "eslint . --cache --fix",
     "lint-staged": "lint-staged",
     "precompile": "rimraf lib/",
@@ -159,6 +161,7 @@
     "build:sections": "node bin/styleguidist.js build --config examples/sections/styleguide.config.js",
     "build:navigation": "node bin/styleguidist.js build --config examples/navigation/styleguide.config.js",
     "build:customised": "node bin/styleguidist.js build --config examples/customised/styleguide.config.js",
+    "build:vuecli3": "node bin/styleguidist.js build --config examples/vuecli3/styleguide.config.js",
     "publish": "npm run build",
     "prepare": "npm run compile",
     "test:browser:pre": "npm i --no-save puppeteer",
