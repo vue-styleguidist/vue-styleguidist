@@ -1,1 +1,2 @@
-examples/*/styleguide/
+examples/*/styleguide
+package.json
