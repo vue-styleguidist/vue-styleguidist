@@ -119,16 +119,21 @@
     "eslint-plugin-es5": "^1.2.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-vue": "^4.5.0",
     "file-loader": "^1.1.11",
+    "hash-sum": "^1.0.2",
     "husky": "^0.14.3",
+    "inquirer": "^5.2.0",
     "jest": "^22.4.3",
     "jest-serializer-html": "^5.0.0",
     "keymirror": "^0.1.1",
     "lint-staged": "^7.0.0",
+    "lru-cache": "^4.1.3",
     "prettier": "1.11.1",
     "raf": "^3.4.0",
     "react-test-renderer": "^16.2.0",
     "rimraf": "^2.6.2",
+    "semver": "^5.5.0",
     "strip-shebang": "^1.0.2",
     "url-loader": "^1.0.1",
     "webpack": "^4.4.1",
@@ -183,7 +188,8 @@
     "testPathIgnorePatterns": [
       "<rootDir>/lib/",
       "<rootDir>/examples/",
-      "<rootDir>/test/"
+      "<rootDir>/test/",
+      "<rootDir>/src/rsg-components"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/scripts/server.js",

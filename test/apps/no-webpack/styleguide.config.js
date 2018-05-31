@@ -1,4 +1,4 @@
 module.exports = {
-	title: 'React Style Guide Example',
+	title: 'Vue Style Guide Example',
 	components: './components/**/[A-Z]*.js',
 };

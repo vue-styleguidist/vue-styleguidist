@@ -1,5 +1,3 @@
-'use strict';
-
 const hash = require('hash-sum');
 const compiler = require('vue-template-compiler');
 const cache = require('lru-cache')(100);

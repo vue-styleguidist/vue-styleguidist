@@ -1,1 +1,1 @@
-export { default } from './SlotsTableRenderer.js';
+export { default } from './SlotsTableRenderer';

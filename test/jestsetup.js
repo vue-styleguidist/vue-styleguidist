@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
-import { shallow, render, mount } from 'enzyme';
+import { configure, shallow, render, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import keymirror from 'keymirror';
 import * as theme from '../src/styles/theme';
 
@@ -8,6 +9,8 @@ import * as theme from '../src/styles/theme';
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
+
+configure({ adapter: new Adapter() });
 
 // Get class names from styles function
 global.classes = styles => keymirror(styles(theme));

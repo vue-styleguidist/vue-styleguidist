@@ -6,9 +6,10 @@ const config = {
 	getExampleFilename: componentpath => path.join(path.dirname(componentpath), 'Readme.md'),
 	getComponentPathLine: componentpath => componentpath,
 };
+xdescribe('processComponent', () => {
+	it('processComponent() should return an object for section with content', () => {
+		const result = processComponent('pizza.js', config);
 
-it('processComponent() should return an object for section with content', () => {
-	const result = processComponent('pizza.js', config);
-
-	expect(result).toMatchSnapshot();
+		expect(result).toMatchSnapshot();
+	});
 });

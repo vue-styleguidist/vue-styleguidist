@@ -1,7 +1,7 @@
 // To make a screenshot: https://github.com/ariya/phantomjs/blob/master/examples/rasterize.js
 // phantomjs rasterize.js http://localhost:6060/ output.png
 
-/* eslint-disable no-console, no-multi-assign */
+/* eslint-disable */
 /* globals phantom:false */
 
 const system = require('system');

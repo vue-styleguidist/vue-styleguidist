@@ -11,6 +11,7 @@ const absolutize = filePath => path.resolve(process.cwd(), filePath);
  * Fixed location for Create React App or webpack.config.js in the root directory.
  * Returns false if config not found.
  *
+ * @param {function} resolve function used to resolve the cli webpack
  * @return {string|boolean}
  */
 module.exports = function findUserWebpackConfig(resolve) {

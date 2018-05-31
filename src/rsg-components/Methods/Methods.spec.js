@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { parse } from 'react-docgen';
 import MethodsRenderer, { columns } from './MethodsRenderer';
