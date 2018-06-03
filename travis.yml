@@ -23,10 +23,6 @@ stages:
   - lint
   - test
   - integration
-  - coverage
-  - release
-  - name: documentation
-    if: branch = master
 jobs:
   include:
     - stage: lint
