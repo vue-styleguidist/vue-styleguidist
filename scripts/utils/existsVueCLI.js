@@ -5,8 +5,9 @@
  */
 module.exports = function existsVueCLI() {
 	try {
+		// eslint-disable-next-line import/no-unresolved
 		require('@vue/cli-service/package.json');
-		return true
+		return true;
 	} catch (err) {
 		return false;
 	}

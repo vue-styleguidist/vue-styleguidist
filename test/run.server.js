@@ -11,14 +11,21 @@ styleguidist({
 		module: {
 			rules: [
 				{
-					test: /\.jsx?$/,
-					include: dir,
+					test: /\.vue$/,
+					loader: 'vue-loader',
+				},
+				{
+					test: /\.js?$/,
+					exclude: /node_modules/,
 					loader: 'babel-loader',
 				},
 				{
 					test: /\.css$/,
-					include: dir,
-					loader: 'style-loader!css-loader?modules',
+					use: ['style-loader', 'css-loader', 'sass-loader'],
+				},
+				{
+					test: /\.scss$/,
+					use: ['style-loader', 'css-loader', 'sass-loader'],
 				},
 			],
 		},
@@ -27,6 +34,7 @@ styleguidist({
 		info: console.log,
 		warn: message => console.warn(`Warning: ${message}`),
 	},
+	serverPort: 8082,
 }).server((err, config) => {
 	if (err) {
 		console.log(err);
