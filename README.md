@@ -7,6 +7,10 @@
   <a href="https://www.npmjs.com/package/vue-styleguidist">
     <img src="https://img.shields.io/npm/dt/vue-styleguidist.svg" alt="downloads">
   </a>
+  
+  <a href="https://travis-ci.org/styleguidist/react-styleguidist">
+    <img src="https://travis-ci.org/vue-styleguidist/vue-styleguidist.svg" alt="downloads">
+  </a>
   <a href="https://npmjs.org/package/vue-styleguidist" title="View this project on NPM">
     <img src="https://img.shields.io/npm/dm/vue-styleguidist.svg" alt="NPM downloads" />
   </a>
