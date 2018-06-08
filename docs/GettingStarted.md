@@ -16,6 +16,8 @@ npm install --save-dev vue-styleguidist
 
 ## 2. Configure your style guide
 
+If you’re using [Vue-CLI 3.x](https://github.com/vuejs/vue-cli) you can skip this step.
+
 [Point Styleguidist to your Vue components](Components.md) and [tell how to load your code](Webpack.md).
 
 ## 3. Add npm scripts for convenience
