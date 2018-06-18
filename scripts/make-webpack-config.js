@@ -57,7 +57,11 @@ module.exports = function(config, env) {
 	}
 
 	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, existsVueCLI() ? 'vueCLI' : env);
+		webpackConfig = mergeWebpackConfig(
+			webpackConfig,
+			config.webpackConfig,
+			existsVueCLI() ? 'vueCLI' : env
+		);
 	}
 
 	webpackConfig = merge(webpackConfig, {
@@ -68,7 +72,6 @@ module.exports = function(config, env) {
 				// allows to use the compiler
 				// without this, cli will overload the alias and use runtime esm
 				vue$: 'vue/dist/vue.esm.js',
-				'@': path.resolve(__dirname, '../src'),
 			},
 		},
 		plugins: [
@@ -85,7 +88,7 @@ module.exports = function(config, env) {
 	});
 
 	// To have the hot-reload work on vue-styleguide
-	// the HMR has to be loaded after the html plugin. 
+	// the HMR has to be loaded after the html plugin.
 	// Hence this piece added last to the list of plugins.
 	if (isProd) {
 		webpackConfig = merge(webpackConfig, {
