@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-basic",
   "description": "Vue styleguidist basic example",
-  "version": "1.7.9",
+  "version": "1.7.10",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -16,7 +16,7 @@
     "dog-names": "^1.0.2",
     "vue": "^2.5.16",
     "vue-i18n": "^7.6.0",
-    "vue-styleguidist": "1.7.9",
+    "vue-styleguidist": "1.7.10",
     "vuetify": "^1.0.17"
   },
   "scripts": {
