@@ -31,6 +31,18 @@ const pkgExamples = [
 		url: './examples/vuex/package.json',
 		json: require('./examples/vuex/package.json'),
 	},
+	{
+		url: './examples/with-sass-loader/package.json',
+		json: require('./examples/with-sass-loader/package.json'),
+	},
+	{
+		url: './examples/vuetify/package.json',
+		json: require('./examples/vuetify/package.json'),
+	},
+	{
+		url: './examples/vuecli3/package.json',
+		json: require('./examples/vuecli3/package.json'),
+	},
 ];
 
 const curVersion = pkg.version;

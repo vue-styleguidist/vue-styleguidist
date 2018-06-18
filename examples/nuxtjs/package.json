@@ -1,23 +1,23 @@
 {
-	"name": "styleguide",
-	"version": "1.6.1",
-	"description": "Nuxt.js project",
-	"author": "Knovour <knovour@gmail.com>",
-	"private": true,
-	"scripts": {
-		"dev": "nuxt",
-		"build": "nuxt build",
-		"start": "nuxt start",
-		"generate": "nuxt generate",
-		"styleguide": "vue-styleguidist server",
-		"styleguide:build": "vue-styleguidist build"
-	},
-	"dependencies": {
-		"nuxt": "^1.0.0-rc11",
-		"vue-styleguidist": "1.6.1",
-		"vue-webpack-loaders": "^1.0.8"
-	},
-	"devDependencies": {
-		"babel-preset-react": "^6.24.1"
-	}
+  "name": "styleguide",
+  "version": "1.7.9",
+  "description": "Nuxt.js project",
+  "author": "Knovour <knovour@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
+  },
+  "dependencies": {
+    "nuxt": "^1.0.0-rc11",
+    "vue-styleguidist": "1.7.9",
+    "vue-webpack-loaders": "^1.0.8"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.24.1"
+  }
 }
