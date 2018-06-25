@@ -9,6 +9,7 @@ const merge = require('webpack-merge');
 const forEach = require('lodash/forEach');
 const isFunction = require('lodash/isFunction');
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
+const mergeWebpackConfigVueCLI = require('./utils/mergeWebpackConfigVueCLI');
 const StyleguidistOptionsPlugin = require('./utils/StyleguidistOptionsPlugin');
 const getWebpackVersion = require('./utils/getWebpackVersion');
 const existsVueCLI = require('./utils/existsVueCLI');
@@ -57,11 +58,11 @@ module.exports = function(config, env) {
 	}
 
 	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(
-			webpackConfig,
-			config.webpackConfig,
-			existsVueCLI() ? 'vueCLI' : env
-		);
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
+
+		if (existsVueCLI()) {
+			webpackConfig = mergeWebpackConfigVueCLI(webpackConfig);
+		}
 	}
 
 	webpackConfig = merge(webpackConfig, {
