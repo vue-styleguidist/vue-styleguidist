@@ -1,4 +1,5 @@
 const path = require('path');
+const vueLoader = require('vue-loader');
 
 module.exports = {
 	title: 'Style guide example',
@@ -79,6 +80,9 @@ module.exports = {
 				},
 			],
 		},
+		plugins: [
+			new vueLoader.VueLoaderPlugin()
+		],
 		resolve: {
 			alias: {
 				// Make sure the example uses the local version of react-styleguidist

@@ -1,4 +1,5 @@
 const path = require('path');
+const vueLoader = require('vue-loader');
 
 module.exports = {
 	title: 'Vue Style Guide Example',
@@ -61,6 +62,9 @@ module.exports = {
 				},
 			],
 		},
+		plugins: [
+			new vueLoader.VueLoaderPlugin()
+		],
 		performance:
 			env === 'development'
 				? false

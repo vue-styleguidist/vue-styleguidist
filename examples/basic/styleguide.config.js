@@ -1,3 +1,5 @@
+const vueLoader = require('vue-loader');
+
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
@@ -26,6 +28,9 @@ module.exports = {
 				},
 			],
 		},
+		plugins: [
+			new vueLoader.VueLoaderPlugin()
+		]
 	},
 	showUsage: true,
 	showCode: true,

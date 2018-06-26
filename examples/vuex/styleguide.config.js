@@ -1,3 +1,5 @@
+const vueLoader = require('vue-loader');
+
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	webpackConfig: {
@@ -22,6 +24,9 @@ module.exports = {
 				},
 			],
 		},
+		plugins: [
+			new vueLoader.VueLoaderPlugin()
+		],
 	},
 	showUsage: true,
 	vuex: './src/store/index',
