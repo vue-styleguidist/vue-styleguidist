@@ -20,17 +20,11 @@ module.exports = {
 				},
 				{
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
-				},
-				{
-					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
+					use: ['style-loader', 'css-loader'],
 				},
 			],
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin()
-		]
+		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
 	showUsage: true,
 	showCode: true,
