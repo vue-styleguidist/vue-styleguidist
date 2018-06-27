@@ -23,6 +23,18 @@ module.exports = function mergeWebpackConfigVueCLI(baseConfig) {
 					test: rule.test,
 					use: rule.use.filter(use => use.loader === 'vue-loader'),
 				};
+			} else if (rule.oneOf) {
+				// Also, avoid to use "mini-css-extract-plugin" loader, they should be filtered
+				// Because causes errors when tries to build
+				return {
+					...rule,
+					oneOf: rule.oneOf.map(oneRule => {
+						return {
+							...oneRule,
+							use: oneRule.use.filter(use => use.loader.indexOf('mini-css-extract-plugin') === -1),
+						};
+					}),
+				};
 			}
 			return rule;
 		});
