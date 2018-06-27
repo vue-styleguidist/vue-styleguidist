@@ -16,10 +16,6 @@ const pkgExamples = [
 		json: require('./examples/navigation/package.json'),
 	},
 	{
-		url: './examples/nuxtjs/package.json',
-		json: require('./examples/nuxtjs/package.json'),
-	},
-	{
 		url: './examples/sections/package.json',
 		json: require('./examples/sections/package.json'),
 	},
