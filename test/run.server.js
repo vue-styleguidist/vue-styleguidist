@@ -1,4 +1,5 @@
 const path = require('path');
+const vueLoader = require('vue-loader');
 const styleguidist = require('../scripts');
 
 /* eslint-disable no-console */
@@ -29,6 +30,7 @@ styleguidist({
 				},
 			],
 		},
+		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
 	logger: {
 		info: console.log,
