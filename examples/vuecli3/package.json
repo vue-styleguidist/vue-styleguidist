@@ -14,7 +14,8 @@
     "vue-styleguidist": "1.7.12"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.0.0-rc.3",
+    "@vue/cli-plugin-babel": "^3.0.0-rc.5",
+    "@vue/cli-service": "^3.0.0-rc.5",
     "vue-template-compiler": "^2.5.16"
   },
   "postcss": {
