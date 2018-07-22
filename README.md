@@ -17,6 +17,9 @@
   <a href="https://www.npmjs.com/package/vue-styleguidist">
     <img src="https://img.shields.io/npm/l/vue-styleguidist.svg" alt="License">
   </a>
+  <a href="https://gitter.im/vue-style/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge" title="Join the chat at https://gitter.im/vue-style/Lobby">
+    <img src="https://badges.gitter.im/vue-style/Lobby.svg" alt="License">
+  </a>
   </span>
 
 **Style guide — documentation — component workbench**
@@ -70,6 +73,6 @@ The change log can be found on the [Releases page](https://github.com/vue-styleg
 [Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc92), [react-styleguidist contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors) and [vue-styleguidist contributors](https://github.com/vue-styleguidist/vue-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist by the amazing tool.
 
 I work in this project because I like the open source community and learn new things, however, also you can give me a cup of coffee :)
-[![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc) [![Join the chat at https://gitter.im/vue-style/Lobby](https://badges.gitter.im/vue-style/Lobby.svg)](https://gitter.im/vue-style/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc) 
 
 MIT License
