@@ -1,8 +1,15 @@
 module.exports = {
-	components: 'src/components/**/[A-Z]*.vue',
-	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
-	},
-	showUsage: true,
-	showCode: true,
-};
+  // set your styleguidist configuration here
+  title: 'Default Style Guide',
+  defaultExample: true
+  // components: 'src/components/**/[A-Z]*.vue',
+  // sections: [
+  //   {
+  //     name: 'First Section',
+  //     components: 'src/components/**/[A-Z]*.vue'
+  //   }
+  // ],
+  // webpackConfig: {
+  //   // custom config goes here
+  // }
+}

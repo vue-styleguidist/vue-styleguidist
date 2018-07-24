@@ -1,3 +1,0 @@
-```vue
-<HelloWorld msg="Example"/>
-```
