@@ -1,6 +1,5 @@
 const vueLoader = require('vue-loader');
 const mergeBase = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const mergeWebpackConfig = require('./mergeWebpackConfig');
 
 module.exports = function mergeWebpackConfigVueCLI(baseConfig, userConfig, env) {
@@ -8,6 +7,8 @@ module.exports = function mergeWebpackConfigVueCLI(baseConfig, userConfig, env) 
 	// but the new version of vue-loader need to add the plugin VueLoaderPlugin to work
 	// so, to add VueLoaderPlugin again
 	if (vueLoader.VueLoaderPlugin) {
+		// mini-css-extract-plugin causes error in webpack@3
+		const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 		const filterWebpackUserConfig = mergeWebpackConfig({}, userConfig, env);
 		const webpackConfig = mergeWebpackConfig(
 			mergeBase(baseConfig, {
