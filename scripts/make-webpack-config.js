@@ -58,10 +58,10 @@ module.exports = function(config, env) {
 	}
 
 	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
-
 		if (existsVueCLI()) {
-			webpackConfig = mergeWebpackConfigVueCLI(webpackConfig);
+			webpackConfig = mergeWebpackConfigVueCLI(webpackConfig, config.webpackConfig, env);
+		} else {
+			webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
 		}
 	}
 

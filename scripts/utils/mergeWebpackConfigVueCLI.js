@@ -1,44 +1,42 @@
 const vueLoader = require('vue-loader');
+const mergeBase = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const mergeWebpackConfig = require('./mergeWebpackConfig');
 
-module.exports = function mergeWebpackConfigVueCLI(baseConfig) {
+module.exports = function mergeWebpackConfigVueCLI(baseConfig, userConfig, env) {
 	// When brings the vue-cli webpackcongif should remove his plugins,
 	// but the new version of vue-loader need to add the plugin VueLoaderPlugin to work
 	// so, to add VueLoaderPlugin again
 	if (vueLoader.VueLoaderPlugin) {
-		const newWebpackConfig = mergeWebpackConfig(
-			{
-				plugins: [new vueLoader.VueLoaderPlugin()],
-			},
-			baseConfig,
+		const filterWebpackUserConfig = mergeWebpackConfig({}, userConfig, env);
+		const webpackConfig = mergeWebpackConfig(
+			mergeBase(baseConfig, {
+				plugins: [
+					new vueLoader.VueLoaderPlugin(),
+					new MiniCssExtractPlugin({
+						chunkFilename: 'css/[name].[contenthash:8].css',
+						filename: 'css/[name].[contenthash:8].css',
+					}),
+				],
+			}),
+			filterWebpackUserConfig,
 			'removePlugins'
 		);
-		const rules = newWebpackConfig.module.rules;
+		const rules = webpackConfig.module.rules;
 
 		// If there is cache-loader inside .vue rule, it should be removed
 		// the new version of vue-loader generates error with cache-loader
-		newWebpackConfig.module.rules = rules.map(rule => {
+		webpackConfig.module.rules = rules.map(rule => {
 			if (rule.test && rule.test.test('.vue')) {
 				return {
 					test: rule.test,
 					use: rule.use.filter(use => use.loader === 'vue-loader'),
 				};
-			} else if (rule.oneOf) {
-				// Also, avoid to use "mini-css-extract-plugin" loader, they should be filtered
-				// Because causes errors when tries to build
-				return {
-					...rule,
-					oneOf: rule.oneOf.map(oneRule => {
-						return {
-							...oneRule,
-							use: oneRule.use.filter(use => use.loader.indexOf('mini-css-extract-plugin') === -1),
-						};
-					}),
-				};
 			}
 			return rule;
 		});
-		return newWebpackConfig;
+
+		return webpackConfig;
 	}
 	return baseConfig;
 };
