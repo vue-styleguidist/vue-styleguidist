@@ -1,22 +1,21 @@
-# Vue Styleguidist style guide using the vue cli 3.0
+# vuecli3
 
-How to start locally:
-
+## Project setup
 ```
-git clone https://github.com/vue-styleguidist/vue-styleguidist.git
-cd vue-styleguidist/examples/vue
-npm install
-npm run styleguide
+yarn install
 ```
 
-Then open [http://localhost:6060](http://localhost:6060) in your browser.
-
-You coule also do
-
+### Compiles and hot-reloads for development
 ```
-vue create myAppVue --default
-cd myAppVue
-npm install vue-styleguidist
+yarn run serve
 ```
 
-Then checkout the `styleguide.config.js` and the `package.json` to get inspired for configuration
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
