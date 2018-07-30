@@ -133,8 +133,11 @@ Enable [skipComponentsWithoutExample](Configuration.md#skipcomponentswithoutexam
 Require these components in your examples:
 
 ```jsx
-const Button = require('../common/Button')
-;<Button>Push Me Tender</Button>
+const Vue = require('vue').default
+const Button = require('./Button.vue').default
+Vue.component('Button', Button)
+
+<Button>Push Me</Button>
 ```
 
 ## How to add custom JavaScript and CSS or polyfills?
@@ -198,33 +201,6 @@ module.exports = {
 
 You can replace any Styleguidist Vue component. But in most of the cases you’ll want to replace `*Renderer` components — all HTML is rendered by these components. For example `ReactComponentRenderer`, `ComponentsListRenderer`, `PropsRenderer`, etc. — [check the source](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/src/rsg-components) to see what components are available.
 
-There’s also a special wrapper component — `Wrapper` — that wraps every example component. By default it just renders `children` as is but you can use it to provide a custom logic.
-
-For example you can replace the `Wrapper` component to wrap any example in the [React Intl’s](https://github.com/yahoo/react-intl) provider component. You can’t wrap the whole style guide because every example is compiled separately in a browser.
-
-```javascript
-// styleguide.config.js
-const path = require('path')
-module.exports = {
-  styleguideComponents: {
-    Wrapper: path.join(__dirname, 'lib/styleguide/Wrapper')
-  }
-}
-```
-
-```jsx
-// lib/styleguide/Wrapper.js
-import React, { Component } from 'react'
-import { IntlProvider } from 'react-intl'
-export default class Wrapper extends Component {
-  render() {
-    return (
-      <IntlProvider locale="en">{this.props.children}</IntlProvider>
-    )
-  }
-}
-```
-
 You can replace the `StyleGuideRenderer` component like this:
 
 ```javascript
@@ -236,6 +212,22 @@ module.exports = {
       __dirname,
       'lib/styleguide/StyleGuideRenderer'
     )
+  },
+  webpackConfig: {
+    module: {
+      rules: [
+        {
+          test: /\.js?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          query: {
+            cacheDirectory: true,
+            presets: ['react', 'env']
+          }
+        }
+        /* ... */
+      ]
+    }
   }
 }
 ```
