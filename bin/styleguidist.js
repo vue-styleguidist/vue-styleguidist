@@ -8,11 +8,11 @@ const stringify = require('q-i').stringify;
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const webpackDevServerUtils = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
+const setupLogger = require('react-styleguidist/scripts/logger');
+const StyleguidistError = require('react-styleguidist/scripts/utils/error');
 const logger = require('glogg')('rsg');
 const getConfig = require('../scripts/config');
-const setupLogger = require('../scripts/logger');
 const consts = require('../scripts/consts');
-const StyleguidistError = require('../scripts/utils/error');
 
 const argv = minimist(process.argv.slice(2));
 const command = argv._[0];

@@ -1,5 +1,5 @@
 import webpack, { validate } from 'webpack';
-import getWebpackVersion from '../utils/getWebpackVersion';
+import getWebpackVersion from 'react-styleguidist/scripts/utils/getWebpackVersion';
 import makeWebpackConfig from '../make-webpack-config';
 
 const theme = 'hl-theme';

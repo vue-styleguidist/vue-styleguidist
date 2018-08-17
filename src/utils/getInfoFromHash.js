@@ -1,5 +1,5 @@
 import isNaN from 'lodash/isNaN';
-import { hasInHash, getHashAsArray } from './handleHash';
+import { hasInHash, getHashAsArray } from 'react-styleguidist/lib/utils/handleHash';
 
 function filterNumbers(item) {
 	return isNaN(parseInt(item, 10)) && item !== '';

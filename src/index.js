@@ -1,9 +1,9 @@
 /* eslint-disable import/first */
-import './polyfills';
+import 'react-styleguidist/lib/polyfills';
 import './styles';
 import ReactDOM from 'react-dom';
+import { getParameterByName, hasInHash } from 'react-styleguidist/lib/utils/handleHash';
 import renderStyleguide from './utils/renderStyleguide';
-import { getParameterByName, hasInHash } from './utils/handleHash';
 
 // Examples code revision to rerender only code examples (not the whole page) when code changes
 // eslint-disable-next-line no-unused-vars

@@ -5,7 +5,7 @@ const toAst = require('to-ast');
 const logger = require('glogg')('rsg');
 const getExamples = require('./utils/getExamples');
 const getProps = require('./utils/getProps');
-const defaultSortProps = require('./utils/sortProps');
+const defaultSortProps = require('react-styleguidist/loaders/utils/sortProps');
 const consts = require('../scripts/consts');
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.';

@@ -8,10 +8,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const merge = require('webpack-merge');
 const forEach = require('lodash/forEach');
 const isFunction = require('lodash/isFunction');
+const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin');
+const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVersion');
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
 const mergeWebpackConfigVueCLI = require('./utils/mergeWebpackConfigVueCLI');
-const StyleguidistOptionsPlugin = require('./utils/StyleguidistOptionsPlugin');
-const getWebpackVersion = require('./utils/getWebpackVersion');
 const existsVueCLI = require('./utils/existsVueCLI');
 
 const RENDERER_REGEXP = /Renderer$/;

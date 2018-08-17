@@ -1,5 +1,5 @@
-import getFilterRegExp from './getFilterRegExp';
-import filterComponentsByName from './filterComponentsByName';
+import getFilterRegExp from 'react-styleguidist/lib/utils/getFilterRegExp';
+import filterComponentsByName from 'react-styleguidist/lib/utils/filterComponentsByName';
 
 /**
  * Fuzzy filters sections by section or component name.

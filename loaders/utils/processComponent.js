@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const getNameFromFilePath = require('./getNameFromFilePath');
-const requireIt = require('./requireIt');
-const slugger = require('./slugger');
+const getNameFromFilePath = require('react-styleguidist/loaders/utils/getNameFromFilePath');
+const requireIt = require('react-styleguidist/loaders/utils/requireIt');
+const slugger = require('react-styleguidist/loaders/utils/slugger');
 const logger = require('glogg')('rsg');
 
 const vueDocLoader = path.resolve(__dirname, '../vuedoc-loader.js');

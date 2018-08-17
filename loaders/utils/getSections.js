@@ -3,10 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
-const requireIt = require('./requireIt');
-const getComponentFiles = require('./getComponentFiles');
+const requireIt = require('react-styleguidist/loaders/utils/requireIt');
+const getComponentFiles = require('react-styleguidist/loaders/utils/getComponentFiles');
+const slugger = require('react-styleguidist/loaders/utils/slugger');
 const getComponents = require('./getComponents');
-const slugger = require('./slugger');
 
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js');
 
