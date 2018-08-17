@@ -1,4 +1,9 @@
 import isNaN from 'lodash/isNaN';
+import { hasInHash, getHashAsArray } from './handleHash';
+
+function filterNumbers(item) {
+	return isNaN(parseInt(item, 10)) && item !== '';
+}
 
 /**
  * Returns an object containing component/section name and, optionally, an example index
@@ -10,15 +15,14 @@ import isNaN from 'lodash/isNaN';
  * @returns {object}
  */
 export default function getInfoFromHash(hash) {
-	if (hash.substr(0, 3) === '#!/') {
-		let path = hash.substr(3);
-		if (path.indexOf('?id') > -1) {
-			path = path.replace(path.slice(path.indexOf('?id')), '');
-		}
-		const tokens = path.split('/');
-		const index = parseInt(tokens[1], 10);
+	const shouldIsolate = hasInHash(hash, '#!/');
+	if (shouldIsolate || hasInHash(hash, '#/')) {
+		const hashArray = getHashAsArray(hash, shouldIsolate ? '#!/' : '#/');
+		const index = parseInt(hashArray[hashArray.length - 1], 10);
 		return {
-			targetName: decodeURIComponent(tokens[0]),
+			isolate: shouldIsolate,
+			hashArray: hashArray.filter(filterNumbers),
+			targetName: hashArray[0],
 			targetIndex: isNaN(index) ? undefined : index,
 		};
 	}

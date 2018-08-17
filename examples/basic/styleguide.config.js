@@ -6,6 +6,7 @@ module.exports = {
 	ribbon: {
 		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
 	},
+	version: '1.1.1',
 	webpackConfig: {
 		module: {
 			rules: [
@@ -26,6 +27,6 @@ module.exports = {
 		},
 		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
-	showUsage: true,
-	showCode: true,
+	usageMode: 'expand',
+	exampleMode: 'expand',
 };

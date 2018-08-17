@@ -63,16 +63,16 @@ const extractImports = function(code) {
 	return imports + '\n';
 };
 
-module.exports.isSingleFileComponent = function isSingleFileComponent(code) {
+export function isSingleFileComponent(code) {
 	try {
 		const parts = compiler.parseComponent(code, { pad: 'line' });
 		return parts.template !== null;
 	} catch (err) {
 		return false;
 	}
-};
+}
 
-module.exports.transformSingleFileComponent = function transformSingleFileComponent(code) {
+export function transformSingleFileComponent(code) {
 	const parts = getSingleFileComponentParts(code);
 	const templateAdded = injectTemplateAndParseExport(parts);
 	return {
@@ -82,4 +82,4 @@ module.exports.transformSingleFileComponent = function transformSingleFileCompon
 		`,
 		style: buildStyles(parts.styles),
 	};
-};
+}

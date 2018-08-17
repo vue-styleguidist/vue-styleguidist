@@ -2,13 +2,9 @@ import isFinite from 'lodash/isFinite';
 import filterComponentExamples from './filterComponentExamples';
 import filterComponentsInSectionsByExactName from './filterComponentsInSectionsByExactName';
 import filterSectionExamples from './filterSectionExamples';
-import filterSectionByLevel from './filterSectionByLevel';
 import findSection from './findSection';
-import findSectionForSlug from './findSectionForSlug';
 import getInfoFromHash from './getInfoFromHash';
-import getIdParam from './getIdParam';
 import { DisplayModes } from '../consts';
-import getUrl from './getUrl';
 
 /**
  * Return sections / components / examples to show on a screen according to a current route.
@@ -19,53 +15,99 @@ import getUrl from './getUrl';
  *
  * @param {object} sections
  * @param {string} hash
- * @param {boolean} navigation
+ * @param {boolean} pagePerSection
  * @returns {object}
  */
-export default function getRouteData(sections, hash, navigation) {
+export default function getRouteData(sections, hash, pagePerSection) {
 	// Parse URL hash to check if the components list must be filtered
+	const infoFromHash = getInfoFromHash(hash, pagePerSection);
+
+	// Name of the filtered component/section to show isolated (/#!/Button → Button)
+	let { targetName, hashArray } = infoFromHash;
+
 	const {
-		// Name of the filtered component/section to show isolated (/#!/Button → Button)
-		targetName,
 		// Index of the fenced block example of the filtered component isolate (/#!/Button/1 → 1)
 		targetIndex,
-	} = getInfoFromHash(hash);
-	const id = getIdParam();
-	let displayMode = DisplayModes.all;
+		isolate,
+	} = infoFromHash;
 
-	if (navigation && !targetName && sections[0]) {
-		const name = sections[0].name;
-		window.location.href = getUrl({ name, isolated: true });
+	let displayMode = isolate ? DisplayModes.example : DisplayModes.all;
+
+	if (pagePerSection && !targetName && sections[0]) {
+		// For default takes the first section when pagePerSection enabled
+		targetName = sections[0].name;
+		hashArray = [targetName];
 	}
 
-	// Filter the requested component if required
 	if (targetName) {
-		const filteredComponents = filterComponentsInSectionsByExactName(sections, targetName);
-		if (filteredComponents.length) {
-			sections = [{ components: filteredComponents }];
-			displayMode = DisplayModes.component;
-		} else {
-			let section;
+		let filteredSections;
 
-			section = findSection(sections, targetName);
-			if (section && navigation && !id) {
-				section = filterSectionByLevel(section);
-			} else if (section && navigation && id) {
-				const sectionSlug = findSectionForSlug(section, id);
-				if (sectionSlug) {
-					section = sectionSlug;
+		if (pagePerSection) {
+			// hashArray could be an array as ["Documentation", "Files", "Button"]
+			// each hashArray's element represent each section name with the same deep
+			// so it should be filter each section to trying to find each one of array on the same deep
+			hashArray.forEach((hashName, index) => {
+				// Filter the requested component if required but only on the first depth
+				// so in the next time of iteration, it will be trying to filter only on the second depth and so on
+				filteredSections = filterComponentsInSectionsByExactName(sections, hashName, isolate);
+
+				// If filteredSections exists, its because is an array of an component
+				// else it is an array of sections and depending his sectionDepth
+				// his children could be filtered or not
+				if (filteredSections.length) {
+					sections = filteredSections;
 				} else {
-					window.location.href = getUrl({ name, isolated: true });
+					let section = findSection(sections, hashName);
+					if (section) {
+						// Only if hashName is the last of hashArray his children should be filtered
+						// because else there are possibilities to keep on filtering to try find the next section
+						const isLastHashName = !hashArray[index + 1];
+
+						// When sectionDepth is bigger than 0, their children should be filtered
+						const shouldFilterTheirChildren = section.sectionDepth > 0 && isLastHashName;
+
+						if (shouldFilterTheirChildren) {
+							// Filter his sections and components
+							section = {
+								...section,
+								sections: [],
+								components: [],
+							};
+						}
+						sections = [section];
+					} else {
+						sections = [];
+					}
 				}
+			});
+			if (!sections.length) {
+				displayMode = DisplayModes.notFound;
 			}
-			sections = section ? [section] : [];
-			displayMode = DisplayModes.section;
+			// The targetName takes the last of hashArray
+			targetName = hashArray[hashArray.length - 1];
+		} else {
+			// Filter the requested component if required
+			filteredSections = filterComponentsInSectionsByExactName(sections, targetName, true);
+			if (filteredSections.length) {
+				sections = filteredSections;
+				displayMode = DisplayModes.component;
+			} else {
+				const section = findSection(sections, targetName);
+				sections = section ? [section] : [];
+				displayMode = DisplayModes.section;
+			}
 		}
 
 		// If a single component or section is filtered and a fenced block index is specified hide all other examples
 		if (isFinite(targetIndex)) {
-			if (filteredComponents.length === 1) {
-				sections = [{ components: [filterComponentExamples(filteredComponents[0], targetIndex)] }];
+			if (filteredSections.length === 1) {
+				const filteredComponents = filteredSections[0].components;
+				sections = [
+					{
+						...filteredSections[0],
+						components: [filterComponentExamples(filteredComponents[0], targetIndex)],
+					},
+				];
 				displayMode = DisplayModes.example;
 			} else if (sections.length === 1) {
 				sections = [filterSectionExamples(sections[0], targetIndex)];

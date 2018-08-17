@@ -34,7 +34,7 @@ const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
 });
 
 export function ComponentsListRenderer({ classes, items }) {
-	items = items.filter(item => item.name);
+	items = items.filter(item => item.visibleName);
 
 	if (!items.length) {
 		return null;
@@ -42,13 +42,13 @@ export function ComponentsListRenderer({ classes, items }) {
 
 	return (
 		<ul className={classes.list}>
-			{items.map(({ heading, name, href, content }) => (
+			{items.map(({ heading, visibleName, href, content }) => (
 				<li
 					className={cx(classes.item, (!content || !content.props.items.length) && classes.isChild)}
-					key={name}
+					key={href}
 				>
 					<Link className={cx(heading && classes.heading)} href={href}>
-						{name}
+						{visibleName}
 					</Link>
 					{content}
 				</li>
@@ -60,7 +60,6 @@ export function ComponentsListRenderer({ classes, items }) {
 ComponentsListRenderer.propTypes = {
 	items: PropTypes.array.isRequired,
 	classes: PropTypes.object.isRequired,
-	useIsolatedLinks: PropTypes.bool,
 };
 
 export default Styled(styles)(ComponentsListRenderer);

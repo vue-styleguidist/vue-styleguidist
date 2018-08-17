@@ -42,10 +42,8 @@ module.exports = {
 				},
 			],
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin()
-		],
+		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
-	showUsage: true,
-	showCode: true,
+	usageMode: 'expand',
+	exampleMode: 'expand',
 };

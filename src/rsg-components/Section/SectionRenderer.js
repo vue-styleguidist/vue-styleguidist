@@ -18,24 +18,19 @@ export function SectionRenderer(allProps) {
 		content,
 		components,
 		sections,
-		collection,
 		depth,
 		description,
-		nameParent,
-		level,
+		pagePerSection,
 	} = allProps;
 
 	return (
 		<section className={classes.root}>
 			{name && (
 				<SectionHeading
-					nameParent={nameParent}
-					name={name}
-					level={level}
 					depth={depth}
 					id={slug}
-					collection={collection}
 					slotName="sectionToolbar"
+					pagePerSection={pagePerSection}
 					slotProps={allProps}
 				>
 					{name}
@@ -52,8 +47,6 @@ export function SectionRenderer(allProps) {
 SectionRenderer.propTypes = {
 	classes: PropTypes.object.isRequired,
 	name: PropTypes.string,
-	nameParent: PropTypes.string,
-	level: PropTypes.number,
 	description: PropTypes.string,
 	slug: PropTypes.string,
 	filepath: PropTypes.string,
@@ -61,8 +54,8 @@ SectionRenderer.propTypes = {
 	components: PropTypes.node,
 	sections: PropTypes.node,
 	isolated: PropTypes.bool,
-	collection: PropTypes.object,
 	depth: PropTypes.number.isRequired,
+	pagePerSection: PropTypes.bool,
 };
 
 export default Styled(styles)(SectionRenderer);

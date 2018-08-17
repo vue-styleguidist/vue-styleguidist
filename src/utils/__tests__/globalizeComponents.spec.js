@@ -5,7 +5,7 @@ afterEach(() => {
 	delete global.Bar;
 });
 
-xdescribe('globalizeComponents', () => {
+describe('globalizeComponents', () => {
 	it('should set all components’ modules as a global variables', () => {
 		const globalsCount = Object.keys(global).length;
 		globalizeComponents([

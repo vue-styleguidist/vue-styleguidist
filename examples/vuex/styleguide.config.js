@@ -24,10 +24,8 @@ module.exports = {
 				},
 			],
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin()
-		],
+		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
-	showUsage: true,
+	usageMode: 'expand',
 	vuex: './src/store/index',
 };

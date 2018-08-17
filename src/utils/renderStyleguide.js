@@ -29,11 +29,12 @@ export default function renderStyleguide(
 	// all components accessible to all examples
 	globalizeComponents(allSections);
 
-	const { title, navigation } = styleguide.config;
-	const { sections, displayMode } = getRouteData(allSections, loc.hash, navigation);
+	const { title, pagePerSection } = styleguide.config;
+	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection);
 
 	// Update page title
 	doc.title = getPageTitle(sections, title, displayMode);
+
 	// If the current hash location was set to just `/` (e.g. when navigating back from isolated view to overview)
 	// replace the URL with one without hash, to present the user with a single address of the overview screen
 	if (loc.hash === '#/') {
@@ -52,6 +53,7 @@ export default function renderStyleguide(
 			sections={sections}
 			allSections={allSections}
 			displayMode={displayMode}
+			pagePerSection={pagePerSection}
 		/>
 	);
 }

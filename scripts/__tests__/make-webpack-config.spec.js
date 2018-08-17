@@ -7,7 +7,7 @@ const styleguideConfig = {
 	styleguideDir: __dirname,
 	require: [],
 	editorConfig: {
-		theme: 'hl-theme',
+		theme,
 	},
 	title: 'Style Guide',
 };
@@ -191,4 +191,17 @@ it('should update NODE_ENV', () => {
 it('should not overwrite NODE_ENV', () => {
 	makeWebpackConfig(styleguideConfig, 'production');
 	expect(process.env.NODE_ENV).toBe(process$env$nodeEnv);
+});
+
+it('should pass specified mountPointId to HTML plugin', () => {
+	const result = makeWebpackConfig(
+		{
+			...styleguideConfig,
+			mountPointId: 'foo-bar',
+		},
+		'development'
+	);
+	expect(getClasses(result.plugins, 'MiniHtmlWebpackPlugin')[0].options.context.container).toEqual(
+		'foo-bar'
+	);
 });

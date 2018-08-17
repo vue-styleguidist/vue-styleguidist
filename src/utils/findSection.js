@@ -8,10 +8,8 @@ import find from 'lodash/find';
  * @return {object}
  */
 export default function findSection(sections, name) {
-	const found = find(
-		sections,
-		section => section.name.replace(/\s/g, '%20') === name.replace(/\s/g, '%20')
-	);
+	// We're using Lodash because IE11 doesn't support Array.find.
+	const found = find(sections, { name });
 	if (found) {
 		return found;
 	}

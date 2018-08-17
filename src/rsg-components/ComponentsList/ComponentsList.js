@@ -1,21 +1,17 @@
 import React from 'react';
 import ComponentsListRenderer from 'rsg-components/ComponentsList/ComponentsListRenderer';
 import PropTypes from 'prop-types';
-import { getUrlNavigation } from '../../utils/utils';
+import getUrl from '../../utils/getUrl';
 
-function ComponentsList({ classes, items, useIsolatedLinks = false }, { config }) {
-	const navigation = config.navigation;
+function ComponentsList({ classes, items, useRouterLinks = false, useHashId, hashPath }) {
 	const mappedItems = items.map(item => ({
 		...item,
-		href: getUrlNavigation(navigation, {
+		href: getUrl({
 			name: item.name,
 			slug: item.slug,
-			nameParent: item.nameParent,
-			level: item.level,
-			sections: item.sections,
-			components: item.components,
-			anchor: !useIsolatedLinks,
-			isolated: useIsolatedLinks,
+			anchor: !useRouterLinks,
+			hashPath: useRouterLinks ? hashPath : false,
+			id: useRouterLinks ? useHashId : false,
 		}),
 	}));
 	return <ComponentsListRenderer classes={classes} items={mappedItems} />;
@@ -24,11 +20,9 @@ function ComponentsList({ classes, items, useIsolatedLinks = false }, { config }
 ComponentsList.propTypes = {
 	items: PropTypes.array.isRequired,
 	classes: PropTypes.object,
-	useIsolatedLinks: PropTypes.bool,
-};
-
-ComponentsList.contextTypes = {
-	config: PropTypes.object,
+	hashPath: PropTypes.array,
+	useRouterLinks: PropTypes.bool,
+	useHashId: PropTypes.bool,
 };
 
 export default ComponentsList;

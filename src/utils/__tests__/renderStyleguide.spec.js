@@ -3,19 +3,21 @@ import renderStyleguide from '../renderStyleguide';
 const styleguide = {
 	config: {
 		title: 'My Style Guide',
+		pagePerSection: false,
 	},
+	mixins: [],
 	sections: [
 		{
 			components: [
 				{
 					props: {
-						displayName: 'Button',
+						displayName: 'ButtonComponent',
 					},
 					module: 'ButtonModule',
 				},
 				{
 					props: {
-						displayName: 'Image',
+						displayName: 'ImageComponent',
 					},
 					module: 'ImageModule',
 				},
@@ -37,11 +39,11 @@ const history = {
 };
 
 afterEach(() => {
-	delete global.Button;
-	delete global.Image;
+	delete global.ButtonComponent;
+	delete global.ImageComponent;
 });
 
-xdescribe('renderStyleguide', () => {
+describe('renderStyleguide', () => {
 	it('should render StyleGuide component', () => {
 		const result = shallow(renderStyleguide(styleguide, codeRevision, location, doc, history));
 		expect(result).toMatchSnapshot();
@@ -49,14 +51,14 @@ xdescribe('renderStyleguide', () => {
 
 	it('should globalize all components', () => {
 		renderStyleguide(styleguide, codeRevision, location, doc, history);
-		expect(global.Button).toBe('ButtonModule');
-		expect(global.Image).toBe('ImageModule');
+		expect(global.ButtonComponent).toBe('ButtonModule');
+		expect(global.ImageComponent).toBe('ImageModule');
 	});
 
 	it('should globalize all components in isolated mode', () => {
 		renderStyleguide(styleguide, codeRevision, { hash: '#!/Button' }, doc, history);
-		expect(global.Button).toBe('ButtonModule');
-		expect(global.Image).toBe('ImageModule');
+		expect(global.ButtonComponent).toBe('ButtonModule');
+		expect(global.ImageComponent).toBe('ImageModule');
 	});
 
 	it('should change document title', () => {

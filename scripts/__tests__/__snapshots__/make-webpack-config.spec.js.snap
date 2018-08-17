@@ -29,13 +29,13 @@ exports[`should not owerwrite user DefinePlugin 1`] = `
 Array [
   DefinePlugin {
     "definitions": Object {
-      "process.env.PIZZA": "\\"salami\\"",
+      "process.env.NODE_ENV": "\\"test\\"",
+      "process.env.STYLEGUIDIST_ENV": "\\"development\\"",
     },
   },
   DefinePlugin {
     "definitions": Object {
-      "process.env.NODE_ENV": "\\"test\\"",
-      "process.env.STYLEGUIDIST_ENV": "\\"development\\"",
+      "process.env.PIZZA": "\\"salami\\"",
     },
   },
 ]

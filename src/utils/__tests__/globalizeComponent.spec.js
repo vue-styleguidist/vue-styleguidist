@@ -2,7 +2,7 @@ import globalizeComponent from '../globalizeComponent';
 
 const component = { module: 'someModule', name: 'SomeName' };
 
-xdescribe('globalizeComponent', () => {
+describe('globalizeComponent', () => {
 	afterEach(() => {
 		delete global[component.name];
 	});

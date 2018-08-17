@@ -2,6 +2,13 @@ import path from 'path';
 import getSections, { processSection } from '../getSections';
 
 const configDir = path.resolve(__dirname, '../../../test');
+const config = {
+	configDir,
+	exampleMode: 'collapse',
+	usageMode: 'collapse',
+	getExampleFilename: a => a,
+	getComponentPathLine: a => a,
+};
 const sections = [
 	{
 		name: 'Readme',
@@ -17,11 +24,60 @@ const sections = [
 		ignore: '**/components/Annotation/*',
 	},
 ];
-const config = {
-	configDir,
-	getExampleFilename: a => a,
-	getComponentPathLine: a => a,
-};
+const sectionsWithDepth = [
+	{
+		name: 'Documentation',
+		sections: [
+			{
+				name: 'Files',
+				sections: [
+					{
+						name: 'First File',
+					},
+				],
+			},
+		],
+		sectionDepth: 2,
+	},
+	{
+		name: 'Components',
+		sections: [
+			{
+				name: 'Buttons',
+			},
+		],
+		sectionDepth: 0,
+	},
+];
+const sectionsWithBadDepth = [
+	{
+		name: 'Documentation',
+		sections: [
+			{
+				name: 'Files',
+				sections: [
+					{
+						name: 'First File',
+					},
+				],
+				sectionDepth: 2,
+			},
+		],
+	},
+];
+
+function filterSectionDepth(section) {
+	if (section.sections && section.sections.length) {
+		return {
+			sectionDepth: section.sectionDepth,
+			sections: section.sections.map(filterSectionDepth),
+		};
+	}
+	return {
+		sectionDepth: section.sectionDepth,
+	};
+}
+
 describe('processSection', () => {
 	it('should return an object for section with content', () => {
 		const result = processSection(sections[0], config);
@@ -30,18 +86,24 @@ describe('processSection', () => {
 	});
 
 	it('should throw when content file not found', () => {
-		const fn = () => processSection({ content: 'pizza' }, config);
+		const fn = () =>
+			processSection(
+				{
+					content: 'pizza',
+				},
+				config
+			);
 
 		expect(fn).toThrowError('Section content file not found');
 	});
 
-	xit('should return an object for section with components', () => {
+	it('should return an object for section with components', () => {
 		const result = processSection(sections[1], config);
 
 		expect(result).toMatchSnapshot();
 	});
 
-	xit('should return an object for section without ignored components', () => {
+	it('should return an object for section without ignored components', () => {
 		const result = processSection(sections[2], config);
 
 		expect(result).toMatchSnapshot();
@@ -53,5 +115,53 @@ xdescribe('getSections', () => {
 		const result = getSections(sections, config);
 
 		expect(result).toMatchSnapshot();
+	});
+
+	it('should return an array of sectionsWithDepth with sectionDepth decreasing', () => {
+		const result = getSections(sectionsWithDepth, config);
+
+		expect(result.map(filterSectionDepth)).toEqual([
+			{
+				sectionDepth: 2,
+				sections: [
+					{
+						sectionDepth: 1,
+						sections: [
+							{
+								sectionDepth: 0,
+							},
+						],
+					},
+				],
+			},
+			{
+				sectionDepth: 0,
+				sections: [
+					{
+						sectionDepth: 0,
+					},
+				],
+			},
+		]);
+	});
+
+	it('should return an array of sectionsWithBadDepth taking the sectionDepth of the first depth of the sections', () => {
+		const result = getSections(sectionsWithBadDepth, config);
+
+		expect(result.map(filterSectionDepth)).toEqual([
+			{
+				sectionDepth: 0,
+				sections: [
+					{
+						sectionDepth: 0,
+						sections: [
+							{
+								sectionDepth: 0,
+							},
+						],
+					},
+				],
+			},
+		]);
 	});
 });

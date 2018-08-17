@@ -4,7 +4,7 @@ import Playground from 'rsg-components/Playground';
 import Markdown from 'rsg-components/Markdown';
 import ExamplesRenderer from 'rsg-components/Examples/ExamplesRenderer';
 
-export default function Examples({ examples, name }, { codeRevision }) {
+export default function Examples({ examples, name, exampleMode }, { codeRevision }) {
 	return (
 		<ExamplesRenderer>
 			{examples.map((example, index) => {
@@ -19,6 +19,7 @@ export default function Examples({ examples, name }, { codeRevision }) {
 								name={name}
 								index={index}
 								settings={example.settings}
+								exampleMode={exampleMode}
 							/>
 						);
 					case 'markdown':
@@ -33,6 +34,7 @@ export default function Examples({ examples, name }, { codeRevision }) {
 Examples.propTypes = {
 	examples: PropTypes.array.isRequired,
 	name: PropTypes.string.isRequired,
+	exampleMode: PropTypes.string.isRequired,
 };
 Examples.contextTypes = {
 	codeRevision: PropTypes.number.isRequired,

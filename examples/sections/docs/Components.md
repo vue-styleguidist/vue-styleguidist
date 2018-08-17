@@ -4,5 +4,6 @@ Ut veniam sit pariatur deserunt non officia. Esse commodo proident quis culpa es
 
 List of components:
 
-* [Label](#!/Components?id=label)
-* [Placeholder](#!/Components?id=placeholder)
+- [Buttons](#/Components?id=buttons)
+- [Fields](#/Components?id=fields)
+- [Others](#/Components?id=others)

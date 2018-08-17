@@ -16,16 +16,18 @@ const requireIt = require('./utils/requireIt');
 // Config options that should be passed to the client
 const CLIENT_CONFIG_OPTIONS = [
 	'title',
+	'version',
 	'showCode',
 	'showUsage',
 	'showSidebar',
 	'previewDelay',
 	'theme',
-	'navigation',
 	'styles',
 	'compilerConfig',
 	'editorConfig',
 	'ribbon',
+	'pagePerSection',
+	'mountPointId',
 ];
 
 module.exports = function() {};

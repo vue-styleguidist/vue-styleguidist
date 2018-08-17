@@ -80,9 +80,7 @@ module.exports = {
 				},
 			],
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin()
-		],
+		plugins: [new vueLoader.VueLoaderPlugin()],
 		resolve: {
 			alias: {
 				// Make sure the example uses the local version of react-styleguidist
@@ -91,6 +89,6 @@ module.exports = {
 			},
 		},
 	},
-	showUsage: true,
-	showCode: true,
+	usageMode: 'expand',
+	exampleMode: 'expand',
 };
