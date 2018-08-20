@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Message/MessageRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Message/MessageRenderer';

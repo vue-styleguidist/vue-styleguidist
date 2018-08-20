@@ -5,7 +5,6 @@ const styleguide = {
 		title: 'My Style Guide',
 		pagePerSection: false,
 	},
-	mixins: [],
 	sections: [
 		{
 			components: [

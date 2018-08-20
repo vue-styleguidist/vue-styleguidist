@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Styled/Styled';
+export { default } from 'react-styleguidist/lib/rsg-components/Styled/Styled';

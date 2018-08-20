@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Error/ErrorRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Error/ErrorRenderer';

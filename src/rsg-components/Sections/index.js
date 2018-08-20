@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Sections/Sections';
+export { default } from 'react-styleguidist/lib/rsg-components/Sections/Sections';

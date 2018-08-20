@@ -131,6 +131,7 @@ module.exports = {
 		type: 'array',
 		default: [],
 		example: ['path/to/mixin.js', 'path/to/created.js'],
+		deprecated: 'Use renderRootJsx option instead',
 	},
 	logger: {
 		type: 'object',
@@ -319,6 +320,7 @@ module.exports = {
 	},
 	vuex: {
 		type: 'directory path',
+		deprecated: 'Use renderRootJsx option instead',
 	},
 	webpackConfig: {
 		type: ['object', 'function'],

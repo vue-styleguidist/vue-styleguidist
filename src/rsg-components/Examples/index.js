@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Examples/Examples';
+export { default } from 'react-styleguidist/lib/rsg-components/Examples/Examples';

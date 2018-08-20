@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/ComponentsList/ComponentsList';
+export { default } from 'react-styleguidist/lib/rsg-components/ComponentsList/ComponentsList';

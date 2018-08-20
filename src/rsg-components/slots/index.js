@@ -1,7 +1,7 @@
-import Editor from 'rsg-components/Editor';
+import Editor from 'react-styleguidist/lib/rsg-components/Editor';
 import Usage from 'rsg-components/Usage';
-import IsolateButton from 'rsg-components/slots/IsolateButton';
-import CodeTabButton from 'rsg-components/slots/CodeTabButton';
+import IsolateButton from 'react-styleguidist/lib/rsg-components/slots/IsolateButton';
+import CodeTabButton from 'react-styleguidist/lib/rsg-components/slots/CodeTabButton';
 import UsageTabButton from 'rsg-components/slots/UsageTabButton';
 
 export const EXAMPLE_TAB_CODE_EDITOR = 'rsg-code-editor';

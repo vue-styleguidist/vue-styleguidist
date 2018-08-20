@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Name/NameRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Name/NameRenderer';

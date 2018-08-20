@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TableOfContents from 'rsg-components/TableOfContents';
 import StyleGuideRenderer from 'rsg-components/StyleGuide/StyleGuideRenderer';
+import { DisplayModes } from 'react-styleguidist/lib/consts';
 import Sections from 'rsg-components/Sections';
 import Welcome from 'rsg-components/Welcome';
 import Error from 'rsg-components/Error';
 import NotFound from 'rsg-components/NotFound';
 import { HOMEPAGE } from '../../../scripts/consts';
-import { DisplayModes } from '../../consts';
 
 /**
  * This function will return true, if the sidebar should be visible and false otherwise.

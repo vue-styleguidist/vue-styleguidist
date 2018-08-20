@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Version/VersionRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Version/VersionRenderer';

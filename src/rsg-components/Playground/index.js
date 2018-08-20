@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Playground/Playground';
+export { default } from 'react-styleguidist/lib/rsg-components/Playground/Playground';

@@ -5,7 +5,6 @@ import getRouteData from 'react-styleguidist/lib/utils/getRouteData';
 import getPageTitle from 'react-styleguidist/lib/utils/getPageTitle';
 import globalizeComponents from './globalizeComponents';
 import processSections from './processSections';
-import processMixins from './processMixins';
 
 /**
  * @param {object} styleguide An object returned by styleguide-loader
@@ -22,8 +21,7 @@ export default function renderStyleguide(
 	doc = document,
 	hist = window.history
 ) {
-	const allSections = processSections(styleguide.sections, styleguide.vuex);
-	processMixins(styleguide.mixins);
+	const allSections = processSections(styleguide.sections);
 
 	// Globalize all components, not just ones we see on the screen, to make
 	// all components accessible to all examples

@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Editor/EditorLoader';
+export { default } from 'react-styleguidist/lib/rsg-components/Editor/EditorLoader';

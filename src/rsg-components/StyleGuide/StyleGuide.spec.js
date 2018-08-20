@@ -1,8 +1,8 @@
 import React from 'react';
+import { DisplayModes } from 'react-styleguidist/lib/consts';
 import TableOfContents from '../TableOfContents';
 import StyleGuide from './StyleGuide';
 import { StyleGuideRenderer } from './StyleGuideRenderer';
-import { DisplayModes } from '../../consts';
 
 const sections = [
 	{

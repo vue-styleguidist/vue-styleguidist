@@ -4,14 +4,13 @@ import processComponents from './processComponents';
  * Recursively process each component in all sections.
  *
  * @param {Array} sections
- * @param {String} vuex
  * @return {Array}
  */
-export default function processSections(sections, vuex) {
+export default function processSections(sections) {
 	return sections.map(section => ({
 		...section,
 		visibleName: section.name,
-		components: processComponents(section.components || [], vuex),
-		sections: processSections(section.sections || [], vuex),
+		components: processComponents(section.components || []),
+		sections: processSections(section.sections || []),
 	}));
 }

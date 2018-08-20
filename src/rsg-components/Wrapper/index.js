@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Wrapper/Wrapper';
+export { default } from 'react-styleguidist/lib/rsg-components/Wrapper/Wrapper';

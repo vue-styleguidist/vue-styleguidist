@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/NotFound/NotFoundRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/NotFound/NotFoundRenderer';

@@ -1,1 +1,3 @@
-export { default } from 'rsg-components/ExamplePlaceholder/ExamplePlaceholderRenderer';
+export {
+	default,
+} from 'react-styleguidist/lib/rsg-components/ExamplePlaceholder/ExamplePlaceholderRenderer';

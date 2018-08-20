@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Text/TextRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Text/TextRenderer';

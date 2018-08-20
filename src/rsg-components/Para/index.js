@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Para/ParaRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Para/ParaRenderer';

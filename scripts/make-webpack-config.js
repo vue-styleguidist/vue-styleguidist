@@ -47,6 +47,14 @@ module.exports = function(config, env) {
 				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
 			},
 		},
+		module: {
+			rules: [
+				{
+					resourceQuery: /blockType=docs/,
+					loader: require.resolve('../loaders/docs-loader.js'),
+				},
+			],
+		},
 		performance: {
 			hints: false,
 		},

@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/JsDoc/JsDoc';
+export { default } from 'react-styleguidist/lib/rsg-components/JsDoc/JsDoc';

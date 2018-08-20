@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Pathline/PathlineRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Pathline';

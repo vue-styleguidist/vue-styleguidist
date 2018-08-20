@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Heading/HeadingRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Heading/HeadingRenderer';

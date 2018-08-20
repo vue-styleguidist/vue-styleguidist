@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Slot/Slot';
+export { default } from 'react-styleguidist/lib/rsg-components/Slot/Slot';

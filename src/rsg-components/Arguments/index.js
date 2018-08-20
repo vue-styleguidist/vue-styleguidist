@@ -1,1 +1,1 @@
-export { default } from 'react-styleguidist/lib/rsg-components/Arguments/ArgumentsRenderer';
+export { default } from 'react-styleguidist/lib/rsg-components/Arguments';

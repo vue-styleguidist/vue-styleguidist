@@ -1,1 +1,1 @@
-export { default } from 'rsg-components/Ribbon/Ribbon';
+export { default } from 'react-styleguidist/lib/rsg-components/Ribbon/Ribbon';

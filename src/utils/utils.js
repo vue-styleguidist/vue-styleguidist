@@ -1,5 +1,3 @@
-import getUrl from './getUrl';
-
 /**
  * Remove quotes around given string.
  *
@@ -28,24 +26,6 @@ export function getType(prop) {
  */
 export function showSpaces(string) {
 	return string.replace(/^\s|\s$/g, '␣');
-}
-
-export function getUrlNavigation(
-	navigation,
-	{ level, sections, components, nameParent, name, slug, anchor, isolated }
-) {
-	if (navigation) {
-		if (level < 2 && (sections || components)) {
-			return getUrl({ name, isolated: true });
-		}
-		return getUrl({ name: nameParent, id: slug, isolated: true });
-	}
-	return getUrl({
-		name,
-		slug,
-		anchor,
-		isolated,
-	});
 }
 
 /**
