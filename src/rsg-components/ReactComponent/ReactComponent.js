@@ -6,8 +6,8 @@ import JsDoc from 'rsg-components/JsDoc';
 import Markdown from 'rsg-components/Markdown';
 import Slot from 'rsg-components/Slot';
 import ReactComponentRenderer from 'rsg-components/ReactComponent/ReactComponentRenderer';
+import { DisplayModes, UsageModes } from 'react-styleguidist/lib/consts';
 import { DOCS_TAB_USAGE } from '../slots';
-import { DisplayModes, UsageModes } from '../../consts';
 
 const ExamplePlaceholder =
 	process.env.STYLEGUIDIST_ENV !== 'production'
