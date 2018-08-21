@@ -3,21 +3,17 @@ import path from 'path';
 import getConfig from '../config';
 
 const cwd = process.cwd();
-const configDir = path.resolve(__dirname, '../../test/apps/defaults');
-beforeEach(() => {
-	process.chdir(configDir);
-});
 afterAll(() => {
 	process.chdir(cwd);
 });
 
 it('should read a config file', () => {
-	const result = getConfig('../basic/styleguide.config.js');
+	const result = getConfig('./test/data/styleguide.config.js');
 	expect(result).toMatchObject({ title: 'Vue Style Guide Example' });
 });
 
 it('should accept absolute path', () => {
-	const result = getConfig(path.join(__dirname, '../../test/apps/basic/styleguide.config.js'));
+	const result = getConfig(path.join(__dirname, '.../../test/data/styleguide.config.js'));
 	expect(result).toMatchObject({ title: 'Vue Style Guide Example' });
 });
 
@@ -27,7 +23,7 @@ it('should throw when passed config file not found', () => {
 });
 
 it('should find config file automatically', () => {
-	process.chdir('../basic');
+	process.chdir('test/apps/basic');
 	const result = getConfig();
 	expect(result).toMatchObject({ title: 'Vue Style Guide Example' });
 });
@@ -66,7 +62,6 @@ it('should have default getExampleFilename implementation', () => {
 });
 
 it('default getExampleFilename should return Readme.md path if it exists', () => {
-	process.chdir('../..');
 	const result = getConfig();
 	expect(result.getExampleFilename(path.resolve('components/Button/Button.js'))).toEqual(
 		path.resolve('components/Button/Readme.md')
@@ -74,7 +69,6 @@ it('default getExampleFilename should return Readme.md path if it exists', () =>
 });
 
 it('default getExampleFilename should return Component.md path if it exists', () => {
-	process.chdir('../..');
 	const result = getConfig();
 	expect(result.getExampleFilename(path.resolve('components/Placeholder/Placeholder.js'))).toEqual(
 		path.resolve('components/Placeholder/Placeholder.md')
@@ -82,7 +76,6 @@ it('default getExampleFilename should return Component.md path if it exists', ()
 });
 
 it('default getExampleFilename should return false if no examples file found', () => {
-	process.chdir('../..');
 	const result = getConfig();
 	expect(
 		result.getExampleFilename(path.resolve('components/RandomButton/RandomButton.js'))
@@ -101,8 +94,10 @@ it('should have default title based on package.json name', () => {
 });
 
 it('configDir option should be a directory of a passed config', () => {
-	const result = getConfig(path.join(configDir, 'styleguide.config.js'));
-	expect(result).toMatchObject({ configDir });
+	const dir = path.resolve('test/apps/basic');
+	process.chdir(dir);
+	const result = getConfig(path.join(dir, 'styleguide.config.js'));
+	expect(result).toMatchObject({ configDir: dir });
 });
 
 it('configDir option should be a current directory if the config was passed as an object', () => {
@@ -111,11 +106,10 @@ it('configDir option should be a current directory if the config was passed as a
 });
 
 it('should absolutize assetsDir if it exists', () => {
-	const assetsDir = 'src/components';
 	const result = getConfig({
-		assetsDir,
+		assetsDir: 'scripts/__tests__',
 	});
-	expect(result.assetsDir).toEqual(path.join(configDir, assetsDir));
+	expect(result.assetsDir).toEqual(__dirname);
 });
 
 it('should throw if assetsDir does not exist', () => {
@@ -136,7 +130,7 @@ it('should use embedded default example template if defaultExample=true', () => 
 
 it('should absolutize defaultExample if it is a string', () => {
 	const result = getConfig({
-		defaultExample: 'src/components/Button.md',
+		defaultExample: 'test/components/Button/Readme.md',
 	});
 	expect(result.defaultExample[0]).toEqual('/');
 });
@@ -150,7 +144,7 @@ it('should throw if defaultExample does not exist', () => {
 });
 
 it('should use components option as the first sections if there’s no sections option', () => {
-	const components = 'components/*/*.js';
+	const components = 'test/components/*/*.js';
 	const result = getConfig({
 		components,
 	});
@@ -165,9 +159,9 @@ it('should use default components option both components and sections options we
 });
 
 it('should ignore components option there’s sections options', () => {
-	const components = 'components/*/*.js';
+	const components = 'test/components/*/*.js';
 	const result = getConfig({
-		components: 'components/Button/*.js',
+		components: 'test/components/Button/*.js',
 		sections: [
 			{
 				components,
@@ -187,7 +181,7 @@ it('should return webpackConfig option as is', () => {
 });
 
 it('should return webpackConfig with user webpack config', () => {
-	process.chdir('../basic');
+	process.chdir('test/apps/basic');
 	const result = getConfig();
 	expect(result.webpackConfig).toEqual(
 		expect.objectContaining({
@@ -199,7 +193,7 @@ it('should return webpackConfig with user webpack config', () => {
 });
 
 it('should allow no webpack config', () => {
-	process.chdir('../no-webpack');
+	process.chdir('test/apps/no-webpack');
 	const fn = () => getConfig();
 	expect(fn).not.toThrow();
 });
