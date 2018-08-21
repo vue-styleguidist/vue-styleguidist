@@ -13,6 +13,7 @@ const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVe
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
 const mergeWebpackConfigVueCLI = require('./utils/mergeWebpackConfigVueCLI');
 const existsVueCLI = require('./utils/existsVueCLI');
+const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config');
 
 const RENDERER_REGEXP = /Renderer$/;
 
@@ -21,7 +22,6 @@ const sourceDir = path.resolve(__dirname, '../lib');
 
 module.exports = function(config, env) {
 	process.env.NODE_ENV = process.env.NODE_ENV || env;
-
 	const isProd = env === 'production';
 
 	const template = isFunction(config.template) ? config.template : MiniHtmlWebpackTemplate;
@@ -153,6 +153,16 @@ module.exports = function(config, env) {
 			plugins: [new webpack.HotModuleReplacementPlugin()],
 		});
 	}
+	const sourceSrc = path.resolve(sourceDir, 'rsg-components');
+
+	webpackConfig.resolve.alias['rsg-components/Events'] = path.resolve(sourceSrc, 'Events');
+	webpackConfig.resolve.alias['rsg-components/Preview'] = path.resolve(sourceSrc, 'Preview');
+	webpackConfig.resolve.alias['rsg-components/Props'] = path.resolve(sourceSrc, 'Props');
+	webpackConfig.resolve.alias['rsg-components/SlotsTable'] = path.resolve(sourceSrc, 'SlotsTable');
+	webpackConfig.resolve.alias['rsg-components/StyleGuide'] = path.resolve(sourceSrc, 'StyleGuide');
+	webpackConfig.resolve.alias['rsg-components/Table'] = path.resolve(sourceSrc, 'Table');
+	webpackConfig.resolve.alias['rsg-components/Usage'] = path.resolve(sourceSrc, 'Usage');
+	webpackConfig.resolve.alias['rsg-components/Welcome'] = path.resolve(sourceSrc, 'Welcome');
 
 	// Custom style guide components
 	if (config.styleguideComponents) {
@@ -163,10 +173,11 @@ module.exports = function(config, env) {
 			webpackConfig.resolve.alias[`rsg-components/${fullName}`] = filepath;
 		});
 	}
-
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
-	webpackConfig.resolve.alias['rsg-components'] = path.resolve(sourceDir, 'rsg-components');
+	webpackConfig.resolve.alias['rsg-components'] = makeWebpackConfig(config, env).resolve.alias[
+		'rsg-components'
+	];
 
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env);
