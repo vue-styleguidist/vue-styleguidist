@@ -153,6 +153,17 @@ module.exports = function(config, env) {
 			plugins: [new webpack.HotModuleReplacementPlugin()],
 		});
 	}
+
+	// Custom style guide components
+	if (config.styleguideComponents) {
+		forEach(config.styleguideComponents, (filepath, name) => {
+			const fullName = name.match(RENDERER_REGEXP)
+				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
+				: name;
+			webpackConfig.resolve.alias[`rsg-components/${fullName}`] = filepath;
+		});
+	}
+
 	const sourceSrc = path.resolve(sourceDir, 'rsg-components');
 
 	webpackConfig.resolve.alias['rsg-components/Events'] = path.resolve(sourceSrc, 'Events');
@@ -164,15 +175,6 @@ module.exports = function(config, env) {
 	webpackConfig.resolve.alias['rsg-components/Usage'] = path.resolve(sourceSrc, 'Usage');
 	webpackConfig.resolve.alias['rsg-components/Welcome'] = path.resolve(sourceSrc, 'Welcome');
 
-	// Custom style guide components
-	if (config.styleguideComponents) {
-		forEach(config.styleguideComponents, (filepath, name) => {
-			const fullName = name.match(RENDERER_REGEXP)
-				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
-				: name;
-			webpackConfig.resolve.alias[`rsg-components/${fullName}`] = filepath;
-		});
-	}
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	webpackConfig.resolve.alias['rsg-components'] = makeWebpackConfig(config, env).resolve.alias[

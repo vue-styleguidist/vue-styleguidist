@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 import 'react-styleguidist/lib/polyfills';
-import './styles';
+import 'react-styleguidist/lib/styles';
 import ReactDOM from 'react-dom';
 import { getParameterByName, hasInHash } from 'react-styleguidist/lib/utils/handleHash';
 import renderStyleguide from './utils/renderStyleguide';
