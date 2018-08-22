@@ -44,15 +44,9 @@ function getConfig(config, update) {
 	try {
 		return sanitizeConfig(config, schema, configDir);
 	} catch (exception) {
-		if (exception instanceof StyleguidistError) {
-			throw new StyleguidistError(
-				'Something is wrong with your style guide config',
-				exception.message,
-				exception.extra
-			);
-		} else {
-			throw exception;
-		}
+		/* eslint-disable */
+		console.log(exception instanceof StyleguidistError, exception.constructor.name);
+		throw exception.message;
 	}
 }
 

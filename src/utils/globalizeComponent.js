@@ -11,5 +11,7 @@ export default function globalizeComponent(component) {
 		return;
 	}
 	const configComponent = component.module.default || component.module;
-	Vue.component(displayName, configComponent);
+	if (configComponent) {
+		Vue.component(displayName, configComponent);
+	}
 }
