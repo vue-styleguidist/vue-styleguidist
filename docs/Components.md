@@ -4,9 +4,9 @@
 
 <!-- toc -->
 
-* [Finding components](#finding-components)
-* [Sections](#sections)
-* [Limitations](#limitations)
+- [Finding components](#finding-components)
+- [Sections](#sections)
+- [Limitations](#limitations)
 
 <!-- tocstop -->
 
@@ -24,7 +24,7 @@ module.exports = {
 
 But will ignore tests:
 
-* `__tests__` folder
+- `__tests__` folder
 
 > **Note:** All paths are relative to the config folder.
 
@@ -32,18 +32,25 @@ But will ignore tests:
 
 > **Note:** Use [getComponentPathLine](Configuration.md#getcomponentpathline) option to change a path you see below a component name.
 
+## Loading and exposing components
+
+Styleguidist _loads_ your components and _exposes_ them globally for your examples to consume.
+
 ## Sections
 
 Group components into sections or add extra Markdown documents to your style guide.
 
 Each section consists of (all fields are optional):
 
-* `name` — section title.
-* `content` — location of a Markdown file containing the overview content.
-* `components` — a glob pattern string, an array of component paths or a function returning a list of components. The same rules apply as for the root `components` option.
-* `sections` — array of subsections (can be nested).
-* `description` — A small description of this section.
-* `ignore` — string/array of globs that should not be included in the section.
+- `name` — section title.
+- `content` — location of a Markdown file containing the overview content.
+- `components` — a glob pattern string, an array of component paths or glob pattern strings, or a function returning a list of components or glob pattern strings. The same rules apply as for the root `components` option.
+- `sections` — array of subsections (can be nested).
+- `description` — A small description of this section.
+- `sectionDepth` — Number of subsections with single pages, only available with [pagePerSection](Configuration.md#pagepersection) is enabled.
+- `exampleMode` — Initial state of the code example tab, uses [exampleMode](Configuration.md#examplemode).
+- `usageMode` — Initial state of the props and methods tab, uses [usageMode](Configuration.md#usagemode).
+- `ignore` — string/array of globs that should not be included in the section.
 
 Configuring a style guide with textual documentation section and a list of components would look like:
 

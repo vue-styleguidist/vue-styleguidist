@@ -6,47 +6,47 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 
 <!-- toc -->
 
-* [`assetsDir`](#assetsdir)
-* [`compilerConfig`](#compilerconfig)
-* [`components`](#components)
-* [`context`](#context)
-* [`contextDependencies`](#contextdependencies)
-* [`configureServer`](#configureserver)
-* [`dangerouslyUpdateWebpackConfig`](#dangerouslyupdatewebpackconfig)
-* [`defaultExample`](#defaultexample)
-* [`getComponentPathLine`](#getcomponentpathline)
-* [`editorConfig`](#editorconfig)
-* [`getExampleFilename`](#getexamplefilename)
-* [`navigation`](#navigation)
-* [`mixins`](#mixins)
-* [`ignore`](#ignore)
-* [`logger`](#logger)
-* [`printBuildInstructions`](#printbuildinstructions)
-* [`printServerInstructions`](#printserverinstructions)
-* [`previewDelay`](#previewdelay)
-* [`propsParser`](#propsparser)
-* [`require`](#require)
-* [`renderRootJsx`](#renderrootjsx)
-* [`ribbon`](#ribbon)
-* [`sections`](#sections)
-* [`serverHost`](#serverhost)
-* [`serverPort`](#serverport)
-* [`showCode`](#showcode)
-* [`showUsage`](#showusage)
-* [`showSidebar`](#showsidebar)
-* [`skipComponentsWithoutExample`](#skipcomponentswithoutexample)
-* [`styleguideComponents`](#styleguidecomponents)
-* [`styleguideDir`](#styleguidedir)
-* [`styles`](#styles)
-* [`template`](#template)
-* [`theme`](#theme)
-* [`title`](#title)
-* [`sortProps`](#sortprops)
-* [`updateDocs`](#updatedocs)
-* [`updateExample`](#updateexample)
-* [`verbose`](#verbose)
-* [`vuex`](#vuex)
-* [`webpackConfig`](#webpackconfig)
+- [`assetsDir`](#assetsdir)
+- [`compilerConfig`](#compilerconfig)
+- [`components`](#components)
+- [`context`](#context)
+- [`contextDependencies`](#contextdependencies)
+- [`configureServer`](#configureserver)
+- [`dangerouslyUpdateWebpackConfig`](#dangerouslyupdatewebpackconfig)
+- [`defaultExample`](#defaultexample)
+- [`getComponentPathLine`](#getcomponentpathline)
+- [`editorConfig`](#editorconfig)
+- [`getExampleFilename`](#getexamplefilename)
+- [`exampleMode`](#examplemode)
+- [`ignore`](#ignore)
+- [`logger`](#logger)
+- [`mountPointId`](#mountpointid)
+- [`pagePerSection`](#pagepersection)
+- [`printBuildInstructions`](#printbuildinstructions)
+- [`printServerInstructions`](#printserverinstructions)
+- [`previewDelay`](#previewdelay)
+- [`propsParser`](#propsparser)
+- [`require`](#require)
+- [`renderRootJsx`](#renderrootjsx)
+- [`ribbon`](#ribbon)
+- [`sections`](#sections)
+- [`serverHost`](#serverhost)
+- [`serverPort`](#serverport)
+- [`showSidebar`](#showsidebar)
+- [`skipComponentsWithoutExample`](#skipcomponentswithoutexample)
+- [`styleguideComponents`](#styleguidecomponents)
+- [`styleguideDir`](#styleguidedir)
+- [`styles`](#styles)
+- [`template`](#template)
+- [`theme`](#theme)
+- [`title`](#title)
+- [`sortProps`](#sortprops)
+- [`updateDocs`](#updatedocs)
+- [`updateExample`](#updateexample)
+- [`usageMode`](#usagemode)
+- [`verbose`](#verbose)
+- [`version`](#version)
+- [`webpackConfig`](#webpackconfig)
 
 <!-- tocstop -->
 
@@ -66,9 +66,9 @@ Styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the
 
 Type: `String`, `Function` or `Array`, default: `src/components/**/*.vue`
 
-* when `String`: a [glob pattern](https://github.com/isaacs/node-glob#glob-primer) that matches all your component modules.
-* when `Function`: a function that returns an array of module paths.
-* when `Array`: an array of module paths.
+- when `String`: a [glob pattern](https://github.com/isaacs/node-glob#glob-primer) that matches all your component modules.
+- when `Function`: a function that returns an array of module paths.
+- when `Array`: an array of module paths.
 
 All paths are relative to config folder.
 
@@ -198,44 +198,15 @@ module.exports = {
 }
 ```
 
-#### `navigation`
+#### `exampleMode`
 
-Type: `Boolean`, default: `false`
+Type: `String`, default: `collapse`
 
-Render one section or component per page, starting with the first.
+Defines the initial state of the example code tab:
 
-If set to `true`, the sidebar will be visible on each page, except for the examples.
-
-The value may be differ on each environment.
-
-```javascript
-module.exports = {
-  navigation: process.env.NODE_ENV !== 'production'
-}
-```
-
-#### `mixins`
-
-Type: `Array`, default: `[]`
-
-Set up the [mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) that will share all the components of examples in the style guide. See example in the [cookbook](Cookbook.md#how-to-add-mixins-or-third-party-plugins-to-the-style-guide).
-
-For example:
-
-```javascript
-module.exports = {
-  mixins: [
-    'src/mixins/logger.js',
-    'src/mixins/global.js',
-    // another mixin
-    {
-      created() {
-        console.log('component created')
-      }
-    }
-  ]
-}
-```
+- `collapse`: collapses the tab by default.
+- `hide`: hide the tab and it can´t be toggled in the UI.
+- `expand`: expand the tab by default.
 
 #### `ignore`
 
@@ -260,6 +231,88 @@ module.exports = {
     // Override display function
     warn: message => console.warn(`NOOOOOO: ${message}`)
   }
+}
+```
+
+#### `mountPointId`
+
+Type: `string`, defaults: `rsg-root`
+
+The ID of a DOM element where Styleguidist mounts.
+
+#### `pagePerSection`
+
+Type: `Boolean`, default: `false`
+
+Render one section or component per page.
+
+If `true`, each section will be a single page.
+
+The value may depends on a current environment:
+
+```javascript
+module.exports = {
+  pagePerSection: process.env.NODE_ENV !== 'production'
+}
+```
+
+To isolate section’s children as single pages (subroutes), add `sectionDepth` into each section with the number of subroutes (depth) to render as single pages.
+
+For example:
+
+```javascript
+module.exports = {
+  pagePerSection: true,
+  sections: [
+    {
+      name: 'Documentation',
+      sections: [
+        {
+          name: 'Files',
+          sections: [
+            {
+              name: 'First File'
+            },
+            {
+              name: 'Second File'
+            }
+          ]
+        }
+      ],
+      // Will show "Documentation" and "Files" as single pages, filtering its children
+      sectionDepth: 2
+    },
+    {
+      name: 'Components',
+      sections: [
+        {
+          name: 'Buttons',
+          sections: [
+            {
+              name: 'WrapperButton'
+            }
+          ]
+        }
+      ]
+      // Will show "Components" as single page, filtering its children
+      sectionDepth: 1,
+    },
+    {
+      name: 'Examples',
+      sections: [
+        {
+          name: 'Case 1',
+          sections: [
+            {
+              name: 'Buttons'
+            }
+          ]
+        }
+      ]
+      // There is no subroutes, "Examples" will show all its children on a page
+      sectionDepth: 0,
+    }
+  ]
 }
 ```
 
@@ -409,18 +462,6 @@ Dev server host name.
 Type: `Number`, default: `6060`
 
 Dev server port.
-
-#### `showCode`
-
-Type: `Boolean`, default: `false`
-
-Show or hide example code initially. It can be toggled in the UI by clicking the Code button after each example.
-
-#### `showUsage`
-
-Type: `Boolean`, default: `false`
-
-Show or hide props and methods documentation initially. It can be toggled in the UI by clicking the Props & methods button after each component description.
 
 #### `showSidebar`
 
@@ -586,17 +627,27 @@ module.exports = {
 }
 ```
 
+#### `usageMode`
+
+Type: `String`, default: `collapse`
+
+Defines the initial state of the props and methods tab:
+
+- `collapse`: collapses the tab by default.
+- `hide`: hide the tab and it can´t be toggled in the UI.
+- `expand`: expand the tab by default.
+
 #### `verbose`
 
 Type: `Boolean`, default: `false`
 
 Print debug information. Same as `--verbose` command line switch.
 
-#### `vuex`
+#### `version`
 
 Type: `String`, optional
 
-For implementations with vuex, you can add the path where the store exports.
+Style guide version, displayed under the title in the sidebar.
 
 #### `webpackConfig`
 

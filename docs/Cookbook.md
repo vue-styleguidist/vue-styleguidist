@@ -4,46 +4,23 @@
 
 <!-- toc -->
 
-* [How to add data dummy and third-party plugins to the style guide?](#how-to-add-data-dummy-and-third-party-plugins-to-the-style-guide)
-* [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
-* [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
-* [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
-* [How to change styles of a style guide?](#how-to-change-styles-of-a-style-guide)
-* [How to change the layout of a style guide?](#how-to-change-the-layout-of-a-style-guide)
-* [How to change style guide dev server logs output?](#how-to-change-style-guide-dev-server-logs-output)
-* [How to debug my components and examples?](#how-to-debug-my-components-and-examples)
-* [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
-* [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
-* [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
+- [How to add third-party plugins to the style guide?](#how-to-add-third-party-plugins-to-the-style-guide)
+- [How to add vuex to the style guide?](#how-to-add-vuex-to-the-style-guide)
+- [How to add data dummy to the style guide?](#how-to-add-data-dummy-to-the-style-guide)
+- [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
+- [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
+- [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
+- [How to change styles of a style guide?](#how-to-change-styles-of-a-style-guide)
+- [How to change the layout of a style guide?](#how-to-change-the-layout-of-a-style-guide)
+- [How to change style guide dev server logs output?](#how-to-change-style-guide-dev-server-logs-output)
+- [How to debug my components and examples?](#how-to-debug-my-components-and-examples)
+- [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
+- [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
+- [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
 
 <!-- tocstop -->
 
-## How to add data dummy and third-party plugins to the style guide?
-
-If you need to have default data for use in the examples of your components, you can import mixins to the style guide. Creating a .js file that exports the mixins or adding it directly to the `styleguide.config.js` file
-
-Use [mixins](Configuration.md#mixins) option to customize this behavior:
-
-```javascript
-// mixin file
-export default {
-  data() {
-    return {
-      colorDemo: 'blue',
-      sizeDemo: 'large'
-    }
-  }
-  /* ... */
-}
-```
-
-```jsx
-// example component
-
-<Button size="colorDemo" color="sizeDemo">
-  Lick Me
-</Button>
-```
+## How to add third-party plugins to the style guide?
 
 If you need to load vue plugins from a third party. You can add it, creating a .js file that installs the plugins and then adds it into the `styleguide.config.js` file
 
@@ -111,6 +88,81 @@ module.exports = {
 ```
 
 See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuetify).
+
+## How to add vuex to the style guide?
+
+You can add it, creating a .js file that installs the plugins and then adds it into the `styleguide.config.js` file
+
+```javascript
+// config/styleguide.root.js
+import Vue from 'vue'
+import Vuex from 'vuex'
+import { state, mutations, getters } from './mutations'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state,
+  getters,
+  mutations
+})
+
+export default previewComponent => {
+  // https://vuejs.org/v2/guide/render-function.html
+  return {
+    store,
+    render(createElement) {
+      return createElement(previewComponent)
+    }
+  }
+}
+```
+
+Use [require](Configuration.md#require) option:
+
+```javascript
+// styleguide.config.js
+module.exports = {
+  renderRootJsx: path.join(__dirname, 'config/styleguide.root.js')
+}
+```
+
+See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuex).
+
+## How to add data dummy to the style guide?
+
+You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add data dummy:
+
+Use [require](Configuration.md#require) option:
+
+```javascript
+// styleguide/global.requires.js
+import Vue from 'vue'
+
+Vue.mixin({
+  data() {
+    return {
+      colorDemo: 'blue',
+      sizeDemo: 'large'
+    }
+  }
+})
+```
+
+```javascript
+// styleguide.config.js
+module.exports = {
+  require: [path.join(__dirname, 'styleguide/global.requires.js')]
+}
+```
+
+```jsx
+// example component
+
+<Button size="colorDemo" color="sizeDemo">
+  Lick Me
+</Button>
+```
 
 ## How to exclude some components from style guide?
 
