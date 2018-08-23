@@ -1,31 +1,32 @@
 const pick = require('lodash/pick');
-const path = require('path');
 const commonDir = require('common-dir');
 const generate = require('escodegen').generate;
 const toAst = require('to-ast');
 const logger = require('glogg')('rsg');
-const fileExistsCaseInsensitive = require('../scripts/utils/findFileCaseInsensitive');
-const getAllContentPages = require('./utils/getAllContentPages');
-const getComponentFilesFromSections = require('./utils/getComponentFilesFromSections');
-const getComponentPatternsFromSections = require('./utils/getComponentPatternsFromSections');
+const fileExistsCaseInsensitive = require('react-styleguidist/scripts/utils/findFileCaseInsensitive');
+const getAllContentPages = require('react-styleguidist/loaders/utils/getAllContentPages');
+const getComponentFilesFromSections = require('react-styleguidist/loaders/utils/getComponentFilesFromSections');
+const getComponentPatternsFromSections = require('react-styleguidist/loaders/utils/getComponentPatternsFromSections');
 const getSections = require('./utils/getSections');
-const filterComponentsWithExample = require('./utils/filterComponentsWithExample');
-const slugger = require('./utils/slugger');
-const requireIt = require('./utils/requireIt');
+const filterComponentsWithExample = require('react-styleguidist/loaders/utils/filterComponentsWithExample');
+const slugger = require('react-styleguidist/loaders/utils/slugger');
+const requireIt = require('react-styleguidist/loaders/utils/requireIt');
 
 // Config options that should be passed to the client
 const CLIENT_CONFIG_OPTIONS = [
 	'title',
+	'version',
 	'showCode',
 	'showUsage',
 	'showSidebar',
 	'previewDelay',
 	'theme',
-	'navigation',
 	'styles',
 	'compilerConfig',
 	'editorConfig',
 	'ribbon',
+	'pagePerSection',
+	'mountPointId',
 ];
 
 module.exports = function() {};
@@ -54,14 +55,6 @@ module.exports.pitch = function() {
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0;
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined;
 	const renderRootJsx = config.renderRootJsx ? requireIt(config.renderRootJsx) : undefined;
-	const vuex = config.vuex ? requireIt(config.vuex) : undefined;
-	const mixins = config.mixins.map(mixin => {
-		if (typeof mixin === 'string') {
-			mixin = path.resolve(config.configDir, mixin);
-			return requireIt(mixin);
-		}
-		return mixin;
-	});
 
 	logger.debug('Loading components:\n' + allComponentFiles.join('\n'));
 
@@ -78,9 +71,7 @@ module.exports.pitch = function() {
 		welcomeScreen,
 		patterns,
 		sections,
-		vuex,
 		renderRootJsx,
-		mixins,
 	};
 
 	return `

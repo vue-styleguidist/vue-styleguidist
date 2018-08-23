@@ -6,10 +6,10 @@ const loaderUtils = require('loader-utils');
 const generate = require('escodegen').generate;
 const toAst = require('to-ast');
 const b = require('ast-types').builders;
+const expandDefaultComponent = require('react-styleguidist/loaders/utils/expandDefaultComponent');
+const getRequires = require('react-styleguidist/loaders/utils/getRequires');
+const requireIt = require('react-styleguidist/loaders/utils/requireIt');
 const chunkify = require('./utils/chunkify');
-const expandDefaultComponent = require('./utils/expandDefaultComponent');
-const getRequires = require('./utils/getRequires');
-const requireIt = require('./utils/requireIt');
 const getComponentVueDoc = require('./utils/getComponentVueDoc');
 
 const absolutize = filepath => path.resolve(__dirname, filepath);

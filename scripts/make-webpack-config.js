@@ -8,11 +8,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const merge = require('webpack-merge');
 const forEach = require('lodash/forEach');
 const isFunction = require('lodash/isFunction');
+const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin');
+const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVersion');
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
 const mergeWebpackConfigVueCLI = require('./utils/mergeWebpackConfigVueCLI');
-const StyleguidistOptionsPlugin = require('./utils/StyleguidistOptionsPlugin');
-const getWebpackVersion = require('./utils/getWebpackVersion');
 const existsVueCLI = require('./utils/existsVueCLI');
+const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config');
 
 const RENDERER_REGEXP = /Renderer$/;
 
@@ -21,7 +22,6 @@ const sourceDir = path.resolve(__dirname, '../lib');
 
 module.exports = function(config, env) {
 	process.env.NODE_ENV = process.env.NODE_ENV || env;
-
 	const isProd = env === 'production';
 
 	const template = isFunction(config.template) ? config.template : MiniHtmlWebpackTemplate;
@@ -29,7 +29,7 @@ module.exports = function(config, env) {
 	const htmlPluginOptions = {
 		context: Object.assign({}, templateContext, {
 			title: config.title,
-			container: 'rsg-root',
+			container: config.mountPointId,
 			trimWhitespace: true,
 		}),
 		template,
@@ -46,6 +46,14 @@ module.exports = function(config, env) {
 			alias: {
 				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
 			},
+		},
+		module: {
+			rules: [
+				{
+					resourceQuery: /blockType=docs/,
+					loader: require.resolve('../loaders/docs-loader.js'),
+				},
+			],
 		},
 		performance: {
 			hints: false,
@@ -156,9 +164,27 @@ module.exports = function(config, env) {
 		});
 	}
 
+	const sourceSrc = path.resolve(sourceDir, 'rsg-components');
+
+	webpackConfig.resolve.alias['rsg-components/Events'] = path.resolve(sourceSrc, 'Events');
+	webpackConfig.resolve.alias['rsg-components/Preview'] = path.resolve(sourceSrc, 'Preview');
+	webpackConfig.resolve.alias['rsg-components/Props'] = path.resolve(sourceSrc, 'Props');
+	webpackConfig.resolve.alias['rsg-components/SlotsTable'] = path.resolve(sourceSrc, 'SlotsTable');
+	webpackConfig.resolve.alias['rsg-components/StyleGuide'] = path.resolve(sourceSrc, 'StyleGuide');
+	webpackConfig.resolve.alias['rsg-components/Table'] = path.resolve(sourceSrc, 'Table');
+	webpackConfig.resolve.alias['rsg-components/Usage'] = path.resolve(sourceSrc, 'Usage');
+	webpackConfig.resolve.alias['rsg-components/slots/UsageTabButton'] = path.resolve(
+		sourceSrc,
+		'slots',
+		'UsageTabButton'
+	);
+	webpackConfig.resolve.alias['rsg-components/Welcome'] = path.resolve(sourceSrc, 'Welcome');
+
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
-	webpackConfig.resolve.alias['rsg-components'] = path.resolve(sourceDir, 'rsg-components');
+	webpackConfig.resolve.alias['rsg-components'] = makeWebpackConfig(config, env).resolve.alias[
+		'rsg-components'
+	];
 
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env);

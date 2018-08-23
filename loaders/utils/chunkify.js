@@ -1,7 +1,7 @@
 const remark = require('remark');
 const visit = require('unist-util-visit');
-const highlightCode = require('./highlightCode');
-const parseExample = require('./parseExample');
+const highlightCode = require('react-styleguidist/loaders/utils/highlightCode');
+const parseExample = require('react-styleguidist/loaders/utils/parseExample');
 
 const PLAYGROUND_LANGS = ['javascript', 'js', 'jsx', 'vue'];
 const CODE_PLACEHOLDER = '<%{#code#}%>';

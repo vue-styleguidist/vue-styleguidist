@@ -3,6 +3,7 @@ const vueLoader = require('vue-loader');
 
 module.exports = {
 	title: 'Vue Style Guide Example',
+	pagePerSection: true,
 	sections: [
 		{
 			name: 'Documentation',
@@ -13,9 +14,10 @@ module.exports = {
 					content: 'docs/Files.md',
 					sections: [
 						{
-							name: 'First',
+							name: 'First File',
 							content: 'docs/One.md',
 							description: 'This is the first section description',
+							components: () => ['./src/components/Label/Label.vue'],
 						},
 						{
 							name: 'Second File',
@@ -24,25 +26,31 @@ module.exports = {
 					],
 				},
 			],
+			sectionDepth: 2,
 		},
 		{
 			name: 'Components',
 			sections: [
 				{
 					name: 'Buttons',
-					components: () => [
-						'./src/components/Button/Button.vue',
-						'./src/components/RandomButton/RandomButton.vue',
-					],
+					components: () => ['./src/components/Button/Button.vue'],
+					exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+					usageMode: 'hide', // 'hide' | 'collapse' | 'expand'
 				},
 				{
 					name: 'Fields',
-					components: () => [
-						'./src/components/Label/Label.vue',
-						'./src/components/Placeholder/Placeholder.vue',
-					],
+					components: () => ['./src/components/Placeholder/Placeholder.vue'],
+					exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+					usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+				},
+				{
+					name: 'Others',
+					components: () => ['./src/components/RandomButton/RandomButton.vue'],
+					exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+					usageMode: 'collapse', // 'hide' | 'collapse' | 'expand'
 				},
 			],
+			sectionDepth: 0,
 		},
 	],
 	require: [path.join(__dirname, 'src/styles.css')],
@@ -65,9 +73,7 @@ module.exports = {
 				},
 			],
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin()
-		],
+		plugins: [new vueLoader.VueLoaderPlugin()],
 		performance:
 			env === 'development'
 				? false

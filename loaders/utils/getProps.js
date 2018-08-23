@@ -1,15 +1,19 @@
 const path = require('path');
 const fs = require('fs');
-const highlightCodeInMarkdown = require('./highlightCodeInMarkdown');
-const removeDoclets = require('./removeDoclets');
-const requireIt = require('./requireIt');
-const getNameFromFilePath = require('./getNameFromFilePath');
+const highlightCodeInMarkdown = require('react-styleguidist/loaders/utils/highlightCodeInMarkdown');
+const removeDoclets = require('react-styleguidist/loaders/utils/removeDoclets');
+const requireIt = require('react-styleguidist/loaders/utils/requireIt');
+const getNameFromFilePath = require('react-styleguidist/loaders/utils/getNameFromFilePath');
 const doctrine = require('doctrine');
 const _ = require('lodash');
 const logger = require('glogg')('rsg');
 
 const reactDocs = () => {};
+
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js');
+
+const JS_DOC_METHOD_PARAM_TAG_SYNONYMS = ['param', 'arg', 'argument'];
+const JS_DOC_METHOD_RETURN_TAG_SYNONYMS = ['return', 'returns'];
 
 // HACK: We have to make sure that doclets is a proper object with correct prototype to
 // work around an issue in react-docgen that breaks the build if a component has JSDoc tags
@@ -33,6 +37,12 @@ const doesExternalExampleFileExist = (componentPath, exampleFile) => {
 	return doesFileExist;
 };
 
+const getMethodParamsFromTags = tags => {
+	return JS_DOC_METHOD_PARAM_TAG_SYNONYMS.map(
+		paramTagSynonym => tags[paramTagSynonym] || []
+	).reduce((params, paramTags) => [...params, ...paramTags], []);
+};
+
 /**
  * 1. Remove non-public methods.
  * 2. Extract doclets.
@@ -52,9 +62,29 @@ module.exports = function getProps(doc, filepath) {
 
 	// Parse the docblock of the remaining methods with doctrine to retrieve the JsDoc tags
 	doc.methods = doc.methods.map(method => {
-		return Object.assign(method, {
-			tags: getDoctrineTags(doctrine.parse(method.docblock)),
-		});
+		let tags = getDoctrineTags(doctrine.parse(method.docblock, { sloppy: true, unwrap: true }));
+
+		// Merge with react-docgen information about arguments and return value with inforamtion from jsdoc
+		const params =
+			method.params &&
+			method.params.map(param =>
+				Object.assign(
+					param,
+					getMethodParamsFromTags(tags).find(tagParam => tagParam.name === param.name)
+				)
+			);
+		const returns = method.returns || (tags.returns && tags.returns[0]);
+		// Remove @param and @return and it synonyms from tags
+		tags = Object.keys(tags)
+			.filter(
+				key =>
+					[...JS_DOC_METHOD_PARAM_TAG_SYNONYMS, ...JS_DOC_METHOD_RETURN_TAG_SYNONYMS].indexOf(
+						key
+					) === -1
+			)
+			.reduce((prev, key) => ({ ...prev, [key]: tags[key] }), {});
+
+		return Object.assign(method, returns && { returns }, params && { params }, { tags });
 	});
 
 	if (doc.description) {
@@ -104,6 +134,17 @@ module.exports = function getProps(doc, filepath) {
 	if (!doc.displayName && filepath) {
 		// Guess the exported component's display name based on the file path
 		doc.displayName = getNameFromFilePath(filepath);
+	}
+
+	if (doc.doclets && doc.doclets.visibleName) {
+		doc.visibleName = doc.doclets.visibleName;
+
+		// custom tag is added both to doclets and tags
+		// removing from both locations
+		delete doc.doclets.visibleName;
+		if (doc.tags) {
+			delete doc.tags.visibleName;
+		}
 	}
 
 	return doc;

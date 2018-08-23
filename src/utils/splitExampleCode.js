@@ -1,4 +1,5 @@
 import * as acorn from 'acorn';
+import find from 'lodash/find';
 
 // Strip semicolon (;) at the end
 const unsemicolon = s => s.replace(/;\s*$/, '');
@@ -20,12 +21,12 @@ const unsemicolon = s => s.replace(/;\s*$/, '');
 export default function splitExampleCode(code) {
 	let ast;
 	try {
-		ast = acorn.parse(code);
+		ast = acorn.parse(code, { ecmaVersion: 2019 });
 	} catch (err) {
 		return { head: '', example: code };
 	}
 
-	const firstExpression = ast.body.reverse().find(({ type }) => type === 'ExpressionStatement');
+	const firstExpression = find(ast.body.reverse(), { type: 'ExpressionStatement' });
 	if (!firstExpression) {
 		return { head: '', example: code };
 	}

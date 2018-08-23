@@ -41,6 +41,8 @@ function renderFlowType(type) {
 	const { name, raw, value } = type;
 
 	switch (name) {
+		case 'enum':
+			return name;
 		case 'literal':
 			return value;
 		case 'signature':
@@ -103,6 +105,7 @@ function renderShape(props) {
 const defaultValueBlacklist = ['null', 'undefined'];
 
 function renderDefault(prop) {
+	// Workaround for issue https://github.com/reactjs/react-docgen/issues/221
 	// If prop has defaultValue it can not be required
 	if (prop.defaultValue) {
 		if (prop.type || prop.flowType) {
@@ -110,7 +113,7 @@ function renderDefault(prop) {
 
 			if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
 				return <Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>;
-			} else if (propName === 'func' || prop.defaultValue.func) {
+			} else if (propName === 'func' || propName === 'function') {
 				return (
 					<Text
 						size="small"
@@ -176,7 +179,6 @@ function renderDescription(prop) {
 
 function renderExtra(prop) {
 	const type = getType(prop);
-
 	if (!type) {
 		return null;
 	}
@@ -203,11 +205,12 @@ function renderExtra(prop) {
 }
 
 function renderUnion(prop) {
-	if (!Array.isArray(getType(prop).value)) {
-		return <span>{getType(prop).value}</span>;
+	const type = getType(prop);
+	if (!Array.isArray(type.value)) {
+		return <span>{type.value}</span>;
 	}
 
-	const values = getType(prop).value.map((value, index) => (
+	const values = type.value.map((value, index) => (
 		<Type key={`${value.name}-${index}`}>{renderType(value)}</Type>
 	));
 	return (

@@ -6,13 +6,10 @@ const pkg = require('./package.json');
 /**
  * Examples packages
  */
-const pkgExamples = [{
+const pkgExamples = [
+	{
 		url: './examples/basic/package.json',
 		json: require('./examples/basic/package.json'),
-	},
-	{
-		url: './examples/navigation/package.json',
-		json: require('./examples/navigation/package.json'),
 	},
 	{
 		url: './examples/sections/package.json',
@@ -33,19 +30,19 @@ const pkgExamples = [{
 	{
 		url: './examples/vuetify/package.json',
 		json: require('./examples/vuetify/package.json'),
-	}
+	},
 ];
 
 const curVersion = pkg.version;
 
 (async () => {
-	const {
-		newVersion
-	} = await inquirer.prompt([{
-		type: 'input',
-		name: 'newVersion',
-		message: `Please provide a version (current: ${curVersion}):`,
-	}, ]);
+	const { newVersion } = await inquirer.prompt([
+		{
+			type: 'input',
+			name: 'newVersion',
+			message: `Please provide a version (current: ${curVersion}):`,
+		},
+	]);
 
 	if (!semver.valid(newVersion)) {
 		// eslint-disable-next-line
@@ -61,21 +58,18 @@ const curVersion = pkg.version;
 		process.exit(1);
 	}
 
-	const {
-		yes
-	} = await inquirer.prompt([{
-		name: 'yes',
-		message: `Release ${newVersion}?`,
-		type: 'confirm',
-	}, ]);
+	const { yes } = await inquirer.prompt([
+		{
+			name: 'yes',
+			message: `Release ${newVersion}?`,
+			type: 'confirm',
+		},
+	]);
 
 	if (yes) {
 		pkg.version = newVersion;
 		fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
-		pkgExamples.forEach(({
-			json,
-			url
-		}) => {
+		pkgExamples.forEach(({ json, url }) => {
 			json.version = newVersion;
 			json.dependencies['vue-styleguidist'] = newVersion;
 			fs.writeFileSync(url, JSON.stringify(json, null, 2));

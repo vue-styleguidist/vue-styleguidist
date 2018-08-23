@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Styled from 'rsg-components/Styled';
 import Heading from 'rsg-components/Heading';
 // Import default implementation from vue-styleguidist using the full path
-import DefaultSections from 'vue-styleguidist/lib/rsg-components/Sections/SectionsRenderer';
+import DefaultSections from 'react-styleguidist/lib/rsg-components/Sections/SectionsRenderer';
 
 const styles = ({ fontFamily, color, space }) => ({
 	headingSpacer: {

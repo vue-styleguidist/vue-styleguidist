@@ -1,3 +1,4 @@
+const path = require('path');
 const vueLoader = require('vue-loader');
 
 module.exports = {
@@ -24,10 +25,8 @@ module.exports = {
 				},
 			],
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin()
-		],
+		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
-	showUsage: true,
-	vuex: './src/store/index',
+	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
+	usageMode: 'expand',
 };

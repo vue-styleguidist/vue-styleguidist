@@ -4,17 +4,18 @@ import { readFileSync } from 'fs';
 import styleguideLoader from '../styleguide-loader';
 import getConfig from '../../scripts/config';
 
-const file = './test/components/Button/Button.js';
-
 /* eslint-disable quotes */
 xdescribe('styleguide-loader', () => {
+	const file = path.resolve(__dirname, '../../test/components/Button/Button.js');
+	const configDir = path.resolve(__dirname, '../../test');
+
 	it('should return valid, parsable JS', () => {
 		const result = styleguideLoader.pitch.call(
 			{
 				request: file,
 				_styleguidist: {
-					sections: [{ components: '../../test/components/**/*.js' }],
-					configDir: __dirname,
+					sections: [{ components: 'components/**/*.js' }],
+					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
 				},
@@ -31,8 +32,7 @@ xdescribe('styleguide-loader', () => {
 			{
 				request: file,
 				_styleguidist: {
-					...getConfig(),
-					configDir: path.resolve(__dirname, '../../examples/cra'),
+					...getConfig(path.resolve(__dirname, '../../test/apps/defaults/styleguide.config.js')),
 				},
 				addContextDependency: () => {},
 			},
@@ -42,7 +42,6 @@ xdescribe('styleguide-loader', () => {
 		expect(() => new vm.Script(result)).not.toThrow();
 		expect(result).toMatch(`'filepath': 'src/components/Button.js'`);
 		expect(result).toMatch(`'filepath': 'src/components/Placeholder.js'`);
-		expect(result).toMatch(`'filepath': 'src/components/RandomButton.js'`);
 	});
 
 	it('should return correct component paths: glob', () => {
@@ -51,7 +50,7 @@ xdescribe('styleguide-loader', () => {
 				request: file,
 				_styleguidist: {
 					sections: [{ components: 'components/**/*.js' }],
-					configDir: path.resolve(__dirname, '../../test'),
+					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
 				},
@@ -74,12 +73,12 @@ xdescribe('styleguide-loader', () => {
 					sections: [
 						{
 							components: () => [
-								`${__dirname}/components/Button/Button.js`,
-								`${__dirname}/components/Placeholder/Placeholder.js`,
+								`${configDir}/components/Button/Button.js`,
+								`${configDir}/components/Placeholder/Placeholder.js`,
 							],
 						},
 					],
-					configDir: __dirname,
+					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
 				},
@@ -107,7 +106,7 @@ xdescribe('styleguide-loader', () => {
 							],
 						},
 					],
-					configDir: __dirname,
+					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
 				},
@@ -132,7 +131,7 @@ xdescribe('styleguide-loader', () => {
 							components: ['components/Button/Button.js', 'components/Placeholder/Placeholder.js'],
 						},
 					],
-					configDir: __dirname,
+					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
 				},
@@ -159,7 +158,7 @@ xdescribe('styleguide-loader', () => {
 							],
 						},
 					],
-					configDir: path.resolve(__dirname, '../../test'),
+					configDir,
 					skipComponentsWithoutExample: true,
 					getExampleFilename: componentPath => path.join(path.dirname(componentPath), 'Readme.md'),
 					getComponentPathLine: filepath => filepath,
@@ -182,7 +181,9 @@ xdescribe('styleguide-loader', () => {
 				request: file,
 				_styleguidist: {
 					sections: [{ components: 'components/**/*.js' }],
-					configDir: __dirname,
+					configDir,
+					getExampleFilename: () => 'Readme.md',
+					getComponentPathLine: filepath => filepath,
 					contextDependencies,
 				},
 				addContextDependency,
@@ -201,7 +202,7 @@ xdescribe('styleguide-loader', () => {
 				request: file,
 				_styleguidist: {
 					sections: [{ components: 'components/**/*.js' }],
-					configDir: path.resolve(__dirname, '../../test'),
+					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
 				},

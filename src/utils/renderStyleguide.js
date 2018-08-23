@@ -1,11 +1,10 @@
 import React from 'react';
 import slots from 'rsg-components/slots';
 import StyleGuide from 'rsg-components/StyleGuide';
-import getPageTitle from './getPageTitle';
-import getRouteData from './getRouteData';
+import getRouteData from 'react-styleguidist/lib/utils/getRouteData';
+import getPageTitle from 'react-styleguidist/lib/utils/getPageTitle';
 import globalizeComponents from './globalizeComponents';
 import processSections from './processSections';
-import processMixins from './processMixins';
 
 /**
  * @param {object} styleguide An object returned by styleguide-loader
@@ -22,18 +21,18 @@ export default function renderStyleguide(
 	doc = document,
 	hist = window.history
 ) {
-	const allSections = processSections(styleguide.sections, styleguide.vuex);
-	processMixins(styleguide.mixins);
+	const allSections = processSections(styleguide.sections);
 
 	// Globalize all components, not just ones we see on the screen, to make
 	// all components accessible to all examples
 	globalizeComponents(allSections);
 
-	const { title, navigation } = styleguide.config;
-	const { sections, displayMode } = getRouteData(allSections, loc.hash, navigation);
+	const { title, pagePerSection } = styleguide.config;
+	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection);
 
 	// Update page title
 	doc.title = getPageTitle(sections, title, displayMode);
+
 	// If the current hash location was set to just `/` (e.g. when navigating back from isolated view to overview)
 	// replace the URL with one without hash, to present the user with a single address of the overview screen
 	if (loc.hash === '#/') {
@@ -52,6 +51,7 @@ export default function renderStyleguide(
 			sections={sections}
 			allSections={allSections}
 			displayMode={displayMode}
+			pagePerSection={pagePerSection}
 		/>
 	);
 }

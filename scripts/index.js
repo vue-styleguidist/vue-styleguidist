@@ -1,11 +1,11 @@
 // Make sure user has webpack installed
 require('./utils/ensureWebpack');
+const setupLogger = require('react-styleguidist/scripts/logger');
 
 const build = require('./build');
 const server = require('./server');
 const makeWebpackConfig = require('./make-webpack-config');
 const getConfig = require('./config');
-const setupLogger = require('./logger');
 
 /**
  * Initialize Vue Styleguide API.

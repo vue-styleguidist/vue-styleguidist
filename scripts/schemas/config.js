@@ -2,16 +2,16 @@
 // in loaders/styleguide-loader.js
 
 const EXTENSIONS = 'vue';
-const DEFAULT_COMPONENTS_PATTERN = 'src/@(components|Components)/**/*.vue';
+const DEFAULT_COMPONENTS_PATTERN = `src/@(components|Components)/**/*.{${EXTENSIONS}}`;
 
 const path = require('path');
 const startCase = require('lodash/startCase');
-const chalk = require('chalk');
+const kleur = require('kleur');
 const logger = require('glogg')('rsg');
+const fileExistsCaseInsensitive = require('react-styleguidist/scripts/utils/findFileCaseInsensitive');
+const getUserPackageJson = require('react-styleguidist/scripts/utils/getUserPackageJson');
+const StyleguidistError = require('react-styleguidist/scripts/utils/error');
 const findUserWebpackConfig = require('../utils/findUserWebpackConfig');
-const getUserPackageJson = require('../utils/getUserPackageJson');
-const fileExistsCaseInsensitive = require('../utils/findFileCaseInsensitive');
-const StyleguidistError = require('../utils/error');
 const consts = require('../consts');
 
 module.exports = {
@@ -55,6 +55,13 @@ module.exports = {
 		default: false,
 		process: val =>
 			val === true ? path.resolve(__dirname, '../templates/DefaultExample.md') : val,
+	},
+	exampleMode: {
+		type: 'string',
+		process: (value, config) => {
+			return config.showCode === undefined ? value : config.showCode ? 'expand' : 'collapse';
+		},
+		default: 'collapse',
 	},
 	getComponentPathLine: {
 		type: 'function',
@@ -118,14 +125,24 @@ module.exports = {
 	navigation: {
 		type: 'boolean',
 		default: false,
+		deprecated: 'Use pagePerSection option instead',
 	},
 	mixins: {
 		type: 'array',
 		default: [],
 		example: ['path/to/mixin.js', 'path/to/created.js'],
+		deprecated: 'Use renderRootJsx option instead',
 	},
 	logger: {
 		type: 'object',
+	},
+	mountPointId: {
+		type: 'string',
+		default: 'rsg-root',
+	},
+	pagePerSection: {
+		type: 'boolean',
+		default: false,
 	},
 	previewDelay: {
 		type: 'number',
@@ -193,10 +210,12 @@ module.exports = {
 	showCode: {
 		type: 'boolean',
 		default: false,
+		deprecated: 'Use exampleMode option instead',
 	},
 	showUsage: {
 		type: 'boolean',
 		default: false,
+		deprecated: 'Use usageMode option instead',
 	},
 	showSidebar: {
 		type: 'boolean',
@@ -237,7 +256,7 @@ module.exports = {
 		process: val => {
 			if (typeof val === 'string') {
 				throw new StyleguidistError(
-					`${chalk.bold(
+					`${kleur.bold(
 						'template'
 					)} config option format has been changed, you need to update your config.`,
 					'template'
@@ -260,7 +279,7 @@ module.exports = {
 			if (val) {
 				return val;
 			}
-			const name = getUserPackageJson().name;
+			const name = getUserPackageJson().name || '';
 			return `${startCase(name)} Style Guide`;
 		},
 		example: 'My Style Guide',
@@ -285,12 +304,23 @@ module.exports = {
 		type: 'function',
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`,
 	},
+	usageMode: {
+		type: 'string',
+		process: (value, config) => {
+			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse';
+		},
+		default: 'collapse',
+	},
 	verbose: {
 		type: 'boolean',
 		default: false,
 	},
+	version: {
+		type: 'string',
+	},
 	vuex: {
 		type: 'directory path',
+		deprecated: 'Use renderRootJsx option instead',
 	},
 	webpackConfig: {
 		type: ['object', 'function'],
