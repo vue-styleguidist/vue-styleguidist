@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-basic",
   "description": "Vue styleguidist basic example",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -15,7 +15,7 @@
   "dependencies": {
     "dog-names": "^1.0.2",
     "extract-text-webpack-plugin": "^3.0.2",
-    "vue-styleguidist": "1.8.0",
+    "vue-styleguidist": "1.8.1",
     "webpack-merge": "^4.1.2"
   },
   "scripts": {
