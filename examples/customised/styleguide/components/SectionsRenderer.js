@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from 'rsg-components/Styled';
 import Heading from 'rsg-components/Heading';
-// Import default implementation from vue-styleguidist using the full path
-import DefaultSections from 'react-styleguidist/lib/rsg-components/Sections/SectionsRenderer';
+// Import default implementation from react-styleguidist using the full path
+import DefaultSectionsRenderer from 'react-styleguidist/lib/rsg-components/Sections/SectionsRenderer';
 
 const styles = ({ fontFamily, color, space }) => ({
 	headingSpacer: {
@@ -18,13 +18,12 @@ const styles = ({ fontFamily, color, space }) => ({
 export function SectionsRenderer({ classes, children }) {
 	return (
 		<div>
-			<div className={classes.headingSpacer}>
-				<Heading level={1}>Example Components</Heading>
-				<p className={classes.descriptionText}>
-					These are the greatest components
-				</p>
-			</div>
-			<DefaultSections>{children}</DefaultSections>
+			{!!children.length &&
+				<div className={classes.headingSpacer}>
+					<Heading level={1}>Example Components</Heading>
+					<p className={classes.descriptionText}>These are the greatest components</p>
+				</div>}
+			<DefaultSectionsRenderer>{children}</DefaultSectionsRenderer>
 		</div>
 	);
 }

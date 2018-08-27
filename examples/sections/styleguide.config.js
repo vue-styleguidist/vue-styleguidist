@@ -25,6 +25,11 @@ module.exports = {
 						},
 					],
 				},
+				{
+					name: 'Online documentation',
+					href: 'https://github.com/vue-styleguidist/vue-styleguidist',
+					external: true,
+				},
 			],
 			sectionDepth: 2,
 		},
