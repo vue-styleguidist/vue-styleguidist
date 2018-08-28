@@ -12,6 +12,10 @@ const pkgExamples = [
 		json: require('./examples/basic/package.json'),
 	},
 	{
+		url: './examples/vuecli3/package.json',
+		json: require('./examples/vuecli3/package.json'),
+	},
+	{
 		url: './examples/sections/package.json',
 		json: require('./examples/sections/package.json'),
 	},
