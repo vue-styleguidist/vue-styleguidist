@@ -2,7 +2,7 @@
 // in loaders/styleguide-loader.js
 
 const EXTENSIONS = 'vue';
-const DEFAULT_COMPONENTS_PATTERN = `src/@(components|Components)/**/*.{${EXTENSIONS}}`;
+const DEFAULT_COMPONENTS_PATTERN = `src/(components|Components)/**/*.{${EXTENSIONS}}`;
 
 const path = require('path');
 const startCase = require('lodash/startCase');
