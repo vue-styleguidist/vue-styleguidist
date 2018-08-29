@@ -473,8 +473,8 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 You can also `require` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
 
 ```jsx
-const mockData = require('./mocks')
-;<Message content={mockData.hello} />
+const mockData = require('./mocks');
+<Message :content="mockData.hello" />
 ```
 
 > **Note:** You can `require` only from examples in Markdown files. ES6 `import` syntax isn’t supported.
