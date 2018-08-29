@@ -1,8 +1,7 @@
 // If you want to access any of these options in React, don’t forget to update CLIENT_CONFIG_OPTIONS array
 // in loaders/styleguide-loader.js
 
-const EXTENSIONS = 'vue';
-const DEFAULT_COMPONENTS_PATTERN = `src/(components|Components)/**/*.{${EXTENSIONS}}`;
+const DEFAULT_COMPONENTS_PATTERN = `src/{components,Components}/**/*.vue`;
 
 const path = require('path');
 const startCase = require('lodash/startCase');
@@ -86,15 +85,7 @@ module.exports = {
 		},
 		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md'),
 	},
-	ignore: {
-		type: 'array',
-		default: [
-			'**/__tests__/**',
-			`**/*.test.{${EXTENSIONS}}`,
-			`**/*.spec.{${EXTENSIONS}}`,
-			'**/*.d.ts',
-		],
-	},
+
 	highlightTheme: {
 		type: 'string',
 		default: 'base16-light',
