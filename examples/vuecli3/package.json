@@ -1,6 +1,6 @@
 {
   "name": "vuecli3",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "vue": "^2.5.16",
-    "vue-styleguidist": "1.8.3"
+    "vue-styleguidist": "1.8.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
