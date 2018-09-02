@@ -166,19 +166,19 @@ module.exports = function(config, env) {
 
 	const sourceSrc = path.resolve(sourceDir, 'rsg-components');
 
-	webpackConfig.resolve.alias['rsg-components/Events'] = path.resolve(sourceSrc, 'Events');
-	webpackConfig.resolve.alias['rsg-components/Preview'] = path.resolve(sourceSrc, 'Preview');
-	webpackConfig.resolve.alias['rsg-components/Props'] = path.resolve(sourceSrc, 'Props');
-	webpackConfig.resolve.alias['rsg-components/SlotsTable'] = path.resolve(sourceSrc, 'SlotsTable');
-	webpackConfig.resolve.alias['rsg-components/StyleGuide'] = path.resolve(sourceSrc, 'StyleGuide');
-	webpackConfig.resolve.alias['rsg-components/Table'] = path.resolve(sourceSrc, 'Table');
-	webpackConfig.resolve.alias['rsg-components/Usage'] = path.resolve(sourceSrc, 'Usage');
-	webpackConfig.resolve.alias['rsg-components/slots/UsageTabButton'] = path.resolve(
-		sourceSrc,
-		'slots',
-		'UsageTabButton'
-	);
-	webpackConfig.resolve.alias['rsg-components/Welcome'] = path.resolve(sourceSrc, 'Welcome');
+	[
+		'Preview',
+		'Usage',
+		'Events',
+		'Props',
+		'Table',
+		'SlotsTable',
+		'slots/UsageTabButton',
+		'StyleGuide',
+		'Welcome',
+	].forEach(function(component) {
+		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component);
+	});
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
