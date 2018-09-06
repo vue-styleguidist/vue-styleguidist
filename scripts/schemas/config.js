@@ -85,7 +85,10 @@ module.exports = {
 		},
 		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md'),
 	},
-
+	ignore: {
+		type: 'array',
+		default: ['**/__tests__/**', `**/*.test.vue`, `**/*.spec.vue`, '**/*.d.ts'],
+	},
 	highlightTheme: {
 		type: 'string',
 		default: 'base16-light',
