@@ -7,10 +7,12 @@ Basic button:
 Big pink button:
 
 ```jsx
-<Button size="large" color="deeppink">Lick Me</Button>
+<Button size="large" color="deeppink">
+  Click Me
+</Button>
 ```
 
-And you *can* **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
+And you _can_ **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
 
 Fenced code blocks with `vue`, `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
 
