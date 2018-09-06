@@ -160,7 +160,7 @@ module.exports = {
 // example component
 
 <Button size="colorDemo" color="sizeDemo">
-  Lick Me
+  Click Me
 </Button>
 ```
 
