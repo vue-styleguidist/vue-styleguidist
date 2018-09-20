@@ -13,6 +13,7 @@
     "node": ">=4"
   },
   "dependencies": {
+    "babel-core": "7.0.0-bridge.0",
     "dog-names": "^1.0.2",
     "vue-styleguidist": "1.8.9"
   },
