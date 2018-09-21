@@ -1,7 +1,7 @@
 {
 	"presets": [
 		[
-			"env",
+			"@babel/preset-env",
 			{
 				"targets": {
 					"uglify": true
@@ -9,20 +9,20 @@
 				"modules": false
 			}
 		],
-		"react"
+		"@babel/preset-react"
 	],
 	"plugins": [
-		"transform-class-properties",
-		"transform-object-rest-spread",
-		"syntax-dynamic-import"
+		"@babel/plugin-syntax-dynamic-import",
+    	"@babel/plugin-proposal-class-properties",
+    	"@babel/plugin-proposal-object-rest-spread"
 	],
 	"env": {
 		"test": {
-			"presets": ["env", "react"],
+			"presets": ["@babel/preset-env", "@babel/preset-react"],
 			"plugins": [
-				"system-import-transformer",
-				"transform-class-properties",
-				"transform-object-rest-spread"
+				"@babel/plugin-syntax-dynamic-import",
+    			"@babel/plugin-proposal-class-properties",
+    			"@babel/plugin-proposal-object-rest-spread"
 			]
 		}
 	}
