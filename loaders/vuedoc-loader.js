@@ -29,12 +29,12 @@ module.exports = function(source) {
 
 		const componentVueDoc = getComponentVueDoc(source, file);
 		if (componentVueDoc) {
-			docs.example = requireIt(`!!${examplesLoader}!${file}`);
+			docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx|html!${file}`);
 		} else if (docs.tags) {
 			const examples = docs.tags.examples;
 			if (examples) {
 				const examplePath = examples[examples.length - 1].description;
-				docs.example = requireIt(`!!${examplesLoader}!${examplePath}`);
+				docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx|html!${examplePath}`);
 			}
 		}
 		if (docs.props) {

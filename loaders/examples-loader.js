@@ -10,6 +10,5 @@ module.exports = function examplesLoader(source) {
 	if (isVueFile(file)) {
 		source = getComponentVueDoc(source, file);
 	}
-	this.query += (/\?/.test(this.query) ? '&' : '?') + 'customLangs=vue,js,jsx,html';
 	return examplesLoaderRsg.call(this, source);
 };
