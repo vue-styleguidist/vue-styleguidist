@@ -1,27 +1,28 @@
 {
 	"presets": [
 		[
-			"env",
+			"@babel/preset-env",
 			{
 				"targets": {
-					"browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+					"uglify": true
 				},
 				"modules": false
 			}
 		],
-		"react",
-		["es2015", { "modules": false }],
-		["stage-2"]
+		"@babel/preset-react"
 	],
-	"plugins": ["transform-runtime", "transform-class-properties", "transform-object-rest-spread"],
+	"plugins": [
+		"@babel/plugin-syntax-dynamic-import",
+    	"@babel/plugin-proposal-class-properties",
+    	"@babel/plugin-proposal-object-rest-spread"
+	],
 	"env": {
 		"test": {
-			"presets": ["env", "stage-2", "react"],
+			"presets": ["@babel/preset-env", "@babel/preset-react"],
 			"plugins": [
-				"istanbul",
-				"system-import-transformer",
-				"transform-class-properties",
-				"transform-object-rest-spread"
+				"@babel/plugin-syntax-dynamic-import",
+    			"@babel/plugin-proposal-class-properties",
+    			"@babel/plugin-proposal-object-rest-spread"
 			]
 		}
 	}

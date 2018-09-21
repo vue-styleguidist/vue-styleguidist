@@ -23,6 +23,7 @@
     "styleguide:build": "vue-styleguidist build"
   },
   "devDependencies": {
+    "babel-core": "^7.0.0-bridge.0",
     "css-loader": "^0.28.7",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
