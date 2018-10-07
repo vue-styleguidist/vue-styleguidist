@@ -76,7 +76,7 @@
     "react-group": "^1.0.6",
     "react-icons": "^2.2.7",
     "react-lifecycles-compat": "^3.0.4",
-    "react-styleguidist": "^7.3.8",
+    "react-styleguidist": "^7.3.9",
     "recast": "^0.13.0",
     "remark": "^9.0.0",
     "strip-comments": "^0.4.4",

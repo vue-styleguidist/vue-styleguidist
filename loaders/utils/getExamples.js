@@ -14,11 +14,13 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js');
  */
 module.exports = function getExamples(examplesFile, displayName, defaultExample) {
 	if (examplesFile && fs.existsSync(examplesFile)) {
-		return requireIt(`!!${examplesLoader}!${examplesFile}`);
+		return requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx|html!${examplesFile}`);
 	}
 
 	if (defaultExample) {
-		return requireIt(`!!${examplesLoader}?componentName=${displayName}!${defaultExample}`);
+		return requireIt(
+			`!!${examplesLoader}?componentName=${displayName}&customLangs=vue|js|jsx|html!${defaultExample}`
+		);
 	}
 
 	return [];

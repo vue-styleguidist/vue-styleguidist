@@ -6,7 +6,7 @@ Basic button:
 
 Big pink button:
 
-```jsx
+```vue
 <Button size="large" color="deeppink">
   Click Me
 </Button>
