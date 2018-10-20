@@ -1,17 +1,17 @@
 module.exports = {
-	title: 'Styleguidist Docs',
+	title: 'Vue Styleguidist Documentation',
 	themeConfig: {
 		sidebar: [
 			['/', 'Introduction'],
-			'/API',
-			'/CLI',
-			['/Components', 'Components'],
-			'/Configuration',
-			'/Cookbook',
-			'/Development',
-			'/Documenting',
 			'/GettingStarted',
+			'/Documenting',
+			['/Components', 'Locating Components'],
 			'/Webpack',
+			'/Cookbook',
+			'/API',
+			'/Configuration',
+			'/CLI',
+			'/Development',
 		],
 	},
 };
