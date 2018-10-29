@@ -1,8 +1,8 @@
 module.exports = {
-	title: 'Vue Styleguidist Documentation',
+	title: 'Vue Styleguidist',
+	description: 'Isolated Vue component development environment with a living style guide',
 	themeConfig: {
 		sidebar: [
-			['/', 'Introduction'],
 			'/GettingStarted',
 			'/Documenting',
 			['/Components', 'Locating Components'],
