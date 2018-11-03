@@ -177,6 +177,13 @@ function renderDescription(prop) {
 	);
 }
 
+function renderRequired (prop) {
+  var required = prop.required
+  return React.createElement("div", null, required && React.createElement(Markdown, {
+    text: `${required}` || 'false'
+  }))
+}
+
 function renderExtra(prop) {
 	const type = getType(prop);
 	if (!type) {
@@ -252,6 +259,10 @@ export const columns = [
 		caption: 'Default',
 		render: renderDefault,
 	},
+	{
+		caption: 'Required',
+		render: renderRequired
+	},	
 	{
 		caption: 'Description',
 		render: renderDescription,
