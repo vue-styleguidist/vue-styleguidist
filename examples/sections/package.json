@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-basic",
   "description": "Vue styleguidist basic example",
-  "version": "1.8.10",
+  "version": "1.8.11",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue-styleguidist": "1.8.10"
+    "vue-styleguidist": "1.8.11"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
