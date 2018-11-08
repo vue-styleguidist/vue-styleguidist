@@ -27,9 +27,9 @@
 
 > Project was started when not finding a tool that generates documentation of components with hot reloading, read documentation and have a playground. Created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files. Only supports 2.x.
 
-Vue Styleguidist is a style guide generator for Vue components. It lists component and shows live, editable usage examples based on Markdown files. You can use it to generate a static HTML page to share and publish or as a workbench for developing new components using hot reloaded dev server.
+![](https://user-images.githubusercontent.com/10201025/48210221-e7bcee00-e344-11e8-92d7-df4d988598f7.gif)
 
-![](https://lh3.googleusercontent.com/tYVDDLYMopULiC3h_Pwiw69RZ85gLSpQQYh5cpOgfvYyMqzZo9Z8cpHLiZ7Jt-Kpnyfa_SNpZSwtokQSTI71r9d9QqH4bymxreVOY0unvKEd0aqCY5YLCwsF_oSvC7sHPEHKsSwJLs4FbneoXd6eZQ4F_Kv7EC_sYTc1KeuoSZrbroh5RwlFw7t2iZDhQnp4rV-STc9plH6hLg1QyPm0ehV6C54szgSoi5PUWXTiIbG63DNXTn3zizkOLpk-BOE-E_uhRmLiNbaggVrfjw-zInqWgouaqV2fQfLkWPs7W6SJHn8IaS9jKVJBF5CN6rv9eQNs7sFr_u9ZwBvU7yVAJq2gLrAD033JdHjx-LZbQI_kCGvXV98yEP7C2OHsIx-IT8n90nbFnAXp7tlAc-mGQeUnEIdnfe4GdILEDP5tYPmu-nKeN7tL6_E-kpN8oIT6tdm2yCEivhQx6CcvDJlpAIG9eGWduwtf2c2Kfx6U0k4bWgCid7X_39KkgDmCbUMt2fdMMfcDVHrGOMWiOVzBbFuKxMbIxbd7J0ty_ZKKa8dFIfhLYdUtRK4bCjf7ZKIqNUy9wwKY=w1600-h794)
+Vue Styleguidist is a style guide generator for Vue components. It lists component and shows live, editable usage examples based on Markdown files. You can use it to generate a static HTML page to share and publish or as a workbench for developing new components using hot reloaded dev server.
 
 ## Usage
 
