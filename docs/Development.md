@@ -24,7 +24,7 @@ The main thing is that we’re running two apps at the same time: user’s compo
 
 ## How it works
 
-Vue Styleguidist uses [vue-docgen-api]https://github.com/vue-styleguidist/vue-docgen-api) to parse *source* files (not transpiled). vue-docgen-api finds exported Vue components and generates documentation.
+Vue Styleguidist uses [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) to parse *source* files (not transpiled). vue-docgen-api finds exported Vue components and generates documentation.
 
 Styleguidist uses Markdown for documentation: each JavaScript code block is rendered as an interactive playground with [CodeMirror](http://codemirror.net/). To do that we extract all these code blocks using [Remark](http://remark.js.org/).
 
