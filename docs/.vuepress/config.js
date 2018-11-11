@@ -2,6 +2,9 @@ module.exports = {
 	title: 'Vue Styleguidist',
 	description: 'Isolated Vue component development environment with a living style guide',
 	themeConfig: {
+		repo: 'vue-styleguidist/vue-styleguidist',
+		editLinks: true,
+		docsDir: 'docs',
 		sidebar: [
 			'/GettingStarted',
 			'/Documenting',
