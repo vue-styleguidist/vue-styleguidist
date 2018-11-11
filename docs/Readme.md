@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://user-images.githubusercontent.com/10201025/44880548-670db180-ac72-11e8-94ba-42f2d560efe2.png
+heroImage: https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png
 actionText: Get Started →
 actionLink: /GettingStarted.html
 footer: MIT Licensed
