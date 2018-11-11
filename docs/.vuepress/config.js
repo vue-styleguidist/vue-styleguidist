@@ -1,4 +1,5 @@
 module.exports = {
+	dest: 'docs/dist',
 	title: 'Vue Styleguidist',
 	description: 'Isolated Vue component development environment with a living style guide',
 	themeConfig: {
