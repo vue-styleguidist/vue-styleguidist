@@ -27,8 +27,8 @@ script:
   - npm run test:jest -- --runInBand
 
 branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+  only:
+    - master
 
 stages:
   - lint
