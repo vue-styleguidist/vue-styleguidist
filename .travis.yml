@@ -84,3 +84,10 @@ jobs:
         keep-history: true
         on:
           branch: master
+
+after_success:
+  - npm install --no-save semantic-release
+  - npx semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
