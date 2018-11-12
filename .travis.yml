@@ -62,13 +62,12 @@ jobs:
         - npm run test:cypress:run
 
     - stage: release
+      deploy:
+      provider: script
+      skip_cleanup: true
       script:
         - npm install --no-save semantic-release
-        - >-
-          npx semantic-release 
-          --analyze-commits semantic-release/analyzeCommits 
-          --verify-release semantic-release/verifyRelease 
-          --generate-notes semantic-release/generateNotes
+        - npx semantic-release
 
       # Build & Deploy the documentation website
     - stage: documentation
@@ -84,10 +83,3 @@ jobs:
         keep-history: true
         on:
           branch: master
-
-after_success:
-  - npm install --no-save semantic-release
-  - npx semantic-release
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
