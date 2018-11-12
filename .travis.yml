@@ -53,4 +53,22 @@ jobs:
       script:
         - npm install --no-save semantic-release-tamia
         - >-
-          npx semantic-release --analyze-commits semantic-release-tamia/analyzeCommits --verify-release semantic-release-tamia/verifyRelease --generate-notes semantic-release-tamia/generateNotes
+          npx semantic-release 
+          --analyze-commits semantic-release-tamia/analyzeCommits 
+          --verify-release semantic-release-tamia/verifyRelease 
+          --generate-notes semantic-release-tamia/generateNotes
+
+      # Build & Deploy the documentation website
+    - stage: documentation
+      script:
+      - npm run docs:build
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        local-dir: docs/dist
+        target-branch: master
+        repo: vue-styleguidist/vue-styleguidist.github.io
+        github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+        keep-history: true
+        on:
+          branch: master
