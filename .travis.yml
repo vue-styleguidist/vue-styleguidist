@@ -51,6 +51,7 @@ jobs:
         # Build the docs
         - npm run docs:build
 
+# Deploy the documentation website
 deploy:
   provider: pages
   skip-cleanup: true
@@ -59,4 +60,4 @@ deploy:
   github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   keep-history: true
   on:
-    branch: master
+    branch: feat-vuepress
