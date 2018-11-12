@@ -57,6 +57,7 @@ jobs:
         provider: pages
         skip-cleanup: true
         local-dir: docs/dist
+        target-branch: master
         repo: vue-styleguidist/vue-styleguidist.github.io
         github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
         keep-history: true
