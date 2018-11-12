@@ -22,4 +22,3 @@ footer: MIT Licensed
     <p>See how components react to different props and data right in the browser</p>
   </div>
 </div>
-

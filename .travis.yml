@@ -1,28 +1,40 @@
 language: node_js
+
 node_js:
   - 9
   - 8
   - 6
+
+branches:
+  only:
+    - master
+
 env:
   - WEBPACK_VERSION= # Current, from package.json
   - WEBPACK_VERSION=3
+
 install:
   # Use npm 5.7.x since it has introduced `npm ci`
   - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
   - npm ci
+
 before_script:
   # Install Webpack version
   - if [[ -n "$WEBPACK_VERSION" ]]; then npm install --no-save webpack@$WEBPACK_VERSION; fi
+
 script:
   # Run tests without coverage since it's 2x faster
   - npm run test:jest -- --runInBand
+
 branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+  only:
+    - master
+
 stages:
   - lint
   - test
   - integration
+
 jobs:
   include:
     - stage: lint
@@ -49,10 +61,18 @@ jobs:
         - npm run test:cypress:startServer:post
         - npm run test:cypress:run
 
-      # Build & Deploy the documentation website
-    - stage: documentation deployment
+    - stage: release
+      deploy:
+      provider: script
+      skip_cleanup: true
       script:
-      - npm run docs:build
+        - npm install semantic-release
+        - npx semantic-release
+
+      # Build & Deploy the documentation website
+    - stage: documentation
+      script:
+        - npm run docs:build
       deploy:
         provider: pages
         skip-cleanup: true
