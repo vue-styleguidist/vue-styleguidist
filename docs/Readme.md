@@ -1,13 +1,25 @@
-# Vue Styleguidist Documentation
+---
+home: true
+heroImage: https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png
+actionText: Get Started →
+actionLink: /GettingStarted.html
+footer: MIT Licensed
+---
 
-* **[Getting Started](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/GettingStarted.md): install and run Styleguidist**
-* [Documenting components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Documenting.md): how to write documentation
-* [Locating components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Components.md): point Styleguidist to your Vue components
-* [Configuring webpack](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Webpack.md): tell Styleguidist how to load your code
-* [Cookbook](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Cookbook.md): how to solve common tasks with Vue Styleguidist
+<div class="features">
+  <div class="feature">
+    <h2>Development environment</h2>
+    <p>Focus on one component at a time, see all its variants and work faster with hot reload</p>
+  </div>
 
-***
+  <div class="feature">
+    <h2>Style guide</h2>
+    <p>Share components with your team, including designers and developers</p>
+  </div>
 
-* [Configuration](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Configuration.md)
-* [CLI commands and options](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/CLI.md)
-* [Node API](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/API.md)
+  <div class="feature">
+    <h2>Interactive playground</h2>
+    <p>See how components react to different props and data right in the browser</p>
+  </div>
+</div>
+

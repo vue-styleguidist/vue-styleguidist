@@ -48,3 +48,16 @@ jobs:
         - npm run test:cypress:startServer &
         - npm run test:cypress:startServer:post
         - npm run test:cypress:run
+        # Build the docs
+        - npm run docs:build
+
+# Deploy the documentation website
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: docs/dist
+  repo: vue-styleguidist/vue-styleguidist.github.io
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
