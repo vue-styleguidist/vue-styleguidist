@@ -48,11 +48,11 @@ jobs:
         - npm run test:cypress:startServer &
         - npm run test:cypress:startServer:post
         - npm run test:cypress:run
-        # Build the docs
-        - npm run docs:build
 
-    - stage: deployment
-      # Deploy the documentation website
+      # Build & Deploy the documentation website
+    - stage: documentation deployment
+      script:
+      - npm run docs:build
       deploy:
         provider: pages
         skip-cleanup: true
