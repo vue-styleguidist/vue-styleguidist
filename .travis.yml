@@ -51,13 +51,14 @@ jobs:
         # Build the docs
         - npm run docs:build
 
-# Deploy the documentation website
-deploy:
-  provider: pages
-  skip-cleanup: true
-  local-dir: docs/dist
-  repo: vue-styleguidist/vue-styleguidist.github.io
-  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  on:
-    branch: master
+    - stage: deployment
+      # Deploy the documentation website
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        local-dir: docs/dist
+        repo: vue-styleguidist/vue-styleguidist.github.io
+        github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+        keep-history: true
+        on:
+          branch: master
