@@ -1,26 +1,20 @@
 language: node_js
 
 node_js:
+  - 10
   - 9
-  - 8
   - 6
 
+# In order to avoid double build on pull requests, 
+# only build on pushes on master and on pushes on pull requests
 branches:
   only:
     - master
-
-env:
-  - WEBPACK_VERSION= # Current, from package.json
-  - WEBPACK_VERSION=3
 
 install:
   # Use npm 5.7.x since it has introduced `npm ci`
   - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
   - npm ci
-
-before_script:
-  # Install Webpack version
-  - if [[ -n "$WEBPACK_VERSION" ]]; then npm install --no-save webpack@$WEBPACK_VERSION; fi
 
 script:
   # Run tests without coverage since it's 2x faster
@@ -63,11 +57,11 @@ jobs:
 
     - stage: release
       deploy:
-      provider: script
-      skip_cleanup: true
-      script:
-        - npm install semantic-release
-        - npx semantic-release
+        provider: script
+        skip_cleanup: true
+        script:
+          - npm install semantic-release
+          - npx semantic-release
 
       # Build & Deploy the documentation website
     - stage: documentation
@@ -83,3 +77,4 @@ jobs:
         keep-history: true
         on:
           branch: master
+          
