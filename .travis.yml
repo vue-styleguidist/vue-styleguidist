@@ -29,6 +29,10 @@ stages:
   - lint
   - test
   - integration
+  - name: release
+    if: type != pull_request AND branch = master
+  - name: documentation
+    if: type != pull_request AND branch = master
 
 jobs:
   include:
