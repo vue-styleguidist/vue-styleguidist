@@ -59,6 +59,7 @@ Add a `webpackConfig` section to your `styleguide.config.js`:
 
 ```javascript
 // ./styleguide.config.js
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
   webpackConfig: {
     module: {
@@ -81,7 +82,11 @@ module.exports = {
           loader: 'style-loader!css-loader'
         }
       ]
-    }
+    },
+    plugins: [
+      // add vue-loader plugin
+      new VueLoaderPlugin()
+    ]
   }
 };
 ```
@@ -91,6 +96,8 @@ module.exports = {
 > **Note:** `entry`, `externals`, `output`, `watch`, and `stats` options will be ignored. For production builds, `devtool` will also be ignored.
 
 > **Note:** `CommonsChunkPlugins`, `HtmlWebpackPlugin`, `UglifyJsPlugin`, `HotModuleReplacementPlugin` plugins will be ignored because Styleguidist already includes them or they may break Styleguidist.
+
+> **Note:** it's expected that you already have `vue-loader` dependency in your project.
 
 ## When nothing else works
 
