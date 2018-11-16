@@ -85,7 +85,7 @@ module.exports = {
     },
     plugins: [
       // add vue-loader plugin
-      new VueLoaderPlugin(),
+      new VueLoaderPlugin()
     ]
   }
 };
