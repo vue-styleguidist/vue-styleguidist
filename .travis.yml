@@ -61,6 +61,8 @@ jobs:
         - npm run test:cypress:run
 
     - stage: release
+      script:
+          - npm run compile
       deploy:
         provider: script
         skip_cleanup: true
