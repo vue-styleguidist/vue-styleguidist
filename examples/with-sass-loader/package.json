@@ -1,6 +1,6 @@
 {
-  "name": "vue-styleguidist-example-basic",
-  "description": "Vue styleguidist basic example",
+  "name": "vue-styleguidist-example-sass",
+  "description": "Vue styleguidist sass example",
   "version": "1.8.11",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
