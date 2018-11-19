@@ -63,10 +63,6 @@ jobs:
     - stage: release
       script:
           - npm run compile
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script:
           - npm install semantic-release
           - npx semantic-release
 
