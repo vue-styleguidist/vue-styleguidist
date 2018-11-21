@@ -105,7 +105,7 @@ module.exports = function getProps(doc, filepath) {
 		}
 
 		if (exampleFileExists) {
-			doc.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx|html!${exampleFile}`);
+			doc.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${exampleFile}`);
 			delete doc.doclets.example;
 		}
 	} else {
