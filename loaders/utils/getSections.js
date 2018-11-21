@@ -48,7 +48,7 @@ function processSection(section, config, parentDepth) {
 		if (!fs.existsSync(contentAbsolutePath)) {
 			throw new Error(`Styleguidist: Section content file not found: ${contentAbsolutePath}`);
 		}
-		content = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx|html!${contentAbsolutePath}`);
+		content = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${contentAbsolutePath}`);
 	}
 
 	let sectionDepth;
