@@ -63,7 +63,7 @@ jobs:
     - stage: release
       script:
           - npm run compile
-          - npm install semantic-release@15.12.0
+          - npm install semantic-release
           - npx semantic-release
 
       # Build & Deploy the documentation website
