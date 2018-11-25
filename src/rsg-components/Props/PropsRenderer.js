@@ -177,11 +177,16 @@ function renderDescription(prop) {
 	);
 }
 
-function renderRequired (prop) {
-  var required = prop.required
-  return React.createElement("div", null, required && React.createElement(Markdown, {
-    text: `${required}` || 'false'
-  }))
+function renderRequired(prop) {
+	const required = prop.required;
+	return React.createElement(
+		'div',
+		null,
+		required &&
+			React.createElement(Markdown, {
+				text: `${required}` || 'false',
+			})
+	);
 }
 
 function renderExtra(prop) {
@@ -261,8 +266,8 @@ export const columns = [
 	},
 	{
 		caption: 'Required',
-		render: renderRequired
-	},	
+		render: renderRequired,
+	},
 	{
 		caption: 'Description',
 		render: renderDescription,

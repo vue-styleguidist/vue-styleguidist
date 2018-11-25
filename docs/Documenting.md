@@ -8,15 +8,15 @@ Vue styleguidist generates documentation for your components based on the commen
 
 <!-- toc -->
 
-* [Code comments](#code-comments)
-* [Slots documentation](#slots-documentation)
-* [Include Mixins and Extends](#include-mixins-and-extends)
-* [Usage examples and Readme files](#usage-examples-and-readme-files)
-* [External examples using doclet tags](#external-examples-using-doclet-tags)
-* [Public methods](#public-methods)
-* [Ignoring props](#ignoring-props)
-* [Using JSDoc tags](#using-jsdoc-tags)
-* [Writing code examples](#writing-code-examples)
+- [Code comments](#code-comments)
+- [Slots documentation](#slots-documentation)
+- [Include Mixins and Extends](#include-mixins-and-extends)
+- [Usage examples and Readme files](#usage-examples-and-readme-files)
+- [External examples using doclet tags](#external-examples-using-doclet-tags)
+- [Public methods](#public-methods)
+- [Ignoring props](#ignoring-props)
+- [Using JSDoc tags](#using-jsdoc-tags)
+- [Writing code examples](#writing-code-examples)
 
 <!-- tocstop -->
 
@@ -367,23 +367,23 @@ By default, all props your components have are considered to be public and are p
 
 You can use the following [JSDoc](http://usejsdoc.org/) tags when documenting components, props and methods:
 
-* [@deprecated](http://usejsdoc.org/tags-deprecated.html)
-* [@see, @link](http://usejsdoc.org/tags-see.html)
-* [@author](http://usejsdoc.org/tags-author.html)
-* [@since](http://usejsdoc.org/tags-since.html)
-* [@version](http://usejsdoc.org/tags-version.html)
+- [@deprecated](http://usejsdoc.org/tags-deprecated.html)
+- [@see, @link](http://usejsdoc.org/tags-see.html)
+- [@author](http://usejsdoc.org/tags-author.html)
+- [@since](http://usejsdoc.org/tags-since.html)
+- [@version](http://usejsdoc.org/tags-version.html)
 
 When documenting methods you can also use:
 
-* [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
+- [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
 
 Documenting events:
 
-* [@event, @type](http://usejsdoc.org/tags-event.html)
+- [@event, @type](http://usejsdoc.org/tags-event.html)
 
 Documenting v-model:
 
-* @model
+- @model
 
 All tags can render Markdown.
 

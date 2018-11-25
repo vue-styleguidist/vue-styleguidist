@@ -17,6 +17,4 @@ Basic Input
       :replacement="setting.replacement"
       @fire="executeFire"
     ></Input>
-
 ```
-

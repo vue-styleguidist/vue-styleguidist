@@ -2,7 +2,7 @@
 
 Vue styleguidist uses [webpack](https://webpack.js.org/) under the hood and it needs to know how to load your project’s files.
 
-*Webpack is required to run Vue styleguidist but your project doesn’t have to use it.*
+_Webpack is required to run Vue styleguidist but your project doesn’t have to use it._
 
 > **Note:** See [cookbook](Cookbook.md) for more examples.
 
@@ -26,7 +26,7 @@ If your webpack config is located somewhere else, you need to load it manually f
 // ./styleguide.config.js
 module.exports = {
   webpackConfig: require('./configs/webpack.js')
-};
+}
 ```
 
 Or if you want to merge it with other options:
@@ -34,13 +34,10 @@ Or if you want to merge it with other options:
 ```javascript
 // ./styleguide.config.js
 module.exports = {
-  webpackConfig: Object.assign({},
-    require('./configs/webpack.js'),
-    {
-      /* Custom config options */
-    }
-  )
-};
+  webpackConfig: Object.assign({}, require('./configs/webpack.js'), {
+    /* Custom config options */
+  })
+}
 ```
 
 > **Note:** `entry`, `externals`, `output`, `watch`, and `stats` options will be ignored. For production builds, `devtool` will also be ignored.
@@ -59,7 +56,7 @@ Add a `webpackConfig` section to your `styleguide.config.js`:
 
 ```javascript
 // ./styleguide.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
   webpackConfig: {
     module: {
@@ -88,7 +85,7 @@ module.exports = {
       new VueLoaderPlugin()
     ]
   }
-};
+}
 ```
 
 > **Warning:** This option disables config load from `webpack.config.js`, see above how to load your config manually.

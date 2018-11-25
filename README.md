@@ -2,6 +2,7 @@
 <img src="assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
 
 **Isolated Vue component development environment with a living style guide**
+
 <div class="badge-npmdownloads">
   <a href="https://www.npmjs.com/package/vue-styleguidist">
     <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version">

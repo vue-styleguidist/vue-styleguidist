@@ -45,4 +45,4 @@ See how to [document your components](Documenting.md)
 
 ## Have questions?
 
-* [Read the cookbook](Cookbook.md)
+- [Read the cookbook](Cookbook.md)

@@ -17,7 +17,7 @@ Then open [http://localhost:6060](http://localhost:6060) in your browser.
 
 ### Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install # Yarn will have `packages version mismatch` problem with vue-styleguidist, not recommend
 

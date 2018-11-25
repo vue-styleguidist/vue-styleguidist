@@ -1,16 +1,16 @@
 # Developer guide
 
->Vue Styleguidist created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files.
+> Vue Styleguidist created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files.
 
 <!-- To update run: npx markdown-toc --maxdepth 2 -i docs/API.md -->
 
 <!-- toc -->
 
-* [How it works](#how-it-works)
-* [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
-* [React components](#react-components)
-* [Styles](#styles)
-* [Render components vue](#render-components-vue)
+- [How it works](#how-it-works)
+- [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
+- [React components](#react-components)
+- [Styles](#styles)
+- [Render components vue](#render-components-vue)
 
 <!-- tocstop -->
 
@@ -18,13 +18,13 @@ Styleguidist isn’t an ordinary single page app and some design decisions may l
 
 The main thing is that we’re running two apps at the same time: user’s components and Styleguidist UI. They share a webpack configuration and have styles in the same scope (there’s only one scope in CSS). And we can control only one of these two apps: Styleguidist UI. That puts us under some restrictions:
 
-* Our styles should not affect user component styles.
-* User styles (especially global like Bootstrap) should not affect Styleguidist UI.
-* `body` styles (like `font-family`) should affect user components as the user expects but not Styleguidist UI.
+- Our styles should not affect user component styles.
+- User styles (especially global like Bootstrap) should not affect Styleguidist UI.
+- `body` styles (like `font-family`) should affect user components as the user expects but not Styleguidist UI.
 
 ## How it works
 
-Vue Styleguidist uses [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) to parse *source* files (not transpiled). vue-docgen-api finds exported Vue components and generates documentation.
+Vue Styleguidist uses [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) to parse _source_ files (not transpiled). vue-docgen-api finds exported Vue components and generates documentation.
 
 Styleguidist uses Markdown for documentation: each JavaScript code block is rendered as an interactive playground with [CodeMirror](http://codemirror.net/). To do that we extract all these code blocks using [Remark](http://remark.js.org/).
 
@@ -34,14 +34,14 @@ Webpack loaders (see below) generate JavaScript modules with all user components
 
 We use webpack loaders to hot reload the style guide on changes in user components, styles and Markdown documentation. We have three loaders ([loaders](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/loaders) folder):
 
-* `styleguide-loader`: loads components and sections;
-* `vuedoc-loader`: loads props documentation using vue-docgen-api;
-* `examples-loader`: loads examples from Markdown files;
+- `styleguide-loader`: loads components and sections;
+- `vuedoc-loader`: loads props documentation using vue-docgen-api;
+- `examples-loader`: loads examples from Markdown files;
 
 There are two more loaders — `css-loader` and `styles-loader` but they are just one-line aliases to corresponding webpack loaders. We don’t want to rely on webpack loader resolver because its behavior can be changed by user’s webpack config (Create React App does that for example). This way we can bypass webpack resolver and use Node resolver instead. These loaders are used like this:
 
 ```js
-require('!!../../../loaders/style-loader!../../../loaders/css-loader!codemirror/lib/codemirror.css');
+require('!!../../../loaders/style-loader!../../../loaders/css-loader!codemirror/lib/codemirror.css')
 ```
 
 `!!` prefix tells webpack not to use any other loaders that may be listed in a webpack configuration to load this module. This ensures that user’s webpack configuration won’t affect Styleguidist.
@@ -56,26 +56,29 @@ Most of StyleGuidist UI components consist of two parts: `Foo/Foo.js` that conta
 
 ```js
 // styleguide.config.js
-const path = require('path');
+const path = require('path')
 module.exports = {
   webpackConfig: {
     resolve: {
       alias: {
-        'rsg-components/Wrapper': path.join(__dirname, 'lib/styleguide/Wrapper')
+        'rsg-components/Wrapper': path.join(
+          __dirname,
+          'lib/styleguide/Wrapper'
+        )
       }
     }
   }
-};
+}
 ```
 
 All Styleguidist components should be imported like this: `import Foo from 'rsg-components/Foo'` to make aliases work.
 
 Each component folder usually has several files:
 
-* `Foo/Foo.js`  (optional for simple components);
-* `Foo/FooRenderer.js`;
-* `Foo/Foo.spec.js` — tests;
-* `Foo/index.js` — reexport of `Foo.js` or `FooRenderer.js`.
+- `Foo/Foo.js` (optional for simple components);
+- `Foo/FooRenderer.js`;
+- `Foo/Foo.spec.js` — tests;
+- `Foo/index.js` — reexport of `Foo.js` or `FooRenderer.js`.
 
 ## Styles
 
@@ -86,8 +89,8 @@ Use [classnames](https://github.com/JedWatson/classnames) to merge several class
 We use `Styled` higher-order component to allow theming (see [theme](Configuration.md#theme) and [style](Configuration.md#style) style guide config options). Use it like this:
 
 ```jsx
-import React from 'react';
-import Styled from 'rsg-components/Styled';
+import React from 'react'
+import Styled from 'rsg-components/Styled'
 
 export const styles = ({ fontFamily, fontSize, color }) => ({
   button: {
@@ -96,17 +99,15 @@ export const styles = ({ fontFamily, fontSize, color }) => ({
     color: color.light,
     '&:hover, &:active': {
       isolate: false,
-      color: color.lightest,
-    },
-  },
-});
+      color: color.lightest
+    }
+  }
+})
 
 export function ExamplePlaceholderRenderer({ classes }) {
   return (
-    <button className={classes.button}>
-      I am a styled button
-    </button>
-  );
+    <button className={classes.button}>I am a styled button</button>
+  )
 }
 ```
 
