@@ -2,7 +2,7 @@ const isFunction = require('lodash/isFunction');
 const omit = require('lodash/omit');
 const mergeBase = require('webpack-merge');
 
-const IGNORE_SECTIONS = ['entry', 'externals', 'output', 'watch', 'stats', 'styleguidist'];
+const IGNORE_SECTIONS = ['entry', 'output', 'watch', 'stats', 'styleguidist'];
 const IGNORE_SECTIONS_ENV = {
 	development: [],
 	// For production builds, we'll ignore devtool settings to avoid
