@@ -1,5 +1,5 @@
 {
-  "name": "styleguide",
+  "name": "nuxt-styleguide",
   "version": "1.7.10",
   "description": "Nuxt.js project",
   "author": "Knovour <knovour@gmail.com>",
@@ -9,17 +9,20 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "styleguide": "vue-styleguidist server",
-    "styleguide:build": "vue-styleguidist build"
+    "styleguide": "vue-styleguidist server --config styleguide/styleguide.config.js",
+    "styleguide:build": "vue-styleguidist build --config styleguide/styleguide.config.js"
   },
   "dependencies": {
-    "nuxt": "^1.0.0-rc11",
-    "vue-styleguidist": "1.7.10",
-    "vue-webpack-loaders": "^1.0.8"
+    "nuxt": "^2.3.4"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0-bridge.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-env": "^7.1.0"
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.1",
+    "style-loader": "^0.23.1",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-styleguidist": "^2.0.2"
   }
 }
