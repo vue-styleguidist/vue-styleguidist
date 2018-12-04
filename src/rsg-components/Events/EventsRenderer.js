@@ -86,12 +86,7 @@ function renderDescription(prop) {
 			return total;
 		}, []);
 	}
-	const args = [
-		...(tags.arg || []),
-		...(tags.argument || []),
-		...(tags.param || []),
-		...(tags || []),
-	];
+	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])];
 	return (
 		<div>
 			{description && <Markdown text={description} />}
