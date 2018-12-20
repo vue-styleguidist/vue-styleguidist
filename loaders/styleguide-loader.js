@@ -27,6 +27,7 @@ const CLIENT_CONFIG_OPTIONS = [
 	'ribbon',
 	'pagePerSection',
 	'mountPointId',
+	'transformSections',
 ];
 
 module.exports = function() {};

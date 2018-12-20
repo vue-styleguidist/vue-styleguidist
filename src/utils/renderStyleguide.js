@@ -21,7 +21,11 @@ export default function renderStyleguide(
 	doc = document,
 	hist = window.history
 ) {
-	const allSections = processSections(styleguide.sections);
+	let allSections = processSections(styleguide.sections);
+
+	if (typeof styleguide.config.transformSections === 'function') {
+		allSections = styleguide.config.transformSections(allSections);
+	}
 
 	// Globalize all components, not just ones we see on the screen, to make
 	// all components accessible to all examples

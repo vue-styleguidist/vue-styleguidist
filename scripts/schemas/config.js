@@ -14,6 +14,9 @@ const findUserWebpackConfig = require('../utils/findUserWebpackConfig');
 const consts = require('../consts');
 
 module.exports = {
+	transformSections: {
+		type: 'function',
+	},
 	assetsDir: {
 		type: 'existing directory path',
 		example: 'assets',
