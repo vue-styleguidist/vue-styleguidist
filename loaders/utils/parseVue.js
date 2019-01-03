@@ -1,6 +1,8 @@
 const hash = require('hash-sum');
 const compiler = require('vue-template-compiler');
-const cache = require('lru-cache')(100);
+const LRUCache = require('lru-cache');
+
+const cache = new LRUCache(100);
 
 module.exports = function parseVue(source, filename) {
 	const cacheKey = hash(filename + source);
