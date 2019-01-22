@@ -31,7 +31,7 @@ module.exports = function mergeWebpackConfigVueCLI(baseConfig, userConfig, env) 
 			if (rule.test && rule.test.test('.vue')) {
 				return {
 					test: rule.test,
-					use: rule.use.filter(use => use.loader === 'vue-loader'),
+					use: (rule.use || []).filter(use => use.loader === 'vue-loader'),
 				};
 			}
 			return rule;
