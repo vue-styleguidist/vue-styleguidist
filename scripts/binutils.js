@@ -20,12 +20,11 @@ module.exports = {
 
 /**
  * @param {object} config
- * @param {boolean} verbose
  * @return {object}
  */
-function updateConfig(config, verbose) {
+function updateConfig(config) {
 	// Set verbose mode from config option or command line switch
-	config.verbose = config.verbose || verbose;
+	config.verbose = config.verbose || process.env.verbose;
 
 	// Setup logger *before* config validation (because validations may use logger to print warnings)
 	setupLogger(config.logger, config.verbose);
@@ -176,7 +175,7 @@ function printErrorWithLink(message, linkTitle, linkUrl) {
 function printErrors(header, errors, originalErrors, type) {
 	printStatus(header, type);
 	console.error();
-	const messages = process.ENV.verbose ? originalErrors : errors;
+	const messages = process.env.verbose ? originalErrors : errors;
 	messages.forEach(message => {
 		console.error(message.message || message);
 	});
@@ -252,10 +251,9 @@ function printStyleguidistError(errors) {
 
 /**
  * @param {object} errors
- * @param {boolean} verbose
  */
-function printNoLoaderError(errors, verbose) {
-	if (verbose) {
+function printNoLoaderError(errors) {
+	if (process.env.verbose) {
 		return;
 	}
 
