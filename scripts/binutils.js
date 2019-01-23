@@ -25,7 +25,7 @@ module.exports = {
  */
 function updateConfig(config) {
 	// Set verbose mode from config option or command line switch
-	config.verbose = config.verbose || process.env.verbose;
+	config.verbose = config.verbose || process.env.VUESG_VERBOSE;
 
 	// Setup logger *before* config validation (because validations may use logger to print warnings)
 	setupLogger(config.logger, config.verbose);
@@ -176,7 +176,7 @@ function printErrorWithLink(message, linkTitle, linkUrl) {
 function printErrors(header, errors, originalErrors, type) {
 	printStatus(header, type);
 	console.error();
-	const messages = process.env.verbose ? originalErrors : errors;
+	const messages = process.env.VUESG_VERBOSE ? originalErrors : errors;
 	messages.forEach(message => {
 		console.error(message.message || message);
 	});
@@ -254,7 +254,7 @@ function printStyleguidistError(errors) {
  * @param {object} errors
  */
 function printNoLoaderError(errors) {
-	if (process.env.verbose) {
+	if (process.env.VUESG_VERBOSE) {
 		return;
 	}
 

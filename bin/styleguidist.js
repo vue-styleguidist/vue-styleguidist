@@ -58,7 +58,7 @@ try {
 	}
 }
 
-process.env.verbose = !!argv.verbose;
+process.env.VUESG_VERBOSE = !!argv.verbose;
 
 binutils.verbose('Styleguidist config:', config);
 
