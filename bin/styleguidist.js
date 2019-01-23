@@ -58,6 +58,8 @@ try {
 	}
 }
 
+process.ENV.verbose = !!argv.verbose;
+
 binutils.verbose('Styleguidist config:', config);
 
 switch (command) {
@@ -65,7 +67,7 @@ switch (command) {
 		binutils.commandBuild(config);
 		break;
 	case 'server':
-		binutils.commandServer(config, argv.verbose);
+		binutils.commandServer(config, argv.open);
 		break;
 	default:
 		binutils.commandHelp();

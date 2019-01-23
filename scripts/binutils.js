@@ -172,12 +172,11 @@ function printErrorWithLink(message, linkTitle, linkUrl) {
  * @param {object} errors
  * @param {object} originalErrors
  * @param {'success'|'error'|'warning'} type
- * @param {boolean} verbose
  */
-function printErrors(header, errors, originalErrors, type, verbose) {
+function printErrors(header, errors, originalErrors, type) {
 	printStatus(header, type);
 	console.error();
-	const messages = verbose ? originalErrors : errors;
+	const messages = process.ENV.verbose ? originalErrors : errors;
 	messages.forEach(message => {
 		console.error(message.message || message);
 	});
