@@ -12,7 +12,7 @@ const binutils = require('./binutils');
  * Initialize Vue Styleguide API.
  *
  * @param {object} [config] Styleguidist config.
- * @param {function} [updateConfig] updtae config post resolution
+ * @param {function} [updateConfig] update config post resolution
  * @returns {object} API.
  */
 module.exports = function(config, updateConfig) {
