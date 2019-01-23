@@ -18,7 +18,9 @@ const binutils = require('./binutils');
 module.exports = function(config, updateConfig) {
 	config = getConfig(config, config => {
 		setupLogger(config.logger, config.verbose, {});
-		updateConfig(config);
+		if (typeof updateConfig === 'function') {
+			updateConfig(config);
+		}
 		return config;
 	});
 
