@@ -16,6 +16,7 @@ module.exports = {
 	commandServer,
 	commandHelp,
 	verbose,
+	printErrorWithLink,
 };
 
 /**
