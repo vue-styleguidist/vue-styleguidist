@@ -1,6 +1,5 @@
 {
   "parser": "babel-eslint",
-  "extends": "tamia/react",
   "env": {
     "browser": true,
     "node": true

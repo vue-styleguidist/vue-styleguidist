@@ -11,8 +11,6 @@ const isFunction = require('lodash/isFunction');
 const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin');
 const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVersion');
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
-const mergeWebpackConfigVueCLI = require('./utils/mergeWebpackConfigVueCLI');
-const existsVueCLI = require('./utils/existsVueCLI');
 const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config');
 
 const RENDERER_REGEXP = /Renderer$/;
@@ -66,11 +64,7 @@ module.exports = function(config, env) {
 	}
 
 	if (config.webpackConfig) {
-		if (existsVueCLI()) {
-			webpackConfig = mergeWebpackConfigVueCLI(webpackConfig, config.webpackConfig, env);
-		} else {
-			webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
-		}
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
 	}
 
 	webpackConfig = merge(webpackConfig, {

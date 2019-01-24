@@ -7,7 +7,7 @@ const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVe
 const StyleguidistError = require('react-styleguidist/scripts/utils/error');
 const consts = require('../consts');
 
-const MIN_WEBPACK_VERSION = 2;
+const MIN_WEBPACK_VERSION = 4;
 const webpackVersion = getWebpackVersion();
 
 if (!webpackVersion) {

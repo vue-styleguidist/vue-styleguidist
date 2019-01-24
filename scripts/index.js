@@ -6,16 +6,21 @@ const build = require('./build');
 const server = require('./server');
 const makeWebpackConfig = require('./make-webpack-config');
 const getConfig = require('./config');
+const binutils = require('./binutils');
 
 /**
  * Initialize Vue Styleguide API.
  *
  * @param {object} [config] Styleguidist config.
+ * @param {function} [updateConfig] update config post resolution
  * @returns {object} API.
  */
-module.exports = function(config) {
+module.exports = function(config, updateConfig) {
 	config = getConfig(config, config => {
 		setupLogger(config.logger, config.verbose, {});
+		if (typeof updateConfig === 'function') {
+			updateConfig(config);
+		}
 		return config;
 	});
 
@@ -49,6 +54,11 @@ module.exports = function(config) {
 		 */
 		makeWebpackConfig(env) {
 			return makeWebpackConfig(config, env || 'production');
+		},
+
+		binutils: {
+			server: open => binutils.commandServer(config, open),
+			build: () => binutils.commandBuild(config),
 		},
 	};
 };
