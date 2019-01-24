@@ -58,6 +58,10 @@ function commandBuild(config) {
 			process.exit(1);
 		}
 	});
+
+	// in order to have the caller be able to interact
+	// with the compiler when i's hot
+	return compiler;
 }
 
 function commandServer(config, open) {
@@ -109,6 +113,10 @@ function commandServer(config, open) {
 
 		printAllErrorsAndWarnings(messages, stats.compilation);
 	});
+
+	// in order to have the caller be able to interact
+	// with the compiler when i's hot
+	return compiler;
 }
 
 function commandHelp() {
