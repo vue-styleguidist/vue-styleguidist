@@ -68,7 +68,7 @@ function commandServer(config, open) {
 	let spinner;
 
 	const server = require('./server');
-	const compiler = server(config, err => {
+	const { app, compiler } = server(config, err => {
 		if (err) {
 			console.error(err);
 		} else {
@@ -89,7 +89,7 @@ function commandServer(config, open) {
 				openBrowser(urls.localUrlForBrowser);
 			}
 		}
-	}).compiler;
+	});
 
 	verbose('Webpack config:', compiler.options);
 
@@ -115,8 +115,8 @@ function commandServer(config, open) {
 	});
 
 	// in order to have the caller be able to interact
-	// with the compiler when i's hot
-	return compiler;
+	// with the app when it's hot
+	return { app, compiler };
 }
 
 function commandHelp() {
