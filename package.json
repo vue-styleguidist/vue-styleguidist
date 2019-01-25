@@ -78,7 +78,7 @@
     "style-loader": "^0.21.0",
     "to-ast": "^1.0.0",
     "uglifyjs-webpack-plugin": "1.2.7",
-    "vue-docgen-api": "^3.3.1",
+    "vue-docgen-api": "^3.3.2",
     "webpack-dev-server": "^3.1.14",
     "webpack": "^4.29.0",
     "webpack-merge": "^4.0.0"
