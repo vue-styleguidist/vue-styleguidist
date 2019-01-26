@@ -15,6 +15,8 @@ config.logger = {
 
 config.components = path.resolve(dir, 'src/components/**/[A-Z]*.vue');
 
+delete config.ribbon;
+
 const { app } = styleguidist(config).server((err, config) => {
 	if (err) {
 		console.log(err);
