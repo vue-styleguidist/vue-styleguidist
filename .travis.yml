@@ -45,6 +45,7 @@ jobs:
       script:
         # Compile JS
         - npm run compile
+
         # Build all examples
         - npm run build
         - npm run build customised
@@ -52,18 +53,22 @@ jobs:
         - npm run build vuex
         - npm run build nuxtjs
         - npm run build vuetify
-        - npm run build:cli
+        - npm run build:vuecli3
+
         # Check that examples really works: no JS errors on load
         - npm run test:browser:pre
+
         - npm run test:browser basic
         - npm run test:browser customised
         - npm run test:browser sections
         - npm run test:browser vuex
         - npm run test:browser nuxtjs
         - npm run test:browser vuetify
-        - npm run test:browser:cli
+        - npm run test:browser vuecli3
+
         # Run integration tests with Cypress
         - npm run test:cypress:pre
+
         - npm run test:cypress:startServer &
         - npm run test:cypress:startServer:post
         - npm run test:cypress:run
