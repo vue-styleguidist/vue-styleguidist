@@ -3,9 +3,6 @@ const vueLoader = require('vue-loader');
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
-	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
-	},
 	version: '1.1.1',
 	webpackConfig: {
 		module: {
@@ -27,6 +24,4 @@ module.exports = {
 		},
 		plugins: [new vueLoader.VueLoaderPlugin()],
 	},
-	usageMode: 'expand',
-	exampleMode: 'expand',
 };

@@ -1,10 +1,11 @@
 const path = require('path');
-const vueLoader = require('vue-loader');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cypress = require('cypress');
 const styleguidist = require('../scripts');
 
 /* eslint-disable no-console */
 
-const dir = path.resolve(__dirname, '../examples/basic');
+const dir = path.resolve(__dirname, '../examples', process.argv[2] || 'basic');
 const config = require(path.join(dir, 'styleguide.config'));
 
 config.logger = {
@@ -12,13 +13,15 @@ config.logger = {
 	warn: message => console.warn(`Warning: ${message}`),
 };
 
-config.serverPort = 8082;
 config.components = path.resolve(dir, 'src/components/**/[A-Z]*.vue');
 
-styleguidist(config).server((err, config) => {
+const { app } = styleguidist(config).server((err, config) => {
 	if (err) {
 		console.log(err);
 	} else {
 		console.log('Listening at http://' + config.serverHost + ':' + config.serverPort);
+		cypress.run().then(() => {
+			app.close();
+		});
 	}
 });
