@@ -17,7 +17,7 @@
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
-    "vue-cli-plugin-styleguidist": "^0.1.0",
+    "vue-cli-plugin-styleguidist": "^1.0.2",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {
