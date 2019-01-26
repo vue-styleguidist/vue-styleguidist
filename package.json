@@ -158,7 +158,7 @@
     "compile": "babel --ignore '*.spec.js' -d lib/ src/",
     "compile:watch": "babel --ignore '*.spec.js' --watch -d lib/ src/",
     "prepublishOnly": "npm run compile",
-    "build": "node bin/styleguidist.js build",
+    "build": "node test/styleguidist.js build",
     "test:browser:pre": "npm i --no-save puppeteer",
     "test:browser": "node test/browser.js",
     "test:browser:cli": "test/browser.js examples/vuecli3/styleguide/index.html",
