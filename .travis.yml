@@ -49,11 +49,19 @@ jobs:
         - npm run build:basic
         - npm run build:customised
         - npm run build:sections
+        - npm run build:vuex
+        - npm run build:nuxtjs
+        - npm run build:vuetify
+        - npm run build:cli
         # Check that examples really works: no JS errors on load
         - npm run test:browser:pre
         - npm run test:browser:basic
         - npm run test:browser:customised
         - npm run test:browser:sections
+        - npm run test:browser:vuex
+        - npm run test:browser:nuxtjs
+        - npm run test:browser:vuetify
+        - npm run test:browser:cli
         # Run integration tests with Cypress
         - npm run test:cypress:pre
         - npm run test:cypress:startServer &
