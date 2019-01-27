@@ -150,6 +150,7 @@ function commandHelp() {
  * @param {object} urls
  */
 function printServerInstructions(urls) {
+	console.log();
 	console.log(`You can now view your style guide in the browser:`);
 	console.log();
 	console.log(`  ${kleur.bold('Local:')}            ${urls.localUrlForTerminal}`);
