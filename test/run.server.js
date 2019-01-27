@@ -1,5 +1,5 @@
 const path = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-unresolved
 const cypress = require('cypress');
 const styleguidist = require('../scripts');
 
