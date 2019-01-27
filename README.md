@@ -23,8 +23,9 @@
   <a href="https://github.com/semantic-release/semantic-release">
     <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release">
   </a>
-  <a href="https://gitter.im/vue-style/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge" title="Join the chat at https://gitter.im/vue-style/Lobby">
-    <img src="https://badges.gitter.im/vue-style/Lobby.svg" alt="License">
+  <a href="https://discordapp.com/channels/325477692906536972/538786416092512278">
+    <img src="https://img.shields.io/discord/325477692906536972.svg?logo=discord"
+alt="chat on Discord">
   </a>
   </div>
 </div>
