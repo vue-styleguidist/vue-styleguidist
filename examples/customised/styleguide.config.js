@@ -63,7 +63,6 @@ module.exports = {
 					exclude: /node_modules/,
 					query: {
 						cacheDirectory: true,
-						presets: ['@babel/preset-react', '@babel/preset-env'],
 					},
 				},
 				{

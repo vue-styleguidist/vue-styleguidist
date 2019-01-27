@@ -1,12 +1,9 @@
-const vueLoader = require('vue-loader');
+const { resolve } = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
-	defaultExample: true,
-	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
-	},
-	version: '1.1.1',
+	renderRootJsx: resolve(__dirname, 'styleguide/styleguide.root.js'),
 	webpackConfig: {
 		module: {
 			rules: [
@@ -15,16 +12,17 @@ module.exports = {
 					loader: 'vue-loader',
 				},
 				{
-					test: /\.js?$/,
+					test: /\.js$/,
 					exclude: /node_modules/,
 					loader: 'babel-loader',
 				},
 				{
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader'],
+					use: ['vue-style-loader', 'css-loader'],
 				},
 			],
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
+		plugins: [new VueLoaderPlugin()],
 	},
+	usageMode: 'expand',
 };
