@@ -8,6 +8,7 @@
 
 <script>
 import VueTypes from 'vue-types';
+import PropTypes from '@znck/prop-types';
 import loggerMixin from '../../mixins/loggerMixin';
 
 /**
@@ -24,6 +25,13 @@ export default {
 			type: String,
 			default: '#333',
 		},
+		/**
+		 * The shape of my heart
+		 */
+		shape: PropTypes.shape({
+			color: PropTypes.string,
+			fontSize: PropTypes.number,
+		}),
 		/**
 		 * The size of the button
 		 * `small, normal, large`
