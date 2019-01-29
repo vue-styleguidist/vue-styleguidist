@@ -17,7 +17,7 @@ module.exports = function findUserWebpackConfig() {
 		try {
 			return require.resolve(configFile);
 		} catch (e) {
-			// eat the error
+			// if file not found, eat the error
 		}
 	}
 
