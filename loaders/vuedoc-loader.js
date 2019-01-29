@@ -5,6 +5,7 @@ const logger = require('glogg')('rsg');
 const getExamples = require('./utils/getExamples');
 const requireIt = require('react-styleguidist/loaders/utils/requireIt');
 const getComponentVueDoc = require('./utils/getComponentVueDoc');
+const findUserWebpackConfig = require('../scripts/utils/findUserWebpackConfig');
 const vueDocs = require('vue-docgen-api');
 const defaultSortProps = require('react-styleguidist/loaders/utils/sortProps');
 
@@ -20,7 +21,16 @@ module.exports = function(source) {
 		config.contextDependencies.forEach(dir => this.addContextDependency(dir));
 	}
 
-	const defaultParser = file => vueDocs.parse(file);
+	const webpackConfigPath = findUserWebpackConfig();
+	let aliases = {};
+	if (webpackConfigPath) {
+		// eslint-disable-next-line import/no-dynamic-require
+		const wbConfig = require(webpackConfigPath);
+		if (wbConfig.resolve) {
+			aliases = wbConfig.resolve.alias;
+		}
+	}
+	const defaultParser = file => vueDocs.parse(file, aliases);
 	const propsParser = config.propsParser || defaultParser;
 
 	let docs = {};

@@ -16,12 +16,13 @@ config.logger = {
 config.components = path.resolve(dir, 'src/components/**/[A-Z]*.vue');
 
 delete config.ribbon;
+delete config.usageMode;
+delete config.exampleMode;
 
 const { app } = styleguidist(config).server((err, config) => {
 	if (err) {
 		console.log(err);
 	} else {
-		console.log('Listening at http://' + config.serverHost + ':' + config.serverPort);
 		cypress.run().then(() => {
 			app.close();
 		});
