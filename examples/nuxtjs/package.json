@@ -23,6 +23,6 @@
     "style-loader": "^0.23.1",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
-    "vue-styleguidist": "^2.0.2"
+    "vue-styleguidist": "*"
   }
 }
