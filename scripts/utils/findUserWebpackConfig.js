@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const USER_WEBPACK_CONFIG_NAMES = [
 	'./webpack.config.js',
 	'./webpackfile.js',
