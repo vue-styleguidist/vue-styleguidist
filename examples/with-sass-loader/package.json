@@ -14,8 +14,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "webpack-merge": "^4.1.2"
+    "extract-text-webpack-plugin": "^3.0.2"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
