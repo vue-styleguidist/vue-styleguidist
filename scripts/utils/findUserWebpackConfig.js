@@ -1,9 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
-const USER_WEBPACK_CONFIG_NAMES = ['webpack.config.js', 'webpackfile.js'];
-
-const absolutize = filePath => path.resolve(process.cwd(), filePath);
+const USER_WEBPACK_CONFIG_NAMES = [
+	'./webpack.config.js',
+	'./webpackfile.js',
+	'@vue/cli-service/webpack.config.js',
+];
 
 /**
  * Find user’s Webpack config and return its path.
@@ -15,9 +14,10 @@ const absolutize = filePath => path.resolve(process.cwd(), filePath);
 module.exports = function findUserWebpackConfig() {
 	// Check in the root folder
 	for (const configFile of USER_WEBPACK_CONFIG_NAMES) {
-		const absoluteConfigFile = absolutize(configFile);
-		if (fs.existsSync(absoluteConfigFile)) {
-			return absoluteConfigFile;
+		try {
+			return require.resolve(configFile);
+		} catch (e) {
+			// if file not found, eat the error
 		}
 	}
 

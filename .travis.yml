@@ -53,6 +53,7 @@ jobs:
         - npm run build vuex
         - npm run build nuxtjs
         - npm run build vuetify
+        - npm run build vuecli-noplugin
         - npm run build:vuecli3
 
         # Check that examples really works: no JS errors on load
@@ -64,6 +65,7 @@ jobs:
         - npm run test:browser vuex
         - npm run test:browser nuxtjs
         - npm run test:browser vuetify
+        - npm run test:browser vuecli-noplugin
         - npm run test:browser vuecli3
 
         # Run integration tests with Cypress

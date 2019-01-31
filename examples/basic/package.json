@@ -13,14 +13,14 @@
     "node": ">=4"
   },
   "dependencies": {
-    "dog-names": "^1.0.2",
-    "vue-styleguidist": "1.8.11"
+    "dog-names": "^1.0.2"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
     "styleguide:build": "vue-styleguidist build"
   },
   "devDependencies": {
+    "vue-styleguidist": "*",
     "babel-core": "^7.0.0-bridge.0",
     "css-loader": "^0.28.7",
     "style-loader": "^0.19.0",
