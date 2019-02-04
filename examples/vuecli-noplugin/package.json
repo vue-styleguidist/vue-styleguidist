@@ -10,7 +10,7 @@
     "vue": "^2.5.16"
   },
   "devDependencies": {
-    "vue-styleguidist": "*",
+    "vue-styleguidist": "^3.0.8",
     "@vue/cli-service": "^3.3.1"
   }
 }
