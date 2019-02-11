@@ -70,7 +70,7 @@
     "prop-types": "^15.6.2",
     "q-i": "^2.0.1",
     "react": "^16.4.1",
-    "react-dev-utils": "^7.0.1",
+    "react-dev-utils": "7.0.1",
     "react-dom": "^16.4.1",
     "react-group": "^1.0.6",
     "react-styleguidist": "^8.0.4",
