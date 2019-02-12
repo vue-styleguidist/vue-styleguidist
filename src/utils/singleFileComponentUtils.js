@@ -24,11 +24,15 @@ const buildStyles = function(styles) {
 
 const getSingleFileComponentParts = function(code) {
 	const parts = compiler.parseComponent(code, { pad: 'line' });
-	parts.script.content = stripComments(parts.script.content, { preserveNewLines: true });
+	if(parts.script) parts.script.content = stripComments(parts.script.content, { preserveNewLines: true });
 	return parts;
 };
 
 const injectTemplateAndParseExport = function(parts) {
+	const templateString = replaceAll(`${parts.template.content}`, '`', '\\`');
+
+	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
+
 	const code = parts.script.content;
 	let index = -1;
 	if (code.indexOf('module.exports') !== -1) {
@@ -48,7 +52,6 @@ const injectTemplateAndParseExport = function(parts) {
 	if (right[right.length - 1] === ';') {
 		right = right.slice(0, -1);
 	}
-	const templateString = replaceAll(`${parts.template.content}`, '`', '\\`');
 	return `{\ntemplate: \`${templateString}\`,\n${right}`;
 };
 
@@ -77,7 +80,7 @@ export function transformSingleFileComponent(code) {
 	const templateAdded = injectTemplateAndParseExport(parts);
 	return {
 		component: `
-			${extractImports(parts.script.content)}
+			${parts.script ? extractImports(parts.script.content) : ''}
 			new Vue(${templateAdded});
 		`,
 		style: buildStyles(parts.styles),
