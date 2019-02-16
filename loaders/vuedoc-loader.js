@@ -22,15 +22,17 @@ module.exports = function(source) {
 	}
 
 	const webpackConfigPath = findUserWebpackConfig();
-	let aliases = {};
+	let alias = {};
+	let modules = null;
 	if (webpackConfigPath) {
 		// eslint-disable-next-line import/no-dynamic-require
 		const wbConfig = require(webpackConfigPath);
 		if (wbConfig.resolve) {
-			aliases = wbConfig.resolve.alias;
+			alias = wbConfig.resolve.alias;
+			modules = wbConfig.resolve.modules;
 		}
 	}
-	const defaultParser = file => vueDocs.parse(file, aliases);
+	const defaultParser = file => vueDocs.parse(file, { alias, modules });
 	const propsParser = config.propsParser || defaultParser;
 
 	let docs = {};
