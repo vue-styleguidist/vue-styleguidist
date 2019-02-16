@@ -41,6 +41,10 @@ function getConfig(config, update) {
 
 	const configDir = configFilepath ? path.dirname(configFilepath) : process.cwd();
 
+	if (config.serverPort && isString(config.serverPort)) {
+		config.serverPort = parseInt(config.serverPort);
+	}
+
 	try {
 		return sanitizeConfig(config, schema, configDir);
 	} catch (exception) {
