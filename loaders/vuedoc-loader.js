@@ -56,7 +56,7 @@ module.exports = function(source) {
 					delete props[key];
 				}
 			});
-		
+		}
 
 		if (docs.methods) {
 			docs.methods.map(method => {
