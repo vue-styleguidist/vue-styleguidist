@@ -198,7 +198,7 @@ module.exports = {
 		default: '0.0.0.0',
 	},
 	serverPort: {
-		type: 'number',
+		type: ['number', 'string'],
 		default: 6060,
 	},
 	showCode: {
