@@ -51,6 +51,11 @@ module.exports = {
 		SectionsRenderer: path.join(__dirname, 'styleguide/components/SectionsRenderer'),
 	},
 	webpackConfig: {
+		resolve: {
+			alias: {
+				'@mixins': path.resolve(__dirname, './src/mixins'),
+			},
+		},
 		module: {
 			rules: [
 				{
