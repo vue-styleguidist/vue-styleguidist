@@ -10,7 +10,7 @@
 
 <script>
 
-import loggerMixin from '../../mixins/loggerMixin';
+import loggerMixin from '@mixins/loggerMixin';
 
 /**
  * The only true button.

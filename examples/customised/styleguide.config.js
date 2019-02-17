@@ -82,6 +82,7 @@ module.exports = {
 		plugins: [new vueLoader.VueLoaderPlugin()],
 		resolve: {
 			alias: {
+				'@mixins': path.resolve(__dirname, './src/mixins'),
 				// Make sure the example uses the local version of react-styleguidist
 				// This is only for the examples in this repo, you won't need it for your own project
 				'vue-styleguidist': path.join(__dirname, '../../'),
