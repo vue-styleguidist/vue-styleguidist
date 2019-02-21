@@ -1,4 +1,5 @@
 const title = 'Vue Styleguidist';
+const ogprefix = 'og: http://ogp.me/ns#';
 const description = 'Isolated Vue component development environment with a living style guide';
 
 module.exports = {
