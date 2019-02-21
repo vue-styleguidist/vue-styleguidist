@@ -74,7 +74,7 @@ module.exports = function(config, env) {
 			alias: {
 				// allows to use the compiler
 				// without this, cli will overload the alias and use runtime esm
-				vue$: 'vue/dist/vue.esm.js',
+				vue$: require.resolve('vue/dist/vue.esm.js'),
 			},
 		},
 		plugins: [
