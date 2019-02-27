@@ -1,7 +1,7 @@
 const path = require('path');
 // eslint-disable-next-line import/no-unresolved
 const cypress = require('cypress');
-const styleguidist = require('../scripts');
+const styleguidist = require('../packages/vue-styleguidist/scripts');
 
 /* eslint-disable no-console */
 

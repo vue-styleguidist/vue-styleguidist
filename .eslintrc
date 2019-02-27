@@ -11,7 +11,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "moduleDirectory": ["src", "node_modules"]
+        "moduleDirectory": ["/packages/vue-styleguidist/src", "node_modules"]
       }
     }
   },

@@ -1,4 +1,4 @@
-const styleguidist = require('../scripts');
+const styleguidist = require('../packages/vue-styleguidist/scripts');
 
 /* eslint-disable no-console */
 
