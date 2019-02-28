@@ -1,6 +1,7 @@
 node_modules
 examples/*/styleguide/*
-packages/vue-styleguidist/lib/*
+packages/*/lib/
+packages/*/dist/
 coverage/*
 travis_phantomjs/*
 docs/dist/**/*
