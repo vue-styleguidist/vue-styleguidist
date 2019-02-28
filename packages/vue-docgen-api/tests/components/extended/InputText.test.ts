@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+
 const InputText = path.join(__dirname, './InputText.vue')
 let docInputText: ComponentDoc
 

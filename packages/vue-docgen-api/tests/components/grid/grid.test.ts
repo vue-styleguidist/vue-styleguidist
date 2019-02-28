@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { ComponentDoc, PropDescriptor } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+
 const grid = path.join(__dirname, './Grid.vue')
 let docGrid: ComponentDoc
 

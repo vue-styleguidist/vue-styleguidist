@@ -1,14 +1,15 @@
 import * as bt from '@babel/types';
 import babylon from '../../babel-parser';
-jest.mock('../../utils/resolveRequired');
-jest.mock('../../utils/resolvePathFrom');
-jest.mock('../../parse');
 import { Documentation } from '../../Documentation';
 import { parseFile } from '../../parse';
 import resolveExportedComponent from '../../utils/resolveExportedComponent';
 import resolvePathFrom from '../../utils/resolvePathFrom';
 import resolveRequired from '../../utils/resolveRequired';
 import extendsHandler from '../extendsHandler';
+
+jest.mock('../../utils/resolveRequired');
+jest.mock('../../utils/resolvePathFrom');
+jest.mock('../../parse');
 
 describe('extendsHandler', () => {
 	let resolveRequiredMock: jest.Mock;

@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import { ComponentDoc, PropDescriptor } from '../../../src/Documentation';
 import { parse } from '../../../src/main';
+
 const button = path.join(__dirname, './Button.vue');
 let docButton: ComponentDoc;
 

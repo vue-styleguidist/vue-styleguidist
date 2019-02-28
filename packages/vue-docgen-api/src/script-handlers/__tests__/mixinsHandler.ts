@@ -1,14 +1,15 @@
 import * as bt from '@babel/types';
 import babelParser from '../../babel-parser';
-jest.mock('../../utils/resolveRequired');
-jest.mock('../../utils/resolvePathFrom');
-jest.mock('../../parse');
 import { Documentation } from '../../Documentation';
 import { parseFile } from '../../parse';
 import resolveExportedComponent from '../../utils/resolveExportedComponent';
 import resolvePathFrom from '../../utils/resolvePathFrom';
 import resolveRequired from '../../utils/resolveRequired';
 import mixinsHandler from '../mixinsHandler';
+
+jest.mock('../../utils/resolveRequired');
+jest.mock('../../utils/resolvePathFrom');
+jest.mock('../../parse');
 
 describe('mixinsHandler', () => {
 	let resolveRequiredMock: jest.Mock;

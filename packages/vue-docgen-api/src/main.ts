@@ -1,5 +1,6 @@
 import { ComponentDoc, Documentation } from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as parseSourceLocal } from './parse'
+
 export { ScriptHandler, TemplateHandler } from './parse'
 export { ComponentDoc, DocGenOptions, ParseOptions, Documentation }
 

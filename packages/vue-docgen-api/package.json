@@ -39,5 +39,8 @@
     "typescript": "^3.2.2",
     "vue": "^2.6.3",
     "vue-template-compiler": "^2.6.3"
+  },
+  "devDependencies": {
+    "vue-property-decorator": "^7.3.0"
   }
 }
