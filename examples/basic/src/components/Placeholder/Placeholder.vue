@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 /**
  * Button that counts how many times it was pressed and exposes a `@public` method to reset itself.
  */
@@ -17,21 +16,21 @@ export default {
 		 */
 		type: {
 			type: String,
-			default: 'animal'
+			default: 'animal',
 		},
 		width: {
 			type: Number,
-			default: 150
+			default: 150,
 		},
 		height: {
 			type: Number,
-			default: 150
-		}
+			default: 150,
+		},
 	},
 	data() {
 		return {
-			value: 0
-		}
+			value: 0,
+		};
 	},
 	methods: {
 		getImageUrl() {
@@ -48,9 +47,9 @@ export default {
 				people: `http://lorempixel.com/${width}/${height}/people`,
 			};
 			return types[type];
-		}
-	}
-}
+		},
+	},
+};
 </script>
 <style scope>
 .placeholder {

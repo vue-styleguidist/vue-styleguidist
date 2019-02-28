@@ -21,28 +21,28 @@ export default {
 		 */
 		variants: {
 			type: Array,
-			required: true
-		}
+			required: true,
+		},
 	},
 	data() {
 		return {
-			label: sample(this.variants)
-		}
+			label: sample(this.variants),
+		};
 	},
 	methods: {
-		handleClick(){
-			this.label = sample(this.variants)
-		}
-	}
-}
+		handleClick() {
+			this.label = sample(this.variants);
+		},
+	},
+};
 </script>
 <style scope>
 .random-button {
-	padding: .5em 1.5em;
+	padding: 0.5em 1.5em;
 	color: #666;
 	background-color: #fff;
 	border: 1px solid currentColor;
-	border-radius: .3em;
+	border-radius: 0.3em;
 	font-size: 16px;
 	font-weight: bold;
 	text-align: center;

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 import loggerMixin from '@mixins/loggerMixin';
 
 /**
@@ -24,7 +23,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#333'
+			default: '#333',
 		},
 		/**
 		 * The size of the button
@@ -32,21 +31,21 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'normal'
+			default: 'normal',
 		},
 		/**
 		 * Gets called when the user clicks on the button
 		 * @ignore
 		 */
 		onClick: {
-			type:Function,
-			default: (event) => {
+			type: Function,
+			default: event => {
 				console.log('You have clicked me!', event.target);
-			}
-		}
+			},
+		},
 	},
 	computed: {
-		fontSize(){
+		fontSize() {
 			let size;
 			switch (this.size) {
 				case 'small':
@@ -60,24 +59,27 @@ export default {
 					break;
 			}
 			return size;
-		}
-	}
-}
+		},
+	},
+};
 </script>
 
 <style scope>
 .button {
-	padding: .5em 1.5em;
+	padding: 0.5em 1.5em;
 	color: #666;
 	background-color: #fff;
 	border: 1px solid currentColor;
-	border-radius: .3em;
+	border-radius: 0.3em;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
 }
 .checks {
-	background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 25%), linear-gradient(-45deg, #f5f5f5 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f5f5f5 75%), linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
+	background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 25%),
+		linear-gradient(-45deg, #f5f5f5 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, #f5f5f5 75%),
+		linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
 	background-size: 16px 16px;
 	background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
 }

@@ -24,14 +24,15 @@ const buildStyles = function(styles) {
 
 const getSingleFileComponentParts = function(code) {
 	const parts = compiler.parseComponent(code, { pad: 'line' });
-	if(parts.script) parts.script.content = stripComments(parts.script.content, { preserveNewLines: true });
+	if (parts.script)
+		parts.script.content = stripComments(parts.script.content, { preserveNewLines: true });
 	return parts;
 };
 
 const injectTemplateAndParseExport = function(parts) {
 	const templateString = replaceAll(`${parts.template.content}`, '`', '\\`');
 
-	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
+	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`;
 
 	const code = parts.script.content;
 	let index = -1;

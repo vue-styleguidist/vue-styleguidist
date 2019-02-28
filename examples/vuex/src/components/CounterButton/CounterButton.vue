@@ -8,29 +8,29 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 /**
  * Button that counts how many times it was pressed and exposes a `@public` method to reset itself.
  */
 export default {
-	name: "CounterButton",
+	name: 'CounterButton',
 	computed: {
-		...mapGetters(["count"]),
+		...mapGetters(['count']),
 	},
 	methods: {
 		/**
 		 * Increments the counter. This method is not marked @public and is not visible in the styleguide.
 		 */
 		increment() {
-			this.$store.commit('increment')
+			this.$store.commit('increment');
 			/**
 			 * After increment event
 			 * @event after
 			 * @type {number}
 			 */
-			this.$emit("after", this.value);
-		}
+			this.$emit('after', this.value);
+		},
 	},
 };
 </script>

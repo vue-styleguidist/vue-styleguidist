@@ -15,18 +15,18 @@ export default {
 	props: {
 		color: {
 			type: String,
-			default: '#333'
+			default: '#333',
 		},
 		/**
 		 * `small, normal, large`
 		 */
 		size: {
 			type: String,
-			default: 'normal'
-		}
+			default: 'normal',
+		},
 	},
 	computed: {
-		fontSize(){
+		fontSize() {
 			let size;
 			switch (this.size) {
 				case 'small':
@@ -40,17 +40,17 @@ export default {
 					break;
 			}
 			return size;
-		}
-	}
-}
+		},
+	},
+};
 </script>
 <style scope>
 .push-button {
-	padding: .5em 1.5em;
+	padding: 0.5em 1.5em;
 	color: #666;
 	background-color: #fff;
 	border: 1px solid currentColor;
-	border-radius: .3em;
+	border-radius: 0.3em;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
