@@ -16,7 +16,9 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "scripts": {
-    "test": "jest",
+    "pretest": "yarn lint",
+    "test": "yarn test:jest",
+    "test:jest": "jest",
     "posttest": "yarn format",
     "test:coverage": "jest --coverage",
     "start": "node test/styleguidist.js server",
