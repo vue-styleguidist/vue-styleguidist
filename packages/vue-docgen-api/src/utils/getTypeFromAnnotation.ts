@@ -25,7 +25,7 @@ const TS_TYPE_NAME_MAP: { [name: string]: string } = {
 	TSVoidKeyword: 'void',
 	TSUndefinedKeyword: 'undefined',
 	TSNullKeyword: 'null',
-	TSNeverKeyword: 'never',
+	TSNeverKeyword: 'never'
 };
 
 function getTypeObjectFromTSType(type: bt.TSType): ParamType {
@@ -50,7 +50,7 @@ const FLOW_TYPE_NAME_MAP: { [name: string]: string } = {
 	VoidTypeAnnotation: 'void',
 	UndefinedTypeAnnotation: 'undefined',
 	NullTypeAnnotation: 'null',
-	NeverTypeAnnotation: 'never',
+	NeverTypeAnnotation: 'never'
 };
 
 function getTypeObjectFromFlowType(type: bt.FlowType): ParamType {

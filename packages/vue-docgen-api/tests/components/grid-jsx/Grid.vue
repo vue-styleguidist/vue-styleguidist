@@ -20,7 +20,7 @@ export default {
 		 */
 		msg: {
 			type: [String, Number],
-			default: text,
+			default: text
 		},
 		/**
 		 * describe data
@@ -32,13 +32,13 @@ export default {
 			type: Array,
 			default: function() {
 				return [{}];
-			},
+			}
 		},
 		/**
 		 * prop function
 		 */
 		propFunc: {
-			default: function() {},
+			default: function() {}
 		},
 		/**
 		 * get columns list
@@ -50,8 +50,8 @@ export default {
 		 */
 		filterKey: {
 			type: String,
-			default: 'example',
-		},
+			default: 'example'
+		}
 	},
 	data() {
 		var sortOrders = {};
@@ -60,7 +60,7 @@ export default {
 		});
 		return {
 			sortKey: '',
-			sortOrders: sortOrders,
+			sortOrders: sortOrders
 		};
 	},
 	computed: {
@@ -88,7 +88,7 @@ export default {
 				});
 			}
 			return data;
-		},
+		}
 	},
 
 	render() {
@@ -133,7 +133,7 @@ export default {
 			 * @type {object}
 			 */
 			this.$emit('success', {
-				demo: 'example success',
+				demo: 'example success'
 			});
 		},
 
@@ -145,13 +145,13 @@ export default {
 			 * @type {object}
 			 */
 			this.$emit('error', {
-				demo: 'example error',
+				demo: 'example error'
 			});
 		},
 		capitalize: function(str) {
 			return str.charAt(0).toUpperCase() + str.slice(1);
-		},
-	},
+		}
+	}
 };
 </script>
 

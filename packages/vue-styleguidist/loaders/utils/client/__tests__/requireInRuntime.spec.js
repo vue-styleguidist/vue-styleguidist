@@ -2,7 +2,7 @@ import requireInRuntime from '../requireInRuntime';
 
 const map = {
 	a: 42,
-	b: 43,
+	b: 43
 };
 
 it('should return a module from the map', () => {

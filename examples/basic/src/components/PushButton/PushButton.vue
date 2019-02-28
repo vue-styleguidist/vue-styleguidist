@@ -15,15 +15,15 @@ export default {
 	props: {
 		color: {
 			type: String,
-			default: '#333',
+			default: '#333'
 		},
 		/**
 		 * `small, normal, large`
 		 */
 		size: {
 			type: String,
-			default: 'normal',
-		},
+			default: 'normal'
+		}
 	},
 	computed: {
 		fontSize() {
@@ -40,8 +40,8 @@ export default {
 					break;
 			}
 			return size;
-		},
-	},
+		}
+	}
 };
 </script>
 <style scope>

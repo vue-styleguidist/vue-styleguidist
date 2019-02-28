@@ -21,19 +21,19 @@ export default {
 		 */
 		variants: {
 			type: Array,
-			required: true,
-		},
+			required: true
+		}
 	},
 	data() {
 		return {
-			label: sample(this.variants),
+			label: sample(this.variants)
 		};
 	},
 	methods: {
 		handleClick() {
 			this.label = sample(this.variants);
-		},
-	},
+		}
+	}
 };
 </script>
 <style scope>

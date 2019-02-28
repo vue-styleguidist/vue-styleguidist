@@ -17,14 +17,14 @@ export default function processComponents(components) {
 			props: {
 				...component.props,
 				// Append @example doclet to all examples
-				examples: [...(component.props.examples || []), ...(component.props.example || [])],
-			},
+				examples: [...(component.props.examples || []), ...(component.props.example || [])]
+			}
 		};
 
 		delete newComponent.props.example;
 		newComponent.props.examples = [
 			...(component.props.examples || []),
-			...(component.props.example || []),
+			...(component.props.example || [])
 		];
 
 		return newComponent;

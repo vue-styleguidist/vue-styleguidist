@@ -14,8 +14,8 @@ export default {
 	extends: Base,
 	props: {
 		placeholder: {
-			type: String,
-		},
-	},
+			type: String
+		}
+	}
 };
 </script>

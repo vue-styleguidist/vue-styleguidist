@@ -59,8 +59,8 @@ module.exports = function(source) {
 					{
 						title: 'public',
 						description: null,
-						type: null,
-					},
+						type: null
+					}
 				];
 				const params = method.tags.params;
 				if (params) {

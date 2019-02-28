@@ -16,7 +16,7 @@ module.exports = {
 	commandServer,
 	commandHelp,
 	verbose,
-	printErrorWithLink,
+	printErrorWithLink
 };
 
 /**
@@ -141,7 +141,7 @@ function commandHelp() {
 			'',
 			'    ' + kleur.yellow('--config') + '        Config file path',
 			'    ' + kleur.yellow('--open') + '          Open Styleguidist in the default browser',
-			'    ' + kleur.yellow('--verbose') + '       Print debug information',
+			'    ' + kleur.yellow('--verbose') + '       Print debug information'
 		].join('\n')
 	);
 }

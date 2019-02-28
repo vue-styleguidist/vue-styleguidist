@@ -79,9 +79,9 @@ function renderDescription(prop) {
 			total.push({
 				name: current.name,
 				type: {
-					name: current.type.names[0],
+					name: current.type.names[0]
 				},
-				description: current.description,
+				description: current.description
 			});
 			return total;
 		}, []);
@@ -164,16 +164,16 @@ export function propsToArray(props) {
 export const columns = [
 	{
 		caption: 'Event name',
-		render: renderName,
+		render: renderName
 	},
 	{
 		caption: 'Type',
-		render: renderTypeColumn,
+		render: renderTypeColumn
 	},
 	{
 		caption: 'Description',
-		render: renderDescription,
-	},
+		render: renderDescription
+	}
 ];
 
 export default function EventsRenderer({ props }) {
@@ -181,5 +181,5 @@ export default function EventsRenderer({ props }) {
 }
 
 EventsRenderer.propTypes = {
-	props: PropTypes.object.isRequired,
+	props: PropTypes.object.isRequired
 };

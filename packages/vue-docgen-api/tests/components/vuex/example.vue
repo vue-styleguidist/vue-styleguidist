@@ -15,8 +15,8 @@ export default {
 		},
 		...mapGetters({
 			duplicate: 'hasDuplicateCustomer',
-			characters: 'alphaKeys',
-		}),
+			characters: 'alphaKeys'
+		})
 	},
 	methods: {
 		/**
@@ -31,10 +31,10 @@ export default {
 		async onSubmit() {
 			let res = await api.post(this.params);
 			this.response = response;
-		},
+		}
 	},
 	mounted() {
 		console.log('Second component loaded');
-	},
+	}
 };
 </script>

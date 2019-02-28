@@ -23,14 +23,14 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#333',
+			default: '#333'
 		},
 		/**
 		 * The shape of my heart
 		 */
 		shape: PropTypes.shape({
 			color: PropTypes.string,
-			fontSize: PropTypes.number,
+			fontSize: PropTypes.number
 		}),
 		/**
 		 * The size of the button
@@ -45,8 +45,8 @@ export default {
 			type: Function,
 			default: event => {
 				console.log('You have clicked me!', event.target);
-			},
-		},
+			}
+		}
 	},
 	computed: {
 		fontSize() {
@@ -63,8 +63,8 @@ export default {
 					break;
 			}
 			return size;
-		},
-	},
+		}
+	}
 };
 </script>
 

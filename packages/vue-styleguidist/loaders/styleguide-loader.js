@@ -26,7 +26,7 @@ const CLIENT_CONFIG_OPTIONS = [
 	'editorConfig',
 	'ribbon',
 	'pagePerSection',
-	'mountPointId',
+	'mountPointId'
 ];
 
 module.exports = function() {};
@@ -71,7 +71,7 @@ module.exports.pitch = function() {
 		welcomeScreen,
 		patterns,
 		sections,
-		renderRootJsx,
+		renderRootJsx
 	};
 
 	return `

@@ -7,8 +7,8 @@ export default {
 		 * Another mixin
 		 */
 		secret: {
-			type: String,
-		},
+			type: String
+		}
 	},
 	mounted() {
 		this.hello();
@@ -16,6 +16,6 @@ export default {
 	methods: {
 		hello() {
 			console.log('hello from mixin!');
-		},
-	},
+		}
+	}
 };

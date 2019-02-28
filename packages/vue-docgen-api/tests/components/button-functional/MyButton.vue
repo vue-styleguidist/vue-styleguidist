@@ -12,7 +12,7 @@
 export default {
 	props: {
 		size: Number,
-		default: 200,
-	},
+		default: 200
+	}
 };
 </script>

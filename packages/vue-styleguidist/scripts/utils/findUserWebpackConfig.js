@@ -1,7 +1,7 @@
 const USER_WEBPACK_CONFIG_NAMES = [
 	'./webpack.config.js',
 	'./webpackfile.js',
-	'@vue/cli-service/webpack.config.js',
+	'@vue/cli-service/webpack.config.js'
 ];
 
 /**

@@ -8,8 +8,8 @@ const styles = ({ space, maxWidth }) => ({
 	root: {
 		maxWidth,
 		margin: [[0, 'auto']],
-		padding: space[4],
-	},
+		padding: space[4]
+	}
 });
 
 export function WelcomeRenderer({ classes, patterns }) {
@@ -38,7 +38,7 @@ Read more in the [locating components guide](${DOCS_COMPONENTS}).
 
 WelcomeRenderer.propTypes = {
 	classes: PropTypes.object.isRequired,
-	patterns: PropTypes.array.isRequired,
+	patterns: PropTypes.array.isRequired
 };
 
 export default Styled(styles)(WelcomeRenderer);

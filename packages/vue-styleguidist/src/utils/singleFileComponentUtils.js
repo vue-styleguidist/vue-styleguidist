@@ -84,6 +84,6 @@ export function transformSingleFileComponent(code) {
 			${parts.script ? extractImports(parts.script.content) : ''}
 			new Vue(${templateAdded});
 		`,
-		style: buildStyles(parts.styles),
+		style: buildStyles(parts.styles)
 	};
 }

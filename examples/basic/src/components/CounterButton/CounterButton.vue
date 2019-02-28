@@ -12,7 +12,7 @@ export default {
 	name: 'CounterButton',
 	data() {
 		return {
-			value: 0,
+			value: 0
 		};
 	},
 	methods: {
@@ -40,7 +40,7 @@ export default {
 		 */
 		set(newValue) {
 			this.value = parseInt(newValue, 10);
-		},
-	},
+		}
+	}
 };
 </script>

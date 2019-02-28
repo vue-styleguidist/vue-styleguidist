@@ -9,32 +9,32 @@ const pkg = require('./package.json');
 const pkgExamples = [
 	{
 		url: './examples/basic/package.json',
-		json: require('./examples/basic/package.json'),
+		json: require('./examples/basic/package.json')
 	},
 	{
 		url: './examples/vuecli3/package.json',
-		json: require('./examples/vuecli3/package.json'),
+		json: require('./examples/vuecli3/package.json')
 	},
 	{
 		url: './examples/sections/package.json',
-		json: require('./examples/sections/package.json'),
+		json: require('./examples/sections/package.json')
 	},
 	{
 		url: './examples/customised/package.json',
-		json: require('./examples/sections/package.json'),
+		json: require('./examples/sections/package.json')
 	},
 	{
 		url: './examples/vuex/package.json',
-		json: require('./examples/vuex/package.json'),
+		json: require('./examples/vuex/package.json')
 	},
 	{
 		url: './examples/with-sass-loader/package.json',
-		json: require('./examples/with-sass-loader/package.json'),
+		json: require('./examples/with-sass-loader/package.json')
 	},
 	{
 		url: './examples/vuetify/package.json',
-		json: require('./examples/vuetify/package.json'),
-	},
+		json: require('./examples/vuetify/package.json')
+	}
 ];
 
 const curVersion = pkg.version;
@@ -44,8 +44,8 @@ const curVersion = pkg.version;
 		{
 			type: 'input',
 			name: 'newVersion',
-			message: `Please provide a version (current: ${curVersion}):`,
-		},
+			message: `Please provide a version (current: ${curVersion}):`
+		}
 	]);
 
 	if (!semver.valid(newVersion)) {
@@ -66,8 +66,8 @@ const curVersion = pkg.version;
 		{
 			name: 'yes',
 			message: `Release ${newVersion}?`,
-			type: 'confirm',
-		},
+			type: 'confirm'
+		}
 	]);
 
 	if (yes) {

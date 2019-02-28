@@ -16,62 +16,61 @@ const consts = require('../consts');
 module.exports = {
 	assetsDir: {
 		type: 'existing directory path',
-		example: 'assets',
+		example: 'assets'
 	},
 	compilerConfig: {
 		type: 'object',
 		default: {
-			objectAssign: 'Object.assign',
-		},
+			objectAssign: 'Object.assign'
+		}
 	},
 	// `components` is a shortcut for { sections: [{ components }] },
 	// see `sections` below
 	components: {
 		type: ['string', 'function', 'array'],
-		example: 'components/**/[A-Z]*.vue',
+		example: 'components/**/[A-Z]*.vue'
 	},
 	configDir: {
-		process: (value, config, rootDir) => rootDir,
+		process: (value, config, rootDir) => rootDir
 	},
 	context: {
 		type: 'object',
 		default: {},
 		example: {
-			map: 'lodash/map',
-		},
+			map: 'lodash/map'
+		}
 	},
 	contextDependencies: {
-		type: 'array',
+		type: 'array'
 	},
 	configureServer: {
-		type: 'function',
+		type: 'function'
 	},
 	dangerouslyUpdateWebpackConfig: {
-		type: 'function',
+		type: 'function'
 	},
 	defaultExample: {
 		type: ['boolean', 'existing file path'],
 		default: false,
-		process: val =>
-			val === true ? path.resolve(__dirname, '../templates/DefaultExample.md') : val,
+		process: val => (val === true ? path.resolve(__dirname, '../templates/DefaultExample.md') : val)
 	},
 	exampleMode: {
 		type: 'string',
 		process: (value, config) => {
 			return config.showCode === undefined ? value : config.showCode ? 'expand' : 'collapse';
 		},
-		default: 'collapse',
+		default: 'collapse'
 	},
 	getComponentPathLine: {
 		type: 'function',
-		default: componentPath => componentPath,
+		default: componentPath => componentPath
 	},
 	getExampleFilename: {
 		type: 'function',
 		default: componentPath => {
 			const files = [
 				path.join(path.dirname(componentPath), 'Readme.md'),
-				componentPath.replace(path.extname(componentPath), '.md'),
+				componentPath.replace(path.extname(componentPath), '.md')
 			];
 
 			for (const file of files) {
@@ -83,16 +82,16 @@ module.exports = {
 
 			return false;
 		},
-		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md'),
+		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md')
 	},
 	ignore: {
 		type: 'array',
-		default: ['**/__tests__/**', `**/*.test.vue`, `**/*.spec.vue`, '**/*.d.ts'],
+		default: ['**/__tests__/**', `**/*.test.vue`, `**/*.spec.vue`, '**/*.d.ts']
 	},
 	highlightTheme: {
 		type: 'string',
 		default: 'base16-light',
-		deprecated: 'Use the theme property in the editorConfig option instead',
+		deprecated: 'Use the theme property in the editorConfig option instead'
 	},
 	editorConfig: {
 		type: 'object',
@@ -104,67 +103,67 @@ module.exports = {
 				smartIndent: false,
 				matchBrackets: true,
 				viewportMargin: Infinity,
-				lineNumbers: false,
+				lineNumbers: false
 			};
 			return Object.assign(
 				{},
 				defaults,
 				config.highlightTheme && {
-					theme: config.highlightTheme,
+					theme: config.highlightTheme
 				},
 				value
 			);
-		},
+		}
 	},
 	navigation: {
 		type: 'boolean',
 		default: false,
-		deprecated: 'Use pagePerSection option instead',
+		deprecated: 'Use pagePerSection option instead'
 	},
 	mixins: {
 		type: 'array',
 		default: [],
 		example: ['path/to/mixin.js', 'path/to/created.js'],
-		deprecated: 'Use renderRootJsx option instead',
+		deprecated: 'Use renderRootJsx option instead'
 	},
 	logger: {
-		type: 'object',
+		type: 'object'
 	},
 	mountPointId: {
 		type: 'string',
-		default: 'rsg-root',
+		default: 'rsg-root'
 	},
 	pagePerSection: {
 		type: 'boolean',
-		default: false,
+		default: false
 	},
 	previewDelay: {
 		type: 'number',
-		default: 500,
+		default: 500
 	},
 	printBuildInstructions: {
-		type: 'function',
+		type: 'function'
 	},
 	printServerInstructions: {
-		type: 'function',
+		type: 'function'
 	},
 	propsParser: {
-		type: 'function',
+		type: 'function'
 	},
 	require: {
 		type: 'array',
 		default: [],
-		example: ['babel-polyfill', 'path/to/styles.css'],
+		example: ['babel-polyfill', 'path/to/styles.css']
 	},
 	renderRootJsx: {
-		type: 'directory path',
+		type: 'directory path'
 	},
 	ribbon: {
 		type: 'object',
 		example: {
 			url: 'http://example.com/',
-			text: 'Fork me on GitHub',
-		},
+			text: 'Fork me on GitHub'
+		}
 	},
 	sections: {
 		type: 'array',
@@ -176,8 +175,8 @@ module.exports = {
 				const components = config.components || DEFAULT_COMPONENTS_PATTERN;
 				return [
 					{
-						components,
-					},
+						components
+					}
 				];
 			}
 			return val;
@@ -185,53 +184,53 @@ module.exports = {
 		example: [
 			{
 				name: 'Documentation',
-				content: 'Readme.md',
+				content: 'Readme.md'
 			},
 			{
 				name: 'Components',
-				components: './lib/components/**/[A-Z]*.js',
-			},
-		],
+				components: './lib/components/**/[A-Z]*.js'
+			}
+		]
 	},
 	serverHost: {
 		type: 'string',
-		default: '0.0.0.0',
+		default: '0.0.0.0'
 	},
 	serverPort: {
 		type: ['number', 'string'],
-		default: 6060,
+		default: 6060
 	},
 	showCode: {
 		type: 'boolean',
 		default: false,
-		deprecated: 'Use exampleMode option instead',
+		deprecated: 'Use exampleMode option instead'
 	},
 	showUsage: {
 		type: 'boolean',
 		default: false,
-		deprecated: 'Use usageMode option instead',
+		deprecated: 'Use usageMode option instead'
 	},
 	showSidebar: {
 		type: 'boolean',
-		default: true,
+		default: true
 	},
 	skipComponentsWithoutExample: {
 		type: 'boolean',
-		default: false,
+		default: false
 	},
 	sortProps: {
-		type: 'function',
+		type: 'function'
 	},
 	styleguideComponents: {
-		type: 'object',
+		type: 'object'
 	},
 	styleguideDir: {
 		type: 'directory path',
-		default: 'styleguide',
+		default: 'styleguide'
 	},
 	styleguidePublicPath: {
 		type: 'string',
-		default: '',
+		default: ''
 	},
 	styles: {
 		type: 'object',
@@ -239,10 +238,10 @@ module.exports = {
 		example: {
 			Logo: {
 				logo: {
-					fontStyle: 'italic',
-				},
-			},
-		},
+					fontStyle: 'italic'
+				}
+			}
+		}
 	},
 	template: {
 		type: ['object', 'function'],
@@ -257,15 +256,15 @@ module.exports = {
 				);
 			}
 			return val;
-		},
+		}
 	},
 	theme: {
 		type: 'object',
 		default: {},
 		example: {
 			link: 'firebrick',
-			linkHover: 'salmon',
-		},
+			linkHover: 'salmon'
+		}
 	},
 	title: {
 		type: 'string',
@@ -276,10 +275,10 @@ module.exports = {
 			const name = getUserPackageJson().name || '';
 			return `${startCase(name)} Style Guide`;
 		},
-		example: 'My Style Guide',
+		example: 'My Style Guide'
 	},
 	updateDocs: {
-		type: 'function',
+		type: 'function'
 	},
 	updateExample: {
 		type: 'function',
@@ -292,29 +291,29 @@ module.exports = {
 				);
 			}
 			return props;
-		},
+		}
 	},
 	updateWebpackConfig: {
 		type: 'function',
-		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`,
+		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
 		type: 'string',
 		process: (value, config) => {
 			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse';
 		},
-		default: 'collapse',
+		default: 'collapse'
 	},
 	verbose: {
 		type: 'boolean',
-		default: false,
+		default: false
 	},
 	version: {
-		type: 'string',
+		type: 'string'
 	},
 	vuex: {
 		type: 'directory path',
-		deprecated: 'Use renderRootJsx option instead',
+		deprecated: 'Use renderRootJsx option instead'
 	},
 	webpackConfig: {
 		type: ['object', 'function'],
@@ -345,32 +344,32 @@ module.exports = {
 						test: /\.vue$/,
 						exclude: /node_modules/,
 						loader: 'vue-loader',
-						options: {},
+						options: {}
 					},
 					{
 						test: /\.js$/,
 						exclude: /node_modules/,
-						loader: 'babel-loader',
+						loader: 'babel-loader'
 					},
 					{
 						test: /\.css$/,
-						loader: 'style-loader!css-loader',
+						loader: 'style-loader!css-loader'
 					},
 
 					{
 						test: /\.json$/,
-						loader: 'json-loader',
+						loader: 'json-loader'
 					},
 					{
 						exclude: [/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.vue$/, /\.json$/],
 						loader: 'url-loader',
 						query: {
 							limit: 10000,
-							name: 'static/media/[name].[hash:8].[ext]',
-						},
-					},
-				],
-			},
-		},
-	},
+							name: 'static/media/[name].[hash:8].[ext]'
+						}
+					}
+				]
+			}
+		}
+	}
 };

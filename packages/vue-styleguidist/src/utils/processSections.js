@@ -11,6 +11,6 @@ export default function processSections(sections) {
 		...section,
 		visibleName: section.name,
 		components: processComponents(section.components || []),
-		sections: processSections(section.sections || []),
+		sections: processSections(section.sections || [])
 	}));
 }

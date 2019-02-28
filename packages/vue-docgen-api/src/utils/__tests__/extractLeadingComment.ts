@@ -21,7 +21,7 @@ describe('extractLeadingComment', () => {
 				' <div>Happy Day !!</div>',
 				' <!-- single line comment -->',
 				' <h1>title of the template</h1>',
-				'</div>',
+				'</div>'
 			].join('\n')
 		);
 		if (!elt) {
@@ -39,7 +39,7 @@ describe('extractLeadingComment', () => {
 				'  <!-- multi line comment -->',
 				'  <!-- on 2 lines         -->',
 				'  <h1>title of the template</h1>',
-				'</div>',
+				'</div>'
 			].join('\n')
 		);
 		if (elt) {

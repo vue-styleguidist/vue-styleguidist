@@ -10,7 +10,7 @@ describe('tests button', () => {
 	beforeAll(done => {
 		docButton = parse(button, {
 			'@mixins': path.resolve(__dirname, '../../mixins'),
-			'@utils': path.resolve(__dirname, '../../utils'),
+			'@utils': path.resolve(__dirname, '../../utils')
 		});
 		done();
 	});

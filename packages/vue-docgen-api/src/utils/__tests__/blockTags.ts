@@ -1,7 +1,7 @@
-import blockTags from '../blockTags'
+import blockTags from '../blockTags';
 
 describe('blockTags', () => {
-  it('should return an array', () => {
-    expect(typeof blockTags.length).not.toBeUndefined()
-  })
-})
+	it('should return an array', () => {
+		expect(typeof blockTags.length).not.toBeUndefined();
+	});
+});

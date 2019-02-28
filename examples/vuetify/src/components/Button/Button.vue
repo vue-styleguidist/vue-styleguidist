@@ -24,7 +24,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: 'success',
+			default: 'success'
 		},
 		/**
 		 * The size of the button
@@ -32,7 +32,7 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'normal',
+			default: 'normal'
 		},
 		/**
 		 * Gets called when the user clicks on the button
@@ -42,8 +42,8 @@ export default {
 			type: Function,
 			default: event => {
 				console.log('You have clicked me!', event.target);
-			},
-		},
+			}
+		}
 	},
 	computed: {
 		fontSize() {
@@ -60,8 +60,8 @@ export default {
 					break;
 			}
 			return size;
-		},
-	},
+		}
+	}
 };
 </script>
 

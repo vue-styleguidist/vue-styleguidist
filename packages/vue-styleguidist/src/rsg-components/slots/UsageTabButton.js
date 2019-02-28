@@ -17,9 +17,9 @@ UsageTabButton.propTypes = {
 	name: PropTypes.string.isRequired,
 	props: PropTypes.shape({
 		props: PropTypes.array,
-		methods: PropTypes.array,
+		methods: PropTypes.array
 	}).isRequired,
-	active: PropTypes.bool,
+	active: PropTypes.bool
 };
 
 export default UsageTabButton;

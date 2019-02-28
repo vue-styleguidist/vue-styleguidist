@@ -10,7 +10,7 @@ module.exports = {
 		link: '#274e75',
 		linkHover: '#90a7bf',
 		border: '#e0d2de',
-		font: ['Helvetica', 'sans-serif'],
+		font: ['Helvetica', 'sans-serif']
 	},
 	styles: {
 		Playground: {
@@ -18,18 +18,18 @@ module.exports = {
 				paddingLeft: 0,
 				paddingRight: 0,
 				borderWidth: [[0, 0, 1, 0]],
-				borderRadius: 0,
-			},
+				borderRadius: 0
+			}
 		},
 		Markdown: {
 			pre: {
 				border: 0,
-				background: 'none',
+				background: 'none'
 			},
 			code: {
-				fontSize: 14,
-			},
-		},
+				fontSize: 14
+			}
+		}
 	},
 	getComponentPathLine(componentPath) {
 		const name = path.basename(componentPath, '.js');
@@ -48,36 +48,36 @@ module.exports = {
 	styleguideComponents: {
 		LogoRenderer: path.join(__dirname, 'styleguide/components/Logo'),
 		StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuide'),
-		SectionsRenderer: path.join(__dirname, 'styleguide/components/SectionsRenderer'),
+		SectionsRenderer: path.join(__dirname, 'styleguide/components/SectionsRenderer')
 	},
 	webpackConfig: {
 		module: {
 			rules: [
 				{
 					test: /\.vue$/,
-					loader: 'vue-loader',
+					loader: 'vue-loader'
 				},
 				{
 					test: /\.js?$/,
 					loader: 'babel-loader',
 					exclude: /node_modules/,
 					query: {
-						cacheDirectory: true,
-					},
+						cacheDirectory: true
+					}
 				},
 				{
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
+					use: ['style-loader', 'css-loader', 'sass-loader']
 				},
 				{
 					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
+					use: ['style-loader', 'css-loader', 'sass-loader']
 				},
 				{
 					test: /\.png$/,
-					use: ['url-loader'],
-				},
-			],
+					use: ['url-loader']
+				}
+			]
 		},
 		plugins: [new vueLoader.VueLoaderPlugin()],
 		resolve: {
@@ -85,10 +85,10 @@ module.exports = {
 				'@mixins': path.resolve(__dirname, './src/mixins'),
 				// Make sure the example uses the local version of react-styleguidist
 				// This is only for the examples in this repo, you won't need it for your own project
-				'vue-styleguidist': path.join(__dirname, '../../'),
-			},
-		},
+				'vue-styleguidist': path.join(__dirname, '../../')
+			}
+		}
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand',
+	exampleMode: 'expand'
 };

@@ -16,26 +16,26 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: 'black',
+			default: 'black'
 		},
 		/** Sets background color of the button
 		 * @since 1.2.0
 		 */
 		background: {
 			type: String,
-			default: 'white',
+			default: 'white'
 		},
 		/** @deprecated Use color instead */
-		oldColor: String,
+		oldColor: String
 	},
 	computed: {
 		styles() {
 			return {
 				'font-size': this.size,
 				color: this.color,
-				background: this.background,
+				background: this.background
 			};
-		},
+		}
 	},
 	methods: {
 		/** Triggered when button is clicked
@@ -49,8 +49,8 @@ export default {
 		handleClick(e) {
 			this.$emit('click', e);
 			this.$emit('gator', e);
-		},
-	},
+		}
+	}
 };
 </script>
 

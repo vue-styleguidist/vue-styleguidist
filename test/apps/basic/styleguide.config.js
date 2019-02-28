@@ -12,14 +12,14 @@ module.exports = {
 				{
 					test: /\.jsx?$/,
 					include: dir,
-					loader: 'babel-loader',
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.css$/,
 					include: dir,
-					loader: 'style-loader!css-loader?modules',
-				},
-			],
-		},
-	},
+					loader: 'style-loader!css-loader?modules'
+				}
+			]
+		}
+	}
 };

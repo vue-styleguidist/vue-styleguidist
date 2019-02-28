@@ -4,7 +4,7 @@ module.exports = {
 		 * Error
 		 */
 		right: {
-			default: 'example',
-		},
-	},
+			default: 'example'
+		}
+	}
 };

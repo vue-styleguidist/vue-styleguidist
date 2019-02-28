@@ -28,34 +28,34 @@ module.exports = function(config, env) {
 		context: Object.assign({}, templateContext, {
 			title: config.title,
 			container: config.mountPointId,
-			trimWhitespace: true,
+			trimWhitespace: true
 		}),
-		template,
+		template
 	};
 
 	let webpackConfig = {
 		output: {
 			path: config.styleguideDir,
 			filename: 'build/[name].bundle.js',
-			chunkFilename: 'build/[name].js',
+			chunkFilename: 'build/[name].js'
 		},
 		resolve: {
 			extensions: ['.js', '.jsx', '.json'],
 			alias: {
-				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`,
-			},
+				'rsg-codemirror-theme.css': `codemirror/theme/${config.editorConfig.theme}.${'css'}`
+			}
 		},
 		module: {
 			rules: [
 				{
 					resourceQuery: /blockType=docs/,
-					loader: require.resolve('../loaders/docs-loader.js'),
-				},
-			],
+					loader: require.resolve('../loaders/docs-loader.js')
+				}
+			]
 		},
 		performance: {
-			hints: false,
-		},
+			hints: false
+		}
 	};
 
 	/* istanbul ignore if */
@@ -74,8 +74,8 @@ module.exports = function(config, env) {
 			alias: {
 				// allows to use the compiler
 				// without this, cli will overload the alias and use runtime esm
-				vue$: require.resolve('vue/dist/vue.esm.js'),
-			},
+				vue$: require.resolve('vue/dist/vue.esm.js')
+			}
 		},
 		plugins: [
 			// in order to avoid collision with the preload plugins
@@ -85,9 +85,9 @@ module.exports = function(config, env) {
 			new MiniHtmlWebpackPlugin(htmlPluginOptions),
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-			}),
-		],
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env)
+			})
+		]
 	});
 
 	// To have the hot-reload work on vue-styleguide
@@ -98,23 +98,23 @@ module.exports = function(config, env) {
 			output: {
 				filename: 'build/bundle.[chunkhash:8].js',
 				chunkFilename: 'build/[name].[chunkhash:8].js',
-				publicPath: config.styleguidePublicPath,
+				publicPath: config.styleguidePublicPath
 			},
 			plugins: [
 				new CleanWebpackPlugin(['build'], {
 					root: config.styleguideDir,
-					verbose: config.verbose === true,
+					verbose: config.verbose === true
 				}),
 				new CopyWebpackPlugin(
 					config.assetsDir
 						? [
 								{
-									from: config.assetsDir,
-								},
+									from: config.assetsDir
+								}
 						  ]
 						: []
-				),
-			],
+				)
+			]
 		});
 
 		const uglifier = new UglifyJSPlugin({
@@ -125,18 +125,18 @@ module.exports = function(config, env) {
 				ecma: 5,
 				compress: {
 					keep_fnames: true,
-					warnings: false,
+					warnings: false
 				},
 				mangle: {
-					keep_fnames: true,
-				},
-			},
+					keep_fnames: true
+				}
+			}
 		});
 
 		/* istanbul ignore if */
 		if (isWebpack4) {
 			webpackConfig.optimization = {
-				minimizer: [uglifier],
+				minimizer: [uglifier]
 			};
 		} else {
 			webpackConfig.plugins.unshift(uglifier);
@@ -144,7 +144,7 @@ module.exports = function(config, env) {
 	} else {
 		webpackConfig = merge(webpackConfig, {
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')],
-			plugins: [new webpack.HotModuleReplacementPlugin()],
+			plugins: [new webpack.HotModuleReplacementPlugin()]
 		});
 	}
 
@@ -169,7 +169,7 @@ module.exports = function(config, env) {
 		'SlotsTable',
 		'slots/UsageTabButton',
 		'StyleGuide',
-		'Welcome',
+		'Welcome'
 	].forEach(function(component) {
 		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component);
 	});

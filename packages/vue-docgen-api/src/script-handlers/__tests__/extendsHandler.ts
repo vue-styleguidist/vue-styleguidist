@@ -21,7 +21,7 @@ describe('extendsHandler', () => {
 			(ast: bt.File, varNameFilter?: string[]) => { [key: string]: string }
 		>;
 		resolveRequiredMock.mockReturnValue({
-			testComponent: { filePath: './componentPath', exportName: 'default' },
+			testComponent: { filePath: './componentPath', exportName: 'default' }
 		});
 
 		mockResolvePathFrom = (<unknown>resolvePathFrom) as jest.Mock<
@@ -46,12 +46,12 @@ describe('extendsHandler', () => {
 			'import testComponent from "./testComponent"',
 			'export default {',
 			'  extends:testComponent',
-			'}',
+			'}'
 		].join('\n');
 		parseItExtends(src);
 		expect(parseFile).toHaveBeenCalledWith(doc, {
 			filePath: './component/full/path',
-			nameFilter: ['default'],
+			nameFilter: ['default']
 		});
 	});
 
@@ -60,12 +60,12 @@ describe('extendsHandler', () => {
 			'const testComponent = require("./testComponent");',
 			'export default {',
 			'  extends:testComponent',
-			'}',
+			'}'
 		].join('\n');
 		parseItExtends(src);
 		expect(parseFile).toHaveBeenCalledWith(doc, {
 			filePath: './component/full/path',
-			nameFilter: ['default'],
+			nameFilter: ['default']
 		});
 	});
 
@@ -74,12 +74,12 @@ describe('extendsHandler', () => {
 			'import { test as testComponent, other } from "./testComponent"',
 			'export default {',
 			'  extends:testComponent',
-			'}',
+			'}'
 		].join('\n');
 		parseItExtends(src);
 		expect(parseFile).toHaveBeenCalledWith(doc, {
 			filePath: './component/full/path',
-			nameFilter: ['default'],
+			nameFilter: ['default']
 		});
 	});
 
@@ -88,12 +88,12 @@ describe('extendsHandler', () => {
 			'import { testComponent } from "./testComponent";',
 			'@Component',
 			'export default class Bart extends testComponent {',
-			'}',
+			'}'
 		].join('\n');
 		parseItExtends(src);
 		expect(parseFile).toHaveBeenCalledWith(doc, {
 			filePath: './component/full/path',
-			nameFilter: ['default'],
+			nameFilter: ['default']
 		});
 	});
 });

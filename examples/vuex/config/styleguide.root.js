@@ -6,6 +6,6 @@ export default previewComponent => {
 		store,
 		render(createElement) {
 			return createElement(previewComponent);
-		},
+		}
 	};
 };

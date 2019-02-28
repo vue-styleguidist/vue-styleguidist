@@ -6,8 +6,8 @@ const props = [
 		name: 'children',
 		type: { name: 'string' },
 		required: true,
-		description: 'Button label.',
-	},
+		description: 'Button label.'
+	}
 ];
 const methods = [
 	{
@@ -16,12 +16,12 @@ const methods = [
 			{
 				name: 'newValue',
 				description: 'New value for the counter.',
-				type: { name: 'Number' },
-			},
+				type: { name: 'Number' }
+			}
 		],
 		returns: null,
-		description: 'Sets the counter to a particular value.',
-	},
+		description: 'Sets the counter to a particular value.'
+	}
 ];
 
 describe('Usage', () => {

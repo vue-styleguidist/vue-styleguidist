@@ -36,27 +36,27 @@ export default {
 		 * The size of the button
 		 */
 		size: {
-			default: 'normal',
+			default: 'normal'
 		},
 		/**
 		 * Number of columns (1-12) the column should span.
 		 */
 		span: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		/** Sm breakpoint and above */
 		spanSm: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		/** Md breakpoint and above */
 		spanMd: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		/**
 		 * The example props
 		 */
 		example: {
-			default: false,
+			default: false
 		},
 		/**
 		 * Model example2
@@ -64,21 +64,21 @@ export default {
 		 */
 		example2: {
 			type: String,
-			default: 'example model',
+			default: 'example model'
 		},
 		/**
 		 * The example3 props
 		 */
 		example3: {
 			type: Number,
-			default: 16,
+			default: 16
 		},
 		/**
 		 * @ignore
 		 * Add custom click actions.
 		 **/
 		onCustomClick: {
-			default: () => () => null,
+			default: () => () => null
 		},
 		/**
 		 * Function default
@@ -87,7 +87,7 @@ export default {
 			type: Function,
 			default: () => {
 				return 'foo';
-			},
+			}
 		},
 		/**
 		 * Object or array defaults must be returned from
@@ -97,17 +97,17 @@ export default {
 			type: Object,
 			default: () => {
 				return { message: 'hello' };
-			},
+			}
 		},
 		/**
 		 *@ignore
 		 *
 		 */
-		prop1: String,
+		prop1: String
 	},
 	data() {
 		return {
-			count: 0,
+			count: 0
 		};
 	},
 	methods: {
@@ -125,14 +125,14 @@ export default {
 				this.$emit(
 					'success',
 					{
-						demo: 'example',
+						demo: 'example'
 					},
 					10,
 					false
 				);
 			}, 1000);
-		},
-	},
+		}
+	}
 };
 </script>
 

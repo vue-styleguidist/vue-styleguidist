@@ -8,13 +8,13 @@ module.exports = {
 		 */
 		color: {
 			type: String,
-			default: 'blue',
+			default: 'blue'
 		},
 		/**
 		 * Error
 		 */
 		size: {
-			default: 'example',
-		},
-	},
+			default: 'example'
+		}
+	}
 };

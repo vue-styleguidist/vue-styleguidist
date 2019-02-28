@@ -55,6 +55,6 @@ module.exports = function processComponent(filepath, config) {
 		module: requireIt(filepath),
 		props,
 		hasExamples: examplesFile && fs.existsSync(examplesFile),
-		metadata: fs.existsSync(componentMetadataPath) ? requireIt(componentMetadataPath) : {},
+		metadata: fs.existsSync(componentMetadataPath) ? requireIt(componentMetadataPath) : {}
 	};
 };

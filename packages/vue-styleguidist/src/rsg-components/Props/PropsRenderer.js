@@ -161,7 +161,7 @@ function renderRequired(prop) {
 		null,
 		required &&
 			React.createElement(Markdown, {
-				text: `${required}` || 'false',
+				text: `${required}` || 'false'
 			})
 	);
 }
@@ -231,24 +231,24 @@ export function getRowKey(row) {
 export const columns = [
 	{
 		caption: 'Prop name',
-		render: renderName,
+		render: renderName
 	},
 	{
 		caption: 'Type',
-		render: renderTypeColumn,
+		render: renderTypeColumn
 	},
 	{
 		caption: 'Default',
-		render: renderDefault,
+		render: renderDefault
 	},
 	{
 		caption: 'Required',
-		render: renderRequired,
+		render: renderRequired
 	},
 	{
 		caption: 'Description',
-		render: renderDescription,
-	},
+		render: renderDescription
+	}
 ];
 
 export default function PropsRenderer({ props }) {
@@ -256,5 +256,5 @@ export default function PropsRenderer({ props }) {
 }
 
 PropsRenderer.propTypes = {
-	props: PropTypes.array.isRequired,
+	props: PropTypes.array.isRequired
 };

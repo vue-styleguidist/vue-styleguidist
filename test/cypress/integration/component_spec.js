@@ -77,7 +77,7 @@ describe('Single component', () => {
 				// around it with a bunch of backspacing, since there's no way
 				// to place the cursor
 				.type(`${'{backspace}'.repeat(codeToDelete.length)} Harder${codeToDelete}`, {
-					force: true,
+					force: true
 				});
 
 			// Wait for CodeMirror to update

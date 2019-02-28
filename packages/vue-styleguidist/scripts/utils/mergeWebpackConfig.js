@@ -8,7 +8,7 @@ const IGNORE_SECTIONS_ENV = {
 	// For production builds, we'll ignore devtool settings to avoid
 	// source mapping bloat.
 	production: ['devtool'],
-	removePlugins: ['plugins'],
+	removePlugins: ['plugins']
 };
 
 const IGNORE_PLUGINS = [
@@ -18,7 +18,7 @@ const IGNORE_PLUGINS = [
 	'OccurrenceOrderPlugin',
 	'DedupePlugin',
 	'UglifyJsPlugin',
-	'HotModuleReplacementPlugin',
+	'HotModuleReplacementPlugin'
 ];
 
 const merge = mergeBase({
@@ -27,7 +27,7 @@ const merge = mergeBase({
 		'plugins',
 		IGNORE_PLUGINS,
 		plugin => plugin.constructor && plugin.constructor.name
-	),
+	)
 });
 
 /**

@@ -17,26 +17,26 @@ export default {
 		 */
 		value: {
 			required: true,
-			type: [Number, String],
+			type: [Number, String]
 		},
 		/**
 		 * Using for: String.prototype.replace(regexp, replacement)
 		 */
 		regExp: {
 			type: RegExp,
-			default: null,
+			default: null
 		},
 		/**
 		 * Using for: String.prototype.replace(regexp, replacement)
 		 */
 		replacement: {
 			type: String,
-			default: '',
-		},
+			default: ''
+		}
 	},
 	data() {
 		return {
-			val: '',
+			val: ''
 		};
 	},
 	methods: {
@@ -80,14 +80,14 @@ export default {
 			 * @type {string}
 			 */
 			this.$emit('fire', 'hello fire!!');
-		},
+		}
 	},
 	watch: {
 		// watch value prop
 		value(val) {
 			this.updateValue(val);
-		},
-	},
+		}
+	}
 };
 </script>
 

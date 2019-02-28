@@ -11,6 +11,6 @@ import { anotherMixin, myMixin } from '@mixins/index';
 import { multi, hidden } from 'multiMixin';
 
 export default {
-	mixins: [anotherMixin, myMixin],
+	mixins: [anotherMixin, myMixin]
 };
 </script>

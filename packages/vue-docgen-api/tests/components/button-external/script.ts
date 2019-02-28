@@ -1,4 +1,4 @@
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 /**
  * This is an example of creating a reusable button component and using it with external data.
@@ -7,40 +7,38 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
  */
 @Component
 export default class MyComponent extends Vue {
-  public aHiddenData: string
+	public aHiddenData: string;
 
-  /**
-   * An example of a property typed through the decorators arguments
-   */
-  @Prop({ type: String })
-  public propNoType
+	/**
+	 * An example of a property typed through the decorators arguments
+	 */
+	@Prop({ type: String })
+	public propNoType;
 
-  /**
-   * An example of a property typed through the annotation
-   */
-  @Prop
-  public propA: number
+	/**
+	 * An example of a property typed through the annotation
+	 */
+	@Prop public propA: number;
 
-  /**
-   * A prop with a default value
-   */
-  @Prop({ default: 'default value' })
-  public propB: string
+	/**
+	 * A prop with a default value
+	 */
+	@Prop({ default: 'default value' })
+	public propB: string;
 
-  /**
-   * A prop with a hybrid type
-   */
-  @Prop
-  public propC: string | boolean
+	/**
+	 * A prop with a hybrid type
+	 */
+	@Prop public propC: string | boolean;
 
-  /**
-   * method testing
-   * @public
-   */
-  public onClick(a: string) {
-    /**
-     * Success event when we click
-     */
-    this.$emit('success', a)
-  }
+	/**
+	 * method testing
+	 * @public
+	 */
+	public onClick(a: string) {
+		/**
+		 * Success event when we click
+		 */
+		this.$emit('success', a);
+	}
 }

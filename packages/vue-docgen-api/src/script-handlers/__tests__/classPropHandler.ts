@@ -1,94 +1,94 @@
-import { NodePath } from 'ast-types'
-import Map from 'ts-map'
-import babylon from '../../babel-parser'
-import { Documentation, PropDescriptor } from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import classPropHandler from '../classPropHandler'
+import { NodePath } from 'ast-types';
+import Map from 'ts-map';
+import babylon from '../../babel-parser';
+import { Documentation, PropDescriptor } from '../../Documentation';
+import resolveExportedComponent from '../../utils/resolveExportedComponent';
+import classPropHandler from '../classPropHandler';
 
-jest.mock('../../Documentation')
+jest.mock('../../Documentation');
 
 function parse(src: string): Map<string, NodePath> {
-  const ast = babylon({ plugins: ['typescript'] }).parse(src)
-  return resolveExportedComponent(ast)
+	const ast = babylon({ plugins: ['typescript'] }).parse(src);
+	return resolveExportedComponent(ast);
 }
 
 describe('propHandler', () => {
-  let documentation: Documentation
-  let mockPropDescriptor: PropDescriptor
+	let documentation: Documentation;
+	let mockPropDescriptor: PropDescriptor;
 
-  beforeEach(() => {
-    mockPropDescriptor = {
-      description: '',
-      required: '',
-      tags: {},
-    }
-    const MockDocumentation = require('../../Documentation').Documentation
-    documentation = new MockDocumentation()
-    const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock
-    mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
-  })
+	beforeEach(() => {
+		mockPropDescriptor = {
+			description: '',
+			required: '',
+			tags: {}
+		};
+		const MockDocumentation = require('../../Documentation').Documentation;
+		documentation = new MockDocumentation();
+		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock;
+		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor);
+	});
 
-  function tester(src: string, matchedObj: any) {
-    const def = parse(src).get('default')
-    classPropHandler(documentation, def as any)
-    expect(mockPropDescriptor).toMatchObject(matchedObj)
-  }
+	function tester(src: string, matchedObj: any) {
+		const def = parse(src).get('default');
+		classPropHandler(documentation, def as any);
+		expect(mockPropDescriptor).toMatchObject(matchedObj);
+	}
 
-  describe('base', () => {
-    it('should ignore data that does not have the prop decorator', () => {
-      const src = `
+	describe('base', () => {
+		it('should ignore data that does not have the prop decorator', () => {
+			const src = `
         @Component
         export default class MyComp {
           someData: boolean;
-        }`
-      tester(src, {})
-      expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('someData')
-    })
-    it('should detect all data that have the prop decorator', () => {
-      const src = `
+        }`;
+			tester(src, {});
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('someData');
+		});
+		it('should detect all data that have the prop decorator', () => {
+			const src = `
         @Component
         export default class MyComp {
           @Prop
           test: string;
-        }`
-      tester(src, {
-        type: { name: 'string' },
-      })
-      expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test')
-    })
+        }`;
+			tester(src, {
+				type: { name: 'string' }
+			});
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test');
+		});
 
-    it('should get default expression from the prop decorator', () => {
-      const src = `
+		it('should get default expression from the prop decorator', () => {
+			const src = `
         @Component
         export default class MyTest {
           @Prop({default: 'hello'})
           testDefault: string;
-        }`
-      tester(src, {
-        type: { name: 'string' },
-        defaultValue: {
-          value: `"hello"`,
-        },
-      })
-      expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testDefault')
-    })
+        }`;
+			tester(src, {
+				type: { name: 'string' },
+				defaultValue: {
+					value: `"hello"`
+				}
+			});
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testDefault');
+		});
 
-    it('should get required from the prop decorator', () => {
-      const src = `
+		it('should get required from the prop decorator', () => {
+			const src = `
         @Component
         export default class MyTest {
           @Prop({required: true})
           testRequired: string;
-        }`
-      tester(src, {
-        type: { name: 'string' },
-        required: true,
-      })
-      expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testRequired')
-    })
+        }`;
+			tester(src, {
+				type: { name: 'string' },
+				required: true
+			});
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testRequired');
+		});
 
-    it('should extract descriptions from leading comments', () => {
-      const src = `
+		it('should extract descriptions from leading comments', () => {
+			const src = `
         @Component
         export default class MyTest {
           /**
@@ -96,24 +96,24 @@ describe('propHandler', () => {
            **/
           @Prop
           testDescribed: boolean;
-        }`
-      tester(src, {
-        description: 'A described prop',
-      })
-      expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testDescribed')
-    })
+        }`;
+			tester(src, {
+				description: 'A described prop'
+			});
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testDescribed');
+		});
 
-    it('should extract type from decorator arguments', () => {
-      const src = `
+		it('should extract type from decorator arguments', () => {
+			const src = `
         @Component
         export default class MyTest {
           @Prop({type:String})
           testTyped;
-        }`
-      tester(src, {
-        type: { name: 'string' },
-      })
-      expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped')
-    })
-  })
-})
+        }`;
+			tester(src, {
+				type: { name: 'string' }
+			});
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped');
+		});
+	});
+});

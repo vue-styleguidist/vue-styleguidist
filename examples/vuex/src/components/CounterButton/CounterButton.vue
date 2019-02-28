@@ -16,7 +16,7 @@ import { mapGetters } from 'vuex';
 export default {
 	name: 'CounterButton',
 	computed: {
-		...mapGetters(['count']),
+		...mapGetters(['count'])
 	},
 	methods: {
 		/**
@@ -30,8 +30,8 @@ export default {
 			 * @type {number}
 			 */
 			this.$emit('after', this.value);
-		},
-	},
+		}
+	}
 };
 </script>
 <docs>

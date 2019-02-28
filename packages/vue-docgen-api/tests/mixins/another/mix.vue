@@ -6,8 +6,8 @@ module.exports = {
 		 */
 		propsAnother: {
 			type: String,
-			default: 'blue',
-		},
-	},
+			default: 'blue'
+		}
+	}
 };
 </script>

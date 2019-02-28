@@ -38,6 +38,6 @@ Usage.propTypes = {
 		props: PropTypes.array,
 		methods: PropTypes.array,
 		eventsNode: PropTypes.object,
-		slotsNode: PropTypes.object,
-	}).isRequired,
+		slotsNode: PropTypes.object
+	}).isRequired
 };

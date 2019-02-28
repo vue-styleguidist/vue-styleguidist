@@ -58,7 +58,7 @@ module.exports = function(config, updateConfig) {
 
 		binutils: {
 			server: open => binutils.commandServer(config, open),
-			build: () => binutils.commandBuild(config),
-		},
+			build: () => binutils.commandBuild(config)
+		}
 	};
 };

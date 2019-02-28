@@ -6,10 +6,10 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 	table: {
 		width: '100%',
 		borderCollapse: 'collapse',
-		marginBottom: space[4],
+		marginBottom: space[4]
 	},
 	tableHead: {
-		borderBottom: [[1, color.border, 'solid']],
+		borderBottom: [[1, color.border, 'solid']]
 	},
 	cellHeading: {
 		color: color.base,
@@ -19,7 +19,7 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 		fontFamily: fontFamily.base,
 		fontWeight: 'bold',
 		fontSize: fontSize.small,
-		whiteSpace: 'nowrap',
+		whiteSpace: 'nowrap'
 	},
 	cell: {
 		color: color.base,
@@ -32,13 +32,13 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 		'&:last-child': {
 			isolate: false,
 			width: '80%',
-			paddingRight: 0,
+			paddingRight: 0
 		},
 		'& p:last-child': {
 			isolate: false,
-			marginBottom: 0,
-		},
-	},
+			marginBottom: 0
+		}
+	}
 });
 
 export function TableRenderer({ classes, columns, rows, getRowKey }) {
@@ -73,11 +73,11 @@ TableRenderer.propTypes = {
 	columns: PropTypes.arrayOf(
 		PropTypes.shape({
 			caption: PropTypes.string.isRequired,
-			render: PropTypes.func.isRequired,
+			render: PropTypes.func.isRequired
 		})
 	).isRequired,
 	rows: PropTypes.arrayOf(PropTypes.object).isRequired,
-	getRowKey: PropTypes.func.isRequired,
+	getRowKey: PropTypes.func.isRequired
 };
 
 export default Styled(styles)(TableRenderer);

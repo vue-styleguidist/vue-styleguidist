@@ -19,16 +19,16 @@ export default class Placeholder extends Component {
 			'food',
 			'city',
 			'nature',
-			'people',
+			'people'
 		]),
 		width: PropTypes.number,
-		height: PropTypes.number,
+		height: PropTypes.number
 	};
 
 	static defaultProps = {
 		type: 'animal',
 		width: 150,
-		height: 150,
+		height: 150
 	};
 
 	/**
@@ -46,7 +46,7 @@ export default class Placeholder extends Component {
 			city: `http://lorempixel.com/${width}/${height}/city`,
 			food: `http://lorempixel.com/${width}/${height}/food`,
 			nature: `http://lorempixel.com/${width}/${height}/nature`,
-			people: `http://lorempixel.com/${width}/${height}/people`,
+			people: `http://lorempixel.com/${width}/${height}/people`
 		};
 		return types[type];
 	}

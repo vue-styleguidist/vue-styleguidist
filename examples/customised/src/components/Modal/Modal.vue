@@ -30,9 +30,9 @@ export default {
 		 */
 		showModal: {
 			type: Boolean,
-			default: false,
-		},
-	},
+			default: false
+		}
+	}
 };
 </script>
 

@@ -26,12 +26,12 @@ export function propsToArray(props) {
 export const columns = [
 	{
 		caption: 'Slot',
-		render: renderName,
+		render: renderName
 	},
 	{
 		caption: 'Description',
-		render: renderDescription,
-	},
+		render: renderDescription
+	}
 ];
 
 export default function SlotsTableRenderer({ props }) {
@@ -39,5 +39,5 @@ export default function SlotsTableRenderer({ props }) {
 }
 
 SlotsTableRenderer.propTypes = {
-	props: PropTypes.object.isRequired,
+	props: PropTypes.object.isRequired
 };

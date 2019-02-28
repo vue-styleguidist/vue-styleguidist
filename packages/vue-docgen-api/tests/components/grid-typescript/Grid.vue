@@ -55,7 +55,7 @@ export default Vue.extend({
 		 */
 		msg: {
 			type: [String, Number],
-			default: text,
+			default: text
 		},
 		/**
 		 * describe data
@@ -67,19 +67,19 @@ export default Vue.extend({
 			type: Array,
 			default: function() {
 				return [{}];
-			},
+			}
 		},
 		/**
 		 * prop function
 		 */
 		propFunc: {
-			default: function() {},
+			default: function() {}
 		},
 		/**
 		 * get columns list
 		 */
 		columns: {
-			type: Array,
+			type: Array
 		},
 		/**
 		 * filter key
@@ -87,8 +87,8 @@ export default Vue.extend({
 		 */
 		filterKey: {
 			type: String,
-			default: 'example',
-		},
+			default: 'example'
+		}
 	},
 	data(): IData {
 		var sortOrders: { [key: string]: number } = {};
@@ -98,7 +98,7 @@ export default Vue.extend({
 		return {
 			sortKey: '',
 			sortOrders: sortOrders,
-			filterKey: undefined,
+			filterKey: undefined
 		};
 	},
 	computed: {
@@ -126,12 +126,12 @@ export default Vue.extend({
 				});
 			}
 			return data;
-		},
+		}
 	},
 	filters: {
 		capitalize(str: string): string {
 			return str.charAt(0).toUpperCase() + str.slice(1);
-		},
+		}
 	},
 	methods: {
 		/**
@@ -154,7 +154,7 @@ export default Vue.extend({
 			 * @type {object}
 			 */
 			this.$emit('success', {
-				demo: 'example success',
+				demo: 'example success'
 			});
 		},
 
@@ -173,10 +173,10 @@ export default Vue.extend({
 			 * @type {object}
 			 */
 			this.$emit('error', {
-				demo: 'example error',
+				demo: 'example error'
 			});
-		},
-	},
+		}
+	}
 });
 </script>
 

@@ -17,9 +17,9 @@ xdescribe('styleguide-loader', () => {
 					sections: [{ components: 'components/**/*.js' }],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -32,9 +32,9 @@ xdescribe('styleguide-loader', () => {
 			{
 				request: file,
 				_styleguidist: {
-					...getConfig(path.resolve(__dirname, '../../test/apps/defaults/styleguide.config.js')),
+					...getConfig(path.resolve(__dirname, '../../test/apps/defaults/styleguide.config.js'))
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -52,9 +52,9 @@ xdescribe('styleguide-loader', () => {
 					sections: [{ components: 'components/**/*.js' }],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -74,15 +74,15 @@ xdescribe('styleguide-loader', () => {
 						{
 							components: () => [
 								`${configDir}/components/Button/Button.js`,
-								`${configDir}/components/Placeholder/Placeholder.js`,
-							],
-						},
+								`${configDir}/components/Placeholder/Placeholder.js`
+							]
+						}
 					],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -102,15 +102,15 @@ xdescribe('styleguide-loader', () => {
 						{
 							components: () => [
 								'components/Button/Button.js',
-								'components/Placeholder/Placeholder.js',
-							],
-						},
+								'components/Placeholder/Placeholder.js'
+							]
+						}
 					],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -128,14 +128,14 @@ xdescribe('styleguide-loader', () => {
 				_styleguidist: {
 					sections: [
 						{
-							components: ['components/Button/Button.js', 'components/Placeholder/Placeholder.js'],
-						},
+							components: ['components/Button/Button.js', 'components/Placeholder/Placeholder.js']
+						}
 					],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -154,16 +154,16 @@ xdescribe('styleguide-loader', () => {
 						{
 							components: () => [
 								'components/Button/Button.js',
-								'components/RandomButton/RandomButton.js',
-							],
-						},
+								'components/RandomButton/RandomButton.js'
+							]
+						}
 					],
 					configDir,
 					skipComponentsWithoutExample: true,
 					getExampleFilename: componentPath => path.join(path.dirname(componentPath), 'Readme.md'),
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency: () => {},
+				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -184,9 +184,9 @@ xdescribe('styleguide-loader', () => {
 					configDir,
 					getExampleFilename: () => 'Readme.md',
 					getComponentPathLine: filepath => filepath,
-					contextDependencies,
+					contextDependencies
 				},
-				addContextDependency,
+				addContextDependency
 			},
 			readFileSync(file, 'utf8')
 		);
@@ -204,9 +204,9 @@ xdescribe('styleguide-loader', () => {
 					sections: [{ components: 'components/**/*.js' }],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: filepath => filepath,
+					getComponentPathLine: filepath => filepath
 				},
-				addContextDependency,
+				addContextDependency
 			},
 			readFileSync(file, 'utf8')
 		);

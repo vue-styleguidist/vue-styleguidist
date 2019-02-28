@@ -13,20 +13,20 @@ export default {
 			items: [
 				{
 					text: 'English',
-					value: 'en',
+					value: 'en'
 				},
 				{
 					text: 'Español',
-					value: 'es',
-				},
-			],
+					value: 'es'
+				}
+			]
 		};
 	},
 	watch: {
 		e1(value) {
 			this.$i18n.locale = value;
-		},
-	},
+		}
+	}
 };
 </script>
 <style>

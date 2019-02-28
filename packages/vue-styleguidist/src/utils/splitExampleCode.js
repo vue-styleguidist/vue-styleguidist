@@ -38,6 +38,6 @@ export default function splitExampleCode(code) {
 
 	return {
 		head,
-		example,
+		example
 	};
 }

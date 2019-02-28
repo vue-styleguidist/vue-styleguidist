@@ -71,7 +71,7 @@ function processSection(section, config, parentDepth) {
 		href: section.href,
 		components: getSectionComponents(section, config),
 		content,
-		external: section.external,
+		external: section.external
 	};
 }
 

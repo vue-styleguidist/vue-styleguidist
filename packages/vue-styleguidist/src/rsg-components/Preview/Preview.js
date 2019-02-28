@@ -6,7 +6,7 @@ import { parse } from 'esprima';
 import Vue from 'vue';
 import {
 	isSingleFileComponent,
-	transformSingleFileComponent,
+	transformSingleFileComponent
 } from '../../utils/singleFileComponentUtils';
 import styleScoper from '../../utils/styleScoper';
 
@@ -32,7 +32,7 @@ const separateScript = function separateScript(code, style) {
 		return {
 			js: code.slice(0, indexVueBegin),
 			vueComponent: code.slice(indexVueBegin) + setVue,
-			style,
+			style
 		};
 	} else if (isSingleFileComponent(code)) {
 		const transformed = transformSingleFileComponent(code);
@@ -46,7 +46,7 @@ const separateScript = function separateScript(code, style) {
 	}
 	return {
 		js: lines.slice(0, index).join('\n'),
-		html: lines.slice(index).join('\n'),
+		html: lines.slice(index).join('\n')
 	};
 };
 
@@ -80,16 +80,16 @@ export default class Preview extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
 		evalInContext: PropTypes.func.isRequired,
-		vuex: PropTypes.object,
+		vuex: PropTypes.object
 	};
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
 		codeRevision: PropTypes.number.isRequired,
-		renderRootJsx: PropTypes.object,
+		renderRootJsx: PropTypes.object
 	};
 
 	state = {
-		error: null,
+		error: null
 	};
 
 	componentDidMount() {
@@ -128,14 +128,14 @@ export default class Preview extends Component {
 			el = new Vue({
 				el,
 				data: {},
-				template: '<div></div> ',
+				template: '<div></div> '
 			});
 		}
 	}
 
 	executeCode() {
 		this.setState({
-			error: null,
+			error: null
 		});
 
 		const { code, vuex } = this.props;
@@ -187,7 +187,7 @@ export default class Preview extends Component {
 				const template = compuse.html;
 				previewComponent = {
 					data,
-					template,
+					template
 				};
 			}
 
@@ -202,11 +202,11 @@ export default class Preview extends Component {
 				: {
 						render(createElement) {
 							return createElement(previewComponent);
-						},
+						}
 				  };
 			const vueInstance = new Vue(
 				Object.assign(extendsComponent, rootComponent, {
-					el,
+					el
 				})
 			);
 
@@ -267,7 +267,7 @@ export default class Preview extends Component {
 		this.unmountPreview();
 
 		this.setState({
-			error: err.toString(),
+			error: err.toString()
 		});
 
 		console.error(err); // eslint-disable-line no-console

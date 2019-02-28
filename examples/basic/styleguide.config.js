@@ -4,7 +4,7 @@ module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
+		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
 	},
 	version: '1.1.1',
 	webpackConfig: {
@@ -12,21 +12,21 @@ module.exports = {
 			rules: [
 				{
 					test: /\.vue$/,
-					loader: 'vue-loader',
+					loader: 'vue-loader'
 				},
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader',
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader'],
-				},
-			],
+					use: ['style-loader', 'css-loader']
+				}
+			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
+		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand',
+	exampleMode: 'expand'
 };

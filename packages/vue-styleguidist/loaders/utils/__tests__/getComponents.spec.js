@@ -7,7 +7,7 @@ xdescribe('getComponents', () => {
 		const result = getComponents(['Foo.js', 'Bar.js'], {
 			configDir: path.resolve(__dirname, '../../../test'),
 			getExampleFilename: identity,
-			getComponentPathLine: identity,
+			getComponentPathLine: identity
 		});
 
 		expect(result).toMatchSnapshot();

@@ -27,8 +27,8 @@ import CounterButton from '~/components/CounterButton/CounterButton.vue';
 export default {
 	components: {
 		Logo,
-		CounterButton,
-	},
+		CounterButton
+	}
 };
 </script>
 

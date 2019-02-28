@@ -40,7 +40,7 @@ export default class StyleGuide extends Component {
 		patterns: PropTypes.array,
 		displayMode: PropTypes.string,
 		allSections: PropTypes.array.isRequired,
-		pagePerSection: PropTypes.bool,
+		pagePerSection: PropTypes.bool
 	};
 
 	static childContextTypes = {
@@ -48,16 +48,16 @@ export default class StyleGuide extends Component {
 		config: PropTypes.object.isRequired,
 		slots: PropTypes.object.isRequired,
 		displayMode: PropTypes.string,
-		renderRootJsx: PropTypes.object,
+		renderRootJsx: PropTypes.object
 	};
 
 	static defaultProps = {
-		displayMode: DisplayModes.all,
+		displayMode: DisplayModes.all
 	};
 
 	state = {
 		error: false,
-		info: null,
+		info: null
 	};
 
 	getChildContext() {
@@ -66,14 +66,14 @@ export default class StyleGuide extends Component {
 			config: this.props.config,
 			slots: this.props.slots,
 			displayMode: this.props.displayMode,
-			renderRootJsx: this.props.renderRootJsx,
+			renderRootJsx: this.props.renderRootJsx
 		};
 	}
 
 	componentDidCatch(error, info) {
 		this.setState({
 			error,
-			info,
+			info
 		});
 	}
 
@@ -85,7 +85,7 @@ export default class StyleGuide extends Component {
 			patterns,
 			displayMode,
 			allSections,
-			pagePerSection,
+			pagePerSection
 		} = this.props;
 
 		if (this.state.error) {

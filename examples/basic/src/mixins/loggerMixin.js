@@ -10,8 +10,8 @@ export default {
 		 */
 		propA: {
 			type: String,
-			default: '#333',
-		},
+			default: '#333'
+		}
 	},
 	mounted() {
 		this.hello();
@@ -19,6 +19,6 @@ export default {
 	methods: {
 		hello() {
 			console.log('hello from mixin!');
-		},
-	},
+		}
+	}
 };

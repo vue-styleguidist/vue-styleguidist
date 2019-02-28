@@ -1,11 +1,11 @@
 export const multi = {
 	props: {
-		shouldBe: String,
-	},
+		shouldBe: String
+	}
 };
 
 export const hidden = {
 	props: {
-		shouldNotBe: Number,
-	},
+		shouldNotBe: Number
+	}
 };

@@ -10,19 +10,19 @@ export default class RandomButton extends Component {
 		/**
 		 * List of possible labels.
 		 */
-		variants: PropTypes.array.isRequired,
+		variants: PropTypes.array.isRequired
 	};
 
 	constructor(props) {
 		super();
 		this.state = {
-			label: sample(props.variants),
+			label: sample(props.variants)
 		};
 	}
 
 	handleClick() {
 		this.setState({
-			label: sample(this.props.variants),
+			label: sample(this.props.variants)
 		});
 	}
 

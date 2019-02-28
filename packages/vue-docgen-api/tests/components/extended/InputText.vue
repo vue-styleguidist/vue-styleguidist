@@ -13,6 +13,6 @@ import Base from './Base.vue';
 export default {
 	name: 'InputText',
 	extends: Base,
-	props: ['placeholder'],
+	props: ['placeholder']
 };
 </script>

@@ -10,6 +10,6 @@
  */
 export default {
 	name: 'Base',
-	props: ['question'],
+	props: ['question']
 };
 </script>

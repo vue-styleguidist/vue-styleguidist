@@ -5,18 +5,18 @@ module.exports = {
 			{
 				targets: {
 					chrome: 59,
-					ie: 11,
+					ie: 11
 				},
 				forceAllTransforms: true,
-				modules: false,
-			},
+				modules: false
+			}
 		],
-		'@babel/preset-react',
+		'@babel/preset-react'
 	],
 	plugins: [
 		'@babel/plugin-syntax-dynamic-import',
 		'@babel/plugin-proposal-class-properties',
-		'@babel/plugin-proposal-object-rest-spread',
+		'@babel/plugin-proposal-object-rest-spread'
 	],
 	env: {
 		test: {
@@ -24,8 +24,8 @@ module.exports = {
 			plugins: [
 				'@babel/plugin-syntax-dynamic-import',
 				'@babel/plugin-proposal-class-properties',
-				'@babel/plugin-proposal-object-rest-spread',
-			],
-		},
-	},
+				'@babel/plugin-proposal-object-rest-spread'
+			]
+		}
+	}
 };

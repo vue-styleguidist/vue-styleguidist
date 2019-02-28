@@ -23,7 +23,7 @@ export function getType(prop) {
 			return {
 				...prop.flowType,
 				name: 'enum',
-				value: prop.flowType.elements,
+				value: prop.flowType.elements
 			};
 		}
 		return prop.flowType;

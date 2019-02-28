@@ -18,9 +18,9 @@ text
 			{
 				_styleguidist: {
 					context: {
-						_: 'lodash',
-					},
-				},
+						_: 'lodash'
+					}
+				}
 			},
 			exampleMarkdown
 		);
@@ -45,7 +45,7 @@ text
 		const result = examplesLoader.call(
 			{
 				query: '?componentName=FooComponent',
-				_styleguidist: {},
+				_styleguidist: {}
 			},
 			exampleMarkdown
 		);
@@ -66,8 +66,8 @@ text
 				query: '?componentName=FooComponent',
 				resourcePath: '/path/to/foo/examples/file',
 				_styleguidist: {
-					updateExample,
-				},
+					updateExample
+				}
 			},
 			exampleMarkdown
 		);
@@ -75,7 +75,7 @@ text
 			{
 				content: '<h1>Hello world!</h2>',
 				settings: { static: true },
-				lang: 'jsx',
+				lang: 'jsx'
 			},
 			'/path/to/foo/examples/file'
 		);

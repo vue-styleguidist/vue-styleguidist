@@ -16,20 +16,20 @@ export default {
 		 */
 		type: {
 			type: String,
-			default: 'animal',
+			default: 'animal'
 		},
 		width: {
 			type: Number,
-			default: 150,
+			default: 150
 		},
 		height: {
 			type: Number,
-			default: 150,
-		},
+			default: 150
+		}
 	},
 	data() {
 		return {
-			value: 0,
+			value: 0
 		};
 	},
 	methods: {
@@ -44,11 +44,11 @@ export default {
 				city: `http://lorempixel.com/${width}/${height}/city`,
 				food: `http://lorempixel.com/${width}/${height}/food`,
 				nature: `http://lorempixel.com/${width}/${height}/nature`,
-				people: `http://lorempixel.com/${width}/${height}/people`,
+				people: `http://lorempixel.com/${width}/${height}/people`
 			};
 			return types[type];
-		},
-	},
+		}
+	}
 };
 </script>
 <style scope>

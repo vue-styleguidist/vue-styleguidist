@@ -10,22 +10,22 @@ import Version from 'rsg-components/Version';
 const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth }) => ({
 	root: {
 		minHeight: '100vh',
-		backgroundColor: color.baseBackground,
+		backgroundColor: color.baseBackground
 	},
 	hasSidebar: {
 		paddingLeft: sidebarWidth,
 		[mq.small]: {
-			paddingLeft: 0,
-		},
+			paddingLeft: 0
+		}
 	},
 	content: {
 		maxWidth,
 		padding: [[space[2], space[4]]],
 		margin: [[0, 'auto']],
 		[mq.small]: {
-			padding: space[2],
+			padding: space[2]
 		},
-		display: 'block',
+		display: 'block'
 	},
 	sidebar: {
 		backgroundColor: color.sidebarBackground,
@@ -42,19 +42,19 @@ const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth
 			position: 'static',
 			width: 'auto',
 			borderWidth: [[1, 0, 0, 0]],
-			paddingBottom: space[0],
-		},
+			paddingBottom: space[0]
+		}
 	},
 	logo: {
 		padding: space[2],
-		borderBottom: [[1, color.border, 'solid']],
+		borderBottom: [[1, color.border, 'solid']]
 	},
 	footer: {
 		display: 'block',
 		color: color.light,
 		fontFamily: fontFamily.base,
-		fontSize: fontSize.small,
-	},
+		fontSize: fontSize.small
+	}
 });
 
 export function StyleGuideRenderer({
@@ -64,7 +64,7 @@ export function StyleGuideRenderer({
 	homepageUrl,
 	children,
 	toc,
-	hasSidebar,
+	hasSidebar
 }) {
 	return (
 		<div className={cx(classes.root, hasSidebar && classes.hasSidebar)}>
@@ -95,7 +95,7 @@ StyleGuideRenderer.propTypes = {
 	homepageUrl: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 	toc: PropTypes.node.isRequired,
-	hasSidebar: PropTypes.bool,
+	hasSidebar: PropTypes.bool
 };
 
 export default Styled(styles)(StyleGuideRenderer);

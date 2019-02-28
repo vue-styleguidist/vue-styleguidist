@@ -28,14 +28,14 @@ document.createRange = function() {
 		setStart: () => {},
 		getBoundingClientRect() {
 			return {
-				right: 0,
+				right: 0
 			};
 		},
 		getClientRects() {
 			return {
-				right: 0,
+				right: 0
 			};
-		},
+		}
 	};
 };
 
@@ -46,7 +46,7 @@ jest.mock('react-scripts/config/webpack.config.dev', () => ({ cra: true }), { vi
 jest.mock('webpack-dev-server', function() {
 	return function() {
 		return {
-			app: {},
+			app: {}
 		};
 	};
 });

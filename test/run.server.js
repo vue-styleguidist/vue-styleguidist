@@ -10,7 +10,7 @@ const config = require(path.join(dir, 'styleguide.config'));
 
 config.logger = {
 	info: console.log,
-	warn: message => console.warn(`Warning: ${message}`),
+	warn: message => console.warn(`Warning: ${message}`)
 };
 
 config.components = path.resolve(dir, 'src/components/**/[A-Z]*.vue');

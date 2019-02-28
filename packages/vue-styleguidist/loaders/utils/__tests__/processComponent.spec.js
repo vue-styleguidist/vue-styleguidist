@@ -4,7 +4,7 @@ import processComponent from '../processComponent';
 const config = {
 	configDir: __dirname,
 	getExampleFilename: componentpath => path.join(path.dirname(componentpath), 'Readme.md'),
-	getComponentPathLine: componentpath => componentpath,
+	getComponentPathLine: componentpath => componentpath
 };
 xdescribe('processComponent', () => {
 	it('processComponent() should return an object for section with content', () => {
