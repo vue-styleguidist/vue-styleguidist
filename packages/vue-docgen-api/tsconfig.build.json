@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig",
+	"compilerOptions": {
+		"declaration": true,
+		"sourceMap": false
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["src/**/__tests__/**/*.ts"]
+}

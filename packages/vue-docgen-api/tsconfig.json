@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"target": "es5",
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"strict": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"noUnusedLocals": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"strictFunctionTypes": false,
+		"types": ["jest", "node", "htmlparser2"]
+	},
+	"include": ["src/**/*.ts", "tests/**/*.vue", "tests/**/*.ts"],
+	"exclude": ["node_modules"]
+}

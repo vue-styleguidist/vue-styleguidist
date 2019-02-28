@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests button with no script block should match the snapshot 1`] = `
+Object {
+  "description": "",
+  "displayName": "MyButton",
+  "events": Object {},
+  "methods": Array [],
+  "props": undefined,
+  "slots": Object {
+    "default": Object {
+      "bindings": Object {},
+      "description": "Use this slot default",
+    },
+  },
+  "tags": Object {},
+}
+`;

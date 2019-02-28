@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests wrapper with root slot should match the reference for the footer slot 1`] = `
+Object {
+  "bindings": Object {
+    ":item": "item",
+  },
+  "description": "Modal footer here",
+  "scoped": true,
+}
+`;

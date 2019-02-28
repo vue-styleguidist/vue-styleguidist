@@ -17,18 +17,14 @@
   },
   "scripts": {
     "pretest": "yarn lint",
-    "test": "yarn test:jest",
+    "test": "lerna run test",
     "posttest": "yarn format",
-    "test:jest": "jest",
-    "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "start": "node test/styleguidist.js server",
     "start:vuecli3": "vue-cli-service styleguidist --config examples/vuecli3/styleguide.config.js",
     "start:empty": "node bin/styleguidist.js server",
     "lint": "eslint . --cache --fix",
-    "precompile": "rimraf packages/vue-styleguidist/lib/",
-    "compile": "babel --ignore '*.spec.js' -d packages/vue-styleguidist/lib/ packages/vue-styleguidist/src/",
-    "compile:watch": "babel --ignore '*.spec.js' --watch -d packages/vue-styleguidist/lib/ packages/vue-styleguidist/src/",
+    "compile": "lerna run compile",
     "prepublishOnly": "yarn compile",
     "build": "node test/styleguidist.js build",
     "build:vuecli3": "vue-cli-service styleguidist:build --config examples/vuecli3/styleguide.config.js",
@@ -55,6 +51,10 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@types/htmlparser2": "^3.7.31",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18",
+    "@types/pug": "^2.0.4",
     "@vue/cli-service": "^3.3.1",
     "@znck/prop-types": "^0.5.1",
     "babel-core": "^7.0.0-bridge.0",
@@ -96,44 +96,22 @@
     "sass-loader": "^7.1.0",
     "semver": "^5.5.0",
     "strip-shebang": "^1.0.2",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.3.3333",
     "url-loader": "^1.0.1",
     "vue": "^2.5.17",
     "vue-cli-plugin-styleguidist": "^1.0.3",
     "vue-i18n": "^8.7.0",
     "vue-loader": "^15.2.4",
+    "vue-property-decorator": "^7.3.0",
     "vue-template-compiler": "^2.5.17",
     "vue-types": "^1.3.4",
     "vuepress": "^0.14.4",
     "vuetify": "^1.4.3",
     "vuex": "^3.0.0",
     "webpack-cli": "^2.0.13"
-  },
-  "jest": {
-    "setupFiles": [
-      "./test/raf-polyfill.js",
-      "./test/jestsetup.js"
-    ],
-    "modulePaths": [
-      "./src"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.css$": "<rootDir>/test/empty.js"
-    },
-    "testPathIgnorePatterns": [
-      "<rootDir>/packages/vue-styleguidist/lib/",
-      "<rootDir>/examples/",
-      "<rootDir>/test/",
-      "<rootDir>/packages/vue-styleguidist/src/rsg-components"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/packages/vue-styleguidist/scripts/server.js",
-      "<rootDir>/packages/vue-styleguidist/scripts/build.js"
-    ],
-    "snapshotSerializers": [
-      "deabsdeep/serializer",
-      "enzyme-to-json/serializer",
-      "jest-serializer-html"
-    ]
   },
   "keywords": [
     "vue",
