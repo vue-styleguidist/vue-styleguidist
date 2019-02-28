@@ -159,7 +159,7 @@ Object {
       "defaultValue": Object {
         "func": true,
         "value": "function() {
-  return [{}]
+    return [{}];
 }",
       },
       "description": "",

@@ -16,8 +16,7 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "scripts": {
-    "pretest": "yarn lint",
-    "test": "lerna run test",
+    "test": "jest",
     "posttest": "yarn format",
     "test:coverage": "jest --coverage",
     "start": "node test/styleguidist.js server",
@@ -25,7 +24,6 @@
     "start:empty": "node bin/styleguidist.js server",
     "lint": "eslint . --cache --fix",
     "compile": "lerna run compile",
-    "prepublishOnly": "yarn compile",
     "build": "node test/styleguidist.js build",
     "build:vuecli3": "vue-cli-service styleguidist:build --config examples/vuecli3/styleguide.config.js",
     "test:browser:pre": "yarn add puppeteer",

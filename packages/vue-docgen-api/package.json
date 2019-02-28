@@ -8,8 +8,7 @@
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
-    "compile": "tsc -p ./tsconfig.build.json",
-    "test": "jest"
+    "compile": "tsc -p ./tsconfig.build.json"
   },
   "files": [
     "dist",
@@ -40,16 +39,5 @@
     "typescript": "^3.2.2",
     "vue": "^2.6.3",
     "vue-template-compiler": "^2.6.3"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "tslint -p . --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.md": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }

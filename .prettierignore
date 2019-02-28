@@ -1,2 +1,4 @@
 examples/*/styleguide/
+packages/*/lib/
+packages/*/dist/
 docs/dist/
