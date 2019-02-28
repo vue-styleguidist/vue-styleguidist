@@ -3,3 +3,4 @@ examples/*/styleguide/*
 packages/vue-styleguidist/lib/*
 coverage/*
 travis_phantomjs/*
+docs/dist/**/*
