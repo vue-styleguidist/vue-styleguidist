@@ -30,13 +30,13 @@ async function checkProject(project) {
 }
 
 test('invoke should create a config file', async () => {
-	const project = await createAndInstall(`files-invoke`, { plugins: {} });
+	const project = await createAndInstall(`files-invoke-lib`, { plugins: {} });
 	await project.run(`${require.resolve('@vue/cli/bin/vue')} invoke vue-cli-plugin-styleguidist`);
 	checkProject(project);
 });
 
 test('create should create a config file', async () => {
-	const project = await createAndInstall(`files-create`, {
+	const project = await createAndInstall(`files-create-lib`, {
 		plugins: { 'vue-cli-plugin-styleguidist': {} }
 	});
 	checkProject(project);

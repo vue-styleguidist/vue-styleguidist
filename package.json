@@ -17,7 +17,7 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "scripts": {
-    "pretest": "yarn lint",
+    "pretest": "yarn lint && rimraf test/cli-packages/*",
     "test": "yarn test:jest",
     "test:jest": "jest",
     "posttest": "yarn format",
