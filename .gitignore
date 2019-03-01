@@ -1,9 +1,9 @@
 node_modules/
 /examples/**/styleguide/build
+/examples/**/CHANGELOG.md
 /examples/**/styleguide/index.html
 /.publish/
 /coverage/
-Changelog.md
 .DS_Store
 Thumbs.db
 .idea/

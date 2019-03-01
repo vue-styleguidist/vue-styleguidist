@@ -52,8 +52,6 @@ jobs:
         - yarn build:vuecli3
 
         # Check that examples really works: no JS errors on load
-        - yarn test:browser:pre
-
         - yarn test:browser basic
         - yarn test:browser customised
         - yarn test:browser sections
