@@ -5,7 +5,8 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "examples/*"
+    "examples/*",
+    "test-cli-packages/*"
   ],
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
