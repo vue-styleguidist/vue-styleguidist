@@ -21,7 +21,7 @@ async function createAndInstall(name, isClass) {
 	return project;
 }
 
-test('serve with typescript', async () => {
+xtest('serve with typescript', async () => {
 	const project = await createAndInstall(`serve-ts`);
 	await serve(
 		() => project.run('vue-cli-service styleguidist'),
@@ -31,7 +31,7 @@ test('serve with typescript', async () => {
 	);
 });
 
-test('serve with typescript', async () => {
+xtest('serve with typescript class', async () => {
 	const project = await createAndInstall(`serve-ts-class`, true);
 	await serve(
 		() => project.run('vue-cli-service styleguidist'),

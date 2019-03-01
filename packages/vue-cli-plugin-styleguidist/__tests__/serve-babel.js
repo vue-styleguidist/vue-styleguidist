@@ -38,7 +38,7 @@ async function createAndInstall(name) {
 	return project;
 }
 
-test('serve with babel', async () => {
+xtest('serve with babel', async () => {
 	const project = await createAndInstall(`serve-babel`);
 	await serve(
 		() => project.run('vue-cli-service styleguidist'),
