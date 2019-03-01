@@ -17,5 +17,5 @@ Thumbs.db
 test/cypress/screenshots/
 test/cypress/videos/
 /docs/dist/
-#/test/cli-packages/
+/test/cli-packages/
 !/test/cli-packages/.gitkeep
