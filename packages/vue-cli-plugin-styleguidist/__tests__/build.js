@@ -3,7 +3,7 @@ jest.setTimeout(40000);
 const create = require('@vue/cli-test-utils/createTestProject');
 const path = require('path');
 
-const cwd = path.resolve(__dirname, '../../../test-cli-packages');
+const cwd = path.resolve(__dirname, '../../../test/cli-packages');
 
 async function createAndInstall(name) {
 	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd);

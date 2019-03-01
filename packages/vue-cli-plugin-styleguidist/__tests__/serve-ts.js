@@ -3,7 +3,7 @@ jest.setTimeout(80000);
 const create = require('@vue/cli-test-utils/createTestProject');
 const path = require('path');
 
-const cwd = path.resolve(__dirname, '../../../test-cli-packages');
+const cwd = path.resolve(__dirname, '../../../test/cli-packages');
 const serve = require('@vue/cli-test-utils/serveWithPuppeteer');
 
 async function createAndInstall(name, isClass) {
