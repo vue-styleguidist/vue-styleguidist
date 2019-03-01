@@ -13,5 +13,8 @@
   },
   "peerDependencies": {
     "@vue/cli-service": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-test-utils": "^3.4.1"
   }
 }

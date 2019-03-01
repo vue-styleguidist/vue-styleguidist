@@ -3,7 +3,7 @@ module.exports = {
 		'^.+\\.ts$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest'
 	},
-	moduleFileExtensions: ['ts', 'js'],
+	moduleFileExtensions: ['ts', 'js', 'json'],
 	testMatch: [
 		'<rootDir>/packages/*/tests/**/*.test.(ts|js)',
 		'<rootDir>/packages/**/__tests__/*.(ts|js)'
