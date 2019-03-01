@@ -2,6 +2,11 @@
 import { configure, shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+import rimraf from 'rimraf';
+import * as path from 'path';
+
+rimraf(path.resolve(__dirname, './cli-packages/*'), () => {});
+
 process.env.VUE_CLI_TEST = true;
 
 // Make Enzyme functions available in all test files without importing
