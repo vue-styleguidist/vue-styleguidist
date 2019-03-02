@@ -1,4 +1,4 @@
-import processComponents from './processComponents';
+import processComponents from './processComponents'
 
 /**
  * Recursively process each component in all sections.
@@ -12,5 +12,5 @@ export default function processSections(sections) {
 		visibleName: section.name,
 		components: processComponents(section.components || []),
 		sections: processSections(section.sections || [])
-	}));
+	}))
 }

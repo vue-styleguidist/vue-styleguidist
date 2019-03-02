@@ -1,5 +1,5 @@
-import { parse, ParserOptions } from '@babel/parser';
-import * as bt from '@babel/types';
+import { parse, ParserOptions } from '@babel/parser'
+import * as bt from '@babel/types'
 
 const babelParserOptions: ParserOptions = {
 	sourceType: 'module',
@@ -27,7 +27,7 @@ const babelParserOptions: ParserOptions = {
 		'throwExpressions',
 		'nullishCoalescingOperator'
 	]
-};
+}
 
 export default function buildParse(
 	options: ParserOptions = {}
@@ -36,10 +36,10 @@ export default function buildParse(
 		...babelParserOptions,
 		...options,
 		plugins: [...(babelParserOptions.plugins || []), ...(options.plugins || [])]
-	};
+	}
 	return {
 		parse(src: string): bt.File {
-			return parse(src, options);
+			return parse(src, options)
 		}
-	};
+	}
 }

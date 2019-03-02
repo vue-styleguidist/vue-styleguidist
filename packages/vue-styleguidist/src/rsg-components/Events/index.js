@@ -1,1 +1,1 @@
-export { default } from './EventsRenderer';
+export { default } from './EventsRenderer'

@@ -16,4 +16,4 @@ module.exports = {
 	},
 	testPathIgnorePatterns: ['<rootDir>/packages/*/lib/'],
 	snapshotSerializers: ['deabsdeep/serializer', 'enzyme-to-json/serializer', 'jest-serializer-html']
-};
+}

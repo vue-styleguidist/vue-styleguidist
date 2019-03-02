@@ -30,11 +30,11 @@ export default {
 	data() {
 		return {
 			value: 0
-		};
+		}
 	},
 	methods: {
 		getImageUrl() {
-			const { type, width, height } = this;
+			const { type, width, height } = this
 			const types = {
 				animal: `http://placeimg.com/${width}/${height}/animals`,
 				bacon: `http://baconmockup.com/${width}/${height}`,
@@ -45,11 +45,11 @@ export default {
 				food: `http://lorempixel.com/${width}/${height}/food`,
 				nature: `http://lorempixel.com/${width}/${height}/nature`,
 				people: `http://lorempixel.com/${width}/${height}/people`
-			};
-			return types[type];
+			}
+			return types[type]
 		}
 	}
-};
+}
 </script>
 <style scope>
 .placeholder {

@@ -16,8 +16,8 @@
  * @return {Function}
  */
 module.exports = function evalInContext(header, require, code) {
-	var func = new Function('require', 'state', 'setState', header + code); // eslint-disable-line no-new-func
+	var func = new Function('require', 'state', 'setState', header + code) // eslint-disable-line no-new-func
 
 	// Bind the `require` function, other context arguments will be passed from the frontend
-	return func.bind(null, require);
-};
+	return func.bind(null, require)
+}

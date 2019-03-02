@@ -27,22 +27,22 @@ export default {
 	},
 	computed: {
 		fontSize() {
-			let size;
+			let size
 			switch (this.size) {
 				case 'small':
-					size = '10px';
-					break;
+					size = '10px'
+					break
 				case 'normal':
-					size = '14px';
-					break;
+					size = '14px'
+					break
 				case 'large':
-					size = '18px';
-					break;
+					size = '18px'
+					break
 			}
-			return size;
+			return size
 		}
 	}
-};
+}
 </script>
 <style scope>
 .push-button {

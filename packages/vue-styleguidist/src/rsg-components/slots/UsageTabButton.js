@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import TabButton from 'rsg-components/TabButton';
+import React from 'react'
+import PropTypes from 'prop-types'
+import TabButton from 'rsg-components/TabButton'
 
 const UsageTabButton = props => {
-	const component = props.props;
+	const component = props.props
 	const showButton =
 		component.props ||
 		(component.methods && component.methods.length > 0) ||
 		(component.slots && Object.keys(component.slots).length > 0) ||
-		(component.events && Object.keys(component.events).length > 0);
-	return showButton ? <TabButton {...props}>Props, methods, events & slots</TabButton> : null;
-};
+		(component.events && Object.keys(component.events).length > 0)
+	return showButton ? <TabButton {...props}>Props, methods, events & slots</TabButton> : null
+}
 
 UsageTabButton.propTypes = {
 	onClick: PropTypes.func.isRequired,
@@ -20,6 +20,6 @@ UsageTabButton.propTypes = {
 		methods: PropTypes.array
 	}).isRequired,
 	active: PropTypes.bool
-};
+}
 
-export default UsageTabButton;
+export default UsageTabButton

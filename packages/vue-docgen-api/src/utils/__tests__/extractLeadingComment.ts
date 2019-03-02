@@ -1,15 +1,15 @@
-import { ASTElement, compile } from 'vue-template-compiler';
-import extractLeadingComment from '../extractLeadingComment';
+import { ASTElement, compile } from 'vue-template-compiler'
+import extractLeadingComment from '../extractLeadingComment'
 
 function compileIt(src: string): ASTElement | undefined {
-	const ast = compile(src, { comments: true }).ast;
+	const ast = compile(src, { comments: true }).ast
 	if (ast) {
-		const firstHeader = ast.children.filter((a: ASTElement) => a.tag === 'h1') as ASTElement[];
+		const firstHeader = ast.children.filter((a: ASTElement) => a.tag === 'h1') as ASTElement[]
 		if (firstHeader.length) {
-			return firstHeader[0];
+			return firstHeader[0]
 		}
 	}
-	return ast;
+	return ast
 }
 
 describe('extractLeadingComment', () => {
@@ -23,13 +23,13 @@ describe('extractLeadingComment', () => {
 				' <h1>title of the template</h1>',
 				'</div>'
 			].join('\n')
-		);
+		)
 		if (!elt) {
-			fail();
+			fail()
 		} else {
-			expect(extractLeadingComment(elt.parent, elt, '')).toBe('single line comment');
+			expect(extractLeadingComment(elt.parent, elt, '')).toBe('single line comment')
 		}
-	});
+	})
 
 	it('should extract multi line comments', () => {
 		const elt = compileIt(
@@ -41,13 +41,13 @@ describe('extractLeadingComment', () => {
 				'  <h1>title of the template</h1>',
 				'</div>'
 			].join('\n')
-		);
+		)
 		if (elt) {
 			expect(extractLeadingComment(elt.parent, elt, '')).toBe(
 				['multi line comment', 'on 2 lines'].join('\n')
-			);
+			)
 		} else {
-			fail();
+			fail()
 		}
-	});
-});
+	})
+})

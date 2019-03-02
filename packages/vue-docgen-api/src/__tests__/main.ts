@@ -1,7 +1,7 @@
-import { parse } from '../main';
+import { parse } from '../main'
 
 describe('main', () => {
 	it('should return an object', () => {
-		expect(parse).not.toBeUndefined();
-	});
-});
+		expect(parse).not.toBeUndefined()
+	})
+})

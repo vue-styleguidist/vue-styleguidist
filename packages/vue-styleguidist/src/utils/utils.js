@@ -5,7 +5,7 @@
  * @returns {string}
  */
 export function unquote(string) {
-	return string.replace(/^['"]|['"]$/g, '');
+	return string.replace(/^['"]|['"]$/g, '')
 }
 
 /**
@@ -15,7 +15,7 @@ export function unquote(string) {
  * @returns {object}
  */
 export function getType(prop) {
-	return prop.flowType || prop.type;
+	return prop.flowType || prop.type
 }
 
 /**
@@ -25,7 +25,7 @@ export function getType(prop) {
  * @returns {string}
  */
 export function showSpaces(string) {
-	return string.replace(/^\s|\s$/g, '␣');
+	return string.replace(/^\s|\s$/g, '␣')
 }
 
 /**
@@ -36,5 +36,5 @@ export function showSpaces(string) {
  * @returns {string} the string with replacements made
  */
 export function replaceAll(str, target, replacement) {
-	return str.split(target).join(replacement);
+	return str.split(target).join(replacement)
 }

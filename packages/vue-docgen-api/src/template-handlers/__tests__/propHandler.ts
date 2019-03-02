@@ -1,13 +1,13 @@
-import { compile } from 'vue-template-compiler';
-import { Documentation } from '../../Documentation';
-import { traverse } from '../../parse-template';
-import propHandler from '../propHandler';
+import { compile } from 'vue-template-compiler'
+import { Documentation } from '../../Documentation'
+import { traverse } from '../../parse-template'
+import propHandler from '../propHandler'
 
 describe('slotHandler', () => {
-	let doc: Documentation;
+	let doc: Documentation
 	beforeEach(() => {
-		doc = new Documentation();
-	});
+		doc = new Documentation()
+	})
 
 	it('should match props in attributes expressions', () => {
 		const ast = compile(
@@ -20,17 +20,17 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' });
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toMatchObject({
 				size: { type: { name: 'number' }, description: 'width of the button' },
 				value: { type: { name: 'string' }, description: 'value in the form' }
-			});
+			})
 		} else {
-			fail();
+			fail()
 		}
-	});
+	})
 
 	it('should match props in interpolated text', () => {
 		const ast = compile(
@@ -45,17 +45,17 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' });
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toMatchObject({
 				name: { type: { name: 'mixed' }, description: 'Your Name' },
 				adress: { type: { name: 'string' }, description: 'Your Adress' }
-			});
+			})
 		} else {
-			fail();
+			fail()
 		}
-	});
+	})
 
 	it('should not match props if in a string litteral', () => {
 		const ast = compile(
@@ -66,14 +66,14 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' });
-			expect(doc.toObject().props).toBeUndefined();
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			expect(doc.toObject().props).toBeUndefined()
 		} else {
-			fail();
+			fail()
 		}
-	});
+	})
 
 	it('should not match props if in a non evaluated attribute', () => {
 		const ast = compile(
@@ -84,12 +84,12 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' });
-			expect(doc.toObject().props).toBeUndefined();
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			expect(doc.toObject().props).toBeUndefined()
 		} else {
-			fail();
+			fail()
 		}
-	});
-});
+	})
+})

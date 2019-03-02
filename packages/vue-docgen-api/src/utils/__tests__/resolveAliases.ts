@@ -1,5 +1,5 @@
-import * as path from 'path';
-import resolveAliases from '../resolveAliases';
+import * as path from 'path'
+import resolveAliases from '../resolveAliases'
 
 describe('resolveAliases', () => {
 	it('should resolve aliased from a path', () => {
@@ -7,6 +7,6 @@ describe('resolveAliases', () => {
 			resolveAliases('myPath/somethingNice/mixinFile.js', {
 				myPath: './replacementPath/src/mixins'
 			})
-		).toEqual(path.join('./replacementPath/src/mixins', 'somethingNice/mixinFile.js'));
-	});
-});
+		).toEqual(path.join('./replacementPath/src/mixins', 'somethingNice/mixinFile.js'))
+	})
+})

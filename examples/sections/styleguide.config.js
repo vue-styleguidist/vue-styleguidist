@@ -1,5 +1,5 @@
-const path = require('path');
-const vueLoader = require('vue-loader');
+const path = require('path')
+const vueLoader = require('vue-loader')
 
 module.exports = {
 	title: 'Vue Style Guide Example',
@@ -88,4 +88,4 @@ module.exports = {
 						hints: 'error'
 				  }
 	})
-};
+}

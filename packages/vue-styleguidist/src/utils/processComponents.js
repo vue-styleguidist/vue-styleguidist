@@ -19,14 +19,14 @@ export default function processComponents(components) {
 				// Append @example doclet to all examples
 				examples: [...(component.props.examples || []), ...(component.props.example || [])]
 			}
-		};
+		}
 
-		delete newComponent.props.example;
+		delete newComponent.props.example
 		newComponent.props.examples = [
 			...(component.props.examples || []),
 			...(component.props.example || [])
-		];
+		]
 
-		return newComponent;
-	});
+		return newComponent
+	})
 }

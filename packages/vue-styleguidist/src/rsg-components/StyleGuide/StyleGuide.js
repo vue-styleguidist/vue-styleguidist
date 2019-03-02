@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import TableOfContents from 'rsg-components/TableOfContents';
-import StyleGuideRenderer from 'rsg-components/StyleGuide/StyleGuideRenderer';
-import { DisplayModes } from 'react-styleguidist/lib/consts';
-import Sections from 'rsg-components/Sections';
-import Welcome from 'rsg-components/Welcome';
-import Error from 'rsg-components/Error';
-import NotFound from 'rsg-components/NotFound';
-import { HOMEPAGE } from '../../../scripts/consts';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import TableOfContents from 'rsg-components/TableOfContents'
+import StyleGuideRenderer from 'rsg-components/StyleGuide/StyleGuideRenderer'
+import { DisplayModes } from 'react-styleguidist/lib/consts'
+import Sections from 'rsg-components/Sections'
+import Welcome from 'rsg-components/Welcome'
+import Error from 'rsg-components/Error'
+import NotFound from 'rsg-components/NotFound'
+import { HOMEPAGE } from '../../../scripts/consts'
 
 /**
  * This function will return true, if the sidebar should be visible and false otherwise.
@@ -26,7 +26,7 @@ import { HOMEPAGE } from '../../../scripts/consts';
  * @returns {boolean}
  */
 function hasSidebar(displayMode, showSidebar) {
-	return displayMode === DisplayModes.notFound || (showSidebar && displayMode === DisplayModes.all);
+	return displayMode === DisplayModes.notFound || (showSidebar && displayMode === DisplayModes.all)
 }
 
 export default class StyleGuide extends Component {
@@ -41,7 +41,7 @@ export default class StyleGuide extends Component {
 		displayMode: PropTypes.string,
 		allSections: PropTypes.array.isRequired,
 		pagePerSection: PropTypes.bool
-	};
+	}
 
 	static childContextTypes = {
 		codeRevision: PropTypes.number.isRequired,
@@ -49,16 +49,16 @@ export default class StyleGuide extends Component {
 		slots: PropTypes.object.isRequired,
 		displayMode: PropTypes.string,
 		renderRootJsx: PropTypes.object
-	};
+	}
 
 	static defaultProps = {
 		displayMode: DisplayModes.all
-	};
+	}
 
 	state = {
 		error: false,
 		info: null
-	};
+	}
 
 	getChildContext() {
 		return {
@@ -67,14 +67,14 @@ export default class StyleGuide extends Component {
 			slots: this.props.slots,
 			displayMode: this.props.displayMode,
 			renderRootJsx: this.props.renderRootJsx
-		};
+		}
 	}
 
 	componentDidCatch(error, info) {
 		this.setState({
 			error,
 			info
-		});
+		})
 	}
 
 	render() {
@@ -86,14 +86,14 @@ export default class StyleGuide extends Component {
 			displayMode,
 			allSections,
 			pagePerSection
-		} = this.props;
+		} = this.props
 
 		if (this.state.error) {
-			return <Error error={this.state.error} info={this.state.info} />;
+			return <Error error={this.state.error} info={this.state.info} />
 		}
 
 		if (welcomeScreen) {
-			return <Welcome patterns={patterns} />;
+			return <Welcome patterns={patterns} />
 		}
 
 		return (
@@ -106,6 +106,6 @@ export default class StyleGuide extends Component {
 			>
 				{sections.length ? <Sections sections={sections} depth={1} /> : <NotFound />}
 			</StyleGuideRenderer>
-		);
+		)
 	}
 }

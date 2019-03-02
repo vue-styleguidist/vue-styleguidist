@@ -14,5 +14,5 @@ export default {
 		size: Number,
 		default: 200
 	}
-};
+}
 </script>

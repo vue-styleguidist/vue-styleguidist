@@ -1,29 +1,29 @@
-const path = require('path');
-const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin');
-const MiniHtmlWebpackTemplate = require('@vxna/mini-html-webpack-template');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const merge = require('webpack-merge');
-const forEach = require('lodash/forEach');
-const isFunction = require('lodash/isFunction');
-const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin');
-const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVersion');
-const mergeWebpackConfig = require('./utils/mergeWebpackConfig');
-const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config');
+const path = require('path')
+const webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
+const MiniHtmlWebpackTemplate = require('@vxna/mini-html-webpack-template')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const merge = require('webpack-merge')
+const forEach = require('lodash/forEach')
+const isFunction = require('lodash/isFunction')
+const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin')
+const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVersion')
+const mergeWebpackConfig = require('./utils/mergeWebpackConfig')
+const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config')
 
-const RENDERER_REGEXP = /Renderer$/;
+const RENDERER_REGEXP = /Renderer$/
 
-const isWebpack4 = getWebpackVersion() >= 4;
-const sourceDir = path.resolve(__dirname, '../lib');
+const isWebpack4 = getWebpackVersion() >= 4
+const sourceDir = path.resolve(__dirname, '../lib')
 
 module.exports = function(config, env) {
-	process.env.NODE_ENV = process.env.NODE_ENV || env;
-	const isProd = env === 'production';
+	process.env.NODE_ENV = process.env.NODE_ENV || env
+	const isProd = env === 'production'
 
-	const template = isFunction(config.template) ? config.template : MiniHtmlWebpackTemplate;
-	const templateContext = isFunction(config.template) ? {} : config.template;
+	const template = isFunction(config.template) ? config.template : MiniHtmlWebpackTemplate
+	const templateContext = isFunction(config.template) ? {} : config.template
 	const htmlPluginOptions = {
 		context: Object.assign({}, templateContext, {
 			title: config.title,
@@ -31,7 +31,7 @@ module.exports = function(config, env) {
 			trimWhitespace: true
 		}),
 		template
-	};
+	}
 
 	let webpackConfig = {
 		output: {
@@ -56,15 +56,15 @@ module.exports = function(config, env) {
 		performance: {
 			hints: false
 		}
-	};
+	}
 
 	/* istanbul ignore if */
 	if (isWebpack4) {
-		webpackConfig.mode = env;
+		webpackConfig.mode = env
 	}
 
 	if (config.webpackConfig) {
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env);
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
 	webpackConfig = merge(webpackConfig, {
@@ -88,7 +88,7 @@ module.exports = function(config, env) {
 				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env)
 			})
 		]
-	});
+	})
 
 	// To have the hot-reload work on vue-styleguide
 	// the HMR has to be loaded after the html plugin.
@@ -115,7 +115,7 @@ module.exports = function(config, env) {
 						: []
 				)
 			]
-		});
+		})
 
 		const uglifier = new UglifyJSPlugin({
 			parallel: true,
@@ -131,21 +131,21 @@ module.exports = function(config, env) {
 					keep_fnames: true
 				}
 			}
-		});
+		})
 
 		/* istanbul ignore if */
 		if (isWebpack4) {
 			webpackConfig.optimization = {
 				minimizer: [uglifier]
-			};
+			}
 		} else {
-			webpackConfig.plugins.unshift(uglifier);
+			webpackConfig.plugins.unshift(uglifier)
 		}
 	} else {
 		webpackConfig = merge(webpackConfig, {
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')],
 			plugins: [new webpack.HotModuleReplacementPlugin()]
-		});
+		})
 	}
 
 	// Custom style guide components
@@ -153,14 +153,14 @@ module.exports = function(config, env) {
 		forEach(config.styleguideComponents, (filepath, name) => {
 			const fullName = name.match(RENDERER_REGEXP)
 				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
-				: name;
-			webpackConfig.resolve.alias[`rsg-components/${fullName}`] = filepath;
-		});
+				: name
+			webpackConfig.resolve.alias[`rsg-components/${fullName}`] = filepath
+		})
 	}
 
-	const sourceSrc = path.resolve(sourceDir, 'rsg-components');
+	const sourceSrc = path.resolve(sourceDir, 'rsg-components')
 
-	[
+	;[
 		'Preview',
 		'Usage',
 		'Events',
@@ -171,18 +171,18 @@ module.exports = function(config, env) {
 		'StyleGuide',
 		'Welcome'
 	].forEach(function(component) {
-		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component);
-	});
+		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component)
+	})
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	webpackConfig.resolve.alias['rsg-components'] = makeWebpackConfig(config, env).resolve.alias[
 		'rsg-components'
-	];
+	]
 
 	if (config.dangerouslyUpdateWebpackConfig) {
-		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env);
+		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env)
 	}
 
-	return webpackConfig;
-};
+	return webpackConfig
+}

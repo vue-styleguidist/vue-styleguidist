@@ -9,5 +9,5 @@ module.exports = {
 			default: 'blue'
 		}
 	}
-};
+}
 </script>

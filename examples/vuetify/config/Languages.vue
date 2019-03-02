@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import messages from './i18n';
+import messages from './i18n'
 export default {
 	data() {
 		return {
@@ -20,14 +20,14 @@ export default {
 					value: 'es'
 				}
 			]
-		};
+		}
 	},
 	watch: {
 		e1(value) {
-			this.$i18n.locale = value;
+			this.$i18n.locale = value
 		}
 	}
-};
+}
 </script>
 <style>
 .language {

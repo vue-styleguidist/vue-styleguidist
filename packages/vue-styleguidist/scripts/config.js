@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const findup = require('findup');
-const isString = require('lodash/isString');
-const isPlainObject = require('lodash/isPlainObject');
-const StyleguidistError = require('react-styleguidist/scripts/utils/error');
-const sanitizeConfig = require('react-styleguidist/scripts/utils/sanitizeConfig');
-const schema = require('./schemas/config');
+const fs = require('fs')
+const path = require('path')
+const findup = require('findup')
+const isString = require('lodash/isString')
+const isPlainObject = require('lodash/isPlainObject')
+const StyleguidistError = require('react-styleguidist/scripts/utils/error')
+const sanitizeConfig = require('react-styleguidist/scripts/utils/sanitizeConfig')
+const schema = require('./schemas/config')
 
-const CONFIG_FILENAME = 'styleguide.config.js';
+const CONFIG_FILENAME = 'styleguide.config.js'
 
 /**
  * Read, parse and validate config file or passed config.
@@ -17,40 +17,40 @@ const CONFIG_FILENAME = 'styleguide.config.js';
  * @returns {object}
  */
 function getConfig(config, update) {
-	let configFilepath;
+	let configFilepath
 	if (isString(config)) {
 		// Load config from a given file
-		configFilepath = path.resolve(process.cwd(), config);
+		configFilepath = path.resolve(process.cwd(), config)
 		if (!fs.existsSync(configFilepath)) {
-			throw new StyleguidistError('Styleguidist config not found: ' + configFilepath + '.');
+			throw new StyleguidistError('Styleguidist config not found: ' + configFilepath + '.')
 		}
-		config = {};
+		config = {}
 	} else if (!isPlainObject(config)) {
 		// Try to read config options from a file
-		configFilepath = findConfigFile();
-		config = {};
+		configFilepath = findConfigFile()
+		config = {}
 	}
 
 	if (configFilepath) {
-		config = require(configFilepath);
+		config = require(configFilepath)
 	}
 
 	if (update) {
-		config = update(config);
+		config = update(config)
 	}
 
-	const configDir = configFilepath ? path.dirname(configFilepath) : process.cwd();
+	const configDir = configFilepath ? path.dirname(configFilepath) : process.cwd()
 
 	if (config.serverPort && isString(config.serverPort)) {
-		config.serverPort = parseInt(config.serverPort);
+		config.serverPort = parseInt(config.serverPort)
 	}
 
 	try {
-		return sanitizeConfig(config, schema, configDir);
+		return sanitizeConfig(config, schema, configDir)
 	} catch (exception) {
 		/* eslint-disable */
-		console.log(exception instanceof StyleguidistError, exception.constructor.name);
-		throw exception.message;
+		console.log(exception instanceof StyleguidistError, exception.constructor.name)
+		throw exception.message
 	}
 }
 
@@ -60,14 +60,14 @@ function getConfig(config, update) {
  * @return {string|boolean} Config absolute file path.
  */
 function findConfigFile() {
-	let configDir;
+	let configDir
 	try {
-		configDir = findup.sync(process.cwd(), CONFIG_FILENAME);
+		configDir = findup.sync(process.cwd(), CONFIG_FILENAME)
 	} catch (exception) {
-		return false;
+		return false
 	}
 
-	return path.join(configDir, CONFIG_FILENAME);
+	return path.join(configDir, CONFIG_FILENAME)
 }
 
-module.exports = getConfig;
+module.exports = getConfig

@@ -1,17 +1,17 @@
 // If you want to access any of these options in React, don’t forget to update CLIENT_CONFIG_OPTIONS array
 // in loaders/styleguide-loader.js
 
-const DEFAULT_COMPONENTS_PATTERN = `src/{components,Components}/**/*.vue`;
+const DEFAULT_COMPONENTS_PATTERN = `src/{components,Components}/**/*.vue`
 
-const path = require('path');
-const startCase = require('lodash/startCase');
-const kleur = require('kleur');
-const logger = require('glogg')('rsg');
-const fileExistsCaseInsensitive = require('react-styleguidist/scripts/utils/findFileCaseInsensitive');
-const getUserPackageJson = require('react-styleguidist/scripts/utils/getUserPackageJson');
-const StyleguidistError = require('react-styleguidist/scripts/utils/error');
-const findUserWebpackConfig = require('../utils/findUserWebpackConfig');
-const consts = require('../consts');
+const path = require('path')
+const startCase = require('lodash/startCase')
+const kleur = require('kleur')
+const logger = require('glogg')('rsg')
+const fileExistsCaseInsensitive = require('react-styleguidist/scripts/utils/findFileCaseInsensitive')
+const getUserPackageJson = require('react-styleguidist/scripts/utils/getUserPackageJson')
+const StyleguidistError = require('react-styleguidist/scripts/utils/error')
+const findUserWebpackConfig = require('../utils/findUserWebpackConfig')
+const consts = require('../consts')
 
 module.exports = {
 	assetsDir: {
@@ -57,7 +57,7 @@ module.exports = {
 	exampleMode: {
 		type: 'string',
 		process: (value, config) => {
-			return config.showCode === undefined ? value : config.showCode ? 'expand' : 'collapse';
+			return config.showCode === undefined ? value : config.showCode ? 'expand' : 'collapse'
 		},
 		default: 'collapse'
 	},
@@ -71,16 +71,16 @@ module.exports = {
 			const files = [
 				path.join(path.dirname(componentPath), 'Readme.md'),
 				componentPath.replace(path.extname(componentPath), '.md')
-			];
+			]
 
 			for (const file of files) {
-				const existingFile = fileExistsCaseInsensitive(file);
+				const existingFile = fileExistsCaseInsensitive(file)
 				if (existingFile) {
-					return existingFile;
+					return existingFile
 				}
 			}
 
-			return false;
+			return false
 		},
 		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md')
 	},
@@ -104,7 +104,7 @@ module.exports = {
 				matchBrackets: true,
 				viewportMargin: Infinity,
 				lineNumbers: false
-			};
+			}
 			return Object.assign(
 				{},
 				defaults,
@@ -112,7 +112,7 @@ module.exports = {
 					theme: config.highlightTheme
 				},
 				value
-			);
+			)
 		}
 	},
 	navigation: {
@@ -172,14 +172,14 @@ module.exports = {
 			if (!val) {
 				// If root `components` isn't empty, make it a first section
 				// If `components` and `sections` weren’t specified, use default pattern
-				const components = config.components || DEFAULT_COMPONENTS_PATTERN;
+				const components = config.components || DEFAULT_COMPONENTS_PATTERN
 				return [
 					{
 						components
 					}
-				];
+				]
 			}
-			return val;
+			return val
 		},
 		example: [
 			{
@@ -253,9 +253,9 @@ module.exports = {
 						'template'
 					)} config option format has been changed, you need to update your config.`,
 					'template'
-				);
+				)
 			}
-			return val;
+			return val
 		}
 	},
 	theme: {
@@ -270,10 +270,10 @@ module.exports = {
 		type: 'string',
 		process: val => {
 			if (val) {
-				return val;
+				return val
 			}
-			const name = getUserPackageJson().name || '';
-			return `${startCase(name)} Style Guide`;
+			const name = getUserPackageJson().name || ''
+			return `${startCase(name)} Style Guide`
 		},
 		example: 'My Style Guide'
 	},
@@ -284,13 +284,13 @@ module.exports = {
 		type: 'function',
 		default: props => {
 			if (props.lang === 'example') {
-				props.lang = 'js';
+				props.lang = 'js'
 				logger.warn(
 					'"example" code block language is deprecated. Use "js", "jsx" or "javascript" instead:\n' +
 						consts.DOCS_DOCUMENTING
-				);
+				)
 			}
-			return props;
+			return props
 		}
 	},
 	updateWebpackConfig: {
@@ -300,7 +300,7 @@ module.exports = {
 	usageMode: {
 		type: 'string',
 		process: (value, config) => {
-			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse';
+			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse'
 		},
 		default: 'collapse'
 	},
@@ -319,23 +319,23 @@ module.exports = {
 		type: ['object', 'function'],
 		process: val => {
 			if (val) {
-				return val;
+				return val
 			}
 
-			const file = findUserWebpackConfig();
+			const file = findUserWebpackConfig()
 			if (file) {
-				logger.info(`Loading webpack config from:\n${file}`);
+				logger.info(`Loading webpack config from:\n${file}`)
 				// eslint-disable-next-line import/no-dynamic-require
-				return require(file);
+				return require(file)
 			}
 
 			logger.warn(
 				'No webpack config found. ' +
 					'You may need to specify "webpackConfig" option in your style guide config:\n' +
 					consts.DOCS_WEBPACK
-			);
+			)
 
-			return undefined;
+			return undefined
 		},
 		example: {
 			module: {
@@ -372,4 +372,4 @@ module.exports = {
 			}
 		}
 	}
-};
+}

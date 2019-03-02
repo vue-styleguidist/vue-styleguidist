@@ -1,13 +1,13 @@
-import vm from 'vm';
-import path from 'path';
-import { readFileSync } from 'fs';
-import styleguideLoader from '../styleguide-loader';
-import getConfig from '../../scripts/config';
+import vm from 'vm'
+import path from 'path'
+import { readFileSync } from 'fs'
+import styleguideLoader from '../styleguide-loader'
+import getConfig from '../../scripts/config'
 
 /* eslint-disable quotes */
 xdescribe('styleguide-loader', () => {
-	const file = path.resolve(__dirname, '../../test/components/Button/Button.js');
-	const configDir = path.resolve(__dirname, '../../test');
+	const file = path.resolve(__dirname, '../../test/components/Button/Button.js')
+	const configDir = path.resolve(__dirname, '../../test')
 
 	it('should return valid, parsable JS', () => {
 		const result = styleguideLoader.pitch.call(
@@ -22,10 +22,10 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+	})
 
 	it('should return correct component paths: default glob pattern', () => {
 		const result = styleguideLoader.pitch.call(
@@ -37,12 +37,12 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-		expect(result).toMatch(`'filepath': 'src/components/Button.js'`);
-		expect(result).toMatch(`'filepath': 'src/components/Placeholder.js'`);
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+		expect(result).toMatch(`'filepath': 'src/components/Button.js'`)
+		expect(result).toMatch(`'filepath': 'src/components/Placeholder.js'`)
+	})
 
 	it('should return correct component paths: glob', () => {
 		const result = styleguideLoader.pitch.call(
@@ -57,13 +57,13 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-		expect(result).toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`)
+		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`)
+		expect(result).toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`)
+	})
 
 	it('should return correct component paths: function returning absolute paths', () => {
 		const result = styleguideLoader.pitch.call(
@@ -85,13 +85,13 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-		expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`)
+		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`)
+		expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`)
+	})
 
 	it('should return correct component paths: function returning relative paths', () => {
 		const result = styleguideLoader.pitch.call(
@@ -113,13 +113,13 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-		expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`)
+		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`)
+		expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`)
+	})
 
 	it('should return correct component paths: array of of relative paths', () => {
 		const result = styleguideLoader.pitch.call(
@@ -138,12 +138,12 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`)
+		expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`)
+	})
 
 	it('should filter out components without examples if skipComponentsWithoutExample=true', () => {
 		const result = styleguideLoader.pitch.call(
@@ -166,16 +166,16 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency: () => {}
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(result).toBeTruthy();
-		expect(() => new vm.Script(result)).not.toThrow();
-		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-		expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
-	});
+		)
+		expect(result).toBeTruthy()
+		expect(() => new vm.Script(result)).not.toThrow()
+		expect(result).toMatch(`'filepath': 'components/Button/Button.js'`)
+		expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`)
+	})
 
 	it('should add context dependencies to webpack from contextDependencies config option', () => {
-		const contextDependencies = ['foo', 'bar'];
-		const addContextDependency = jest.fn();
+		const contextDependencies = ['foo', 'bar']
+		const addContextDependency = jest.fn()
 		styleguideLoader.pitch.call(
 			{
 				request: file,
@@ -189,14 +189,14 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(addContextDependency).toHaveBeenCalledTimes(2);
-		expect(addContextDependency).toBeCalledWith(contextDependencies[0]);
-		expect(addContextDependency).toBeCalledWith(contextDependencies[1]);
-	});
+		)
+		expect(addContextDependency).toHaveBeenCalledTimes(2)
+		expect(addContextDependency).toBeCalledWith(contextDependencies[0])
+		expect(addContextDependency).toBeCalledWith(contextDependencies[1])
+	})
 
 	it('should add common parent folder of all components to context dependencies', () => {
-		const addContextDependency = jest.fn();
+		const addContextDependency = jest.fn()
 		styleguideLoader.pitch.call(
 			{
 				request: file,
@@ -209,8 +209,8 @@ xdescribe('styleguide-loader', () => {
 				addContextDependency
 			},
 			readFileSync(file, 'utf8')
-		);
-		expect(addContextDependency).toHaveBeenCalledTimes(1);
-		expect(addContextDependency).toBeCalledWith(expect.stringMatching(/test\/components\/$/));
-	});
-});
+		)
+		expect(addContextDependency).toHaveBeenCalledTimes(1)
+		expect(addContextDependency).toBeCalledWith(expect.stringMatching(/test\/components\/$/))
+	})
+})

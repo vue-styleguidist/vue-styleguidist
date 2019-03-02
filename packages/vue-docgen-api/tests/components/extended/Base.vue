@@ -11,5 +11,5 @@
 export default {
 	name: 'Base',
 	props: ['question']
-};
+}
 </script>

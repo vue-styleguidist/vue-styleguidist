@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import sample from 'lodash/sample';
+import sample from 'lodash/sample'
 
 /**
  * An example-less button.
@@ -27,14 +27,14 @@ export default {
 	data() {
 		return {
 			label: sample(this.variants)
-		};
+		}
 	},
 	methods: {
 		handleClick() {
-			this.label = sample(this.variants);
+			this.label = sample(this.variants)
 		}
 	}
-};
+}
 </script>
 <style scope>
 .random-button {

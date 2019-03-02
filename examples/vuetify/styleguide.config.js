@@ -1,5 +1,5 @@
-const path = require('path');
-const vueLoader = require('vue-loader');
+const path = require('path')
+const vueLoader = require('vue-loader')
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
@@ -48,4 +48,4 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand'
-};
+}

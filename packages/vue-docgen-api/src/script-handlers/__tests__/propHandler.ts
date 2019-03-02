@@ -1,37 +1,37 @@
-import { NodePath } from 'ast-types';
-import babylon from '../../babel-parser';
-import { Documentation, PropDescriptor } from '../../Documentation';
-import resolveExportedComponent from '../../utils/resolveExportedComponent';
-import propHandler from '../propHandler';
+import { NodePath } from 'ast-types'
+import babylon from '../../babel-parser'
+import { Documentation, PropDescriptor } from '../../Documentation'
+import resolveExportedComponent from '../../utils/resolveExportedComponent'
+import propHandler from '../propHandler'
 
-jest.mock('../../Documentation');
+jest.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
-	const ast = babylon().parse(src);
-	return resolveExportedComponent(ast).get('default');
+	const ast = babylon().parse(src)
+	return resolveExportedComponent(ast).get('default')
 }
 
 describe('propHandler', () => {
-	let documentation: Documentation;
-	let mockPropDescriptor: PropDescriptor;
+	let documentation: Documentation
+	let mockPropDescriptor: PropDescriptor
 
 	beforeEach(() => {
 		mockPropDescriptor = {
 			description: '',
 			tags: {}
-		};
-		const MockDocumentation = require('../../Documentation').Documentation;
-		documentation = new MockDocumentation();
-		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock;
-		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor);
-	});
+		}
+		const MockDocumentation = require('../../Documentation').Documentation
+		documentation = new MockDocumentation()
+		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock
+		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
+	})
 
 	function tester(src: string, matchedObj: any) {
-		const def = parse(src);
+		const def = parse(src)
 		if (def) {
-			propHandler(documentation, def);
+			propHandler(documentation, def)
 		}
-		expect(mockPropDescriptor).toMatchObject(matchedObj);
+		expect(mockPropDescriptor).toMatchObject(matchedObj)
 	}
 
 	describe('base', () => {
@@ -39,15 +39,15 @@ describe('propHandler', () => {
 			const src = `
         export default {
           props: ['testArray']
-        }`;
-			const def = parse(src);
+        }`
+			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def);
+				propHandler(documentation, def)
 			}
-			expect(mockPropDescriptor.required).toEqual('');
-			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testArray');
-		});
-	});
+			expect(mockPropDescriptor.required).toEqual('')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testArray')
+		})
+	})
 
 	describe('type', () => {
 		it('should return the right props type', () => {
@@ -63,11 +63,11 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'array' }
-			});
-		});
+			})
+		})
 
 		it('should return the right props type for lit Array', () => {
 			const src = `
@@ -76,11 +76,11 @@ describe('propHandler', () => {
             columns: [Array]
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'array' }
-			});
-		});
+			})
+		})
 
 		it('should return the right props composite type', () => {
 			const src = `
@@ -91,11 +91,11 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'string|number' }
-			});
-		});
+			})
+		})
 
 		it('should return the right props type', () => {
 			const src = `
@@ -104,11 +104,11 @@ describe('propHandler', () => {
             test: Array
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'array' }
-			});
-		});
+			})
+		})
 
 		it('should not return required if prop only Type', () => {
 			const src = `
@@ -117,13 +117,13 @@ describe('propHandler', () => {
             test: String
           }
         }
-        `;
-			const def = parse(src);
+        `
+			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def);
+				propHandler(documentation, def)
 			}
-			expect(mockPropDescriptor.required).toBeUndefined();
-		});
+			expect(mockPropDescriptor.required).toBeUndefined()
+		})
 
 		it('should return the right props type string', () => {
 			const src = `
@@ -132,11 +132,11 @@ describe('propHandler', () => {
             test: String
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'string' }
-			});
-		});
+			})
+		})
 
 		it('should return the right props composite string|number', () => {
 			const src = `
@@ -145,11 +145,11 @@ describe('propHandler', () => {
             test: [String, Number]
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'string|number' }
-			});
-		});
+			})
+		})
 
 		it('should deduce the prop type from the default value', () => {
 			const src = `
@@ -160,11 +160,11 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				type: { name: 'boolean' }
-			});
-		});
+			})
+		})
 
 		it('should still return props with vue-types', () => {
 			const src = [
@@ -176,13 +176,13 @@ describe('propHandler', () => {
 				'    })',
 				'  }',
 				'}'
-			].join('\n');
+			].join('\n')
 			tester(src, {
 				type: {
 					func: true
 				}
-			});
-		});
+			})
+		})
 
 		it('should still return props with prop-types', () => {
 			const src = [
@@ -191,23 +191,23 @@ describe('propHandler', () => {
 				"    test: PropTypes.oneOf(['News', 'Photos'])",
 				'  }',
 				'}'
-			].join('\n');
+			].join('\n')
 			tester(src, {
 				type: {
 					func: true
 				}
-			});
-		});
+			})
+		})
 
 		it('should still return props with delegated types', () => {
-			const src = ['export default {', '  props: {', '    toto', '  }', '}'].join('\n');
+			const src = ['export default {', '  props: {', '    toto', '  }', '}'].join('\n')
 			tester(src, {
 				type: {
 					name: 'undefined'
 				}
-			});
-		});
-	});
+			})
+		})
+	})
 
 	describe('required', () => {
 		it('should return the right required props', () => {
@@ -223,12 +223,12 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				required: true
-			});
-		});
-	});
+			})
+		})
+	})
 
 	describe('defaultValue', () => {
 		it('should return the right default', () => {
@@ -240,11 +240,11 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				defaultValue: { value: `["hello"]` }
-			});
-		});
+			})
+		})
 
 		it('should be ok with just the default', () => {
 			const src = `
@@ -255,11 +255,11 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				defaultValue: { value: `"normal"` }
-			});
-		});
+			})
+		})
 
 		it('should return the body of the function as default value without parenthesis', () => {
 			const src = `
@@ -270,12 +270,12 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				defaultValue: { value: `{}` }
-			});
-		});
-	});
+			})
+		})
+	})
 
 	describe('description', () => {
 		it('should return the right description', () => {
@@ -290,12 +290,12 @@ describe('propHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				description: 'test description'
-			});
-		});
-	});
+			})
+		})
+	})
 
 	describe('v-model', () => {
 		it('should set the @model property as v-model instead of test', () => {
@@ -309,12 +309,12 @@ describe('propHandler', () => {
             test: String
           }
         }
-        `;
+        `
 			tester(src, {
 				description: 'test description'
-			});
-			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('test');
-			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model');
-		});
-	});
-});
+			})
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('test')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+		})
+	})
+})

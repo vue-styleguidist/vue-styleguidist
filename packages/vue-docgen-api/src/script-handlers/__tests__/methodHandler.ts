@@ -1,42 +1,42 @@
-import { NodePath } from 'ast-types';
-import babylon from '../../babel-parser';
-import { Documentation, MethodDescriptor } from '../../Documentation';
-import resolveExportedComponent from '../../utils/resolveExportedComponent';
-import propHandler from '../methodHandler';
+import { NodePath } from 'ast-types'
+import babylon from '../../babel-parser'
+import { Documentation, MethodDescriptor } from '../../Documentation'
+import resolveExportedComponent from '../../utils/resolveExportedComponent'
+import propHandler from '../methodHandler'
 
-jest.mock('../../Documentation');
+jest.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
-	const ast = babylon({ plugins: ['flow'] }).parse(src);
-	return resolveExportedComponent(ast).get('default');
+	const ast = babylon({ plugins: ['flow'] }).parse(src)
+	return resolveExportedComponent(ast).get('default')
 }
 
 function parseTS(src: string): NodePath | undefined {
-	const ast = babylon({ plugins: ['typescript'] }).parse(src);
-	return resolveExportedComponent(ast).get('default');
+	const ast = babylon({ plugins: ['typescript'] }).parse(src)
+	return resolveExportedComponent(ast).get('default')
 }
 
 describe('methodHandler', () => {
-	let documentation: Documentation;
-	let mockMethodDescriptor: MethodDescriptor;
+	let documentation: Documentation
+	let mockMethodDescriptor: MethodDescriptor
 
 	beforeEach(() => {
-		mockMethodDescriptor = { name: '', description: '', modifiers: [] };
-		const MockDocumentation = require('../../Documentation').Documentation;
-		documentation = new MockDocumentation();
-		const mockGetMethodDescriptor = documentation.getMethodDescriptor as jest.Mock;
+		mockMethodDescriptor = { name: '', description: '', modifiers: [] }
+		const MockDocumentation = require('../../Documentation').Documentation
+		documentation = new MockDocumentation()
+		const mockGetMethodDescriptor = documentation.getMethodDescriptor as jest.Mock
 		mockGetMethodDescriptor.mockImplementation((name: string) => {
-			mockMethodDescriptor.name = name;
-			return mockMethodDescriptor;
-		});
-	});
+			mockMethodDescriptor.name = name
+			return mockMethodDescriptor
+		})
+	})
 
 	function tester(src: string, matchedObj: any) {
-		const def = parse(src);
+		const def = parse(src)
 		if (def) {
-			propHandler(documentation, def);
+			propHandler(documentation, def)
 		}
-		expect(mockMethodDescriptor).toMatchObject(matchedObj);
+		expect(mockMethodDescriptor).toMatchObject(matchedObj)
 	}
 
 	it('should ignore every method not tagged as @public', () => {
@@ -48,11 +48,11 @@ describe('methodHandler', () => {
           return 1;
         }
       }
-    }`;
+    }`
 		tester(src, {
 			name: ''
-		});
-	});
+		})
+	})
 
 	describe('formats', () => {
 		it('should return the method if it is an anonymous function', () => {
@@ -67,11 +67,11 @@ describe('methodHandler', () => {
         }
       }
     }
-    `;
+    `
 			tester(src, {
 				name: 'testFunction'
-			});
-		});
+			})
+		})
 
 		it('should return the method if it is an object method', () => {
 			const src = `
@@ -85,11 +85,11 @@ describe('methodHandler', () => {
             }
           }
         }
-        `;
+        `
 			tester(src, {
 				name: 'testMethod'
-			});
-		});
+			})
+		})
 
 		it('should return the method if it is an arrow function', () => {
 			const src = `
@@ -103,12 +103,12 @@ describe('methodHandler', () => {
           },
         }
       }
-      `;
+      `
 			tester(src, {
 				name: 'testArrowFunction'
-			});
-		});
-	});
+			})
+		})
+	})
 
 	it('should return their parameters', () => {
 		const src = `
@@ -122,12 +122,12 @@ describe('methodHandler', () => {
         }
       }
     }
-    `;
+    `
 		tester(src, {
 			name: 'testWithMultipleParams',
 			params: [{ name: 'param1' }, { name: 'param2' }]
-		});
-	});
+		})
+	})
 
 	it('should allow description of methods', () => {
 		const src = `
@@ -143,12 +143,12 @@ describe('methodHandler', () => {
         }
       }
     }
-    `;
+    `
 		tester(src, {
 			name: 'describedFunc',
 			description: 'it returns 2'
-		});
-	});
+		})
+	})
 
 	it('should allow description of params', () => {
 		const src = `
@@ -164,12 +164,12 @@ describe('methodHandler', () => {
         }
       }
     }
-    `;
+    `
 		tester(src, {
 			name: 'describedParams',
 			params: [{ name: 'p1' }, { name: 'p2', description: 'multiplier', type: { name: 'string' } }]
-		});
-	});
+		})
+	})
 
 	it('should allow description of params even if they are implicit', () => {
 		const src = `
@@ -186,15 +186,15 @@ describe('methodHandler', () => {
         }
       }
     }
-    `;
+    `
 		tester(src, {
 			name: 'describedParams',
 			params: [
 				{ description: 'unnamed param', type: { name: 'string' } },
 				{ description: 'another unnamed param', type: { name: 'number' } }
 			]
-		});
-	});
+		})
+	})
 
 	it('should allow description of params without naming them', () => {
 		const src = `
@@ -211,15 +211,15 @@ describe('methodHandler', () => {
         }
       }
     }
-    `;
+    `
 		tester(src, {
 			name: 'describedParams',
 			params: [
 				{ name: 'p', description: 'unnamed param', type: { name: 'string' } },
 				{ name: 'p2', description: 'another unnamed param', type: { name: 'number' } }
 			]
-		});
-	});
+		})
+	})
 
 	describe('flow', () => {
 		it('should deduce the type of params from the param type', () => {
@@ -235,11 +235,11 @@ describe('methodHandler', () => {
 				'    }',
 				'  }',
 				'}'
-			].join('\n');
+			].join('\n')
 
-			const def = parse(src);
+			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def);
+				propHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'publicMethod',
@@ -247,8 +247,8 @@ describe('methodHandler', () => {
 					{ name: 'param', type: { name: 'string' } },
 					{ name: 'paramObscure', type: { name: 'ObscureInterface' } }
 				]
-			});
-		});
+			})
+		})
 
 		it('should deduce the return type from method', () => {
 			const src = [
@@ -263,18 +263,18 @@ describe('methodHandler', () => {
 				'    }',
 				'  }',
 				'}'
-			].join('\n');
+			].join('\n')
 
-			const def = parse(src);
+			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def);
+				propHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'publicMethod',
 				returns: { type: { name: 'string' } }
-			});
-		});
-	});
+			})
+		})
+	})
 
 	describe('typescript', () => {
 		it('should deduce the type of params from the param type', () => {
@@ -289,11 +289,11 @@ describe('methodHandler', () => {
           }
         }
       }
-      `;
+      `
 
-			const def = parse(src);
+			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def);
+				propHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'publicMethod',
@@ -301,8 +301,8 @@ describe('methodHandler', () => {
 					{ name: 'param', type: { name: 'string' } },
 					{ name: 'paramObscure', type: { name: 'ObscureInterface' } }
 				]
-			});
-		});
+			})
+		})
 
 		it('should deduce the return type from method decoration', () => {
 			const src = `
@@ -316,16 +316,16 @@ describe('methodHandler', () => {
           }
         }
       };
-      `;
+      `
 
-			const def = parseTS(src);
+			const def = parseTS(src)
 			if (def) {
-				propHandler(documentation, def);
+				propHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'twoMethod',
 				returns: { type: { name: 'number' } }
-			});
-		});
-	});
-});
+			})
+		})
+	})
+})

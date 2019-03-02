@@ -1,6 +1,6 @@
-import path from 'path';
-import identity from 'lodash/identity';
-import getComponents from '../getComponents';
+import path from 'path'
+import identity from 'lodash/identity'
+import getComponents from '../getComponents'
 
 xdescribe('getComponents', () => {
 	it('should return an object for components', () => {
@@ -8,8 +8,8 @@ xdescribe('getComponents', () => {
 			configDir: path.resolve(__dirname, '../../../test'),
 			getExampleFilename: identity,
 			getComponentPathLine: identity
-		});
+		})
 
-		expect(result).toMatchSnapshot();
-	});
-});
+		expect(result).toMatchSnapshot()
+	})
+})

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Logo from 'rsg-components/Logo';
-import Markdown from 'rsg-components/Markdown';
-import Styled from 'rsg-components/Styled';
-import cx from 'classnames';
-import Ribbon from 'rsg-components/Ribbon';
-import Version from 'rsg-components/Version';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Logo from 'rsg-components/Logo'
+import Markdown from 'rsg-components/Markdown'
+import Styled from 'rsg-components/Styled'
+import cx from 'classnames'
+import Ribbon from 'rsg-components/Ribbon'
+import Version from 'rsg-components/Version'
 
 const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth }) => ({
 	root: {
@@ -55,7 +55,7 @@ const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth
 		fontFamily: fontFamily.base,
 		fontSize: fontSize.small
 	}
-});
+})
 
 export function StyleGuideRenderer({
 	classes,
@@ -85,7 +85,7 @@ export function StyleGuideRenderer({
 			)}
 			<Ribbon />
 		</div>
-	);
+	)
 }
 
 StyleGuideRenderer.propTypes = {
@@ -96,6 +96,6 @@ StyleGuideRenderer.propTypes = {
 	children: PropTypes.node.isRequired,
 	toc: PropTypes.node.isRequired,
 	hasSidebar: PropTypes.bool
-};
+}
 
-export default Styled(styles)(StyleGuideRenderer);
+export default Styled(styles)(StyleGuideRenderer)

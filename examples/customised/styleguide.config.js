@@ -1,5 +1,5 @@
-const path = require('path');
-const vueLoader = require('vue-loader');
+const path = require('path')
+const vueLoader = require('vue-loader')
 
 module.exports = {
 	title: 'Style guide example',
@@ -32,8 +32,8 @@ module.exports = {
 		}
 	},
 	getComponentPathLine(componentPath) {
-		const name = path.basename(componentPath, '.js');
-		return `import { ${name} } from 'my-awesome-library';`;
+		const name = path.basename(componentPath, '.js')
+		return `import { ${name} } from 'my-awesome-library';`
 	},
 
 	// Example of overriding the CLI message in local development.
@@ -41,7 +41,7 @@ module.exports = {
 	// serverHost: 'your-domain',
 	printServerInstructions(config) {
 		// eslint-disable-next-line no-console
-		console.log(`View your styleguide at: http://${config.serverHost}:${config.serverPort}`);
+		console.log(`View your styleguide at: http://${config.serverHost}:${config.serverPort}`)
 	},
 
 	// Override Styleguidist components
@@ -91,4 +91,4 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand'
-};
+}

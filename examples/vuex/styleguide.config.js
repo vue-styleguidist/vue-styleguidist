@@ -1,5 +1,5 @@
-const path = require('path');
-const vueLoader = require('vue-loader');
+const path = require('path')
+const vueLoader = require('vue-loader')
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
@@ -29,4 +29,4 @@ module.exports = {
 	},
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
 	usageMode: 'expand'
-};
+}

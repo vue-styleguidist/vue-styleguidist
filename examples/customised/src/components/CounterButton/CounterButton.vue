@@ -16,20 +16,20 @@ export default {
 	data() {
 		return {
 			value: 0
-		};
+		}
 	},
 	methods: {
 		/**
 		 * Increments the counter. This method is not marked @public and is not visible in the styleguide.
 		 */
 		increment() {
-			this.value++;
+			this.value++
 			/**
 			 * After increment event
 			 * @event after
 			 * @type {number}
 			 */
-			this.$emit('after', this.value);
+			this.$emit('after', this.value)
 		},
 		/**
 		 * Sets the counter to a particular value.
@@ -40,8 +40,8 @@ export default {
 		 * @returns {string} Test
 		 */
 		set(newValue) {
-			this.value = parseInt(newValue, 10);
+			this.value = parseInt(newValue, 10)
 		}
 	}
-};
+}
 </script>

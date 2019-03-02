@@ -16,7 +16,7 @@ module.exports = function requireInRuntime(requireMap, filepath) {
 			'require() statements can be added only by editing a Markdown example file: require("' +
 				filepath +
 				'")'
-		);
+		)
 	}
-	return requireMap[filepath];
-};
+	return requireMap[filepath]
+}

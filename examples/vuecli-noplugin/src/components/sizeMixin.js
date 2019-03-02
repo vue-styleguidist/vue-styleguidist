@@ -11,4 +11,4 @@ module.exports = {
 			default: '14px'
 		}
 	}
-};
+}

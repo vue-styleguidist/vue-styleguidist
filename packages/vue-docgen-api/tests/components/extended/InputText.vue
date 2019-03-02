@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import Base from './Base.vue';
+import Base from './Base.vue'
 
 /**
  * Description InputText
@@ -14,5 +14,5 @@ export default {
 	name: 'InputText',
 	extends: Base,
 	props: ['placeholder']
-};
+}
 </script>

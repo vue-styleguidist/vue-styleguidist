@@ -1,4 +1,4 @@
-const processComponent = require('./processComponent');
+const processComponent = require('./processComponent')
 
 /**
  * Process each component in a list.
@@ -8,5 +8,5 @@ const processComponent = require('./processComponent');
  * @returns {object|null}
  */
 module.exports = function getComponents(components, config) {
-	return components.map(filepath => processComponent(filepath, config));
-};
+	return components.map(filepath => processComponent(filepath, config))
+}

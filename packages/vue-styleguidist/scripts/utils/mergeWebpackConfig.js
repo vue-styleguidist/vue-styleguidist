@@ -1,15 +1,15 @@
-const isFunction = require('lodash/isFunction');
-const omit = require('lodash/omit');
-const mergeBase = require('webpack-merge');
+const isFunction = require('lodash/isFunction')
+const omit = require('lodash/omit')
+const mergeBase = require('webpack-merge')
 
-const IGNORE_SECTIONS = ['entry', 'output', 'watch', 'stats', 'styleguidist'];
+const IGNORE_SECTIONS = ['entry', 'output', 'watch', 'stats', 'styleguidist']
 const IGNORE_SECTIONS_ENV = {
 	development: [],
 	// For production builds, we'll ignore devtool settings to avoid
 	// source mapping bloat.
 	production: ['devtool'],
 	removePlugins: ['plugins']
-};
+}
 
 const IGNORE_PLUGINS = [
 	'CommonsChunkPlugins',
@@ -19,7 +19,7 @@ const IGNORE_PLUGINS = [
 	'DedupePlugin',
 	'UglifyJsPlugin',
 	'HotModuleReplacementPlugin'
-];
+]
 
 const merge = mergeBase({
 	// Ignore user’s plugins to avoid duplicates and issues with our plugins
@@ -28,7 +28,7 @@ const merge = mergeBase({
 		IGNORE_PLUGINS,
 		plugin => plugin.constructor && plugin.constructor.name
 	)
-});
+})
 
 /**
  * Merge two Webpack configs.
@@ -43,7 +43,7 @@ const merge = mergeBase({
  * @return {object}
  */
 module.exports = function mergeWebpackConfig(baseConfig, userConfig, env) {
-	const userConfigObject = isFunction(userConfig) ? userConfig(env) : userConfig;
-	const safeUserConfig = omit(userConfigObject, IGNORE_SECTIONS.concat(IGNORE_SECTIONS_ENV[env]));
-	return merge(baseConfig, safeUserConfig);
-};
+	const userConfigObject = isFunction(userConfig) ? userConfig(env) : userConfig
+	const safeUserConfig = omit(userConfigObject, IGNORE_SECTIONS.concat(IGNORE_SECTIONS_ENV[env]))
+	return merge(baseConfig, safeUserConfig)
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Styled from 'rsg-components/Styled';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Styled from 'rsg-components/Styled'
 
 export const styles = ({ space, color, fontFamily, fontSize }) => ({
 	table: {
@@ -39,7 +39,7 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 			marginBottom: 0
 		}
 	}
-});
+})
 
 export function TableRenderer({ classes, columns, rows, getRowKey }) {
 	return (
@@ -65,7 +65,7 @@ export function TableRenderer({ classes, columns, rows, getRowKey }) {
 				))}
 			</tbody>
 		</table>
-	);
+	)
 }
 
 TableRenderer.propTypes = {
@@ -78,6 +78,6 @@ TableRenderer.propTypes = {
 	).isRequired,
 	rows: PropTypes.arrayOf(PropTypes.object).isRequired,
 	getRowKey: PropTypes.func.isRequired
-};
+}
 
-export default Styled(styles)(TableRenderer);
+export default Styled(styles)(TableRenderer)

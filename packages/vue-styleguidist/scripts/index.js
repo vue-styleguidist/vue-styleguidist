@@ -1,12 +1,12 @@
 // Make sure user has webpack installed
-require('./utils/ensureWebpack');
-const setupLogger = require('react-styleguidist/scripts/logger');
+require('./utils/ensureWebpack')
+const setupLogger = require('react-styleguidist/scripts/logger')
 
-const build = require('./build');
-const server = require('./server');
-const makeWebpackConfig = require('./make-webpack-config');
-const getConfig = require('./config');
-const binutils = require('./binutils');
+const build = require('./build')
+const server = require('./server')
+const makeWebpackConfig = require('./make-webpack-config')
+const getConfig = require('./config')
+const binutils = require('./binutils')
 
 /**
  * Initialize Vue Styleguide API.
@@ -17,12 +17,12 @@ const binutils = require('./binutils');
  */
 module.exports = function(config, updateConfig) {
 	config = getConfig(config, config => {
-		setupLogger(config.logger, config.verbose, {});
+		setupLogger(config.logger, config.verbose, {})
 		if (typeof updateConfig === 'function') {
-			updateConfig(config);
+			updateConfig(config)
 		}
-		return config;
-	});
+		return config
+	})
 
 	return {
 		/**
@@ -32,7 +32,7 @@ module.exports = function(config, updateConfig) {
 		 * @return {Compiler} Webpack Compiler instance.
 		 */
 		build(callback) {
-			return build(config, (err, stats) => callback(err, config, stats));
+			return build(config, (err, stats) => callback(err, config, stats))
 		},
 
 		/**
@@ -43,7 +43,7 @@ module.exports = function(config, updateConfig) {
 		 * @return {ServerInfo.Compiler} Webpack Compiler instance.
 		 */
 		server(callback) {
-			return server(config, err => callback(err, config));
+			return server(config, err => callback(err, config))
 		},
 
 		/**
@@ -53,12 +53,12 @@ module.exports = function(config, updateConfig) {
 		 * @return {object}
 		 */
 		makeWebpackConfig(env) {
-			return makeWebpackConfig(config, env || 'production');
+			return makeWebpackConfig(config, env || 'production')
 		},
 
 		binutils: {
 			server: open => binutils.commandServer(config, open),
 			build: () => binutils.commandBuild(config)
 		}
-	};
-};
+	}
+}

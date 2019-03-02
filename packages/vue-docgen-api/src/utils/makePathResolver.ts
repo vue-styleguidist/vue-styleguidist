@@ -1,5 +1,5 @@
-import resolveAliases from '../utils/resolveAliases';
-import resolvePathFrom from '../utils/resolvePathFrom';
+import resolveAliases from '../utils/resolveAliases'
+import resolvePathFrom from '../utils/resolvePathFrom'
 
 export default function makePathResolver(
 	refDirName: string,
@@ -10,5 +10,5 @@ export default function makePathResolver(
 		resolvePathFrom(resolveAliases(filePath, aliases || {}), [
 			originalDirNameOverride || refDirName,
 			...(modules || [])
-		]);
+		])
 }

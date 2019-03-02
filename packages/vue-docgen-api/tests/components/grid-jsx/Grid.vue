@@ -1,6 +1,6 @@
 
 <script>
-import { text } from './utils';
+import { text } from './utils'
 
 /**
  * This is an example of creating a reusable grid component and using it with external data.
@@ -31,7 +31,7 @@ export default {
 		images: {
 			type: Array,
 			default: function() {
-				return [{}];
+				return [{}]
 			}
 		},
 		/**
@@ -54,21 +54,21 @@ export default {
 		}
 	},
 	data() {
-		var sortOrders = {};
+		var sortOrders = {}
 		this.columns.forEach(function(key) {
-			sortOrders[key] = 1;
-		});
+			sortOrders[key] = 1
+		})
 		return {
 			sortKey: '',
 			sortOrders: sortOrders
-		};
+		}
 	},
 	computed: {
 		filteredData: function() {
-			var sortKey = this.sortKey;
-			var filterKey = this.filterKey && this.filterKey.toLowerCase();
-			var order = this.sortOrders[sortKey] || 1;
-			var data = this.data;
+			var sortKey = this.sortKey
+			var filterKey = this.filterKey && this.filterKey.toLowerCase()
+			var order = this.sortOrders[sortKey] || 1
+			var data = this.data
 			if (filterKey) {
 				data = data.filter(function(row) {
 					return Object.keys(row).some(function(key) {
@@ -76,23 +76,23 @@ export default {
 							String(row[key])
 								.toLowerCase()
 								.indexOf(filterKey) > -1
-						);
-					});
-				});
+						)
+					})
+				})
 			}
 			if (sortKey) {
 				data = data.slice().sort(function(a, b) {
-					a = a[sortKey];
-					b = b[sortKey];
-					return (a === b ? 0 : a > b ? 1 : -1) * order;
-				});
+					a = a[sortKey]
+					b = b[sortKey]
+					return (a === b ? 0 : a > b ? 1 : -1) * order
+				})
 			}
-			return data;
+			return data
 		}
 	},
 
 	render() {
-		const { sortKey, capitalize } = this;
+		const { sortKey, capitalize } = this
 		return (
 			<table class="grid">
 				{/** @slot Use this slot header */}
@@ -109,7 +109,7 @@ export default {
 				</thead>
 				<tbody>{filteredData.map(entry => columns.map(key => entry[key]))}</tbody>
 			</table>
-		);
+		)
 	},
 
 	methods: {
@@ -123,8 +123,8 @@ export default {
 		 * @returns {string} Test
 		 */
 		sortBy: function(key) {
-			this.sortKey = key;
-			this.sortOrders[key] = this.sortOrders[key] * -1;
+			this.sortKey = key
+			this.sortOrders[key] = this.sortOrders[key] * -1
 
 			/**
 			 * Success event.
@@ -134,7 +134,7 @@ export default {
 			 */
 			this.$emit('success', {
 				demo: 'example success'
-			});
+			})
 		},
 
 		hiddenMethod: function() {
@@ -146,13 +146,13 @@ export default {
 			 */
 			this.$emit('error', {
 				demo: 'example error'
-			});
+			})
 		},
 		capitalize: function(str) {
-			return str.charAt(0).toUpperCase() + str.slice(1);
+			return str.charAt(0).toUpperCase() + str.slice(1)
 		}
 	}
-};
+}
 </script>
 
 <style scoped>

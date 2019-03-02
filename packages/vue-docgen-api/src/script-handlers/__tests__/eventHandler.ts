@@ -1,27 +1,27 @@
-import * as bt from '@babel/types';
-import { NodePath } from 'ast-types';
-import babylon from '../../babel-parser';
-import { Documentation, EventDescriptor } from '../../Documentation';
-import resolveExportedComponent from '../../utils/resolveExportedComponent';
-import eventHandler from '../eventHandler';
+import * as bt from '@babel/types'
+import { NodePath } from 'ast-types'
+import babylon from '../../babel-parser'
+import { Documentation, EventDescriptor } from '../../Documentation'
+import resolveExportedComponent from '../../utils/resolveExportedComponent'
+import eventHandler from '../eventHandler'
 
-jest.mock('../../Documentation');
+jest.mock('../../Documentation')
 
 function parse(src: string): { component: NodePath | undefined; ast: bt.File } {
-	const ast = babylon().parse(src);
-	return { component: resolveExportedComponent(ast).get('default'), ast };
+	const ast = babylon().parse(src)
+	return { component: resolveExportedComponent(ast).get('default'), ast }
 }
 
 describe('eventHandler', () => {
-	let documentation: Documentation;
-	let mockEventDescriptor: EventDescriptor;
+	let documentation: Documentation
+	let mockEventDescriptor: EventDescriptor
 
 	beforeEach(() => {
-		mockEventDescriptor = { description: '', properties: [] };
-		documentation = new (require('../../Documentation')).Documentation();
-		const mockGetEventDescriptor = documentation.getEventDescriptor as jest.Mock;
-		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor);
-	});
+		mockEventDescriptor = { description: '', properties: [] }
+		documentation = new (require('../../Documentation')).Documentation()
+		const mockGetEventDescriptor = documentation.getEventDescriptor as jest.Mock
+		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
+	})
 
 	it('should find events emmitted', () => {
 		const src = `
@@ -37,10 +37,10 @@ describe('eventHandler', () => {
         }
       }
     }
-    `;
-		const def = parse(src);
+    `
+		const def = parse(src)
 		if (def.component) {
-			eventHandler(documentation, def.component, def.ast);
+			eventHandler(documentation, def.component, def.ast)
 		}
 		const eventComp: EventDescriptor = {
 			description: 'Describe the event',
@@ -58,10 +58,10 @@ describe('eventHandler', () => {
 					}
 				}
 			]
-		};
-		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success');
-		expect(mockEventDescriptor).toMatchObject(eventComp);
-	});
+		}
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success')
+		expect(mockEventDescriptor).toMatchObject(eventComp)
+	})
 
 	it('should find events undocumented properties', () => {
 		const src = `
@@ -72,10 +72,10 @@ describe('eventHandler', () => {
         }
       }
     }
-    `;
-		const def = parse(src);
+    `
+		const def = parse(src)
 		if (def.component) {
-			eventHandler(documentation, def.component, def.ast);
+			eventHandler(documentation, def.component, def.ast)
 		}
 		const eventComp: EventDescriptor = {
 			description: '',
@@ -90,10 +90,10 @@ describe('eventHandler', () => {
 					}
 				}
 			]
-		};
-		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success');
-		expect(mockEventDescriptor).toMatchObject(eventComp);
-	});
+		}
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success')
+		expect(mockEventDescriptor).toMatchObject(eventComp)
+	})
 
 	it('should find events names stored in variables', () => {
 		const src = `
@@ -105,13 +105,13 @@ describe('eventHandler', () => {
         }
       }
     }
-    `;
-		const def = parse(src);
+    `
+		const def = parse(src)
 		if (def.component) {
-			eventHandler(documentation, def.component, def.ast);
+			eventHandler(documentation, def.component, def.ast)
 		}
-		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success');
-	});
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success')
+	})
 
 	it('should find events whose names are only spcified in the JSDoc', () => {
 		const src = `
@@ -125,11 +125,11 @@ describe('eventHandler', () => {
         }
       }
     }
-    `;
-		const def = parse(src);
+    `
+		const def = parse(src)
 		if (def.component) {
-			eventHandler(documentation, def.component, def.ast);
+			eventHandler(documentation, def.component, def.ast)
 		}
-		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success');
-	});
-});
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success')
+	})
+})

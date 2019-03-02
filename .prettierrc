@@ -4,6 +4,7 @@
   "trailingComma": "none",
   "useTabs": true,
   "proseWrap": "never",
+  "semi": false,
   "overrides": [{
     "files": "*.md",
     "options": {

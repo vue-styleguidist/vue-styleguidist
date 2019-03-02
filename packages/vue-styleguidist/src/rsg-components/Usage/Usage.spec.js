@@ -1,5 +1,5 @@
-import React from 'react';
-import Usage from './Usage';
+import React from 'react'
+import Usage from './Usage'
 
 const props = [
 	{
@@ -8,7 +8,7 @@ const props = [
 		required: true,
 		description: 'Button label.'
 	}
-];
+]
 const methods = [
 	{
 		name: 'set',
@@ -22,24 +22,24 @@ const methods = [
 		returns: null,
 		description: 'Sets the counter to a particular value.'
 	}
-];
+]
 
 describe('Usage', () => {
 	it('should render props table', () => {
-		const actual = shallow(<Usage props={{ props }} />);
+		const actual = shallow(<Usage props={{ props }} />)
 
-		expect(actual).toMatchSnapshot();
-	});
+		expect(actual).toMatchSnapshot()
+	})
 
 	it('should render methods table', () => {
-		const actual = shallow(<Usage props={{ methods }} />);
+		const actual = shallow(<Usage props={{ methods }} />)
 
-		expect(actual).toMatchSnapshot();
-	});
+		expect(actual).toMatchSnapshot()
+	})
 
 	it('should render nothing without props and methods', () => {
-		const actual = shallow(<Usage props={{}} />);
+		const actual = shallow(<Usage props={{}} />)
 
-		expect(actual.getElement()).toBe(null);
-	});
-});
+		expect(actual.getElement()).toBe(null)
+	})
+})

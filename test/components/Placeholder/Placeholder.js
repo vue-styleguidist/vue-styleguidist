@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * Image placeholders.
@@ -23,20 +23,20 @@ export default class Placeholder extends Component {
 		]),
 		width: PropTypes.number,
 		height: PropTypes.number
-	};
+	}
 
 	static defaultProps = {
 		type: 'animal',
 		width: 150,
 		height: 150
-	};
+	}
 
 	/**
 	 * A public method.
 	 * @public
 	 */
 	getImageUrl() {
-		const { type, width, height } = this.props;
+		const { type, width, height } = this.props
 		const types = {
 			animal: `http://placeimg.com/${width}/${height}/animals`,
 			bacon: `http://baconmockup.com/${width}/${height}`,
@@ -47,16 +47,16 @@ export default class Placeholder extends Component {
 			food: `http://lorempixel.com/${width}/${height}/food`,
 			nature: `http://lorempixel.com/${width}/${height}/nature`,
 			people: `http://lorempixel.com/${width}/${height}/people`
-		};
-		return types[type];
+		}
+		return types[type]
 	}
 
 	makeABarrelRoll() {
-		return 'This is a private method';
+		return 'This is a private method'
 	}
 
 	render() {
-		const { width, height } = this.props;
-		return <img src={this.getImageUrl()} width={width} height={height} />;
+		const { width, height } = this.props
+		return <img src={this.getImageUrl()} width={width} height={height} />
 	}
 }

@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import Base from './Base.vue';
+import Base from './Base.vue'
 
 /**
  * Description InputTextDocumented
@@ -17,5 +17,5 @@ export default {
 			type: String
 		}
 	}
-};
+}
 </script>

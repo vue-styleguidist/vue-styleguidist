@@ -1,13 +1,13 @@
-import { compile } from 'vue-template-compiler';
-import { Documentation } from '../../Documentation';
-import { traverse } from '../../parse-template';
-import slotHandler from '../slotHandler';
+import { compile } from 'vue-template-compiler'
+import { Documentation } from '../../Documentation'
+import { traverse } from '../../parse-template'
+import slotHandler from '../slotHandler'
 
 describe('slotHandler', () => {
-	let doc: Documentation;
+	let doc: Documentation
 	beforeEach(() => {
-		doc = new Documentation();
-	});
+		doc = new Documentation()
+	})
 
 	it('should pick comments at the beginning of templates', () => {
 		const ast = compile(
@@ -19,17 +19,17 @@ describe('slotHandler', () => {
 				'</slot>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], {
 				functional: false,
 				rootLeadingComment: '@slot first slot found'
-			});
-			expect(doc.toObject().slots.first).toMatchObject({ description: 'first slot found' });
+			})
+			expect(doc.toObject().slots.first).toMatchObject({ description: 'first slot found' })
 		} else {
-			fail();
+			fail()
 		}
-	});
+	})
 
 	it('should pick comments before slots', () => {
 		const ast = compile(
@@ -41,14 +41,14 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' });
-			expect(doc.toObject().slots.default).toMatchObject({ description: 'a default slot' });
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+			expect(doc.toObject().slots.default).toMatchObject({ description: 'a default slot' })
 		} else {
-			fail();
+			fail()
 		}
-	});
+	})
 
 	it('should pick up the name of a slot', () => {
 		const ast = compile(
@@ -60,14 +60,14 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' });
-			expect(doc.toObject().slots.oeuf).toMatchObject({ description: 'a slot named oeuf' });
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+			expect(doc.toObject().slots.oeuf).toMatchObject({ description: 'a slot named oeuf' })
 		} else {
-			fail();
+			fail()
 		}
-	});
+	})
 
 	it('should detect scoped slots', () => {
 		const ast = compile(
@@ -78,15 +78,15 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n'),
 			{ comments: true }
-		).ast;
+		).ast
 		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' });
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
 			expect(doc.toObject().slots.oeuf).toMatchObject({
 				scoped: true,
 				description: 'a slot named oeuf'
-			});
+			})
 		} else {
-			fail();
+			fail()
 		}
-	});
-});
+	})
+})

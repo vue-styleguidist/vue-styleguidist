@@ -1,4 +1,4 @@
-import { ASTElement, ASTNode } from 'vue-template-compiler';
+import { ASTElement, ASTNode } from 'vue-template-compiler'
 
 /**
  * Extract leading comments to an html node
@@ -11,20 +11,20 @@ export default function extractLeadingComment(
 	templateAst: ASTNode,
 	rootLeadingComment: string
 ): string {
-	let comment = '';
+	let comment = ''
 	if (parentAst) {
-		const slotSiblings: ASTNode[] = parentAst.children;
+		const slotSiblings: ASTNode[] = parentAst.children
 		// First find the position of the slot in the list
-		let i = slotSiblings.length - 1;
-		let currentSlotIndex = -1;
+		let i = slotSiblings.length - 1
+		let currentSlotIndex = -1
 		do {
 			if (slotSiblings[i] === templateAst) {
-				currentSlotIndex = i;
+				currentSlotIndex = i
 			}
-		} while (currentSlotIndex < 0 && i--);
+		} while (currentSlotIndex < 0 && i--)
 
 		// Find the first leading comment
-		const slotSiblingsBeforeSlot = slotSiblings.slice(0, currentSlotIndex).reverse();
+		const slotSiblingsBeforeSlot = slotSiblings.slice(0, currentSlotIndex).reverse()
 
 		for (const potentialComment of slotSiblingsBeforeSlot) {
 			// if there is text between the slot and the comment, ignore
@@ -32,15 +32,15 @@ export default function extractLeadingComment(
 				potentialComment.type !== 3 ||
 				(!potentialComment.isComment && potentialComment.text.trim().length)
 			) {
-				break;
+				break
 			}
 
 			if (potentialComment.isComment) {
-				comment = potentialComment.text.trim() + '\n' + comment;
+				comment = potentialComment.text.trim() + '\n' + comment
 			}
 		}
 	} else if (rootLeadingComment.length) {
-		comment = rootLeadingComment;
+		comment = rootLeadingComment
 	}
-	return comment.trim();
+	return comment.trim()
 }

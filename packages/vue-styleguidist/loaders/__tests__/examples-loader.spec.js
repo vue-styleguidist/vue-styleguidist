@@ -1,4 +1,4 @@
-import examplesLoader from '../examples-loader';
+import examplesLoader from '../examples-loader'
 
 xdescribe('examples-loader', () => {
 	it('should return valid, parsable JS', () => {
@@ -13,7 +13,7 @@ text
 \`\`\`
 <span/>
 \`\`\`
-`;
+`
 		const result = examplesLoader.call(
 			{
 				_styleguidist: {
@@ -23,11 +23,11 @@ text
 				}
 			},
 			exampleMarkdown
-		);
+		)
 
-		expect(result).toBeTruthy();
-		expect(() => new Function(result)).not.toThrowError(SyntaxError); // eslint-disable-line no-new-func
-	});
+		expect(result).toBeTruthy()
+		expect(() => new Function(result)).not.toThrowError(SyntaxError) // eslint-disable-line no-new-func
+	})
 
 	// componentName query option
 
@@ -40,7 +40,7 @@ text
 	</__COMPONENT__>
 	<__COMPONENT__ />
 </div>
-`;
+`
 
 		const result = examplesLoader.call(
 			{
@@ -48,19 +48,19 @@ text
 				_styleguidist: {}
 			},
 			exampleMarkdown
-		);
-		expect(result).not.toMatch(/__COMPONENT__/);
-		expect(result).toMatch(/FooComponent/);
-		expect(result.match(/FooComponent/g).length).toBe(4);
-	});
+		)
+		expect(result).not.toMatch(/__COMPONENT__/)
+		expect(result).toMatch(/FooComponent/)
+		expect(result.match(/FooComponent/g).length).toBe(4)
+	})
 
 	it('should pass updateExample function from config to chunkify', () => {
 		const exampleMarkdown = `
 \`\`\`jsx static
 <h1>Hello world!</h2>
 \`\`\`
-`;
-		const updateExample = jest.fn(props => props);
+`
+		const updateExample = jest.fn(props => props)
 		examplesLoader.call(
 			{
 				query: '?componentName=FooComponent',
@@ -70,7 +70,7 @@ text
 				}
 			},
 			exampleMarkdown
-		);
+		)
 		expect(updateExample).toBeCalledWith(
 			{
 				content: '<h1>Hello world!</h2>',
@@ -78,6 +78,6 @@ text
 				lang: 'jsx'
 			},
 			'/path/to/foo/examples/file'
-		);
-	});
-});
+		)
+	})
+})

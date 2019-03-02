@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import sizeMixin from './sizeMixin';
+import sizeMixin from './sizeMixin'
 export default {
 	name: 'app-button',
 	mixins: [sizeMixin],
@@ -34,7 +34,7 @@ export default {
 				'font-size': this.size,
 				color: this.color,
 				background: this.background
-			};
+			}
 		}
 	},
 	methods: {
@@ -47,11 +47,11 @@ export default {
 		 * @type {Event}
 		 */
 		handleClick(e) {
-			this.$emit('click', e);
-			this.$emit('gator', e);
+			this.$emit('click', e)
+			this.$emit('gator', e)
 		}
 	}
-};
+}
 </script>
 
 <docs>

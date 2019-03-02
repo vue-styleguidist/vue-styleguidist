@@ -1,5 +1,5 @@
-const { resolve } = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
+const { resolve } = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
@@ -25,4 +25,4 @@ module.exports = {
 		plugins: [new VueLoaderPlugin()]
 	},
 	usageMode: 'expand'
-};
+}

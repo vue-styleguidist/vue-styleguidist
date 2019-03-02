@@ -21,15 +21,15 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
-import CounterButton from '~/components/CounterButton/CounterButton.vue';
+import Logo from '~/components/Logo.vue'
+import CounterButton from '~/components/CounterButton/CounterButton.vue'
 
 export default {
 	components: {
 		Logo,
 		CounterButton
 	}
-};
+}
 </script>
 
 <style>

@@ -3,4 +3,4 @@ module.exports = {
 	resolve: {
 		extensions: ['.scss']
 	}
-};
+}

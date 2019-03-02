@@ -14,11 +14,11 @@ export default {
 		}
 	},
 	mounted() {
-		this.hello();
+		this.hello()
 	},
 	methods: {
 		hello() {
-			console.log('hello from mixin!');
+			console.log('hello from mixin!')
 		}
 	}
-};
+}

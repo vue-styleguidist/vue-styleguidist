@@ -1,4 +1,4 @@
-const GITHUB_HOMEPAGE = 'https://github.com/vue-styleguidist/vue-styleguidist/';
+const GITHUB_HOMEPAGE = 'https://github.com/vue-styleguidist/vue-styleguidist/'
 
 module.exports = {
 	HOMEPAGE: GITHUB_HOMEPAGE,
@@ -8,4 +8,4 @@ module.exports = {
 	DOCS_WEBPACK: GITHUB_HOMEPAGE + 'blob/master/docs/Webpack.md',
 	DOCS_DOCUMENTING: GITHUB_HOMEPAGE + 'blob/master/docs/Documenting.md',
 	DOCS_THIRDPARTIES: ''
-};
+}

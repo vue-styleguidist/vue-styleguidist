@@ -4,17 +4,17 @@
 /* eslint-disable */
 /* globals phantom:false */
 
-const system = require('system');
+const system = require('system')
 
 if (system.args.length !== 2) {
-	console.log('Usage: phantom.js <URL>');
-	phantom.exit(1);
+	console.log('Usage: phantom.js <URL>')
+	phantom.exit(1)
 }
 
-const page = require('webpage').create();
+const page = require('webpage').create()
 
 page.onError = phantom.onError = function(err, trace) {
-	console.log('PhantomJS error:', err);
+	console.log('PhantomJS error:', err)
 	if (trace && trace.length > 0) {
 		trace.forEach(function(t) {
 			console.log(
@@ -23,27 +23,27 @@ page.onError = phantom.onError = function(err, trace) {
 					': ' +
 					t.line +
 					(t.function ? ' (in function ' + t.function + ')' : '')
-			);
-		});
+			)
+		})
 	}
-	phantom.exit(1);
-};
+	phantom.exit(1)
+}
 page.onResourceError = page.onResourceTimeout = function(err) {
 	if (err.url.startsWith('http://placebeard.it/')) {
-		return;
+		return
 	}
-	console.log('PhantomJS cannot load resource:', err.url, '-', err.errorString);
-};
+	console.log('PhantomJS cannot load resource:', err.url, '-', err.errorString)
+}
 page.onConsoleMessage = function(msg) {
-	console.log('PhantomJS:', msg);
-};
+	console.log('PhantomJS:', msg)
+}
 
-page.viewportSize = { width: 1024, height: 768 };
+page.viewportSize = { width: 1024, height: 768 }
 
 page.open(system.args[1], function(status) {
 	if (status !== 'success') {
-		console.log('PhantomJS: Cannot load the page');
-		phantom.exit(1);
+		console.log('PhantomJS: Cannot load the page')
+		phantom.exit(1)
 	}
-	phantom.exit(0);
-});
+	phantom.exit(0)
+})

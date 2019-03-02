@@ -1,47 +1,47 @@
-const path = require('path');
-const fs = require('fs');
-const highlightCodeInMarkdown = require('react-styleguidist/loaders/utils/highlightCodeInMarkdown');
-const removeDoclets = require('react-styleguidist/loaders/utils/removeDoclets');
-const requireIt = require('react-styleguidist/loaders/utils/requireIt');
-const getNameFromFilePath = require('react-styleguidist/loaders/utils/getNameFromFilePath');
-const doctrine = require('doctrine');
-const _ = require('lodash');
-const logger = require('glogg')('rsg');
+const path = require('path')
+const fs = require('fs')
+const highlightCodeInMarkdown = require('react-styleguidist/loaders/utils/highlightCodeInMarkdown')
+const removeDoclets = require('react-styleguidist/loaders/utils/removeDoclets')
+const requireIt = require('react-styleguidist/loaders/utils/requireIt')
+const getNameFromFilePath = require('react-styleguidist/loaders/utils/getNameFromFilePath')
+const doctrine = require('doctrine')
+const _ = require('lodash')
+const logger = require('glogg')('rsg')
 
-const reactDocs = () => {};
+const reactDocs = () => {}
 
-const examplesLoader = path.resolve(__dirname, '../examples-loader.js');
+const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
 
-const JS_DOC_METHOD_PARAM_TAG_SYNONYMS = ['param', 'arg', 'argument'];
-const JS_DOC_METHOD_RETURN_TAG_SYNONYMS = ['return', 'returns'];
+const JS_DOC_METHOD_PARAM_TAG_SYNONYMS = ['param', 'arg', 'argument']
+const JS_DOC_METHOD_RETURN_TAG_SYNONYMS = ['return', 'returns']
 
 // HACK: We have to make sure that doclets is a proper object with correct prototype to
 // work around an issue in react-docgen that breaks the build if a component has JSDoc tags
 // like @see in its description, see https://github.com/reactjs/react-docgen/issues/155
 // and https://github.com/styleguidist/react-styleguidist/issues/298
 const getDocletsObject = string => {
-	return Object.assign({}, reactDocs.utils.docblock.getDoclets(string));
-};
+	return Object.assign({}, reactDocs.utils.docblock.getDoclets(string))
+}
 
 const getDoctrineTags = documentation => {
-	return _.groupBy(documentation.tags, 'title');
-};
+	return _.groupBy(documentation.tags, 'title')
+}
 
 const doesExternalExampleFileExist = (componentPath, exampleFile) => {
-	const exampleFilepath = path.resolve(path.dirname(componentPath), exampleFile);
-	const doesFileExist = fs.existsSync(exampleFilepath);
+	const exampleFilepath = path.resolve(path.dirname(componentPath), exampleFile)
+	const doesFileExist = fs.existsSync(exampleFilepath)
 
 	if (!doesFileExist) {
-		logger.warn(`An example file ${exampleFile} defined in ${componentPath} component not found.`);
+		logger.warn(`An example file ${exampleFile} defined in ${componentPath} component not found.`)
 	}
-	return doesFileExist;
-};
+	return doesFileExist
+}
 
 const getMethodParamsFromTags = tags => {
 	return JS_DOC_METHOD_PARAM_TAG_SYNONYMS.map(
 		paramTagSynonym => tags[paramTagSynonym] || []
-	).reduce((params, paramTags) => [...params, ...paramTags], []);
-};
+	).reduce((params, paramTags) => [...params, ...paramTags], [])
+}
 
 /**
  * 1. Remove non-public methods.
@@ -56,13 +56,13 @@ const getMethodParamsFromTags = tags => {
 module.exports = function getProps(doc, filepath) {
 	// Keep only public methods
 	doc.methods = (doc.methods || []).filter(method => {
-		const doclets = method.docblock && reactDocs.utils.docblock.getDoclets(method.docblock);
-		return doclets && doclets.public;
-	});
+		const doclets = method.docblock && reactDocs.utils.docblock.getDoclets(method.docblock)
+		return doclets && doclets.public
+	})
 
 	// Parse the docblock of the remaining methods with doctrine to retrieve the JsDoc tags
 	doc.methods = doc.methods.map(method => {
-		let tags = getDoctrineTags(doctrine.parse(method.docblock, { sloppy: true, unwrap: true }));
+		let tags = getDoctrineTags(doctrine.parse(method.docblock, { sloppy: true, unwrap: true }))
 
 		// Merge with react-docgen information about arguments and return value with inforamtion from jsdoc
 		const params =
@@ -72,8 +72,8 @@ module.exports = function getProps(doc, filepath) {
 					param,
 					getMethodParamsFromTags(tags).find(tagParam => tagParam.name === param.name)
 				)
-			);
-		const returns = method.returns || (tags.returns && tags.returns[0]);
+			)
+		const returns = method.returns || (tags.returns && tags.returns[0])
 		// Remove @param and @return and it synonyms from tags
 		tags = Object.keys(tags)
 			.filter(
@@ -82,70 +82,70 @@ module.exports = function getProps(doc, filepath) {
 						key
 					) === -1
 			)
-			.reduce((prev, key) => ({ ...prev, [key]: tags[key] }), {});
+			.reduce((prev, key) => ({ ...prev, [key]: tags[key] }), {})
 
-		return Object.assign(method, returns && { returns }, params && { params }, { tags });
-	});
+		return Object.assign(method, returns && { returns }, params && { params }, { tags })
+	})
 
 	if (doc.description) {
 		// Read doclets from the description and remove them
-		doc.doclets = getDocletsObject(doc.description);
+		doc.doclets = getDocletsObject(doc.description)
 
-		const documentation = doctrine.parse(doc.description);
-		doc.tags = getDoctrineTags(documentation);
+		const documentation = doctrine.parse(doc.description)
+		doc.tags = getDoctrineTags(documentation)
 
-		doc.description = highlightCodeInMarkdown(removeDoclets(doc.description));
+		doc.description = highlightCodeInMarkdown(removeDoclets(doc.description))
 
-		let exampleFileExists = false;
-		let exampleFile = doc.doclets.example;
+		let exampleFileExists = false
+		let exampleFile = doc.doclets.example
 		// doc.doclets.example might be a boolean or undefined
 		if (typeof doc.doclets.example === 'string') {
-			exampleFile = doc.doclets.example.trim();
-			exampleFileExists = doesExternalExampleFileExist(filepath, exampleFile);
+			exampleFile = doc.doclets.example.trim()
+			exampleFileExists = doesExternalExampleFileExist(filepath, exampleFile)
 		}
 
 		if (exampleFileExists) {
-			doc.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${exampleFile}`);
-			delete doc.doclets.example;
+			doc.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${exampleFile}`)
+			delete doc.doclets.example
 		}
 	} else {
-		doc.doclets = {};
+		doc.doclets = {}
 	}
 
 	if (doc.props) {
 		// Read doclets of props
 		Object.keys(doc.props).forEach(propName => {
-			const prop = doc.props[propName];
-			const doclets = getDocletsObject(prop.description);
+			const prop = doc.props[propName]
+			const doclets = getDocletsObject(prop.description)
 			// when a prop is listed in defaultProps but not in props the prop.description is undefined
-			const documentation = doctrine.parse(prop.description || '');
+			const documentation = doctrine.parse(prop.description || '')
 
 			// documentation.description is the description without tags
-			doc.props[propName].description = documentation.description;
-			doc.props[propName].tags = getDoctrineTags(documentation);
+			doc.props[propName].description = documentation.description
+			doc.props[propName].tags = getDoctrineTags(documentation)
 
 			// Remove ignored props
 			if (doclets && doclets.ignore) {
-				delete doc.props[propName];
+				delete doc.props[propName]
 			}
-		});
+		})
 	}
 
 	if (!doc.displayName && filepath) {
 		// Guess the exported component's display name based on the file path
-		doc.displayName = getNameFromFilePath(filepath);
+		doc.displayName = getNameFromFilePath(filepath)
 	}
 
 	if (doc.doclets && doc.doclets.visibleName) {
-		doc.visibleName = doc.doclets.visibleName;
+		doc.visibleName = doc.doclets.visibleName
 
 		// custom tag is added both to doclets and tags
 		// removing from both locations
-		delete doc.doclets.visibleName;
+		delete doc.doclets.visibleName
 		if (doc.tags) {
-			delete doc.tags.visibleName;
+			delete doc.tags.visibleName
 		}
 	}
 
-	return doc;
-};
+	return doc
+}

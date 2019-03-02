@@ -24,17 +24,17 @@
 </template>
 
 <script lang='ts'>
-import Vue from 'vue';
-import { text } from './utils';
+import Vue from 'vue'
+import { text } from './utils'
 
 interface IData {
-	sortKey: string;
-	sortOrders: Record<string, number>;
-	filterKey?: string;
+	sortKey: string
+	sortOrders: Record<string, number>
+	filterKey?: string
 }
 
 interface ForParam {
-	color: string;
+	color: string
 }
 
 /**
@@ -66,7 +66,7 @@ export default Vue.extend({
 		images: {
 			type: Array,
 			default: function() {
-				return [{}];
+				return [{}]
 			}
 		},
 		/**
@@ -91,22 +91,22 @@ export default Vue.extend({
 		}
 	},
 	data(): IData {
-		var sortOrders: { [key: string]: number } = {};
-		(this as any).columns.forEach(function(key: string) {
-			sortOrders[key] = 1;
-		});
+		var sortOrders: { [key: string]: number } = {}
+		;(this as any).columns.forEach(function(key: string) {
+			sortOrders[key] = 1
+		})
 		return {
 			sortKey: '',
 			sortOrders: sortOrders,
 			filterKey: undefined
-		};
+		}
 	},
 	computed: {
 		filteredData(): IData {
-			var sortKey = this.sortKey;
-			var filterKey: string = this.filterKey ? this.filterKey.toLowerCase() : '';
-			var order = this.sortOrders[sortKey] || 1;
-			var data = this.data;
+			var sortKey = this.sortKey
+			var filterKey: string = this.filterKey ? this.filterKey.toLowerCase() : ''
+			var order = this.sortOrders[sortKey] || 1
+			var data = this.data
 			if (filterKey) {
 				data = data.filter(function(row: { [key: string]: string }) {
 					return Object.keys(row).some(function(key) {
@@ -114,23 +114,23 @@ export default Vue.extend({
 							String(row[key])
 								.toLowerCase()
 								.indexOf(filterKey) > -1
-						);
-					});
-				});
+						)
+					})
+				})
 			}
 			if (sortKey) {
 				data = data.slice().sort(function(a: any, b: any) {
-					a = a[sortKey];
-					b = b[sortKey];
-					return (a === b ? 0 : a > b ? 1 : -1) * order;
-				});
+					a = a[sortKey]
+					b = b[sortKey]
+					return (a === b ? 0 : a > b ? 1 : -1) * order
+				})
 			}
-			return data;
+			return data
 		}
 	},
 	filters: {
 		capitalize(str: string): string {
-			return str.charAt(0).toUpperCase() + str.slice(1);
+			return str.charAt(0).toUpperCase() + str.slice(1)
 		}
 	},
 	methods: {
@@ -144,8 +144,8 @@ export default Vue.extend({
 		 * @returns {string} Test
 		 */
 		sortBy(key: string): void {
-			this.sortKey = key;
-			this.sortOrders[key] = this.sortOrders[key] * -1;
+			this.sortKey = key
+			this.sortOrders[key] = this.sortOrders[key] * -1
 
 			/**
 			 * Success event.
@@ -155,14 +155,14 @@ export default Vue.extend({
 			 */
 			this.$emit('success', {
 				demo: 'example success'
-			});
+			})
 		},
 
 		/**
 		 * @public
 		 */
 		publicMethod(test: number, param: ForParam) {
-			console.log('test', test, param);
+			console.log('test', test, param)
 		},
 
 		hiddenMethod(): void {
@@ -174,10 +174,10 @@ export default Vue.extend({
 			 */
 			this.$emit('error', {
 				demo: 'example error'
-			});
+			})
 		}
 	}
-});
+})
 </script>
 
 <style scoped>

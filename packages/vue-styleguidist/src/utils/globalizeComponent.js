@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
 /**
  * Expose component as global variables.
@@ -6,12 +6,12 @@ import Vue from 'vue';
  * @param {Object} component
  */
 export default function globalizeComponent(component) {
-	const displayName = component.props.displayName;
+	const displayName = component.props.displayName
 	if (!component.name) {
-		return;
+		return
 	}
-	const configComponent = component.module.default || component.module;
+	const configComponent = component.module.default || component.module
 	if (configComponent) {
-		Vue.component(displayName, configComponent);
+		Vue.component(displayName, configComponent)
 	}
 }

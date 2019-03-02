@@ -7,5 +7,5 @@ module.exports = function(source, map) {
 		Component.options.__docs = ${JSON.stringify(source)}
 	  }`,
 		map
-	);
-};
+	)
+}

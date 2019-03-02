@@ -3,4 +3,4 @@ module.exports = env => ({
 	resolve: {
 		extensions: [env]
 	}
-});
+})

@@ -1,47 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Group from 'react-group';
-import Arguments from 'rsg-components/Arguments';
-import Code from 'rsg-components/Code';
-import JsDoc from 'rsg-components/JsDoc';
-import Markdown from 'rsg-components/Markdown';
-import Name from 'rsg-components/Name';
-import Type from 'rsg-components/Type';
-import Para from 'rsg-components/Para';
-import Table from 'rsg-components/Table';
-import map from 'lodash/map';
-import { unquote, getType, showSpaces } from '../../utils/utils';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Group from 'react-group'
+import Arguments from 'rsg-components/Arguments'
+import Code from 'rsg-components/Code'
+import JsDoc from 'rsg-components/JsDoc'
+import Markdown from 'rsg-components/Markdown'
+import Name from 'rsg-components/Name'
+import Type from 'rsg-components/Type'
+import Para from 'rsg-components/Para'
+import Table from 'rsg-components/Table'
+import map from 'lodash/map'
+import { unquote, getType, showSpaces } from '../../utils/utils'
 
 function renderType(type) {
 	if (!type) {
-		return 'unknown';
+		return 'unknown'
 	}
-	let name = type.name;
-	const names = type.names;
+	let name = type.name
+	const names = type.names
 
 	if (names) {
-		name = names.join('|');
+		name = names.join('|')
 	}
 	switch (name) {
 		case 'arrayOf':
-			return `${type.value.name}[]`;
+			return `${type.value.name}[]`
 		case 'objectOf':
-			return `{${renderType(type.value)}}`;
+			return `{${renderType(type.value)}}`
 		case 'instanceOf':
-			return type.value;
+			return type.value
 		default:
-			return name;
+			return name
 	}
 }
 
 function renderEnum(prop) {
 	if (!Array.isArray(getType(prop).value)) {
-		return <span>{getType(prop).value}</span>;
+		return <span>{getType(prop).value}</span>
 	}
 
 	const values = getType(prop).value.map(({ value }) => (
 		<Code key={value}>{showSpaces(unquote(value))}</Code>
-	));
+	))
 	return (
 		<span>
 			One of:{' '}
@@ -49,14 +49,14 @@ function renderEnum(prop) {
 				{values}
 			</Group>
 		</span>
-	);
+	)
 }
 
 function renderShape(props) {
-	const rows = [];
+	const rows = []
 	for (const name in props) {
-		const prop = props[name];
-		const description = prop.description;
+		const prop = props[name]
+		const description = prop.description
 		rows.push(
 			<div key={name}>
 				<Name>{name}</Name>
@@ -65,15 +65,15 @@ function renderShape(props) {
 				{description && ' — '}
 				{description && <Markdown text={description} inline />}
 			</div>
-		);
+		)
 	}
-	return rows;
+	return rows
 }
 
 function renderDescription(prop) {
-	const { description, tags = {} } = prop;
-	let { properties } = prop;
-	const extra = renderExtra(prop);
+	const { description, tags = {} } = prop
+	let { properties } = prop
+	const extra = renderExtra(prop)
 	if (Array.isArray(properties)) {
 		properties = properties.reduce((total, current) => {
 			total.push({
@@ -82,11 +82,11 @@ function renderDescription(prop) {
 					name: current.type.names[0]
 				},
 				description: current.description
-			});
-			return total;
-		}, []);
+			})
+			return total
+		}, [])
 	}
-	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])];
+	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])]
 	return (
 		<div>
 			{description && <Markdown text={description} />}
@@ -95,45 +95,45 @@ function renderDescription(prop) {
 			{args && args.length > 0 && <Arguments args={args} heading />}
 			{properties && properties.length > 0 && <Arguments args={properties} heading />}
 		</div>
-	);
+	)
 }
 
 function renderExtra(prop) {
-	const type = getType(prop);
+	const type = getType(prop)
 
 	if (!type) {
-		return null;
+		return null
 	}
 	switch (type.name) {
 		case 'enum':
-			return renderEnum(prop);
+			return renderEnum(prop)
 		case 'union':
-			return renderUnion(prop);
+			return renderUnion(prop)
 		case 'shape':
-			return renderShape(prop.type.value);
+			return renderShape(prop.type.value)
 		case 'arrayOf':
 			if (type.value.name === 'shape') {
-				return renderShape(prop.type.value.value);
+				return renderShape(prop.type.value.value)
 			}
-			return null;
+			return null
 		case 'objectOf':
 			if (type.value.name === 'shape') {
-				return renderShape(prop.type.value.value);
+				return renderShape(prop.type.value.value)
 			}
-			return null;
+			return null
 		default:
-			return null;
+			return null
 	}
 }
 
 function renderUnion(prop) {
 	if (!Array.isArray(getType(prop).value)) {
-		return <span>{getType(prop).value}</span>;
+		return <span>{getType(prop).value}</span>
 	}
 
 	const values = getType(prop).value.map((value, index) => (
 		<Type key={`${value.name}-${index}`}>{renderType(value)}</Type>
-	));
+	))
 	return (
 		<span>
 			One of type:{' '}
@@ -141,24 +141,24 @@ function renderUnion(prop) {
 				{values}
 			</Group>
 		</span>
-	);
+	)
 }
 
 function renderName(prop) {
-	const { name, tags = {} } = prop;
-	return <Name deprecated={!!tags.deprecated}>{name}</Name>;
+	const { name, tags = {} } = prop
+	return <Name deprecated={!!tags.deprecated}>{name}</Name>
 }
 
 function renderTypeColumn(prop) {
-	return <Type>{renderType(getType(prop))}</Type>;
+	return <Type>{renderType(getType(prop))}</Type>
 }
 
 export function getRowKey(row) {
-	return row.name;
+	return row.name
 }
 
 export function propsToArray(props) {
-	return map(props, (prop, name) => ({ ...prop, name }));
+	return map(props, (prop, name) => ({ ...prop, name }))
 }
 
 export const columns = [
@@ -174,12 +174,12 @@ export const columns = [
 		caption: 'Description',
 		render: renderDescription
 	}
-];
+]
 
 export default function EventsRenderer({ props }) {
-	return <Table columns={columns} rows={propsToArray(props)} getRowKey={getRowKey} />;
+	return <Table columns={columns} rows={propsToArray(props)} getRowKey={getRowKey} />
 }
 
 EventsRenderer.propTypes = {
 	props: PropTypes.object.isRequired
-};
+}

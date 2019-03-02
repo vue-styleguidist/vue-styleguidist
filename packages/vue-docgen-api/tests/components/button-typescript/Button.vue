@@ -6,7 +6,7 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 /**
  * This is an example of creating a reusable button component and using it with external data.
@@ -15,29 +15,29 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
  */
 @Component
 export default class MyComponent extends Vue {
-	aHiddenData: string;
+	aHiddenData: string
 
 	/**
 	 * An example of a property typed through the decorators arguments
 	 */
 	@Prop({ type: String })
-	propNoType;
+	propNoType
 
 	/**
 	 * An example of a property typed through the annotation
 	 */
-	@Prop propA: number;
+	@Prop propA: number
 
 	/**
 	 * A prop with a default value
 	 */
 	@Prop({ default: 'default value' })
-	propB: string;
+	propB: string
 
 	/**
 	 * A prop with a hybrid type
 	 */
-	@Prop propC: string | boolean;
+	@Prop propC: string | boolean
 
 	/**
 	 * method testing
@@ -47,7 +47,7 @@ export default class MyComponent extends Vue {
 		/**
 		 * Success event when we click
 		 */
-		this.$emit('success', a);
+		this.$emit('success', a)
 	}
 }
 </script>

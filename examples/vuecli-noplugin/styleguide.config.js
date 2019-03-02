@@ -12,4 +12,4 @@ module.exports = {
 	// webpackConfig: {
 	//   // custom config goes here
 	// }
-};
+}

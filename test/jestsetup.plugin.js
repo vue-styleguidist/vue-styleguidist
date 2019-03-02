@@ -1,6 +1,6 @@
-import rimraf from 'rimraf';
-import * as path from 'path';
+import rimraf from 'rimraf'
+import * as path from 'path'
 
-rimraf.sync(path.resolve(__dirname, './cli-packages/*'));
+rimraf.sync(path.resolve(__dirname, './cli-packages/*'))
 
-process.env.VUE_CLI_TEST = true;
+process.env.VUE_CLI_TEST = true

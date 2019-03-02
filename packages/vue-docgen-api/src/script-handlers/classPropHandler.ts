@@ -1,11 +1,11 @@
-import * as bt from '@babel/types';
-import { NodePath } from 'ast-types';
-import { BlockTag, DocBlockTags, Documentation } from '../Documentation';
-import getDocblock from '../utils/getDocblock';
-import getDoclets from '../utils/getDoclets';
-import getTypeFromAnnotation from '../utils/getTypeFromAnnotation';
-import transformTagsIntoObject from '../utils/transformTagsIntoObject';
-import { describeDefault, describeRequired, describeType } from './propHandler';
+import * as bt from '@babel/types'
+import { NodePath } from 'ast-types'
+import { BlockTag, DocBlockTags, Documentation } from '../Documentation'
+import getDocblock from '../utils/getDocblock'
+import getDoclets from '../utils/getDoclets'
+import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
+import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import { describeDefault, describeRequired, describeType } from './propHandler'
 
 export default function propHandler(
 	documentation: Documentation,
@@ -20,54 +20,54 @@ export default function propHandler(
 				const propDeco = (propPath.get('decorators') || []).filter((p: NodePath<bt.Decorator>) => {
 					const exp = bt.isCallExpression(p.node.expression)
 						? p.node.expression.callee
-						: p.node.expression;
-					return bt.isIdentifier(exp) && exp.name === 'Prop';
-				});
+						: p.node.expression
+					return bt.isIdentifier(exp) && exp.name === 'Prop'
+				})
 
 				if (!propDeco.length) {
-					return;
+					return
 				}
 
-				const propName = bt.isIdentifier(propPath.node.key) ? propPath.node.key.name : undefined;
+				const propName = bt.isIdentifier(propPath.node.key) ? propPath.node.key.name : undefined
 				if (!propName) {
-					return;
+					return
 				}
 
-				const propDescriptor = documentation.getPropDescriptor(propName);
+				const propDescriptor = documentation.getPropDescriptor(propName)
 
 				// description
-				const docBlock = getDocblock(propPath);
-				const jsDoc: DocBlockTags = docBlock ? getDoclets(docBlock) : { description: '', tags: [] };
-				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : [];
+				const docBlock = getDocblock(propPath)
+				const jsDoc: DocBlockTags = docBlock ? getDoclets(docBlock) : { description: '', tags: [] }
+				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 				if (jsDocTags) {
-					propDescriptor.tags = transformTagsIntoObject(jsDocTags);
+					propDescriptor.tags = transformTagsIntoObject(jsDocTags)
 				}
 				if (jsDoc.description) {
-					propDescriptor.description = jsDoc.description;
+					propDescriptor.description = jsDoc.description
 				}
 
 				if (propPath.node.typeAnnotation) {
-					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation);
+					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
 				}
 
-				const propDecoratorPath = propDeco[0].get('expression');
+				const propDecoratorPath = propDeco[0].get('expression')
 				if (bt.isCallExpression(propDecoratorPath.node)) {
-					const propDecoratorArg = propDecoratorPath.get('arguments', 0);
+					const propDecoratorArg = propDecoratorPath.get('arguments', 0)
 
 					if (propDecoratorArg && bt.isObjectExpression(propDecoratorArg.node)) {
 						const propsPath = propDecoratorArg
 							.get('properties')
 							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
 							NodePath<bt.ObjectProperty>
-						>;
+						>
 						// if there is no type annotation, get it from the decorators arguments
 						if (!propPath.node.typeAnnotation) {
-							describeType(propsPath, propDescriptor);
+							describeType(propsPath, propDescriptor)
 						}
-						describeDefault(propsPath, propDescriptor);
-						describeRequired(propsPath, propDescriptor);
+						describeDefault(propsPath, propDescriptor)
+						describeRequired(propsPath, propDescriptor)
 					}
 				}
-			});
+			})
 	}
 }

@@ -7,21 +7,21 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { ClientTable } from 'some-plugin';
-import another from '@mixins/another';
-import anotherMixin from '@utils/anotherMixin';
-import model from '@utils/model.json';
-import genericMixin from './genericMixin';
-import colorMixin from './colorMixin';
-import review from '@utils/review.json';
-import { multi, hidden } from '@mixins/multiMixin';
+import Vue from 'vue'
+import { ClientTable } from 'some-plugin'
+import another from '@mixins/another'
+import anotherMixin from '@utils/anotherMixin'
+import model from '@utils/model.json'
+import genericMixin from './genericMixin'
+import colorMixin from './colorMixin'
+import review from '@utils/review.json'
+import { multi, hidden } from '@mixins/multiMixin'
 
-Vue.use(ClientTable);
+Vue.use(ClientTable)
 
-const NAME = 'buttonComponent';
+const NAME = 'buttonComponent'
 
-console.log('mixin loaded but not parsed', hidden);
+console.log('mixin loaded but not parsed', hidden)
 
 /**
  * This is an example of creating a reusable button component and using it with external data.
@@ -86,7 +86,7 @@ export default {
 		funcDefault: {
 			type: Function,
 			default: () => {
-				return 'foo';
+				return 'foo'
 			}
 		},
 		/**
@@ -96,7 +96,7 @@ export default {
 		propE: {
 			type: Object,
 			default: () => {
-				return { message: 'hello' };
+				return { message: 'hello' }
 			}
 		},
 		/**
@@ -108,11 +108,11 @@ export default {
 	data() {
 		return {
 			count: 0
-		};
+		}
 	},
 	methods: {
 		onClick() {
-			console.log('Hello World');
+			console.log('Hello World')
 			setTimeout(() => {
 				/**
 				 * Success event.
@@ -129,11 +129,11 @@ export default {
 					},
 					10,
 					false
-				);
-			}, 1000);
+				)
+			}, 1000)
 		}
 	}
-};
+}
 </script>
 
 <style scoped>

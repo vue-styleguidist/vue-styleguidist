@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Markdown from 'rsg-components/Markdown';
-import Styled from 'rsg-components/Styled';
-import { DOCS_COMPONENTS } from '../../../scripts/consts';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Markdown from 'rsg-components/Markdown'
+import Styled from 'rsg-components/Styled'
+import { DOCS_COMPONENTS } from '../../../scripts/consts'
 
 const styles = ({ space, maxWidth }) => ({
 	root: {
@@ -10,7 +10,7 @@ const styles = ({ space, maxWidth }) => ({
 		margin: [[0, 'auto']],
 		padding: space[4]
 	}
-});
+})
 
 export function WelcomeRenderer({ classes, patterns }) {
 	return (
@@ -33,12 +33,12 @@ Read more in the [locating components guide](${DOCS_COMPONENTS}).
 				`}
 			/>
 		</div>
-	);
+	)
 }
 
 WelcomeRenderer.propTypes = {
 	classes: PropTypes.object.isRequired,
 	patterns: PropTypes.array.isRequired
-};
+}
 
-export default Styled(styles)(WelcomeRenderer);
+export default Styled(styles)(WelcomeRenderer)
