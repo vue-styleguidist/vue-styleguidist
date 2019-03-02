@@ -136,7 +136,7 @@ describe('tests button', () => {
 		it('should value default propE to be a funtion', () => {
 			const dv = props.propE.defaultValue
 			const functionNoSpaceNoReturn = dv ? dv.value.replace(/[ \n\r]/g, '') : ''
-			expect(functionNoSpaceNoReturn).toEqual(`()=>{return{message:'hello'};}`)
+			expect(functionNoSpaceNoReturn).toEqual(`()=>{return{message:'hello'}}`)
 			expect(dv ? dv.func : false).toBeTruthy()
 		})
 

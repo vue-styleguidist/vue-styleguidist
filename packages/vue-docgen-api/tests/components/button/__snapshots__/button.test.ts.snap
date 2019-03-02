@@ -85,7 +85,7 @@ Object {
       "defaultValue": Object {
         "func": true,
         "value": "() => {
-    return 'foo';
+    return 'foo'
 }",
       },
       "description": "Function default",
@@ -132,7 +132,7 @@ Object {
       "defaultValue": Object {
         "func": true,
         "value": "() => {
-    return { message: 'hello' };
+    return { message: 'hello' }
 }",
       },
       "description": "Object or array defaults must be returned from
