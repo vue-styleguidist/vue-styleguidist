@@ -1,7 +1,4 @@
 {
-  "name": "vue-styleguidist",
-  "description": "Vue components style guide generator",
-  "version": "0.0.0-development",
   "private": true,
   "workspaces": [
     "packages/*",
