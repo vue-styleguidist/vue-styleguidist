@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import rimraf from 'rimraf';
 import * as path from 'path';
 
-rimraf(path.resolve(__dirname, './cli-packages/*'), () => {});
+rimraf.sync(path.resolve(__dirname, './cli-packages/*'));
 
 process.env.VUE_CLI_TEST = true;
 

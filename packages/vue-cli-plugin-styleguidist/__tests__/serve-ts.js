@@ -1,5 +1,6 @@
 jest.setTimeout(80000);
 
+const invoke = require('@vue/cli/lib/invoke');
 const create = require('@vue/cli-test-utils/createTestProject');
 const path = require('path');
 
@@ -13,15 +14,11 @@ async function createAndInstall(name, isClass) {
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*';
 	pkg.devDependencies['@vue/cli-plugin-typescript'] = '*';
 	await project.write('package.json', JSON.stringify(pkg, null, 2));
-	await project.run(
-		`${require.resolve('@vue/cli/bin/vue')} invoke typescript --classComponent${
-			isClass ? '' : ' 0'
-		}`
-	);
+	await invoke('typescript', { classComponent: isClass }, project.dir);
 	return project;
 }
 
-xtest('serve with typescript', async () => {
+test('serve with typescript', async () => {
 	const project = await createAndInstall(`serve-ts`);
 	await serve(
 		() => project.run('vue-cli-service styleguidist'),
@@ -31,7 +28,7 @@ xtest('serve with typescript', async () => {
 	);
 });
 
-xtest('serve with typescript class', async () => {
+test('serve with typescript class', async () => {
 	const project = await createAndInstall(`serve-ts-class`, true);
 	await serve(
 		() => project.run('vue-cli-service styleguidist'),
