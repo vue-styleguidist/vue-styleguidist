@@ -7,7 +7,6 @@ import eventHandler from './eventHandler';
 import extendsHandler from './extendsHandler';
 import methodHandler from './methodHandler';
 import mixinsHandler from './mixinsHandler';
-// import oldEventsHandler from './oldEventsHandler'
 import propHandler from './propHandler';
 import slotHandler from './slotHandler';
 
@@ -16,8 +15,8 @@ export default [
 	extendsHandler,
 	// have to be second as they can be overridden too
 	mixinsHandler,
-	componentHandler,
 	displayNameHandler,
+	componentHandler,
 	methodHandler,
 	propHandler,
 	eventHandler,
@@ -25,6 +24,4 @@ export default [
 	classDisplayNameHandler,
 	classMethodHandler,
 	classPropHandler
-	// at the end extract events from comments
-	// oldEventsHandler,
 ];
