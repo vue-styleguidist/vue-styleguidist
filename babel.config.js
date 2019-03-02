@@ -28,5 +28,11 @@ module.exports = {
 				'@babel/plugin-transform-runtime'
 			]
 		}
-	}
+	},
+	overrides: [
+		{
+			test: ['./test/cli-packages'],
+			presets: ['@vue/app']
+		}
+	]
 };
