@@ -31,9 +31,7 @@ async function createAndInstall(name) {
 	await project.write('package.json', JSON.stringify(pkg, null, 2));
 	await project.write(
 		'babel.config.js',
-		`module.exports = {
-    presets: ['@vue/app']
-}`
+		['module.exports = {', "	presets: ['@vue/app']", '}'].join('\n')
 	);
 	return project;
 }
