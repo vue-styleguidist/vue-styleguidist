@@ -5,7 +5,7 @@ module.exports = {
 	},
 	moduleFileExtensions: ['ts', 'js', 'json'],
 	testMatch: [
-		'<rootDir>/packages/*/tests/**/*.test.(ts|js)',
+		// '<rootDir>/packages/*/tests/**/*.test.(ts|js)',
 		'<rootDir>/packages/**/__tests__/*.(ts|js)'
 	],
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
