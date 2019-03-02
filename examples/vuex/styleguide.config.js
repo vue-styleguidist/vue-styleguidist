@@ -25,7 +25,10 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()]
+		plugins: [new vueLoader.VueLoaderPlugin()],
+		optimization: {
+			minimize: false
+		}
 	},
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
 	usageMode: 'expand'
