@@ -1,3 +1,6 @@
+/**
+ * setup test environment for CLI plugin with puppetteer
+ */
 import rimraf from 'rimraf'
 import * as path from 'path'
 
