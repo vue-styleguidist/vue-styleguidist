@@ -79,9 +79,7 @@ module.exports = {
 			]
 		},
 		plugins: [new vueLoader.VueLoaderPlugin()],
-		optimization: {
-			minimize: false
-		},
+
 		performance:
 			env === 'development'
 				? false

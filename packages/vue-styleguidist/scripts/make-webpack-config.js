@@ -159,7 +159,6 @@ module.exports = function(config, env) {
 	}
 
 	const sourceSrc = path.resolve(sourceDir, 'rsg-components')
-
 	;[
 		'Preview',
 		'Usage',

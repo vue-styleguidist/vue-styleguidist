@@ -42,10 +42,7 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
-		optimization: {
-			minimize: false
-		}
+		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand'

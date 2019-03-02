@@ -22,10 +22,7 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [new VueLoaderPlugin()],
-		optimization: {
-			minimize: false
-		}
+		plugins: [new VueLoaderPlugin()]
 	},
 	usageMode: 'expand'
 }

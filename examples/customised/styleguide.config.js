@@ -87,9 +87,6 @@ module.exports = {
 				// This is only for the examples in this repo, you won't need it for your own project
 				'vue-styleguidist': path.join(__dirname, '../../')
 			}
-		},
-		optimization: {
-			minimize: false
 		}
 	},
 	usageMode: 'expand',

@@ -25,9 +25,7 @@ module.exports = {
 				}
 			]
 		},
-		optimization: {
-			minimize: false
-		},
+
 		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
