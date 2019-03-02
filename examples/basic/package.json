@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2"
-    
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
