@@ -65,6 +65,9 @@ jobs:
         - yarn test:cypress:pre
         - yarn test:cypress
 
+        # test vue-cli-plugin
+        - yarn test:plugin
+
     - stage: release
       script:
         - yarn compile

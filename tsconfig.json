@@ -12,6 +12,6 @@
 		"strictFunctionTypes": false,
 		"types": ["jest", "node", "htmlparser2"]
 	},
-	"include": ["packages/**/*.ts", "packages/**/*.vue"],
+	"include": ["packages/**/*.ts", "packages/**/*.vue", "test/**/*.ts", "test/**/*.vue"],
 	"exclude": ["node_modules"]
 }

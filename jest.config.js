@@ -5,9 +5,8 @@ module.exports = {
 	},
 	moduleFileExtensions: ['ts', 'js', 'json'],
 	testMatch: [
-		// '<rootDir>/packages/*/tests/**/*.test.(ts|js)',
-		'<rootDir>/packages/vue-docgen-api/**/__tests__/*.(ts|js)',
-		'<rootDir>/packages/vue-cli-plugin-styleguidist/**/__tests__/*.(ts|js)'
+		'<rootDir>/packages/*/tests/**/*.test.(ts|js)',
+		'<rootDir>/packages/**/__tests__/*.(ts|js)'
 	],
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
 	modulePaths: ['./packages/vue-styleguidist/src'],
