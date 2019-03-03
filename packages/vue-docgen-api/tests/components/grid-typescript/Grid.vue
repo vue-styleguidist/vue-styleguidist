@@ -30,7 +30,7 @@
 
 <script lang='ts'>
 import Vue from 'vue'
-import { text } from './utils'
+import text from './utils'
 
 interface IData {
 	sortKey: string

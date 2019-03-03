@@ -1,1 +1,1 @@
-export const text = 'this is a secret'
+export default 'this is a secret'
