@@ -1,4 +1,4 @@
-const SUFFIXES = ['', '.js', '.ts', '.vue', '/index.js', '/index.ts']
+const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 
 export default function resolvePathFrom(path: string, from: string[]): string {
 	let finalPath = ''
@@ -12,11 +12,20 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 				// eat the error
 			}
 		}
+		if (!finalPath.length) {
+			try {
+				finalPath = require.resolve(`${path}/index${s}`, {
+					paths: from
+				})
+			} catch (e) {
+				// eat the error
+			}
+		}
 	})
 
 	if (!finalPath.length) {
 		throw new Error(
-			`Neither '${path}.vue' nor '${path}.js', not even '${path}/index.js' or '${path}/index.ts' could be found in '${from}'`
+			`Neither '${path}.vue' nor '${path}.js(x)' or '${path}/index.js(x)' or '${path}/index.ts(x)' could be found in '${from}'`
 		)
 	}
 
