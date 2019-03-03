@@ -9,13 +9,11 @@ const merge = require('webpack-merge')
 const forEach = require('lodash/forEach')
 const isFunction = require('lodash/isFunction')
 const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin')
-const getWebpackVersion = require('react-styleguidist/scripts/utils/getWebpackVersion')
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig')
 const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config')
 
 const RENDERER_REGEXP = /Renderer$/
 
-const isWebpack4 = getWebpackVersion() >= 4
 const sourceDir = path.resolve(__dirname, '../lib')
 
 module.exports = function(config, env) {
@@ -58,10 +56,7 @@ module.exports = function(config, env) {
 		}
 	}
 
-	/* istanbul ignore if */
-	if (isWebpack4) {
-		webpackConfig.mode = env
-	}
+	webpackConfig.mode = env
 
 	if (config.webpackConfig) {
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
@@ -133,13 +128,8 @@ module.exports = function(config, env) {
 			}
 		})
 
-		/* istanbul ignore if */
-		if (isWebpack4) {
-			webpackConfig.optimization = {
-				minimizer: [uglifier]
-			}
-		} else {
-			webpackConfig.plugins.unshift(uglifier)
+		webpackConfig.optimization = {
+			minimizer: [uglifier]
 		}
 	} else {
 		webpackConfig = merge(webpackConfig, {
