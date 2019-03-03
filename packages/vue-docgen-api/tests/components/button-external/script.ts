@@ -7,29 +7,29 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
  */
 @Component
 export default class MyComponent extends Vue {
-	public aHiddenData: string
+	public aHiddenData: string = ''
 
 	/**
 	 * An example of a property typed through the decorators arguments
 	 */
 	@Prop({ type: String })
-	public propNoType
+	public propNoType = ''
 
 	/**
 	 * An example of a property typed through the annotation
 	 */
-	@Prop public propA: number
+	@Prop() public propA: number = 0
 
 	/**
 	 * A prop with a default value
 	 */
 	@Prop({ default: 'default value' })
-	public propB: string
+	public propB: string = 'hello'
 
 	/**
 	 * A prop with a hybrid type
 	 */
-	@Prop public propC: string | boolean
+	@Prop() public propC: string | boolean = false
 
 	/**
 	 * method testing
