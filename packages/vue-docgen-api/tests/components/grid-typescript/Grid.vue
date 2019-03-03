@@ -5,15 +5,20 @@
     <table class="grid">
       <thead>
         <tr>
-          <th v-for="key in columns" @click="sortBy(key)" :class="{ active: sortKey == key }">
+          <th
+            v-for="key in columns"
+            :key="key"
+            @click="sortBy(key)"
+            :class="{ active: sortKey == key }"
+          >
             {{ key | capitalize }}
             <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="entry in filteredData">
-          <td v-for="key in columns">{{entry[key]}}</td>
+        <tr v-for="entry in filteredData" :key="entry">
+          <td v-for="key in columns" :key="key">{{entry[key]}}</td>
         </tr>
       </tbody>
     </table>
@@ -106,7 +111,7 @@ export default Vue.extend({
 			var sortKey = this.sortKey
 			var filterKey: string = this.filterKey ? this.filterKey.toLowerCase() : ''
 			var order = this.sortOrders[sortKey] || 1
-			var data = this.data
+			var data = this.$props.data
 			if (filterKey) {
 				data = data.filter(function(row: { [key: string]: string }) {
 					return Object.keys(row).some(function(key) {
