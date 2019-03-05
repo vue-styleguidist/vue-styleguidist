@@ -74,10 +74,7 @@ module.exports = function(source) {
 		/* istanbul ignore next */
 		const componentPath = path.relative(process.cwd(), file)
 		const message =
-			`Cannot parse ${componentPath}: ${err}\n\n` +
-			'It usually means that vue-docgen-api does not understand your source code or when using third-party libraries, try to file an issue here:\n' +
-			'https://github.com/vue-styleguidist/vue-docgen-api/issues'
-		logger.warn(message)
+			`vue-docgen-api cannot parse ${componentPath}: ${err}\n\n` + logger.warn(message)
 	}
 
 	const componentProps = docs.props
