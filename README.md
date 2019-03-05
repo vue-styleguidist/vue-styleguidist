@@ -4,20 +4,17 @@
 **Isolated Vue component development environment with a living style guide**
 
 <div class="badge-npmdownloads">
-<a href="https://www.npmjs.com/package/vue-styleguidist">
-    <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version">
-</a>
 <a href="https://travis-ci.org/vue-styleguidist/vue-styleguidist">
     <img src="https://travis-ci.org/vue-styleguidist/vue-styleguidist.svg" alt="travis ci">
 </a>
 <a href="https://npmjs.org/package/vue-styleguidist" title="View this project on NPM">
     <img src="https://img.shields.io/npm/dm/vue-styleguidist.svg" alt="NPM downloads" />
 </a>
-<a href="https://www.npmjs.com/package/vue-styleguidist">
+<a href="LICENSE">
     <img src="https://img.shields.io/npm/l/vue-styleguidist.svg" alt="License">
 </a>
-<a href="https://github.com/semantic-release/semantic-release">
-    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="Semantic Release">
+<a href="https://lernajs.io/">
+    <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Lerna">
 </a>
 <a href="https://discordapp.com/channels/325477692906536972/538786416092512278">
     <img src="https://img.shields.io/discord/325477692906536972.svg?logo=discord"

@@ -1,7 +1,10 @@
 <div align="center" markdown="1" style="text-align:center">
   <img src="assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
 
+
 **Isolated Vue component development environment with a living style guide**
+ <a href="https://www.npmjs.com/package/vue-styleguidist"> <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version">
+ </a>
 
 </div>
 
