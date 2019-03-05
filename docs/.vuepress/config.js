@@ -27,6 +27,7 @@ module.exports = {
 		docsDir: 'docs',
 		sidebar: [
 			'/GettingStarted',
+			['/VueCLI3', '@vue/cli 3.X'],
 			'/Documenting',
 			['/Components', 'Locating Components'],
 			'/Webpack',
