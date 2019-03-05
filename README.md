@@ -26,6 +26,10 @@ alt="Chat on Discord">
 </div>
 </div>
 
+## Documentation
+
+Docs are available at https://vue-styleguidist.github.io/ - we are still working on refining it and contributions are welcome!
+
 ## Packages
 
 [vue-docgen-api](packages/vue-docgen-api) will parse your vue components and load their documentation in a Javascript object
@@ -33,10 +37,6 @@ alt="Chat on Discord">
 [vue-styleguidist](packages/vue-styleguidist) will take the results of vue-docgen-api and create a good looking site to play with your components
 
 [vue-cli-plugin-styleguidist](packages/vue-cli-plugin-styleguidist) will configure styleguidist to work smoothly with [vue-cli 3](https://cli.vuejs.org/guide/)
-
-## Documentation
-
-Docs are available at https://vue-styleguidist.github.io/ - we are still working on refining it and contributions are welcome!
 
 ## Contributing
 
