@@ -2,9 +2,6 @@
   "name": "vue-docgen-api",
   "version": "0.0.0-development",
   "description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
-  "bugs": {
-    "url": "https://github.com/vue-styleguidist/vue-docgen-api/issues"
-  },
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
@@ -14,9 +11,12 @@
     "dist"
   ],
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vue-styleguidist/vue-docgen-api.git"
-  },
+		"type": "git",
+		"url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
+	},
+	"bugs": {
+		"url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
+	},
   "keywords": [
     "vue",
     "documentation-generation",
