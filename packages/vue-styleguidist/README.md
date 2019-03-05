@@ -1,7 +1,8 @@
 <div align="center" markdown="1" style="text-align:center">
-  <img src="../../assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
+  <img src="assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
 
-  **Isolated Vue component development environment with a living style guide**
+**Isolated Vue component development environment with a living style guide**
+
 </div>
 
 > Project was started when not finding a tool that generates documentation of components with hot reloading, read documentation and have a playground. Created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files. Only supports vue 2.x.
