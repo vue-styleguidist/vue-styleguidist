@@ -7,6 +7,11 @@ This project uses a monorepo setup that requires using [Yarn](https://yarnpkg.co
 yarn
 ```
 
+### Dependency architecture
+
+In this monorepo, `vue-cli-plugin-styleguidist` depends on `vue-styleguidist` which in turn depends on `vue-docgen-api`. So if you change something in vue-docgen-api, a new version of each module is going to be delivered. Whereas if you only change something only in the plugin, nonly the plugin will be delivered.
+
+
 ### Testing Tips
 
 If you run `yarn test`, yarn will run eslint linting, then test vue-styleguidist and vue-docgen-api then test the plugin. Finally it will format all your files using prettier.
