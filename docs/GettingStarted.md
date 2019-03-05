@@ -14,6 +14,14 @@ Install Styleguidist:
 npm install --save-dev vue-styleguidist
 ```
 
+unless youa re using vue cli 3 (@vue/cli) then you should use
+
+``` sh
+vue add styleguidist
+```
+
+and use [Vue CLI documentation](VueCLI3.md)
+
 ## 2. Configure your style guide
 
 If you’re using [Vue-CLI 3.x](https://github.com/vuejs/vue-cli) you can skip this step, and install [vue-cli-plugin-styleguidist](https://github.com/vue-styleguidist/vue-cli-plugin-styleguidist).
