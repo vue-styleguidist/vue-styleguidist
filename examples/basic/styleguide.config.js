@@ -1,6 +1,7 @@
 const vueLoader = require('vue-loader')
 
 module.exports = {
+	title: 'Vue Styleguidist basic',
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	ribbon: {
