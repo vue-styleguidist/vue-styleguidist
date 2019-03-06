@@ -39,6 +39,17 @@ Docs are available at https://vue-styleguidist.github.io/ - we are still working
 
 Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/.github/CONTRIBUTING.md).
 
+## Authors and license
+
+[Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc), [Bart Ledoux](https://github.com/elevatebart), [react-styleguidist contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors) and [vue-styleguidist contributors](https://github.com/vue-styleguidist/vue-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist for the amazing tool.
+
+We work on this project because we love the open source community and learn new things.
+
+- Rafael: You can buy me a cup of coffee :) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc)
+- Bart: Send me money to make chameleon stickers. I promise I will send you one if you donate. [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/elevatebart)
+
+Logo by [Benjamin Cognard](https://twitter.com/benbnur).
+
 ## License
 
-[MIT](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/LICENSE)
+[MIT License](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/LICENSE)

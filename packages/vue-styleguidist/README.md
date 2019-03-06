@@ -1,10 +1,7 @@
 <div align="center" markdown="1" style="text-align:center">
   <img src="assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
 
-
-**Isolated Vue component development environment with a living style guide**
- <a href="https://www.npmjs.com/package/vue-styleguidist"> <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version">
- </a>
+**Isolated Vue component development environment with a living style guide** <a href="https://www.npmjs.com/package/vue-styleguidist"> <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version"> </a>
 
 </div>
 
@@ -52,10 +49,7 @@ The change log can be found on the [Releases page](https://github.com/vue-styleg
 
 ## Authors and license
 
-[Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc), [Bart Ledoux](https://github.com/elevatebart), [react-styleguidist contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors) and [vue-styleguidist contributors](https://github.com/vue-styleguidist/vue-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist by the amazing tool.
+We work on this project because we love the open source community and learn new things.
 
-I work in this project because I like the open source community and learn new things, however, also you can give me a cup of coffee :) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc)
-
-Logo by [Benjamin Cognard](https://twitter.com/benbnur).
-
-MIT License
+- Rafael: You can buy me a cup of coffee :) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc)
+- Bart: Send me money to make chameleon stickers. I promise I will send you one if you donate. [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/elevatebart)
