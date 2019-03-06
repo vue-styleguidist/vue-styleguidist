@@ -17,6 +17,7 @@
 - [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
 - [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
 - [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
+- [How to document styled components?](#how-to-document-styled-components)
 
 <!-- tocstop -->
 
@@ -358,3 +359,34 @@ devServer: {
 ## How to reuse project’s webpack config?
 
 See in [configuring webpack](Webpack.md#reusing-your-projects-webpack-config).
+
+
+## How to reuse project’s webpack config?
+
+In order to document styled components you need to get them recognized by vue-docgen-api.
+Simplest way is to use extends:
+
+```js
+const StyledTitle = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+export default {
+  extends: StyledTitle
+};
+```
+
+or using with the class component syntax
+
+```js
+const StyledTitle = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+@Components({extends: StyledTitle})
+export default class StyledTitleClass extends Vue {};
+```
