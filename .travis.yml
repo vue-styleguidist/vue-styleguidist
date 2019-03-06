@@ -7,7 +7,7 @@ node_js:
 
 cache: npm
 
-# In order to avoid double build on pull requests, 
+# In order to avoid double build on pull requests,
 # only build on pushes on master and on pushes on pull requests
 branches:
   only:
@@ -47,7 +47,7 @@ jobs:
         - npm run build customised
         - npm run build sections
         - npm run build vuex
-        - npm run build nuxtjs
+        - npm run build nuxtjs/styleguide
         - npm run build vuetify
         - npm run build vuecli-noplugin
         - npm run build:vuecli3
@@ -59,7 +59,7 @@ jobs:
         - npm run test:browser customised
         - npm run test:browser sections
         - npm run test:browser vuex
-        - npm run test:browser nuxtjs
+        - npm run test:browser nuxtjs/styleguide
         - npm run test:browser vuetify
         - npm run test:browser vuecli-noplugin
         - npm run test:browser vuecli3
@@ -70,9 +70,9 @@ jobs:
 
     - stage: release
       script:
-          - npm run compile
-          - npm install --no-save node-fetch semantic-release
-          - npx semantic-release
+        - npm run compile
+        - npm install --no-save node-fetch semantic-release
+        - npx semantic-release
 
       # Build & Deploy the documentation website
     - stage: documentation
@@ -88,4 +88,3 @@ jobs:
         keep-history: true
         on:
           branch: master
-          
