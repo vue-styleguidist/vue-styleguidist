@@ -25,6 +25,10 @@ module.exports = {
 		repo: 'vue-styleguidist/vue-styleguidist',
 		editLinks: true,
 		docsDir: 'docs',
+		algolia: {
+			apiKey: '27d4fa7b11db706f186d098352d5ae3e',
+			indexName: 'vue-styleguidist',
+		},
 		sidebar: [
 			'/GettingStarted',
 			'/Documenting',
