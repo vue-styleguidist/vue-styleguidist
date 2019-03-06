@@ -366,26 +366,26 @@ In order to document styled components you need to get them recognized by vue-do
 Simplest way is to use extends:
 
 ```js
-const StyledTitle = styled.h1`
+const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
 `;
 
 export default {
-  extends: StyledTitle
+  extends: _StyledTitle
 };
 ```
 
 or if you are using with the class component syntax
 
 ```js
-const StyledTitle = styled.h1`
+const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
 `;
 
-@Components({extends: StyledTitle})
-export default class StyledTitleClass extends Vue {};
+@Components({extends: _StyledTitle})
+export default class StyledTitle extends Vue {};
 ```
