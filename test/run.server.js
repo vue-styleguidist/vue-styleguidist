@@ -21,10 +21,15 @@ delete config.exampleMode
 
 const { app } = styleguidist(config).server((err, config) => {
 	if (err) {
-		console.log(err)
+		throw err
 	} else {
-		cypress.run().then(() => {
-			app.close()
-		})
+		cypress
+			.run()
+			.then(() => {
+				app.close()
+			})
+			.catch(err => {
+				throw err
+			})
 	}
 })
