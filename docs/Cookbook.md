@@ -366,6 +366,8 @@ In order to document styled components you need to get them recognized by vue-do
 Simplest way is to use extends:
 
 ```js
+import styled from 'vue-styled-components';
+
 const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
@@ -380,6 +382,8 @@ export default {
 or if you are using with the class component syntax
 
 ```js
+import styled from 'vue-styled-components';
+
 const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
