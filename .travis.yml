@@ -2,10 +2,16 @@ language: node_js
 
 node_js:
   - 10
-  - 9
-  - 6
+  - 8
 
-cache: npm
+cache: yarn
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
+install:
+  - yarn install
 
 # In order to avoid double build on pull requests,
 # only build on pushes on master and on pushes on pull requests
@@ -13,13 +19,9 @@ branches:
   only:
     - master
 
-before_install:
-  # Use npm 5.7.x since it has introduced `npm ci`
-  - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
-
 script:
   # Run tests without coverage since it's 2x faster
-  - npm run test:jest -- --runInBand
+  - yarn test:jest --runInBand
 
 stages:
   - lint
@@ -34,50 +36,55 @@ jobs:
   include:
     - stage: lint
       script:
-        - npm run lint
+        - yarn lint
         - npx danger ci
 
     - stage: integration
       script:
         # Compile JS
-        - npm run compile
+        - yarn compile
 
         # Build all examples
-        - npm run build
-        - npm run build customised
-        - npm run build sections
-        - npm run build vuex
-        - npm run build nuxtjs/styleguide
-        - npm run build vuetify
-        - npm run build vuecli-noplugin
-        - npm run build:vuecli3
+        - yarn build
+        - yarn build customised
+        - yarn build sections
+        - yarn build vuex
+        - yarn build nuxtjs/styleguide
+        - yarn build vuetify
+        - yarn build vuecli-noplugin
+        - yarn build:vuecli3
 
         # Check that examples really works: no JS errors on load
-        - npm run test:browser:pre
-
-        - npm run test:browser basic
-        - npm run test:browser customised
-        - npm run test:browser sections
-        - npm run test:browser vuex
-        - npm run test:browser nuxtjs/styleguide
-        - npm run test:browser vuetify
-        - npm run test:browser vuecli-noplugin
-        - npm run test:browser vuecli3
+        - yarn test:browser basic
+        - yarn test:browser customised
+        - yarn test:browser sections
+        - yarn test:browser vuex
+        - yarn test:browser nuxtjs/styleguide
+        - yarn test:browser vuetify
+        - yarn test:browser vuecli-noplugin
+        - yarn test:browser vuecli3
 
         # Run integration tests with Cypress
-        - npm run test:cypress:pre
-        - npm run test:cypress
+        - yarn test:cypress:pre
+        - yarn test:cypress
+
+        # test vue-cli-plugin
+        - yarn test:plugin
 
     - stage: release
       script:
-        - npm run compile
-        - npm install --no-save node-fetch semantic-release
-        - npx semantic-release
+        - yarn compile
+        - git config --global user.name "Vue Styleguidist Bot"
+        - git config --global user.email "cluedude@hotmail.com"
+        - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        - git checkout master
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+        - yarn lerna publish --yes
 
       # Build & Deploy the documentation website
     - stage: documentation
       script:
-        - npm run docs:build
+        - yarn docs:build
       deploy:
         provider: pages
         skip-cleanup: true

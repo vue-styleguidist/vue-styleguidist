@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import sample from 'lodash/sample';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import sample from 'lodash/sample'
 
 /**
  * Button that changes label on every click.
@@ -10,23 +10,23 @@ export default class RandomButton extends Component {
 		/**
 		 * List of possible labels.
 		 */
-		variants: PropTypes.array.isRequired,
-	};
+		variants: PropTypes.array.isRequired
+	}
 
 	constructor(props) {
-		super();
+		super()
 		this.state = {
-			label: sample(props.variants),
-		};
+			label: sample(props.variants)
+		}
 	}
 
 	handleClick() {
 		this.setState({
-			label: sample(this.props.variants),
-		});
+			label: sample(this.props.variants)
+		})
 	}
 
 	render() {
-		return <button onClick={this.handleClick.bind(this)}>{this.state.label}</button>;
+		return <button onClick={this.handleClick.bind(this)}>{this.state.label}</button>
 	}
 }

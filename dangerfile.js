@@ -1,17 +1,35 @@
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { danger, warn } from 'danger';
+import { danger, warn } from 'danger'
 
-const packageChanged = danger.git.modified_files.includes('package.json');
-const lockfileChanged = danger.git.modified_files.includes('package-lock.json');
+const packages = [
+	'package.json',
+	'packages/vue-styleguidist/package.json',
+	'packages/vue-docgen-api/package.json',
+	'packages/vue-cli-plugin-styleguidist/package.json'
+]
 
-if (packageChanged && !lockfileChanged) {
-	warn(`Changes were made to \`package.json\`, but not to \`package-lock.json\`.
+const changePackages = packages.filter(f => {
+	danger.git.modified_files.includes(f)
+})
 
-If you’ve changed any dependencies (added, removed or updated any packages), please run \`npm install\` and commit changes in package-lock.json file. Make sure you’re using npm 5+.`);
+const lockfileChanged = danger.git.modified_files.includes('yarn.lock')
+
+if (!lockfileChanged && changePackages.length) {
+	if (changePackages.length === 1) {
+		warn(`Changes were made to \`${changePackages[0]}\`, but not to \`yarn.lock\`.
+		
+If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in yarn.lock file.`)
+	} else {
+		warn(`Changes were made to all the following files \`${changePackages.join(
+			'`, `'
+		)}\`, but not to \`yarn.lock\`.
+		
+If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in yarn.lock file.`)
+	}
 }
 
-if (!packageChanged && lockfileChanged) {
-	warn(`Changes were made to \`package-lock.json\`, but not to \`package.json\`.
+if (!changePackages.length && lockfileChanged) {
+	warn(`Changes were made to \`yarn.lock\`, but to no \`package.json\` file in the package.
 
-Please remove \`package-lock.json\` changes from your pull request. Try to run \`git checkout master -- package-lock.json\` and commit changes.`);
+Please remove \`yarn.lock\` changes from your pull request. Try to run \`git checkout master -- yarn.lock\` and commit changes.`)
 }

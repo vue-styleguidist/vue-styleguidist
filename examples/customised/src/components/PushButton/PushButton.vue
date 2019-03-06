@@ -26,31 +26,31 @@ export default {
 		}
 	},
 	computed: {
-		fontSize(){
-			let size;
+		fontSize() {
+			let size
 			switch (this.size) {
 				case 'small':
-					size = '10px';
-					break;
+					size = '10px'
+					break
 				case 'normal':
-					size = '14px';
-					break;
+					size = '14px'
+					break
 				case 'large':
-					size = '18px';
-					break;
+					size = '18px'
+					break
 			}
-			return size;
+			return size
 		}
 	}
 }
 </script>
 <style scope>
 .push-button {
-	padding: .5em 1.5em;
+	padding: 0.5em 1.5em;
 	color: #666;
 	background-color: #fff;
 	border: 1px solid currentColor;
-	border-radius: .3em;
+	border-radius: 0.3em;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;

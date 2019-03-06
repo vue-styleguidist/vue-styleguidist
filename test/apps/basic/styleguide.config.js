@@ -1,6 +1,6 @@
-const path = require('path');
+const path = require('path')
 
-const dir = path.resolve(__dirname, 'lib');
+const dir = path.resolve(__dirname, 'lib')
 
 module.exports = {
 	title: 'Vue Style Guide Example',
@@ -12,14 +12,14 @@ module.exports = {
 				{
 					test: /\.jsx?$/,
 					include: dir,
-					loader: 'babel-loader',
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.css$/,
 					include: dir,
-					loader: 'style-loader!css-loader?modules',
-				},
-			],
-		},
-	},
-};
+					loader: 'style-loader!css-loader?modules'
+				}
+			]
+		}
+	}
+}

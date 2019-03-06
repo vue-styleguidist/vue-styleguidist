@@ -10,15 +10,15 @@ export default {
 		 */
 		propA: {
 			type: String,
-			default: '#333',
-		},
+			default: '#333'
+		}
 	},
 	mounted() {
-		this.hello();
+		this.hello()
 	},
 	methods: {
 		hello() {
-			console.log('hello from mixin!');
-		},
-	},
-};
+			console.log('hello from mixin!')
+		}
+	}
+}

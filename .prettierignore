@@ -1,1 +1,6 @@
 examples/*/styleguide/
+packages/*/lib/
+packages/*/dist/
+test/cli-packages/
+docs/dist/
+**/CHANGELOG.md

@@ -1,5 +1,5 @@
-const path = require('path');
-const vueLoader = require('vue-loader');
+const path = require('path')
+const vueLoader = require('vue-loader')
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
@@ -8,25 +8,25 @@ module.exports = {
 			rules: [
 				{
 					test: /\.vue$/,
-					loader: 'vue-loader',
+					loader: 'vue-loader'
 				},
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader',
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
+					use: ['style-loader', 'css-loader', 'sass-loader']
 				},
 				{
 					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
-				},
-			],
+					use: ['style-loader', 'css-loader', 'sass-loader']
+				}
+			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
+		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
-	usageMode: 'expand',
-};
+	usageMode: 'expand'
+}

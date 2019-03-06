@@ -1,5 +1,5 @@
 {
-  "name": "vuecli3",
+  "name": "vuecli3-noplugin",
   "version": "1.8.11",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "vue": "^2.5.16"
   },
   "devDependencies": {
-    "vue-styleguidist": "^3.0.8",
+    "vue-styleguidist": "3.X.X",
     "@vue/cli-service": "^3.3.1"
   }
 }

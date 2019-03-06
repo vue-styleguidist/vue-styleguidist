@@ -8,7 +8,7 @@
 <script>
 export default {
 	mounted() {
-		this.updateValue(this.value);
+		this.updateValue(this.value)
 	},
 	name: 'Input',
 	props: {
@@ -17,41 +17,41 @@ export default {
 		 */
 		value: {
 			required: true,
-			type: [Number, String],
+			type: [Number, String]
 		},
 		/**
 		 * Using for: String.prototype.replace(regexp, replacement)
 		 */
 		regExp: {
 			type: RegExp,
-			default: null,
+			default: null
 		},
 		/**
 		 * Using for: String.prototype.replace(regexp, replacement)
 		 */
 		replacement: {
 			type: String,
-			default: '',
-		},
+			default: ''
+		}
 	},
 	data() {
 		return {
-			val: '',
-		};
+			val: ''
+		}
 	},
 	methods: {
 		// format the value of input
 		formatValue(val) {
-			const formattedValue = val.toString().replace(this.regExp, this.replacement);
+			const formattedValue = val.toString().replace(this.regExp, this.replacement)
 
-			return formattedValue;
+			return formattedValue
 		},
 
 		updateValue(val) {
-			const formattedValue = this.formatValue(val);
+			const formattedValue = this.formatValue(val)
 
-			this.val = formattedValue;
-			this.emitInput(formattedValue);
+			this.val = formattedValue
+			this.emitInput(formattedValue)
 		},
 
 		emitInput(val) {
@@ -62,7 +62,7 @@ export default {
 			 * @property {number} called - test called
 			 * @property {boolean} isPacked - Indicates whether the snowball is tightly packed.
 			 */
-			this.$emit('input', val, 1, false);
+			this.$emit('input', val, 1, false)
 		},
 
 		// emit change event
@@ -71,7 +71,7 @@ export default {
 			 * Change event
 			 * @event change
 			 */
-			this.$emit('change', this.val);
+			this.$emit('change', this.val)
 		},
 		fireEvent() {
 			/**
@@ -79,16 +79,16 @@ export default {
 			 * @event fire
 			 * @type {string}
 			 */
-			this.$emit('fire', 'hello fire!!');
-		},
+			this.$emit('fire', 'hello fire!!')
+		}
 	},
 	watch: {
 		// watch value prop
 		value(val) {
-			this.updateValue(val);
-		},
-	},
-};
+			this.updateValue(val)
+		}
+	}
+}
 </script>
 
 <style>

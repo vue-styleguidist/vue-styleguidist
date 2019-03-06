@@ -1,9 +1,10 @@
 {
   "printWidth": 100,
   "singleQuote": true,
-  "trailingComma": "es5",
+  "trailingComma": "none",
   "useTabs": true,
   "proseWrap": "never",
+  "semi": false,
   "overrides": [{
     "files": "*.md",
     "options": {

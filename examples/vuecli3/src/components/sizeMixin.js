@@ -8,7 +8,7 @@ module.exports = {
 		 */
 		size: {
 			type: String,
-			default: '14px',
-		},
-	},
-};
+			default: '14px'
+		}
+	}
+}

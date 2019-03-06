@@ -1,12 +1,12 @@
-const path = require('path');
-const vueLoader = require('vue-loader');
+const path = require('path')
+const vueLoader = require('vue-loader')
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	require: [path.join(__dirname, './src/style.scss')],
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist',
+		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
 	},
 	webpackConfig: {
 		module: {
@@ -24,26 +24,26 @@ module.exports = {
 									options: {
 										includePaths: ['./src'],
 										data: '@import "style.scss";',
-										outputStyle: 'compressed',
-									},
-								},
-							],
-						},
-					},
+										outputStyle: 'compressed'
+									}
+								}
+							]
+						}
+					}
 				},
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader',
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.(css?|scss)(\?.*)?$/,
-					loader: 'style-loader!css-loader!sass-loader',
-				},
-			],
+					loader: 'style-loader!css-loader!sass-loader'
+				}
+			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
+		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand',
-};
+	exampleMode: 'expand'
+}

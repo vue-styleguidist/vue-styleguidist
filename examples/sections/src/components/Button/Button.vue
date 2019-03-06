@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 /**
  * The only true button.
  */
@@ -36,27 +35,27 @@ export default {
 		 * @ignore
 		 */
 		onClick: {
-			type:Function,
-			default: (event) => {
-				console.log('You have clicked me!', event.target);
+			type: Function,
+			default: event => {
+				console.log('You have clicked me!', event.target)
 			}
 		}
 	},
 	computed: {
-		fontSize(){
-			let size;
+		fontSize() {
+			let size
 			switch (this.size) {
 				case 'small':
-					size = '10px';
-					break;
+					size = '10px'
+					break
 				case 'normal':
-					size = '14px';
-					break;
+					size = '14px'
+					break
 				case 'large':
-					size = '18px';
-					break;
+					size = '18px'
+					break
 			}
-			return size;
+			return size
 		}
 	}
 }
@@ -64,17 +63,20 @@ export default {
 
 <style scope>
 .button {
-	padding: .5em 1.5em;
+	padding: 0.5em 1.5em;
 	color: #666;
 	background-color: #fff;
 	border: 1px solid currentColor;
-	border-radius: .3em;
+	border-radius: 0.3em;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
 }
 .checks {
-	background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 25%), linear-gradient(-45deg, #f5f5f5 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f5f5f5 75%), linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
+	background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 25%),
+		linear-gradient(-45deg, #f5f5f5 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, #f5f5f5 75%),
+		linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
 	background-size: 16px 16px;
 	background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
 }

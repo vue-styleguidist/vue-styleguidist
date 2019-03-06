@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 /**
  * Button that counts how many times it was pressed and exposes a `@public` method to reset itself.
  */
@@ -35,7 +34,7 @@ export default {
 	},
 	methods: {
 		getImageUrl() {
-			const { type, width, height } = this;
+			const { type, width, height } = this
 			const types = {
 				animal: `http://placeimg.com/${width}/${height}/animals`,
 				bacon: `http://baconmockup.com/${width}/${height}`,
@@ -45,9 +44,9 @@ export default {
 				city: `http://lorempixel.com/${width}/${height}/city`,
 				food: `http://lorempixel.com/${width}/${height}/food`,
 				nature: `http://lorempixel.com/${width}/${height}/nature`,
-				people: `http://lorempixel.com/${width}/${height}/people`,
-			};
-			return types[type];
+				people: `http://lorempixel.com/${width}/${height}/people`
+			}
+			return types[type]
 		}
 	}
 }

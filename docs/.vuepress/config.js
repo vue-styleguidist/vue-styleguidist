@@ -1,6 +1,6 @@
-const title = 'Vue Styleguidist';
-const ogprefix = 'og: http://ogp.me/ns#';
-const description = 'Isolated Vue component development environment with a living style guide';
+const title = 'Vue Styleguidist'
+const ogprefix = 'og: http://ogp.me/ns#'
+const description = 'Isolated Vue component development environment with a living style guide'
 
 module.exports = {
 	dest: 'docs/dist',
@@ -17,9 +17,9 @@ module.exports = {
 				prefix: ogprefix,
 				property: 'og:image',
 				content:
-					'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png',
-			},
-		],
+					'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/packages/vue-styleguidist/assets/logo.png'
+			}
+		]
 	],
 	themeConfig: {
 		repo: 'vue-styleguidist/vue-styleguidist',
@@ -31,6 +31,7 @@ module.exports = {
 		},
 		sidebar: [
 			'/GettingStarted',
+			['/VueCLI3', '@vue/cli 3.X'],
 			'/Documenting',
 			['/Components', 'Locating Components'],
 			'/Webpack',
@@ -38,7 +39,7 @@ module.exports = {
 			'/API',
 			'/Configuration',
 			'/CLI',
-			'/Development',
-		],
-	},
-};
+			'/Development'
+		]
+	}
+}

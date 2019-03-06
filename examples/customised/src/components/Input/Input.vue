@@ -8,7 +8,7 @@
 <script>
 export default {
 	mounted() {
-		this.updateValue(this.value);
+		this.updateValue(this.value)
 	},
 	name: 'Input',
 	props: {
@@ -37,21 +37,21 @@ export default {
 	data() {
 		return {
 			val: ''
-		};
+		}
 	},
 	methods: {
 		// format the value of input
 		formatValue(val) {
-			const formattedValue = val.toString().replace(this.regExp, this.replacement);
+			const formattedValue = val.toString().replace(this.regExp, this.replacement)
 
-			return formattedValue;
+			return formattedValue
 		},
 
 		updateValue(val) {
-			const formattedValue = this.formatValue(val);
+			const formattedValue = this.formatValue(val)
 
-			this.val = formattedValue;
-			this.emitInput(formattedValue);
+			this.val = formattedValue
+			this.emitInput(formattedValue)
 		},
 
 		emitInput(val) {
@@ -60,7 +60,7 @@ export default {
 			 * @event input
 			 * @type {number|string}
 			 */
-			this.$emit('input', val);
+			this.$emit('input', val)
 		},
 
 		// emit change event
@@ -69,7 +69,7 @@ export default {
 			 * Change event
 			 * @event change
 			 */
-			this.$emit('change', this.val);
+			this.$emit('change', this.val)
 		},
 		fireEvent() {
 			/**
@@ -83,12 +83,11 @@ export default {
 	watch: {
 		// watch value prop
 		value(val) {
-			this.updateValue(val);
+			this.updateValue(val)
 		}
 	}
 }
 </script>
 
 <style>
-
 </style>

@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import VueTypes from 'vue-types';
-import PropTypes from '@znck/prop-types';
-import loggerMixin from '../../mixins/loggerMixin';
+import VueTypes from 'vue-types'
+import PropTypes from '@znck/prop-types'
+import loggerMixin from '../../mixins/loggerMixin'
 
 /**
  * The only true button.
@@ -23,14 +23,14 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#333',
+			default: '#333'
 		},
 		/**
 		 * The shape of my heart
 		 */
 		shape: PropTypes.shape({
 			color: PropTypes.string,
-			fontSize: PropTypes.number,
+			fontSize: PropTypes.number
 		}),
 		/**
 		 * The size of the button
@@ -44,28 +44,28 @@ export default {
 		onClick: {
 			type: Function,
 			default: event => {
-				console.log('You have clicked me!', event.target);
-			},
-		},
+				console.log('You have clicked me!', event.target)
+			}
+		}
 	},
 	computed: {
 		fontSize() {
-			let size;
+			let size
 			switch (this.size) {
 				case 'small':
-					size = '10px';
-					break;
+					size = '10px'
+					break
 				case 'normal':
-					size = '14px';
-					break;
+					size = '14px'
+					break
 				case 'large':
-					size = '18px';
-					break;
+					size = '18px'
+					break
 			}
-			return size;
-		},
-	},
-};
+			return size
+		}
+	}
+}
 </script>
 
 <style scope>

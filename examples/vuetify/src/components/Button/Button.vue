@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import loggerMixin from '../../mixins/loggerMixin';
+import loggerMixin from '../../mixins/loggerMixin'
 
 /**
  * The only true button.
@@ -24,7 +24,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: 'success',
+			default: 'success'
 		},
 		/**
 		 * The size of the button
@@ -32,7 +32,7 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'normal',
+			default: 'normal'
 		},
 		/**
 		 * Gets called when the user clicks on the button
@@ -41,28 +41,28 @@ export default {
 		onClick: {
 			type: Function,
 			default: event => {
-				console.log('You have clicked me!', event.target);
-			},
-		},
+				console.log('You have clicked me!', event.target)
+			}
+		}
 	},
 	computed: {
 		fontSize() {
-			let size;
+			let size
 			switch (this.size) {
 				case 'small':
-					size = '10px';
-					break;
+					size = '10px'
+					break
 				case 'normal':
-					size = '14px';
-					break;
+					size = '14px'
+					break
 				case 'large':
-					size = '18px';
-					break;
+					size = '18px'
+					break
 			}
-			return size;
-		},
-	},
-};
+			return size
+		}
+	}
+}
 </script>
 
 <style scope>

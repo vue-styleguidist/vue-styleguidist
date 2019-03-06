@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * The only true button.
@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 export default function Button({ color, size, children }) {
 	const styles = {
 		color,
-		fontSize: Button.sizes[size],
-	};
+		fontSize: Button.sizes[size]
+	}
 
-	return <button style={styles}>{children}</button>;
+	return <button style={styles}>{children}</button>
 }
 Button.propTypes = {
 	/**
@@ -23,14 +23,14 @@ Button.propTypes = {
 	 * A prop that should not be visible in the doc.
 	 * @ignore
 	 */
-	ignoredProp: PropTypes.bool,
-};
+	ignoredProp: PropTypes.bool
+}
 Button.defaultProps = {
 	color: '#333',
-	size: 'normal',
-};
+	size: 'normal'
+}
 Button.sizes = {
 	small: '10px',
 	normal: '14px',
-	large: '18px',
-};
+	large: '18px'
+}

@@ -1,0 +1,250 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests button should match the snapshot 1`] = `
+Object {
+  "description": "This is an example of creating a reusable button component and using it with external data.",
+  "displayName": "buttonComponent",
+  "events": Object {
+    "success": Object {
+      "description": "Success event.",
+      "properties": Array [
+        Object {
+          "description": "example",
+          "name": "demo",
+          "type": Object {
+            "names": Array [
+              "object",
+            ],
+          },
+        },
+        Object {
+          "description": "test called",
+          "name": "called",
+          "type": Object {
+            "names": Array [
+              "number",
+            ],
+          },
+        },
+        Object {
+          "description": "Indicates whether the snowball is tightly packed.",
+          "name": "isPacked",
+          "type": Object {
+            "names": Array [
+              "boolean",
+            ],
+          },
+        },
+      ],
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+  },
+  "methods": Array [],
+  "props": Object {
+    "color": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'#333'",
+      },
+      "description": "The color for the button example",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "example": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "The example props",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    "example3": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "16",
+      },
+      "description": "The example3 props",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "number",
+      },
+    },
+    "funcDefault": Object {
+      "defaultValue": Object {
+        "func": true,
+        "value": "() => {
+    return 'foo'
+}",
+      },
+      "description": "Function default",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "func",
+      },
+    },
+    "onCustomClick": Object {
+      "defaultValue": Object {
+        "func": true,
+        "value": "() => () => null",
+      },
+      "description": "Add custom click actions.",
+      "required": "",
+      "tags": Object {
+        "ignore": Array [
+          Object {
+            "description": true,
+            "title": "ignore",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "func",
+      },
+    },
+    "prop1": Object {
+      "description": "",
+      "tags": Object {
+        "ignore": Array [
+          Object {
+            "description": true,
+            "title": "ignore",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "propE": Object {
+      "defaultValue": Object {
+        "func": true,
+        "value": "() => {
+    return { message: 'hello' }
+}",
+      },
+      "description": "Object or array defaults must be returned from
+a factory function",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "object",
+      },
+    },
+    "propsAnother": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'blue'",
+      },
+      "description": "Example prop",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "secret": Object {
+      "description": "Another mixin",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "shouldBe": Object {
+      "description": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "size": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'normal'",
+      },
+      "description": "The size of the button",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "span": Object {
+      "description": "Number of columns (1-12) the column should span.",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    "spanMd": Object {
+      "description": "Md breakpoint and above",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    "spanSm": Object {
+      "description": "Sm breakpoint and above",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    "v-model": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'example model'",
+      },
+      "description": "Model example2",
+      "required": "",
+      "tags": Object {
+        "model": Array [
+          Object {
+            "description": true,
+            "title": "model",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "string",
+      },
+    },
+  },
+  "slots": Object {
+    "default": Object {
+      "bindings": Object {},
+      "description": "Use this slot default",
+    },
+  },
+  "tags": Object {
+    "author": Array [
+      Object {
+        "description": "[Rafael](https://github.com/rafaesc92)",
+        "title": "author",
+      },
+    ],
+    "version": Array [
+      Object {
+        "description": "1.0.5",
+        "title": "version",
+      },
+    ],
+  },
+}
+`;

@@ -1,11 +1,11 @@
-import VueI18n from 'vue-i18n';
-import messages from './i18n';
-import Languages from './Languages.vue';
+import VueI18n from 'vue-i18n'
+import messages from './i18n'
+import Languages from './Languages.vue'
 
 const i18n = new VueI18n({
 	locale: 'en',
-	messages,
-});
+	messages
+})
 
 export default previewComponent => {
 	// https://vuejs.org/v2/guide/render-function.html
@@ -16,11 +16,11 @@ export default previewComponent => {
 				'v-app',
 				{
 					props: {
-						id: 'v-app',
-					},
+						id: 'v-app'
+					}
 				},
 				[createElement(Languages), createElement(Object.assign(previewComponent))]
-			);
-		},
-	};
-};
+			)
+		}
+	}
+}

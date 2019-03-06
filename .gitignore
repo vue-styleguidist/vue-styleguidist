@@ -1,10 +1,9 @@
 node_modules/
 /examples/**/styleguide/build
+/examples/**/CHANGELOG.md
 /examples/**/styleguide/index.html
 /.publish/
-/lib
 /coverage/
-Changelog.md
 .DS_Store
 Thumbs.db
 .idea/
@@ -14,8 +13,9 @@ Thumbs.db
 *.log
 .eslintcache
 .nuxt/
-yarn.lock
 /cypress/
 test/cypress/screenshots/
 test/cypress/videos/
 /docs/dist/
+/test/cli-packages/
+!/test/cli-packages/.gitkeep

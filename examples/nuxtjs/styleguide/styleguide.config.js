@@ -1,5 +1,5 @@
-const { resolve } = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
+const { resolve } = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
 	components: '../src/components/**/[A-Z]*.vue',
@@ -9,20 +9,20 @@ module.exports = {
 			rules: [
 				{
 					test: /\.vue$/,
-					loader: 'vue-loader',
+					loader: 'vue-loader'
 				},
 				{
 					test: /\.js$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader',
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.css$/,
-					use: ['vue-style-loader', 'css-loader'],
-				},
-			],
+					use: ['vue-style-loader', 'css-loader']
+				}
+			]
 		},
-		plugins: [new VueLoaderPlugin()],
+		plugins: [new VueLoaderPlugin()]
 	},
-	usageMode: 'expand',
-};
+	usageMode: 'expand'
+}

@@ -32,7 +32,7 @@
     "style-loader": "^0.19.0",
     "url-loader": "^1.1.2",
     "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^3.0.9",
+    "vue-styleguidist": "3.X.X",
     "webpack": "^4.10.0"
   }
 }

@@ -8,15 +8,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
 /**
  * Button that counts how many times it was pressed and exposes a `@public` method to reset itself.
  */
 export default {
-	name: "CounterButton",
+	name: 'CounterButton',
 	computed: {
-		...mapGetters(["count"]),
+		...mapGetters(['count'])
 	},
 	methods: {
 		/**
@@ -29,10 +29,10 @@ export default {
 			 * @event after
 			 * @type {number}
 			 */
-			this.$emit("after", this.value);
+			this.$emit('after', this.value)
 		}
-	},
-};
+	}
+}
 </script>
 <docs>
 Don't forget that you can debug it with [vue-devtools](https://github.com/vuejs/vue-devtools)
