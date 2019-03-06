@@ -360,8 +360,7 @@ devServer: {
 
 See in [configuring webpack](Webpack.md#reusing-your-projects-webpack-config).
 
-
-## How to reuse project’s webpack config?
+## How to document styled components?
 
 In order to document styled components you need to get them recognized by vue-docgen-api.
 Simplest way is to use extends:
@@ -378,7 +377,7 @@ export default {
 };
 ```
 
-or using with the class component syntax
+or if you are using with the class component syntax
 
 ```js
 const StyledTitle = styled.h1`
