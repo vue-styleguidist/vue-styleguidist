@@ -2,8 +2,8 @@ const { resolve } = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-	components: 'src/components/**/[A-Z]*.vue',
-	renderRootJsx: resolve(__dirname, 'styleguide/styleguide.root.js'),
+	components: '../src/components/**/[A-Z]*.vue',
+	renderRootJsx: resolve(__dirname, 'styleguide.root.js'),
 	webpackConfig: {
 		module: {
 			rules: [
