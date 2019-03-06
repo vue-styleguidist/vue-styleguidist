@@ -1,8 +1,5 @@
 # vue-docgen-api
 
-[![npm](https://img.shields.io/npm/v/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api) [![Build Status](https://travis-ci.org/vue-styleguidist/vue-docgen-api.svg?branch=master)](https://travis-ci.org/vue-styleguidist/vue-docgen-api) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) <a href="https://discordapp.com/channels/325477692906536972/538786416092512278"> <img src="https://img.shields.io/discord/325477692906536972.svg?logo=discord"
-alt="chat on Discord"> </a>
-
 `vue-docgen-api` is a toolbox to help extracting information from [Vue](https://vuejs.org/) components, and generate documentation from it.
 
 Use [@babel/parser](https://babeljs.io/docs/en/babel-parser) to parse the code and analyze the contents of the component extracting methods, props events and slots. The output is a JavaScript object.
