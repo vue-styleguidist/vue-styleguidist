@@ -42,7 +42,6 @@ jobs:
     - stage: integration
       script:
         # Compile JS
-        - yarn lerna bootstrap
         - yarn compile
 
         # Build all examples
