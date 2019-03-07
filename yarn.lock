@@ -2462,7 +2462,7 @@
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-3.4.1.tgz#f850c2f8d7cd42b475d03ec6658ccf2ec9830511"
 
-"@vue/cli-plugin-babel@*", "@vue/cli-plugin-babel@^3.0.0-rc.5":
+"@vue/cli-plugin-babel@^3.0.0-rc.5":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-3.4.1.tgz#f84fe329966ab5c82c80da1bd62da4db4089090b"
   dependencies:
@@ -2472,7 +2472,7 @@
     babel-loader "^8.0.5"
     webpack ">=4 < 4.29"
 
-"@vue/cli-plugin-eslint@*", "@vue/cli-plugin-eslint@^3.0.0-rc.5":
+"@vue/cli-plugin-eslint@^3.0.0-rc.5":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-3.4.1.tgz#59896379e12d68aefcdccac28c691cb6e23e5720"
   dependencies:
@@ -2498,7 +2498,7 @@
     tslint "^5.12.1"
     webpack ">=4 < 4.29"
 
-"@vue/cli-service@^3.0.0-rc.5", "@vue/cli-service@^3.3.1", "@vue/cli-service@^3.4.0", "@vue/cli-service@^3.4.1":
+"@vue/cli-service@^3.0.0-rc.5", "@vue/cli-service@^3.3.1", "@vue/cli-service@^3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.4.1.tgz#65ef3ed00b8e6eeeca736308a703c264cfa280cc"
   integrity sha512-HAF2yeafVJVKiBaapvbVIK4cM+lDU4r6aJzbKLOonzQrnI45T2NLEvYC+9uW7C5LvC1d4g1XUx25Q8ixSBKegQ==
@@ -3871,7 +3871,7 @@ babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
 
-babel-eslint@*, babel-eslint@^10.0.1:
+babel-eslint@^10.0.1:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.0.1.tgz#919681dc099614cd7d31d45c8908695092a1faed"
   dependencies:
@@ -7190,17 +7190,17 @@ eslint-plugin-react@^7.10.0:
     prop-types "^15.6.2"
     resolve "^1.9.0"
 
-eslint-plugin-vue@*, eslint-plugin-vue@^5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-5.2.2.tgz#86601823b7721b70bc92d54f1728cfc03b36283c"
-  dependencies:
-    vue-eslint-parser "^5.0.0"
-
 eslint-plugin-vue@^4.7.1:
   version "4.7.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-4.7.1.tgz#c829b9fc62582c1897b5a0b94afd44ecca511e63"
   dependencies:
     vue-eslint-parser "^2.0.3"
+
+eslint-plugin-vue@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-5.2.2.tgz#86601823b7721b70bc92d54f1728cfc03b36283c"
+  dependencies:
+    vue-eslint-parser "^5.0.0"
 
 eslint-scope@3.7.1:
   version "3.7.1"
@@ -7223,14 +7223,6 @@ eslint-scope@^4.0.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-scope@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-4.0.2.tgz#5f10cd6cabb1965bf479fa65745673439e21cb0e"
-  integrity sha512-5q1+B/ogmHl8+paxtOKx38Z8LtWkVGuNt3+GQNErqwLl6ViNp/gdJGMCjZNxZ8j/VYjDNZ2Fo+eQc1TAVPIzbg==
-  dependencies:
-    esrecurse "^4.1.0"
-    estraverse "^4.1.1"
-
 eslint-utils@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/eslint-utils/-/eslint-utils-1.3.1.tgz#9a851ba89ee7c460346f97cf8939c7298827e512"
@@ -7238,48 +7230,6 @@ eslint-utils@^1.3.1:
 eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
-
-eslint@*:
-  version "5.15.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.15.1.tgz#8266b089fd5391e0009a047050795b1d73664524"
-  integrity sha512-NTcm6vQ+PTgN3UBsALw5BMhgO6i5EpIjQF/Xb5tIh3sk9QhrFafujUOczGz4J24JBlzWclSB9Vmx8d+9Z6bFCg==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    ajv "^6.9.1"
-    chalk "^2.1.0"
-    cross-spawn "^6.0.5"
-    debug "^4.0.1"
-    doctrine "^3.0.0"
-    eslint-scope "^4.0.2"
-    eslint-utils "^1.3.1"
-    eslint-visitor-keys "^1.0.0"
-    espree "^5.0.1"
-    esquery "^1.0.1"
-    esutils "^2.0.2"
-    file-entry-cache "^5.0.1"
-    functional-red-black-tree "^1.0.1"
-    glob "^7.1.2"
-    globals "^11.7.0"
-    ignore "^4.0.6"
-    import-fresh "^3.0.0"
-    imurmurhash "^0.1.4"
-    inquirer "^6.2.2"
-    js-yaml "^3.12.0"
-    json-stable-stringify-without-jsonify "^1.0.1"
-    levn "^0.3.0"
-    lodash "^4.17.11"
-    minimatch "^3.0.4"
-    mkdirp "^0.5.1"
-    natural-compare "^1.4.0"
-    optionator "^0.8.2"
-    path-is-inside "^1.0.2"
-    progress "^2.0.0"
-    regexpp "^2.0.1"
-    semver "^5.5.1"
-    strip-ansi "^4.0.0"
-    strip-json-comments "^2.0.1"
-    table "^5.2.3"
-    text-table "^0.2.0"
 
 eslint@^4.19.1:
   version "4.19.1"
@@ -10716,9 +10666,10 @@ left-pad@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
 
-lerna@^3.13.0:
+lerna@^3.13.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/lerna/-/lerna-3.13.1.tgz#feaff562176f304bd82329ca29ce46ab6c033463"
+  integrity sha512-7kSz8LLozVsoUNTJzJzy+b8TnV9YdviR2Ee2PwGZSlVw3T1Rn7kOAPZjEi+3IWnOPC96zMPHVmjCmzQ4uubalw==
   dependencies:
     "@lerna/add" "3.13.1"
     "@lerna/bootstrap" "3.13.1"
@@ -17051,14 +17002,6 @@ vue-cli-plugin-apollo@^0.19.1:
     subscriptions-transport-ws "^0.9.15"
     ts-node "^7.0.1"
 
-vue-cli-plugin-styleguidist@*:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-styleguidist/-/vue-cli-plugin-styleguidist-1.1.2.tgz#918c9a25b55c615983a88709aed0623cced594b9"
-  integrity sha512-p0VrKOXBw3LX6OMfaj2u2A9/wOLZ0E8LgBhy3Pnm3sRt0pIhUgI4p1Zky4GePcVLL7co+BdVtkH15RLhtBBDFg==
-  dependencies:
-    null-loader "^0.1.1"
-    vue-styleguidist "^3.0.X"
-
 vue-cli-plugin-styleguidist@^1.0.3, vue-cli-plugin-styleguidist@^1.0.4:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-styleguidist/-/vue-cli-plugin-styleguidist-1.0.12.tgz#51f51f872b2df10a6f42ef68650f5f85489bb687"
@@ -17302,7 +17245,7 @@ vue-styleguidist@3.X.X, vue-styleguidist@^3.0.X:
     style-loader "^0.21.0"
     to-ast "^1.0.0"
     uglifyjs-webpack-plugin "1.2.7"
-    vue-docgen-api "file:../../../AppData/Local/Yarn/Cache/v4/npm-vue-styleguidist-0.0.0-development-dcc72bb7-f8be-4782-ab4f-9aa280a5e539-1551906027423/node_modules/vue-docgen-api"
+    vue-docgen-api "file:../../../Library/Caches/Yarn/v4/npm-vue-styleguidist-0.0.0-development-bf3ecb2f-9984-45a5-ade8-7d32b52215bc-1551917695410/node_modules/vue-docgen-api"
     webpack "^4.28.4"
     webpack-dev-server "^3.1.14"
     webpack-merge "^4.0.0"
@@ -17310,14 +17253,6 @@ vue-styleguidist@3.X.X, vue-styleguidist@^3.0.X:
 vue-template-compiler@^2.5.16, vue-template-compiler@^2.5.17, vue-template-compiler@^2.5.22, vue-template-compiler@^2.6.3:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.7.tgz#7f6c14eacf3c912d28d33b029cde706d9756e00c"
-  dependencies:
-    de-indent "^1.0.2"
-    he "^1.1.0"
-
-vue-template-compiler@^2.5.21:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.8.tgz#750802604595134775b9c53141b9850b35255e1c"
-  integrity sha512-SwWKANE5ee+oJg+dEJmsdxsxWYICPsNwk68+1AFjOS8l0O/Yz2845afuJtFqf3UjS/vXG7ECsPeHHEAD65Cjng==
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -17335,11 +17270,6 @@ vue-types@^1.3.4, vue-types@^1.5.0:
 vue@2.*, vue@^2.5.16, vue@^2.5.17, vue@^2.5.22, vue@^2.6.3:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.7.tgz#254f188e7621d2d19ee28d0c0442c6d21b53ae2d"
-
-vue@^2.6.6:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.8.tgz#f21cbc536bfc14f7d1d792a137bb12f69e60ea91"
-  integrity sha512-+vp9lEC2Kt3yom673pzg1J7T1NVGuGzO9j8Wxno+rQN2WYVBX2pyo/RGQ3fXCLh2Pk76Skw/laAPCuBuEQ4diw==
 
 vuepress-html-webpack-plugin@^3.2.0:
   version "3.2.0"
