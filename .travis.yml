@@ -24,11 +24,11 @@ script:
   - yarn test:jest --runInBand
 
 stages:
+  - name: release
+    if: type != pull_request AND branch = master
   - lint
   - test
   - integration
-  - name: release
-    if: type != pull_request AND branch = master
   - name: documentation
     if: type != pull_request AND branch = master
 
