@@ -24,9 +24,9 @@ script:
   - yarn test:jest --runInBand
 
 stages:
+  - integration
   - lint
   - test
-  - integration
   - name: release
     if: type != pull_request AND branch = master AND sender != "vue-styleguidist-bot"
   - name: documentation
