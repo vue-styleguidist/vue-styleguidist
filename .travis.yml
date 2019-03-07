@@ -28,9 +28,9 @@ stages:
   - test
   - integration
   - name: release
-    if: type != pull_request AND branch = master
+    if: type != pull_request AND branch = master AND sender != "vue-styleguidist-bot"
   - name: documentation
-    if: type != pull_request AND branch = master
+    if: type != pull_request AND branch = master AND sender != "vue-styleguidist-bot"
 
 jobs:
   include:
