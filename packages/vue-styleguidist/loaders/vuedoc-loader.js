@@ -73,8 +73,8 @@ module.exports = function(source) {
 	} catch (err) {
 		/* istanbul ignore next */
 		const componentPath = path.relative(process.cwd(), file)
-		const message =
-			`vue-docgen-api cannot parse ${componentPath}: ${err}\n\n` + logger.warn(message)
+		const message = `vue-docgen-api cannot parse ${componentPath}: ${err}\n\n`
+		logger.warn(message)
 	}
 
 	const componentProps = docs.props
