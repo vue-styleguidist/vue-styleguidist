@@ -42,7 +42,7 @@ module.exports = function processComponent(filepath, config) {
 	if (isVueFile(filepath)) {
 		props = requireIt(`!!${vueDocLoader}!${filepath}`)
 	} else {
-		const message = `Error when parsing ${filepath}:\n\n Only can parse files .vue:\n`
+		const message = `Error when parsing ${filepath}:\n\n Styleguidist can only parse '.vue' files:\n`
 		logger.debug(message)
 		throw new Error(message)
 	}
