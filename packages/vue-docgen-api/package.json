@@ -25,7 +25,6 @@
   ],
   "author": "Rafael Escala",
   "license": "MIT",
-  "homepage": "https://github.com/vue-styleguidist/vue-docgen-api#readme",
   "dependencies": {
     "@babel/parser": "^7.2.3",
     "@babel/types": "^7.0.0",
