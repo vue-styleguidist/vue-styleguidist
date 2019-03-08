@@ -3,7 +3,7 @@
 
 **Isolated Vue component development environment with a living style guide**
 
-<div class="badge-npmdownloads">
+<div>
 <a href="https://travis-ci.com/vue-styleguidist/vue-styleguidist">
     <img src="https://travis-ci.com/vue-styleguidist/vue-styleguidist.svg?branch=dev" alt="travis ci">
 </a>
