@@ -4,8 +4,8 @@
 **Isolated Vue component development environment with a living style guide**
 
 <div class="badge-npmdownloads">
-<a href="https://travis-ci.org/vue-styleguidist/vue-styleguidist">
-    <img src="https://travis-ci.org/vue-styleguidist/vue-styleguidist.svg" alt="travis ci">
+<a href="https://travis-ci.com/vue-styleguidist/vue-styleguidist">
+    <img src="https://travis-ci.com/vue-styleguidist/vue-styleguidist.svg?branch=dev" alt="travis ci">
 </a>
 <a href="https://npmjs.org/package/vue-styleguidist" title="View this project on NPM">
     <img src="https://img.shields.io/npm/dm/vue-styleguidist.svg" alt="NPM downloads" />
