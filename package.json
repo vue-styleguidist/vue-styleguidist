@@ -50,6 +50,8 @@
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "@types/htmlparser2": "^3.7.31",
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.18",
@@ -118,7 +120,8 @@
     "vuetify": "^1.4.3",
     "vuex": "^3.0.0",
     "webpack": "^4.29.6",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^2.0.13",
+    "yorkie": "^2.0.0"
   },
   "keywords": [
     "vue",
@@ -140,5 +143,9 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -E GIT_PARAMS"
   }
 }
