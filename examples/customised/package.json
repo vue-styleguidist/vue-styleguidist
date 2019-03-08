@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-customized",
   "description": "Vue styleguidist customized example",
-  "version": "3.8.1",
+  "version": "3.8.2",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -32,7 +32,7 @@
     "style-loader": "^0.19.0",
     "url-loader": "^1.1.2",
     "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^3.8.1",
+    "vue-styleguidist": "^3.8.2",
     "webpack": "^4.10.0"
   }
 }
