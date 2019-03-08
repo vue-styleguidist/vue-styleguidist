@@ -1,5 +1,8 @@
 language: node_js
 
+# never build when commited by the bot
+if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot"
+
 node_js:
   - 10
   - 8
@@ -28,9 +31,9 @@ stages:
   - test
   - integration
   - name: release
-    if: type != pull_request AND branch = master AND sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot"
+    if: type != pull_request AND branch = master
   - name: documentation
-    if: type != pull_request AND branch = master AND sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot"
+    if: type != pull_request AND branch = master
 
 jobs:
   include:
