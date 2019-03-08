@@ -28,7 +28,7 @@ If you’ve changed any dependencies (added, removed or updated any packages), p
 	}
 }
 
-if (!changePackages.length && lockfileChanged) {
+if (changePackages.length > 0 && lockfileChanged) {
 	warn(`Changes were made to \`yarn.lock\`, but to no \`package.json\` file in the package.
 
 Please remove \`yarn.lock\` changes from your pull request. Try to run \`git checkout master -- yarn.lock\` and commit changes.`)
