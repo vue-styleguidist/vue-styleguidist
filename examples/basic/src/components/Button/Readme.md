@@ -4,11 +4,15 @@ Basic button:
 <Button>Push Me</Button>
 ```
 
-Big pink button:
+Big pink button and small blue button:
 
 ```vue
 <Button size="large" color="deeppink">
   Click Me
+</Button>
+<br />
+<Button size="small" color="blue">
+  Second button
 </Button>
 ```
 
