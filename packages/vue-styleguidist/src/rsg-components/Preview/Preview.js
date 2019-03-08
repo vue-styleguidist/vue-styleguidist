@@ -184,7 +184,7 @@ export default class Preview extends Component {
 				})
 			} else {
 				const data = exampleComponent()
-				const template = compuse.html
+				const template = `<div>${compuse.html}</div>`
 				previewComponent = {
 					data,
 					template
