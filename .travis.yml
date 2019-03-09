@@ -1,7 +1,7 @@
 language: node_js
 
 # never build when commited by the bot
-if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot"
+if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = master)
 
 node_js:
   - 10
