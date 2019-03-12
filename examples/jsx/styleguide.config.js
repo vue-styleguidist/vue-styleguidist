@@ -1,7 +1,7 @@
 const vueLoader = require('vue-loader')
 
 module.exports = {
-	title: 'Vue Styleguidist basic',
+	title: 'Vue Styleguidist jsx',
 	components: 'src/components/**/[A-Z]*.jsx',
 	defaultExample: true,
 	ribbon: {
@@ -16,9 +16,15 @@ module.exports = {
 					loader: 'vue-loader'
 				},
 				{
-					test: /\.js?$/,
+					test: /\.(jsx|js)$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader'
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env'],
+							plugins: ['transform-vue-jsx']
+						}
+					}
 				},
 				{
 					test: /\.css$/,

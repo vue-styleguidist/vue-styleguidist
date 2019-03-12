@@ -6,13 +6,18 @@ import loggerMixin from '../../mixins/loggerMixin'
  * The only true button.
  */
 export default {
-	render(h){
+	render(h) {
 		return (
-		<div className="Button">
-		<button className="button" v-on:click.prevent={onClick} v-bind:style={ color: color, fontSize: fontSize }>
-		  <slot></slot>
-		</button>
-	  </div>);
+			<div class="Button">
+				<button
+					class="button"
+					on-click={this.onClick}
+					style={{ color: this.color, fontSize: this.fontSize }}
+				>
+					{this.$slots.default}
+				</button>
+			</div>
+		)
 	},
 	name: 'Button',
 	mixins: [loggerMixin],
