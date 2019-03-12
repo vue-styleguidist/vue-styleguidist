@@ -36,14 +36,13 @@
  * @since Version 1.0.1
  */
 export default {
-	name: 'grid',
 	props: {
 		/**
 		 * object/array defaults should be returned from a factory function
 		 * @version 1.0.5
 		 * @since Version 1.0.1
 		 * @see See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names) for a list of color names
-		 * @link See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names) for a list of color names
+		 * @link Link [Documentation](https://vue-styleguidist.github.io/) for more info
 		 */
 		msg: {
 			type: [String, Number],
