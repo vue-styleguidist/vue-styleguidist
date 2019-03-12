@@ -1,0 +1,39 @@
+{
+  "name": "vue-styleguidist-example-jsx",
+  "description": "Vue styleguidist jsx example",
+  "version": "3.8.3",
+  "private": true,
+  "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/styleguidist/vue-styleguidist.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4"
+  },
+  "dependencies": {
+    "@znck/prop-types": "^0.6.1",
+    "dog-names": "^1.0.2",
+    "vue-types": "^1.5.0"
+  },
+  "scripts": {
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-transform-vue-jsx": "4.0.1",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^0.28.7",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "vue-loader": "^15.2.4",
+    "vue-styleguidist": "^3.8.3",
+    "webpack": "^4.10.0"
+  }
+}
