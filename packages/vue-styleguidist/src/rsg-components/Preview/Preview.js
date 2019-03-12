@@ -152,6 +152,7 @@ export default class Preview extends Component {
 
 		try {
 			compuse = separateScript(code)
+			console.log('compuse', compuse)
 			compiledCode = this.compileCode(compuse.js)
 
 			if (compuse.vueComponent) {
