@@ -54,6 +54,7 @@ jobs:
         - yarn build customised
         - yarn build sections
         - yarn build vuex
+        - yarn build jsx
         - yarn build nuxtjs/styleguide
         - yarn build vuetify
         - yarn build vuecli-noplugin
@@ -64,6 +65,7 @@ jobs:
         - yarn test:browser customised
         - yarn test:browser sections
         - yarn test:browser vuex
+        - yarn test:browser jsx
         - yarn test:browser nuxtjs/styleguide
         - yarn test:browser vuetify
         - yarn test:browser vuecli-noplugin
