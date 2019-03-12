@@ -25,7 +25,7 @@ function getComponentMetadataPath(filepath) {
  * @returns {boolean}
  */
 function isVueFile(filepath) {
-	return /.vue$/.test(filepath)
+	return /.(vue|jsx|js|tsx|ts)$/.test(filepath)
 }
 
 /**
