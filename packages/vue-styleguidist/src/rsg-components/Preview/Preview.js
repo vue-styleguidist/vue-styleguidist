@@ -13,9 +13,12 @@ import styleScoper from '../../utils/styleScoper'
 /* eslint-disable react/no-multi-comp */
 const nameVarComponent = '__component__'
 
-/*
+/**
  * Reads the code in string and separates the javascript part and the html part
  * @param {string} code
+ * @return {js:String, html:String}
+ *
+ * TODO: extract this and test it
  */
 const separateScript = function separateScript(code, style) {
 	let index
@@ -50,6 +53,10 @@ const separateScript = function separateScript(code, style) {
 	}
 }
 
+/**
+ * exttract variable and function declaration from an AST and returns their ids
+ * @param {ast} syntaxTree
+ */
 const getVars = syntaxTree => {
 	let arr = []
 	arr = syntaxTree.body.filter(syntax => {
