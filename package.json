@@ -25,6 +25,7 @@
     "start:empty": "node bin/styleguidist.js server",
     "lint": "eslint . --cache --fix --ext .ts,.ts --cache-location node_modules/.eslint_cache/",
     "compile": "lerna run compile",
+    "compile:vsg": "babel --ignore '*.spec.js' -d packages/vue-styleguidist/lib/ packages/vue-styleguidist/src/ --watch",
     "build": "node test/styleguidist.js build",
     "build:vuecli3": "vue-cli-service styleguidist:build --config examples/vuecli3/styleguide.config.js",
     "test:browser": "node test/browser.js",
