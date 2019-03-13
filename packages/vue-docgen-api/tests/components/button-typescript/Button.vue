@@ -13,7 +13,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
  * @author [Rafael](https://github.com/rafaesc92)
  * @version 1.0.5
  */
-@Component
+@Component({
+	name: "ClassButton"
+})
 export default class MyComponent extends Vue {
 	aHiddenData: string = ''
 

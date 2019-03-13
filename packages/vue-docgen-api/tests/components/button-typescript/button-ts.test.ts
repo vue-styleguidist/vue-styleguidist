@@ -14,6 +14,10 @@ describe('tests button', () => {
 		expect(typeof docButton).toEqual('object')
 	})
 
+	it('should use the name in the decorator', () => {
+		expect(docButton.displayName).toEqual('ClassButton')
+	})
+
 	it('should return propB type as string', () => {
 		expect(docButton.methods).toMatchObject([{ name: 'onClick' }])
 	})
