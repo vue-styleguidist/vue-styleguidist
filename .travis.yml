@@ -29,13 +29,13 @@ script:
   - yarn test:jest --runInBand
 
 stages:
-  #- lint
-  #- test
-  #- integration
+  - lint
+  - test
+  - integration
   - name: release
     if: type != pull_request AND branch = master
-  #- name: documentation
-  #  if: type != pull_request AND branch = master
+  - name: documentation
+    if: type != pull_request AND branch = master
 
 jobs:
   include:
