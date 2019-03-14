@@ -3,3 +3,4 @@
 *.jsx text eol=lf
 *.tsx text eol=lf
 *.json text eol=lf
+*.lock text eol=lf
