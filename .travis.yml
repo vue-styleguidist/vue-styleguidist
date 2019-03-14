@@ -85,8 +85,10 @@ jobs:
         - git config --global user.email "cluedude@hotmail.com"
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git checkout master
+        - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - yarn lerna publish --yes --no-changelog
+        - yarn lerna version --yes --no-changelog
+        - yarn lerna publish from-git --yes
 
       # Build & Deploy the documentation website
     - stage: documentation

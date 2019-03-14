@@ -10,7 +10,6 @@ const defaultSortProps = require('react-styleguidist/loaders/utils/sortProps')
 
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
-/* eslint-disable no-console */
 module.exports = function(source) {
 	const file = this.request.split('!').pop()
 	const config = this._styleguidist
