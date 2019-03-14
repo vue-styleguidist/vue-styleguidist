@@ -24,13 +24,8 @@ function isComponentDefinition(path: NodePath): boolean {
 			bt.isIdentifier(path.node.callee.object) &&
 			path.node.callee.object.name === 'Vue' &&
 			path.node.callee.property.name === 'extend') ||
-		// @Component
 		// export default class MyComp extends VueComp
-		(bt.isClassDeclaration(path.node) &&
-			(path.node.decorators || []).some(d => {
-				const exp = bt.isCallExpression(d.expression) ? d.expression.callee : d.expression
-				return bt.isIdentifier(exp) && exp.name === 'Component'
-			}))
+		bt.isClassDeclaration(path.node)
 	)
 }
 
