@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-vuex",
   "description": "Vue styleguidist vuex example",
-  "version": "3.9.2",
+  "version": "3.9.3",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -27,7 +27,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^3.9.2",
+    "vue-styleguidist": "^3.9.3",
     "webpack": "^4.10.0"
   },
   "dependencies": {

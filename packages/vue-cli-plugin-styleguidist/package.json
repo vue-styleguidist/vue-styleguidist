@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-styleguidist",
-  "version": "3.9.2",
+  "version": "3.9.3",
   "description": "vue cli 3.0 plugin for vue-styleguidist",
   "main": "index.js",
   "repository": {
@@ -15,7 +15,7 @@
   "private": false,
   "dependencies": {
     "null-loader": "^0.1.1",
-    "vue-styleguidist": "^3.9.2"
+    "vue-styleguidist": "^3.9.3"
   },
   "peerDependencies": {
     "@vue/cli-service": "^3.0.0"
