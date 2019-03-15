@@ -18,6 +18,13 @@ describe('tests button', () => {
 		expect(docButton.methods).toMatchObject([{ name: 'onClick' }])
 	})
 
+	it('should return propB type as string', () => {
+		expect(docButton.slots).toMatchObject({
+			default: { description: 'Use this slot default' },
+			empty: { description: 'Use this slot for not button' }
+		})
+	})
+
 	describe('props', () => {
 		let props: { [propName: string]: PropDescriptor }
 		beforeEach(() => {
