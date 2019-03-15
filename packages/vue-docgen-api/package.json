@@ -1,6 +1,6 @@
 {
   "name": "vue-docgen-api",
-  "version": "3.9.0",
+  "version": "3.9.3",
   "description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
