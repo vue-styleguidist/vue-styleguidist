@@ -2662,7 +2662,7 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
-"@octokit/endpoint@^3.2.0":
+"@octokit/endpoint@^3.1.1":
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/@octokit/endpoint/-/endpoint-3.2.3.tgz#bd9aea60cd94ce336656b57a5c9cb7f10be8f4f3"
   integrity sha512-yUPCt4vMIOclox13CUxzuKiPJIFo46b/6GhUnUTw5QySczN1L0DtSxgmIZrZV4SAb9EyAqrceoyrWoYVnfF2AA==
@@ -2677,12 +2677,12 @@
   resolved "https://registry.yarnpkg.com/@octokit/plugin-enterprise-rest/-/plugin-enterprise-rest-2.2.0.tgz#7ee72a187e8a034d6fc21b8174bef40e34c22f02"
   integrity sha512-/uXIvjK5bxmMKI1MDZXxVSiheiyvqv7GCWjoN1s43jF3MMrfqnErOwbZkreeL0CgO1R2lNW6dESDV5NbRiWEQA==
 
-"@octokit/request@2.4.2":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-2.4.2.tgz#87c36e820dd1e43b1629f4f35c95b00cd456320b"
-  integrity sha512-lxVlYYvwGbKSHXfbPk5vxEA8w4zHOH1wobado4a9EfsyD3Cbhuhus1w0Ye9Ro0eMubGO8kNy5d+xNFisM3Tvaw==
+"@octokit/request@2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-2.4.1.tgz#98c4d6870e4abe3ccdd2b9799034b4ae3f441c30"
+  integrity sha512-nN8W24ZXEpJQJoVgMsGZeK9FOzxkc39Xn9ykseUpPpPMNEDFSvqfkCeqqKrjUiXRm72ubGLWG1SOz0aJPcgGww==
   dependencies:
-    "@octokit/endpoint" "^3.2.0"
+    "@octokit/endpoint" "^3.1.1"
     deprecation "^1.0.1"
     is-plain-object "^2.0.4"
     node-fetch "^2.3.0"
@@ -3159,7 +3159,7 @@
     tslint "^5.13.0"
     webpack ">=4 < 4.29"
 
-"@vue/cli-service@^3.0.0-rc.5", "@vue/cli-service@^3.3.1", "@vue/cli-service@^3.4.1", "@vue/cli-service@^3.5.0":
+"@vue/cli-service@^3.0.0-rc.5", "@vue/cli-service@^3.3.1", "@vue/cli-service@^3.4.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.5.1.tgz#d400ab956569a87f3947e7d6972f35c97de84145"
   integrity sha512-c3xzj2+yrnyziDvkKBTD1cB2jDBs0E4G5gk21hHzvAwzyNSpMPTqwAaeAfUtKHWSgs1dKxi/gURfIgFGUJPn+Q==
@@ -19939,7 +19939,7 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.5.16, vue-template-compiler@^2.5.17, vue-template-compiler@^2.5.21, vue-template-compiler@^2.5.22, vue-template-compiler@^2.6.3:
+vue-template-compiler@^2.5.16, vue-template-compiler@^2.5.17, vue-template-compiler@^2.5.22, vue-template-compiler@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.9.tgz#26600415ff81a7a241aebc2d4e0abaa0f1a07915"
   integrity sha512-QgO0LSCdeH6zUMSgtqel+yDWsZWQPXiWBdFg9qzOhWfQL8vZ+ywinAzE04rm1XrWc+3SU0YAdWISlEgs/i8WWA==
@@ -19959,7 +19959,7 @@ vue-types@^1.3.4, vue-types@^1.5.0:
   dependencies:
     lodash "^4.17.10"
 
-vue@2.*, vue@^2.5.16, vue@^2.5.17, vue@^2.5.22, vue@^2.6.3, vue@^2.6.6:
+vue@2.*, vue@^2.5.16, vue@^2.5.17, vue@^2.5.22, vue@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.9.tgz#415c1cc1a5ed00c8f0acdd0a948139d12b7ea6b3"
   integrity sha512-t1+tvH8hybPM86oNne3ZozCD02zj/VoZIiojOBPJLjwBn7hxYU5e1gBObFpq8ts1NEn1VhPf/hVXBDAJ3X5ljg==

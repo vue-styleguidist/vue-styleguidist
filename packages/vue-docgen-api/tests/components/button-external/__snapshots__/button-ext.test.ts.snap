@@ -79,6 +79,10 @@ Object {
       "bindings": Object {},
       "description": "Use this slot default",
     },
+    "empty": Object {
+      "bindings": Object {},
+      "description": "Use this slot for not button",
+    },
   },
   "tags": Object {
     "author": Array [
