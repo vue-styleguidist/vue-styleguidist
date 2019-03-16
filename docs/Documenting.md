@@ -16,6 +16,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Public methods](#public-methods)
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
+- [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [Writing code examples](#writing-code-examples)
 
 <!-- tocstop -->
@@ -85,29 +86,56 @@ export default {
 </script>
 ```
 
-For events documentation
+For events documentation just add a comment right above it.
+
+If the event is explicitly specified, no need to tell styleguidist what it is.
 
 ```js
 /**
  * Success event.
  *
- * @event success
- * @type {object}
+ * @property {object}
  */
 this.$emit('success', {
   demo: 'example'
 })
 ```
 
+Constants will be recognized too
+
+```js
+/**
+ * Success event.
+ *
+ * @property {object}
+ */
+const success = 'succ'
+this.$emit(success, {
+  demo: 'example'
+})
+```
+
+If your event name comes from an object, precise the `@event` tag
+
+```js
+/**
+ * Success event.
+ *
+ * @event success
+ * @property {object}
+ */
+this.$emit(EVENTS.success, {
+  demo: 'example'
+})
+```
+
 > **Note:** You can change its behavior using [propsParser](Configuration.md#propsparser) options.
 
-> **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) library.
-
-> **Note:** The 'name' property in the component is mandatory, as it will be the component name to use in the examples. If you need to configure the component name before you document it, you can review the following [example](https://github.com/vue-styleguidist/buefy-styleguide-example/blob/master/styleguide.config.js#L43)
+> **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/) library.
 
 ## Slots documentation
 
-For default, Vue styleguidist doesn't document the slots, you need to add a comment before slot inside of the template using the @slot notation.
+Slots are automatically documented by styleguidist. To add descriptions, just add a comment just before.
 
 ```html
 <template>
@@ -130,7 +158,7 @@ For default, Vue styleguidist doesn't document the slots, you need to add a comm
 
 If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends) it will automatically be added to your main component
 
-Case Mixin:
+Include a Mixin:
 
 ```javascript
 // src/mixins/colorMixin.js
@@ -148,7 +176,7 @@ module.exports = {
 }
 ```
 
-Case Extends:
+Extends a component:
 
 ```vue
 // src/extends/Base.vue
@@ -312,7 +340,7 @@ Additional example files can be associated with components using `@example` docl
 
 The following component will also have an example loaded from the `extra.examples.md` file:
 
-```javascript
+```js
 /**
  * Component is described here.
  *
@@ -447,6 +475,74 @@ export default {
   /* ... */
 }
 </script>
+```
+
+## TypeScript, Flow and Class-style Components
+
+Vue styleguidist understands TypeScript & Flow anotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well.
+
+```ts
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component({
+  name: 'ClassButton'
+})
+export default class MyComponent extends Vue {
+  aHiddenData: string = ''
+
+  /**
+   * prop typed through the decorators arguments
+   */
+  @Prop({ type: String })
+  propNoType = ''
+
+  /**
+   * prop typed through an annotation
+   */
+  @Prop() propA: number = 0
+
+  /**
+   * prop with a default value
+   */
+  @Prop({ default: 'default value' })
+  propB: string = 'hello'
+
+  /**
+   * prop with a hybrid type
+   */
+  @Prop() propC: string | boolean = false
+
+  /**
+   * method testing
+   * @public
+   */
+  onClick(a: string) {
+    /**
+     * Success event when we click
+     */
+    this.$emit('success', a)
+  }
+}
+```
+
+Notice how `onClick` parameter `a` does not need type documentation.
+
+## JSX
+
+vue styleguidist understands JSX component templates too. In this example it will display the definition of the found slot.
+
+```jsx
+export default {
+  render() {
+    return (
+      <div>
+        {/** @slot Use this slot to have a header */}
+        <slot name="header" />
+        {this.contentText}
+      </div>
+    )
+  }
+}
 ```
 
 ## Writing code examples
