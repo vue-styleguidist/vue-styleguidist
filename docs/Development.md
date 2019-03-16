@@ -137,7 +137,7 @@ The scripts are transformed from es6 or jsx to es5 using buble. The names of the
 
 ### Render example
 
-First make sure that the mount point is ready and save it in a variable Second prepare the component by executing the funciton created above `exampleComponent()` And finally instanciate vue tomount our made up component in the mounting point
+First make sure that the mount point is ready and save it in a variable Second prepare the component by executing the funciton created above `exampleComponent()` And finally instanciate vue to mount our made up component in the mounting point
 
 ### Hot Reload
 
