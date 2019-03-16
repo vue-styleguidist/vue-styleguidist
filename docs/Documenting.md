@@ -128,16 +128,13 @@ For default, Vue styleguidist doesn't document the slots, you need to add a comm
 
 ## Include Mixins and Extends
 
-If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends), for it to be documented you need to add in the header the mixin tag **@mixin**, for example
+If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends) it will automatically be added to your main component
 
 Case Mixin:
 
 ```javascript
 // src/mixins/colorMixin.js
 
-/**
- * @mixin
- */
 module.exports = {
   props: {
     /**
@@ -163,9 +160,6 @@ Case Extends:
   </div>
 </template>
 <script>
-/**
- * @mixin
- */
 export default {
   props: {
     /**
@@ -180,34 +174,34 @@ export default {
 </script>
 ```
 
-```html
+```vue
 <template>
 <!-- -->
 </template>
 <script>
 // src/components/Button/Button.vue
 
-import colorMixin from '../../mixins/colorMixin';
-import Base from '../../extends/Base.vue';
+import colorMixin from '../../mixins/colorMixin'
+import Base from '../../extends/Base.vue'
 export default {
   name: 'Button',
   mixins: [colorMixin],
   extends: Base,
   props: {
     /**
-    * The size of the button
-    * `small, normal, large`
-    */
+     * The size of the button
+     * `small, normal, large`
+     */
     size: {
       default: 'normal'
     },
     /**
-    * Add custom click actions.
-    **/
+     * Add custom click actions.
+     **/
     onCustomClick: {
-      default: () => () => null,
-    },
-  },
+      default: () => () => null
+    }
+  }
   /* ... */
 }
 </script>
@@ -379,7 +373,7 @@ When documenting methods you can also use:
 
 Documenting events:
 
-- [@event, @type](http://usejsdoc.org/tags-event.html)
+- [@event](http://usejsdoc.org/tags-event.html)
 
 Documenting v-model:
 
