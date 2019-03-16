@@ -27,7 +27,7 @@ module.exports = {
 		docsDir: 'docs',
 		algolia: {
 			apiKey: '27d4fa7b11db706f186d098352d5ae3e',
-			indexName: 'vue-styleguidist',
+			indexName: 'vue-styleguidist'
 		},
 		sidebar: [
 			'/GettingStarted',
@@ -37,6 +37,7 @@ module.exports = {
 			'/Webpack',
 			'/Cookbook',
 			'/API',
+			['/Docgen', 'vue-docgen-api'],
 			'/Configuration',
 			'/CLI',
 			'/Development'
