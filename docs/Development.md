@@ -125,11 +125,11 @@ The function rendering examples when codemirror updates is `executeCode()`.
 
 ### Separate script from template
 
-First we extract any JavaScript from it by:
+First we extract any JavaScript from it by doing this:
 
-1.  if it contains `new Vue` return the contents as a script
-2.  if it is a singlefilecomponent extract template and script and compile the script
-3.  then look at the first line that start with a `<` then everything that is before it is js and the rest html
+- if it contains `new Vue` return the contents as a script
+- if it is a single file component extract template and script and compile the script
+- else look at the first line that start with a `<` then everything that is before it is js and the rest will be html
 
 ### Prepare code
 
