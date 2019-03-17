@@ -25,17 +25,17 @@ export default function parseTemplate(
 			tpl.attrs && tpl.attrs.lang === 'pug'
 				? pug.render(tpl.content, { filename: filePath })
 				: tpl.content
-		const ast = cacher(() => compile(template, { comments: true }).ast, template)
+		const ast = cacher(() => compile(template, { comments: true, optimize: false }).ast, template)
 		const rootLeadingCommentArray = /^<!--(.+)-->/.exec(template.trim())
 		const rootLeadingComment =
 			rootLeadingCommentArray && rootLeadingCommentArray.length > 1
 				? rootLeadingCommentArray[1].trim()
 				: ''
-
 		const functional = !!tpl.attrs.functional
 		if (functional) {
 			documentation.set('functional', functional)
 		}
+
 		if (ast) {
 			traverse(ast, documentation, handlers, {
 				functional,
@@ -51,16 +51,27 @@ export function traverse(
 	handlers: Handler[],
 	options: TemplateParserOptions
 ) {
-	if (templateAst.type === 1) {
-		handlers.forEach(handler => {
-			handler(documentation, templateAst, options)
-		})
+	const traverseAstChildren = (templateAst: ASTElement) => {
 		if (templateAst.children) {
 			for (const childNode of templateAst.children) {
 				if (isASTElement(childNode)) {
 					traverse(childNode, documentation, handlers, options)
 				}
 			}
+		}
+	}
+
+	if (templateAst.type === 1) {
+		handlers.forEach(handler => {
+			handler(documentation, templateAst, options)
+		})
+		if (templateAst.if && templateAst.ifConditions) {
+			// for if statement iterate through the branches
+			templateAst.ifConditions.forEach(({ block }) => {
+				traverseAstChildren(block)
+			})
+		} else {
+			traverseAstChildren(templateAst)
 		}
 	}
 }
