@@ -2,7 +2,7 @@
 
 > Vue Styleguidist created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/API.md -->
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Development.md -->
 
 <!-- toc -->
 
@@ -10,7 +10,7 @@
 - [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
 - [React components](#react-components)
 - [Styles](#styles)
-- [Render components vue](#render-components-vue)
+- [Render vue components](#render-vue-components)
 
 <!-- tocstop -->
 
@@ -24,18 +24,18 @@ The main thing is that we’re running two apps at the same time: user’s compo
 
 ## How it works
 
-Vue Styleguidist uses [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) to parse _source_ files (not transpiled). vue-docgen-api finds exported Vue components and generates documentation.
+Vue Styleguidist uses [vue-docgen-api](Docgen.md) to parse _source_ files (not transpiled). vue-docgen-api finds exported Vue components and generates documentation.
 
 Styleguidist uses Markdown for documentation: each JavaScript code block is rendered as an interactive playground with [CodeMirror](http://codemirror.net/). To do that we extract all these code blocks using [Remark](http://remark.js.org/).
 
-Webpack loaders (see below) generate JavaScript modules with all user components, their documentation and examples and pass that to a React app which renders a style guide.
+Webpack loaders (see below) generate JavaScript modules with all user components with their documentation and examples and pass all that to a React app which renders the style guide.
 
 ## Webpack loaders and webpack configuration
 
-We use webpack loaders to hot reload the style guide on changes in user components, styles and Markdown documentation. We have three loaders ([loaders](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/loaders) folder):
+We use webpack loaders to hot reload the style guide on changes in user components, styles and Markdown documentation. We have three loaders ([loaders](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/loaders) folder):
 
 - `styleguide-loader`: loads components and sections;
-- `vuedoc-loader`: loads props documentation using vue-docgen-api;
+- `vuedoc-loader`: loads props documentation using [vue-docgen-api](Docgen.md);
 - `examples-loader`: loads examples from Markdown files;
 
 There are two more loaders — `css-loader` and `styles-loader` but they are just one-line aliases to corresponding webpack loaders. We don’t want to rely on webpack loader resolver because its behavior can be changed by user’s webpack config (Create React App does that for example). This way we can bypass webpack resolver and use Node resolver instead. These loaders are used like this:
@@ -46,9 +46,9 @@ require('!!../../../loaders/style-loader!../../../loaders/css-loader!codemirror/
 
 `!!` prefix tells webpack not to use any other loaders that may be listed in a webpack configuration to load this module. This ensures that user’s webpack configuration won’t affect Styleguidist.
 
-Styleguidist tries to load and reuse user’s webpack config (`webpack.config.js` in project root folder). It works most of the time but has some restrictions: Styleguidist [ignores](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/scripts/utils/mergeWebpackConfig.js) some fields and plugins because they are already included (like `webpack.HotModuleReplacementPlugin`), don’t make sense for a style guide (like `output`) or may break Styleguidist (like `entry`).
+Styleguidist tries to load and reuse user’s webpack config (`webpack.config.js` in project root folder). It works most of the time but has some restrictions: Styleguidist [ignores](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/scripts/utils/mergeWebpackConfig.js) some fields and plugins because they are already included (like `webpack.HotModuleReplacementPlugin`), don’t make sense for a style guide (like `output`) or may break Styleguidist (like `entry`).
 
-We’re trying to keep Styleguidist’s own [webpack config](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/scripts/make-webpack-config.js) minimal to reduce clashes with user’s configuration.
+We’re trying to keep Styleguidist’s own [webpack config](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/scripts/make-webpack-config.js) minimal to reduce clashes with user’s configuration.
 
 ## React components
 
@@ -115,6 +115,30 @@ Check available theme variables in [src/styles/theme.js](https://github.com/styl
 
 Because of isolation and theming you need to explicitly declare `fontFamily`, `fontSize` and `color`. Add `isolate: false` to your hover styles, otherwise you’ll have to repeat base non-hover styles.
 
-## Render components vue
+## Render vue components
 
-(Documentation in progress)
+To render vue components, styleguidist uses the [Preview.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/src/rsg-components/Preview/Preview.js) React component.
+
+As soon as users open the page, Preview is mounted.
+
+The function rendering examples when codemirror updates is `executeCode()`.
+
+### Separate script from template
+
+First we extract any JavaScript from it by doing this:
+
+- if it contains `new Vue` return the contents as a script
+- if it is a single file component extract template and script and compile the script
+- else look at the first line that start with a `<` then everything that is before it is js and the rest will be html
+
+### Prepare code
+
+The scripts are transformed from es6 or jsx to es5 using buble. The names of the variables that are declared in the global scope are extracted since they cannot be used in an eval. The code is then wrapped in a `getConfig` function.
+
+### Render example
+
+First make sure that the mount point is ready and save it in a variable Second prepare the component by executing the funciton created above `exampleComponent()` And finally instanciate vue to mount our made up component in the mounting point
+
+### Hot Reload
+
+In order to enable hot reloading even when the site is compiled, we need to keep the root of the `Preview` component unchanged. We instead will play with whatever is inside this root. At unmmount, when the `Preview` component is Reloaded, we clear the vue instance to place a new one: `unmountPreview()`.
