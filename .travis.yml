@@ -29,9 +29,9 @@ script:
   - yarn test:jest --runInBand
 
 stages:
-  #- lint
-  #- test
-  #- integration
+  - lint
+  - test
+  - integration
   - name: release
     if: type != pull_request AND branch = master
   - name: documentation
@@ -88,7 +88,7 @@ jobs:
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - yarn lerna version --yes --no-changelog
-        #- yarn lerna publish from-git --yes
+        - yarn lerna publish from-git --yes
 
       # Build & Deploy the documentation website
     - stage: documentation
