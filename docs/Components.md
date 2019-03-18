@@ -5,8 +5,8 @@
 <!-- toc -->
 
 - [Finding components](#finding-components)
+- [Loading and exposing components](#loading-and-exposing-components)
 - [Sections](#sections)
-- [Limitations](#limitations)
 
 <!-- tocstop -->
 

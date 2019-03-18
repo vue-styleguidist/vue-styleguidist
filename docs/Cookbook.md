@@ -18,6 +18,7 @@
 - [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
 - [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
 - [How to document styled components?](#how-to-document-styled-components)
+- [Use vue-styleguideist with components that contain routing](#use-vue-styleguideist-with-components-that-contain-routing)
 
 <!-- tocstop -->
 
