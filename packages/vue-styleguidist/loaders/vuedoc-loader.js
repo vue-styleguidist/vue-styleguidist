@@ -39,7 +39,15 @@ module.exports = function(source) {
 		} else if (docs.tags) {
 			const examples = docs.tags.examples
 			if (examples) {
-				const examplePath = examples[examples.length - 1].description
+				const examplePath = examples[examples.length - 1].content
+				if (examples.length > 1) {
+					logger.warn(
+						`More than one @example tags specified in component ${path.relative(
+							process.cwd(),
+							file
+						)}\nUsing the last tag to build examples: '${examplePath}'`
+					)
+				}
 				docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
 			}
 		}

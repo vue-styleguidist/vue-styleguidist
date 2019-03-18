@@ -41,5 +41,18 @@ export default function propHandler(documentation: Documentation, path: NodePath
 
 	documentation.set('description', jsDoc.description)
 
-	documentation.set('tags', transformTagsIntoObject(jsDoc.tags || []))
+	if (jsDoc.tags) {
+		const tagsAsObject = transformTagsIntoObject(
+			jsDoc.tags.filter(t => t.title !== 'example') || []
+		)
+
+		const examples = jsDoc.tags.filter(t => t.title === 'example')
+		if (examples.length) {
+			tagsAsObject.examples = examples
+		}
+
+		documentation.set('tags', tagsAsObject)
+	} else {
+		documentation.set('tags', {})
+	}
 }
