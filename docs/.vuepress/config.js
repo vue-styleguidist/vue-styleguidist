@@ -17,7 +17,7 @@ module.exports = {
 				prefix: ogprefix,
 				property: 'og:image',
 				content:
-					'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/packages/vue-styleguidist/assets/logo.png'
+					'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png'
 			}
 		]
 	],
@@ -27,7 +27,7 @@ module.exports = {
 		docsDir: 'docs',
 		algolia: {
 			apiKey: '27d4fa7b11db706f186d098352d5ae3e',
-			indexName: 'vue-styleguidist',
+			indexName: 'vue-styleguidist'
 		},
 		sidebar: [
 			'/GettingStarted',
@@ -37,6 +37,7 @@ module.exports = {
 			'/Webpack',
 			'/Cookbook',
 			'/API',
+			['/Docgen', 'vue-docgen-api'],
 			'/Configuration',
 			'/CLI',
 			'/Development'

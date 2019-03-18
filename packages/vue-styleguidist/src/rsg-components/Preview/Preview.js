@@ -177,11 +177,9 @@ export default class Preview extends Component {
 			if (configComponent) {
 				previewComponent = exampleComponent()
 
-				Object.keys(previewComponent).forEach(key => {
-					if (key === 'el') {
-						delete previewComponent.el
-					}
-				})
+				if (previewComponent.el) {
+					delete previewComponent.el
+				}
 			} else {
 				const data = exampleComponent()
 				const template = `<div>${compuse.html}</div>`

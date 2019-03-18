@@ -362,34 +362,50 @@ See in [configuring webpack](Webpack.md#reusing-your-projects-webpack-config).
 
 ## How to document styled components?
 
-In order to document styled components you need to get them recognized by vue-docgen-api.
-Simplest way is to use extends:
+In order to document styled components you need to get them recognized by vue-docgen-api. Simplest way is to use extends:
 
 ```js
-import styled from 'vue-styled-components';
+import styled from 'vue-styled-components'
 
 const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-`;
+`
 
 export default {
   extends: _StyledTitle
-};
+}
 ```
 
 or if you are using with the class component syntax
 
 ```js
-import styled from 'vue-styled-components';
+import styled from 'vue-styled-components'
 
 const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-`;
+`
 
-@Components({extends: _StyledTitle})
-export default class StyledTitle extends Vue {};
+@Components({ extends: _StyledTitle })
+export default class StyledTitle extends Vue {}
+```
+
+## Use vue-styleguideist with components that contain routing
+
+If your components contain `<router-link>` the best way is, in your styleguide to mock it. In the `styelguide.config,js` file add `styleguide.global.required.js` (see below) to the [require](Configuration.md#require) parameter. Styleguidist will render `router-link` as an anchor or tag of your choosing. Don't use `vue-router` inside vue-styleguidist. It will conflict with its internal router.
+
+```js
+// styleguide.global.requires.js
+import Vue from 'vue'
+Vue.component('RouterLink', {
+  props: {
+    tag: { type: String, default: 'a' }
+  },
+  render(createElement) {
+    return createElement(this.tag, {}, this.$slots.default)
+  }
+})
 ```
