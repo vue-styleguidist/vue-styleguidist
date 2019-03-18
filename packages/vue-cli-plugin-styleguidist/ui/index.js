@@ -1,17 +1,8 @@
-const config = require('./configDescription').config
+import describeTasks from './tasks'
+import { config } from './config'
 
 module.exports = api => {
-	api.describeTask({
-		match: /vue-cli-service styleguidist$/,
-		description: 'Compiles and hot-reloads styleguide for development',
-		link: 'https://vue-styleguidist.github.io/CLI.html#cli-commands-and-options'
-	})
-
-	api.describeTask({
-		match: /vue-cli-service styleguidist:build$/,
-		description: 'Compiles styleguide assets for production',
-		link: 'https://vue-styleguidist.github.io/CLI.html#cli-commands-and-options'
-	})
+	describeTasks(api)
 
 	api.describeConfig(config)
 }
