@@ -1,6 +1,6 @@
 {
   "name": "vuecli3-noplugin",
-  "version": "3.9.5",
+  "version": "3.10.0",
   "private": true,
   "scripts": {
     "styleguide": "styleguidist serve",
@@ -11,6 +11,6 @@
   },
   "devDependencies": {
     "@vue/cli-service": "^3.3.1",
-    "vue-styleguidist": "^3.9.5"
+    "vue-styleguidist": "^3.10.0"
   }
 }
