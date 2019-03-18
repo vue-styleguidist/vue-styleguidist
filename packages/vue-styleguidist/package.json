@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "3.9.5",
+	"version": "3.10.0",
 	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
 	"scripts": {
 		"precompile": "rimraf lib/",
@@ -84,7 +84,7 @@
 		"style-loader": "^0.21.0",
 		"to-ast": "^1.0.0",
 		"uglifyjs-webpack-plugin": "1.2.7",
-		"vue-docgen-api": "^3.9.5",
+		"vue-docgen-api": "^3.10.0",
 		"webpack": "^4.28.4",
 		"webpack-dev-server": "^3.1.14",
 		"webpack-merge": "^4.0.0"
