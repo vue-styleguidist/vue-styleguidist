@@ -6,7 +6,7 @@ const path = require('path')
 const cwd = path.resolve(__dirname, '../../../test/cli-packages')
 
 async function createAndInstall(name) {
-	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd)
+	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd, false)
 	// mock install
 	const pkg = JSON.parse(await project.read('package.json'))
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*'

@@ -6,7 +6,7 @@ const path = require('path')
 const cwd = path.resolve(__dirname, '../../../test/cli-packages')
 
 async function createAndInstall(name, options) {
-	const project = await create(name, options, cwd)
+	const project = await create(name, options, cwd, false)
 	const pkg = JSON.parse(await project.read('package.json'))
 	const updatedPkges = {
 		...pkg,

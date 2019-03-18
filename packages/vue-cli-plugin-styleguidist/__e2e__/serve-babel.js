@@ -1,4 +1,4 @@
-jest.setTimeout(40000)
+jest.setTimeout(30000)
 
 const create = require('@vue/cli-test-utils/createTestProject')
 const path = require('path')
@@ -7,12 +7,13 @@ const cwd = path.resolve(__dirname, '../../../test/cli-packages')
 const serve = require('@vue/cli-test-utils/serveWithPuppeteer')
 
 async function createAndInstall(name) {
-	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd)
+	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd, false)
 	// mock install
 	const pkg = JSON.parse(await project.read('package.json'))
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*'
 	pkg.devDependencies['@vue/cli-plugin-babel'] = '*'
-	pkg.devDependencies['@vue/cli-plugin-eslint'] = '*'
+	// TODO: re enable eslint while ignoring the node_modules folder
+	// pkg.devDependencies['@vue/cli-plugin-eslint'] = '*'
 	pkg.devDependencies['babel-eslint'] = '*'
 	pkg.devDependencies['eslint'] = '*'
 	pkg.devDependencies['eslint-plugin-vue'] = '*'

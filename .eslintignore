@@ -1,7 +1,6 @@
 node_modules
 examples/*/styleguide/*
-packages/*/lib/
-packages/*/dist/
+packages/*/lib/**/*
+packages/*/dist/**/*
 coverage/*
-travis_phantomjs/*
 docs/dist/**/*
