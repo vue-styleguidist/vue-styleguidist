@@ -17,7 +17,7 @@ module.exports = {
 				prefix: ogprefix,
 				property: 'og:image',
 				content:
-					'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/packages/vue-styleguidist/assets/logo.png'
+					'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png'
 			}
 		]
 	],

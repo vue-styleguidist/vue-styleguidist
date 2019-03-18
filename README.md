@@ -1,5 +1,5 @@
 <div align="center" markdown="1" style="text-align:center">
-    <img src="packages/vue-styleguidist/assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
+    <img src="assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
 
 **Isolated Vue component development environment with a living style guide**
 
