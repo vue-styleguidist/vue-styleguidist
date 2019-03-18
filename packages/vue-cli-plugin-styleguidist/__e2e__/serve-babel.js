@@ -12,8 +12,7 @@ async function createAndInstall(name) {
 	const pkg = JSON.parse(await project.read('package.json'))
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*'
 	pkg.devDependencies['@vue/cli-plugin-babel'] = '*'
-	// TODO: re enable eslint while ignoring the node_modules folder
-	// pkg.devDependencies['@vue/cli-plugin-eslint'] = '*'
+	pkg.devDependencies['@vue/cli-plugin-eslint'] = '*'
 	pkg.devDependencies['babel-eslint'] = '*'
 	pkg.devDependencies['eslint'] = '*'
 	pkg.devDependencies['eslint-plugin-vue'] = '*'
