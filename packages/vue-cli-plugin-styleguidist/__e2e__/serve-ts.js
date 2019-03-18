@@ -8,7 +8,7 @@ const cwd = path.resolve(__dirname, '../../../test/cli-packages')
 const serve = require('@vue/cli-test-utils/serveWithPuppeteer')
 
 async function createAndInstall(name, isClass) {
-	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd)
+	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd, false)
 	// mock install
 	const pkg = JSON.parse(await project.read('package.json'))
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*'
