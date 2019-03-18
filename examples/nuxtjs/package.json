@@ -1,6 +1,6 @@
 {
   "name": "nuxt-styleguide",
-  "version": "3.9.4",
+  "version": "3.9.5",
   "description": "Nuxt.js project",
   "author": "Knovour <knovour@gmail.com>",
   "private": true,
@@ -27,7 +27,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^3.9.4",
+    "vue-styleguidist": "^3.9.5",
     "webpack": "^4.10.0"
   }
 }
