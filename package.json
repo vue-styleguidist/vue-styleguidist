@@ -29,12 +29,13 @@
     "build:vuecli3": "vue-cli-service styleguidist:build --config examples/vuecli3/styleguide.config.js",
     "test:browser": "node test/browser.js",
     "precommit": "lint-staged",
-    "format": "prettier --write '**/*.{js,md,vue,ts}'",
+    "format": "prettier --write **/*.{js,md,vue,ts}",
     "test:cypress:pre": "yarn add -D -W cypress@3.1.4 wait-on",
     "test:cypress:open": "cypress open",
     "test:cypress": "node test/run.server.js",
     "docs": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "postinstall": "cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",
   "engines": {
@@ -109,7 +110,7 @@
     "typescript": "^3.3.3333",
     "url-loader": "^1.0.1",
     "vue": "^2.6.9",
-    "vue-cli-plugin-styleguidist": "^1.0.3",
+    "vue-cli-plugin-styleguidist": "*",
     "vue-i18n": "^8.7.0",
     "vue-loader": "^15.7.0",
     "vue-property-decorator": "^7.3.0",

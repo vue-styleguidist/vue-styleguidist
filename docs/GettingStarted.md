@@ -16,7 +16,7 @@ npm install --save-dev vue-styleguidist
 
 unless youa re using vue cli 3 (@vue/cli) then you should use
 
-``` sh
+```sh
 vue add styleguidist
 ```
 

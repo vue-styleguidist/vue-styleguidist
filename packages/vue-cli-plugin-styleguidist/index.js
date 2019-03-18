@@ -82,6 +82,11 @@ function getConfig(api) {
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
 
+	const eslintRule = conf.module.rule('eslint')
+	if (eslintRule) {
+		eslintRule.exclude.add(require('path').dirname(require.resolve('vue-styleguidist')))
+	}
+
 	// remove the double compiled successfully message
 	conf.plugins.delete('friendly-errors')
 	return api.resolveWebpackConfig(conf)
