@@ -13,10 +13,10 @@
     "vue": "^2.5.16"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-rc.5",
-    "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
-    "@vue/cli-service": "^3.0.0-rc.5",
-    "vue-cli-plugin-styleguidist": "^1.0.4",
+    "@vue/cli-plugin-babel": "^3.5.1",
+    "@vue/cli-plugin-eslint": "^3.5.1",
+    "@vue/cli-service": "^3.5.1",
+    "vue-cli-plugin-styleguidist": "^3.9.5",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

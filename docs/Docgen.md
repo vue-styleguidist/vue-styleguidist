@@ -2,7 +2,7 @@
 
 The engine behind it all
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Documenting.md -->
+<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Docgen.md -->
 
 <!-- toc -->
 
