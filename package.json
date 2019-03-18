@@ -17,7 +17,7 @@
     "pretest": "yarn lint",
     "test": "yarn test:jest && yarn test:plugin",
     "test:jest": "jest",
-    "test:plugin": "jest --config=./jest.config.plugin.js --runInBand",
+    "test:plugin": "rimraf ./test/cli-packages/* && jest --config=./jest.config.plugin.js --runInBand",
     "posttest": "yarn format",
     "test:coverage": "jest --coverage",
     "start": "node test/styleguidist.js server",
