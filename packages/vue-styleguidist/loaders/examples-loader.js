@@ -1,4 +1,4 @@
-const examplesLoaderRsg = require('react-styleguidist/loaders/examples-loader')
+const examplesLoaderRsg = require('react-styleguidist/lib/loaders/examples-loader').default
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
 
 function isVueFile(filepath) {

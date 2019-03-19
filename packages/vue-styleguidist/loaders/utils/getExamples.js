@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const requireIt = require('react-styleguidist/loaders/utils/requireIt')
+const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
 

@@ -8,9 +8,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const merge = require('webpack-merge')
 const forEach = require('lodash/forEach')
 const isFunction = require('lodash/isFunction')
-const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin')
+const StyleguidistOptionsPlugin = require('react-styleguidist/lib/scripts/utils/StyleguidistOptionsPlugin')
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig')
-const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config')
+const makeWebpackConfig = require('react-styleguidist/lib/scripts/make-webpack-config')
 
 const RENDERER_REGEXP = /Renderer$/
 

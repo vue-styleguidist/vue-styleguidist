@@ -59,10 +59,13 @@ module.exports = {
 				},
 				{
 					test: /\.js?$/,
-					loader: 'babel-loader',
 					exclude: /node_modules/,
-					query: {
-						cacheDirectory: true
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env'],
+							plugins: ['transform-vue-jsx']
+						}
 					}
 				},
 				{

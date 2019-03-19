@@ -18,7 +18,24 @@ module.exports = {
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader'
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: [
+								[
+									'@babel/preset-env',
+									{
+										useBuiltIns: 'usage',
+										targets: {
+											chrome: '58',
+											ie: '11'
+										}
+									}
+								]
+							],
+							comments: false
+						}
+					}
 				},
 				{
 					test: /\.css$/,

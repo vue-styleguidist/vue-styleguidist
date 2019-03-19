@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
-import 'react-styleguidist/lib/polyfills'
-import 'react-styleguidist/lib/styles'
+import 'react-styleguidist/lib/client/polyfills'
+import 'react-styleguidist/lib/client/styles'
 import ReactDOM from 'react-dom'
-import { getParameterByName, hasInHash } from 'react-styleguidist/lib/utils/handleHash'
+import { getParameterByName, hasInHash } from 'react-styleguidist/lib/client/utils/handleHash'
 import renderStyleguide from './utils/renderStyleguide'
 
 // Examples code revision to rerender only code examples (not the whole page) when code changes
