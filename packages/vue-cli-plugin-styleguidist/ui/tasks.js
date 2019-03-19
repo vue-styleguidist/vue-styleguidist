@@ -1,4 +1,4 @@
-export default function describeTasks(api) {
+module.exports = function describeTasks(api) {
 	api.describeTask({
 		match: /vue-cli-service styleguidist$/,
 		description: 'Compiles and hot-reloads styleguide for development',
