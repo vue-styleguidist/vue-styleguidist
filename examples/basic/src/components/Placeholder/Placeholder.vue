@@ -1,7 +1,8 @@
 <template>
-<div class="Placeholder">
-	<img class="placeholder" :src="getImageUrl()" :width="width" :height="height" />
-</div>
+  <div class="Placeholder">
+    <img class="placeholder" :src="getImageUrl()" :width="width" :height="height">
+    <b class="showbefore"></b>
+  </div>
 </template>
 
 <script>
@@ -51,9 +52,15 @@ export default {
 	}
 }
 </script>
-<style scope>
+<style scoped>
 .placeholder {
 	background: #ccc;
+}
+
+.showbefore:before {
+	background: #aa0;
+	display: block;
+	content: '-';
 }
 </style>
 <docs>
