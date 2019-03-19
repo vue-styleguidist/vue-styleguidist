@@ -87,7 +87,7 @@ jobs:
         - git checkout master
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - yarn lerna version --yes --no-changelog
+        - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
 
       # Build & Deploy the documentation website
