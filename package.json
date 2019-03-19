@@ -58,6 +58,8 @@
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "@vue/cli": "^3.5.1",
+    "@vue/cli-plugin-babel": "^3.5.1",
+    "@vue/cli-plugin-eslint": "^3.5.1",
     "@vue/cli-plugin-typescript": "^3.5.1",
     "@vue/cli-service": "^3.5.1",
     "@znck/prop-types": "^0.5.1",
