@@ -8,8 +8,8 @@ const generate = require('escodegen').generate
 const toAst = require('to-ast')
 const b = require('ast-types').builders
 const chunkify = require('react-styleguidist/lib/loaders/utils/chunkify').default
+const { parseComponent } = require('vue-template-compiler')
 const expandDefaultComponent = require('react-styleguidist/lib/loaders/utils/expandDefaultComponent')
-	.default
 const getImports = require('react-styleguidist/lib/loaders/utils/getImports').default
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
@@ -51,13 +51,20 @@ module.exports = function examplesLoader(source) {
 	// Load examples
 	const examples = chunkify(source, updateExample, customLangs)
 
+	// In case we are loading a vue component as an example, extract script tag
+	const getVueImports = source => {
+		// script is at the beginning of a line after a return
+		const parts = /\n\W*<script/i.test(source) ? parseComponent(source) : null
+		return getImports(parts && parts.script ? parts.script.content : source)
+	}
+
 	// Find all import statements and require() calls in examples to make them
 	// available in webpack context at runtime.
 	// Note that we can't just use require() directly at runtime,
 	// because webpack changes its name to something like __webpack__require__().
 	const allCodeExamples = filter(examples, { type: 'code' })
 	const requiresFromExamples = allCodeExamples.reduce((requires, example) => {
-		return requires.concat(getImports(example.content))
+		return requires.concat(getVueImports(example.content))
 	}, [])
 
 	// Auto imported modules.

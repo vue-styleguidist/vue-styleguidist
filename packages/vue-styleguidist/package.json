@@ -95,6 +95,7 @@
 		"vue-template-compiler": ">=2.0.0"
 	},
 	"devDependencies": {
-		"strip-shebang": "^1.0.2"
+		"strip-shebang": "^1.0.2",
+		"qss": "^2.0.3"
 	}
 }
