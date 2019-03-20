@@ -1,6 +1,6 @@
 import examplesLoader from '../examples-loader'
 
-xdescribe('examples-loader', () => {
+describe('examples-loader', () => {
 	it('should return valid, parsable JS', () => {
 		const exampleMarkdown = `
 # header
@@ -16,6 +16,7 @@ text
 `
 		const result = examplesLoader.call(
 			{
+				request: 'Readme.md',
 				_styleguidist: {
 					context: {
 						_: 'lodash'
@@ -44,6 +45,7 @@ text
 
 		const result = examplesLoader.call(
 			{
+				request: 'Readme.md',
 				query: '?componentName=FooComponent',
 				_styleguidist: {}
 			},
@@ -63,6 +65,7 @@ text
 		const updateExample = jest.fn(props => props)
 		examplesLoader.call(
 			{
+				request: 'Readme.md',
 				query: '?componentName=FooComponent',
 				resourcePath: '/path/to/foo/examples/file',
 				_styleguidist: {

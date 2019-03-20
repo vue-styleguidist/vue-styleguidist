@@ -16,6 +16,8 @@ export default [
 	// have to be second as they can be overridden too
 	mixinsHandler,
 	displayNameHandler,
+	// the displayname handler has to be before the component handler
+	// for @displayName tag to work
 	componentHandler,
 	methodHandler,
 	propHandler,

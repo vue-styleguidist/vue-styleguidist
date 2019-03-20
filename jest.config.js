@@ -15,5 +15,6 @@ module.exports = {
 		'^.+\\.css$': '<rootDir>/test/empty.js'
 	},
 	testPathIgnorePatterns: ['<rootDir>/packages/*/lib/'],
+	collectCoverage: true,
 	snapshotSerializers: ['deabsdeep/serializer', 'enzyme-to-json/serializer', 'jest-serializer-html']
 }
