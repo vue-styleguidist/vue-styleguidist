@@ -1,5 +1,6 @@
 node_modules/
 /examples/**/styleguide/build
+/examples/**/styleguide/css/*.css
 /examples/**/CHANGELOG.md
 /examples/**/styleguide/index.html
 /.publish/
