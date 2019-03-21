@@ -3,6 +3,7 @@ const vueLoader = require('vue-loader')
 
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
+	simpleEditor: true,
 	webpackConfig: {
 		module: {
 			rules: [

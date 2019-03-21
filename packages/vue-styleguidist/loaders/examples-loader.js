@@ -13,6 +13,7 @@ const expandDefaultComponent = require('react-styleguidist/lib/loaders/utils/exp
 const getImports = require('react-styleguidist/lib/loaders/utils/getImports').default
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
+const isCodeVueSfc = require('./utils/isCodeVueSfc')
 
 // Hack the react scaffolding to be able to load client
 const absolutize = filepath =>
@@ -54,7 +55,7 @@ module.exports = function examplesLoader(source) {
 	// In case we are loading a vue component as an example, extract script tag
 	const getVueImports = source => {
 		// script is at the beginning of a line after a return
-		const parts = /\n\W*<script/i.test(source) ? parseComponent(source) : null
+		const parts = isCodeVueSfc(source) ? parseComponent(source) : null
 		return getImports(parts && parts.script ? parts.script.content : source)
 	}
 

@@ -164,6 +164,13 @@ module.exports = function(config, env) {
 		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component)
 	})
 
+	if (config.simpleEditor) {
+		webpackConfig.resolve.alias['rsg-components/Editor'] = path.resolve(
+			sourceSrc,
+			'Editor/EditorPrism'
+		)
+	}
+
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	webpackConfig.resolve.alias['rsg-components'] = makeWebpackConfig(config, env).resolve.alias[
