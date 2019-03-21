@@ -371,5 +371,9 @@ module.exports = {
 				]
 			}
 		}
+	},
+	simpleEditor: {
+		type: 'boolean',
+		default: false
 	}
 }

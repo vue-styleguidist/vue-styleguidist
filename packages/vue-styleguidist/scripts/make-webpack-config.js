@@ -150,8 +150,8 @@ module.exports = function(config, env) {
 
 	const sourceSrc = path.resolve(sourceDir, 'rsg-components')
 	;[
+		...(config.simpleEditor ? [] : ['Editor']),
 		'Preview',
-		'Editor',
 		'Usage',
 		'Events',
 		'Props',
