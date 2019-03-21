@@ -69,11 +69,27 @@ module.exports = {
 				},
 				{
 					test: /\.js?$/,
-					exclude: /node_modules/,
+					exclude: modulePath =>
+						/node_modules/.test(modulePath) &&
+						!/regexpu-core/.test(modulePath) &&
+						!/unicode-match-property-ecmascript/.test(modulePath) &&
+						!/unicode-match-property-value-ecmascript/.test(modulePath) &&
+						!/acorn-jsx/.test(modulePath) &&
+						!/@znck[\\/]prop-types/.test(modulePath),
 					use: {
 						loader: 'babel-loader',
 						options: {
-							presets: ['@babel/preset-env'],
+							sourceType: 'unambiguous',
+							presets: [
+								[
+									'@babel/preset-env',
+									{
+										targets: {
+											ie: '11'
+										}
+									}
+								]
+							],
 							plugins: ['@babel/plugin-transform-runtime'],
 							comments: false
 						}
