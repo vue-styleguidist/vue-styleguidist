@@ -1,7 +1,6 @@
 import { replaceAll } from './utils'
 
 const compiler = require('vue-template-compiler')
-const stripComments = require('strip-comments')
 
 const startsWith = function(str, searchString) {
 	return str.indexOf(searchString, 0) === 0
@@ -23,10 +22,7 @@ const buildStyles = function(styles) {
 }
 
 const getSingleFileComponentParts = function(code) {
-	const parts = compiler.parseComponent(code, { pad: 'line' })
-	if (parts.script)
-		parts.script.content = stripComments(parts.script.content, { preserveNewLines: true })
-	return parts
+	return compiler.parseComponent(code, { pad: 'line' })
 }
 
 const injectTemplateAndParseExport = function(parts) {
@@ -34,7 +30,7 @@ const injectTemplateAndParseExport = function(parts) {
 
 	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
 
-	const code = parts.script.content
+	const code = parts.script.content.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
 	let index = -1
 	if (code.indexOf('module.exports') !== -1) {
 		const startIndex = code.indexOf('module.exports')
