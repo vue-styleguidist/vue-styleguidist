@@ -57,22 +57,22 @@ describe('Single component', () => {
 
 		it('does not show code initially', () => {
 			cy.get('@container')
-				.find('.npm__react-simple-code-editor__textarea')
+				.find('.CodeMirror')
 				.should('not.exist')
 		})
 
 		it('shows code on click', () => {
 			cy.get('@viewCodeBtn').click()
 			cy.get('@container')
-				.find('.npm__react-simple-code-editor__textarea')
+				.find('.CodeMirror')
 				.should('exist')
 		})
 
 		it('changes the render after code change', () => {
 			const codeToDelete = '</Button>'
 			cy.get('@container')
-				.find('.npm__react-simple-code-editor__textarea')
-				// Editor actually listens to keystrokes on an empty textarea
+				.find('.CodeMirror textarea')
+				// CodeMirror actually listens to keystrokes on an empty textarea
 				// to update the div with the code, so we have to hack our way
 				// around it with a bunch of backspacing, since there's no way
 				// to place the cursor
@@ -80,7 +80,7 @@ describe('Single component', () => {
 					force: true
 				})
 
-			// Wait for Editor to update
+			// Wait for CodeMirror to update
 			cy.wait(500)
 
 			cy.get('@preview')
