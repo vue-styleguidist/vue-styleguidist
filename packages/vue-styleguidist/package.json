@@ -75,6 +75,7 @@
 		"prismjs": "^1.15.0",
 		"prop-types": "^15.6.2",
 		"q-i": "^2.0.1",
+		"qss": "^2.0.3",
 		"react": "^16.4.1",
 		"react-codemirror2": "^5.1.0",
 		"react-dev-utils": "^7.0.3",

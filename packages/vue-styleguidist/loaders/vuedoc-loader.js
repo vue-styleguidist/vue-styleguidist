@@ -99,7 +99,7 @@ module.exports = function(source) {
 	}
 
 	const examplesFile = config.getExampleFilename(file)
-	docs.examples = getExamples(examplesFile, docs.displayName, config.defaultExample)
+	docs.examples = getExamples(file, examplesFile, docs.displayName, config.defaultExample)
 
 	if (config.updateDocs) {
 		docs = config.updateDocs(docs, file)
