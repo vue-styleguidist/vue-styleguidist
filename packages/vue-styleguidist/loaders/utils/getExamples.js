@@ -16,6 +16,10 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
  */
 module.exports = function getExamples(file, examplesFile, displayName, defaultExample) {
 	const examplesFileToLoad = examplesFile || defaultExample
+	if (!examplesFileToLoad) {
+		return null
+	}
+
 	const relativePath = `./${path.relative(path.dirname(examplesFileToLoad), file)}`
 
 	const query = {
