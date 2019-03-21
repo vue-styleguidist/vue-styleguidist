@@ -41,14 +41,13 @@ module.exports = {
 	// serverHost: 'your-domain',
 	printServerInstructions(config) {
 		// eslint-disable-next-line no-console
-		console.log(`View your styleguide at: http://${config.serverHost}:${config.serverPort}`)
+		console.log(`View your styleguide at: http://localhost:${config.serverPort}`)
 	},
 
 	// Override Styleguidist components
 	styleguideComponents: {
 		LogoRenderer: path.join(__dirname, 'styleguide/components/Logo'),
-		StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuide'),
-		SectionsRenderer: path.join(__dirname, 'styleguide/components/SectionsRenderer')
+		StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuide')
 	},
 	webpackConfig: {
 		module: {
@@ -64,7 +63,12 @@ module.exports = {
 						loader: 'babel-loader',
 						options: {
 							presets: ['@babel/preset-env'],
-							plugins: ['transform-vue-jsx']
+							plugins: [
+								'@babel/plugin-transform-runtime',
+								'@babel/plugin-transform-react-jsx',
+								'transform-vue-jsx'
+							],
+							comments: false
 						}
 					}
 				},
@@ -85,12 +89,12 @@ module.exports = {
 		plugins: [new vueLoader.VueLoaderPlugin()],
 		resolve: {
 			alias: {
-				'@mixins': path.resolve(__dirname, './src/mixins'),
-				// Make sure the example uses the local version of react-styleguidist
-				// This is only for the examples in this repo, you won't need it for your own project
-				'vue-styleguidist': path.join(__dirname, '../../')
+				'@mixins': path.resolve(__dirname, './src/mixins')
 			}
 		}
+	},
+	editorConfig: {
+		keyMap: 'sublime'
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand'

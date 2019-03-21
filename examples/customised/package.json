@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.3.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
+    "codemirror": "^5.45.0",
     "css-loader": "^0.28.7",
     "node-sass": "^4.11.0",
     "sass-loader": "^6.0.6",
