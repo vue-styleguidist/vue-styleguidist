@@ -70,7 +70,14 @@ module.exports = {
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,
-					loader: 'babel-loader'
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env'],
+							plugins: ['@babel/plugin-transform-runtime'],
+							comments: false
+						}
+					}
 				},
 				{
 					test: /\.css$/,
@@ -78,15 +85,6 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
-
-		performance:
-			env === 'development'
-				? false
-				: {
-						maxAssetSize: 1685000, // bytes
-						maxEntrypointSize: 1685000, // bytes
-						hints: 'error'
-				  }
+		plugins: [new vueLoader.VueLoaderPlugin()]
 	})
 }
