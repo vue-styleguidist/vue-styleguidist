@@ -178,6 +178,13 @@ module.exports = function(config, env) {
 		'rsg-components'
 	]
 
+	// To avoid circular rendering when overriding existing components,
+	// Create another alias, not overriden by users
+	if (config.styleguideComponents) {
+		webpackConfig.resolve.alias['rsg-components-default'] =
+			webpackConfig.resolve.alias['rsg-components']
+	}
+
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env)
 	}
