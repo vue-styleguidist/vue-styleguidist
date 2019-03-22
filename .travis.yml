@@ -100,7 +100,6 @@ jobs:
         - git config --global user.email "cluedude@hotmail.com"
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git fetch origin dev
-        - git checkout origin/dev
         - git checkout --track origin/dev
         - git status -v
         - git merge master -m "chore:\ master"
