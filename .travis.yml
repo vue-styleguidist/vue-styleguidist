@@ -98,13 +98,10 @@ jobs:
       script:
         - git config --global user.name "Vue Styleguidist Bot"
         - git config --global user.email "cluedude@hotmail.com"
-        - git remote add origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
-        - git checkout master
-        - git fetch origin/dev
-        - git branch
-        - git checkout origin/dev
-        - git status
-        - git merge master -m "chore:\ master"
+        - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        - git checkout dev
+        - git status -v
+        - git merge origin/master -m "chore:\ master"
         - git push
 
     # Build & Deploy the documentation website
