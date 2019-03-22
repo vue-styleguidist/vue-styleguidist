@@ -17,8 +17,31 @@ module.exports = {
 				},
 				{
 					test: /\.js?$/,
-					exclude: /node_modules/,
-					loader: 'babel-loader'
+					exclude: modulePath =>
+						/node_modules/.test(modulePath) &&
+						!/node_modules[\\/]regexpu-core/.test(modulePath) &&
+						!/node_modules[\\/]unicode-match-property-ecmascript/.test(modulePath) &&
+						!/node_modules[\\/]unicode-match-property-value-ecmascript/.test(modulePath) &&
+						!/node_modules[\\/]acorn-jsx/.test(modulePath) &&
+						!/node_modules[\\/]@znck[\\/]prop-types/.test(modulePath),
+					use: {
+						loader: 'babel-loader',
+						options: {
+							sourceType: 'unambiguous',
+							presets: [
+								[
+									'@babel/preset-env',
+									{
+										useBuiltIns: 'usage',
+										targets: {
+											ie: '11'
+										}
+									}
+								]
+							],
+							comments: false
+						}
+					}
 				},
 				{
 					test: /\.css$/,
@@ -30,5 +53,8 @@ module.exports = {
 		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand'
+	exampleMode: 'expand',
+	compilerConfig: {
+		target: { ie: 11 }
+	}
 }
