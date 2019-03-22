@@ -91,7 +91,9 @@ jobs:
         - yarn lerna publish from-git --yes
         # then merge the whole thing back to dev
         - git fetch origin/dev
+        - git branch
         - git checkout origin/dev
+        - git status
         - git merge master -m "chore:\ master"
         - git push
 
