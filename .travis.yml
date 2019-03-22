@@ -103,7 +103,8 @@ jobs:
         - git checkout github/dev
         - git status -v
         - git merge master -m "chore:\ master"
-        - git push --set-upstream dev github/dev
+        - git branch --set-upstream-to github/dev
+        - git push
 
     # Build & Deploy the documentation website
     - stage: documentation
