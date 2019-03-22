@@ -101,7 +101,7 @@ jobs:
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git fetch origin
         - git branch -v -a
-        - git checkout -t origin/dev
+        - git branch dev origin/dev
         - git status -v
         - git merge origin/master -m "chore:\ master"
         - git push
