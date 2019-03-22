@@ -101,6 +101,7 @@ jobs:
         - git remote add github "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git fetch github dev
         - git checkout github/dev
+        - git checkout -b dev
         - git status -v
         - git merge master -m "chore:\ master"
         - git branch --set-upstream-to github/dev
