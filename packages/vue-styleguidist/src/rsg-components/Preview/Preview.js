@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
-import { parse } from 'esprima'
+import { parse } from 'acorn'
 import Vue from 'vue'
 import {
 	isSingleFileComponent,
