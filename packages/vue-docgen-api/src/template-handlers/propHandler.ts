@@ -60,8 +60,8 @@ function getPropsFromExpression(
 	const propsFound: string[] = []
 	recast.visit(ast.program, {
 		visitMemberExpression(path) {
-			const obj = path.node ? path.node.object : null
-			const propName = path.node ? path.node.property : null
+			const obj = path.node ? path.node.object : undefined
+			const propName = path.node ? path.node.property : undefined
 			if (
 				obj &&
 				propName &&
