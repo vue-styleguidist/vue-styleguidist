@@ -164,6 +164,7 @@ module.exports = function(config, env) {
 		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component)
 	})
 
+	// if the user chose prism, load the prism editor instead of codemirror
 	if (config.simpleEditor) {
 		webpackConfig.resolve.alias['rsg-components/Editor'] = path.resolve(
 			sourceSrc,
