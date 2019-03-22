@@ -89,6 +89,10 @@ jobs:
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
+        # then merge the whole thing back to dev
+        - git checkout dev
+        - git merge master -m "chore: master"
+        - git push
 
       # Build & Deploy the documentation website
     - stage: documentation
