@@ -90,7 +90,7 @@ jobs:
         - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
         # then merge the whole thing back to dev
-        - git fetch
+        - git fetch origin/dev
         - git checkout dev
         - git merge master -m "chore: master"
         - git push
