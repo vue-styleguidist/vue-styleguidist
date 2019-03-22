@@ -104,7 +104,7 @@ jobs:
         - git checkout upstream/dev
         - git status -v
         - git merge origin/master -m "chore:\ master"
-        - git push
+        - git push origin HEAD:dev
 
     # Build & Deploy the documentation website
     - stage: documentation
