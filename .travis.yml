@@ -29,11 +29,11 @@ script:
   - yarn test:jest --runInBand
 
 stages:
-  - lint
-  - test
-  - integration
-  - name: release
-    if: type != pull_request AND branch = master
+  #- lint
+  #- test
+  #- integration
+  #- name: release
+  #  if: type != pull_request AND branch = master
   - name: merge-back
     if: type != pull_request AND branch = master
   - name: documentation
@@ -102,10 +102,9 @@ jobs:
         - git fetch github dev
         - git checkout github/dev
         - git checkout -b dev
-        - git branch --set-upstream-to github/dev
         - git status -v
         - git merge github/master -m "chore:\ master"
-        - git push
+        - git push --set-upstream github dev
 
     # Build & Deploy the documentation website
     - stage: documentation
