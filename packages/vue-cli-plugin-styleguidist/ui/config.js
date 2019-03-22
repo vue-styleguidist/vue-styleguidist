@@ -124,7 +124,7 @@ function onRead({ data }) {
 						type: 'input',
 						message: 'Mount Point ID',
 						description: 'The ID of a DOM element where Styleguidist mounts.',
-						link: 'https://vue-styleguidist.github.io/Configuration.html#mountpointid',
+						link: 'https://vue-styleguidist.github.io/Configuration.html#showsidebar',
 						default: 'rsg-root',
 						value: styleguide.mountPointId
 					},
