@@ -92,7 +92,7 @@ jobs:
         # then merge the whole thing back to dev
         - git fetch origin/dev
         - git checkout dev
-        - git merge master -m "chore: master"
+        - git merge master -m "chore:\ master"
         - git push
 
     # Build & Deploy the documentation website
