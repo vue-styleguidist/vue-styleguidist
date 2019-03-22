@@ -100,7 +100,7 @@ jobs:
         - git config --global user.email "cluedude@hotmail.com"
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git remote add upstream "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
-        - git fetch upstream/dev
+        - git fetch upstream
         - git checkout upstream/dev
         - git status -v
         - git merge origin/master -m "chore:\ master"
