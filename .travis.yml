@@ -29,9 +29,9 @@ script:
   - yarn test:jest --runInBand
 
 stages:
-  - lint
-  - test
-  - integration
+  #- lint
+  #- test
+  #- integration
   - name: release
     if: type != pull_request AND branch = master
   - name: documentation
@@ -91,7 +91,7 @@ jobs:
         - yarn lerna publish from-git --yes
         # then merge the whole thing back to dev
         - git fetch origin/dev
-        - git checkout dev
+        - git checkout origin/dev
         - git merge master -m "chore:\ master"
         - git push
 
