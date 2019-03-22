@@ -22,7 +22,10 @@ const buildStyles = function(styles) {
 }
 
 const getSingleFileComponentParts = function(code) {
-	return compiler.parseComponent(code, { pad: 'line' })
+	const parts = compiler.parseComponent(code, { pad: 'line' })
+	if (parts.script)
+		parts.script.content = parts.script.content.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
+	return parts
 }
 
 const injectTemplateAndParseExport = function(parts) {
@@ -30,7 +33,7 @@ const injectTemplateAndParseExport = function(parts) {
 
 	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
 
-	const code = parts.script.content.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
+	const code = parts.script.content
 	let index = -1
 	if (code.indexOf('module.exports') !== -1) {
 		const startIndex = code.indexOf('module.exports')
