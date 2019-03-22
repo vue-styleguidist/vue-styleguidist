@@ -32,7 +32,9 @@ stages:
   #- lint
   #- test
   #- integration
-  - name: release
+  #- name: release
+  #  if: type != pull_request AND branch = master
+  - name: merge-back
     if: type != pull_request AND branch = master
   - name: documentation
     if: type != pull_request AND branch = master
@@ -89,7 +91,15 @@ jobs:
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
-        # then merge the whole thing back to dev
+
+    # then merge the whole thing back to dev
+    - stage: merge-back
+      install: skip # bundle install is not required
+      script:
+        - git config --global user.name "Vue Styleguidist Bot"
+        - git config --global user.email "cluedude@hotmail.com"
+        - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        - git checkout master
         - git fetch origin/dev
         - git branch
         - git checkout origin/dev
