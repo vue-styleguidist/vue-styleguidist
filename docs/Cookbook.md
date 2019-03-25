@@ -303,7 +303,7 @@ const StyleGuideRenderer = ({
         {components}
         <footer className="footer">
           <Markdown
-            text={`Generated with [React Styleguidist](${homepageUrl})`}
+            text={`Generated with [Vue Styleguidist](${homepageUrl})`}
           />
         </footer>
       </div>
