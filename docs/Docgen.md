@@ -62,7 +62,13 @@ Same as parse, but this way you can force the content of the code. The `filePath
 
 ## Documentation Object
 
-The `Documentation` class is the container of information
+The `Documentation` class is the container of information before geting compiled. It is easily modified and accessed. In order to be used and exported, one can use the `toObject()` function.
+
+The object has functions to get descriptor for props, events, methods and slots. All those functions follow the same principle. If you call it twice with the same argument, it will return twice the same reference to the prop. this way if your prop is decorated in multiple places, it can be easily made working.
+
+```ts
+function getPropDescriptor(propName: string): PropDescriptor
+```
 
 ## Parsing
 
