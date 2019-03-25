@@ -58,10 +58,102 @@ var componentInfoConfigured = parse(filePath, {
 
 ### `parseSource(code: string, filePath:string, options?: DocGenOptions)`
 
-Same as parse, but this way you can force the content of the code. The filePath parameter will then only be used for dependency resolution.
+Same as parse, but this way you can force the content of the code. The `filePath` parameter will then only be used for dependency resolution.
 
 ## Documentation Object
 
+The `Documentation` class is the container of information
+
 ## Parsing
 
+First we use babel to parse the comments in the code.
+
+Then we use vue-template-compiler to parse the html template.
+
+These parsers give us Abstract Syntax Trees (AST). We then traverse them with handlers to extract the info we need from components and their JSdoc.
+
 ## Handlers
+
+Script and template have 2 different AST structure. Makes sense that they have different handlers.
+
+### Script Handlers
+
+To handle scripts, we can registrer them this way. Each handler is a JavaScript function following this prototype.
+
+```ts
+export default function handler(
+  documentation: Documentation,
+  componentDefinition: NodePath,
+  astPath: bt.File,
+  opt: ParseOptions
+) {
+  // Handling of the documentation on the script
+}
+```
+
+In the example next, we extract the functional flag of a Vue component object.
+
+```ts
+import * as bt from '@babel/types'
+import { NodePath } from 'ast-types'
+import { Documentation, ParseOptions } from 'vue-docgen-api'
+
+export default function handler(
+  documentation: Documentation,
+  componentDefinition: NodePath,
+  astPath: bt.File,
+  opt: ParseOptions
+) {
+  // deal with functional flag
+  if (bt.isObjectExpression(componentDefinition.node)) {
+    const functionalPath = componentDefinition
+      .get('properties')
+      .filter(
+        (p: NodePath) =>
+          bt.isObjectProperty(p.node) &&
+          p.node.key.name === 'functional'
+      )
+
+    if (functionalPath.length) {
+      const functionalValue = functionalPath[0].get('value').node
+      if (bt.isBooleanLiteral(functionalValue)) {
+        documentation.set('functional', functionalValue.value)
+      }
+    }
+  }
+  // ...
+}
+```
+
+### Template Handlers
+
+Template handlers have the following prototype. If you are using
+
+```ts
+export default function handler(
+  documentation: Documentation,
+  templateAst: ASTElement,
+  options: TemplateParserOptions
+) {
+  // template handler code
+}
+```
+
+The following example stores all buttons name attributes in the template in a `buttons` key.
+
+```ts
+import { ASTElement } from 'vue-template-compiler'
+import { Documentation, TemplateParserOptions } from 'vue-docgen-api'
+
+export default function slotHandler(
+  documentation: Documentation,
+  templateAst: ASTElement,
+  options: TemplateParserOptions
+) {
+  if (templateAst.tag === 'button') {
+    let buttons = documentation.get('buttons') || []
+    buttons.push(templateAst.attrsMap['name'])
+    documentation.set('buttons', buttons)
+  }
+}
+```
