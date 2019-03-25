@@ -7,9 +7,9 @@ const path = require('path')
 const startCase = require('lodash/startCase')
 const kleur = require('kleur')
 const logger = require('glogg')('rsg')
-const fileExistsCaseInsensitive = require('react-styleguidist/scripts/utils/findFileCaseInsensitive')
-const getUserPackageJson = require('react-styleguidist/scripts/utils/getUserPackageJson')
-const StyleguidistError = require('react-styleguidist/scripts/utils/error')
+const fileExistsCaseInsensitive = require('react-styleguidist/lib/scripts/utils/findFileCaseInsensitive')
+const getUserPackageJson = require('react-styleguidist/lib/scripts/utils/getUserPackageJson')
+const StyleguidistError = require('react-styleguidist/lib/scripts/utils/error')
 const findUserWebpackConfig = require('../utils/findUserWebpackConfig')
 const consts = require('../consts')
 
@@ -371,5 +371,9 @@ module.exports = {
 				]
 			}
 		}
+	},
+	simpleEditor: {
+		type: 'boolean',
+		default: false
 	}
 }

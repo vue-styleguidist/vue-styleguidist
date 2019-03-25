@@ -3,10 +3,10 @@ const generate = require('escodegen').generate
 const toAst = require('to-ast')
 const logger = require('glogg')('rsg')
 const getExamples = require('./utils/getExamples')
-const requireIt = require('react-styleguidist/loaders/utils/requireIt')
+const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
 const vueDocs = require('vue-docgen-api')
-const defaultSortProps = require('react-styleguidist/loaders/utils/sortProps')
+const defaultSortProps = require('react-styleguidist/lib/loaders/utils/sortProps')
 
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
@@ -99,7 +99,7 @@ module.exports = function(source) {
 	}
 
 	const examplesFile = config.getExampleFilename(file)
-	docs.examples = getExamples(examplesFile, docs.displayName, config.defaultExample)
+	docs.examples = getExamples(file, examplesFile, docs.displayName, config.defaultExample)
 
 	if (config.updateDocs) {
 		docs = config.updateDocs(docs, file)

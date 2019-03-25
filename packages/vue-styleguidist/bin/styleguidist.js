@@ -3,7 +3,7 @@
 
 const minimist = require('minimist')
 const kleur = require('kleur')
-const StyleguidistError = require('react-styleguidist/scripts/utils/error')
+const StyleguidistError = require('react-styleguidist/lib/scripts/utils/error')
 
 const getConfig = require('../scripts/config')
 const consts = require('../scripts/consts')

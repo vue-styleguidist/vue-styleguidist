@@ -1,8 +1,8 @@
 import React from 'react'
 import slots from 'rsg-components/slots'
 import StyleGuide from 'rsg-components/StyleGuide'
-import getRouteData from 'react-styleguidist/lib/utils/getRouteData'
-import getPageTitle from 'react-styleguidist/lib/utils/getPageTitle'
+import getRouteData from 'react-styleguidist/lib/client/utils/getRouteData'
+import getPageTitle from 'react-styleguidist/lib/client/utils/getPageTitle'
 import globalizeComponents from './globalizeComponents'
 import processSections from './processSections'
 
