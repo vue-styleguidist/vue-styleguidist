@@ -162,6 +162,8 @@ module.exports = function(config, env) {
 		'Welcome'
 	].forEach(function(component) {
 		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component)
+		webpackConfig.resolve.alias[`rsg-components-default/${component}`] =
+			webpackConfig.resolve.alias[`rsg-components/${component}`]
 	})
 
 	// if the user chose prism, load the prism editor instead of codemirror
@@ -170,6 +172,8 @@ module.exports = function(config, env) {
 			sourceSrc,
 			'Editor/EditorPrism'
 		)
+		webpackConfig.resolve.alias['rsg-components-default/Editor'] =
+			webpackConfig.resolve.alias['rsg-components/Editor']
 	}
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
