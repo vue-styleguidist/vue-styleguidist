@@ -110,6 +110,16 @@ function onRead({ data }) {
 						value: styleguide.showSidebar
 					},
 					{
+						name: 'simpleEditor',
+						type: 'confirm',
+						message: 'Use Simple Editor',
+						description:
+							'Avoid loading CodeMirror and reduce bundle size significantly, use prism.js for code highlighting. Warning: editor options will not be mapped over.',
+						link: 'https://vue-styleguidist.github.io/Configuration.html#simpleeditor',
+						default: false,
+						value: styleguide.simpleEditor
+					},
+					{
 						name: 'mountPointId',
 						type: 'input',
 						message: 'Mount Point ID',

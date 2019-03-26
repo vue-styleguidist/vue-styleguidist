@@ -561,13 +561,11 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 
 > **Note:** Vue styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend, it supports [most of the ES6 features](https://buble.surge.sh/guide/#unsupported-features).
 
-You can also `require` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
+You can also `import` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
 
 ```jsx
 const mockData = require('./mocks');
 <Message :content="mockData.hello" />
 ```
 
-> **Note:** You can `require` only from examples in Markdown files. ES6 `import` syntax isn’t supported.
-
-> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `require` it in Markdown
+> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown

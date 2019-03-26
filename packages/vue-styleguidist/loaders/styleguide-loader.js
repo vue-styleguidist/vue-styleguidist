@@ -3,14 +3,14 @@ const commonDir = require('common-dir')
 const generate = require('escodegen').generate
 const toAst = require('to-ast')
 const logger = require('glogg')('rsg')
-const fileExistsCaseInsensitive = require('react-styleguidist/scripts/utils/findFileCaseInsensitive')
-const getAllContentPages = require('react-styleguidist/loaders/utils/getAllContentPages')
-const getComponentFilesFromSections = require('react-styleguidist/loaders/utils/getComponentFilesFromSections')
-const getComponentPatternsFromSections = require('react-styleguidist/loaders/utils/getComponentPatternsFromSections')
+const fileExistsCaseInsensitive = require('react-styleguidist/lib/scripts/utils/findFileCaseInsensitive')
+const getAllContentPages = require('react-styleguidist/lib/loaders/utils/getAllContentPages')
+const getComponentFilesFromSections = require('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections')
+const getComponentPatternsFromSections = require('react-styleguidist/lib/loaders/utils/getComponentPatternsFromSections')
 const getSections = require('./utils/getSections')
-const filterComponentsWithExample = require('react-styleguidist/loaders/utils/filterComponentsWithExample')
-const slugger = require('react-styleguidist/loaders/utils/slugger')
-const requireIt = require('react-styleguidist/loaders/utils/requireIt')
+const filterComponentsWithExample = require('react-styleguidist/lib/loaders/utils/filterComponentsWithExample')
+const slugger = require('react-styleguidist/lib/loaders/utils/slugger')
+const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 
 // Config options that should be passed to the client
 const CLIENT_CONFIG_OPTIONS = [

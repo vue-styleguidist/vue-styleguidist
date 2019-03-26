@@ -3,8 +3,8 @@ const path = require('path')
 const findup = require('findup')
 const isString = require('lodash/isString')
 const isPlainObject = require('lodash/isPlainObject')
-const StyleguidistError = require('react-styleguidist/scripts/utils/error')
-const sanitizeConfig = require('react-styleguidist/scripts/utils/sanitizeConfig')
+const StyleguidistError = require('react-styleguidist/lib/scripts/utils/error')
+const sanitizeConfig = require('react-styleguidist/lib/scripts/utils/sanitizeConfig')
 const schema = require('./schemas/config')
 
 const CONFIG_FILENAME = 'styleguide.config.js'

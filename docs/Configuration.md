@@ -33,6 +33,7 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 - [`serverHost`](#serverhost)
 - [`serverPort`](#serverport)
 - [`showSidebar`](#showsidebar)
+- [`simpleEditor`](#simpleeditor)
 - [`skipComponentsWithoutExample`](#skipcomponentswithoutexample)
 - [`styleguideComponents`](#styleguidecomponents)
 - [`styleguideDir`](#styleguidedir)
@@ -468,6 +469,12 @@ Dev server port.
 Type: `Boolean`, default: `true`
 
 Toggle sidebar visibility. Sidebar will be hidden when opening components or examples in isolation mode even if this value is set to `true`. When set to `false`, sidebar will always be hidden.
+
+#### `simpleEditor`
+
+Type: `Boolean`, default: `false`
+
+Avoid loading CodeMirror and reduce bundle size significantly, use [prism.js](https://prismjs.com/) for code highlighting. Warning: editor options will not be mapped over.
 
 #### `skipComponentsWithoutExample`
 

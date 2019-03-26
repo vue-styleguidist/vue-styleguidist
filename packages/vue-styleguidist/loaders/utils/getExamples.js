@@ -1,26 +1,40 @@
 const fs = require('fs')
 const path = require('path')
-const requireIt = require('react-styleguidist/loaders/utils/requireIt')
+const qss = require('qss')
+const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
 
 /**
  * Get require statement for examples file if it exists, or for default examples if it was defined.
  *
+ * @param {string} file
  * @param {string} examplesFile
  * @param {string} displayName
  * @param {string} defaultExample
  * @returns {object|Array}
  */
-module.exports = function getExamples(examplesFile, displayName, defaultExample) {
+module.exports = function getExamples(file, examplesFile, displayName, defaultExample) {
+	const examplesFileToLoad = examplesFile || defaultExample
+	if (!examplesFileToLoad) {
+		return null
+	}
+
+	const relativePath = `./${path.relative(path.dirname(examplesFileToLoad), file)}`
+
+	const query = {
+		displayName,
+		file: relativePath,
+		shouldShowDefaultExample: !examplesFile && !!defaultExample,
+		customLangs: 'vue|js|jsx'
+	}
+
 	if (examplesFile && fs.existsSync(examplesFile)) {
-		return requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplesFile}`)
+		return requireIt(`!!${examplesLoader}?${qss.encode(query)}!${examplesFile}`)
 	}
 
 	if (defaultExample) {
-		return requireIt(
-			`!!${examplesLoader}?componentName=${displayName}&customLangs=vue|js|jsx!${defaultExample}`
-		)
+		return requireIt(`!!${examplesLoader}?${qss.encode(query)}!${defaultExample}`)
 	}
 
 	return []

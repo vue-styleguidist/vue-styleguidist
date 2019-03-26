@@ -8,9 +8,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const merge = require('webpack-merge')
 const forEach = require('lodash/forEach')
 const isFunction = require('lodash/isFunction')
-const StyleguidistOptionsPlugin = require('react-styleguidist/scripts/utils/StyleguidistOptionsPlugin')
+const StyleguidistOptionsPlugin = require('react-styleguidist/lib/scripts/utils/StyleguidistOptionsPlugin')
 const mergeWebpackConfig = require('./utils/mergeWebpackConfig')
-const makeWebpackConfig = require('react-styleguidist/scripts/make-webpack-config')
+const makeWebpackConfig = require('react-styleguidist/lib/scripts/make-webpack-config')
 
 const RENDERER_REGEXP = /Renderer$/
 
@@ -138,18 +138,22 @@ module.exports = function(config, env) {
 		})
 	}
 
+	const RSG_COMPONENTS_ALIAS = 'rsg-components'
+	const RSG_COMPONENTS_ALIAS_DEFAULT = `${RSG_COMPONENTS_ALIAS}-default`
+
 	// Custom style guide components
 	if (config.styleguideComponents) {
 		forEach(config.styleguideComponents, (filepath, name) => {
 			const fullName = name.match(RENDERER_REGEXP)
 				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
 				: name
-			webpackConfig.resolve.alias[`rsg-components/${fullName}`] = filepath
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
 		})
 	}
 
-	const sourceSrc = path.resolve(sourceDir, 'rsg-components')
+	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
 	;[
+		...(config.simpleEditor ? [] : ['Editor']),
 		'Preview',
 		'Usage',
 		'Events',
@@ -160,14 +164,36 @@ module.exports = function(config, env) {
 		'StyleGuide',
 		'Welcome'
 	].forEach(function(component) {
-		webpackConfig.resolve.alias[`rsg-components/${component}`] = path.resolve(sourceSrc, component)
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
+			sourceSrc,
+			component
+		)
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
 	})
+
+	// if the user chose prism, load the prism editor instead of codemirror
+	if (config.simpleEditor) {
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`] = path.resolve(
+			sourceSrc,
+			'Editor/EditorPrism'
+		)
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/Editor`] =
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`]
+	}
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
-	webpackConfig.resolve.alias['rsg-components'] = makeWebpackConfig(config, env).resolve.alias[
-		'rsg-components'
+	webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS] = makeWebpackConfig(config, env).resolve.alias[
+		RSG_COMPONENTS_ALIAS
 	]
+
+	// To avoid circular rendering when overriding existing components,
+	// Create another alias, not overriden by users
+	if (config.styleguideComponents) {
+		webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS_DEFAULT] =
+			webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS]
+	}
 
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env)
