@@ -6,7 +6,7 @@
 
 - [How to add third-party plugins to the style guide?](#how-to-add-third-party-plugins-to-the-style-guide)
 - [How to add vuex to the style guide?](#how-to-add-vuex-to-the-style-guide)
-- [How to add data dummy to the style guide?](#how-to-add-data-dummy-to-the-style-guide)
+- [How to add dummy data to the style guide?](#how-to-add-dummy-data-to-the-style-guide)
 - [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
 - [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
 - [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
@@ -131,9 +131,9 @@ module.exports = {
 
 See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuex).
 
-## How to add data dummy to the style guide?
+## How to add dummy data to the style guide?
 
-You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add data dummy:
+You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add dummy data:
 
 Use [require](Configuration.md#require) option:
 
