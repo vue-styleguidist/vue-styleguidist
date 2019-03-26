@@ -8,7 +8,7 @@ import makePathResolver from '../utils/makePathResolver'
 import resolveRequired from '../utils/resolveRequired'
 
 /**
- * Retruns documentation of the component referenced in the extends property of the component
+ * Returns documentation of the component referenced in the extends property of the component
  * @param {NodePath} astPath
  * @param {Array<NodePath>} componentDefinitions
  * @param {string} originalFilePath
