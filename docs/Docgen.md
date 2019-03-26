@@ -1,6 +1,6 @@
 # vue-docgen-api
 
-`vue-docgen-api` turns VueJs component into documentation.
+`vue-docgen-api` turns VueJs components into documentation objects.
 
 <!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Docgen.md -->
 
@@ -30,7 +30,11 @@ var componentInfoSimple = parse(filePath)
 In the options, specify the changes you made to node resolution through your webpack config. Write additional script and template handlers and push them in the options object to parse non-standard elements.
 
 ```ts
-import { parse } from 'vue-docgen-api'
+import * as bt from '@babel/types'
+import { NodePath } from 'ast-types'
+import { parse, Documentation, ParseOptions } from 'vue-docgen-api'
+import { ASTElement } from 'vue-template-compiler'
+
 var componentInfoConfigured = parse(filePath, {
   alias: { '@assets': path.resolve(__dirname, 'src/assets') },
   resolve: [path.resolve(__dirname, 'src')],
@@ -80,7 +84,7 @@ These parsers give us Abstract Syntax Trees (AST). We then traverse them with ha
 
 ## Handlers
 
-Script and template have 2 different AST structure. Makes sense that they have different handlers.
+Script and template have 2 different AST structure. Makes sense that they have different handlers. There is a few standard handlers in docgen. You can add your own using the `addScriptHandler` or `addTemplateHandler` options.
 
 ### Script Handlers
 
@@ -133,7 +137,7 @@ export default function handler(
 
 ### Template Handlers
 
-Template handlers have the following prototype. If you are using
+Template handlers have the following prototype.
 
 ```ts
 export default function handler(
