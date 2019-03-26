@@ -133,7 +133,7 @@ See an example of [style guide with vuex](https://github.com/vue-styleguidist/vu
 
 ## How to add dummy data to the style guide?
 
-You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add data dummy:
+You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add dummy data:
 
 Use [require](Configuration.md#require) option:
 
