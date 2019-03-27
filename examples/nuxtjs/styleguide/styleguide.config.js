@@ -27,5 +27,6 @@ module.exports = {
 		},
 		plugins: [new VueLoaderPlugin()]
 	},
-	usageMode: 'expand'
+	usageMode: 'expand',
+	styleguideDir: '../dist'
 }
