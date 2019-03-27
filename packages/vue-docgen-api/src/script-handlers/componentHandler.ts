@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
-import { Documentation } from '../Documentation'
+import { Documentation, Tag } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
@@ -42,8 +42,14 @@ export default function propHandler(documentation: Documentation, path: NodePath
 	documentation.set('description', jsDoc.description)
 
 	if (jsDoc.tags) {
+		const displayNamesTags = jsDoc.tags.filter(t => t.title === 'displayName')
+		if (displayNamesTags.length) {
+			const displayName = displayNamesTags[0] as Tag
+			documentation.set('displayName', displayName.content)
+		}
+
 		const tagsAsObject = transformTagsIntoObject(
-			jsDoc.tags.filter(t => t.title !== 'example') || []
+			jsDoc.tags.filter(t => t.title !== 'example' && t.title !== 'displayName') || []
 		)
 
 		const examples = jsDoc.tags.filter(t => t.title === 'example')
