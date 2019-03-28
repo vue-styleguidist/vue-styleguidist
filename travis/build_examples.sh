@@ -1,2 +1,3 @@
 #!/bin/bash
-for D in examples/*/; do yarn build "${D}"; done
+cd examples
+for D in *; do yarn build "${D}"; done

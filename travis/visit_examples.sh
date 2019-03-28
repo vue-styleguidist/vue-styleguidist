@@ -1,2 +1,3 @@
 #!/bin/bash
-for D in examples/*/; do yarn test:browser "${D}"; done
+cd examples
+for D in *; do yarn test:browser "${D}"; done

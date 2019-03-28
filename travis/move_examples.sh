@@ -1,2 +1,3 @@
 #!/bin/bash
-for D in examples/*/; do mv "${D}"dist docs/dist/"${D}"; done
+cd examples
+for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
