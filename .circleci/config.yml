@@ -1,7 +1,7 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/project/vue
+  working_directory: ~/vue-styleguidist
   docker:
     - image: circleci/node:lts
 
