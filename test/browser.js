@@ -39,7 +39,7 @@ async function onerror(err) {
 
 	const url = /https?/.test(args[0])
 		? args[0]
-		: `file://${path.resolve(`examples/${args[0]}/styleguide/index.html`)}`
+		: `file://${path.resolve(`examples/${args[0]}/dist/index.html`)}`
 	await page.goto(url)
 
 	if (args[1]) {
