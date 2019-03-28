@@ -28,7 +28,10 @@ jobs:
           at: ~/
       - run: yarn compile
   test:
+    <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/
       - run: yarn lint
       - run: yarn test
       - run: yarn danger ci 
