@@ -1,42 +1,55 @@
 version: 2
 
-defaults: &install
+defaults: &instdefaultsall
   docker:
     - image: circleci/node:lts
   working_directory: ~/vue-styleguidist
-  steps:
-    - checkout
-    - restore_cache:
-        keys:
-          - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
-    - run: yarn
-    - save_cache:
-        key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
-        paths:
-          - node_modules/
+  
 
 jobs:
-  compile:
-    <<: *install
+  install:
+    <<: *defaults
+      
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - vue-styleguidist
+              
+
+  compile:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: vue-styleguidist/
       - run: yarn compile
       - persist_to_workspace:
           root: packages/
           paths:
-            - vue-docgen-api/dist/*
+            - vue-styleguidist/dist/*
             - vue-styleguidist/lib/*
 
+
   test:
-    <<: *install
+    <<: *defaults
     steps:
       - attach_workspace:
-          at: packages/
+          at: vue-styleguidist/
       - run: yarn lint
       - run: yarn test
-      - run: yarn danger ci
-
+      - run: yarn danger ci 
+      
   integration:
-    <<: *install
+    <<: *defaults
     steps:
       - attach_workspace:
           at: packages/
@@ -66,7 +79,10 @@ workflows:
   version: 2
   test:
     jobs:
-      - compile
+      - install
+      - compile:
+          requires:
+            - install
       - test:
           requires:
             - compile
