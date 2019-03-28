@@ -20,17 +20,17 @@ jobs:
             - node_modules/
             - ~/.cache
       - run: pwd
-      - persist_to_workspace:
-          root: packages/
-          paths:
-            - vue-styleguidist/lib/**/*
-            - vue-docgen-api/dist/**/*
+
   compile:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: packages/
       - run: yarn compile
+      - persist_to_workspace:
+        root: packages/
+        paths:
+          - vue-styleguidist/lib/*
+          - vue-docgen-api/dist/*
+
   test:
     <<: *defaults
     steps:
@@ -39,6 +39,7 @@ jobs:
       - run: yarn lint
       - run: yarn test
       - run: yarn danger ci 
+      
   integration:
     <<: *defaults
     steps:
