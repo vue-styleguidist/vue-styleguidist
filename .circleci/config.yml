@@ -41,8 +41,8 @@ workflows:
     jobs:
       - install
       - compile:
-      requires:
+        requires:
         - install
       - test:
-      requires:
+        requires:
         - install
