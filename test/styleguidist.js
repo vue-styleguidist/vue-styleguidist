@@ -4,9 +4,9 @@
  * launch `npm run build vuetify` and there you have it, the built vuetify example
  */
 
-var examplePath = process.argv[3] || 'basic'
+var examplePath = process.argv[3] || 'example/basic'
 
 process.argv[3] = '--config'
-process.argv[4] = `examples/${examplePath}/styleguide.config.js`
+process.argv[4] = `${examplePath}/styleguide.config.js`
 
 require('../packages/vue-styleguidist/bin/styleguidist')
