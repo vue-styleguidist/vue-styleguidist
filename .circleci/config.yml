@@ -40,6 +40,6 @@ workflows:
   test:
     jobs:
       - install
-      - compile
+      - compile:
           requires:
             - install
