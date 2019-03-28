@@ -5,7 +5,7 @@ import styleguideLoader from '../styleguide-loader'
 
 /* eslint-disable quotes */
 describe('styleguide-loader', () => {
-	const file = path.resolve(__dirname, '../../../../test/components/Button/Button.js')
+	const file = path.resolve(__dirname, '../../../../test/components/Button.vue')
 	const configDir = path.resolve(__dirname, '../../../../test')
 
 	it('should return valid, parsable JS', () => {
