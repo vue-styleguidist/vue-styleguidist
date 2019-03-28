@@ -1,6 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-unresolved */
 const puppeteer = require('puppeteer')
 const path = require('path')
 
@@ -39,7 +37,7 @@ async function onerror(err) {
 
 	const url = /https?/.test(args[0])
 		? args[0]
-		: `file://${path.resolve(`examples/${args[0]}/styleguide/index.html`)}`
+		: `file://${path.resolve(`examples/${args[0]}/dist/index.html`)}`
 	await page.goto(url)
 
 	if (args[1]) {

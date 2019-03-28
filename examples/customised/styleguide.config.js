@@ -90,5 +90,6 @@ module.exports = {
 		}
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand'
+	exampleMode: 'expand',
+	styleguideDir: 'dist'
 }

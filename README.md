@@ -20,11 +20,13 @@ alt="Chat on Discord">
 </div>
 </div>
 
-## Documentation
-
-Docs are available at https://vue-styleguidist.github.io/ - we are still working on refining it and contributions are welcome!
-
 ## Packages
+
+[vue-styleguidist](packages/vue-styleguidist) will take the results of [vue-docgen-api](packages/vue-docgen-api) and create a website site to showcase and develop components.
+
+[![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dm/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
+
+---
 
 [vue-docgen-api](packages/vue-docgen-api) will parse your vue components and load their documentation in a Javascript object
 
@@ -32,15 +34,13 @@ Docs are available at https://vue-styleguidist.github.io/ - we are still working
 
 ---
 
-[vue-styleguidist](packages/vue-styleguidist) will take the results of vue-docgen-api and create a good looking site to play with your components
-
-[![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dm/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-docgen-api)
-
----
-
 [vue-cli-plugin-styleguidist](packages/vue-cli-plugin-styleguidist) will configure styleguidist to work smoothly with [vue-cli 3](https://cli.vuejs.org/guide/)
 
 [![](https://img.shields.io/npm/v/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist) [![](https://img.shields.io/npm/dm/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-docgen-api)
+
+## Documentation
+
+Docs are available at https://vue-styleguidist.github.io/ - we are still working on refining it and contributions are welcome!
 
 ## Contributing
 

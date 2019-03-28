@@ -116,4 +116,19 @@ describe('componentHandler', () => {
 			]
 		})
 	})
+
+	it('should extract the @displayName tag seperately', () => {
+		const src = `
+		/**
+		 * @displayName Best Button Ever
+		 */
+    export default {
+    }
+    `
+		const def = parse(src).get('default')
+		if (def) {
+			componentHandler(documentation, def)
+		}
+		expect(documentation.set).toHaveBeenCalledWith('displayName', 'Best Button Ever')
+	})
 })

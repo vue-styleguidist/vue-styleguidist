@@ -19,9 +19,9 @@ test/cypress/videos/
 /docs/dist/
 
 # examples build artefacts
-/examples/**/styleguide/build
-/examples/**/styleguide/css/*.css
-/examples/**/styleguide/index.html
+/examples/**/dist/build
+/examples/**/dist/css/*.css
+/examples/**/dist/index.html
 
 # packages resulting of plugin tests
 /test/cli-packages/

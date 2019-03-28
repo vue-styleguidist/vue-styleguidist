@@ -88,5 +88,6 @@ module.exports = {
 						maxEntrypointSize: 1685000, // bytes
 						hints: 'error'
 				  }
-	})
+	}),
+	styleguideDir: 'dist'
 }
