@@ -40,5 +40,9 @@ workflows:
   compile_and_test:
     jobs:
       - install
-      - compile
+      - compile:
+      requires:
+        - install
       - test
+      requires:
+        - install
