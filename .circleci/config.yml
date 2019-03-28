@@ -24,7 +24,6 @@ jobs:
   compile:
     <<: *defaults
     steps:
-      steps:
       - attach_workspace:
           at: ~/
       - run: yarn compile
