@@ -3,7 +3,7 @@
 In the [repository](https://github.com/vue-styleguidist/vue-styleguidist), there is a few example styleguide. You will find below what each styleguide looks like once it is built.
 
 - [basic](https://vue-styleguidist.github.io/basic/index.html)
-- [customized](https://vue-styleguidist.github.io/customized/index.html)
+- [customised](https://vue-styleguidist.github.io/customised/index.html)
 - [JSX](https://vue-styleguidist.github.io/jsx/index.html)
 - [nuxtjs](https://vue-styleguidist.github.io/nuxtjs/index.html)
 - [sections](https://vue-styleguidist.github.io/sections/index.html)
