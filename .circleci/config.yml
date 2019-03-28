@@ -1,0 +1,43 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/project/vue
+  docker:
+    - image: circleci/node:lts
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+            - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+  build:
+    <<: *defaults
+    steps:
+      steps:
+      - attach_workspace:
+        at: ~/
+      - run: yarn compile
+  test:
+    steps:
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn danger ci 
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      requires:
+        - install
+        - build
