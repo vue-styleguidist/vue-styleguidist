@@ -56,5 +56,6 @@ module.exports = {
 	exampleMode: 'expand',
 	compilerConfig: {
 		target: { ie: 11 }
-	}
+	},
+	styleguideDir: 'dist'
 }

@@ -52,7 +52,7 @@ jobs:
         - yarn compile
 
         # Build all examples
-        - yarn build
+        - yarn build basic
         - yarn build customised
         - yarn build sections
         - yarn build vuex
@@ -111,6 +111,17 @@ jobs:
     - stage: documentation
       script:
         - yarn docs:build
+        # Build all examples
+        - yarn build basic && mv examples/basic/dist docs/dist/basic
+        - yarn build customised && mv examples/customised/dist docs/dist/customised
+        - yarn build sections && mv examples/sections/dist docs/dist/sections
+        - yarn build vuex && mv examples/vuex/dist docs/dist/vuex
+        - yarn build jsx && mv examples/jsx/dist docs/dist/jsx
+        - yarn build nuxtjs/styleguide && mv examples/nuxtjs/dist docs/dist/nuxtjs
+        - yarn build vuetify && mv examples/vuetify/dist docs/dist/vuetify
+        - yarn build vuecli-noplugin && mv examples/vuecli-noplugin/dist docs/dist/vuecli-noplugin
+        - yarn build:vuecli3 && mv examples/vuecli3/dist docs/dist/vuecli3
+
       deploy:
         provider: pages
         skip-cleanup: true
