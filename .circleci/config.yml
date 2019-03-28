@@ -26,7 +26,7 @@ jobs:
     steps:
       steps:
       - attach_workspace:
-        at: ~/
+          at: ~/
       - run: yarn compile
   test:
     steps:
