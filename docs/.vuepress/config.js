@@ -32,7 +32,7 @@ module.exports = {
 		sidebar: [
 			'/GettingStarted',
 			'/Examples',
-			[('/VueCLI3', '@vue/cli 3.X')],
+			[('/VueCLI3doc', '@vue/cli 3.X')],
 			'/Documenting',
 			['/Components', 'Locating Components'],
 			'/Webpack',

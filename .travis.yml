@@ -29,15 +29,15 @@ script:
   - yarn test:jest --runInBand
 
 stages:
-  - lint
-  - test
-  - integration
-  - name: release
-    if: type != pull_request AND branch = master
-  - name: merge-back
-    if: type != pull_request AND branch = master
+  #- lint
+  #- test
+  #- integration
+  #- name: release
+  #  if: type != pull_request AND branch = master
   - name: documentation
     if: type != pull_request AND branch = master
+  #- name: merge-back
+  #  if: type != pull_request AND branch = master
 
 jobs:
   include:
@@ -92,25 +92,12 @@ jobs:
         - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
 
-    # then merge the whole thing back to dev
-    - stage: merge-back
-      install: skip # bundle install is not required
-      script:
-        - git config --global user.name "Vue Styleguidist Bot"
-        - git config --global user.email "cluedude@hotmail.com"
-        - git remote add github "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
-        - git fetch github dev
-        - git checkout github/dev
-        - git checkout -b dev
-        - git status -v
-        - git merge master -m "chore:\ master"
-        - git branch --set-upstream-to github/dev
-        - git push
-
     # Build & Deploy the documentation website
     - stage: documentation
       script:
         - yarn docs:build
+        - yarn compile
+
         # Build all examples
         - yarn build basic && mv examples/basic/dist docs/dist/basic
         - yarn build customised && mv examples/customised/dist docs/dist/customised
@@ -132,3 +119,18 @@ jobs:
         keep-history: true
         on:
           branch: master
+
+    # then merge the whole thing back to dev
+    - stage: merge-back
+      install: skip # bundle install is not required
+      script:
+        - git config --global user.name "Vue Styleguidist Bot"
+        - git config --global user.email "cluedude@hotmail.com"
+        - git remote add github "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        - git fetch github dev
+        - git checkout github/dev
+        - git checkout -b dev
+        - git status -v
+        - git merge master -m "chore:\ master"
+        - git branch --set-upstream-to github/dev
+        - git push
