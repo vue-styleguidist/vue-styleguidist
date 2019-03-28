@@ -23,8 +23,8 @@ jobs:
       - persist_to_workspace:
           root: packages/
           paths:
-            - vue-styleguidist/lib
-            - vue-docgen-api/dist
+            - vue-styleguidist/lib/**/*
+            - vue-docgen-api/dist/**/*
   compile:
     <<: *defaults
     steps:
