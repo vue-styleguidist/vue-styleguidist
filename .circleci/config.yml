@@ -18,8 +18,6 @@ jobs:
           key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/
-            - ~/.cache
-      - run: pwd
 
   compile:
     <<: *defaults
