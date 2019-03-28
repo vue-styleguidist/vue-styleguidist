@@ -18,22 +18,28 @@ jobs:
           key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - vue-styleguidist
+              
 
   compile:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: vue-styleguidist/
       - run: yarn compile
       - persist_to_workspace:
-          root: packages/
+          root: ~/
           paths:
-            - vue-styleguidist/lib/*
-            - vue-docgen-api/dist/*
+            - vue-styleguidist
 
   test:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: packages/
+          at: vue-styleguidist/
       - run: yarn lint
       - run: yarn test
       - run: yarn danger ci 
