@@ -37,12 +37,3 @@ jobs:
       - run: yarn danger ci 
 workflows:
   version: 2
-  compile_and_test:
-    jobs:
-      - install
-      - compile:
-        requires:
-          - install
-      - test:
-        requires:
-          - install
