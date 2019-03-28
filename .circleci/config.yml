@@ -42,7 +42,7 @@ workflows:
       - install
       - compile:
         requires:
-        - install
+          - install
       - test:
         requires:
-        - install
+          - install
