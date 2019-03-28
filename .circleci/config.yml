@@ -71,6 +71,6 @@ workflows:
       - test:
           requires:
             - compile
-      -integration:
+      - integration:
           requires:
             - compile
