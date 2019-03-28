@@ -20,18 +20,21 @@ jobs:
             - node_modules/
             - ~/.cache
       - persist_to_workspace:
-          root: ~/
+          root: ~/packages/
+          paths:
+            - vue-styleguidist/lib
+            - vue-docgen-api/dist
   compile:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/packages/
       - run: yarn compile
   test:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/packages/
       - run: yarn lint
       - run: yarn test
       - run: yarn danger ci 
@@ -39,7 +42,8 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/packages/
+
       # Build all examples
       - run: yarn build basic
       - run: yarn build customised
