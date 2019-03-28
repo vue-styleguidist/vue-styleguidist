@@ -45,7 +45,7 @@ jobs:
       - run: yarn test
       - run: yarn danger ci
 
-  integration:
+  integration-basic:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -56,10 +56,6 @@ jobs:
       - run: yarn build customised
       - run: yarn build sections
       - run: yarn build vuex
-      - run: yarn build jsx
-      - run: yarn build nuxtjs/styleguide
-      - run: yarn build vuetify
-      - run: yarn build vuecli-noplugin
       - run: yarn build:vuecli3
 
       # Check that examples really works: no JS errors on load
@@ -67,11 +63,25 @@ jobs:
       - run: yarn test:browser customised
       - run: yarn test:browser sections
       - run: yarn test:browser vuex
+      - run: yarn test:browser vuecli3
+
+  integration-other:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: vue-styleguidist
+
+      # Build all examples
+      - run: yarn build jsx
+      - run: yarn build nuxtjs/styleguide
+      - run: yarn build vuetify
+      - run: yarn build vuecli-noplugin
+
+      # Check that examples really works: no JS errors on load
       - run: yarn test:browser jsx
       - run: yarn test:browser nuxtjs
       - run: yarn test:browser vuetify
       - run: yarn test:browser vuecli-noplugin
-      - run: yarn test:browser vuecli3
 
 workflows:
   version: 2
@@ -84,6 +94,9 @@ workflows:
       - test:
           requires:
             - compile
-      - integration:
+      - integration-basic:
+          requires:
+            - compile
+      - integration-other:
           requires:
             - compile
