@@ -40,6 +40,3 @@ workflows:
       - install
       - build
       - test
-      requires:
-        - install
-        - compile
