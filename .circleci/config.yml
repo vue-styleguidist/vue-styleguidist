@@ -1,20 +1,19 @@
 version: 2
 
-defaults: &instdefaultsall
+defaults: &defaults
   docker:
     - image: circleci/node:lts
   working_directory: ~/vue-styleguidist
-  
 
 jobs:
   install:
     <<: *defaults
-      
+
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+            - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
       - run: yarn
       - save_cache:
           key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
@@ -24,7 +23,6 @@ jobs:
           root: ~/
           paths:
             - vue-styleguidist
-              
 
   compile:
     <<: *defaults
@@ -38,7 +36,6 @@ jobs:
             - vue-styleguidist/dist/*
             - vue-styleguidist/lib/*
 
-
   test:
     <<: *defaults
     steps:
@@ -46,8 +43,8 @@ jobs:
           at: vue-styleguidist/
       - run: yarn lint
       - run: yarn test
-      - run: yarn danger ci 
-      
+      - run: yarn danger ci
+
   integration:
     <<: *defaults
     steps:
