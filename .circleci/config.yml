@@ -5,17 +5,17 @@ defaults: &install
     - image: circleci/node:lts
   working_directory: ~/vue-styleguidist
   steps:
-      - checkout
-      - restore_cache:
-          keys:
+    - checkout
+    - restore_cache:
+        keys:
           - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
-      - run: yarn
-      - save_cache:
-          key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules/
+    - run: yarn
+    - save_cache:
+        key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+        paths:
+          - node_modules/
 
-jobs:         
+jobs:
   compile:
     <<: *install
     steps:
@@ -27,16 +27,16 @@ jobs:
             - vue-styleguidist/lib/*
 
   test:
-    <<: *defaults
+    <<: *install
     steps:
       - attach_workspace:
           at: packages/
       - run: yarn lint
       - run: yarn test
-      - run: yarn danger ci 
-      
+      - run: yarn danger ci
+
   integration:
-    <<: *defaults
+    <<: *install
     steps:
       - attach_workspace:
           at: packages/
