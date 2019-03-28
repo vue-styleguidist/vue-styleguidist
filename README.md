@@ -24,7 +24,7 @@ alt="Chat on Discord">
 
 [vue-styleguidist](packages/vue-styleguidist) will take the results of [vue-docgen-api](packages/vue-docgen-api) and create a website site to showcase and develop components.
 
-[![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dm/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-docgen-api)
+[![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dm/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
 
 ---
 
