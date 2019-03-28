@@ -3,6 +3,7 @@ version: 2
 defaults: &defaults
   docker:
     - image: circleci/node:lts
+  working_directory: ~/vue-styleguidist
 
 jobs:
   install:
