@@ -24,10 +24,10 @@ jobs:
     steps:
       - run: yarn compile
       - persist_to_workspace:
-        root: packages/
-        paths:
-          - vue-styleguidist/lib/*
-          - vue-docgen-api/dist/*
+          root: packages/
+          paths:
+            - vue-styleguidist/lib/*
+            - vue-docgen-api/dist/*
 
   test:
     <<: *defaults
