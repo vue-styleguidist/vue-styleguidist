@@ -21,7 +21,7 @@ jobs:
             - ~/.cache
       - persist_to_workspace:
           root: ~/
-  build:
+  compile:
     <<: *defaults
     steps:
       steps:
@@ -38,7 +38,8 @@ workflows:
   build_and_test:
     jobs:
       - install
+      - build
       - test
       requires:
         - install
-        - build
+        - compile
