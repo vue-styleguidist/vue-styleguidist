@@ -28,7 +28,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: vue-styleguidist/
+          at: ~/
       - run: ls -la
       - run: yarn compile
       - persist_to_workspace:
@@ -41,7 +41,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: vue-styleguidist/
+          at: ~/
       - run: yarn lint
       - run: yarn test
       - run: yarn danger ci
