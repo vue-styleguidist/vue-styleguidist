@@ -52,26 +52,10 @@ jobs:
         - yarn compile
 
         # Build all examples
-        - yarn build basic
-        - yarn build customised
-        - yarn build sections
-        - yarn build vuex
-        - yarn build jsx
-        - yarn build nuxtjs/styleguide
-        - yarn build vuetify
-        - yarn build vuecli-noplugin
-        - yarn build:vuecli3
+        - travis/build_examples.sh
 
         # Check that examples really works: no JS errors on load
-        - yarn test:browser basic
-        - yarn test:browser customised
-        - yarn test:browser sections
-        - yarn test:browser vuex
-        - yarn test:browser jsx
-        - yarn test:browser nuxtjs/styleguide
-        - yarn test:browser vuetify
-        - yarn test:browser vuecli-noplugin
-        - yarn test:browser vuecli3
+        - travis/visit_examples.sh
 
         # Run integration tests with Cypress
         - yarn test:cypress:pre
