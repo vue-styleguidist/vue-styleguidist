@@ -68,7 +68,7 @@ jobs:
         - yarn test:browser sections
         - yarn test:browser vuex
         - yarn test:browser jsx
-        - yarn test:browser nuxtjs/styleguide
+        - yarn test:browser nuxtjs
         - yarn test:browser vuetify
         - yarn test:browser vuecli-noplugin
         - yarn test:browser vuecli3
