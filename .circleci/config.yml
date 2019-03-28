@@ -20,21 +20,21 @@ jobs:
           paths:
             - node_modules/
       - persist_to_workspace:
-          root: vue-styleguidist
+          root: ~/
           paths:
-            - .
+            - vue-styleguidist
 
   compile:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: vue-styleguidist
+          at: ~/
       - run: ls -la
       - run: yarn compile
       - persist_to_workspace:
-          root: vue-styleguidist
+          root: ~/
           paths:
-            - .
+            - vue-styleguidist
 
   test:
     <<: *defaults
@@ -49,7 +49,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: vue-styleguidist
+          at: ~/
 
       # Build all examples
       - run: yarn build basic
@@ -69,7 +69,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: vue-styleguidist
+          at: ~/
 
       # Build all examples
       - run: yarn build jsx
