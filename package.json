@@ -71,6 +71,7 @@
     "babel-plugin-system-import-transformer": "^3.1.0",
     "cheerio": "^1.0.0-rc.2",
     "css-loader": "^2.1.0",
+    "danger": "^7.0.17",
     "deabsdeep": "^1.0.6",
     "deepfreeze": "^2.0.0",
     "dog-names": "^1.0.2",
