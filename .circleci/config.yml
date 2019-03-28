@@ -29,6 +29,7 @@ jobs:
     steps:
       - attach_workspace:
           at: vue-styleguidist/
+      - run: ls -la
       - run: yarn compile
       - persist_to_workspace:
           root: packages/
