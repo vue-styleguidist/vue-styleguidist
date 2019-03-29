@@ -73,10 +73,10 @@ jobs:
         - yarn compile
 
         # Build all examples
-        - yarn build EXAMPLE_NAME
+        - yarn build $EXAMPLE_NAME
 
         # Check that examples really works: no JS errors on load
-        - yarn test:browser EXAMPLE_NAME
+        - yarn test:browser $EXAMPLE_NAME
 
     - stage: release
       script:
