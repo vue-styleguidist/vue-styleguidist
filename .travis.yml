@@ -70,32 +70,32 @@ jobs:
         - yarn test:plugin
 
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=basic
+      env:
+        - EXAMPLE_NAME=basic
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=customised
+      env:
+        - EXAMPLE_NAME=customised
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=jsx
+      env:
+        - EXAMPLE_NAME=jsx
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=nuxtjs
+      env:
+        - EXAMPLE_NAME=nuxtjs
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=sections
+      env:
+        - EXAMPLE_NAME=sections
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=vuecli-noplugin
+      env:
+        - EXAMPLE_NAME=vuecli-noplugin
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=vuecli3
+      env:
+        - EXAMPLE_NAME=vuecli3
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=vuetify
+      env:
+        - EXAMPLE_NAME=vuetify
     - <<: *examples
-        env:
-          - EXAMPLE_NAME=vuex
+      env:
+        - EXAMPLE_NAME=vuex
 
     - stage: release
       script:
