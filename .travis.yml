@@ -8,6 +8,17 @@ node_js:
   - 10
   - 8
 
+env:
+  - EXAMPLE_NAME=basic
+  - EXAMPLE_NAME=customised
+  - EXAMPLE_NAME=jsx
+  - EXAMPLE_NAME=nuxtjs
+  - EXAMPLE_NAME=sections
+  - EXAMPLE_NAME=vuecli-noplugin
+  - EXAMPLE_NAME=vuecli3
+  - EXAMPLE_NAME=vuetify
+  - EXAMPLE_NAME=vuex
+
 cache: yarn
 
 before_install:
@@ -58,16 +69,7 @@ jobs:
         - yarn test:plugin
 
     - stage: examples
-      env:
-        - EXAMPLE_NAME=basic
-        - EXAMPLE_NAME=customised
-        - EXAMPLE_NAME=jsx
-        - EXAMPLE_NAME=nuxtjs
-        - EXAMPLE_NAME=sections
-        - EXAMPLE_NAME=vuecli-noplugin
-        - EXAMPLE_NAME=vuecli3
-        - EXAMPLE_NAME=vuetify
-        - EXAMPLE_NAME=vuex
+      
       script:
         # Compile JS
         - yarn compile
