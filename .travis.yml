@@ -87,15 +87,19 @@ jobs:
 
         # test vue-cli-plugin
         - yarn test:plugin
+      env:
+        - TEST=plugin
       
     - stage: examples
       script:
         # Compile JS
         - yarn compile
-        
+
         # Run integration tests with Cypress
         - yarn test:cypress:pre
         - yarn test:cypress
+      env:
+        - TEST=cypress
 
     - stage: release
       script:
