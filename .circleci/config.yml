@@ -29,7 +29,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ls -la
       - run: yarn compile
       - persist_to_workspace:
           root: ~/
