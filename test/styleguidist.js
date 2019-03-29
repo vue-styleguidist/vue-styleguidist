@@ -6,7 +6,15 @@
 
 var examplePath = process.argv[3] || 'basic'
 
-process.argv[3] = '--config'
-process.argv[4] = `examples/${examplePath}/styleguide.config.js`
+if (examplePath.indexOf('examples/') !== 0) {
+	examplePath = 'examples/' + examplePath
+}
 
-require('../packages/vue-styleguidist/bin/styleguidist')
+process.argv[3] = '--config'
+process.argv[4] = `${examplePath}/styleguide.config.js`
+if (examplePath === 'examples/vuecli3') {
+	process.argv[2] = 'styleguidist:build'
+	require('@vue/cli-service/bin/vue-cli-service')
+} else {
+	require('../packages/vue-styleguidist/bin/styleguidist')
+}
