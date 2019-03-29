@@ -35,11 +35,14 @@ jobs:
           paths:
             - vue-styleguidist
 
-  test:
+  unit_test:
     <<: *defaults
     steps:
       - attach_workspace:
           at: ~/
+
+      # remake the yarn link
+      - run: yarn install
       - run: yarn lint
       - run: yarn test
       - run: yarn danger ci
@@ -68,6 +71,7 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      # remake the yarn link to vue-cli-plugin
       - run: yarn install
       - run: yarn build:vuecli3
       - run: yarn build vuecli-noplugin
@@ -98,7 +102,7 @@ workflows:
       - compile:
           requires:
             - install
-      - test:
+      - unit_test:
           requires:
             - compile
       - integration-basic:
