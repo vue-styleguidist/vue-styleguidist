@@ -38,18 +38,6 @@ stages:
   - name: merge-back
     if: type != pull_request AND branch = master
 
-examples: &examples
-  - stage: example
-    script:
-      # Compile JS
-      - yarn compile
-
-      # Build all examples
-      - yarn build $EXAMPLE_NAME
-
-      # Check that examples really works: no JS errors on load
-      - yarn test:browser examples/$EXAMPLE_NAME
-
 jobs:
   include:
     - stage: lint
@@ -69,34 +57,6 @@ jobs:
 
         # test vue-cli-plugin
         - yarn test:plugin
-
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=basic
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=customised
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=jsx
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=nuxtjs
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=sections
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=vuecli-noplugin
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=vuecli3
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=vuetify
-    - <<: *examples
-      env:
-        - EXAMPLE_NAME=vuex
 
     - stage: release
       script:
