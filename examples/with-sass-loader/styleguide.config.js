@@ -16,18 +16,7 @@ module.exports = {
 					loader: 'vue-loader',
 					options: {
 						loaders: {
-							scss: [
-								'vue-style-loader',
-								'css-loader',
-								{
-									loader: 'sass-loader',
-									options: {
-										includePaths: ['./src'],
-										data: '@import "style.scss";',
-										outputStyle: 'compressed'
-									}
-								}
-							]
+							scss: ['vue-style-loader', 'css-loader', 'sass-loader']
 						}
 					}
 				},
