@@ -62,5 +62,3 @@ Logo by [Benjamin Cognard](https://twitter.com/benbnur).
 ## License
 
 [MIT License](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/LICENSE)
-
-+
