@@ -1,11 +1,9 @@
 <template>
-<div class="Button">
-	<button class="button"
-		@click.prevent="onClick"
-		:style="{ color: color, fontSize: fontSize }">
-		<slot></slot>
-	</button>
-</div>
+  <div class="Button">
+    <button class="button" @click.prevent="onClick" :style="{ color: color, fontSize: fontSize }">
+      <slot></slot>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -62,6 +60,8 @@ export default {
 </script>
 
 <style lang="scss" scope>
+@import '../../style.scss';
+
 .button {
 	padding: 0.5em 1.5em;
 	background-color: $primary;

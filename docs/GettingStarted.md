@@ -20,7 +20,7 @@ If you use Vue CLI 3 ([@vue/cli](https://cli.vuejs.org/)), you should probably u
 vue add styleguidist
 ```
 
-and use [Vue CLI documentation](VueCLI3.md)
+and use [Vue CLI documentation](VueCLI3doc.md)
 
 ## 2. Configure your style guide
 
