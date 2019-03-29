@@ -38,16 +38,17 @@ stages:
   - name: merge-back
     if: type != pull_request AND branch = master
 
-examples: &examples
-  script:
-    # Compile JS
-    - yarn compile
+examplesPattern: &examples
+  - stage: example
+    script:
+      # Compile JS
+      - yarn compile
 
-    # Build all examples
-    - yarn build $EXAMPLE_NAME
+      # Build all examples
+      - yarn build $EXAMPLE_NAME
 
-    # Check that examples really works: no JS errors on load
-    - yarn test:browser examples/$EXAMPLE_NAME
+      # Check that examples really works: no JS errors on load
+      - yarn test:browser examples/$EXAMPLE_NAME
 
 jobs:
   include:
