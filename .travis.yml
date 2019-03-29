@@ -17,6 +17,18 @@ before_install:
 install:
   - yarn install
 
+examples: &examples
+  - stage: example
+    script:
+      # Compile JS
+      - yarn compile
+
+      # Build all examples
+      - yarn build $EXAMPLE_NAME
+
+      # Check that examples really works: no JS errors on load
+      - yarn test:browser examples/$EXAMPLE_NAME
+
 # In order to avoid double build on pull requests,
 # only build on pushes on master and on pushes on pull requests
 branches:
