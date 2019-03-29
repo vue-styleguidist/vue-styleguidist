@@ -132,4 +132,18 @@ describe('eventHandler', () => {
 		}
 		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success')
 	})
+
+	it('should not fail when event name cannot be found', () => {
+		const src = `
+    export default {
+      methods: {
+        testEmit(success) {
+            this.$emit(success, 1, 2)
+        }
+      }
+    }
+		`
+		const def = parse(src)
+		expect(() => eventHandler(documentation, def.component as any, def.ast)).not.toThrow()
+	})
 })
