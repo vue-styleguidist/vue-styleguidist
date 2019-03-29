@@ -15,6 +15,7 @@ import loggerMixin from '../../mixins/loggerMixin'
  * The only true button.
  * @example ../../../docs/ButtonIgnored.md
  * @example ../../../docs/Button.md
+ * @displayName Best Button
  */
 export default {
 	name: 'Button',

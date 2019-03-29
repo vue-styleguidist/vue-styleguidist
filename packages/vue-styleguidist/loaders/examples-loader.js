@@ -14,6 +14,7 @@ const getImports = require('react-styleguidist/lib/loaders/utils/getImports').de
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
 const isCodeVueSfc = require('./utils/isCodeVueSfc')
+const cleanComponentName = require('./utils/cleanComponentName')
 
 // Hack the react scaffolding to be able to load client
 const absolutize = filepath =>
@@ -42,7 +43,7 @@ module.exports = function examplesLoader(source) {
 
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
 	if (shouldShowDefaultExample) {
-		source = expandDefaultComponent(source, displayName)
+		source = expandDefaultComponent(source, cleanComponentName(displayName))
 	}
 
 	const updateExample = config.updateExample
@@ -81,7 +82,7 @@ module.exports = function examplesLoader(source) {
 		// Append the current component module to make it accessible in examples
 		// without an explicit import
 		// TODO: Do not leak absolute path
-		...(displayName ? { [displayName]: file } : {})
+		...(displayName ? { [cleanComponentName(displayName)]: file } : {})
 	}
 
 	// All required or imported modules, either explicitly in examples code
