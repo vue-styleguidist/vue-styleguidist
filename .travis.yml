@@ -43,7 +43,7 @@ stages:
   - lint
   - test
   - integration
-  - examples
+  - example
   - name: release
     if: type != pull_request AND branch = master
   - name: documentation
