@@ -38,7 +38,7 @@ stages:
   - name: merge-back
     if: type != pull_request AND branch = master
 
-examplesPattern: &examples
+examples: &examples
   - stage: example
     script:
       # Compile JS
