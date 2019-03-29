@@ -56,14 +56,24 @@ jobs:
       - run: yarn build customised
       - run: yarn build sections
       - run: yarn build vuex
-      - run: yarn build:vuecli3
 
       # Check that examples really works: no JS errors on load
       - run: yarn test:browser basic
       - run: yarn test:browser customised
       - run: yarn test:browser sections
       - run: yarn test:browser vuex
+
+  integration-vuecli:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run: yarn install
+      - run: yarn build:vuecli3
+      - run: yarn build vuecli-noplugin
       - run: yarn test:browser vuecli3
+      - run: yarn test:browser vuecli-noplugin
 
   integration-other:
     <<: *defaults
@@ -75,13 +85,11 @@ jobs:
       - run: yarn build jsx
       - run: yarn build nuxtjs/styleguide
       - run: yarn build vuetify
-      - run: yarn build vuecli-noplugin
 
       # Check that examples really works: no JS errors on load
       - run: yarn test:browser jsx
       - run: yarn test:browser nuxtjs
       - run: yarn test:browser vuetify
-      - run: yarn test:browser vuecli-noplugin
 
 workflows:
   version: 2
@@ -95,6 +103,9 @@ workflows:
           requires:
             - compile
       - integration-basic:
+          requires:
+            - compile
+      - integration-vuecli:
           requires:
             - compile
       - integration-other:
