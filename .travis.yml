@@ -17,17 +17,17 @@ before_install:
 install:
   - yarn install
 
-examples: &examples
-    stage: example
-    script:
-      # Compile JS
-      - yarn compile
+examplePattern: &example
+          stage: examples
+          script:
+            # Compile JS
+            - yarn compile
 
-      # Build all examples
-      - yarn build $EXAMPLE_NAME
+            # Build all examples
+            - yarn build $EXAMPLE_NAME
 
-      # Check that examples really works: no JS errors on load
-      - yarn test:browser examples/$EXAMPLE_NAME
+            # Check that examples really works: no JS errors on load
+            - yarn test:browser examples/$EXAMPLE_NAME
 
 # In order to avoid double build on pull requests,
 # only build on pushes on master and on pushes on pull requests
@@ -43,7 +43,7 @@ stages:
   - lint
   - test
   - integration
-  - example
+  - examples
   - name: release
     if: type != pull_request AND branch = master
   - name: documentation
@@ -71,31 +71,31 @@ jobs:
         # test vue-cli-plugin
         - yarn test:plugin
     
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=basic
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=customised
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=jsx
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=nuxtjs
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=sections
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=vuecli-noplugin
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=vuecli3
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=vuetify
-    - <<: *examples
+    - <<: *example
       env:
         - EXAMPLE_NAME=vuex
 
