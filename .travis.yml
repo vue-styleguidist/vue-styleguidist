@@ -25,8 +25,7 @@ branches:
     - dev
 
 script:
-  # Run tests without coverage since it's 2x faster
-  - yarn test:jest --runInBand
+  - yarn test:jest --maxWorkers=2
 
 stages:
   - lint
@@ -51,18 +50,33 @@ jobs:
         # Compile JS
         - yarn compile
 
-        # Build all examples
-        - travis/build_examples.sh
-
-        # Check that examples really works: no JS errors on load
-        - travis/visit_examples.sh
-
         # Run integration tests with Cypress
         - yarn test:cypress:pre
         - yarn test:cypress
 
         # test vue-cli-plugin
         - yarn test:plugin
+
+    - stage: examples
+      env:
+        - EXAMPLE_NAME=basic
+        - EXAMPLE_NAME=customised
+        - EXAMPLE_NAME=jsx
+        - EXAMPLE_NAME=nuxtjs
+        - EXAMPLE_NAME=sections
+        - EXAMPLE_NAME=vuecli-noplugin
+        - EXAMPLE_NAME=vuecli3
+        - EXAMPLE_NAME=vuetify
+        - EXAMPLE_NAME=vuex
+      script:
+        # Compile JS
+        - yarn compile
+
+        # Build all examples
+        - yarn build EXAMPLE_NAME
+
+        # Check that examples really works: no JS errors on load
+        - yarn test:browser EXAMPLE_NAME
 
     - stage: release
       script:
