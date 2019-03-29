@@ -35,21 +35,6 @@ branches:
     - master
     - dev
 
-script:
-  - yarn lint
-  - yarn danger ci
-  - yarn test:jest --maxWorkers=2
-
-  # Compile JS
-  - yarn compile
-
-  # test vue-cli-plugin
-  - yarn test:plugin
-
-  # Run integration tests with Cypress
-  - yarn test:cypress:pre
-  - yarn test:cypress
-
 stages:
   - test
   - examples
@@ -62,6 +47,22 @@ stages:
 
 jobs:
   include:
+    - stage: test
+      script:
+        - yarn lint
+        - yarn danger ci
+        - yarn test:jest --maxWorkers=2
+
+        # Compile JS
+        - yarn compile
+
+        # test vue-cli-plugin
+        - yarn test:plugin
+
+        # Run integration tests with Cypress
+        - yarn test:cypress:pre
+        - yarn test:cypress
+
     - <<: *example
       env:
         - EXAMPLE_NAME=basic
