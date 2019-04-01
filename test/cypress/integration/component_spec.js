@@ -1,7 +1,7 @@
 describe('Single component', () => {
 	before(() => {
 		// Open simple button component in isolation
-		cy.visit('/#!/Button/1')
+		cy.visit('/#!/Best Button/1')
 	})
 
 	describe('props, methods, events & slots section', () => {
@@ -69,7 +69,7 @@ describe('Single component', () => {
 		})
 
 		it('changes the render after code change', () => {
-			const codeToDelete = '</Button>'
+			const codeToDelete = '</BestButton>'
 			cy.get('@container')
 				.find('.CodeMirror textarea')
 				// CodeMirror actually listens to keystrokes on an empty textarea
