@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import cleanComponentName from './cleanComponentName'
 
 /**
  * Expose component as global variables.
@@ -12,6 +13,6 @@ export default function globalizeComponent(component) {
 	}
 	const configComponent = component.module.default || component.module
 	if (configComponent) {
-		Vue.component(displayName, configComponent)
+		Vue.component(cleanComponentName(displayName), configComponent)
 	}
 }

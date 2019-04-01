@@ -50,7 +50,7 @@ export default function eventHandler(
 						firstArg = resolveIdentifier(astPath, firstArg)
 					}
 
-					if (!bt.isStringLiteral(firstArg.node)) {
+					if (!firstArg || !bt.isStringLiteral(firstArg.node)) {
 						return false
 					}
 					eventName = firstArg.node.value
