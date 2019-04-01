@@ -1,6 +1,5 @@
 import Vue from 'vue'
-
-const cleanComponentName = require('../../loaders/utils/cleanComponentName')
+import cleanComponentName from './cleanComponentName'
 
 /**
  * Expose component as global variables.
