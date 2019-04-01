@@ -84,7 +84,9 @@ function getConfig(api) {
 
 	const eslintRule = conf.module.rule('eslint')
 	if (eslintRule) {
-		eslintRule.exclude.add(require('path').dirname(require.resolve('vue-styleguidist')))
+		const path = require('path')
+		const vsgPath = path.resolve(path.dirname(require.resolve('vue-styleguidist')), '../')
+		eslintRule.exclude.add(vsgPath)
 	}
 
 	// remove the double compiled successfully message
