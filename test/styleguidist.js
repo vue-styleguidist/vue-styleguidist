@@ -13,7 +13,8 @@ if (examplePath.indexOf('examples/') !== 0) {
 process.argv[3] = '--config'
 process.argv[4] = `${examplePath}/styleguide.config.js`
 if (examplePath === 'examples/vuecli3') {
-	process.argv[2] = 'styleguidist:build'
+	const command = process.argv[2] === 'server' ? '' : `:${process.argv[2]}`
+	process.argv[2] = `styleguidist${command}`
 	require('@vue/cli-service/bin/vue-cli-service')
 } else {
 	require('../packages/vue-styleguidist/bin/styleguidist')
