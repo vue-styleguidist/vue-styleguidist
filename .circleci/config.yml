@@ -46,7 +46,7 @@ jobs:
       - run: yarn lint
       - run: yarn test
 
-  integration-basic:
+  examples-basic:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -64,7 +64,7 @@ jobs:
       - run: yarn test:browser sections
       - run: yarn test:browser vuex
 
-  integration-vuecli:
+  examples-vuecli:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -77,7 +77,7 @@ jobs:
       - run: yarn test:browser vuecli3
       - run: yarn test:browser vuecli-noplugin
 
-  integration-other:
+  examples-other:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -93,6 +93,22 @@ jobs:
       - run: yarn test:browser nuxtjs
       - run: yarn test:browser vuetify
 
+  publish:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run: yarn install
+      - run: git config --global user.name "Vue Styleguidist Bot"
+      - run: git config --global user.email "cluedude@hotmail.com"
+      - run: git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+      - run: git checkout master
+      - run: git reset --hard
+      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+      - run: yarn lerna version --yes --github-release
+      - run: yarn lerna publish from-git --yes
+
 workflows:
   version: 2
   test:
@@ -104,12 +120,22 @@ workflows:
       - unit_test:
           requires:
             - compile
-      - integration-basic:
+      - examples-basic:
           requires:
             - compile
-      - integration-vuecli:
+      - examples-vuecli:
           requires:
             - compile
-      - integration-other:
+      - examples-other:
           requires:
             - compile
+      - publish:
+          requires:
+            - unit_test
+            - examples-basic
+            - examples-vuecli
+            - examples-other
+          filters:
+            branches:
+              only:
+                - master
