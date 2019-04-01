@@ -45,7 +45,6 @@ jobs:
       - run: yarn install
       - run: yarn lint
       - run: yarn test
-      - run: yarn danger ci
 
   integration-basic:
     <<: *defaults
