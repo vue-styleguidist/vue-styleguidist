@@ -3,6 +3,10 @@ module.exports = {
 	title: 'Default Style Guide',
 	defaultExample: true,
 	components: 'src/components/**/[A-Z]*.vue',
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	},
 	styleguideDir: 'dist'
 	// sections: [
 	//   {

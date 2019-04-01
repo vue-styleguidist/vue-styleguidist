@@ -30,5 +30,9 @@ module.exports = {
 	},
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
 	usageMode: 'expand',
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	}
 }

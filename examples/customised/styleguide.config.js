@@ -5,6 +5,10 @@ module.exports = {
 	title: 'Style guide example',
 	components: 'src/components/**/[A-Z]*.vue',
 	showSidebar: false,
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	},
 	theme: {
 		baseBackground: '#fdfdfc',
 		link: '#274e75',

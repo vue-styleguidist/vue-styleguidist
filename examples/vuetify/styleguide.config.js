@@ -48,5 +48,9 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	}
 }

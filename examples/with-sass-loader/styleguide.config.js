@@ -6,7 +6,8 @@ module.exports = {
 	defaultExample: true,
 	require: [path.join(__dirname, './src/style.scss')],
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
 	},
 	webpackConfig: {
 		module: {

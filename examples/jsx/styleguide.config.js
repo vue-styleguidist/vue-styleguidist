@@ -5,7 +5,8 @@ module.exports = {
 	components: 'src/components/**/[A-Z]*.jsx',
 	defaultExample: true,
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
 	},
 	version: '1.1.1',
 	webpackConfig: {

@@ -4,6 +4,10 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
 	components: './src/components/**/[A-Z]*.vue',
 	renderRootJsx: resolve(__dirname, 'styleguide/styleguide.root.js'),
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	},
 	webpackConfig: {
 		module: {
 			rules: [
