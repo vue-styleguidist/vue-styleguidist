@@ -26,3 +26,33 @@ branches:
 script:
   - yarn lint
   - yarn danger ci
+
+stages:
+  - test
+  - name: documentation
+    if: type != pull_request AND branch = master
+
+jobs:
+  include:
+    # Build & Deploy the documentation website
+    - stage: documentation
+      script:
+        - yarn docs:build
+        - yarn compile
+
+        # Build all examples
+        - ./travis/build_examples.sh
+
+        # Move them to the docs
+        - ./travis/move_examples.sh
+
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        local-dir: docs/dist
+        target-branch: master
+        repo: vue-styleguidist/vue-styleguidist.github.io
+        github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+        keep-history: true
+        on:
+          branch: master
