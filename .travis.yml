@@ -4,9 +4,6 @@ language: node_js
 # + prevent double build on dev -> master Pull Request
 if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = master)
 
-node_js:
-  - 10
-
 cache: yarn
 
 before_install:
@@ -23,12 +20,7 @@ branches:
     - master
     - dev
 
-script:
-  # Run tests without coverage since it's 2x faster
-  - yarn test:jest --runInBand
-
 stages:
-  - lint
   - test
   - integration
   - name: release
@@ -40,9 +32,11 @@ stages:
 
 jobs:
   include:
-    - stage: lint
+    - stage: test
       script:
         - yarn lint
+        # Run tests without coverage since it's 2x faster
+        - yarn test:jest --runInBand
         - yarn danger ci
 
     - stage: integration
