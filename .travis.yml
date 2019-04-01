@@ -6,7 +6,6 @@ if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (t
 
 node_js:
   - 10
-  - 8
 
 cache: yarn
 
