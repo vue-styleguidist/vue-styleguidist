@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.11.2...v3.11.3) (2019-04-01)
+
+
+### Bug Fixes
+
+* **plugin:** add the whole package to eslintignore ([3b13ccf](https://github.com/vue-styleguidist/vue-styleguidist/commit/3b13ccf))
+
+
+
+
+
 ## [3.11.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.11.1...v3.11.2) (2019-03-28)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
