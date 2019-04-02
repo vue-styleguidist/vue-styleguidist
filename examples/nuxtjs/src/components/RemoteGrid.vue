@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="entry in filteredData" :key="entry">
+        <tr v-for="(entry, id) in filteredData" :key="id">
           <td v-for="key in columns" :key="key">{{entry[key]}}</td>
         </tr>
       </tbody>
@@ -76,7 +76,7 @@ export default {
 		 */
 		filterKey: {
 			type: String,
-			default: 'example'
+			default: undefined
 		}
 	},
 	async mounted() {
