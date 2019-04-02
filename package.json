@@ -110,6 +110,7 @@
     "typescript": "^3.3.3333",
     "url-loader": "^1.0.1",
     "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
     "vue-cli-plugin-styleguidist": "*",
     "vue-i18n": "^8.7.0",
     "vue-loader": "^15.7.0",
