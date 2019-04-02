@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests button should match the snapshot 1`] = `
+Object {
+  "description": "This is an example of creating a reusable button component and using it with external data.",
+  "displayName": "ClassComponent",
+  "events": Object {
+    "success": Object {
+      "description": "",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+  },
+  "methods": Array [
+    Object {
+      "description": "",
+      "modifiers": Array [],
+      "name": "onClick",
+      "params": Array [
+        Object {
+          "name": "a",
+          "type": Object {
+            "name": "string",
+          },
+        },
+      ],
+      "tags": Object {
+        "access": Array [
+          Object {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+  ],
+  "props": Object {
+    "bundleHash": Object {
+      "description": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "number",
+      },
+    },
+    "color": Object {
+      "description": "color of the button",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+  },
+  "slots": Object {
+    "default": Object {
+      "bindings": Object {},
+      "description": "Use this slot default",
+    },
+  },
+  "tags": Object {
+    "author": Array [
+      Object {
+        "description": "[Rafael](https://github.com/rafaesc92)",
+        "title": "author",
+      },
+    ],
+    "version": Array [
+      Object {
+        "description": "1.0.5",
+        "title": "version",
+      },
+    ],
+  },
+}
+`;

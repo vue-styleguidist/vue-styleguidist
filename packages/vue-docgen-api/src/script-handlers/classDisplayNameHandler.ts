@@ -1,6 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import { Documentation } from '../Documentation'
+import getArgFromDecorator from '../utils/getArgFromDecorator'
 
 export default function classDisplayNameHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isClassDeclaration(path.node)) {
@@ -25,22 +26,4 @@ export default function classDisplayNameHandler(documentation: Documentation, pa
 			documentation.set('displayName', displayName)
 		}
 	}
-}
-
-function getArgFromDecorator(
-	path: NodePath<bt.Decorator>
-): null | NodePath<bt.Expression | bt.SpreadElement | bt.JSXNamespacedName> {
-	const expForDecorator = path
-		.filter((p: NodePath) => {
-			const exp = p.get('expression')
-			const decoratorIdenifier = bt.isCallExpression(exp.node) ? exp.node.callee : exp.node
-			return 'Component' === (bt.isIdentifier(decoratorIdenifier) ? decoratorIdenifier.name : null)
-		}, null)[0]
-		.get('expression')
-	if (bt.isCallExpression(expForDecorator.node)) {
-		return expForDecorator.get('arguments', 0) as NodePath<
-			bt.Expression | bt.SpreadElement | bt.JSXNamespacedName
-		>
-	}
-	return null
 }
