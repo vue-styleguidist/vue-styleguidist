@@ -1,8 +1,17 @@
 <div align="center" markdown="1" style="text-align:center">
   <img src="assets/logo-withtext.png" alt="Vue Styleguidist" width="400">
 
-**Isolated Vue component development environment with a living style guide** <a href="https://www.npmjs.com/package/vue-styleguidist"> <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version"> </a>
+**Isolated Vue component development environment with a living style guide**
 
+<a href="https://www.npmjs.com/package/vue-styleguidist"> 
+  <img src="https://img.shields.io/npm/v/vue-styleguidist.svg" alt="Version"> 
+</a>
+<a href="https://travis-ci.com/vue-styleguidist/vue-styleguidist">
+  <img src="https://travis-ci.com/vue-styleguidist/vue-styleguidist.svg?branch=dev" alt="Travis CI (unit & lint)">
+</a>
+<a href="https://circleci.com/gh/vue-styleguidist/vue-styleguidist">
+  <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=svg" alt="Circle CI (integration)">
+</a>
 </div>
 
 > Project was started when not finding a tool that generates documentation of components with hot reloading, read documentation and have a playground. Created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files. Only supports vue 2.x.

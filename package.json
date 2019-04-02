@@ -13,7 +13,7 @@
   },
   "scripts": {
     "pretest": "yarn lint",
-    "test": "yarn test:jest && yarn test:plugin",
+    "test": "yarn test:jest --maxWorkers=2 && yarn test:plugin",
     "test:jest": "jest",
     "test:plugin": "rimraf ./test/cli-packages/* && jest --config=./jest.config.plugin.js --runInBand",
     "posttest": "yarn format",
