@@ -1,0 +1,101 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:latest-browsers
+  working_directory: ~/vue-styleguidist
+
+jobs:
+  install:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - vue-styleguidist
+
+  compile:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: yarn compile
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - vue-styleguidist
+
+  examples-basic:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      # Build all examples
+      - run: yarn build basic
+      - run: yarn build customised
+      - run: yarn build sections
+      - run: yarn build vuex
+
+      # Check that examples really works: no JS errors on load
+      - run: yarn test:browser basic
+      - run: yarn test:browser customised
+      - run: yarn test:browser sections
+      - run: yarn test:browser vuex
+
+  examples-vuecli:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      # remake the yarn link to vue-cli-plugin
+      - run: yarn install
+      - run: yarn build vuecli3
+      - run: yarn build vuecli-noplugin
+      - run: yarn test:browser vuecli3
+      - run: yarn test:browser vuecli-noplugin
+
+  examples-other:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      # Build all examples
+      - run: yarn build jsx
+      - run: yarn build nuxtjs
+      - run: yarn build vuetify
+
+      # Check that examples really works: no JS errors on load
+      - run: yarn test:browser jsx
+      - run: yarn test:browser nuxtjs
+      - run: yarn test:browser vuetify
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - install
+      - compile:
+          requires:
+            - install
+      - examples-basic:
+          requires:
+            - compile
+      - examples-vuecli:
+          requires:
+            - compile
+      - examples-other:
+          requires:
+            - compile
