@@ -59,7 +59,7 @@ jobs:
         on:
           branch: master
 
-  - stage: release
+    - stage: release
       script:
         - yarn compile
         - git config --global user.name "Vue Styleguidist Bot"
