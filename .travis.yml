@@ -71,29 +71,6 @@ jobs:
         - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
 
-    # Build & Deploy the documentation website
-    - stage: documentation
-      script:
-        - yarn docs:build
-        - yarn compile
-
-        # Build all examples
-        - ./travis/build_examples.sh
-
-        # Move them to the docs
-        - ./travis/move_examples.sh
-
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        local-dir: docs/dist
-        target-branch: master
-        repo: vue-styleguidist/vue-styleguidist.github.io
-        github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-        keep-history: true
-        on:
-          branch: master
-
     # then merge the whole thing back to dev
     - stage: merge-back
       install: skip # bundle install is not required

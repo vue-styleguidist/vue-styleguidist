@@ -85,29 +85,13 @@ jobs:
 
       # Build all examples
       - run: yarn build jsx
-      - run: yarn build nuxtjs/styleguide
+      - run: yarn build nuxtjs
       - run: yarn build vuetify
 
       # Check that examples really works: no JS errors on load
       - run: yarn test:browser jsx
       - run: yarn test:browser nuxtjs
       - run: yarn test:browser vuetify
-
-  publish:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/
-
-      - run: yarn install
-      - run: git config --global user.name "Vue Styleguidist Bot"
-      - run: git config --global user.email "cluedude@hotmail.com"
-      - run: git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
-      - run: git checkout master
-      - run: git reset --hard
-      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-      - run: yarn lerna version --yes --github-release
-      - run: yarn lerna publish from-git --yes
 
 workflows:
   version: 2
@@ -129,13 +113,3 @@ workflows:
       - examples-other:
           requires:
             - compile
-      - publish:
-          requires:
-            - unit_test
-            - examples-basic
-            - examples-vuecli
-            - examples-other
-          filters:
-            branches:
-              only:
-                - master
