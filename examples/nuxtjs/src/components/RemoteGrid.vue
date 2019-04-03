@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="entry in filteredData" :key="entry">
+        <tr v-for="(entry, id) in filteredData" :key="id">
           <td v-for="key in columns" :key="key">{{entry[key]}}</td>
         </tr>
       </tbody>
@@ -76,12 +76,12 @@ export default {
 		 */
 		filterKey: {
 			type: String,
-			default: 'example'
+			default: undefined
 		}
 	},
 	async mounted() {
-		const test = await this.$axios.$get('http://dummy.restapiexample.com/api/v1/employees')
-		console.log('test', test)
+		const result = await this.$axios.$get('http://dummy.restapiexample.com/api/v1/employees')
+		this.dataLive = result
 	},
 	data() {
 		var sortOrders = {}
@@ -90,7 +90,8 @@ export default {
 		})
 		return {
 			sortKey: '',
-			sortOrders: sortOrders
+			sortOrders: sortOrders,
+			dataLive: this.data
 		}
 	},
 	computed: {
@@ -98,7 +99,7 @@ export default {
 			var sortKey = this.sortKey
 			var filterKey = this.filterKey && this.filterKey.toLowerCase()
 			var order = this.sortOrders[sortKey] || 1
-			var data = this.data
+			var data = this.dataLive
 			if (filterKey) {
 				data = data.filter(function(row) {
 					return Object.keys(row).some(function(key) {
@@ -173,6 +174,6 @@ export default {
 
 <docs>
 ```jsx
-<grid :data="[]" :columns='["col 1", "col 2"]'/>
+<RemoteGrid :data="[]" :columns='["employee_name", "employee_salary"]'/>
 ```
 </docs>

@@ -5,13 +5,20 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
-import { describeDefault, describeRequired, describeType } from './propHandler'
+import propHandler, { describeDefault, describeRequired, describeType } from './propHandler'
+import getArgFromDecorator from '../utils/getArgFromDecorator'
 
-export default function propHandler(
+export default function classPropHandler(
 	documentation: Documentation,
 	path: NodePath<bt.ClassDeclaration>
 ) {
 	if (bt.isClassDeclaration(path.node)) {
+		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
+
+		if (config && bt.isObjectExpression(config.node)) {
+			propHandler(documentation, config)
+		}
+
 		path
 			.get('body')
 			.get('body')
