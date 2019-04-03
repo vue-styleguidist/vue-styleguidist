@@ -7,9 +7,11 @@
 </template>
 
 <docs>
+Document your functional templates in docs blocks
+
 ```vue
-<functional-button id="test">
-    hello
-</functional-button>
+<FunctionalButton id="test">
+    In the docs block
+</FunctionalButton>
 ```
 </docs>
