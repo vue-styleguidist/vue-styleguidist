@@ -2,8 +2,12 @@ const { resolve } = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
-	components: '../src/components/**/[A-Z]*.vue',
-	renderRootJsx: resolve(__dirname, 'styleguide.root.js'),
+	components: './src/components/**/[A-Z]*.vue',
+	renderRootJsx: resolve(__dirname, 'styleguide/styleguide.root.js'),
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	},
 	webpackConfig: {
 		module: {
 			rules: [
@@ -14,9 +18,9 @@ module.exports = {
 				{
 					test: /\.js$/,
 					exclude: /node_modules/,
-					use:{
+					use: {
 						loader: 'babel-loader',
-						options:require("../babel.config")
+						options: require('./babel.config')
 					}
 				},
 				{
@@ -27,5 +31,6 @@ module.exports = {
 		},
 		plugins: [new VueLoaderPlugin()]
 	},
-	usageMode: 'expand'
+	usageMode: 'expand',
+	styleguideDir: 'dist'
 }

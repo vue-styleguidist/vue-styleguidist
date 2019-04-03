@@ -47,5 +47,10 @@ module.exports = {
 		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand'
+	exampleMode: 'expand',
+	styleguideDir: 'dist',
+	ribbon: {
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
+	}
 }

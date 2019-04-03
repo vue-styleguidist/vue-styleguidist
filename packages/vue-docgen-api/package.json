@@ -1,6 +1,6 @@
 {
   "name": "vue-docgen-api",
-  "version": "3.11.0",
+  "version": "3.11.3",
   "description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
@@ -36,9 +36,10 @@
     "ts-map": "^1.0.3",
     "typescript": "^3.2.2",
     "vue": "^2.6.9",
-    "vue-template-compiler": "^2.6.9"
+    "vue-template-compiler": "^2.6.10"
   },
   "devDependencies": {
+    "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^7.3.0"
   }
 }

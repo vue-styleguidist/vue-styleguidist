@@ -40,9 +40,10 @@ module.exports = function examplesLoader(source) {
 	const { file, displayName, shouldShowDefaultExample, customLangs } =
 		loaderUtils.getOptions(this) || {}
 
+	const cleanDisplayName = displayName ? displayName.replace(/[^A-Za-z0-9]/g, '') : undefined
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
 	if (shouldShowDefaultExample) {
-		source = expandDefaultComponent(source, displayName)
+		source = expandDefaultComponent(source, cleanDisplayName)
 	}
 
 	const updateExample = config.updateExample
@@ -81,7 +82,7 @@ module.exports = function examplesLoader(source) {
 		// Append the current component module to make it accessible in examples
 		// without an explicit import
 		// TODO: Do not leak absolute path
-		...(displayName ? { [displayName]: file } : {})
+		...(cleanDisplayName ? { [cleanDisplayName]: file } : {})
 	}
 
 	// All required or imported modules, either explicitly in examples code

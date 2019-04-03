@@ -5,7 +5,8 @@ module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
 	},
 	version: '1.1.1',
 	webpackConfig: {
@@ -33,6 +34,7 @@ module.exports = {
 									'@babel/preset-env',
 									{
 										useBuiltIns: 'usage',
+										corejs: 2,
 										targets: {
 											ie: '11'
 										}
@@ -56,5 +58,6 @@ module.exports = {
 	exampleMode: 'expand',
 	compilerConfig: {
 		target: { ie: 11 }
-	}
+	},
+	styleguideDir: 'dist'
 }

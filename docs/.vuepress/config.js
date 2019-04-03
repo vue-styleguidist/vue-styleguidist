@@ -2,13 +2,15 @@ const title = 'Vue Styleguidist'
 const ogprefix = 'og: http://ogp.me/ns#'
 const description = 'Isolated Vue component development environment with a living style guide'
 
+const titleShare = `${title} docs`
+
 module.exports = {
 	dest: 'docs/dist',
 	title,
 	description,
 	head: [
-		['meta', { prefix: ogprefix, property: 'og:title', content: title }],
-		['meta', { prefix: ogprefix, property: 'twitter:title', content: title }],
+		['meta', { prefix: ogprefix, property: 'og:title', content: titleShare }],
+		['meta', { prefix: ogprefix, property: 'twitter:title', content: titleShare }],
 		['meta', { prefix: ogprefix, property: 'og:type', content: 'website' }],
 		['meta', { prefix: ogprefix, property: 'og:description', content: description }],
 		[
@@ -31,7 +33,8 @@ module.exports = {
 		},
 		sidebar: [
 			'/GettingStarted',
-			['/VueCLI3', '@vue/cli 3.X'],
+			'/Examples',
+			['/VueCLI3doc', '@vue/cli 3.X'],
 			'/Documenting',
 			['/Components', 'Locating Components'],
 			'/Webpack',
