@@ -2,6 +2,8 @@
 
 In the [repository](https://github.com/vue-styleguidist/vue-styleguidist), there is a few example styleguide. You will find below what each styleguide looks like once it is built.
 
+<!-- vsg-examples: -->
+
 - [basic](https://vue-styleguidist.github.io/basic/)
 - [customised](https://vue-styleguidist.github.io/customised/)
 - [JSX](https://vue-styleguidist.github.io/jsx/)
@@ -12,3 +14,5 @@ In the [repository](https://github.com/vue-styleguidist/vue-styleguidist), there
 - [vuetify](https://vue-styleguidist.github.io/vuetify/)
 - [vuex](https://vue-styleguidist.github.io/vuex/)
 - [with-sass-loader](https://vue-styleguidist.github.io/with-sass-loader/)
+
+<!-- /vsg-examples -->
