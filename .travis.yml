@@ -65,7 +65,7 @@ jobs:
       script:
         - yarn compile
         - git config --global user.name "Vue Styleguidist Bot"
-        - git config --global user.email "cluedude@hotmail.com"
+        - git config --global user.email "${BOT_EMAIL}"
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git checkout master
         - git reset --hard
@@ -78,7 +78,7 @@ jobs:
       install: skip # bundle install is not required
       script:
         - git config --global user.name "Vue Styleguidist Bot"
-        - git config --global user.email "cluedude@hotmail.com"
+        - git config --global user.email "${BOT_EMAIL}"
         - git remote add github "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
         - git fetch github dev
         - git checkout github/dev
