@@ -30,7 +30,7 @@
     "test:cypress:open": "cypress open",
     "test:cypress": "node test/run.server.js",
     "docs": "vuepress dev docs",
-    "docs:build": "node ./docs/scripts/review_templates.js && vuepress build docs",
+    "docs:build": "node ./docs/scripts/render_templates.js && vuepress build docs",
     "postinstall": "cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",
@@ -66,7 +66,9 @@
     "babel-eslint": "^9.0.0",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-system-import-transformer": "^3.1.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
     "cheerio": "^1.0.0-rc.2",
     "css-loader": "^2.1.0",
     "danger": "^7.0.17",

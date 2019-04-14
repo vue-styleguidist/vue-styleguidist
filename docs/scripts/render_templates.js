@@ -9,7 +9,6 @@ async function render() {
 	const files = await globby('*.ejs', { cwd: templateFolder })
 	files.forEach(filename => {
 		const filepath = path.resolve(templateFolder, filename)
-		console.log('filepath', filepath)
 		ejs.renderFile(filepath, { globby, path, rootFolder, require }, function(err, str) {
 			if (err) {
 				throw new Error(err)
@@ -21,6 +20,8 @@ async function render() {
 				function(err) {
 					if (err) {
 						throw new Error(err)
+					} else {
+						console.log('template generated:', filename)
 					}
 				}
 			)
