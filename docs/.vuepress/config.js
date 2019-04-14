@@ -1,6 +1,8 @@
 const title = 'Vue Styleguidist'
 const ogprefix = 'og: http://ogp.me/ns#'
 const description = 'Isolated Vue component development environment with a living style guide'
+const fs = require('fs')
+const path = require('path')
 
 const titleShare = `${title} docs`
 
@@ -33,7 +35,7 @@ module.exports = {
 		},
 		sidebar: [
 			'/GettingStarted',
-			'/Examples',
+			...(fs.existsSync(path.resolve(__dirname, '../Examples.md')) ? ['/Examples'] : []),
 			['/VueCLI3doc', '@vue/cli 3.X'],
 			'/Documenting',
 			['/Components', 'Locating Components'],

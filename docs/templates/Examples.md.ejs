@@ -1,0 +1,21 @@
+# Examples
+
+In the [repository](https://github.com/vue-styleguidist/vue-styleguidist), There is a few example styleguide. You will find below what each styleguide looks like once it is built.
+
+<% 
+const examples = globby.sync('examples/*/package.json', {cwd: rootFolder, absolute: true})
+examples.forEach(function(ex) { 
+    const pkg = require(ex);
+    const exampleName = pkg.name.replace(/^vue-styleguidist-example-/, '')
+
+%>## [<%= exampleName %>](https://vue-styleguidist.github.io/<%= exampleName %>/)<% if(pkg.description){ %>
+
+<%= pkg.description %><% } %><% if(pkg.keywords){ %>
+
+### Keywords
+<% pkg.keywords.forEach(function(word){ %>
+- <%= word %><% })} %>
+
+<% 
+}) 
+%>

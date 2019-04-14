@@ -35,5 +35,10 @@
     "vue-loader": "^15.2.4",
     "vue-styleguidist": "^3.10.1",
     "webpack": "^4.10.0"
-  }
+  },
+  "keywords": [
+    "internet explorer", 
+    "compatible", 
+    "IE11"
+  ]
 }
