@@ -17,6 +17,7 @@ test/cypress/videos/
 
 # output of docs build
 /docs/dist/
+/docs/Examples.md
 
 # examples build artefacts
 /examples/**/dist/build

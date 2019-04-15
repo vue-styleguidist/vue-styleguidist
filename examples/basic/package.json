@@ -1,6 +1,11 @@
 {
   "name": "vue-styleguidist-example-basic",
-  "description": "Vue styleguidist basic example",
+  "description": "Example of vue-styleguidist tested on IE11, please have a look at the webpack config of babel",
+  "keywords": [
+    "internet explorer", 
+    "compatible", 
+    "IE11"
+  ],
   "version": "3.10.1",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",

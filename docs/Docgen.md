@@ -2,8 +2,6 @@
 
 `vue-docgen-api` turns VueJs components into documentation objects.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Docgen.md -->
-
 <!-- toc -->
 
 - [API](#api)
@@ -74,7 +72,7 @@ The object has functions to get descriptor for props, events, methods and slots.
 function getPropDescriptor(propName: string): PropDescriptor
 ```
 
-## Parsing
+## Parsers
 
 First we use babel to parse the comments in the code.
 

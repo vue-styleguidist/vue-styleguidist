@@ -1,7 +1,5 @@
 # Node.js API
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/API.md -->
-
 <!-- toc -->
 
 - [Initialization](#initialization)
