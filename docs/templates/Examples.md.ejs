@@ -10,15 +10,14 @@ examples.forEach(function(ex) {
     const pkg = require(ex);
     const exampleName = pkg.name.replace(/^vue-styleguidist-example-/, '')
 
-%>## <%= exampleName %>
+%>## <%= exampleName %><% 
+if(pkg.description){ %>
+<%= pkg.description %>
+<% } %>
 - [Live Demo](https://vue-styleguidist.github.io/<%= exampleName %>/)
-- [GitHub](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/examples/<%= exampleName %>/)<% if(pkg.description){ %>
+- [GitHub](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/examples/<%= exampleName %>/)<% if(pkg.keywords){ %>
 
-<%= pkg.description %><% } %><% if(pkg.keywords){ %>
-
-### Keywords
-<% pkg.keywords.forEach(function(word){ %>
-- <%= word %><% })} %>
+Keywords: <% pkg.keywords.forEach(function(word){ %><%= word %>, <% })} %> 
 
 <% 
 }) 
