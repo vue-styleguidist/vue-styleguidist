@@ -45,10 +45,11 @@ jobs:
         - yarn compile
 
         # Build all examples
-        - ./travis/build_examples.sh
+        - cd examples
+        - for D in *; do yarn build "${D}"; done
 
         # Move them to the docs
-        - ./travis/move_examples.sh
+        - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
 
       deploy:
         provider: pages

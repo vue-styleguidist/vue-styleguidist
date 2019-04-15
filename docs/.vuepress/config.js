@@ -4,14 +4,14 @@ const description = 'Isolated Vue component development environment with a livin
 const fs = require('fs')
 const path = require('path')
 
-const render = require('./render_templates')
+const render_templates = require('./render_templates')
 const render_tocs = require('./render-tocs')
 
 const titleShare = `${title} docs`
 
-module.exports = async () => {
-	await render()
-	await render_tocs()
+module.exports = () => {
+	render_templates()
+	render_tocs()
 	return {
 		dest: 'docs/dist',
 		title,

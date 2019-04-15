@@ -20,6 +20,7 @@ module.exports = async function generate_toc() {
 							if (err) {
 								reject(err)
 							} else {
+								console.log(`ToC updated for ${file}`)
 								resolve()
 							}
 						}
