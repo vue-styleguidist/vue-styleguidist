@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist-example-nuxtjs",
   "version": "3.10.1",
-  "description": "Using NuXTjs generate your styleguide site besides your main app",
+  "description": "Use beside Nuxt.js and generate your styleguide besides your main app",
   "keywords": [
     "nuxt",
     "nuxtjs",

@@ -5,7 +5,7 @@ const ejs = require('ejs')
 
 const templateFolder = path.resolve(__dirname, '../templates')
 const rootFolder = path.resolve(__dirname, '../..')
-async function render() {
+module.exports = async function render() {
 	const files = await globby('*.ejs', { cwd: templateFolder })
 	files.forEach(filename => {
 		const filepath = path.resolve(templateFolder, filename)
@@ -28,5 +28,3 @@ async function render() {
 		})
 	})
 }
-
-render()
