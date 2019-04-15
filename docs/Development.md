@@ -2,8 +2,6 @@
 
 > Vue Styleguidist created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Development.md -->
-
 <!-- toc -->
 
 - [How it works](#how-it-works)

@@ -1,7 +1,5 @@
 # Cookbook
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Cookbook.md -->
-
 <!-- toc -->
 
 - [How to add third-party plugins to the style guide?](#how-to-add-third-party-plugins-to-the-style-guide)

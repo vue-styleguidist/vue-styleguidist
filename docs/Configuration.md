@@ -2,8 +2,6 @@
 
 By default, Vue styleguidist will look for `styleguide.config.js` file in your project’s root folder. You can change the location of the config file using `--config` [CLI](CLI.md) option.
 
-<!-- To update run: npx markdown-toc --maxdepth 4 -i docs/Configuration.md -->
-
 <!-- toc -->
 
 - [`assetsDir`](#assetsdir)

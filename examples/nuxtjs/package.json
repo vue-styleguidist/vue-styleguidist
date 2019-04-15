@@ -1,7 +1,13 @@
 {
   "name": "vue-styleguidist-example-nuxtjs",
   "version": "3.10.1",
-  "description": "Nuxt.js project",
+  "description": "Use beside Nuxt.js and generate your styleguide besides your main app",
+  "keywords": [
+    "nuxt",
+    "nuxtjs",
+    "production ready",
+    "scaffolding"
+  ],
   "author": "Knovour <knovour@gmail.com>",
   "private": true,
   "scripts": {

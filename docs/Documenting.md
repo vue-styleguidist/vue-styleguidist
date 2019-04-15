@@ -4,8 +4,6 @@ Vue styleguidist generates documentation for your components based on the commen
 
 > **Note:** [See examples](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/basic/src/components) of documented components in our demo style guide.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Documenting.md -->
-
 <!-- toc -->
 
 - [Code comments](#code-comments)
