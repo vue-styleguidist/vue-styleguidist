@@ -5,11 +5,13 @@ const fs = require('fs')
 const path = require('path')
 
 const render = require('./render_templates')
+const render_tocs = require('./render-tocs')
 
 const titleShare = `${title} docs`
 
 module.exports = async () => {
 	await render()
+	await render_tocs()
 	return {
 		dest: 'docs/dist',
 		title,
