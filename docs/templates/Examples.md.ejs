@@ -1,6 +1,8 @@
 # Examples
 
-In the [repository](https://github.com/vue-styleguidist/vue-styleguidist), There is a few example styleguide. You will find below what each styleguide looks like once it is built.
+In the [repository](https://github.com/vue-styleguidist/vue-styleguidist), 
+There is a few example styleguides. Each tryes to demonstrate one key aspect of what you can do with the library.
+Check out the github links to see how it's done.
 
 <% 
 const examples = globby.sync('examples/*/package.json', {cwd: rootFolder, absolute: true})
@@ -8,7 +10,9 @@ examples.forEach(function(ex) {
     const pkg = require(ex);
     const exampleName = pkg.name.replace(/^vue-styleguidist-example-/, '')
 
-%>## [<%= exampleName %>](https://vue-styleguidist.github.io/<%= exampleName %>/)<% if(pkg.description){ %>
+%>## <%= exampleName %>
+- [Live Demo](https://vue-styleguidist.github.io/<%= exampleName %>/)
+- [GitHub](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/examples/<%= exampleName %>/)<% if(pkg.description){ %>
 
 <%= pkg.description %><% } %><% if(pkg.keywords){ %>
 
