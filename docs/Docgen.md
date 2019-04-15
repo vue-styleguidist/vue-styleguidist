@@ -2,8 +2,6 @@
 
 `vue-docgen-api` turns VueJs components into documentation objects.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Docgen.md -->
-
 <!-- toc -->
 
 - [API](#api)
