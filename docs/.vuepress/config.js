@@ -4,6 +4,8 @@ const description = 'Isolated Vue component development environment with a livin
 const fs = require('fs')
 const path = require('path')
 
+require('./render_templates')
+
 const titleShare = `${title} docs`
 
 module.exports = {

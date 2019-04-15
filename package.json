@@ -30,7 +30,7 @@
     "test:cypress:open": "cypress open",
     "test:cypress": "node test/run.server.js",
     "docs": "vuepress dev docs",
-    "docs:build": "node ./docs/scripts/render_templates.js && vuepress build docs",
+    "docs:build": "vuepress build docs",
     "postinstall": "cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",

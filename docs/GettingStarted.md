@@ -1,6 +1,6 @@
-# Getting Started with Vue Styleguidist
+# Getting Started
 
-## 1. Install Styleguidist
+## 1. Install
 
 Install webpack if you don’t have it already, this is how we determine if your version of webpack is compatible with styleguidist.
 
