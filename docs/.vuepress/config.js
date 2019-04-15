@@ -4,14 +4,9 @@ const description = 'Isolated Vue component development environment with a livin
 const fs = require('fs')
 const path = require('path')
 
-const render_templates = require('./render_templates')
-const render_tocs = require('./render-tocs')
-
 const titleShare = `${title} docs`
 
 module.exports = () => {
-	render_templates()
-	render_tocs()
 	return {
 		dest: 'docs/dist',
 		title,
@@ -40,14 +35,14 @@ module.exports = () => {
 				indexName: 'vue-styleguidist'
 			},
 			sidebar: [
-				'/GettingStarted',
+				['/GettingStarted', 'Getting Started'],
 				...(fs.existsSync(path.resolve(__dirname, '../Examples.md')) ? ['/Examples'] : []),
 				['/VueCLI3doc', '@vue/cli 3.X'],
-				'/Documenting',
+				['/Documenting', 'Documenting'],
 				['/Components', 'Locating Components'],
-				'/Webpack',
+				['/Webpack', 'Webpack'],
 				'/Cookbook',
-				'/API',
+				['/API', 'API'],
 				['/Docgen', 'vue-docgen-api'],
 				'/Configuration',
 				'/CLI',

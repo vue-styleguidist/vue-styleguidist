@@ -29,8 +29,9 @@
     "test:cypress:pre": "yarn add -D -W cypress@3.1.4 wait-on",
     "test:cypress:open": "cypress open",
     "test:cypress": "node test/run.server.js",
+    "predocs": "node ./docs/.vuepress/preprocess.js",
     "docs": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
     "postinstall": "cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",
