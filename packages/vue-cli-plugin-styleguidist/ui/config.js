@@ -11,7 +11,14 @@ function onRead({ data }) {
 	const styleguide = data.styleguide || {}
 	const filteredSchema = Object.keys(configSchema).reduce(function(acc, key) {
 		const configParam = configSchema[key]
+
+		// Since for some parameters, multiple types are allowed,
+		// we have to specify which one will be displayed in vue ui
+		// hence the `uitype`
 		var type = TYPE_MAP[configParam.uitype || configParam.type]
+
+		// Only load parameters that have a `message` member
+		// and whose type we support
 		if (configParam.message && type) {
 			const paramComputed = {
 				name: key,
@@ -23,6 +30,8 @@ function onRead({ data }) {
 				value: styleguide[key]
 			}
 
+			// in the original config choice lists are promped as strings,
+			// here we update it if we find the list object
 			if (configParam.list) {
 				paramComputed.type = 'list'
 				paramComputed.choices = configParam.list
