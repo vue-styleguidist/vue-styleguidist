@@ -13,8 +13,14 @@ const StyleguidistError = require('react-styleguidist/lib/scripts/utils/error')
 const findUserWebpackConfig = require('../utils/findUserWebpackConfig')
 const consts = require('../consts')
 
+const MODES = ['collapse', 'expand', 'hide'].map(m => ({ value: m, name: m }))
+
 module.exports = {
 	assetsDir: {
+		uitype: 'string',
+		message: 'Assets Directory',
+		description:
+			'Your application static assets folder, will be accessible as / in the style guide dev server.',
 		type: 'existing directory path',
 		example: 'assets'
 	},
@@ -27,6 +33,10 @@ module.exports = {
 	// `components` is a shortcut for { sections: [{ components }] },
 	// see `sections` below
 	components: {
+		uitype: 'string',
+		message: 'Components',
+		description:
+			'Where to find the components. Takes in a String or an Array of glob paths. Comma separated.',
 		type: ['string', 'function', 'array'],
 		example: 'components/**/[A-Z]*.vue'
 	},
@@ -50,11 +60,18 @@ module.exports = {
 		type: 'function'
 	},
 	defaultExample: {
+		uitype: 'boolean',
+		message: 'Default Example',
+		description:
+			"Display each component with a default example, regardless of if there's a README or <docs/> block written.",
 		type: ['boolean', 'existing file path'],
 		default: false,
 		process: val => (val === true ? path.resolve(__dirname, '../templates/DefaultExample.md') : val)
 	},
 	exampleMode: {
+		message: 'Example Mode',
+		description: 'Defines the initial state of the props and methods tab',
+		list: MODES,
 		type: 'string',
 		process: (value, config) => {
 			return config.showCode === undefined ? value : config.showCode ? 'expand' : 'collapse'
@@ -85,6 +102,9 @@ module.exports = {
 		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md')
 	},
 	ignore: {
+		uitype: 'string',
+		message: 'Ignore',
+		description: 'What components to ignore. Can be an Array or String. Comma separated.',
 		type: 'array',
 		default: ['**/__tests__/**', `**/*.test.vue`, `**/*.spec.vue`, '**/*.d.ts']
 	},
@@ -130,10 +150,15 @@ module.exports = {
 		type: 'object'
 	},
 	mountPointId: {
+		message: 'Mount Point ID',
+		description: 'The ID of a DOM element where Styleguidist mounts.',
 		type: 'string',
 		default: 'rsg-root'
 	},
 	pagePerSection: {
+		message: 'Page Per Section',
+		description:
+			'Render one section or component per page. If true, each section will be a single page.',
 		type: 'boolean',
 		default: false
 	},
@@ -159,6 +184,10 @@ module.exports = {
 		type: 'directory path'
 	},
 	ribbon: {
+		uitype: 'boolean',
+		message: 'Ribbon',
+		description:
+			"Shows 'Fork Me' ribbon in the top-right corner. If ribbon key is present, then it's required to add url property; text property is optional. If you want to change styling of the ribbon, please, refer to the theme section in the documentation.",
 		type: 'object',
 		example: {
 			url: 'http://example.com/',
@@ -193,10 +222,15 @@ module.exports = {
 		]
 	},
 	serverHost: {
+		message: 'Server Host',
+		description: 'Dev server host name',
 		type: 'string',
 		default: '0.0.0.0'
 	},
 	serverPort: {
+		uitype: 'string',
+		message: 'Server Port',
+		description: 'Dev server port',
 		type: ['number', 'string'],
 		default: 6060
 	},
@@ -211,10 +245,23 @@ module.exports = {
 		deprecated: 'Use usageMode option instead'
 	},
 	showSidebar: {
+		message: 'Show Sidebar',
+		description:
+			'Toggle sidebar visibility. Sidebar will be hidden when opening components or examples in isolation mode even if this value is set to true. When set to false, sidebar will always be hidden.',
 		type: 'boolean',
 		default: true
 	},
+	simpleEditor: {
+		message: 'Use Simple Editor',
+		description:
+			'Avoid loading CodeMirror and reduce bundle size significantly, use prism.js for code highlighting. Warning: editor options will not be mapped over.',
+		type: 'boolean',
+		default: false
+	},
 	skipComponentsWithoutExample: {
+		message: 'Skip Components Without Example',
+		description:
+			'Ignore components that don’t have an example file (as determined by getExampleFilename). These components won’t be accessible from other examples unless you manually require them.',
 		type: 'boolean',
 		default: false
 	},
@@ -225,6 +272,9 @@ module.exports = {
 		type: 'object'
 	},
 	styleguideDir: {
+		uitype: 'string',
+		message: 'Styleguide Directory',
+		description: 'Folder for static HTML style guide generated with `styleguidist build` command.',
 		type: 'directory path',
 		default: 'styleguide'
 	},
@@ -267,6 +317,8 @@ module.exports = {
 		}
 	},
 	title: {
+		message: 'Title',
+		description: 'Style guide title',
 		type: 'string',
 		process: val => {
 			if (val) {
@@ -298,6 +350,9 @@ module.exports = {
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
+		message: 'Usage Mode',
+		description: 'Defines the initial state of the props and methods tab',
+		list: MODES,
 		type: 'string',
 		process: (value, config) => {
 			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse'
@@ -305,10 +360,14 @@ module.exports = {
 		default: 'collapse'
 	},
 	verbose: {
+		message: 'Verbose',
+		description: 'Print debug information. Same as --verbose command line switch.',
 		type: 'boolean',
 		default: false
 	},
 	version: {
+		message: 'Version #',
+		description: 'The version # of the Styleguide',
 		type: 'string'
 	},
 	vuex: {
@@ -371,9 +430,5 @@ module.exports = {
 				]
 			}
 		}
-	},
-	simpleEditor: {
-		type: 'boolean',
-		default: false
 	}
 }
