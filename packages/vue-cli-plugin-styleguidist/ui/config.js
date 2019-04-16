@@ -53,12 +53,16 @@ function onRead({ data }) {
 					'ribbon',
 					'styleguideDir',
 					'assetsDir'
-				].map(key => filteredSchema[key])
+				]
+					.map(key => filteredSchema[key])
+					.filter(p => !!p)
 			},
 			{
 				id: 'server',
 				label: 'Server Configuration',
-				prompts: ['serverPort', 'serverHost', 'verbose'].map(key => filteredSchema[key])
+				prompts: ['serverPort', 'serverHost', 'verbose']
+					.map(key => filteredSchema[key])
+					.filter(p => !!p)
 			}
 		]
 	}
