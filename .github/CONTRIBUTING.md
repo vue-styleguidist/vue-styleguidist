@@ -9,7 +9,7 @@ yarn
 
 ## Dependency architecture
 
-In this monorepo, `vue-cli-plugin-styleguidist` depends on `vue-styleguidist` which in turn depends on `vue-docgen-api`. So if you change something in vue-docgen-api, a new version of each module is going to be delivered. Whereas if you only change something only in the plugin, nonly the plugin will be delivered.
+In this monorepo, `vue-cli-plugin-styleguidist` depends on `vue-styleguidist` which in turn depends on `vue-docgen-api`. So if you change something in vue-docgen-api, a new version of each module is going to be delivered. Whereas if you only change something only in the plugin, only the plugin will be delivered.
 
 ## Testing Tips
 
@@ -53,7 +53,7 @@ Allows you to run the examples against your local version of styleguidist. An ex
 yarn start customised
 ```
 
-This command will run the `customised` example. It will look for `examples/customised/styleguide.config.js` and run styleguidist on it. You can ommit the last param and do just `yarn start` to run the basic example.
+This command will run the `customised` example. It will look for `examples/customised/styleguide.config.js` and run styleguidist on it. You can omit the last param and do just `yarn start` to run the basic example.
 
 ### yarn build
 
