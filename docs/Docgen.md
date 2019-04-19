@@ -86,7 +86,7 @@ Script and template have 2 different AST structure. Makes sense that they have d
 
 ### Script Handlers
 
-To handle scripts, we can registrer them this way. Each handler is a JavaScript function following this prototype.
+To handle scripts, we can register them this way. Each handler is a JavaScript function following this prototype.
 
 ```ts
 export default function handler(
