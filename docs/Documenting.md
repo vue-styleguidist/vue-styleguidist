@@ -478,7 +478,7 @@ export default {
 
 ## TypeScript, Flow and Class-style Components
 
-Vue styleguidist understands TypeScript & Flow anotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well.
+Vue styleguidist understands TypeScript & Flow annotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well.
 
 ```ts
 import { Component, Prop, Vue } from 'vue-property-decorator'
