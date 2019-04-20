@@ -1,60 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
-import PlaygroundError from 'rsg-components/PlaygroundError'
 import { parse } from 'acorn'
 import Vue from 'vue'
-import {
-	isSingleFileComponent,
-	transformSingleFileComponent
-} from '../../utils/singleFileComponentUtils'
 import styleScoper from '../../utils/styleScoper'
-
-/* eslint-disable react/no-multi-comp */
-const nameVarComponent = '__component__'
+import separateScript, { nameVarComponent } from '../../utils/separateScript'
 
 /**
- * Reads the code in string and separates the javascript part and the html part
- * @param {string} code
- * @return {js:String, html:String}
- *
- * TODO: extract this and test it
- */
-const separateScript = function separateScript(code, style) {
-	let index
-	const lines = code.split('\n')
-	if (code.indexOf('new Vue') > -1) {
-		const indexVueBegin = code.indexOf('new Vue')
-		const setVue = `
-
-
-
-
-		// Ignore: Extract the configuration of the example component
-		function Vue(params){ ${nameVarComponent} = params }`
-		return {
-			js: code.slice(0, indexVueBegin),
-			vueComponent: code.slice(indexVueBegin) + setVue,
-			style
-		}
-	} else if (isSingleFileComponent(code)) {
-		const transformed = transformSingleFileComponent(code)
-		return separateScript(transformed.component, transformed.style)
-	}
-	for (let id = 0; id < lines.length; id++) {
-		if (lines[id].trim().charAt(0) === '<') {
-			index = id
-			break
-		}
-	}
-	return {
-		js: lines.slice(0, index).join('\n'),
-		html: lines.slice(index).join('\n')
-	}
-}
-
-/**
- * exttract variable and function declaration from an AST and returns their ids
+ * extract variable and function declaration from an AST and returns their ids
  * @param {ast} syntaxTree
  */
 const getVars = syntaxTree => {
@@ -78,10 +31,6 @@ const getVars = syntaxTree => {
 	})
 }
 const compileCode = (code, config) => transform(code, config).code
-
-/* eslint-disable no-invalid-this */
-
-const Fragment = React.Fragment ? React.Fragment : 'div'
 
 export default class Preview extends Component {
 	static propTypes = {
@@ -159,7 +108,6 @@ export default class Preview extends Component {
 
 		try {
 			compuse = separateScript(code)
-			console.log('compuse', compuse)
 			compiledCode = this.compileCode(compuse.js)
 
 			if (compuse.vueComponent) {
@@ -205,11 +153,7 @@ export default class Preview extends Component {
 
 			const rootComponent = renderRootJsx
 				? renderRootJsx.default(previewComponent)
-				: {
-						render(createElement) {
-							return createElement(previewComponent)
-						}
-				  }
+				: { render: createElement => createElement(previewComponent) }
 			const vueInstance = new Vue(
 				Object.assign(extendsComponent, rootComponent, {
 					el
