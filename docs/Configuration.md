@@ -177,7 +177,7 @@ module.exports = {
 
 #### `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/scripts/schemas/config.js#L96)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/packages/vue-styleguidist/scripts/schemas/config.js#L96)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
 
@@ -543,6 +543,8 @@ Type: `object`, optional
 Customize style guide UI fonts, colors, etc.
 
 See example in the [cookbook](Cookbook.md#how-to-change-styles-of-a-style-guide).
+
+> **Note:** This theme will only apply to styleguidist components. The side menu, the section titles, the prop definitions. The components you showcase will not be affected.
 
 #### `title`
 
