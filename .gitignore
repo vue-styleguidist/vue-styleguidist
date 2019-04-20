@@ -1,7 +1,6 @@
 node_modules/
-/examples/**/styleguide/build
-/examples/**/CHANGELOG.md
-/examples/**/styleguide/index.html
+
+
 /.publish/
 /coverage/
 .DS_Store
@@ -11,11 +10,20 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 *.log
-.eslintcache
 .nuxt/
 /cypress/
 test/cypress/screenshots/
 test/cypress/videos/
+
+# output of docs build
 /docs/dist/
+/docs/Examples.md
+
+# examples build artefacts
+/examples/**/dist/build
+/examples/**/dist/css/*.css
+/examples/**/dist/index.html
+
+# packages resulting of plugin tests
 /test/cli-packages/
 !/test/cli-packages/.gitkeep

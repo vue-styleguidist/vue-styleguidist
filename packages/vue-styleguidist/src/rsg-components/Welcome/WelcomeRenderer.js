@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Markdown from 'rsg-components/Markdown'
 import Styled from 'rsg-components/Styled'
-import { DOCS_COMPONENTS } from '../../../scripts/consts'
+
+const { DOCS_COMPONENTS } = require('../../../scripts/consts')
 
 const styles = ({ space, maxWidth }) => ({
 	root: {

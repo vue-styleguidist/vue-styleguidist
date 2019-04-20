@@ -4,8 +4,6 @@ Vue styleguidist generates documentation for your components based on the commen
 
 > **Note:** [See examples](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/basic/src/components) of documented components in our demo style guide.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Documenting.md -->
-
 <!-- toc -->
 
 - [Code comments](#code-comments)
@@ -16,6 +14,8 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Public methods](#public-methods)
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
+- [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
+- [JSX](#jsx)
 - [Writing code examples](#writing-code-examples)
 
 <!-- tocstop -->
@@ -85,29 +85,56 @@ export default {
 </script>
 ```
 
-For events documentation
+For events documentation just add a comment right above it.
+
+If the event is explicitly specified, no need to tell styleguidist what it is.
 
 ```js
 /**
  * Success event.
  *
- * @event success
- * @type {object}
+ * @property {object}
  */
 this.$emit('success', {
   demo: 'example'
 })
 ```
 
+Constants will be recognized too
+
+```js
+/**
+ * Success event.
+ *
+ * @property {object}
+ */
+const success = 'succ'
+this.$emit(success, {
+  demo: 'example'
+})
+```
+
+If your event name comes from an object, precise the `@event` tag
+
+```js
+/**
+ * Success event.
+ *
+ * @event success
+ * @property {object}
+ */
+this.$emit(EVENTS.success, {
+  demo: 'example'
+})
+```
+
 > **Note:** You can change its behavior using [propsParser](Configuration.md#propsparser) options.
 
-> **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/vue-docgen-api) library.
-
-> **Note:** The 'name' property in the component is mandatory, as it will be the component name to use in the examples. If you need to configure the component name before you document it, you can review the following [example](https://github.com/vue-styleguidist/buefy-styleguide-example/blob/master/styleguide.config.js#L43)
+> **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/) library.
 
 ## Slots documentation
 
-For default, Vue styleguidist doesn't document the slots, you need to add a comment before slot inside of the template using the @slot notation.
+Slots are automatically documented by styleguidist. To add descriptions, just add a comment just before.
 
 ```html
 <template>
@@ -128,16 +155,13 @@ For default, Vue styleguidist doesn't document the slots, you need to add a comm
 
 ## Include Mixins and Extends
 
-If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends), for it to be documented you need to add in the header the mixin tag **@mixin**, for example
+If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends) it will automatically be added to your main component
 
-Case Mixin:
+Include a Mixin:
 
 ```javascript
 // src/mixins/colorMixin.js
 
-/**
- * @mixin
- */
 module.exports = {
   props: {
     /**
@@ -151,7 +175,7 @@ module.exports = {
 }
 ```
 
-Case Extends:
+Extends a component:
 
 ```vue
 // src/extends/Base.vue
@@ -163,9 +187,6 @@ Case Extends:
   </div>
 </template>
 <script>
-/**
- * @mixin
- */
 export default {
   props: {
     /**
@@ -180,34 +201,34 @@ export default {
 </script>
 ```
 
-```html
+```vue
 <template>
 <!-- -->
 </template>
 <script>
 // src/components/Button/Button.vue
 
-import colorMixin from '../../mixins/colorMixin';
-import Base from '../../extends/Base.vue';
+import colorMixin from '../../mixins/colorMixin'
+import Base from '../../extends/Base.vue'
 export default {
   name: 'Button',
   mixins: [colorMixin],
   extends: Base,
   props: {
     /**
-    * The size of the button
-    * `small, normal, large`
-    */
+     * The size of the button
+     * `small, normal, large`
+     */
     size: {
       default: 'normal'
     },
     /**
-    * Add custom click actions.
-    **/
+     * Add custom click actions.
+     **/
     onCustomClick: {
-      default: () => () => null,
-    },
-  },
+      default: () => () => null
+    }
+  }
   /* ... */
 }
 </script>
@@ -318,7 +339,7 @@ Additional example files can be associated with components using `@example` docl
 
 The following component will also have an example loaded from the `extra.examples.md` file:
 
-```javascript
+```js
 /**
  * Component is described here.
  *
@@ -379,7 +400,7 @@ When documenting methods you can also use:
 
 Documenting events:
 
-- [@event, @type](http://usejsdoc.org/tags-event.html)
+- [@event](http://usejsdoc.org/tags-event.html)
 
 Documenting v-model:
 
@@ -455,6 +476,74 @@ export default {
 </script>
 ```
 
+## TypeScript, Flow and Class-style Components
+
+Vue styleguidist understands TypeScript & Flow annotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well.
+
+```ts
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component({
+  name: 'ClassButton'
+})
+export default class MyComponent extends Vue {
+  aHiddenData: string = ''
+
+  /**
+   * prop typed through the decorators arguments
+   */
+  @Prop({ type: String })
+  propNoType = ''
+
+  /**
+   * prop typed through an annotation
+   */
+  @Prop() propA: number = 0
+
+  /**
+   * prop with a default value
+   */
+  @Prop({ default: 'default value' })
+  propB: string = 'hello'
+
+  /**
+   * prop with a hybrid type
+   */
+  @Prop() propC: string | boolean = false
+
+  /**
+   * method testing
+   * @public
+   */
+  onClick(a: string) {
+    /**
+     * Success event when we click
+     */
+    this.$emit('success', a)
+  }
+}
+```
+
+Notice how `onClick` parameter `a` does not need type documentation.
+
+## JSX
+
+vue styleguidist understands JSX component templates too. In this example it will display the definition of the found slot.
+
+```jsx
+export default {
+  render() {
+    return (
+      <div>
+        {/** @slot Use this slot to have a header */}
+        <slot name="header" />
+        {this.contentText}
+      </div>
+    )
+  }
+}
+```
+
 ## Writing code examples
 
 Code examples in Markdown use the ES6 syntax. They can access all the components of your style guide using global variables:
@@ -470,13 +559,11 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 
 > **Note:** Vue styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend, it supports [most of the ES6 features](https://buble.surge.sh/guide/#unsupported-features).
 
-You can also `require` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
+You can also `import` other modules (e.g. mock data that you use in your unit tests) from examples in Markdown:
 
 ```jsx
 const mockData = require('./mocks');
 <Message :content="mockData.hello" />
 ```
 
-> **Note:** You can `require` only from examples in Markdown files. ES6 `import` syntax isn’t supported.
-
-> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `require` it in Markdown
+> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown

@@ -1,8 +1,8 @@
-# Getting Started with Vue Styleguidist
+# Getting Started
 
-## 1. Install Styleguidist
+## 1. Install
 
-Install webpack if you don’t have it already:
+Install webpack if you don’t have it already, this is how we determine if your version of webpack is compatible with styleguidist.
 
 ```bash
 npm install --save-dev webpack
@@ -14,13 +14,13 @@ Install Styleguidist:
 npm install --save-dev vue-styleguidist
 ```
 
-unless youa re using vue cli 3 (@vue/cli) then you should use
+If you use Vue CLI 3 ([@vue/cli](https://cli.vuejs.org/)), you should probably use the plugin
 
-``` sh
+```sh
 vue add styleguidist
 ```
 
-and use [Vue CLI documentation](VueCLI3.md)
+and use [Vue CLI documentation](VueCLI3doc.md)
 
 ## 2. Configure your style guide
 

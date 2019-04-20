@@ -25,8 +25,8 @@ or with typescript
 
 ```ts
 import { parse } from 'vue-docgen-api'
-var componentInfo = parse(filePath)
-var componentInfo = vueDocs.parse(filePath, {
+var componentInfoSimple = parse(filePath)
+var componentInfoConfigured = parse(filePath, {
   alias: { '@assets': path.resolve(__dirname, 'src/assets') },
   resolve: [path.resolve(__dirname, 'src')],
   addScriptHandler: [

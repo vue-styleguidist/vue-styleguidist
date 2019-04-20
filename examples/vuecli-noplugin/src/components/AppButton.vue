@@ -7,6 +7,7 @@
 
 <script>
 import sizeMixin from './sizeMixin'
+
 export default {
 	name: 'app-button',
 	mixins: [sizeMixin],

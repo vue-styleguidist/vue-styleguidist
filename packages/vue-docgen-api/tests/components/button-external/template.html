@@ -1,4 +1,8 @@
-<button class="buttonComponent" @click.prevent="onClick">
-  <!-- @slot Use this slot default -->
-  <slot></slot>
+<button v-if="isButton" class="buttonComponent" @click.prevent="onClick">
+	<!-- @slot Use this slot default -->
+	<slot></slot>
 </button>
+<a v-else>
+	<!-- @slot Use this slot for not button -->
+	<slot name="empty"></slot>
+</a>

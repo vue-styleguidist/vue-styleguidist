@@ -2,8 +2,6 @@
 
 By default, Vue styleguidist will look for `styleguide.config.js` file in your project’s root folder. You can change the location of the config file using `--config` [CLI](CLI.md) option.
 
-<!-- To update run: npx markdown-toc --maxdepth 4 -i docs/Configuration.md -->
-
 <!-- toc -->
 
 - [`assetsDir`](#assetsdir)
@@ -33,6 +31,7 @@ By default, Vue styleguidist will look for `styleguide.config.js` file in your p
 - [`serverHost`](#serverhost)
 - [`serverPort`](#serverport)
 - [`showSidebar`](#showsidebar)
+- [`simpleEditor`](#simpleeditor)
 - [`skipComponentsWithoutExample`](#skipcomponentswithoutexample)
 - [`styleguideComponents`](#styleguidecomponents)
 - [`styleguideDir`](#styleguidedir)
@@ -178,7 +177,7 @@ module.exports = {
 
 #### `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/scripts/schemas/config.js#L96)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/packages/vue-styleguidist/scripts/schemas/config.js#L96)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
 
@@ -469,6 +468,12 @@ Type: `Boolean`, default: `true`
 
 Toggle sidebar visibility. Sidebar will be hidden when opening components or examples in isolation mode even if this value is set to `true`. When set to `false`, sidebar will always be hidden.
 
+#### `simpleEditor`
+
+Type: `Boolean`, default: `false`
+
+Avoid loading CodeMirror and reduce bundle size significantly, use [prism.js](https://prismjs.com/) for code highlighting. Warning: editor options will not be mapped over.
+
 #### `skipComponentsWithoutExample`
 
 Type: `Boolean`, default: `false`
@@ -538,6 +543,8 @@ Type: `object`, optional
 Customize style guide UI fonts, colors, etc.
 
 See example in the [cookbook](Cookbook.md#how-to-change-styles-of-a-style-guide).
+
+> **Note:** This theme will only apply to styleguidist components. The side menu, the section titles, the prop definitions. The components you showcase will not be affected.
 
 #### `title`
 

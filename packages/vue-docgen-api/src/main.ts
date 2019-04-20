@@ -1,9 +1,15 @@
 import { ComponentDoc, Documentation } from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as parseSourceLocal } from './parse'
 
+export { TemplateParserOptions } from './parse-template'
 export { ScriptHandler, TemplateHandler } from './parse'
 export { ComponentDoc, DocGenOptions, ParseOptions, Documentation }
 
+/**
+ * Parse the components at filePath and return props, public methods, events and slots
+ * @param filePath absolute path of the parsed file
+ * @param opts
+ */
 export function parse(
 	filePath: string,
 	opts?: DocGenOptions | { [alias: string]: string }
@@ -11,6 +17,11 @@ export function parse(
 	return parsePrimitive((doc, options) => parseFile(doc, options), filePath, opts)
 }
 
+/**
+ * Parse the `source` assuming that it is located at `filePath` and return props, public methods, events and slots
+ * @param filePath absolute path of the parsed file
+ * @param opts
+ */
 export function parseSource(
 	source: string,
 	filePath: string,

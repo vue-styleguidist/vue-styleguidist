@@ -89,4 +89,46 @@ describe('componentHandler', () => {
 		}
 		expect(documentation.set).toHaveBeenCalledWith('functional', true)
 	})
+
+	it('should compile @example tags into one examples', () => {
+		const src = `
+		/**
+		 * @example path/to/example.md
+		 * @example path/to/otherexample.md
+		 */
+    export default {
+    }
+    `
+		const def = parse(src).get('default')
+		if (def) {
+			componentHandler(documentation, def)
+		}
+		expect(documentation.set).toHaveBeenCalledWith('tags', {
+			examples: [
+				{
+					content: 'path/to/example.md',
+					title: 'example'
+				},
+				{
+					content: 'path/to/otherexample.md',
+					title: 'example'
+				}
+			]
+		})
+	})
+
+	it('should extract the @displayName tag seperately', () => {
+		const src = `
+		/**
+		 * @displayName Best Button Ever
+		 */
+    export default {
+    }
+    `
+		const def = parse(src).get('default')
+		if (def) {
+			componentHandler(documentation, def)
+		}
+		expect(documentation.set).toHaveBeenCalledWith('displayName', 'Best Button Ever')
+	})
 })

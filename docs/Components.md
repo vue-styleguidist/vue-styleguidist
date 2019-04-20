@@ -1,12 +1,10 @@
 # Locating your components and organizing your style guide
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Components.md -->
-
 <!-- toc -->
 
 - [Finding components](#finding-components)
+- [Loading and exposing components](#loading-and-exposing-components)
 - [Sections](#sections)
-- [Limitations](#limitations)
 
 <!-- tocstop -->
 

@@ -8,7 +8,7 @@ import makePathResolver from '../utils/makePathResolver'
 import resolveRequired from '../utils/resolveRequired'
 
 /**
- * Retruns documentation of the component referenced in the extends property of the component
+ * Returns documentation of the component referenced in the extends property of the component
  * @param {NodePath} astPath
  * @param {Array<NodePath>} componentDefinitions
  * @param {string} originalFilePath
@@ -71,8 +71,9 @@ function getExtendsVariableNameFromCompDef(compDef: NodePath): NodePath | undefi
 	if (!compDef) {
 		return undefined
 	}
-	const pathExtends = compDef
-		.get('properties')
-		.filter((p: NodePath<bt.Property>) => p.node.key.name === 'extends')
+	const compDefProperties = compDef.get('properties')
+	const pathExtends = compDefProperties.value
+		? compDefProperties.filter((p: NodePath<bt.Property>) => p.node.key.name === 'extends')
+		: []
 	return pathExtends.length ? pathExtends[0] : undefined
 }

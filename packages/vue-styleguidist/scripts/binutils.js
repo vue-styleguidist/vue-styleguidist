@@ -6,7 +6,7 @@ const stringify = require('q-i').stringify
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
 const webpackDevServerUtils = require('react-dev-utils/WebpackDevServerUtils')
 const openBrowser = require('react-dev-utils/openBrowser')
-const setupLogger = require('react-styleguidist/scripts/logger')
+const setupLogger = require('react-styleguidist/lib/scripts/logger')
 const consts = require('./consts')
 const logger = require('glogg')('vsg')
 

@@ -63,4 +63,24 @@ describe('mixinsHandler', () => {
 			nameFilter: ['default']
 		})
 	})
+
+	it('should resolve mixins modules variables in class style components', () => {
+		const src = [
+			'import { testMixin, otherMixin  } from "./mixins";',
+			'@Component',
+			'export default class Bart extends mixins(testMixins, otherMixin) {',
+			'}'
+		].join('\n')
+		const ast = babelParser().parse(src)
+		const path = resolveExportedComponent(ast).get('default')
+		if (!path) {
+			fail()
+			return
+		}
+		mixinsHandler(doc, path, ast, { filePath: '' })
+		expect(parseFile).toHaveBeenCalledWith(doc, {
+			filePath: './component/full/path',
+			nameFilter: ['default']
+		})
+	})
 })

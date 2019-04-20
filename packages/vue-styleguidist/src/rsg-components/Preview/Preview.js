@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
-import { parse } from 'esprima'
+import { parse } from 'acorn'
 import Vue from 'vue'
 import {
 	isSingleFileComponent,
@@ -185,11 +185,9 @@ export default class Preview extends Component {
 			if (configComponent) {
 				previewComponent = exampleComponent()
 
-				Object.keys(previewComponent).forEach(key => {
-					if (key === 'el') {
-						delete previewComponent.el
-					}
-				})
+				if (previewComponent.el) {
+					delete previewComponent.el
+				}
 			} else {
 				const data = exampleComponent()
 				const template = `<div>${compuse.html}</div>`

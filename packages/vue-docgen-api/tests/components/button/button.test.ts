@@ -20,7 +20,7 @@ describe('tests button', () => {
 	})
 
 	it('The component name should be buttonComponent', () => {
-		expect(docButton.displayName).toEqual('buttonComponent')
+		expect(docButton.displayName).toEqual('Best Button')
 	})
 
 	it('The component should have a description', () => {

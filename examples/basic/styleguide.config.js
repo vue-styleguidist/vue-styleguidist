@@ -5,7 +5,8 @@ module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
 	},
 	version: '1.1.1',
 	webpackConfig: {
@@ -17,8 +18,32 @@ module.exports = {
 				},
 				{
 					test: /\.js?$/,
-					exclude: /node_modules/,
-					loader: 'babel-loader'
+					exclude: modulePath =>
+						/node_modules/.test(modulePath) &&
+						!/node_modules[\\/]regexpu-core/.test(modulePath) &&
+						!/node_modules[\\/]unicode-match-property-ecmascript/.test(modulePath) &&
+						!/node_modules[\\/]unicode-match-property-value-ecmascript/.test(modulePath) &&
+						!/node_modules[\\/]acorn-jsx/.test(modulePath) &&
+						!/node_modules[\\/]@znck[\\/]prop-types/.test(modulePath),
+					use: {
+						loader: 'babel-loader',
+						options: {
+							sourceType: 'unambiguous',
+							presets: [
+								[
+									'@babel/preset-env',
+									{
+										useBuiltIns: 'usage',
+										corejs: 2,
+										targets: {
+											ie: '11'
+										}
+									}
+								]
+							],
+							comments: false
+						}
+					}
 				},
 				{
 					test: /\.css$/,
@@ -30,5 +55,9 @@ module.exports = {
 		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand'
+	exampleMode: 'expand',
+	compilerConfig: {
+		target: { ie: 11 }
+	},
+	styleguideDir: 'dist'
 }

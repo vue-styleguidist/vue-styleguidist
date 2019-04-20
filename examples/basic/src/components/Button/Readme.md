@@ -1,19 +1,19 @@
 Basic button:
 
 ```jsx
-<Button>Push Me</Button>
+<BestButton>Push Me</BestButton>
 ```
 
 Big pink button and small blue button:
 
 ```vue
-<Button size="large" color="deeppink">
+<BestButton size="large" color="deeppink">
   Click Me
-</Button>
+</BestButton>
 <br />
-<Button size="small" color="blue">
+<BestButton size="small" color="blue">
   Second button
-</Button>
+</BestButton>
 ```
 
 And you _can_ **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
@@ -21,7 +21,7 @@ And you _can_ **use** `any` [Markdown](http://daringfireball.net/projects/markdo
 Fenced code blocks with `vue`, `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
 
 ```jsx
-<Button>Push Me</Button>
+<BestButton>Push Me</BestButton>
 ```
 
 You can also use the Single File Component Format
@@ -29,7 +29,7 @@ You can also use the Single File Component Format
 ```vue
 <template>
     <div class="wrapper">
-        <Button @click.native="pushButton">Push Me</Button>
+        <BestButton @click.native="pushButton">Push Me</BestButton>
         <hr />
         <p class="text-name">Next Dog Name: {{ dogName }}</p>
     </div>

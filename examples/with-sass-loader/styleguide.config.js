@@ -6,7 +6,8 @@ module.exports = {
 	defaultExample: true,
 	require: [path.join(__dirname, './src/style.scss')],
 	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
+		text: 'Back to examples',
+		url: 'https://vue-styleguidist.github.io/Examples.html'
 	},
 	webpackConfig: {
 		module: {
@@ -16,18 +17,7 @@ module.exports = {
 					loader: 'vue-loader',
 					options: {
 						loaders: {
-							scss: [
-								'vue-style-loader',
-								'css-loader',
-								{
-									loader: 'sass-loader',
-									options: {
-										includePaths: ['./src'],
-										data: '@import "style.scss";',
-										outputStyle: 'compressed'
-									}
-								}
-							]
+							scss: ['vue-style-loader', 'css-loader', 'sass-loader']
 						}
 					}
 				},
@@ -45,5 +35,6 @@ module.exports = {
 		plugins: [new vueLoader.VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	exampleMode: 'expand'
+	exampleMode: 'expand',
+	styleguideDir: 'dist'
 }

@@ -1,12 +1,10 @@
 # Cookbook
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Cookbook.md -->
-
 <!-- toc -->
 
 - [How to add third-party plugins to the style guide?](#how-to-add-third-party-plugins-to-the-style-guide)
 - [How to add vuex to the style guide?](#how-to-add-vuex-to-the-style-guide)
-- [How to add data dummy to the style guide?](#how-to-add-data-dummy-to-the-style-guide)
+- [How to add dummy data to the style guide?](#how-to-add-dummy-data-to-the-style-guide)
 - [How to exclude some components from style guide?](#how-to-exclude-some-components-from-style-guide)
 - [How to hide some components in style guide but make them available in examples?](#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples)
 - [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
@@ -18,6 +16,7 @@
 - [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
 - [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
 - [How to document styled components?](#how-to-document-styled-components)
+- [Use vue-styleguideist with components that contain routing](#use-vue-styleguideist-with-components-that-contain-routing)
 
 <!-- tocstop -->
 
@@ -130,9 +129,9 @@ module.exports = {
 
 See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuex).
 
-## How to add data dummy to the style guide?
+## How to add dummy data to the style guide?
 
-You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add data dummy:
+You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add dummy data:
 
 Use [require](Configuration.md#require) option:
 
@@ -302,7 +301,7 @@ const StyleGuideRenderer = ({
         {components}
         <footer className="footer">
           <Markdown
-            text={`Generated with [React Styleguidist](${homepageUrl})`}
+            text={`Generated with [Vue Styleguidist](${homepageUrl})`}
           />
         </footer>
       </div>
@@ -310,6 +309,53 @@ const StyleGuideRenderer = ({
     </main>
   </div>
 )
+```
+
+NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Checkout the [customised](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, is uses the following:
+
+```jsx
+// SectionsRenderer.js
+import React from 'react'
+import PropTypes from 'prop-types'
+import Styled from 'rsg-components/Styled'
+import Heading from 'rsg-components/Heading'
+
+// Avoid circular ref
+// Import default implementation using `rsg-components-default`
+import DefaultSectionsRenderer from 'rsg-components-default/Sections/SectionsRenderer'
+
+const styles = ({ fontFamily, color, space }) => ({
+  headingSpacer: {
+    marginBottom: space[2]
+  },
+  descriptionText: {
+    marginTop: space[0],
+    fontFamily: fontFamily.base
+  }
+})
+
+export function SectionsRenderer({ classes, children }) {
+  return (
+    <div>
+      {!!children.length && (
+        <div className={classes.headingSpacer}>
+          <Heading level={1}>Example Components</Heading>
+          <p className={classes.descriptionText}>
+            These are the greatest components
+          </p>
+        </div>
+      )}
+      <DefaultSectionsRenderer>{children}</DefaultSectionsRenderer>
+    </div>
+  )
+}
+
+SectionsRenderer.propTypes = {
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.node
+}
+
+export default Styled(styles)(SectionsRenderer)
 ```
 
 ## How to change style guide dev server logs output?
@@ -362,34 +408,50 @@ See in [configuring webpack](Webpack.md#reusing-your-projects-webpack-config).
 
 ## How to document styled components?
 
-In order to document styled components you need to get them recognized by vue-docgen-api.
-Simplest way is to use extends:
+In order to document styled components you need to get them recognized by vue-docgen-api. Simplest way is to use extends:
 
 ```js
-import styled from 'vue-styled-components';
+import styled from 'vue-styled-components'
 
 const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-`;
+`
 
 export default {
   extends: _StyledTitle
-};
+}
 ```
 
 or if you are using with the class component syntax
 
 ```js
-import styled from 'vue-styled-components';
+import styled from 'vue-styled-components'
 
 const _StyledTitle = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-`;
+`
 
-@Components({extends: _StyledTitle})
-export default class StyledTitle extends Vue {};
+@Components({ extends: _StyledTitle })
+export default class StyledTitle extends Vue {}
+```
+
+## Use vue-styleguideist with components that contain routing
+
+If your components contain `<router-link>` the best way is, in your styleguide to mock it. In the `styelguide.config,js` file add `styleguide.global.required.js` (see below) to the [require](Configuration.md#require) parameter. Styleguidist will render `router-link` as an anchor or tag of your choosing. Don't use `vue-router` inside vue-styleguidist. It will conflict with its internal router.
+
+```js
+// styleguide.global.requires.js
+import Vue from 'vue'
+Vue.component('RouterLink', {
+  props: {
+    tag: { type: String, default: 'a' }
+  },
+  render(createElement) {
+    return createElement(this.tag, {}, this.$slots.default)
+  }
+})
 ```

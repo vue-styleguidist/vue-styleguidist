@@ -6,8 +6,6 @@ _Webpack is required to run Vue styleguidist but your project doesn’t have to 
 
 > **Note:** See [cookbook](Cookbook.md) for more examples.
 
-<!-- To update run: npx markdown-toc --maxdepth 2 -i docs/Webpack.md -->
-
 <!-- toc -->
 
 - [Reusing your project’s webpack config](#reusing-your-projects-webpack-config)

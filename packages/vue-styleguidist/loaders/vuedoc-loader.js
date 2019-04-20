@@ -3,14 +3,13 @@ const generate = require('escodegen').generate
 const toAst = require('to-ast')
 const logger = require('glogg')('rsg')
 const getExamples = require('./utils/getExamples')
-const requireIt = require('react-styleguidist/loaders/utils/requireIt')
+const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
 const vueDocs = require('vue-docgen-api')
-const defaultSortProps = require('react-styleguidist/loaders/utils/sortProps')
+const defaultSortProps = require('react-styleguidist/lib/loaders/utils/sortProps')
 
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
-/* eslint-disable no-console */
 module.exports = function(source) {
 	const file = this.request.split('!').pop()
 	const config = this._styleguidist
@@ -40,7 +39,15 @@ module.exports = function(source) {
 		} else if (docs.tags) {
 			const examples = docs.tags.examples
 			if (examples) {
-				const examplePath = examples[examples.length - 1].description
+				const examplePath = examples[examples.length - 1].content
+				if (examples.length > 1) {
+					logger.warn(
+						`More than one @example tags specified in component ${path.relative(
+							process.cwd(),
+							file
+						)}\nUsing the last tag to build examples: '${examplePath}'`
+					)
+				}
 				docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
 			}
 		}
@@ -92,7 +99,7 @@ module.exports = function(source) {
 	}
 
 	const examplesFile = config.getExampleFilename(file)
-	docs.examples = getExamples(examplesFile, docs.displayName, config.defaultExample)
+	docs.examples = getExamples(file, examplesFile, docs.displayName, config.defaultExample)
 
 	if (config.updateDocs) {
 		docs = config.updateDocs(docs, file)

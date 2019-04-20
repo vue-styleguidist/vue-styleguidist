@@ -115,5 +115,20 @@ describe('propHandler', () => {
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped')
 		})
+
+		it('should document props as decorator argument', () => {
+			const src = `
+        @Component({
+			props: {
+				testTyped: String
+			}
+		})
+        export default class MyTest {
+        }`
+			tester(src, {
+				type: { name: 'string' }
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped')
+		})
 	})
 })
