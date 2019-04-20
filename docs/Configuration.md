@@ -544,6 +544,8 @@ Customize style guide UI fonts, colors, etc.
 
 See example in the [cookbook](Cookbook.md#how-to-change-styles-of-a-style-guide).
 
+> **Note:** This theme will only apply to styleguidist components. The side menu, the section titles, the prop definitions. The components you showcase will not be affected.
+
 #### `title`
 
 Type: `String`, default: `<app name from package.json> Style Guide`
