@@ -35,14 +35,15 @@ const injectTemplateAndParseExport = function(parts) {
 
 	const code = parts.script.content
 	let index = -1
+	let startIndex = -1
 	if (code.indexOf('module.exports') !== -1) {
-		const startIndex = code.indexOf('module.exports')
+		startIndex = code.indexOf('module.exports')
 		index = code.indexOf('{', startIndex) + 1
 	} else if (code.indexOf('exports.default') !== -1) {
-		const startIndex = code.indexOf('exports.default')
+		startIndex = code.indexOf('exports.default')
 		index = code.indexOf('{', startIndex) + 1
 	} else if (code.indexOf('export ') !== -1) {
-		const startIndex = code.indexOf('export ')
+		startIndex = code.indexOf('export ')
 		index = code.indexOf('{', startIndex) + 1
 	}
 	if (index === -1) {
@@ -52,7 +53,10 @@ const injectTemplateAndParseExport = function(parts) {
 	if (right[right.length - 1] === ';') {
 		right = right.slice(0, -1)
 	}
-	return `{\ntemplate: \`${templateString}\`,\n${right}`
+	return {
+		preprocessing: code.substr(0, startIndex).trim(),
+		component: `{\ntemplate: \`${templateString}\`,\n${right}`
+	}
 }
 
 const extractImports = function(code) {
@@ -81,7 +85,8 @@ export function transformSingleFileComponent(code) {
 	return {
 		component: `
 			${parts.script ? extractImports(parts.script.content) : ''}
-			new Vue(${templateAdded});
+			${templateAdded.preprocessing}
+			new Vue(${templateAdded.component});
 		`,
 		style: buildStyles(parts.styles)
 	}
