@@ -43,11 +43,9 @@ function propsInInterpolation(
 	options: TemplateParserOptions
 ) {
 	if (templateAst.children) {
-		templateAst.children
-			.filter(c => c.type === 2)
-			.forEach((expr: ASTExpression) => {
-				getPropsFromExpression(templateAst, expr, expr.expression, documentation, options)
-			})
+		templateAst.children.filter(c => c.type === 2).forEach((expr: ASTExpression) => {
+			getPropsFromExpression(templateAst, expr, expr.expression, documentation, options)
+		})
 	}
 }
 

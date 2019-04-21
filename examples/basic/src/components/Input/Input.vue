@@ -1,13 +1,8 @@
 <template>
-	<div>
-		<input
-			@input="updateValue($event.target.value)"
-			@change="emitChange"
-			v-model="val"
-			ref="input"
-		/>
-		<button @click="fireEvent()">Fire example event!</button>
-	</div>
+  <div>
+    <input @input="updateValue($event.target.value)" @change="emitChange" v-model="val" ref="input">
+    <button @click="fireEvent()">Fire example event!</button>
+  </div>
 </template>
 
 <script>
@@ -96,4 +91,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>

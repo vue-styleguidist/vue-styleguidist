@@ -9,7 +9,7 @@ describe('slotHandler', () => {
 		doc = new Documentation()
 	})
 
-	it('should pick comments at the beginning of templates', done => {
+	it('should pick comments at the beginning of templates', () => {
 		const ast = compile(
 			[
 				'<slot name="first">',
@@ -28,11 +28,11 @@ describe('slotHandler', () => {
 			expect(doc.toObject().slots.first).toMatchObject({ description: 'first slot found' })
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 
-	it('should pick comments before slots', done => {
+	it('should pick comments before slots', () => {
 		const ast = compile(
 			[
 				'<div>',
@@ -48,11 +48,11 @@ describe('slotHandler', () => {
 			expect(doc.toObject().slots.default).toMatchObject({ description: 'a default slot' })
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 
-	it('should pick up the name of a slot', done => {
+	it('should pick up the name of a slot', () => {
 		const ast = compile(
 			[
 				'<div>',
@@ -68,11 +68,11 @@ describe('slotHandler', () => {
 			expect(doc.toObject().slots.oeuf).toMatchObject({ description: 'a slot named oeuf' })
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 
-	it('should detect scoped slots', done => {
+	it('should detect scoped slots', () => {
 		const ast = compile(
 			[
 				'<div title="a list of item with a scope" >',
@@ -90,7 +90,7 @@ describe('slotHandler', () => {
 			})
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 })

@@ -1,4 +1,5 @@
-<template> </template>
+<template>
+</template>
 <script>
 import { mapGetters } from 'vuex'
 const ctx = require.context('some/path', true, /.jpg$/)

@@ -64,7 +64,7 @@ describe('mixinsHandler', () => {
 		})
 	})
 
-	it('should resolve mixins modules variables in class style components', done => {
+	it('should resolve mixins modules variables in class style components', () => {
 		const src = [
 			'import { testMixin, otherMixin  } from "./mixins";',
 			'@Component',
@@ -74,7 +74,7 @@ describe('mixinsHandler', () => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast).get('default')
 		if (!path) {
-			done.fail()
+			fail()
 			return
 		}
 		mixinsHandler(doc, path, ast, { filePath: '' })

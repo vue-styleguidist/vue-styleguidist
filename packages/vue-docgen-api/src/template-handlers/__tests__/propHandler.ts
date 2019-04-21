@@ -9,7 +9,7 @@ describe('slotHandler', () => {
 		doc = new Documentation()
 	})
 
-	it('should match props in attributes expressions', done => {
+	it('should match props in attributes expressions', () => {
 		const ast = compile(
 			[
 				'<div>',
@@ -29,11 +29,11 @@ describe('slotHandler', () => {
 			})
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 
-	it('should match props in interpolated text', done => {
+	it('should match props in interpolated text', () => {
 		const ast = compile(
 			[
 				'<div>',
@@ -55,11 +55,11 @@ describe('slotHandler', () => {
 			})
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 
-	it('should not match props if in a string litteral', done => {
+	it('should not match props if in a string litteral', () => {
 		const ast = compile(
 			[
 				'<div>',
@@ -74,11 +74,11 @@ describe('slotHandler', () => {
 			expect(doc.toObject().props).toBeUndefined()
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 
-	it('should not match props if in a non evaluated attribute', done => {
+	it('should not match props if in a non evaluated attribute', () => {
 		const ast = compile(
 			[
 				'<div>',
@@ -93,7 +93,7 @@ describe('slotHandler', () => {
 			expect(doc.toObject().props).toBeUndefined()
 			done()
 		} else {
-			done.fail()
+			fail()
 		}
 	})
 })

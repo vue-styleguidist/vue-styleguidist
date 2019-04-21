@@ -1,7 +1,7 @@
 <template>
 	<button class="buttonComponent">
 		<!-- @slot Use this slot default -->
-		<slot />
+		<slot/>
 	</button>
 </template>
 

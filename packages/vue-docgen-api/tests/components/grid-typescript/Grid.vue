@@ -1,34 +1,34 @@
 <template>
-	<div>
-		<!-- @slot Use this slot header -->
-		<slot name="header"></slot>
-		<table class="grid">
-			<thead>
-				<tr>
-					<th
-						v-for="key in columns"
-						:key="key"
-						@click="sortBy(key)"
-						:class="{ active: sortKey == key }"
-					>
-						{{ key | capitalize }}
-						<span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="entry in filteredData" :key="entry">
-					<td v-for="key in columns" :key="key">{{ entry[key] }}</td>
-				</tr>
-			</tbody>
-		</table>
+  <div>
+    <!-- @slot Use this slot header -->
+    <slot name="header"></slot>
+    <table class="grid">
+      <thead>
+        <tr>
+          <th
+            v-for="key in columns"
+            :key="key"
+            @click="sortBy(key)"
+            :class="{ active: sortKey == key }"
+          >
+            {{ key | capitalize }}
+            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="entry in filteredData" :key="entry">
+          <td v-for="key in columns" :key="key">{{entry[key]}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-		<!-- @slot Use this slot footer -->
-		<slot name="footer"></slot>
-	</div>
+    <!-- @slot Use this slot footer -->
+    <slot name="footer"></slot>
+  </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import Vue from 'vue'
 import text from './utils'
 
