@@ -4,9 +4,6 @@ const vueLoader = require('vue-loader')
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
-	ribbon: {
-		url: 'https://github.com/vue-styleguidist/vue-styleguidist'
-	},
 	template: {
 		head: {
 			links: [

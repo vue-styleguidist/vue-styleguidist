@@ -109,10 +109,10 @@ export function parseSource(documentation: Documentation, source: string, opt: P
 	const scriptSource = extSource.length
 		? extSource
 		: parts
-			? parts.script
-				? parts.script.content
-				: undefined
-			: source
+		? parts.script
+			? parts.script.content
+			: undefined
+		: source
 	if (scriptSource) {
 		opt.lang =
 			(parts && parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||

@@ -1,5 +1,5 @@
 {
-	"extends": ["eslint:recommended","plugin:jest/recommended"],
+	"extends": ["eslint:recommended","plugin:jest/recommended", "plugin:react/recommended"],
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
@@ -14,7 +14,6 @@
 		}
 	},
 	"rules": {
-		"no-unused-vars": ["warn", { "varsIgnorePattern": "React" }],
 		"compat/compat": "error",
 		"import/no-unresolved": [
 			"error",
@@ -57,6 +56,10 @@
 						"extensions": [".ts", ".js"]
 					}
 				}
+			},
+			"rules": {
+				"no-unused-vars": "off",
+				"typescript/no-unused-vars": "off"
 			}
 		}
 	],

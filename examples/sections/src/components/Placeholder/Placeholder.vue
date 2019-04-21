@@ -1,7 +1,7 @@
 <template>
-<div class="Placeholder">
-	<img class="placeholder" :src="getImageUrl()" :width="width" :height="height" />
-</div>
+	<div class="Placeholder">
+		<img class="placeholder" :src="getImageUrl()" :width="width" :height="height" />
+	</div>
 </template>
 
 <script>

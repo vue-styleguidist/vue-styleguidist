@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <!--How to include the question here???-->
-    <input :placeholder="placeholder">
-  </div>
+	<div>
+		<!--How to include the question here???-->
+		<input :placeholder="placeholder" />
+	</div>
 </template>
 <script>
 import Base from './Base.vue'

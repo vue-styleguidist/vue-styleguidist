@@ -129,8 +129,8 @@ function getTypeFromTypePath(typePath: NodePath): { name: string; func?: boolean
 		: typeNode &&
 		  bt.isIdentifier(typeNode) &&
 		  VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
-			? typeNode.name.toLowerCase()
-			: 'undefined'
+		? typeNode.name.toLowerCase()
+		: 'undefined'
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}

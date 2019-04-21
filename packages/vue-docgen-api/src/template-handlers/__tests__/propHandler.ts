@@ -9,7 +9,7 @@ describe('slotHandler', () => {
 		doc = new Documentation()
 	})
 
-	it('should match props in attributes expressions', () => {
+	it('should match props in attributes expressions', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -28,11 +28,11 @@ describe('slotHandler', () => {
 				value: { type: { name: 'string' }, description: 'value in the form' }
 			})
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 
-	it('should match props in interpolated text', () => {
+	it('should match props in interpolated text', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -53,11 +53,11 @@ describe('slotHandler', () => {
 				adress: { type: { name: 'string' }, description: 'Your Adress' }
 			})
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 
-	it('should not match props if in a string litteral', () => {
+	it('should not match props if in a string litteral', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -71,11 +71,11 @@ describe('slotHandler', () => {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toBeUndefined()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 
-	it('should not match props if in a non evaluated attribute', () => {
+	it('should not match props if in a non evaluated attribute', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -89,7 +89,7 @@ describe('slotHandler', () => {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toBeUndefined()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 })

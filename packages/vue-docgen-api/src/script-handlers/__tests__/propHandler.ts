@@ -97,7 +97,7 @@ describe('propHandler', () => {
 			})
 		})
 
-		it('should return the right props type', () => {
+		it('should return the right props type for Array', () => {
 			const src = `
         export default {
           props: {

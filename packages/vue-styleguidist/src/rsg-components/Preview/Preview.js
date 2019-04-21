@@ -197,11 +197,7 @@ export default class Preview extends Component {
 
 			const rootComponent = renderRootJsx
 				? renderRootJsx.default(previewComponent)
-				: {
-						render(createElement) {
-							return createElement(previewComponent)
-						}
-				  }
+				: { render: createElement => createElement(previewComponent) }
 			const vueInstance = new Vue(
 				Object.assign(extendsComponent, rootComponent, {
 					el
