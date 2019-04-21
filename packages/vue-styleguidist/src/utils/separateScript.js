@@ -1,4 +1,5 @@
-import { isSingleFileComponent, transformSingleFileComponent } from './singleFileComponentUtils'
+import transformSingleFileComponent from './singleFileComponentUtils'
+import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
 
 export const nameVarComponent = '__component__'
 
@@ -25,7 +26,7 @@ export default function separateScript(code, style) {
 			vueComponent: code.slice(indexVueBegin) + setVue,
 			style
 		}
-	} else if (isSingleFileComponent(code)) {
+	} else if (isCodeVueSfc(code)) {
 		const transformed = transformSingleFileComponent(code)
 		return separateScript(transformed.component, transformed.style)
 	}
