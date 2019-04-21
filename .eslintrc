@@ -14,6 +14,7 @@
 		}
 	},
 	"rules": {
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
 		"compat/compat": "error",
 		"import/no-unresolved": [
 			"error",

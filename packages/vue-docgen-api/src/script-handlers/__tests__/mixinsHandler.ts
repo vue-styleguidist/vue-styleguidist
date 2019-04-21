@@ -82,5 +82,6 @@ describe('mixinsHandler', () => {
 			filePath: './component/full/path',
 			nameFilter: ['default']
 		})
+		done()
 	})
 })

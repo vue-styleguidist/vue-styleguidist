@@ -27,6 +27,7 @@ describe('slotHandler', () => {
 				size: { type: { name: 'number' }, description: 'width of the button' },
 				value: { type: { name: 'string' }, description: 'value in the form' }
 			})
+			done()
 		} else {
 			done.fail()
 		}
@@ -52,6 +53,7 @@ describe('slotHandler', () => {
 				name: { type: { name: 'mixed' }, description: 'Your Name' },
 				adress: { type: { name: 'string' }, description: 'Your Adress' }
 			})
+			done()
 		} else {
 			done.fail()
 		}
@@ -70,6 +72,7 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toBeUndefined()
+			done()
 		} else {
 			done.fail()
 		}
@@ -88,6 +91,7 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toBeUndefined()
+			done()
 		} else {
 			done.fail()
 		}

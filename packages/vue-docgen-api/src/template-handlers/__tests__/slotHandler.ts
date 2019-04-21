@@ -26,6 +26,7 @@ describe('slotHandler', () => {
 				rootLeadingComment: '@slot first slot found'
 			})
 			expect(doc.toObject().slots.first).toMatchObject({ description: 'first slot found' })
+			done()
 		} else {
 			done.fail()
 		}
@@ -45,6 +46,7 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
 			expect(doc.toObject().slots.default).toMatchObject({ description: 'a default slot' })
+			done()
 		} else {
 			done.fail()
 		}
@@ -64,6 +66,7 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
 			expect(doc.toObject().slots.oeuf).toMatchObject({ description: 'a slot named oeuf' })
+			done()
 		} else {
 			done.fail()
 		}
@@ -85,6 +88,7 @@ describe('slotHandler', () => {
 				scoped: true,
 				description: 'a slot named oeuf'
 			})
+			done()
 		} else {
 			done.fail()
 		}

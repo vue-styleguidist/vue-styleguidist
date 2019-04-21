@@ -28,6 +28,7 @@ describe('extractLeadingComment', () => {
 			done.fail()
 		} else {
 			expect(extractLeadingComment(elt.parent, elt, '')).toBe('single line comment')
+			done()
 		}
 	})
 
@@ -46,6 +47,7 @@ describe('extractLeadingComment', () => {
 			expect(extractLeadingComment(elt.parent, elt, '')).toBe(
 				['multi line comment', 'on 2 lines'].join('\n')
 			)
+			done()
 		} else {
 			done.fail()
 		}
