@@ -1,10 +1,4 @@
-import { replaceAll } from './utils'
-
 const compiler = require('vue-template-compiler')
-
-const startsWith = function(str, searchString) {
-	return str.indexOf(searchString, 0) === 0
-}
 
 const buildStyles = function(styles) {
 	let _styles = ''
@@ -29,20 +23,21 @@ const getSingleFileComponentParts = function(code) {
 }
 
 const injectTemplateAndParseExport = function(parts) {
-	const templateString = replaceAll(`${parts.template.content}`, '`', '\\`')
+	const templateString = parts.template.content.replace(/`/g, '\\`')
 
 	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
 
 	const code = parts.script.content
 	let index = -1
+	let startIndex = -1
 	if (code.indexOf('module.exports') !== -1) {
-		const startIndex = code.indexOf('module.exports')
+		startIndex = code.indexOf('module.exports')
 		index = code.indexOf('{', startIndex) + 1
 	} else if (code.indexOf('exports.default') !== -1) {
-		const startIndex = code.indexOf('exports.default')
+		startIndex = code.indexOf('exports.default')
 		index = code.indexOf('{', startIndex) + 1
 	} else if (code.indexOf('export ') !== -1) {
-		const startIndex = code.indexOf('export ')
+		startIndex = code.indexOf('export ')
 		index = code.indexOf('{', startIndex) + 1
 	}
 	if (index === -1) {
@@ -52,18 +47,10 @@ const injectTemplateAndParseExport = function(parts) {
 	if (right[right.length - 1] === ';') {
 		right = right.slice(0, -1)
 	}
-	return `{\ntemplate: \`${templateString}\`,\n${right}`
-}
-
-const extractImports = function(code) {
-	let imports = ''
-	const lines = code.split('\n')
-	lines.forEach(it => {
-		if (startsWith(it, 'import') || it.indexOf('require(') !== -1) {
-			imports += it + '\n'
-		}
-	})
-	return imports + '\n'
+	return {
+		preprocessing: code.substr(0, startIndex).trim(),
+		component: `{\ntemplate: \`${templateString}\`,\n${right}`
+	}
 }
 
 export function isSingleFileComponent(code) {
@@ -80,8 +67,8 @@ export function transformSingleFileComponent(code) {
 	const templateAdded = injectTemplateAndParseExport(parts)
 	return {
 		component: `
-			${parts.script ? extractImports(parts.script.content) : ''}
-			new Vue(${templateAdded});
+			${templateAdded.preprocessing}
+			new Vue(${templateAdded.component});
 		`,
 		style: buildStyles(parts.styles)
 	}
