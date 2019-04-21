@@ -53,16 +53,7 @@ const injectTemplateAndParseExport = function(parts) {
 	}
 }
 
-export function isSingleFileComponent(code) {
-	try {
-		const parts = compiler.parseComponent(code, { pad: 'line' })
-		return parts.template !== null
-	} catch (err) {
-		return false
-	}
-}
-
-export function transformSingleFileComponent(code) {
+export default function transformSingleFileComponent(code) {
 	const parts = getSingleFileComponentParts(code)
 	const templateAdded = injectTemplateAndParseExport(parts)
 	return {
