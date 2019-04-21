@@ -1,10 +1,4 @@
-import { replaceAll } from './utils'
-
 const compiler = require('vue-template-compiler')
-
-const startsWith = function(str, searchString) {
-	return str.indexOf(searchString, 0) === 0
-}
 
 const buildStyles = function(styles) {
 	let _styles = ''
@@ -29,7 +23,7 @@ const getSingleFileComponentParts = function(code) {
 }
 
 const injectTemplateAndParseExport = function(parts) {
-	const templateString = replaceAll(`${parts.template.content}`, '`', '\\`')
+	const templateString = parts.template.content.replace(/`/g, '\\`')
 
 	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
 
@@ -59,17 +53,6 @@ const injectTemplateAndParseExport = function(parts) {
 	}
 }
 
-const extractImports = function(code) {
-	let imports = ''
-	const lines = code.split('\n')
-	lines.forEach(it => {
-		if (startsWith(it, 'import') || it.indexOf('require(') !== -1) {
-			imports += it + '\n'
-		}
-	})
-	return imports + '\n'
-}
-
 export function isSingleFileComponent(code) {
 	try {
 		const parts = compiler.parseComponent(code, { pad: 'line' })
@@ -84,7 +67,6 @@ export function transformSingleFileComponent(code) {
 	const templateAdded = injectTemplateAndParseExport(parts)
 	return {
 		component: `
-			${parts.script ? extractImports(parts.script.content) : ''}
 			${templateAdded.preprocessing}
 			new Vue(${templateAdded.component});
 		`,

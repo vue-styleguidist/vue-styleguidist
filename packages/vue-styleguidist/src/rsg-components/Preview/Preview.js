@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
+import transpileImports from 'react-styleguidist/lib/client/utils/transpileImports'
 import { parse } from 'acorn'
 import Vue from 'vue'
 import styleScoper from '../../utils/styleScoper'
@@ -111,7 +112,7 @@ export default class Preview extends Component {
 
 		try {
 			compuse = separateScript(code)
-			compiledCode = this.compileCode(compuse.js)
+			compiledCode = this.compileCode(transpileImports(compuse.js))
 
 			if (compuse.vueComponent) {
 				configComponent = this.compileCode(compuse.vueComponent)
