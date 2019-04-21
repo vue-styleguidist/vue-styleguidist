@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
+import PlaygroundError from 'rsg-components/PlaygroundError'
 import { parse } from 'acorn'
 import Vue from 'vue'
 import styleScoper from '../../utils/styleScoper'
@@ -31,6 +32,8 @@ const getVars = syntaxTree => {
 	})
 }
 const compileCode = (code, config) => transform(code, config).code
+
+const Fragment = React.Fragment ? React.Fragment : 'div'
 
 export default class Preview extends Component {
 	static propTypes = {
