@@ -18,7 +18,7 @@ describe('tests button', () => {
 		expect(docButton.methods).toMatchObject([{ name: 'onClick' }])
 	})
 
-	it('should return propB type as string', () => {
+	it('should return slots definitions', () => {
 		expect(docButton.slots).toMatchObject({
 			default: { description: 'Use this slot default' },
 			empty: { description: 'Use this slot for not button' }

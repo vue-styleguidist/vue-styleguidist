@@ -2,6 +2,8 @@
 home: true
 heroImage: >-
   https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png
+  
+
 actionText: Get Started →
 actionLink: /GettingStarted.html
 footer: MIT Licensed
