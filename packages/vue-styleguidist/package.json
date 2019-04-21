@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
 	"scripts": {
 		"precompile": "rimraf lib/",
-		"compile": "babel --ignore '*.spec.js' -d lib/ src/"
+		"compile": "babel --ignore **/__tests__/*.js,**/*.spec.js -d lib/ src/"
 	},
 	"repository": {
 		"type": "git",

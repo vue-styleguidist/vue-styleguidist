@@ -1,4 +1,5 @@
 {
+	"extends": ["eslint:recommended","plugin:jest/recommended", "plugin:react/recommended"],
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
@@ -8,11 +9,12 @@
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"moduleDirectory": ["/packages/vue-styleguidist/src", "node_modules"]
+				"moduleDirectory": ["packages/vue-styleguidist/src", "node_modules"]
 			}
 		}
 	},
 	"rules": {
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
 		"compat/compat": "error",
 		"import/no-unresolved": [
 			"error",
@@ -55,6 +57,10 @@
 						"extensions": [".ts", ".js"]
 					}
 				}
+			},
+			"rules": {
+				"no-unused-vars": "off",
+				"typescript/no-unused-vars": "off"
 			}
 		}
 	],

@@ -9,7 +9,7 @@ describe('slotHandler', () => {
 		doc = new Documentation()
 	})
 
-	it('should match props in attributes expressions', () => {
+	it('should match props in attributes expressions', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -27,12 +27,13 @@ describe('slotHandler', () => {
 				size: { type: { name: 'number' }, description: 'width of the button' },
 				value: { type: { name: 'string' }, description: 'value in the form' }
 			})
+			done()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 
-	it('should match props in interpolated text', () => {
+	it('should match props in interpolated text', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -52,12 +53,13 @@ describe('slotHandler', () => {
 				name: { type: { name: 'mixed' }, description: 'Your Name' },
 				adress: { type: { name: 'string' }, description: 'Your Adress' }
 			})
+			done()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 
-	it('should not match props if in a string litteral', () => {
+	it('should not match props if in a string litteral', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -70,12 +72,13 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toBeUndefined()
+			done()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 
-	it('should not match props if in a non evaluated attribute', () => {
+	it('should not match props if in a non evaluated attribute', done => {
 		const ast = compile(
 			[
 				'<div>',
@@ -88,8 +91,9 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
 			expect(doc.toObject().props).toBeUndefined()
+			done()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 })

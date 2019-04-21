@@ -5,6 +5,7 @@ const logger = require('glogg')('rsg')
 const getExamples = require('./utils/getExamples')
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
+// eslint-disable-next-line import/no-unresolved
 const vueDocs = require('vue-docgen-api')
 const defaultSortProps = require('react-styleguidist/lib/loaders/utils/sortProps')
 

@@ -32,40 +32,39 @@ Vue styleguidist will display your components’ JSDoc comment blocks.
 </template>
 
 <script>
-
-/**
- * The only true button.
- */
-export default {
-  name: 'Button',
-  props: {
-    /**
-    * The color for the button.
-    */
-    color: {
-      type: String,
-      default: '#333'
-    },
-    /**
-    * The size of the button
-    * `small, normal, large`
-    */
-    size: {
-      type: String,
-      default: 'normal'
-    },
-    /**
-    * Gets called when the user clicks on the button
-    */
-    onClick: {
-      type:Function,
-      default: (event) => {
-        console.log('You have clicked me!', event.target);
+  /**
+   * The only true button.
+   */
+  export default {
+    name: 'Button',
+    props: {
+      /**
+       * The color for the button.
+       */
+      color: {
+        type: String,
+        default: '#333'
+      },
+      /**
+       * The size of the button
+       * `small, normal, large`
+       */
+      size: {
+        type: String,
+        default: 'normal'
+      },
+      /**
+       * Gets called when the user clicks on the button
+       */
+      onClick: {
+        type: Function,
+        default: event => {
+          console.log('You have clicked me!', event.target)
+        }
       }
     }
-  },
-  /* ... */
-}
+    /* ... */
+  }
 </script>
 ```
 
@@ -73,15 +72,15 @@ If you want create a custom [v-model](https://vuejs.org/v2/guide/components.html
 
 ```html
 <script>
-export default {
-  name: 'my-checkbox',
-  props: {
-    /**
-     * @model
-     */
-    value: String
+  export default {
+    name: 'my-checkbox',
+    props: {
+      /**
+       * @model
+       */
+      value: String
+    }
   }
-}
 </script>
 ```
 
@@ -203,7 +202,7 @@ export default {
 
 ```vue
 <template>
-<!-- -->
+  <!-- -->
 </template>
 <script>
 // src/components/Button/Button.vue
@@ -414,65 +413,64 @@ All tags can render Markdown.
 </template>
 
 <script>
-
-/**
-* The only true button.
-* @version 1.0.1
-*/
-export default {
-  name: 'Button',
-  props: {
-    /**
-    * The color for the button.
-    * @see See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
-    * @see See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) for a list of color names
-    */
-    color: {
-      type: String,
-      default: '#333'
+  /**
+   * The only true button.
+   * @version 1.0.1
+   */
+  export default {
+    name: 'Button',
+    props: {
+      /**
+       * The color for the button.
+       * @see See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
+       * @see See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) for a list of color names
+       */
+      color: {
+        type: String,
+        default: '#333'
+      },
+      /**
+       * The size of the button
+       * `small, normal, large`
+       * @since Version 1.0.1
+       */
+      size: {
+        type: String,
+        default: 'normal'
+      },
+      /**
+       * Gets called when the user clicks on the button
+       */
+      onClick: {
+        type: Function,
+        default: event => {
+          console.log('You have clicked me!', event.target)
+        }
+      }
     },
-    /**
-    * The size of the button
-    * `small, normal, large`
-    * @since Version 1.0.1
-    */
-    size: {
-      type: String,
-      default: 'normal'
-    },
-    /**
-    * Gets called when the user clicks on the button
-    */
-    onClick: {
-      type:Function,
-      default: (event) => {
-        console.log('You have clicked me!', event.target);
+    methods: {
+      /**
+       * Gets called when the user clicks on the button
+       *
+       * @param {SyntheticEvent} event The react `SyntheticEvent`
+       * @param {Number} num Numbers of examples
+       */
+      launch(event, num) {
+        /* ... */
+      },
+      // ...
+      ignoreMethod() {
+        /**
+         * Success event.
+         *
+         * @event success
+         * @type {object}
+         */
+        this.$emit('success', {})
       }
     }
-  },
-  methods: {
-    /**
-     * Gets called when the user clicks on the button
-     *
-     * @param {SyntheticEvent} event The react `SyntheticEvent`
-     * @param {Number} num Numbers of examples
-     */
-    launch(event, num){
-      /* ... */
-    },
-    // ...
-    ignoreMethod(){
-      /**
-      * Success event.
-      *
-      * @event success
-      * @type {object}
-      */
-      this.$emit('success', {})
-    }
-  },
-  /* ... */
-}
+    /* ... */
+  }
 </script>
 ```
 

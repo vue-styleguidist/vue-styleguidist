@@ -15,6 +15,7 @@ export default {
 	},
 	methods: {
 		hello() {
+			// eslint-disable-next-line no-console
 			console.log('hello from mixin!')
 		}
 	}
