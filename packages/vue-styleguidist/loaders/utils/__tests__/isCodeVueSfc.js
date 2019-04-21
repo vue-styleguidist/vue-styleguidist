@@ -1,4 +1,4 @@
-import isCodeVueSfc from '../isCodeVueSfc'
+import { isCodeVueSfc } from '../isCodeVueSfc'
 
 describe('isCodeVueSfc', () => {
 	it('should return true if there is a script tag', () => {
