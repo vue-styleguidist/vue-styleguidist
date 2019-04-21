@@ -13,7 +13,7 @@ function compileIt(src: string): ASTElement | undefined {
 }
 
 describe('extractLeadingComment', () => {
-	it('should extract single line comments', () => {
+	it('should extract single line comments', done => {
 		const elt = compileIt(
 			[
 				'<div>',
@@ -25,14 +25,14 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (!elt) {
-			fail()
+			done.fail()
 		} else {
 			expect(extractLeadingComment(elt.parent, elt, '')).toBe('single line comment')
 			done()
 		}
 	})
 
-	it('should extract multi line comments', () => {
+	it('should extract multi line comments', done => {
 		const elt = compileIt(
 			[
 				'<div>',
@@ -49,7 +49,7 @@ describe('extractLeadingComment', () => {
 			)
 			done()
 		} else {
-			fail()
+			done.fail()
 		}
 	})
 })
