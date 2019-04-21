@@ -1,5 +1,6 @@
 node_modules
 examples/*/styleguide/*
+examples/*/dist/*
 packages/*/lib/**/*
 packages/*/dist/**/*
 coverage/*

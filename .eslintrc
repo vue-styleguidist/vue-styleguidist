@@ -1,4 +1,5 @@
 {
+	"extends": ["eslint:recommended","plugin:jest/recommended"],
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
@@ -8,11 +9,12 @@
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"moduleDirectory": ["/packages/vue-styleguidist/src", "node_modules"]
+				"moduleDirectory": ["packages/vue-styleguidist/src", "node_modules"]
 			}
 		}
 	},
 	"rules": {
+		"no-unused-vars": ["warn", { "varsIgnorePattern": "React" }],
 		"compat/compat": "error",
 		"import/no-unresolved": [
 			"error",
