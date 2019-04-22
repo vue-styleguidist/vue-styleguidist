@@ -22,7 +22,7 @@ export default {
 		expect(dummySet).toMatchObject({ param: 'Foo' })
 	})
 
-	it('shoud be fine with using the new Vue structure', () => {
+	it('shoud be fine with using the `new Vue` structure', () => {
 		const sut = separateScript(`
 let param = 'Bar';
 new Vue({
@@ -30,5 +30,15 @@ new Vue({
 });`)
 		eval(sut.script)
 		expect(dummySet).toMatchObject({ param: 'Bar' })
+	})
+
+	it('shoud work with the vsg way', () => {
+		const sut = separateScript(`
+		let param = 'BazBaz';
+		<div>
+			<button> {{param}} </button>
+		</div>
+		`)
+		expect(sut.script.trim()).toBe("let param = 'BazBaz';")
 	})
 })

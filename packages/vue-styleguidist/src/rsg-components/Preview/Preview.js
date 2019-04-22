@@ -1,4 +1,3 @@
-import { parse } from 'acorn'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
@@ -6,35 +5,11 @@ import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
 import styleScoper from '../../utils/styleScoper'
 import separateScript from '../../utils/separateScript'
+import getVars from '../../utils/getVars'
 
 const compileCode = (code, config) => transform(code, config).code
 
 const Fragment = React.Fragment ? React.Fragment : 'div'
-
-/**
- * extract variable and function declaration from an AST and returns their ids
- * @param {ast} syntaxTree
- */
-const getVars = code => {
-	const syntaxTree = parse(code)
-	const arr = syntaxTree.body.filter(syntax => {
-		return syntax.type === 'VariableDeclaration' || syntax.type === 'FunctionDeclaration'
-	})
-	arr.unshift([])
-	return arr.reduce((total, next) => {
-		function getId(syntax) {
-			if (syntax.declarations) {
-				return Array.prototype.concat.apply(
-					[],
-					syntax.declarations.map(declaration => declaration.id.name)
-				)
-			}
-			return [syntax.id.name]
-		}
-		total = total.concat(getId(next))
-		return total
-	})
-}
 
 export default class Preview extends Component {
 	static propTypes = {
