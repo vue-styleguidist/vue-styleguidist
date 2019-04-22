@@ -156,31 +156,32 @@ export default class Preview extends Component {
 	}
 
 	evalInContext(compiledCode, listVars) {
-		// When it's a full script or a SFC
-		const exampleComponentCode = `let __component__ = {}
-				function getConfig() {
-					eval(${JSON.stringify(
-						`${
-							// run script for SFC and full scripts
-							// and set config object in __component__
-							// if the structure is vsg mode, define local variables
-							// to set them up in the next step
-							compiledCode
-						};__component__.data = __component__.data || function() {return {${
-							// add local vars in data
-							// this is done through an object like {varName: varName}
-							// since varName is defined in compiledCode, it can be used to init
-							// the data object here
-							listVars.map(localVar => `${localVar}: ${localVar},`).join('\n')
-						}};};`
-					)});
-					return __component__;
-				}
+		const exampleComponentCode = `function getConfig() {
+	let __component__ = {}
+	
+	// When we do new Vue({name: 'MyComponent'}) the comfig object
+	// is set to __component__
+	function Vue(params){ __component__ = params; }
 
-				// Ignore: Extract the configuration of the example component
-				function Vue(params){ __component__ = params; }
-				return getConfig();
-			`
+	eval(${JSON.stringify(
+		`${
+			// run script for SFC and full scripts
+			// and set config object in __component__
+			// if the structure is vsg mode, define local variables
+			// to set them up in the next step
+			compiledCode
+		};__component__.data = __component__.data || function() {return {${
+			// add local vars in data
+			// this is done through an object like {varName: varName}
+			// since each varName is defined in compiledCode, it can be used to init
+			// the data object here
+			listVars.map(varName => `${varName}: ${varName}`).join(',')
+		}};};`
+	)});
+
+	return __component__;
+}
+return getConfig();`
 		return this.props.evalInContext(exampleComponentCode)
 	}
 
