@@ -1,4 +1,4 @@
-import transformSingleFileComponent from './singleFileComponentUtils'
+import normalizeComponent from './normalizeComponent'
 import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
 
 /**
@@ -20,7 +20,7 @@ export default function separateScript(code, style) {
 			style
 		}
 	} else if (isCodeVueSfc(code)) {
-		const transformed = transformSingleFileComponent(code)
+		const transformed = normalizeComponent(code)
 		return separateScript(transformed.component, transformed.style)
 	}
 	for (let id = 0; id < lines.length; id++) {

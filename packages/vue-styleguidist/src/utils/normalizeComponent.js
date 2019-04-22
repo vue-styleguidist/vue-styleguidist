@@ -1,4 +1,6 @@
-const compiler = require('vue-template-compiler')
+import { parseComponent } from 'vue-template-compiler'
+import { parse } from 'acorn'
+import walkes from 'walkes'
 
 const buildStyles = function(styles) {
 	let _styles = ''
@@ -16,7 +18,7 @@ const buildStyles = function(styles) {
 }
 
 const getSingleFileComponentParts = function(code) {
-	const parts = compiler.parseComponent(code, { pad: 'line' })
+	const parts = parseComponent(code, { pad: 'line' })
 	if (parts.script)
 		parts.script.content = parts.script.content.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
 	return parts
@@ -28,6 +30,10 @@ const injectTemplateAndParseExport = function(parts) {
 	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
 
 	const code = parts.script.content
+	const ast = parse(code)
+	walkes(ast, {
+		ExportDeclaration() {}
+	})
 	let index = -1
 	let startIndex = -1
 	if (code.indexOf('module.exports') !== -1) {
@@ -53,7 +59,7 @@ const injectTemplateAndParseExport = function(parts) {
 	}
 }
 
-export default function transformSingleFileComponent(code) {
+export default function normalizeComponent(code) {
 	const parts = getSingleFileComponentParts(code)
 	const templateAdded = injectTemplateAndParseExport(parts)
 	return {
