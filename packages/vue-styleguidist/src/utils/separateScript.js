@@ -5,7 +5,7 @@ import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
  * @param {string} code
- * @return {js:String, html:String}
+ * @return {script:String, html:String}
  *
  */
 export default function separateScript(code, style) {
@@ -30,7 +30,10 @@ export default function separateScript(code, style) {
 		}
 	}
 	return {
-		script: lines.slice(0, index).join('\n'),
+		script: lines
+			.slice(0, index)
+			.join('\n')
+			.trim(),
 		html: lines.slice(index).join('\n')
 	}
 }

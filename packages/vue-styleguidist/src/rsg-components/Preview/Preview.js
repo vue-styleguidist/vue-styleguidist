@@ -1,3 +1,4 @@
+import { parse } from 'acorn'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
@@ -9,6 +10,31 @@ import separateScript from '../../utils/separateScript'
 const compileCode = (code, config) => transform(code, config).code
 
 const Fragment = React.Fragment ? React.Fragment : 'div'
+
+/**
+ * extract variable and function declaration from an AST and returns their ids
+ * @param {ast} syntaxTree
+ */
+const getVars = code => {
+	const syntaxTree = parse(code)
+	const arr = syntaxTree.body.filter(syntax => {
+		return syntax.type === 'VariableDeclaration' || syntax.type === 'FunctionDeclaration'
+	})
+	arr.unshift([])
+	return arr.reduce((total, next) => {
+		function getId(syntax) {
+			if (syntax.declarations) {
+				return Array.prototype.concat.apply(
+					[],
+					syntax.declarations.map(declaration => declaration.id.name)
+				)
+			}
+			return [syntax.id.name]
+		}
+		total = total.concat(getId(next))
+		return total
+	})
+}
 
 export default class Preview extends Component {
 	static propTypes = {
@@ -75,31 +101,30 @@ export default class Preview extends Component {
 		const { code, vuex } = this.props
 		const { renderRootJsx } = this.context
 		let compuse = {}
-		let exampleComponent
 		if (!code) {
 			return
 		}
 
 		let extendsComponent = {}
 		let previewComponent = {}
+		let listVars = []
 
 		try {
 			compuse = separateScript(code)
-			if (compuse.script) {
-				// When it's a full script or an SFC
-				const compiledCode = this.compileCode(compuse.script)
-				exampleComponent = this.evalInContext(compiledCode)
-				previewComponent = exampleComponent()
-
-				if (previewComponent.el) {
-					delete previewComponent.el
-				}
-			} else {
-				// When it's just a template
+			if (compuse.html && compuse.script.length) {
+				// When it's a template preceeded by a script (vsg format)
+				// extract all variable to set them up as data in the component
+				// this way we can use what is defined in script in the template
+				listVars = getVars(compuse.script)
+			}
+			if (compuse.html) {
 				const template = `<div>${compuse.html}</div>`
-				previewComponent = {
-					template
-				}
+				previewComponent.template = template
+			}
+			if (compuse.script) {
+				const compiledCode = this.compileCode(compuse.script)
+				const evalResult = this.evalInContext(compiledCode, listVars)()
+				previewComponent = { ...previewComponent, ...evalResult }
 			}
 		} catch (err) {
 			this.handleError(err)
@@ -146,21 +171,27 @@ export default class Preview extends Component {
 		return false
 	}
 
-	evalInContext(compiledCode) {
+	evalInContext(compiledCode, listVars) {
 		// When it's a full script or a SFC
 		const exampleComponentCode = `
+				let __component__ = {}
 				function getConfig() {
-					eval(
-						${JSON.stringify(compiledCode)}
-					);
+					eval(${JSON.stringify(
+						`${
+							// set config object in __component__
+							compiledCode
+						};__component__.data = __component__.data || function() {return {${
+							// add local vars in data
+							listVars.map(localVar => `${localVar}: ${localVar},`).join('\n')
+						}};};`
+					)});
 					return __component__;
 				}
 
 				// Ignore: Extract the configuration of the example component
-				function Vue(params){ __component__ = params }
+				function Vue(params){ __component__ = params; }
 				return getConfig();
 			`
-
 		return this.props.evalInContext(exampleComponentCode)
 	}
 

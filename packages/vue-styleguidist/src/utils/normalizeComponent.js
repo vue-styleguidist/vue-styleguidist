@@ -35,20 +35,20 @@ function injectTemplateAndParseExport(parts) {
 		ecmaVersion: 2019,
 		sourceType: 'module'
 	})
-	let beforeIndex = -1
+	let preprocessing = ''
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
 	walkes(ast, {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node) {
-			beforeIndex = node.start + offset
+			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
 			endIndex = node.declaration.declarations[0].init.end + offset
 		},
 		//export default {}
 		ExportDefaultDeclaration(node) {
-			beforeIndex = node.start + offset
+			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
 		},
@@ -60,23 +60,21 @@ function injectTemplateAndParseExport(parts) {
 					/module/.test(node.left.object.name) &&
 					/exports/.test(node.left.property.name))
 			) {
-				beforeIndex = node.start + offset
+				preprocessing = code.slice(0, node.start + offset)
 				startIndex = node.right.start + offset
 				endIndex = node.right.end + offset
 			}
 		},
 		ImportDeclaration(node) {
-			if (node.source) {
-				const start = node.start + offset
-				const end = node.end + offset
+			const start = node.start + offset
+			const end = node.end + offset
 
-				const statement = code.substring(start, end)
-				const transpiledStatement = rewriteImports(statement)
+			const statement = code.substring(start, end)
+			const transpiledStatement = rewriteImports(statement)
 
-				code = code.substring(0, start) + transpiledStatement + code.substring(end)
+			code = code.substring(0, start) + transpiledStatement + code.substring(end)
 
-				offset += transpiledStatement.length - statement.length
-			}
+			offset += transpiledStatement.length - statement.length
 		}
 	})
 	if (startIndex === -1) {
@@ -84,7 +82,7 @@ function injectTemplateAndParseExport(parts) {
 	}
 	let right = code.slice(startIndex + 1, endIndex - 1)
 	return {
-		preprocessing: code.slice(0, beforeIndex),
+		preprocessing,
 		component: `{\n  template: \`${templateString}\`,\n  ${right}}`,
 		postprocessing: code.slice(endIndex)
 	}
