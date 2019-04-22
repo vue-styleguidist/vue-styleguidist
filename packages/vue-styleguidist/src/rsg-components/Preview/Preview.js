@@ -3,35 +3,10 @@ import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import transpileImports from 'react-styleguidist/lib/client/utils/transpileImports'
-import { parse } from 'acorn'
 import Vue from 'vue'
 import styleScoper from '../../utils/styleScoper'
-import separateScript, { nameVarComponent } from '../../utils/separateScript'
+import separateScript from '../../utils/separateScript'
 
-/**
- * extract variable and function declaration from an AST and returns their ids
- * @param {ast} syntaxTree
- */
-const getVars = syntaxTree => {
-	let arr = []
-	arr = syntaxTree.body.filter(syntax => {
-		return syntax.type === 'VariableDeclaration' || syntax.type === 'FunctionDeclaration'
-	})
-	arr.unshift([])
-	return arr.reduce((total, next) => {
-		function getId(syntax) {
-			if (syntax.declarations) {
-				return Array.prototype.concat.apply(
-					[],
-					syntax.declarations.map(declaration => declaration.id.name)
-				)
-			}
-			return [syntax.id.name]
-		}
-		total = total.concat(getId(next))
-		return total
-	})
-}
 const compileCode = (code, config) => transform(code, config).code
 
 const Fragment = React.Fragment ? React.Fragment : 'div'
@@ -101,25 +76,32 @@ export default class Preview extends Component {
 		const { code, vuex } = this.props
 		const { renderRootJsx } = this.context
 		let compuse = {}
-		let compiledCode
-		let configComponent
-		let syntaxTree
-		let listVars = []
 		let exampleComponent
 		if (!code) {
 			return
 		}
 
+		let extendsComponent = {}
+		let previewComponent = {}
+
 		try {
 			compuse = separateScript(code)
-			compiledCode = this.compileCode(transpileImports(compuse.js))
+			if (compuse.script) {
+				// When it's a full script or an SFC
+				const compiledCode = this.compileCode(transpileImports(compuse.script))
+				exampleComponent = this.evalInContext(compiledCode)
+				previewComponent = exampleComponent()
 
-			if (compuse.vueComponent) {
-				configComponent = this.compileCode(compuse.vueComponent)
+				if (previewComponent.el) {
+					delete previewComponent.el
+				}
+			} else {
+				// When it's just a template
+				const template = `<div>${compuse.html}</div>`
+				previewComponent = {
+					template
+				}
 			}
-			syntaxTree = parse(compuse.js)
-			listVars = getVars(syntaxTree)
-			exampleComponent = this.evalInContext(compiledCode, listVars, configComponent)
 		} catch (err) {
 			this.handleError(err)
 			compuse.html = ''
@@ -131,45 +113,27 @@ export default class Preview extends Component {
 			this.mountNode.appendChild(document.createElement('div'))
 			el = this.mountNode.children[0]
 		}
-		if (exampleComponent) {
-			let extendsComponent = {}
-			let previewComponent = {}
-			if (configComponent) {
-				previewComponent = exampleComponent()
 
-				if (previewComponent.el) {
-					delete previewComponent.el
-				}
-			} else {
-				const data = exampleComponent()
-				const template = `<div>${compuse.html}</div>`
-				previewComponent = {
-					data,
-					template
-				}
-			}
+		if (vuex) {
+			extendsComponent = { store: vuex.default }
+		}
+		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
+		previewComponent._scopeId = moduleId
 
-			if (vuex) {
-				extendsComponent = { store: vuex.default }
-			}
-			const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
-			previewComponent._scopeId = moduleId
+		const rootComponent = renderRootJsx
+			? renderRootJsx.default(previewComponent)
+			: { render: createElement => createElement(previewComponent) }
+		const vueInstance = new Vue({
+			...extendsComponent,
+			...rootComponent,
+			el
+		})
 
-			const rootComponent = renderRootJsx
-				? renderRootJsx.default(previewComponent)
-				: { render: createElement => createElement(previewComponent) }
-			const vueInstance = new Vue(
-				Object.assign(extendsComponent, rootComponent, {
-					el
-				})
-			)
-
-			if (compuse.style) {
-				const styleContainer = document.createElement('div')
-				styleContainer.innerHTML = compuse.style
-				styleContainer.firstChild.id = moduleId
-				vueInstance.$el.appendChild(styleContainer.firstChild)
-			}
+		if (compuse.style) {
+			const styleContainer = document.createElement('div')
+			styleContainer.innerHTML = compuse.style
+			styleContainer.firstChild.id = moduleId
+			vueInstance.$el.appendChild(styleContainer.firstChild)
 		}
 		styleScoper()
 	}
@@ -183,36 +147,20 @@ export default class Preview extends Component {
 		return false
 	}
 
-	evalInContext(compiledCode, listVars, configComponent) {
-		let exampleComponentCode = ''
-		if (configComponent) {
-			exampleComponentCode = `
+	evalInContext(compiledCode) {
+		// When it's a full script or a SFC
+		const exampleComponentCode = `
 				function getConfig() {
 					eval(
 						${JSON.stringify(compiledCode)}
-						 + ";" +
-						${JSON.stringify(configComponent)}
 					);
-					return ${nameVarComponent};
+					return __component__;
 				}
+
+				// Ignore: Extract the configuration of the example component
+				function Vue(params){ __component__ = params }
 				return getConfig();
 			`
-		} else {
-			listVars = listVars.map(value => {
-				return `${value} : ${value}`
-			})
-			exampleComponentCode = `
-				function getData() {
-					eval(${JSON.stringify(compiledCode)})
-					return function() {
-						return {
-							${listVars.join(',')}
-						}
-					}
-				}
-				return getData();
-			`
-		}
 
 		return this.props.evalInContext(exampleComponentCode)
 	}
