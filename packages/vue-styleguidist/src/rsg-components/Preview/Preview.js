@@ -7,8 +7,6 @@ import styleScoper from '../../utils/styleScoper'
 import separateScript from '../../utils/separateScript'
 import getVars from '../../utils/getVars'
 
-const compileCode = (code, config) => transform(code, config).code
-
 const Fragment = React.Fragment ? React.Fragment : 'div'
 
 export default class Preview extends Component {
@@ -75,35 +73,36 @@ export default class Preview extends Component {
 
 		const { code, vuex } = this.props
 		const { renderRootJsx } = this.context
-		let compuse = {}
 		if (!code) {
 			return
 		}
 
-		let extendsComponent = {}
+		let style
 		let previewComponent = {}
 		let listVars = []
 
 		try {
-			compuse = separateScript(code)
+			const compuse = separateScript(code)
+			style = compuse.style
 			if (compuse.html && compuse.script.length) {
 				// When it's a template preceeded by a script (vsg format)
+				// NOTA: if it is an SFC, the html template will be added in the script
+
 				// extract all variable to set them up as data in the component
-				// this way we can use what is defined in script in the template
+				// this way we can use in the template what is defined in the script
 				listVars = getVars(compuse.script)
+			}
+			if (compuse.script) {
+				const compiledCode = this.compileCode(compuse.script)
+				previewComponent = this.evalInContext(compiledCode, listVars)() || {}
 			}
 			if (compuse.html) {
 				const template = `<div>${compuse.html}</div>`
 				previewComponent.template = template
 			}
-			if (compuse.script) {
-				const compiledCode = this.compileCode(compuse.script)
-				const evalResult = this.evalInContext(compiledCode, listVars)()
-				previewComponent = { ...previewComponent, ...evalResult }
-			}
 		} catch (err) {
 			this.handleError(err)
-			compuse.html = ''
+			previewComponent.template = ''
 		}
 
 		let el = this.mountNode.children[0]
@@ -113,6 +112,7 @@ export default class Preview extends Component {
 			el = this.mountNode.children[0]
 		}
 
+		let extendsComponent = {}
 		if (vuex) {
 			extendsComponent = { store: vuex.default }
 		}
@@ -128,9 +128,9 @@ export default class Preview extends Component {
 			el
 		})
 
-		if (compuse.style) {
+		if (style) {
 			const styleContainer = document.createElement('div')
-			styleContainer.innerHTML = compuse.style
+			styleContainer.innerHTML = style
 			styleContainer.firstChild.id = moduleId
 			vueInstance.$el.appendChild(styleContainer.firstChild)
 		}
@@ -139,7 +139,7 @@ export default class Preview extends Component {
 
 	compileCode(code) {
 		try {
-			return compileCode(code, this.context.config.compilerConfig)
+			return transform(code, this.context.config.compilerConfig).code
 		} catch (err) {
 			this.handleError(err)
 		}
@@ -148,15 +148,20 @@ export default class Preview extends Component {
 
 	evalInContext(compiledCode, listVars) {
 		// When it's a full script or a SFC
-		const exampleComponentCode = `
-				let __component__ = {}
+		const exampleComponentCode = `let __component__ = {}
 				function getConfig() {
 					eval(${JSON.stringify(
 						`${
-							// set config object in __component__
+							// run script for SFC and full scripts
+							// and set config object in __component__
+							// if the structure is vsg mode, define local variables
+							// to set them up in the next step
 							compiledCode
 						};__component__.data = __component__.data || function() {return {${
 							// add local vars in data
+							// this is done through an object like {varName: varName}
+							// since varName is defined in compiledCode, it can be used to init
+							// the data object here
 							listVars.map(localVar => `${localVar}: ${localVar},`).join('\n')
 						}};};`
 					)});
