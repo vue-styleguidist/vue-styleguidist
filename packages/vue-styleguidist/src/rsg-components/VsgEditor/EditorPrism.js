@@ -10,8 +10,7 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
-
-const isCodeVueSfc = require('../../../loaders/utils/isCodeVueSfc')
+import { isCodeVueSfc } from '../../../loaders/utils/isCodeVueSfc'
 
 const highlight = lang => {
 	const langScheme = Prism.languages[lang]
