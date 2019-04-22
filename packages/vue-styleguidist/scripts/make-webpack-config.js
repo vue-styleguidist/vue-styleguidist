@@ -151,17 +151,8 @@ module.exports = function(config, env) {
 		})
 	}
 
-	const customComponents = [
-		'Events',
-		'Preview',
-		'Props',
-		'SlotsTable',
-		'StyleGuide',
-		'Table',
-		'Usage',
-		'Welcome'
-	]
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
+	const customComponents = require('fs').readdirSync(sourceSrc)
 	customComponents.forEach(function(component) {
 		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
 			sourceSrc,
@@ -171,16 +162,14 @@ module.exports = function(config, env) {
 			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
 	})
 
-	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
-	;['slots/UsageTabButton'].forEach(function(component) {
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
-			sourceSrc,
-			component
-		)
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
-	})
+	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/'slots/UsageTabButton'`] = path.resolve(
+		sourceSrc,
+		'VsgSlots/UsageTabButton'
+	)
+	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/'slots/UsageTabButton'`] =
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/'slots/UsageTabButton'`]
 
+	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
 	// if the user chose prism, load the prism editor instead of codemirror
 	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`] = path.resolve(
 		sourceSrc,
