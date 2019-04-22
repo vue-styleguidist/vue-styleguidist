@@ -151,19 +151,28 @@ module.exports = function(config, env) {
 		})
 	}
 
-	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
-	;[
-		...(config.simpleEditor ? [] : ['Editor']),
-		'Preview',
-		'Usage',
+	const customComponents = [
 		'Events',
+		'Preview',
 		'Props',
-		'Table',
 		'SlotsTable',
-		'slots/UsageTabButton',
 		'StyleGuide',
+		'Table',
+		'Usage',
 		'Welcome'
-	].forEach(function(component) {
+	]
+	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
+	customComponents.forEach(function(component) {
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
+			sourceSrc,
+			component
+		)
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+	})
+
+	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
+	;['slots/UsageTabButton'].forEach(function(component) {
 		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
 			sourceSrc,
 			component
@@ -173,14 +182,12 @@ module.exports = function(config, env) {
 	})
 
 	// if the user chose prism, load the prism editor instead of codemirror
-	if (config.simpleEditor) {
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`] = path.resolve(
-			sourceSrc,
-			'Editor/EditorPrism'
-		)
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/Editor`] =
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`]
-	}
+	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`] = path.resolve(
+		sourceSrc,
+		`${CUSTOM_EDITOR_FOLDER}/${config.simpleEditor ? 'EditorPrism' : 'Editor'}`
+	)
+	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/Editor`] =
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`]
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
