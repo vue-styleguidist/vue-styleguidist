@@ -93,10 +93,16 @@ export default class Preview extends Component {
 				listVars = getVars(compuse.script)
 			}
 			if (compuse.script) {
+				// compile and execute the script
+				// it can be:
+				// - a script setting up variables => we set up the data function of previewComponent
+				// - a `new Vue()` script that will return a full config object
 				const compiledCode = this.compileCode(compuse.script)
 				previewComponent = this.evalInContext(compiledCode, listVars)() || {}
 			}
 			if (compuse.html) {
+				// if this is a pure template or if we are in hybrid vsg mode,
+				// we need to set the template up.
 				const template = `<div>${compuse.html}</div>`
 				previewComponent.template = template
 			}
@@ -119,15 +125,18 @@ export default class Preview extends Component {
 		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
 		previewComponent._scopeId = moduleId
 
+		// then we just have to render the setup previewComponent in the prepared slot
 		const rootComponent = renderRootJsx
 			? renderRootJsx.default(previewComponent)
 			: { render: createElement => createElement(previewComponent) }
+
 		const vueInstance = new Vue({
 			...extendsComponent,
 			...rootComponent,
 			el
 		})
 
+		// Add the scoped style if there is any
 		if (style) {
 			const styleContainer = document.createElement('div')
 			styleContainer.innerHTML = style
