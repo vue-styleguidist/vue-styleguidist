@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
-import transpileImports from 'react-styleguidist/lib/client/utils/transpileImports'
 import Vue from 'vue'
 import styleScoper from '../../utils/styleScoper'
 import separateScript from '../../utils/separateScript'
@@ -88,7 +87,7 @@ export default class Preview extends Component {
 			compuse = separateScript(code)
 			if (compuse.script) {
 				// When it's a full script or an SFC
-				const compiledCode = this.compileCode(transpileImports(compuse.script))
+				const compiledCode = this.compileCode(compuse.script)
 				exampleComponent = this.evalInContext(compiledCode)
 				previewComponent = exampleComponent()
 

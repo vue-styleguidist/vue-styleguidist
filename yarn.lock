@@ -16122,6 +16122,11 @@ rewrite-imports@1.2.0:
   resolved "https://registry.yarnpkg.com/rewrite-imports/-/rewrite-imports-1.2.0.tgz#091b05aa0a358e54b6582205b6feeb73977bd8fb"
   integrity sha512-oVoZ3QImciK+S7I89vPyxDgohkwhJyWLP5EKcMvF2NOhaFkmdKFiJMJzTM35VeNV1gQfGvv9Cve6sMq5E7unHg==
 
+rewrite-imports@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/rewrite-imports/-/rewrite-imports-2.0.3.tgz#210fc05ebda6a6c6a2e396608b0146003d510dda"
+  integrity sha512-R7ICJEeP3y+d/q4C8YEJj9nRP0JyiSqG07uc0oQh8JvAe706dDFVL95GBZYCjADqmhArZWWjfM/5EcmVu4/B+g==
+
 rfc6902@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/rfc6902/-/rfc6902-3.0.1.tgz#03a3d38329dbc266fbc92aa7fc14546d7839e89f"

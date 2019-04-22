@@ -84,6 +84,7 @@
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.9.4",
 		"react-styleguidist": "^9.0.4",
+		"rewrite-imports": "^2.0.3",
 		"style-loader": "^0.21.0",
 		"to-ast": "^1.0.0",
 		"uglifyjs-webpack-plugin": "1.2.7",
