@@ -152,31 +152,31 @@ module.exports = function(config, env) {
 	}
 
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
-	const customComponents = require('fs').readdirSync(sourceSrc)
-	customComponents.forEach(function(component) {
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
-			sourceSrc,
-			component
-		)
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
-	})
-
-	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/'slots/UsageTabButton'`] = path.resolve(
-		sourceSrc,
-		'VsgSlots/UsageTabButton'
-	)
-	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/'slots/UsageTabButton'`] =
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/'slots/UsageTabButton'`]
+	require('fs')
+		.readdirSync(sourceSrc)
+		.forEach(function(component) {
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
+				sourceSrc,
+				component
+			)
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+				webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+		})
 
 	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
-	// if the user chose prism, load the prism editor instead of codemirror
-	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`] = path.resolve(
-		sourceSrc,
-		`${CUSTOM_EDITOR_FOLDER}/${config.simpleEditor ? 'EditorPrism' : 'Editor'}`
-	)
-	webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/Editor`] =
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`]
+	const customComponents = {
+		'slots/UsageTabButton': 'VsgSlots/UsageTabButton',
+		// if the user chose prism, load the prism editor instead of codemirror
+		Editor: path.join(CUSTOM_EDITOR_FOLDER, config.simpleEditor ? 'EditorPrism' : 'Editor')
+	}
+	Object.keys(customComponents).forEach(function(key) {
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(
+			sourceSrc,
+			customComponents[key]
+		)
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`]
+	})
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
