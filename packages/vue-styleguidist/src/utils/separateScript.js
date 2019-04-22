@@ -1,13 +1,11 @@
-import transformSingleFileComponent from './singleFileComponentUtils'
+import normalizeComponent from './normalizeComponent'
 import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
-
-export const nameVarComponent = '__component__'
 
 /**
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
  * @param {string} code
- * @return {js:String, html:String}
+ * @return {script:String, html:String}
  *
  */
 export default function separateScript(code, style) {
@@ -15,19 +13,14 @@ export default function separateScript(code, style) {
 	const lines = code.split('\n')
 	if (code.indexOf('new Vue') > -1) {
 		const indexVueBegin = code.indexOf('new Vue')
-		const setVue = [
-			'',
-			'// Ignore: Extract the configuration of the example component',
-			`function Vue(params){ ${nameVarComponent} = params }`
-		].join('\n')
 
+		const script = [`${code.slice(0, indexVueBegin)};`, `${code.slice(indexVueBegin)};`].join('\n')
 		return {
-			js: code.slice(0, indexVueBegin),
-			vueComponent: code.slice(indexVueBegin) + setVue,
+			script,
 			style
 		}
 	} else if (isCodeVueSfc(code)) {
-		const transformed = transformSingleFileComponent(code)
+		const transformed = normalizeComponent(code)
 		return separateScript(transformed.component, transformed.style)
 	}
 	for (let id = 0; id < lines.length; id++) {
@@ -37,7 +30,10 @@ export default function separateScript(code, style) {
 		}
 	}
 	return {
-		js: lines.slice(0, index).join('\n'),
+		script: lines
+			.slice(0, index)
+			.join('\n')
+			.trim(),
 		html: lines.slice(index).join('\n')
 	}
 }

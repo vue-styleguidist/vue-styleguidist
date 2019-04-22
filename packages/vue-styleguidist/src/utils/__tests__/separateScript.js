@@ -2,7 +2,11 @@ import separateScript from '../separateScript'
 
 describe('separateScript', () => {
 	// eslint-disable-next-line no-unused-vars
-	let __component__
+	let dummySet
+	// eslint-disable-next-line no-unused-vars
+	function Vue(param) {
+		dummySet = param
+	}
 	it('bake template into a new Vue', () => {
 		const sut = separateScript(`
 <template>
@@ -14,17 +18,27 @@ export default {
 	param
 }
 </script>`)
-		eval(`${sut.js};${sut.vueComponent}`)
-		expect(__component__).toMatchObject({ param: 'Foo' })
+		eval(sut.script)
+		expect(dummySet).toMatchObject({ param: 'Foo' })
 	})
 
-	it('shoud be fine with using the new Vue structure', () => {
+	it('shoud be fine with using the `new Vue` structure', () => {
 		const sut = separateScript(`
 let param = 'Bar';
 new Vue({
 	param
 });`)
-		eval(`${sut.js};${sut.vueComponent}`)
-		expect(__component__).toMatchObject({ param: 'Bar' })
+		eval(sut.script)
+		expect(dummySet).toMatchObject({ param: 'Bar' })
+	})
+
+	it('shoud work with the vsg way', () => {
+		const sut = separateScript(`
+		let param = 'BazBaz';
+		<div>
+			<button> {{param}} </button>
+		</div>
+		`)
+		expect(sut.script.trim()).toBe("let param = 'BazBaz';")
 	})
 })
