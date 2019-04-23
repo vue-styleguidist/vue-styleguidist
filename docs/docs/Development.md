@@ -50,7 +50,7 @@ We’re trying to keep Styleguidist’s own [webpack config](https://github.com/
 
 ## React components
 
-Most of StyleGuidist UI components consist of two parts: `Foo/Foo.js` that contains all logic and `Foo/FooRenderer.js` that contains all markup and styles. This allows users to customize rendering by overriding `*Renderer` component using webpack aliases (or [styleguideComponents](Configuration.md#styleguidecomponents) config option):
+Most of StyleGuidist UI components consist of two parts: `Foo/Foo.js` that contains all logic and `Foo/FooRenderer.js` that contains all markup and styles. This allows users to customize rendering by overriding `*Renderer` component using webpack aliases (or [styleguideComponents](/Configuration.md#styleguidecomponents) config option):
 
 ```js
 // styleguide.config.js
@@ -84,7 +84,7 @@ For styles we use [JSS](http://cssinjs.org/), it allows users to customize their
 
 Use [classnames](https://github.com/JedWatson/classnames) to merge several class names or for conditional class names, import it as `cx` (`import cx from 'classnames'`).
 
-We use `Styled` higher-order component to allow theming (see [theme](Configuration.md#theme) and [style](Configuration.md#style) style guide config options). Use it like this:
+We use `Styled` higher-order component to allow theming (see [theme](/Configuration.md#theme) and [style](/Configuration.md#style) style guide config options). Use it like this:
 
 ```jsx
 import React from 'react'

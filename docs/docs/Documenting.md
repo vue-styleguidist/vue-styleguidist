@@ -2,7 +2,7 @@
 
 Vue styleguidist generates documentation for your components based on the comments in your source code declarations and Readme files.
 
-> **Note:** [See examples](Examples.md) of documented components in our demo style guide.
+> **Note:** [See examples](/Examples.md) of documented components in our demo style guide.
 
 <!-- toc -->
 
@@ -28,7 +28,7 @@ Vue styleguidist will display the contents or your components’ JSDoc comment b
 
 > **Note:** Component’s and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
 
-> **Note:** You can change this behavior using [propsParser](Configuration.md#propsparser) options.
+> **Note:** You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
 ```html
 <template>
@@ -335,7 +335,7 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
 
     Any [Markdown](http://daringfireball.net/projects/markdown/) is **allowed** _here_.
 
-> **Note:** You can configure examples file name with the [getExampleFilename](Configuration.md#getexamplefilename) option.
+> **Note:** You can configure examples file name with the [getExampleFilename](/Configuration.md#getexamplefilename) option.
 
 You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
 
@@ -357,7 +357,7 @@ export default {
 }
 ```
 
-> **Note:** You’ll need a regular example file (like `Readme.md`) too when [skipComponentsWithoutExample](Configuration.md#skipcomponentswithoutexample) is `true`.
+> **Note:** You’ll need a regular example file (like `Readme.md`) too when [skipComponentsWithoutExample](/Configuration.md#skipcomponentswithoutexample) is `true`.
 
 ## Public methods
 
