@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import cleanComponentName from './cleanComponentName'
+import { cleanComponentName } from '../../loaders/utils/cleanComponentName'
 
 /**
  * Expose component as global variables.

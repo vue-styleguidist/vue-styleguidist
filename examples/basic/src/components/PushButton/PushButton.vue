@@ -1,9 +1,9 @@
 <template>
-<div class="PushButton">
-	<button class="push-button" :style="{ color: color, fontSize: fontSize }">
-		<slot></slot>
-	</button>
-</div>
+  <div class="PushButton">
+    <button class="push-button" :style="{ color: color, fontSize: fontSize }">
+      <slot></slot>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@
  * An example-less button.
  */
 export default {
-	name: 'PushButton',
+	name: 'push-button',
 	props: {
 		color: {
 			type: String,
