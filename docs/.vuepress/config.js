@@ -51,6 +51,7 @@ module.exports = () => {
 					'/docs/Cookbook',
 					'/docs/CLI',
 					'/docs/API',
+					'/docs/Deployment',
 					'/docs/Docgen',
 					'/docs/Development'
 				],
