@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
 	"scripts": {
 		"precompile": "rimraf lib/",
-		"compile": "babel --ignore '*.spec.js' -d lib/ src/"
+		"compile": "babel --ignore **/__tests__/*.js,**/*.spec.js -d lib/ src/"
 	},
 	"repository": {
 		"type": "git",
@@ -84,10 +84,12 @@
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.9.4",
 		"react-styleguidist": "^9.0.4",
+		"rewrite-imports": "^2.0.3",
 		"style-loader": "^0.21.0",
 		"to-ast": "^1.0.0",
 		"uglifyjs-webpack-plugin": "1.2.7",
 		"vue-docgen-api": "^3.11.4",
+		"walkes": "^0.2.1",
 		"webpack": "^4.28.4",
 		"webpack-dev-server": "^3.1.14",
 		"webpack-merge": "^4.0.0"

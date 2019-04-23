@@ -171,6 +171,48 @@ describe('methodHandler', () => {
 		})
 	})
 
+	it('should allow description of args', () => {
+		const src = `
+    export default {
+      name: 'name-123',
+      methods: {
+        /**
+         * @public
+         * @arg {string} p2 - multiplier
+         */
+        describedParams(p1, p2){
+          return p2 * 2;
+        }
+      }
+    }
+    `
+		tester(src, {
+			name: 'describedParams',
+			params: [{ name: 'p1' }, { name: 'p2', description: 'multiplier', type: { name: 'string' } }]
+		})
+	})
+
+	it('should allow description of arguments', () => {
+		const src = `
+    export default {
+      name: 'name-123',
+      methods: {
+        /**
+         * @public
+         * @argument {string} p2 - multiplier
+         */
+        describedParams(p1, p2){
+          return p2 * 2;
+        }
+      }
+    }
+    `
+		tester(src, {
+			name: 'describedParams',
+			params: [{ name: 'p1' }, { name: 'p2', description: 'multiplier', type: { name: 'string' } }]
+		})
+	})
+
 	it('should allow description of params even if they are implicit', () => {
 		const src = `
     export default {

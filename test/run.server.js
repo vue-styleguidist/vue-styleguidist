@@ -19,7 +19,7 @@ delete config.ribbon
 delete config.usageMode
 delete config.exampleMode
 
-const { app } = styleguidist(config).server((err, config) => {
+const { app } = styleguidist(config).server(err => {
 	if (err) {
 		throw err
 	} else {

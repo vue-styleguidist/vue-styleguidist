@@ -152,35 +152,31 @@ module.exports = function(config, env) {
 	}
 
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
-	;[
-		...(config.simpleEditor ? [] : ['Editor']),
-		'Preview',
-		'Usage',
-		'Events',
-		'Props',
-		'Table',
-		'SlotsTable',
-		'slots/UsageTabButton',
-		'StyleGuide',
-		'Welcome'
-	].forEach(function(component) {
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
-			sourceSrc,
-			component
-		)
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
-	})
+	require('fs')
+		.readdirSync(sourceSrc)
+		.forEach(function(component) {
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
+				sourceSrc,
+				component
+			)
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+				webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+		})
 
-	// if the user chose prism, load the prism editor instead of codemirror
-	if (config.simpleEditor) {
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`] = path.resolve(
-			sourceSrc,
-			'Editor/EditorPrism'
-		)
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/Editor`] =
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/Editor`]
+	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
+	const customComponents = {
+		'slots/UsageTabButton': 'VsgSlots/UsageTabButton',
+		// if the user chose prism, load the prism editor instead of codemirror
+		Editor: path.join(CUSTOM_EDITOR_FOLDER, config.simpleEditor ? 'EditorPrism' : 'Editor')
 	}
+	Object.keys(customComponents).forEach(function(key) {
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(
+			sourceSrc,
+			customComponents[key]
+		)
+		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`]
+	})
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)

@@ -22,7 +22,7 @@ async function onerror(err) {
 	process.exit(1)
 }
 
-;(async () => {
+const launchPuppeteer = async () => {
 	browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
 	const page = await browser.newPage()
 	await page.setViewport({ width: 1024, height: 768 })
@@ -45,4 +45,6 @@ async function onerror(err) {
 	}
 
 	await browser.close()
-})().catch(onerror)
+}
+
+launchPuppeteer().catch(onerror)

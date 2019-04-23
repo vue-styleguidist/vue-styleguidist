@@ -71,7 +71,11 @@ export function setMethodDescriptor(
 	jsDocTags: BlockTag[]
 ) {
 	// params
-	describeParams(method, methodDescriptor, jsDocTags.filter(tag => tag.title === 'param'))
+	describeParams(
+		method,
+		methodDescriptor,
+		jsDocTags.filter(tag => ['param', 'arg', 'argument'].indexOf(tag.title) >= 0)
+	)
 
 	// returns
 	describeReturns(method, methodDescriptor, jsDocTags.filter(t => t.title === 'returns'))

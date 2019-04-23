@@ -29,7 +29,7 @@ export default function slotHandler(
 			templateAst,
 			options.rootLeadingComment
 		)
-		if (comment.length && comment.search(/\@slot/) !== -1) {
+		if (comment.length && comment.search(/@slot/) !== -1) {
 			slotDescriptor.description = comment.replace('@slot', '').trim()
 		}
 	}

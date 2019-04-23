@@ -55,6 +55,7 @@ module.exports = api => {
 			if (process.env.VUE_CLI_TEST) {
 				process.stdin.on('data', data => {
 					if (data.toString() === 'close') {
+						// eslint-disable-next-line no-console
 						console.log('got close signal!')
 						server.close(() => {
 							process.exit(0)

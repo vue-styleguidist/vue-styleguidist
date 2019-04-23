@@ -2,18 +2,20 @@
 
 Vue styleguidist generates documentation for your components based on the comments in your source code declarations and Readme files.
 
-> **Note:** [See examples](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/basic/src/components) of documented components in our demo style guide.
+> **Note:** [See examples](Examples.md) of documented components in our demo style guide.
 
 <!-- toc -->
 
 - [Code comments](#code-comments)
-- [Slots documentation](#slots-documentation)
+- [Events](#events)
+- [Slots](#slots)
 - [Include Mixins and Extends](#include-mixins-and-extends)
 - [Usage examples and Readme files](#usage-examples-and-readme-files)
 - [External examples using doclet tags](#external-examples-using-doclet-tags)
 - [Public methods](#public-methods)
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
+- [Methods](#methods)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
 - [Writing code examples](#writing-code-examples)
@@ -22,7 +24,11 @@ Vue styleguidist generates documentation for your components based on the commen
 
 ## Code comments
 
-Vue styleguidist will display your components’ JSDoc comment blocks.
+Vue styleguidist will display the contents or your components’ JSDoc comment blocks.
+
+> **Note:** Component’s and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
+
+> **Note:** You can change this behavior using [propsParser](Configuration.md#propsparser) options.
 
 ```html
 <template>
@@ -32,58 +38,62 @@ Vue styleguidist will display your components’ JSDoc comment blocks.
 </template>
 
 <script>
-
-/**
- * The only true button.
- */
-export default {
-  name: 'Button',
-  props: {
-    /**
-    * The color for the button.
-    */
-    color: {
-      type: String,
-      default: '#333'
-    },
-    /**
-    * The size of the button
-    * `small, normal, large`
-    */
-    size: {
-      type: String,
-      default: 'normal'
-    },
-    /**
-    * Gets called when the user clicks on the button
-    */
-    onClick: {
-      type:Function,
-      default: (event) => {
-        console.log('You have clicked me!', event.target);
+  /**
+   * The only true button.
+   * @displayName Best Button
+   */
+  export default {
+    name: 'Button',
+    props: {
+      /**
+       * The color for the button.
+       */
+      color: {
+        type: String,
+        default: '#333'
+      },
+      /**
+       * The size of the button
+       * `small, normal, large`
+       */
+      size: {
+        type: String,
+        default: 'normal'
+      },
+      /**
+       * Gets called when the user clicks on the button
+       */
+      onClick: {
+        type: Function,
+        default: event => {
+          console.log('You have clicked me!', event.target)
+        }
       }
     }
-  },
-  /* ... */
-}
+    /* ... */
+  }
 </script>
 ```
+
+Notice the use of the @displayName tag to change the displayed name of your component
 
 If you want create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
 ```html
 <script>
-export default {
-  name: 'my-checkbox',
-  props: {
-    /**
-     * @model
-     */
-    value: String
+  export default {
+    name: 'my-checkbox',
+    props: {
+      /**
+       * @model
+       */
+      value: String
+    }
   }
-}
 </script>
 ```
+
+## Events
 
 For events documentation just add a comment right above it.
 
@@ -128,11 +138,7 @@ this.$emit(EVENTS.success, {
 })
 ```
 
-> **Note:** You can change its behavior using [propsParser](Configuration.md#propsparser) options.
-
-> **Note:** Component’s and documentation comments are parsed by the [vue-docgen-api](https://github.com/vue-styleguidist/) library.
-
-## Slots documentation
+## Slots
 
 Slots are automatically documented by styleguidist. To add descriptions, just add a comment just before.
 
@@ -203,7 +209,7 @@ export default {
 
 ```vue
 <template>
-<!-- -->
+  <!-- -->
 </template>
 <script>
 // src/components/Button/Button.vue
@@ -394,6 +400,22 @@ You can use the following [JSDoc](http://usejsdoc.org/) tags when documenting co
 - [@since](http://usejsdoc.org/tags-since.html)
 - [@version](http://usejsdoc.org/tags-version.html)
 
+### displayName
+
+In addition to those tags you can use `@displayName` to change the name displayed in you styleguide. Know that since it's visual name has changed, it's calling name is now The letters of it, without space or punctuation.
+
+For instance, if the display name is set as
+
+```js
+/**
+ * @displayName Wonderful Button
+ **/
+```
+
+To reference it in examples, one has to call `<WonderfulButton/>`.
+
+## Methods
+
 When documenting methods you can also use:
 
 - [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
@@ -406,7 +428,7 @@ Documenting v-model:
 
 - @model
 
-All tags can render Markdown.
+Tags can even render Markdown.
 
 ```html
 <template>
@@ -414,71 +436,70 @@ All tags can render Markdown.
 </template>
 
 <script>
-
-/**
-* The only true button.
-* @version 1.0.1
-*/
-export default {
-  name: 'Button',
-  props: {
-    /**
-    * The color for the button.
-    * @see See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
-    * @see See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) for a list of color names
-    */
-    color: {
-      type: String,
-      default: '#333'
+  /**
+   * The only true button.
+   * @version 1.0.1
+   */
+  export default {
+    name: 'Button',
+    props: {
+      /**
+       * The color for the button.
+       * @see See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
+       * @see See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) for a list of color names
+       */
+      color: {
+        type: String,
+        default: '#333'
+      },
+      /**
+       * The size of the button
+       * `small, normal, large`
+       * @since Version 1.0.1
+       */
+      size: {
+        type: String,
+        default: 'normal'
+      },
+      /**
+       * Gets called when the user clicks on the button
+       */
+      onClick: {
+        type: Function,
+        default: event => {
+          console.log('You have clicked me!', event.target)
+        }
+      }
     },
-    /**
-    * The size of the button
-    * `small, normal, large`
-    * @since Version 1.0.1
-    */
-    size: {
-      type: String,
-      default: 'normal'
-    },
-    /**
-    * Gets called when the user clicks on the button
-    */
-    onClick: {
-      type:Function,
-      default: (event) => {
-        console.log('You have clicked me!', event.target);
+    methods: {
+      /**
+       * Gets called when the user clicks on the button
+       *
+       * @param {SyntheticEvent} event The react `SyntheticEvent`
+       * @param {Number} num Numbers of examples
+       */
+      launch(event, num) {
+        /* ... */
+      },
+      // ...
+      ignoreMethod() {
+        /**
+         * Success event.
+         *
+         * @event success
+         * @type {object}
+         */
+        this.$emit('success', {})
       }
     }
-  },
-  methods: {
-    /**
-     * Gets called when the user clicks on the button
-     *
-     * @param {SyntheticEvent} event The react `SyntheticEvent`
-     * @param {Number} num Numbers of examples
-     */
-    launch(event, num){
-      /* ... */
-    },
-    // ...
-    ignoreMethod(){
-      /**
-      * Success event.
-      *
-      * @event success
-      * @type {object}
-      */
-      this.$emit('success', {})
-    }
-  },
-  /* ... */
-}
+    /* ... */
+  }
 </script>
 ```
 
 ## TypeScript, Flow and Class-style Components
 
-Vue styleguidist understands TypeScript & Flow annotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well.
+Vue styleguidist understands TypeScript & Flow annotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well, with or without TypeScript.
 
 ```ts
 import { Component, Prop, Vue } from 'vue-property-decorator'
