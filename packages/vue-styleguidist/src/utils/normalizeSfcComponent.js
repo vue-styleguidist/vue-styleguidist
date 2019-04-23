@@ -62,7 +62,9 @@ function injectTemplateAndParseExport(parts) {
 			}
 		},
 		ImportDeclaration(node) {
-			transformOneImport(node, code, offset)
+			const ret = transformOneImport(node, code, offset)
+			offset = ret.offset
+			code = ret.code
 		}
 	})
 	if (startIndex === -1) {

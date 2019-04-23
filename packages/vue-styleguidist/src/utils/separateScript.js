@@ -8,7 +8,9 @@ function transformImports(code) {
 	let offset = 0
 	walkes(getAst(code), {
 		ImportDeclaration(node) {
-			transformOneImport(node, code, offset)
+			const ret = transformOneImport(node, code, offset)
+			offset = ret.offset
+			code = ret.code
 		}
 	})
 	return code
@@ -40,10 +42,12 @@ export default function separateScript(code, style, importTransformed) {
 		}
 	}
 	return {
-		script: lines
-			.slice(0, index)
-			.join('\n')
-			.trim(),
+		script: transformImports(
+			lines
+				.slice(0, index)
+				.join('\n')
+				.trim()
+		),
 		html: lines.slice(index).join('\n')
 	}
 }

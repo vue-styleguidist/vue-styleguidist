@@ -16,4 +16,9 @@ describe('getVars', () => {
 		expect(sut).toContain('param')
 		expect(sut).toContain('rain')
 	})
+
+	it('should detect spread declared variable', () => {
+		const sut = getVars('const { all:param } = {all: "foo"}')
+		expect(sut).toContain('param')
+	})
 })

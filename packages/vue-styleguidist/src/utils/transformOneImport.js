@@ -10,4 +10,5 @@ export default function transformOneImport(node, code, offset) {
 	code = code.substring(0, start) + transpiledStatement + code.substring(end)
 
 	offset += transpiledStatement.length - statement.length
+	return { code, offset }
 }

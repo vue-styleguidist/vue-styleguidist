@@ -11,7 +11,16 @@ export default code => {
 	walkes(getAst(code), {
 		VariableDeclaration(node) {
 			node.declarations.forEach(declaration => {
-				varNames.push(declaration.id.name)
+				if (declaration.id.name) {
+					// simple variable declaration
+					varNames.push(declaration.id.name)
+				} else if (declaration.id.properties) {
+					// spread variable declaration
+					// const { all:names } = {all: 'foo'}
+					declaration.id.properties.forEach(p => {
+						varNames.push(p.value.name)
+					})
+				}
 			})
 		},
 		FunctionDeclaration(node) {
