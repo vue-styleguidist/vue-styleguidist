@@ -1,7 +1,7 @@
 import { parseComponent } from 'vue-template-compiler'
-import { parse } from 'acorn'
 import walkes from 'walkes'
-import rewriteImports from 'rewrite-imports'
+import transformOneImport from './transformOneImport'
+import getAst from './getAst'
 
 const buildStyles = function(styles) {
 	let _styles = ''
@@ -31,15 +31,11 @@ function injectTemplateAndParseExport(parts) {
 	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
 
 	let code = parts.script.content
-	const ast = parse(code, {
-		ecmaVersion: 2019,
-		sourceType: 'module'
-	})
 	let preprocessing = ''
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
-	walkes(ast, {
+	walkes(getAst(code), {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node) {
 			preprocessing = code.slice(0, node.start + offset)
@@ -66,15 +62,9 @@ function injectTemplateAndParseExport(parts) {
 			}
 		},
 		ImportDeclaration(node) {
-			const start = node.start + offset
-			const end = node.end + offset
-
-			const statement = code.substring(start, end)
-			const transpiledStatement = rewriteImports(statement)
-
-			code = code.substring(0, start) + transpiledStatement + code.substring(end)
-
-			offset += transpiledStatement.length - statement.length
+			const ret = transformOneImport(node, code, offset)
+			offset = ret.offset
+			code = ret.code
 		}
 	})
 	if (startIndex === -1) {
@@ -93,7 +83,7 @@ function injectTemplateAndParseExport(parts) {
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeComponent(code) {
+export default function normalizeSfcComponent(code) {
 	const parts = getSingleFileComponentParts(code)
 	const extractedComponent = injectTemplateAndParseExport(parts)
 	//console.log(extractedComponent.component)

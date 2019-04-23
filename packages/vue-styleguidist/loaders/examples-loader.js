@@ -14,6 +14,7 @@ const getImports = require('react-styleguidist/lib/loaders/utils/getImports').de
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
 const { isCodeVueSfc } = require('./utils/isCodeVueSfc')
+const { cleanComponentName } = require('./utils/cleanComponentName')
 
 // Hack the react scaffolding to be able to load client
 const absolutize = filepath =>
@@ -40,7 +41,7 @@ module.exports = function examplesLoader(source) {
 	const { file, displayName, shouldShowDefaultExample, customLangs } =
 		loaderUtils.getOptions(this) || {}
 
-	const cleanDisplayName = displayName ? displayName.replace(/[^A-Za-z0-9]/g, '') : undefined
+	const cleanDisplayName = displayName ? cleanComponentName(displayName) : undefined
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
 	if (shouldShowDefaultExample) {
 		source = expandDefaultComponent(source, cleanDisplayName)

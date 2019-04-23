@@ -34,20 +34,30 @@ module.exports = () => {
 				apiKey: '27d4fa7b11db706f186d098352d5ae3e',
 				indexName: 'vue-styleguidist'
 			},
-			sidebar: [
-				['/GettingStarted', 'Getting Started'],
-				...(fs.existsSync(path.resolve(__dirname, '../Examples.md')) ? ['/Examples'] : []),
-				['/VueCLI3doc', '@vue/cli 3.X'],
-				['/Documenting', 'Documenting'],
-				['/Components', 'Locating Components'],
-				['/Webpack', 'Webpack'],
-				'/Cookbook',
-				['/API', 'API'],
-				['/Docgen', 'vue-docgen-api'],
-				'/Configuration',
-				'/CLI',
-				'/Development'
-			]
+			nav: [
+				{ text: 'Docs', link: '/docs/GettingStarted.md' },
+				...(fs.existsSync(path.resolve(__dirname, '../Examples.md'))
+					? [{ text: 'Examples', link: '/Examples.md' }]
+					: []),
+				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc.md' },
+				{ text: 'Reference', link: '/Configuration.md' }
+			],
+			sidebar: {
+				'/docs/': [
+					['/docs/GettingStarted', 'Getting Started'],
+					'/docs/Documenting',
+					['/docs/Components', 'Locating Components'],
+					'/docs/Webpack',
+					'/docs/Cookbook',
+					'/docs/CLI',
+					'/docs/API',
+					'/docs/Deployment',
+					'/docs/Docgen',
+					'/docs/Development'
+				],
+				'/Configuration': ['/Configuration'],
+				'/Examples': ['/Examples']
+			}
 		}
 	}
 }

@@ -24,11 +24,11 @@ But will ignore tests:
 
 - `__tests__` folder
 
-> **Note:** All paths are relative to the config folder.
+> **Note:** All paths are relative to the folder where the config file is.
 
-> **Note:** Use [ignore](Configuration.md#ignore) option to exclude some files from the style guide.
+> **Pro Tip:** Use [ignore](/Configuration.md#ignore) option to exclude some files from the style guide.
 
-> **Note:** Use [getComponentPathLine](Configuration.md#getcomponentpathline) option to change a path you see below a component name.
+> **Note:** Use [getComponentPathLine](/Configuration.md#getcomponentpathline) option to change a path you see below a component name.
 
 ## Loading and exposing components
 
@@ -45,9 +45,9 @@ Each section consists of (all fields are optional):
 - `components` — a glob pattern string, an array of component paths or glob pattern strings, or a function returning a list of components or glob pattern strings. The same rules apply as for the root `components` option.
 - `sections` — array of subsections (can be nested).
 - `description` — A small description of this section.
-- `sectionDepth` — Number of subsections with single pages, only available with [pagePerSection](Configuration.md#pagepersection) is enabled.
-- `exampleMode` — Initial state of the code example tab, uses [exampleMode](Configuration.md#examplemode).
-- `usageMode` — Initial state of the props and methods tab, uses [usageMode](Configuration.md#usagemode).
+- `sectionDepth` — Number of subsections with single pages, only available with [pagePerSection](/Configuration.md#pagepersection) is enabled.
+- `exampleMode` — Initial state of the code example tab, uses [exampleMode](/Configuration.md#examplemode).
+- `usageMode` — Initial state of the props and methods tab, uses [usageMode](/Configuration.md#usagemode).
 - `ignore` — string/array of globs that should not be included in the section.
 - `href` - an URL to navigate to instead of navigating to the section content
 - `external` - if set, the link will open in a new window

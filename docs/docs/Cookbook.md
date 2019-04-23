@@ -24,7 +24,7 @@
 
 If you need to load vue plugins from a third party. You can add it, creating a .js file that installs the plugins and then adds it into the `styleguide.config.js` file
 
-Use [require](Configuration.md#require) option:
+Use [require](/Configuration.md#require) option:
 
 ```javascript
 // styleguide/global.requires.js
@@ -48,7 +48,7 @@ module.exports = {
 
 If you need to change the root component of each preview example, you can change the root component of preview. Creating a .js file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
 
-Use [renderRootJsx](Configuration.md#renderrootjsx) option:
+Use [renderRootJsx](/Configuration.md#renderrootjsx) option:
 
 ```javascript
 // config/styleguide.root.js
@@ -118,7 +118,7 @@ export default previewComponent => {
 }
 ```
 
-Use [require](Configuration.md#require) option:
+Use [require](/Configuration.md#require) option:
 
 ```javascript
 // styleguide.config.js
@@ -133,7 +133,7 @@ See an example of [style guide with vuex](https://github.com/vue-styleguidist/vu
 
 You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add dummy data:
 
-Use [require](Configuration.md#require) option:
+Use [require](/Configuration.md#require) option:
 
 ```javascript
 // styleguide/global.requires.js
@@ -168,7 +168,7 @@ module.exports = {
 
 Vue Styleguidist will ignore tests (`__tests__` folder) by default.
 
-Use [ignore](Configuration.md#ignore) option to customize this behavior:
+Use [ignore](/Configuration.md#ignore) option to customize this behavior:
 
 ```javascript
 module.exports = {
@@ -180,7 +180,7 @@ module.exports = {
 
 ## How to hide some components in style guide but make them available in examples?
 
-Enable [skipComponentsWithoutExample](Configuration.md#skipcomponentswithoutexample) option and do not add example file (`Readme.md` by default) to components you want to ignore.
+Enable [skipComponentsWithoutExample](/Configuration.md#skipcomponentswithoutexample) option and do not add example file (`Readme.md` by default) to components you want to ignore.
 
 Require these components in your examples:
 
@@ -209,11 +209,11 @@ module.exports = {
 
 ## How to change styles of a style guide?
 
-There are two config options to change your style guide UI: [theme](Configuration.md#theme) and [styles](Configuration.md#styles).
+There are two config options to change your style guide UI: [theme](/Configuration.md#theme) and [styles](/Configuration.md#styles).
 
-Use [theme](Configuration.md#theme) to change fonts, colors, etc.
+Use [theme](/Configuration.md#theme) to change fonts, colors, etc.
 
-Use [styles](Configuration.md#styles) to tweak the style of any particular Styleguidist component.
+Use [styles](/Configuration.md#styles) to tweak the style of any particular Styleguidist component.
 
 As an example:
 
@@ -441,7 +441,7 @@ export default class StyledTitle extends Vue {}
 
 ## Use vue-styleguideist with components that contain routing
 
-If your components contain `<router-link>` the best way is, in your styleguide to mock it. In the `styelguide.config,js` file add `styleguide.global.required.js` (see below) to the [require](Configuration.md#require) parameter. Styleguidist will render `router-link` as an anchor or tag of your choosing. Don't use `vue-router` inside vue-styleguidist. It will conflict with its internal router.
+If your components contain `<router-link>` the best way is, in your styleguide to mock it. In the `styelguide.config,js` file add `styleguide.global.required.js` (see below) to the [require](/Configuration.md#require) parameter. Styleguidist will render `router-link` as an anchor or tag of your choosing. Don't use `vue-router` inside vue-styleguidist. It will conflict with its internal router.
 
 ```js
 // styleguide.global.requires.js

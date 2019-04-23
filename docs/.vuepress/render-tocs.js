@@ -6,7 +6,7 @@ const toc = require('markdown-toc')
 const docsFolder = path.resolve(__dirname, '..')
 
 module.exports = async function generate_toc() {
-	const files = await globby('*.md', { cwd: docsFolder })
+	const files = await globby(['*.md', 'docs/*.md'], { cwd: docsFolder })
 	return Promise.all(
 		files.map(file => {
 			return new Promise((resolve, reject) => {
