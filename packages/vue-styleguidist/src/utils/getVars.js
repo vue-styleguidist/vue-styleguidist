@@ -1,5 +1,5 @@
-import { parse } from 'acorn'
 import walkes from 'walkes'
+import getAst from './getAst'
 
 /**
  * extract variable and function declaration from a code
@@ -8,7 +8,7 @@ import walkes from 'walkes'
  */
 export default code => {
 	const varNames = []
-	walkes(parse(code), {
+	walkes(getAst(code), {
 		VariableDeclaration(node) {
 			node.declarations.forEach(declaration => {
 				varNames.push(declaration.id.name)
