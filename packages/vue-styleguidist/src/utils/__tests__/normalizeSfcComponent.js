@@ -1,8 +1,8 @@
-import normalizeComponent from '../normalizeComponent'
+import normalizeSfcComponent from '../normalizeSfcComponent'
 
-describe('normalizeComponent', () => {
+describe('normalizeSfcComponent', () => {
 	it('bake template into a new Vue (export default)', () => {
-		const sut = normalizeComponent(`
+		const sut = normalizeSfcComponent(`
 <template>
 	<div/>
 </template>
@@ -17,7 +17,7 @@ export default {
 	})
 
 	it('bake template into a new Vue (named exports)', () => {
-		const sut = normalizeComponent(`
+		const sut = normalizeSfcComponent(`
 <template>
 	<div/>
 </template>
@@ -32,7 +32,7 @@ export const compo = {
 	})
 
 	it('bake template into a new Vue (es5 exports)', () => {
-		const sut = normalizeComponent(`
+		const sut = normalizeSfcComponent(`
 <template>
 	<div/>
 </template>

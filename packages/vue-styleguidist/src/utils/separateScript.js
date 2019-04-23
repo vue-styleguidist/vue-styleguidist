@@ -1,5 +1,18 @@
-import normalizeComponent from './normalizeComponent'
+import walkes from 'walkes'
+import transformOneImport from './transformOneImport'
+import normalizeSfcComponent from './normalizeSfcComponent'
 import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
+import getAst from './getAst'
+
+function transformImports(code) {
+	let offset = 0
+	walkes(getAst(code), {
+		ImportDeclaration(node) {
+			transformOneImport(node, code, offset)
+		}
+	})
+	return code
+}
 
 /**
  * Reads the code in string and separates the javascript part and the html part
@@ -8,20 +21,17 @@ import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
  * @return {script:String, html:String}
  *
  */
-export default function separateScript(code, style) {
+export default function separateScript(code, style, importTransformed) {
 	let index
 	const lines = code.split('\n')
 	if (code.indexOf('new Vue') > -1) {
-		const indexVueBegin = code.indexOf('new Vue')
-
-		const script = [`${code.slice(0, indexVueBegin)};`, `${code.slice(indexVueBegin)};`].join('\n')
 		return {
-			script,
+			script: importTransformed ? code : transformImports(code),
 			style
 		}
 	} else if (isCodeVueSfc(code)) {
-		const transformed = normalizeComponent(code)
-		return separateScript(transformed.component, transformed.style)
+		const transformed = normalizeSfcComponent(code)
+		return separateScript(transformed.component, transformed.style, true)
 	}
 	for (let id = 0; id < lines.length; id++) {
 		if (lines[id].trim().charAt(0) === '<') {
