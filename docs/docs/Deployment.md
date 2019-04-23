@@ -2,20 +2,26 @@
 
 Vue-Styleguidist generates a static website. It is now time to deploy it.
 
-First specify the location where the styleguide site is going to be built using the [styledguideDir](/Configuration.md#styleguidedir) option. If you do not specify it it will by default be in a `styleguide` folder besides your `styleguide.config.js`.
+First, you can specify the location where the styleguide site is going to be built using the [styledguideDir](/Configuration.md#styleguidedir) option. It will default to a `styleguide` folder besides your `styleguide.config.js`.
 
-Now that you have a
+Check the results by running
+
+```sh
+yarn styleguide:build
+```
+
+Now that you have a directory containing html and javascript. Let's publish it.
 
 ## Deploy on Netlify
 
 1.  Connect Netlify to your github account
 1.  Select the repo to deploy
 1.  Set the build command as `styleguidist build`
-1.  The build folder will be `styleguide` if you have `styleguide.config.js`. If you changed the `styleguideDir` this change follows
+1.  The build folder will be `styleguide` if you have `styleguide.config.js` at the root of your repository and left out the option. If you changed the `styleguideDir` option, pick the new path chosen.
 
 ## Deploy on Zeit Now
 
-In your `now.json` file use
+Create a `now.json` file at the root of your repository containing
 
 ```json
 {
@@ -30,7 +36,7 @@ In your `now.json` file use
 }
 ```
 
-And make sure to prepare a script in your `package.json` thand runs
+And make sure to prepare a `"build-now"` script in your `package.json` that builds the styleguide
 
 ```json
 {
@@ -44,19 +50,21 @@ Adjust the `distDir` config according to your [styledguideDir](/Configuration.md
 
 ## Deploy on GitHub Pages
 
-[Github Pages](https://pages.github.com/) can be very useful to host static websites. It needs a little more digging than for netlify. It actually uses your repository as the static pages themselves.
+[Github Pages](https://pages.github.com/) can be very useful to host static websites. It needs a little more effort than Netlify. It uses your repository files as the static pages themselves.
 
-Create a repo called `yourgithubid.github.io` and enable github pages on it. Add an index.html in it.
-
-You can now access your page at https://yourgithubid.github.io/
-
-Next, run `styleguidist build`. Them upload (commit) in the same repository the contents of your `styleguide` folder. Go to the url and see the styleguide live.
+1.  Create a repo called `yourgithubid.github.io`. Replace yourgithubid by your github id.
+1.  Enable github pages on it. `Settings > Options > Github Pages`
+1.  Add an index.html in it. Whatever the content is, it does not matter.
+1.  Check that you can access the created page at https://yourgithubid.github.io/
+1.  Next, back on your library, run `styleguidist build`.
+1.  Upload (commit) in the `yourgithubid.github.io` repository the contents of your `styleguide` folder.
+1.  Go to the url and see the styleguide live.
 
 ## Automate deployment on travisCI
 
 Zeit and Netlify make it easy for your website publication to be automated. If you are going with GitHub pages though, because it is free for instance, you might want to build automation yourself.
 
-This is how the very documentation you are on is deployed automatically
+This is how the very documentation you are reading is deployed automatically
 
 ```yml
     deploy:
