@@ -74,7 +74,7 @@ export function setMethodDescriptor(
 	describeParams(
 		method,
 		methodDescriptor,
-		jsDocTags.filter(tag => ['param', 'arg', 'argumnent'].indexOf(tag.title) >= 0)
+		jsDocTags.filter(tag => ['param', 'arg', 'argument'].indexOf(tag.title) >= 0)
 	)
 
 	// returns
