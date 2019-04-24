@@ -1,16 +1,18 @@
 # Deployment
 
-Vue-Styleguidist generates a static website. It is now time to deploy it.
+Vue-Styleguidist can generate a static website. To deploy it, follow this short intro and choose one of the providers.
 
-First, you can specify the location where the styleguide site is going to be built using the [styledguideDir](/Configuration.md#styleguidedir) option. It will default to a `styleguide` folder besides your `styleguide.config.js`.
+## Pre-requisites
 
-Check the results by running
+First, specify the location where the styleguide site is going to be built using the [styledguideDir](/Configuration.md#styleguidedir) option. It will default to a `styleguide` folder besides your `styleguide.config.js`.
+
+Check out the results of running the following command
 
 ```sh
 yarn styleguide:build
 ```
 
-Now that you have a directory containing html and javascript. Let's publish it.
+Now, you should have a directory containing html and javascript. Let's deploy it.
 
 ## Deploy on Netlify
 
@@ -20,6 +22,8 @@ Now that you have a directory containing html and javascript. Let's publish it.
 1.  The build folder will be `styleguide` if you have `styleguide.config.js` at the root of your repository and left out the option. If you changed the `styleguideDir` option, pick the new path chosen.
 
 ## Deploy on Zeit Now
+
+Connect your github account with zeit.
 
 Create a `now.json` file at the root of your repository containing
 
@@ -62,7 +66,7 @@ Adjust the `distDir` config according to your [styledguideDir](/Configuration.md
 
 ## Automate deployment on travisCI
 
-Zeit and Netlify make it easy for your website publication to be automated. If you are going with GitHub pages though, because it is free for instance, you might want to build automation yourself.
+Zeit and Netlify make it easy for your website deployment to be automated. If you are going with GitHub pages though, because it is free for instance, you might want to build automation yourself.
 
 This is how the very documentation you are reading is deployed automatically
 
