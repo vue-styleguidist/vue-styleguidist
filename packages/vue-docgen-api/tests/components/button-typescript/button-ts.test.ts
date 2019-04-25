@@ -18,7 +18,7 @@ describe('tests button', () => {
 		expect(docButton.displayName).toEqual('ClassButton')
 	})
 
-	it('should return propB type as string', () => {
+	it('should return methods object containing `onClick`', () => {
 		expect(docButton.methods).toMatchObject([{ name: 'onClick' }])
 	})
 
