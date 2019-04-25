@@ -73,7 +73,8 @@ export function parseSource(documentation: Documentation, source: string, opt: P
 	}
 
 	if (singleFileComponent) {
-		parts = cacher(() => parseComponent(source), source)
+		// use padding so that errors are displayed at the correct line
+		parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
 	}
 
 	// get slots and props from template
