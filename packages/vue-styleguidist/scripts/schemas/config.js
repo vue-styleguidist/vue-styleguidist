@@ -116,7 +116,7 @@ module.exports = {
 	jsxInComponents: {
 		message: 'JSX in Components',
 		description:
-			'Do documented components contain JSX syntax? Set this to `false` to restore compatibility with TypeScript cast syntax `<any>variable` instead of `variable as any`.',
+			'Do documented components contain JSX syntax? Set this to `false` to restore compatibility with this TypeScript cast syntax: `<any>variable` instead of `variable as any`.',
 		type: 'boolean',
 		default: true
 	},
