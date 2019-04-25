@@ -43,6 +43,11 @@ export interface DocGenOptions {
 	 * Handlers that will be added at the end of the template analysis
 	 */
 	addTemplateHandlers?: TemplateHandler[]
+	/**
+	 * Does parsed components use jsx?
+	 * @default true - if you do not disable it, babel will fail with `(<any>window).$`
+	 */
+	jsx?: boolean
 }
 
 /**
@@ -73,7 +78,8 @@ export function parseSource(documentation: Documentation, source: string, opt: P
 	}
 
 	if (singleFileComponent) {
-		parts = cacher(() => parseComponent(source), source)
+		// use padding so that errors are displayed at the correct line
+		parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
 	}
 
 	// get slots and props from template
@@ -114,6 +120,9 @@ export function parseSource(documentation: Documentation, source: string, opt: P
 				: undefined
 			: source
 	if (scriptSource) {
+		// if jsx option is not mentionned, parse jsx in components
+		opt.jsx = opt.jsx === undefined ? true : opt.jsx
+
 		opt.lang =
 			(parts && parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
 			/\.tsx?$/i.test(path.extname(opt.filePath)) ||

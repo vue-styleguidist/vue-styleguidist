@@ -6,7 +6,6 @@ const babelParserOptions: ParserOptions = {
 	strictMode: false,
 	tokens: true,
 	plugins: [
-		'jsx',
 		'decorators-legacy',
 		'doExpressions',
 		'objectRestSpread',

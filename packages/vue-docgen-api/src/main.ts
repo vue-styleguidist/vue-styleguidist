@@ -31,7 +31,7 @@ export function parseSource(
 }
 
 function isOptionsObject(opts: any): opts is DocGenOptions {
-	return !!opts && !!opts.alias
+	return !!opts && (!!opts.alias || opts.jsx !== undefined)
 }
 
 function parsePrimitive(

@@ -101,6 +101,11 @@ module.exports = {
 		},
 		example: componentPath => componentPath.replace(/\.jsx?$/, '.examples.md')
 	},
+	highlightTheme: {
+		type: 'string',
+		default: 'base16-light',
+		deprecated: 'Use the theme property in the editorConfig option instead'
+	},
 	ignore: {
 		uitype: 'string',
 		message: 'Ignore',
@@ -108,10 +113,12 @@ module.exports = {
 		type: 'array',
 		default: ['**/__tests__/**', `**/*.test.vue`, `**/*.spec.vue`, '**/*.d.ts']
 	},
-	highlightTheme: {
-		type: 'string',
-		default: 'base16-light',
-		deprecated: 'Use the theme property in the editorConfig option instead'
+	jsxInComponents: {
+		message: 'JSX in Components',
+		description:
+			'Do documented components contain JSX syntax? Set this to `false` to restore compatibility with this TypeScript cast syntax: `<any>variable` instead of `variable as any`.',
+		type: 'boolean',
+		default: true
 	},
 	editorConfig: {
 		type: 'object',
