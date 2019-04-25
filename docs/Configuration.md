@@ -168,6 +168,21 @@ Array of [glob pattern](https://github.com/isaacs/node-glob#glob-primer) that sh
 
 > **Note:** You should pass glob patterns, for example, use `**/components/Button.vue` instead of `components/Button.vue`.
 
+## jsxInComponents
+
+Type: `Boolean`, default: `true`
+
+Do your components contain JSX syntax? Since some TypeScript syntax can sometimes conflict with JSX, it ca be useful to disble it when needed. The following TypeScript code would fail parsing if this flag is not set to false.
+
+```typescript
+function initDatepicker() {
+  ;(<any>window).$.datetimepicker({
+    // babel parser will think that `<any>` is actually jsx
+    //...
+  })
+}
+```
+
 ## `logger`
 
 Type: `Object`, by default will use `console.*` in CLI or nothing in Node.js API

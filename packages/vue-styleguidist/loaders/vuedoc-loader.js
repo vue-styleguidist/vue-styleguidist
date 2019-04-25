@@ -27,7 +27,7 @@ module.exports = function(source) {
 		alias = webpackConfig.resolve.alias
 		modules = webpackConfig.resolve.modules
 	}
-	const defaultParser = file => vueDocs.parse(file, { alias, modules })
+	const defaultParser = file => vueDocs.parse(file, { alias, modules, jsx: config.jsxInComponents })
 	const propsParser = config.propsParser || defaultParser
 
 	let docs = {}
