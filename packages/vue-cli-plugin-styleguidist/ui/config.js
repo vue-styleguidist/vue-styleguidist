@@ -53,6 +53,7 @@ function onRead({ data }) {
 					'ignore',
 					'defaultExample',
 					'skipComponentsWithoutExample',
+					'jsxInComponents',
 					'pagePerSection',
 					'usageMode',
 					'exampleMode',
