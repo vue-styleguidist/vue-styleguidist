@@ -4,7 +4,7 @@ import babelParser from '../babel-parser'
 describe('babel-parser', () => {
 	let parser: { parse: (src: string) => bt.File }
 	beforeEach(() => {
-		parser = babelParser()
+		parser = babelParser({ plugins: ['jsx'] })
 	})
 
 	it('should parse js with no trouble', () => {

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests datePicker should match the snapshot 1`] = `
+Object {
+  "description": "",
+  "displayName": "DatePicker",
+  "events": Object {
+    "update:date": Object {
+      "description": "",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+  },
+  "methods": Array [],
+  "props": Object {
+    "color": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "any",
+      },
+    },
+    "date": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "any",
+      },
+    },
+    "disabled": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "any",
+      },
+    },
+    "format": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "any",
+      },
+    },
+  },
+  "slots": Object {},
+  "tags": Object {},
+}
+`;

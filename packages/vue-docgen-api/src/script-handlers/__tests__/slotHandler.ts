@@ -1,5 +1,5 @@
 import { NodePath } from 'ast-types'
-import babylon from '../../babel-parser'
+import buildParser from '../../babel-parser'
 import { Documentation, SlotDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import slotHandler from '../slotHandler'
@@ -7,7 +7,7 @@ import slotHandler from '../slotHandler'
 jest.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
-	const ast = babylon().parse(src)
+	const ast = buildParser({ plugins: ['jsx'] }).parse(src)
 	return resolveExportedComponent(ast).get('default')
 }
 
