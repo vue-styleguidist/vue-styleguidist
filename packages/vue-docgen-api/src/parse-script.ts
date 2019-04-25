@@ -25,6 +25,9 @@ export default function parseScript(
 	options: ParseOptions
 ) {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
+	if (options.jsx) {
+		plugins.push('jsx')
+	}
 
 	const ast = cacher(() => recast.parse(source, { parser: buildParser({ plugins }) }), source)
 	if (!ast) {
