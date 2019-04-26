@@ -1,5 +1,5 @@
 {
-  "name": "vue-styleguidist-example-with-laravvel-token",
+  "name": "vue-styleguidist-example-with-laravel-token",
   "description": "This example is a way to demontrate how to initialize global/window context usable by every component",
   "version": "3.10.1",
   "private": true,
