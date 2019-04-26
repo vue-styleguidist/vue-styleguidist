@@ -3,17 +3,19 @@ import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
+import { FilePathContext } from '../VsgReactComponent/ReactComponent'
 import styleScoper from '../../utils/styleScoper'
 import separateScript from '../../utils/separateScript'
 import getVars from '../../utils/getVars'
 
 const Fragment = React.Fragment ? React.Fragment : 'div'
 
-export default class Preview extends Component {
+class Preview extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
 		evalInContext: PropTypes.func.isRequired,
-		vuex: PropTypes.object
+		vuex: PropTypes.object,
+		filePath: PropTypes.string.isRequired
 	}
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
@@ -206,4 +208,12 @@ return getConfig();`
 			</Fragment>
 		)
 	}
+}
+
+export default function PreviewFilePath(props) {
+	return (
+		<FilePathContext.Consumer>
+			{filePath => <Preview {...props} filePath={filePath} />}
+		</FilePathContext.Consumer>
+	)
 }
