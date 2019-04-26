@@ -45,6 +45,10 @@ Simplify running and maintaining the examples, compile all packages, test and sh
 
 This command will compile `vue-docgen-api` typescript, then transpile `vue-styleguidist/src` with babel It is never run automatically so if you make any changes to the react components in `src`, don't forget to compile again.
 
+`yarn compile:watch` will launch the babel compilation of the `rsg-components` folder in watch mode.
+
+My favoured developing setup: 2 terminal windows, one with `yarn compile:watch` the other with `yarn start`.
+
 ### yarn start
 
 Allows you to run the examples against your local version of styleguidist. An extra parameter allows you to choose which one. By default, it will run `basic`
