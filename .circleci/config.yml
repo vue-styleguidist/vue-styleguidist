@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/node:lts
+    - image: circleci/node:lts-browsers
   working_directory: ~/vue-styleguidist
 
 jobs:
