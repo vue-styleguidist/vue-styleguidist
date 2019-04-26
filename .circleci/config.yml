@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/node:latest-browsers
+    - image: circleci/node:lts-browsers
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -86,7 +86,11 @@ workflows:
   version: 2
   test:
     jobs:
-      - install
+      - install:
+          filters:
+            branches:
+              only:
+                - master
       - compile:
           requires:
             - install
