@@ -3,8 +3,13 @@ import slots from 'rsg-components/slots'
 import StyleGuide from 'rsg-components/StyleGuide'
 import getRouteData from 'react-styleguidist/lib/client/utils/getRouteData'
 import getPageTitle from 'react-styleguidist/lib/client/utils/getPageTitle'
-import globalizeComponents from './globalizeComponents'
+import getComponentsFromSections from './getComponentsFromSections'
+import globalizeComponent from './globalizeComponent'
 import processSections from './processSections'
+import { cleanComponentName } from '../../loaders/utils/cleanComponentName'
+
+export const RenderJsxContext = React.createContext({})
+export const VueComponentMapContext = React.createContext({})
 
 /**
  * @param {object} styleguide An object returned by styleguide-loader
@@ -22,10 +27,24 @@ export default function renderStyleguide(
 	hist = window.history
 ) {
 	const allSections = processSections(styleguide.sections)
+	const components = getComponentsFromSections(allSections)
 
-	// Globalize all components, not just ones we see on the screen, to make
-	// all components accessible to all examples
-	globalizeComponents(allSections)
+	const componentsMap = {}
+
+	if (styleguide.config.locallyRegisterComponents) {
+		// create a map of relativefilepath => Vue object
+		// to load them only when demanded
+		components.forEach(component => {
+			componentsMap[component.filepath] = {
+				displayName: cleanComponentName(component.props.displayName),
+				...component.module
+			}
+		})
+	} else {
+		// Globalize all components, not just ones we see on the screen, to make
+		// all components accessible to all examples
+		components.forEach(component => globalizeComponent(component))
+	}
 
 	const { title, pagePerSection } = styleguide.config
 	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection)
@@ -41,17 +60,20 @@ export default function renderStyleguide(
 	}
 
 	return (
-		<StyleGuide
-			codeRevision={codeRevision}
-			config={styleguide.config}
-			renderRootJsx={styleguide.renderRootJsx}
-			slots={slots(styleguide.config)}
-			welcomeScreen={styleguide.welcomeScreen}
-			patterns={styleguide.patterns}
-			sections={sections}
-			allSections={allSections}
-			displayMode={displayMode}
-			pagePerSection={pagePerSection}
-		/>
+		<VueComponentMapContext.Provider value={componentsMap}>
+			<RenderJsxContext.Provider value={styleguide.renderRootJsx}>
+				<StyleGuide
+					codeRevision={codeRevision}
+					config={styleguide.config}
+					slots={slots(styleguide.config)}
+					welcomeScreen={styleguide.welcomeScreen}
+					patterns={styleguide.patterns}
+					sections={sections}
+					allSections={allSections}
+					displayMode={displayMode}
+					pagePerSection={pagePerSection}
+				/>
+			</RenderJsxContext.Provider>
+		</VueComponentMapContext.Provider>
 	)
 }

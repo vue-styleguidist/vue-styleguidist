@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
-import { FilePathContext } from '../VsgReactComponent/ReactComponent'
+import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
+import { RenderJsxContext } from '../../utils/renderStyleguide'
 import styleScoper from '../../utils/styleScoper'
 import separateScript from '../../utils/separateScript'
 import getVars from '../../utils/getVars'
@@ -15,12 +16,12 @@ class Preview extends Component {
 		code: PropTypes.string.isRequired,
 		evalInContext: PropTypes.func.isRequired,
 		vuex: PropTypes.object,
-		filePath: PropTypes.string.isRequired
+		component: PropTypes.object,
+		renderRootJsx: PropTypes.object
 	}
 	static contextTypes = {
 		config: PropTypes.object.isRequired,
-		codeRevision: PropTypes.number.isRequired,
-		renderRootJsx: PropTypes.object
+		codeRevision: PropTypes.number.isRequired
 	}
 
 	state = {
@@ -73,8 +74,7 @@ class Preview extends Component {
 			error: null
 		})
 
-		const { code, vuex } = this.props
-		const { renderRootJsx } = this.context
+		const { code, vuex, component, renderRootJsx } = this.props
 		if (!code) {
 			return
 		}
@@ -126,6 +126,12 @@ class Preview extends Component {
 		}
 		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
 		previewComponent._scopeId = moduleId
+
+		if (component) {
+			// register component locally
+			previewComponent.components = previewComponent.components || {}
+			previewComponent.components[component.displayName] = component.default || component
+		}
 
 		// then we just have to render the setup previewComponent in the prepared slot
 		const rootComponent = renderRootJsx
@@ -210,10 +216,14 @@ return getConfig();`
 	}
 }
 
-export default function PreviewFilePath(props) {
+export default function PreviewWithComponent(props) {
 	return (
-		<FilePathContext.Consumer>
-			{filePath => <Preview {...props} filePath={filePath} />}
-		</FilePathContext.Consumer>
+		<RenderJsxContext.Consumer>
+			{renderRootJsx => (
+				<DocumentedComponentContext.Consumer>
+					{component => <Preview {...props} component={component} renderRootJsx={renderRootJsx} />}
+				</DocumentedComponentContext.Consumer>
+			)}
+		</RenderJsxContext.Consumer>
 	)
 }
