@@ -8,6 +8,7 @@ import { RenderJsxContext } from '../../utils/renderStyleguide'
 import styleScoper from '../../utils/styleScoper'
 import separateScript from '../../utils/separateScript'
 import getVars from '../../utils/getVars'
+import { cleanComponentName } from '../../../loaders/utils/cleanComponentName'
 
 const Fragment = React.Fragment ? React.Fragment : 'div'
 
@@ -75,6 +76,9 @@ class Preview extends Component {
 		})
 
 		const { code, vuex, component, renderRootJsx } = this.props
+
+		const documentedComponent = component.module.default || component.module
+		component.displayName = cleanComponentName(this.props.component.name)
 		if (!code) {
 			return
 		}
@@ -127,10 +131,11 @@ class Preview extends Component {
 		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
 		previewComponent._scopeId = moduleId
 
-		if (component) {
+		if (documentedComponent && !previewComponent.components) {
 			// register component locally
-			previewComponent.components = previewComponent.components || {}
-			previewComponent.components[component.displayName] = component.default || component
+			previewComponent.components = {
+				[component.displayName]: documentedComponent
+			}
 		}
 
 		// then we just have to render the setup previewComponent in the prepared slot
