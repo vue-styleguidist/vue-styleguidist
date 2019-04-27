@@ -167,6 +167,7 @@ module.exports = function(config, env) {
 	const customComponents = {
 		'slots/UsageTabButton': 'VsgSlots/UsageTabButton',
 		'ReactComponent/ReactComponent': 'VsgReactComponent/ReactComponent',
+		'StyleGuide/StyleGuideRenderer': 'VsgStyleGuide/StyleGuideRenderer',
 		// if the user chose prism, load the prism editor instead of codemirror
 		Editor: path.join(CUSTOM_EDITOR_FOLDER, config.simpleEditor ? 'EditorPrism' : 'Editor')
 	}
