@@ -131,7 +131,11 @@ class Preview extends Component {
 		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
 		previewComponent._scopeId = moduleId
 
-		if (documentedComponent && !previewComponent.components) {
+		if (
+			this.context.config.locallyRegisterComponents &&
+			documentedComponent &&
+			!previewComponent.components
+		) {
 			// register component locally
 			previewComponent.components = {
 				[component.displayName]: documentedComponent
