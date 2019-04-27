@@ -59,6 +59,5 @@ module.exports = {
 	compilerConfig: {
 		target: { ie: 11 }
 	},
-	styleguideDir: 'dist',
-	locallyRegisterComponents: true
+	styleguideDir: 'dist'
 }
