@@ -1,4 +1,4 @@
-# vuecli3
+# svg-loader example
 
 ## Project setup
 
