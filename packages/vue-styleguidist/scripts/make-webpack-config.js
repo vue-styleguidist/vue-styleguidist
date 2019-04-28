@@ -164,11 +164,22 @@ module.exports = function(config, env) {
 		})
 
 	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
-	const customComponents = {
-		'slots/UsageTabButton': 'VsgSlots/UsageTabButton',
-		// if the user chose prism, load the prism editor instead of codemirror
-		Editor: path.join(CUSTOM_EDITOR_FOLDER, config.simpleEditor ? 'EditorPrism' : 'Editor')
-	}
+	const custComp = [
+		'slots/UsageTabButton',
+		'ReactComponent/ReactComponent',
+		'StyleGuide/StyleGuideRenderer'
+	]
+	const customComponents = custComp.reduce(function(acc, comp) {
+		acc[comp] = `Vsg${comp}`
+		return acc
+	}, {})
+
+	// if the user chose prism, load the prism editor instead of codemirror
+	customComponents.Editor = path.join(
+		CUSTOM_EDITOR_FOLDER,
+		config.simpleEditor ? 'EditorPrism' : 'Editor'
+	)
+
 	Object.keys(customComponents).forEach(function(key) {
 		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(
 			sourceSrc,

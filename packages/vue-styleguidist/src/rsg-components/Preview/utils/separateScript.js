@@ -1,7 +1,7 @@
 import walkes from 'walkes'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent from './normalizeSfcComponent'
-import { isCodeVueSfc } from '../../loaders/utils/isCodeVueSfc'
+import { isCodeVueSfc } from '../../../../loaders/utils/isCodeVueSfc'
 import getAst from './getAst'
 
 function transformImports(code) {

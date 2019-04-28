@@ -86,11 +86,7 @@ workflows:
   version: 2
   test:
     jobs:
-      - install:
-          filters:
-            branches:
-              only:
-                - master
+      - install
       - compile:
           requires:
             - install

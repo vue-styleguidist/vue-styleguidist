@@ -6,6 +6,7 @@ import Styled from 'rsg-components/Styled'
 import cx from 'classnames'
 import Ribbon from 'rsg-components/Ribbon'
 import Version from 'rsg-components/Version'
+import { HOMEPAGE } from '../../../scripts/consts'
 
 const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth }) => ({
 	root: {
@@ -57,21 +58,13 @@ const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth
 	}
 })
 
-export function StyleGuideRenderer({
-	classes,
-	title,
-	version,
-	homepageUrl,
-	children,
-	toc,
-	hasSidebar
-}) {
+export function StyleGuideRenderer({ classes, title, version, children, toc, hasSidebar }) {
 	return (
 		<div className={cx(classes.root, hasSidebar && classes.hasSidebar)}>
 			<main className={classes.content}>
 				{children}
 				<footer className={classes.footer}>
-					<Markdown text={`Generated with [Vue Styleguidist](${homepageUrl})`} />
+					<Markdown text={`Generated with [Vue Styleguidist](${HOMEPAGE})`} />
 				</footer>
 			</main>
 			{hasSidebar && (
