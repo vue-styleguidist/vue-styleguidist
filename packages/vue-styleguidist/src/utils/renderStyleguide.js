@@ -3,8 +3,12 @@ import slots from 'rsg-components/slots'
 import StyleGuide from 'rsg-components/StyleGuide'
 import getRouteData from 'react-styleguidist/lib/client/utils/getRouteData'
 import getPageTitle from 'react-styleguidist/lib/client/utils/getPageTitle'
-import globalizeComponents from './globalizeComponents'
+import getComponentsFromSections from './getComponentsFromSections'
+import globalizeComponent from './globalizeComponent'
 import processSections from './processSections'
+
+export const RenderJsxContext = React.createContext({})
+export const VueComponentMapContext = React.createContext({})
 
 /**
  * @param {object} styleguide An object returned by styleguide-loader
@@ -23,9 +27,12 @@ export default function renderStyleguide(
 ) {
 	const allSections = processSections(styleguide.sections)
 
-	// Globalize all components, not just ones we see on the screen, to make
-	// all components accessible to all examples
-	globalizeComponents(allSections)
+	if (!styleguide.config.locallyRegisterComponents) {
+		// Globalize all components, not just ones we see on the screen, to make
+		// all components accessible to all examples
+		const components = getComponentsFromSections(allSections)
+		components.forEach(component => globalizeComponent(component))
+	}
 
 	const { title, pagePerSection } = styleguide.config
 	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection)
@@ -41,17 +48,18 @@ export default function renderStyleguide(
 	}
 
 	return (
-		<StyleGuide
-			codeRevision={codeRevision}
-			config={styleguide.config}
-			renderRootJsx={styleguide.renderRootJsx}
-			slots={slots(styleguide.config)}
-			welcomeScreen={styleguide.welcomeScreen}
-			patterns={styleguide.patterns}
-			sections={sections}
-			allSections={allSections}
-			displayMode={displayMode}
-			pagePerSection={pagePerSection}
-		/>
+		<RenderJsxContext.Provider value={styleguide.renderRootJsx}>
+			<StyleGuide
+				codeRevision={codeRevision}
+				config={styleguide.config}
+				slots={slots(styleguide.config)}
+				welcomeScreen={styleguide.welcomeScreen}
+				patterns={styleguide.patterns}
+				sections={sections}
+				allSections={allSections}
+				displayMode={displayMode}
+				pagePerSection={pagePerSection}
+			/>
+		</RenderJsxContext.Provider>
 	)
 }

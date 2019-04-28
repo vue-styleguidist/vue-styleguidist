@@ -142,6 +142,12 @@ module.exports = {
 			)
 		}
 	},
+	locallyRegisterComponents: {
+		message: 'Locally register components',
+		description: 'Register components on their examples only instead of globally Vue.components()',
+		type: 'boolean',
+		default: false
+	},
 	navigation: {
 		type: 'boolean',
 		default: false,

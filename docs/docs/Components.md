@@ -32,7 +32,7 @@ But will ignore tests:
 
 ## Loading and exposing components
 
-Styleguidist _loads_ your components and _exposes_ them globally for your examples to consume.
+Styleguidist, by default, _loads_ your components and _exposes_ them globally for your examples to consume. You can use [locallyRegisterComponents](/Configuration.md#locallyRegisterComponents) to avoid global registration. This loads components only in examples illustrating them.
 
 ## Sections
 

@@ -201,6 +201,40 @@ module.exports = {
 }
 ```
 
+## `locallyRegisterComponents`
+
+Type: `Boolean`, default: `false`
+
+By default, `vue-styleguidist` registers all components globally. This can be an issue when:
+
+- Multiple components are sharing the same name OR
+- Components are changing behaviour if another component is registered
+
+In this case, just set `locallyRegisterComponents` to `true`. It will register components only in the examples of their documentation.
+
+Though if you need to register an additionl component and you are forced to use this behaviour, proceed like this:
+
+1.  Write examples using SFC format
+1.  Explicitly require or import all needed components
+1.  Register them in your example
+
+```vue
+<script>
+import MyButton from './src/components/MyButton.vue'
+import MyIcon from './src/components/MyIcon.vue'
+
+export default {
+  components: { MyButton, MyIcon }
+}
+</script>
+
+<template>
+  <MyButton><MyIcon name=Save/>Save Form</MyButton>
+</template>
+```
+
+> **Note** This can be done as well using a `new Vue()` script
+
 ## `mountPointId`
 
 Type: `string`, defaults: `rsg-root`
