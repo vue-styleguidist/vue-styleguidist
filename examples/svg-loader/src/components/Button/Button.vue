@@ -74,7 +74,7 @@ Icon on the right Side
 </template>
 
 <script>
-import { default as TestIcon } from '../../assets/logo.svg'
+import TestIcon from '../../assets/logo.svg'
 // You can also use 'exports.default = {}' style module exports.
 
 export default {
