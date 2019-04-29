@@ -8,7 +8,7 @@ import { RenderJsxContext } from '../../utils/renderStyleguide'
 import styleScoper from './utils/styleScoper'
 import separateScript from './utils/separateScript'
 import getVars from './utils/getVars'
-import { cleanComponentName } from '../../../loaders/utils/cleanComponentName'
+import cleanComponentName from '../../utils/cleanComponentName'
 
 const Fragment = React.Fragment ? React.Fragment : 'div'
 

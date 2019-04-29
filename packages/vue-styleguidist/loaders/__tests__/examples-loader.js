@@ -127,7 +127,6 @@ Two:
 	expect(result).toBeTruthy()
 	expect(() => new Function(result)).not.toThrow(SyntaxError)
 	expect(result).toMatch(`'lodash': require('lodash')`)
-	expect(result).toMatch(`'react': require('react')`)
 })
 
 it('should generate require map when import is used', () => {
@@ -150,7 +149,6 @@ One:
 	expect(result).toBeTruthy()
 	expect(() => new Function(result)).not.toThrow(SyntaxError)
 	expect(result).toMatch(`'lodash': require('lodash')`)
-	expect(result).toMatch(`'react': require('react')`)
 })
 
 it('should work with multiple JSX element on the root level', () => {
@@ -169,24 +167,6 @@ it('should work with multiple JSX element on the root level', () => {
 
 	expect(result).toBeTruthy()
 	expect(() => new Function(result)).not.toThrow(SyntaxError)
-})
-
-it('should prepend example code with React require()', () => {
-	const exampleMarkdown = `<X/>`
-	const result = examplesLoader.call(
-		{
-			request: 'Readme.md',
-			query: getQuery(),
-			_styleguidist: {}
-		},
-		exampleMarkdown
-	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).toMatch(
-		`const React$0 = require('react');\\nconst React = React$0.default || React$0;`
-	)
 })
 
 it('should prepend example code with component require()', () => {
@@ -224,16 +204,12 @@ it('should allow explicit import of React and component module', () => {
 	expect(result).toBeTruthy()
 	expect(() => new Function(result)).not.toThrow(SyntaxError)
 	expect(result).toMatch(
-		`const React$0 = require('react');\\nconst React = React$0.default || React$0;`
-	)
-	expect(result).toMatch(
 		`const FooComponent$0 = require('../foo.js');\\nconst FooComponent = FooComponent$0.default || FooComponent$0;`
 	)
 })
 
 it('should works for any Markdown file, without a current component', () => {
 	const exampleMarkdown = `
-    import React from 'react';
     import FooComponent from '../foo.js';
     <FooComponent/>`
 	const result = examplesLoader.call(
@@ -247,9 +223,6 @@ it('should works for any Markdown file, without a current component', () => {
 
 	expect(result).toBeTruthy()
 	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).toMatch(
-		`const React$0 = require('react');\\nconst React = React$0.default || React$0;`
-	)
 	expect(result).not.toMatch('undefined')
 })
 
