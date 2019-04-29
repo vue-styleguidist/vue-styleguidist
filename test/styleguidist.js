@@ -10,8 +10,8 @@ if (examplePath.indexOf('examples/') !== 0) {
 	examplePath = 'examples/' + examplePath
 }
 
-process.argv[3] = '--config'
-process.argv[4] = `${examplePath}/styleguide.config.js`
+process.chdir(`./${examplePath}`)
+
 if (examplePath === 'examples/vuecli3' || examplePath === 'examples/svg-loader') {
 	const command = process.argv[2] === 'server' ? '' : `:${process.argv[2]}`
 	process.argv[2] = `styleguidist${command}`
