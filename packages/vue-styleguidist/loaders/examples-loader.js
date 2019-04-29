@@ -78,11 +78,8 @@ module.exports = function examplesLoader(source) {
 	const fullContext = {
 		// Modules, provied by the user
 		...config.context,
-		// Append React, because it’s required for JSX
-		React: 'react',
 		// Append the current component module to make it accessible in examples
 		// without an explicit import
-		// TODO: Do not leak absolute path
 		...(cleanDisplayName ? { [cleanDisplayName]: file } : {})
 	}
 
