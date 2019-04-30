@@ -1,5 +1,5 @@
 {
-  "name": "vue-styleguidist-example-vuecli3-noplugin",
+  "name": "vue-styleguidist-example-vuecli-noplugin",
   "description": "What happens if you try to use the Vue CLI 3, install styleguidist, and omit to use the plugin",
   "version": "3.10.1",
   "private": true,

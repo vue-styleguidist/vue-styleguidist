@@ -251,7 +251,7 @@ module.exports = {
 
 ## How to change the layout of a style guide?
 
-You can replace any Styleguidist Vue component. But in most of the cases you’ll want to replace `*Renderer` components — all HTML is rendered by these components. For example `ReactComponentRenderer`, `ComponentsListRenderer`, `PropsRenderer`, etc. — [check the source](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/src/rsg-components) to see what components are available.
+You can replace any Styleguidist Vue component. But in most of the cases you’ll want to replace `*Renderer` components — all HTML is rendered by these components. For example `ReactComponentRenderer`, `ComponentsListRenderer`, `PropsRenderer`, etc. — [check the source](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/src/rsg-components) to see what components are available.
 
 You can replace the `StyleGuideRenderer` component like this:
 
