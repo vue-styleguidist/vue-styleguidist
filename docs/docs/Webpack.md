@@ -96,6 +96,6 @@ module.exports = {
 
 ## When nothing else works
 
-In very rare cases, like using legacy or third-party libraries, you may need to change webpack options that Styleguidist doesn’t allow you to change via `webpackConfig` options. In this case you can use [dangerouslyUpdateWebpackConfig](Configuration.md#dangerouslyupdatewebpackconfig) option.
+In very rare cases, like using legacy or third-party libraries, you may need to change webpack options that Styleguidist doesn’t allow you to change via `webpackConfig` options. In this case you can use [dangerouslyUpdateWebpackConfig](/Configuration.md#dangerouslyupdatewebpackconfig) option.
 
 > **Warning:** You may easily break Vue styleguidist using this options, use it at your own risk.

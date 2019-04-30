@@ -1,6 +1,6 @@
 # Configuration
 
-By default, Vue styleguidist will look for `styleguide.config.js` file in your project’s root folder. You can change the location of the config file using `--config` [CLI](CLI.md) option.
+By default, Vue styleguidist will look for `styleguide.config.js` file in your project’s root folder. You can change the location of the config file using `--config` [CLI](/docs/CLI.md) option.
 
 ## `assetsDir`
 
@@ -24,7 +24,7 @@ Type: `String`, `Function` or `Array`, default: `src/components/**/*.vue`
 
 All paths are relative to config folder.
 
-See examples in the [Components section](Components.md#components).
+See examples in the [Components section](/docs/Components.md#components).
 
 ## `context`
 
@@ -404,7 +404,7 @@ module.exports = {
 }
 ```
 
-See [Configuring webpack](Webpack.md) for mode details.
+See [Configuring webpack](/docs/Webpack.md) for mode details.
 
 ## `renderRootJsx`
 
@@ -450,7 +450,7 @@ Type: `Array`, optional
 
 Allows components to be grouped into sections with a title and overview content. Sections can also be content only, with no associated components (for example, a textual introduction). Sections can be nested.
 
-See examples of [sections configuration](Components.md#sections).
+See examples of [sections configuration](/docs/Components.md#sections).
 
 ## `serverHost`
 
@@ -480,7 +480,7 @@ Avoid loading CodeMirror and reduce bundle size significantly, use [prism.js](ht
 
 Type: `Boolean`, default: `false`
 
-Ignore components that don’t have an example file (as determined by [getExampleFilename](#getexamplefilename)). These components won’t be accessible from other examples unless you [manually `require` them](Cookbook.md#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples).
+Ignore components that don’t have an example file (as determined by [getExampleFilename](#getexamplefilename)). These components won’t be accessible from other examples unless you [manually `require` them](/docs/Cookbook.md#how-to-hide-some-components-in-style-guide-but-make-them-available-in-examples).
 
 ## `styleguideComponents`
 
@@ -518,7 +518,7 @@ Type: `object`, optional
 
 Customize styles of any Styleguidist’s component.
 
-See example in the [cookbook](Cookbook.md#how-to-change-styles-of-a-style-guide).
+See example in the [cookbook](/docs/Cookbook.md#how-to-change-styles-of-a-style-guide).
 
 ## `template`
 
@@ -544,7 +544,7 @@ Type: `object`, optional
 
 Customize style guide UI fonts, colors, etc.
 
-See example in the [cookbook](Cookbook.md#how-to-change-styles-of-a-style-guide).
+See example in the [cookbook](/docs/Cookbook.md#how-to-change-styles-of-a-style-guide).
 
 > **Note:** This theme will only apply to styleguidist components. The side menu, the section titles, the prop definitions. The components you showcase will not be affected.
 
@@ -622,7 +622,7 @@ Use it like this in your Markdown files:
     ```js { "file": "./some/file.js" }
     ```
 
-You can also use this function to dynamically update some of your fenced code blocks that you do not want to be interpreted as Vue components by using the [static modifier](Documenting.md#usage-examples-and-readme-files).
+You can also use this function to dynamically update some of your fenced code blocks that you do not want to be interpreted as Vue components by using the [static modifier](/docs/Documenting.md#usage-examples-and-readme-files).
 
 ```javascript
 module.exports = {
@@ -713,7 +713,7 @@ module.exports = {
 }
 ```
 
-> **Warning:** This option disables config load from `webpack.config.js`, load your config [manually](Webpack.md#reusing-your-projects-webpack-config).
+> **Warning:** This option disables config load from `webpack.config.js`, load your config [manually](/docs/Webpack.md#reusing-your-projects-webpack-config).
 
 > **Note:** `entry`, `externals`, `output`, `watch`, and `stats` options will be ignored. For production builds, `devtool` will also be ignored.
 
@@ -721,4 +721,4 @@ module.exports = {
 
 > **Note:** Run style guide in verbose mode to see the actual webpack config used by vue-styleguidist: `npx vue-styleguidist server --verbose`.
 
-See [Configuring webpack](Webpack.md) for examples.
+See [Configuring webpack](/docs/Webpack.md) for examples.
