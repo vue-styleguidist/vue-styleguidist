@@ -7,7 +7,7 @@ module.exports = {
 		text: 'Back to examples',
 		url: 'https://vue-styleguidist.github.io/Examples.html'
 	},
-	styleguideDir: 'dist'
+	buildDir: 'build'
 	// sections: [
 	//   {
 	//     name: 'First Section',

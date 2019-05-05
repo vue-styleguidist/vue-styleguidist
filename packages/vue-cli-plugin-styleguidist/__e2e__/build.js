@@ -21,13 +21,13 @@ test('simple build', async () => {
 	expect(project.has('styleguide/index.html')).toBeTruthy()
 })
 
-test('change styleguideDir folder', async () => {
+test('change buildDir folder', async () => {
 	const project = await createAndInstall(`build-config-dir`)
 	const config = await project.read('styleguide.config.js')
-	// add a styleguideDir configuration
+	// add a buildDir configuration
 	await project.write(
 		'styleguide.config.js',
-		config.replace(/(module\.exports = \{)/, "$1\n  styleguideDir: 'dist',")
+		config.replace(/(module\.exports = \{)/, "$1\n  buildDir: 'build',")
 	)
 	await project.run('vue-cli-service styleguidist:build')
 	expect(project.has('styleguide/index.html')).not.toBeTruthy()

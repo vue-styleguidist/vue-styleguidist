@@ -61,7 +61,7 @@ function onRead({ data }) {
 					'simpleEditor',
 					'mountPointId',
 					'ribbon',
-					'styleguideDir',
+					'buildDir',
 					'assetsDir'
 				]
 					.map(key => filteredSchema[key])

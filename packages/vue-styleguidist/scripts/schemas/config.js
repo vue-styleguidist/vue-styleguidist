@@ -284,12 +284,12 @@ module.exports = {
 	styleguideComponents: {
 		type: 'object'
 	},
-	styleguideDir: {
+	buildDir: {
 		uitype: 'string',
 		message: 'Styleguide Directory',
 		description: 'Folder for static HTML style guide generated with `styleguidist build` command.',
 		type: 'directory path',
-		default: 'styleguide'
+		default: 'build'
 	},
 	styleguidePublicPath: {
 		type: 'string',

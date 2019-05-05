@@ -229,7 +229,7 @@ export default {
 </script>
 
 <template>
-  <MyButton><MyIcon name=Save/>Save Form</MyButton>
+  <MyButton><MyIcon name="Save" />Save Form</MyButton>
 </template>
 ```
 
@@ -328,7 +328,7 @@ module.exports = {
   printBuildInstructions(config) {
     console.log(
       `Style guide published to ${
-        config.styleguideDir
+        config.buildDir
       }. Something else interesting.`
     )
   }
@@ -506,9 +506,9 @@ If you want to wrap, rather than replace a component, make sure to import the de
 
 **Note**: these components are not guaranteed to be safe from breaking changes in vue-styleguidist updates.
 
-## `styleguideDir`
+## `buildDir`
 
-Type: `String`, default: `styleguide`
+Type: `String`, default: `build`
 
 Folder for static HTML style guide generated with `styleguidist build` command.
 

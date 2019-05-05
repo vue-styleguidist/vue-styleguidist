@@ -4,7 +4,7 @@ Vue-Styleguidist can generate a static website. To deploy it, follow this short 
 
 ## Pre-requisites
 
-First, specify the location where the styleguide site is going to be built using the [styledguideDir](/Configuration.md#styleguidedir) option. It will default to a `styleguide` folder besides your `styleguide.config.js`.
+First, specify the location where the styleguide site is going to be built using the [buildDir](/Configuration.md#buildDir) option. It will default to a `build` folder besides your `styleguide.config.js`.
 
 Check out the results of running the following command
 
@@ -19,7 +19,7 @@ Now, you should have a directory containing html and javascript. Let's deploy it
 1.  Connect Netlify to your github account
 1.  Select the repo to deploy
 1.  Set the build command as `styleguidist build`
-1.  The build folder will be `styleguide` if you have `styleguide.config.js` at the root of your repository and left out the option. If you changed the `styleguideDir` option, pick the new path chosen.
+1.  The build folder will be `build` if you have `styleguide.config.js` at the root of your repository and left out the option. If you changed the `buildDir` option, pick the new path chosen.
 
 ## Deploy on Zeit Now
 
@@ -50,7 +50,7 @@ And make sure to prepare a `"build-now"` script in your `package.json` that buil
 }
 ```
 
-Adjust the `distDir` config according to your [styledguideDir](/Configuration.md#styleguidedir) option.
+Adjust the `distDir` config according to your [styledguideDir](/Configuration.md#buildDir) option.
 
 ## Deploy on GitHub Pages
 
@@ -71,16 +71,16 @@ Zeit and Netlify make it easy for your website deployment to be automated. If yo
 This is how the very documentation you are reading is deployed automatically
 
 ```yml
-    deploy:
-        provider: pages
-        skip-cleanup: true
-        local-dir: styleguide
-        target-branch: master
-        repo: yourgithubid/yourgithubid.github.io
-        github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-        keep-history: true
-        on:
-            branch: master # only deploy when a commit or a merge is pushed to master
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: styleguide
+  target-branch: master
+  repo: yourgithubid/yourgithubid.github.io
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master # only deploy when a commit or a merge is pushed to master
 ```
 
 [Read More](https://docs.travis-ci.com/user/deployment/pages/)

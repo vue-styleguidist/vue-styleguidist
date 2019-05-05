@@ -89,7 +89,7 @@ module.exports = {
 						hints: 'error'
 				  }
 	}),
-	styleguideDir: 'dist',
+	buildDir: 'build',
 	ribbon: {
 		text: 'Back to examples',
 		url: 'https://vue-styleguidist.github.io/Examples.html'

@@ -16,5 +16,5 @@ module.exports = {
 	// webpackConfig: {
 	//   // custom config goes here
 	// }
-	styleguideDir: 'dist'
+	buildDir: 'build'
 }

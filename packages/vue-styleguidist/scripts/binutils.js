@@ -164,7 +164,7 @@ function printServerInstructions(urls) {
  * @param {object} config
  */
 function printBuildInstructions(config) {
-	console.log('Style guide published to:\n' + kleur.underline(config.styleguideDir))
+	console.log('Style guide published to:\n' + kleur.underline(config.buildDir))
 }
 
 /**

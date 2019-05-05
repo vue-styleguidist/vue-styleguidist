@@ -95,5 +95,5 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	styleguideDir: 'dist'
+	buildDir: 'build'
 }

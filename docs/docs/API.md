@@ -88,7 +88,7 @@ styleguidist(require('../styleguide.config.js')).build(
     if (err) {
       console.log(err)
     } else {
-      console.log('Style guide published to', config.styleguideDir)
+      console.log('Style guide published to', config.buildDir)
     }
   }
 )

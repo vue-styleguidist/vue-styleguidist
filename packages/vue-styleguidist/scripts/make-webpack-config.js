@@ -33,7 +33,7 @@ module.exports = function(config, env) {
 
 	let webpackConfig = {
 		output: {
-			path: config.styleguideDir,
+			path: config.buildDir,
 			filename: 'build/[name].bundle.js',
 			chunkFilename: 'build/[name].js'
 		},
@@ -97,7 +97,7 @@ module.exports = function(config, env) {
 			},
 			plugins: [
 				new CleanWebpackPlugin(['build'], {
-					root: config.styleguideDir,
+					root: config.buildDir,
 					verbose: config.verbose === true
 				}),
 				new CopyWebpackPlugin(

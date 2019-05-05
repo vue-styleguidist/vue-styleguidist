@@ -32,5 +32,5 @@ module.exports = {
 		plugins: [new VueLoaderPlugin()]
 	},
 	usageMode: 'expand',
-	styleguideDir: 'dist'
+	buildDir: 'build'
 }
