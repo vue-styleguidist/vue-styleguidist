@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { danger, warn } from 'danger'
-import * as fs from 'fs'
-import * as path from 'path'
+import { danger, warn, fail } from 'danger'
 
+var fs = require('fs')
+var path = require('path')
 var getSize = require('get-folder-size')
 var gzipSize = require('gzip-size')
 var validateMessage = require('validate-commit-msg')
