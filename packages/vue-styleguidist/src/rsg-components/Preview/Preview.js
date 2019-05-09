@@ -77,8 +77,8 @@ class Preview extends Component {
 
 		const { code, vuex, component, renderRootJsx } = this.props
 
-		const documentedComponent = component.module.default || component.module
-		component.displayName = cleanComponentName(this.props.component.name)
+		const documentedComponent = component.module && component.module.default || component.module
+		component.displayName = cleanComponentName(this.props.component.name || "")
 		if (!code) {
 			return
 		}
