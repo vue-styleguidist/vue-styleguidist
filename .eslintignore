@@ -6,3 +6,4 @@ packages/*/dist/**/*
 coverage/*
 docs/dist/**/*
 test/cli-packages
+dangerfile.js

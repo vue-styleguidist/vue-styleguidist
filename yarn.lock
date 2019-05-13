@@ -6558,6 +6558,11 @@ conventional-changelog-writer@^4.0.5:
     split "^1.0.0"
     through2 "^3.0.0"
 
+conventional-commit-types@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/conventional-commit-types/-/conventional-commit-types-2.1.1.tgz#352eb53f56fbc7c1a6c1ba059c2b6670c90b2a8a"
+  integrity sha512-0Ts+fEdmjqYDOQ1yZ+LNgdSPO335XZw9qC10M7CxtLP3nIMGmeMhmkM8Taffa4+MXN13bRPlp0CtH+QfOzKTzw==
+
 conventional-commits-filter@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/conventional-commits-filter/-/conventional-commits-filter-2.0.2.tgz#f122f89fbcd5bb81e2af2fcac0254d062d1039c1"
@@ -8945,7 +8950,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-findup@^0.1.5:
+findup@0.1.5, findup@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/findup/-/findup-0.1.5.tgz#8ad929a3393bac627957a7e5de4623b06b0e2ceb"
   integrity sha1-itkpozk7rGJ5V6fl3kYjsGsOLOs=
@@ -9208,6 +9213,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+gar@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gar/-/gar-1.0.4.tgz#f777bc7db425c0572fdeb52676172ca1ae9888b8"
+  integrity sha512-w4n9cPWyP7aHxKxYHFQMegj7WIAsL/YX/C4Bs5Rr8s1H9M1rNtRWRsw+ovYMkXDQ5S4ZbYHsHAPmevPjPgw44w==
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -9250,6 +9260,14 @@ get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
   integrity sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
+
+get-folder-size@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/get-folder-size/-/get-folder-size-2.0.1.tgz#3fe0524dd3bad05257ef1311331417bcd020a497"
+  integrity sha512-+CEb+GDCM7tkOS2wdMKTn9vU7DgnKUTuDlehkNJKNSovdCOVxs14OfKCk4cvSaR3za4gj+OBdl9opPN9xrJ0zA==
+  dependencies:
+    gar "^1.0.4"
+    tiny-each-async "2.0.3"
 
 get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.0"
@@ -9807,7 +9825,7 @@ gzip-size@5.0.0:
     duplexer "^0.1.1"
     pify "^3.0.0"
 
-gzip-size@^5.0.0:
+gzip-size@^5.0.0, gzip-size@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.0.tgz#2db0396c71f5c902d5cf6b52add5030b93c99bd2"
   integrity sha512-wfSnvypBDRW94v5W3ckvvz/zFUNdJ81VgOP6tE4bPpRUcc0wGqU+y0eZjJEvKxwubJFix6P84sE8M51YWLT7rQ==
@@ -16991,6 +17009,11 @@ semver-diff@^2.0.0:
   dependencies:
     semver "^5.0.3"
 
+semver-regex@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/semver-regex/-/semver-regex-1.0.0.tgz#92a4969065f9c70c694753d55248fc68f8f652c9"
+  integrity sha1-kqSWkGX5xwxpR1PVUkj8aPj2Usk=
+
 "semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.0.1, semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.0.tgz#790a7cf6fea5459bac96110b29b60412dc8ff96b"
@@ -18223,6 +18246,11 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tiny-each-async@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-each-async/-/tiny-each-async-2.0.3.tgz#8ebbbfd6d6295f1370003fbb37162afe5a0a51d1"
+  integrity sha1-jru/1tYpXxNwAD+7NxYq/loKUdE=
+
 tiny-emitter@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
@@ -18965,6 +18993,16 @@ v8-compile-cache@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.2.tgz#a428b28bb26790734c4fc8bc9fa106fccebf6a6c"
   integrity sha512-1wFuMUIM16MDJRCrpbpuEPTUGmM5QMUg0cr3KFwra2XgOgFcPGDQHDh3CszSCD2Zewc/dh/pamNEW8CbfDebUw==
+
+validate-commit-msg@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/validate-commit-msg/-/validate-commit-msg-2.14.0.tgz#e5383691012cbb270dcc0bc2a4effebe14890eac"
+  integrity sha1-5Tg2kQEsuycNzAvCpO/+vhSJDqw=
+  dependencies:
+    conventional-commit-types "^2.0.0"
+    find-parent-dir "^0.3.0"
+    findup "0.1.5"
+    semver-regex "1.0.0"
 
 validate-npm-package-license@^3.0.1, validate-npm-package-license@^3.0.3:
   version "3.0.4"

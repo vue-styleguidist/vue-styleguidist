@@ -76,9 +76,6 @@ class Preview extends Component {
 		})
 
 		const { code, vuex, component, renderRootJsx } = this.props
-
-		const documentedComponent = component.module.default || component.module
-		component.displayName = cleanComponentName(this.props.component.name)
 		if (!code) {
 			return
 		}
@@ -131,14 +128,19 @@ class Preview extends Component {
 		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
 		previewComponent._scopeId = moduleId
 
+		// if we are in local component registration, register current component
+		// NOTA: on pure md files, component.module is undefined
 		if (
+			component.module &&
 			this.context.config.locallyRegisterComponents &&
-			documentedComponent &&
+			// NOTA: if the ccomponents member of the vue config object is
+			// already set it should not be changed
 			!previewComponent.components
 		) {
+			component.displayName = cleanComponentName(component.name)
 			// register component locally
 			previewComponent.components = {
-				[component.displayName]: documentedComponent
+				[component.displayName]: component.module.default || component.module
 			}
 		}
 
@@ -173,32 +175,25 @@ class Preview extends Component {
 	}
 
 	evalInContext(compiledCode, listVars) {
-		const exampleComponentCode = `function getConfig() {
-	let __component__ = {}
-	
-	// When we do new Vue({name: 'MyComponent'}) the comfig object
-	// is set to __component__
-	function Vue(params){ __component__ = params; }
-
-	eval(${JSON.stringify(
-		`${
-			// run script for SFC and full scripts
-			// and set config object in __component__
-			// if the structure is vsg mode, define local variables
-			// to set them up in the next step
-			compiledCode
-		};__component__.data = __component__.data || function() {return {${
+		const exampleComponentCode = `let __component__ = {}
+	${
+		// run script for SFC and full scripts
+		// and set config object in __component__
+		// if the structure is vsg mode, define local variables
+		// to set them up in the next step
+		compiledCode
+	};__component__.data=__component__.data||function(){return {${
 			// add local vars in data
 			// this is done through an object like {varName: varName}
 			// since each varName is defined in compiledCode, it can be used to init
 			// the data object here
-			listVars.map(varName => `${varName}: ${varName}`).join(',')
-		}};};`
-	)});
-
-	return __component__;
-}
-return getConfig();`
+			listVars.map(varName => `${varName}:${varName}`).join(',')
+		}};};
+	// When wiriting "new Vue({name: 'MyComponent'})" the config object
+	// is assigned to the variable __component__
+	function Vue(params){ __component__ = params; }
+	// Then we simply return the __component__ variable
+	return __component__;`
 		return this.props.evalInContext(exampleComponentCode)
 	}
 
