@@ -76,9 +76,6 @@ class Preview extends Component {
 		})
 
 		const { code, vuex, component, renderRootJsx } = this.props
-
-		const documentedComponent = component.module.default || component.module
-		component.displayName = cleanComponentName(this.props.component.name)
 		if (!code) {
 			return
 		}
@@ -131,14 +128,19 @@ class Preview extends Component {
 		const moduleId = 'data-v-' + Math.floor(Math.random() * 1000) + 1
 		previewComponent._scopeId = moduleId
 
+		// if we are in local component registration, register current component
+		// NOTA: on pure md files, component.module is undefined
 		if (
+			component.module &&
 			this.context.config.locallyRegisterComponents &&
-			documentedComponent &&
+			// NOTA: if the ccomponents member of the vue config object is
+			// already set it should not be changed
 			!previewComponent.components
 		) {
+			component.displayName = cleanComponentName(component.name)
 			// register component locally
 			previewComponent.components = {
-				[component.displayName]: documentedComponent
+				[component.displayName]: component.module.default || component.module
 			}
 		}
 
