@@ -1,0 +1,46 @@
+{
+	"name": "vue-styleguidist-router",
+	"description": "Here we experiment how to mock the router in your showcases",
+	"version": "3.10.1",
+	"keywords": [
+		"routing",
+		"window",
+		"global",
+		"mock",
+		"vue-router",
+		"router-link"
+	],
+	"private": true,
+	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/styleguidist/vue-styleguidist.git"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=4"
+	},
+	"dependencies": {
+		"dog-names": "^1.0.2",
+		"mini-css-extract-plugin": "^0.5.0",
+		"vue": "^2.6.10"
+	},
+	"scripts": {
+		"styleguide": "vue-styleguidist server",
+		"styleguide:build": "vue-styleguidist build"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.2.2",
+		"@babel/plugin-transform-runtime": "^7.2.0",
+		"@babel/preset-env": "^7.3.1",
+		"babel-core": "^7.0.0-bridge.0",
+		"babel-loader": "^8.0.5",
+		"css-loader": "^0.28.7",
+		"node-sass": "^4.11.0",
+		"sass-loader": "^6.0.6",
+		"style-loader": "^0.19.0",
+		"vue-loader": "^15.2.4",
+		"vue-styleguidist": "^3.10.1",
+		"webpack": "^4.10.0"
+	}
+}
