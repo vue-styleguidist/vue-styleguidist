@@ -5,6 +5,20 @@ Vue.component('RouterLink', {
 		tag: { type: String, default: 'a' }
 	},
 	render(createElement) {
-		return createElement(this.tag, {}, this.$slots.default)
+		const href = this.$attrs.to
+		return createElement(
+			this.tag,
+			{
+				attrs: { href },
+				on: {
+					click(e) {
+						// eslint-disable-next-line no-console
+						console.log('Navigated to: ', href)
+						e.preventDefault()
+					}
+				}
+			},
+			this.$slots.default
+		)
 	}
 })
