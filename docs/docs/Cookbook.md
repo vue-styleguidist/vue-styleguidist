@@ -455,3 +455,5 @@ Vue.component('RouterLink', {
   }
 })
 ```
+
+See [this example](/Examples#router) for a concrete implementation.
