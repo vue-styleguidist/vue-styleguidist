@@ -4,7 +4,7 @@
  * @param {array} sections
  */
 export default function getComponentsFromSections(sections) {
-	return sections.reduce((acc, section) => {
+	return sections.reduce((allComponent, section) => {
 		let sectionComponents = []
 		let subSectionComponents = []
 		if (section.components) {
@@ -13,6 +13,6 @@ export default function getComponentsFromSections(sections) {
 		if (section.sections) {
 			subSectionComponents = getComponentsFromSections(section.sections)
 		}
-		return [...sectionComponents, ...subSectionComponents]
+		return [...allComponent, ...sectionComponents, ...subSectionComponents]
 	}, [])
 }
