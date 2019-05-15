@@ -36,17 +36,16 @@ export default function extendsHandler(
 	resolveImmediatelyExportedRequire(pathResolver, extendsFilePath)
 
 	// only look for documentation in the current project not in node_modules
-	if (/^\./.test(extendsFilePath[extendsVariableName].filePath)) {
-		const fullFilePath = pathResolver(extendsFilePath[extendsVariableName].filePath)
-
+	const fullFilePath = pathResolver(extendsFilePath[extendsVariableName].filePath)
+	if (!/[\\/]node_modules[\\/]/.test(fullFilePath)) {
 		parseFile(documentation, {
 			...opt,
 			filePath: fullFilePath,
 			nameFilter: [extendsFilePath[extendsVariableName].exportName]
 		})
-		// make sure that the parent name does not bleed on the new doc
-		documentation.set('displayName', null)
 	}
+	// make sure that the parent name does not bleed on the new doc
+	documentation.set('displayName', null)
 }
 
 function getExtendsVariableName(compDef: NodePath): string | undefined {

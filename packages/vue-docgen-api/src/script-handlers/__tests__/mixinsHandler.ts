@@ -30,6 +30,7 @@ describe('mixinsHandler', () => {
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
 		mockParse = parseFile as jest.Mock
+		mockParse.mockReset()
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})
 
@@ -58,7 +59,7 @@ describe('mixinsHandler', () => {
 		if (path) {
 			mixinsHandler(doc, path, ast, { filePath: '' })
 		}
-		expect(parseFile).toHaveBeenCalledWith(doc, {
+		expect(mockParse).toHaveBeenCalledWith(doc, {
 			filePath: './component/full/path',
 			nameFilter: ['default']
 		})
@@ -78,10 +79,29 @@ describe('mixinsHandler', () => {
 			return
 		}
 		mixinsHandler(doc, path, ast, { filePath: '' })
-		expect(parseFile).toHaveBeenCalledWith(doc, {
+		expect(mockParse).toHaveBeenCalledWith(doc, {
 			filePath: './component/full/path',
 			nameFilter: ['default']
 		})
+		done()
+	})
+
+	it('should ignore mixins coming from node_modules', done => {
+		const src = [
+			'import { VueMixin  } from "vue-mixins";',
+			'export default {',
+			'  mixins:[VueMixin]',
+			'}'
+		].join('\n')
+		const ast = babelParser().parse(src)
+		const path = resolveExportedComponent(ast).get('default')
+		if (!path) {
+			done.fail()
+			return
+		}
+		mockResolvePathFrom.mockReturnValue('foo/node_modules/component/full/path')
+		mixinsHandler(doc, path, ast, { filePath: '' })
+		expect(mockParse).not.toHaveBeenCalled()
 		done()
 	})
 })
