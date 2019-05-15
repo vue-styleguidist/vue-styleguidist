@@ -39,10 +39,12 @@ export default function mixinsHandler(
 	const files = new Map<string, string[]>()
 	for (const varName of Object.keys(mixinVarToFilePath)) {
 		const { filePath, exportName } = mixinVarToFilePath[varName]
-		const fullFilePath = pathResolver(filePath)
-		const vars = files.get(fullFilePath) || []
-		vars.push(exportName)
-		files.set(fullFilePath, vars)
+		if (/^\./.test(filePath)) {
+			const fullFilePath = pathResolver(filePath)
+			const vars = files.get(fullFilePath) || []
+			vars.push(exportName)
+			files.set(fullFilePath, vars)
+		}
 	}
 
 	files.forEach((vars, fullFilePath) => {
