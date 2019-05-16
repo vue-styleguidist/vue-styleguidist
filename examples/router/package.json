@@ -1,5 +1,5 @@
 {
-	"name": "vue-styleguidist-router",
+	"name": "vue-styleguidist-example-router",
 	"description": "Here we experiment how to mock the router in your showcases",
 	"version": "3.10.1",
 	"keywords": [
