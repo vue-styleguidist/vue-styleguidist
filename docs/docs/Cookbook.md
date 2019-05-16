@@ -311,7 +311,7 @@ const StyleGuideRenderer = ({
 )
 ```
 
-NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Checkout the [customised](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, is uses the following:
+> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Checkout the [customised](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, is uses the following:
 
 ```jsx
 // SectionsRenderer.js
@@ -457,3 +457,21 @@ Vue.component('RouterLink', {
 ```
 
 See [this example](/Examples#router) for a concrete implementation.
+
+> PRO TIP: If your styleguide has `.resolve` issues in the browser console, it still seems to be using vue-router. Check if you are requiring the `router.js` file in any of the showcased components and remove teh dependency. If you still con't find teh culprit, follow these steps and you will find it.
+>
+> 1.  Find all mentions of `Vue.use(Router)` in your codebase
+> 1.  Add `console.trace()` just before it to get the stack trace of the way they are called
+> 1.  open styleguidist and look at the console of your browser
+>
+> Somewhere in your stack should be one of the displayed components. Find a way to avoid this require. If you can't find a way around this require, use a context variable to only load the router when not in styleguidist.
+>
+> 1.  Install `cross-env` package
+> 1.  Set a context variable before you launch styleguidist: `cross-env MYSTYLE=true styleguide serve`
+> 1.  Use the variable in your code as follows
+>
+> ```js
+> if (!process.env.MYSTYLE) {
+>   Vue.use(Router)
+> }
+> ```
