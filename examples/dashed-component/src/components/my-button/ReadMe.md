@@ -1,4 +1,4 @@
-Dashed style named component
+# Dashed style named component
 
 ```vue
 <template>
