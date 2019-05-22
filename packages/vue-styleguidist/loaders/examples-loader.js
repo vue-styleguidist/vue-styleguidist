@@ -74,14 +74,10 @@ module.exports = function examplesLoader(source) {
 	// work because both imports (generated below and by rewrite-imports) will
 	// be eventually transpiled to `var x = require('x')`, so we'll just have two
 	// of them in the same scope, which is fine in non-strict mode
-	const fullContext = {
-		// Modules, provided by the user
-		...config.context
-	}
 
 	// All required or imported modules, either explicitly in examples code
 	// or implicitly (React, current component and context config option)
-	const allModules = [...requiresFromExamples, ...values(fullContext)]
+	const allModules = [...requiresFromExamples, ...values(config.context)]
 
 	// “Prerequire” modules required in Markdown examples and context so they
 	// end up in a bundle and be available at runtime
@@ -93,7 +89,7 @@ module.exports = function examplesLoader(source) {
 	// Require context modules so they are available in an example
 	const requireContextCode = b.program(
 		flatten(
-			map(fullContext, (requireRequest, name) => [
+			map(config.context, (requireRequest, name) => [
 				// const name$0 = require(path);
 				b.variableDeclaration('const', [
 					b.variableDeclarator(b.identifier(`${name}$0`), requireIt(requireRequest).toAST())
