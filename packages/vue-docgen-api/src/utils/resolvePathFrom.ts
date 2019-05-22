@@ -1,3 +1,5 @@
+const { join } = require('path');
+
 const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 
 export default function resolvePathFrom(path: string, from: string[]): string {
@@ -14,9 +16,16 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 		}
 		if (!finalPath.length) {
 			try {
-				finalPath = require.resolve(`${path}/index${s}`, {
+				finalPath = require.resolve(join(path, `index${s}`), {
 					paths: from
 				})
+			} catch (e) {
+				// eat the error
+			}
+		}
+		if (!finalPath.length) {
+			try {
+				finalPath = require.resolve(join(from[0], `${path}${s}`))
 			} catch (e) {
 				// eat the error
 			}
