@@ -24,10 +24,15 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 			}
 		}
 		if (!finalPath.length) {
-			try {
-				finalPath = require.resolve(join(from[0], `${path}${s}`))
-			} catch (e) {
-				// eat the error
+			for (let i = 0; i < from.length; i++) {
+				try {
+					finalPath = require.resolve(join(from[i], `${path}${s}`));
+					if (finalPath.length) {
+						break;
+					}
+				} catch (e) {
+					// eat the error
+				}
 			}
 		}
 	})
