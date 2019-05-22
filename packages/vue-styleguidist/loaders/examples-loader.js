@@ -38,8 +38,7 @@ module.exports = function examplesLoader(source) {
 		source = getComponentVueDoc(source, filePath)
 	}
 	const config = this._styleguidist
-	const { file, displayName, shouldShowDefaultExample, customLangs } =
-		loaderUtils.getOptions(this) || {}
+	const { displayName, shouldShowDefaultExample, customLangs } = loaderUtils.getOptions(this) || {}
 
 	const cleanDisplayName = displayName ? cleanComponentName(displayName) : undefined
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
@@ -76,11 +75,8 @@ module.exports = function examplesLoader(source) {
 	// be eventually transpiled to `var x = require('x')`, so we'll just have two
 	// of them in the same scope, which is fine in non-strict mode
 	const fullContext = {
-		// Modules, provied by the user
-		...config.context,
-		// Append the current component module to make it accessible in examples
-		// without an explicit import
-		...(cleanDisplayName ? { [cleanDisplayName]: file } : {})
+		// Modules, provided by the user
+		...config.context
 	}
 
 	// All required or imported modules, either explicitly in examples code

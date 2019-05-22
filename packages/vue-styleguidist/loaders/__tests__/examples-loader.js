@@ -169,45 +169,6 @@ it('should work with multiple JSX element on the root level', () => {
 	expect(() => new Function(result)).not.toThrow(SyntaxError)
 })
 
-it('should prepend example code with component require()', () => {
-	const exampleMarkdown = `<X/>`
-	const result = examplesLoader.call(
-		{
-			request: 'Readme.md',
-			query: getQuery(),
-			_styleguidist: {}
-		},
-		exampleMarkdown
-	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).toMatch(
-		`const FooComponent$0 = require('../foo.js');\\nconst FooComponent = FooComponent$0.default || FooComponent$0;`
-	)
-})
-
-it('should allow explicit import of React and component module', () => {
-	const exampleMarkdown = `
-    import React from 'react';
-    import FooComponent from '../foo.js';
-    <FooComponent/>`
-	const result = examplesLoader.call(
-		{
-			request: 'Readme.md',
-			query: getQuery(),
-			_styleguidist: {}
-		},
-		exampleMarkdown
-	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).toMatch(
-		`const FooComponent$0 = require('../foo.js');\\nconst FooComponent = FooComponent$0.default || FooComponent$0;`
-	)
-})
-
 it('should works for any Markdown file, without a current component', () => {
 	const exampleMarkdown = `
     import FooComponent from '../foo.js';
@@ -226,7 +187,7 @@ it('should works for any Markdown file, without a current component', () => {
 	expect(result).not.toMatch('undefined')
 })
 
-it('should impoert external dependency in a vue component example', () => {
+it('should import external dependency in a vue component example', () => {
 	const exampleMarkdown = `
 One:
 
