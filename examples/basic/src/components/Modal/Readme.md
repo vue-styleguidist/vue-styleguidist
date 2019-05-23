@@ -1,16 +1,15 @@
 You can modify the code through the playground
 
     let isOpen = false;
+    const _ = require("lodash").default
 
-    <div>
-      <button @click.prevent="isOpen = true">Open</button>
-      <Modal :showModal="isOpen">
-        <h1 slot="head">Hallo!</h1>
-        <div slot="body">
-          <button  @click.prevent="isOpen = false">Close</button>
-        </div>
-      </Modal>
-    </div>
+    <button @click.prevent="isOpen = true">Open</button>
+    <Modal :showModal="isOpen">
+      <h1 slot="head">Hallo!</h1>
+      <div slot="body">
+        <button  @click.prevent="isOpen = false">Close</button>
+      </div>
+    </Modal>
 
 The variables are reactive:
 

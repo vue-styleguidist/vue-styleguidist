@@ -1,16 +1,14 @@
 <template>
-<div class="RandomButton">
-	<button class="random-button" @click.prevent="handleClick">
-		{{ label }}
-	</button>
-</div>
+  <div class="RandomButton">
+    <button class="random-button" @click.prevent="handleClick">{{ label }}</button>
+  </div>
 </template>
 
 <script>
 import sample from 'lodash/sample'
 
 /**
- * An example-less button.
+ * A button that requires json
  * @deprecated Use the [only true button component](#button) instead
  */
 export default {
