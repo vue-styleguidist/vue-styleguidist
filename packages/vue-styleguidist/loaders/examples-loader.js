@@ -53,11 +53,19 @@ module.exports = function examplesLoader(source) {
 	// Load examples
 	const examples = chunkify(source, updateExample, customLangs)
 
-	// In case we are loading a vue component as an example, extract script tag
-	const getVueImports = source => {
+	const getScript = code => {
 		// script is at the beginning of a line after a return
-		const parts = isCodeVueSfc(source) ? parseComponent(source) : null
-		return getImports(parts && parts.script ? parts.script.content : source)
+		// In case we are loading a vue component as an example, extract script tag
+		if (isCodeVueSfc(code)) {
+			const parts = parseComponent(code)
+			return parts && parts.script ? parts.script.content : ''
+		}
+		//else it could be the weird almost jsx of vue-styleguidist
+		return code.split(/\n\W*</)[0]
+	}
+
+	const getExampleLiveImports = source => {
+		return getImports(getScript(source))
 	}
 
 	// Find all import statements and require() calls in examples to make them
@@ -66,7 +74,7 @@ module.exports = function examplesLoader(source) {
 	// because webpack changes its name to something like __webpack__require__().
 	const allCodeExamples = filter(examples, { type: 'code' })
 	const requiresFromExamples = allCodeExamples.reduce((requires, example) => {
-		return requires.concat(getVueImports(example.content))
+		return requires.concat(getExampleLiveImports(example.content))
 	}, [])
 
 	// All required or imported modules
