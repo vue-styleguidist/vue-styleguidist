@@ -1,11 +1,11 @@
 You can `require` external files in your examples:
 
-    const names = require('dog-names').all;
+    const names = require('./dog-names.json');
     <RandomButton :variants="names" />
 
 Another example initializing Vue
 
-    const names = require('dog-names').all;
+    const names = require('./dog-names.json');
 
     new Vue({
       data(){
