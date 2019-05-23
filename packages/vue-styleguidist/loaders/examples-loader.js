@@ -53,11 +53,19 @@ module.exports = function examplesLoader(source) {
 	// Load examples
 	const examples = chunkify(source, updateExample, customLangs)
 
-	// In case we are loading a vue component as an example, extract script tag
-	const getVueImports = source => {
+	const getScript = code => {
 		// script is at the beginning of a line after a return
-		const parts = isCodeVueSfc(source) ? parseComponent(source) : null
-		return getImports(parts && parts.script ? parts.script.content : source)
+		// In case we are loading a vue component as an example, extract script tag
+		if (isCodeVueSfc(code)) {
+			const parts = parseComponent(code)
+			return parts && parts.script ? parts.script.content : ''
+		}
+		//else it could be the weird almost jsx of vue-styleguidist
+		return code.split(/\n\W*</)[0]
+	}
+
+	const getExampleLiveImports = source => {
+		return getImports(getScript(source))
 	}
 
 	// Find all import statements and require() calls in examples to make them
@@ -66,22 +74,11 @@ module.exports = function examplesLoader(source) {
 	// because webpack changes its name to something like __webpack__require__().
 	const allCodeExamples = filter(examples, { type: 'code' })
 	const requiresFromExamples = allCodeExamples.reduce((requires, example) => {
-		return requires.concat(getVueImports(example.content))
+		return requires.concat(getExampleLiveImports(example.content))
 	}, [])
 
-	// Auto imported modules.
-	// We don't need to do anything here to support explicit imports: they will
-	// work because both imports (generated below and by rewrite-imports) will
-	// be eventually transpiled to `var x = require('x')`, so we'll just have two
-	// of them in the same scope, which is fine in non-strict mode
-	const fullContext = {
-		// Modules, provided by the user
-		...config.context
-	}
-
-	// All required or imported modules, either explicitly in examples code
-	// or implicitly (React, current component and context config option)
-	const allModules = [...requiresFromExamples, ...values(fullContext)]
+	// All required or imported modules
+	const allModules = [...requiresFromExamples, ...values(config.context)]
 
 	// “Prerequire” modules required in Markdown examples and context so they
 	// end up in a bundle and be available at runtime
@@ -93,7 +90,7 @@ module.exports = function examplesLoader(source) {
 	// Require context modules so they are available in an example
 	const requireContextCode = b.program(
 		flatten(
-			map(fullContext, (requireRequest, name) => [
+			map(config.context, (requireRequest, name) => [
 				// const name$0 = require(path);
 				b.variableDeclaration('const', [
 					b.variableDeclarator(b.identifier(`${name}$0`), requireIt(requireRequest).toAST())
