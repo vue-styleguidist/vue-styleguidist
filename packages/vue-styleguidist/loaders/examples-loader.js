@@ -69,14 +69,7 @@ module.exports = function examplesLoader(source) {
 		return requires.concat(getVueImports(example.content))
 	}, [])
 
-	// Auto imported modules.
-	// We don't need to do anything here to support explicit imports: they will
-	// work because both imports (generated below and by rewrite-imports) will
-	// be eventually transpiled to `var x = require('x')`, so we'll just have two
-	// of them in the same scope, which is fine in non-strict mode
-
-	// All required or imported modules, either explicitly in examples code
-	// or implicitly (React, current component and context config option)
+	// All required or imported modules
 	const allModules = [...requiresFromExamples, ...values(config.context)]
 
 	// “Prerequire” modules required in Markdown examples and context so they
