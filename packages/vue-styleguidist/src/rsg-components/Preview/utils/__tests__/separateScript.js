@@ -42,7 +42,7 @@ new Vue({
 		expect(sut.script.trim()).toBe("let param = 'BazBaz';")
 	})
 
-	it('shoud allow for hidden components', () => {
+	it('should allow for hidden components', () => {
 		const sut = separateScript(`
 		const Vue = require('vue').default;
 		const MyButton = require('./MyButton.vue').default;
