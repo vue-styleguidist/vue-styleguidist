@@ -90,7 +90,7 @@ export default function normalizeSfcComponent(code) {
 	return {
 		component: [
 			extractedComponent.preprocessing,
-			`new Vue(${extractedComponent.component});`,
+			`new __LocalVue__(${extractedComponent.component});`,
 			extractedComponent.postprocessing
 		].join('\n'),
 		style: buildStyles(parts.styles)

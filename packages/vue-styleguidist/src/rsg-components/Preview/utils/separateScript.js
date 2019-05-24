@@ -23,31 +23,27 @@ function transformImports(code) {
  * @return {script:String, html:String}
  *
  */
-export default function separateScript(code, style, importTransformed) {
-	let index
-	const lines = code.split('\n')
-	if (code.indexOf('new Vue') > -1) {
+export default function separateScript(code, style) {
+	let index = code.indexOf('new Vue')
+	if (index > -1) {
+		code = code.replace(/new Vue\(/g, '__LocalVue__(')
 		return {
-			script: importTransformed ? code : transformImports(code),
+			script: transformImports(code),
+			style
+		}
+	} else if (code.indexOf('__LocalVue__') > -1) {
+		return {
+			script: code,
 			style
 		}
 	} else if (isCodeVueSfc(code)) {
 		const transformed = normalizeSfcComponent(code)
-		return separateScript(transformed.component, transformed.style, true)
+		return separateScript(transformed.component, transformed.style)
 	}
-	for (let id = 0; id < lines.length; id++) {
-		if (lines[id].trim().charAt(0) === '<') {
-			index = id
-			break
-		}
-	}
+	const findStartTemplateMatch = /^\W*</.test(code) ? { index: 0 } : code.match(/\n[\t ]*</)
+	const limitScript = findStartTemplateMatch ? findStartTemplateMatch.index : -1
 	return {
-		script: transformImports(
-			lines
-				.slice(0, index)
-				.join('\n')
-				.trim()
-		),
-		html: lines.slice(index).join('\n')
+		script: transformImports(code.slice(0, limitScript)),
+		html: limitScript > -1 ? code.slice(limitScript) : undefined
 	}
 }
