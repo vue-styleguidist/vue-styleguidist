@@ -61,7 +61,7 @@ module.exports = function examplesLoader(source) {
 			return parts && parts.script ? parts.script.content : ''
 		}
 		//else it could be the weird almost jsx of vue-styleguidist
-		return code.split(/\n\W*</)[0]
+		return code.split(/\n[\t ]*</)[0]
 	}
 
 	const getExampleLiveImports = source => {

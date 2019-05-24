@@ -4,7 +4,7 @@ describe('separateScript', () => {
 	// eslint-disable-next-line no-unused-vars
 	let dummySet
 	// eslint-disable-next-line no-unused-vars
-	function Vue(param) {
+	function __LocalVue__(param) {
 		dummySet = param
 	}
 	it('bake template into a new Vue', () => {
@@ -22,7 +22,7 @@ export default {
 		expect(dummySet).toMatchObject({ param: 'Foo' })
 	})
 
-	it('shoud be fine with using the `new Vue` structure', () => {
+	it('shoud be fine with using the `new __LocalVue__` structure', () => {
 		const sut = separateScript(`
 let param = 'Bar';
 new Vue({
@@ -40,5 +40,19 @@ new Vue({
 		</div>
 		`)
 		expect(sut.script.trim()).toBe("let param = 'BazBaz';")
+	})
+
+	it('should allow for hidden components', () => {
+		const sut = separateScript(`
+		const Vue = require('vue').default;
+		const MyButton = require('./MyButton.vue').default;
+		Vue.component('MyButton', MyButton);
+		
+		let param = 'BazFoo';
+		<div>
+			<MyButton> {{param}} </MyButton>
+		</div>
+		`)
+		expect(sut.script).toContain("let param = 'BazFoo';")
 	})
 })

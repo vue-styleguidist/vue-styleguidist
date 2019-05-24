@@ -189,9 +189,9 @@ class Preview extends Component {
 			// the data object here
 			listVars.map(varName => `${varName}:${varName}`).join(',')
 		}};};
-	// When wiriting "new Vue({name: 'MyComponent'})" the config object
+	// When wiriting "new __LocalVue__({name: 'MyComponent'})" the config object
 	// is assigned to the variable __component__
-	function Vue(params){ __component__ = params; }
+	function __LocalVue__(params){ __component__ = params; }
 	// Then we simply return the __component__ variable
 	return __component__;`
 		return this.props.evalInContext(exampleComponentCode)
