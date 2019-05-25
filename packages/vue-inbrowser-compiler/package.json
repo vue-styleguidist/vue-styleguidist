@@ -1,0 +1,19 @@
+{
+  "name": "vue-inbrowser-compiler",
+  "version": "1.0.0",
+  "description": "compile vue single file components right in your browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "compile",
+    "live",
+    "browser",
+    "buble",
+    "acorn"
+  ],
+  "author": "Bart Ledoux <ledouxb@me.com>",
+  "license": "MIT"
+}

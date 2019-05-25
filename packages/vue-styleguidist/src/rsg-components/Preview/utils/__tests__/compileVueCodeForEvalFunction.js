@@ -1,14 +1,8 @@
-import separateScript from '../separateScript'
+import compileVueCodeForEvalFunction from '../compileVueCodeForEvalFunction'
 
-describe('separateScript', () => {
-	// eslint-disable-next-line no-unused-vars
-	let dummySet
-	// eslint-disable-next-line no-unused-vars
-	function __LocalVue__(param) {
-		dummySet = param
-	}
+describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {
-		const sut = separateScript(`
+		const sut = compileVueCodeForEvalFunction(`
 <template>
 	<div/>
 </template>
@@ -18,22 +12,22 @@ export default {
 	param
 }
 </script>`)
-		eval(sut.script)
+		const dummySet = new Function(sut.script)()
 		expect(dummySet).toMatchObject({ param: 'Foo' })
 	})
 
-	it('shoud be fine with using the `new __LocalVue__` structure', () => {
-		const sut = separateScript(`
+	it('shoud be fine with using the `new Vue` structure', () => {
+		const sut = compileVueCodeForEvalFunction(`
 let param = 'Bar';
 new Vue({
 	param
 });`)
-		eval(sut.script)
+		const dummySet = new Function(sut.script)()
 		expect(dummySet).toMatchObject({ param: 'Bar' })
 	})
 
 	it('shoud work with the vsg way', () => {
-		const sut = separateScript(`
+		const sut = compileVueCodeForEvalFunction(`
 		let param = 'BazBaz';
 		<div>
 			<button> {{param}} </button>
@@ -43,7 +37,7 @@ new Vue({
 	})
 
 	it('should allow for hidden components', () => {
-		const sut = separateScript(`
+		const sut = compileVueCodeForEvalFunction(`
 		const Vue = require('vue').default;
 		const MyButton = require('./MyButton.vue').default;
 		Vue.component('MyButton', MyButton);
