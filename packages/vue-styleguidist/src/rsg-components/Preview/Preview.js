@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { transform } from 'buble'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
@@ -8,8 +7,6 @@ import { RenderJsxContext } from '../../utils/renderStyleguide'
 import styleScoper from './utils/styleScoper'
 import compileVueCodeForEvalFunction from './utils/compileVueCodeForEvalFunction'
 import cleanComponentName from '../../utils/cleanComponentName'
-
-const Fragment = React.Fragment ? React.Fragment : 'div'
 
 class Preview extends Component {
 	static propTypes = {
@@ -83,21 +80,19 @@ class Preview extends Component {
 		let previewComponent = {}
 
 		try {
-			const compuse = compileVueCodeForEvalFunction(code)
-			style = compuse.style
-			if (compuse.script) {
+			const example = compileVueCodeForEvalFunction(code, this.context.config.compilerConfig)
+			style = example.style
+			if (example.script) {
 				// compile and execute the script
 				// it can be:
 				// - a script setting up variables => we set up the data function of previewComponent
 				// - a `new Vue()` script that will return a full config object
-				const compiledCode = this.compileCode(compuse.script)
-				previewComponent = this.props.evalInContext(compiledCode)() || {}
+				previewComponent = this.props.evalInContext(example.script)() || {}
 			}
-			if (compuse.html) {
+			if (example.template) {
 				// if this is a pure template or if we are in hybrid vsg mode,
 				// we need to set the template up.
-				const template = `<div>${compuse.html}</div>`
-				previewComponent.template = template
+				previewComponent.template = `<div>${example.template}</div>`
 			}
 		} catch (err) {
 			this.handleError(err)
@@ -119,7 +114,7 @@ class Preview extends Component {
 		previewComponent._scopeId = moduleId
 
 		// if we are in local component registration, register current component
-		// NOTA: on pure md files, component.module is undefined
+		// NOTA: on independent md files, component.module is undefined
 		if (
 			component.module &&
 			this.context.config.locallyRegisterComponents &&
@@ -155,15 +150,6 @@ class Preview extends Component {
 		styleScoper()
 	}
 
-	compileCode(code) {
-		try {
-			return transform(code, this.context.config.compilerConfig).code
-		} catch (err) {
-			this.handleError(err)
-		}
-		return false
-	}
-
 	handleError = err => {
 		this.unmountPreview()
 
@@ -177,12 +163,12 @@ class Preview extends Component {
 	render() {
 		const { error } = this.state
 		return (
-			<Fragment>
+			<>
 				<div ref={ref => (this.mountNode = ref)}>
 					<div />
 				</div>
 				{error && <PlaygroundError message={error} />}
-			</Fragment>
+			</>
 		)
 	}
 }
