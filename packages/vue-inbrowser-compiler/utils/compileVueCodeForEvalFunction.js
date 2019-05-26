@@ -13,16 +13,21 @@ function transformBuble(code, config) {
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
  * @param {string} code
- * @return {script:String, html:String}
+ * @param {object} config buble config tobe used when transforming
+ * @return {script:String, template:String}
  *
  */
 module.exports = function compileVueCodeForEvalFunction(code, config) {
 	let style, vsgMode, template
+	// if the component is written as a Vue sfc,
+	// transform it in to a "new Vue"
 	if (isCodeVueSfc(code)) {
 		const transformed = normalizeSfcComponent(code)
 		code = transformed.component
 		style = transformed.style
 	}
+	// if it's not a new Vue, it must be a simple template or a vsg format
+	// lets separate the template from the script
 	if (!/new Vue\(/.test(code)) {
 		const findStartTemplateMatch = /^\W*</.test(code) ? { index: 0 } : code.match(/\n[\t ]*</)
 		const limitScript = findStartTemplateMatch ? findStartTemplateMatch.index : -1
@@ -46,7 +51,7 @@ module.exports = function compileVueCodeForEvalFunction(code, config) {
 				code = before + ';return ' + after
 			}
 		},
-		// fix all imports into require function calls
+		// transform all imports into require function calls
 		ImportDeclaration(node) {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
