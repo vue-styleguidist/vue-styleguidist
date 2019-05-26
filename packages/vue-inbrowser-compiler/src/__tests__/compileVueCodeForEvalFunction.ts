@@ -1,4 +1,4 @@
-const compileVueCodeForEvalFunction = require('../compileVueCodeForEvalFunction')
+import compileVueCodeForEvalFunction from '../compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {

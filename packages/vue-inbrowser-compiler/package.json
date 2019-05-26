@@ -4,7 +4,7 @@
   "description": "compile vue single file components right in your browser",
   "main": "lib/index.js",
   "scripts": {
-    "compile": "babel --ignore **/__tests__/*.js,**/*.spec.js -d lib/ src/"
+    "compile": "tsc -p ./tsconfig.build.json"
   },
   "keywords": [
     "vue",
