@@ -38,7 +38,7 @@ function generate(keys, dep, base, fn) {
 }
 
 let num
-module.exports = function(str, fn = 'require') {
+export default function(str, fn = 'require') {
 	num = 0
 	return str
 		.replace(NAMED, (_, asterisk, base, req, dep) =>

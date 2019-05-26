@@ -1,7 +1,7 @@
-const { parseComponent } = require('vue-template-compiler')
-const walkes = require('walkes')
-const getAst = require('./getAst')
-const transformOneImport = require('./transformOneImport')
+import { parseComponent } from 'vue-template-compiler'
+import walkes from 'walkes'
+import getAst from './getAst'
+import transformOneImport from './transformOneImport'
 
 const buildStyles = function(styles) {
 	let _styles = ''
@@ -13,7 +13,7 @@ const buildStyles = function(styles) {
 		})
 	}
 	if (_styles !== '') {
-		return `<style scoped>${_styles.trim()}</style>`
+		return _styles.trim()
 	}
 	return undefined
 }
@@ -83,7 +83,7 @@ function injectTemplateAndParseExport(parts) {
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-module.exports = function normalizeSfcComponent(code) {
+export default function normalizeSfcComponent(code) {
 	const parts = getSingleFileComponentParts(code)
 	const extractedComponent = injectTemplateAndParseExport(parts)
 	//console.log(extractedComponent.component)

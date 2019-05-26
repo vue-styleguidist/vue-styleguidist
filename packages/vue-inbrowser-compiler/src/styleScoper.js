@@ -8,7 +8,7 @@ function init() {
 	style.sheet.insertRule('body { visibility: hidden; }', 0)
 }
 
-function scoper(css, suffix) {
+export function scoper(css, suffix) {
 	const re = /([^\r\n,{}]+)(,(?=[^}]*{)|s*{)/g
 
 	// `after` is going to contain eithe a comma or an opening curly bracket
@@ -45,7 +45,7 @@ function scoper(css, suffix) {
 	return css
 }
 
-function process() {
+export function process() {
 	const styles = document.body.querySelectorAll('style[scoped]')
 
 	if (styles.length === 0) {
@@ -83,8 +83,3 @@ function process() {
 }
 
 init()
-
-module.exports = {
-	scoper,
-	process
-}

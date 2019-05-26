@@ -1,6 +1,6 @@
-const rewriteImports = require('./rewriteImports')
+import rewriteImports from './rewriteImports'
 
-module.exports = function transformOneImport(node, code, offset) {
+export default function transformOneImport(node, code, offset) {
 	const start = node.start + offset
 	const end = node.end + offset
 

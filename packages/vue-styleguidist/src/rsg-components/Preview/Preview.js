@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { scoper, compile } from 'vue-inbrowser-compiler'
+import { compile } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
@@ -75,12 +75,12 @@ class Preview extends Component {
 			return
 		}
 
-		let style
+		//let style
 		let previewComponent = {}
 
 		try {
 			const example = compile(code, this.context.config.compilerConfig)
-			style = example.style
+			//style = example.style
 			if (example.script) {
 				// compile and execute the script
 				// it can be:
@@ -133,20 +133,20 @@ class Preview extends Component {
 			? renderRootJsx.default(previewComponent)
 			: { render: createElement => createElement(previewComponent) }
 
-		const vueInstance = new Vue({
+		new Vue({
 			...extendsComponent,
 			...rootComponent,
 			el
 		})
 
 		// Add the scoped style if there is any
-		if (style) {
-			const styleContainer = document.createElement('div')
-			styleContainer.innerHTML = style
-			styleContainer.firstChild.id = moduleId
-			vueInstance.$el.appendChild(styleContainer.firstChild)
-		}
-		scoper()
+		// if (style) {
+		// 	const styleContainer = document.createElement('div')
+		// 	styleContainer.innerHTML = style
+		// 	styleContainer.firstChild.id = moduleId
+		// 	vueInstance.$el.appendChild(styleContainer.firstChild)
+		// }
+		// scoper()
 	}
 
 	handleError = err => {

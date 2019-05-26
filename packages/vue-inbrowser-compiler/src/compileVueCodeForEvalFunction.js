@@ -1,13 +1,9 @@
-const { transform } = require('buble')
-const walkes = require('walkes')
-const normalizeSfcComponent = require('./normalizeSfcComponent')
-const isCodeVueSfc = require('./isCodeVueSfc')
-const getAst = require('./getAst')
-const transformOneImport = require('./transformOneImport')
-
-function transformBuble(code, config) {
-	return transform(code, config).code
-}
+import { transform } from 'buble'
+import walkes from 'walkes'
+import transformOneImport from './transformOneImport'
+import normalizeSfcComponent from './normalizeSfcComponent'
+import isCodeVueSfc from './isCodeVueSfc'
+import getAst from './getAst'
 
 /**
  * Reads the code in string and separates the javascript part and the html part
@@ -17,7 +13,7 @@ function transformBuble(code, config) {
  * @return {script:String, template:String}
  *
  */
-module.exports = function compileVueCodeForEvalFunction(code, config) {
+export default function compileVueCodeForEvalFunction(code, config) {
 	let style, vsgMode, template
 	// if the component is written as a Vue sfc,
 	// transform it in to a "new Vue"
@@ -89,7 +85,7 @@ module.exports = function compileVueCodeForEvalFunction(code, config) {
 		}};}}`
 	}
 	return {
-		script: transformBuble(code, config),
+		script: transform(code, config).code,
 		style,
 		template
 	}
