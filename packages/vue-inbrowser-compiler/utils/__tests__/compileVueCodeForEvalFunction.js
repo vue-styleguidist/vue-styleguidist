@@ -1,4 +1,4 @@
-import compileVueCodeForEvalFunction from '../compileVueCodeForEvalFunction'
+const compileVueCodeForEvalFunction = require('../compileVueCodeForEvalFunction')
 
 describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {
@@ -33,7 +33,8 @@ new Vue({
 			<button> {{param}} </button>
 		</div>
 		`)
-		expect(sut.script.trim()).toBe("let param = 'BazBaz';")
+		const dummySet = new Function(sut.script)()
+		expect(dummySet.data()).toMatchObject({ param: 'BazBaz' })
 	})
 
 	it('should allow for hidden components', () => {
@@ -47,6 +48,9 @@ new Vue({
 			<MyButton> {{param}} </MyButton>
 		</div>
 		`)
-		expect(sut.script).toContain("let param = 'BazFoo';")
+		const dummySet = new Function('require', sut.script)(() => ({
+			default: { component: jest.fn() }
+		}))
+		expect(dummySet.data()).toMatchObject({ param: 'BazFoo' })
 	})
 })

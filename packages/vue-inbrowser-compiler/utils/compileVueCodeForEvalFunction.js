@@ -1,9 +1,9 @@
-import { transform } from 'buble'
-import walkes from 'walkes'
-import transformOneImport from './transformOneImport'
-import normalizeSfcComponent from './normalizeSfcComponent'
-import { isCodeVueSfc } from '../../../../loaders/utils/isCodeVueSfc'
-import getAst from './getAst'
+const { transform } = require('buble')
+const walkes = require('walkes')
+const normalizeSfcComponent = require('./normalizeSfcComponent')
+const isCodeVueSfc = require('./isCodeVueSfc')
+const getAst = require('./getAst')
+const transformOneImport = require('./transformOneImport')
 
 function transformBuble(code, config) {
 	return transform(code, config).code
@@ -16,7 +16,7 @@ function transformBuble(code, config) {
  * @return {script:String, html:String}
  *
  */
-export default function compileVueCodeForEvalFunction(code, config) {
+module.exports = function compileVueCodeForEvalFunction(code, config) {
 	let style, vsgMode, template
 	if (isCodeVueSfc(code)) {
 		const transformed = normalizeSfcComponent(code)

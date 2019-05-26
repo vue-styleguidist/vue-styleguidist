@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { scoper, compile } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
-import styleScoper from './utils/styleScoper'
-import compileVueCodeForEvalFunction from './utils/compileVueCodeForEvalFunction'
 import cleanComponentName from '../../utils/cleanComponentName'
 
 class Preview extends Component {
@@ -80,7 +79,7 @@ class Preview extends Component {
 		let previewComponent = {}
 
 		try {
-			const example = compileVueCodeForEvalFunction(code, this.context.config.compilerConfig)
+			const example = compile(code, this.context.config.compilerConfig)
 			style = example.style
 			if (example.script) {
 				// compile and execute the script
@@ -147,7 +146,7 @@ class Preview extends Component {
 			styleContainer.firstChild.id = moduleId
 			vueInstance.$el.appendChild(styleContainer.firstChild)
 		}
-		styleScoper()
+		scoper()
 	}
 
 	handleError = err => {

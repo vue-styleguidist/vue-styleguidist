@@ -1,4 +1,4 @@
-import normalizeSfcComponent from '../normalizeSfcComponent'
+const normalizeSfcComponent = require('../normalizeSfcComponent')
 
 describe('normalizeSfcComponent', () => {
 	it('bake template into a new Vue (export default)', () => {

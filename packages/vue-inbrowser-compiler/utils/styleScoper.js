@@ -8,7 +8,7 @@ function init() {
 	style.sheet.insertRule('body { visibility: hidden; }', 0)
 }
 
-export function scoper(css, suffix) {
+function scoper(css, suffix) {
 	const re = /([^\r\n,{}]+)(,(?=[^}]*{)|s*{)/g
 
 	// `after` is going to contain eithe a comma or an opening curly bracket
@@ -84,4 +84,7 @@ function process() {
 
 init()
 
-export default process
+module.exports = {
+	scoper,
+	process
+}

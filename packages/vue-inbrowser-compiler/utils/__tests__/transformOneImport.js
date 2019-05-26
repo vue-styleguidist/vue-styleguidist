@@ -1,4 +1,4 @@
-import transformOneImport from '../transformOneImport'
+const transformOneImport = require('../transformOneImport')
 
 describe('transformOneImport', () => {
 	const test = 0

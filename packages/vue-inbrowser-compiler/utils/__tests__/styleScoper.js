@@ -1,4 +1,4 @@
-import { scoper } from '../styleScoper'
+const { scoper } = require('../styleScoper')
 
 describe('styleScoper', () => {
 	it('should scope css selectors', () => {
