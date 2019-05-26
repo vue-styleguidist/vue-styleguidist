@@ -25,10 +25,16 @@ function getSingleFileComponentParts(code: string) {
 	return parts
 }
 
-function injectTemplateAndParseExport(parts: SFCDescriptor) {
+function injectTemplateAndParseExport(
+	parts: SFCDescriptor
+): {
+	preprocessing?: string
+	component: string
+	postprocessing?: string
+} {
 	const templateString = parts.template ? parts.template.content.replace(/`/g, '\\`') : undefined
 
-	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
+	if (!parts.script) return { component: `{\ntemplate: \`${templateString}\` }` }
 
 	let code = parts.script.content
 	let preprocessing = ''
@@ -61,7 +67,7 @@ function injectTemplateAndParseExport(parts: SFCDescriptor) {
 				endIndex = node.right.end + offset
 			}
 		},
-		ImportDeclaration(node: undefined) {
+		ImportDeclaration(node: any) {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
 			code = ret.code
@@ -83,14 +89,13 @@ function injectTemplateAndParseExport(parts: SFCDescriptor) {
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code) {
+export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
 	const extractedComponent = injectTemplateAndParseExport(parts)
-	//console.log(extractedComponent.component)
 	return {
-		component: [
+		script: [
 			extractedComponent.preprocessing,
-			`new Vue(${extractedComponent.component});`,
+			`;return ${extractedComponent.component}`,
 			extractedComponent.postprocessing
 		].join('\n'),
 		style: buildStyles(parts.styles)

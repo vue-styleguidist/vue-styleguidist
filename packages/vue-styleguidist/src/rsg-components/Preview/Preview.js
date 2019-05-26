@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compile } from 'vue-inbrowser-compiler'
+import { compile, addScopedStyle } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
@@ -75,12 +75,12 @@ class Preview extends Component {
 			return
 		}
 
-		//let style
+		let style
 		let previewComponent = {}
 
 		try {
 			const example = compile(code, this.context.config.compilerConfig)
-			//style = example.style
+			style = example.style
 			if (example.script) {
 				// compile and execute the script
 				// it can be:
@@ -140,13 +140,9 @@ class Preview extends Component {
 		})
 
 		// Add the scoped style if there is any
-		// if (style) {
-		// 	const styleContainer = document.createElement('div')
-		// 	styleContainer.innerHTML = style
-		// 	styleContainer.firstChild.id = moduleId
-		// 	vueInstance.$el.appendChild(styleContainer.firstChild)
-		// }
-		// scoper()
+		if (style) {
+			addScopedStyle(style, moduleId)
+		}
 	}
 
 	handleError = err => {

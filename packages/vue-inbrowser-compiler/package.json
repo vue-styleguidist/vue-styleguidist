@@ -20,6 +20,9 @@
     "vue-template-compiler": "^2.6.10",
     "walkes": "^0.2.1"
   },
+  "devDependencies": {
+    "@types/buble":"^0.19.2"
+  },
   "author": "Bart Ledoux <ledouxb@me.com>",
   "license": "MIT"
 }

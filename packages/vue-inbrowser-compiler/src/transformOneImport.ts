@@ -1,6 +1,6 @@
 import rewriteImports from './rewriteImports'
 
-export default function transformOneImport(node, code, offset) {
+export default function transformOneImport(node: any, code: string, offset: number) {
 	const start = node.start + offset
 	const end = node.end + offset
 

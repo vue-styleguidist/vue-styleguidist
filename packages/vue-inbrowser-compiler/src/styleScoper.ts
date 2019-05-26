@@ -1,7 +1,7 @@
 /* eslint-disable no-control-regex */
 
 // used to make CSS selectors remain scoped properly
-export default function scoper(css, suffix) {
+export default function scoper(css: string, suffix: string) {
 	const re = /([^\r\n,{}]+)(,(?=[^}]*{)|s*{)/g
 
 	// `after` is going to contain eithe a comma or an opening curly bracket
@@ -13,7 +13,7 @@ export default function scoper(css, suffix) {
 
 		// deal with :scope pseudo selectors
 		if (selector.match(/:scope/)) {
-			selector = selector.replace(/([^\s]*):scope/, function(full, cutSelector) {
+			selector = selector.replace(/([^\s]*):scope/, function(full: string, cutSelector: string) {
 				if (cutSelector === '') {
 					return '> *'
 				}

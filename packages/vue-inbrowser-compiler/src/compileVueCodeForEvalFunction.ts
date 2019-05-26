@@ -13,30 +13,34 @@ import getAst from './getAst'
  * @return {script:String, template:String}
  *
  */
-export default function compileVueCodeForEvalFunction(code, config) {
+export default function compileVueCodeForEvalFunction(
+	code: string,
+	config?: any
+): { script: string; template?: string; style?: string } {
 	let style, vsgMode, template
 	// if the component is written as a Vue sfc,
 	// transform it in to a "new Vue"
 	if (isCodeVueSfc(code)) {
-		const transformed = normalizeSfcComponent(code)
-		code = transformed.component
-		style = transformed.style
+		return normalizeSfcComponent(code)
 	}
 	// if it's not a new Vue, it must be a simple template or a vsg format
 	// lets separate the template from the script
 	if (!/new Vue\(/.test(code)) {
 		const findStartTemplateMatch = /^\W*</.test(code) ? { index: 0 } : code.match(/\n[\t ]*</)
-		const limitScript = findStartTemplateMatch ? findStartTemplateMatch.index : -1
+		const limitScript =
+			findStartTemplateMatch && findStartTemplateMatch.index !== undefined
+				? findStartTemplateMatch.index
+				: -1
 		template = limitScript > -1 ? code.slice(limitScript) : undefined
 		code = limitScript > -1 ? code.slice(0, limitScript) : code
 		vsgMode = true
 	}
 	const ast = getAst(code)
 	let offset = 0
-	const varNames = []
+	const varNames: string[] = []
 	walkes(ast, {
 		// replace `new Vue({data})` by `return {data}`
-		ExpressionStatement(node) {
+		ExpressionStatement(node: any) {
 			if (node.expression.type === 'NewExpression' && node.expression.callee.name === 'Vue') {
 				const before = code.slice(0, node.expression.start)
 				const optionsNode =
@@ -48,28 +52,28 @@ export default function compileVueCodeForEvalFunction(code, config) {
 			}
 		},
 		// transform all imports into require function calls
-		ImportDeclaration(node) {
+		ImportDeclaration(node: any) {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
 			code = ret.code
 		},
 		...(vsgMode
 			? {
-					VariableDeclaration(node) {
-						node.declarations.forEach(declaration => {
+					VariableDeclaration(node: any) {
+						node.declarations.forEach((declaration: any) => {
 							if (declaration.id.name) {
 								// simple variable declaration
 								varNames.push(declaration.id.name)
 							} else if (declaration.id.properties) {
 								// spread variable declaration
 								// const { all:names } = {all: 'foo'}
-								declaration.id.properties.forEach(p => {
+								declaration.id.properties.forEach((p: any) => {
 									varNames.push(p.value.name)
 								})
 							}
 						})
 					},
-					FunctionDeclaration(node) {
+					FunctionDeclaration(node: any) {
 						varNames.push(node.id.name)
 					}
 			  }
