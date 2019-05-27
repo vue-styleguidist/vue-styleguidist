@@ -86,8 +86,15 @@ function getConfig(api) {
 	const eslintRule = conf.module.rule('eslint')
 	if (eslintRule) {
 		const path = require('path')
+		// in dev mode some resolved module that should be ignored in the linting are not
+		// we add them here to avoid warnings in linting
 		const vsgPath = path.resolve(path.dirname(require.resolve('vue-styleguidist')), '../')
+		const vueBrowserCompilerPath = path.resolve(
+			path.dirname(require.resolve('vue-inbrowser-compiler')),
+			'../'
+		)
 		eslintRule.exclude.add(vsgPath)
+		eslintRule.exclude.add(vueBrowserCompilerPath)
 	}
 
 	// remove the double compiled successfully message
