@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+// eslint-disable-next-line import/no-unresolved
 import { compile, addScopedStyle } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
