@@ -4,7 +4,8 @@
   "description": "compile vue single file components right in your browser",
   "main": "lib/index.js",
   "scripts": {
-    "compile": "tsc -p ./tsconfig.build.json"
+    "compile": "tsc -p ./tsconfig.build.json",
+    "compile:watch": "yarn compile --watch"
   },
   "keywords": [
     "vue",
