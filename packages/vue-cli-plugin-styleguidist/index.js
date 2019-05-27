@@ -83,18 +83,26 @@ function getConfig(api) {
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
 
+	// When using lerna and simlinks,
+	// mode some modules that should be ignored are not
+	// we add them here to avoid errors
+	const path = require('path')
+	const vueBrowserCompilerPath = path.resolve(
+		path.dirname(require.resolve('vue-inbrowser-compiler')),
+		'../'
+	)
+
 	const eslintRule = conf.module.rule('eslint')
 	if (eslintRule) {
-		const path = require('path')
-		// in dev mode some resolved module that should be ignored in the linting are not
-		// we add them here to avoid warnings in linting
 		const vsgPath = path.resolve(path.dirname(require.resolve('vue-styleguidist')), '../')
-		const vueBrowserCompilerPath = path.resolve(
-			path.dirname(require.resolve('vue-inbrowser-compiler')),
-			'../'
-		)
+
 		eslintRule.exclude.add(vsgPath)
 		eslintRule.exclude.add(vueBrowserCompilerPath)
+	}
+
+	const jsRule = conf.module.rule('js')
+	if (jsRule) {
+		jsRule.exclude.add(vueBrowserCompilerPath)
 	}
 
 	// remove the double compiled successfully message
