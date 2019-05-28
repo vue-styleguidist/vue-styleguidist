@@ -3,6 +3,12 @@ import examplesLoader from '../examples-loader'
 
 /* eslint-disable no-new-func */
 
+jest.mock('vue-inbrowser-compiler', () => {
+	return {
+		isCodeVueSfc: code => /<script/.test(code)
+	}
+})
+
 const query = {
 	file: '../foo.js',
 	displayName: 'FooComponent',
@@ -188,6 +194,11 @@ it('should works for any Markdown file, without a current component', () => {
 })
 
 it('should import external dependency in a vue component example', () => {
+	jest.mock('vue-inbrowser-compiler', () => {
+		return {
+			isCodeVueSfc: () => true
+		}
+	})
 	const exampleMarkdown = `
 One:
 
