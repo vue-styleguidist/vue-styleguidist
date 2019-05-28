@@ -51,13 +51,20 @@ export class Editor extends Component {
 		config: PropTypes.object.isRequired
 	}
 
+	location = ''
+
 	constructor() {
 		super()
 		this.handleChange = debounce(this.handleChange.bind(this), UPDATE_DELAY)
+		this.location = document.location.href
 	}
 
 	shouldComponentUpdate(nextProps) {
-		return !!(this.getEditorConfig(nextProps).readOnly && nextProps.code !== this.props.code)
+		const differentLocation = this.location !== document.location.href
+		return !!(
+			(differentLocation || this.getEditorConfig(nextProps).readOnly) &&
+			nextProps.code !== this.props.code
+		)
 	}
 
 	getEditorConfig(props) {
