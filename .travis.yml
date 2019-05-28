@@ -34,6 +34,7 @@ jobs:
     - stage: test
       script:
         - yarn lint
+        - yarn compile
         # Run tests without coverage since it's 2x faster
         - yarn test:jest --runInBand
         - yarn danger ci

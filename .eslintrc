@@ -21,7 +21,7 @@
 			{
 				"commonjs": true,
 				"caseSensitive": true,
-				"ignore": ["rsg-components/"]
+				"ignore": ["rsg-components/", "vue-inbrowser-compiler"]
 			}
 		],
 		"import/export": "error",

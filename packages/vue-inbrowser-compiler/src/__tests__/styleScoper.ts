@@ -1,4 +1,4 @@
-import { scoper } from '../styleScoper'
+import scoper from '../styleScoper'
 
 describe('styleScoper', () => {
 	it('should scope css selectors', () => {

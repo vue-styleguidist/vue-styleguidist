@@ -22,7 +22,7 @@
     "start:empty": "node bin/styleguidist.js server",
     "lint": "eslint . --cache --fix --ext .ts,.js --cache-location node_modules/.eslint_cache/",
     "compile": "lerna run compile",
-    "compile:watch": "babel --ignore **/__tests__/*.js,**/*.spec.js -d packages/vue-styleguidist/lib/ packages/vue-styleguidist/src/ --watch",
+    "compile:watch": "lerna run compile:watch --parallel",
     "build": "node test/styleguidist.js build",
     "test:browser": "node test/browser.js",
     "precommit": "lint-staged",

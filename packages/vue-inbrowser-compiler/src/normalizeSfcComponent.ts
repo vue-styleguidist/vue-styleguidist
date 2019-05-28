@@ -1,9 +1,9 @@
-import { parseComponent } from 'vue-template-compiler'
+import { parseComponent, SFCDescriptor } from 'vue-template-compiler'
 import walkes from 'walkes'
-import transformOneImport from './transformOneImport'
 import getAst from './getAst'
+import transformOneImport from './transformOneImport'
 
-const buildStyles = function(styles) {
+const buildStyles = function(styles: Array<{ content: string }>): string | undefined {
 	let _styles = ''
 	if (styles) {
 		styles.forEach(it => {
@@ -13,22 +13,28 @@ const buildStyles = function(styles) {
 		})
 	}
 	if (_styles !== '') {
-		return `<style scoped>${_styles.trim()}</style>`
+		return _styles.trim()
 	}
 	return undefined
 }
 
-function getSingleFileComponentParts(code) {
+function getSingleFileComponentParts(code: string) {
 	const parts = parseComponent(code)
 	if (parts.script)
 		parts.script.content = parts.script.content.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
 	return parts
 }
 
-function injectTemplateAndParseExport(parts) {
-	const templateString = parts.template.content.replace(/`/g, '\\`')
+function injectTemplateAndParseExport(
+	parts: SFCDescriptor
+): {
+	preprocessing?: string
+	component: string
+	postprocessing?: string
+} {
+	const templateString = parts.template ? parts.template.content.replace(/`/g, '\\`') : undefined
 
-	if (!parts.script) return `{\ntemplate: \`${templateString}\` }`
+	if (!parts.script) return { component: `{\ntemplate: \`${templateString}\` }` }
 
 	let code = parts.script.content
 	let preprocessing = ''
@@ -37,19 +43,19 @@ function injectTemplateAndParseExport(parts) {
 	let offset = 0
 	walkes(getAst(code), {
 		//export const MyComponent = {}
-		ExportNamedDeclaration(node) {
+		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
 			endIndex = node.declaration.declarations[0].init.end + offset
 		},
 		//export default {}
-		ExportDefaultDeclaration(node) {
+		ExportDefaultDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
 		},
 		//module.exports = {}
-		AssignmentExpression(node) {
+		AssignmentExpression(node: any) {
 			if (
 				/exports/.test(node.left.name) ||
 				(node.left.object &&
@@ -61,7 +67,7 @@ function injectTemplateAndParseExport(parts) {
 				endIndex = node.right.end + offset
 			}
 		},
-		ImportDeclaration(node) {
+		ImportDeclaration(node: any) {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
 			code = ret.code
@@ -83,14 +89,13 @@ function injectTemplateAndParseExport(parts) {
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code) {
+export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
 	const extractedComponent = injectTemplateAndParseExport(parts)
-	//console.log(extractedComponent.component)
 	return {
-		component: [
+		script: [
 			extractedComponent.preprocessing,
-			`new __LocalVue__(${extractedComponent.component});`,
+			`;return ${extractedComponent.component}`,
 			extractedComponent.postprocessing
 		].join('\n'),
 		style: buildStyles(parts.styles)

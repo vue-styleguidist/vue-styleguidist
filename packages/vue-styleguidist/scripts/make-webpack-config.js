@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const MiniHtmlWebpackTemplate = require('@vxna/mini-html-webpack-template')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -89,6 +89,29 @@ module.exports = function(config, env) {
 	// the HMR has to be loaded after the html plugin.
 	// Hence this piece added last to the list of plugins.
 	if (isProd) {
+		const minimizer = new TerserPlugin({
+			parallel: true,
+			cache: true,
+			terserOptions: {
+				ie8: false,
+				ecma: 5,
+				compress: {
+					keep_fnames: true,
+					warnings: false,
+					/*
+					 * Disable reduce_funcs to keep Terser from inlining
+					 * Preact's VNode. If enabled, the 'new VNode()' is replaced
+					 * with a anonymous 'function(){}', which is problematic for
+					 * preact-compat, since it extends the VNode prototype to
+					 * accomodate React's API.
+					 */
+					reduce_funcs: false
+				},
+				mangle: {
+					keep_fnames: true
+				}
+			}
+		})
 		webpackConfig = merge(webpackConfig, {
 			output: {
 				filename: 'build/bundle.[chunkhash:8].js',
@@ -109,32 +132,15 @@ module.exports = function(config, env) {
 						  ]
 						: []
 				)
-			]
-		})
-
-		const uglifier = new UglifyJSPlugin({
-			parallel: true,
-			cache: true,
-			uglifyOptions: {
-				ie8: false,
-				ecma: 5,
-				compress: {
-					keep_fnames: true,
-					warnings: false
-				},
-				mangle: {
-					keep_fnames: true
-				}
+			],
+			optimization: {
+				minimizer: [minimizer]
 			}
 		})
-
-		webpackConfig.optimization = {
-			minimizer: [uglifier]
-		}
 	} else {
 		webpackConfig = merge(webpackConfig, {
-			entry: [require.resolve('react-dev-utils/webpackHotDevClient')],
-			plugins: [new webpack.HotModuleReplacementPlugin()]
+			//plugins: [new webpack.HotModuleReplacementPlugin()],
+			entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 		})
 	}
 
@@ -151,6 +157,7 @@ module.exports = function(config, env) {
 		})
 	}
 
+	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
 	require('fs')
 		.readdirSync(sourceSrc)
@@ -159,10 +166,14 @@ module.exports = function(config, env) {
 				sourceSrc,
 				component
 			)
+			// plus in order to avoid cirular references, add an extra ref to the defaults
+			// so that custom components can reference their defaults
 			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
 				webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
 		})
 
+	// For some components, the alias model is a little more complicated,
+	// because we only override a part of the directory
 	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
 	const custComp = [
 		'slots/UsageTabButton',

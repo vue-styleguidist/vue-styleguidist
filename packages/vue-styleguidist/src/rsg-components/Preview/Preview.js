@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { transform } from 'buble'
+import { compile, addScopedStyle } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Vue from 'vue'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
-import styleScoper from './utils/styleScoper'
-import separateScript from './utils/separateScript'
-import getVars from './utils/getVars'
 import cleanComponentName from '../../utils/cleanComponentName'
-
-const Fragment = React.Fragment ? React.Fragment : 'div'
 
 class Preview extends Component {
 	static propTypes = {
@@ -82,36 +77,25 @@ class Preview extends Component {
 
 		let style
 		let previewComponent = {}
-		let listVars = []
 
 		try {
-			const compuse = separateScript(code)
-			style = compuse.style
-			if (compuse.html && compuse.script.length) {
-				// When it's a template preceeded by a script (vsg format)
-				// NOTA: if it is an SFC, the html template will be added in the script
-
-				// extract all variable to set them up as data in the component
-				// this way we can use in the template what is defined in the script
-				listVars = getVars(compuse.script)
-			}
-			if (compuse.script) {
+			const example = compile(code, this.context.config.compilerConfig)
+			style = example.style
+			if (example.script) {
 				// compile and execute the script
 				// it can be:
 				// - a script setting up variables => we set up the data function of previewComponent
 				// - a `new Vue()` script that will return a full config object
-				const compiledCode = this.compileCode(compuse.script)
-				previewComponent = this.evalInContext(compiledCode, listVars)() || {}
+				previewComponent = this.props.evalInContext(example.script)() || {}
 			}
-			if (compuse.html) {
+			if (example.template) {
 				// if this is a pure template or if we are in hybrid vsg mode,
 				// we need to set the template up.
-				const template = `<div>${compuse.html}</div>`
-				previewComponent.template = template
+				previewComponent.template = `<div>${example.template}</div>`
 			}
 		} catch (err) {
 			this.handleError(err)
-			previewComponent.template = ''
+			previewComponent.template = '<div/>'
 		}
 
 		let el = this.mountNode.children[0]
@@ -129,11 +113,11 @@ class Preview extends Component {
 		previewComponent._scopeId = moduleId
 
 		// if we are in local component registration, register current component
-		// NOTA: on pure md files, component.module is undefined
+		// NOTA: on independent md files, component.module is undefined
 		if (
 			component.module &&
 			this.context.config.locallyRegisterComponents &&
-			// NOTA: if the ccomponents member of the vue config object is
+			// NOTA: if the components member of the vue config object is
 			// already set it should not be changed
 			!previewComponent.components
 		) {
@@ -149,7 +133,7 @@ class Preview extends Component {
 			? renderRootJsx.default(previewComponent)
 			: { render: createElement => createElement(previewComponent) }
 
-		const vueInstance = new Vue({
+		new Vue({
 			...extendsComponent,
 			...rootComponent,
 			el
@@ -157,44 +141,8 @@ class Preview extends Component {
 
 		// Add the scoped style if there is any
 		if (style) {
-			const styleContainer = document.createElement('div')
-			styleContainer.innerHTML = style
-			styleContainer.firstChild.id = moduleId
-			vueInstance.$el.appendChild(styleContainer.firstChild)
+			addScopedStyle(style, moduleId)
 		}
-		styleScoper()
-	}
-
-	compileCode(code) {
-		try {
-			return transform(code, this.context.config.compilerConfig).code
-		} catch (err) {
-			this.handleError(err)
-		}
-		return false
-	}
-
-	evalInContext(compiledCode, listVars) {
-		const exampleComponentCode = `let __component__ = {}
-	${
-		// run script for SFC and full scripts
-		// and set config object in __component__
-		// if the structure is vsg mode, define local variables
-		// to set them up in the next step
-		compiledCode
-	};__component__.data=__component__.data||function(){return {${
-			// add local vars in data
-			// this is done through an object like {varName: varName}
-			// since each varName is defined in compiledCode, it can be used to init
-			// the data object here
-			listVars.map(varName => `${varName}:${varName}`).join(',')
-		}};};
-	// When wiriting "new __LocalVue__({name: 'MyComponent'})" the config object
-	// is assigned to the variable __component__
-	function __LocalVue__(params){ __component__ = params; }
-	// Then we simply return the __component__ variable
-	return __component__;`
-		return this.props.evalInContext(exampleComponentCode)
 	}
 
 	handleError = err => {
@@ -210,12 +158,12 @@ class Preview extends Component {
 	render() {
 		const { error } = this.state
 		return (
-			<Fragment>
+			<>
 				<div ref={ref => (this.mountNode = ref)}>
 					<div />
 				</div>
 				{error && <PlaygroundError message={error} />}
-			</Fragment>
+			</>
 		)
 	}
 }
