@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import RsgReactComponent from 'rsg-components/ReactComponent/ReactComponent'
+import RsgReactComponent from 'react-styleguidist/lib/client/rsg-components/ReactComponent/ReactComponent'
 
 export const DocumentedComponentContext = React.createContext({})
 
