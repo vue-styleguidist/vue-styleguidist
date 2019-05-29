@@ -132,12 +132,15 @@ class Preview extends Component {
 		const rootComponent = renderRootJsx
 			? renderRootJsx.default(previewComponent)
 			: { render: createElement => createElement(previewComponent) }
-
-		new Vue({
-			...extendsComponent,
-			...rootComponent,
-			el
-		})
+		try {
+			new Vue({
+				...extendsComponent,
+				...rootComponent,
+				el
+			})
+		} catch (err) {
+			this.handleError(err)
+		}
 
 		// Add the scoped style if there is any
 		if (style) {
