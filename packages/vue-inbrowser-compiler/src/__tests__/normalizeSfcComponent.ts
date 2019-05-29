@@ -1,5 +1,11 @@
 import normalizeSfcComponent from '../normalizeSfcComponent'
 
+function evalFunction(sut: { script: string }): any {
+	return new Function('require', sut.script)(() => ({
+		default: { component: jest.fn() }
+	}))
+}
+
 describe('normalizeSfcComponent', () => {
 	it('bake template into a new Vue (export default)', () => {
 		const sut = normalizeSfcComponent(`
@@ -13,7 +19,7 @@ export default {
 	param
 }
 </script>`)
-		expect(sut.component).toContain('template: `\n<div/>\n`')
+		expect(evalFunction(sut)).toMatchObject({ template: '\n<div/>\n', param: 'Foo' })
 	})
 
 	it('bake template into a new Vue (named exports)', () => {
@@ -28,7 +34,7 @@ export const compo = {
 	param
 }
 </script>`)
-		expect(sut.component).toContain('template: `\n<div/>\n`')
+		expect(evalFunction(sut)).toMatchObject({ template: '\n<div/>\n', param: 'Foo' })
 	})
 
 	it('bake template into a new Vue (es5 exports)', () => {
@@ -42,6 +48,6 @@ module.exports = {
 	param
 }
 </script>`)
-		expect(sut.component).toContain('template: `\n<div/>\n`')
+		expect(evalFunction(sut)).toMatchObject({ template: '\n<div/>\n', param: 'Foo' })
 	})
 })

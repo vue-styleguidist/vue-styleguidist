@@ -10,7 +10,7 @@
 		"sourceMap": true,
 		"baseUrl": ".",
 		"strictFunctionTypes": false,
-		"types": ["jest", "node", "htmlparser2"]
+		"types": ["jest", "node", "htmlparser2", "buble"]
 	},
 	"include": ["packages/**/*.ts", "packages/**/*.vue", "test/**/*.ts", "test/**/*.vue"],
 	"exclude": ["node_modules"]

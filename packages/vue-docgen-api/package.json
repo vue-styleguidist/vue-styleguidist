@@ -5,7 +5,8 @@
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
-    "compile": "tsc -p ./tsconfig.build.json"
+    "compile": "tsc -p ./tsconfig.build.json",
+    "compile:watch": "yarn compile --watch"
   },
   "files": [
     "dist"

@@ -1,23 +1,22 @@
 const UNNAMED = /import\s*['"]([^'"]+)['"];?/gi
 const NAMED = /import\s*(\*\s*as)?\s*(\w*?)\s*,?\s*(?:\{([\s\S]*?)\})?\s*from\s*['"]([^'"]+)['"];?/gi
 
-function alias(key) {
-	key = key.trim()
+function alias(previousKey: string) {
+	let key = previousKey.trim()
 	const name = key.split(' as ')
 	if (name.length > 1) {
-		key = name.shift()
+		key = name.shift() || ''
 	}
 	return { key, name: name[0] }
 }
 
-function generate(keys, dep, base, fn) {
-	const tmp =
-		dep
-			.split('/')
-			.pop()
-			.replace(/\W/g, '_') +
-		'$' +
-		num++ // uniqueness
+let num: number
+
+function generate(keys: string[], dep: string, base?: string, fn?: string) {
+	const depEnd = dep.split('/').pop()
+	const tmp = depEnd
+		? depEnd.replace(/\W/g, '_') + '$' + num++ // uniqueness
+		: ''
 	const name = alias(tmp).name
 
 	dep = `${fn}('${dep}')`
@@ -37,12 +36,11 @@ function generate(keys, dep, base, fn) {
 	return out
 }
 
-let num
-export default function(str, fn = 'require') {
+export default function(str: string, fn = 'require') {
 	num = 0
 	return str
 		.replace(NAMED, (_, asterisk, base, req, dep) =>
-			generate(req ? req.split(',').filter(dep => dep.trim()) : [], dep, base, fn)
+			generate(req ? req.split(',').filter((d: string) => d.trim()) : [], dep, base, fn)
 		)
 		.replace(UNNAMED, (_, dep) => `${fn}('${dep}');`)
 }
