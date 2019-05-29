@@ -17,6 +17,7 @@
 - [How to reuse project’s webpack config?](#how-to-reuse-projects-webpack-config)
 - [How to document styled components?](#how-to-document-styled-components)
 - [Use vue-styleguideist with components that contain routing](#use-vue-styleguideist-with-components-that-contain-routing)
+- [How to include FontAwesome (or other icon sets) in your style guide](#how-to-include-fontawesome-or-other-icon-sets-in-your-style-guide)
 
 <!-- tocstop -->
 
@@ -475,3 +476,28 @@ See [this example](/Examples#router) for a concrete implementation.
 >   Vue.use(Router)
 > }
 > ```
+
+## How to include FontAwesome (or other icon sets) in your style guide
+
+If your components rely on an icon set such as FontAwesome, you can edit `styleguide.config.js` to import it:
+
+```js
+module.exports = {
+  title: 'My Style Guide',
+  template: {
+    head: {
+      links: [
+        {
+          rel: 'stylesheet',
+          href:
+            'https://pro.fontawesome.com/releases/v5.8.2/css/all.css',
+          integrity: 'your hash here',
+          crossorigin: 'anonymous'
+        }
+      ]
+    }
+  }
+}
+```
+
+See [`template`](/Configuration.md#template) for more details.
