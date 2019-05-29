@@ -74,6 +74,27 @@ Ugly button with pink font and blue background:
 </app-button>
 ```
 
+with extra styling
+
+```vue
+<template>
+  <div class="LoadingPickle-wrap">
+    <app-button>Loading...</app-button>
+  </div>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style scoped>
+.LoadingPickle-wrap {
+	padding: 20px;
+	background-color: red;
+}
+</style>
+```
+
 Button containing custom tags:
 
 ```jsx
