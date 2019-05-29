@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler",
-  "version": "3.13.7",
+  "version": "3.13.8",
   "description": "compile vue single file components right in your browser",
   "main": "lib/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "walkes": "^0.2.1"
   },
   "devDependencies": {
-    "@types/buble":"^0.19.2"
+    "@types/buble": "^0.19.2"
   },
   "author": "Bart Ledoux <ledouxb@me.com>",
   "license": "MIT"
