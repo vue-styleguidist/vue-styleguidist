@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { danger, warn, fail, github } from 'danger'
+import { danger, warn, fail } from 'danger'
 
 var fs = require('fs')
 var path = require('path')
@@ -7,7 +7,7 @@ var getSize = require('get-folder-size')
 var gzipSize = require('gzip-size')
 var validateMessage = require('validate-commit-msg')
 
-if (github.branch_for_base !== 'dev' || github.branch_for_head !== 'master') {
+if (danger.github.branch_for_base !== 'dev' || danger.github.branch_for_head !== 'master') {
 	const packages = [
 		'package.json',
 		'packages/vue-styleguidist/package.json',
@@ -41,13 +41,6 @@ If you’ve changed any dependencies (added, removed or updated any packages), p
 
 Please remove \`yarn.lock\` changes from your pull request. Try to run \`git checkout master -- yarn.lock\` and commit changes.`)
 	}
-
-	//simple regex matcher to detect usage of helper function and its type signature
-	var hotMatch = /\bhot\(/gi
-	var hotSignatureMatch = /\bimport \{.*?hot.*?\} from '.*?\/helpers\/marble-testing'/gi
-
-	var coldMatch = /\bcold\(/gi
-	var coldSignatureMatch = /\bimport \{.*?cold.*?\} from '.*?\/helpers\/marble-testing'/gi
 
 	var errorCount = 0
 
