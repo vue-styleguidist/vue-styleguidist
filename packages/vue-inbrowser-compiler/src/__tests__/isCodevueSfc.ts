@@ -14,6 +14,15 @@ describe('isCodeVueSfc', () => {
 		).toBeTruthy()
 	})
 
+	it('should detect a lonely template as SFC', () => {
+		expect(
+			isCodeVueSfc(`
+			<template>
+				<div/>
+			</template>`)
+		).toBeTruthy()
+	})
+
 	it('should return false if there is only javascript', () => {
 		expect(
 			isCodeVueSfc(`
