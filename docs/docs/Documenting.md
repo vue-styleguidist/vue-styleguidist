@@ -103,7 +103,7 @@ If the event is explicitly specified, no need to tell styleguidist what it is.
 /**
  * Success event.
  *
- * @property {object}
+ * @type {object}
  */
 this.$emit('success', {
   demo: 'example'
@@ -116,7 +116,7 @@ Constants will be recognized too
 /**
  * Success event.
  *
- * @property {object}
+ * @type {object}
  */
 const success = 'succ'
 this.$emit(success, {
@@ -131,7 +131,7 @@ If your event name comes from an object, precise the `@event` tag
  * Success event.
  *
  * @event success
- * @property {object}
+ * @type {object}
  */
 this.$emit(EVENTS.success, {
   demo: 'example'
