@@ -139,7 +139,7 @@ module.exports = function(config, env) {
 		})
 	} else {
 		webpackConfig = merge(webpackConfig, {
-			//plugins: [new webpack.HotModuleReplacementPlugin()],
+			plugins: [new webpack.HotModuleReplacementPlugin()],
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 		})
 	}
