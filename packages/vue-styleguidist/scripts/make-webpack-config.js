@@ -89,29 +89,35 @@ module.exports = function(config, env) {
 	// the HMR has to be loaded after the html plugin.
 	// Hence this piece added last to the list of plugins.
 	if (isProd) {
-		const minimizer = new TerserPlugin({
-			parallel: true,
-			cache: true,
-			terserOptions: {
-				ie8: false,
-				ecma: 5,
-				compress: {
-					keep_fnames: true,
-					warnings: false,
-					/*
+		const optimization = config.minimize
+			? {
+					minimizer: [
+						new TerserPlugin({
+							parallel: true,
+							cache: true,
+							terserOptions: {
+								ie8: false,
+								ecma: 5,
+								compress: {
+									keep_fnames: true,
+									warnings: false,
+									/*
 					 * Disable reduce_funcs to keep Terser from inlining
 					 * Preact's VNode. If enabled, the 'new VNode()' is replaced
 					 * with a anonymous 'function(){}', which is problematic for
 					 * preact-compat, since it extends the VNode prototype to
 					 * accomodate React's API.
 					 */
-					reduce_funcs: false
-				},
-				mangle: {
-					keep_fnames: true
-				}
-			}
-		})
+									reduce_funcs: false
+								},
+								mangle: {
+									keep_fnames: true
+								}
+							}
+						})
+					]
+			  }
+			: { minimize: false }
 		webpackConfig = merge(webpackConfig, {
 			output: {
 				filename: 'build/bundle.[chunkhash:8].js',
@@ -133,9 +139,7 @@ module.exports = function(config, env) {
 						: []
 				)
 			],
-			optimization: {
-				minimizer: [minimizer]
-			}
+			optimization
 		})
 	} else {
 		webpackConfig = merge(webpackConfig, {

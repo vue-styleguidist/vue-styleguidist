@@ -162,6 +162,13 @@ module.exports = {
 	logger: {
 		type: 'object'
 	},
+	minimize: {
+		type: 'boolean',
+		default: true,
+		message: 'Minimize Built Styleguide',
+		description:
+			'If this option is set to false, the styelguidist will not minimize the js at build.'
+	},
 	mountPointId: {
 		message: 'Mount Point ID',
 		description: 'The ID of a DOM element where Styleguidist mounts.',

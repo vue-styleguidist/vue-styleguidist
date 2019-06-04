@@ -62,7 +62,8 @@ function onRead({ data }) {
 					'mountPointId',
 					'ribbon',
 					'styleguideDir',
-					'assetsDir'
+					'assetsDir',
+					'minimize'
 				]
 					.map(key => filteredSchema[key])
 					.filter(p => !!p)
