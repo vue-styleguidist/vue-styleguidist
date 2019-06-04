@@ -7,7 +7,7 @@ var getSize = require('get-folder-size')
 var gzipSize = require('gzip-size')
 var validateMessage = require('validate-commit-msg')
 
-if (danger.github.branch_for_base !== 'dev' || danger.github.branch_for_head !== 'master') {
+if (danger.github.pr.head.ref !== 'dev' || danger.github.pr.base.ref !== 'master') {
 	const packages = [
 		'package.json',
 		'packages/vue-styleguidist/package.json',
