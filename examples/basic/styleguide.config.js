@@ -4,6 +4,7 @@ module.exports = {
 	title: 'Vue Styleguidist basic',
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
+	minimize: false,
 	ribbon: {
 		text: 'Back to examples',
 		url: 'https://vue-styleguidist.github.io/Examples.html'
