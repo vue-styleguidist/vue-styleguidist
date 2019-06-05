@@ -1,3 +1,10 @@
 export default function isCodeVueSfc(code: string) {
-	return /\n\W*<script/.test(code) || /\n\W*<template/.test(code)
+	if (/\n\W*<script/.test(code)) {
+		return true
+	}
+	const temp = /\n\W*<template(.*)>/.exec(code)
+	if (temp) {
+		return !/slot=".*"/.test(temp[1]) && !/#/.test(temp[1])
+	}
+	return false
 }
