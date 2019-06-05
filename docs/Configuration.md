@@ -235,6 +235,12 @@ export default {
 
 > **Note** This can be done as well using a `new Vue()` script
 
+## `minimize`
+
+Type: `boolean`, defaults: `true`
+
+If you wish to remove minimization from the build process to help with debugging or to accelate netlify build time on PR, turn this one off.
+
 ## `mountPointId`
 
 Type: `string`, defaults: `rsg-root`
