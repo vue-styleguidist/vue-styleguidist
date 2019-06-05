@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.14.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.13.10...v3.14.0) (2019-06-05)
+
+
+### Bug Fixes
+
+* bring back last version of acorn ([1f7ee42](https://github.com/vue-styleguidist/vue-styleguidist/commit/1f7ee42))
+
+
+### Features
+
+* add minimize options ([93ad5d3](https://github.com/vue-styleguidist/vue-styleguidist/commit/93ad5d3))
+
+
+
+
+
 ## [3.13.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.13.9...v3.13.10) (2019-06-04)
 
 
