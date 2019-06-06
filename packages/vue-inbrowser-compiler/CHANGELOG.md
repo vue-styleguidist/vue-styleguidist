@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.14.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.14.1...v3.14.2) (2019-06-06)
+
+
+### Bug Fixes
+
+* **docgen:** make sure v-slot templates are understood too ([e9ab6d5](https://github.com/vue-styleguidist/vue-styleguidist/commit/e9ab6d5))
+
+
+
+
+
 ## [3.14.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.14.0...v3.14.1) (2019-06-05)
 
 
