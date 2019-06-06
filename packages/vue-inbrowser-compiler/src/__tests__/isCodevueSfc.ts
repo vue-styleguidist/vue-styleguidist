@@ -44,14 +44,18 @@ describe('isCodeVueSfc', () => {
 	it('should return false if there is templates in the moustache', () => {
 		expect(
 			isCodeVueSfc(`
-			<div :class="isTrue?'firstC':'secondC'">
+			<div>
 				<template #icon>
   					<img class="text-gray-500 w-4 h-4 mr-2" src="~@/assets/svg/info.svg">
 				</template>
+			</div>
+			<div>
 				<template slot="otherIcon">
   					<img class="text-gray-500 w-4 h-4 mr-2" src="~@/assets/svg/info.svg">
 				</template>
-            	{hello}
+				<template v-slot:colonIcon>
+  					<img class="text-gray-500 w-4 h-4 mr-2" src="~@/assets/svg/info.svg">
+				</template>
             </div>
         `)
 		).toBeFalsy()

@@ -1,10 +1,6 @@
+import { parseComponent } from 'vue-template-compiler'
+
 export default function isCodeVueSfc(code: string) {
-	if (/\n\W*<script/.test(code)) {
-		return true
-	}
-	const temp = /\n\W*<template(.*)>/.exec(code)
-	if (temp) {
-		return !/slot=".*"/.test(temp[1]) && !/#/.test(temp[1])
-	}
-	return false
+	const parts = parseComponent(code)
+	return !!parts.script || !!parts.template
 }
