@@ -7,7 +7,6 @@
     "branding",
     "beautiful"
   ],
-  "version": "3.10.1",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {

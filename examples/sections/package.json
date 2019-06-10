@@ -1,7 +1,6 @@
 {
   "name": "vue-styleguidist-example-sections",
   "description": "To group components, sections are useful. Look at the left menu of this example",
-  "version": "3.10.1",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
