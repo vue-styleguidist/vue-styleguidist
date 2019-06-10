@@ -5,10 +5,11 @@ there are a few example styleguides. Each tries to demonstrate one key aspect of
 Check out the github links to see how it's done.
 
 <% 
+const path = require('path')
 const examples = globby.sync('examples/*/package.json', {cwd: rootFolder, absolute: true})
 examples.forEach(function(ex) { 
     const pkg = require(ex);
-    const exampleName = pkg.name.replace(/^vue-styleguidist-example-/, '')
+    const exampleName = path.basename(path.dirname(ex))
 
 %>## <%= exampleName %><% 
 if(pkg.description){ %>
