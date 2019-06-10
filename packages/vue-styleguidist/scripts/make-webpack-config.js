@@ -151,16 +151,6 @@ module.exports = function(config, env) {
 	const RSG_COMPONENTS_ALIAS = 'rsg-components'
 	const RSG_COMPONENTS_ALIAS_DEFAULT = `${RSG_COMPONENTS_ALIAS}-default`
 
-	// Custom style guide components
-	if (config.styleguideComponents) {
-		forEach(config.styleguideComponents, (filepath, name) => {
-			const fullName = name.match(RENDERER_REGEXP)
-				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
-				: name
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
-		})
-	}
-
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
 	require('fs')
@@ -204,6 +194,16 @@ module.exports = function(config, env) {
 			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`]
 	})
 
+	// Custom style guide components
+	if (config.styleguideComponents) {
+		forEach(config.styleguideComponents, (filepath, name) => {
+			const fullName = name.match(RENDERER_REGEXP)
+				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
+				: name
+			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
+		})
+	}
+
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS] = makeWebpackConfig(config, env).resolve.alias[
@@ -220,6 +220,5 @@ module.exports = function(config, env) {
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env)
 	}
-
 	return webpackConfig
 }
