@@ -24,9 +24,9 @@ Vue styleguidist generates documentation for your components based on the commen
 
 ## Code comments
 
-Vue styleguidist will display the contents or your components’ JSDoc comment blocks.
+Vue styleguidist will display the contents of your components’ JSDoc comment blocks.
 
-> **Note:** Component’s and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
+> **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
 
 > **Note:** You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
