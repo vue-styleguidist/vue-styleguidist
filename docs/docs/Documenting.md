@@ -242,7 +242,7 @@ export default {
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a Vue component with an interactive playground.
 
     Vue component example:
 
