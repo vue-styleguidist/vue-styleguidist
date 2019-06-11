@@ -24,9 +24,9 @@ Vue styleguidist generates documentation for your components based on the commen
 
 ## Code comments
 
-Vue styleguidist will display the contents or your components’ JSDoc comment blocks.
+Vue styleguidist will display the contents of your components’ JSDoc comment blocks.
 
-> **Note:** Component’s and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
+> **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
 
 > **Note:** You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
@@ -242,7 +242,7 @@ export default {
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a React component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a Vue component with an interactive playground.
 
     Vue component example:
 
