@@ -91,7 +91,7 @@
 		"vue-docgen-api": "^3.13.8",
 		"vue-inbrowser-compiler": "^3.14.2",
 		"webpack": "^4.28.4",
-		"webpack-dev-server": "^3.1.14",
+		"webpack-dev-server": "^3.7.1",
 		"webpack-merge": "^4.0.0"
 	},
 	"peerDependencies": {
