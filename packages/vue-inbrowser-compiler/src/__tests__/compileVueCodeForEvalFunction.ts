@@ -53,4 +53,15 @@ new Vue({
 		}))
 		expect(dummySet.data()).toMatchObject({ param: 'BazFoo' })
 	})
+
+	it('compile code from SFCs', () => {
+		const sut = compileVueCodeForEvalFunction(`
+<script>
+const bar = "foo"
+export default {}
+</script>`)
+		const dummySet = sut.script
+		expect(dummySet).toContain('var bar')
+		expect(dummySet).not.toContain('export default')
+	})
 })

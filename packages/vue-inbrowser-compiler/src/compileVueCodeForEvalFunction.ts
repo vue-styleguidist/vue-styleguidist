@@ -5,6 +5,12 @@ import normalizeSfcComponent from './normalizeSfcComponent'
 import isCodeVueSfc from './isCodeVueSfc'
 import getAst from './getAst'
 
+interface EvaluableComponent {
+	script: string
+	template?: string
+	style?: string
+}
+
 /**
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
@@ -16,7 +22,15 @@ import getAst from './getAst'
 export default function compileVueCodeForEvalFunction(
 	code: string,
 	config?: any
-): { script: string; template?: string; style?: string } {
+): EvaluableComponent {
+	const nonCompiledComponent = prepareVueCodeForEvalFunction(code)
+	return {
+		...nonCompiledComponent,
+		script: transform(nonCompiledComponent.script, config).code
+	}
+}
+
+function prepareVueCodeForEvalFunction(code: string): EvaluableComponent {
 	let style, vsgMode, template
 	// if the component is written as a Vue sfc,
 	// transform it in to a "new Vue"
@@ -89,7 +103,7 @@ export default function compileVueCodeForEvalFunction(
 		}};}}`
 	}
 	return {
-		script: transform(code, config).code,
+		script: code,
 		style,
 		template
 	}
