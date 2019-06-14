@@ -90,7 +90,9 @@ export function setEventDescriptor(
 	eventDescriptor: EventDescriptor,
 	jsDoc: DocBlockTags
 ): EventDescriptor {
-	eventDescriptor.description = jsDoc.description || ''
+	if (jsDoc.description.length) {
+		eventDescriptor.description = jsDoc.description
+	}
 
 	const nonNullTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 

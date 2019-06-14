@@ -113,6 +113,46 @@ describe('eventHandler', () => {
 		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('success')
 	})
 
+	it('should allow the use of an event multiple times', () => {
+		const src = `
+    export default {
+      methods: {
+        testEmit() {
+			/**
+			 * Describe the event
+			 * @property {number} prop1
+			 * @property {string} msg
+			 */
+			this.$emit('success', 3, "hello")
+			this.$emit('success', 1)
+        }
+      }
+    }
+    `
+		const def = parse(src)
+		if (def.component) {
+			eventHandler(documentation, def.component, def.ast)
+		}
+		const eventComp: EventDescriptor = {
+			description: 'Describe the event',
+			properties: [
+				{
+					name: 'prop1',
+					type: {
+						names: ['number']
+					}
+				},
+				{
+					name: 'msg',
+					type: {
+						names: ['string']
+					}
+				}
+			]
+		}
+		expect(mockEventDescriptor).toMatchObject(eventComp)
+	})
+
 	it('should find events whose names are only spcified in the JSDoc', () => {
 		const src = `
     export default {
