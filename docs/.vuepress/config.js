@@ -26,6 +26,14 @@ module.exports = () => {
 				}
 			]
 		],
+		plugins: [
+			[
+				'@vuepress/google-analytics',
+				{
+					ga: 'UA-142169574-1'
+				}
+			]
+		],
 		themeConfig: {
 			repo: 'vue-styleguidist/vue-styleguidist',
 			editLinks: true,
