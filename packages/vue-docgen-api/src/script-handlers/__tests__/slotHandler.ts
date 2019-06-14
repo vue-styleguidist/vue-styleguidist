@@ -126,4 +126,40 @@ describe('render function slotHandler', () => {
 		}
 		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
 	})
+
+	it('should allow describing slots in render', () => {
+        const src = `
+    export default {
+      render: function (createElement) {
+        return createElement(
+        	'div', 
+        	/** @slot Use this slot header */
+        	this.$slots.mySlot
+        )
+      }
+    }
+    `
+        const def = parse(src)
+        if (def) {
+            slotHandler(documentation, def)
+        }
+
+        expect(mockSlotDescriptor.description).toEqual('Use this slot header')
+    })
+
+	it('should allow describing scoped slots in render', () => {
+        const src = `
+    export default {
+      render: function (createElement) {
+        return createElement('div', {}, [/** @slot Use this slot header */this.$scopedSlots.mySlot])
+      }
+    }
+    `
+        const def = parse(src)
+        if (def) {
+            slotHandler(documentation, def)
+        }
+
+        expect(mockSlotDescriptor.description).toEqual('Use this slot header')
+    })
 })

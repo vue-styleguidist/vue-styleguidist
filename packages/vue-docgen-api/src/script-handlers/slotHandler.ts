@@ -32,9 +32,13 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					bt.isMemberExpression(pathCall.node.callee.object) &&
 					bt.isThisExpression(pathCall.node.callee.object.object) &&
 					bt.isIdentifier(pathCall.node.callee.property) &&
-					pathCall.node.callee.object.property.name === '$scopedSlots'
+					(
+						pathCall.node.callee.object.property.name === '$slots' ||
+						pathCall.node.callee.object.property.name === '$scopedSlots'
+					)
 				) {
 					documentation.getSlotDescriptor(pathCall.node.callee.property.name)
+
 					return false
 				}
 				this.traverse(pathCall)
@@ -44,11 +48,17 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					bt.isMemberExpression(pathMember.node.object) &&
 					bt.isThisExpression(pathMember.node.object.object) &&
 					bt.isIdentifier(pathMember.node.object.property) &&
-					pathMember.node.object.property.name === '$slots' &&
+					(
+						pathMember.node.object.property.name === '$slots' ||
+						pathMember.node.object.property.name === '$scopedSlots'
+					) &&
 					bt.isIdentifier(pathMember.node.property)
 				) {
-					documentation.getSlotDescriptor(pathMember.node.property.name)
-					return false
+
+                    const doc = documentation.getSlotDescriptor(pathMember.node.property.name)
+                    doc.description = getExpressionDescription(pathMember.node)
+
+                    return false;
 				}
 				this.traverse(pathMember)
 			},
@@ -63,7 +73,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					const doc = documentation.getSlotDescriptor(getName(nodeJSX))
 					const parentNode = pathJSX.parentPath.node
 					if (bt.isJSXElement(parentNode)) {
-						doc.description = getDescription(nodeJSX, parentNode.children)
+						doc.description = getJSXDescription(nodeJSX, parentNode.children)
 					}
 				}
 				this.traverse(pathJSX)
@@ -82,7 +92,7 @@ function getName(nodeJSX: bt.JSXElement): string {
 	return nameNode && bt.isStringLiteral(nameNode) ? nameNode.value : 'default'
 }
 
-function getDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): string {
+function getJSXDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): string {
 	if (!siblings) {
 		return ''
 	}
@@ -101,18 +111,31 @@ function getDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): string {
 	}
 	const cmts = commentExpression.expression.innerComments
 	const lastComment = cmts[cmts.length - 1]
-	if (lastComment.type !== 'CommentBlock') {
+
+    return parseCommentNode(lastComment);
+}
+
+function getExpressionDescription(node: any): string {
+	if (!node.leadingComments || node.leadingComments.length === 0) {
 		return ''
 	}
-	const docBlock = lastComment.value.replace(/^\*/, '').trim()
-	const jsDoc = getDoclets(docBlock)
-	if (!jsDoc.tags) {
-		return ''
-	}
-	const slotTags = jsDoc.tags.filter(t => t.title === 'slot')
-	if (slotTags.length) {
-		const tagContent = (slotTags[0] as Tag).content
-		return typeof tagContent === 'string' ? tagContent : ''
-	}
-	return ''
+
+	return parseCommentNode(node.leadingComments[node.leadingComments.length - 1])
+}
+
+function parseCommentNode(node: bt.BaseComment): string {
+    if (node.type !== 'CommentBlock') {
+        return ''
+    }
+    const docBlock = node.value.replace(/^\*/, '').trim()
+    const jsDoc = getDoclets(docBlock)
+    if (!jsDoc.tags) {
+        return ''
+    }
+    const slotTags = jsDoc.tags.filter(t => t.title === 'slot')
+    if (slotTags.length) {
+        const tagContent = (slotTags[0] as Tag).content
+        return typeof tagContent === 'string' ? tagContent : ''
+    }
+    return ''
 }

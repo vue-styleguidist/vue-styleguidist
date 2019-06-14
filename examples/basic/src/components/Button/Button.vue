@@ -73,7 +73,6 @@ export default {
 <style scope>
 .button {
 	padding: 0.5em 1.5em;
-	color: #666;
 	background-color: #fff;
 	border: 1px solid currentColor;
 	border-radius: 0.3em;
