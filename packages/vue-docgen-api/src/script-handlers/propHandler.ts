@@ -66,6 +66,23 @@ export default function propHandler(documentation: Documentation, path: NodePath
 
 					// default
 					describeDefault(propPropertiesPath, propDescriptor)
+				} else if (bt.isTSAsExpression(propValuePath.node)) {
+					// standard default + type + required with TS as annotation
+					const propPropertiesPath = propValuePath
+						.get('expression')
+						.get('properties')
+						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
+						NodePath<bt.ObjectProperty>
+					>
+
+					// type
+					propDescriptor.type = getTypeFromTypePath(propValuePath)
+
+					// required
+					describeRequired(propPropertiesPath, propDescriptor)
+
+					// default
+					describeDefault(propPropertiesPath, propDescriptor)
 				} else {
 					// in any other case, just display the code for the typing
 					propDescriptor.type = {
@@ -121,16 +138,22 @@ const VALID_VUE_TYPES = [
 
 function getTypeFromTypePath(typePath: NodePath): { name: string; func?: boolean } {
 	const typeNode = typePath.node
-	const typeName = bt.isArrayExpression(typeNode)
-		? typePath
-				.get('elements')
-				.map((t: NodePath) => getTypeFromTypePath(t).name)
-				.join('|')
-		: typeNode &&
-		  bt.isIdentifier(typeNode) &&
-		  VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
-			? typeNode.name.toLowerCase()
-			: recast.print(typeNode).code
+
+	const typeName =
+		bt.isTSAsExpression(typeNode) &&
+		bt.isTSTypeReference(typeNode.typeAnnotation) &&
+		typeNode.typeAnnotation.typeParameters
+			? recast.print(typeNode.typeAnnotation.typeParameters.params[0]).code
+			: bt.isArrayExpression(typeNode)
+				? typePath
+						.get('elements')
+						.map((t: NodePath) => getTypeFromTypePath(t).name)
+						.join('|')
+				: typeNode &&
+				  bt.isIdentifier(typeNode) &&
+				  VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
+					? typeNode.name.toLowerCase()
+					: recast.print(typeNode).code
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}

@@ -323,7 +323,8 @@ describe('propHandler', () => {
 			  export default Vue.extend({
 				props: {
 				  tsvalue: {
-					type: [String, Number] as Prop<SelectOption['value']>
+					type: [String, Number] as Prop<SelectOption['value']>,
+					required: true
 				  }
 				}
 			  });`
@@ -331,15 +332,16 @@ describe('propHandler', () => {
 				src,
 				{
 					type: {
-						name: '[String, Number] as Prop<SelectOption["value"]>'
-					}
+						name: 'SelectOption["value"]'
+					},
+					required: true
 				},
 				['typescript']
 			)
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
-		it('should understand "As" anotations', () => {
+		it('should understand As anotations at the end of a prop definition', () => {
 			const src = `
 			export default Vue.extend({
 			  props: {
@@ -354,6 +356,10 @@ describe('propHandler', () => {
 				{
 					type: {
 						name: 'SocialNetwork[]'
+					},
+					defaultValue: {
+						func: true,
+						value: '() => []'
 					}
 				},
 				['typescript']
