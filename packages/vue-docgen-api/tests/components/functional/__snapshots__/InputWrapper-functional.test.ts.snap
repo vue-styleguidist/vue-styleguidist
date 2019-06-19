@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests button functional should match the snapshot 1`] = `
+Object {
+  "description": "Wrapper for input elements",
+  "displayName": "InputWrapper",
+  "events": Object {},
+  "functional": true,
+  "methods": Array [],
+  "props": Object {
+    "disabled": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should the input be disabled?",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    "error": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should display error?",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    "errorMessage": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "String with relevant error message",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "focused": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should the input be focused?",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    "icon": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "Prefix icon for input field",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "id": Object {
+      "description": "Input ID",
+      "required": true,
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    "label": Object {
+      "description": "String for label text",
+      "required": true,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "labelAlwaysFloating": Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "True if input label should always be \\"up there\\"",
+      "required": "",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    "prefix": Object {
+      "description": "Prefix string for input field",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "value": Object {
+      "description": "Input value",
+      "required": true,
+      "tags": Object {},
+      "type": Object {
+        "name": "undefined",
+      },
+    },
+  },
+  "slots": Object {
+    "default": Object {
+      "bindings": Object {},
+      "description": "",
+    },
+  },
+  "tags": Object {},
+}
+`;

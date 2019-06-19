@@ -56,7 +56,8 @@ function getPropsFromExpression(
 	documentation: Documentation,
 	options: TemplateParserOptions
 ) {
-	const ast = parser.parse(expression)
+	// this allows for weird expressions like {[t]:val} to be parsed properly
+	const ast = parser.parse(`(() => (${expression}))()`)
 	const propsFound: string[] = []
 	recast.visit(ast.program, {
 		visitMemberExpression(path) {
