@@ -96,4 +96,32 @@ describe('slotHandler', () => {
 			done.fail()
 		}
 	})
+
+	it('should find props in object defined', done => {
+		const ast = compile(
+			[
+				'<div>',
+				'  <h1>titleof the template</h1>',
+				'  <button :class="{',
+				'	[$style.root]: true,',
+				'	[$style.error]: props.error',
+				'  }"></slot>',
+				'</div>'
+			].join('\n'),
+			{ comments: true }
+		).ast
+		if (ast) {
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			expect(doc.toObject().props).toMatchObject({
+				error: { type: {} }
+			})
+			done()
+		} else {
+			done.fail()
+		}
+	})
+
+	/*
+	
+	*/
 })
