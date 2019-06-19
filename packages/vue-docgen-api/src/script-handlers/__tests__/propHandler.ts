@@ -1,3 +1,4 @@
+import { ParserPlugin } from '@babel/parser'
 import { NodePath } from 'ast-types'
 import babylon from '../../babel-parser'
 import { Documentation, PropDescriptor } from '../../Documentation'
@@ -6,8 +7,8 @@ import propHandler from '../propHandler'
 
 jest.mock('../../Documentation')
 
-function parse(src: string): NodePath | undefined {
-	const ast = babylon().parse(src)
+function parse(src: string, plugins?: ParserPlugin[]): NodePath | undefined {
+	const ast = babylon({ plugins }).parse(src)
 	return resolveExportedComponent(ast).get('default')
 }
 
@@ -26,8 +27,8 @@ describe('propHandler', () => {
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 
-	function tester(src: string, matchedObj: any) {
-		const def = parse(src)
+	function tester(src: string, matchedObj: any, plugins?: ParserPlugin[]) {
+		const def = parse(src, plugins)
 		if (def) {
 			propHandler(documentation, def)
 		}
@@ -202,9 +203,7 @@ describe('propHandler', () => {
 		it('should still return props with delegated types', () => {
 			const src = ['export default {', '  props: {', '    toto', '  }', '}'].join('\n')
 			tester(src, {
-				type: {
-					name: 'undefined'
-				}
+				type: {}
 			})
 		})
 	})
@@ -315,6 +314,29 @@ describe('propHandler', () => {
 			})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('test')
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+		})
+	})
+
+	describe('typescript Vue.extends', () => {
+		it('should be ok with Prop', () => {
+			const src = `
+			  export default Vue.extend({
+				props: {
+				  tsvalue: {
+					type: [String, Number] as Prop<SelectOption['value']>
+				  }
+				}
+			  });`
+			tester(
+				src,
+				{
+					type: {
+						name: '[String, Number] as Prop<SelectOption["value"]>'
+					}
+				},
+				['typescript']
+			)
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 	})
 })
