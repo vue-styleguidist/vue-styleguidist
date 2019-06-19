@@ -338,5 +338,26 @@ describe('propHandler', () => {
 			)
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
+
+		it('should understand "As" anotations', () => {
+			const src = `
+			export default Vue.extend({
+			  props: {
+				blockData: {
+					type: Array,
+					default: () => [],
+				} as PropOptions<SocialNetwork[]>,
+			  }
+			});`
+			tester(
+				src,
+				{
+					type: {
+						name: 'SocialNetwork[]'
+					}
+				},
+				['typescript']
+			)
+		})
 	})
 })
