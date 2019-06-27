@@ -18,12 +18,15 @@ function isComponentDefinition(path: NodePath): boolean {
 		(bt.isVariableDeclarator(path.node) &&
 			path.node.init &&
 			bt.isObjectExpression(path.node.init)) ||
-		// export default Vue.extends({})
+		// export default Vue.extend({})
 		(bt.isCallExpression(path.node) &&
 			bt.isMemberExpression(path.node.callee) &&
-			bt.isIdentifier(path.node.callee.object) &&
-			path.node.callee.object.name === 'Vue' &&
-			path.node.callee.property.name === 'extend') ||
+			path.node.callee.property.name === 'extend' &&
+			((bt.isIdentifier(path.node.callee.object) && path.node.callee.object.name === 'Vue') ||
+				// or export default (Vue as VueConstructor<Vue>).extend({})
+				(bt.isTSAsExpression(path.node.callee.object) &&
+					bt.isIdentifier(path.node.callee.object.expression) &&
+					path.node.callee.object.expression.name === 'Vue'))) ||
 		// export default class MyComp extends VueComp
 		bt.isClassDeclaration(path.node)
 	)
