@@ -10,12 +10,10 @@ function alias(previousKey: string) {
 	return { key, name: name[0] }
 }
 
-let num: number
-
-function generate(keys: string[], dep: string, base?: string, fn?: string) {
+function generate(keys: string[], dep: string, base?: string, fn?: string, offset: number = 0) {
 	const depEnd = dep.split('/').pop()
 	const tmp = depEnd
-		? depEnd.replace(/\W/g, '_') + '$' + num++ // uniqueness
+		? depEnd.replace(/\W/g, '_') + '$' + offset // uniqueness
 		: ''
 	const name = alias(tmp).name
 
@@ -36,11 +34,10 @@ function generate(keys: string[], dep: string, base?: string, fn?: string) {
 	return out
 }
 
-export default function(str: string, fn = 'require') {
-	num = 0
+export default function(str: string, offset: number, fn = 'require') {
 	return str
 		.replace(NAMED, (_, asterisk, base, req, dep) =>
-			generate(req ? req.split(',').filter((d: string) => d.trim()) : [], dep, base, fn)
+			generate(req ? req.split(',').filter((d: string) => d.trim()) : [], dep, base, fn, offset)
 		)
 		.replace(UNNAMED, (_, dep) => `${fn}('${dep}');`)
 }
