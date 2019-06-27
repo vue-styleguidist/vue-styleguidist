@@ -55,4 +55,18 @@ describe('resolveExportedComponent', () => {
 		)
 		expect(resolveExportedComponent(ast).size).toBe(1)
 	})
+
+	it('should return exported typescript extend style components', () => {
+		const ast = babylon({ plugins: ['typescript'] }).parse(
+			['export default Vue.extend({})'].join('\n')
+		)
+		expect(resolveExportedComponent(ast).size).toBe(1)
+	})
+
+	it('should return exported typescript extend custom VueConstructor', () => {
+		const ast = babylon({ plugins: ['typescript'] }).parse(
+			['export default (Vue as VueConstructor<Vue & SomeInterface>).extend({})'].join('\n')
+		)
+		expect(resolveExportedComponent(ast).size).toBe(1)
+	})
 })

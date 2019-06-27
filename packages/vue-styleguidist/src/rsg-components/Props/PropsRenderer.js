@@ -101,7 +101,7 @@ function renderShape(props) {
 	return rows
 }
 
-const defaultValueBlacklist = ['null', 'undefined']
+const defaultValueBlacklist = ['null', 'undefined', "''", '""']
 
 function renderDefault(prop) {
 	// Workaround for issue https://github.com/reactjs/react-docgen/issues/221
@@ -111,7 +111,7 @@ function renderDefault(prop) {
 			const propName = prop.type.name
 
 			if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
-				return <Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>
+				return <Code>{prop.defaultValue.value}</Code>
 			} else if (propName === 'func' || propName === 'function') {
 				return (
 					<Text
