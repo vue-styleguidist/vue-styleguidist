@@ -97,11 +97,11 @@ describe('slotHandler', () => {
 		}
 	})
 
-	it('should detect implicit bindings', done => {
+	it('should detect explicit bindings using v-bind', done => {
 		const ast = compile(
 			[
 				'<div title="a list of item with a scope" >',
-				'  <slot name="bound" v-for="item in items" v-bind="{ item: item }"/>',
+				'  <slot name="bound" v-for="item in items" v-bind="{ ...keyNames }"/>',
 				'</div>'
 			].join('\n'),
 			{ comments: true }
@@ -109,7 +109,26 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
 			const slots = doc.toObject().slots
-			expect(slots.bound.bindings).toMatchObject({ 'v-bind': '{ item: item }' })
+			expect(slots.bound.bindings).toMatchObject({ 'v-bind': '{ ...keyNames }' })
+			done()
+		} else {
+			done.fail()
+		}
+	})
+
+	it('should detect implicit bindings if it is simple enough', done => {
+		const ast = compile(
+			[
+				'<div title="a list of item with a scope" >',
+				'  <slot name="bound" v-for="item in items" v-bind="{ item, otherItem: valueGiven }"/>',
+				'</div>'
+			].join('\n'),
+			{ comments: true }
+		).ast
+		if (ast) {
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+			const slots = doc.toObject().slots
+			expect(slots.bound.bindings).toMatchObject({ item: 'item', otherItem: 'valueGiven' })
 			done()
 		} else {
 			done.fail()

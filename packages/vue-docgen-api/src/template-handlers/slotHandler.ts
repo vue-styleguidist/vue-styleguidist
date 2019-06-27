@@ -1,7 +1,12 @@
 import { ASTElement } from 'vue-template-compiler'
+import recast, { NodePath } from 'recast'
 import { Documentation } from '../Documentation'
+import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
+import * as bt from '@babel/types'
+
+const parser = buildParser({ plugins: ['typescript'] })
 
 export default function slotHandler(
 	documentation: Documentation,
@@ -10,7 +15,7 @@ export default function slotHandler(
 ) {
 	if (templateAst.tag === 'slot') {
 		const bindings = extractAndFilterAttr(templateAst.attrsMap)
-		bindings['v-bind'] = templateAst.attrsMap['v-bind']
+
 		let name = 'default'
 		if (bindings.name) {
 			name = bindings.name
@@ -18,6 +23,28 @@ export default function slotHandler(
 		}
 
 		if (bindings['']) {
+			const vBindCode = templateAst.attrsMap['v-bind']
+			const ast = parser.parse(`() => (${vBindCode})`)
+			let rawVBind = false
+			recast.visit(ast.program, {
+				visitObjectExpression(path) {
+					if (!path.node) {
+						return false
+					}
+					path.get('properties').each((property: NodePath) => {
+						const node = property.node
+						if (bt.isProperty(node) || bt.isObjectProperty(node)) {
+							bindings[node.key.name] = recast.print(property.get('value')).code
+						} else {
+							rawVBind = true
+						}
+					})
+					return false
+				}
+			})
+			if (rawVBind) {
+				bindings['v-bind'] = vBindCode
+			}
 			delete bindings['']
 		}
 
