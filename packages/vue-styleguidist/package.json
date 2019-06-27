@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "3.15.0",
+	"version": "3.15.1",
 	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
 	"scripts": {
 		"precompile": "rimraf lib/",
@@ -89,7 +89,7 @@
 		"terser-webpack-plugin": "^1.3.0",
 		"to-ast": "^1.0.0",
 		"vue-docgen-api": "^3.15.0",
-		"vue-inbrowser-compiler": "^3.14.4",
+		"vue-inbrowser-compiler": "^3.15.1",
 		"webpack": "^4.28.4",
 		"webpack-dev-server": "^3.7.1",
 		"webpack-merge": "^4.0.0"

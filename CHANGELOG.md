@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.0...v3.15.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* make sure imported variables are declared ([bc50ab1](https://github.com/vue-styleguidist/vue-styleguidist/commit/bc50ab1))
+* **compiler:** make sure files with the same name wont conflict ([98a1b76](https://github.com/vue-styleguidist/vue-styleguidist/commit/98a1b76)), closes [#471](https://github.com/vue-styleguidist/vue-styleguidist/issues/471)
+
+
+
+
+
 # [3.15.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.14.5...v3.15.0) (2019-06-19)
 
 
