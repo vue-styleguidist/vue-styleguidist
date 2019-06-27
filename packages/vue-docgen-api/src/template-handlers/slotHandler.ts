@@ -10,10 +10,15 @@ export default function slotHandler(
 ) {
 	if (templateAst.tag === 'slot') {
 		const bindings = extractAndFilterAttr(templateAst.attrsMap)
+		bindings['v-bind'] = templateAst.attrsMap['v-bind']
 		let name = 'default'
 		if (bindings.name) {
 			name = bindings.name
 			delete bindings.name
+		}
+
+		if (bindings['']) {
+			delete bindings['']
 		}
 
 		const slotDescriptor = documentation.getSlotDescriptor(name)

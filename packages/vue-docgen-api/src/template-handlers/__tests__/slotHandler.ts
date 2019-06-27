@@ -86,8 +86,30 @@ describe('slotHandler', () => {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
 			expect(doc.toObject().slots.oeuf).toMatchObject({
 				scoped: true,
-				description: 'a slot named oeuf'
+				description: 'a slot named oeuf',
+				bindings: {
+					item: 'item'
+				}
 			})
+			done()
+		} else {
+			done.fail()
+		}
+	})
+
+	it('should detect implicit bindings', done => {
+		const ast = compile(
+			[
+				'<div title="a list of item with a scope" >',
+				'  <slot name="bound" v-for="item in items" v-bind="{ item: item }"/>',
+				'</div>'
+			].join('\n'),
+			{ comments: true }
+		).ast
+		if (ast) {
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+			const slots = doc.toObject().slots
+			expect(slots.bound.bindings).toMatchObject({ 'v-bind': '{ item: item }' })
 			done()
 		} else {
 			done.fail()
