@@ -5,7 +5,7 @@ export default function transformOneImport(node: any, code: string, offset: numb
 	const end = node.end + offset
 
 	const statement = code.substring(start, end)
-	let transpiledStatement = rewriteImports(statement)
+	let transpiledStatement = rewriteImports(statement, offset)
 
 	code = code.substring(0, start) + transpiledStatement + code.substring(end)
 

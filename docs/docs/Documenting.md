@@ -587,4 +587,4 @@ const mockData = require('./mocks');
 <Message :content="mockData.hello" />
 ```
 
-> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown
+> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, just do `import { myExample as exam } from './myExample';

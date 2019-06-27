@@ -31,7 +31,9 @@ export default function compileVueCodeForEvalFunction(
 }
 
 function prepareVueCodeForEvalFunction(code: string): EvaluableComponent {
-	let style, vsgMode, template
+	let style,
+		vsgMode = false,
+		template
 	// if the component is written as a Vue sfc,
 	// transform it in to a "new Vue"
 	if (isCodeVueSfc(code)) {
@@ -70,6 +72,9 @@ function prepareVueCodeForEvalFunction(code: string): EvaluableComponent {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
 			code = ret.code
+			if (vsgMode && node.specifiers) {
+				node.specifiers.forEach((s: any) => varNames.push(s.local.name))
+			}
 		},
 		...(vsgMode
 			? {
