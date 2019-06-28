@@ -1,10 +1,10 @@
+import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
 import recast, { NodePath } from 'recast'
 import { Documentation } from '../Documentation'
 import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
-import * as bt from '@babel/types'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
