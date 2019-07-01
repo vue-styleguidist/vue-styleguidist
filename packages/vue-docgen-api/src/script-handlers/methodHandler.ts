@@ -98,10 +98,20 @@ function describeParams(
 	}
 
 	const params: Param[] = []
-	fExp.params.forEach((par: bt.Identifier, i) => {
-		const param: Param = { name: par.name }
+	fExp.params.forEach((par: bt.Identifier | bt.AssignmentPattern, i) => {
+		let name: string
+		if (bt.isIdentifier(par)) {
+			// simple params
+			name = par.name
+		} else if (bt.isIdentifier(par.left)) {
+			// es6 default params
+			name = par.left.name
+		} else {
+			// unrecognized pattern
+			return
+		}
 
-		const jsDocTags = jsDocParamTags.filter(tag => tag.name === param.name)
+		const jsDocTags = jsDocParamTags.filter(tag => tag.name === name)
 		let jsDocTag = jsDocTags.length ? jsDocTags[0] : undefined
 
 		// if tag is not namely described try finding it by its order
@@ -111,6 +121,7 @@ function describeParams(
 			}
 		}
 
+		const param: Param = { name }
 		if (jsDocTag) {
 			if (jsDocTag.type) {
 				param.type = jsDocTag.type
