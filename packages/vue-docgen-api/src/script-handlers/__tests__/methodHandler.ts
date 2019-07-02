@@ -129,6 +129,25 @@ describe('methodHandler', () => {
 		})
 	})
 
+	it('should detect parameters even when es6 defaulted', () => {
+		const src = `
+    export default {
+      methods: {
+        /**
+         * @public
+         */
+        testWithMultipleParamsDefaulted(param1, param2 = 3){
+          return param2 + param1;
+        }
+      }
+    }
+    `
+		tester(src, {
+			name: 'testWithMultipleParamsDefaulted',
+			params: [{ name: 'param1' }, { name: 'param2' }]
+		})
+	})
+
 	it('should allow description of methods', () => {
 		const src = `
     export default {
