@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.2...v3.15.3) (2019-07-02)
+
+
+### Bug Fixes
+
+* **codemirror:** allow for mulitple words in cm themes ([6168883](https://github.com/vue-styleguidist/vue-styleguidist/commit/6168883)), closes [#480](https://github.com/vue-styleguidist/vue-styleguidist/issues/480)
+
+
+
+
+
 ## [3.15.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.1...v3.15.2) (2019-07-02)
 
 
