@@ -57,6 +57,9 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
+	editorConfig: {
+		theme: 'solarized dark'
+	},
 	compilerConfig: {
 		target: { ie: 11 }
 	},
