@@ -63,6 +63,20 @@ describe('classPropHandler', () => {
 		tester(src, { name: 'myMethod', params: [{ name: 'param1' }] })
 	})
 
+	it('should detect public methods params with default values', () => {
+		const src = `
+        @Component
+        export default class MyComp {
+          /**
+           * @public
+           */
+          myMethod(param1 = 2){
+
+          }
+        }`
+		tester(src, { name: 'myMethod', params: [{ name: 'param1' }] })
+	})
+
 	it('should detect public methods params types', () => {
 		const src = `
         @Component
