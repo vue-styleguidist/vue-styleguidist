@@ -1,18 +1,18 @@
 # Use with the cli 3
 
-With vue cli 3 devs can create a working environment in minutes. Just do `vue create myProject` and you are ready to code VueJs.
+With Vue CLI 3, developers can now create a working environment in minutes. Just do `vue create myProject` and you are ready to code VueJs. Better, it can help you get started with styleguidist.
 
 ## Install
 
-The vue environment created comes with its own set of features. If you want to add `styleguidist` to the mix just do
+To add `styleguidist` to the mix just do in your app's directory.
 
 ```sh
 vue add styleguidist
 ```
 
-Vue Styleguidist will configure itself and add a couple examples to get you started. It will immediately set up the webpack config, Hot Module Reloading and a nice styleguide for you to use. You can still modify the `styleguide.config.js` to make the styleguide look even better.
+Vue Styleguidist will configure itself and add a couple examples to get you started. It will immediately set up the webpack config, Hot Module Reloading and a sample styleguide for you to browse. You can modify the `styleguide.config.js` to make the styleguide look like what's needed.
 
-> **Note** If you wish to use `styleguidist` with the CLI but without the plugin, it is possible. Just install `styleguidist` normally.
+> **Note** If you wish to use `styleguidist` with the CLI but without the plugin, it is not impossible. Just install `styleguidist` normally. It is not officially supported though.
 >
 > You might have to remove the HMR from the CLI yourself as it conflicts with styleguidists HMR. You might just end up on an infinite HMR loop. See [issue 290](https://github.com/vue-styleguidist/vue-styleguidist/issues/290)
 
@@ -23,3 +23,5 @@ Vue Styleguidist is compatible with the Vue UI so if you want to configure `styl
 ```sh
 vue ui
 ```
+
+In the plugins configuration, you will find switches to configure your styleguide.
