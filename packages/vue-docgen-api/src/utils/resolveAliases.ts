@@ -11,7 +11,8 @@ export default function resolveAliases(
 		return filePath
 	}
 	while (!aliasFound && i--) {
-		aliasFound = filePath.substring(0, aliasKeys[i].length) === aliasKeys[i]
+		const aliasValueWithSlash = aliasKeys[i] + '/'
+		aliasFound = filePath.substring(0, aliasValueWithSlash.length) === aliasValueWithSlash
 	}
 	if (!aliasFound) {
 		return filePath

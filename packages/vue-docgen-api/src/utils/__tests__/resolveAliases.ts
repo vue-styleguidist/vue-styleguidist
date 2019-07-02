@@ -9,4 +9,11 @@ describe('resolveAliases', () => {
 			})
 		).toEqual(path.join('./replacementPath/src/mixins', 'somethingNice/mixinFile.js'))
 	})
+
+	it('should not resolve partial aliased', () => {
+		const aliasedPath = resolveAliases('@myPath/somethingNice/mixinFile.js', {
+			'@': './replacementPath/src/mixins'
+		})
+		expect(aliasedPath).not.toContain('replacementPath')
+	})
 })
