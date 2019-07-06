@@ -38,11 +38,15 @@ export default function extendsHandler(
 	// only look for documentation in the current project not in node_modules
 	const fullFilePath = pathResolver(extendsFilePath[extendsVariableName].filePath)
 	if (!/[\\/]node_modules[\\/]/.test(fullFilePath)) {
-		parseFile(documentation, {
-			...opt,
-			filePath: fullFilePath,
-			nameFilter: [extendsFilePath[extendsVariableName].exportName]
-		})
+		try {
+			parseFile(documentation, {
+				...opt,
+				filePath: fullFilePath,
+				nameFilter: [extendsFilePath[extendsVariableName].exportName]
+			})
+		} catch (e) {
+			// eat the error
+		}
 	}
 	// make sure that the parent name does not bleed on the new doc
 	documentation.set('displayName', null)
