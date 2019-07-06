@@ -49,7 +49,11 @@ export default function mixinsHandler(
 
 	files.forEach((vars, fullFilePath) => {
 		if (fullFilePath && vars) {
-			parseFile(documentation, { ...opt, filePath: fullFilePath, nameFilter: vars })
+			try {
+				parseFile(documentation, { ...opt, filePath: fullFilePath, nameFilter: vars })
+			} catch (e) {
+				// eat the error
+			}
 		}
 	})
 	documentation.set('displayName', null)
