@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join } = require('path')
 
 const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 
@@ -26,9 +26,9 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 		if (!finalPath.length) {
 			for (let i = 0; i < from.length; i++) {
 				try {
-					finalPath = require.resolve(join(from[i], `${path}${s}`));
+					finalPath = require.resolve(join(from[i], `${path}${s}`))
 					if (finalPath.length) {
-						break;
+						break
 					}
 				} catch (e) {
 					// eat the error
@@ -38,7 +38,8 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 	})
 
 	if (!finalPath.length) {
-		throw new Error(
+		// eslint-disable-next-line no-console
+		console.warn(
 			`Neither '${path}.vue' nor '${path}.js(x)' or '${path}/index.js(x)' or '${path}/index.ts(x)' could be found in '${from}'`
 		)
 	}
