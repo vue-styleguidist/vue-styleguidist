@@ -6,7 +6,7 @@ const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getNameFromFilePath = require('react-styleguidist/lib/loaders/utils/getNameFromFilePath')
 const doctrine = require('doctrine')
 const _ = require('lodash')
-const logger = require('glogg')('rsg')
+const logger = require('glogg')('vsg')
 
 const reactDocs = () => {}
 
