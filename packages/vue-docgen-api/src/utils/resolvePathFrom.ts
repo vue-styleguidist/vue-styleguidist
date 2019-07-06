@@ -3,7 +3,8 @@ const { join } = require('path')
 const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 
 export default function resolvePathFrom(path: string, from: string[]): string {
-	let finalPath = ''
+	let finalPath: string = ''
+
 	SUFFIXES.forEach(s => {
 		if (!finalPath.length) {
 			try {
@@ -36,6 +37,17 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 			}
 		}
 	})
+
+	try {
+		const packagePath = require.resolve(join(path, 'package.json'), {
+			paths: from
+		})
+		const pkg = require(packagePath)
+		// if it is an es6 module use the module instead of commonjs
+		finalPath = require.resolve(join(path, pkg.module || pkg.main))
+	} catch (e) {
+		// eat the error
+	}
 
 	if (!finalPath.length) {
 		// eslint-disable-next-line no-console
