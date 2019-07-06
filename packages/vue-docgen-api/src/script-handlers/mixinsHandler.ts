@@ -26,7 +26,7 @@ export default function mixinsHandler(
 	// filter only mixins
 	const mixinVariableNames = getMixinsVariableNames(componentDefinition)
 
-	if (!mixinVariableNames) {
+	if (!mixinVariableNames || !mixinVariableNames.length) {
 		return
 	}
 
