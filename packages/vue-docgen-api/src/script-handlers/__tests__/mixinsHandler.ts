@@ -104,4 +104,23 @@ describe('mixinsHandler', () => {
 		expect(mockParse).not.toHaveBeenCalled()
 		done()
 	})
+
+	it('should ignore variables that are not mixins', done => {
+		const src = [
+			'const { maxin } = require("./maxins");',
+			'const foo = require("./bar")',
+			'export default {',
+			'  name: "boo"',
+			'}'
+		].join('\n')
+		const ast = babelParser().parse(src)
+		const path = resolveExportedComponent(ast).get('default')
+		if (!path) {
+			done.fail()
+			return
+		}
+		mixinsHandler(doc, path, ast, { filePath: '' })
+		expect(mockParse).not.toHaveBeenCalled()
+		done()
+	})
 })

@@ -31,13 +31,13 @@ export default function parseScript(
 
 	const ast = cacher(() => recast.parse(source, { parser: buildParser({ plugins }) }), source)
 	if (!ast) {
-		throw new Error(ERROR_MISSING_DEFINITION)
+		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
 	const componentDefinitions = resolveExportedComponent(ast)
 
 	if (componentDefinitions.size === 0) {
-		throw new Error(ERROR_MISSING_DEFINITION)
+		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
 	executeHandlers(handlers, componentDefinitions, documentation, ast, options)
