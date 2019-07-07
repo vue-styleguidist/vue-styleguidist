@@ -1,6 +1,6 @@
 {
   "name": "vue-docgen-api",
-  "version": "3.15.3",
+  "version": "3.15.4",
   "description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
   "homepage": "https://vue-styleguidist.github.io",
   "main": "dist/main.js",
