@@ -89,6 +89,7 @@ Object {
   "props": Object {
     "columns": Object {
       "description": "get columns list",
+      "name": "columns",
       "tags": Object {},
       "type": Object {
         "name": "array",
@@ -96,6 +97,7 @@ Object {
     },
     "data": Object {
       "description": "describe data",
+      "name": "data",
       "tags": Object {
         "version": Array [
           Object {
@@ -114,6 +116,7 @@ Object {
         "value": "'example'",
       },
       "description": "filter key",
+      "name": "filterKey",
       "required": "",
       "tags": Object {
         "ignore": Array [
@@ -135,6 +138,7 @@ Object {
 }",
       },
       "description": "",
+      "name": "images",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -147,6 +151,7 @@ Object {
         "value": "text",
       },
       "description": "object/array defaults should be returned from a factory function",
+      "name": "msg",
       "required": "",
       "tags": Object {
         "link": Array [
@@ -184,6 +189,7 @@ Object {
         "value": "function() {}",
       },
       "description": "prop function",
+      "name": "propFunc",
       "required": "",
       "tags": Object {},
       "type": Object {
