@@ -14,6 +14,7 @@ Object {
         "value": "false",
       },
       "description": "Should the input be disabled?",
+      "name": "disabled",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -26,6 +27,7 @@ Object {
         "value": "false",
       },
       "description": "Should display error?",
+      "name": "error",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -38,6 +40,7 @@ Object {
         "value": "''",
       },
       "description": "String with relevant error message",
+      "name": "errorMessage",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -50,6 +53,7 @@ Object {
         "value": "false",
       },
       "description": "Should the input be focused?",
+      "name": "focused",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -62,6 +66,7 @@ Object {
         "value": "''",
       },
       "description": "Prefix icon for input field",
+      "name": "icon",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -70,6 +75,7 @@ Object {
     },
     "id": Object {
       "description": "Input ID",
+      "name": "id",
       "required": true,
       "tags": Object {},
       "type": Object {
@@ -78,6 +84,7 @@ Object {
     },
     "label": Object {
       "description": "String for label text",
+      "name": "label",
       "required": true,
       "tags": Object {},
       "type": Object {
@@ -90,6 +97,7 @@ Object {
         "value": "false",
       },
       "description": "True if input label should always be \\"up there\\"",
+      "name": "labelAlwaysFloating",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -98,14 +106,31 @@ Object {
     },
     "prefix": Object {
       "description": "Prefix string for input field",
+      "name": "prefix",
       "tags": Object {},
       "type": Object {
         "name": "string",
       },
     },
-    "value": Object {
+    "v-model": Object {
       "description": "Input value",
+      "name": "value",
       "required": true,
+      "tags": Object {
+        "model": Array [
+          Object {
+            "description": true,
+            "title": "model",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "string",
+      },
+    },
+    "value": Object {
+      "description": "",
+      "name": "value",
       "tags": Object {},
       "type": Object {
         "name": "undefined",
