@@ -315,6 +315,28 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('test')
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
 		})
+
+		it('should set the @model property as v-model instead of value even with a type', () => {
+			const src = `
+        export default {
+          props: {
+            /**
+             * Binding from v-model
+             * @model
+             */
+            value: {
+				required: true,
+				type: undefined
+			}
+          }
+        }
+        `
+			tester(src, {
+				description: 'Binding from v-model'
+			})
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+		})
 	})
 
 	describe('typescript Vue.extends', () => {
