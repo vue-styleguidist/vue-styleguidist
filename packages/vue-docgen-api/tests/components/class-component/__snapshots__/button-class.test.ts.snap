@@ -41,6 +41,7 @@ Object {
   "props": Object {
     "bundleHash": Object {
       "description": "",
+      "name": "bundleHash",
       "tags": Object {},
       "type": Object {
         "name": "number",
@@ -48,6 +49,7 @@ Object {
     },
     "color": Object {
       "description": "color of the button",
+      "name": "color",
       "tags": Object {},
       "type": Object {
         "name": "string",

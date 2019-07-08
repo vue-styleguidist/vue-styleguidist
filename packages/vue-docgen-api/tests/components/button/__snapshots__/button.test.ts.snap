@@ -51,6 +51,7 @@ Object {
         "value": "'#333'",
       },
       "description": "The color for the button example",
+      "name": "color",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -63,6 +64,7 @@ Object {
         "value": "false",
       },
       "description": "The example props",
+      "name": "example",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -75,6 +77,7 @@ Object {
         "value": "16",
       },
       "description": "The example3 props",
+      "name": "example3",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -89,6 +92,7 @@ Object {
 }",
       },
       "description": "Function default",
+      "name": "funcDefault",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -101,6 +105,7 @@ Object {
         "value": "() => () => null",
       },
       "description": "Add custom click actions.",
+      "name": "onCustomClick",
       "required": "",
       "tags": Object {
         "ignore": Array [
@@ -116,6 +121,7 @@ Object {
     },
     "prop1": Object {
       "description": "",
+      "name": "prop1",
       "tags": Object {
         "ignore": Array [
           Object {
@@ -137,6 +143,7 @@ Object {
       },
       "description": "Object or array defaults must be returned from
 a factory function",
+      "name": "propE",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -149,6 +156,7 @@ a factory function",
         "value": "'blue'",
       },
       "description": "Example prop",
+      "name": "propsAnother",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -157,6 +165,7 @@ a factory function",
     },
     "secret": Object {
       "description": "Another mixin",
+      "name": "secret",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -165,6 +174,7 @@ a factory function",
     },
     "shouldBe": Object {
       "description": "",
+      "name": "shouldBe",
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -176,6 +186,7 @@ a factory function",
         "value": "'normal'",
       },
       "description": "The size of the button",
+      "name": "size",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -184,6 +195,7 @@ a factory function",
     },
     "span": Object {
       "description": "Number of columns (1-12) the column should span.",
+      "name": "span",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -192,6 +204,7 @@ a factory function",
     },
     "spanMd": Object {
       "description": "Md breakpoint and above",
+      "name": "spanMd",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -200,6 +213,7 @@ a factory function",
     },
     "spanSm": Object {
       "description": "Sm breakpoint and above",
+      "name": "spanSm",
       "required": "",
       "tags": Object {},
       "type": Object {
@@ -212,6 +226,7 @@ a factory function",
         "value": "'example model'",
       },
       "description": "Model example2",
+      "name": "example2",
       "required": "",
       "tags": Object {
         "model": Array [

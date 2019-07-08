@@ -19,7 +19,8 @@ describe('propHandler', () => {
 	beforeEach(() => {
 		mockPropDescriptor = {
 			description: '',
-			tags: {}
+			tags: {},
+			name: ''
 		}
 		const MockDocumentation = require('../../Documentation').Documentation
 		documentation = new MockDocumentation()
