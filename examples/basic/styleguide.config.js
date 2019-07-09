@@ -63,6 +63,5 @@ module.exports = {
 	compilerConfig: {
 		target: { ie: 11 }
 	},
-	styleguidePublicPath: '/styleguide',
 	styleguideDir: 'dist'
 }
