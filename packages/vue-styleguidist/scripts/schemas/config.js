@@ -300,6 +300,8 @@ module.exports = {
 	},
 	styleguidePublicPath: {
 		type: 'string',
+		message: 'Base url path for all the assets',
+		description: 'configures the prefix of the server and built urls.',
 		default: ''
 	},
 	styles: {

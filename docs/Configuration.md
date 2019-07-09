@@ -518,6 +518,14 @@ Type: `String`, default: `styleguide`
 
 Folder for static HTML style guide generated with `styleguidist build` command.
 
+## `styleguidePublicPath`
+
+Type: `String`, optional
+
+Configures the prefix of the build and server urls.
+
+Example: If set to `/mystyleguide` the url for dev server will be `htp://localhost:6060/mystyleguide`
+
 ## `styles`
 
 Type: `object`, optional
