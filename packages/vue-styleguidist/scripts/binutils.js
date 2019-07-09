@@ -82,7 +82,12 @@ function commandServer(config, open) {
 			if (config.printServerInstructions) {
 				config.printServerInstructions(config, { isHttps })
 			} else {
-				printServerInstructions(urls)
+				printServerInstructions(
+					urls,
+					compiler.options.devServer && compiler.options.devServer.publicPath
+						? compiler.options.devServer.publicPath.replace(/^\//, '')
+						: ''
+				)
 			}
 
 			if (open) {
@@ -90,7 +95,12 @@ function commandServer(config, open) {
 			}
 		}
 	})
-
+	/*	dangerouslyUpdateWebpackConfig(webpackConfig) {
+		webpackConfig.devServer = webpackConfig.devServer || {}
+		webpackConfig.devServer.publicPath = '/styleguide'
+		webpackConfig.output.publicPath = '/styleguide'
+		return webpackConfig
+	}*/
 	verbose('Webpack config:', compiler.options)
 
 	// Show message when webpack is recompiling the bundle
@@ -148,14 +158,15 @@ function commandHelp() {
 
 /**
  * @param {object} urls
+ * @param {string} publicPath
  */
-function printServerInstructions(urls) {
+function printServerInstructions(urls, publicPath) {
 	console.log()
 	console.log(`You can now view your style guide in the browser:`)
 	console.log()
-	console.log(`  ${kleur.bold('Local:')}            ${urls.localUrlForTerminal}`)
+	console.log(`  ${kleur.bold('Local:')}            ${urls.localUrlForTerminal + publicPath}`)
 	if (urls.lanUrlForTerminal) {
-		console.log(`  ${kleur.bold('On your network:')}  ${urls.lanUrlForTerminal}`)
+		console.log(`  ${kleur.bold('On your network:')}  ${urls.lanUrlForTerminal + publicPath}`)
 	}
 	console.log()
 }
