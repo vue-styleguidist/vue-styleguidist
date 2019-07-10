@@ -408,8 +408,8 @@ For instance, if the display name is set as
 
 ```js
 /**
- * @displayName Wonderful Button
- **/
+* @displayName Wonderful Button
+*/
 ```
 
 To reference it in examples, one has to call `<WonderfulButton/>`.
