@@ -8,6 +8,12 @@ Compile vue components code into vue components objects inside of your browser
 yarn add vue-inbrowser-compiler
 ```
 
-## use
+## usage
 
-To be written
+### isVueSFC
+
+### adaptCreateElement
+
+### compile
+
+### addScopedStyle
