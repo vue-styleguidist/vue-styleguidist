@@ -26,7 +26,7 @@ const absolutize = filepath =>
 
 const REQUIRE_IN_RUNTIME_PATH = absolutize('requireInRuntime')
 const EVAL_IN_CONTEXT_PATH = absolutize('evalInContext')
-const PRAGMA_JSX_PATH = require.resolve('vue-inbrowser-compiler')
+const PRAGMA_JSX_PATH = require.resolve('vue-inbrowser-compiler/lib/adaptCreateElement')
 
 function isVueFile(filepath) {
 	return /.vue$/.test(filepath)
@@ -147,7 +147,7 @@ if (module.hot) {
 var requireMap = ${generate(toAst(allModulesCode))};
 var requireInRuntimeBase = require(${JSON.stringify(REQUIRE_IN_RUNTIME_PATH)});
 var requireInRuntime = requireInRuntimeBase.bind(null, requireMap);
-var __pragma__ = require(${JSON.stringify(PRAGMA_JSX_PATH)}).pragmaJSX;
+var __pragma__ = require(${JSON.stringify(PRAGMA_JSX_PATH)}).default;
 
 var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});
 var evalInContext = evalInContextBase.bind(null, ${JSON.stringify(

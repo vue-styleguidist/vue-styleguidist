@@ -1,6 +1,6 @@
 const camelCase = require('camelcase')
 
-export default function createElement(
+export default function adaptCreateElement(
 	h: (comp: object | string, attr: { [key: string]: any }, children: any[]) => any[] | any
 ) {
 	return (comp: object | string, attr: { [key: string]: any }, ...children: any[]): any[] | any => {
