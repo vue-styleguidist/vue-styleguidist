@@ -5,6 +5,9 @@
  */
 
 var examplePath = process.argv[3] || 'basic'
+if (/^--/.test(examplePath)) {
+	examplePath = 'basic'
+}
 
 if (examplePath.indexOf('examples/') !== 0) {
 	examplePath = 'examples/' + examplePath
