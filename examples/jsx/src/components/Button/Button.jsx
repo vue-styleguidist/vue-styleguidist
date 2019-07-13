@@ -6,19 +6,6 @@ import loggerMixin from '../../mixins/loggerMixin'
  * The only true button.
  */
 export default {
-	render(h) {
-		return (
-			<div class="Button">
-				<button
-					class="button"
-					on-click={this.onClick}
-					style={{ color: this.color, fontSize: this.fontSize }}
-				>
-					{this.$slots.default}
-				</button>
-			</div>
-		)
-	},
 	name: 'Button',
 	mixins: [loggerMixin],
 	props: {
@@ -68,5 +55,18 @@ export default {
 			}
 			return size
 		}
+	},
+	render() {
+		return (
+			<div class="Button">
+				<button
+					class="button"
+					on-click={this.onClick}
+					style={{ color: this.color, fontSize: this.fontSize }}
+				>
+					{this.$slots.default}
+				</button>
+			</div>
+		)
 	}
 }

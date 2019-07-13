@@ -1,10 +1,10 @@
-# Vue Styleguidist basic example style guide
+# Vue Styleguidist jsx example style guide
 
 How to start locally:
 
 ```
 git clone https://github.com/vue-styleguidist/vue-styleguidist.git
-cd vue-styleguidist/examples/basic
+cd vue-styleguidist/examples/jsx
 npm install
 npm run styleguide
 ```
