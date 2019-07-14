@@ -1,9 +1,14 @@
 const camelCase = require('camelcase')
 
+/**
+ * Groups atributes passed to a React pragma to the VueJS fashion
+ * @param h the VueJS createElement function passed in render functions
+ * @returns pragma usable in buble rendered JSX for VueJS
+ */
 export default function adaptCreateElement(
 	h: (comp: object | string, attr: { [key: string]: any }, children: any[]) => any[] | any
-) {
-	return (comp: object | string, attr: { [key: string]: any }, ...children: any[]): any[] | any => {
+): (comp: object | string, attr: { [key: string]: any }, ...children: any[]) => any[] | any {
+	return (comp, attr, ...children) => {
 		return h(comp, groupAttr(attr), children)
 	}
 }

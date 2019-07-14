@@ -14,9 +14,8 @@ interface EvaluableComponent {
 /**
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
- * @param {string} code
- * @param {object} config buble config to be used when transforming
- * @return {script:String, template:String}
+ * @param code
+ * @param config buble config to be used when transforming
  *
  */
 export default function compileVueCodeForEvalFunction(

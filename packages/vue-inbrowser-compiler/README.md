@@ -16,6 +16,8 @@ This library is meant to help write components for vue that can be edited throug
 
 Compiles a string of pseudo javascript code written in es2015. It returns the body of a function as a string. Once you execute the function, it will return a VueJS component.
 
+**prototype**: `compile(code: string, config: BubleConfig): {script: string, style: string}`
+
 ```js
 import { compile } from 'vue-inbrowser-compiler'
 
@@ -30,7 +32,7 @@ function getComponent(code) {
       target: { ie: 11 }
     }
   )
-  const func = new Function(code)
+  const func = new Function(conpiledCode.script)
   return func()
 }
 ```
@@ -141,6 +143,8 @@ export default {
 
 Detects if the code given corresponds to a VueJS [Single File Component](https://vuejs.org/v2/guide/single-file-components.html). If there is a `<template>` or a `<script>` tag, it will return true, otherwise return false.
 
+**prototype**: `isCodeVueSfc(code: string):boolean`
+
 ```js
 import { isCodeVueSfc } from 'vue-inbrowser-compiler'
 
@@ -151,6 +155,32 @@ if (isCodeVueSfc(code)) {
 }
 ```
 
+### addScopedStyle
+
+Takes the css style passed in first argument, scopes it using the suffix and adds it to the current page.
+
+**prototype**: `addScopedStyle(css: string, suffix: string):void`
+
 ### adaptCreateElement
 
-### addScopedStyle
+In order to make JSX work with the compiler, you need to specify a pragma. Since tis pragma has a different form for VueJs than for ReactJs, we need to provide an adapter.
+
+```js
+import { compile, adaptCreateElement } from 'vue-inbrowser-compiler'
+
+/**
+ * render a JSX component
+ */
+function getComponent(code) {
+  const conpiledCode = compile(
+    code,
+    // in this config we set up the jsx pragma to a higher order function
+    {
+      jsx: '__pragma__(h)'
+    }
+  )
+  const func = new Function('__pragma__', conpiledCode.script)
+  // now pass the higher order function to the function call
+  return func(adaptCreateElement)
+}
+```
