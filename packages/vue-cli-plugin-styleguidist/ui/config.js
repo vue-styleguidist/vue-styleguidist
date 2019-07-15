@@ -71,7 +71,7 @@ function onRead({ data }) {
 			{
 				id: 'server',
 				label: 'Server Configuration',
-				prompts: ['serverPort', 'serverHost', 'verbose']
+				prompts: ['serverPort', 'serverHost', 'verbose', 'styleguidePublicPath']
 					.map(key => filteredSchema[key])
 					.filter(p => !!p)
 			}

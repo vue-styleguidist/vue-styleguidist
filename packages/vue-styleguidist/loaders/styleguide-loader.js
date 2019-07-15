@@ -26,7 +26,8 @@ const CLIENT_CONFIG_OPTIONS = [
 	'editorConfig',
 	'ribbon',
 	'pagePerSection',
-	'mountPointId'
+	'mountPointId',
+	'jsxInExamples'
 ]
 
 module.exports = function() {}

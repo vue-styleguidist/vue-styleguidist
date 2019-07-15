@@ -14,7 +14,14 @@ describe('tests button functional', () => {
 	it('should extract props from template if functional', () => {
 		expect(docButton.props).toMatchObject({
 			error: { type: { name: 'boolean' } },
-			label: { type: { name: 'string' } }
+			label: { type: { name: 'string' } },
+			'v-model': { type: { name: 'string' } }
+		})
+	})
+
+	it('should not return the value props as it is v-model', () => {
+		expect(docButton.props).not.toMatchObject({
+			value: { type: { name: 'string' } }
 		})
 	})
 

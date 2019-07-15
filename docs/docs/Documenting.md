@@ -588,3 +588,13 @@ const mockData = require('./mocks');
 ```
 
 > **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, just do `import { myExample as exam } from './myExample';
+
+If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in `styleguide.config.js`.
+
+```jsx
+export default {
+  render() {
+    return <Button />
+  }
+}
+```

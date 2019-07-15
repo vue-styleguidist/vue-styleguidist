@@ -1,7 +1,7 @@
 import { transform } from 'buble'
 import walkes from 'walkes'
 import transformOneImport from './transformOneImport'
-import normalizeSfcComponent from './normalizeSfcComponent'
+import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
 import isCodeVueSfc from './isCodeVueSfc'
 import getAst from './getAst'
 
@@ -14,31 +14,42 @@ interface EvaluableComponent {
 /**
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
- * @param {string} code
- * @param {object} config buble config tobe used when transforming
- * @return {script:String, template:String}
+ * @param code
+ * @param config buble config to be used when transforming
  *
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config?: any
+	config: any = {}
 ): EvaluableComponent {
-	const nonCompiledComponent = prepareVueCodeForEvalFunction(code)
+	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	return {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, config).code
 	}
 }
 
-function prepareVueCodeForEvalFunction(code: string): EvaluableComponent {
+function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
 	let style,
 		vsgMode = false,
 		template
+
 	// if the component is written as a Vue sfc,
 	// transform it in to a "new Vue"
+	// even if jsx is used in an sfc we still use this use case
 	if (isCodeVueSfc(code)) {
 		return normalizeSfcComponent(code)
 	}
+
+	// this for jsx examples without the SFC shell
+	// export default {render: (h) => <Button>}
+	if (config.jsx) {
+		const { preprocessing, component, postprocessing } = parseScriptCode(code)
+		return {
+			script: `${preprocessing};\nreturn {${component}};\n${postprocessing}`
+		}
+	}
+
 	// if it's not a new Vue, it must be a simple template or a vsg format
 	// lets separate the template from the script
 	if (!/new Vue\(/.test(code)) {

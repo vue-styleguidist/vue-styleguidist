@@ -1,13 +1,11 @@
 import VueTypes from 'vue-types'
 import PropTypes from '@znck/prop-types'
-import loggerMixin from '../../mixins/loggerMixin'
 
 /**
  * The only true button.
  */
 export default {
 	name: 'Button',
-	mixins: [loggerMixin],
 	props: {
 		/**
 		 * The color for the button.

@@ -52,6 +52,12 @@ export interface PropDescriptor {
 	required?: string | boolean
 	defaultValue?: { value: string; func?: boolean }
 	tags: { [title: string]: BlockTag[] }
+	/**
+	 * internal name of the prop
+	 * same as key most of the time.
+	 * real prop name if v-model.
+	 */
+	name: string
 }
 
 export interface MethodDescriptor {
@@ -104,10 +110,14 @@ export class Documentation {
 	}
 
 	public getPropDescriptor(propName: string): PropDescriptor {
-		return this.getDescriptor(propName, this.propsMap, () => ({
-			description: '',
-			tags: {}
-		}))
+		const vModelDescriptor = this.propsMap.get('v-model')
+		return vModelDescriptor && vModelDescriptor.name === propName
+			? vModelDescriptor
+			: this.getDescriptor(propName, this.propsMap, () => ({
+					description: '',
+					tags: {},
+					name: propName
+			  }))
 	}
 
 	public getMethodDescriptor(methodName: string): MethodDescriptor {

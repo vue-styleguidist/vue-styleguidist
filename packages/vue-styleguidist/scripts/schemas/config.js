@@ -68,6 +68,28 @@ module.exports = {
 		default: false,
 		process: val => (val === true ? path.resolve(__dirname, '../templates/DefaultExample.md') : val)
 	},
+	editorConfig: {
+		type: 'object',
+		process: (value, config) => {
+			const defaults = {
+				theme: 'base16-light',
+				mode: 'jsx',
+				lineWrapping: true,
+				smartIndent: false,
+				matchBrackets: true,
+				viewportMargin: Infinity,
+				lineNumbers: false
+			}
+			return Object.assign(
+				{},
+				defaults,
+				config.highlightTheme && {
+					theme: config.highlightTheme
+				},
+				value
+			)
+		}
+	},
 	exampleMode: {
 		message: 'Example Mode',
 		description: 'Defines the initial state of the props and methods tab',
@@ -120,27 +142,11 @@ module.exports = {
 		type: 'boolean',
 		default: true
 	},
-	editorConfig: {
-		type: 'object',
-		process: (value, config) => {
-			const defaults = {
-				theme: 'base16-light',
-				mode: 'jsx',
-				lineWrapping: true,
-				smartIndent: false,
-				matchBrackets: true,
-				viewportMargin: Infinity,
-				lineNumbers: false
-			}
-			return Object.assign(
-				{},
-				defaults,
-				config.highlightTheme && {
-					theme: config.highlightTheme
-				},
-				value
-			)
-		}
+	jsxInExamples: {
+		message: 'JSX in Markdown Examples',
+		description: 'Do exmaples contain JSX syntax?',
+		type: 'boolean',
+		default: false
 	},
 	locallyRegisterComponents: {
 		message: 'Locally register components',
@@ -300,6 +306,8 @@ module.exports = {
 	},
 	styleguidePublicPath: {
 		type: 'string',
+		message: 'Base url path for all the assets',
+		description: 'configures the prefix of the server and built urls.',
 		default: ''
 	},
 	styles: {

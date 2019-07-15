@@ -168,7 +168,7 @@ Array of [glob pattern](https://github.com/isaacs/node-glob#glob-primer) that sh
 
 > **Note:** You should pass glob patterns, for example, use `**/components/Button.vue` instead of `components/Button.vue`.
 
-## jsxInComponents
+## `jsxInComponents`
 
 Type: `Boolean`, default: `true`
 
@@ -182,6 +182,22 @@ function initDatepicker() {
   })
 }
 ```
+
+## `jsxInExamples`
+
+Type: `Boolean`, default: `false`
+
+If your examples are written in JSX, you will need this flag on.
+
+```jsx
+export default {
+  render() {
+    return <Button />
+  }
+}
+```
+
+> **Note:** When this flag is on, the pseudo-jsx examples will not work anymore. Example should be written with proper vue syntax.
 
 ## `logger`
 
@@ -517,6 +533,14 @@ If you want to wrap, rather than replace a component, make sure to import the de
 Type: `String`, default: `styleguide`
 
 Folder for static HTML style guide generated with `styleguidist build` command.
+
+## `styleguidePublicPath`
+
+Type: `String`, optional
+
+Configures the prefix of the build and server urls.
+
+Example: If set to `/mystyleguide` the url for dev server will be `htp://localhost:6060/mystyleguide`
 
 ## `styles`
 
