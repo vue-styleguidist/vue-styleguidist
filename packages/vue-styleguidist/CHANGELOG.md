@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.4...v3.16.0) (2019-07-15)
+
+
+### Bug Fixes
+
+* bump clipboard-copy version ([b3c86d9](https://github.com/vue-styleguidist/vue-styleguidist/commit/b3c86d9)), closes [#500](https://github.com/vue-styleguidist/vue-styleguidist/issues/500)
+* rename createElement ([429dd96](https://github.com/vue-styleguidist/vue-styleguidist/commit/429dd96))
+
+
+### Features
+
+* use styleguidePublicPath in server ([bd5e3ec](https://github.com/vue-styleguidist/vue-styleguidist/commit/bd5e3ec))
+* use the JSX capabilities of compiler ([a6db6cb](https://github.com/vue-styleguidist/vue-styleguidist/commit/a6db6cb))
+
+
+
+
+
 ## [3.15.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.3...v3.15.4) (2019-07-07)
 
 **Note:** Version bump only for package vue-styleguidist
