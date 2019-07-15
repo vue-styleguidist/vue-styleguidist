@@ -183,7 +183,7 @@ function initDatepicker() {
 }
 ```
 
-## `jsxInExamples`
+## `jsxInExamples` [BETA]
 
 Type: `Boolean`, default: `false`
 
