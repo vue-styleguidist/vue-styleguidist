@@ -54,7 +54,7 @@ new Vue({
 		expect(dummySet.data()).toMatchObject({ param: 'BazFoo' })
 	})
 
-	it('compile code from SFCs', () => {
+	it('should compile code from SFCs without a template', () => {
 		const sut = compileVueCodeForEvalFunction(`
 <script>
 const bar = "foo"
@@ -63,5 +63,21 @@ export default {}
 		const dummySet = sut.script
 		expect(dummySet).toContain('var bar')
 		expect(dummySet).not.toContain('export default')
+	})
+
+	it('should compile JSX', () => {
+		const sut = compileVueCodeForEvalFunction(
+			`
+export default {
+	render(){
+		return (
+			<HelloWorld />
+		)
+	}
+}`,
+			{ jsx: 'pragma' }
+		)
+		const dummySet = sut.script
+		expect(dummySet).toContain('pragma( HelloWorld')
 	})
 })

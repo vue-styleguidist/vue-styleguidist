@@ -79,7 +79,10 @@ class Preview extends Component {
 		let previewComponent = {}
 
 		try {
-			const example = compile(code, this.context.config.compilerConfig)
+			const example = compile(code, {
+				...this.context.config.compilerConfig,
+				...(this.context.config.jsxInExamples ? { jsx: '__pragma__(h)' } : {})
+			})
 			style = example.style
 			if (example.script) {
 				// compile and execute the script

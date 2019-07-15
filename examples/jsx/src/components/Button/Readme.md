@@ -37,7 +37,7 @@ You can also use the Single File Component Format
 <script>
 const dogNames = require('dog-names').all
 
-// You can also use 'exports.default = {}' style module exports.
+// You can also use 'export default {}' style module exports.
 export default {
   data() {
     return { numClicks: 0, dogName: dogNames[0] }

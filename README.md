@@ -25,19 +25,25 @@ alt="Chat on Discord">
 
 ## Packages
 
-[vue-styleguidist](packages/vue-styleguidist) will take the results of [vue-docgen-api](packages/vue-docgen-api) and create a website site to showcase and develop components.
+[vue-styleguidist](packages/vue-styleguidist) takes the results of [vue-docgen-api](packages/vue-docgen-api) and creates a website site to showcase and develop components.
 
 [![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dm/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
 
 ---
 
-[vue-docgen-api](packages/vue-docgen-api) will parse your vue components and load their documentation in a Javascript object
+[vue-docgen-api](packages/vue-docgen-api) parses vue components and load their documentation in a JavaScript object.
 
 [![](https://img.shields.io/npm/v/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api) [![](https://img.shields.io/npm/dm/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api)
 
 ---
 
-[vue-cli-plugin-styleguidist](packages/vue-cli-plugin-styleguidist) will configure styleguidist to work smoothly with [vue-cli 3](https://cli.vuejs.org/guide/)
+[vue-inbrowser-compiler](packages/vue-inbrowser-compiler) takes vue components code written in es6 and uses buble to make it compatible with all browser.
+
+[![](https://img.shields.io/npm/v/vue-inbrowser-compiler.svg)](https://www.npmjs.com/package/vue-inbrowser-compiler) [![](https://img.shields.io/npm/dm/vue-inbrowser-compiler.svg)](https://www.npmjs.com/package/vue-inbrowser-compiler)
+
+---
+
+[vue-cli-plugin-styleguidist](packages/vue-cli-plugin-styleguidist) configures vue-styleguidist to work with [vue-cli 3](https://cli.vuejs.org/guide/).
 
 [![](https://img.shields.io/npm/v/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist) [![](https://img.shields.io/npm/dm/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-docgen-api)
 

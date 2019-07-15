@@ -36,23 +36,43 @@ function injectTemplateAndParseExport(
 
 	if (!parts.script) return { component: `{\ntemplate: \`${templateString}\` }` }
 
-	let code = parts.script.content
+	const comp = parseScriptCode(parts.script.content)
+	if (templateString) {
+		comp.component = `{\n  template: \`${templateString}\`,\n  ${comp.component}}`
+	} else {
+		comp.component = `{\n  ${comp.component}}`
+	}
+	return comp
+}
+
+export function parseScriptCode(
+	code: string
+): {
+	preprocessing?: string
+	component: string
+	postprocessing?: string
+} {
 	let preprocessing = ''
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
+	let renderFunctionStart = -1
 	walkes(getAst(code), {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
 			endIndex = node.declaration.declarations[0].init.end + offset
+			if (node.declarations) {
+				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
+			}
 		},
 		//export default {}
 		ExportDefaultDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
+			renderFunctionStart = getRenderFunctionStart(node.declaration)
 		},
 		//module.exports = {}
 		AssignmentExpression(node: any) {
@@ -67,6 +87,7 @@ function injectTemplateAndParseExport(
 				endIndex = node.right.end + offset
 			}
 		},
+		// and transform import statements into require
 		ImportDeclaration(node: any) {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
@@ -76,12 +97,33 @@ function injectTemplateAndParseExport(
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	let right = code.slice(startIndex + 1, endIndex - 1)
+	if (renderFunctionStart > 0) {
+		renderFunctionStart += offset
+		code = `${code.slice(0, renderFunctionStart + 1)}
+		const h = this.$createElement;${code.slice(renderFunctionStart + 1)}`
+		endIndex += JSX_ADDON_LENGTH
+	}
+	let component = code.slice(startIndex + 1, endIndex - 1)
 	return {
 		preprocessing,
-		component: `{\n  template: \`${templateString}\`,\n  ${right}}`,
+		component,
 		postprocessing: code.slice(endIndex)
 	}
+}
+
+const JSX_ADDON_LENGTH = 33
+
+function getRenderFunctionStart(objectExpression: any): number {
+	if (objectExpression && objectExpression.properties) {
+		const nodeProperties: any[] = objectExpression.properties
+		const renderFunctionObj = nodeProperties.find(
+			(p: any) => p.key && p.key.type === 'Identifier' && p.key.name === 'render'
+		)
+		if (renderFunctionObj && renderFunctionObj.value.body) {
+			return renderFunctionObj.value.body.start
+		}
+	}
+	return 0
 }
 
 /**

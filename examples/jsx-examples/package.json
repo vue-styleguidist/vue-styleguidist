@@ -1,11 +1,13 @@
 {
-  "name": "vue-styleguidist-example-basic",
-  "description": "Example of vue-styleguidist tested on IE11, please have a look at the webpack config of babel",
+  "name": "vue-styleguidist-example-jsx-examples",
+  "description": "Examples can contain jsx too",
   "keywords": [
-    "internet explorer", 
-    "compatible", 
-    "IE11"
-  ],
+		"jsx",
+		"buble",
+		"compiler",
+		"vue examples",
+		"functional"
+	],
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -27,11 +29,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/polyfill": "^7.2.5",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-transform-vue-jsx": "4.0.1",
     "css-loader": "^2.1.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^6.0.6",
