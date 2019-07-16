@@ -39,11 +39,27 @@ describe('adaptCreateElement', () => {
 	})
 
 	describe('from JSX', () => {
-		const getComponent = (code: string): { [key: string]: any } => {
+		const getComponent = (
+			code: string,
+			params: { [key: string]: any } = {}
+		): { [key: string]: any } => {
 			const compiledCode = transform('const a = ' + code, { jsx: '__pragma__(h)' }).code
-			const getValue = new Function('__pragma__', 'text', compiledCode + ';return a;')
-			const text = 'foo'
-			return getValue(adaptCreateElement, text)
+			const [param1, param2, param3, param4] = Object.keys(params)
+			const getValue = new Function(
+				'__pragma__',
+				param1,
+				param2,
+				param3,
+				param4,
+				compiledCode + ';return a;'
+			)
+			return getValue(
+				adaptCreateElement,
+				params[param1],
+				params[param2],
+				params[param3],
+				params[param4]
+			)
 		}
 
 		test('Contains text', () => {
@@ -60,12 +76,16 @@ describe('adaptCreateElement', () => {
 		})
 
 		test('Binds text', () => {
+			const text = 'foo'
 			const wrapper = shallowMount(
-				getComponent(`{
+				getComponent(
+					`{
 					render(h) {
 						return <div>{text}</div>
 					}
-				}`)
+				}`,
+					{ text }
+				)
 			)
 
 			expect(wrapper.is('div')).toBeTruthy()
@@ -86,19 +106,23 @@ describe('adaptCreateElement', () => {
 		})
 
 		test('Binds attrs', () => {
+			const hi = 'foo'
 			const wrapper = shallowMount(
-				getComponent(`{
+				getComponent(
+					`{
 					render(h) {
-					  return <div id={text} />
+					  return <div id={hi} />
 					},
-				  }`)
+				  }`,
+					{ hi }
+				)
 			)
 
 			expect(wrapper.element.id).toBe('foo')
 		})
 
 		test('Omits attrs if possible', () => {
-			const wrapper = shallowMount(
+			const wrapper: any = shallowMount(
 				getComponent(`{
 					render(h) {
 					  return <div>test</div>
@@ -106,19 +130,68 @@ describe('adaptCreateElement', () => {
 				  }`)
 			)
 
-			expect((wrapper as any).vnode.data).toBeUndefined()
+			expect(wrapper.vnode.data).toBeUndefined()
 		})
 
 		test('Omits children if possible', () => {
-			const wrapper = shallowMount(
+			const wrapper: any = shallowMount(
 				getComponent(`{
 				render(h) {
 				  return <div/>
-				},
+				}
 			  }`)
 			)
 
-			expect((wrapper as any).vnode.children).toBeUndefined()
+			expect(wrapper.vnode.children).toBeUndefined()
+		})
+
+		test('Handles top-level special attrs', () => {
+			const wrapper: any = shallowMount(
+				getComponent(`{
+					render(h) {
+						return <div class="foo" style="bar" key="key" ref="ref" refInFor slot="slot" />
+					}
+				  }`)
+			)
+			expect(wrapper.vnode.data.class).toBe('foo')
+			expect(wrapper.vnode.data.style).toBe('bar')
+			expect(wrapper.vnode.data.key).toBe('key')
+			expect(wrapper.vnode.data.ref).toBe('ref')
+			expect(wrapper.vnode.data.refInFor).toBeTruthy()
+			expect(wrapper.vnode.data.slot).toBe('slot')
+		})
+
+		test('Handles nested properties (camelCase)', () => {
+			const noop = (_: any) => _
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+			  render(h) {
+				return (
+				  <div propsOnSuccess={noop} onClick={noop} onCamelCase={noop} domPropsInnerHTML="<p>hi</p>" hookInsert={noop} />
+				)
+			  },
+			}`,
+					{ noop }
+				)
+			)
+			expect(wrapper.vnode.data.props.onSuccess).toBe(noop)
+			expect(wrapper.vnode.data.on.click.fns).toBe(noop)
+			expect(wrapper.vnode.data.on.camelCase.fns).toBe(noop)
+			expect(wrapper.vnode.data.domProps.innerHTML).toBe('<p>hi</p>')
+			expect(wrapper.vnode.data.hook.insert).toBe(noop)
+		})
+
+		test('Supports data attribute', () => {
+			const wrapper: any = shallowMount(
+				getComponent(`{
+			  render(h) {
+				return <div data-id="1" />
+			  },
+			}`)
+			)
+
+			expect(wrapper.vnode.data.attrs['data-id']).toBe('1')
 		})
 	})
 })

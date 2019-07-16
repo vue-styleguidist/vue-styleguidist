@@ -34,7 +34,11 @@ const rootAttributes = [
 	'model'
 ]
 
-const onRE = /(on|nativeOn|domProps)([A-Z][a-zA-Z]+)/
+const prefixedRE = /(on|nativeOn|props|domProps|hook)([A-Z][a-zA-Z]+)/
+
+const getDomPropsRawName = (name: string): string => {
+	return name.replace(/^dom(Props|-props)/, '')
+}
 
 const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } | undefined => {
 	if (!attrs) {
@@ -46,20 +50,20 @@ const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } | unde
 		const ccName = camelCase(name)
 		if (rootAttributes.includes(ccName)) {
 			attributes[ccName] = value
-		} else if (onRE.test(ccName)) {
-			const foundName = onRE.exec(ccName)
+		} else if (prefixedRE.test(ccName)) {
+			const foundName = prefixedRE.exec(ccName)
 			if (foundName) {
-				const rawEventName = foundName[2]
-				const eventName = camelCase(rawEventName)
 				const prefix = foundName[1]
+				const rawName = prefix === 'domProps' ? getDomPropsRawName(name) : foundName[2]
+				const camelCasedName = rawName[0].toLowerCase() + rawName.slice(1)
 				if (!attributes[prefix]) {
 					attributes[prefix] = {}
 				}
-				attributes[prefix][eventName] = value
+				attributes[prefix][camelCasedName] = value
 			}
 		} else {
 			attributes.attrs = attributes.attrs || {}
-			attributes.attrs[ccName] = value
+			attributes.attrs[/^data-/.test(name) ? name : ccName] = value
 		}
 	})
 	return attributes
