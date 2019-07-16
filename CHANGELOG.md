@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.0...v3.16.1) (2019-07-16)
+
+
+### Bug Fixes
+
+* **compiler:** add normal attributes in attrs ([be6de16](https://github.com/vue-styleguidist/vue-styleguidist/commit/be6de16))
+* allow for new Vue in jsx ([45c62c9](https://github.com/vue-styleguidist/vue-styleguidist/commit/45c62c9))
+
+
+
+
+
 # [3.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.4...v3.16.0) (2019-07-15)
 
 
