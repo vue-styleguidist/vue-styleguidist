@@ -73,3 +73,13 @@ new Vue({
   }
 })
 ```
+
+or this
+
+```jsx
+export default {
+  render() {
+    return <Button>test</Button>
+  }
+}
+```
