@@ -1,6 +1,7 @@
 import { transform } from 'buble'
 import { shallowMount, mount } from '@vue/test-utils'
 import adaptCreateElement, { CreateElementFunction } from '../adaptCreateElement'
+import Vue from 'vue'
 
 describe('adaptCreateElement', () => {
 	let h: jest.Mock<CreateElementFunction>
@@ -43,7 +44,7 @@ describe('adaptCreateElement', () => {
 			code: string,
 			params: { [key: string]: any } = {}
 		): { [key: string]: any } => {
-			const compiledCode = transform('const a = ' + code, { jsx: '__pragma__(h)' }).code
+			const compiledCode = transform('const ___ = ' + code, { jsx: '__pragma__(h)' }).code
 			const [param1, param2, param3, param4] = Object.keys(params)
 			const getValue = new Function(
 				'__pragma__',
@@ -51,7 +52,7 @@ describe('adaptCreateElement', () => {
 				param2,
 				param3,
 				param4,
-				compiledCode + ';return a;'
+				compiledCode + ';return ___;'
 			)
 			return getValue(
 				adaptCreateElement,
@@ -253,6 +254,174 @@ describe('adaptCreateElement', () => {
 			)
 
 			expect(wrapper.html()).toBe('<div>foo</div>')
+		})
+
+		test.skip('Spread (single object expression)', () => {
+			const props = {
+				hello: 2
+			}
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+			  render(h) {
+				return <div {...{ props }} />
+			  },
+			}`,
+					{ props }
+				)
+			)
+
+			expect(wrapper.vnode.data.props.hello).toBe(2)
+		})
+
+		test.skip('Spread (mixed)', () => {
+			const calls: number[] = []
+			const data = {
+				attrs: {
+					id: 'hehe'
+				},
+				on: {
+					click: function() {
+						calls.push(3)
+					}
+				},
+				props: {
+					innerHTML: 2
+				},
+				hook: {
+					insert: function() {
+						calls.push(1)
+					}
+				},
+				class: ['a', 'b']
+			}
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+			  render(h) {
+				return (
+				  <div
+					href="huhu"
+					{...data}
+					class={{ c: true }}
+					on-click={() => calls.push(4)}
+					hook-insert={() => calls.push(2)}
+				  />
+				)
+			  },
+			}`,
+					{ data, calls }
+				)
+			)
+
+			expect(wrapper.vnode.data.attrs.id).toBe('hehe')
+			expect(wrapper.vnode.data.attrs.href).toBe('huhu')
+			expect(wrapper.vnode.data.props.innerHTML).toBe(2)
+			expect(wrapper.vnode.data.class).toEqual(['a', 'b', { c: true }])
+			expect(calls).toEqual([1, 2])
+			wrapper.vnode.data.on.click()
+			expect(calls).toEqual([1, 2, 3, 4])
+		})
+
+		test('Custom directives', () => {
+			const directive = {
+				inserted() {}
+			}
+			Vue.directive('test', directive)
+			Vue.directive('other', directive)
+
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+				render(h) {
+					return <div v-test={123} vOther={234} />
+				}
+			}`
+				)
+			)
+
+			expect(wrapper.vnode.data.directives.length).toBe(2)
+			expect(wrapper.vnode.data.directives[0]).toEqual({
+				def: directive,
+				modifiers: {},
+				name: 'test',
+				value: 123
+			})
+			expect(wrapper.vnode.data.directives[1]).toEqual({
+				def: directive,
+				modifiers: {},
+				name: 'other',
+				value: 234
+			})
+		})
+
+		test('xlink:href', () => {
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+			  render(h) {
+				return <use xlinkHref={'#name'} />
+			  },
+			}`
+				)
+			)
+
+			expect(wrapper.vnode.data.attrs['xlink:href']).toBe('#name')
+		})
+		test.skip('Merge class', () => {
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+				render(h) {
+					return <div class="a" {...{ class: 'b' }} />
+				}
+			}`
+				)
+			)
+
+			expect(wrapper.vnode.data.class).toEqual(['a', 'b'])
+		})
+
+		test('JSXMemberExpression', () => {
+			const a = {
+				b: {
+					cmp: getComponent(
+						`{
+						render(h) {
+							return <div />
+						}
+					}`
+					)
+				}
+			}
+			const wrapper: any = mount(
+				getComponent(
+					`{
+			  render(h) {
+				return <a.b.cmp />
+			  },
+			}`,
+					{ a }
+				)
+			)
+
+			expect(wrapper.html()).toBe('<div></div>')
+		})
+
+		test.skip('JSXSpreadChild', () => {
+			const a = ['1', '2']
+			const wrapper = shallowMount(
+				getComponent(
+					`{
+			  render(h) {
+				return <div>{...a}</div>
+			  },
+			}`,
+					{ a }
+				)
+			)
+
+			expect(wrapper.html()).toBe('<div>12</div>')
 		})
 	})
 })

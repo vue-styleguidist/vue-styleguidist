@@ -34,10 +34,10 @@ const rootAttributes = [
 	'model'
 ]
 
-const prefixedRE = /(on|nativeOn|props|domProps|hook)([A-Z][a-zA-Z]+)/
+const prefixedRE = /(on|nativeOn|props|domProps|hook|v)([A-Z][a-zA-Z]+)/
 
-const getDomPropsRawName = (name: string): string => {
-	return name.replace(/^dom(Props|-props)/, '')
+const getRawName = (name: string): string => {
+	return name.replace(/^(on|native(On|-on)|props|dom(Props|-props)|hook|v)-?/, '')
 }
 
 const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } | undefined => {
@@ -54,16 +54,27 @@ const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } | unde
 			const foundName = prefixedRE.exec(ccName)
 			if (foundName) {
 				const prefix = foundName[1]
-				const rawName = prefix === 'domProps' ? getDomPropsRawName(name) : foundName[2]
+				const rawName = getRawName(name)
 				const camelCasedName = rawName[0].toLowerCase() + rawName.slice(1)
-				if (!attributes[prefix]) {
-					attributes[prefix] = {}
+				if (prefix === 'v') {
+					if (!attributes.directives) {
+						attributes.directives = []
+					}
+					attributes.directives.push({
+						name: camelCasedName,
+						value
+					})
+				} else {
+					if (!attributes[prefix]) {
+						attributes[prefix] = {}
+					}
+					attributes[prefix][camelCasedName] = value
 				}
-				attributes[prefix][camelCasedName] = value
 			}
 		} else {
 			attributes.attrs = attributes.attrs || {}
-			attributes.attrs[/^data-/.test(name) ? name : ccName] = value
+			const finalName = /^data-/.test(name) ? name : ccName === 'xlinkHref' ? 'xlink:href' : ccName
+			attributes.attrs[finalName] = value
 		}
 	})
 	return attributes
