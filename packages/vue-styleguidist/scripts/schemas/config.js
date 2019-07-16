@@ -143,8 +143,9 @@ module.exports = {
 		default: true
 	},
 	jsxInExamples: {
-		message: 'JSX in Markdown Examples',
-		description: 'Do exmaples contain JSX syntax?',
+		message: 'JSX in Markdown Examples [BETA]',
+		description:
+			'Will allow exmaples to contain JSX syntax. You will have to use proper Vue component format in examples. No pseudo JSX.',
 		type: 'boolean',
 		default: false
 	},
