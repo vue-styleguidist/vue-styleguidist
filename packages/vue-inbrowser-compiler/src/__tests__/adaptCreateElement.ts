@@ -1,5 +1,5 @@
 import { transform } from 'buble'
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import adaptCreateElement, { CreateElementFunction } from '../adaptCreateElement'
 
 describe('adaptCreateElement', () => {
@@ -192,6 +192,67 @@ describe('adaptCreateElement', () => {
 			)
 
 			expect(wrapper.vnode.data.attrs['data-id']).toBe('1')
+		})
+
+		test('Handles identifier tag name as components', () => {
+			const Test = { render: () => null }
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+			  render(h) {
+				return <Test />
+			  },
+			}`,
+					{ Test }
+				)
+			)
+
+			expect(wrapper.vnode.tag).toMatch(/^vue-component/)
+		})
+
+		test('Works for components with children', () => {
+			const Test = {
+				render(h: (b: string) => any) {
+					h('div')
+				}
+			}
+			const wrapper: any = shallowMount(
+				getComponent(
+					`{
+				render(h) {
+					return (
+						<Test>
+							<div>hi</div>
+						</Test>
+					)
+				}
+			}`,
+					{ Test }
+				)
+			)
+			const children = wrapper.vnode.componentOptions.children
+			expect(children[0].tag).toBe('div')
+		})
+
+		test('Binds things in thunk with correct this context', () => {
+			const Test = getComponent(`{
+				render(h) {
+					return <div>{this.$slots.default}</div>
+				}
+			}`)
+			const wrapper: any = mount(
+				getComponent(
+					`{
+			  data: () => ({ test: 'foo' }),
+			  render(h) {
+				return <Test>{this.test}</Test>
+			  },
+			}`,
+					{ Test }
+				)
+			)
+
+			expect(wrapper.html()).toBe('<div>foo</div>')
 		})
 	})
 })
