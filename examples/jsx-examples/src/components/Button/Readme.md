@@ -63,3 +63,13 @@ export default {
 }
 </style>
 ```
+
+A minima, one is supposed to do that
+
+```jsx
+new Vue({
+  render() {
+    return <Button>test</Button>
+  }
+})
+```

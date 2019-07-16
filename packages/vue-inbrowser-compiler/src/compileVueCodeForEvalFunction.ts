@@ -1,7 +1,12 @@
 import { transform } from 'buble'
 import walkes from 'walkes'
 import transformOneImport from './transformOneImport'
-import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
+import normalizeSfcComponent, {
+	parseScriptCode,
+	getRenderFunctionStart,
+	insertCreateElementFunction,
+	JSX_ADDON_LENGTH
+} from './normalizeSfcComponent'
 import isCodeVueSfc from './isCodeVueSfc'
 import getAst from './getAst'
 
@@ -35,24 +40,24 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		template
 
 	// if the component is written as a Vue sfc,
-	// transform it in to a "new Vue"
+	// transform it in to a "return"
 	// even if jsx is used in an sfc we still use this use case
 	if (isCodeVueSfc(code)) {
 		return normalizeSfcComponent(code)
 	}
 
-	// this for jsx examples without the SFC shell
-	// export default {render: (h) => <Button>}
-	if (config.jsx) {
-		const { preprocessing, component, postprocessing } = parseScriptCode(code)
-		return {
-			script: `${preprocessing};\nreturn {${component}};\n${postprocessing}`
-		}
-	}
-
 	// if it's not a new Vue, it must be a simple template or a vsg format
 	// lets separate the template from the script
 	if (!/new Vue\(/.test(code)) {
+		// this for jsx examples without the SFC shell
+		// export default {render: (h) => <Button>}
+		if (config.jsx) {
+			const { preprocessing, component, postprocessing } = parseScriptCode(code)
+			return {
+				script: `${preprocessing};\nreturn {${component}};\n${postprocessing}`
+			}
+		}
+
 		const findStartTemplateMatch = /^\W*</.test(code) ? { index: 0 } : code.match(/\n[\t ]*</)
 		const limitScript =
 			findStartTemplateMatch && findStartTemplateMatch.index !== undefined
@@ -74,7 +79,16 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 					node.expression.arguments && node.expression.arguments.length
 						? node.expression.arguments[0]
 						: undefined
-				const after = optionsNode ? code.slice(optionsNode.start, optionsNode.end) : 'undefined'
+				const renderIndex = getRenderFunctionStart(optionsNode)
+				let endIndex = optionsNode.end
+				if (renderIndex > 0) {
+					code = insertCreateElementFunction(
+						code.slice(0, renderIndex + 1),
+						code.slice(renderIndex + 1)
+					)
+					endIndex += JSX_ADDON_LENGTH
+				}
+				const after = optionsNode ? code.slice(optionsNode.start, endIndex) : ''
 				code = before + ';return ' + after
 			}
 		},
@@ -118,6 +132,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 			varNames.map(varName => `${varName}:${varName}`).join(',')
 		}};}}`
 	}
+	console.log(code)
 	return {
 		script: code,
 		style,
