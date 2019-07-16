@@ -1,7 +1,7 @@
+import Vue from 'vue'
 import { transform } from 'buble'
 import { shallowMount, mount } from '@vue/test-utils'
 import adaptCreateElement, { CreateElementFunction } from '../adaptCreateElement'
-import Vue from 'vue'
 
 describe('adaptCreateElement', () => {
 	let h: jest.Mock<CreateElementFunction>
