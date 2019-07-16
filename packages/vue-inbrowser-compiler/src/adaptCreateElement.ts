@@ -1,15 +1,24 @@
 const camelCase = require('camelcase')
 
+export type CreateElementFunction = (
+	component: string | object,
+	attributes?: { [k: string]: any },
+	children?: any | any[]
+) => any[] | any
+
 /**
  * Groups atributes passed to a React pragma to the VueJS fashion
  * @param h the VueJS createElement function passed in render functions
  * @returns pragma usable in buble rendered JSX for VueJS
  */
-export default function adaptCreateElement(
-	h: (comp: object | string, attr?: { [key: string]: any }, children?: any[]) => any[] | any
-): (comp: object | string, attr: { [key: string]: any }, ...children: any[]) => any[] | any {
+export default function adaptCreateElement(h: CreateElementFunction): CreateElementFunction {
 	return (comp, attr, ...children) => {
-		return children.length ? h(comp, groupAttr(attr), children) : h(comp, groupAttr(attr))
+		if (attr === undefined) {
+			return h(comp)
+		} else if (!children.length) {
+			return h(comp, groupAttr(attr))
+		}
+		return h(comp, groupAttr(attr), children)
 	}
 }
 
@@ -25,30 +34,47 @@ const rootAttributes = [
 	'model'
 ]
 
-const onRE = /(on|nativeOn|domProps)([A-Z][a-zA-Z]+)/
+const prefixedRE = /(on|nativeOn|props|domProps|hook|v)([A-Z][a-zA-Z]+)/
 
-const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } => {
-	if (!attrs) return attrs
+const getRawName = (name: string): string => {
+	return name.replace(/^(on|native(On|-on)|props|dom(Props|-props)|hook|v)-?/, '')
+}
+
+const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } | undefined => {
+	if (!attrs) {
+		return undefined
+	}
 	const attributes: { [key: string]: any } = {}
 	Object.keys(attrs).forEach(name => {
 		const value = attrs[name]
 		const ccName = camelCase(name)
 		if (rootAttributes.includes(ccName)) {
 			attributes[ccName] = value
-		} else if (onRE.test(ccName)) {
-			const foundName = onRE.exec(ccName)
+		} else if (prefixedRE.test(ccName)) {
+			const foundName = prefixedRE.exec(ccName)
 			if (foundName) {
-				const rawEventName = foundName[2]
-				const eventName = camelCase(rawEventName)
 				const prefix = foundName[1]
-				if (!attributes[prefix]) {
-					attributes[prefix] = {}
+				const rawName = getRawName(name)
+				const camelCasedName = rawName[0].toLowerCase() + rawName.slice(1)
+				if (prefix === 'v') {
+					if (!attributes.directives) {
+						attributes.directives = []
+					}
+					attributes.directives.push({
+						name: camelCasedName,
+						value
+					})
+				} else {
+					if (!attributes[prefix]) {
+						attributes[prefix] = {}
+					}
+					attributes[prefix][camelCasedName] = value
 				}
-				attributes[prefix][eventName] = value
 			}
 		} else {
 			attributes.attrs = attributes.attrs || {}
-			attributes.attrs[ccName] = value
+			const finalName = /^data-/.test(name) ? name : ccName === 'xlinkHref' ? 'xlink:href' : ccName
+			attributes.attrs[finalName] = value
 		}
 	})
 	return attributes
