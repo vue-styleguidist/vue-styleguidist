@@ -132,7 +132,6 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 			varNames.map(varName => `${varName}:${varName}`).join(',')
 		}};}}`
 	}
-	console.log(code)
 	return {
 		script: code,
 		style,
