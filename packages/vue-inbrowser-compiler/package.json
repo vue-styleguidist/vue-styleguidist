@@ -25,7 +25,8 @@
     "walkes": "^0.2.1"
   },
   "devDependencies": {
-    "@types/buble": "^0.19.2"
+    "@types/buble": "^0.19.2",
+    "@vue/test-utils": "^1.0.0-beta.29"
   },
   "author": "Bart Ledoux <ledouxb@me.com>",
   "license": "MIT"

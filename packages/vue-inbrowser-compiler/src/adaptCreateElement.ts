@@ -1,15 +1,24 @@
 const camelCase = require('camelcase')
 
+export type CreateElementFunction = (
+	component: string | object,
+	attributes?: { [k: string]: any },
+	children?: any | any[]
+) => any[] | any
+
 /**
  * Groups atributes passed to a React pragma to the VueJS fashion
  * @param h the VueJS createElement function passed in render functions
  * @returns pragma usable in buble rendered JSX for VueJS
  */
-export default function adaptCreateElement(
-	h: (comp: object | string, attr?: { [key: string]: any }, children?: any[]) => any[] | any
-): (comp: object | string, attr: { [key: string]: any }, ...children: any[]) => any[] | any {
+export default function adaptCreateElement(h: CreateElementFunction): CreateElementFunction {
 	return (comp, attr, ...children) => {
-		return children.length ? h(comp, groupAttr(attr), children) : h(comp, groupAttr(attr))
+		if (attr === undefined) {
+			return h(comp)
+		} else if (!children.length) {
+			return h(comp, groupAttr(attr))
+		}
+		return h(comp, groupAttr(attr), children)
 	}
 }
 
@@ -27,8 +36,10 @@ const rootAttributes = [
 
 const onRE = /(on|nativeOn|domProps)([A-Z][a-zA-Z]+)/
 
-const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } => {
-	if (!attrs) return attrs
+const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } | undefined => {
+	if (!attrs) {
+		return undefined
+	}
 	const attributes: { [key: string]: any } = {}
 	Object.keys(attrs).forEach(name => {
 		const value = attrs[name]
