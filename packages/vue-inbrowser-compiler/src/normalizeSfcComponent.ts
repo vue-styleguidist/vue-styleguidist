@@ -99,8 +99,10 @@ export function parseScriptCode(
 	}
 	if (renderFunctionStart > 0) {
 		renderFunctionStart += offset
-		code = `${code.slice(0, renderFunctionStart + 1)}
-		const h = this.$createElement;${code.slice(renderFunctionStart + 1)}`
+		code = insertCreateElementFunction(
+			code.slice(0, renderFunctionStart + 1),
+			code.slice(renderFunctionStart + 1)
+		)
 		endIndex += JSX_ADDON_LENGTH
 	}
 	let component = code.slice(startIndex + 1, endIndex - 1)
@@ -111,9 +113,9 @@ export function parseScriptCode(
 	}
 }
 
-const JSX_ADDON_LENGTH = 33
+export const JSX_ADDON_LENGTH = 31
 
-function getRenderFunctionStart(objectExpression: any): number {
+export function getRenderFunctionStart(objectExpression: any): number {
 	if (objectExpression && objectExpression.properties) {
 		const nodeProperties: any[] = objectExpression.properties
 		const renderFunctionObj = nodeProperties.find(
@@ -123,7 +125,12 @@ function getRenderFunctionStart(objectExpression: any): number {
 			return renderFunctionObj.value.body.start
 		}
 	}
-	return 0
+	return -1
+}
+
+export function insertCreateElementFunction(before: string, after: string): string {
+	return `${before}
+const h = this.$createElement;${after}`
 }
 
 /**

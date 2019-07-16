@@ -6,10 +6,10 @@ const camelCase = require('camelcase')
  * @returns pragma usable in buble rendered JSX for VueJS
  */
 export default function adaptCreateElement(
-	h: (comp: object | string, attr: { [key: string]: any }, children: any[]) => any[] | any
+	h: (comp: object | string, attr?: { [key: string]: any }, children?: any[]) => any[] | any
 ): (comp: object | string, attr: { [key: string]: any }, ...children: any[]) => any[] | any {
 	return (comp, attr, ...children) => {
-		return h(comp, groupAttr(attr), children)
+		return children.length ? h(comp, groupAttr(attr), children) : h(comp, groupAttr(attr))
 	}
 }
 
@@ -46,6 +46,9 @@ const groupAttr = (attrs: { [key: string]: any }): { [key: string]: any } => {
 				}
 				attributes[prefix][eventName] = value
 			}
+		} else {
+			attributes.attrs = attributes.attrs || {}
+			attributes.attrs[ccName] = value
 		}
 	})
 	return attributes
