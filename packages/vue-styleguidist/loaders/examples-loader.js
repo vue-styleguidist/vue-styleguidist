@@ -147,12 +147,19 @@ if (module.hot) {
 var requireMap = ${generate(toAst(allModulesCode))};
 var requireInRuntimeBase = require(${JSON.stringify(REQUIRE_IN_RUNTIME_PATH)});
 var requireInRuntime = requireInRuntimeBase.bind(null, requireMap);
+var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
+		config.jsxInExamples
+			? `
 var pragma = require(${JSON.stringify(PRAGMA_JSX_PATH)});
-
-var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});
-var evalInContext = evalInContextBase.bind(null, ${JSON.stringify(
-		generate(requireContextCode)
-	)}, requireInRuntime, pragma.default, pragma.concatenate);
-module.exports = ${generate(toAst(examplesWithEval))}
-	`
+var evalInContext = evalInContextBase.bind(null, 
+	${JSON.stringify(generate(requireContextCode))}, 
+	requireInRuntime, 
+	pragma.default, 
+	pragma.concatenate);`
+			: `
+var evalInContext = evalInContextBase.bind(null, 
+	${JSON.stringify(generate(requireContextCode))}, 
+	requireInRuntime)`
+	}
+module.exports = ${generate(toAst(examplesWithEval))}`
 }
