@@ -2,7 +2,7 @@ import path from 'path'
 import identity from 'lodash/identity'
 import getComponents from '../getComponents'
 
-describe.skip('getComponents', () => {
+describe('getComponents', () => {
 	it('should return an object for components', () => {
 		const result = getComponents(['Foo.js', 'Bar.js'], {
 			configDir: path.resolve(__dirname, '../../../test'),
@@ -10,6 +10,25 @@ describe.skip('getComponents', () => {
 			getComponentPathLine: identity
 		})
 
-		expect(result).toMatchSnapshot()
+		expect(result).toMatchObject([
+			{
+				slug: 'foo',
+				module: {
+					require: 'Foo.js'
+				},
+				props: {},
+				hasExamples: false,
+				metadata: {}
+			},
+			{
+				slug: 'bar',
+				module: {
+					require: 'Bar.js'
+				},
+				props: {},
+				hasExamples: false,
+				metadata: {}
+			}
+		])
 	})
 })
