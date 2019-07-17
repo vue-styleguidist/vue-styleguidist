@@ -14,10 +14,7 @@ describe('processComponent', () => {
 			slug: 'pizza',
 			module: {
 				require: 'pizza.js'
-			},
-			props: {},
-			hasExamples: true,
-			metadata: {}
+			}
 		})
 	})
 })
