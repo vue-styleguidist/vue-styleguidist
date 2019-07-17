@@ -34,7 +34,7 @@ const rootAttributes = [
 	'model'
 ]
 
-const prefixedRE = /(on|nativeOn|props|domProps|hook|v)([A-Z][a-zA-Z]+)?/
+const prefixedRE = /^(on|nativeOn|props|domProps|hook|v)([A-Z][a-zA-Z]+)?$/
 
 const getRawName = (name: string): string => {
 	return name.replace(/^(on|native(On|-on)|props|dom(Props|-props)|hook|v)-?/, '')
@@ -85,6 +85,7 @@ export const concatenate = (
 	src: { [key: string]: any },
 	...otherObj: { [key: string]: any }[]
 ): { [key: string]: any } => {
+	src = src || {}
 	otherObj.forEach(obj => {
 		Object.keys(obj).forEach((key: string) => {
 			src[key] = merge(src[key], obj[key])
@@ -104,7 +105,7 @@ const groupAttr = (attrsIn: { [key: string]: any }): { [key: string]: any } | un
 		if (rootAttributes.indexOf(ccName) > 0) {
 			attrsOut[ccName] = value
 		} else if (name === 'attrs') {
-			concatenate(attrsOut.attrs, value)
+			attrsOut.attrs = concatenate(attrsOut.attrs, value)
 		} else if (prefixedRE.test(ccName)) {
 			const foundName = prefixedRE.exec(ccName)
 			if (foundName) {
