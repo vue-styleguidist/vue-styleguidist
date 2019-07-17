@@ -52,12 +52,23 @@ export function traverse(
 	options: TemplateParserOptions
 ) {
 	const traverseAstChildren = (templateAst: ASTElement) => {
-		if (templateAst.children) {
-			for (const childNode of templateAst.children) {
+		const children = templateAst.children
+		if (children) {
+			for (const childNode of children) {
 				if (isASTElement(childNode)) {
 					traverse(childNode, documentation, handlers, options)
 				}
 			}
+		}
+
+		const scopedSlots = templateAst.scopedSlots
+		if (scopedSlots) {
+			Object.keys(scopedSlots).forEach(key => {
+				const slotNode = scopedSlots[key]
+				if (isASTElement(slotNode)) {
+					traverse(slotNode, documentation, handlers, options)
+				}
+			})
 		}
 	}
 
