@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler",
-  "version": "3.16.1",
+  "version": "3.16.2",
   "description": "compile vue single file components right in your browser",
   "main": "lib/index.js",
   "scripts": {

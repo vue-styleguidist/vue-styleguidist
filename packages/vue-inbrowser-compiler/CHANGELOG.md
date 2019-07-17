@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.1...v3.16.2) (2019-07-17)
+
+
+### Bug Fixes
+
+* **compiler:** make the jsx spread work vue style ([27dd670](https://github.com/vue-styleguidist/vue-styleguidist/commit/27dd670))
+* make regexp more precise ([29ba8b5](https://github.com/vue-styleguidist/vue-styleguidist/commit/29ba8b5))
+
+
+
+
+
 ## [3.16.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.0...v3.16.1) (2019-07-16)
 
 
