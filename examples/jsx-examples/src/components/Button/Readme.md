@@ -83,3 +83,14 @@ export default {
   }
 }
 ```
+
+it works with spread too
+
+```jsx
+const a = { attrs: { type: 'button', value: 'test' } }
+export default {
+  render() {
+    return <input {...a} />
+  }
+}
+```
