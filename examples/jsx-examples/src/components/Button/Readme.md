@@ -87,10 +87,10 @@ export default {
 it works with spread too
 
 ```jsx
-const a = { attrs: { type: 'button', value: 'test' } }
+const a = { color: 'purple', size: 'large' }
 export default {
   render() {
-    return <input {...a} />
+    return <Button {...a}>text</Button>
   }
 }
 ```
