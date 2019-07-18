@@ -2,28 +2,52 @@ import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
 
-const button = path.join(__dirname, './Wrapper.vue')
-let docButton: ComponentDoc
+const wrapper = path.join(__dirname, './Wrapper.vue')
+let docWrapper: ComponentDoc
+
+const app = path.join(__dirname, './App.vue')
+let docApp: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
-	beforeEach(done => {
-		docButton = parse(button)
-		done()
+	describe('wrapper', () => {
+		beforeEach(done => {
+			docWrapper = parse(wrapper)
+			done()
+		})
+
+		it('should have a slot.', () => {
+			expect(Object.keys(docWrapper.slots).length).toEqual(1)
+		})
+
+		it('should have a wrapper slot.', () => {
+			expect(docWrapper.slots.footer.description).toBe('Modal footer here')
+		})
+
+		it('should show the slot as scoped', () => {
+			expect(docWrapper.slots.footer.scoped).toBeTruthy()
+		})
+
+		it('should match the reference for the footer slot', () => {
+			expect(docWrapper.slots.footer).toMatchSnapshot()
+		})
 	})
 
-	it('should have a slot.', () => {
-		expect(Object.keys(docButton.slots).length).toEqual(1)
-	})
+	describe('app', () => {
+		beforeEach(done => {
+			docApp = parse(app)
+			done()
+		})
 
-	it('should have a wrapper slot.', () => {
-		expect(docButton.slots.footer.description).toBe('Modal footer here')
-	})
+		it('should have a slot', () => {
+			expect(Object.keys(docApp.slots).length).toEqual(1)
+		})
 
-	it('should show the slot as scoped', () => {
-		expect(docButton.slots.footer.scoped).toBeTruthy()
-	})
+		it('should have a text slot', () => {
+			expect(docApp.slots.text.description).toBe('text slot here')
+		})
 
-	it('should match the reference for the footer slot', () => {
-		expect(docButton.slots.footer).toMatchSnapshot()
+		it('should match the reference for the text slot', () => {
+			expect(docApp.slots.text).toMatchSnapshot()
+		})
 	})
 })
