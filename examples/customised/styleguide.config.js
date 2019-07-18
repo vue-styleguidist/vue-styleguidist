@@ -84,10 +84,9 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [
-			new vueLoader.VueLoaderPlugin(),
-			new BundleAnalyzerPlugin({ analyzerMode: 'static' })
-		],
+		plugins: [new vueLoader.VueLoaderPlugin()].concat(
+			process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
+		),
 		resolve: {
 			alias: {
 				'@mixins': path.resolve(__dirname, './src/mixins'),
