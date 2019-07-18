@@ -1,4 +1,4 @@
-interface VsgSFCDescriptor {
+export interface VsgSFCDescriptor {
 	template?: string
 	script?: string
 	style?: string
@@ -7,22 +7,27 @@ interface VsgSFCDescriptor {
 type PartTypes = keyof VsgSFCDescriptor
 
 const PARTS: Array<PartTypes> = ['template', 'script', 'style']
-const partsRE: { [partName: string]: RegExp } = PARTS.reduce(
-	(ret: { [partName: string]: RegExp }, part: string) => {
-		ret[part] = new RegExp(`<${part}[^>]*>((.|\\n|\\r)+)</${part}>`, 'g')
-		return ret
-	},
-	{}
-)
 
 export default function parseComponent(code: string): VsgSFCDescriptor {
+	// reinintialize regexp after each tour
+	const partsRE: { [partName: string]: RegExp } = PARTS.reduce(
+		(ret: { [partName: string]: RegExp }, part: string) => {
+			ret[part] = new RegExp(`<${part}[^>]*>((.|\\n|\\r)+)</${part}>`, 'g')
+			return ret
+		},
+		{}
+	)
+
 	const descriptor: VsgSFCDescriptor = {}
 	const partsWithWrapper: VsgSFCDescriptor = {}
+
 	// extract all parts
 	PARTS.forEach(part => {
 		const res = partsRE[part].exec(code)
-		partsWithWrapper[part] = res ? res[0] : undefined
-		descriptor[part] = res ? res[1].trim() : undefined
+		if (res) {
+			partsWithWrapper[part] = res[0]
+			descriptor[part] = res[1]
+		}
 	})
 
 	// make sure they are the only components of the code

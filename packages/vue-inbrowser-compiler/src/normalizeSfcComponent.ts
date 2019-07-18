@@ -1,42 +1,26 @@
-import { parseComponent, SFCDescriptor } from 'vue-template-compiler'
 import walkes from 'walkes'
 import getAst from './getAst'
+import parseComponent, { VsgSFCDescriptor } from './parseComponent'
 import transformOneImport from './transformOneImport'
-
-const buildStyles = function(styles: Array<{ content: string }>): string | undefined {
-	let _styles = ''
-	if (styles) {
-		styles.forEach(it => {
-			if (it.content) {
-				_styles += it.content
-			}
-		})
-	}
-	if (_styles !== '') {
-		return _styles.trim()
-	}
-	return undefined
-}
 
 function getSingleFileComponentParts(code: string) {
 	const parts = parseComponent(code)
-	if (parts.script)
-		parts.script.content = parts.script.content.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
+	if (parts.script) parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
 	return parts
 }
 
 function injectTemplateAndParseExport(
-	parts: SFCDescriptor
+	parts: VsgSFCDescriptor
 ): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
 } {
-	const templateString = parts.template ? parts.template.content.replace(/`/g, '\\`') : undefined
+	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
 
 	if (!parts.script) return { component: `{\ntemplate: \`${templateString}\` }` }
 
-	const comp = parseScriptCode(parts.script.content)
+	const comp = parseScriptCode(parts.script)
 	if (templateString) {
 		comp.component = `{\n  template: \`${templateString}\`,\n  ${comp.component}}`
 	} else {
@@ -147,6 +131,6 @@ export default function normalizeSfcComponent(code: string): { script: string; s
 			`;return ${extractedComponent.component}`,
 			extractedComponent.postprocessing
 		].join('\n'),
-		style: buildStyles(parts.styles)
+		style: parts.style
 	}
 }

@@ -10,7 +10,7 @@ describe('normalizeSfcComponent', () => {
 	it('bake template into a new Vue (export default)', () => {
 		const sut = normalizeSfcComponent(`
 <template>
-	<div/>
+<div/>
 </template>
 <script>
 import {comp} from './comp'
@@ -25,7 +25,7 @@ export default {
 	it('bake template into a new Vue (named exports)', () => {
 		const sut = normalizeSfcComponent(`
 <template>
-	<div/>
+<div/>
 </template>
 <script>
 import comp from './comp'
@@ -40,7 +40,7 @@ export const compo = {
 	it('bake template into a new Vue (es5 exports)', () => {
 		const sut = normalizeSfcComponent(`
 <template>
-	<div/>
+<div/>
 </template>
 <script>
 const param = 'Foo'

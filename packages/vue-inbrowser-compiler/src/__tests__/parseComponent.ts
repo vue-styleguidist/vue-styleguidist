@@ -10,15 +10,15 @@ describe('parseComponent', () => {
             hello world
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
-		
-		<template>
-		  <div>
-		    hello
-		  </div>
-		</template>
-		hello world
-		
-	`)
+				
+				<template>
+				  <div>
+				    hello
+				  </div>
+				</template>
+				hello world
+				
+		`)
 	})
 
 	it('should detect scripts', () => {
@@ -26,7 +26,11 @@ describe('parseComponent', () => {
         <script>
         export default {}
         </script>`)
-		expect(comp.script).toMatchInlineSnapshot(`"export default {}"`)
+		expect(comp.script).toMatchInlineSnapshot(`
+		"
+		        export default {}
+		        "
+	`)
 	})
 
 	it('should detect style', () => {
@@ -37,10 +41,12 @@ describe('parseComponent', () => {
         }
         </style>`)
 		expect(comp.style).toMatchInlineSnapshot(`
-				".class3{
-				            color: red;
-				        }"
-		`)
+		"
+		        .class3{
+		            color: red;
+		        }
+		        "
+	`)
 	})
 
 	it('should not see internal templates', () => {
