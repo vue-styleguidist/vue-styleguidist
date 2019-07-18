@@ -1,3 +1,4 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const vueLoader = require('vue-loader')
 
 module.exports = {
@@ -53,7 +54,7 @@ module.exports = {
 			]
 		},
 
-		plugins: [new vueLoader.VueLoaderPlugin()]
+		plugins: [new vueLoader.VueLoaderPlugin(), new BundleAnalyzerPlugin({ analyzerMode: 'static' })]
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
