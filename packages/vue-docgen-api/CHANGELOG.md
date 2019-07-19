@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.2...v3.16.3) (2019-07-19)
+
+
+### Bug Fixes
+
+* slot scoped parsing ([9685ba2](https://github.com/vue-styleguidist/vue-styleguidist/commit/9685ba2))
+
+
+
+
+
 # [3.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.15.4...v3.16.0) (2019-07-15)
 
 

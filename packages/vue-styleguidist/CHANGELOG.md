@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.2...v3.16.3) (2019-07-19)
+
+
+### Bug Fixes
+
+*  evaluation was failing ([467949f](https://github.com/vue-styleguidist/vue-styleguidist/commit/467949f))
+
+
+
+
+
 ## [3.16.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.1...v3.16.2) (2019-07-17)
 
 

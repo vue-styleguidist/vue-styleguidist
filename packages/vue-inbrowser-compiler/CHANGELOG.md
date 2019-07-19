@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.2...v3.16.3) (2019-07-19)
+
+
+### Bug Fixes
+
+* accept multiple style parts ([9a6b031](https://github.com/vue-styleguidist/vue-styleguidist/commit/9a6b031))
+* use style normalize sfc component ([fcae13c](https://github.com/vue-styleguidist/vue-styleguidist/commit/fcae13c))
+
+
+### Performance Improvements
+
+* create new simpler parser ([d8acf85](https://github.com/vue-styleguidist/vue-styleguidist/commit/d8acf85))
+* use the new parser ([385b018](https://github.com/vue-styleguidist/vue-styleguidist/commit/385b018))
+
+
+
+
+
 ## [3.16.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.1...v3.16.2) (2019-07-17)
 
 
