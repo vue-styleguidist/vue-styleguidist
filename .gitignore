@@ -23,6 +23,7 @@ test/cypress/videos/
 /examples/**/dist/build
 /examples/**/dist/css/*.css
 /examples/**/dist/index.html
+/examples/**/dist/report.html
 
 # packages resulting of plugin tests
 /test/cli-packages/

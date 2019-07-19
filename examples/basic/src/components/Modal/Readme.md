@@ -1,7 +1,7 @@
 You can modify the code through the playground
 
     let isOpen = false;
-    const _ = require("lodash").default
+    const merge = require("lodash/merge").default
 
     <button @click.prevent="isOpen = true">Open</button>
     <Modal :showModal="isOpen">

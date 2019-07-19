@@ -1,4 +1,4 @@
-import { parseComponent } from 'vue-template-compiler'
+import parseComponent from './parseComponent'
 
 /**
  * Determines if the given code is a VueSfc file

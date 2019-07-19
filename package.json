@@ -134,6 +134,7 @@
     "vuetify": "^1.4.3",
     "vuex": "^3.0.0",
     "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "3.3.2",
     "webpack-cli": "^2.0.13",
     "yorkie": "^2.0.0"
   },
