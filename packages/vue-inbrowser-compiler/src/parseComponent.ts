@@ -1,12 +1,13 @@
-export interface VsgSFCDescriptor {
+interface VsgSFCDescriptorSimple {
 	template?: string
 	script?: string
-	style?: string
 }
 
-type PartTypes = keyof VsgSFCDescriptor
+export interface VsgSFCDescriptor extends VsgSFCDescriptorSimple {
+	styles?: string[]
+}
 
-const PARTS: Array<PartTypes> = ['template', 'script', 'style']
+const PARTS: Array<keyof VsgSFCDescriptorSimple> = ['template', 'script']
 
 export default function parseComponent(code: string): VsgSFCDescriptor {
 	// reinintialize regexp after each tour
@@ -19,7 +20,7 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 	)
 
 	const descriptor: VsgSFCDescriptor = {}
-	const partsWithWrapper: VsgSFCDescriptor = {}
+	const partsWithWrapper: VsgSFCDescriptorSimple = {}
 
 	// extract all parts
 	PARTS.forEach(part => {
@@ -37,6 +38,43 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 		const withWrapper = partsWithWrapper[PARTS[i]]
 		if (withWrapper) {
 			check = check.replace(withWrapper, '').trim()
+		}
+	}
+
+	// we assume that
+	const styleRE = /(<style[^>]*>)([^<]+)(<.......)/g
+	const styleFollowUpRE = /()([^<]+)(<.......)/g
+	let styleAnalyzed: string = ''
+	let stylesWithWrapper: string[] = []
+	let stylePart: RegExpExecArray | undefined | null = styleRE.exec(check)
+	let styleHeader: string = stylePart ? stylePart[1] : ''
+	let styles: string[] | undefined
+	while (stylePart) {
+		styleAnalyzed += stylePart[2]
+
+		if (stylePart[3] === '</style>') {
+			if (!styles) {
+				styles = []
+			}
+			styles.push(styleAnalyzed)
+			stylesWithWrapper.push(`${styleHeader}${styleAnalyzed}</style>`)
+			styleAnalyzed = ''
+			styleHeader = ''
+
+			// if we just started to analyze a new style tag
+			stylePart = styleRE.exec(check)
+			styleHeader = stylePart ? stylePart[1] : ''
+		} else {
+			styleAnalyzed += stylePart[3]
+			styleFollowUpRE.lastIndex = styleRE.lastIndex
+			stylePart = styleFollowUpRE.exec(check)
+		}
+	}
+	if (styles) {
+		descriptor.styles = styles
+		let i = styles.length
+		while (i--) {
+			check = check.replace(stylesWithWrapper[i], '').trim()
 		}
 	}
 	return check.length ? {} : descriptor
