@@ -3,6 +3,21 @@ import getAst from './getAst'
 import parseComponent, { VsgSFCDescriptor } from './parseComponent'
 import transformOneImport from './transformOneImport'
 
+const buildStyles = function(styles: string[] | undefined): string | undefined {
+	let _styles = ''
+	if (styles) {
+		styles.forEach(it => {
+			if (it) {
+				_styles += it
+			}
+		})
+	}
+	if (_styles !== '') {
+		return _styles.trim()
+	}
+	return undefined
+}
+
 function getSingleFileComponentParts(code: string) {
 	const parts = parseComponent(code)
 	if (parts.script) parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
@@ -131,6 +146,6 @@ export default function normalizeSfcComponent(code: string): { script: string; s
 			`;return ${extractedComponent.component}`,
 			extractedComponent.postprocessing
 		].join('\n'),
-		style: parts.style
+		style: buildStyles(parts.styles)
 	}
 }
