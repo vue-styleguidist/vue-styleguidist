@@ -159,7 +159,7 @@ var evalInContext = evalInContextBase.bind(null,
 			: `
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
-	requireInRuntime)`
+	requireInRuntime, null, null)`
 	}
 module.exports = ${generate(toAst(examplesWithEval))}`
 }
