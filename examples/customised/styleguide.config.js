@@ -1,3 +1,4 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 const vueLoader = require('vue-loader')
 
@@ -83,7 +84,9 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
+		plugins: [new vueLoader.VueLoaderPlugin()].concat(
+			process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
+		),
 		resolve: {
 			alias: {
 				'@mixins': path.resolve(__dirname, './src/mixins'),
