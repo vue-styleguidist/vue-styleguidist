@@ -159,19 +159,18 @@ module.exports = function(config, env) {
 	const RSG_COMPONENTS_ALIAS = 'rsg-components'
 	const RSG_COMPONENTS_ALIAS_DEFAULT = `${RSG_COMPONENTS_ALIAS}-default`
 
+	const webpackAlias = webpackConfig.resolve.alias
+
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
 	require('fs')
 		.readdirSync(sourceSrc)
 		.forEach(function(component) {
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(
-				sourceSrc,
-				component
-			)
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
 			// plus in order to avoid cirular references, add an extra ref to the defaults
 			// so that custom components can reference their defaults
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-				webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+			webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+				webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`]
 		})
 
 	// For some components, the alias model is a little more complicated,
@@ -187,6 +186,8 @@ module.exports = function(config, env) {
 		return acc
 	}, {})
 
+	customComponents.Preview = path.join('Preview', config.codeSplit ? 'PreviewAsync' : 'Preview')
+
 	// if the user chose prism, load the prism editor instead of codemirror
 	customComponents.Editor = path.join(
 		CUSTOM_EDITOR_FOLDER,
@@ -194,12 +195,10 @@ module.exports = function(config, env) {
 	)
 
 	Object.keys(customComponents).forEach(function(key) {
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(
-			sourceSrc,
-			customComponents[key]
-		)
-		webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${key}`]
+		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(sourceSrc, customComponents[key])
+
+		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`]
 	})
 
 	// Custom style guide components
@@ -208,25 +207,25 @@ module.exports = function(config, env) {
 			const fullName = name.match(RENDERER_REGEXP)
 				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
 				: name
-			webpackConfig.resolve.alias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
 		})
 	}
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
-	webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS] = makeWebpackConfig(config, env).resolve.alias[
+	webpackAlias[RSG_COMPONENTS_ALIAS] = makeWebpackConfig(config, env).resolve.alias[
 		RSG_COMPONENTS_ALIAS
 	]
 
 	// To avoid circular rendering when overriding existing components,
 	// Create another alias, not overriden by users
 	if (config.styleguideComponents) {
-		webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS_DEFAULT] =
-			webpackConfig.resolve.alias[RSG_COMPONENTS_ALIAS]
+		webpackAlias[RSG_COMPONENTS_ALIAS_DEFAULT] = webpackAlias[RSG_COMPONENTS_ALIAS]
 	}
 
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env)
 	}
+
 	return webpackConfig
 }
