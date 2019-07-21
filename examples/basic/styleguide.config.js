@@ -21,7 +21,7 @@ module.exports = {
 				{
 					test: /\.js?$/,
 					exclude: modulePath =>
-						/node_modules/.test(modulePath) &&
+						(/node_modules/.test(modulePath) || /packages/.test(modulePath)) &&
 						!/node_modules[\\/]regexpu-core/.test(modulePath) &&
 						!/node_modules[\\/]unicode-match-property-ecmascript/.test(modulePath) &&
 						!/node_modules[\\/]unicode-match-property-value-ecmascript/.test(modulePath) &&
@@ -66,5 +66,6 @@ module.exports = {
 	compilerConfig: {
 		target: { ie: 11 }
 	},
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	codeSplit: true
 }
