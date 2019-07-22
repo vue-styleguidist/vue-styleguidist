@@ -93,6 +93,7 @@ jobs:
 
       # run cypress tests
       - run: yarn test:cypress basic
+      - run: yarn test:cypress jsx-examples
 
 workflows:
   version: 2
