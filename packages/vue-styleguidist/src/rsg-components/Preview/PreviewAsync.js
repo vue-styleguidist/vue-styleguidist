@@ -77,81 +77,83 @@ class Preview extends Component {
 		let style
 		let previewComponent = {}
 
-		import('vue-inbrowser-compiler').then(({ compile, addScopedStyle }) => {
-			try {
-				const example = compile(code, {
-					...this.context.config.compilerConfig,
-					...(this.context.config.jsxInExamples
-						? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
-						: {})
-				})
-				style = example.style
-				if (example.script) {
-					// compile and execute the script
-					// it can be:
-					// - a script setting up variables => we set up the data function of previewComponent
-					// - a `new Vue()` script that will return a full config object
-					previewComponent = this.props.evalInContext(example.script)() || {}
+		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(
+			({ compile, addScopedStyle }) => {
+				try {
+					const example = compile(code, {
+						...this.context.config.compilerConfig,
+						...(this.context.config.jsxInExamples
+							? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
+							: {})
+					})
+					style = example.style
+					if (example.script) {
+						// compile and execute the script
+						// it can be:
+						// - a script setting up variables => we set up the data function of previewComponent
+						// - a `new Vue()` script that will return a full config object
+						previewComponent = this.props.evalInContext(example.script)() || {}
+					}
+					if (example.template) {
+						// if this is a pure template or if we are in hybrid vsg mode,
+						// we need to set the template up.
+						previewComponent.template = `<div>${example.template}</div>`
+					}
+				} catch (err) {
+					this.handleError(err)
+					previewComponent.template = '<div/>'
 				}
-				if (example.template) {
-					// if this is a pure template or if we are in hybrid vsg mode,
-					// we need to set the template up.
-					previewComponent.template = `<div>${example.template}</div>`
+
+				let el = this.mountNode.children[0]
+				if (!el) {
+					this.mountNode.innerHTML = ' '
+					this.mountNode.appendChild(document.createElement('div'))
+					el = this.mountNode.children[0]
 				}
-			} catch (err) {
-				this.handleError(err)
-				previewComponent.template = '<div/>'
-			}
 
-			let el = this.mountNode.children[0]
-			if (!el) {
-				this.mountNode.innerHTML = ' '
-				this.mountNode.appendChild(document.createElement('div'))
-				el = this.mountNode.children[0]
-			}
+				let extendsComponent = {}
+				if (vuex) {
+					extendsComponent = { store: vuex.default }
+				}
+				const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
+				previewComponent._scopeId = 'data-' + moduleId
 
-			let extendsComponent = {}
-			if (vuex) {
-				extendsComponent = { store: vuex.default }
-			}
-			const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
-			previewComponent._scopeId = 'data-' + moduleId
+				// if we are in local component registration, register current component
+				// NOTA: on independent md files, component.module is undefined
+				if (
+					component.module &&
+					this.context.config.locallyRegisterComponents &&
+					// NOTA: if the components member of the vue config object is
+					// already set it should not be changed
+					!previewComponent.components
+				) {
+					component.displayName = cleanComponentName(component.name)
+					// register component locally
+					previewComponent.components = {
+						[component.displayName]: component.module.default || component.module
+					}
+				}
 
-			// if we are in local component registration, register current component
-			// NOTA: on independent md files, component.module is undefined
-			if (
-				component.module &&
-				this.context.config.locallyRegisterComponents &&
-				// NOTA: if the components member of the vue config object is
-				// already set it should not be changed
-				!previewComponent.components
-			) {
-				component.displayName = cleanComponentName(component.name)
-				// register component locally
-				previewComponent.components = {
-					[component.displayName]: component.module.default || component.module
+				// then we just have to render the setup previewComponent in the prepared slot
+				const rootComponent = renderRootJsx
+					? renderRootJsx.default(previewComponent)
+					: { render: createElement => createElement(previewComponent) }
+				try {
+					new Vue({
+						...extendsComponent,
+						...rootComponent,
+						el
+					})
+				} catch (err) {
+					this.handleError(err)
+				}
+
+				// Add the scoped style if there is any
+				if (style) {
+					addScopedStyle(style, moduleId)
 				}
 			}
-
-			// then we just have to render the setup previewComponent in the prepared slot
-			const rootComponent = renderRootJsx
-				? renderRootJsx.default(previewComponent)
-				: { render: createElement => createElement(previewComponent) }
-			try {
-				new Vue({
-					...extendsComponent,
-					...rootComponent,
-					el
-				})
-			} catch (err) {
-				this.handleError(err)
-			}
-
-			// Add the scoped style if there is any
-			if (style) {
-				addScopedStyle(style, moduleId)
-			}
-		})
+		)
 	}
 
 	handleError = err => {
