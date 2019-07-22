@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 
-const Editor = lazy(() => import('./Editor.js'))
+const Editor = lazy(() => import(/* webpackChunkName: "editor" */ './Editor.js'))
 
 export default function EditorAsync(props) {
 	return (
