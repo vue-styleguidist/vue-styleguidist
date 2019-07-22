@@ -5,7 +5,9 @@ const styleguidist = require('../packages/vue-styleguidist/scripts')
 
 /* eslint-disable no-console */
 
-const dir = path.resolve(__dirname, '../examples', process.argv[2] || 'basic')
+const exampleName = process.argv[2] || 'basic'
+
+const dir = path.resolve(__dirname, '../examples', exampleName)
 const config = require(path.join(dir, 'styleguide.config'))
 
 config.logger = {
@@ -13,7 +15,7 @@ config.logger = {
 	warn: message => console.warn(`Warning: ${message}`)
 }
 
-config.components = path.resolve(dir, 'src/components/**/[A-Z]*.vue')
+config.components = path.resolve(dir, 'src/components/**/[A-Z]*.{vue,jsx}')
 
 delete config.ribbon
 delete config.usageMode
@@ -24,7 +26,9 @@ const { app } = styleguidist(config).server(err => {
 		throw err
 	} else {
 		cypress
-			.run()
+			.run({
+				spec: [path.join(__dirname, 'cypress/integration', exampleName, '*_spec.js')]
+			})
 			.then(() => {
 				app.close()
 			})
