@@ -1,4 +1,4 @@
-describe('All Component', () => {
+describe('Preview render', () => {
 	before(() => {
 		// Open simple button component in isolation
 		cy.visit('/')
