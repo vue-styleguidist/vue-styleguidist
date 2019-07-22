@@ -1,4 +1,5 @@
 const styleguidist = require('vue-styleguidist')
+const merge = require('webpack-merge')
 
 module.exports = api => {
 	api.configureWebpack(() => ({
@@ -69,7 +70,11 @@ module.exports = api => {
 
 function getStyleguidist(args, api) {
 	const conf = api.resolve(args.config || './styleguide.config.js')
-	return styleguidist(conf, config => (config.webpackConfig = getConfig(api)))
+	const userWebpackConfig = conf && conf.length ? require(conf).webpackConfig : {}
+	return styleguidist(
+		conf,
+		config => (config.webpackConfig = merge(getConfig(api), userWebpackConfig))
+	)
 }
 
 /**

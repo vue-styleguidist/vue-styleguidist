@@ -65,7 +65,7 @@ module.exports = {
 				{
 					test: /\.js?$/,
 					loader: 'babel-loader',
-					exclude: /node_modules/,
+					exclude: /(node_modules|packages)/,
 					query: {
 						cacheDirectory: true
 					}
@@ -98,5 +98,6 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	codeSplit: true
 }

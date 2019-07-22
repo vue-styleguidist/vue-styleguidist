@@ -24,6 +24,13 @@ module.exports = {
 		type: 'existing directory path',
 		example: 'assets'
 	},
+	codeSplit: {
+		default: false,
+		message: 'Code Split',
+		description:
+			'Should the styleguide try code splitting for better performance? NOte that you will need the proper transform in your babel config',
+		type: 'boolean'
+	},
 	compilerConfig: {
 		type: 'object',
 		default: {
