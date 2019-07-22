@@ -82,6 +82,18 @@ jobs:
       - run: yarn test:browser nuxtjs
       - run: yarn test:browser vuetify
 
+  cypress:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      # install cypress
+      - run: yarn add cypress
+
+      # run cypress tests
+      - run: yarn test:cypress basic
+
 workflows:
   version: 2
   test:
@@ -99,3 +111,6 @@ workflows:
       - examples-other:
           requires:
             - compile
+      - cypress:
+          requires:
+            - install
