@@ -1,5 +1,4 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const vueLoader = require('vue-loader')
 
 module.exports = {
 	jsxInExamples: true,
@@ -16,12 +15,8 @@ module.exports = {
 		module: {
 			rules: [
 				{
-					test: /\.vue$/,
-					loader: 'vue-loader'
-				},
-				{
 					test: /\.(jsx|js)$/,
-					exclude: /node_modules/,
+					exclude: /node_modules|packages/,
 					use: {
 						loader: 'babel-loader',
 						options: {
@@ -37,11 +32,10 @@ module.exports = {
 			]
 		},
 
-		plugins: [new vueLoader.VueLoaderPlugin()].concat(
-			process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
-		)
+		plugins: [].concat(process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : [])
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	codeSplit: true
 }
