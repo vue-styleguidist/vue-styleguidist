@@ -128,7 +128,7 @@ describe('render function slotHandler', () => {
 	})
 
 	it('should allow describing slots in render', () => {
-        const src = `
+		const src = `
     export default {
       render: function (createElement) {
         return createElement(
@@ -139,27 +139,46 @@ describe('render function slotHandler', () => {
       }
     }
     `
-        const def = parse(src)
-        if (def) {
-            slotHandler(documentation, def)
-        }
+		const def = parse(src)
+		if (def) {
+			slotHandler(documentation, def)
+		}
 
-        expect(mockSlotDescriptor.description).toEqual('Use this slot header')
-    })
+		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
+	})
+
+	it('should allow describing scopedSlots in render', () => {
+		const src = `
+      export default {
+        render(h) {
+          return h('div', [
+            /** @slot It is the default slot */
+            this.$scopedSlots.default(),
+           ]);
+         },
+      };
+  `
+		const def = parse(src)
+		if (def) {
+			slotHandler(documentation, def)
+		}
+
+		expect(mockSlotDescriptor.description).toEqual('It is the default slot')
+	})
 
 	it('should allow describing scoped slots in render', () => {
-        const src = `
+		const src = `
     export default {
       render: function (createElement) {
         return createElement('div', {}, [/** @slot Use this slot header */this.$scopedSlots.mySlot])
       }
     }
     `
-        const def = parse(src)
-        if (def) {
-            slotHandler(documentation, def)
-        }
+		const def = parse(src)
+		if (def) {
+			slotHandler(documentation, def)
+		}
 
-        expect(mockSlotDescriptor.description).toEqual('Use this slot header')
-    })
+		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
+	})
 })
