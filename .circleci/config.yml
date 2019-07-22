@@ -89,7 +89,7 @@ jobs:
           at: ~/
 
       # install cypress
-      - run: yarn add cypress
+      - run: yarn add --ignore-workspace-root-check cypress
 
       # run cypress tests
       - run: yarn test:cypress basic
