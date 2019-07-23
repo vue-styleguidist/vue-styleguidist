@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.3...v3.17.0) (2019-07-23)
+
+
+### Bug Fixes
+
+* make sure code split works with prism ([51e7660](https://github.com/vue-styleguidist/vue-styleguidist/commit/51e7660))
+
+
+### Features
+
+* add codeSplit option for compiler ([286e2ee](https://github.com/vue-styleguidist/vue-styleguidist/commit/286e2ee))
+* when codeSplit lazy load codemirror editor ([6f83989](https://github.com/vue-styleguidist/vue-styleguidist/commit/6f83989))
+
+
+
+
+
 ## [3.16.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.2...v3.16.3) (2019-07-19)
 
 
