@@ -8,6 +8,16 @@ Type: `String`, optional
 
 Your application static assets folder, will be accessible as `/` in the style guide dev server.
 
+## `codeSplit`
+
+Type: `Boolean`, default: false
+
+By default vue-styleguidist will build one single bundle for all your javascript. When this flag is on, the editor (CodeMirror) is loaded as a separate bundle and so is the compiler. Each of those 2 bundles are about 400Kb. It allows for a faster initial load.
+
+> **Note**: When you use this option and have a babel-loader in your webpack config, make sure that you either ignore `node_modules` in your babel loader or that you have the [proper plugin](https://babeljs.io/docs/en/babel-plugin-syntax-dynamic-import) for code splitting with babel. If not, you might get the following error:
+>
+> `SyntaxError: Support for the experimental syntax 'dynamicImport' isn't currently enabled`
+
 ## `compilerConfig`
 
 Type: `Object`, default: `{ objectAssign: 'Object.assign' }`
