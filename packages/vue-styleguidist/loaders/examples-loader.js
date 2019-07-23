@@ -8,7 +8,8 @@ const generate = require('escodegen').generate
 const toAst = require('to-ast')
 const b = require('ast-types').builders
 const { parseComponent } = require('vue-template-compiler')
-const { isCodeVueSfc } = require('vue-inbrowser-compiler')
+const { isCodeVueSfc, compile } = require('vue-inbrowser-compiler')
+const Terser = require('terser')
 const chunkify = require('react-styleguidist/lib/loaders/utils/chunkify').default
 const expandDefaultComponent = require('react-styleguidist/lib/loaders/utils/expandDefaultComponent')
 const getImports = require('react-styleguidist/lib/loaders/utils/getImports').default
@@ -136,6 +137,14 @@ module.exports = function examplesLoader(source) {
 	const examplesWithEval = examples.map(example => {
 		if (example.type === 'code') {
 			example.evalInContext = { toAST: () => b.identifier('evalInContext') }
+			if (config.codeSplit) {
+				const compiledExample = compile(example.content)
+				example.compiled = {
+					script: Terser.minify(`function t(){${compiledExample.script}}`).code.slice(13, -1),
+					template: compiledExample.template,
+					style: compiledExample.style
+				}
+			}
 		}
 		return example
 	})

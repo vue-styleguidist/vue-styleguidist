@@ -21,11 +21,14 @@ export default function processComponents(components) {
 			}
 		}
 
-		delete newComponent.props.example
-		newComponent.props.examples = [
-			...(component.props.examples || []),
-			...(component.props.example || [])
-		]
+		newComponent.props.examples.forEach(ex => {
+			if (ex.type === 'code') {
+				if (ex.compiled) {
+					ex.content = { raw: ex.content }
+					ex.content.compiled = ex.compiled
+				}
+			}
+		})
 
 		return newComponent
 	})
