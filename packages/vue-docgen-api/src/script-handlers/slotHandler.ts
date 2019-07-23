@@ -32,12 +32,14 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					bt.isMemberExpression(pathCall.node.callee.object) &&
 					bt.isThisExpression(pathCall.node.callee.object.object) &&
 					bt.isIdentifier(pathCall.node.callee.property) &&
-					(
-						pathCall.node.callee.object.property.name === '$slots' ||
-						pathCall.node.callee.object.property.name === '$scopedSlots'
-					)
+					(pathCall.node.callee.object.property.name === '$slots' ||
+						pathCall.node.callee.object.property.name === '$scopedSlots')
 				) {
-					documentation.getSlotDescriptor(pathCall.node.callee.property.name)
+					const doc = documentation.getSlotDescriptor(pathCall.node.callee.property.name)
+					doc.description =
+						doc.description && doc.description.length
+							? doc.description
+							: getExpressionDescription(pathCall.node)
 
 					return false
 				}
@@ -48,17 +50,14 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					bt.isMemberExpression(pathMember.node.object) &&
 					bt.isThisExpression(pathMember.node.object.object) &&
 					bt.isIdentifier(pathMember.node.object.property) &&
-					(
-						pathMember.node.object.property.name === '$slots' ||
-						pathMember.node.object.property.name === '$scopedSlots'
-					) &&
+					(pathMember.node.object.property.name === '$slots' ||
+						pathMember.node.object.property.name === '$scopedSlots') &&
 					bt.isIdentifier(pathMember.node.property)
 				) {
+					const doc = documentation.getSlotDescriptor(pathMember.node.property.name)
+					doc.description = getExpressionDescription(pathMember.node)
 
-                    const doc = documentation.getSlotDescriptor(pathMember.node.property.name)
-                    doc.description = getExpressionDescription(pathMember.node)
-
-                    return false;
+					return false
 				}
 				this.traverse(pathMember)
 			},
@@ -112,7 +111,7 @@ function getJSXDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): string 
 	const cmts = commentExpression.expression.innerComments
 	const lastComment = cmts[cmts.length - 1]
 
-    return parseCommentNode(lastComment);
+	return parseCommentNode(lastComment)
 }
 
 function getExpressionDescription(node: any): string {
@@ -124,18 +123,18 @@ function getExpressionDescription(node: any): string {
 }
 
 function parseCommentNode(node: bt.BaseComment): string {
-    if (node.type !== 'CommentBlock') {
-        return ''
-    }
-    const docBlock = node.value.replace(/^\*/, '').trim()
-    const jsDoc = getDoclets(docBlock)
-    if (!jsDoc.tags) {
-        return ''
-    }
-    const slotTags = jsDoc.tags.filter(t => t.title === 'slot')
-    if (slotTags.length) {
-        const tagContent = (slotTags[0] as Tag).content
-        return typeof tagContent === 'string' ? tagContent : ''
-    }
-    return ''
+	if (node.type !== 'CommentBlock') {
+		return ''
+	}
+	const docBlock = node.value.replace(/^\*/, '').trim()
+	const jsDoc = getDoclets(docBlock)
+	if (!jsDoc.tags) {
+		return ''
+	}
+	const slotTags = jsDoc.tags.filter(t => t.title === 'slot')
+	if (slotTags.length) {
+		const tagContent = (slotTags[0] as Tag).content
+		return typeof tagContent === 'string' ? tagContent : ''
+	}
+	return ''
 }
