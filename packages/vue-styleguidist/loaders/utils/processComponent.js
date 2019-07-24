@@ -33,7 +33,7 @@ module.exports = function processComponent(filepath, config) {
 	const componentMetadataPath = getComponentMetadataPath(filepath)
 	const hasExamplesFile = examplesFile && fs.existsSync(examplesFile)
 	let hasInternalExamples = false
-	if (!hasExamplesFile) {
+	if (!hasExamplesFile && fs.existsSync(componentPath)) {
 		const customBlocks = parseComponent(fs.readFileSync(componentPath, 'utf8')).customBlocks
 		hasInternalExamples = !!customBlocks && customBlocks.findIndex(p => p.type === 'docs') >= 0
 	}
