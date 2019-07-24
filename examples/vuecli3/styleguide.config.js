@@ -19,5 +19,6 @@ module.exports = {
 	webpackConfig: {
 		plugins: process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
 	},
-	codeSplit: true
+	codeSplit: true,
+	skipComponentsWithoutExample: true
 }
