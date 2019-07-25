@@ -191,7 +191,7 @@ module.exports = function(config, env) {
 	// if the user chose prism, load the prism editor instead of codemirror
 	customComponents.Editor = path.join(
 		CUSTOM_EDITOR_FOLDER,
-		config.simpleEditor ? 'EditorPrism' : config.codeSplit ? 'EditorAsync' : 'Editor'
+		(config.simpleEditor ? 'EditorPrism' : 'Editor') + (config.codeSplit ? 'Async' : '')
 	)
 
 	Object.keys(customComponents).forEach(function(key) {
