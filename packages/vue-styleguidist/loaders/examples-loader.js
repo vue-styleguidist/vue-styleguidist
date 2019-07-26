@@ -138,7 +138,10 @@ module.exports = function examplesLoader(source) {
 		if (example.type === 'code') {
 			example.evalInContext = { toAST: () => b.identifier('evalInContext') }
 			if (config.codeSplit) {
-				const compiledExample = compile(example.content)
+				const compiledExample = compile(example.content, {
+					...config.compilerConfig,
+					...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+				})
 				example.compiled = {
 					script: Terser.minify(`function t(){${compiledExample.script}}`).code.slice(13, -1),
 					template: compiledExample.template,
