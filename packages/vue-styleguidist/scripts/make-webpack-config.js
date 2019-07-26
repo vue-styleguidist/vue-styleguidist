@@ -175,7 +175,6 @@ module.exports = function(config, env) {
 
 	// For some components, the alias model is a little more complicated,
 	// because we only override a part of the directory
-	const CUSTOM_EDITOR_FOLDER = 'VsgEditor'
 	const custComp = [
 		'slots/UsageTabButton',
 		'ReactComponent/ReactComponent',
@@ -186,12 +185,16 @@ module.exports = function(config, env) {
 		return acc
 	}, {})
 
+	if (config.codeSplit) {
+		customComponents['Playground/Playground'] = 'PlaygroundAsync/PlaygroundAsync'
+	}
+
 	customComponents.Preview = path.join('Preview', config.codeSplit ? 'PreviewAsync' : 'Preview')
 
 	// if the user chose prism, load the prism editor instead of codemirror
 	customComponents.Editor = path.join(
-		CUSTOM_EDITOR_FOLDER,
-		config.simpleEditor ? 'EditorPrism' : config.codeSplit ? 'EditorAsync' : 'Editor'
+		'VsgEditor',
+		(config.simpleEditor ? 'EditorPrism' : 'Editor') + (config.codeSplit ? 'Async' : '')
 	)
 
 	Object.keys(customComponents).forEach(function(key) {

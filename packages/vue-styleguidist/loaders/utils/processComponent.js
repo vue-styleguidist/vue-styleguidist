@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const { parseComponent } = require('vue-template-compiler')
 const getNameFromFilePath = require('react-styleguidist/lib/loaders/utils/getNameFromFilePath')
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const slugger = require('react-styleguidist/lib/loaders/utils/slugger')
@@ -30,13 +31,21 @@ module.exports = function processComponent(filepath, config) {
 	const props = requireIt(`!!${vueDocLoader}!${filepath}`)
 	const examplesFile = config.getExampleFilename(filepath)
 	const componentMetadataPath = getComponentMetadataPath(filepath)
+	const hasExamplesFile = examplesFile && fs.existsSync(examplesFile)
+	let hasInternalExamples = false
+	if (!hasExamplesFile && fs.existsSync(componentPath)) {
+		const customBlocks = parseComponent(fs.readFileSync(componentPath, 'utf8')).customBlocks
+		hasInternalExamples = !!customBlocks && customBlocks.findIndex(p => p.type === 'docs') >= 0
+	}
+	const hasExamples = hasExamplesFile || hasInternalExamples
+
 	return {
 		filepath: componentPath,
 		slug: slugger.slug(componentName),
 		pathLine: config.getComponentPathLine(componentPath),
 		module: requireIt(filepath),
 		props,
-		hasExamples: examplesFile && fs.existsSync(examplesFile),
+		hasExamples,
 		metadata: fs.existsSync(componentMetadataPath) ? requireIt(componentMetadataPath) : {}
 	}
 }
