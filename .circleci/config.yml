@@ -74,11 +74,13 @@ jobs:
 
       # Build all examples
       - run: yarn build jsx
+      - run: yarn build jsx-examples
       - run: yarn build nuxtjs
       - run: yarn build vuetify
 
       # Check that examples really works: no JS errors on load
       - run: yarn test:browser jsx
+      - run: yarn test:browser jsx-examples
       - run: yarn test:browser nuxtjs
       - run: yarn test:browser vuetify
 
