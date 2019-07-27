@@ -90,6 +90,12 @@ module.exports = {
 
 Your components will be able to invoke the URL `http://localhost:6060/custom-endpoint` from their examples.
 
+## `copyCodeButton`
+
+Type: `Boolean`, default: `false`
+
+Adds a little button on the top right hand corner of the editor to copy the contents of the editor into the clipboard.
+
 ## `dangerouslyUpdateWebpackConfig`
 
 Type: `Function`, optional
