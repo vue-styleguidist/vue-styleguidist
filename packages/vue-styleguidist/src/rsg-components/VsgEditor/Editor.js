@@ -61,10 +61,14 @@ export class Editor extends Component {
 
 	shouldComponentUpdate(nextProps) {
 		const differentLocation = this.location !== document.location.href
-		return !!(
+		if (
 			(differentLocation || this.getEditorConfig(nextProps).readOnly) &&
 			nextProps.code !== this.props.code
-		)
+		) {
+			this.location = document.location.href
+			return true
+		}
+		return false
 	}
 
 	getEditorConfig(props) {
