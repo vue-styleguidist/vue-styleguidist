@@ -191,11 +191,32 @@ module.exports = function(config, env) {
 
 	customComponents.Preview = path.join('Preview', config.codeSplit ? 'PreviewAsync' : 'Preview')
 
-	// if the user chose prism, load the prism editor instead of codemirror
-	customComponents.Editor = path.join(
-		'VsgEditor',
-		(config.simpleEditor ? 'EditorPrism' : 'Editor') + (config.codeSplit ? 'Async' : '')
-	)
+	const buildEditorComponentChain = cc => {
+		let key = 'Editor'
+
+		// avoid codesplitting tiny prism only spli heavy codemirror
+		if (config.codeSplit && !config.simpleEditor) {
+			cc[key] = 'EditorAsync'
+			key = 'EditorStatic'
+		}
+
+		// adapt compiled/raw format neede for precompiled preview
+		if (config.codeSplit) {
+			cc[key] = 'EditorPrecompiled'
+			key = 'EditorString'
+		}
+
+		// add codebutton if asked for
+		if (config.copyCodeButton) {
+			cc[key] = 'EditorWithToolbar'
+			key = 'EditorNoTools'
+		}
+
+		// if the user chose prism, load the prism editor instead of codemirror
+		cc[key] = path.join('VsgEditor', config.simpleEditor ? 'EditorPrism' : 'Editor')
+	}
+
+	buildEditorComponentChain(customComponents)
 
 	Object.keys(customComponents).forEach(function(key) {
 		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(sourceSrc, customComponents[key])

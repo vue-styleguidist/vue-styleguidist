@@ -63,6 +63,13 @@ module.exports = {
 	configureServer: {
 		type: 'function'
 	},
+	copyCodeButton: {
+		type: 'boolean',
+		message: 'Easily copy the code of the example',
+		description:
+			'Add a button on the top right of the code sections to copy to clipboard the current contents of the editor',
+		default: false
+	},
 	dangerouslyUpdateWebpackConfig: {
 		type: 'function'
 	},

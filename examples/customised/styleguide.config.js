@@ -99,5 +99,8 @@ module.exports = {
 	usageMode: 'expand',
 	exampleMode: 'expand',
 	styleguideDir: 'dist',
-	codeSplit: true
+	codeSplit: true,
+	editorConfig: {
+		theme: 'night'
+	}
 }

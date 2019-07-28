@@ -15,8 +15,6 @@ describe('Preview render', () => {
 			'Push Me',
 			'In the docs block',
 			'Fire example event!',
-			'Second item',
-			'',
 			'Open',
 			'1',
 			'Open Modal',
@@ -24,7 +22,8 @@ describe('Preview render', () => {
 			'',
 			'Default Example Usage',
 			'',
-			''
+			'',
+			'Second item'
 		]
 
 		texts.forEach((text, i) => {
