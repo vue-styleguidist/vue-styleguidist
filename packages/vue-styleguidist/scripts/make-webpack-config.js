@@ -206,6 +206,12 @@ module.exports = function(config, env) {
 			key = 'EditorString'
 		}
 
+		// add codebutton if asked for
+		if (config.copyCodeButton) {
+			cc[key] = 'EditorWithToolbar'
+			key = 'EditorNoTools'
+		}
+
 		// if the user chose prism, load the prism editor instead of codemirror
 		cc[key] = path.join('VsgEditor', config.simpleEditor ? 'EditorPrism' : 'Editor')
 	}
