@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.17.2...v3.18.0) (2019-07-28)
+
+
+### Bug Fixes
+
+* async conlict with routing ([75424f7](https://github.com/vue-styleguidist/vue-styleguidist/commit/75424f7))
+* better PropTypes for PlaygroundAsync ([3b60e3e](https://github.com/vue-styleguidist/vue-styleguidist/commit/3b60e3e))
+
+
+### Features
+
+* add copyCodeButton option ([90767af](https://github.com/vue-styleguidist/vue-styleguidist/commit/90767af))
+
+
+
+
+
 ## [3.17.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.17.1...v3.17.2) (2019-07-26)
 
 

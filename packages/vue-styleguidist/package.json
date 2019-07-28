@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "3.17.2",
+	"version": "3.18.0",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
 		"precompile": "rimraf lib/",
