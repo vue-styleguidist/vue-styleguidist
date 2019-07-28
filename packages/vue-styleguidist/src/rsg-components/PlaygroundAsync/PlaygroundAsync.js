@@ -6,7 +6,14 @@ import Playground from 'react-styleguidist/lib/client/rsg-components/Playground/
 class PlaygroundAsync extends Component {
 	static propTypes = {
 		...Playground.propTypes,
-		code: PropTypes.object.isRequired
+		code: PropTypes.shape({
+			raw: PropTypes.string.isRequired,
+			compiled: PropTypes.shape({
+				script: PropTypes.string.isRequired,
+				template: PropTypes.string.isRequired,
+				style: PropTypes.string.isRequired
+			}).isRequired
+		}).isRequired
 	}
 
 	static contextTypes = Playground.contextTypes

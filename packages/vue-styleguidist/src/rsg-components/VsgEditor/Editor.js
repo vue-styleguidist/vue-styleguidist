@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Styled from 'rsg-components/Styled'
 import debounce from 'lodash/debounce'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
 import 'codemirror/mode/jsx/jsx'
+import Styled from 'rsg-components/Styled'
 
 // We’re explicitly specifying Webpack loaders here so we could skip specifying them in Webpack configuration.
 // That way we could avoid clashes between our loaders and user loaders.
