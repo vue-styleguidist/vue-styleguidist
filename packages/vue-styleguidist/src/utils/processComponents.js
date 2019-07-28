@@ -23,7 +23,7 @@ export default function processComponents(components) {
 
 		newComponent.props.examples.forEach(ex => {
 			if (ex.type === 'code') {
-				if (ex.compiled) {
+				if (ex.compiled && !ex.content.compiled) {
 					ex.content = { raw: ex.content }
 					ex.content.compiled = ex.compiled
 				}
