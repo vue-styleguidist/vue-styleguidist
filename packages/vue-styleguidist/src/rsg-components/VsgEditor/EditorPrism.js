@@ -18,6 +18,9 @@ const highlight = lang => {
 }
 
 const styles = ({ fontFamily, fontSize, color, borderRadius }) => ({
+	container: {
+		position: 'relative'
+	},
 	root: {
 		fontFamily: fontFamily.monospace,
 		fontSize: fontSize.small,
@@ -37,6 +40,13 @@ const styles = ({ fontFamily, fontSize, color, borderRadius }) => ({
 			boxShadow: [[0, 0, 0, 2, color.focus]]
 		},
 		...prismTheme({ color })
+	},
+	copyButton: {
+		position: 'absolute',
+		right: 12,
+		top: 12,
+		zIndex: 3,
+		cursor: 'pointer'
 	}
 })
 
