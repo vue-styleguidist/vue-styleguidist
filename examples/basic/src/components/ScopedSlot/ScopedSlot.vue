@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import List from './List.vue'
+import List from './_List.vue'
 export default {
-	name: 'App',
+	name: 'ScopedSlot',
 	components: {
 		List
 	},
