@@ -103,7 +103,7 @@
     "lodash": "^4.17.11",
     "markdown-toc": "^1.2.0",
     "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "prettier": "1.13.7",
     "prop-types": "^15.6.2",
     "puppeteer": "^1.12.2",
