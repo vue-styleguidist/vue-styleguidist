@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.18.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.18.0...v3.18.1) (2019-07-30)
+
+
+### Bug Fixes
+
+* editor should update when changing page ([35d0c3f](https://github.com/vue-styleguidist/vue-styleguidist/commit/35d0c3f))
+
+
+
+
+
 # [3.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.17.2...v3.18.0) (2019-07-28)
 
 
