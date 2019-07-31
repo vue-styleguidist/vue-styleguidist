@@ -6,6 +6,9 @@
   "command": {
     "publish": {
       "conventionalCommits": true
+    },
+    "version": {
+      "message": "%s [skip ci]"
     }
   }
 }

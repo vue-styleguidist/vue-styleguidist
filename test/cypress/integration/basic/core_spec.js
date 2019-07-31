@@ -6,13 +6,13 @@ describe('Styleguidist core', () => {
 	})
 
 	it('shows multiple components in normal mode', () => {
-		cy.get('[id$=container]').should('have.length.above', 1)
+		cy.get('[data-testid$=container]').should('have.length.above', 1)
 	})
 
 	it('shows single component in isolated mode', () => {
 		cy.get('[title="Open isolated"]')
 			.first()
 			.click()
-		cy.get('[id$=container]').should('have.length', 1)
+		cy.get('[data-testid$=container]').should('have.length', 1)
 	})
 })
