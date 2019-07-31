@@ -15,7 +15,7 @@ export default {
 </script>
 
 <docs>
-You can have the example in remote files too.
+Example can be their own file. Use the following syntax.
 
 ````markdown
 ```[import](./_radioExample.vue)
@@ -27,7 +27,14 @@ this text is going to be ignored
 this text is going to be ignored
 ```
 
-Or you can try this
+They can be imported from anywhere from your source. 
+To keep your code tidy and the navigation easy, keep then in the same directory as your component.
+
+````markdown
+```[import](./examples/example.js)
+this text is going to be ignored
+```
+````
 
 ```[import](./examples/example.js)
 this text is going to be ignored

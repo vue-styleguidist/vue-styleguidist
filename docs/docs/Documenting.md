@@ -598,3 +598,17 @@ export default {
   }
 }
 ```
+
+## Importing examples
+
+To make autocomplete and syntax higlighting practical, one can as well import examples from external files. In the following example `./myExample.vue` will be used as an example.
+
+````markdown
+```[import](./myExample.vue)
+Text typed here will be entirely ignored. You can use it to describe the example imported for maintenance purposes
+```
+````
+
+> **Note** No need to spcify the language as it will be inferred from the name of the file
+
+> **Note** All flags described [here](#usage-examples-and-readme-files) cn still be used

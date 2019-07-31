@@ -86,6 +86,11 @@ export default {
 
 it works with spread too
 
-```[import](./_example.jsx)
-...ignored text...
+```jsx
+const a = { color: 'purple', size: 'large' }
+export default {
+  render() {
+    return <Button {...a}>text</Button>
+  }
+}
 ```
