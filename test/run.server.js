@@ -13,11 +13,17 @@ config.logger = {
 	warn: message => console.warn(`Warning: ${message}`)
 }
 
-config.components = path.resolve(dir, 'src/components/**/[A-Z]*.{vue,jsx}')
+config.components = path.resolve(dir, config.components)
 
 delete config.ribbon
 delete config.usageMode
 delete config.exampleMode
-delete config.codeSplit
 
-styleguidist(config).server(() => {})
+styleguidist(config).server((err, config) => {
+	if (err) {
+		console.warn(err)
+	} else {
+		const url = `http://localhost:${config.serverPort}`
+		console.log(`Listening at ${url}`)
+	}
+})
