@@ -28,7 +28,6 @@ export default function compileVueCodeForEvalFunction(
 	config: any = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
-	console.log('nonCompiledComponent.script', nonCompiledComponent.script)
 	return {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, config).code

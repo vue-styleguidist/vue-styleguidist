@@ -40,7 +40,7 @@ module.exports = function getExamples(
 		return requireIt(`!!${examplesLoader}?${qss.encode(query)}!${examplesFile}`)
 	}
 
-	if (defaultExample) {
+	if (defaultExample && !isComponentDocInVueFile) {
 		return requireIt(`!!${examplesLoader}?${qss.encode(query)}!${defaultExample}`)
 	}
 
