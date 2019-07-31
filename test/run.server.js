@@ -1,11 +1,9 @@
 const path = require('path')
-// eslint-disable-next-line import/no-unresolved
-const cypress = require('cypress')
 const styleguidist = require('../packages/vue-styleguidist/scripts')
 
 /* eslint-disable no-console */
 
-const exampleName = process.argv[2] || 'basic'
+const exampleName = process.env.CY_EXAMPLE_FOLDER || 'basic'
 
 const dir = path.resolve(__dirname, '../examples', exampleName)
 const config = require(path.join(dir, 'styleguide.config'))
@@ -15,25 +13,17 @@ config.logger = {
 	warn: message => console.warn(`Warning: ${message}`)
 }
 
-config.components = path.resolve(dir, 'src/components/**/[A-Z]*.{vue,jsx}')
+config.components = path.resolve(dir, config.components)
 
 delete config.ribbon
 delete config.usageMode
 delete config.exampleMode
 
-const { app } = styleguidist(config).server(err => {
+styleguidist(config).server((err, config) => {
 	if (err) {
-		throw err
+		console.warn(err)
 	} else {
-		cypress
-			.run({
-				spec: [path.join(__dirname, 'cypress/integration', exampleName, '*_spec.js')]
-			})
-			.then(() => {
-				app.close()
-			})
-			.catch(err => {
-				throw err
-			})
+		const url = `http://localhost:${config.serverPort}`
+		console.log(`Listening at ${url}`)
 	}
 })

@@ -81,7 +81,7 @@ describe('Single component', () => {
 				})
 
 			// Wait for CodeMirror to update
-			cy.wait(500)
+			cy.wait(1000)
 
 			cy.get('@preview')
 				.find('button')

@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/node:lts-browsers
+    - image: cypress/included:3.4.0
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -90,12 +90,15 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      # install cypress
-      - run: yarn add --ignore-workspace-root-check cypress
-
       # run cypress tests
-      - run: yarn test:cypress basic
-      - run: yarn test:cypress jsx-examples
+      - run: yarn cross-env CY_EXAMPLE_FOLDER=basic yarn cy
+      - store_artifacts:
+          path: /root/vue-styleguidist/test/cypress/screenshots
+          destination: cy-screenshots-basic
+      - run: yarn cross-env CY_EXAMPLE_FOLDER=jsx-examples yarn cy
+      - store_artifacts:
+          path: /root/vue-styleguidist/test/cypress/screenshots
+          destination: cy-screenshots-jsx-examples
 
 workflows:
   version: 2
