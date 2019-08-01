@@ -28,6 +28,7 @@ export default function compileVueCodeForEvalFunction(
 	config: any = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
+	console.log('nonCompiledComponent.script', nonCompiledComponent.script)
 	return {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, config).code
@@ -74,7 +75,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		// replace `new Vue({data})` by `return {data}`
 		ExpressionStatement(node: any) {
 			if (node.expression.type === 'NewExpression' && node.expression.callee.name === 'Vue') {
-				const before = code.slice(0, node.expression.start)
+				const before = code.slice(0, node.expression.start + offset)
 				const optionsNode =
 					node.expression.arguments && node.expression.arguments.length
 						? node.expression.arguments[0]
@@ -88,7 +89,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 					)
 					endIndex += JSX_ADDON_LENGTH
 				}
-				const after = optionsNode ? code.slice(optionsNode.start, endIndex) : ''
+				const after = optionsNode ? code.slice(optionsNode.start + offset, endIndex + offset) : ''
 				code = before + ';return ' + after
 			}
 		},
