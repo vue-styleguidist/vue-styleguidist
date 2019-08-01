@@ -147,10 +147,16 @@ module.exports = function(config, env) {
 		webpackConfig = merge(webpackConfig, {
 			plugins: [new webpack.HotModuleReplacementPlugin()],
 			output: {
-				publicPath: config.styleguidePublicPath
+				publicPath:
+					webpackConfig.output && webpackConfig.output.publicPath
+						? webpackConfig.output.publicPath
+						: config.styleguidePublicPath
 			},
 			devServer: {
-				publicPath: config.styleguidePublicPath
+				publicPath:
+					webpackConfig.devServer && webpackConfig.devServer.publicPath
+						? webpackConfig.devServer.publicPath
+						: config.styleguidePublicPath
 			},
 			entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 		})
