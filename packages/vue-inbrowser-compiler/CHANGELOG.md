@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.18.1...v3.19.0) (2019-08-02)
+
+
+### Bug Fixes
+
+* combining new Vue and imports was impossible ([d37359c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d37359c))
+
+
+### Features
+
+* allow import syntax ([5c61678](https://github.com/vue-styleguidist/vue-styleguidist/commit/5c61678)), closes [#104](https://github.com/vue-styleguidist/vue-styleguidist/issues/104)
+
+
+
+
+
 ## [3.16.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.16.2...v3.16.3) (2019-07-19)
 
 

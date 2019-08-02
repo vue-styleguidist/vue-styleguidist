@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.18.1...v3.19.0) (2019-08-02)
+
+
+### Bug Fixes
+
+* combining new Vue and imports was impossible ([d37359c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d37359c))
+* default example only appear when no doc ([b3b4156](https://github.com/vue-styleguidist/vue-styleguidist/commit/b3b4156))
+* webpackConfig has priority on publicPath ([a06c1c6](https://github.com/vue-styleguidist/vue-styleguidist/commit/a06c1c6)), closes [#529](https://github.com/vue-styleguidist/vue-styleguidist/issues/529)
+* wrong propTypes for playgroundAsync ([3fffa13](https://github.com/vue-styleguidist/vue-styleguidist/commit/3fffa13))
+
+
+### Features
+
+* allow import syntax ([5c61678](https://github.com/vue-styleguidist/vue-styleguidist/commit/5c61678)), closes [#104](https://github.com/vue-styleguidist/vue-styleguidist/issues/104)
+
+
+
+
+
 ## [3.18.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.18.0...v3.18.1) (2019-07-30)
 
 
