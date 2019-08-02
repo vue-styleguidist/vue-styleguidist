@@ -31,11 +31,13 @@ module.exports = function(source) {
 	const propsParser = config.propsParser || defaultParser
 
 	let docs = {}
+	let isComponentDocInVueFile = false
 	try {
 		docs = propsParser(file, source)
 
 		const componentVueDoc = getComponentVueDoc(source, file)
 		if (componentVueDoc) {
+			isComponentDocInVueFile = true
 			docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
 		} else if (docs.tags) {
 			const examples = docs.tags.examples
@@ -100,7 +102,13 @@ module.exports = function(source) {
 	}
 
 	const examplesFile = config.getExampleFilename(file)
-	docs.examples = getExamples(file, examplesFile, docs.displayName, config.defaultExample)
+	docs.examples = getExamples(
+		file,
+		examplesFile,
+		docs.displayName,
+		config.defaultExample,
+		isComponentDocInVueFile
+	)
 
 	if (config.updateDocs) {
 		docs = config.updateDocs(docs, file)

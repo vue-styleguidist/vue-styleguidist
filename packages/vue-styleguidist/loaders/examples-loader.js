@@ -9,13 +9,13 @@ const toAst = require('to-ast')
 const b = require('ast-types').builders
 const { parseComponent } = require('vue-template-compiler')
 const { isCodeVueSfc, compile } = require('vue-inbrowser-compiler')
-const Terser = require('terser')
 const chunkify = require('react-styleguidist/lib/loaders/utils/chunkify').default
 const expandDefaultComponent = require('react-styleguidist/lib/loaders/utils/expandDefaultComponent')
 const getImports = require('react-styleguidist/lib/loaders/utils/getImports').default
 const requireIt = require('react-styleguidist/lib/loaders/utils/requireIt')
 const getComponentVueDoc = require('./utils/getComponentVueDoc')
 const cleanComponentName = require('./utils/cleanComponentName')
+const importCodeExampleFile = require('./utils/importCodeExampleFile')
 
 // Hack the react scaffolding to be able to load client
 const absolutize = filepath =>
@@ -49,9 +49,10 @@ module.exports = function examplesLoader(source) {
 		source = expandDefaultComponent(source, cleanDisplayName)
 	}
 
-	const updateExample = config.updateExample
-		? props => config.updateExample(props, this.resourcePath)
-		: undefined
+	const updateExample = props => {
+		const p = importCodeExampleFile(props, this.resourcePath, this)
+		return config.updateExample ? config.updateExample(p, this.resourcePath) : p
+	}
 
 	// Load examples
 	const examples = chunkify(source, updateExample, customLangs)
@@ -80,7 +81,11 @@ module.exports = function examplesLoader(source) {
 	// because webpack changes its name to something like __webpack__require__().
 	const allCodeExamples = filter(examples, { type: 'code' })
 	const requiresFromExamples = allCodeExamples.reduce((requires, example) => {
-		return requires.concat(getExampleLiveImports(example.content))
+		const requiresLocal = getExampleLiveImports(example.content)
+		const importPath = example.settings.importpath
+		return requires.concat(
+			importPath ? requiresLocal.map(path => ({ importPath, path })) : requiresLocal
+		)
 	}, [])
 
 	// Auto imported modules.
@@ -102,7 +107,20 @@ module.exports = function examplesLoader(source) {
 	// “Prerequire” modules required in Markdown examples and context so they
 	// end up in a bundle and be available at runtime
 	const allModulesCode = allModules.reduce((requires, requireRequest) => {
-		requires[requireRequest] = requireIt(requireRequest)
+		// if we are looking at a remote example
+		// resolve the requires from there
+
+		if (requireRequest.importPath) {
+			if (!requires[requireRequest.importPath]) {
+				requires[requireRequest.importPath] = {}
+			}
+			const relativePath = /^\./.test(requireRequest.path)
+				? path.join(requireRequest.importPath, requireRequest.path)
+				: requireRequest.path
+			requires[requireRequest.importPath][requireRequest.path] = requireIt(relativePath)
+		} else {
+			requires[requireRequest] = requireIt(requireRequest)
+		}
 		return requires
 	}, {})
 
@@ -136,14 +154,27 @@ module.exports = function examplesLoader(source) {
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map(example => {
 		if (example.type === 'code') {
-			example.evalInContext = { toAST: () => b.identifier('evalInContext') }
+			const importPath = example.settings && example.settings.importpath
+			example.evalInContext = {
+				toAST: () =>
+					b.callExpression(
+						b.memberExpression(b.identifier('evalInContext'), b.identifier('bind')),
+						[
+							b.identifier('null'),
+							b.callExpression(
+								b.memberExpression(b.identifier('requireInRuntime'), b.identifier('bind')),
+								[b.identifier('null'), importPath ? b.literal(importPath) : b.identifier('null')]
+							)
+						]
+					)
+			}
 			if (config.codeSplit) {
 				const compiledExample = compile(example.content, {
 					...config.compilerConfig,
 					...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
 				})
 				example.compiled = {
-					script: Terser.minify(`function t(){${compiledExample.script}}`).code.slice(13, -1),
+					script: compiledExample.script,
 					template: compiledExample.template,
 					style: compiledExample.style
 				}
@@ -165,13 +196,11 @@ var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
 var pragma = require(${JSON.stringify(PRAGMA_JSX_PATH)});
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
-	requireInRuntime, 
-	pragma.default, 
-	pragma.concatenate);`
+	pragma.default, pragma.concatenate);`
 			: `
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
-	requireInRuntime, null, null)`
+	null, null)`
 	}
 module.exports = ${generate(toAst(examplesWithEval))}`
 }

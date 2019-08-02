@@ -94,11 +94,11 @@ jobs:
       - run: yarn cross-env CY_EXAMPLE_FOLDER=basic yarn cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
-          destination: cy-screenshots-basic
+          destination: cy-screenshots
       - run: yarn cross-env CY_EXAMPLE_FOLDER=jsx-examples yarn cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
-          destination: cy-screenshots-jsx-examples
+          destination: cy-screenshots
 
 workflows:
   version: 2

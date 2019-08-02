@@ -22,6 +22,9 @@ describe('Preview render', () => {
 			'',
 			'Default Example Usage',
 			'',
+			'world',
+			'Medor',
+			'',
 			'',
 			'Second item'
 		]
@@ -52,12 +55,12 @@ describe('Preview render', () => {
 
 		it('random buttons', () => {
 			cy.get('[class^="rsg--preview-"]')
-				.eq(15)
+				.eq(14)
 				.find('button')
 				.should('exist')
 
 			cy.get('[class^="rsg--preview-"]')
-				.eq(16)
+				.eq(18)
 				.find('button')
 				.should('exist')
 		})
