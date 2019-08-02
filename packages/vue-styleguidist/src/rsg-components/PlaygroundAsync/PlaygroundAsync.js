@@ -9,9 +9,9 @@ class PlaygroundAsync extends Component {
 		code: PropTypes.shape({
 			raw: PropTypes.string.isRequired,
 			compiled: PropTypes.shape({
-				script: PropTypes.string.isRequired,
-				template: PropTypes.string.isRequired,
-				style: PropTypes.string.isRequired
+				script: PropTypes.string,
+				template: PropTypes.string,
+				style: PropTypes.string
 			}).isRequired
 		}).isRequired
 	}

@@ -11,15 +11,17 @@
  * Also prepends a given `code` with a `header` (maps required context modules to local variables).
  *
  * @param {string} header
- * @param {Function} require
  * @param {Function} __pragma__
  * @param {Function} __concatenate__
+ * @param {Function} require
  * @param {string} code
  * @return {Function}
  */
-module.exports = function evalInContext(header, require, __pragma__, __concatenate__, code) {
+module.exports = function evalInContext(header, __pragma__, __concatenate__, require, code) {
 	var func = new Function('require', '__pragma__', '__concatenate__', header + code) // eslint-disable-line no-new-func
 
+	var requireScoped = require
+
 	// Bind the `require` function, other context arguments will be passed from the frontend
-	return func.bind(null, require, __pragma__, __concatenate__)
+	return func.bind(null, requireScoped, __pragma__, __concatenate__)
 }

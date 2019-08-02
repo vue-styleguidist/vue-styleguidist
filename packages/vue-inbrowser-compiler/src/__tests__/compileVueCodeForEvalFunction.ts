@@ -80,4 +80,39 @@ export default {
 		const dummySet = sut.script
 		expect(dummySet).toContain('pragma( HelloWorld')
 	})
+
+	it('should combine import and new vue', () => {
+		const sut = compileVueCodeForEvalFunction(`
+import Vue from 'vue'
+import three from '../RandomButton/dog-names'
+
+new Vue({
+	data() {
+		let i = 0
+		return {
+			opt: three.map(a => ({ text: a, value: i++ }))
+		}
+	},
+	template: '<Radio :options="opt" />'
+})
+		`)
+
+		expect(sut.script).toMatchInlineSnapshot(`
+		"
+		var vue$0 = require('vue');
+		var Vue = vue$0.default || vue$0;
+		var dog_names$44 = require('../RandomButton/dog-names');
+		var three = dog_names$44.default || dog_names$44;
+		
+		;return {
+			data: function data() {
+				var i = 0
+				return {
+					opt: three.map(function (a) { return ({ text: a, value: i++ }); })
+				}
+			},
+			template: '<Radio :options=\\"opt\\" />'
+		}"
+	`)
+	})
 })

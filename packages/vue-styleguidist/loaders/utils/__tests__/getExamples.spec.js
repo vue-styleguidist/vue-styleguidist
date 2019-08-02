@@ -1,6 +1,6 @@
 import getExamples from '../getExamples'
 
-it('getExamples() should return require with examples-loader is component ha example file', () => {
+it('getExamples() should return require with examples-loader if component has example files', () => {
 	const file = 'file.md'
 	const examplesFile = __filename
 	const result = getExamples(file, examplesFile)

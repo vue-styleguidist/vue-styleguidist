@@ -12,9 +12,16 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
  * @param {string} examplesFile
  * @param {string} displayName
  * @param {string} defaultExample
+ * @param {boolean} isComponentDocInVueFile
  * @returns {object|Array}
  */
-module.exports = function getExamples(file, examplesFile, displayName, defaultExample) {
+module.exports = function getExamples(
+	file,
+	examplesFile,
+	displayName,
+	defaultExample,
+	isComponentDocInVueFile
+) {
 	const examplesFileToLoad = examplesFile || defaultExample
 	if (!examplesFileToLoad) {
 		return null
@@ -25,7 +32,7 @@ module.exports = function getExamples(file, examplesFile, displayName, defaultEx
 	const query = {
 		displayName,
 		file: relativePath,
-		shouldShowDefaultExample: !examplesFile && !!defaultExample,
+		shouldShowDefaultExample: !examplesFile && !!defaultExample && !isComponentDocInVueFile,
 		customLangs: 'vue|js|jsx'
 	}
 
@@ -33,7 +40,7 @@ module.exports = function getExamples(file, examplesFile, displayName, defaultEx
 		return requireIt(`!!${examplesLoader}?${qss.encode(query)}!${examplesFile}`)
 	}
 
-	if (defaultExample) {
+	if (defaultExample && !isComponentDocInVueFile) {
 		return requireIt(`!!${examplesLoader}?${qss.encode(query)}!${defaultExample}`)
 	}
 

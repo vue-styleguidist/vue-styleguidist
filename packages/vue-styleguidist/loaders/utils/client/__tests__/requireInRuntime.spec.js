@@ -6,11 +6,11 @@ const map = {
 }
 
 it('should return a module from the map', () => {
-	const result = requireInRuntime(map, 'a')
+	const result = requireInRuntime(map, null, 'a')
 	expect(result).toBe(map.a)
 })
 
 it('should throw if module is not in the map', () => {
-	const fn = () => requireInRuntime(map, 'c')
+	const fn = () => requireInRuntime(map, null, 'c')
 	expect(fn).toThrowError('require() statements can be added')
 })
