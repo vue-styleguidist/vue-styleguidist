@@ -12,7 +12,7 @@ module.exports = function getComponentVueDoc(source, file) {
 	if (parts.customBlocks) {
 		const docBlocks = parts.customBlocks.filter(block => block.type === 'docs')[0]
 		if (docBlocks && docBlocks.src) {
-			const jsFilePath = path.join(path.dirname(file), parts.script.src)
+			const jsFilePath = path.join(path.dirname(file), docBlocks.src)
 			return readSeparateScriptFile(jsFilePath)
 		} else if (docBlocks && docBlocks.content) {
 			return docBlocks.content
