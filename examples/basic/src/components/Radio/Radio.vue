@@ -32,7 +32,8 @@ To keep your code tidy and the navigation easy, keep then in the same directory 
 
 ````markdown
 ```[import](./examples/example.js)
-this text is going to be ignored
+If you do this, vscode will not recognize the import as a link.<template>
+Prefer examples in the same folder as your comoponent.
 ```
 ````
 

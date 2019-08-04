@@ -144,22 +144,19 @@ module.exports = function(config, env) {
 			optimization
 		})
 	} else {
-		webpackConfig = merge(webpackConfig, {
-			plugins: [new webpack.HotModuleReplacementPlugin()],
-			output: {
-				publicPath:
-					webpackConfig.output && webpackConfig.output.publicPath
-						? webpackConfig.output.publicPath
-						: config.styleguidePublicPath
+		webpackConfig = merge(
+			{
+				output: {
+					publicPath: config.styleguidePublicPath
+				},
+				devServer: {
+					publicPath: config.styleguidePublicPath
+				},
+				plugins: [new webpack.HotModuleReplacementPlugin()],
+				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},
-			devServer: {
-				publicPath:
-					webpackConfig.devServer && webpackConfig.devServer.publicPath
-						? webpackConfig.devServer.publicPath
-						: config.styleguidePublicPath
-			},
-			entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
-		})
+			webpackConfig
+		)
 	}
 
 	const RSG_COMPONENTS_ALIAS = 'rsg-components'
