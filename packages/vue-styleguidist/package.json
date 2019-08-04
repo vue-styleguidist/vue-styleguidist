@@ -91,7 +91,7 @@
 		"to-ast": "^1.0.0",
 		"vue-docgen-api": "^3.17.0",
 		"vue-inbrowser-compiler": "^3.19.0",
-		"webpack": "^4.28.4",
+		"webpack": ">=4 < 4.29",
 		"webpack-dev-server": "^3.7.1",
 		"webpack-merge": "^4.0.0"
 	},
