@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.0...v3.19.1) (2019-08-04)
+
+
+### Bug Fixes
+
+* <docs src=> should not look at script tag ([2cef0d4](https://github.com/vue-styleguidist/vue-styleguidist/commit/2cef0d4))
+* avoid hmr loop in plugin usage ([c6e4adf](https://github.com/vue-styleguidist/vue-styleguidist/commit/c6e4adf))
+
+
+
+
+
 # [3.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.18.1...v3.19.0) (2019-08-02)
 
 
