@@ -91,7 +91,6 @@
 		"to-ast": "^1.0.0",
 		"vue-docgen-api": "^3.17.0",
 		"vue-inbrowser-compiler": "^3.19.0",
-		"webpack": ">=4 < 4.29",
 		"webpack-dev-server": "^3.7.1",
 		"webpack-merge": "^4.0.0"
 	},
@@ -101,6 +100,7 @@
 		"vue-template-compiler": ">=2.0.0"
 	},
 	"devDependencies": {
-		"strip-shebang": "^1.0.2"
+		"strip-shebang": "^1.0.2",
+		"webpack": "4.35.2"
 	}
 }
