@@ -1,6 +1,19 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const vueLoader = require('vue-loader')
 
+const transpileDependencies = [
+	'regexpu-core',
+	'strip-ansi',
+	'ansi-regex',
+	'ansi-styles',
+	'react-dev-utils',
+	'chalk',
+	'unicode-match-property-ecmascript',
+	'unicode-match-property-value-ecmascript',
+	'acorn-jsx',
+	'@znck[\\\\/]prop-types'
+]
+
 module.exports = {
 	title: 'Vue Styleguidist basic',
 	components: 'src/components/**/[A-Z]*.vue',
@@ -19,15 +32,13 @@ module.exports = {
 					loader: 'vue-loader'
 				},
 				{
-					test: /\.js?$/,
+					test: /\.js$/,
 					exclude: modulePath =>
 						(/node_modules/.test(modulePath) ||
 							/packages[\\/]vue-styleguidist[\\/]lib/.test(modulePath)) &&
-						!/node_modules[\\/]regexpu-core/.test(modulePath) &&
-						!/node_modules[\\/]unicode-match-property-ecmascript/.test(modulePath) &&
-						!/node_modules[\\/]unicode-match-property-value-ecmascript/.test(modulePath) &&
-						!/node_modules[\\/]acorn-jsx/.test(modulePath) &&
-						!/node_modules[\\/]@znck[\\/]prop-types/.test(modulePath),
+						!transpileDependencies.some(mod =>
+							new RegExp(`node_modules[\\\\/]${mod}[\\\\/]`).test(modulePath)
+						),
 					use: {
 						loader: 'babel-loader',
 						options: {
