@@ -1,5 +1,5 @@
 // Make sure user has webpack installed
-require('./utils/ensureWebpack')
+require('react-styleguidist/lib/scripts/utils/ensureWebpack')
 const setupLogger = require('react-styleguidist/lib/scripts/logger')
 
 const build = require('./build')

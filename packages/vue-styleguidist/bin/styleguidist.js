@@ -34,7 +34,7 @@ process.on('uncaughtException', err => {
 })
 
 // Make sure user has webpack installed
-require('../scripts/utils/ensureWebpack')
+require('react-styleguidist/lib/scripts/utils/ensureWebpack')
 
 // Set environment before loading style guide config because user’s webpack config may use it
 const env = command === 'build' ? 'production' : 'development'
