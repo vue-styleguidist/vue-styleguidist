@@ -63,8 +63,10 @@ jobs:
       - run: yarn install
       - run: yarn build vuecli3
       - run: yarn build vuecli-noplugin
+      - run: yarn build vuetify-cli-ie
       - run: yarn test:browser vuecli3
       - run: yarn test:browser vuecli-noplugin
+      - run: yarn test:browser vuetify-cli-ie
 
   examples-other:
     <<: *defaults
