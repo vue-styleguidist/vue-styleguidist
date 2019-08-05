@@ -1,5 +1,5 @@
 {
-	"extends": ["eslint:recommended","plugin:jest/recommended", "plugin:react/recommended"],
+	"extends": ["eslint:recommended", "plugin:jest/recommended", "plugin:react/recommended"],
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,

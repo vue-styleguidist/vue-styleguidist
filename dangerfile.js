@@ -46,7 +46,14 @@ Please remove \`yarn.lock\` changes from your pull request. Try to run \`git che
 
 	// Warn when PR size is large
 	var bigPRThreshold = 600
-	if (danger.github.pr.additions + danger.github.pr.deletions > bigPRThreshold) {
+	// avoid saying that the pr is big for iimages and binaries
+	var modifiedBinFiles = danger.git.modified_files.filter(function(filePath) {
+		return filePath.match(/\.(png|jpeg|lock)$/i)
+	})
+	if (
+		!modifiedBinFiles.length &&
+		danger.github.pr.additions + danger.github.pr.deletions > bigPRThreshold
+	) {
 		warn(':exclamation: Big PR (' + ++errorCount + ')')
 		markdown(
 			'> (' +
