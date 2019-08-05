@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.1...v3.19.2) (2019-08-05)
+
+
+### Bug Fixes
+
+* avoid dependency to webpack ([63ee996](https://github.com/vue-styleguidist/vue-styleguidist/commit/63ee996))
+
+
+
+
+
 ## [3.19.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.0...v3.19.1) (2019-08-04)
 
 
