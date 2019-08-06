@@ -1,5 +1,7 @@
 .v-application {
-	background: transparent !important;
+	&.theme--light {
+		background: transparent;
+	}
 	&--wrap {
 		min-height: auto;
 	}
