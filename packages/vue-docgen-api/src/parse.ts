@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { parseComponent, SFCDescriptor } from 'vue-template-compiler'
-import { Documentation } from './Documentation'
+import Documentation from './Documentation'
 import parseScript, { Handler as ScriptHandler } from './parse-script'
 import parseTemplate, { Handler as TemplateHandler } from './parse-template'
 import scriptHandlers from './script-handlers'

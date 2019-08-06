@@ -1,7 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import { Documentation, ParamTag, ParamType, Tag } from '../Documentation'
+import Documentation, { ParamTag, ParamType, Tag } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 
 export interface TypedParamTag extends ParamTag {

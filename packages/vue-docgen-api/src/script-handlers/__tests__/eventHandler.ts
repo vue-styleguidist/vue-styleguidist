@@ -1,7 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import babylon from '../../babel-parser'
-import { Documentation, EventDescriptor } from '../../Documentation'
+import Documentation, { EventDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import eventHandler from '../eventHandler'
 
@@ -18,7 +18,7 @@ describe('eventHandler', () => {
 
 	beforeEach(() => {
 		mockEventDescriptor = { description: '', properties: [] }
-		documentation = new (require('../../Documentation')).Documentation()
+		documentation = new Documentation()
 		const mockGetEventDescriptor = documentation.getEventDescriptor as jest.Mock
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})

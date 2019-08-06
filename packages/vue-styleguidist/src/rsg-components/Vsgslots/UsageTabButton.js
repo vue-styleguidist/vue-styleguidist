@@ -17,7 +17,9 @@ UsageTabButton.propTypes = {
 	name: PropTypes.string.isRequired,
 	props: PropTypes.shape({
 		props: PropTypes.array,
-		methods: PropTypes.array
+		methods: PropTypes.array,
+		events: PropTypes.object,
+		slots: PropTypes.object
 	}).isRequired,
 	active: PropTypes.bool
 }
