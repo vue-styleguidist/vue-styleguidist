@@ -37,7 +37,7 @@ Usage.propTypes = {
 	props: PropTypes.shape({
 		props: PropTypes.array,
 		methods: PropTypes.array,
-		eventsNode: PropTypes.object,
-		slotsNode: PropTypes.object
+		events: PropTypes.object,
+		slots: PropTypes.object
 	}).isRequired
 }
