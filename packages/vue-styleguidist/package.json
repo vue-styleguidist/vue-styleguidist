@@ -32,7 +32,6 @@
 	},
 	"dependencies": {
 		"@vxna/mini-html-webpack-template": "^0.1.7",
-		"acorn": "^6.0.5",
 		"ast-types": "^0.12.2",
 		"classnames": "^2.2.6",
 		"clean-webpack-plugin": "^0.1.19",
@@ -50,7 +49,6 @@
 		"glob": "^7.1.2",
 		"glogg": "^1.0.1",
 		"hash-sum": "^1.0.2",
-		"highlight.js": "^9.12.0",
 		"is-directory": "^0.3.1",
 		"javascript-stringify": "^1.6.0",
 		"kleur": "^2.0.1",
@@ -86,7 +84,8 @@
 	"peerDependencies": {
 		"vue": ">=2.0.0",
 		"vue-loader": ">=14.0.0",
-		"vue-template-compiler": ">=2.0.0"
+		"vue-template-compiler": ">=2.0.0",
+		"webpack": ">=4.0.0"
 	},
 	"devDependencies": {
 		"strip-shebang": "^1.0.2",
