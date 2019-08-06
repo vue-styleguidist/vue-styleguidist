@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.2...v3.19.3) (2019-08-06)
+
+
+### Bug Fixes
+
+* add webpack peerDependency ([16b1fa7](https://github.com/vue-styleguidist/vue-styleguidist/commit/16b1fa7))
+
+
+### Performance Improvements
+
+* remove multiple dependencies ([0927e85](https://github.com/vue-styleguidist/vue-styleguidist/commit/0927e85))
+
+
+
+
+
 ## [3.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.1...v3.19.2) (2019-08-05)
 
 
