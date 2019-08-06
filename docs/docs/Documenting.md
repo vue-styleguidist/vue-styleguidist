@@ -19,6 +19,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
 - [Writing code examples](#writing-code-examples)
+- [Importing examples](#importing-examples)
 
 <!-- tocstop -->
 
