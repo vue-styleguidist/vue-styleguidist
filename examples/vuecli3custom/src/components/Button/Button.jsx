@@ -2,7 +2,7 @@
  * The only true button.
  */
 export default {
-	render(h) {
+	render() {
 		return (
 			<div className="Button">
 				<button
@@ -31,6 +31,7 @@ export default {
 		onClick: {
 			type: Function,
 			default: event => {
+				// eslint-disable-next-line no-console
 				console.log('You have clicked me!', event.target)
 			}
 		}
