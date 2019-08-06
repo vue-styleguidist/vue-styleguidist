@@ -1,6 +1,6 @@
 import { NodePath } from 'ast-types'
 import buildParser from '../../babel-parser'
-import { Documentation, SlotDescriptor } from '../../Documentation'
+import Documentation, { SlotDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import slotHandler from '../slotHandler'
 

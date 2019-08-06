@@ -1,5 +1,5 @@
 import babylon from '../../babel-parser'
-import { Documentation } from '../../Documentation'
+import Documentation from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import classDisplayNameHandler from '../classDisplayNameHandler'
 
@@ -14,7 +14,7 @@ describe('classDisplayNameHandler', () => {
 	let documentation: Documentation
 
 	beforeEach(() => {
-		documentation = new (require('../../Documentation')).Documentation()
+		documentation = new Documentation()
 	})
 
 	it('should extract the name of the component from the classname', () => {

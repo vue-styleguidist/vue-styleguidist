@@ -1,10 +1,9 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import {
+import Documentation, {
 	BlockTag,
 	DocBlockTags,
-	Documentation,
 	EventDescriptor,
 	ParamTag,
 	ParamType,

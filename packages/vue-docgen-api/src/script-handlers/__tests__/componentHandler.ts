@@ -2,7 +2,7 @@ import { ParserPlugin } from '@babel/parser'
 import { NodePath } from 'ast-types'
 import Map from 'ts-map'
 import babylon from '../../babel-parser'
-import { Documentation } from '../../Documentation'
+import Documentation from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import componentHandler from '../componentHandler'
 
@@ -17,7 +17,7 @@ describe('componentHandler', () => {
 	let documentation: Documentation
 
 	beforeEach(() => {
-		documentation = new (require('../../Documentation')).Documentation()
+		documentation = new Documentation()
 	})
 
 	it('should return the right component name', () => {

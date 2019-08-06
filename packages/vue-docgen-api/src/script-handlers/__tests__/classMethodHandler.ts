@@ -1,7 +1,7 @@
 import { NodePath } from 'ast-types'
 import Map from 'ts-map'
 import babylon from '../../babel-parser'
-import { Documentation, MethodDescriptor } from '../../Documentation'
+import Documentation, { MethodDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import classMethodHandler from '../classMethodHandler'
 
@@ -18,7 +18,7 @@ describe('classPropHandler', () => {
 
 	beforeEach(() => {
 		mockMethodDescriptor = { name: '', description: '', modifiers: [] }
-		const MockDocumentation = require('../../Documentation').Documentation
+		const MockDocumentation = Documentation
 		documentation = new MockDocumentation()
 		const mockGetMethodDescriptor = documentation.getMethodDescriptor as jest.Mock
 		mockGetMethodDescriptor.mockImplementation((name: string) => {

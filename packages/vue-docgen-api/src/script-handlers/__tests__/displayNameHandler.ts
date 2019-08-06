@@ -1,6 +1,6 @@
 import { NodePath } from 'ast-types'
 import babylon from '../../babel-parser'
-import { Documentation } from '../../Documentation'
+import Documentation from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import displayNameHandler from '../displayNameHandler'
 
@@ -15,7 +15,7 @@ describe('displayNameHandler', () => {
 	let documentation: Documentation
 
 	beforeEach(() => {
-		documentation = new (require('../../Documentation')).Documentation()
+		documentation = new Documentation()
 	})
 
 	it('should return the right component name', () => {

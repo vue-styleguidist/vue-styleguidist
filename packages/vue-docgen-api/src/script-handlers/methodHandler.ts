@@ -1,9 +1,8 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
-import {
+import Documentation, {
 	BlockTag,
 	DocBlockTags,
-	Documentation,
 	MethodDescriptor,
 	Param,
 	ParamTag,
