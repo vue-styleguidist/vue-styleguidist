@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.3...v3.19.4) (2019-08-06)
+
+
+### Bug Fixes
+
+* webpack dependency for yarn + storybook ([e4c5d2e](https://github.com/vue-styleguidist/vue-styleguidist/commit/e4c5d2e))
+
+
+
+
+
 ## [3.19.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.2...v3.19.3) (2019-08-06)
 
 
