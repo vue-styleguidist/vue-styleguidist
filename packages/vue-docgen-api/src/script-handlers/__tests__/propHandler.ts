@@ -1,7 +1,7 @@
 import { ParserPlugin } from '@babel/parser'
 import { NodePath } from 'ast-types'
 import babylon from '../../babel-parser'
-import { Documentation, PropDescriptor } from '../../Documentation'
+import Documentation, { PropDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import propHandler from '../propHandler'
 
@@ -22,7 +22,7 @@ describe('propHandler', () => {
 			tags: {},
 			name: ''
 		}
-		const MockDocumentation = require('../../Documentation').Documentation
+		const MockDocumentation = require('../../Documentation').default
 		documentation = new MockDocumentation()
 		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)

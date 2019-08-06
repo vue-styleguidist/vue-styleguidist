@@ -1,9 +1,26 @@
-import { ComponentDoc, Documentation } from './Documentation'
+import Documentation, {
+	ComponentDoc,
+	BlockTag,
+	PropDescriptor,
+	SlotDescriptor,
+	EventDescriptor,
+	MethodDescriptor
+} from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as parseSourceLocal } from './parse'
 
 export { TemplateParserOptions } from './parse-template'
 export { ScriptHandler, TemplateHandler } from './parse'
-export { ComponentDoc, DocGenOptions, ParseOptions, Documentation }
+export {
+	ComponentDoc,
+	DocGenOptions,
+	ParseOptions,
+	Documentation,
+	BlockTag,
+	PropDescriptor,
+	SlotDescriptor,
+	EventDescriptor,
+	MethodDescriptor
+}
 
 /**
  * Parse the components at filePath and return props, public methods, events and slots

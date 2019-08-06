@@ -1,5 +1,5 @@
 import { compile } from 'vue-template-compiler'
-import { Documentation } from '../../Documentation'
+import Documentation from '../../Documentation'
 import { traverse } from '../../parse-template'
 import propHandler from '../propHandler'
 

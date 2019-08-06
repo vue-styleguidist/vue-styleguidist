@@ -1,6 +1,6 @@
 import * as pug from 'pug'
 import { ASTElement, ASTNode, compile, SFCBlock } from 'vue-template-compiler'
-import { Documentation } from './Documentation'
+import Documentation from './Documentation'
 import cacher from './utils/cacher'
 
 export interface TemplateParserOptions {

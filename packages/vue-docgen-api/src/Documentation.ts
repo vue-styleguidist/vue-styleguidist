@@ -86,7 +86,7 @@ export interface ComponentDoc {
 	[key: string]: any
 }
 
-export class Documentation {
+export default class Documentation {
 	private propsMap: Map<string, PropDescriptor>
 	private methodsMap: Map<string, MethodDescriptor>
 	private slotsMap: Map<string, SlotDescriptor>

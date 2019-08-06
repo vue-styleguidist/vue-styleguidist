@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
-import { Documentation } from '../Documentation'
+import Documentation from '../Documentation'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
 export default function classDisplayNameHandler(documentation: Documentation, path: NodePath) {
