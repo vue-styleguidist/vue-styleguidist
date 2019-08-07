@@ -428,7 +428,7 @@ this.$emit('success', {
 
 ## Change log
 
-The change log can be found on the [Releases page](https://github.com/vue-styleguidist/vue-docgen-api/releases).
+The change log can be found on the [Changelog Page](./CHANGELOG.md).
 
 ## Authors and license
 
