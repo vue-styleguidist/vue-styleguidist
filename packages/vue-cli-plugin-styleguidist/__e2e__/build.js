@@ -5,6 +5,14 @@ const path = require('path')
 
 const cwd = path.resolve(__dirname, '../../../test/cli-packages')
 
+const fs = require('fs')
+
+beforeAll(() => {
+	if (!fs.existsSync(cwd)) {
+		fs.mkdirSync(cwd)
+	}
+})
+
 async function createAndInstall(name) {
 	const project = await create(name, { plugins: { 'vue-cli-plugin-styleguidist': {} } }, cwd, false)
 	// mock install
