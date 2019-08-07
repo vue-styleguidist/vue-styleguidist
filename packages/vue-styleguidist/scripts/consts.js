@@ -1,11 +1,12 @@
 const GITHUB_HOMEPAGE = 'https://github.com/vue-styleguidist/vue-styleguidist/'
+const SITE_HOMEPAGE = 'https://vue-styleguidist.github.io/'
 
 module.exports = {
-	HOMEPAGE: GITHUB_HOMEPAGE,
+	HOMEPAGE: SITE_HOMEPAGE,
 	BUGS: GITHUB_HOMEPAGE + '/issues',
-	DOCS_CONFIG: GITHUB_HOMEPAGE + 'blob/master/docs/Configuration.md',
-	DOCS_COMPONENTS: GITHUB_HOMEPAGE + 'blob/master/docs/Components.md',
-	DOCS_WEBPACK: GITHUB_HOMEPAGE + 'blob/master/docs/Webpack.md',
-	DOCS_DOCUMENTING: GITHUB_HOMEPAGE + 'blob/master/docs/Documenting.md',
+	DOCS_CONFIG: SITE_HOMEPAGE + 'Configuration.html',
+	DOCS_COMPONENTS: SITE_HOMEPAGE + 'docs/Components.html',
+	DOCS_WEBPACK: SITE_HOMEPAGE + 'docs/Webpack.html',
+	DOCS_DOCUMENTING: SITE_HOMEPAGE + 'docs/Documenting.html',
 	DOCS_THIRDPARTIES: ''
 }
