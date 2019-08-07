@@ -4,6 +4,13 @@ const create = require('@vue/cli-test-utils/createTestProject')
 const path = require('path')
 
 const cwd = path.resolve(__dirname, '../../../test/cli-packages')
+const fs = require('fs')
+
+beforeAll(() => {
+	if (!fs.existsSync(cwd)) {
+		fs.mkdirSync(cwd)
+	}
+})
 
 async function createAndInstall(name, options) {
 	const project = await create(name, options, cwd, false)
