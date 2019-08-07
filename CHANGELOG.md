@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.4...v3.19.5) (2019-08-07)
+
+
+### Bug Fixes
+
+* EditorWithToolbar naming case ([595a077](https://github.com/vue-styleguidist/vue-styleguidist/commit/595a077))
+
+
+### Performance Improvements
+
+* only precompile example for prod ([b7aeb58](https://github.com/vue-styleguidist/vue-styleguidist/commit/b7aeb58))
+
+
+
+
+
 ## [3.19.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.3...v3.19.4) (2019-08-06)
 
 
