@@ -169,14 +169,20 @@ module.exports = function examplesLoader(source) {
 					)
 			}
 			if (config.codeSplit) {
-				const compiledExample = compile(example.content, {
-					...config.compilerConfig,
-					...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
-				})
-				example.compiled = {
-					script: compiledExample.script,
-					template: compiledExample.template,
-					style: compiledExample.style
+				if (process.env.NODE_ENV !== 'production') {
+					// if we are not in prod, we want to avoid running examples through
+					// buble all at the same time. We then tell it to calsculate on the fly
+					example.compiled = false
+				} else {
+					const compiledExample = compile(example.content, {
+						...config.compilerConfig,
+						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+					})
+					example.compiled = {
+						script: compiledExample.script,
+						template: compiledExample.template,
+						style: compiledExample.style
+					}
 				}
 			}
 		}

@@ -8,11 +8,14 @@ class PlaygroundAsync extends Component {
 		...Playground.propTypes,
 		code: PropTypes.shape({
 			raw: PropTypes.string.isRequired,
-			compiled: PropTypes.shape({
-				script: PropTypes.string,
-				template: PropTypes.string,
-				style: PropTypes.string
-			}).isRequired
+			compiled: PropTypes.oneOfType([
+				PropTypes.shape({
+					script: PropTypes.string,
+					template: PropTypes.string,
+					style: PropTypes.string
+				}),
+				PropTypes.bool
+			])
 		}).isRequired
 	}
 
