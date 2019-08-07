@@ -9,7 +9,17 @@ import cleanComponentName from '../../utils/cleanComponentName'
 
 class Preview extends Component {
 	static propTypes = {
-		code: PropTypes.object.isRequired,
+		code: PropTypes.shape({
+			raw: PropTypes.string.isRequired,
+			compiled: PropTypes.oneOfType([
+				PropTypes.shape({
+					script: PropTypes.string,
+					template: PropTypes.string,
+					style: PropTypes.string
+				}),
+				PropTypes.bool
+			])
+		}).isRequired,
 		evalInContext: PropTypes.func.isRequired,
 		vuex: PropTypes.object,
 		component: PropTypes.object,
@@ -32,7 +42,11 @@ class Preview extends Component {
 			console.clear()
 		}
 
-		this.setCompiledPreview(this.props.code.compiled)
+		if (this.props.code.compiled) {
+			this.setCompiledPreview(this.props.code.compiled)
+		} else {
+			this.executeCode(this.props.code.raw)
+		}
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
