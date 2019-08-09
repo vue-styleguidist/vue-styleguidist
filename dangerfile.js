@@ -6,15 +6,10 @@ var path = require('path')
 var getSize = require('get-folder-size')
 var gzipSize = require('gzip-size')
 var validateMessage = require('validate-commit-msg')
+var glob = require('globby')
 
 if (danger.github.pr.head.ref !== 'dev' || danger.github.pr.base.ref !== 'master') {
-	const packages = [
-		'package.json',
-		'packages/vue-styleguidist/package.json',
-		'packages/vue-inbrowser-compiler/package.json',
-		'packages/vue-docgen-api/package.json',
-		'packages/vue-cli-plugin-styleguidist/package.json'
-	]
+	const packages = ['package.json', ...glob.sync('packages/*/package.json')]
 
 	const changePackages = packages.filter(f => {
 		danger.git.modified_files.includes(f)
