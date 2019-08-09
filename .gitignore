@@ -17,13 +17,18 @@ test/cypress/videos/
 
 # output of docs build
 /docs/dist/
+/docs/components/**/*.md
 /docs/Examples.md
 
 # examples build artefacts
-/examples/**/dist/build
-/examples/**/dist/css/*.css
-/examples/**/dist/index.html
-/examples/**/dist/report.html
+/examples/*/dist/build
+/examples/*/dist/css/*.css
+/examples/*/dist/index.html
+/examples/*/dist/report.html
+
+# docs generted using run.cli
+/examples/*/docs/components/**/*.md
+/examples/*/docs/src/components/**/*.md
 
 # packages resulting of plugin tests
 /test/cli-packages/

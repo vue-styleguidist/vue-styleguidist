@@ -1,0 +1,25 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"env": {
+		"browser": false,
+		"node": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".ts"]
+			}
+		}
+	},
+	"rules": {
+		"compat/compat": "off"
+	},
+	"globals": {
+		"Promise": false
+	}
+}
