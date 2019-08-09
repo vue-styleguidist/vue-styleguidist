@@ -4,6 +4,13 @@ exports[`tests button functional should match the snapshot 1`] = `
 Object {
   "description": "Wrapper for input elements",
   "displayName": "InputWrapper",
+  "docsBlocks": Array [
+    "\`\` \`jsx
+<input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\">
+  …
+</input-wrapper>
+\`\` \`",
+  ],
   "events": Object {},
   "functional": true,
   "methods": Array [],
