@@ -50,7 +50,7 @@ module.exports = () => {
 			},
 			nav: [
 				{ text: 'Docs', link: '/docs/GettingStarted' },
-				...(fs.existsSync(path.resolve(__dirname, '../Examples'))
+				...(fs.existsSync(path.resolve(__dirname, '../Examples.md'))
 					? [{ text: 'Examples', link: '/Examples' }]
 					: []),
 				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc' },
