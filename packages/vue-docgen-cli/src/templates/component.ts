@@ -14,6 +14,7 @@ export default (
 	return `${
 		!config.outFile && deprecated
 			? // to avoid having the squiggles in the left menu for deprecated items
+			  // use the frontmatter feature of vuepress
 			  `
 ---
 title: ${displayName}
