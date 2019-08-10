@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { parseComponent, SFCDescriptor } from 'vue-template-compiler'
+import { parseComponent } from 'vue-template-compiler'
 import Documentation from './Documentation'
 import parseScript, { Handler as ScriptHandler } from './parse-script'
 import parseTemplate, { Handler as TemplateHandler } from './parse-template'
@@ -71,7 +71,7 @@ export function parseFile(documentation: Documentation, opt: ParseOptions) {
  */
 export function parseSource(documentation: Documentation, source: string, opt: ParseOptions) {
 	const singleFileComponent = /\.vue$/i.test(path.extname(opt.filePath))
-	let parts: SFCDescriptor | null = null
+	let scriptSource: string | undefined
 
 	if (source === '') {
 		throw new Error(ERROR_EMPTY_DOCUMENT)
@@ -79,56 +79,62 @@ export function parseSource(documentation: Documentation, source: string, opt: P
 
 	if (singleFileComponent) {
 		// use padding so that errors are displayed at the correct line
-		parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
-	}
+		const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
 
-	// get slots and props from template
-	if (parts && parts.template) {
-		const extTemplSrc: string =
-			parts && parts.template && parts.template.attrs ? parts.template.attrs.src : ''
-		const extTemplSource =
-			extTemplSrc && extTemplSrc.length
-				? fs.readFileSync(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
+		if (parts.customBlocks) {
+			const docsBlocks = parts.customBlocks
+				.filter(block => block.type === 'docs' && block.content && block.content.length)
+				.map(block => block.content.trim())
+
+			if (docsBlocks.length) {
+				documentation.setDocsBlocks(docsBlocks)
+			}
+		}
+
+		// get slots and props from template
+		if (parts.template) {
+			const extTemplSrc: string =
+				parts && parts.template && parts.template.attrs ? parts.template.attrs.src : ''
+			const extTemplSource =
+				extTemplSrc && extTemplSrc.length
+					? fs.readFileSync(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
+							encoding: 'utf-8'
+					  })
+					: ''
+			if (extTemplSource.length) {
+				parts.template.content = extTemplSource
+			}
+			const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
+			parseTemplate(
+				parts.template,
+				documentation,
+				[...templateHandlers, ...addTemplateHandlers],
+				opt.filePath
+			)
+		}
+
+		const extSrc: string = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : ''
+		const extSource =
+			extSrc && extSrc.length
+				? fs.readFileSync(path.resolve(path.dirname(opt.filePath), extSrc), {
 						encoding: 'utf-8'
 				  })
 				: ''
-		if (extTemplSource.length) {
-			parts.template.content = extTemplSource
-		}
-		const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
-		parseTemplate(
-			parts.template,
-			documentation,
-			[...templateHandlers, ...addTemplateHandlers],
-			opt.filePath
-		)
-	}
 
-	const extSrc: string = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : ''
-	const extSource =
-		extSrc && extSrc.length
-			? fs.readFileSync(path.resolve(path.dirname(opt.filePath), extSrc), {
-					encoding: 'utf-8'
-			  })
-			: ''
-
-	const scriptSource = extSource.length
-		? extSource
-		: parts
-			? parts.script
-				? parts.script.content
-				: undefined
-			: source
-	if (scriptSource) {
-		// if jsx option is not mentionned, parse jsx in components
-		opt.jsx = opt.jsx === undefined ? true : opt.jsx
-
+		scriptSource = extSource.length ? extSource : parts.script ? parts.script.content : undefined
 		opt.lang =
-			(parts && parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
-			/\.tsx?$/i.test(path.extname(opt.filePath)) ||
+			(parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
 			/\.tsx?$/i.test(extSrc)
 				? 'ts'
 				: 'js'
+	} else {
+		scriptSource = source
+		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
+	}
+
+	if (scriptSource) {
+		// if jsx option is not mentionned, parse jsx in components
+		opt.jsx = opt.jsx === undefined ? true : opt.jsx
 
 		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
 		if (scriptSource) {

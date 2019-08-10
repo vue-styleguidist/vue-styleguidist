@@ -4,6 +4,12 @@ const description = 'Isolated Vue component development environment with a livin
 const fs = require('fs')
 const path = require('path')
 
+const glob = require('globby')
+
+const componentFiles = glob
+	.sync('components/**/*.md', { cwd: path.join(__dirname, '..') })
+	.map(f => '/' + f)
+
 const titleShare = `${title} docs`
 
 module.exports = () => {
@@ -43,12 +49,13 @@ module.exports = () => {
 				indexName: 'vue-styleguidist'
 			},
 			nav: [
-				{ text: 'Docs', link: '/docs/GettingStarted.md' },
-				...(fs.existsSync(path.resolve(__dirname, '../Examples.md'))
-					? [{ text: 'Examples', link: '/Examples.md' }]
+				{ text: 'Docs', link: '/docs/GettingStarted' },
+				...(fs.existsSync(path.resolve(__dirname, '../Examples'))
+					? [{ text: 'Examples', link: '/Examples' }]
 					: []),
-				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc.md' },
-				{ text: 'Reference', link: '/Configuration.md' }
+				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc' },
+				{ text: 'Reference', link: '/Configuration' },
+				componentFiles.length ? { text: 'Components', link: componentFiles[0] } : {}
 			],
 			sidebar: {
 				'/docs/': [
@@ -64,7 +71,8 @@ module.exports = () => {
 					'/docs/Development'
 				],
 				'/Configuration': ['/Configuration'],
-				'/Examples': ['/Examples']
+				'/Examples': ['/Examples'],
+				'/components': componentFiles
 			}
 		}
 	}

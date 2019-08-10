@@ -1,0 +1,25 @@
+{
+    "name": "vue-docgen-cli",
+    "version": "3.19.0",
+    "scripts": {
+        "compile": "tsc -p ./tsconfig.build.json",
+        "compile:watch": "yarn compile --watch"
+    },
+    "bin": {
+        "vue-docgen": "lib/docgen.js"
+    },
+    "main": "lib/compileTemplates.js",
+    "dependencies": {
+        "chokidar": "^3.0.2",
+        "globby": "^10.0.1",
+        "minimist": "^1.2.0",
+        "mkdirp": "^0.5.1",
+        "prettier": "^1.18.2",
+        "vue-docgen-api": "^3.17.0"
+    },
+    "devDependencies": {
+        "@types/minimist": "^1.2.0",
+        "@types/mkdirp": "^0.5.2",
+        "@types/prettier": "^1.18.1"
+    }
+}
