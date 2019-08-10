@@ -2,6 +2,8 @@
 
 Generate documentation markdown files from VueJs components using the vue-docgen-api.
 
+[![](https://img.shields.io/npm/v/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli) [![](https://img.shields.io/npm/dm/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli)
+
 ## Install
 
 Install the module directly from npm:

@@ -45,7 +45,13 @@ alt="Chat on Discord">
 
 [vue-cli-plugin-styleguidist](packages/vue-cli-plugin-styleguidist) configures vue-styleguidist to work with [vue-cli 3](https://cli.vuejs.org/guide/).
 
-[![](https://img.shields.io/npm/v/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist) [![](https://img.shields.io/npm/dm/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-docgen-api)
+[![](https://img.shields.io/npm/v/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist) [![](https://img.shields.io/npm/dm/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist)
+
+---
+
+\[BETA\] [vue-docgen-cli](packages/vue-docgen-cli) is a command line interface generating documentation files automatically from [vue-dogen-api]. Generate markdown by default but can be configured to generate whatever text format you desire.
+
+[![](https://img.shields.io/npm/v/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli) [![](https://img.shields.io/npm/dm/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli)
 
 ## Documentation
 
