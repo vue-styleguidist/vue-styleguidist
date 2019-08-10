@@ -4,7 +4,10 @@ import Documentation, {
 	PropDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
-	MethodDescriptor
+	MethodDescriptor,
+	Param,
+	Tag,
+	ParamTag
 } from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as parseSourceLocal } from './parse'
 
@@ -19,7 +22,10 @@ export {
 	PropDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
-	MethodDescriptor
+	MethodDescriptor,
+	Param,
+	Tag,
+	ParamTag
 }
 
 /**

@@ -83,6 +83,7 @@ export interface ComponentDoc {
 	slots: { [name: string]: SlotDescriptor }
 	events?: { [name: string]: EventDescriptor }
 	tags: { [key: string]: BlockTag[] }
+	docsBlocks?: string[]
 	[key: string]: any
 }
 
@@ -92,6 +93,8 @@ export default class Documentation {
 	private slotsMap: Map<string, SlotDescriptor>
 	private eventsMap: Map<string, any>
 	private dataMap: Map<string, any>
+	private docsBlocks: string[] | undefined
+
 	constructor() {
 		this.propsMap = new Map()
 		this.methodsMap = new Map()
@@ -99,6 +102,10 @@ export default class Documentation {
 		this.eventsMap = new Map()
 
 		this.dataMap = new Map()
+	}
+
+	public setDocsBlocks(docsBlocks: string[]) {
+		this.docsBlocks = docsBlocks
 	}
 
 	public set(key: string, value: any) {
@@ -155,6 +162,10 @@ export default class Documentation {
 				obj[key] = value
 			}
 		})
+
+		if (this.docsBlocks) {
+			obj.docsBlocks = this.docsBlocks
+		}
 
 		return {
 			...obj,
