@@ -1,5 +1,7 @@
 {
   "name": "pug-ts-cli-class",
+  "description": "Here we showcase the wide variety of technologies vue-styleguidist supports",
+  "keywords": ["technologies", "typescript", "sass", "class-component"],
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
