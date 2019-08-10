@@ -1,5 +1,5 @@
 import { MethodDescriptor, Param } from 'vue-docgen-api'
-import { cleanReturn } from './utils'
+import { mdit } from './utils'
 
 const paramsTmpl = (params: Param[]): string => {
 	let ret = `
@@ -14,7 +14,7 @@ const paramsTmpl = (params: Param[]): string => {
 		const n = p.name ? p.name : ''
 		const d = p.description ? p.description : ''
 
-		ret += cleanReturn(`| ${n} | ${t} | ${d} |`) + '\n'
+		ret += `| ${mdit(n)} | ${mdit(t)} | ${mdit(d)} |\n`
 	})
 
 	return ret

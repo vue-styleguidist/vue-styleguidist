@@ -14,6 +14,7 @@ import props from './templates/props'
 import component from './templates/component'
 
 export { DocgenCLIConfig } from './extractConfig'
+export { mdit } from './templates/utils'
 export { events, methods, slots, props, component }
 
 export interface Templates {
