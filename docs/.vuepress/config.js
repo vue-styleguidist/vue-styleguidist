@@ -55,7 +55,7 @@ module.exports = () => {
 					: []),
 				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc' },
 				{ text: 'Reference', link: '/Configuration' },
-				componentFiles.length ? { text: 'Components', link: componentFiles[0] } : {}
+				...(componentFiles.length ? [{ text: 'Components', link: componentFiles[0] }] : [])
 			],
 			sidebar: {
 				'/docs/': [
