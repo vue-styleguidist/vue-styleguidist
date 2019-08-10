@@ -54,7 +54,7 @@ module.exports = {
     components: "**/[A-Z]*.vue", // the glob to define what files should be documented as components (relative to componentRoot)
     outDir: "docs", // folder to save components docs in (relative to the current working directry)
     apiOptions: {
-        ...require('webpack.config').resolve, // inform vue-docgen-api of your webpack aliases
+        ...require('./webpack.config').resolve, // inform vue-docgen-api of your webpack aliases
         'jsx': true // tell vue-docgen-api that your components are using JSX to avoid conflicts with TypeScript <type> syntax
     },
     getDocFileName: (componentPath: string) => componentPath.replace(/\.vue$/, '.md') // specify the name of the input md file
@@ -71,13 +71,13 @@ module.exports = {
 
 #### components
 
-> type: `string`, default: `src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}`
+> type: `string`, default: `"src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}"`
 
 Glob string used to get all the components to parse and document.
 
 #### outDir
 
-> type: `string`, default: `docs`
+> type: `string`, default: `"docs"`
 
 The root directory for the generation of the markdown files
 
@@ -145,7 +145,7 @@ By default it will find the `Readme.md` sibling to the component files. Use this
 
 #### getDestFile
 
-> type: `(file: string, config: DocgenCLIConfig) => string`, default: (file, config) => path.resolve(config.outDir, file).replace(/\.\w+\$/, '.md')`
+> type: `(file: string, config: DocgenCLIConfig) => string`, default: `(file, config) => path.resolve(config.outDir, file).replace(/\.\w+\$/, '.md')`
 
 Function returning the absolute path of the documentation markdown files. It [outFile](#outfile) is used, this config will be ignored.
 
@@ -161,12 +161,16 @@ Should vue-docgen keep on watching your files for changes once generation is don
 
 An object specifying the functions to be used to render the components.
 
+For example:
+
 file: `component.ts`
 
 ```ts
 export default function component(
-  renderedUsage: RenderedUsage,
-  doc: ComponentDoc
+  renderedUsage: RenderedUsage, // props, events, methods and slots documentation rendered
+  doc: ComponentDoc, // the object returned by vue-docgen-api
+  config: DocgenCLIConfig, // the local config, useful to know the context
+  fileName: string // the name of the current file in the doc (to explain how to import it)
 ): string {
   const { displayName, description, docsBlocks } = doc
   return `
@@ -183,7 +187,7 @@ export default function component(
 }
 ```
 
-for slots
+And the partial for slots
 
 ```ts
 import { SlotDescriptor } from 'vue-docgen-api'

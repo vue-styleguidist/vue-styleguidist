@@ -3,47 +3,71 @@
 import globby from 'globby'
 import * as path from 'path'
 import * as fs from 'fs'
+import { promisify } from 'util'
 import mkdirp from 'mkdirp'
 import prettier from 'prettier'
 import chokidar from 'chokidar'
 import compileTemplates, { DocgenCLIConfig } from './compileTemplates'
 import extractConfig from './extractConfig'
 
-const writeDownMdFile = (destFilePath: string, content: string) => {
+const writeFile = promisify(fs.writeFile)
+const exists = promisify(fs.exists)
+const readFile = promisify(fs.readFile)
+const unlink = promisify(fs.unlink)
+
+const writeDownMdFile = async (destFilePath: string, content: string) => {
 	const prettyMd = prettier.format(content, { parser: 'markdown' })
 	const destFolder = path.dirname(destFilePath)
-	if (!fs.existsSync(destFolder)) {
+	if (!(await fs.existsSync(destFolder))) {
 		mkdirp.sync(destFolder)
 	}
 
-	fs.writeFile(destFilePath, prettyMd, err => {
-		if (err) {
-			throw err
-		}
-	})
+	await writeFile(destFilePath, prettyMd)
 }
 
 const compileMarkdown = async (config: DocgenCLIConfig, file: string): Promise<string> => {
-	// compile a markdown file in the dist folder. keep original scaffolding
-	return new Promise(resolve => {
-		const componentAbsolutePath = path.join(config.componentsRoot, file)
-		const docFilePath = config.getDocFileName(componentAbsolutePath)
-		fs.exists(docFilePath, exists => {
-			const doc = compileTemplates(
-				componentAbsolutePath,
-				config.templates,
-				config.apiOptions,
-				exists ? fs.readFileSync(docFilePath, 'utf8') : undefined
-			)
-			resolve(doc)
-		})
-	})
+	// compile a markdown file from a component and returnit as string
+	const componentAbsolutePath = path.join(config.componentsRoot, file)
+	const docFilePath = config.getDocFileName(componentAbsolutePath)
+	const docExists = await exists(docFilePath)
+	const doc = compileTemplates(
+		componentAbsolutePath,
+		config,
+		file,
+		docExists ? await readFile(docFilePath, 'utf8') : undefined
+	)
+	return doc
 }
 
 const compile = async (config: DocgenCLIConfig, filePath: string) => {
 	const doc = await compileMarkdown(config, filePath)
 	const destFilePath = config.getDestFile(filePath, config)
 	writeDownMdFile(destFilePath, doc)
+}
+
+interface DocgenCLIConfigWithOutFile extends DocgenCLIConfig {
+	outFile: string
+}
+
+const compileSingleDoc = async (
+	conf: DocgenCLIConfigWithOutFile,
+	files: string[],
+	cachedContent: { [filepath: string]: string },
+	changedFilePath?: string
+) => {
+	const setMarkDownContent = async (filePath: string) => {
+		cachedContent[filePath] = await compileMarkdown(conf, filePath)
+		return true
+	}
+	if (changedFilePath) {
+		// if in chokidar mode (watch), the path of the file that was just changed
+		// is passed as an argument. We only affect the changed file and avoid re-parsing the rest
+		await setMarkDownContent(changedFilePath)
+	} else {
+		// if we are initializing the current file, parse all components
+		await Promise.all(files.map(setMarkDownContent))
+	}
+	writeDownMdFile(conf.outFile, Object.values(cachedContent).join(''))
 }
 
 const compileDocs = async (config: DocgenCLIConfig) => {
@@ -56,20 +80,13 @@ const compileDocs = async (config: DocgenCLIConfig) => {
 
 	// create one big documentation file
 	if (config.outFile) {
-		const compileSingleDoc = async () => {
-			if (config.outFile) {
-				const docArray = await Promise.all(
-					files.map(async filePath => await compileMarkdown(config, filePath))
-				)
-				writeDownMdFile(config.outFile, docArray.join(''))
-			}
-		}
-		compileSingleDoc()
+		const compileSingleDocWithConfig = compileSingleDoc.bind(null, config, files, {})
+		compileSingleDocWithConfig()
 		if (config.watch) {
 			chokidar
 				.watch(config.components, { cwd: config.componentsRoot })
-				.on('add', compileSingleDoc)
-				.on('change', compileSingleDoc)
+				.on('add', compileSingleDocWithConfig)
+				.on('change', compileSingleDocWithConfig)
 		}
 	} else {
 		const compileWithConfig = compile.bind(null, config)
@@ -86,11 +103,7 @@ const compileDocs = async (config: DocgenCLIConfig) => {
 				.on('change', compileWithConfig)
 				// on file delete, delete corresponding md file
 				.on('unlink', relPath => {
-					fs.unlink(config.getDestFile(relPath, config), err => {
-						if (err) {
-							throw err
-						}
-					})
+					unlink(config.getDestFile(relPath, config))
 				})
 		}
 	}
