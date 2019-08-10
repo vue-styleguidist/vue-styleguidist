@@ -32,8 +32,8 @@ const compileMarkdown = async (config: DocgenCLIConfig, file: string): Promise<s
 	const docExists = await exists(docFilePath)
 	const doc = compileTemplates(
 		componentAbsolutePath,
-		config.templates,
-		config.apiOptions,
+		config,
+		file,
 		docExists ? await readFile(docFilePath, 'utf8') : undefined
 	)
 	return doc

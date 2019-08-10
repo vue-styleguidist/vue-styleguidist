@@ -4,17 +4,17 @@ import {
 	SlotDescriptor,
 	MethodDescriptor,
 	EventDescriptor,
-	ComponentDoc,
-	DocGenOptions
+	ComponentDoc
 } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import slots from './templates/slots'
 import props from './templates/props'
 import component from './templates/component'
+import { DocgenCLIConfig } from './extractConfig'
 
-export { DocgenCLIConfig } from './extractConfig'
 export { mdit } from './templates/utils'
+export { DocgenCLIConfig }
 export { events, methods, slots, props, component }
 
 export interface Templates {
@@ -22,7 +22,12 @@ export interface Templates {
 	slots(slots: { [slotName: string]: SlotDescriptor }): string
 	methods(methods: MethodDescriptor[]): string
 	events(events: { [eventName: string]: EventDescriptor }): string
-	component(usage: RenderedUsage, doc: ComponentDoc): string
+	component(
+		usage: RenderedUsage,
+		doc: ComponentDoc,
+		config: DocgenCLIConfig,
+		componentRelativePath: string
+	): string
 }
 
 export interface RenderedUsage {
@@ -34,10 +39,11 @@ export interface RenderedUsage {
 
 export default (
 	absolutePath: string,
-	templates: Templates,
-	options?: DocGenOptions,
+	config: DocgenCLIConfig,
+	componentRelativePath: string,
 	extraMd?: string
 ): string => {
+	const { apiOptions: options, templates } = config
 	const doc = parse(absolutePath, options)
 	const { props, events, methods, slots } = doc
 
@@ -52,5 +58,5 @@ export default (
 		doc.docsBlocks = [...(doc.docsBlocks || []), extraMd]
 	}
 
-	return templates.component(renderedUsage, doc)
+	return templates.component(renderedUsage, doc, config, componentRelativePath)
 }

@@ -12,7 +12,7 @@ const paramsTmpl = (params: Param[]): string => {
 	params.forEach(p => {
 		const t = p.type && p.type.name ? p.type.name : ''
 		const n = p.name ? p.name : ''
-		const d = p.description ? p.description : ''
+		const d = typeof p.description === 'string' ? p.description : ''
 
 		ret += `| ${mdit(n)} | ${mdit(t)} | ${mdit(d)} |\n`
 	})

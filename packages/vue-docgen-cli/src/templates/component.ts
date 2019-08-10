@@ -1,12 +1,25 @@
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
-import { RenderedUsage } from '../compileTemplates'
+import { RenderedUsage, DocgenCLIConfig } from '../compileTemplates'
 
-export default (renderedUsage: RenderedUsage, doc: ComponentDoc): string => {
+export default (
+	renderedUsage: RenderedUsage,
+	doc: ComponentDoc,
+	config: DocgenCLIConfig,
+	fileName: string
+): string => {
 	const { displayName, description, docsBlocks, tags } = doc
 
 	const { deprecated, author, since, version, see, link } = tags
 
-	return `
+	return `${
+		!config.outFile && deprecated
+			? // to avoid having the squiggles in the left menu for deprecated items
+			  `
+---
+title: ${displayName}
+---`
+			: ''
+	}
   # ${deprecated ? `~~${displayName}~~` : displayName}
 
   ${deprecated ? `> **Deprecated** ${(deprecated[0] as ParamTag).description}\n` : ''}

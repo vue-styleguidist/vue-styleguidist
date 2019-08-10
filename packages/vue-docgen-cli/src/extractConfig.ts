@@ -45,7 +45,7 @@ export default (): DocgenCLIConfig => {
 	}
 
 	// only default outDir if outFile is null to avoid confusion
-	config.outDir = config.outDir || config.outFile ? '.' : 'docs'
+	config.outDir = config.outDir || (config.outFile ? '.' : 'docs')
 
 	config.templates = {
 		component,
