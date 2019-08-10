@@ -1,7 +1,7 @@
 {
 	"parser": "@typescript-eslint/parser",
 	"env": {
-		"browser": false,
+		"es6": true,
 		"node": true
 	},
 	"parserOptions": {
@@ -18,8 +18,5 @@
 	},
 	"rules": {
 		"compat/compat": "off"
-	},
-	"globals": {
-		"Promise": false
 	}
 }
