@@ -112,6 +112,8 @@ const compileDocs = async (config: DocgenCLIConfig) => {
 const run = (config: DocgenCLIConfig) => {
 	const { pages } = config
 	if (pages) {
+		// to avoid re-rendering the same pages
+		delete config.pages
 		pages.forEach(page => {
 			const pageConf = { ...config, ...page }
 			run(pageConf)
