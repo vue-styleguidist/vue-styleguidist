@@ -1,12 +1,12 @@
 import { EventDescriptor } from 'vue-docgen-api'
-import { mdit } from './utils'
+import { mdclean } from './utils'
 
 const tmpl = (events: { [eventName: string]: EventDescriptor }) => {
 	let ret = ''
 	Object.keys(events).forEach(i => {
 		const { description, ...e } = events[i]
 		const t = e.type && e.type.names ? e.type.names.join(' ') : ''
-		ret += `| ${mdit(i)} | ${mdit(t)} | ${mdit(description)}\n`
+		ret += `| ${mdclean(i)} | ${mdclean(t)} | ${mdclean(description)}\n`
 	})
 	return ret
 }
