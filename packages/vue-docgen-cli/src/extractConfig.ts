@@ -7,7 +7,7 @@ import { component, events, methods, props, slots, Templates } from './compileTe
 export interface DocgenCLIConfig {
 	outDir: string
 	outFile?: string
-	components: string
+	components?: string | string[]
 	componentsRoot: string
 	apiOptions?: DocGenOptions
 	getDocFileName(componentPath: string): string
@@ -18,17 +18,17 @@ export interface DocgenCLIConfig {
 	pages?: DocgenCLIConfig[]
 }
 
-export default (): DocgenCLIConfig => {
+export default (processArgv: string[], processCwd: string): DocgenCLIConfig => {
 	const { _: pathArray, configFile: configFileFromCmd, watch, cwd: cwdFromCommand } = minimist(
-		process.argv.slice(2),
+		processArgv.slice(2),
 		{
 			alias: { c: 'configFile', w: 'watch' }
 		}
 	)
 	const configFilePath = configFileFromCmd
-		? path.resolve(process.cwd(), configFileFromCmd)
-		: path.join(process.cwd(), 'docgen.config.js')
-	const cwd = cwdFromCommand || process.cwd()
+		? path.resolve(processCwd, configFileFromCmd)
+		: path.join(processCwd, 'docgen.config.js')
+	const cwd = cwdFromCommand || processCwd
 	const [componentsFromCmd, outDirFromCmd] = pathArray
 
 	const config: DocgenCLIConfig = {
@@ -44,7 +44,7 @@ export default (): DocgenCLIConfig => {
 		...(fs.existsSync(configFilePath) ? require(configFilePath) : undefined)
 	}
 
-	// only default outDir if outFile is null to avoid confusion
+	// only default outDir if `outFile` is null to avoid confusion
 	config.outDir = config.outDir || (config.outFile ? '.' : 'docs')
 
 	config.templates = {

@@ -228,19 +228,21 @@ ${slotNames
 Allows to group components into pages. Each page will inherit its parent properties.
 
 ```js
-const path = require("path")
+const path = require('path')
 
 module.exports = {
-    componentsRoot: "src/components", // the folder where CLI will start searching for components.
-    outDir: "docs"
-    pages:[{
-        components: "atoms/**/[A-Z]*.vue", // the glob to define what files should be documented as components (relative to componentRoot)
-        outFile: "atoms.md", // saved as `docs/atoms.md`
+  componentsRoot: 'src/components', // the folder where CLI will start searching for components.
+  outDir: 'docs',
+  pages: [
+    {
+      components: 'atoms/**/[A-Z]*.vue', // the glob to define what files should be documented as components (relative to componentRoot)
+      outFile: 'atoms.md' // saved as `docs/atoms.md`
     },
     {
-        components: "molecules/**/[A-Z]*.vue", // the glob to define what files should be documented as components (relative to componentRoot)
-        outFile: "molecules.md",  // saved as `docs/molecules.md`
-    }]
+      components: 'molecules/**/[A-Z]*.vue', // the glob to define what files should be documented as components (relative to componentRoot)
+      outFile: 'molecules.md' // saved as `docs/molecules.md`
+    }
+  ]
 }
 ```
 

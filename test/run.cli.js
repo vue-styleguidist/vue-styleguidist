@@ -10,4 +10,4 @@ process.chdir(examplePath)
 
 process.argv[2] = require('minimist')(process.argv.slice(2)).watch ? '--watch' : undefined
 
-require('../packages/vue-docgen-cli/lib/docgen.js')
+require('../packages/vue-docgen-cli/lib/bin.js')

@@ -1,5 +1,5 @@
 import { PropDescriptor } from 'vue-docgen-api'
-import { mdit } from './utils'
+import { mdclean } from './utils'
 
 const tmpl = (props: { [propName: string]: PropDescriptor } = {}): string => {
 	let ret = ''
@@ -10,7 +10,7 @@ const tmpl = (props: { [propName: string]: PropDescriptor } = {}): string => {
 		const v = pr.defaultValue && pr.defaultValue.value ? pr.defaultValue.value : ''
 		const d = pr.description ? pr.description : ''
 
-		ret += `| ${mdit(p)} | ${mdit(n)} | ${mdit(v)} | ${mdit(d)} |` + '\n'
+		ret += `| ${mdclean(p)} | ${mdclean(n)} | ${mdclean(v)} | ${mdclean(d)} |` + '\n'
 	})
 	return ret
 }

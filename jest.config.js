@@ -11,7 +11,8 @@ module.exports = {
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
 	modulePaths: ['./packages/vue-styleguidist/src'],
 	moduleNameMapper: {
-		'^rsg-components/(.+)$': '<rootDir>/node_modules/react-styleguidist/lib/rsg-components/$1',
+		'^rsg-components/(.+)$':
+			'<rootDir>/node_modules/react-styleguidist/lib/client/rsg-components/$1',
 		'^.+\\.css$': '<rootDir>/test/empty.js'
 	},
 	testPathIgnorePatterns: ['<rootDir>/packages/*/lib/'],
