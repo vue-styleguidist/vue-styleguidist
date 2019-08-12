@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.20.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.20.2...v3.20.3) (2019-08-12)
+
+
+### Bug Fixes
+
+* watch when input md changes ([54ff5ac](https://github.com/vue-styleguidist/vue-styleguidist/commit/54ff5ac))
+
+
+
+
+
 ## [3.20.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.20.1...v3.20.2) (2019-08-11)
 
 
