@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { writeDownMdFile, compileMarkdown } from '../utils'
+import { writeDownMdFile, compileMarkdown, getDocMap } from '../utils'
 import extractConfig, { DocgenCLIConfig } from '../extractConfig'
 
 const UGLY_MD = 'ugly'
@@ -108,5 +108,29 @@ describe('compileMarkdown', () => {
 			EXTRA_CONTENT
 		)
 		done()
+	})
+})
+
+describe('getDocMap', () => {
+	it('should return relative maps', () => {
+		const files = [
+			'src/components/Button/Button.vue',
+			'src/components/Input/Input.vue',
+			'src/components/CounterButton/CounterButton.vue',
+			'src/components/PushButton/PushButton.vue'
+		]
+		const docMap = getDocMap(
+			files,
+			componentPath => path.resolve(path.dirname(componentPath), 'Readme.md'),
+			'src'
+		)
+		expect(docMap).toMatchInlineSnapshot(`
+		Object {
+		  "components/Button/Readme.md": "src/components/Button/Button.vue",
+		  "components/CounterButton/Readme.md": "src/components/CounterButton/CounterButton.vue",
+		  "components/Input/Readme.md": "src/components/Input/Input.vue",
+		  "components/PushButton/Readme.md": "src/components/PushButton/PushButton.vue",
+		}
+	`)
 	})
 })

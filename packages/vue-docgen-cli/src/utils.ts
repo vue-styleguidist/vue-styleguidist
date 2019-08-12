@@ -70,7 +70,7 @@ export function getDocMap(
 	const docMap: { [filepath: string]: string } = {}
 	files.forEach(f => {
 		const docFilePath = getDocFileName(f)
-		docMap[docFilePath] = path.relative(root, f)
+		docMap[path.relative(root, docFilePath)] = f
 	})
 	return docMap
 }
