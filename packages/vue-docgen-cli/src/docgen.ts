@@ -1,9 +1,9 @@
-import globby from 'globby'
 import * as path from 'path'
+import globby from 'globby'
+import { FSWatcher } from 'chokidar'
 import { DocgenCLIConfig } from './extractConfig'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
-import { FSWatcher } from 'chokidar'
 import { getWatcher } from './utils'
 
 export interface DocgenCLIConfigWithComponents extends DocgenCLIConfig {
