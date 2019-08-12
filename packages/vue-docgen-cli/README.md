@@ -246,6 +246,12 @@ module.exports = {
 }
 ```
 
+#### defaultExamples
+
+> type: `boolean`, default: `false`
+
+Generate example for components that have neither `<docs>` block nor a markdown file to provide examples of usage.
+
 #### cwd
 
 > type: `string`, optional
