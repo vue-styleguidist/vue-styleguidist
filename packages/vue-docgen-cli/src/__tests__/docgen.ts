@@ -1,6 +1,6 @@
+import { FSWatcher } from 'chokidar'
 import extractConfig, { DocgenCLIConfig } from '../extractConfig'
 import docgen from '../docgen'
-import { FSWatcher } from 'chokidar'
 
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 const DOC_MAP = {
