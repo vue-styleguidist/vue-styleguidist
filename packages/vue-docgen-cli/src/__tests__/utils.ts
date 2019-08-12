@@ -1,14 +1,10 @@
 import * as path from 'path'
-import { writeDownMdFile, compileMarkdown, getDocMap } from '../utils'
+import { writeDownMdFile, compileMarkdown, getDocMap, getWatcher } from '../utils'
 import extractConfig, { DocgenCLIConfig } from '../extractConfig'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
 const MD_FILE_PATH = 'test/file'
-
-jest.mock('chokidar', () => ({
-	watch: jest.fn()
-}))
 
 var mockFs: {
 	readFile: jest.Mock
@@ -111,19 +107,46 @@ describe('compileMarkdown', () => {
 	})
 })
 
+var mockWatch: jest.Mock, mockAddWatch: jest.Mock
+jest.mock('chokidar', () => {
+	mockAddWatch = jest.fn()
+	mockWatch = jest.fn(() => ({
+		add: mockAddWatch
+	}))
+	return {
+		watch: mockWatch
+	}
+})
+
+const FILES = [
+	'src/components/Button/Button.vue',
+	'src/components/Input/Input.vue',
+	'src/components/CounterButton/CounterButton.vue',
+	'src/components/PushButton/PushButton.vue'
+]
+
+const COMPONENTS_GLOB = 'components/**/*.vue'
+
+const getDocFileName = (componentPath: string) =>
+	path.resolve(path.dirname(componentPath), 'Readme.md')
+
+describe('getWatcher', () => {
+	it('should watch the files passed', () => {
+		mockWatch.mockClear()
+		getWatcher(COMPONENTS_GLOB, 'src', FILES)
+		expect(mockWatch).toHaveBeenCalledWith(COMPONENTS_GLOB, expect.any(Object))
+	})
+
+	it('should add all the additional files', () => {
+		mockAddWatch.mockClear()
+		getWatcher(COMPONENTS_GLOB, 'src', FILES)
+		expect(mockAddWatch).toHaveBeenCalledWith(FILES)
+	})
+})
+
 describe('getDocMap', () => {
 	it('should return relative maps', () => {
-		const files = [
-			'src/components/Button/Button.vue',
-			'src/components/Input/Input.vue',
-			'src/components/CounterButton/CounterButton.vue',
-			'src/components/PushButton/PushButton.vue'
-		]
-		const docMap = getDocMap(
-			files,
-			componentPath => path.resolve(path.dirname(componentPath), 'Readme.md'),
-			'src'
-		)
+		const docMap = getDocMap(FILES, getDocFileName, 'src')
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {
 		  "components/Button/Readme.md": "src/components/Button/Button.vue",

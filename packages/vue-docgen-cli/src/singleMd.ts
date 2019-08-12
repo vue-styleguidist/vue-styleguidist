@@ -1,4 +1,5 @@
-import { compileMarkdown, writeDownMdFile, getWatcher, getDocMap } from './utils'
+import { FSWatcher } from 'chokidar'
+import { compileMarkdown, writeDownMdFile, getDocMap } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
@@ -12,7 +13,11 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param files
  * @param config
  */
-export default function(files: string[], config: DocgenCLIConfigWithOutFile) {
+export default function(
+	files: string[],
+	watcher: FSWatcher | undefined,
+	config: DocgenCLIConfigWithOutFile
+) {
 	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
 
 	// This fileCache contains will, because it is
@@ -24,10 +29,8 @@ export default function(files: string[], config: DocgenCLIConfigWithOutFile) {
 	const compileSingleDocWithConfig = compile.bind(null, config, files, fileCache, docMap)
 
 	compileSingleDocWithConfig()
-	if (config.watch) {
-		getWatcher(config.components, config.componentsRoot, files, config.getDocFileName)
-			.on('add', compileSingleDocWithConfig)
-			.on('change', compileSingleDocWithConfig)
+	if (watcher) {
+		watcher.on('add', compileSingleDocWithConfig).on('change', compileSingleDocWithConfig)
 	}
 }
 

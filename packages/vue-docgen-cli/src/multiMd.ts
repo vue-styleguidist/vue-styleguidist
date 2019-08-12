@@ -1,6 +1,7 @@
 import * as fs from 'fs'
+import { FSWatcher } from 'chokidar'
 import { promisify } from 'util'
-import { compileMarkdown, writeDownMdFile, getWatcher, getDocMap } from './utils'
+import { compileMarkdown, writeDownMdFile, getDocMap } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 
 const unlink = promisify(fs.unlink)
@@ -12,20 +13,23 @@ const unlink = promisify(fs.unlink)
  * @param files
  * @param config
  */
-export default function(files: string[], config: DocgenCLIConfigWithComponents) {
+export default function(
+	files: string[],
+	watcher: FSWatcher | undefined,
+	config: DocgenCLIConfigWithComponents
+) {
 	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
 	const compileWithConfig = compile.bind(null, config, docMap)
 
 	files.forEach(compileWithConfig)
 
-	// run chokidar on the glob
-	if (config.watch) {
-		getWatcher(config.components, config.componentsRoot, files, config.getDocFileName)
+	if (watcher) {
+		watcher
 			// on filechange, recompile the corresponding file
 			.on('add', compileWithConfig)
 			.on('change', compileWithConfig)
 			// on file delete, delete corresponding md file
-			.on('unlink', relPath => {
+			.on('unlink', (relPath: string) => {
 				unlink(config.getDestFile(relPath, config))
 			})
 	}
