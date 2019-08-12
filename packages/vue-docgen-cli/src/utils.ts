@@ -64,12 +64,13 @@ export function getWatcher(
 
 export function getDocMap(
 	files: string[],
-	getDocFileName: (file: string) => string
+	getDocFileName: (file: string) => string,
+	root: string
 ): { [filepath: string]: string } {
 	const docMap: { [filepath: string]: string } = {}
 	files.forEach(f => {
 		const docFilePath = getDocFileName(f)
-		docMap[docFilePath] = f
+		docMap[docFilePath] = path.relative(root, f)
 	})
 	return docMap
 }

@@ -13,7 +13,7 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param config
  */
 export default function(files: string[], config: DocgenCLIConfigWithOutFile) {
-	const docMap = getDocMap(files, config.getDocFileName)
+	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
 
 	// This fileCache contains will, because it is
 	// bound, the same along usage of this function.

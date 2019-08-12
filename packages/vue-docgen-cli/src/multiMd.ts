@@ -13,7 +13,7 @@ const unlink = promisify(fs.unlink)
  * @param config
  */
 export default function(files: string[], config: DocgenCLIConfigWithComponents) {
-	const docMap = getDocMap(files, config.getDocFileName)
+	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
 	const compileWithConfig = compile.bind(null, config, docMap)
 
 	files.forEach(compileWithConfig)
