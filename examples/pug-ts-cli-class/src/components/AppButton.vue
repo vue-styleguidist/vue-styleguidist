@@ -5,55 +5,54 @@
 </template>
 
 <script lang="ts">
-import sizeMixin from "./sizeMixin";
-import Vue from "vue";
-import Component, { mixins } from "vue-class-component";
+import sizeMixin from './sizeMixin'
+import Component, { mixins } from 'vue-class-component'
 
 @Component({
-  props: {
-    /**
-     * Sets the button font color
-     */
-    color: {
-      type: String,
-      default: "black"
-    },
-    /** Sets background color of the button
-     * @since 1.2.0
-     */
-    background: {
-      type: String,
-      default: "white"
-    },
-    /** @deprecated Use color instead */
-    oldColor: String
-  }
+	props: {
+		/**
+		 * Sets the button font color
+		 */
+		color: {
+			type: String,
+			default: 'black'
+		},
+		/** Sets background color of the button
+		 * @since 1.2.0
+		 */
+		background: {
+			type: String,
+			default: 'white'
+		},
+		/** @deprecated Use color instead */
+		oldColor: String
+	}
 })
 export default class AppButton extends mixins(sizeMixin) {
-  size?: number;
-  color?: string;
-  background?: string;
-  oldColor?: string;
-  get styles() {
-    return {
-      "font-size": this.size,
-      color: this.color,
-      background: this.background
-    };
-  }
+	size?: number
+	color?: string
+	background?: string
+	oldColor?: string
+	get styles() {
+		return {
+			'font-size': this.size,
+			color: this.color,
+			background: this.background
+		}
+	}
 
-  handleClick(e: Event) {
-    /** Triggered when button is clicked
-     * @event click
-     * @type {Event}
-     */
-    this.$emit("click", e);
-    /** Event for Alligator's example
-     * @event gator
-     * @type {Event}
-     */
-    this.$emit("gator", e);
-  }
+	handleClick(e: Event) {
+		/** Triggered when button is clicked
+		 * @event click
+		 * @type {Event}
+		 */
+		this.$emit('click', e)
+		/** Event for Alligator's example
+		 * @event gator
+		 * @type {Event}
+		 */
+		this.$emit('gator', e)
+	}
 }
 </script>
 

@@ -13,9 +13,10 @@ import props from './templates/props'
 import component from './templates/component'
 import { DocgenCLIConfig } from './extractConfig'
 
-export { mdit } from './templates/utils'
+export { mdclean } from './templates/utils'
 export { DocgenCLIConfig }
 export { events, methods, slots, props, component }
+export { default as docgen } from './docgen'
 
 export interface Templates {
 	props(props: { [propName: string]: PropDescriptor }): string

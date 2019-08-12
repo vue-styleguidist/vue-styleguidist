@@ -6,9 +6,9 @@
         "compile:watch": "yarn compile --watch"
     },
     "bin": {
-        "vue-docgen": "lib/docgen.js"
+        "vue-docgen": "lib/bin.js"
     },
-    "main": "lib/compileTemplates.js",
+    "main": "lib/docgen.js",
     "dependencies": {
         "chokidar": "^3.0.2",
         "globby": "^10.0.1",
