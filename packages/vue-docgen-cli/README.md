@@ -71,7 +71,7 @@ module.exports = {
 
 #### components
 
-> type: `string`, default: `"src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}"`
+> type: `string | string[]` , default: `"src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}"`
 
 Glob string used to get all the components to parse and document.
 

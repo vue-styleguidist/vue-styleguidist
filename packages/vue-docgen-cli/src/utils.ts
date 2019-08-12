@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import { promisify } from 'util'
-import chokidar from 'chokidar'
+import chokidar, { FSWatcher } from 'chokidar'
 import mkdirpNative from 'mkdirp'
 import prettier from 'prettier'
 import compileTemplates, { DocgenCLIConfig } from './compileTemplates'
@@ -43,33 +43,38 @@ export async function compileMarkdown(config: DocgenCLIConfig, file: string): Pr
 /**
  * returns a chokidar watcher watching not only the files in
  * the glob but their corresponding doc files
- * @param components
- * @param componentsRoot
- * @param files
- * @param getDocFileName
+ * @param components glob or globs to watch
+ * @param cwd cwd to pass to chokidar
+ * @param additionalFilesWatched the files found by globby to
  */
 export function getWatcher(
 	components: string | string[],
-	componentsRoot: string,
-	files: string[],
-	getDocFileName: (file: string) => string
-) {
-	const watcher = chokidar.watch(components, { cwd: componentsRoot })
-	files.forEach(f => {
-		const docfile = getDocFileName(f)
-		watcher.add(docfile)
-	})
-	return watcher
+	cwd: string,
+	additionalFilesWatched: string[]
+): FSWatcher {
+	const w = chokidar.watch(components, { cwd })
+	w.add(additionalFilesWatched)
+	return w
 }
 
+/**
+ * retrun an object matching document relative file path
+ * with their corresponding components, it's inteded to be use
+ * with watchers to update the right documentation on update of
+ * Readme.md files
+ * @param files file paths of the matched comeponents
+ * @param getDocFileName way to transform a comopnent path into it's Readme.md
+ * @param root componentRoot to de-absolutize the DocFileName path
+ */
 export function getDocMap(
 	files: string[],
-	getDocFileName: (file: string) => string
+	getDocFileName: (file: string) => string,
+	root: string
 ): { [filepath: string]: string } {
 	const docMap: { [filepath: string]: string } = {}
 	files.forEach(f => {
 		const docFilePath = getDocFileName(f)
-		docMap[docFilePath] = f
+		docMap[path.relative(root, docFilePath)] = f
 	})
 	return docMap
 }
