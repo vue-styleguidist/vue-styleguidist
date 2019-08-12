@@ -1,5 +1,5 @@
 import { FSWatcher } from 'chokidar'
-import { compileMarkdown, writeDownMdFile, getDocMap } from './utils'
+import { compileMarkdown, writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
@@ -11,22 +11,24 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * if `config.watch` is true will keep on watch file changes
  * and update the current file if needed
  * @param files
+ * @param watcher
  * @param config
+ * @param _compile
  */
 export default function(
 	files: string[],
 	watcher: FSWatcher | undefined,
-	config: DocgenCLIConfigWithOutFile
+	config: DocgenCLIConfigWithOutFile,
+	docMap: { [filepath: string]: string },
+	_compile = compile
 ) {
-	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
-
 	// This fileCache contains will, because it is
 	// bound, the same along usage of this function.
 	// it will contain
 	// `key`: filePath of source component
 	// `content`: markdown compiled for it
 	const fileCache = {}
-	const compileSingleDocWithConfig = compile.bind(null, config, files, fileCache, docMap)
+	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap)
 
 	compileSingleDocWithConfig()
 	if (watcher) {

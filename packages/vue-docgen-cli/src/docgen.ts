@@ -4,7 +4,7 @@ import { FSWatcher } from 'chokidar'
 import { DocgenCLIConfig } from './extractConfig'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
-import { getWatcher } from './utils'
+import { getWatcher, getDocMap } from './utils'
 
 export interface DocgenCLIConfigWithComponents extends DocgenCLIConfig {
 	components: string | string[]
@@ -40,11 +40,13 @@ export default async (config: DocgenCLIConfig) => {
 		)
 	}
 
+	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
+
 	if (config.outFile) {
 		// create one combined documentation file
-		singleMd(files, watcher, config as DocgenCLIConfigWithOutFile)
+		singleMd(files, watcher, config as DocgenCLIConfigWithOutFile, docMap)
 	} else {
 		// create one documentation file per component
-		multiMd(files, watcher, config)
+		multiMd(files, watcher, config, docMap)
 	}
 }

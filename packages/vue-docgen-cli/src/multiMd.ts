@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import { FSWatcher } from 'chokidar'
 import { promisify } from 'util'
-import { compileMarkdown, writeDownMdFile, getDocMap } from './utils'
+import { compileMarkdown, writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 
 const unlink = promisify(fs.unlink)
@@ -16,10 +16,11 @@ const unlink = promisify(fs.unlink)
 export default function(
 	files: string[],
 	watcher: FSWatcher | undefined,
-	config: DocgenCLIConfigWithComponents
+	config: DocgenCLIConfigWithComponents,
+	docMap: { [filepath: string]: string },
+	_compile = compile
 ) {
-	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
-	const compileWithConfig = compile.bind(null, config, docMap)
+	const compileWithConfig = _compile.bind(null, config, docMap)
 
 	files.forEach(compileWithConfig)
 
