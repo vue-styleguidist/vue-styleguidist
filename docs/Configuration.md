@@ -455,8 +455,10 @@ An example
 ```javascript
 // config/styleguide.root.js
 export default function (previewComponent) {
-  render(createElement) {
-    return createElement(previewComponent);
+  return {
+    render(createElement) {
+      return createElement(previewComponent);
+    }
   },
 }
 ```
