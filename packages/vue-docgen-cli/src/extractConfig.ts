@@ -2,9 +2,18 @@ import minimist from 'minimist'
 import * as path from 'path'
 import * as fs from 'fs'
 import { DocGenOptions } from 'vue-docgen-api'
-import { component, events, methods, props, slots, Templates } from './compileTemplates'
+import {
+	component,
+	events,
+	methods,
+	props,
+	slots,
+	defaultExample,
+	Templates
+} from './compileTemplates'
 
 export interface DocgenCLIConfig {
+	defaultExamples?: boolean
 	outDir: string
 	outFile?: string
 	components?: string | string[]
@@ -53,6 +62,7 @@ export default (processArgv: string[], processCwd: string): DocgenCLIConfig => {
 		methods,
 		props,
 		slots,
+		defaultExample,
 		...config.templates
 	}
 

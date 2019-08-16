@@ -1,0 +1,50 @@
+{
+    "name": "vue-styleguidist-example-docgen",
+    "description": "Use vue-docgen-cli to integrate with vuepress sites",
+    "keywords": [
+      "vuepress",
+      "docgen",
+      "cli",
+      "vue-live",
+      "markdown"
+    ],
+    "private": true,
+    "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/styleguidist/vue-styleguidist.git"
+    },
+    "license": "MIT",
+    "engines": {
+      "node": ">=4"
+    },
+    "dependencies": {
+      "dog-names": "^1.0.2"
+    },
+    "scripts": {
+      "docs": "concurrently \"vue-docgen --watch\" \"vuepress dev docs\"",
+      "docs:build": "vue-docgen && vuepress build docs"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.2.2",
+      "@babel/plugin-transform-react-jsx": "^7.3.0",
+      "@babel/plugin-transform-runtime": "^7.2.0",
+      "@babel/preset-env": "^7.3.1",
+      "@vuepress/plugin-register-components": "1.0.3",
+      "babel-core": "^7.0.0-bridge.0",
+      "babel-loader": "^8.0.5",
+      "concurrently": "^4.1.1",
+      "css-loader": "^2.1.0",
+      "node-sass": "^4.12.0",
+      "sass-loader": "^6.0.6",
+      "style-loader": "^0.19.0",
+      "url-loader": "^1.1.2",
+      "vue-docgen-cli": "^3.20.4",
+      "vue-loader": "^15.2.4",
+      "vuepress": "^1.0.3",
+      "vuepress-plugin-live": "^1.4.0",
+      "webpack": "^4.10.0",
+      "webpack-bundle-analyzer": "3.3.2"
+    }
+  }
+  

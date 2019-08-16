@@ -11,11 +11,12 @@ import methods from './templates/methods'
 import slots from './templates/slots'
 import props from './templates/props'
 import component from './templates/component'
+import defaultExample from './templates/defaultExample'
 import { DocgenCLIConfig } from './extractConfig'
 
 export { mdclean } from './templates/utils'
 export { DocgenCLIConfig }
-export { events, methods, slots, props, component }
+export { events, methods, slots, props, component, defaultExample }
 export { default as docgen } from './docgen'
 
 export interface Templates {
@@ -29,6 +30,7 @@ export interface Templates {
 		config: DocgenCLIConfig,
 		componentRelativePath: string
 	): string
+	defaultExample(doc: ComponentDoc): string
 }
 
 export interface RenderedUsage {
@@ -55,8 +57,10 @@ export default (
 		events: events ? templates.events(events) : ''
 	}
 
-	if (extraMd) {
+	if (extraMd && extraMd.length) {
 		doc.docsBlocks = [...(doc.docsBlocks || []), extraMd]
+	} else if (!doc.docsBlocks && config.defaultExamples) {
+		doc.docsBlocks = [templates.defaultExample(doc)]
 	}
 
 	return templates.component(renderedUsage, doc, config, componentRelativePath)
