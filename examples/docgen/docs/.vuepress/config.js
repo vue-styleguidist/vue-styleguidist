@@ -12,14 +12,15 @@ const components = glob
 	}))
 
 module.exports = {
-	dest: 'dist',
+	dest: path.join(__dirname, '../../dist'),
 	title: 'VuePress DocGen Live',
 	themeConfig: {
 		search: false,
 		sidebar: docFiles
 	},
 	plugins: [
-		['live'],
+		// for now, vue-live is a bit of a mess and can't be used in a monorepo
+		//['live'],
 		[
 			'@vuepress/register-components',
 			{
