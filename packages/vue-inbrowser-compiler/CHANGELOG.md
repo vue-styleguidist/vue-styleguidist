@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.20.5...v3.21.0) (2019-08-17)
+
+**Note:** Version bump only for package vue-inbrowser-compiler
+
+
+
+
+
 # [3.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.18.1...v3.19.0) (2019-08-02)
 
 

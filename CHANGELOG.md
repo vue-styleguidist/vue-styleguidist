@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.20.5...v3.21.0) (2019-08-17)
+
+
+### Features
+
+* add defaultExamples config ([52d7d90](https://github.com/vue-styleguidist/vue-styleguidist/commit/52d7d90))
+
+
+
+
+
 ## [3.20.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.20.4...v3.20.5) (2019-08-16)
 
 **Note:** Version bump only for package vue-styleguidist
