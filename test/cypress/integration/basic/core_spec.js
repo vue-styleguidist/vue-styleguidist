@@ -5,6 +5,10 @@ describe('Styleguidist core', () => {
 		cy.title().should('include', 'Vue Styleguidist')
 	})
 
+	it('shows a table of contents', () => {
+		cy.get('nav > ul> li').should('have.length', 10)
+	})
+
 	it('shows multiple components in normal mode', () => {
 		cy.get('[data-testid$=container]').should('have.length.above', 1)
 	})
