@@ -2,10 +2,12 @@
   "name": "vue-inbrowser-compiler",
   "version": "3.19.0",
   "description": "compile vue single file components right in your browser",
+  "module": "lib/esm.js",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "compile": "tsc -p ./tsconfig.build.json",
-    "compile:watch": "yarn compile --watch"
+    "compile": "rollup -c && tsc --emitDeclarationOnly -p ./tsconfig.build.json",
+    "compile:watch": "rollup -c --watch && tsc --emitDeclarationOnly -p ./tsconfig.build.json --watch"
   },
   "keywords": [
     "vue",
@@ -25,6 +27,9 @@
   "devDependencies": {
     "@types/buble": "^0.19.2",
     "@vue/test-utils": "^1.0.0-beta.29",
+    "rollup": "^1.19.4",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-typescript2": "^0.22.1",
     "vue": "^2.6.10"
   },
   "author": "Bart Ledoux <ledouxb@me.com>",

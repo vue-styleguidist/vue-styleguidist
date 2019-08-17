@@ -4,12 +4,6 @@ const description = 'Isolated Vue component development environment with a livin
 const fs = require('fs')
 const path = require('path')
 
-const glob = require('globby')
-
-const componentFiles = glob
-	.sync('components/**/*.md', { cwd: path.join(__dirname, '..') })
-	.map(f => '/' + f)
-
 const titleShare = `${title} docs`
 
 module.exports = () => {
@@ -54,8 +48,7 @@ module.exports = () => {
 					? [{ text: 'Examples', link: '/Examples' }]
 					: []),
 				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc' },
-				{ text: 'Reference', link: '/Configuration' },
-				...(componentFiles.length ? [{ text: 'Components', link: componentFiles[0] }] : [])
+				{ text: 'Reference', link: '/Configuration' }
 			],
 			sidebar: {
 				'/docs/': [
@@ -71,8 +64,7 @@ module.exports = () => {
 					'/docs/Development'
 				],
 				'/Configuration': ['/Configuration'],
-				'/Examples': ['/Examples'],
-				'/components': componentFiles
+				'/Examples': ['/Examples']
 			}
 		}
 	}

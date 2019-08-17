@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Vue from 'vue'
-import addScopedStyle from 'vue-inbrowser-compiler/lib/addScopedStyle'
+import { addScopedStyle } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'

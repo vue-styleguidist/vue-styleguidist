@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { isCodeVueSfc } from 'vue-inbrowser-compiler'
 import Styled from 'rsg-components/Styled'
 import { polyfill } from 'react-lifecycles-compat'
 import SimpleEditor from 'react-simple-code-editor'
@@ -10,7 +11,6 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
-import isCodeVueSfc from 'vue-inbrowser-compiler/lib/isCodeVueSfc'
 
 const highlight = lang => {
 	const langScheme = Prism.languages[lang]
