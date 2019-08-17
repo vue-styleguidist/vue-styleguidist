@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"outDir": "lib",
 		"declaration": true,
-		"sourceMap": false
+		"sourceMap": false,
+		"module": "es2015"
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/__tests__/**/*.ts"]
