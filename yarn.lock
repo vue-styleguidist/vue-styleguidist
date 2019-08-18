@@ -19256,14 +19256,15 @@ vue-jscodeshift-adapter@^2.0.2:
     vue-sfc-descriptor-to-string "^1.0.0"
     vue-template-compiler "^2.5.13"
 
-vue-live@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/vue-live/-/vue-live-1.4.1.tgz#3b3e90183f6792881b3b79fc0b1e8e0cf89e1840"
-  integrity sha512-UvILmhGeWH+c9I7hc2xvgPiw8WNUtohR9j7HowtP/13famY2v5mYMv59f6vwfZ8hy59f0kvBlkluExSDMBwXGg==
+vue-live@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/vue-live/-/vue-live-1.4.3.tgz#21d0cad0eff5c59844caac0792be55855780523b"
+  integrity sha512-vwFxdOebHKXzDvvulgg4fP2oIjAj1izNHZjHKVuxhCjYfaYGO8/b3vnV1SQl2gkykkdzAZO2VwKFMVeJCy5h2A==
   dependencies:
+    core-js "^2.6.5"
     debounce "^1.2.0"
     prismjs "^1.16.0"
-    vue-inbrowser-compiler "^3.16.3"
+    vue-inbrowser-compiler "^3.21.0"
     vue-prism-editor "^0.2.1"
 
 vue-loader@^15.2.4, vue-loader@^15.7.0:
@@ -19380,13 +19381,13 @@ vuepress-plugin-container@^2.0.0:
   dependencies:
     markdown-it-container "^2.0.0"
 
-vuepress-plugin-live@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-live/-/vuepress-plugin-live-1.4.0.tgz#af4a91ac92fa42aa087ce285983bf1fc49160452"
-  integrity sha512-VCz7r/601A3R11SchAh9csohZgAjfGV/ylLlu5E8n9/N5KBZmCu1YLZrtHDvMBDJb6dtpG7VcaIgwsmlmUJ8cw==
+vuepress-plugin-live@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-live/-/vuepress-plugin-live-1.4.2.tgz#cfb39cf20dfdb32cda8b65a5c68a8058d2f07b2a"
+  integrity sha512-COtS8M+Y1b+cH6C8EFgs9E1VrFVm3BHaBBcO9m8rgwgcovS5v7BIfwcajohK8Uxbmp/fKqo3Wzvb92+ZehwAmA==
   dependencies:
     acorn "^6.1.1"
-    vue-live "^1.4.1"
+    vue-live "^1.4.3"
     walkes "^0.2.1"
 
 vuepress@^1.0.3:

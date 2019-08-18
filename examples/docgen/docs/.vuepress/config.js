@@ -19,8 +19,7 @@ module.exports = {
 		sidebar: docFiles
 	},
 	plugins: [
-		// for now, vue-live is a bit of a mess and can't be used in a monorepo
-		//['live'],
+		['live'],
 		[
 			'@vuepress/register-components',
 			{
