@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Vue from 'vue'
-import { addScopedStyle } from 'vue-inbrowser-compiler'
+import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
@@ -84,19 +84,21 @@ class Preview extends Component {
 			error: null
 		})
 
-		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(({ compile }) => {
-			try {
-				const example = compile(newCode, {
-					...this.context.config.compilerConfig,
-					...(this.context.config.jsxInExamples
-						? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
-						: {})
-				})
-				this.setCompiledPreview(example)
-			} catch (err) {
-				this.handleError(err)
+		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(
+			({ default: compile }) => {
+				try {
+					const example = compile(newCode, {
+						...this.context.config.compilerConfig,
+						...(this.context.config.jsxInExamples
+							? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
+							: {})
+					})
+					this.setCompiledPreview(example)
+				} catch (err) {
+					this.handleError(err)
+				}
 			}
-		})
+		)
 	}
 
 	setCompiledPreview(example) {

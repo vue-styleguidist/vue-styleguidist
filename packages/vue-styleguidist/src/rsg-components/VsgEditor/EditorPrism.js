@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { isCodeVueSfc } from 'vue-inbrowser-compiler'
+import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import Styled from 'rsg-components/Styled'
 import { polyfill } from 'react-lifecycles-compat'
 import SimpleEditor from 'react-simple-code-editor'

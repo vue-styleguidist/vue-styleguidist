@@ -8,7 +8,8 @@ const generate = require('escodegen').generate
 const toAst = require('to-ast')
 const b = require('ast-types').builders
 const { parseComponent } = require('vue-template-compiler')
-const { isCodeVueSfc, compile } = require('vue-inbrowser-compiler')
+const compile = require('vue-inbrowser-compiler')
+const { isCodeVueSfc } = require('vue-inbrowser-compiler-utils')
 const chunkify = require('react-styleguidist/lib/loaders/utils/chunkify').default
 const expandDefaultComponent = require('react-styleguidist/lib/loaders/utils/expandDefaultComponent')
 const getImports = require('react-styleguidist/lib/loaders/utils/getImports').default
@@ -27,7 +28,7 @@ const absolutize = filepath =>
 
 const REQUIRE_IN_RUNTIME_PATH = absolutize('requireInRuntime')
 const EVAL_IN_CONTEXT_PATH = absolutize('evalInContext')
-const PRAGMA_JSX_PATH = require.resolve('vue-inbrowser-compiler')
+const JSX_COMPILER_UTILS_PATH = require.resolve('vue-inbrowser-compiler-utils')
 
 function isVueFile(filepath) {
 	return /.vue$/.test(filepath)
@@ -200,10 +201,10 @@ var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
 		config.jsxInExamples
 			? `
 
-var pragma = require(${JSON.stringify(PRAGMA_JSX_PATH)});
+var compilerUtils = require(${JSON.stringify(JSX_COMPILER_UTILS_PATH)});
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
-	pragma.adaptCreateElement, pragma.concatenate);`
+	compilerUtils.adaptCreateElement, compilerUtils.concatenate);`
 			: `
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 

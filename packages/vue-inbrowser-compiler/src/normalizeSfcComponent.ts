@@ -1,6 +1,6 @@
 import walkes from 'walkes'
 import getAst from './getAst'
-import parseComponent, { VsgSFCDescriptor } from './parseComponent'
+import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
 
 const buildStyles = function(styles: string[] | undefined): string | undefined {
