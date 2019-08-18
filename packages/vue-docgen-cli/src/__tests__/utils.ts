@@ -147,6 +147,12 @@ describe('getWatcher', () => {
 describe('getDocMap', () => {
 	it('should return relative maps', () => {
 		const docMap = getDocMap(FILES, getDocFileName, 'src')
+		// normalize path for windows users
+		Object.keys(docMap).map(k => {
+			const path = docMap[k]
+			delete docMap[k]
+			docMap[k.replace(/\\/g, '/')] = path
+		})
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {
 		  "components/Button/Readme.md": "src/components/Button/Button.vue",

@@ -3,10 +3,10 @@ module.exports = {
 		'^.+\\.ts$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest'
 	},
-	moduleFileExtensions: ['ts', 'js', 'json'],
+	moduleFileExtensions: ['ts', 'js', 'json', 'tsx'],
 	testMatch: [
-		'<rootDir>/packages/*/tests/**/*.test.(ts|js)',
-		'<rootDir>/packages/**/__tests__/*.(ts|js)'
+		'<rootDir>/packages/*/tests/**/*.test.(ts|js|tsx)',
+		'<rootDir>/packages/**/__tests__/*.(ts|js|tsx)'
 	],
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
 	modulePaths: ['./packages/vue-styleguidist/src'],

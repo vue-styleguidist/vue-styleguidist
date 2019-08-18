@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler-utils",
-  "version": "3.21.0",
+  "version": "3.22.1",
   "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
   "module": "lib/vue-inbrowser-compiler-utils.esm.js",
   "main": "lib/vue-inbrowser-compiler-utils.cjs.js",

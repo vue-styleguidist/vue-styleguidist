@@ -12,7 +12,7 @@ export type CreateElementFunction = (
  * @returns pragma usable in buble rendered JSX for VueJS
  */
 export default function adaptCreateElement(h: CreateElementFunction): CreateElementFunction {
-	return (comp, attr, ...children) => {
+	return (comp, attr, ...children: any[]) => {
 		if (attr === undefined) {
 			return h(comp)
 		} else if (!children.length) {
@@ -55,8 +55,8 @@ const makeArray = (a: any): any[] => {
  * @param fn2
  */
 const mergeFn = (
-	fn1: (...argz1: any) => void,
-	fn2: (...argz2: any) => void
+	fn1: (...argz1: any[]) => void,
+	fn2: (...argz2: any[]) => void
 ): ((...argz: any[]) => void) =>
 	function(this: any, ...argzMain: any[]) {
 		fn1 && fn1.apply(this, argzMain)

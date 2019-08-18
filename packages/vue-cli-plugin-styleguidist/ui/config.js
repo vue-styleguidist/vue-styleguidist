@@ -1,4 +1,4 @@
-const configSchema = require('vue-styleguidist/scripts/schemas/config')
+const configSchema = require('vue-styleguidist/lib/scripts/schemas/config')
 
 const CONFIG = 'io.github.vue-styleguidist'
 

@@ -1,17 +1,16 @@
 module.exports = {
 	presets: [
 		[
-			'@babel/preset-env',
+			'@babel/env',
 			{
 				targets: {
 					chrome: 59,
 					ie: 11
 				},
-				forceAllTransforms: true,
-				modules: false
+				forceAllTransforms: true
 			}
 		],
-		'@babel/preset-react'
+		'@babel/typescript'
 	],
 	plugins: [
 		'@babel/plugin-syntax-dynamic-import',
@@ -20,7 +19,7 @@ module.exports = {
 	],
 	env: {
 		test: {
-			presets: ['@babel/preset-env', '@babel/preset-react'],
+			presets: ['@babel/env', '@babel/react'],
 			plugins: [
 				'@babel/plugin-syntax-dynamic-import',
 				'@babel/plugin-proposal-class-properties',
@@ -31,8 +30,25 @@ module.exports = {
 	},
 	overrides: [
 		{
-			test: ['./test/cli-packages'],
+			test: './test/cli-packages',
 			presets: ['@vue/app']
+		},
+		{
+			test: /packages[\\/]vue-styleguidist[\\/]src[\\/]client[\\/]/,
+			presets: [
+				[
+					'@babel/env',
+					{
+						targets: {
+							chrome: 59,
+							ie: 11
+						},
+						forceAllTransforms: true,
+						modules: false
+					}
+				],
+				'@babel/react'
+			]
 		}
 	]
 }
