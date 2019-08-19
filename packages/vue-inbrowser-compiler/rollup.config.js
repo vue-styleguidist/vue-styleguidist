@@ -27,5 +27,5 @@ export default {
 		// Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
 		commonjs()
 	],
-	external: [...Object.keys(pkg.dependencies || {})]
+	external: Object.keys(pkg.dependencies)
 }
