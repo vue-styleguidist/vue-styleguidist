@@ -34,10 +34,10 @@ export default (processArgv: string[], processCwd: string): DocgenCLIConfig => {
 			alias: { c: 'configFile', w: 'watch' }
 		}
 	)
-	const configFilePath = configFileFromCmd
-		? path.resolve(processCwd, configFileFromCmd)
-		: path.join(processCwd, 'docgen.config.js')
 	const cwd = cwdFromCommand || processCwd
+	const configFilePath = configFileFromCmd
+		? path.resolve(cwd, configFileFromCmd)
+		: path.join(cwd, 'docgen.config.js')
 	const [componentsFromCmd, outDirFromCmd] = pathArray
 
 	const config: DocgenCLIConfig = {
