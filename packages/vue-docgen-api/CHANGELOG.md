@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.21.0...v3.22.0) (2019-08-19)
+
+
+### Features
+
+* **docgen:** class event [@emit](https://github.com/emit) ([4483168](https://github.com/vue-styleguidist/vue-styleguidist/commit/4483168)), closes [#305](https://github.com/vue-styleguidist/vue-styleguidist/issues/305)
+
+
+
+
+
 # [3.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.19.5...v3.20.0) (2019-08-10)
 
 

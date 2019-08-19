@@ -2,19 +2,6 @@
  * The only true button.
  */
 export default {
-	render() {
-		return (
-			<div className="Button">
-				<button
-					className="button"
-					on-click={this.onClick}
-					style={{ color: this.color, fontSize: this.fontSize }}
-				>
-					{this.$slots.default}
-				</button>
-			</div>
-		)
-	},
 	name: 'Button',
 	props: {
 		/**
@@ -52,5 +39,18 @@ export default {
 			}
 			return size
 		}
+	},
+	render() {
+		return (
+			<div className="Button">
+				<button
+					className="button"
+					on-click={this.onClick}
+					style={{ color: this.color, fontSize: this.fontSize }}
+				>
+					{this.$slots.default}
+				</button>
+			</div>
+		)
 	}
 }

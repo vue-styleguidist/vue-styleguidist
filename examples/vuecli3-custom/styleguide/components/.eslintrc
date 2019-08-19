@@ -1,4 +1,22 @@
 {
 	"extends": ["plugin:react/recommended"],
-	"parser": "babel-eslint"
+	"parserOptions": {
+		"parser": "babel-eslint",
+		"sourceType": "module"
+	},
+	"rules": {
+		"import/no-unresolved": [
+			"error",
+			{
+				"commonjs": true,
+				"caseSensitive": true,
+				"ignore": ["rsg-components/", "rsg-components-default/"]
+			}
+		]
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
 }
