@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.21.0...v3.22.0) (2019-08-19)
+
+
+### Bug Fixes
+
+* update react styleguidist to fix menu ([00ec66a](https://github.com/vue-styleguidist/vue-styleguidist/commit/00ec66a)), closes [#561](https://github.com/vue-styleguidist/vue-styleguidist/issues/561)
+* update react styleguidist to fix menu (2) ([dba9fbf](https://github.com/vue-styleguidist/vue-styleguidist/commit/dba9fbf)), closes [#561](https://github.com/vue-styleguidist/vue-styleguidist/issues/561)
+
+
+
+
+
 # [3.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.20.5...v3.21.0) (2019-08-17)
 
 **Note:** Version bump only for package vue-styleguidist
