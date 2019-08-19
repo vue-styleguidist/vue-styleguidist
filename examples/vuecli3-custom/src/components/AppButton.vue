@@ -1,14 +1,14 @@
 <template>
-  <button :style="styles" @click="handleClick">
-    <slot/>
-  </button>
+	<button :style="styles" @click="handleClick">
+		<slot />
+	</button>
 </template>
 
 <script>
 import sizeMixin from './sizeMixin'
 
 export default {
-	name: 'app-button',
+	name: 'AppButton',
 	mixins: [sizeMixin],
 	props: {
 		/**
@@ -77,9 +77,9 @@ with extra styling
 
 ```vue
 <template>
-  <div class="LoadingPickle-wrap">
-    <app-button>Loading...</app-button>
-  </div>
+	<div class="LoadingPickle-wrap">
+		<app-button>Loading...</app-button>
+	</div>
 </template>
 
 <script>
