@@ -1,0 +1,4 @@
+# These dependencies are installed wrongfully by yarn. 
+# I delete them to make yarn start docgen work
+@vuepress/core/node_modules/acorn/*
+@vuepress/core/node_modules/acorn-dynamic-import/*

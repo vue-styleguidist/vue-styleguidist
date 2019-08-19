@@ -1,5 +1,5 @@
 {
-  "name": "vuecli3-vuetify-ie",
+  "name": "vue-styleguidist-example-vuecli3-vuetify-ie",
   "description": "Use vuetify, with internationalization within the vue cli. Make sure you have a look at the vue.config.js transpiledDependencies",
   "keywords": [
     "internet explorer", 
@@ -12,7 +12,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "styleguide": "vue-cli-service styleguidist",
+    "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -27,6 +29,7 @@
     "babel-polyfill": "^6.26.0",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
+    "vue-cli-plugin-styleguidist": "^3.20.0",
     "vue-cli-plugin-vuetify": "^0.6.1",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2"
