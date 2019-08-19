@@ -2,8 +2,8 @@
   "name": "vue-inbrowser-compiler",
   "version": "3.21.0",
   "description": "compile vue single file components right in your browser",
-  "module": "lib/esm.js",
-  "main": "lib/index.js",
+  "module": "lib/vue-inbrowser-compiler.esm.js",
+  "main": "lib/vue-inbrowser-compiler.cjs.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "compile": "rollup -c && tsc --emitDeclarationOnly -p ./tsconfig.build.json",
