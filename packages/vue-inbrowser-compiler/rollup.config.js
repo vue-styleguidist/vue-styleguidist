@@ -19,6 +19,7 @@ export default {
 		}
 	],
 	plugins: [
+		// allow rollup to look for modules in node_modules
 		nodeResolve(),
 		// Compile TypeScript files
 		typescript({
