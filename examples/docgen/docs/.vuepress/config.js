@@ -13,6 +13,7 @@ const components = glob
 
 module.exports = {
 	dest: path.join(__dirname, '../../dist'),
+	base: '/docgen/',
 	title: 'VuePress DocGen Live',
 	themeConfig: {
 		search: false,
