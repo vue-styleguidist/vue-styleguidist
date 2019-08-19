@@ -12,7 +12,7 @@ const components = glob
 	}))
 
 module.exports = {
-	dest: 'dist',
+	dest: path.join(__dirname, '../../dist'),
 	title: 'VuePress DocGen Live',
 	themeConfig: {
 		search: false,

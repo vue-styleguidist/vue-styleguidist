@@ -13,12 +13,17 @@ if (examplePath.indexOf('examples/') !== 0) {
 	examplePath = 'examples/' + examplePath
 }
 
-process.chdir(`./${examplePath}`)
-
-if (examplePath === 'examples/vuecli3' || examplePath === 'examples/svg-loader') {
+if (/^examples[\\/]vuecli3/.test(examplePath) || examplePath === 'examples/svg-loader') {
+	process.chdir(`./${examplePath}`)
 	const command = process.argv[2] === 'server' ? '' : `:${process.argv[2]}`
 	process.argv[2] = `styleguidist${command}`
 	require('@vue/cli-service/bin/vue-cli-service')
+} else if (/^examples[\\/]docgen/.test(examplePath)) {
+	const command = process.argv[2]
+	process.argv[2] = process.argv[3]
+	process.argv[3] = command === 'server' ? 'dev' : command
+	require('./run.cli')
 } else {
+	process.chdir(`./${examplePath}`)
 	require('../packages/vue-styleguidist/bin/styleguidist')
 }

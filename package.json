@@ -142,7 +142,7 @@
     "vue-template-compiler": "^2.6.10",
     "vue-types": "1.3.4",
     "vuepress": "^1.0.3",
-    "vuepress-plugin-live": "^1.4.0",
+    "vuepress-plugin-live": "^1.4.2",
     "vuetify": "^2.0.4",
     "vuetify-loader": "^1.3.0",
     "vuex": "^3.0.0",
