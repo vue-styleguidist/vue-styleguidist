@@ -22,7 +22,7 @@ export default function getConfig(
 	update?: (conf: ProcessedStyleGuidistConfigObject | {}) => ProcessedStyleGuidistConfigObject
 ): ProcessedStyleGuidistConfigObject {
 	let configFilepath
-	let config: ProcessedStyleGuidistConfigObject | { serverPort?: string | number } = {}
+	let config: ProcessedStyleGuidistConfigObject | { serverPort?: string | number }
 	if (isString(configParam)) {
 		// Load config from a given file
 		configFilepath = path.resolve(process.cwd(), configParam)
@@ -34,6 +34,8 @@ export default function getConfig(
 		// Try to read config options from a file
 		configFilepath = findConfigFile()
 		config = {}
+	} else {
+		config = configParam
 	}
 
 	if (typeof configFilepath === 'string') {
