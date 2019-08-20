@@ -29,7 +29,7 @@ export default {
 		example: 'assets'
 	},
 	codeSplit: {
-		default: false,
+		default: true,
 		message: 'Code Split',
 		description:
 			'Should the styleguide try code splitting for better performance? NOte that you will need the proper transform in your babel config',
@@ -162,9 +162,9 @@ export default {
 		default: true
 	},
 	jsxInExamples: {
-		message: 'JSX in Markdown Examples [BETA]',
+		message: 'JSX in Markdown Examples',
 		description:
-			'Will allow exmaples to contain JSX syntax. You will have to use proper Vue component format in examples. No pseudo JSX.',
+			'Allow exmaples to contain JSX syntax. Use proper JSX Vue component format in examples.',
 		type: 'boolean',
 		default: false
 	},
@@ -305,7 +305,7 @@ export default {
 		description:
 			'Avoid loading CodeMirror and reduce bundle size significantly, use prism.js for code highlighting. Warning: editor options will not be mapped over.',
 		type: 'boolean',
-		default: false
+		default: true
 	},
 	skipComponentsWithoutExample: {
 		message: 'Skip Components Without Example',
