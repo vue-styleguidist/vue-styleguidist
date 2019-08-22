@@ -22,17 +22,17 @@ Vue Styleguidist is a style guide generator for Vue components. It lists compone
 
 ## Usage
 
-- **[Getting Started](https://vue-styleguidist.github.io/GettingStarted.html): install and run Vue Styleguidist**
-- [Documenting components](https://vue-styleguidist.github.io/Documenting.html): how to write documentation
-- [Locating components](https://vue-styleguidist.github.io/Components.html): point Vue Styleguidist to your Vue components
-- [Configuring webpack](https://vue-styleguidist.github.io/Webpack.html): tell Vue Styleguidist how to load your code
-- [Cookbook](https://vue-styleguidist.github.io/Cookbook.html): how to solve common tasks with Vue Styleguidist
+- **[Getting Started](https://vue-styleguidist.github.io/docs/GettingStarted.html): install and run Vue Styleguidist**
+- [Documenting components](https://vue-styleguidist.github.io/docs/Documenting.html): how to write documentation
+- [Locating components](https://vue-styleguidist.github.io/docs/Components.html): point Vue Styleguidist to your Vue components
+- [Configuring webpack](https://vue-styleguidist.github.io/docs/Webpack.html): tell Vue Styleguidist how to load your code
+- [Cookbook](https://vue-styleguidist.github.io/docs/Cookbook.html): how to solve common tasks with Vue Styleguidist
 
 ## Advanced documentation
 
-- [Configuration](https://vue-styleguidist.github.io/Configuration.html)
-- [CLI commands and options](https://vue-styleguidist.github.io/CLI.html)
-- [Node API](https://vue-styleguidist.github.io/API.html)
+- [Configuration](https://vue-styleguidist.github.io/docs/Configuration.html)
+- [CLI commands and options](https://vue-styleguidist.github.io/docs/CLI.html)
+- [Node API](https://vue-styleguidist.github.io/docs/API.html)
 
 ## Examples
 
