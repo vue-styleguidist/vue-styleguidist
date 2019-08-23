@@ -9,7 +9,7 @@ import getMemberFilter from '../utils/getPropsFilter'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
-export default function propHandler(documentation: Documentation, path: NodePath) {
+export default async function propHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path
 			.get('properties')

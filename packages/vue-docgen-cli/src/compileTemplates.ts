@@ -40,14 +40,14 @@ export interface RenderedUsage {
 	events: string
 }
 
-export default (
+export default async (
 	absolutePath: string,
 	config: DocgenCLIConfig,
 	componentRelativePath: string,
 	extraMd?: string
-): string => {
+): Promise<string> => {
 	const { apiOptions: options, templates } = config
-	const doc = parse(absolutePath, options)
+	const doc = await parse(absolutePath, options)
 	const { props, events, methods, slots } = doc
 
 	const renderedUsage = {

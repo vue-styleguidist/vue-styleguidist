@@ -5,8 +5,8 @@ import { parse } from '../../../src/main'
 const typescriptGrid = path.join(__dirname, './Grid.vue')
 let docGrid: ComponentDoc
 describe('tests typescript grid', () => {
-	beforeAll(done => {
-		docGrid = parse(typescriptGrid)
+	beforeAll(async done => {
+		docGrid = await parse(typescriptGrid)
 		done()
 	})
 

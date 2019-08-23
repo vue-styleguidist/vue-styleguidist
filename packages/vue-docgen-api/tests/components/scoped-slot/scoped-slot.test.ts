@@ -10,8 +10,8 @@ let docApp: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
 	describe('wrapper', () => {
-		beforeEach(done => {
-			docWrapper = parse(wrapper)
+		beforeEach(async done => {
+			docWrapper = await parse(wrapper)
 			done()
 		})
 
@@ -33,8 +33,8 @@ describe('tests wrapper with root slot', () => {
 	})
 
 	describe('app', () => {
-		beforeEach(done => {
-			docApp = parse(app)
+		beforeEach(async done => {
+			docApp = await parse(app)
 			done()
 		})
 

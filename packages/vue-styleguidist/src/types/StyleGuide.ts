@@ -22,7 +22,7 @@ export interface StyleGuidistConfigObject {
 	getExampleFilename?(file: string): string
 	getComponentPathLine?(file: string): string
 	sortProps?(props: PropDescriptor[]): { [key: string]: PropDescriptor }
-	propsParser?(file: string): ComponentDoc
+	propsParser?(file: string): Promise<ComponentDoc>
 	jsxInComponents?: boolean
 	contextDependencies?: string[]
 	printBuildInstructions?(config: ProcessedStyleGuidistConfigObject): void

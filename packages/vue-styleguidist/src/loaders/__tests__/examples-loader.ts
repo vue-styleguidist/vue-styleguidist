@@ -17,7 +17,7 @@ const query = {
 
 const getQuery = (options = {}) => encode({ ...query, ...options }, '?')
 
-it('should return valid, parsable JS', () => {
+it('should return valid, parsable JS', done => {
 	const exampleMarkdown = `
 # header
 	<div/>
@@ -26,20 +26,24 @@ text
 <span/>
 \`\`\`
 `
-	const result = examplesLoader.call(
+	const callback = (err: string, result: string) => {
+		expect(() => new Function(result)).not.toThrow(SyntaxError)
+		expect(result).toBeTruthy()
+		done()
+	}
+
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery(),
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
 })
 
-it('should replace all occurrences of __COMPONENT__ with provided query.displayName', () => {
+it('should replace all occurrences of __COMPONENT__ with provided query.displayName', done => {
 	const exampleMarkdown = `
 <div>
 	<__COMPONENT__>
@@ -50,49 +54,67 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 </div>
 `
 
-	const result = examplesLoader.call(
+	const callback = (err: string, result: string) => {
+		expect(result).not.toMatch(/__COMPONENT__/)
+		const mth = result.match(/<div>(.*?)<\/div>/)
+		expect(mth && mth[0]).toMatchInlineSnapshot(`
+
+		<div>
+		  \\n\\t
+		  <FooComponent>
+		    \\n\\t\\t
+		    <span>
+		      text
+		    </span>
+		    \\n\\t\\t
+		    <span>
+		      Name of component: FooComponent
+		    </span>
+		    \\n\\t
+		  </FooComponent>
+		  \\n\\t
+		  <FooComponent>
+		  </FooComponent>
+		  \\n
+		</div>
+
+	`)
+		done()
+	}
+
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery({ shouldShowDefaultExample: true }),
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-	expect(result).not.toMatch(/__COMPONENT__/)
-	const mth = result.match(/<div>(.*?)<\/div>/)
-	expect(mth && mth[0]).toMatchInlineSnapshot(`
-
-<div>
-  \\n\\t
-  <FooComponent>
-    \\n\\t\\t
-    <span>
-      text
-    </span>
-    \\n\\t\\t
-    <span>
-      Name of component: FooComponent
-    </span>
-    \\n\\t
-  </FooComponent>
-  \\n\\t
-  <FooComponent>
-  </FooComponent>
-  \\n
-</div>
-
-`)
 })
 
-it('should pass updateExample function from config to chunkify', () => {
+it('should pass updateExample function from config to chunkify', done => {
 	const exampleMarkdown = `
 \`\`\`jsx static
 <h1>Hello world!</h2>
 \`\`\`
 `
 	const updateExample = jest.fn(props => props)
+	const callback = () => {
+		expect(updateExample).toHaveBeenCalledWith(
+			{
+				content: '<h1>Hello world!</h2>',
+				settings: { static: true },
+				lang: 'jsx'
+			},
+			'/path/to/foo/examples/file'
+		)
+		done()
+	}
+
 	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery(),
 			resourcePath: '/path/to/foo/examples/file',
@@ -102,17 +124,9 @@ it('should pass updateExample function from config to chunkify', () => {
 		} as any,
 		exampleMarkdown
 	)
-	expect(updateExample).toHaveBeenCalledWith(
-		{
-			content: '<h1>Hello world!</h2>',
-			settings: { static: true },
-			lang: 'jsx'
-		},
-		'/path/to/foo/examples/file'
-	)
 })
 
-it('should generate require map when require() is used', () => {
+it('should generate require map when require() is used', done => {
 	const exampleMarkdown = `
 One:
 \`\`\`
@@ -122,21 +136,24 @@ One:
 Two:
 	<Y/>
 `
-	const result = examplesLoader.call(
+	const callback = (err: string, result: string) => {
+		expect(result).toBeTruthy()
+		expect(() => new Function(result)).not.toThrow(SyntaxError)
+		expect(result).toMatch(`'lodash': require('lodash')`)
+		done()
+	}
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery(),
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).toMatch(`'lodash': require('lodash')`)
 })
 
-it('should generate require map when import is used', () => {
+it('should generate require map when import is used', done => {
 	const exampleMarkdown = `
 One:
 \`\`\`
@@ -144,57 +161,67 @@ One:
 	<X/>
 \`\`\`
 `
-	const result = examplesLoader.call(
+	const callback = (err: string, result: string) => {
+		expect(result).toBeTruthy()
+		expect(() => new Function(result)).not.toThrow(SyntaxError)
+		expect(result).toMatch(`'lodash': require('lodash')`)
+		done()
+	}
+
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery(),
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).toMatch(`'lodash': require('lodash')`)
 })
 
-it('should work with multiple JSX element on the root level', () => {
+it('should work with multiple JSX element on the root level', done => {
 	const exampleMarkdown = `
 	<X/>
 	<Y/>
 `
-	const result = examplesLoader.call(
+	const callback = (err: string, result: string) => {
+		expect(result).toBeTruthy()
+		expect(() => new Function(result)).not.toThrow(SyntaxError)
+		done()
+	}
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery(),
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
 })
 
-it('should works for any Markdown file, without a current component', () => {
+it('should works for any Markdown file, without a current component', done => {
 	const exampleMarkdown = `
     import FooComponent from '../foo.js';
-    <FooComponent/>`
-	const result = examplesLoader.call(
+	<FooComponent/>`
+	const callback = (err: string, result: string) => {
+		expect(result).toBeTruthy()
+		expect(() => new Function(result)).not.toThrow(SyntaxError)
+		expect(result).not.toMatch('undefined')
+		done()
+	}
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: '',
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-
-	expect(result).toBeTruthy()
-	expect(() => new Function(result)).not.toThrow(SyntaxError)
-	expect(result).not.toMatch('undefined')
 })
 
-it('should import external dependency in a vue component example', () => {
+it('should import external dependency in a vue component example', done => {
 	jest.mock('vue-inbrowser-compiler-utils', () => {
 		return {
 			isCodeVueSfc: () => true
@@ -215,15 +242,18 @@ One:
 \`\`\`
 
 		`
-	const result = examplesLoader.call(
+	const callback = (err: string, result: string) => {
+		expect(result).toBeTruthy()
+		expect(result).toMatch(`'lodash': require('lodash')`)
+		done()
+	}
+	examplesLoader.call(
 		{
+			async: () => callback,
 			request: 'Readme.md',
 			query: '',
 			_styleguidist: {}
 		} as any,
 		exampleMarkdown
 	)
-
-	expect(result).toBeTruthy()
-	expect(result).toMatch(`'lodash': require('lodash')`)
 })

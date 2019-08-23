@@ -6,8 +6,8 @@ const extReq = path.join(__dirname, './external-require.vue')
 let docExt: ComponentDoc
 
 describe('tests when requiring an external js file', () => {
-	beforeEach(done => {
-		docExt = parse(extReq)
+	beforeEach(async done => {
+		docExt = await parse(extReq)
 		done()
 	})
 

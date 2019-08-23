@@ -16,11 +16,12 @@ export type Handler = (
 	componentDefinition: NodePath,
 	ast: bt.File,
 	opt: ParseOptions
-) => void
+) => Promise<void>
 
-export default function parseScript(
+export default async function parseScript(
 	source: string,
 	documentation: Documentation,
+	preHandlers: Handler[],
 	handlers: Handler[],
 	options: ParseOptions
 ) {
@@ -40,19 +41,30 @@ export default function parseScript(
 		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
-	executeHandlers(handlers, componentDefinitions, documentation, ast, options)
+	await executeHandlers(preHandlers, handlers, componentDefinitions, documentation, ast, options)
 }
 
-function executeHandlers(
+async function executeHandlers(
+	preHandlers: Handler[],
 	localHandlers: Handler[],
 	componentDefinitions: Map<string, NodePath>,
 	documentation: Documentation,
 	ast: bt.File,
 	opt: ParseOptions
 ) {
-	return componentDefinitions.forEach((compDef, name) => {
-		if (compDef && name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1)) {
-			localHandlers.forEach(handler => handler(documentation, compDef, ast, opt))
-		}
-	})
+	return await Promise.all(
+		componentDefinitions.keys().map(async name => {
+			const compDef = componentDefinitions.get(name)
+			if (compDef && name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1)) {
+				// execute all handlers in order as order matters
+				await preHandlers.reduce(async (_, handler) => {
+					await _
+					return await handler(documentation, compDef, ast, opt)
+				}, Promise.resolve())
+				await Promise.all(
+					localHandlers.map(async handler => await handler(documentation, compDef, ast, opt))
+				)
+			}
+		})
+	)
 }

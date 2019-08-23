@@ -34,6 +34,19 @@ module.exports = {
 			presets: ['@vue/app']
 		},
 		{
+			test: /packages[\\/]vue-styleguidist[\\/]src[\\/]loaders[\\/]/,
+			presets: [
+				[
+					'@babel/env',
+					{
+						targets: {
+							node: 10
+						}
+					}
+				]
+			]
+		},
+		{
 			test: /packages[\\/]vue-styleguidist[\\/]src[\\/]client[\\/]/,
 			presets: [
 				[

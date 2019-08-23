@@ -14,7 +14,7 @@ import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getMemberFilter from '../utils/getPropsFilter'
 
-export default function methodHandler(documentation: Documentation, path: NodePath) {
+export default async function methodHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const methodsPath = path
 			.get('properties')

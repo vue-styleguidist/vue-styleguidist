@@ -5,8 +5,8 @@ import { parse } from '../../../src/main'
 const button = path.join(__dirname, './DatePicker.vue')
 let docButton: ComponentDoc
 describe('tests datePicker', () => {
-	beforeAll(done => {
-		docButton = parse(button, { jsx: false })
+	beforeAll(async done => {
+		docButton = await parse(button, { jsx: false })
 		done()
 	})
 

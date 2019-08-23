@@ -53,11 +53,11 @@ describe('mixinsHandler', () => {
 			'  mixins:[testComponent,other]',
 			'}'
 		].join('\n')
-	])('should resolve extended modules variables', src => {
+	])('should resolve extended modules variables', async (src, done) => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast).get('default')
 		if (path) {
-			mixinsHandler(doc, path, ast, { filePath: '' })
+			await mixinsHandler(doc, path, ast, { filePath: '' })
 		}
 		expect(mockParse).toHaveBeenCalledWith(
 			doc,
@@ -66,9 +66,10 @@ describe('mixinsHandler', () => {
 				nameFilter: ['default']
 			})
 		)
+		done()
 	})
 
-	it('should resolve mixins modules variables in class style components', done => {
+	it('should resolve mixins modules variables in class style components', async done => {
 		const src = [
 			'import { testMixin, otherMixin  } from "./mixins";',
 			'@Component',
@@ -81,7 +82,7 @@ describe('mixinsHandler', () => {
 			done.fail()
 			return
 		}
-		mixinsHandler(doc, path, ast, { filePath: '' })
+		await mixinsHandler(doc, path, ast, { filePath: '' })
 		expect(mockParse).toHaveBeenCalledWith(
 			doc,
 			expect.objectContaining({
@@ -92,7 +93,7 @@ describe('mixinsHandler', () => {
 		done()
 	})
 
-	it('should ignore mixins coming from node_modules', done => {
+	it('should ignore mixins coming from node_modules', async done => {
 		const src = [
 			'import { VueMixin  } from "vue-mixins";',
 			'export default {',
@@ -106,12 +107,12 @@ describe('mixinsHandler', () => {
 			return
 		}
 		mockResolvePathFrom.mockReturnValue('foo/node_modules/component/full/path')
-		mixinsHandler(doc, path, ast, { filePath: '' })
+		await mixinsHandler(doc, path, ast, { filePath: '' })
 		expect(mockParse).not.toHaveBeenCalled()
 		done()
 	})
 
-	it('should ignore variables that are not mixins', done => {
+	it('should ignore variables that are not mixins', async done => {
 		const src = [
 			'const { maxin } = require("./maxins");',
 			'const foo = require("./bar")',
@@ -125,7 +126,7 @@ describe('mixinsHandler', () => {
 			done.fail()
 			return
 		}
-		mixinsHandler(doc, path, ast, { filePath: '' })
+		await mixinsHandler(doc, path, ast, { filePath: '' })
 		expect(mockParse).not.toHaveBeenCalled()
 		done()
 	})

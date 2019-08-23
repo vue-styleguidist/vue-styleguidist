@@ -6,8 +6,8 @@ const InputTextDoc = path.join(__dirname, './InputTextDocumented.vue')
 let docInputTextDoc: ComponentDoc
 
 describe('tests InputTextDoc', () => {
-	beforeAll(done => {
-		docInputTextDoc = parse(InputTextDoc)
+	beforeAll(async done => {
+		docInputTextDoc = await parse(InputTextDoc)
 		done()
 	})
 

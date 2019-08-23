@@ -8,7 +8,7 @@ import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import propHandler, { describeDefault, describeRequired, describeType } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
-export default function classPropHandler(
+export default async function classPropHandler(
 	documentation: Documentation,
 	path: NodePath<bt.ClassDeclaration>
 ) {

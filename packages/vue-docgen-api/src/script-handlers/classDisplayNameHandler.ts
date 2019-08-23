@@ -3,7 +3,10 @@ import { NodePath } from 'ast-types'
 import Documentation from '../Documentation'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
-export default function classDisplayNameHandler(documentation: Documentation, path: NodePath) {
+export default async function classDisplayNameHandler(
+	documentation: Documentation,
+	path: NodePath
+) {
 	if (bt.isClassDeclaration(path.node)) {
 		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
 

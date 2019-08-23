@@ -17,7 +17,7 @@ export interface TypedParamTag extends ParamTag {
 	type: ParamType
 }
 
-export default function eventHandler(
+export default async function eventHandler(
 	documentation: Documentation,
 	path: NodePath,
 	astPath: bt.File
