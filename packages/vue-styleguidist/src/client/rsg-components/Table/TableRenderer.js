@@ -21,6 +21,11 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 		fontSize: fontSize.small,
 		whiteSpace: 'nowrap'
 	},
+	dataRow: {
+		'&:hover': {
+			background: '#fbfbfb'
+		}
+	},
 	cell: {
 		color: color.base,
 		paddingRight: space[2],
@@ -29,6 +34,7 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 		verticalAlign: 'top',
 		fontFamily: fontFamily.base,
 		fontSize: fontSize.small,
+		borderBottom: [[1, color.border, 'solid']],
 		'&:last-child': {
 			isolate: false,
 			width: '80%',
@@ -55,7 +61,7 @@ export function TableRenderer({ classes, columns, rows, getRowKey }) {
 			</thead>
 			<tbody>
 				{rows.map(row => (
-					<tr key={getRowKey(row)}>
+					<tr key={getRowKey(row)} className={classes.dataRow}>
 						{columns.map(({ render }, index) => (
 							<td key={index} className={classes.cell}>
 								{render(row)}
