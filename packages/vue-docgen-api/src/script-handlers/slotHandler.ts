@@ -36,11 +36,9 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 						pathCall.node.callee.object.property.name === '$scopedSlots')
 				) {
 					const doc = documentation.getSlotDescriptor(pathCall.node.callee.property.name)
-					doc.description =
-						doc.description && doc.description.length
-							? doc.description
-							: getExpressionDescription(pathCall.node)
-
+					if (!doc.description || !doc.description.length) {
+						doc.description = getDescription(pathCall)
+					}
 					return false
 				}
 				this.traverse(pathCall)
@@ -55,7 +53,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					bt.isIdentifier(pathMember.node.property)
 				) {
 					const doc = documentation.getSlotDescriptor(pathMember.node.property.name)
-					doc.description = getExpressionDescription(pathMember.node)
+					doc.description = getDescription(pathMember)
 
 					return false
 				}
@@ -79,6 +77,10 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			}
 		})
 	}
+}
+
+function isStatement(path: NodePath): boolean {
+	return path && (bt.isDeclaration(path.node) || bt.isReturnStatement(path.node))
 }
 
 function getName(nodeJSX: bt.JSXElement): string {
@@ -114,7 +116,26 @@ function getJSXDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): string 
 	return parseCommentNode(lastComment)
 }
 
-function getExpressionDescription(node: any): string {
+function getDescription(path: NodePath): string {
+	const desc = getExpressionDescription(path)
+	if (desc.length) {
+		return desc
+	}
+	// in case we don't find a description on the expression,
+	// look for it on the containing statement
+
+	// 1: find the statement
+	let i = 10
+	while (i-- && path && !isStatement(path)) {
+		path = path.parentPath
+	}
+
+	// 2: extract the description if it exists
+	return path ? getExpressionDescription(path) : ''
+}
+
+function getExpressionDescription(path: NodePath): string {
+	const node = path.node
 	if (!node.leadingComments || node.leadingComments.length === 0) {
 		return ''
 	}
