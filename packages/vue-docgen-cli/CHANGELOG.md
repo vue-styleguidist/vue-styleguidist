@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.22.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.22.2...v3.22.3) (2019-09-12)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
 ## [3.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.22.0...v3.22.1) (2019-08-19)
 
 
