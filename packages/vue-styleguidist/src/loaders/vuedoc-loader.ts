@@ -13,7 +13,15 @@ const logger = createLogger('vsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
 export default function(this: StyleguidistContext, source: string) {
-	var callback = this.async()
+	const callback = this.async()
+	const cb = callback ? callback : () => null
+	vuedocLoader.call(this, source).then(res => cb(undefined, res))
+}
+
+export async function vuedocLoader(
+	this: StyleguidistContext,
+	source: string
+): Promise<string | undefined> {
 	const file = this.request.split('!').pop()
 	if (!file) return
 	const config = this._styleguidist
@@ -34,97 +42,85 @@ export default function(this: StyleguidistContext, source: string) {
 		await parse(file, { alias, modules, jsx: config.jsxInComponents })
 	const propsParser = config.propsParser || defaultParser
 
-	propsParser(file)
-		.then(docs => {
-			const componentVueDoc = getComponentVueDoc(source, file)
-			const isComponentDocInVueFile = !!componentVueDoc
-			if (componentVueDoc) {
-				docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
-			} else if (docs.tags) {
-				const examples = docs.tags.examples
-				if (examples) {
-					const examplePath = (examples[examples.length - 1] as Tag).content
-					if (examples.length > 1) {
-						logger.warn(
-							`More than one @example tags specified in component ${path.relative(
-								process.cwd(),
-								file
-							)}\nUsing the last tag to build examples: '${examplePath}'`
-						)
-					}
-					docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
+	let docs = await propsParser(file)
+	const componentVueDoc = getComponentVueDoc(source, file)
+	const isComponentDocInVueFile = !!componentVueDoc
+	if (componentVueDoc) {
+		docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
+	} else if (docs.tags) {
+		const examples = docs.tags.examples
+		if (examples) {
+			const examplePath = (examples[examples.length - 1] as Tag).content
+			if (examples.length > 1) {
+				logger.warn(
+					`More than one @example tags specified in component ${path.relative(
+						process.cwd(),
+						file
+					)}\nUsing the last tag to build examples: '${examplePath}'`
+				)
+			}
+			docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
+		}
+	}
+	if (docs.props) {
+		const props = docs.props
+		Object.keys(props).forEach(key => {
+			if (props[key].tags && props[key].tags.ignore) {
+				delete props[key]
+			}
+		})
+	}
+
+	if (docs.methods) {
+		docs.methods.map(method => {
+			method.tags = method.tags || {}
+			method.tags.public = [
+				{
+					title: 'public'
 				}
+			]
+			const params = method.tags.params
+			if (params) {
+				method.tags.param = params
+				delete method.tags.params
 			}
-			if (docs.props) {
-				const props = docs.props
-				Object.keys(props).forEach(key => {
-					if (props[key].tags && props[key].tags.ignore) {
-						delete props[key]
-					}
-				})
-			}
+			return method
+		})
+	}
 
-			if (docs.methods) {
-				docs.methods.map(method => {
-					method.tags = method.tags || {}
-					method.tags.public = [
-						{
-							title: 'public'
-						}
-					]
-					const params = method.tags.params
-					if (params) {
-						method.tags.param = params
-						delete method.tags.params
-					}
-					return method
-				})
-			}
+	const componentProps = docs.props
+	if (componentProps) {
+		// Transform the properties to an array. This will allow sorting
+		// TODO: Extract to a module
+		const propsAsArray = Object.keys(componentProps).reduce((acc: PropDescriptor[], name) => {
+			componentProps[name].name = name
+			acc.push(componentProps[name])
+			return acc
+		}, [])
 
-			const componentProps = docs.props
-			if (componentProps) {
-				// Transform the properties to an array. This will allow sorting
-				// TODO: Extract to a module
-				const propsAsArray = Object.keys(componentProps).reduce((acc: PropDescriptor[], name) => {
-					componentProps[name].name = name
-					acc.push(componentProps[name])
-					return acc
-				}, [])
+		const sortProps = config.sortProps || defaultSortProps
+		docs.props = sortProps(propsAsArray)
+	}
 
-				const sortProps = config.sortProps || defaultSortProps
-				docs.props = sortProps(propsAsArray)
-			}
+	const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
 
-			const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
+	docs.examples = getExamples(
+		file,
+		examplesFile,
+		docs.displayName,
+		config.defaultExample,
+		isComponentDocInVueFile
+	)
 
-			docs.examples = getExamples(
-				file,
-				examplesFile,
-				docs.displayName,
-				config.defaultExample,
-				isComponentDocInVueFile
-			)
+	if (config.updateDocs) {
+		docs = config.updateDocs(docs, file)
+	}
 
-			if (config.updateDocs) {
-				docs = config.updateDocs(docs, file)
-			}
-
-			callback &&
-				callback(
-					null,
-					`
+	return `
 		if (module.hot) {
 			module.hot.accept([])
 		}
 
 		module.exports = ${generate(toAst(docs))}
 	`
-				)
-		})
-		.catch(err => {
-			/* istanbul ignore next */
-			const componentPath = path.relative(process.cwd(), file)
-			const message = `vue-docgen-api cannot parse ${componentPath}: ${err}\n\n`
-			logger.warn(message)
-		})
 }

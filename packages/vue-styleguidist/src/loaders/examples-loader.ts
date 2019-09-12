@@ -38,8 +38,13 @@ function isVueFile(filepath: string) {
 	return /.vue$/.test(filepath)
 }
 
-export default function examplesLoader(this: StyleguidistContext, src: string) {
+export default function(this: StyleguidistContext, source: string) {
 	const callback = this.async()
+	const cb = callback ? callback : () => null
+	examplesLoader.call(this, source).then(res => cb(undefined, res))
+}
+
+export async function examplesLoader(this: StyleguidistContext, src: string): Promise<string> {
 	const filePath = this.request.split('!').pop()
 	let source: string | false = src
 	if (!filePath) return ''
@@ -197,11 +202,7 @@ export default function examplesLoader(this: StyleguidistContext, src: string) {
 		return example
 	})
 
-	return (
-		callback &&
-		callback(
-			null,
-			`
+	return `
 if (module.hot) {
 	module.hot.accept([])
 }
@@ -209,19 +210,17 @@ var requireMap = ${generate(toAst(allModulesCode))};
 var requireInRuntimeBase = require(${JSON.stringify(REQUIRE_IN_RUNTIME_PATH)});
 var requireInRuntime = requireInRuntimeBase.bind(null, requireMap);
 var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
-				config.jsxInExamples
-					? `
+		config.jsxInExamples
+			? `
 
 var compilerUtils = require(${JSON.stringify(JSX_COMPILER_UTILS_PATH)});
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
 	compilerUtils.adaptCreateElement, compilerUtils.concatenate);`
-					: `
+			: `
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
 	null, null)`
-			}
+	}
 module.exports = ${generate(toAst(examplesWithEval))}`
-		)
-	)
 }
