@@ -35,7 +35,7 @@
     "predocs": "node ./docs/.vuepress/preprocess.js",
     "docs": "vuepress dev docs",
     "docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
-    "postinstall": "cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
+    "postinstall": "yarn compile && cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",
   "engines": {
