@@ -25,9 +25,12 @@ jobs:
       
       ## DOCS
       # Build all examples
-      - run: cd examples
-      - run: for D in *; do yarn build "${D}"; done
+      - 
+        run: for D in *; do yarn build "${D}"; done
+        working-directory: examples
 
       # Move them to the docs
-      - run: for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
+      - 
+        run: for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
+        working-directory: examples
       - run: yarn docs:build
