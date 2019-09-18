@@ -25,7 +25,7 @@ jobs:
       
       ## DOCS
       # Build all examples
-        - cd examples
+      - run: cd examples
       - run: for D in *; do yarn build "${D}"; done
 
       # Move them to the docs
