@@ -31,6 +31,8 @@ jobs:
 
       # Move them to the docs
       - name: Move them to the docs
-        run: for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
+        run: for D in *; do mv ./"${D}"/dist ../docs/dist/"${D}"; done
         working-directory: examples
+        
+      # Finally build the docs site
       - run: yarn docs:build
