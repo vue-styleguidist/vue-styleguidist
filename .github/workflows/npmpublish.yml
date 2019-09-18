@@ -1,4 +1,4 @@
-name: Test 
+name: Compile, Test, Docs 
 
 on:
   pull_request:
@@ -13,6 +13,21 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: yarn
+      - run: yarn install
+      
+      ## compile
       - run: yarn compile
-      - run: yarn test
+      
+      ## TESTS
+      - run: yarn lint
+      - run: yarn test:jest --runInBand
+      - run: yarn test:plugin
+      
+      ## DOCS
+      # Build all examples
+        - cd examples
+      - run: for D in *; do yarn build "${D}"; done
+
+      # Move them to the docs
+      - run: for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
+      - run: yarn docs:build
