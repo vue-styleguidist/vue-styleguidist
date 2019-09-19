@@ -30,6 +30,7 @@ jobs:
         working-directory: examples
 
       # Move them to the docs
+      - run: mkdir ../docs/dist
       - name: Move them to the docs
         run: for D in *; do mv ./"${D}"/dist ../docs/dist/"${D}"; done
         working-directory: examples
