@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.22.3...v3.23.0) (2019-09-19)
+
+
+### Features
+
+* **compiler:** styleScoper deals with deep ([ff89890](https://github.com/vue-styleguidist/vue-styleguidist/commit/ff89890))
+
+
+
+
+
 ## [3.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.22.0...v3.22.1) (2019-08-19)
 
 **Note:** Version bump only for package vue-inbrowser-compiler
