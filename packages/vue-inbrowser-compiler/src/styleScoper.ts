@@ -11,8 +11,16 @@ export default function scoper(css: string, suffix: string) {
 			return selector + after
 		}
 
+		// don't scope the part of the selector after ::v-deep
+		const arrayDeep = /(.*)(::v-deep|>>>|\/deep\/)(.*)/g.exec(selector)
+		if (arrayDeep) {
+			var [, beforeVDeep, , afterVDeep] = arrayDeep
+			selector = beforeVDeep
+			after = afterVDeep + after
+		}
+
 		// deal with :scope pseudo selectors
-		if (selector.match(/:scope/)) {
+		if (selector && selector.match(/:scope/)) {
 			selector = selector.replace(/([^\s]*):scope/, function(full: string, cutSelector: string) {
 				if (cutSelector === '') {
 					return '> *'
@@ -23,7 +31,7 @@ export default function scoper(css: string, suffix: string) {
 
 		// deal with other pseudo selectors
 		let pseudo = ''
-		if (selector.match(/:/)) {
+		if (selector && selector.match(/:/)) {
 			const parts = selector.split(/:/)
 			selector = parts[0]
 			pseudo = ':' + parts[1]
