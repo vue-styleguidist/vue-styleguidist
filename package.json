@@ -35,7 +35,7 @@
     "predocs": "node ./docs/.vuepress/preprocess.js",
     "docs": "vuepress dev docs",
     "docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
-    "postinstall": "cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
+    "postinstall": "yarn compile && cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",
   "engines": {
@@ -106,7 +106,7 @@
     "keymirror": "^0.1.1",
     "lerna": "^3.13.1",
     "lint-staged": "^7.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "markdown-toc": "^1.2.0",
     "mini-css-extract-plugin": "^0.4.1",
     "minimist": "^1.2.0",

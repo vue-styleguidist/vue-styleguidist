@@ -20,4 +20,14 @@ describe('styleScoper', () => {
 		const scopedCSS = scoper(`.bonjour .hello{color:blue;}`, '[test]')
 		expect(scopedCSS).toBe('.bonjour[test] .hello[test] {color:blue;}')
 	})
+
+	it.each(['::v-deep', '>>>', '/deep/'])('should not scope deep selector : %s', selector => {
+		const scopedCSS = scoper(
+			`.bonjour .hello ${selector} .deepClass, .salut .goodbye ${selector} .deepClass{color:blue;}`,
+			'[test]'
+		)
+		expect(scopedCSS).toBe(
+			'.bonjour[test] .hello[test]  .deepClass,.salut[test] .goodbye[test]  .deepClass{color:blue;}'
+		)
+	})
 })

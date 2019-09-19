@@ -19,7 +19,7 @@
   "dependencies": {
     "@znck/prop-types": "^0.6.1",
     "dog-names": "^1.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "vue-types": "^1.5.0"
   },
   "scripts": {
