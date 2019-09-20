@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.23.0...v3.23.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **docgen:** allow default to be a string key ([1fa756f](https://github.com/vue-styleguidist/vue-styleguidist/commit/1fa756f)), closes [#581](https://github.com/vue-styleguidist/vue-styleguidist/issues/581)
+* extend quoting to methods and props ([10e2b3e](https://github.com/vue-styleguidist/vue-styleguidist/commit/10e2b3e))
+
+
+
+
+
 # [3.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.22.3...v3.23.0) (2019-09-19)
 
 
