@@ -5,6 +5,7 @@ import Documentation, { BlockTag, DocBlockTags, PropDescriptor } from '../Docume
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import getMemberFilter from '../utils/getPropsFilter'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
@@ -12,7 +13,7 @@ export default function propHandler(documentation: Documentation, path: NodePath
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path
 			.get('properties')
-			.filter((p: NodePath) => bt.isObjectProperty(p.node) && p.node.key.name === 'props')
+			.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('props')(p))
 
 		// if no prop return
 		if (!propsPath.length) {
@@ -37,12 +38,14 @@ export default function propHandler(documentation: Documentation, path: NodePath
 				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
 				// if it's the v-model describe it only as such
-				const propName = jsDocTags.some(t => t.title === 'model') ? 'v-model' : propNode.key.name
+				const propName = jsDocTags.some(t => t.title === 'model')
+					? 'v-model'
+					: propNode.key.name || propNode.key.value
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
 
 				// save real prop name for reference when v-model
-				propDescriptor.name = propNode.key.name
+				propDescriptor.name = propNode.key.name || propNode.key.value
 
 				const propValuePath = prop.get('value')
 
@@ -112,12 +115,12 @@ export function describeType(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
 	propDescriptor: PropDescriptor
 ) {
-	const typeArray = propPropertiesPath.filter(p => p.node.key.name === 'type')
+	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
 	if (typeArray.length) {
 		propDescriptor.type = getTypeFromTypePath(typeArray[0].get('value'))
 	} else {
 		// deduce the type from default expression
-		const defaultArray = propPropertiesPath.filter(p => p.node.key.name === 'default')
+		const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 		if (defaultArray.length) {
 			const typeNode = defaultArray[0].node
 			const func =
@@ -167,7 +170,7 @@ export function describeRequired(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
 	propDescriptor: PropDescriptor
 ) {
-	const requiredArray = propPropertiesPath.filter(p => p.node.key.name === 'required')
+	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
 	propDescriptor.required =
 		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : ''
@@ -177,7 +180,7 @@ export function describeDefault(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
 	propDescriptor: PropDescriptor
 ) {
-	const defaultArray = propPropertiesPath.filter(p => p.node.key.name === 'default')
+	const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 	if (defaultArray.length) {
 		let defaultPath = defaultArray[0].get('value')
 

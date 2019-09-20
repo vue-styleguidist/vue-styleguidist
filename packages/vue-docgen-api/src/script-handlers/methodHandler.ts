@@ -12,13 +12,14 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import getMemberFilter from '../utils/getPropsFilter'
 
 export default function methodHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const methodsPath = path
 			.get('properties')
 			.filter(
-				(p: NodePath) => bt.isObjectProperty(p.node) && p.node.key.name === 'methods'
+				(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
 			) as Array<NodePath<bt.ObjectProperty>>
 
 		// if no method return
