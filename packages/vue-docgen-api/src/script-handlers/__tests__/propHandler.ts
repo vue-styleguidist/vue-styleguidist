@@ -275,6 +275,21 @@ describe('propHandler', () => {
 				defaultValue: { value: `{}` }
 			})
 		})
+
+		it('should be ok with the default between quotes', () => {
+			const src = `
+        export default {
+          'props': {
+            'test': {
+              'default': 'normal'
+            }
+          }
+        }
+        `
+			tester(src, {
+				defaultValue: { value: `"normal"` }
+			})
+		})
 	})
 
 	describe('description', () => {

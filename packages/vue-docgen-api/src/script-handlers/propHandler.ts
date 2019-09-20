@@ -12,7 +12,7 @@ export default function propHandler(documentation: Documentation, path: NodePath
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path
 			.get('properties')
-			.filter((p: NodePath) => bt.isObjectProperty(p.node) && p.node.key.name === 'props')
+			.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('props')(p))
 
 		// if no prop return
 		if (!propsPath.length) {
@@ -112,12 +112,12 @@ export function describeType(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
 	propDescriptor: PropDescriptor
 ) {
-	const typeArray = propPropertiesPath.filter(p => p.node.key.name === 'type')
+	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
 	if (typeArray.length) {
 		propDescriptor.type = getTypeFromTypePath(typeArray[0].get('value'))
 	} else {
 		// deduce the type from default expression
-		const defaultArray = propPropertiesPath.filter(p => p.node.key.name === 'default')
+		const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 		if (defaultArray.length) {
 			const typeNode = defaultArray[0].node
 			const func =
@@ -167,7 +167,7 @@ export function describeRequired(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
 	propDescriptor: PropDescriptor
 ) {
-	const requiredArray = propPropertiesPath.filter(p => p.node.key.name === 'required')
+	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
 	propDescriptor.required =
 		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : ''
@@ -177,7 +177,7 @@ export function describeDefault(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
 	propDescriptor: PropDescriptor
 ) {
-	const defaultArray = propPropertiesPath.filter(p => p.node.key.name === 'default')
+	const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 	if (defaultArray.length) {
 		let defaultPath = defaultArray[0].get('value')
 
@@ -199,4 +199,8 @@ export function describeDefault(
 			value: parenthesized ? rawValue.slice(1, rawValue.length - 1) : rawValue
 		}
 	}
+}
+
+function getMemberFilter(propName: string): (propPath: NodePath<bt.ObjectProperty>) => boolean {
+	return p => p.node.key.name === propName || p.node.key.value === propName
 }
