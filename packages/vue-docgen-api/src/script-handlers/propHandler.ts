@@ -5,6 +5,7 @@ import Documentation, { BlockTag, DocBlockTags, PropDescriptor } from '../Docume
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import getMemberFilter from '../utils/getPropsFilter'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
@@ -37,12 +38,14 @@ export default function propHandler(documentation: Documentation, path: NodePath
 				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
 				// if it's the v-model describe it only as such
-				const propName = jsDocTags.some(t => t.title === 'model') ? 'v-model' : propNode.key.name
+				const propName = jsDocTags.some(t => t.title === 'model')
+					? 'v-model'
+					: propNode.key.name || propNode.key.value
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
 
 				// save real prop name for reference when v-model
-				propDescriptor.name = propNode.key.name
+				propDescriptor.name = propNode.key.name || propNode.key.value
 
 				const propValuePath = prop.get('value')
 
@@ -199,8 +202,4 @@ export function describeDefault(
 			value: parenthesized ? rawValue.slice(1, rawValue.length - 1) : rawValue
 		}
 	}
-}
-
-function getMemberFilter(propName: string): (propPath: NodePath<bt.ObjectProperty>) => boolean {
-	return p => p.node.key.name === propName || p.node.key.value === propName
 }
