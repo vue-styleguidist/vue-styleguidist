@@ -20,7 +20,6 @@ describe('propHandler', () => {
 		mockPropDescriptor = {
 			name: '',
 			description: '',
-			required: '',
 			tags: {}
 		}
 		const MockDocumentation = Documentation

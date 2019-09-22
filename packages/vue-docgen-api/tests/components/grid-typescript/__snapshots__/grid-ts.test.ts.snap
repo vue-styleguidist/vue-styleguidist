@@ -117,7 +117,7 @@ Object {
     "columns": Object {
       "description": "get columns list",
       "name": "columns",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "array",
@@ -145,7 +145,7 @@ Object {
       },
       "description": "filter key",
       "name": "filterKey",
-      "required": "",
+      "required": undefined,
       "tags": Object {
         "ignore": Array [
           Object {
@@ -167,7 +167,7 @@ Object {
       },
       "description": "",
       "name": "images",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "array",
@@ -180,7 +180,7 @@ Object {
       },
       "description": "object/array defaults should be returned from a factory function",
       "name": "msg",
-      "required": "",
+      "required": undefined,
       "tags": Object {
         "link": Array [
           Object {
@@ -218,7 +218,7 @@ Object {
       },
       "description": "prop function",
       "name": "propFunc",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "func",

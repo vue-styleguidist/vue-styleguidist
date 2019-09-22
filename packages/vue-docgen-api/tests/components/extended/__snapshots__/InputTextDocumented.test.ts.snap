@@ -14,7 +14,7 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
       },
       "name": "placeholder",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -27,7 +27,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
       },
       "name": "question",
-      "required": "",
       "tags": Object {},
       "type": Object {
         "name": "undefined",

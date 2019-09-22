@@ -105,7 +105,6 @@ export default async function propHandler(documentation: Documentation, path: No
 				.forEach((e: NodePath<bt.StringLiteral>) => {
 					const propDescriptor = documentation.getPropDescriptor(e.node.value)
 					propDescriptor.type = { name: 'undefined' }
-					propDescriptor.required = ''
 				})
 		}
 	}
@@ -175,7 +174,7 @@ export function describeRequired(
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
 	propDescriptor.required =
-		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : ''
+		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : undefined
 }
 
 export function describeDefault(

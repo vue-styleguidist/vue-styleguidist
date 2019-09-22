@@ -24,7 +24,7 @@ Object {
       },
       "description": "",
       "name": "color",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "any",
@@ -37,7 +37,7 @@ Object {
       },
       "description": "",
       "name": "date",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "any",
@@ -50,7 +50,7 @@ Object {
       },
       "description": "",
       "name": "disabled",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "any",
@@ -63,7 +63,7 @@ Object {
       },
       "description": "",
       "name": "format",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "any",

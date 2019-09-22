@@ -22,7 +22,7 @@ Object {
       },
       "description": "Should the input be disabled?",
       "name": "disabled",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "boolean",
@@ -35,7 +35,7 @@ Object {
       },
       "description": "Should display error?",
       "name": "error",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "boolean",
@@ -48,7 +48,7 @@ Object {
       },
       "description": "String with relevant error message",
       "name": "errorMessage",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -61,7 +61,7 @@ Object {
       },
       "description": "Should the input be focused?",
       "name": "focused",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "boolean",
@@ -74,7 +74,7 @@ Object {
       },
       "description": "Prefix icon for input field",
       "name": "icon",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -105,7 +105,7 @@ Object {
       },
       "description": "True if input label should always be \\"up there\\"",
       "name": "labelAlwaysFloating",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "boolean",

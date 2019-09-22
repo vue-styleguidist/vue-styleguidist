@@ -37,7 +37,7 @@ describe('propHandler', () => {
 	}
 
 	describe('base', () => {
-		it('should accept an array of string as props and set required as "" for backwards comp', () => {
+		it('should accept an array of string as props', () => {
 			const src = `
         export default {
           props: ['testArray']
@@ -46,7 +46,7 @@ describe('propHandler', () => {
 			if (def) {
 				propHandler(documentation, def)
 			}
-			expect(mockPropDescriptor.required).toEqual('')
+			expect(mockPropDescriptor.required).toBeFalsy()
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testArray')
 		})
 	})

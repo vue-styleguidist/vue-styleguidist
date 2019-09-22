@@ -6,8 +6,8 @@ const exampleQuoted = path.join(__dirname, './example.vue')
 let docQuoted: ComponentDoc
 
 describe('test example vuex', () => {
-	beforeAll(done => {
-		docQuoted = parse(exampleQuoted)
+	beforeAll(async done => {
+		docQuoted = await parse(exampleQuoted)
 		done()
 	})
 
@@ -17,70 +17,70 @@ describe('test example vuex', () => {
 
 	it('The component should parse the quotes', () => {
 		expect(docQuoted.methods).toMatchInlineSnapshot(`
-				Array [
-				  Object {
-				    "description": "Sets the order",
-				    "modifiers": Array [],
-				    "name": "onSubmit",
-				    "params": Array [
-				      Object {
-				        "description": "Key to order",
-				        "name": "key",
-				        "title": "param",
-				        "type": Object {
-				          "name": "string",
-				        },
-				      },
-				    ],
-				    "returns": Object {
-				      "description": "Test",
-				      "title": "returns",
-				      "type": Object {
-				        "name": "string",
-				      },
-				    },
-				    "tags": Object {
-				      "access": Array [
-				        Object {
-				          "description": "public",
-				          "title": "access",
-				        },
-				      ],
-				      "params": Array [
-				        Object {
-				          "description": "Key to order",
-				          "name": "key",
-				          "title": "param",
-				          "type": Object {
-				            "name": "string",
-				          },
-				        },
-				      ],
-				      "returns": Array [
-				        Object {
-				          "description": "Test",
-				          "title": "returns",
-				          "type": Object {
-				            "name": "string",
-				          },
-				        },
-				      ],
-				      "since": Array [
-				        Object {
-				          "description": "Version 1.0.1",
-				          "title": "since",
-				        },
-				      ],
-				      "version": Array [
-				        Object {
-				          "description": "1.0.5",
-				          "title": "version",
-				        },
-				      ],
-				    },
-				  },
-				]
-		`)
+						Array [
+						  Object {
+						    "description": "Sets the order",
+						    "modifiers": Array [],
+						    "name": "onSubmit",
+						    "params": Array [
+						      Object {
+						        "description": "Key to order",
+						        "name": "key",
+						        "title": "param",
+						        "type": Object {
+						          "name": "string",
+						        },
+						      },
+						    ],
+						    "returns": Object {
+						      "description": "Test",
+						      "title": "returns",
+						      "type": Object {
+						        "name": "string",
+						      },
+						    },
+						    "tags": Object {
+						      "access": Array [
+						        Object {
+						          "description": "public",
+						          "title": "access",
+						        },
+						      ],
+						      "params": Array [
+						        Object {
+						          "description": "Key to order",
+						          "name": "key",
+						          "title": "param",
+						          "type": Object {
+						            "name": "string",
+						          },
+						        },
+						      ],
+						      "returns": Array [
+						        Object {
+						          "description": "Test",
+						          "title": "returns",
+						          "type": Object {
+						            "name": "string",
+						          },
+						        },
+						      ],
+						      "since": Array [
+						        Object {
+						          "description": "Version 1.0.1",
+						          "title": "since",
+						        },
+						      ],
+						      "version": Array [
+						        Object {
+						          "description": "1.0.5",
+						          "title": "version",
+						        },
+						      ],
+						    },
+						  },
+						]
+			`)
 		expect(docQuoted.props).toMatchInlineSnapshot(`
 		Object {
 		  "anotherProp": Object {
@@ -99,7 +99,7 @@ describe('test example vuex', () => {
 		    },
 		    "description": "",
 		    "name": "color",
-		    "required": "",
+		    "required": undefined,
 		    "tags": Object {},
 		    "type": Object {
 		      "name": "string",

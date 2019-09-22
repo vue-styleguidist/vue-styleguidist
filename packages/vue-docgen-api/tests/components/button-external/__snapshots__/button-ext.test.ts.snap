@@ -54,7 +54,7 @@ Object {
       },
       "description": "A prop with a default value",
       "name": "propB",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -71,7 +71,7 @@ Object {
     "propNoType": Object {
       "description": "An example of a property typed through the decorators arguments",
       "name": "propNoType",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
