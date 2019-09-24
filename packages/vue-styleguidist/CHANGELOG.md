@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.23.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.23.1...v3.23.2) (2019-09-24)
+
+
+### Bug Fixes
+
+* add .vue to extension array in webpack config ([65da41b](https://github.com/vue-styleguidist/vue-styleguidist/commit/65da41b))
+
+
+
+
+
 ## [3.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.23.0...v3.23.1) (2019-09-20)
 
 **Note:** Version bump only for package vue-styleguidist

@@ -38,7 +38,7 @@ module.exports = function(config, env) {
 			chunkFilename: 'build/[name].js'
 		},
 		resolve: {
-			extensions: ['.js', '.jsx', '.json'],
+			extensions: ['.vue', '.js', '.jsx', '.json'],
 			alias: {
 				'rsg-codemirror-theme.css': `codemirror/theme/${
 					config.editorConfig.theme.split(' ')[0]
