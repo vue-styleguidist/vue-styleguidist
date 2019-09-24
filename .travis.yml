@@ -86,6 +86,6 @@ jobs:
         - git checkout github/dev
         - git checkout -b dev
         - git status -v
-        - git merge master -m "chore&#58; master"
+        - git merge master --no-edit
         - git branch --set-upstream-to github/dev
         - git push
