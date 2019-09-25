@@ -50,8 +50,9 @@ export async function compile(
 	filePath: string
 ) {
 	const componentFile = docMap[filePath] || filePath
-	writeDownMdFile(
-		await compileMarkdown(config, componentFile),
-		config.getDestFile(componentFile, config)
-	)
+	const file = config.getDestFile(componentFile, config)
+	// if getDestFile is null,will not be create files
+	if (file) {
+		writeDownMdFile(await compileMarkdown(config, componentFile), file)
+	}
 }
