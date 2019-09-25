@@ -290,6 +290,30 @@ describe('propHandler', () => {
 				defaultValue: { value: `"normal"` }
 			})
 		})
+
+		it('should be ok with the default as a method', () => {
+			const src = [
+				'export default {',
+				'	props: {',
+				'		test: {',
+				'			default() {',
+				'				return ["normal"]',
+				'			}',
+				'		}',
+				'	}',
+				'}'
+			].join('\n')
+
+			tester(src, {
+				defaultValue: {
+					value: [
+						'function(){', // leave these comments
+						'    return ["normal"];', // with this format
+						'}' // to avoid prettier formatting
+					].join('\n')
+				}
+			})
+		})
 	})
 
 	describe('description', () => {
