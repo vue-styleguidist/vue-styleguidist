@@ -3,6 +3,7 @@ import { NodePath } from 'ast-types'
 import recast from 'recast'
 import Documentation, { ParamTag, ParamType, Tag } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
+import { parseDocblock } from '../utils/getDocblock'
 
 export interface TypedParamTag extends ParamTag {
 	type: ParamType
@@ -26,6 +27,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			? renderPath[0].get('value')
 			: renderPath[0]
 		recast.visit(renderValuePath.node, {
+			// this.$slots.default()
 			visitCallExpression(pathCall) {
 				if (
 					bt.isMemberExpression(pathCall.node.callee) &&
@@ -39,10 +41,15 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					if (!doc.description || !doc.description.length) {
 						doc.description = getDescription(pathCall)
 					}
+					const bindings = pathCall.node.arguments[0]
+					if (bt.isObjectExpression(bindings)) {
+						doc.bindings = getBindings(bindings)
+					}
 					return false
 				}
 				this.traverse(pathCall)
 			},
+			// this.$slots.mySlot
 			visitMemberExpression(pathMember) {
 				if (
 					bt.isMemberExpression(pathMember.node.object) &&
@@ -72,6 +79,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					if (bt.isJSXElement(parentNode)) {
 						doc.description = getJSXDescription(nodeJSX, parentNode.children)
 					}
+					return false
 				}
 				this.traverse(pathJSX)
 			}
@@ -147,7 +155,7 @@ function parseCommentNode(node: bt.BaseComment): string {
 	if (node.type !== 'CommentBlock') {
 		return ''
 	}
-	const docBlock = node.value.replace(/^\*/, '').trim()
+	const docBlock = parseDocblock(node.value).trim()
 	const jsDoc = getDoclets(docBlock)
 	if (!jsDoc.tags) {
 		return ''
@@ -158,4 +166,15 @@ function parseCommentNode(node: bt.BaseComment): string {
 		return typeof tagContent === 'string' ? tagContent : ''
 	}
 	return ''
+}
+
+function getBindings(node: bt.ObjectExpression): Record<string, any> {
+	return node.properties.reduce((bindings: Record<string, any>, prop: bt.ObjectProperty) => {
+		const desc =
+			prop.leadingComments && prop.leadingComments.length
+				? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
+				: undefined
+		bindings[prop.key.name] = desc || '-'
+		return bindings
+	}, {})
 }
