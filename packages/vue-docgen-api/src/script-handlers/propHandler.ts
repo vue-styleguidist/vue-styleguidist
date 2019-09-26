@@ -61,9 +61,9 @@ export default function propHandler(documentation: Documentation, path: NodePath
 					// standard default + type + required
 					const propPropertiesPath = propValuePath
 						.get('properties')
-						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
-						NodePath<bt.ObjectProperty>
-					>
+						.filter(
+							(p: NodePath) => bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)
+						) as Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>
 
 					// type
 					describeType(propPropertiesPath, propDescriptor)
@@ -112,7 +112,7 @@ export default function propHandler(documentation: Documentation, path: NodePath
 }
 
 export function describeType(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
+	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
 ) {
 	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
@@ -123,11 +123,13 @@ export function describeType(
 		const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 		if (defaultArray.length) {
 			const typeNode = defaultArray[0].node
-			const func =
-				bt.isArrowFunctionExpression(typeNode.value) || bt.isFunctionExpression(typeNode.value)
-			const typeValueNode = defaultArray[0].get('value').node as ValueLitteral
-			const typeName = typeof typeValueNode.value
-			propDescriptor.type = { name: func ? 'func' : typeName }
+			if (bt.isObjectProperty(typeNode)) {
+				const func =
+					bt.isArrowFunctionExpression(typeNode.value) || bt.isFunctionExpression(typeNode.value)
+				const typeValueNode = defaultArray[0].get('value').node as ValueLitteral
+				const typeName = typeof typeValueNode.value
+				propDescriptor.type = { name: func ? 'func' : typeName }
+			}
 		}
 	}
 }
@@ -167,7 +169,7 @@ function getTypeFromTypePath(typePath: NodePath): { name: string; func?: boolean
 }
 
 export function describeRequired(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
+	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
 ) {
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
@@ -177,29 +179,38 @@ export function describeRequired(
 }
 
 export function describeDefault(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty>>,
+	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
 ) {
 	const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 	if (defaultArray.length) {
-		let defaultPath = defaultArray[0].get('value')
+		if (bt.isObjectProperty(defaultArray[0].value)) {
+			let defaultPath = defaultArray[0].get('value')
 
-		let parenthesized = false
-		if (
-			bt.isArrowFunctionExpression(defaultPath.node) &&
-			bt.isObjectExpression(defaultPath.node.body) // if () => ({})
-		) {
-			defaultPath = defaultPath.get('body')
-			const extra = (defaultPath.node as any).extra
-			if (extra && extra.parenthesized) {
-				parenthesized = true
+			let parenthesized = false
+			if (
+				bt.isArrowFunctionExpression(defaultPath.node) &&
+				bt.isObjectExpression(defaultPath.node.body) // if () => ({})
+			) {
+				defaultPath = defaultPath.get('body')
+				const extra = (defaultPath.node as any).extra
+				if (extra && extra.parenthesized) {
+					parenthesized = true
+				}
 			}
-		}
 
-		const rawValue = recast.print(defaultPath).code
-		propDescriptor.defaultValue = {
-			func: bt.isFunction(defaultPath.node),
-			value: parenthesized ? rawValue.slice(1, rawValue.length - 1) : rawValue
+			const rawValue = recast.print(defaultPath).code
+			propDescriptor.defaultValue = {
+				func: bt.isFunction(defaultPath.node),
+				value: parenthesized ? rawValue.slice(1, rawValue.length - 1) : rawValue
+			}
+		} else {
+			let defaultPath = defaultArray[0].get('body')
+			const rawValue = recast.print(defaultPath).code
+			propDescriptor.defaultValue = {
+				func: bt.isFunction(defaultPath.node),
+				value: `function()${rawValue.trim()}`
+			}
 		}
 	}
 }
