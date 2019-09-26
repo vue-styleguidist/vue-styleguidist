@@ -174,6 +174,42 @@ describe('render function slotHandler', () => {
 		done()
 	})
 
+	it('should detect scopedSlots in renderless components', async done => {
+		const src = `
+      export default {
+        render () {
+			/**
+			 * @slot Use this slot carefully 
+			 */
+			return this.$scopedSlots.default({
+			  /**
+			   * contains true while compiling
+			   */ 
+			  compiling: this.compiling,
+			  /**
+			   * will render the compiled item
+			   */ 
+			  compile: this.compile
+			})
+		  }
+      };
+  `
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+		expect(mockSlotDescriptor).toMatchInlineSnapshot(`
+		Object {
+		  "bindings": Object {
+		    "compile": "will render the compiled item",
+		    "compiling": "contains true while compiling",
+		  },
+		  "description": "Use this slot carefully",
+		}
+	`)
+		done()
+	})
+
 	it('should allow describing scoped slots in render', async done => {
 		const src = `
     export default {
