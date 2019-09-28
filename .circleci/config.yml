@@ -24,17 +24,6 @@ jobs:
           paths:
             - vue-styleguidist
 
-  compile:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: yarn compile
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - vue-styleguidist
-
   examples-basic:
     <<: *defaults
     steps:
@@ -107,18 +96,15 @@ workflows:
   test:
     jobs:
       - install
-      - compile:
-          requires:
-            - install
       - examples-basic:
           requires:
-            - compile
+            - install
       - examples-vuecli:
           requires:
-            - compile
+            - install
       - examples-other:
           requires:
-            - compile
+            - install
       - cypress:
           requires:
-            - compile
+            - install

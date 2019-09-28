@@ -33,7 +33,6 @@ jobs:
   include:
     - stage: test
       script:
-        - yarn compile
         - yarn lint
         # Run tests without coverage since it's 2x faster
         - yarn test:jest --runInBand
