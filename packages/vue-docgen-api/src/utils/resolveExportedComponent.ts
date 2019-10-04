@@ -67,12 +67,13 @@ export default function resolveExportedComponent(ast: bt.File): Map<string, Node
 	}
 
 	recast.visit(ast.program, {
-		// to look only at the root we ignore all traversing
+		// for perf resons,
+		// look only at the root,
+		// ignore all traversing except for if
 		visitFunctionDeclaration: ignore,
 		visitFunctionExpression: ignore,
 		visitClassDeclaration: ignore,
 		visitClassExpression: ignore,
-		visitIfStatement: ignore,
 		visitWithStatement: ignore,
 		visitSwitchStatement: ignore,
 		visitWhileStatement: ignore,
