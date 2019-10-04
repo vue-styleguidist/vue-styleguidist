@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.24.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.1...v3.24.2) (2019-09-26)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [3.24.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.0...v3.24.1) (2019-09-26)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [3.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.23.2...v3.24.0) (2019-09-25)
+
+
+### Features
+
+* vue-docgen-cli if getDestFile should not create md file ([55da63e](https://github.com/vue-styleguidist/vue-styleguidist/commit/55da63e))
+
+
+
+
+
 ## [3.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.23.0...v3.23.1) (2019-09-20)
 
 **Note:** Version bump only for package vue-docgen-cli
