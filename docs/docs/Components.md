@@ -32,7 +32,7 @@ But will ignore tests:
 
 ## Loading and exposing components
 
-Styleguidist, by default, _loads_ your components and _exposes_ them globally for your examples to consume. You can use [locallyRegisterComponents](/Configuration.md#locallyRegisterComponents) to avoid global registration. This loads components only in examples illustrating them.
+Styleguidist, by default, _loads_ your components and _exposes_ them globally for your examples to consume. You can use [locallyRegisterComponents](/Configuration.md#locallyRegisterComponents) to avoid global registration. This loads component only in examples illustrating them.
 
 ## Sections
 
@@ -43,7 +43,7 @@ Each section consists of (all fields are optional):
 - `name` — section title.
 - `content` — location of a Markdown file containing the overview content.
 - `components` — a glob pattern string, an array of component paths or glob pattern strings, or a function returning a list of components or glob pattern strings. The same rules apply as for the root `components` option.
-- `sections` — array of subsections (can be nested).
+- `sections` — an array of subsections (can be nested).
 - `description` — A small description of this section.
 - `sectionDepth` — Number of subsections with single pages, only available with [pagePerSection](/Configuration.md#pagepersection) is enabled.
 - `exampleMode` — Initial state of the code example tab, uses [exampleMode](/Configuration.md#examplemode).

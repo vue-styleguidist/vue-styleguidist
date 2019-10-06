@@ -17,7 +17,7 @@ The package exposes 2 functions:
 
 ### `parse(filePath:string, options?: DocGenOptions)`
 
-Parses the file at filePath. Returns and object containing all documented and undocumented properties of the component.
+Parses the file at filePath. Returns and objects containing all documented and undocumented properties of the component.
 
 ```ts
 import { parse } from 'vue-docgen-api'
@@ -64,9 +64,9 @@ Same as parse, but this way you can force the content of the code. The `filePath
 
 ## Documentation Object
 
-The `Documentation` class is the container of information before geting compiled. It is easily modified and accessed. In order to be used and exported, one can use the `toObject()` function.
+The `Documentation` class is the container of information before getting compiled. It is easily modified and accessed. To be used and exported, one can use the `toObject()` function.
 
-The object has functions to get descriptor for props, events, methods and slots. All those functions follow the same principle. If you call it twice with the same argument, it will return twice the same reference to the prop. this way if your prop is decorated in multiple places, it can be easily made working.
+The object has functions to get descriptors for props, events, methods, and slots. All those functions follow the same principle. If you call it twice with the same argument, it will return twice the same reference to the prop. this way if your prop is decorated in multiple places, it can be easily made working.
 
 ```ts
 function getPropDescriptor(propName: string): PropDescriptor
@@ -74,15 +74,15 @@ function getPropDescriptor(propName: string): PropDescriptor
 
 ## Parsers
 
-First we use babel to parse the comments in the code.
+First, we use babel to parse the comments in the code.
 
-Then we use vue-template-compiler to parse the html template.
+Then we use vue-template-compiler to parse the HTML template.
 
 These parsers give us Abstract Syntax Trees (AST). We then traverse them with handlers to extract the info we need from components and their JSdoc.
 
 ## Handlers
 
-Script and template have 2 different AST structure. Makes sense that they have different handlers. There is a few standard handlers in docgen. You can add your own using the `addScriptHandler` or `addTemplateHandler` options.
+Script and template have 2 different AST structure. It makes sense that they have different handlers. There are a few standard handlers in docgen. You can add your own using the `addScriptHandler` or `addTemplateHandler` options.
 
 ### Script Handlers
 

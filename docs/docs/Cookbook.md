@@ -47,7 +47,7 @@ module.exports = {
 }
 ```
 
-If you need to change the root component of each preview example, you can change the root component of preview. Creating a .js file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
+If you need to change the root component of each preview example, you can change the root component of the preview. Creating a .js file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
 
 Use [renderRootJsx](/Configuration.md#renderrootjsx) option:
 
@@ -165,7 +165,7 @@ module.exports = {
 </Button>
 ```
 
-## How to exclude some components from style guide?
+## How to exclude some components from the style guide?
 
 Vue Styleguidist will ignore tests (`__tests__` folder) by default.
 
@@ -179,7 +179,7 @@ module.exports = {
 
 > **Note:** You should pass glob patterns, for example, use `**/components/Button.vue` instead of `components/Button.vue`.
 
-## How to hide some components in style guide but make them available in examples?
+## How to hide some components in a style guide but make them available in examples?
 
 Enable [skipComponentsWithoutExample](/Configuration.md#skipcomponentswithoutexample) option and do not add example file (`Readme.md` by default) to components you want to ignore.
 
@@ -252,7 +252,7 @@ module.exports = {
 
 ## How to change the layout of a style guide?
 
-You can replace any Styleguidist Vue component. But in most of the cases you’ll want to replace `*Renderer` components — all HTML is rendered by these components. For example `ReactComponentRenderer`, `ComponentsListRenderer`, `PropsRenderer`, etc. — [check the source](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/src/rsg-components) to see what components are available.
+You can replace any Styleguidist Vue component. But in most of the cases, you’ll want to replace `*Renderer` components — all HTML is rendered by these components. For example `ReactComponentRenderer`, `ComponentsListRenderer`, `PropsRenderer`, etc. — [check the source](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/src/rsg-components) to see what components are available.
 
 You can replace the `StyleGuideRenderer` component like this:
 
@@ -312,7 +312,7 @@ const StyleGuideRenderer = ({
 )
 ```
 
-> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Checkout the [customised](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, is uses the following:
+> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Check out the [customized](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, it uses the following:
 
 ```jsx
 // SectionsRenderer.js
@@ -403,13 +403,13 @@ devServer: {
 }
 ```
 
-## How to reuse project’s webpack config?
+## How to reuse the project’s webpack config?
 
 See in [configuring webpack](Webpack.md#reusing-your-projects-webpack-config).
 
-## How to document styled components?
+## How to document styled-components?
 
-In order to document styled components you need to get them recognized by vue-docgen-api. Simplest way is to use extends:
+To document styled-components you need to get them recognized by vue-docgen-api. The simplest way is to use extends:
 
 ```js
 import styled from 'vue-styled-components'
@@ -459,7 +459,7 @@ Vue.component('RouterLink', {
 
 See [this example](/Examples#router) for a concrete implementation.
 
-> PRO TIP: If your styleguide has `.resolve` issues in the browser console, it still seems to be using vue-router. Check if you are requiring the `router.js` file in any of the showcased components and remove teh dependency. If you still con't find teh culprit, follow these steps and you will find it.
+> PRO TIP: If your styleguide has `.resolve` issues in the browser console, it still seems to be using vue-router. Check if you are requiring the `router.js` file in any of the showcased components and remove the dependency. If you still can't find the culprit, follow these steps and you will find it.
 >
 > 1.  Find all mentions of `Vue.use(Router)` in your codebase
 > 1.  Add `console.trace()` just before it to get the stack trace of the way they are called
