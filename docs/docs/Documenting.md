@@ -431,6 +431,10 @@ Documenting v-model:
 
 Tags can even render Markdown.
 
+- [@public](http://usejsdoc.org/tags-public.html)
+
+You can mark your public methods with JSDoc `@public` tag to get them published in the docs.
+
 ```html
 <template>
   <!-- -->
@@ -478,6 +482,7 @@ Tags can even render Markdown.
        *
        * @param {SyntheticEvent} event The react `SyntheticEvent`
        * @param {Number} num Numbers of examples
+       * @public This is a public method
        */
       launch(event, num) {
         /* ... */
