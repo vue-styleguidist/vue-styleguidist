@@ -26,7 +26,7 @@ Vue Styleguidist uses [vue-docgen-api](Docgen.md) to parse _source_ files (not t
 
 Styleguidist uses Markdown for documentation: each JavaScript code block is rendered as an interactive playground with [CodeMirror](http://codemirror.net/). To do that we extract all these code blocks using [Remark](http://remark.js.org/).
 
-Webpack loaders (see below) generate JavaScript modules with all used components with their documentation and examples and pass all that to a React app which renders the style guide.
+Webpack loaders (see below) generate JavaScript modules. In each of these modules, each component specified by the user is parsed with their documentation and examples. The whole module is then passed to a React app which renders the style guide.
 
 ## Webpack loaders and webpack configuration
 
@@ -121,7 +121,7 @@ As soon as users open the page, Preview is mounted.
 
 The function rendering examples when codemirror updates is `executeCode()`.
 
-### Separate script from a template
+### Separate script from template
 
 First, we extract any JavaScript from it by doing this:
 

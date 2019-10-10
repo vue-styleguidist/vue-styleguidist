@@ -403,10 +403,6 @@ devServer: {
 }
 ```
 
-## How to reuse the project’s webpack config?
-
-See in [configuring webpack](Webpack.md#reusing-your-projects-webpack-config).
-
 ## How to document styled-components?
 
 To document styled-components you need to get them recognized by vue-docgen-api. The simplest way is to use extends:
