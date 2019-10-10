@@ -2,6 +2,19 @@ import Map from 'ts-map'
 
 export type BlockTag = ParamTag | Tag
 
+export interface Module {
+	name: string
+	path: string
+}
+
+/**
+ * Universal model to display origin
+ */
+export interface Descriptor {
+	extends?: Module
+	mixin?: Module
+}
+
 export interface ParamType {
 	name: string
 	elements?: ParamType[]
@@ -41,12 +54,12 @@ interface EventProperty {
 	description?: string | boolean
 }
 
-export interface EventDescriptor extends DocBlockTags {
+export interface EventDescriptor extends DocBlockTags, Descriptor {
 	type?: EventType
 	properties: EventProperty[] | undefined
 }
 
-export interface PropDescriptor {
+export interface PropDescriptor extends Descriptor {
 	type?: { name: string; func?: boolean }
 	description: string
 	required?: string | boolean
@@ -60,7 +73,7 @@ export interface PropDescriptor {
 	name: string
 }
 
-export interface MethodDescriptor {
+export interface MethodDescriptor extends Descriptor {
 	name: string
 	description: string
 	returns?: UnnamedParam
@@ -70,7 +83,7 @@ export interface MethodDescriptor {
 	[key: string]: any
 }
 
-export interface SlotDescriptor {
+export interface SlotDescriptor extends Descriptor {
 	description?: string
 	bindings?: Record<string, any>
 	scoped?: boolean
@@ -94,14 +107,26 @@ export default class Documentation {
 	private eventsMap: Map<string, any>
 	private dataMap: Map<string, any>
 	private docsBlocks: string[] | undefined
+	private originExtendsMixin: Descriptor
 
 	constructor() {
 		this.propsMap = new Map()
 		this.methodsMap = new Map()
 		this.slotsMap = new Map()
 		this.eventsMap = new Map()
+		this.originExtendsMixin = {}
 
 		this.dataMap = new Map()
+	}
+
+	public setOrigin(origin: Descriptor) {
+		if (origin.extends) {
+			this.originExtendsMixin = { extends: origin.extends }
+		}
+
+		if (origin.mixin) {
+			this.originExtendsMixin = { mixin: origin.mixin }
+		}
 	}
 
 	public setDocsBlocks(docsBlocks: string[]) {
@@ -185,7 +210,9 @@ export default class Documentation {
 	private getDescriptor<T>(name: string, map: Map<string, T>, init: () => T): T {
 		let descriptor = map.get(name)
 		if (!descriptor) {
-			map.set(name, (descriptor = init()))
+			descriptor = init()
+			descriptor = { ...descriptor, ...this.originExtendsMixin }
+			map.set(name, descriptor)
 		}
 		return descriptor
 	}

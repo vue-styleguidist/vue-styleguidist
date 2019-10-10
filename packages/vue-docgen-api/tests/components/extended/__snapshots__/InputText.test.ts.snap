@@ -9,6 +9,10 @@ Object {
   "props": Object {
     "placeholder": Object {
       "description": "",
+      "extends": Object {
+        "name": "Base",
+        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
+      },
       "name": "placeholder",
       "required": "",
       "tags": Object {},
@@ -18,6 +22,10 @@ Object {
     },
     "question": Object {
       "description": "",
+      "extends": Object {
+        "name": "Base",
+        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
+      },
       "name": "question",
       "required": "",
       "tags": Object {},

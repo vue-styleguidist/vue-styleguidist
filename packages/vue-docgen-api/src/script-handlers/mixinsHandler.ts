@@ -50,7 +50,17 @@ export default function mixinsHandler(
 	files.forEach((vars, fullFilePath) => {
 		if (fullFilePath && vars) {
 			try {
-				parseFile(documentation, { ...opt, filePath: fullFilePath, nameFilter: vars })
+				const mixinVar = {
+					name: '<mixin/>',
+					path: fullFilePath
+				}
+				parseFile(documentation, {
+					...opt,
+					filePath: fullFilePath,
+					nameFilter: vars,
+					mixin: mixinVar
+				})
+				mixinVar.name = documentation.get('displayName')
 			} catch (e) {
 				// eat the error
 			}

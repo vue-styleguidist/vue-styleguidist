@@ -7,6 +7,10 @@ Object {
   "events": Object {
     "success": Object {
       "description": "",
+      "mixin": Object {
+        "name": "mixin",
+        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
+      },
       "properties": undefined,
       "type": Object {
         "names": Array [
@@ -18,6 +22,10 @@ Object {
   "methods": Array [
     Object {
       "description": "",
+      "mixin": Object {
+        "name": "mixin",
+        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
+      },
       "modifiers": Array [],
       "name": "onClick",
       "params": Array [
@@ -41,6 +49,10 @@ Object {
   "props": Object {
     "bundleHash": Object {
       "description": "",
+      "mixin": Object {
+        "name": "mixin",
+        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
+      },
       "name": "bundleHash",
       "tags": Object {},
       "type": Object {
@@ -49,6 +61,10 @@ Object {
     },
     "color": Object {
       "description": "color of the button",
+      "mixin": Object {
+        "name": "mixin",
+        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
+      },
       "name": "color",
       "tags": Object {},
       "type": Object {
