@@ -78,7 +78,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 
 Notice the use of the @displayName tag to change the displayed name of your component
 
-If you want create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
+If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
 ```html
 <script>
@@ -96,7 +96,7 @@ If you want create a custom [v-model](https://vuejs.org/v2/guide/components.html
 
 ## Events
 
-For events documentation just add a comment right above it.
+For events documentation, just add a comment right above it.
 
 If the event is explicitly specified, no need to tell styleguidist what it is.
 
@@ -378,7 +378,7 @@ insertAtCursor(text) {
 
 ## Ignoring props
 
-By default, all props your components have are considered to be public and are published. In some rare cases you might want to remove a prop from the documentation while keeping it in the code. To do so, mark the prop with JSDoc [`@ignore`](http://usejsdoc.org/tags-ignore.html) tag to remove it from the docs:
+By default, all props your components have are considered to be public and are published. In some rare cases, you might want to remove a prop from the documentation while keeping it in the code. To do so, mark the prop with JSDoc [`@ignore`](http://usejsdoc.org/tags-ignore.html) tag to remove it from the docs:
 
 ```javascript
   props: {
@@ -403,7 +403,7 @@ You can use the following [JSDoc](http://usejsdoc.org/) tags when documenting co
 
 ### displayName
 
-In addition to those tags you can use `@displayName` to change the name displayed in you styleguide. Know that since it's visual name has changed, it's calling name is now The letters of it, without space or punctuation.
+In addition to those tags, you can use `@displayName` to change the name displayed in your style guide. Know that since it's visual name has changed, it's calling name is now The letters of it, without space or punctuation.
 
 For instance, if the display name is set as
 
@@ -555,7 +555,7 @@ Notice how `onClick` parameter `a` does not need type documentation.
 
 ## JSX
 
-vue styleguidist understands JSX component templates too. In this example it will display the definition of the found slot.
+vue styleguidist understands JSX component templates too. In this example, it will display the definition of the found slot.
 
 ```jsx
 export default {
@@ -595,7 +595,7 @@ const mockData = require('./mocks');
 
 > **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, just do `import { myExample as exam } from './myExample';
 
-[ BETA ] If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in `styleguide.config.js`. Using this option will force you to use proper Vue format for you examples. No more pseudo JSX code.
+[ BETA ] If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in `styleguide.config.js`. Using this option will force you to use proper Vue format for your examples. No more pseudo-JSX code.
 
 ```jsx
 export default {
@@ -607,7 +607,7 @@ export default {
 
 ## Importing examples
 
-To make autocomplete and syntax higlighting practical, one can as well import examples from external files. In the following example `./myExample.vue` will be used as an example.
+To make autocomplete and syntax highlighting practical, one can as well import examples from external files. In the following example `./myExample.vue` will be used as an example.
 
 ````markdown
 ```[import](./myExample.vue)
@@ -615,6 +615,6 @@ Text typed here will be entirely ignored. You can use it to describe the example
 ```
 ````
 
-> **Note** No need to spcify the language as it will be inferred from the name of the file
+> **Note** No need to specify the language as it will be inferred from the name of the file
 
 > **Note** All flags described [here](#usage-examples-and-readme-files) cn still be used
