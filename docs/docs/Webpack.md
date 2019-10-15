@@ -16,7 +16,7 @@ _Webpack is required to run Vue styleguidist but your project doesn’t have to 
 
 ## Reusing your project’s webpack config
 
-By default Styleguidist will try to find `webpack.config.js` in your project’s root directory and use it.
+By default, Styleguidist will try to find `webpack.config.js` in your project’s root directory and use it.
 
 If your webpack config is located somewhere else, you need to load it manually from your `styleguide.config.js`:
 
@@ -44,7 +44,7 @@ module.exports = {
 
 > **Note:** If your loaders don’t work with Styleguidist try to make `include` and `exclude` absolute paths.
 
-> **Note:** Babelified webpack configs (like `webpack.config.babel.js`) are not supported. We recommend to convert your config to native Node — Node 6 supports [many ES6 features](http://node.green/).
+> **Note:** Babelified webpack configs (like `webpack.config.babel.js`) are not supported. We recommend converting your config to native Node — Node 6 supports [many ES6 features](http://node.green/).
 
 > **Note:** Use [webpack-merge](https://github.com/survivejs/webpack-merge) for easier config merging.
 
@@ -92,10 +92,10 @@ module.exports = {
 
 > **Note:** `CommonsChunkPlugins`, `HtmlWebpackPlugin`, `UglifyJsPlugin`, `HotModuleReplacementPlugin` plugins will be ignored because Styleguidist already includes them or they may break Styleguidist.
 
-> **Note:** it's expected that you already have `vue-loader` dependency in your project.
+> **Note:** it's expected that you already have a `vue-loader` dependency in your project.
 
 ## When nothing else works
 
 In very rare cases, like using legacy or third-party libraries, you may need to change webpack options that Styleguidist doesn’t allow you to change via `webpackConfig` options. In this case you can use [dangerouslyUpdateWebpackConfig](/Configuration.md#dangerouslyupdatewebpackconfig) option.
 
-> **Warning:** You may easily break Vue styleguidist using this options, use it at your own risk.
+> **Warning:** You may easily break Vue styleguidist using these options, use it at your own risk.
