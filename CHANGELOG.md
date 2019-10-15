@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.2...v3.25.0) (2019-10-15)
+
+
+### Features
+
+* **docgen:** add origin to documentation object ([31e2fe2](https://github.com/vue-styleguidist/vue-styleguidist/commit/31e2fe2)), closes [#594](https://github.com/vue-styleguidist/vue-styleguidist/issues/594)
+* **docgen:** allow wrap export in if ([5744801](https://github.com/vue-styleguidist/vue-styleguidist/commit/5744801))
+* add sponsor button ([59c7731](https://github.com/vue-styleguidist/vue-styleguidist/commit/59c7731))
+
+
+
+
+
 ## [3.24.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.1...v3.24.2) (2019-09-26)
 
 
