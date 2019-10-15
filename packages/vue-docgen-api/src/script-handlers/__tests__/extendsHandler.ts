@@ -49,10 +49,13 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(doc, {
-			filePath: './component/full/path',
-			nameFilter: ['default']
-		})
+		expect(parseFile).toHaveBeenCalledWith(
+			doc,
+			expect.objectContaining({
+				filePath: './component/full/path',
+				nameFilter: ['default']
+			})
+		)
 	})
 
 	it('should resolve extended modules variables in require', () => {
@@ -63,10 +66,13 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(doc, {
-			filePath: './component/full/path',
-			nameFilter: ['default']
-		})
+		expect(parseFile).toHaveBeenCalledWith(
+			doc,
+			expect.objectContaining({
+				filePath: './component/full/path',
+				nameFilter: ['default']
+			})
+		)
 	})
 
 	it('should resolve extended modules variables in import', () => {
@@ -77,10 +83,13 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(doc, {
-			filePath: './component/full/path',
-			nameFilter: ['default']
-		})
+		expect(parseFile).toHaveBeenCalledWith(
+			doc,
+			expect.objectContaining({
+				filePath: './component/full/path',
+				nameFilter: ['default']
+			})
+		)
 	})
 
 	it('should resolve extended modules variables in class style components', () => {
@@ -91,9 +100,12 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(doc, {
-			filePath: './component/full/path',
-			nameFilter: ['default']
-		})
+		expect(parseFile).toHaveBeenCalledWith(
+			doc,
+			expect.objectContaining({
+				filePath: './component/full/path',
+				nameFilter: ['default']
+			})
+		)
 	})
 })

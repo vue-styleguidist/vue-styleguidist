@@ -59,10 +59,13 @@ describe('mixinsHandler', () => {
 		if (path) {
 			mixinsHandler(doc, path, ast, { filePath: '' })
 		}
-		expect(mockParse).toHaveBeenCalledWith(doc, {
-			filePath: './component/full/path',
-			nameFilter: ['default']
-		})
+		expect(mockParse).toHaveBeenCalledWith(
+			doc,
+			expect.objectContaining({
+				filePath: './component/full/path',
+				nameFilter: ['default']
+			})
+		)
 	})
 
 	it('should resolve mixins modules variables in class style components', done => {
@@ -79,10 +82,13 @@ describe('mixinsHandler', () => {
 			return
 		}
 		mixinsHandler(doc, path, ast, { filePath: '' })
-		expect(mockParse).toHaveBeenCalledWith(doc, {
-			filePath: './component/full/path',
-			nameFilter: ['default']
-		})
+		expect(mockParse).toHaveBeenCalledWith(
+			doc,
+			expect.objectContaining({
+				filePath: './component/full/path',
+				nameFilter: ['default']
+			})
+		)
 		done()
 	})
 
