@@ -14,8 +14,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "styleguide": "vue-styleguidist server --config styleguide/styleguide.config.js",
-    "styleguide:build": "vue-styleguidist build --config styleguide/styleguide.config.js"
+    "styleguide": "vue-styleguidist server --config styleguide.config.js",
+    "styleguide:build": "vue-styleguidist build --config styleguide.config.js"
   },
   "dependencies": {
     "nuxt": "^2.3.4",

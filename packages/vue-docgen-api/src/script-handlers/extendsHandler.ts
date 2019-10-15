@@ -39,11 +39,17 @@ export default function extendsHandler(
 	const fullFilePath = pathResolver(extendsFilePath[extendsVariableName].filePath)
 	if (!/[\\/]node_modules[\\/]/.test(fullFilePath)) {
 		try {
+			const extendsVar = {
+				name: extendsFilePath[extendsVariableName].exportName,
+				path: fullFilePath
+			}
 			parseFile(documentation, {
 				...opt,
 				filePath: fullFilePath,
-				nameFilter: [extendsFilePath[extendsVariableName].exportName]
+				nameFilter: [extendsFilePath[extendsVariableName].exportName],
+				extends: extendsVar
 			})
+			extendsVar.name = documentation.get('displayName')
 		} catch (e) {
 			// eat the error
 		}

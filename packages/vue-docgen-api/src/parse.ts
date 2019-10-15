@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { parseComponent } from 'vue-template-compiler'
-import Documentation from './Documentation'
+import Documentation, { Descriptor } from './Documentation'
 import parseScript, { Handler as ScriptHandler } from './parse-script'
 import parseTemplate, { Handler as TemplateHandler } from './parse-template'
 import scriptHandlers from './script-handlers'
@@ -12,7 +12,7 @@ const ERROR_EMPTY_DOCUMENT = 'The passed source is empty'
 
 export { ScriptHandler, TemplateHandler }
 
-export interface ParseOptions extends DocGenOptions {
+export interface ParseOptions extends DocGenOptions, Descriptor {
 	filePath: string
 	/**
 	 * In what language is the component written
@@ -70,6 +70,8 @@ export function parseFile(documentation: Documentation, opt: ParseOptions) {
  * @returns {object} documentation object
  */
 export function parseSource(documentation: Documentation, source: string, opt: ParseOptions) {
+	// if the parsed component is the result of a mixin or an extends
+	documentation.setOrigin(opt)
 	const singleFileComponent = /\.vue$/i.test(path.extname(opt.filePath))
 	let scriptSource: string | undefined
 
