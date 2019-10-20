@@ -15,6 +15,8 @@ export default {
 </script>
 
 <docs>
+### or import it from the docs block
+
 Example can be their own file. Use the following syntax.
 
 ````markdown
