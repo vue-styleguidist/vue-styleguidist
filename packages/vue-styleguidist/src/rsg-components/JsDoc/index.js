@@ -37,7 +37,7 @@ function JsDoc(props) {
 			props[field] && (
 				<div className={`vsg-jsdoc-tag ${classes.wrapper}`} key={field}>
 					<span className={`vsg-tag-name ${classes.name}`}>{capitalize(field)}:</span>
-					<span className={`vsg-tag-name ${classes.value}`}>
+					<span className={`vsg-tag-value ${classes.value}`}>
 						{<Markdown text={format(props[field])} inline />}
 					</span>
 				</div>
