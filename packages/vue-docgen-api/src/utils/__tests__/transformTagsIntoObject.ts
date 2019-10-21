@@ -6,4 +6,24 @@ describe('transformTagsIntoObject', () => {
 			ignore: [{ title: 'ignore', description: true }]
 		})
 	})
+
+	it('should return multiple authors', () => {
+		expect(
+			transformTagsIntoObject([
+				{ title: 'author', content: 'Bobby' },
+				{ title: 'author', content: 'Mike' }
+			])
+		).toMatchObject({
+			author: [
+				{
+					description: 'Bobby',
+					title: 'author'
+				},
+				{
+					description: 'Mike',
+					title: 'author'
+				}
+			]
+		})
+	})
 })
