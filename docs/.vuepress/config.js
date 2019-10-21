@@ -61,6 +61,9 @@ module.exports = () => {
 					'/docs/API',
 					'/docs/Deployment',
 					'/docs/Docgen',
+					...(fs.existsSync(path.resolve(__dirname, '../docs/docgen-cli.md'))
+						? ['/docs/docgen-cli.md']
+						: []),
 					'/docs/Development'
 				],
 				'/Configuration': ['/Configuration'],

@@ -60,11 +60,14 @@ module.exports = {
     getDocFileName: (componentPath: string) => componentPath.replace(/\.vue$/, '.md') // specify the name of the input md file
     getDestFile: (file: string, config: DocgenCLIConfig) => path.join(config.outDir, file).replace(/\.vue$/ ".doc.md") // specify the name of the output md file
     templates: {
-        component: require('templates/component'), // global component template wrapping all others
+        // global component template wrapping all others see #templates
+        component: require('templates/component'),
         events: require('templates/events'),
         methods: require('templates/methods'),
         props: require('templates/props'),
         slots: require('templates/slots'),
+        // static template to display as a tag if component is functional
+        functionalTag: '**functional**',
     }
 }
 ```
