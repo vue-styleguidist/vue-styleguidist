@@ -4,9 +4,10 @@ exports[`tests datePicker should match the snapshot 1`] = `
 Object {
   "description": "",
   "displayName": "DatePicker",
-  "events": Object {
-    "update:date": Object {
+  "events": Array [
+    Object {
       "description": "",
+      "name": "update:date",
       "properties": undefined,
       "type": Object {
         "names": Array [
@@ -14,23 +15,10 @@ Object {
         ],
       },
     },
-  },
-  "methods": Array [],
-  "props": Object {
-    "color": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "''",
-      },
-      "description": "",
-      "name": "color",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "any",
-      },
-    },
-    "date": Object {
+  ],
+  "methods": undefined,
+  "props": Array [
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "''",
@@ -43,20 +31,7 @@ Object {
         "name": "any",
       },
     },
-    "disabled": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "false",
-      },
-      "description": "",
-      "name": "disabled",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "any",
-      },
-    },
-    "format": Object {
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "''",
@@ -69,8 +44,34 @@ Object {
         "name": "any",
       },
     },
-  },
-  "slots": Object {},
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "",
+      "name": "color",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "any",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "",
+      "name": "disabled",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "any",
+      },
+    },
+  ],
+  "slots": Array [],
   "tags": Object {},
 }
 `;

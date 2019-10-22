@@ -1,8 +1,27 @@
+import {
+	PropDescriptor,
+	MethodDescriptor,
+	SlotDescriptor,
+	EventDescriptor,
+	BlockTag
+} from 'vue-docgen-api'
+import * as b from '@babel/types'
+import { Example } from './Example'
+
 export interface ComponentProps {
-	displayName?: string
+	displayName: string
+	description?: string
+	props?: { [name: string]: PropDescriptor }
+	methods?: MethodDescriptor[]
+	slots?: { [name: string]: SlotDescriptor }
+	events?: { [name: string]: EventDescriptor }
+	tags?: {
+		[key: string]: BlockTag[]
+	}
+	docsBlocks?: string[]
 	visibleName?: string
-	examples?: any[]
-	example?: any
+	examples?: { require: string; toAST: () => b.Node } | Example[] | null
+	example?: Example[]
 }
 
 export interface Component {

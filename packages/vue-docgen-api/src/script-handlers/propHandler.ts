@@ -44,9 +44,6 @@ export default async function propHandler(documentation: Documentation, path: No
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
 
-				// save real prop name for reference when v-model
-				propDescriptor.name = propNode.key.name || propNode.key.value
-
 				const propValuePath = prop.get('value')
 
 				propDescriptor.tags = jsDocTags.length ? transformTagsIntoObject(jsDocTags) : {}

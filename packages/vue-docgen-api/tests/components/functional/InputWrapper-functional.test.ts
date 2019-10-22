@@ -12,17 +12,19 @@ describe('tests button functional', () => {
 	})
 
 	it('should extract props from template if functional', () => {
-		expect(docButton.props).toMatchObject({
-			error: { type: { name: 'boolean' } },
-			label: { type: { name: 'string' } },
-			'v-model': { type: { name: 'string' } }
-		})
+		expect(docButton.props).toContainEqual(
+			jasmine.objectContaining({ name: 'error', type: { name: 'boolean' } })
+		)
+		expect(docButton.props).toContainEqual(
+			jasmine.objectContaining({ name: 'v-model', type: { name: 'string' } })
+		)
+		expect(docButton.props).toContainEqual(
+			jasmine.objectContaining({ name: 'label', type: { name: 'string' } })
+		)
 	})
 
 	it('should not return the value props as it is v-model', () => {
-		expect(docButton.props).not.toMatchObject({
-			value: { type: { name: 'string' } }
-		})
+		expect(docButton.props).not.toMatchObject([{ name: 'value', type: { name: 'string' } }])
 	})
 
 	it('should match the snapshot', () => {

@@ -20,10 +20,10 @@ export { events, methods, slots, props, component, defaultExample }
 export { default as docgen } from './docgen'
 
 export interface Templates {
-	props(props: { [propName: string]: PropDescriptor }): string
-	slots(slots: { [slotName: string]: SlotDescriptor }): string
+	props(props: PropDescriptor[]): string
+	slots(slots: SlotDescriptor[]): string
 	methods(methods: MethodDescriptor[]): string
-	events(events: { [eventName: string]: EventDescriptor }): string
+	events(events: EventDescriptor[]): string
 	component(
 		usage: RenderedUsage,
 		doc: ComponentDoc,

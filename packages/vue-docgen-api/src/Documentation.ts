@@ -40,7 +40,7 @@ export interface Tag extends RootTag {
 export interface ParamTag extends RootTag, Param {}
 
 export interface DocBlockTags {
-	description: string
+	description?: string
 	tags?: Array<ParamTag | Tag>
 }
 
@@ -55,21 +55,17 @@ interface EventProperty {
 }
 
 export interface EventDescriptor extends DocBlockTags, Descriptor {
+	name: string
 	type?: EventType
-	properties: EventProperty[] | undefined
+	properties?: EventProperty[]
 }
 
 export interface PropDescriptor extends Descriptor {
 	type?: { name: string; func?: boolean }
-	description: string
+	description?: string
 	required?: boolean
 	defaultValue?: { value: string; func?: boolean }
-	tags: { [title: string]: BlockTag[] }
-	/**
-	 * internal name of the prop
-	 * same as key most of the time.
-	 * real prop name if v-model.
-	 */
+	tags?: { [title: string]: BlockTag[] }
 	name: string
 }
 
@@ -79,11 +75,12 @@ export interface MethodDescriptor extends Descriptor {
 	returns?: UnnamedParam
 	tags?: { [key: string]: BlockTag[] }
 	params?: Param[]
-	modifiers: string[]
+	modifiers?: string[]
 	[key: string]: any
 }
 
 export interface SlotDescriptor extends Descriptor {
+	name: string
 	description?: string
 	bindings?: Record<string, any>
 	scoped?: boolean
@@ -91,11 +88,12 @@ export interface SlotDescriptor extends Descriptor {
 
 export interface ComponentDoc {
 	displayName: string
-	props: { [propName: string]: PropDescriptor } | undefined
-	methods: MethodDescriptor[]
-	slots: { [name: string]: SlotDescriptor }
-	events?: { [name: string]: EventDescriptor }
-	tags: { [key: string]: BlockTag[] }
+	description?: string
+	props?: PropDescriptor[]
+	methods?: MethodDescriptor[]
+	slots?: SlotDescriptor[]
+	events?: EventDescriptor[]
+	tags?: { [key: string]: BlockTag[] }
 	docsBlocks?: string[]
 	[key: string]: any
 }
@@ -163,6 +161,7 @@ export default class Documentation {
 
 	public getEventDescriptor(eventName: string): EventDescriptor {
 		return this.getDescriptor(eventName, this.eventsMap, () => ({
+			name: eventName,
 			properties: undefined,
 			description: '',
 			tags: []
@@ -171,15 +170,16 @@ export default class Documentation {
 
 	public getSlotDescriptor(slotName: string): SlotDescriptor {
 		return this.getDescriptor(slotName, this.slotsMap, () => ({
+			name: slotName,
 			description: ''
 		}))
 	}
 
 	public toObject(): ComponentDoc {
-		const props = this.getPropsObject()
-		const methods = this.getMethodsObject()
-		const events = this.getEventsObject() || {}
-		const slots = this.getSlotsObject()
+		const props = this.getObjectFromDescriptor(this.propsMap)
+		const methods = this.getObjectFromDescriptor(this.methodsMap)
+		const events = this.getObjectFromDescriptor(this.eventsMap) || []
+		const slots = this.getObjectFromDescriptor(this.slotsMap) || []
 
 		const obj: { [key: string]: any } = {}
 		this.dataMap.forEach((value, key) => {
@@ -217,39 +217,17 @@ export default class Documentation {
 		return descriptor
 	}
 
-	private getObjectFromDescriptor<T>(map: Map<string, T>): { [name: string]: T } | undefined {
+	private getObjectFromDescriptor<T>(map: Map<string, T>): T[] | undefined {
 		if (map.size > 0) {
-			const obj: { [name: string]: T } = {}
+			const obj: T[] = []
 			map.forEach((descriptor, name) => {
 				if (name && descriptor) {
-					obj[name] = descriptor
+					obj.push(descriptor)
 				}
 			})
 			return obj
 		} else {
 			return undefined
 		}
-	}
-
-	private getPropsObject(): { [propName: string]: PropDescriptor } | undefined {
-		return this.getObjectFromDescriptor(this.propsMap)
-	}
-
-	private getMethodsObject(): MethodDescriptor[] {
-		const methods: MethodDescriptor[] = []
-		this.methodsMap.forEach((descriptor, name) => {
-			if (name && methods && descriptor) {
-				methods.push(descriptor)
-			}
-		})
-		return methods
-	}
-
-	private getEventsObject(): { [eventName: string]: EventDescriptor } | undefined {
-		return this.getObjectFromDescriptor(this.eventsMap)
-	}
-
-	private getSlotsObject(): { [slotName: string]: SlotDescriptor } {
-		return this.getObjectFromDescriptor(this.slotsMap) || {}
 	}
 }

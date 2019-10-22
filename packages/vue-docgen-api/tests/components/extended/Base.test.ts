@@ -24,10 +24,10 @@ describe('tests Base', () => {
 	})
 
 	it('should has props', () => {
-		expect(typeof docBase.props !== 'undefined').toBe(true)
+		expect(docBase.props).not.toBeUndefined()
 	})
 
 	it('should the component has one prop', () => {
-		expect(Object.keys(docBase.props || {}).length).toEqual(1)
+		expect(docBase.props && docBase.props.length).toEqual(1)
 	})
 })

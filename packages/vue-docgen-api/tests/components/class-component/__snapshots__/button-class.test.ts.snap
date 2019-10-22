@@ -4,13 +4,14 @@ exports[`tests button should match the snapshot 1`] = `
 Object {
   "description": "This is an example of creating a reusable button component and using it with external data.",
   "displayName": "ClassComponent",
-  "events": Object {
-    "success": Object {
+  "events": Array [
+    Object {
       "description": "",
       "mixin": Object {
         "name": "mixin",
         "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
       },
+      "name": "success",
       "properties": undefined,
       "type": Object {
         "names": Array [
@@ -18,7 +19,7 @@ Object {
         ],
       },
     },
-  },
+  ],
   "methods": Array [
     Object {
       "description": "",
@@ -46,20 +47,8 @@ Object {
       },
     },
   ],
-  "props": Object {
-    "bundleHash": Object {
-      "description": "",
-      "mixin": Object {
-        "name": "mixin",
-        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
-      },
-      "name": "bundleHash",
-      "tags": Object {},
-      "type": Object {
-        "name": "number",
-      },
-    },
-    "color": Object {
+  "props": Array [
+    Object {
       "description": "color of the button",
       "mixin": Object {
         "name": "mixin",
@@ -71,13 +60,26 @@ Object {
         "name": "string",
       },
     },
-  },
-  "slots": Object {
-    "default": Object {
+    Object {
+      "description": "",
+      "mixin": Object {
+        "name": "mixin",
+        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
+      },
+      "name": "bundleHash",
+      "tags": Object {},
+      "type": Object {
+        "name": "number",
+      },
+    },
+  ],
+  "slots": Array [
+    Object {
       "bindings": Object {},
       "description": "Use this slot default",
+      "name": "default",
     },
-  },
+  ],
   "tags": Object {
     "author": Array [
       Object {

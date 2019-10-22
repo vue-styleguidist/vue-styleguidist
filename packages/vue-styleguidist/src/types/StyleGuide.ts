@@ -4,6 +4,7 @@ import { Configuration, loader } from 'webpack'
 import { ProcessedSection, Section } from './Section'
 import { EXPAND_MODE } from './enums'
 import { Example } from './Example'
+import { ComponentProps } from './Component'
 
 export interface StyleguidistContext extends loader.LoaderContext {
 	_styleguidist: ProcessedStyleGuidistConfigObject
@@ -17,7 +18,7 @@ export interface StyleGuidistConfigObject {
 	sections?: Section[]
 	renderRootJsx?: string
 	skipComponentsWithoutExample?: boolean
-	updateDocs?(doc: ComponentDoc, file: string): ComponentDoc
+	updateDocs?(doc: ComponentProps, file: string): ComponentProps
 	defaultExample?: string
 	getExampleFilename?(file: string): string
 	getComponentPathLine?(file: string): string

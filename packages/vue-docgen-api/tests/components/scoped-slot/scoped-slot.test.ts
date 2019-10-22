@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+import getTestDescriptor from '../../utils/getTestDescriptor'
 
 const wrapper = path.join(__dirname, './Wrapper.vue')
 let docWrapper: ComponentDoc
@@ -16,19 +17,28 @@ describe('tests wrapper with root slot', () => {
 		})
 
 		it('should have a slot.', () => {
-			expect(Object.keys(docWrapper.slots).length).toEqual(1)
+			expect(docWrapper.slots && docWrapper.slots.length).toEqual(1)
 		})
 
 		it('should have a wrapper slot.', () => {
-			expect(docWrapper.slots.footer.description).toBe('Modal footer here')
+			expect(getTestDescriptor(docWrapper.slots, 'footer').description).toBe('Modal footer here')
 		})
 
 		it('should show the slot as scoped', () => {
-			expect(docWrapper.slots.footer.scoped).toBeTruthy()
+			expect(getTestDescriptor(docWrapper.slots, 'footer').scoped).toBeTruthy()
 		})
 
 		it('should match the reference for the footer slot', () => {
-			expect(docWrapper.slots.footer).toMatchSnapshot()
+			expect(getTestDescriptor(docWrapper.slots, 'footer')).toMatchInlineSnapshot(`
+						Object {
+						  "bindings": Object {
+						    ":item": "item",
+						  },
+						  "description": "Modal footer here",
+						  "name": "footer",
+						  "scoped": true,
+						}
+				`)
 		})
 	})
 
@@ -39,15 +49,21 @@ describe('tests wrapper with root slot', () => {
 		})
 
 		it('should have a slot', () => {
-			expect(Object.keys(docApp.slots).length).toEqual(1)
+			expect(docApp.slots && docApp.slots.length).toEqual(1)
 		})
 
 		it('should have a text slot', () => {
-			expect(docApp.slots.text.description).toBe('text slot here')
+			expect(getTestDescriptor(docApp.slots, 'text').description).toBe('text slot here')
 		})
 
 		it('should match the reference for the text slot', () => {
-			expect(docApp.slots.text).toMatchSnapshot()
+			expect(getTestDescriptor(docApp.slots, 'text')).toMatchInlineSnapshot(`
+			Object {
+			  "bindings": Object {},
+			  "description": "text slot here",
+			  "name": "text",
+			}
+		`)
 		})
 	})
 })

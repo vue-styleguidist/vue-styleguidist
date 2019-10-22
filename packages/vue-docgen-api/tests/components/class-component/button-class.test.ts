@@ -1,6 +1,7 @@
 import * as path from 'path'
-import { ComponentDoc, PropDescriptor } from '../../../src/Documentation'
+import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+import getTestDescriptor from '../../utils/getTestDescriptor'
 
 const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
@@ -23,16 +24,14 @@ describe('tests button', () => {
 	})
 
 	describe('props', () => {
-		let props: { [propName: string]: PropDescriptor }
-		beforeEach(() => {
-			props = docButton.props || {}
-		})
 		it('should return prop bundleHash from component', () => {
-			expect(props.bundleHash.type).toMatchObject({ name: 'number' })
+			expect(getTestDescriptor(docButton.props, 'bundleHash').type).toMatchObject({
+				name: 'number'
+			})
 		})
 
 		it('should return prop color from mixin', () => {
-			expect(props.color).toMatchObject({
+			expect(getTestDescriptor(docButton.props, 'color')).toMatchObject({
 				type: { name: 'string' },
 				description: 'color of the button'
 			})

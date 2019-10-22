@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tests button with no script block should match the snapshot 1`] = `
+exports[`tests button with pug should match the snapshot 1`] = `
 Object {
   "description": "",
   "displayName": "MyButton",

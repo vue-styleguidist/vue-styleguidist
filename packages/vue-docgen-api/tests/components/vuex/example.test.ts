@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+import getTestDescriptor from '../../utils/getTestDescriptor'
 
 const exampleVuex = path.join(__dirname, './example.vue')
 let docVuex: ComponentDoc
@@ -23,16 +24,12 @@ describe('test example vuex', () => {
 		expect(docVuex.description).toEqual('Partial mapping, object spread operator example')
 	})
 
-	it('should has a method', () => {
-		expect(docVuex.methods.length).toEqual(1)
-	})
-
-	it('should has "submit" method', () => {
-		expect(docVuex.methods[0].name).toEqual('onSubmit')
+	it('should have "submit" method', () => {
+		expect(getTestDescriptor(docVuex.methods, 'onSubmit').name).toBe('onSubmit')
 	})
 
 	it('should dont have slots.', () => {
-		expect(Object.keys(docVuex.slots).length).toEqual(0)
+		expect(docVuex.slots && docVuex.slots.length).toEqual(0)
 	})
 
 	it('should match the snapshot', () => {

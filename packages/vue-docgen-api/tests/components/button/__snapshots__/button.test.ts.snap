@@ -4,13 +4,14 @@ exports[`tests button should match the snapshot 1`] = `
 Object {
   "description": "This is an example of creating a reusable button component and using it with external data.",
   "displayName": "Best Button",
-  "events": Object {
-    "success": Object {
+  "events": Array [
+    Object {
       "description": "Success event.",
       "mixin": Object {
         "name": "index",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
+      "name": "success",
       "properties": Array [
         Object {
           "description": "example",
@@ -46,10 +47,40 @@ Object {
         ],
       },
     },
-  },
-  "methods": Array [],
-  "props": Object {
-    "color": Object {
+  ],
+  "methods": undefined,
+  "props": Array [
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'blue'",
+      },
+      "description": "Example prop",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/mixins/another/index.js",
+      },
+      "name": "propsAnother",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "Another mixin",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/components/button/genericMixin.js",
+      },
+      "name": "secret",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "'#333'",
@@ -66,7 +97,75 @@ Object {
         "name": "string",
       },
     },
-    "example": Object {
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'normal'",
+      },
+      "description": "The size of the button",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
+      },
+      "name": "size",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
+      },
+      "name": "shouldBe",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "Number of columns (1-12) the column should span.",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
+      },
+      "name": "span",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    Object {
+      "description": "Sm breakpoint and above",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
+      },
+      "name": "spanSm",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    Object {
+      "description": "Md breakpoint and above",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
+      },
+      "name": "spanMd",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "false",
@@ -83,7 +182,31 @@ Object {
         "name": "boolean",
       },
     },
-    "example3": Object {
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'example model'",
+      },
+      "description": "Model example2",
+      "mixin": Object {
+        "name": "index",
+        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
+      },
+      "name": "v-model",
+      "required": undefined,
+      "tags": Object {
+        "model": Array [
+          Object {
+            "description": true,
+            "title": "model",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "16",
@@ -100,26 +223,7 @@ Object {
         "name": "number",
       },
     },
-    "funcDefault": Object {
-      "defaultValue": Object {
-        "func": true,
-        "value": "() => {
-    return 'foo'
-}",
-      },
-      "description": "Function default",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
-      },
-      "name": "funcDefault",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "func",
-      },
-    },
-    "onCustomClick": Object {
+    Object {
       "defaultValue": Object {
         "func": true,
         "value": "() => () => null",
@@ -143,26 +247,26 @@ Object {
         "name": "func",
       },
     },
-    "prop1": Object {
-      "description": "",
+    Object {
+      "defaultValue": Object {
+        "func": true,
+        "value": "() => {
+    return 'foo'
+}",
+      },
+      "description": "Function default",
       "mixin": Object {
         "name": "index",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
-      "name": "prop1",
-      "tags": Object {
-        "ignore": Array [
-          Object {
-            "description": true,
-            "title": "ignore",
-          },
-        ],
-      },
+      "name": "funcDefault",
+      "required": undefined,
+      "tags": Object {},
       "type": Object {
-        "name": "string",
+        "name": "func",
       },
     },
-    "propE": Object {
+    Object {
       "defaultValue": Object {
         "func": true,
         "value": "() => {
@@ -182,121 +286,18 @@ a factory function",
         "name": "object",
       },
     },
-    "propsAnother": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "'blue'",
-      },
-      "description": "Example prop",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/another/index.js",
-      },
-      "name": "propsAnother",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string",
-      },
-    },
-    "secret": Object {
-      "description": "Another mixin",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/components/button/genericMixin.js",
-      },
-      "name": "secret",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string",
-      },
-    },
-    "shouldBe": Object {
+    Object {
       "description": "",
       "mixin": Object {
         "name": "index",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
-      "name": "shouldBe",
-      "tags": Object {},
-      "type": Object {
-        "name": "string",
-      },
-    },
-    "size": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "'normal'",
-      },
-      "description": "The size of the button",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
-      },
-      "name": "size",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string",
-      },
-    },
-    "span": Object {
-      "description": "Number of columns (1-12) the column should span.",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
-      },
-      "name": "span",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string|number",
-      },
-    },
-    "spanMd": Object {
-      "description": "Md breakpoint and above",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
-      },
-      "name": "spanMd",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string|number",
-      },
-    },
-    "spanSm": Object {
-      "description": "Sm breakpoint and above",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
-      },
-      "name": "spanSm",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string|number",
-      },
-    },
-    "v-model": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "'example model'",
-      },
-      "description": "Model example2",
-      "mixin": Object {
-        "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
-      },
-      "name": "example2",
-      "required": undefined,
+      "name": "prop1",
       "tags": Object {
-        "model": Array [
+        "ignore": Array [
           Object {
             "description": true,
-            "title": "model",
+            "title": "ignore",
           },
         ],
       },
@@ -304,13 +305,14 @@ a factory function",
         "name": "string",
       },
     },
-  },
-  "slots": Object {
-    "default": Object {
+  ],
+  "slots": Array [
+    Object {
       "bindings": Object {},
       "description": "Use this slot default",
+      "name": "default",
     },
-  },
+  ],
   "tags": Object {
     "author": Array [
       Object {

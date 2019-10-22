@@ -39,7 +39,6 @@
     "vue-template-compiler": "^2.0.0"
   },
   "devDependencies": {
-    "typescript": "^3.2.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-clickaway": "^2.2.2",

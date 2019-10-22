@@ -2,9 +2,10 @@ import * as path from 'path'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
-import { parse, Tag, PropDescriptor } from 'vue-docgen-api'
+import { parse, Tag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
+import { ComponentProps } from '../types/Component'
 import { StyleguidistContext } from '../types/StyleGuide'
 import getExamples from './utils/getExamples'
 import getComponentVueDoc from './utils/getComponentVueDoc'
@@ -16,6 +17,14 @@ export default function(this: StyleguidistContext, source: string) {
 	const callback = this.async()
 	const cb = callback ? callback : () => null
 	vuedocLoader.call(this, source).then(res => cb(undefined, res))
+}
+
+function makeObject<T extends { name: string }>(set?: T[]): { [name: string]: T } | undefined {
+	if (!set) return undefined
+	return set.reduce((acc: { [name: string]: T }, item: T) => {
+		acc[item.name] = item
+		return acc
+	}, {})
 }
 
 export async function vuedocLoader(
@@ -32,6 +41,7 @@ export async function vuedocLoader(
 	}
 
 	const webpackConfig = config.webpackConfig ? config.webpackConfig : {}
+
 	let alias: { [key: string]: string } | undefined
 	let modules: string[] | undefined
 	if (webpackConfig.resolve) {
@@ -42,11 +52,18 @@ export async function vuedocLoader(
 		await parse(file, { alias, modules, jsx: config.jsxInComponents })
 	const propsParser = config.propsParser || defaultParser
 
-	let docs = await propsParser(file)
+	const docs = await propsParser(file)
+
+	let vsgDocs: ComponentProps = {
+		...docs,
+		events: makeObject(docs.events),
+		slots: makeObject(docs.slots),
+		props: makeObject(docs.props)
+	}
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
 	if (componentVueDoc) {
-		docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
+		vsgDocs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
 	} else if (docs.tags) {
 		const examples = docs.tags.examples
 		if (examples) {
@@ -59,52 +76,17 @@ export async function vuedocLoader(
 					)}\nUsing the last tag to build examples: '${examplePath}'`
 				)
 			}
-			docs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
+			vsgDocs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
 		}
 	}
 	if (docs.props) {
-		const props = docs.props
-		Object.keys(props).forEach(key => {
-			if (props[key].tags && props[key].tags.ignore) {
-				delete props[key]
-			}
-		})
-	}
-
-	if (docs.methods) {
-		docs.methods.map(method => {
-			method.tags = method.tags || {}
-			method.tags.public = [
-				{
-					title: 'public'
-				}
-			]
-			const params = method.tags.params
-			if (params) {
-				method.tags.param = params
-				delete method.tags.params
-			}
-			return method
-		})
-	}
-
-	const componentProps = docs.props
-	if (componentProps) {
-		// Transform the properties to an array. This will allow sorting
-		// TODO: Extract to a module
-		const propsAsArray = Object.keys(componentProps).reduce((acc: PropDescriptor[], name) => {
-			componentProps[name].name = name
-			acc.push(componentProps[name])
-			return acc
-		}, [])
-
+		docs.props = docs.props.filter(prop => !prop.tags || prop.tags.ignore)
 		const sortProps = config.sortProps || defaultSortProps
-		docs.props = sortProps(propsAsArray)
+		vsgDocs.props = docs.props ? sortProps(docs.props) : undefined
 	}
 
 	const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
-
-	docs.examples = getExamples(
+	vsgDocs.examples = getExamples(
 		file,
 		examplesFile,
 		docs.displayName,
@@ -113,7 +95,7 @@ export async function vuedocLoader(
 	)
 
 	if (config.updateDocs) {
-		docs = config.updateDocs(docs, file)
+		vsgDocs = config.updateDocs(vsgDocs, file)
 	}
 
 	return `
@@ -121,6 +103,6 @@ export async function vuedocLoader(
 			module.hot.accept([])
 		}
 
-		module.exports = ${generate(toAst(docs))}
+		module.exports = ${generate(toAst(vsgDocs))}
 	`
 }

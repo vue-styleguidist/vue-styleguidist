@@ -6,7 +6,7 @@ const readSeparateScriptFile = (fileName: string) => {
 	return fs.readFileSync(fileName, { encoding: 'utf-8' })
 }
 
-export default function getComponentVueDoc(source: string, file: string) {
+export default function getComponentVueDoc(source: string, file: string): string | false {
 	const parts = parseVue(source, file)
 
 	if (parts.customBlocks) {

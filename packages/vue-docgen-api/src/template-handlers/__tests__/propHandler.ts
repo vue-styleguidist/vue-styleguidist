@@ -23,10 +23,10 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
-			expect(doc.toObject().props).toMatchObject({
-				size: { type: { name: 'number' }, description: 'width of the button' },
-				value: { type: { name: 'string' }, description: 'value in the form' }
-			})
+			expect(doc.toObject().props).toMatchObject([
+				{ name: 'size', type: { name: 'number' }, description: 'width of the button' },
+				{ name: 'value', type: { name: 'string' }, description: 'value in the form' }
+			])
 			done()
 		} else {
 			done.fail()
@@ -49,10 +49,10 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
-			expect(doc.toObject().props).toMatchObject({
-				name: { type: { name: 'mixed' }, description: 'Your Name' },
-				adress: { type: { name: 'string' }, description: 'Your Adress' }
-			})
+			expect(doc.toObject().props).toMatchObject([
+				{ name: 'name', type: { name: 'mixed' }, description: 'Your Name' },
+				{ name: 'adress', type: { name: 'string' }, description: 'Your Adress' }
+			])
 			done()
 		} else {
 			done.fail()
@@ -112,9 +112,7 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
-			expect(doc.toObject().props).toMatchObject({
-				error: { type: {} }
-			})
+			expect(doc.toObject().props).toMatchObject([{ name: 'error', type: {} }])
 			done()
 		} else {
 			done.fail()

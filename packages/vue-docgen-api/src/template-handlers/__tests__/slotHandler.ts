@@ -25,7 +25,9 @@ describe('slotHandler', () => {
 				functional: false,
 				rootLeadingComment: '@slot first slot found'
 			})
-			expect(doc.toObject().slots.first).toMatchObject({ description: 'first slot found' })
+			expect(doc.toObject().slots).toMatchObject([
+				{ name: 'first', description: 'first slot found' }
+			])
 			done()
 		} else {
 			done.fail()
@@ -45,7 +47,9 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			expect(doc.toObject().slots.default).toMatchObject({ description: 'a default slot' })
+			expect(doc.toObject().slots).toMatchObject([
+				{ name: 'default', description: 'a default slot' }
+			])
 			done()
 		} else {
 			done.fail()
@@ -65,7 +69,12 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			expect(doc.toObject().slots.oeuf).toMatchObject({ description: 'a slot named oeuf' })
+			expect(doc.toObject().slots).toMatchObject([
+				{
+					name: 'oeuf',
+					description: 'a slot named oeuf'
+				}
+			])
 			done()
 		} else {
 			done.fail()
@@ -84,13 +93,16 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			expect(doc.toObject().slots.oeuf).toMatchObject({
-				scoped: true,
-				description: 'a slot named oeuf',
-				bindings: {
-					item: 'item'
+			expect(doc.toObject().slots).toMatchObject([
+				{
+					name: 'oeuf',
+					scoped: true,
+					description: 'a slot named oeuf',
+					bindings: {
+						item: 'item'
+					}
 				}
-			})
+			])
 			done()
 		} else {
 			done.fail()
@@ -108,8 +120,10 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			const slots = doc.toObject().slots
-			expect(slots.bound.bindings).toMatchObject({ 'v-bind': '{ ...keyNames }' })
+			const slots = doc.toObject().slots || []
+			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject({
+				'v-bind': '{ ...keyNames }'
+			})
 			done()
 		} else {
 			done.fail()
@@ -127,8 +141,11 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			const slots = doc.toObject().slots
-			expect(slots.bound.bindings).toMatchObject({ item: 'item', otherItem: 'valueGiven' })
+			const slots = doc.toObject().slots || []
+			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject({
+				item: 'item',
+				otherItem: 'valueGiven'
+			})
 			done()
 		} else {
 			done.fail()

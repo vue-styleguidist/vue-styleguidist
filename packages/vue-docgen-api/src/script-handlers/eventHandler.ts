@@ -89,7 +89,7 @@ export function setEventDescriptor(
 	eventDescriptor: EventDescriptor,
 	jsDoc: DocBlockTags
 ): EventDescriptor {
-	if (jsDoc.description.length) {
+	if (jsDoc.description && jsDoc.description.length) {
 		eventDescriptor.description = jsDoc.description
 	}
 

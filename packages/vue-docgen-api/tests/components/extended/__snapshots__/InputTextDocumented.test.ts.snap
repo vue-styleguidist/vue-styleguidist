@@ -4,10 +4,22 @@ exports[`tests InputTextDoc should match the snapshot 1`] = `
 Object {
   "description": "Description InputTextDocumented",
   "displayName": "InputTextDocumented",
-  "events": Object {},
-  "methods": Array [],
-  "props": Object {
-    "placeholder": Object {
+  "events": Array [],
+  "methods": undefined,
+  "props": Array [
+    Object {
+      "description": "",
+      "extends": Object {
+        "name": "Base",
+        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
+      },
+      "name": "question",
+      "tags": Object {},
+      "type": Object {
+        "name": "undefined",
+      },
+    },
+    Object {
       "description": "",
       "extends": Object {
         "name": "Base",
@@ -20,20 +32,8 @@ Object {
         "name": "string",
       },
     },
-    "question": Object {
-      "description": "",
-      "extends": Object {
-        "name": "Base",
-        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
-      },
-      "name": "question",
-      "tags": Object {},
-      "type": Object {
-        "name": "undefined",
-      },
-    },
-  },
-  "slots": Object {},
+  ],
+  "slots": Array [],
   "tags": Object {},
 }
 `;

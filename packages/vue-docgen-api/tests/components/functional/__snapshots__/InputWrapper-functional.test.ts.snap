@@ -11,24 +11,11 @@ Object {
 </input-wrapper>
 \`\` \`",
   ],
-  "events": Object {},
+  "events": Array [],
   "functional": true,
-  "methods": Array [],
-  "props": Object {
-    "disabled": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "false",
-      },
-      "description": "Should the input be disabled?",
-      "name": "disabled",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "boolean",
-      },
-    },
-    "error": Object {
+  "methods": undefined,
+  "props": Array [
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "false",
@@ -41,20 +28,7 @@ Object {
         "name": "boolean",
       },
     },
-    "errorMessage": Object {
-      "defaultValue": Object {
-        "func": false,
-        "value": "''",
-      },
-      "description": "String with relevant error message",
-      "name": "errorMessage",
-      "required": undefined,
-      "tags": Object {},
-      "type": Object {
-        "name": "string",
-      },
-    },
-    "focused": Object {
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "false",
@@ -67,7 +41,7 @@ Object {
         "name": "boolean",
       },
     },
-    "icon": Object {
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "''",
@@ -80,25 +54,28 @@ Object {
         "name": "string",
       },
     },
-    "id": Object {
-      "description": "Input ID",
-      "name": "id",
-      "required": true,
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should the input be disabled?",
+      "name": "disabled",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
-        "name": "string|number",
+        "name": "boolean",
       },
     },
-    "label": Object {
-      "description": "String for label text",
-      "name": "label",
-      "required": true,
+    Object {
+      "description": "",
+      "name": "value",
       "tags": Object {},
       "type": Object {
-        "name": "string",
+        "name": "undefined",
       },
     },
-    "labelAlwaysFloating": Object {
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "false",
@@ -111,7 +88,7 @@ Object {
         "name": "boolean",
       },
     },
-    "prefix": Object {
+    Object {
       "description": "Prefix string for input field",
       "name": "prefix",
       "tags": Object {},
@@ -119,9 +96,40 @@ Object {
         "name": "string",
       },
     },
-    "v-model": Object {
+    Object {
+      "description": "Input ID",
+      "name": "id",
+      "required": true,
+      "tags": Object {},
+      "type": Object {
+        "name": "string|number",
+      },
+    },
+    Object {
+      "description": "String for label text",
+      "name": "label",
+      "required": true,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "''",
+      },
+      "description": "String with relevant error message",
+      "name": "errorMessage",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
       "description": "Input value",
-      "name": "value",
+      "name": "v-model",
       "required": true,
       "tags": Object {
         "model": Array [
@@ -135,21 +143,14 @@ Object {
         "name": "string",
       },
     },
-    "value": Object {
-      "description": "",
-      "name": "value",
-      "tags": Object {},
-      "type": Object {
-        "name": "undefined",
-      },
-    },
-  },
-  "slots": Object {
-    "default": Object {
+  ],
+  "slots": Array [
+    Object {
       "bindings": Object {},
       "description": "",
+      "name": "default",
     },
-  },
+  ],
   "tags": Object {},
 }
 `;
