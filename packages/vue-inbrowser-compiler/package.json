@@ -22,6 +22,7 @@
     "acorn-jsx": "^5.0.1",
     "buble": "^0.19.7",
     "camelcase": "^5.3.1",
+    "vue-inbrowser-compiler-utils": "^3.21.0",
     "walkes": "^0.2.1"
   },
   "devDependencies": {

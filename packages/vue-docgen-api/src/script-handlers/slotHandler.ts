@@ -9,7 +9,7 @@ export interface TypedParamTag extends ParamTag {
 	type: ParamType
 }
 
-export default function slotHandler(documentation: Documentation, path: NodePath) {
+export default async function slotHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const renderPath = path
 			.get('properties')

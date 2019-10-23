@@ -16,7 +16,7 @@ describe('render function slotHandler', () => {
 	let mockSlotDescriptor: SlotDescriptor
 
 	beforeEach(() => {
-		mockSlotDescriptor = { description: '' }
+		mockSlotDescriptor = { name: 'mySlot', description: '' }
 		documentation = new Documentation()
 		const mockGetSlotDescriptor = documentation.getSlotDescriptor as jest.Mock
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
@@ -205,6 +205,7 @@ describe('render function slotHandler', () => {
 		    "compiling": "contains true while compiling",
 		  },
 		  "description": "Use this slot carefully",
+		  "name": "mySlot",
 		}
 	`)
 		done()

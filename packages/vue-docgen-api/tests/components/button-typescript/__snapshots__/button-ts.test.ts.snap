@@ -4,9 +4,10 @@ exports[`tests button should match the snapshot 1`] = `
 Object {
   "description": "This is an example of creating a reusable button component and using it with external data.",
   "displayName": "ClassButton",
-  "events": Object {
-    "success": Object {
+  "events": Array [
+    Object {
       "description": "Success event when we click",
+      "name": "success",
       "properties": undefined,
       "type": Object {
         "names": Array [
@@ -14,7 +15,7 @@ Object {
         ],
       },
     },
-  },
+  ],
   "methods": Array [
     Object {
       "description": "method testing",
@@ -38,8 +39,17 @@ Object {
       },
     },
   ],
-  "props": Object {
-    "propA": Object {
+  "props": Array [
+    Object {
+      "description": "An example of a property typed through the decorators arguments",
+      "name": "propNoType",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
       "description": "An example of a property typed through the annotation",
       "name": "propA",
       "tags": Object {},
@@ -47,20 +57,20 @@ Object {
         "name": "number",
       },
     },
-    "propB": Object {
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "'default value'",
       },
       "description": "A prop with a default value",
       "name": "propB",
-      "required": "",
+      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
       },
     },
-    "propC": Object {
+    Object {
       "description": "A prop with a hybrid type",
       "name": "propC",
       "tags": Object {},
@@ -68,22 +78,14 @@ Object {
         "name": "TSUnionType",
       },
     },
-    "propNoType": Object {
-      "description": "An example of a property typed through the decorators arguments",
-      "name": "propNoType",
-      "required": "",
-      "tags": Object {},
-      "type": Object {
-        "name": "string",
-      },
-    },
-  },
-  "slots": Object {
-    "default": Object {
+  ],
+  "slots": Array [
+    Object {
       "bindings": Object {},
       "description": "Use this slot default",
+      "name": "default",
     },
-  },
+  ],
   "tags": Object {
     "author": Array [
       Object {

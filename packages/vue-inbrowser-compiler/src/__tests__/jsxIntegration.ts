@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { transform } from 'buble'
+import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'
 import { shallowMount, mount } from '@vue/test-utils'
-import adaptCreateElement, { concatenate } from '../adaptCreateElement'
 
 describe('integration', () => {
 	describe('from JSX', () => {

@@ -9,7 +9,7 @@ import getMemberFilter from '../utils/getPropsFilter'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
-export default function propHandler(documentation: Documentation, path: NodePath) {
+export default async function propHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path
 			.get('properties')
@@ -43,9 +43,6 @@ export default function propHandler(documentation: Documentation, path: NodePath
 					: propNode.key.name || propNode.key.value
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
-
-				// save real prop name for reference when v-model
-				propDescriptor.name = propNode.key.name || propNode.key.value
 
 				const propValuePath = prop.get('value')
 
@@ -105,7 +102,6 @@ export default function propHandler(documentation: Documentation, path: NodePath
 				.forEach((e: NodePath<bt.StringLiteral>) => {
 					const propDescriptor = documentation.getPropDescriptor(e.node.value)
 					propDescriptor.type = { name: 'undefined' }
-					propDescriptor.required = ''
 				})
 		}
 	}
@@ -175,7 +171,7 @@ export function describeRequired(
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
 	propDescriptor.required =
-		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : ''
+		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : undefined
 }
 
 export function describeDefault(

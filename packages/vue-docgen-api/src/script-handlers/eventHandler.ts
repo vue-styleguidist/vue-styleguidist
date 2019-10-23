@@ -17,7 +17,7 @@ export interface TypedParamTag extends ParamTag {
 	type: ParamType
 }
 
-export default function eventHandler(
+export default async function eventHandler(
 	documentation: Documentation,
 	path: NodePath,
 	astPath: bt.File
@@ -89,7 +89,7 @@ export function setEventDescriptor(
 	eventDescriptor: EventDescriptor,
 	jsDoc: DocBlockTags
 ): EventDescriptor {
-	if (jsDoc.description.length) {
+	if (jsDoc.description && jsDoc.description.length) {
 		eventDescriptor.description = jsDoc.description
 	}
 

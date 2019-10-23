@@ -1,11 +1,11 @@
 import { PropDescriptor } from 'vue-docgen-api'
 import { mdclean } from './utils'
 
-const tmpl = (props: { [propName: string]: PropDescriptor } = {}): string => {
+const tmpl = (props: PropDescriptor[]): string => {
 	let ret = ''
 
-	Object.keys(props).forEach(p => {
-		const pr = props[p]
+	props.forEach(pr => {
+		const p = pr.name
 		const n = pr.type && pr.type.name ? pr.type.name : ''
 		const v = pr.defaultValue && pr.defaultValue.value ? pr.defaultValue.value : ''
 		const d = pr.description ? pr.description : ''
@@ -15,8 +15,7 @@ const tmpl = (props: { [propName: string]: PropDescriptor } = {}): string => {
 	return ret
 }
 
-export default (props: { [propName: string]: PropDescriptor }): string => {
-	if (Object.keys(props).length === 0) return ''
+export default (props: PropDescriptor[]): string => {
 	return `
   ## Props
   | Prop name     | Type        | Default  | Description  |

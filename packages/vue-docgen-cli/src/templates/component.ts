@@ -9,7 +9,7 @@ export default (
 ): string => {
 	const { displayName, description, docsBlocks, tags } = doc
 
-	const { deprecated, author, since, version, see, link } = tags
+	const { deprecated, author, since, version, see, link } = tags || {}
 
 	return `${
 		!config.outFile && deprecated

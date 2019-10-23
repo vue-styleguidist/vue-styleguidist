@@ -2,7 +2,7 @@ import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import Documentation from '../Documentation'
 
-export default function displayNameHandler(documentation: Documentation, compDef: NodePath) {
+export default async function displayNameHandler(documentation: Documentation, compDef: NodePath) {
 	if (bt.isObjectExpression(compDef.node)) {
 		const namePath = compDef
 			.get('properties')
