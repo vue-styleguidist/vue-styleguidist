@@ -6220,6 +6220,13 @@ clean-stack@^2.0.0:
   resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
   integrity sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==
 
+clean-webpack-plugin@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-0.1.19.tgz#ceda8bb96b00fe168e9b080272960d20fdcadd6d"
+  integrity sha512-M1Li5yLHECcN2MahoreuODul5LkjohJGFxLPTjl3j1ttKrF5rgjZET1SJduuqxLAuT1gAPOdkhg03qcaaU1KeA==
+  dependencies:
+    rimraf "^2.6.1"
+
 clean-webpack-plugin@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-1.0.1.tgz#b16ee2f1386aea403010236e632447c7d3505f5a"
@@ -6893,7 +6900,7 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-copy-webpack-plugin@^4.6.0:
+copy-webpack-plugin@^4.5.2, copy-webpack-plugin@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/copy-webpack-plugin/-/copy-webpack-plugin-4.6.0.tgz#e7f40dd8a68477d405dd1b7a854aae324b158bae"
   integrity sha512-Y+SQCF+0NoWQryez2zXn5J5knmr9z/9qSQt7fbL78u83rxmigOy8X5+BFn8CFSuX+nKT8gpYwJX68ekqtQt6ZA==
@@ -9993,7 +10000,7 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
-glogg@^1.0.2:
+glogg@^1.0.1, glogg@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/glogg/-/glogg-1.0.2.tgz#2d7dd702beda22eb3bffadf880696da6d846313f"
   integrity sha512-5mwUoSuBk44Y4EshyiqcH95ZntbDdTQqA3QYSrxmzj28Ai0vXBGMH1ApSANH14j2sIRtqCEyg6PfsuP7ElOEDA==
@@ -18175,6 +18182,14 @@ strong-log-transformer@^2.0.0:
     minimist "^1.2.0"
     through "^2.3.4"
 
+style-loader@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.21.0.tgz#68c52e5eb2afc9ca92b6274be277ee59aea3a852"
+  integrity sha512-T+UNsAcl3Yg+BsPKs1vd22Fr8sVT+CJMtzqc6LEw9bbJZb43lm9GoeIfUcDEefBSWC0BhYbcdupV1GtI4DGzxg==
+  dependencies:
+    loader-utils "^1.1.0"
+    schema-utils "^0.4.5"
+
 style-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.0.0.tgz#1d5296f9165e8e2c85d24eee0b7caf9ec8ca1f82"
@@ -18905,15 +18920,15 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typescript@^3.2.2, typescript@^3.6.0:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
+  integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
+
 typescript@^3.4.5:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
   integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
-
-typescript@^3.6.0:
-  version "3.6.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
-  integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
@@ -19457,6 +19472,15 @@ vue-cli-plugin-pug@^1.0.7:
     pug-plain-loader "^1.0.0"
     raw-loader "^0.5.1"
 
+vue-cli-plugin-styleguidist@*:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-styleguidist/-/vue-cli-plugin-styleguidist-3.25.0.tgz#042a397b3c9b0974a18b1f083bd4cc9372ebce87"
+  integrity sha512-TBRH5MRD6lDbANtlKGqT4k3OnygMYLDRxtr16b5rsxZ/4fqmVVYDqa7w5RKIU5YovIE47ah4nLExOVyl+VPB+g==
+  dependencies:
+    null-loader "^0.1.1"
+    vue-styleguidist "^3.25.0"
+    webpack-merge "^4.2.1"
+
 vue-cli-plugin-vuetify@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-0.6.1.tgz#4fe0b7322a90a9c9f0aff2e18fd9249088b33080"
@@ -19468,6 +19492,22 @@ vue-clickaway@^2.2.2:
   integrity sha512-25SpjXKetL06GLYoLoC8pqAV6Cur9cQ//2g35GRFBV4FgoljbZZjTINR8g2NuVXXDMLSUXaKx5dutgO4PaDE7A==
   dependencies:
     loose-envify "^1.2.0"
+
+vue-docgen-api@^3.25.0:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/vue-docgen-api/-/vue-docgen-api-3.25.0.tgz#7e0000a4cfca1f27e62794c0e233d1e1096965f9"
+  integrity sha512-BhY/xjc/c+x6fqHW7Xi6N0eiYheTC+JtWXq3dNMGlMWl/qdcDaWPeenwhZg7YSZvzz/rq6TqcigkKSLAuS6QgA==
+  dependencies:
+    "@babel/parser" "^7.2.3"
+    "@babel/types" "^7.0.0"
+    ast-types "^0.12.2"
+    hash-sum "^1.0.2"
+    lru-cache "^4.1.5"
+    pug "^2.0.3"
+    recast "^0.17.3"
+    ts-map "^1.0.3"
+    typescript "^3.2.2"
+    vue-template-compiler "^2.0.0"
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
@@ -19502,6 +19542,17 @@ vue-i18n@^8.7.0:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.12.0.tgz#25b56e9fab7e78a0ff58b8b4fba336ad328cce11"
   integrity sha512-Wh40dvkYZH0CntkhQQEed7nY8P/8xOOHy5Bl9W/WmmmW0oLYIL66XWwOqlcnNbLaL5HGN7XISydYVqXS0Sst9w==
+
+vue-inbrowser-compiler@^3.21.0, vue-inbrowser-compiler@^3.23.0:
+  version "3.23.0"
+  resolved "https://registry.yarnpkg.com/vue-inbrowser-compiler/-/vue-inbrowser-compiler-3.23.0.tgz#ce71d09819fac836870fc92fc6e5b4779e8e8183"
+  integrity sha512-DaIcYHinWyt9pJgWM02sJ7bdFAQba9YYQklQ8Fitk7kz+TMyeCeUNwntJQAk+6bplx27qCHyFqXm8yvL0xBwQA==
+  dependencies:
+    acorn "^6.1.1"
+    acorn-jsx "^5.0.1"
+    buble "^0.19.7"
+    camelcase "^5.3.1"
+    walkes "^0.2.1"
 
 vue-jscodeshift-adapter@^2.0.2:
   version "2.0.2"
@@ -19585,6 +19636,61 @@ vue-style-loader@^4.1.0:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
+
+vue-styleguidist@^3.25.0:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/vue-styleguidist/-/vue-styleguidist-3.25.0.tgz#2fe2ff5c48dd3b32ebceaabed8c526c319387535"
+  integrity sha512-AR6Ru1TGbxqRr3I2NU2T2YGsWfYffv5B+TJwCO9DbqUITk1AwaO2XVeYD0M1+ka+VmOB8681V1IEavzFu1OiqA==
+  dependencies:
+    "@vxna/mini-html-webpack-template" "^0.1.7"
+    ast-types "^0.12.2"
+    classnames "^2.2.6"
+    clean-webpack-plugin "^0.1.19"
+    clipboard-copy "^3.0.0"
+    codemirror "^5.39.0"
+    common-dir "^2.0.2"
+    copy-webpack-plugin "^4.5.2"
+    css-loader "^2.1.1"
+    es6-object-assign "^1.1.0"
+    es6-promise "^4.2.6"
+    escodegen "^1.11.1"
+    findup "^0.1.5"
+    function.name-polyfill "^1.0.6"
+    github-slugger "^1.2.0"
+    glob "^7.1.2"
+    glogg "^1.0.1"
+    hash-sum "^1.0.2"
+    is-directory "^0.3.1"
+    javascript-stringify "^1.6.0"
+    kleur "^2.0.1"
+    leven "^2.1.0"
+    loader-utils "^1.1.0"
+    lodash "^4.17.15"
+    lru-cache "^4.1.3"
+    mini-html-webpack-plugin "^0.2.3"
+    minimist "^1.2.0"
+    ora "^2.1.0"
+    prismjs "^1.15.0"
+    prop-types "^15.6.2"
+    q-i "^2.0.1"
+    qss "^2.0.3"
+    react "^16.4.1"
+    react-codemirror2 "^5.1.0"
+    react-dev-utils "^7.0.3"
+    react-dom "^16.4.1"
+    react-group "^1.0.6"
+    react-icons "^3.7.0"
+    react-lifecycles-compat "^3.0.4"
+    react-simple-code-editor "^0.9.4"
+    react-styleguidist "^9.1.16"
+    rewrite-imports "^2.0.3"
+    style-loader "^0.21.0"
+    terser-webpack-plugin "^1.3.0"
+    to-ast "^1.0.0"
+    vue-docgen-api "^3.25.0"
+    vue-inbrowser-compiler "^3.23.0"
+    webpack-dev-server "^3.7.1"
+    webpack-merge "^4.0.0"
 
 vue-svg-loader@^0.12.0:
   version "0.12.0"
