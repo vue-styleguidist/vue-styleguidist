@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* **docgen:** make docgen output arrays only ([d456c6c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d456c6c))
+
+
+### Code Refactoring
+
+* **docgen:** make function docgen.parse async ([e17680b](https://github.com/vue-styleguidist/vue-styleguidist/commit/e17680b))
+* **docgen:** make required always a boolean ([03bc88e](https://github.com/vue-styleguidist/vue-styleguidist/commit/03bc88e))
+
+
+### BREAKING CHANGES
+
+* **docgen:** props, events, methods and slots are now all arrays
+
+Co-authored-by: Sébastien D. <demsking@gmail.com>
+* **docgen:** required for props is never a string anymore
+* **docgen:** docgen becomes async, so do all of the handlers
+
+
+
+
+
 ## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
 
 

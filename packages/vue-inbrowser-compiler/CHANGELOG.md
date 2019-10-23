@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* split compiler & utils - efficient code split ([9ef9d06](https://github.com/vue-styleguidist/vue-styleguidist/commit/9ef9d06))
+
+
+### BREAKING CHANGES
+
+* compiler now exports compiler function as default
+* isCodeVueSfc, styleScoper and adaptCreateElement
+ are now their own package
+
+
+
+
+
 # [3.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.22.3...v3.23.0) (2019-09-19)
 
 
