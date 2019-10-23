@@ -45,7 +45,6 @@ jobs:
     - stage: documentation
       script:
         - yarn docs:build
-        - yarn compile
 
         # Build all examples
         - cd examples
