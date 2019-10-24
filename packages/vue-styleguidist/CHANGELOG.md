@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
+
+
+### Bug Fixes
+
+* publish templates with vsg ([f8df33f](https://github.com/vue-styleguidist/vue-styleguidist/commit/f8df33f))
+
+
+
+
+
 # [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
 
 **Note:** Version bump only for package vue-styleguidist
