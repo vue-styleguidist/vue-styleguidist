@@ -22,10 +22,8 @@
 		"vue-styleguidist": "lib/bin/styleguidist.js"
 	},
 	"files": [
-		"bin",
 		"lib",
-		"loaders",
-		"scripts"
+		"templates"
 	],
 	"engines": {
 		"node": ">=6",
