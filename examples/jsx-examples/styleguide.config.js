@@ -36,6 +36,5 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	styleguideDir: 'dist',
-	codeSplit: true
+	styleguideDir: 'dist'
 }
