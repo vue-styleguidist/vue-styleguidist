@@ -1,6 +1,7 @@
 examples/*/styleguide/
 packages/*/lib/
 packages/*/dist/
+packages/*/tests/perf-test.js
 test/cli-packages/
 docs/dist/
 **/CHANGELOG.md
