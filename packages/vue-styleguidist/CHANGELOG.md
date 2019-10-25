@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* tag class for JsDoc tag values ([38fdd46](https://github.com/vue-styleguidist/vue-styleguidist/commit/38fdd46))
+
+
+### Features
+
+* readable css class for JsDoc results ([a56f341](https://github.com/vue-styleguidist/vue-styleguidist/commit/a56f341)), closes [#602](https://github.com/vue-styleguidist/vue-styleguidist/issues/602)
+
+
+
+
+
 # [3.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.2...v3.25.0) (2019-10-15)
 
 **Note:** Version bump only for package vue-styleguidist

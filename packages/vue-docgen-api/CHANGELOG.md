@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* **docgen:** allow for multiple times the same tag ([68a0204](https://github.com/vue-styleguidist/vue-styleguidist/commit/68a0204))
+
+
+
+
+
 # [3.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.2...v3.25.0) (2019-10-15)
 
 

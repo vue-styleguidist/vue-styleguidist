@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
+
+
+### Features
+
+* use the functional tag in docgen cli ([c6f8725](https://github.com/vue-styleguidist/vue-styleguidist/commit/c6f8725))
+
+
+
+
+
 # [3.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.24.2...v3.25.0) (2019-10-15)
 
 **Note:** Version bump only for package vue-docgen-cli
