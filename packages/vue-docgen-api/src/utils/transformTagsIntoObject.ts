@@ -12,7 +12,11 @@ export default function transformTagsIntoObject(tags: BlockTag[]): { [key: strin
 				tag = newTag
 			}
 			const title = tag.title === 'param' ? 'params' : tag.title
-			acc[title] = [tag]
+			if (acc[title]) {
+				acc[title].push(tag)
+			} else {
+				acc[title] = [tag]
+			}
 		}
 		return acc
 	}, {})
