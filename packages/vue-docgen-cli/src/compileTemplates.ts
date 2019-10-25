@@ -12,11 +12,12 @@ import slots from './templates/slots'
 import props from './templates/props'
 import component from './templates/component'
 import defaultExample from './templates/defaultExample'
+import functionalTag from './templates/functionalTag'
 import { DocgenCLIConfig } from './extractConfig'
 
 export { mdclean } from './templates/utils'
 export { DocgenCLIConfig }
-export { events, methods, slots, props, component, defaultExample }
+export { events, methods, slots, props, component, defaultExample, functionalTag }
 export { default as docgen } from './docgen'
 
 export interface Templates {
@@ -31,6 +32,7 @@ export interface Templates {
 		componentRelativePath: string
 	): string
 	defaultExample(doc: ComponentDoc): string
+	functionalTag: string
 }
 
 export interface RenderedUsage {
@@ -38,6 +40,7 @@ export interface RenderedUsage {
 	slots: string
 	methods: string
 	events: string
+	functionalTag: string
 }
 
 export default async (
@@ -54,7 +57,8 @@ export default async (
 		props: props ? templates.props(props) : '',
 		slots: slots ? templates.slots(slots) : '',
 		methods: methods ? templates.methods(methods) : '',
-		events: events ? templates.events(events) : ''
+		events: events ? templates.events(events) : '',
+		functionalTag: templates.functionalTag
 	}
 
 	if (extraMd && extraMd.length) {

@@ -7,7 +7,7 @@ export default (
 	config: DocgenCLIConfig,
 	fileName: string
 ): string => {
-	const { displayName, description, docsBlocks, tags } = doc
+	const { displayName, description, docsBlocks, tags, functional } = doc
 
 	const { deprecated, author, since, version, see, link } = tags || {}
 
@@ -26,6 +26,7 @@ title: ${displayName}
   ${deprecated ? `> **Deprecated** ${(deprecated[0] as ParamTag).description}\n` : ''}
   ${description ? '> ' + description : ''}
   
+  ${functional ? renderedUsage.functionalTag : ''}
   ${author ? author.map(a => `Author: ${(a as ParamTag).description}\n`) : ''}
   ${since ? `Since: ${(since[0] as ParamTag).description}\n` : ''}
   ${version ? `Version: ${(version[0] as ParamTag).description}\n` : ''}

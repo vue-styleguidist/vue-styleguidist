@@ -9,6 +9,7 @@ import {
 	props,
 	slots,
 	defaultExample,
+	functionalTag,
 	Templates
 } from './compileTemplates'
 
@@ -63,6 +64,7 @@ export default (processArgv: string[], processCwd: string): DocgenCLIConfig => {
 		props,
 		slots,
 		defaultExample,
+		functionalTag,
 		...config.templates
 	}
 
