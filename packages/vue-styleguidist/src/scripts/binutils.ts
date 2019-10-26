@@ -1,17 +1,23 @@
 /* eslint-disable no-console */
 
 import { stringify } from 'q-i'
+import WebpackDevServer from 'webpack-dev-server'
+import { Stats, Compiler } from 'webpack'
 import kleur from 'kleur'
 import ora from 'ora'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import webpackDevServerUtils from 'react-dev-utils/WebpackDevServerUtils'
 import openBrowser from 'react-dev-utils/openBrowser'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
-import { Stats } from 'webpack'
+import glogg from 'glogg'
 import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
+import server from './server'
+import build from './build'
+import consts from './consts'
 
-const consts = require('./consts')
-const logger = require('glogg')('vsg')
+const logger = glogg('vsg')
+
+export type ServerInfo = { app: WebpackDevServer; compiler: Compiler }
 
 /**
  * @param {object} config
@@ -27,10 +33,9 @@ export function updateConfig(config: ProcessedStyleGuidistConfigObject) {
 	return config
 }
 
-export function commandBuild(config: ProcessedStyleGuidistConfigObject) {
+export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compiler {
 	console.log('Building style guide...')
 
-	const build = require('./build').default
 	const compiler = build(config, (err: Error) => {
 		if (err) {
 			console.error(err)
@@ -40,7 +45,7 @@ export function commandBuild(config: ProcessedStyleGuidistConfigObject) {
 		} else {
 			printBuildInstructions(config)
 		}
-	})
+	}) as Compiler
 
 	verbose('Webpack config:', compiler.options)
 
@@ -58,10 +63,11 @@ export function commandBuild(config: ProcessedStyleGuidistConfigObject) {
 	return compiler
 }
 
-export function commandServer(config: ProcessedStyleGuidistConfigObject, open?: boolean) {
+export function commandServer(
+	config: ProcessedStyleGuidistConfigObject,
+	open?: boolean
+): ServerInfo {
 	let spinner: ora.Ora
-
-	const server = require('./server').default
 	const { app, compiler } = server(config, (err: Error) => {
 		if (err) {
 			console.error(err)
@@ -74,7 +80,7 @@ export function commandServer(config: ProcessedStyleGuidistConfigObject, open?: 
 			)
 
 			if (config.printServerInstructions) {
-				config.printServerInstructions(config, { isHttps })
+				config.printServerInstructions(config, { isHttps: !!isHttps })
 			} else {
 				printServerInstructions(
 					urls,
@@ -89,12 +95,7 @@ export function commandServer(config: ProcessedStyleGuidistConfigObject, open?: 
 			}
 		}
 	})
-	/*	dangerouslyUpdateWebpackConfig(webpackConfig) {
-		webpackConfig.devServer = webpackConfig.devServer || {}
-		webpackConfig.devServer.publicPath = '/styleguide'
-		webpackConfig.output.publicPath = '/styleguide'
-		return webpackConfig
-	}*/
+
 	verbose('Webpack config:', compiler.options)
 
 	// Show message when webpack is recompiling the bundle

@@ -10,11 +10,28 @@ var mockFs: {
 	readFile: jest.Mock
 	writeFile: jest.Mock
 	existsSync: jest.Mock
+	createWriteStream: (
+		a: string
+	) => {
+		write: jest.Mock
+		close: jest.Mock
+	}
 }
+
+let cws: {
+	write: jest.Mock
+	close: jest.Mock
+}
+
 jest.mock('fs', () => {
+	cws = {
+		write: jest.fn(),
+		close: jest.fn()
+	}
 	mockFs = {
 		readFile: jest.fn((a, b, c) => c()),
 		writeFile: jest.fn((a, b, c) => c()),
+		createWriteStream: a => cws,
 		existsSync: jest.fn(() => false)
 	}
 	return mockFs
@@ -49,7 +66,7 @@ describe('writeDownMdFile', () => {
 
 	it('should then save the pretified markdown', async done => {
 		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
-		expect(mockFs.writeFile).toHaveBeenCalledWith(MD_FILE_PATH, PRETTY_MD, expect.any(Function))
+		expect(cws.write).toHaveBeenCalledWith(PRETTY_MD)
 		done()
 	})
 })

@@ -1,13 +1,52 @@
 // Make sure user has webpack installed
 import 'react-styleguidist/lib/scripts/utils/ensureWebpack'
-import { Stats } from 'webpack'
+import { Stats, Configuration, Compiler } from 'webpack'
 import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
-import build from './build'
+import buildUtil from './build'
 import server from './server'
 import makeWebpackConfig from './make-webpack-config'
 import getConfig from './config'
 import * as binutils from './binutils'
+
+export interface StyleGuideUtils {
+	/**
+	 * Build style guide.
+	 *
+	 * @param {Function} callback callback(err, config, stats).
+	 * @return {Compiler} Webpack Compiler instance.
+	 */
+	build: (
+		callback: (
+			err: Error | undefined,
+			config: ProcessedStyleGuidistConfigObject,
+			stats: Stats
+		) => void
+	) => Compiler.Watching | Compiler
+
+	/**
+	 * Start style guide dev server.
+	 *
+	 * @param {Function} callback callback(err, config).
+	 * @return {ServerInfo.App} Webpack-Dev-Server.
+	 * @return {ServerInfo.Compiler} Webpack Compiler instance.
+	 */
+	server: (
+		callback: (err: Error | undefined, config: ProcessedStyleGuidistConfigObject) => void
+	) => binutils.ServerInfo
+
+	/**
+	 * Return Styleguidist Webpack config.
+	 *
+	 * @param {string} [env=production] 'production' or 'development'.
+	 * @return {object}
+	 */
+	makeWebpackConfig: (env: 'development' | 'production' | 'none') => Configuration
+	binutils: {
+		server: (open: boolean) => binutils.ServerInfo
+		build: () => Compiler
+	}
+}
 
 /**
  * Initialize Vue Styleguide API.
@@ -19,7 +58,7 @@ import * as binutils from './binutils'
 export default function(
 	config: ProcessedStyleGuidistConfigObject,
 	updateConfig: (conf: ProcessedStyleGuidistConfigObject) => void
-) {
+): StyleGuideUtils {
 	config = getConfig(config, (config: ProcessedStyleGuidistConfigObject) => {
 		setupLogger(config.logger, config.verbose, {})
 		if (typeof updateConfig === 'function') {
@@ -29,45 +68,20 @@ export default function(
 	})
 
 	return {
-		/**
-		 * Build style guide.
-		 *
-		 * @param {Function} callback callback(err, config, stats).
-		 * @return {Compiler} Webpack Compiler instance.
-		 */
-		build(
-			callback: (
-				err: Error | undefined,
-				config: ProcessedStyleGuidistConfigObject,
-				stats: Stats
-			) => void
-		) {
-			return build(config, (err, stats) => callback(err, config, stats))
+		build(callback) {
+			return buildUtil(config, (err, stats) => callback(err, config, stats))
 		},
 
-		/**
-		 * Start style guide dev server.
-		 *
-		 * @param {Function} callback callback(err, config).
-		 * @return {ServerInfo.App} Webpack-Dev-Server.
-		 * @return {ServerInfo.Compiler} Webpack Compiler instance.
-		 */
-		server(callback: (err: Error | undefined, config: ProcessedStyleGuidistConfigObject) => void) {
+		server(callback) {
 			return server(config, err => callback(err, config))
 		},
 
-		/**
-		 * Return Styleguidist Webpack config.
-		 *
-		 * @param {string} [env=production] 'production' or 'development'.
-		 * @return {object}
-		 */
 		makeWebpackConfig(env: 'development' | 'production' | 'none') {
 			return makeWebpackConfig(config, env || 'production')
 		},
 
 		binutils: {
-			server: (open: boolean) => binutils.commandServer(config, open),
+			server: open => binutils.commandServer(config, open),
 			build: () => binutils.commandBuild(config)
 		}
 	}

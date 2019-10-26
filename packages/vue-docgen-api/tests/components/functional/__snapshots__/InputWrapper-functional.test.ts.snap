@@ -11,7 +11,7 @@ Object {
 </input-wrapper>
 \`\` \`",
   ],
-  "events": Array [],
+  "events": undefined,
   "functional": true,
   "methods": undefined,
   "props": Array [

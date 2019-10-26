@@ -7,7 +7,7 @@
 		"precompile": "rimraf lib/",
 		"compile": "yarn typings && babel src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
 		"compile:watch": "concurrently \"yarn compile --watch\" \"yarn typings --watch\"",
-		"typings": "tsc --noEmit"
+		"typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
 	},
 	"repository": {
 		"type": "git",

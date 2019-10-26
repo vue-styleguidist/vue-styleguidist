@@ -28,8 +28,8 @@ describe('test example vuex', () => {
 		expect(getTestDescriptor(docVuex.methods, 'onSubmit').name).toBe('onSubmit')
 	})
 
-	it('should dont have slots.', () => {
-		expect(docVuex.slots && docVuex.slots.length).toEqual(0)
+	it('should not have slots.', () => {
+		expect(docVuex.slots).toBeUndefined()
 	})
 
 	it('should match the snapshot', () => {

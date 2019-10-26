@@ -2,11 +2,8 @@
 	"extends": "../../tsconfig",
 	"compilerOptions": {
 		"lib": ["dom", "esnext"],
-		"baseUrl": "./src",
-		"allowJs": true,
-		"outDir": "lib",
-		"allowSyntheticDefaultImports": true
+		"baseUrl": "./src"
 	},
-	"include": ["./src/**/*.ts", "./src/**/*.tsx"],
+	"include": ["src"],
 	"exclude": ["node_modules"]
 }

@@ -7,7 +7,6 @@ import prettier from 'prettier'
 import compileTemplates, { DocgenCLIConfig } from './compileTemplates'
 
 const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
 const mkdirp = promisify(mkdirpNative)
 
 /**
@@ -31,13 +30,6 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
 
 	// close the stream
 	writeStream.close()
-}
-
-export async function streamMdFile(content: string, destFilePath: string) {
-	const prettyMd = prettier.format(content, { parser: 'markdown' })
-	const destFolder = path.dirname(destFilePath)
-	await mkdirp(destFolder)
-	await writeFile(destFilePath, prettyMd)
 }
 
 /**
