@@ -178,8 +178,8 @@ export default class Documentation {
 	public toObject(): ComponentDoc {
 		const props = this.getObjectFromDescriptor(this.propsMap)
 		const methods = this.getObjectFromDescriptor(this.methodsMap)
-		const events = this.getObjectFromDescriptor(this.eventsMap) || []
-		const slots = this.getObjectFromDescriptor(this.slotsMap) || []
+		const events = this.getObjectFromDescriptor(this.eventsMap)
+		const slots = this.getObjectFromDescriptor(this.slotsMap)
 
 		const obj: { [key: string]: any } = {}
 		this.dataMap.forEach((value, key) => {
