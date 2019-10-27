@@ -25,7 +25,7 @@ export default {
 		typescript({
 			useTsconfigDeclarationDir: true,
 			tsconfig: './tsconfig.build.json',
-			cacheRoot: '../../node_modules/.rpt2_cache'
+			cacheRoot: '../../node_modules/.rollup_vue-compiler_cache'
 		}),
 		// Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
 		commonjs()
