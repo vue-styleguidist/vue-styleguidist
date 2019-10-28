@@ -41,7 +41,7 @@
       "url-loader": "^1.1.2",
       "vue-docgen-cli": "^3.20.4",
       "vue-loader": "^15.2.4",
-      "vuepress": "^1.0.3",
+      "vuepress": "^1.2.0",
       "vuepress-plugin-live": "^1.4.2",
       "webpack": "^4.10.0",
       "webpack-bundle-analyzer": "3.3.2"

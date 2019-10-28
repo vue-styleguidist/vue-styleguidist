@@ -7,7 +7,6 @@ import prettier from 'prettier'
 import compileTemplates, { DocgenCLIConfig } from './compileTemplates'
 
 const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
 const mkdirp = promisify(mkdirpNative)
 
 /**
@@ -16,11 +15,21 @@ const mkdirp = promisify(mkdirpNative)
  * @param content dirty looking markdown content to be saved
  * @param destFilePath destination absolute file path
  */
-export async function writeDownMdFile(content: string, destFilePath: string) {
-	const prettyMd = prettier.format(content, { parser: 'markdown' })
+export async function writeDownMdFile(content: string | string[], destFilePath: string) {
+	const prettyMd = (cont: string) => prettier.format(cont, { parser: 'markdown' })
 	const destFolder = path.dirname(destFilePath)
 	await mkdirp(destFolder)
-	await writeFile(destFilePath, prettyMd)
+	let writeStream = fs.createWriteStream(destFilePath)
+	if (Array.isArray(content)) {
+		content.forEach(cont => {
+			writeStream.write(prettyMd(cont))
+		})
+	} else {
+		writeStream.write(prettyMd(content))
+	}
+
+	// close the stream
+	writeStream.close()
 }
 
 /**

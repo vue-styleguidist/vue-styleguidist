@@ -3,11 +3,12 @@ import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
 import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
 import makeWebpackConfig from './make-webpack-config'
+import { ServerInfo } from './binutils'
 
 export default function createServer(
 	config: ProcessedStyleGuidistConfigObject,
 	env: 'development' | 'production' | 'none'
-) {
+): ServerInfo {
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)
 	const { devServer: webpackDevServerConfig } = merge(
 		{

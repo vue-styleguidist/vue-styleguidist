@@ -71,7 +71,7 @@ Object {
       },
     },
   ],
-  "slots": Array [],
+  "slots": undefined,
   "tags": Object {},
 }
 `;

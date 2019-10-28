@@ -4,7 +4,7 @@ exports[`tests button with no script block should match the snapshot 1`] = `
 Object {
   "description": "",
   "displayName": "MyButton",
-  "events": Array [],
+  "events": undefined,
   "methods": undefined,
   "props": undefined,
   "slots": Array [

@@ -4,7 +4,7 @@ exports[`test example vuex should match the snapshot 1`] = `
 Object {
   "description": "Partial mapping, object spread operator example",
   "displayName": "example",
-  "events": Array [],
+  "events": undefined,
   "methods": Array [
     Object {
       "description": "Sets the order",
@@ -69,7 +69,7 @@ Object {
     },
   ],
   "props": undefined,
-  "slots": Array [],
+  "slots": undefined,
   "tags": Object {},
 }
 `;

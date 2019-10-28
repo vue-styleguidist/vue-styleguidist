@@ -71,5 +71,5 @@ export async function compile(
 		await Promise.all(files.map(cacheMarkDownContent))
 	}
 	// and finally save all concatenated values to the markdown file
-	writeDownMdFile(Object.values(cachedContent).join(''), config.outFile)
+	writeDownMdFile(Object.values(cachedContent), config.outFile)
 }

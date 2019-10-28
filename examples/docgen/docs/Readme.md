@@ -1,8 +1,8 @@
 # Test Documentation
 
-You can build a docuemntation here from scratch if you need to or integrate it with your current vuepress site. This opens up the posibility for a lot more including using docz or even gatsby to showcase your components.
+You can build a documentation here from scratch if you need to. It's event posible to integrate it with your current vuepress site. Creating and maintaining markdown opens up the posibility for a lot more. Amon other tools including gridsome, docz or even gatsby to showcase your components.
 
-Click through the components on the left and open the `.vuepress/config.js` file. You should see that the docs are just using the same tools that you are used to.
+Click through the components on the left and open the `.vuepress/config.js` file in the github repo. You should see that the docs are just using the same tools that you are used to.
 
 ## The way it works
 

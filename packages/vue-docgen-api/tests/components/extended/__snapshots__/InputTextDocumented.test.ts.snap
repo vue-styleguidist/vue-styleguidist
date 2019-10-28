@@ -4,7 +4,7 @@ exports[`tests InputTextDoc should match the snapshot 1`] = `
 Object {
   "description": "Description InputTextDocumented",
   "displayName": "InputTextDocumented",
-  "events": Array [],
+  "events": undefined,
   "methods": undefined,
   "props": Array [
     Object {
@@ -33,7 +33,7 @@ Object {
       },
     },
   ],
-  "slots": Array [],
+  "slots": undefined,
   "tags": Object {},
 }
 `;
