@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+### Features
+
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+
+
+
+
+
 # [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
 
 **Note:** Version bump only for package vue-inbrowser-compiler-utils

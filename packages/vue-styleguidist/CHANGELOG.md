@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+### Features
+
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+
+
+
+
+
 # [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.6...v4.0.0-beta.7) (2019-10-25)
 
 **Note:** Version bump only for package vue-styleguidist
