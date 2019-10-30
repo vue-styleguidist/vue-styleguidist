@@ -76,6 +76,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 ## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
+# [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
 
