@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 
 import { stringify } from 'q-i'
+import { moveCursor, clearLine } from 'readline'
 import WebpackDevServer from 'webpack-dev-server'
-import { Stats, Compiler } from 'webpack'
+import { Stats, Compiler, ProgressPlugin } from 'webpack'
 import kleur from 'kleur'
-import ora from 'ora'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import webpackDevServerUtils from 'react-dev-utils/WebpackDevServerUtils'
 import openBrowser from 'react-dev-utils/openBrowser'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import glogg from 'glogg'
+import { Bar as ProgressBar, Presets } from 'cli-progress'
 import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
 import server from './server'
 import build from './build'
@@ -33,8 +34,25 @@ export function updateConfig(config: ProcessedStyleGuidistConfigObject) {
 	return config
 }
 
+const getProgressPlugin = (msg: string) => {
+	const bar = new ProgressBar(
+		{
+			format: `${msg} ${kleur.green('{bar}')} {percentage}%`
+		},
+		Presets.rect
+	)
+	return {
+		plugin: new ProgressPlugin(percentage => {
+			bar.update(percentage)
+		}),
+		bar
+	}
+}
+
 export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compiler {
-	console.log('Building style guide...')
+	const { plugin, bar } = getProgressPlugin('Building style guide')
+	config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
+	bar.start(1, 0)
 
 	const compiler = build(config, (err: Error) => {
 		if (err) {
@@ -53,6 +71,9 @@ export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compile
 	compiler.hooks.done.tap('vsrDoneBuilding', function(stats: Stats) {
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
+		bar.stop()
+		moveCursor(process.stdout, 0, -1)
+		clearLine(process.stdout, 0)
 		if (hasErrors) {
 			process.exit(1)
 		}
@@ -67,7 +88,9 @@ export function commandServer(
 	config: ProcessedStyleGuidistConfigObject,
 	open?: boolean
 ): ServerInfo {
-	let spinner: ora.Ora
+	const { plugin, bar } = getProgressPlugin('Compiling')
+	config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
+
 	const { app, compiler } = server(config, (err: Error) => {
 		if (err) {
 			console.error(err)
@@ -90,6 +113,8 @@ export function commandServer(
 				)
 			}
 
+			bar.start(1, 0)
+
 			if (open) {
 				openBrowser(urls.localUrlForBrowser)
 			}
@@ -98,17 +123,11 @@ export function commandServer(
 
 	verbose('Webpack config:', compiler.options)
 
-	// Show message when webpack is recompiling the bundle
-	compiler.hooks.invalid.tap('vsgInvalidRecompilation', function() {
-		console.log()
-		spinner = ora('Compiling...').start()
-	})
-
 	// Custom error reporting
 	compiler.hooks.done.tap('vsgErrorDone', function(stats: Stats) {
-		if (spinner) {
-			spinner.stop()
-		}
+		bar.stop()
+		moveCursor(process.stdout, 0, -1)
+		clearLine(process.stdout, 0)
 
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 
