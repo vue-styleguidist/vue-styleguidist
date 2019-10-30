@@ -70,7 +70,7 @@ module.exports = (api, options) => {
 
 function getStyleguidist(args, api, options) {
 	const conf = api.resolve(args.config || './styleguide.config.js')
-	const sgConf = conf && conf.length ? require(conf) : {}
+	const sgConf = conf && conf.length ? styleguidist.getConfig(conf) : {}
 	const userWebpackConfig = sgConf.webpackConfig
 	options.outputDir = sgConf.styleguideDir
 	const cliWebpackConfig = getConfig(api)

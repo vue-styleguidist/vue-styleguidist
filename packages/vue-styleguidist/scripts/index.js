@@ -62,3 +62,5 @@ module.exports = function(config, updateConfig) {
 		}
 	}
 }
+
+module.exports.getConfig = getConfig
