@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
+
+
+### Features
+
+* add progress bar while compiling ([f16b901](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b901))
+
+
+
+
+
 # [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
 
 
