@@ -58,6 +58,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 # [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
+## [3.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.1...v3.26.2) (2019-10-30)
 
 
 ### Bug Fixes
@@ -114,6 +115,7 @@ Co-authored-by: Sébastien D. <demsking@gmail.com>
 * compiler now exports compiler function as default
 * isCodeVueSfc, styleScoper and adaptCreateElement
  are now their own package
+* make sure defaults are there for the plugin ([00a05ac](https://github.com/vue-styleguidist/vue-styleguidist/commit/00a05ac)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
 
 
 
