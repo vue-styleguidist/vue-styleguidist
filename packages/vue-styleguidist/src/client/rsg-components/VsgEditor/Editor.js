@@ -4,6 +4,7 @@ import debounce from 'lodash/debounce'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
 import 'codemirror/mode/jsx/jsx'
 import Styled from 'rsg-components/Styled'
+import Context from 'rsg-components/Context'
 
 // We’re explicitly specifying Webpack loaders here so we could skip specifying them in Webpack configuration.
 // That way we could avoid clashes between our loaders and user loaders.
@@ -47,9 +48,7 @@ export class Editor extends Component {
 		editorConfig: PropTypes.object,
 		classes: PropTypes.object.isRequired
 	}
-	static contextTypes = {
-		config: PropTypes.object.isRequired
-	}
+	static contextType = Context
 
 	location = ''
 

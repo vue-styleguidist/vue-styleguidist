@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { polyfill } from 'react-lifecycles-compat'
 import PropTypes from 'prop-types'
+import Context from 'rsg-components/Context'
 import Playground from 'react-styleguidist/lib/client/rsg-components/Playground/Playground'
 
 class PlaygroundAsync extends Component {
@@ -19,7 +20,7 @@ class PlaygroundAsync extends Component {
 		}).isRequired
 	}
 
-	static contextTypes = Playground.contextTypes
+	static contextType = Context
 
 	static getDerivedStateFromProps = Playground.getDerivedStateFromProps
 
@@ -33,6 +34,8 @@ class PlaygroundAsync extends Component {
 	handleChange = Playground.prototype.handleChange
 
 	handleTabChange = Playground.prototype.handleTabChange
+
+	getInitialActiveTab = Playground.prototype.getInitialActiveTab
 
 	render() {
 		return Playground.prototype.render.call(this)

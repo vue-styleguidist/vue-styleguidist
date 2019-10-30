@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Vue from 'vue'
 import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
+import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
 import cleanComponentName from '../../utils/cleanComponentName'
@@ -25,10 +26,7 @@ class PreviewAsync extends Component {
 		component: PropTypes.object,
 		renderRootJsx: PropTypes.object
 	}
-	static contextTypes = {
-		config: PropTypes.object.isRequired,
-		codeRevision: PropTypes.number.isRequired
-	}
+	static contextType = Context
 
 	state = {
 		error: null
