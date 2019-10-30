@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Vue from 'vue'
 import { compile } from 'vue-inbrowser-compiler'
 import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
-import Vue from 'vue'
+import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
 import cleanComponentName from '../../utils/cleanComponentName'
@@ -16,10 +17,7 @@ class Preview extends Component {
 		component: PropTypes.object,
 		renderRootJsx: PropTypes.object
 	}
-	static contextTypes = {
-		config: PropTypes.object.isRequired,
-		codeRevision: PropTypes.number.isRequired
-	}
+	static contextType = Context
 
 	state = {
 		error: null
@@ -121,6 +119,7 @@ class Preview extends Component {
 		// if we are in local component registration, register current component
 		// NOTA: on independent md files, component.module is undefined
 		if (
+			component &&
 			component.module &&
 			this.context.config.locallyRegisterComponents &&
 			// NOTA: if the components member of the vue config object is
