@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.11](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.2...v4.0.0-beta.11) (2019-10-30)
+
+
+
+# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
+
+
+### Bug Fixes
+
+* move the build files to the right folder ([9944972](https://github.com/vue-styleguidist/vue-styleguidist/commit/9944972)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
+
+
+
+# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
+
+
+
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+
+# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v4.0.0-beta.7) (2019-10-25)
+
+
+
+# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
+
+
+
+# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
+
+
+
+# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
+
+
+
+# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
+
+
+
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+
+## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
+
+
+
+
+
 # [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
 ## [3.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.1...v3.26.2) (2019-10-30)
 

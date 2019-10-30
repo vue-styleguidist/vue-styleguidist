@@ -3,6 +3,96 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.11](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.2...v4.0.0-beta.11) (2019-10-30)
+
+
+
+# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
+
+
+
+# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
+
+
+### Features
+
+* add progress bar while compiling ([f16b901](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b901))
+
+
+
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+### Features
+
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+
+
+
+# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v4.0.0-beta.7) (2019-10-25)
+
+
+
+# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
+
+
+
+# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
+
+
+
+# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
+
+
+### Bug Fixes
+
+* publish templates with vsg ([f8df33f](https://github.com/vue-styleguidist/vue-styleguidist/commit/f8df33f))
+
+
+
+# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
+
+
+
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* passing a webpackConfig should prioitize ([683f3dc](https://github.com/vue-styleguidist/vue-styleguidist/commit/683f3dc))
+* split compiler & utils - efficient code split ([9ef9d06](https://github.com/vue-styleguidist/vue-styleguidist/commit/9ef9d06))
+* **docgen:** make docgen output arrays only ([d456c6c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d456c6c))
+
+
+### Code Refactoring
+
+* **docgen:** make function docgen.parse async ([e17680b](https://github.com/vue-styleguidist/vue-styleguidist/commit/e17680b))
+
+
+### Features
+
+* change defaults for codeSplit & simpleEditor ([810bf1c](https://github.com/vue-styleguidist/vue-styleguidist/commit/810bf1c))
+
+
+### BREAKING CHANGES
+
+* **docgen:** props, events, methods and slots are now all arrays
+
+Co-authored-by: Sébastien D. <demsking@gmail.com>
+* **docgen:** docgen becomes async, so do all of the handlers
+* change defaults for `simpleEditor` mean that `editorConfig` will not work without `simpleEditor: false`
+* compiler now exports compiler function as default
+* isCodeVueSfc, styleScoper and adaptCreateElement
+ are now their own package
+
+
+
+## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
+
+
+
+
+
 # [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
 
 **Note:** Version bump only for package vue-styleguidist
