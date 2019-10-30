@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.26.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v3.26.1) (2019-10-30)
+
+
+### Bug Fixes
+
+* move the build files to the right folder ([3b5aea1](https://github.com/vue-styleguidist/vue-styleguidist/commit/3b5aea1)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
+
+
+
+
+
 # [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
