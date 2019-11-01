@@ -1,7 +1,8 @@
 const styleguidist = require('vue-styleguidist')
 const merge = require('webpack-merge')
+const configSchema = require('vue-styleguidist/scripts/schemas/config')
 
-module.exports = api => {
+module.exports = (api, options) => {
 	api.configureWebpack(() => ({
 		// make sure that the docs blocks
 		// are ignored during normal serve & build
@@ -25,7 +26,7 @@ module.exports = api => {
 			}
 		},
 		args => {
-			getStyleguidist(args, api).binutils.build()
+			getStyleguidist(args, api, options).binutils.build()
 		}
 	)
 
@@ -40,7 +41,7 @@ module.exports = api => {
 		},
 
 		args => {
-			const server = getStyleguidist(args, api).binutils.server(args.open).app
+			const server = getStyleguidist(args, api, options).binutils.server(args.open).app
 
 			// in order to avoid ghosted threads at the end of tests
 			;['SIGINT', 'SIGTERM'].forEach(signal => {
@@ -68,12 +69,15 @@ module.exports = api => {
 	)
 }
 
-function getStyleguidist(args, api) {
+function getStyleguidist(args, api, options) {
 	const conf = api.resolve(args.config || './styleguide.config.js')
-	const userWebpackConfig = conf && conf.length ? require(conf).webpackConfig : {}
+	const sgConf = conf && conf.length ? require(conf) : {}
+	const userWebpackConfig = sgConf.webpackConfig
+	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
+	const cliWebpackConfig = getConfig(api)
 	return styleguidist(
 		conf,
-		config => (config.webpackConfig = merge(getConfig(api), userWebpackConfig))
+		config => (config.webpackConfig = merge(cliWebpackConfig, userWebpackConfig))
 	)
 }
 
