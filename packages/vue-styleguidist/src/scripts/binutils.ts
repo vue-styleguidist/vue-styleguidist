@@ -50,9 +50,13 @@ const getProgressPlugin = (msg: string) => {
 }
 
 export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compiler {
-	const { plugin, bar } = getProgressPlugin('Building style guide')
-	config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
-	bar.start(1, 0)
+	let bar: ProgressBar|undefined;
+	if((config.webpackConfig.plugins || []).find(p => p.constructor === ProgressPlugin)){
+		const { plugin, bar:localBar } = getProgressPlugin('Building style guide')
+		bar = localBar;
+		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
+		bar.start(1, 0)
+	}
 
 	const compiler = build(config, (err: Error) => {
 		if (err) {
@@ -71,9 +75,11 @@ export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compile
 	compiler.hooks.done.tap('vsrDoneBuilding', function(stats: Stats) {
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
-		bar.stop()
-		moveCursor(process.stdout, 0, -1)
-		clearLine(process.stdout, 0)
+		if(bar){
+			bar.stop()
+			moveCursor(process.stdout, 0, -1)
+			clearLine(process.stdout, 0)
+		}
 		if (hasErrors) {
 			process.exit(1)
 		}
@@ -88,9 +94,12 @@ export function commandServer(
 	config: ProcessedStyleGuidistConfigObject,
 	open?: boolean
 ): ServerInfo {
-	const { plugin, bar } = getProgressPlugin('Compiling')
-	config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
-
+	let bar: ProgressBar|undefined;
+	if((config.webpackConfig.plugins || []).find(p => p.constructor === ProgressPlugin)){
+		const { plugin, bar:localBar  } = getProgressPlugin('Compiling')
+		bar = localBar;
+		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
+	}
 	const { app, compiler } = server(config, (err: Error) => {
 		if (err) {
 			console.error(err)
@@ -113,7 +122,9 @@ export function commandServer(
 				)
 			}
 
-			bar.start(1, 0)
+			if(bar){
+				bar.start(1, 0)
+			}
 
 			if (open) {
 				openBrowser(urls.localUrlForBrowser)
@@ -125,9 +136,11 @@ export function commandServer(
 
 	// Custom error reporting
 	compiler.hooks.done.tap('vsgErrorDone', function(stats: Stats) {
-		bar.stop()
-		moveCursor(process.stdout, 0, -1)
-		clearLine(process.stdout, 0)
+		if(bar){
+			bar.stop()
+			moveCursor(process.stdout, 0, -1)
+			clearLine(process.stdout, 0)
+		}
 
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 
