@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.12](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2019-11-06)
+
+
+### Features
+
+* add plugin for docgen cli ([a545aa5](https://github.com/vue-styleguidist/vue-styleguidist/commit/a545aa5)), closes [#614](https://github.com/vue-styleguidist/vue-styleguidist/issues/614)
+
+
+
+
+
 # [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
 ## [3.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.1...v3.26.2) (2019-10-30)
 
