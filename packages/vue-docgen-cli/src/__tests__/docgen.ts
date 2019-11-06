@@ -1,6 +1,6 @@
 import { FSWatcher } from 'chokidar'
-import extractConfig, { DocgenCLIConfig } from '../extractConfig'
-import docgen from '../docgen'
+import extractConfig from '../extractConfig'
+import docgen, { DocgenCLIConfig } from '../docgen'
 
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 const DOC_MAP = {
@@ -44,7 +44,7 @@ describe('docgen', () => {
 	let conf: DocgenCLIConfig
 
 	beforeEach(() => {
-		conf = extractConfig([], CWD)
+		conf = extractConfig(CWD)
 		conf.components = '**/*.vue'
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
 	})

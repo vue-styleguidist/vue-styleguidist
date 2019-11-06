@@ -13,13 +13,13 @@ describe('tests button functional', () => {
 
 	it('should extract props from template if functional', () => {
 		expect(docButton.props).toContainEqual(
-			jasmine.objectContaining({ name: 'error', type: { name: 'boolean' } })
+			expect.objectContaining({ name: 'error', type: { name: 'boolean' } })
 		)
 		expect(docButton.props).toContainEqual(
-			jasmine.objectContaining({ name: 'v-model', type: { name: 'string' } })
+			expect.objectContaining({ name: 'v-model', type: { name: 'string' } })
 		)
 		expect(docButton.props).toContainEqual(
-			jasmine.objectContaining({ name: 'label', type: { name: 'string' } })
+			expect.objectContaining({ name: 'label', type: { name: 'string' } })
 		)
 	})
 

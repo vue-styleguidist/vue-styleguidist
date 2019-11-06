@@ -1,7 +1,5 @@
-import minimist from 'minimist'
 import * as path from 'path'
 import * as fs from 'fs'
-import { DocGenOptions } from 'vue-docgen-api'
 import {
 	component,
 	events,
@@ -9,33 +7,16 @@ import {
 	props,
 	slots,
 	defaultExample,
-	functionalTag,
-	Templates
+	functionalTag
 } from './compileTemplates'
+import { DocgenCLIConfig } from './config'
 
-export interface DocgenCLIConfig {
-	defaultExamples?: boolean
-	outDir: string
-	outFile?: string
-	components?: string | string[]
-	componentsRoot: string
-	apiOptions?: DocGenOptions
-	getDocFileName(componentPath: string): string
-	getDestFile(file: string, config: DocgenCLIConfig): string
-	watch: boolean
-	templates: Templates
-	cwd: string
-	pages?: DocgenCLIConfig[]
-}
-
-export default (processArgv: string[], processCwd: string): DocgenCLIConfig => {
-	const { _: pathArray, configFile: configFileFromCmd, watch, cwd: cwdFromCommand } = minimist(
-		processArgv.slice(2),
-		{
-			alias: { c: 'configFile', w: 'watch' }
-		}
-	)
-	const cwd = cwdFromCommand || processCwd
+export default (
+	cwd: string,
+	watch: boolean = false,
+	configFileFromCmd?: string,
+	pathArray: string[] = []
+): DocgenCLIConfig => {
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
 		: path.join(cwd, 'docgen.config.js')

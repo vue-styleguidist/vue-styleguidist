@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { writeDownMdFile, compileMarkdown, getDocMap, getWatcher } from '../utils'
-import extractConfig, { DocgenCLIConfig } from '../extractConfig'
+import extractConfig from '../extractConfig'
+import { DocgenCLIConfig } from '../config'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
@@ -80,7 +81,7 @@ describe('compileMarkdown', () => {
 	let conf: DocgenCLIConfig
 
 	beforeEach(() => {
-		conf = extractConfig([], CWD)
+		conf = extractConfig(CWD)
 		conf.getDocFileName = jest.fn(() => FAKE_COMPONENT_FULL_PATH)
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
 	})

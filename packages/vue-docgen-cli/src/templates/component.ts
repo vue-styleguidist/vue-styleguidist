@@ -1,5 +1,5 @@
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
-import { RenderedUsage, DocgenCLIConfig } from '../compileTemplates'
+import { RenderedUsage, DocgenCLIConfig } from '../config'
 
 export default (
 	renderedUsage: RenderedUsage,

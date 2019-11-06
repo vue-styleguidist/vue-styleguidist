@@ -1,11 +1,4 @@
-import {
-	parse,
-	PropDescriptor,
-	SlotDescriptor,
-	MethodDescriptor,
-	EventDescriptor,
-	ComponentDoc
-} from 'vue-docgen-api'
+import { parse } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import slots from './templates/slots'
@@ -13,35 +6,11 @@ import props from './templates/props'
 import component from './templates/component'
 import defaultExample from './templates/defaultExample'
 import functionalTag from './templates/functionalTag'
-import { DocgenCLIConfig } from './extractConfig'
+import { DocgenCLIConfig } from './config'
 
 export { mdclean } from './templates/utils'
-export { DocgenCLIConfig }
 export { events, methods, slots, props, component, defaultExample, functionalTag }
 export { default as docgen } from './docgen'
-
-export interface Templates {
-	props(props: PropDescriptor[]): string
-	slots(slots: SlotDescriptor[]): string
-	methods(methods: MethodDescriptor[]): string
-	events(events: EventDescriptor[]): string
-	component(
-		usage: RenderedUsage,
-		doc: ComponentDoc,
-		config: DocgenCLIConfig,
-		componentRelativePath: string
-	): string
-	defaultExample(doc: ComponentDoc): string
-	functionalTag: string
-}
-
-export interface RenderedUsage {
-	props: string
-	slots: string
-	methods: string
-	events: string
-	functionalTag: string
-}
 
 export default async (
 	absolutePath: string,

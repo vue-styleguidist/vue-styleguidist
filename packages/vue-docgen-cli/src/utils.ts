@@ -4,7 +4,8 @@ import { promisify } from 'util'
 import chokidar, { FSWatcher } from 'chokidar'
 import mkdirpNative from 'mkdirp'
 import prettier from 'prettier'
-import compileTemplates, { DocgenCLIConfig } from './compileTemplates'
+import compileTemplates from './compileTemplates'
+import { DocgenCLIConfig } from './config'
 
 const readFile = promisify(fs.readFile)
 const mkdirp = promisify(mkdirpNative)
