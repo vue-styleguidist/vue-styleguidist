@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.13](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.12...v4.0.0-beta.13) (2019-11-06)
+
+
+### Bug Fixes
+
+* avoid double progressBar ([e39878e](https://github.com/vue-styleguidist/vue-styleguidist/commit/e39878e))
+
+
+
+
+
 # [4.0.0-beta.12](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2019-11-06)
 
 **Note:** Version bump only for package vue-styleguidist
