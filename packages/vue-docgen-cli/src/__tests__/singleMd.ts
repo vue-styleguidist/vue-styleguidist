@@ -28,7 +28,7 @@ describe('compile', () => {
 	}
 
 	beforeEach(() => {
-		conf = extractConfig([], CWD) as singleMd.DocgenCLIConfigWithOutFile
+		conf = extractConfig(CWD) as singleMd.DocgenCLIConfigWithOutFile
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)

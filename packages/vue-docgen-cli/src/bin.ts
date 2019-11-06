@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
-import extractConfig, { DocgenCLIConfig } from './extractConfig'
+import minimist from 'minimist'
+import extractConfig from './extractConfig'
 import docgen from './docgen'
+import { DocgenCLIConfig } from './config'
 
 /**
  * run the `config` recursively on pages
@@ -21,5 +23,9 @@ function run(config: DocgenCLIConfig) {
 	}
 }
 
-const conf = extractConfig(process.argv, process.cwd())
+const { _: pathArray, configFile, watch, cwd } = minimist(process.argv.slice(2), {
+	alias: { c: 'configFile', w: 'watch' }
+})
+
+const conf = extractConfig(cwd || process.cwd(), watch, configFile, pathArray)
 run(conf)
