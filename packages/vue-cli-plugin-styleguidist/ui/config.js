@@ -90,7 +90,7 @@ function onWrite({ api, prompts }) {
 	api.setData('styleguide', styleguideData)
 }
 
-const config = {
+module.exports = {
 	id: CONFIG,
 	name: 'Vue Styleguidist configuration',
 	description: 'Create your style guide',
@@ -102,8 +102,4 @@ const config = {
 	},
 	onRead,
 	onWrite
-}
-
-module.exports = {
-	config
 }

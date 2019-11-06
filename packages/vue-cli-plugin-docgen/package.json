@@ -1,7 +1,7 @@
 {
-  "name": "vue-cli-plugin-styleguidist",
+  "name": "vue-cli-plugin-docgen",
   "version": "4.0.0-beta.10",
-  "description": "vue cli 3.0 plugin for vue-styleguidist",
+  "description": "vue cli plugin for vue-docgen-cli",
   "homepage": "https://vue-styleguidist.github.io",
   "main": "index.js",
   "repository": {
@@ -15,8 +15,9 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "typescript": "^3.6.0",
     "null-loader": "^0.1.1",
-    "vue-styleguidist": "^4.0.0-beta.10",
+    "vue-docgen-cli": "^4.0.0-beta.10",
     "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
