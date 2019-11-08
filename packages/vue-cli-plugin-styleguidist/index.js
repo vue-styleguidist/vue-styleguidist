@@ -1,6 +1,8 @@
-const { default: styleguidist } = require('vue-styleguidist')
+const vsg = require('vue-styleguidist')
 const merge = require('webpack-merge')
 const configSchema = require('vue-styleguidist/lib/scripts/schemas/config')
+
+const styleguidist = vsg.default || vsg
 
 module.exports = (api, options) => {
 	api.configureWebpack(() => ({
