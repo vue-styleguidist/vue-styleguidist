@@ -1,0 +1,11 @@
+# This file contains all examples built in the netlify build process
+# Netlify build is limited to 15 min. It cannot build it all.
+basic
+customised
+jsx-examples
+
+docgen
+
+vuecli3-class-pug-ts
+vuecli3-custom
+vuecli3-vuetify-ie
