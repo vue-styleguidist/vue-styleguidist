@@ -25,7 +25,7 @@ if(pkg.description){ %>
 <%= pkg.description %><% 
 } %>
 
-- <a href="<%= process.env.DEPLOY_URL || 'https://vue-styleguidist.github.com' %>/<%= exampleName %>/'">Live Demo</a>
+- <a href="<%= process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.com' %>/<%= exampleName %>/">Live Demo</a>
 - [GitHub](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/examples/<%= exampleName %>/)<% if(pkg.keywords){ %>
 
 Keywords: <% pkg.keywords.forEach(function(word){ %><%= word %>, <% })} %> 
