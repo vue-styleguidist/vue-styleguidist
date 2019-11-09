@@ -35,6 +35,15 @@ module.exports = {
                 }
             }
         },
+        ComponentsList: {
+            list: {
+                '& & a': {
+                    fontSize: '13px';
+                    fontWeight: 'normal',
+                    color: '#258aef'
+                }
+            }
+        },
         TableOfContents:{
             input: {
                 padding: '8px 16px 9px',
@@ -65,6 +74,19 @@ module.exports = {
                     fontSize: '48px',
                     lineHeight: '1.3',
                 }
+            },
+            wrapper: {
+                "& > h1": {
+                    width: 'calc(100% + 64px)',
+                    flexGrow: 2,
+                    padding: '48px 30px',
+                    fontFamily: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
+                    margin: '-16px -30px 24px',
+                    background: '#e9f3fd'
+                }
+            },
+            toolbar: {
+                display: "none"
             }
         },
         Editor:{
