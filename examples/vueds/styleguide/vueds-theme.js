@@ -1,4 +1,37 @@
+const theme = {
+    maxWidth: 'auto',
+    color: {
+        sidebarBackground: '#02172d',
+        border: 'rgba(255, 255, 255, 0.1)',
+        link: '#258aef',
+        linkHover: '#1070d1',
+        /**
+         * prism colors configuration
+         */
+        codeComment: '#6d6d6d',
+        codePunctuation: '#54a3f2',
+        codeProperty: '#54a3f2',
+        codeString: '#ffcc4d',
+        codeInserted: '#EEEEEE',
+        codeOperator: '#DDDDDD',
+        codeKeyword: '#afe74c',
+        codeFunction: '#54a3f2',
+        codeVariable: '#AAAAAA',
+        codeBase: '#FFFFFF',
+        codeBackground: '#041d37'
+    },
+    sidebarWidth: 240,
+    fontFamily: {
+        base: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
+        monospace: ['Consolas', "'Liberation Mono'", 'Menlo', 'monospace']
+    },
+    fontSize: {
+        h4: '18px'
+    }
+}
+
 module.exports = {
+    theme,
     styles:{
         StyleGuide: {
             logo: {
@@ -31,16 +64,24 @@ module.exports = {
             link: {
                 '&, &:link, &:visited': {
                     fontWeight: 600,
-                    color: '#258aef'
+                    color: theme.color.link
+                },
+                '&:hover': {
+                    color: theme.color.linkHover
                 }
             }
         },
         ComponentsList: {
             list: {
                 '& & a': {
-                    fontSize: '13px';
+                    fontSize: '13px',
                     fontWeight: 'normal',
-                    color: '#258aef',
+                    color: theme.color.link,
+                    cursor: 'pointer'
+                },
+                '& & a:hover': {
+                    color: theme.color.linkHover,
+                    fontSize: '13px',
                     cursor: 'pointer'
                 }
             }
@@ -113,36 +154,5 @@ module.exports = {
                 }
             }
         }
-    },
-    theme: {
-		maxWidth: 'auto',
-		color: {
-			sidebarBackground: '#02172d',
-			border: 'rgba(255, 255, 255, 0.1)',
-			link: '#258aef',
-			linkHover: '#1070d1',
-			/**
-			 * prism colors configuration
-			 */
-			codeComment: '#6d6d6d',
-			codePunctuation: '#54a3f2',
-			codeProperty: '#54a3f2',
-			codeString: '#ffcc4d',
-			codeInserted: '#EEEEEE',
-			codeOperator: '#DDDDDD',
-			codeKeyword: '#afe74c',
-			codeFunction: '#54a3f2',
-			codeVariable: '#AAAAAA',
-			codeBase: '#FFFFFF',
-			codeBackground: '#041d37'
-		},
-		sidebarWidth: 240,
-		fontFamily: {
-			base: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
-			monospace: ['Consolas', "'Liberation Mono'", 'Menlo', 'monospace']
-		},
-		fontSize: {
-			h4: '18px'
-		}
-	}
+    }
 }
