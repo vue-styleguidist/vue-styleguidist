@@ -40,7 +40,8 @@ module.exports = {
                 '& & a': {
                     fontSize: '13px';
                     fontWeight: 'normal',
-                    color: '#258aef'
+                    color: '#258aef',
+                    cursor: 'pointer'
                 }
             }
         },
