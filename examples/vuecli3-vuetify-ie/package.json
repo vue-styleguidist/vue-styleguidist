@@ -22,9 +22,9 @@
     "vuetify": "^2.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.10.0",
-    "@vue/cli-plugin-eslint": "^3.10.0",
-    "@vue/cli-service": "^3.10.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-service": "^4.0.5",
     "@babel/preset-env": "^7.4.4",
     "babel-polyfill": "^6.26.0",
     "sass": "^1.17.4",
