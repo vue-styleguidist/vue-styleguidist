@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-jsx",
+	"version": "0.0.0-dev",
   "description": "Even components using JSX templates are documented",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",

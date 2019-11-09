@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-vuecli3-custom",
+	"version": "0.0.0-dev",
   "description": "If you want to customize the styleguide and use the vue cli plugin change a little bit your babel config. This way your styleguide compoents are compiled with react jsx engine instead of vue",
   "private": true,
   "keywords": [

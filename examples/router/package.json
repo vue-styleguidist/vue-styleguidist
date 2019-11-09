@@ -1,5 +1,6 @@
 {
 	"name": "vue-styleguidist-example-router",
+	"version": "0.0.0-dev",
 	"description": "Here we experiment how to mock the router in your showcases",
 	"keywords": [
 		"routing",

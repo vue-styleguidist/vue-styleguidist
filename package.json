@@ -1,7 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -35,7 +36,7 @@
     "predocs": "node ./docs/.vuepress/preprocess.js",
     "docs": "vuepress dev docs",
     "docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
-    "postinstall": "yarn compile && cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
+    "postinstall": "yarn compile"
   },
   "license": "MIT",
   "engines": {
@@ -79,7 +80,6 @@
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "cheerio": "^1.0.0-rc.2",
     "concurrently": "^4.1.1",
-    "core-js": "^3.4.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "danger": "^7.0.17",

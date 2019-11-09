@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-vueds",
+	"version": "0.0.0-dev",
   "description": "Example of vue-styleguidist tested on IE11, please have a look at the webpack config of babel",
   "version": "3.0.5", 
   "keywords": [

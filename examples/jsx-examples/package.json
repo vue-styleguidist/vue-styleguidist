@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-jsx-examples",
+	"version": "0.0.0-dev",
   "description": "Examples can contain jsx too",
   "keywords": [
 		"jsx",

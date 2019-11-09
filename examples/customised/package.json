@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-customised",
+	"version": "0.0.0-dev",
   "description": "The general interface of the output styleguide can be completely changed. Style and assets.",
   "keywords": [
     "styled", 
