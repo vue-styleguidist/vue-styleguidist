@@ -14,37 +14,6 @@ module.exports = {
 	 * Enabling the following option splits sections into separate views.
 	 */
 	pagePerSection: true,
-	theme: {
-		maxWidth: 'auto',
-		color: {
-			sidebarBackground: '#02172d',
-			border: 'rgba(255, 255, 255, 0.1)',
-			link: '#258aef',
-			linkHover: '#1070d1',
-			/**
-			 * prism colors configuration
-			 */
-			codeComment: '#6d6d6d',
-			codePunctuation: '#54a3f2',
-			codeProperty: '#54a3f2',
-			codeString: '#ffcc4d',
-			codeInserted: '#EEEEEE',
-			codeOperator: '#DDDDDD',
-			codeKeyword: '#afe74c',
-			codeFunction: '#54a3f2',
-			codeVariable: '#AAAAAA',
-			codeBase: '#FFFFFF',
-			codeBackground: '#041d37'
-		},
-		sidebarWidth: 240,
-		fontFamily: {
-			base: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
-			monospace: ['Consolas', "'Liberation Mono'", 'Menlo', 'monospace']
-		},
-		fontSize: {
-			h4: '18px'
-		}
-	},
 	simpleEditor: true,
 	template: {
 		title: 'Example — Vue Design System',
@@ -67,7 +36,10 @@ module.exports = {
 	 * remove the component pathline
 	 */
 	getComponentPathLine: () => '',
-	styles: require('./styleguide/styles'),
+	/**
+	 * load the vueds color scheme
+	 */
+	...require('./styleguide/vueds-theme'),
 	webpackConfig: {
 		module: {
 			rules: [
