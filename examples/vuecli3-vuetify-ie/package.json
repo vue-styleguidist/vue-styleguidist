@@ -28,7 +28,7 @@
     "@babel/preset-env": "^7.4.4",
     "babel-polyfill": "^6.26.0",
     "sass": "^1.17.4",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.0",
     "vue-cli-plugin-styleguidist": "^3.20.0",
     "vue-cli-plugin-vuetify": "^0.6.1",
     "vue-template-compiler": "^2.6.10",
