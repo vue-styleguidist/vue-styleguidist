@@ -23,18 +23,9 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
 export default function getSections(
 	sections: Section[],
 	config: ProcessedStyleGuidistConfigObject,
-	parentDepth: number
+	parentDepth?: number
 ): ProcessedSection[] {
 	return sections.map(section => processSection(section, config, parentDepth))
-}
-
-const getSectionComponents = (section: Section, config: ProcessedStyleGuidistConfigObject) => {
-	let ignore = config.ignore ? castArray(config.ignore) : []
-	if (section.ignore) {
-		ignore = ignore.concat(castArray(section.ignore))
-	}
-
-	return getComponents(getComponentFiles(section.components, config.configDir, ignore), config)
 }
 
 /**
@@ -47,7 +38,7 @@ const getSectionComponents = (section: Section, config: ProcessedStyleGuidistCon
 export function processSection(
 	section: Section,
 	config: ProcessedStyleGuidistConfigObject,
-	parentDepth: number
+	parentDepth?: number
 ): ProcessedSection {
 	const contentRelativePath = section.content
 
@@ -83,4 +74,13 @@ export function processSection(
 		content,
 		external: section.external
 	}
+}
+
+const getSectionComponents = (section: Section, config: ProcessedStyleGuidistConfigObject) => {
+	let ignore = config.ignore ? castArray(config.ignore) : []
+	if (section.ignore) {
+		ignore = ignore.concat(castArray(section.ignore))
+	}
+
+	return getComponents(getComponentFiles(section.components, config.configDir, ignore), config)
 }
