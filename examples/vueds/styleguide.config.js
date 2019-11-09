@@ -1,12 +1,14 @@
 const path = require('path')
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	title: 'Vue Design System',
 	components: 'src/components/**/[A-Z]*.vue',
 	version: require('./package.json').version,
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	/**
 	 * Enabling the following option splits sections into separate views.
