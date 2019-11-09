@@ -74,6 +74,7 @@ export interface StyleGuidistConfigObject {
 }
 
 export interface ProcessedStyleGuidistConfigObject extends StyleGuidistConfigObject {
+	progressBar: boolean
 	getExampleFilename(file: string): string
 	getComponentPathLine(file: string): string
 	configDir: string
