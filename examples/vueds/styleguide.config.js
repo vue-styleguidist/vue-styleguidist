@@ -1,6 +1,4 @@
 const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const vueLoader = require('vue-loader')
 
 module.exports = {
 	title: 'Vue Design System',
@@ -40,37 +38,20 @@ module.exports = {
 	 * load the vueds color scheme
 	 */
 	...require('./styleguide/vueds-theme'),
-	webpackConfig: {
-		module: {
-			rules: [
-				{
-					test: /\.vue$/,
-					loader: 'vue-loader'
-				},
-				{
-					test: /\.js$/,
-					loader: 'babel-loader',
-					exclude: /(node_modules|packages)/
-				},
-				{
-					test: /\.css$/,
-					use: ['style-loader', 'css-loader']
-				},
-				{
-					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader']
-				}
-			]
-		},
-
-		plugins: [new vueLoader.VueLoaderPlugin()].concat(
-			process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
-		)
-	},
+	/**
+	 * import the webpack config from the project. It might be useful to add
+	 * a babel loader to get the jsx to work properly for custom components
+	 */
+	webpackConfig: require('./webpack.config'),
 	/**
 	 * We’re defining below JS and SCSS requires for the documentation.
 	 */
-	require: [path.join(__dirname, 'styleguide/loadfont.js')],
+	require: [
+		/**
+		 * load the custom font
+		 */
+		path.join(__dirname, 'styleguide/loadfont.js')
+	],
 	/**
 	 * Make sure sg opens with props and examples visible
 	 */
@@ -80,5 +61,19 @@ module.exports = {
 		ReactComponentRenderer: path.join(__dirname, 'styleguide/components/ReactComponent'),
 		PlaygroundRenderer: path.join(__dirname, 'styleguide/components/Playground')
 	},
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	sections: [
+		{
+			name: 'Getting Started',
+			content: './docs/getting-started.md',
+			sectionDepth: 1
+		},
+		{
+			name: 'Elements',
+			content: './docs/elements.md',
+			pagePerSection: true,
+			components: './src/components/**/[A-Z]*.vue',
+			sectionDepth: 2
+		}
+	]
 }
