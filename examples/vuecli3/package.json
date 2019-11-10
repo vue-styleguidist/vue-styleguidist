@@ -1,6 +1,6 @@
 {
   "name": "vue-styleguidist-example-vuecli3",
-	"version": "0.0.0-dev",
+  "version": "4.0.0-beta.14",
   "description": "When using vue cli 3, prefer using the plugin using `vue add styleguidist`",
   "private": true,
   "scripts": {

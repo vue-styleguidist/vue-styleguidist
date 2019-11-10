@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.14](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.13...v4.0.0-beta.14) (2019-11-10)
+
+
+### Bug Fixes
+
+* **plugin:** load styleguidist right ([d4c6f6d](https://github.com/vue-styleguidist/vue-styleguidist/commit/d4c6f6d))
+* section depth needs too be taken ([b663f1e](https://github.com/vue-styleguidist/vue-styleguidist/commit/b663f1e))
+* wrongly filtered and typed props array ([3495840](https://github.com/vue-styleguidist/vue-styleguidist/commit/3495840))
+
+
+### Features
+
+* add option to disable progress bar ([6ec4e9d](https://github.com/vue-styleguidist/vue-styleguidist/commit/6ec4e9d))
+
+
+
+
+
 # [4.0.0-beta.13](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.12...v4.0.0-beta.13) (2019-11-06)
 
 

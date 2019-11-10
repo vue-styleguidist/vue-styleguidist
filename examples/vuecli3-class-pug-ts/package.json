@@ -1,8 +1,13 @@
 {
   "name": "vuecli3-class-pug-ts",
-	"version": "0.0.0-dev",
+  "version": "4.0.0-beta.14",
   "description": "Here we showcase the wide variety of technologies vue-styleguidist supports",
-  "keywords": ["technologies", "typescript", "sass", "class-component"],
+  "keywords": [
+    "technologies",
+    "typescript",
+    "sass",
+    "class-component"
+  ],
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

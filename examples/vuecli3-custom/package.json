@@ -1,11 +1,11 @@
 {
   "name": "vue-styleguidist-example-vuecli3-custom",
-	"version": "0.0.0-dev",
+  "version": "4.0.0-beta.14",
   "description": "If you want to customize the styleguide and use the vue cli plugin change a little bit your babel config. This way your styleguide compoents are compiled with react jsx engine instead of vue",
   "private": true,
   "keywords": [
-    "styled", 
-    "feature rich", 
+    "styled",
+    "feature rich",
     "branding",
     "beautiful",
     "vuecli3",
@@ -48,7 +48,9 @@
     },
     "overrides": [
       {
-        "files": ["./styleguide/**/*.js"],
+        "files": [
+          "./styleguide/**/*.js"
+        ],
         "plugins": [
           "react"
         ],

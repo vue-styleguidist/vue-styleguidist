@@ -1,14 +1,14 @@
 {
   "name": "vue-styleguidist-example-jsx-examples",
-	"version": "0.0.0-dev",
+  "version": "4.0.0-beta.14",
   "description": "Examples can contain jsx too",
   "keywords": [
-		"jsx",
-		"buble",
-		"compiler",
-		"vue examples",
-		"functional"
-	],
+    "jsx",
+    "buble",
+    "compiler",
+    "vue examples",
+    "functional"
+  ],
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
