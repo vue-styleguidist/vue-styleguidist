@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-vuetify",
+	"version": "0.0.0-dev",
   "description": "No need to create your very own librry to show it off with styleguidist. Use all common libraries. If they are compatible with vue, they should be compatible with styleguidist.",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",

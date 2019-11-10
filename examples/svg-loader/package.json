@@ -1,5 +1,6 @@
 {
 	"name": "vue-styleguidist-example-svg-loader",
+	"version": "0.0.0-dev",
 	"description": "Here is an example of what can be done using an extenal loader. Observe that the loader added to the cli is automatically added to styleguidist.",
 	"private": true,
 	"scripts": {
@@ -13,9 +14,9 @@
 		"vue": "^2.5.16"
 	},
 	"devDependencies": {
-		"@vue/cli-plugin-babel": "^3.10.0",
-		"@vue/cli-plugin-eslint": "^3.10.0",
-		"@vue/cli-service": "^3.10.0",
+		"@vue/cli-plugin-babel": "^4.0.5",
+		"@vue/cli-plugin-eslint": "^4.0.5",
+		"@vue/cli-service": "^4.0.5",
 		"vue-cli-plugin-styleguidist": "^3.10.1",
 		"vue-template-compiler": "^2.5.16",
 		"vue-svg-loader": "^0.12.0"

@@ -218,6 +218,11 @@ export default {
 	printServerInstructions: {
 		type: 'function'
 	},
+	progressBar: {
+		message: 'Display a progress bar while building',
+		type: 'boolean',
+		default: true
+	},
 	propsParser: {
 		type: 'function'
 	},

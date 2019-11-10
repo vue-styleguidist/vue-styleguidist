@@ -44,7 +44,7 @@ declare module 'react-styleguidist/lib/loaders/utils/removeDoclets' {
 declare module 'react-styleguidist/lib/loaders/utils/sortProps' {
 	import { PropDescriptor } from 'vue-docgen-api'
 
-	function sortProps(props: PropDescriptor[]): { [key: string]: PropDescriptor }
+	function sortProps(props: PropDescriptor[]): PropDescriptor[]
 	export = sortProps
 }
 

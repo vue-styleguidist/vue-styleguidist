@@ -2,12 +2,14 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const vueLoader = require('vue-loader')
 const path = require('path')
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	title: 'Vue Styleguidist functional',
 	components: 'src/components/**/[A-Z]*.vue',
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	version: '1.1.1',
 	webpackConfig: {

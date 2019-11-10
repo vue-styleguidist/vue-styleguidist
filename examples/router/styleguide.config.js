@@ -1,11 +1,13 @@
 const vueLoader = require('vue-loader')
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	require: ['./router-mock.js'],
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	webpackConfig: {
 		module: {

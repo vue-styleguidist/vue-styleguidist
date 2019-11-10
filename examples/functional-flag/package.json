@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-functional-flag",
+	"version": "0.0.0-dev",
   "description": "Example of vue-styleguidist with functional tag",
   "keywords": [
     "functional", 

@@ -1,5 +1,6 @@
 {
     "name": "vue-styleguidist-example-docgen",
+	"version": "0.0.0-dev",
     "description": "Use vue-docgen-cli to integrate with vuepress sites",
     "keywords": [
       "vuepress",

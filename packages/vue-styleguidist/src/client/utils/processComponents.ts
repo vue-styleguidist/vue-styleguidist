@@ -10,7 +10,7 @@ import { Example } from '../../types/Example'
  */
 export default function processComponents(components: Component[]): Component[] {
 	return components.map(component => {
-		const newComponent = {
+		const newComponent: Component = {
 			...component,
 
 			// Add .name shortcuts for names instead of .props.displayName.
@@ -27,14 +27,16 @@ export default function processComponents(components: Component[]): Component[] 
 			}
 		}
 
-		newComponent.props.examples.forEach(ex => {
-			if (ex.type === 'code') {
-				if (ex.compiled !== undefined && typeof ex.content === 'string') {
-					const content = { raw: ex.content, compiled: ex.compiled }
-					ex.content = content
+		newComponent.props &&
+			Array.isArray(newComponent.props.examples) &&
+			newComponent.props.examples.forEach(ex => {
+				if (ex.type === 'code') {
+					if (ex.compiled !== undefined && typeof ex.content === 'string') {
+						const content = { raw: ex.content, compiled: ex.compiled }
+						ex.content = content
+					}
 				}
-			}
-		})
+			})
 
 		return newComponent
 	})

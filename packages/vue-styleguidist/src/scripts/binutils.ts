@@ -50,10 +50,13 @@ const getProgressPlugin = (msg: string) => {
 }
 
 export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compiler {
-	let bar: ProgressBar|undefined;
-	if((config.webpackConfig.plugins || []).find(p => p.constructor === ProgressPlugin)){
-		const { plugin, bar:localBar } = getProgressPlugin('Building style guide')
-		bar = localBar;
+	let bar: ProgressBar | undefined
+	if (
+		config.progressBar !== false &&
+		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
+	) {
+		const { plugin, bar: localBar } = getProgressPlugin('Building style guide')
+		bar = localBar
 		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
 		bar.start(1, 0)
 	}
@@ -75,7 +78,7 @@ export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compile
 	compiler.hooks.done.tap('vsrDoneBuilding', function(stats: Stats) {
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
-		if(bar){
+		if (bar) {
 			bar.stop()
 			moveCursor(process.stdout, 0, -1)
 			clearLine(process.stdout, 0)
@@ -94,10 +97,13 @@ export function commandServer(
 	config: ProcessedStyleGuidistConfigObject,
 	open?: boolean
 ): ServerInfo {
-	let bar: ProgressBar|undefined;
-	if((config.webpackConfig.plugins || []).find(p => p.constructor === ProgressPlugin)){
-		const { plugin, bar:localBar  } = getProgressPlugin('Compiling')
-		bar = localBar;
+	let bar: ProgressBar | undefined
+	if (
+		config.progressBar !== false &&
+		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
+	) {
+		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
+		bar = localBar
 		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
 	}
 	const { app, compiler } = server(config, (err: Error) => {
@@ -122,7 +128,7 @@ export function commandServer(
 				)
 			}
 
-			if(bar){
+			if (bar) {
 				bar.start(1, 0)
 			}
 
@@ -136,7 +142,7 @@ export function commandServer(
 
 	// Custom error reporting
 	compiler.hooks.done.tap('vsgErrorDone', function(stats: Stats) {
-		if(bar){
+		if (bar) {
 			bar.stop()
 			moveCursor(process.stdout, 0, -1)
 			clearLine(process.stdout, 0)

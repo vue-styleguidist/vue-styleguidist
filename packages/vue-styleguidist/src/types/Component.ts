@@ -11,7 +11,7 @@ import { Example } from './Example'
 export interface ComponentProps {
 	displayName: string
 	description?: string
-	props?: { [name: string]: PropDescriptor }
+	props?: PropDescriptor[]
 	methods?: MethodDescriptor[]
 	slots?: { [name: string]: SlotDescriptor }
 	events?: { [name: string]: EventDescriptor }
@@ -25,6 +25,7 @@ export interface ComponentProps {
 }
 
 export interface Component {
+	visibleName?: string
 	filepath?: string
 	slug?: string
 	pathLine?: string

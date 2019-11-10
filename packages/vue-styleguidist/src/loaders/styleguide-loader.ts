@@ -44,7 +44,7 @@ export function pitch(this: StyleguidistContext, source: string): string {
 	const config = this._styleguidist
 	if (!config.sections) return ''
 
-	let sections = getSections(config.sections, config, 0)
+	let sections = getSections(config.sections, config)
 	if (config.skipComponentsWithoutExample) {
 		sections = filterComponentsWithExample(sections)
 	}

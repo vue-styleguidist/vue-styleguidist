@@ -58,7 +58,7 @@ export async function vuedocLoader(
 		...docs,
 		events: makeObject(docs.events),
 		slots: makeObject(docs.slots),
-		props: makeObject(docs.props)
+		props: docs.props
 	}
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
@@ -80,9 +80,9 @@ export async function vuedocLoader(
 		}
 	}
 	if (docs.props) {
-		docs.props = docs.props.filter(prop => !prop.tags || prop.tags.ignore)
+		const filteredProps = docs.props.filter(prop => !prop.tags || !prop.tags.ignore)
 		const sortProps = config.sortProps || defaultSortProps
-		vsgDocs.props = docs.props ? sortProps(docs.props) : undefined
+		vsgDocs.props = filteredProps ? sortProps(filteredProps) : undefined
 	}
 
 	const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false

@@ -1,5 +1,6 @@
 {
   "name": "vue-styleguidist-example-with-sass-loader",
+	"version": "0.0.0-dev",
   "description": "In this example, we try loading colors in each vue sfc. Just a head's up, it does not work anymore...",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
