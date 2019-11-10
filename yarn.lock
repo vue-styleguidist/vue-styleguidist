@@ -4076,6 +4076,18 @@
     serve-handler "^6.0.1"
     strip-ansi "^5.2.0"
 
+"@vue/cli-test-utils@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@vue/cli-test-utils/-/cli-test-utils-4.0.5.tgz#4885ced49761dd252535d2edbb14857ead806b0e"
+  integrity sha512-nawUqDeCFmGUnYws9S8jZ9qdJSE0A8WGyRfFkwdG6DIT1OEZmedXD5fCRkPqkipqi2HCQatXyZZcgSRvtFsEUg==
+  dependencies:
+    execa "^1.0.0"
+    fs-extra "^7.0.1"
+    json-server "^0.14.0"
+    puppeteer "^1.11.0"
+    serve-handler "^6.1.2"
+    strip-ansi "^5.2.0"
+
 "@vue/cli-ui-addon-webpack@^3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@vue/cli-ui-addon-webpack/-/cli-ui-addon-webpack-3.10.0.tgz#6fe805e166512a0294c09fad34243dc6f405978b"
@@ -20555,6 +20567,20 @@ serve-handler@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/serve-handler/-/serve-handler-6.1.0.tgz#f1606dc6ff8f9029a1ee042c11dfe7903a5cb92e"
   integrity sha512-63N075Tn3PsFYcu0NVV7tb367UbiW3gnC+/50ohL4oqOhAG6bmbaWqiRcXQgbzqc0ALBjSAzg7VTfa0Qw4E3hA==
+  dependencies:
+    bytes "3.0.0"
+    content-disposition "0.5.2"
+    fast-url-parser "1.1.3"
+    mime-types "2.1.18"
+    minimatch "3.0.4"
+    path-is-inside "1.0.2"
+    path-to-regexp "2.2.1"
+    range-parser "1.2.0"
+
+serve-handler@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/serve-handler/-/serve-handler-6.1.2.tgz#f05b0421a313fff2d257838cba00cbcc512cd2b6"
+  integrity sha512-RFh49wX7zJmmOVDcIjiDSJnMH+ItQEvyuYLYuDBVoA/xmQSCuj+uRmk1cmBB5QQlI3qOiWKp6p4DUGY+Z5AB2A==
   dependencies:
     bytes "3.0.0"
     content-disposition "0.5.2"
