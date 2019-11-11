@@ -37,24 +37,24 @@ describe('tests button', () => {
 
 		it('should the component has authors', () => {
 			expect(docButton.tags && docButton.tags.author).toMatchInlineSnapshot(`
-						Array [
-						  Object {
-						    "description": "[Rafael](https://github.com/rafaesc92)",
-						    "title": "author",
-						  },
-						]
-				`)
+									Array [
+									  Object {
+									    "description": "[Rafael](https://github.com/rafaesc92)",
+									    "title": "author",
+									  },
+									]
+						`)
 		})
 
 		it('should the component has version', () => {
 			expect(docButton.tags && docButton.tags.version).toMatchInlineSnapshot(`
-						Array [
-						  Object {
-						    "description": "1.0.5",
-						    "title": "version",
-						  },
-						]
-				`)
+									Array [
+									  Object {
+									    "description": "1.0.5",
+									    "title": "version",
+									  },
+									]
+						`)
 		})
 	})
 
@@ -77,6 +77,14 @@ describe('tests button', () => {
 			expect(getTestDescriptor(docButton.props, 'size').description).toEqual(
 				'The size of the button'
 			)
+		})
+
+		it('should give the size prop 3 valid values', () => {
+			expect(getTestDescriptor(docButton.props, 'size').values).toEqual([
+				'small',
+				'medium',
+				'large'
+			])
 		})
 
 		it('should the component has color prop description equal The color for the button example', () => {
@@ -217,36 +225,36 @@ describe('tests button', () => {
 
 		it('should the component has event, it called success', () => {
 			expect(getTestDescriptor(docButton.events, 'success').properties).toMatchInlineSnapshot(`
-			Array [
-			  Object {
-			    "description": "example",
-			    "name": "demo",
-			    "type": Object {
-			      "names": Array [
-			        "object",
-			      ],
-			    },
-			  },
-			  Object {
-			    "description": "test called",
-			    "name": "called",
-			    "type": Object {
-			      "names": Array [
-			        "number",
-			      ],
-			    },
-			  },
-			  Object {
-			    "description": "Indicates whether the snowball is tightly packed.",
-			    "name": "isPacked",
-			    "type": Object {
-			      "names": Array [
-			        "boolean",
-			      ],
-			    },
-			  },
-			]
-		`)
+						Array [
+						  Object {
+						    "description": "example",
+						    "name": "demo",
+						    "type": Object {
+						      "names": Array [
+						        "object",
+						      ],
+						    },
+						  },
+						  Object {
+						    "description": "test called",
+						    "name": "called",
+						    "type": Object {
+						      "names": Array [
+						        "number",
+						      ],
+						    },
+						  },
+						  Object {
+						    "description": "Indicates whether the snowball is tightly packed.",
+						    "name": "isPacked",
+						    "type": Object {
+						      "names": Array [
+						        "boolean",
+						      ],
+						    },
+						  },
+						]
+				`)
 		})
 
 		it('should the description of success event is Success event.', () => {

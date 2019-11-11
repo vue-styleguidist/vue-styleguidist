@@ -114,6 +114,11 @@ Object {
       "type": Object {
         "name": "string",
       },
+      "values": Array [
+        "small",
+        "medium",
+        "large",
+      ],
     },
     Object {
       "description": "",

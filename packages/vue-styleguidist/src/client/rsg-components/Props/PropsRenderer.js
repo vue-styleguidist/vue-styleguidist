@@ -228,6 +228,12 @@ export function getRowKey(row) {
 	return row.name
 }
 
+function renderValues(prop) {
+	return prop.values
+		? prop.values.map(v => <Code key={v}>{v}</Code>).reduce((prev, curr) => [prev, ', ', curr])
+		: '-'
+}
+
 export const columns = [
 	{
 		caption: 'Prop name',
@@ -236,6 +242,10 @@ export const columns = [
 	{
 		caption: 'Type',
 		render: renderTypeColumn
+	},
+	{
+		caption: 'Values',
+		render: renderValues
 	},
 	{
 		caption: 'Default',
