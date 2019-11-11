@@ -23118,15 +23118,6 @@ vue-cli-plugin-styleguidist@*:
     vue-styleguidist "^3.25.0"
     webpack-merge "^4.2.1"
 
-vue-cli-plugin-styleguidist@^3.0.0, vue-cli-plugin-styleguidist@^3.10.1, vue-cli-plugin-styleguidist@^3.19.2, vue-cli-plugin-styleguidist@^3.20.0:
-  version "3.26.2"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-styleguidist/-/vue-cli-plugin-styleguidist-3.26.2.tgz#fc8be53125d93591e1e9ce09fc9b9e75817b4361"
-  integrity sha512-fjpF2Lu1BgzCDe5nFTIWM3dT/vWCE9YXEJPva/5G1zCbYR2fdZaAiRMFy0FCYut3+IrOYRKFPZb87QQk3VW0Qw==
-  dependencies:
-    null-loader "^0.1.1"
-    vue-styleguidist "^3.26.2"
-    webpack-merge "^4.2.1"
-
 vue-cli-plugin-vuetify@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-0.6.1.tgz#4fe0b7322a90a9c9f0aff2e18fd9249088b33080"
@@ -23176,7 +23167,7 @@ vue-docgen-api@^3.26.0:
     typescript "^3.2.2"
     vue-template-compiler "^2.0.0"
 
-vue-docgen-cli@^3.20.0, vue-docgen-cli@^3.20.4:
+vue-docgen-cli@^3.20.0:
   version "3.26.0"
   resolved "https://registry.yarnpkg.com/vue-docgen-cli/-/vue-docgen-cli-3.26.0.tgz#d1a9e6f2e3f787ec6d874ebe5c4062a655f7ed75"
   integrity sha512-93nEWRADZr+wURQM761gX56cdVlxlMrQWlDnAS7AKUO+YBINkxJ4b5zPVp94Vz+dNcr+jy7lBrsAutuP+9Pksw==
@@ -23336,61 +23327,6 @@ vue-style-loader@^4.1.0:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
-
-vue-styleguidist@^3.10.1, vue-styleguidist@^3.26.2:
-  version "3.26.2"
-  resolved "https://registry.yarnpkg.com/vue-styleguidist/-/vue-styleguidist-3.26.2.tgz#61fac0e1451a6d89d7d0689fe3f9a1fef552f0c0"
-  integrity sha512-nVkQfPxmg38naWDvwAo1DeNs9X1YCDNGReDJvGF8B+yka7kSQ3JvP9lGVvKgyOoH+0Q1Rez77cFoBJrpRpd+kg==
-  dependencies:
-    "@vxna/mini-html-webpack-template" "^0.1.7"
-    ast-types "^0.12.2"
-    classnames "^2.2.6"
-    clean-webpack-plugin "^0.1.19"
-    clipboard-copy "^3.0.0"
-    codemirror "^5.39.0"
-    common-dir "^2.0.2"
-    copy-webpack-plugin "^4.5.2"
-    css-loader "^2.1.1"
-    es6-object-assign "^1.1.0"
-    es6-promise "^4.2.6"
-    escodegen "^1.11.1"
-    findup "^0.1.5"
-    function.name-polyfill "^1.0.6"
-    github-slugger "^1.2.0"
-    glob "^7.1.2"
-    glogg "^1.0.1"
-    hash-sum "^1.0.2"
-    is-directory "^0.3.1"
-    javascript-stringify "^1.6.0"
-    kleur "^2.0.1"
-    leven "^2.1.0"
-    loader-utils "^1.1.0"
-    lodash "^4.17.15"
-    lru-cache "^4.1.3"
-    mini-html-webpack-plugin "^0.2.3"
-    minimist "^1.2.0"
-    ora "^2.1.0"
-    prismjs "^1.15.0"
-    prop-types "^15.6.2"
-    q-i "^2.0.1"
-    qss "^2.0.3"
-    react "^16.4.1"
-    react-codemirror2 "^5.1.0"
-    react-dev-utils "^7.0.3"
-    react-dom "^16.4.1"
-    react-group "^1.0.6"
-    react-icons "^3.7.0"
-    react-lifecycles-compat "^3.0.4"
-    react-simple-code-editor "^0.9.4"
-    react-styleguidist "^9.1.16"
-    rewrite-imports "^2.0.3"
-    style-loader "^0.21.0"
-    terser-webpack-plugin "^1.3.0"
-    to-ast "^1.0.0"
-    vue-docgen-api "^3.26.0"
-    vue-inbrowser-compiler "^3.23.0"
-    webpack-dev-server "^3.7.1"
-    webpack-merge "^4.0.0"
 
 vue-styleguidist@^3.25.0:
   version "3.25.0"

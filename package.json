@@ -61,6 +61,7 @@
     "@types/pug": "^2.0.4",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
+    "@vue/cli": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
