@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Group from 'react-group'
+import Styled from 'rsg-components/Styled'
 import Arguments from 'rsg-components/Arguments'
 import Argument from 'rsg-components/Argument'
 import Code from 'rsg-components/Code'
@@ -12,6 +13,7 @@ import Text from 'rsg-components/Text'
 import Para from 'rsg-components/Para'
 import Table from 'rsg-components/Table'
 import { unquote, getType, showSpaces } from './util'
+import styles from '../../utils/propStyles'
 
 function renderType(type) {
 	if (!type) {
@@ -80,90 +82,77 @@ function renderEnum(prop) {
 	)
 }
 
-function renderShape(props) {
-	const rows = []
-	for (const name in props) {
-		const prop = props[name]
-		const defaultValue = renderDefault(prop)
-		const description = prop.description
-		rows.push(
-			<div key={name}>
-				<Name>{name}</Name>
-				{': '}
-				<Type>{renderType(prop)}</Type>
-				{defaultValue && ' — '}
-				{defaultValue}
-				{description && ' — '}
-				{description && <Markdown text={description} inline />}
+const defaultValueBlacklist = ['null', 'undefined', "''", '""']
+
+function renderDefaultHoc(classes) {
+	return function renderDefault(prop) {
+		// Workaround for issue https://github.com/reactjs/react-docgen/issues/221
+		// If prop has defaultValue it can not be required
+		if (prop.defaultValue) {
+			if (prop.type) {
+				const propName = prop.type.name
+
+				if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
+					return (
+						<p className={classes.default}>
+							<Code>{prop.defaultValue.value}</Code>
+						</p>
+					)
+				} else if (propName === 'func' || propName === 'function') {
+					return (
+						<Text
+							size="small"
+							color="light"
+							underlined
+							title={showSpaces(unquote(prop.defaultValue.value))}
+						>
+							Function
+						</Text>
+					)
+				}
+			}
+
+			return (
+				<p className={classes.default}>
+					<Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>
+				</p>
+			)
+		}
+		return <p className={classes.default}>-</p>
+	}
+}
+
+function renderTypeBox(prop, classes) {
+	return (
+		<Type>
+			<pre>
+				{prop.flowType ? renderFlowType(getType(prop)) : renderType(getType(prop))}
+				{prop.required ? <span className={classes.required}> - required</span> : null}
+			</pre>
+		</Type>
+	)
+}
+
+function renderDescription(classes) {
+	return function renderDesc(prop) {
+		const { description, tags = {} } = prop
+		const extra = renderExtra(prop)
+		const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])]
+		const returnDocumentation = (tags.return && tags.return[0]) || (tags.returns && tags.returns[0])
+
+		return (
+			<div>
+				<div className={classes.descriptionWrapper}>
+					{description && <Markdown text={description} />}
+				</div>
+				{extra && <Para>{extra}</Para>}
+				<JsDoc {...tags} />
+				{args.length > 0 && <Arguments args={args} heading />}
+				{returnDocumentation && <Argument {...returnDocumentation} returns />}
+				<div className={classes.type}>{renderTypeBox(prop, classes)}</div>
 			</div>
 		)
 	}
-	return rows
-}
-
-const defaultValueBlacklist = ['null', 'undefined', "''", '""']
-
-function renderDefault(prop) {
-	// Workaround for issue https://github.com/reactjs/react-docgen/issues/221
-	// If prop has defaultValue it can not be required
-	if (prop.defaultValue) {
-		if (prop.type) {
-			const propName = prop.type.name
-
-			if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
-				return <Code>{prop.defaultValue.value}</Code>
-			} else if (propName === 'func' || propName === 'function') {
-				return (
-					<Text
-						size="small"
-						color="light"
-						underlined
-						title={showSpaces(unquote(prop.defaultValue.value))}
-					>
-						Function
-					</Text>
-				)
-			}
-		}
-
-		return <Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>
-	} else if (prop.required) {
-		return (
-			<Text size="small" color="light">
-				Required
-			</Text>
-		)
-	}
-	return ''
-}
-
-function renderDescription(prop) {
-	const { description, tags = {} } = prop
-	const extra = renderExtra(prop)
-	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])]
-	const returnDocumentation = (tags.return && tags.return[0]) || (tags.returns && tags.returns[0])
-
-	return (
-		<div>
-			{description && <Markdown text={description} />}
-			{extra && <Para>{extra}</Para>}
-			<JsDoc {...tags} />
-			{args.length > 0 && <Arguments args={args} heading />}
-			{returnDocumentation && <Argument {...returnDocumentation} returns />}
-		</div>
-	)
-}
-
-function renderRequired(prop) {
-	const required = prop.required
-	return React.createElement(
-		'div',
-		null,
-		required &&
-			React.createElement(Markdown, {
-				text: `${required}` || 'false'
-			})
-	)
 }
 
 function renderExtra(prop) {
@@ -176,18 +165,6 @@ function renderExtra(prop) {
 			return renderEnum(prop)
 		case 'union':
 			return renderUnion(prop)
-		case 'shape':
-			return renderShape(prop.type.value)
-		case 'arrayOf':
-			if (type.value.name === 'shape') {
-				return renderShape(prop.type.value.value)
-			}
-			return null
-		case 'objectOf':
-			if (type.value.name === 'shape') {
-				return renderShape(prop.type.value.value)
-			}
-			return null
 		default:
 			return null
 	}
@@ -217,54 +194,57 @@ function renderName(prop) {
 	return <Name deprecated={!!tags.deprecated}>{name}</Name>
 }
 
-function renderTypeColumn(prop) {
-	if (prop.flowType) {
-		return <Type>{renderFlowType(getType(prop))}</Type>
-	}
-	return <Type>{renderType(getType(prop))}</Type>
-}
-
 export function getRowKey(row) {
 	return row.name
 }
 
-function renderValues(prop) {
-	return prop.values
-		? prop.values.map(v => <Code key={v}>{v}</Code>).reduce((prev, curr) => [prev, ', ', curr])
-		: '-'
+function renderValuesHoc(classes) {
+	return function renderValues(prop) {
+		return (
+			<p className={classes.values}>
+				{prop.values
+					? prop.values
+							.map(v => <Code key={v}>{v}</Code>)
+							.reduce((prev, curr) => [prev, ', ', curr])
+					: '-'}
+			</p>
+		)
+	}
 }
 
-export const columns = [
+export const columns = (props, classes) => [
 	{
 		caption: 'Prop name',
-		render: renderName
-	},
-	{
-		caption: 'Type',
-		render: renderTypeColumn
-	},
-	{
-		caption: 'Values',
-		render: renderValues
-	},
-	{
-		caption: 'Default',
-		render: renderDefault
-	},
-	{
-		caption: 'Required',
-		render: renderRequired
+		render: renderName,
+		className: classes.name
 	},
 	{
 		caption: 'Description',
-		render: renderDescription
+		render: renderDescription(classes),
+		className: classes.description
+	},
+	...(props.some(p => p.values)
+		? [
+				{
+					caption: 'Values',
+					render: renderValuesHoc(classes)
+				}
+		  ]
+		: []),
+
+	{
+		caption: 'Default',
+		render: renderDefaultHoc(classes)
 	}
 ]
 
-export default function PropsRenderer({ props }) {
-	return <Table columns={columns} rows={props} getRowKey={getRowKey} />
+function PropsRenderer({ props, classes }) {
+	return <Table columns={columns(props, classes)} rows={props} getRowKey={getRowKey} />
 }
 
 PropsRenderer.propTypes = {
-	props: PropTypes.array.isRequired
+	props: PropTypes.array.isRequired,
+	classes: PropTypes.object.isRequired
 }
+
+export default Styled(styles)(PropsRenderer)

@@ -4,11 +4,9 @@ import Props from 'rsg-components/Props'
 import Methods from 'rsg-components/Methods'
 import Events from 'rsg-components/Events'
 import SlotsTable from 'rsg-components/SlotsTable'
-import pickBy from 'lodash/pickBy'
 
 export default function Usage({ props: { props, methods, events, slots } }) {
 	let slotsNode
-	slots = pickBy(slots, item => !!item.description)
 	if (slots && Object.keys(slots).length > 0) {
 		slotsNode = slots && <SlotsTable props={slots} />
 	}

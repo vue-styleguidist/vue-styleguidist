@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Group from 'react-group'
+import Styled from 'rsg-components/Styled'
 import Arguments from 'rsg-components/Arguments'
 import Code from 'rsg-components/Code'
 import JsDoc from 'rsg-components/JsDoc'
@@ -11,6 +12,7 @@ import Para from 'rsg-components/Para'
 import Table from 'rsg-components/Table'
 import map from 'lodash/map'
 import { unquote, showSpaces } from '../../utils/utils'
+import propStyles from '../../utils/propStyles'
 
 function renderType(type) {
 	if (!type) {
@@ -70,32 +72,45 @@ function renderShape(props) {
 	return rows
 }
 
-function renderDescription(prop) {
-	const { description, tags = {} } = prop
+function renderDescription(myClasses) {
+	return function renderDesc(prop) {
+		const { description, tags = {} } = prop
+
+		const extra = renderExtra(prop)
+
+		return (
+			<div>
+				<div className={myClasses.descriptionWrapper}>
+					{description && <Markdown text={description} />}
+				</div>
+				{extra && <Para>{extra}</Para>}
+				<JsDoc {...tags} />
+			</div>
+		)
+	}
+}
+
+function renderProperties(prop) {
 	let { properties } = prop
-	const extra = renderExtra(prop)
 	if (Array.isArray(properties)) {
 		properties = properties.reduce((total, current) => {
 			total.push({
 				name: current.name,
 				type: {
-					name: current.type.names[0]
+					name: renderType(
+						total.length || current.type.names[0] !== 'undefined' ? current.type : prop.type
+					)
 				},
-				description: current.description
+				description: current.description,
+
+				// make each arguments display on its own line
+				block: true
 			})
 			return total
 		}, [])
 	}
-	const args = [...(tags.arg || []), ...(tags.argument || []), ...(tags.param || [])]
-	return (
-		<div>
-			{description && <Markdown text={description} />}
-			{extra && <Para>{extra}</Para>}
-			<JsDoc {...tags} />
-			{args && args.length > 0 && <Arguments args={args} heading />}
-			{properties && properties.length > 0 && <Arguments args={properties} heading />}
-		</div>
-	)
+
+	return <>{properties && properties.length > 0 && <Arguments args={properties} />}</>
 }
 
 function renderExtra(prop) {
@@ -149,10 +164,6 @@ function renderName(prop) {
 	return <Name deprecated={!!tags.deprecated}>{name}</Name>
 }
 
-function renderTypeColumn(prop) {
-	return <Type>{renderType(prop.type)}</Type>
-}
-
 export function getRowKey(row) {
 	return row.name
 }
@@ -161,25 +172,32 @@ export function propsToArray(props) {
 	return map(props, (prop, name) => ({ ...prop, name }))
 }
 
-export const columns = [
+export const columns = (props, classes) => [
 	{
 		caption: 'Event name',
-		render: renderName
-	},
-	{
-		caption: 'Type',
-		render: renderTypeColumn
+		render: renderName,
+		className: classes.name
 	},
 	{
 		caption: 'Description',
-		render: renderDescription
+		render: renderDescription(classes),
+		className: classes.description
+	},
+	{
+		caption: 'Properties',
+		render: renderProperties
 	}
 ]
 
-export default function EventsRenderer({ props }) {
-	return <Table columns={columns} rows={propsToArray(props)} getRowKey={getRowKey} />
+function EventsRenderer({ props, classes }) {
+	return (
+		<Table columns={columns(props, classes)} rows={propsToArray(props)} getRowKey={getRowKey} />
+	)
 }
 
 EventsRenderer.propTypes = {
-	props: PropTypes.object.isRequired
+	props: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired
 }
+
+export default Styled(propStyles)(EventsRenderer)
