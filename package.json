@@ -1,8 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "packages/*",
-    "examples/*"
+    "packages/*"
   ],
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -36,12 +35,12 @@
     "predocs": "node ./docs/.vuepress/preprocess.js",
     "docs": "vuepress dev docs",
     "docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
-    "postinstall": "yarn compile"
+    "postinstall": "yarn compile && cd ./packages/vue-cli-plugin-styleguidist && yarn link && cd ../.. && yarn link vue-cli-plugin-styleguidist"
   },
   "license": "MIT",
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": ">=9",
+    "npm": ">=5"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -63,6 +62,8 @@
     "@typescript-eslint/parser": "^1.4.2",
     "@vue/cli": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vuepress/plugin-google-analytics": "^1.0.3",
@@ -133,7 +134,6 @@
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
     "vue-cli-plugin-pug": "^1.0.7",
-    "vue-cli-plugin-styleguidist": "*",
     "vue-cli-plugin-vuetify": "^0.6.1",
     "vue-i18n": "^8.7.0",
     "vue-loader": "^15.7.0",
