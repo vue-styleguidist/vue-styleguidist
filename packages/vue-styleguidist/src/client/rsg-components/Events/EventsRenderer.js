@@ -108,9 +108,17 @@ function renderProperties(prop) {
 			})
 			return total
 		}, [])
+	} else {
+		properties = [
+			{
+				type: {
+					name: renderType(prop.type)
+				}
+			}
+		]
 	}
 
-	return <>{properties && properties.length > 0 && <Arguments args={properties} />}</>
+	return properties && properties.length > 0 ? <Arguments args={properties} /> : null
 }
 
 function renderExtra(prop) {
