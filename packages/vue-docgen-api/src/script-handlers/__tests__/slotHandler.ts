@@ -299,15 +299,12 @@ export default {
 			if (def) {
 				await slotHandler(documentation, def)
 			}
-			expect(mockSlotDescriptor.bindings).toMatchInlineSnapshot(`
-			Array [
-			  Object {
-			    "description": undefined,
-			    "name": "menuItem",
-			    "title": "binding",
-			  },
-			]
-		`)
+			expect(mockSlotDescriptor.bindings).toMatchObject([
+				{
+					name: 'menuItem',
+					description: 'the menu item'
+				}
+			])
 			done()
 		})
 
@@ -319,7 +316,7 @@ export default {
 			<div> 
 			  {/** 
 				* @slot The header 
-				* @binding {object} menuItem the menu item
+				* @binding {object} item the menu item
 				*/}
 			  <slot item={menuItem} />
 			</div>)
@@ -330,7 +327,12 @@ export default {
 			if (def) {
 				await slotHandler(documentation, def)
 			}
-			expect(mockSlotDescriptor.bindings).toMatchInlineSnapshot(`undefined`)
+			expect(mockSlotDescriptor.bindings).toMatchObject([
+				{
+					name: 'item',
+					description: 'the menu item'
+				}
+			])
 			done()
 		})
 	})

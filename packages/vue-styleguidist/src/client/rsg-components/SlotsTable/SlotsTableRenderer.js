@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
 import Table from 'rsg-components/Table'
+import Arguments from 'rsg-components/Arguments'
 import map from 'lodash/map'
 import propStyles from '../../utils/propStyles'
 
@@ -25,7 +27,11 @@ export function propsToArray(props) {
 	return map(props, (prop, name) => ({ ...prop, name }))
 }
 
-export const columns = classes => [
+export function renderBindings({ bindings }) {
+	return <Arguments args={bindings.map(b => ({ block: true, ...b }))} />
+}
+
+export const columns = (slots, classes) => [
 	{
 		caption: 'Slot',
 		render: renderName,
@@ -35,11 +41,21 @@ export const columns = classes => [
 		caption: 'Description',
 		render: renderDescription,
 		className: classes.description
-	}
+	},
+	// only add the bindings column if there is any bindings
+	...(slots.some(s => s.bindings)
+		? [
+				{
+					caption: 'Bindings',
+					render: renderBindings
+				}
+		  ]
+		: [])
 ]
 
 function SlotsTableRenderer({ props: slots, classes }) {
-	return <Table columns={columns(classes)} rows={propsToArray(slots)} getRowKey={getRowKey} />
+	const slotsArray = propsToArray(slots)
+	return <Table columns={columns(slotsArray, classes)} rows={slotsArray} getRowKey={getRowKey} />
 }
 
 SlotsTableRenderer.propTypes = {
