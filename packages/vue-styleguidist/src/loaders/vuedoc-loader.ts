@@ -57,8 +57,7 @@ export async function vuedocLoader(
 	let vsgDocs: ComponentProps = {
 		...docs,
 		events: makeObject(docs.events),
-		slots: makeObject(docs.slots),
-		props: docs.props
+		slots: makeObject(docs.slots)
 	}
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
