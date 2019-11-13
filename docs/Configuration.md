@@ -199,7 +199,7 @@ function initDatepicker() {
 }
 ```
 
-## `jsxInExamples` [BETA]
+## `jsxInExamples`
 
 Type: `Boolean`, default: `false`
 
@@ -407,6 +407,14 @@ module.exports = {
   }
 }
 ```
+
+## `progressBar`
+
+Type: `Boolean`, default: true
+
+Should styleguidist show a progress bar using `webpack.ProgressPlugin` while building.
+
+> **Note:**: Builds on CI might be slower when this is active. You might want to make this parameter dependent on CI environement variables.
 
 ## `require`
 
