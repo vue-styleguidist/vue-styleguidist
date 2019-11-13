@@ -111,6 +111,7 @@ function renderProperties(prop) {
 	} else {
 		properties = [
 			{
+				name: '<anonymous>',
 				type: {
 					name: renderType(prop.type)
 				}
