@@ -202,6 +202,12 @@ Object {
   ],
   "slots": Array [
     Object {
+      "bindings": Array [
+        Object {
+          "name": "name",
+          "title": "binding",
+        },
+      ],
       "description": "Use this slot header",
       "name": "header",
     },

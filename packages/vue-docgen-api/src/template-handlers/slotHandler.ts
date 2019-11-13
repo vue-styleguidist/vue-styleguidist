@@ -69,10 +69,12 @@ export default function slotHandler(
 				bindingDescriptors = doclets.tags.filter(t => t.title === 'binding') as ParamTag[]
 			}
 		}
-		slotDescriptor.bindings = Object.keys(bindings).map(b => {
-			const bindingDesc = bindingDescriptors.filter(t => t.name === b)[0]
-			return bindingDesc || { name: b }
-		})
+		if (Object.keys(bindings).length) {
+			slotDescriptor.bindings = Object.keys(bindings).map(b => {
+				const bindingDesc = bindingDescriptors.filter(t => t.name === b)[0]
+				return bindingDesc || { name: b }
+			})
+		}
 	}
 }
 

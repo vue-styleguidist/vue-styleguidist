@@ -230,12 +230,10 @@ Object {
   ],
   "slots": Array [
     Object {
-      "bindings": Object {},
       "description": "Use this slot header",
       "name": "header",
     },
     Object {
-      "bindings": Object {},
       "description": "Use this slot footer",
       "name": "footer",
     },

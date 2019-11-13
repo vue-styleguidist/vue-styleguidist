@@ -82,7 +82,6 @@ Object {
   ],
   "slots": Array [
     Object {
-      "bindings": Object {},
       "description": "Use this slot default",
       "name": "default",
     },

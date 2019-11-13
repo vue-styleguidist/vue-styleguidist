@@ -43,7 +43,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 						doc.description = comment.description
 					}
 					const bindings = pathCall.node.arguments[0]
-					if (bt.isObjectExpression(bindings)) {
+					if (bt.isObjectExpression(bindings) && bindings.properties.length) {
 						doc.bindings = getBindings(bindings, comment ? comment.bindings : undefined)
 					}
 					return false
@@ -87,7 +87,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 						}
 					}
 					const bindings = nodeJSX.openingElement.attributes
-					if (bindings) {
+					if (bindings && bindings.length) {
 						doc.bindings = bindings.map((b: bt.JSXAttribute) =>
 							getBindingsFromJSX(b, comment ? comment.bindings : undefined)
 						)
@@ -191,14 +191,14 @@ function parseCommentNode(node: bt.BaseComment): SlotComment | undefined {
 function getBindings(node: bt.ObjectExpression, bindings: ParamTag[] | undefined): ParamTag[] {
 	return node.properties.map((prop: bt.ObjectProperty) => {
 		const name = prop.key.name
-		let description: string | boolean | undefined =
+		const description: string | boolean | undefined =
 			prop.leadingComments && prop.leadingComments.length
 				? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
 				: undefined
 		if (!description) {
 			const descbinding = bindings ? bindings.filter(b => b.name === name)[0] : undefined
 			if (descbinding) {
-				description = descbinding.description
+				return descbinding
 			}
 		}
 		return {
@@ -212,10 +212,11 @@ function getBindings(node: bt.ObjectExpression, bindings: ParamTag[] | undefined
 function getBindingsFromJSX(attr: bt.JSXAttribute, bindings: ParamTag[] | undefined): ParamTag {
 	const name = attr.name.name as string
 	const descbinding = bindings ? bindings.filter(b => b.name === name)[0] : undefined
-	const description = descbinding ? descbinding.description : undefined
+	if (descbinding) {
+		return descbinding
+	}
 	return {
 		title: 'binding',
-		name,
-		description
+		name
 	}
 }

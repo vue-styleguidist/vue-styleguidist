@@ -82,12 +82,10 @@ Object {
   ],
   "slots": Array [
     Object {
-      "bindings": Object {},
       "description": "Use this slot default",
       "name": "default",
     },
     Object {
-      "bindings": Object {},
       "description": "Use this slot for not button",
       "name": "empty",
     },
