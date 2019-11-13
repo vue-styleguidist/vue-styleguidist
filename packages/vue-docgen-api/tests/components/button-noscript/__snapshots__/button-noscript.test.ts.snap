@@ -5,6 +5,7 @@ Object {
   "description": "",
   "displayName": "MyButton",
   "events": undefined,
+  "exportName": undefined,
   "methods": undefined,
   "props": undefined,
   "slots": Array [

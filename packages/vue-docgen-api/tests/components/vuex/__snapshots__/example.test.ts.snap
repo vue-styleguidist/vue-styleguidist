@@ -5,6 +5,7 @@ Object {
   "description": "Partial mapping, object spread operator example",
   "displayName": "example",
   "events": undefined,
+  "exportName": "default",
   "methods": Array [
     Object {
       "description": "Sets the order",

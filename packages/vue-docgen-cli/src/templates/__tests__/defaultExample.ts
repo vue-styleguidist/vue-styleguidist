@@ -5,6 +5,7 @@ describe('defaultExample', () => {
 		expect(
 			defaultExample({
 				displayName: 'my-component',
+				exportName: 'default',
 				props: [
 					{
 						name: 'string',
@@ -71,6 +72,7 @@ describe('defaultExample', () => {
 		expect(
 			defaultExample({
 				displayName: 'my-component',
+				exportName: 'default',
 				slots: [{ name: 'default', description: '' }]
 			})
 		).toMatchInlineSnapshot(`
@@ -86,6 +88,7 @@ describe('defaultExample', () => {
 		expect(
 			defaultExample({
 				displayName: "it's my component",
+				exportName: 'default',
 				tags: {},
 				slots: [{ name: 'default', description: '' }]
 			})

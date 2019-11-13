@@ -88,6 +88,7 @@ export interface SlotDescriptor extends Descriptor {
 
 export interface ComponentDoc {
 	displayName: string
+	exportName: string
 	description?: string
 	props?: PropDescriptor[]
 	methods?: MethodDescriptor[]
@@ -199,6 +200,7 @@ export default class Documentation {
 			tags: obj.tags || {},
 
 			// set all the static properties
+			exportName: obj.exportName,
 			displayName: obj.displayName,
 			props,
 			events,

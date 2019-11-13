@@ -52,10 +52,19 @@ async function executeHandlers(
 	ast: bt.File,
 	opt: ParseOptions
 ) {
+	const compDefs = componentDefinitions
+		.keys()
+		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
+
+	if (compDefs.length > 1) {
+		throw 'vue-docgen-api: multiple exports in a component file are not handled yet by docgen'
+	}
+
 	return await Promise.all(
-		componentDefinitions.keys().map(async name => {
+		compDefs.map(async name => {
 			const compDef = componentDefinitions.get(name)
-			if (compDef && name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1)) {
+			documentation.set('exportName', name)
+			if (compDef) {
 				// execute all handlers in order as order matters
 				await preHandlers.reduce(async (_, handler) => {
 					await _
