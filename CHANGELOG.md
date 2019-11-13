@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.15](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.14...v4.0.0-beta.15) (2019-11-13)
+
+
+### Bug Fixes
+
+* render event types as properties ([48fc5e7](https://github.com/vue-styleguidist/vue-styleguidist/commit/48fc5e7))
+* **docgen:** avoid setting exportName to deps ([230e1e3](https://github.com/vue-styleguidist/vue-styleguidist/commit/230e1e3))
+
+
+### Features
+
+* review design of all props output ([cc80bd5](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc80bd5))
+* use [@values](https://github.com/values) tag in props ([cb2fc74](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb2fc74)), closes [#345](https://github.com/vue-styleguidist/vue-styleguidist/issues/345)
+* **docgen:** accept more tags for event params ([cc55f58](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc55f58))
+* **docgen:** add exportName to CompoentDoc ([9466105](https://github.com/vue-styleguidist/vue-styleguidist/commit/9466105))
+
+
+
+
+
 # [4.0.0-beta.14](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.13...v4.0.0-beta.14) (2019-11-10)
 
 
