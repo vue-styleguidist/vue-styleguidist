@@ -62,18 +62,18 @@ async function executeHandlers(
 
 	return await Promise.all(
 		compDefs.map(async name => {
-			const compDef = componentDefinitions.get(name)
+			const compDef = componentDefinitions.get(name) as NodePath
+			// execute all handlers in order as order matters
+			await preHandlers.reduce(async (_, handler) => {
+				await _
+				return await handler(documentation, compDef, ast, opt)
+			}, Promise.resolve())
+			await Promise.all(
+				localHandlers.map(async handler => await handler(documentation, compDef, ast, opt))
+			)
+			// end with setting of exportname
+			// to avoid dependecies names bleeding on the main components
 			documentation.set('exportName', name)
-			if (compDef) {
-				// execute all handlers in order as order matters
-				await preHandlers.reduce(async (_, handler) => {
-					await _
-					return await handler(documentation, compDef, ast, opt)
-				}, Promise.resolve())
-				await Promise.all(
-					localHandlers.map(async handler => await handler(documentation, compDef, ast, opt))
-				)
-			}
 		})
 	)
 }

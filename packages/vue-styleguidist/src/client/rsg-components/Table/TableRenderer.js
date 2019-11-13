@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Styled from 'rsg-components/Styled'
+import cx from 'classnames'
 
 export const styles = ({ space, color, fontFamily, fontSize }) => ({
 	table: {
 		width: '100%',
 		borderCollapse: 'collapse',
-		marginBottom: space[4]
+		marginBottom: space[6]
 	},
 	tableHead: {
 		borderBottom: [[1, color.border, 'solid']]
@@ -35,14 +36,9 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 		fontFamily: fontFamily.base,
 		fontSize: fontSize.small,
 		borderBottom: [[1, color.border, 'solid']],
-		'&:last-child': {
+		'& div': {
 			isolate: false,
-			width: '80%',
-			paddingRight: 0
-		},
-		'& p:last-child': {
-			isolate: false,
-			marginBottom: 0
+			minWidth: 300
 		}
 	}
 })
@@ -62,8 +58,8 @@ export function TableRenderer({ classes, columns, rows, getRowKey }) {
 			<tbody>
 				{rows.map(row => (
 					<tr key={getRowKey(row)} className={classes.dataRow}>
-						{columns.map(({ render }, index) => (
-							<td key={index} className={classes.cell}>
+						{columns.map(({ render, className }, index) => (
+							<td key={index} className={cx(classes.cell, className)}>
 								{render(row)}
 							</td>
 						))}

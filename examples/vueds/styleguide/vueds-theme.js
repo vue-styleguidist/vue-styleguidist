@@ -74,15 +74,12 @@ module.exports = {
         ComponentsList: {
             list: {
                 '& & a': {
-                    fontSize: '13px',
-                    fontWeight: 'normal',
-                    color: theme.color.link,
-                    cursor: 'pointer'
+                    isolate: false,
+                    fontWeight: 'normal'
                 },
                 '& & a:hover': {
-                    color: theme.color.linkHover,
-                    fontSize: '13px',
-                    cursor: 'pointer'
+                    isolate: false,
+                    color: theme.color.linkHover
                 }
             }
         },

@@ -48,7 +48,7 @@ Object {
       },
     },
   ],
-  "exportName": "multi",
+  "exportName": "default",
   "methods": undefined,
   "props": Array [
     Object {
@@ -114,6 +114,11 @@ Object {
       "type": Object {
         "name": "string",
       },
+      "values": Array [
+        "small",
+        "medium",
+        "large",
+      ],
     },
     Object {
       "description": "",

@@ -1,7 +1,7 @@
 <template>
-  <div class="CounterButton">
-    <button class="button" @click.prevent="increment">{{value}}</button>
-  </div>
+	<div class="CounterButton">
+		<button class="button" @click.prevent="increment">{{value}}</button>
+	</div>
 </template>
 
 <script>
@@ -36,9 +36,10 @@ export default {
 		 * @public
 		 * @version 1.0.5
 		 * @param {Number} newValue New value for the counter
+		 * @param {Object} target target of the counter
 		 * @returns {string} Test
 		 */
-		set(newValue) {
+		set(newValue, target) {
 			this.value = parseInt(newValue, 10)
 		}
 	}

@@ -1,7 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import Documentation, { BlockTag, DocBlockTags, PropDescriptor } from '../Documentation'
+import Documentation, { BlockTag, DocBlockTags, PropDescriptor, ParamTag } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
@@ -46,9 +46,21 @@ export default async function propHandler(documentation: Documentation, path: No
 
 				const propValuePath = prop.get('value')
 
-				propDescriptor.tags = jsDocTags.length ? transformTagsIntoObject(jsDocTags) : {}
 				if (jsDoc.description) {
 					propDescriptor.description = jsDoc.description
+				}
+
+				if (jsDocTags.length) {
+					propDescriptor.tags = transformTagsIntoObject(jsDocTags)
+				}
+
+				if (propDescriptor.tags && propDescriptor.tags['values']) {
+					const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
+					const choices = typeof description === 'string' ? description.split(',') : undefined
+					if (choices) {
+						propDescriptor.values = choices.map((v: string) => v.trim())
+					}
+					delete propDescriptor.tags['values']
 				}
 
 				if (bt.isArrayExpression(propValuePath.node) || bt.isIdentifier(propValuePath.node)) {

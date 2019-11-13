@@ -1,9 +1,9 @@
 <template>
-  <div class="PushButton">
-    <button class="push-button" :style="{ color: color, fontSize: fontSize }">
-      <slot></slot>
-    </button>
-  </div>
+	<div class="PushButton">
+		<button class="push-button" :style="{ color: color, fontSize: fontSize }">
+			<slot></slot>
+		</button>
+	</div>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
 			default: '#333'
 		},
 		/**
-		 * `small, normal, large`
+		 * @values small, normal, large
 		 */
 		size: {
 			type: String,

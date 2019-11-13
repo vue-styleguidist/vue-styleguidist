@@ -34,7 +34,7 @@ export default {
 		}),
 		/**
 		 * The size of the button
-		 * `small, normal, large`
+		 * @values small, normal, large
 		 */
 		size: VueTypes.string.def('normal'),
 		/**

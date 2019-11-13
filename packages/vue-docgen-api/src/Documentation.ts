@@ -66,6 +66,7 @@ export interface PropDescriptor extends Descriptor {
 	required?: boolean
 	defaultValue?: { value: string; func?: boolean }
 	tags?: { [title: string]: BlockTag[] }
+	values?: string[]
 	name: string
 }
 

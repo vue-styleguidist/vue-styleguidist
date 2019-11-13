@@ -13,6 +13,6 @@
 		"jsx": "preserve",
 		"types": ["jest", "node", "htmlparser2", "buble"]
 	},
-	"include": ["packages/**/*.ts", "packages/**/*.vue", "test/**/*.ts", "test/**/*.vue"],
+	"include": ["packages/**/*.ts", "test/**/*.ts"],
 	"exclude": ["node_modules"]
 }

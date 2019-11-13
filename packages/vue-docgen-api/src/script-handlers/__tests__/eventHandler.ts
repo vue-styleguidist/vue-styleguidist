@@ -31,7 +31,7 @@ describe('eventHandler', () => {
             /**
              * Describe the event
              * @property {number} prop1
-             * @property {number} prop2
+             * @param {number} prop2
              */
             this.$emit('success', 1, 2)
         }

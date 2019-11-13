@@ -38,7 +38,7 @@
 		"sass-loader": "^6.0.6",
 		"style-loader": "^0.19.0",
 		"vue-loader": "^15.2.4",
-		"vue-styleguidist": "^3.10.1",
+		"vue-styleguidist": "^4.0.0-beta.14",
 		"webpack": "^4.10.0"
 	}
 }
