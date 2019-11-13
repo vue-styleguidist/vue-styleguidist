@@ -83,7 +83,7 @@ export interface MethodDescriptor extends Descriptor {
 export interface SlotDescriptor extends Descriptor {
 	name: string
 	description?: string
-	bindings?: Record<string, any>
+	bindings?: ParamTag[]
 	scoped?: boolean
 }
 

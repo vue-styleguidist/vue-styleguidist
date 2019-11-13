@@ -168,13 +168,16 @@ function parseCommentNode(node: bt.BaseComment): string {
 	return ''
 }
 
-function getBindings(node: bt.ObjectExpression): Record<string, any> {
-	return node.properties.reduce((bindings: Record<string, any>, prop: bt.ObjectProperty) => {
+function getBindings(node: bt.ObjectExpression): ParamTag[] {
+	return node.properties.map((prop: bt.ObjectProperty) => {
 		const desc =
 			prop.leadingComments && prop.leadingComments.length
 				? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
 				: undefined
-		bindings[prop.key.name] = desc || '-'
-		return bindings
-	}, {})
+		return {
+			title: 'binding',
+			name: prop.key.name,
+			description: desc
+		}
+	})
 }
