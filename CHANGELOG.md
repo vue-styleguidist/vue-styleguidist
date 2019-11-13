@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.15...v4.0.0-beta.16) (2019-11-13)
+
+
+### Bug Fixes
+
+* warning when unnamed event param ([df587dd](https://github.com/vue-styleguidist/vue-styleguidist/commit/df587dd))
+
+
+
+
+
 # [4.0.0-beta.15](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.14...v4.0.0-beta.15) (2019-11-13)
 
 
