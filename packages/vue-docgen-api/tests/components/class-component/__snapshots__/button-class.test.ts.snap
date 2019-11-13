@@ -20,6 +20,7 @@ Object {
       },
     },
   ],
+  "exportName": "default",
   "methods": Array [
     Object {
       "description": "",

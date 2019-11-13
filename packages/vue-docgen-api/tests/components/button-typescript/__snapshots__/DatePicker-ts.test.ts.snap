@@ -16,6 +16,7 @@ Object {
       },
     },
   ],
+  "exportName": "default",
   "methods": undefined,
   "props": Array [
     Object {

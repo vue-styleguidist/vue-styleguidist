@@ -5,6 +5,7 @@ Object {
   "description": "Description InputText",
   "displayName": "InputText",
   "events": undefined,
+  "exportName": "default",
   "methods": undefined,
   "props": Array [
     Object {

@@ -22,11 +22,10 @@ export default async function displayNameHandler(documentation: Documentation, c
 				displayName = singleNameValuePath.node.value
 			} else if (bt.isIdentifier(singleNameValuePath.node)) {
 				const nameConstId = singleNameValuePath.node.name
-
-				displayName = getDeclaredConstantValue(
-					compDef.parentPath.parentPath as NodePath<bt.Program>,
-					nameConstId
-				)
+				const program = compDef.parentPath.parentPath as NodePath<bt.Program>
+				if (program.name === 'body') {
+					displayName = getDeclaredConstantValue(program, nameConstId)
+				}
 			}
 		}
 		documentation.set('displayName', displayName)

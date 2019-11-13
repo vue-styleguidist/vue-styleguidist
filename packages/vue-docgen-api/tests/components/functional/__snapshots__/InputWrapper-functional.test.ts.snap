@@ -12,6 +12,7 @@ Object {
 \`\` \`",
   ],
   "events": undefined,
+  "exportName": "default",
   "functional": true,
   "methods": undefined,
   "props": Array [

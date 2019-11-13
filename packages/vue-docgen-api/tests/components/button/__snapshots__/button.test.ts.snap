@@ -48,6 +48,7 @@ Object {
       },
     },
   ],
+  "exportName": "multi",
   "methods": undefined,
   "props": Array [
     Object {

@@ -5,6 +5,7 @@ Object {
   "description": "Description InputTextDocumented",
   "displayName": "InputTextDocumented",
   "events": undefined,
+  "exportName": "default",
   "methods": undefined,
   "props": Array [
     Object {
