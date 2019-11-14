@@ -81,44 +81,50 @@ function renderEnum(prop) {
 		</span>
 	)
 }
-
+// to keep showing those vluei insead of empty, we treat them separaty
 const defaultValueBlacklist = ['null', 'undefined', "''", '""']
 
 function renderDefaultHoc(classes) {
 	return function renderDefault(prop) {
-		// Workaround for issue https://github.com/reactjs/react-docgen/issues/221
-		// If prop has defaultValue it can not be required
-		if (prop.defaultValue) {
-			if (prop.type) {
-				const propName = prop.type.name
+		return (
+			<p className={classes.default}>
+				{(() => {
+					// Workaround for issue https://github.com/reactjs/react-docgen/issues/221
+					// If prop has defaultValue it can not be required
+					if (prop.defaultValue) {
+						if (prop.type) {
+							const propName = prop.type.name
 
-				if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
-					return (
-						<p className={classes.default}>
-							<Code>{prop.defaultValue.value}</Code>
-						</p>
-					)
-				} else if (propName === 'func' || propName === 'function') {
-					return (
-						<Text
-							size="small"
-							color="light"
-							underlined
-							title={showSpaces(unquote(prop.defaultValue.value))}
-						>
-							Function
-						</Text>
-					)
-				}
-			}
+							if (defaultValueBlacklist.indexOf(prop.defaultValue.value) > -1) {
+								return <Code>{prop.defaultValue.value}</Code>
+							} else if (
+								propName === 'func' ||
+								propName === 'function' ||
+								/^\(\s*\)\s*=>\s*\{/.test(prop.defaultValue.value)
+							) {
+								return (
+									<Text
+										size="small"
+										color="light"
+										underlined
+										title={showSpaces(unquote(prop.defaultValue.value))}
+									>
+										Function
+									</Text>
+								)
+							}
+						}
 
-			return (
-				<p className={classes.default}>
-					<Code>{showSpaces(unquote(prop.defaultValue.value))}</Code>
-				</p>
-			)
-		}
-		return <p className={classes.default}>-</p>
+						return (
+							<Code>
+								{showSpaces(unquote(prop.defaultValue.value.replace(/^\(\s*\)\s*=>\s*/, '')))}
+							</Code>
+						)
+					}
+					return '-'
+				})()}
+			</p>
+		)
 	}
 }
 

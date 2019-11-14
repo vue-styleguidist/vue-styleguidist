@@ -10,6 +10,12 @@
  */
 export default {
 	name: 'CounterButton',
+	props: {
+		menuItems: {
+			type: Array,
+			default: () => []
+		}
+	},
 	data() {
 		return {
 			value: 0
