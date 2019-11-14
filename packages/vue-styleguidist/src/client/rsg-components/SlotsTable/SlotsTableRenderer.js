@@ -28,7 +28,11 @@ export function propsToArray(props) {
 }
 
 export function renderBindings({ bindings }) {
-	return <Arguments args={bindings.map(b => ({ block: true, ...b }))} />
+	return bindings && bindings.length ? (
+		<Arguments args={bindings.map(b => ({ block: true, ...b }))} />
+	) : (
+		'-'
+	)
 }
 
 export const columns = (slots, classes) => [
