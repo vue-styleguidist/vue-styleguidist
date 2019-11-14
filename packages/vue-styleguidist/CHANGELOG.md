@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.18](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.17...v4.0.0-beta.18) (2019-11-14)
+
+
+### Features
+
+* make arrow functions default cleaner ([f16b424](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b424))
+
+
+
+
+
 # [4.0.0-beta.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.16...v4.0.0-beta.17) (2019-11-14)
 
 
