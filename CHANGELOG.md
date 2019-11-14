@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.16...v4.0.0-beta.17) (2019-11-14)
+
+
+### Bug Fixes
+
+* **plugin:** es6 requires fix in plugin ([205f7a1](https://github.com/vue-styleguidist/vue-styleguidist/commit/205f7a1))
+
+
+### Features
+
+* **docgen:** refactor bindings ([b501f82](https://github.com/vue-styleguidist/vue-styleguidist/commit/b501f82))
+* use bindings comments in styleguidist ([4fb6551](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fb6551))
+
+
+
+
+
 # [4.0.0-beta.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.15...v4.0.0-beta.16) (2019-11-13)
 
 
