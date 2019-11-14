@@ -21,6 +21,33 @@ export default {
 	mixins: [loggerMixin],
 	props: {
 		/**
+		 * A test for default function Object
+		 */
+		propObjectDefault: {
+			type: Object,
+			default: () => ({})
+		},
+		/**
+		 * A test for default function Array
+		 */
+		propArrayDefault: {
+			type: Array,
+			default: () => [1, 2, 3]
+		},
+		/**
+		 * A test for default function more complex
+		 */
+		propComplexDefault: {
+			type: Array,
+			default: () => {
+				if (typeof loggerMixin.mounted === 'function') {
+					return []
+				} else {
+					return undefined
+				}
+			}
+		},
+		/**
 		 * The color for the button.
 		 */
 		color: {
