@@ -1,11 +1,15 @@
 <template>
-  <List :items="listItems">
-    <div slot-scope="row" class="list-item1">
-      {{row.item.text}}
-      <!-- @slot Modal footer here -->
-      <slot name="test" />
-    </div>
-  </List>
+	<List :items="listItems">
+		<div slot-scope="row" class="list-item1">
+			{{row.item.text}}
+			<!-- 
+				@slot Menu Item footer 
+				@binding {object} icon icon of the menu item
+				@binding {string} text text of the menu item
+			-->
+			<slot name="test" :icon="row.item.icon" :text="row.item.text" />
+		</div>
+	</List>
 </template>
 
 <script>
