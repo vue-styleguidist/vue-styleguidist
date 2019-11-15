@@ -1,5 +1,5 @@
 const GITHUB_HOMEPAGE = 'https://github.com/vue-styleguidist/vue-styleguidist/'
-const DOCS_HOMEPAGE = 'https://vue-styleguidist.github.com/'
+const DOCS_HOMEPAGE = 'https://vue-styleguidist.github.io/'
 
 export default {
 	HOMEPAGE: DOCS_HOMEPAGE,

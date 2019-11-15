@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Logo from 'rsg-components/Logo';
-import Markdown from 'rsg-components/Markdown';
-import Styled from 'rsg-components/Styled';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Logo from 'rsg-components/Logo'
+import Markdown from 'rsg-components/Markdown'
+import Styled from 'rsg-components/Styled'
 
-const xsmall = '@media (max-width: 600px)';
+const xsmall = '@media (max-width: 600px)'
 
 const styles = ({ font, base, light, link, baseBackground, mq }) => ({
 	root: {
 		color: base,
-		backgroundColor: baseBackground,
+		backgroundColor: baseBackground
 	},
 	header: {
 		color: '#41b883',
@@ -21,54 +21,49 @@ const styles = ({ font, base, light, link, baseBackground, mq }) => ({
 		alignItems: 'center',
 		[xsmall]: {
 			flexDirection: 'column',
-			alignItems: 'center',
-		},
+			alignItems: 'center'
+		}
 	},
 	nav: {
 		marginLeft: 'auto',
 		marginRight: '-0.5em',
 		[xsmall]: {
-			margin: [[10, 0, 0]],
-		},
+			margin: [[10, 0, 0]]
+		}
 	},
 	headerLink: {
 		'&, &:link, &:visited': {
 			marginLeft: '0.5em',
 			marginRight: '0.5em',
 			fontFamily: font,
-			color: '#41b883',
+			color: '#41b883'
 		},
 		'&:hover, &:active': {
 			color: '#35495e',
-			cursor: 'pointer',
-		},
+			cursor: 'pointer'
+		}
 	},
 	content: {
 		maxWidth: 1000,
 		padding: [[15, 30]],
 		margin: [[0, 'auto']],
 		[mq.small]: {
-			padding: 15,
+			padding: 15
 		},
-		display: 'block',
+		display: 'block'
 	},
 	components: {
-		overflow: 'auto', // To prevent the pane from growing out of the screen
+		overflow: 'auto' // To prevent the pane from growing out of the screen
 	},
 	footer: {
 		display: 'block',
 		color: light,
 		fontFamily: font,
-		fontSize: 12,
-	},
-});
+		fontSize: 12
+	}
+})
 
-export function StyleGuideRenderer({
-	classes,
-	title,
-	homepageUrl,
-	children,
-}) {
+export function StyleGuideRenderer({ classes, title, homepageUrl, children }) {
 	return (
 		<div className={classes.root}>
 			<header className={classes.header}>
@@ -76,10 +71,7 @@ export function StyleGuideRenderer({
 					<div className={classes.bar}>
 						<Logo>{title}</Logo>
 						<nav className={classes.nav}>
-							<a
-								className={classes.headerLink}
-								href="https://vue-styleguidist.github.com"
-							>
+							<a className={classes.headerLink} href="https://vue-styleguidist.github.io">
 								Docs
 							</a>
 							<a
@@ -95,20 +87,18 @@ export function StyleGuideRenderer({
 			<main className={classes.content}>
 				{children}
 				<footer className={classes.footer}>
-					<Markdown
-						text={`Generated with [Vue Styleguidist](${homepageUrl}) ❤️`}
-					/>
+					<Markdown text={`Generated with [Vue Styleguidist](${homepageUrl}) ❤️`} />
 				</footer>
 			</main>
 		</div>
-	);
+	)
 }
 
 StyleGuideRenderer.propTypes = {
 	classes: PropTypes.object.isRequired,
 	title: PropTypes.string.isRequired,
 	homepageUrl: PropTypes.string.isRequired,
-	children: PropTypes.node.isRequired,
-};
+	children: PropTypes.node.isRequired
+}
 
-export default Styled(styles)(StyleGuideRenderer);
+export default Styled(styles)(StyleGuideRenderer)
