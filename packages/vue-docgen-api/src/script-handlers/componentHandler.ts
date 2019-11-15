@@ -5,7 +5,7 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 
-export default function propHandler(documentation: Documentation, path: NodePath) {
+export default async function propHandler(documentation: Documentation, path: NodePath) {
 	// deal with functional flag
 	if (bt.isObjectExpression(path.node)) {
 		const functionalPath = path

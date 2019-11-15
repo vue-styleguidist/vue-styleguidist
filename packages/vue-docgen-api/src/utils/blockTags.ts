@@ -50,5 +50,6 @@ export default [
 	'typedef',
 	'variation',
 	'version',
-	'link'
+	'link',
+	'values'
 ]

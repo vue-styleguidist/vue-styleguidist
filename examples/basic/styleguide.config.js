@@ -14,14 +14,15 @@ const transpileDependencies = [
 	'@znck[\\\\/]prop-types'
 ]
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	title: 'Vue Styleguidist basic',
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
-	minimize: false,
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	version: '1.1.1',
 	webpackConfig: {
@@ -48,7 +49,7 @@ module.exports = {
 									'@babel/preset-env',
 									{
 										useBuiltIns: 'usage',
-										corejs: 2,
+										corejs: 3,
 										targets: {
 											ie: '11'
 										}
@@ -72,12 +73,8 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	editorConfig: {
-		theme: 'solarized dark'
-	},
 	compilerConfig: {
 		target: { ie: 11 }
 	},
-	styleguideDir: 'dist',
-	codeSplit: true // extract compiler and editor to accelerate first load
+	styleguideDir: 'dist'
 }

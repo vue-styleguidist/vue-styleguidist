@@ -1,6 +1,6 @@
 import { BlockTag, DocBlockTags, Param, ParamType } from '../Documentation'
 
-const DOCLET_PATTERN = /^@(\w+)(?:$|\s((?:[^](?!^@\w))*))/gim
+const DOCLET_PATTERN = /^(?:\s+)?@(\w+)(?:$|\s((?:[^](?!^(?:\s+)?@\w))*))/gim
 
 function getParamInfo(content: string, hasName: boolean) {
 	content = content || ''
@@ -45,7 +45,16 @@ function getTypeObjectFromTypeString(typeSlice: string): ParamType {
 	}
 }
 
-const TYPED_TAG_TITLES = ['param', 'arg', 'argument', 'property', 'type', 'returns', 'prop']
+const TYPED_TAG_TITLES = [
+	'param',
+	'arg',
+	'argument',
+	'property',
+	'type',
+	'returns',
+	'prop',
+	'binding'
+]
 const ACCESS_TAG_TITLES = ['private', 'public']
 
 /**

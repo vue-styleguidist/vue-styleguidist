@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { writeDownMdFile, compileMarkdown, getDocMap, getWatcher } from '../utils'
-import extractConfig, { DocgenCLIConfig } from '../extractConfig'
+import extractConfig from '../extractConfig'
+import { DocgenCLIConfig } from '../config'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
@@ -10,11 +11,28 @@ var mockFs: {
 	readFile: jest.Mock
 	writeFile: jest.Mock
 	existsSync: jest.Mock
+	createWriteStream: (
+		a: string
+	) => {
+		write: jest.Mock
+		close: jest.Mock
+	}
 }
+
+let cws: {
+	write: jest.Mock
+	close: jest.Mock
+}
+
 jest.mock('fs', () => {
+	cws = {
+		write: jest.fn(),
+		close: jest.fn()
+	}
 	mockFs = {
 		readFile: jest.fn((a, b, c) => c()),
 		writeFile: jest.fn((a, b, c) => c()),
+		createWriteStream: a => cws,
 		existsSync: jest.fn(() => false)
 	}
 	return mockFs
@@ -49,7 +67,7 @@ describe('writeDownMdFile', () => {
 
 	it('should then save the pretified markdown', async done => {
 		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
-		expect(mockFs.writeFile).toHaveBeenCalledWith(MD_FILE_PATH, PRETTY_MD, expect.any(Function))
+		expect(cws.write).toHaveBeenCalledWith(PRETTY_MD)
 		done()
 	})
 })
@@ -63,7 +81,7 @@ describe('compileMarkdown', () => {
 	let conf: DocgenCLIConfig
 
 	beforeEach(() => {
-		conf = extractConfig([], CWD)
+		conf = extractConfig(CWD)
 		conf.getDocFileName = jest.fn(() => FAKE_COMPONENT_FULL_PATH)
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
 	})
@@ -147,6 +165,12 @@ describe('getWatcher', () => {
 describe('getDocMap', () => {
 	it('should return relative maps', () => {
 		const docMap = getDocMap(FILES, getDocFileName, 'src')
+		// normalize path for windows users
+		Object.keys(docMap).map(k => {
+			const path = docMap[k]
+			delete docMap[k]
+			docMap[k.replace(/\\/g, '/')] = path
+		})
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {
 		  "components/Button/Readme.md": "src/components/Button/Button.vue",

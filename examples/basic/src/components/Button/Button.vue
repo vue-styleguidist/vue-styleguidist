@@ -1,9 +1,9 @@
 <template>
-  <div class="Button">
-    <button class="button" @click.prevent="onClick" :style="{ color: color, fontSize: fontSize }">
-      <slot></slot>
-    </button>
-  </div>
+	<div class="Button">
+		<button class="button" @click.prevent="onClick" :style="{ color: color, fontSize: fontSize }">
+			<slot></slot>
+		</button>
+	</div>
 </template>
 
 <script>
@@ -21,6 +21,33 @@ export default {
 	mixins: [loggerMixin],
 	props: {
 		/**
+		 * A test for default function Object
+		 */
+		propObjectDefault: {
+			type: Object,
+			default: () => ({})
+		},
+		/**
+		 * A test for default function Array
+		 */
+		propArrayDefault: {
+			type: Array,
+			default: () => [1, 2, 3]
+		},
+		/**
+		 * A test for default function more complex
+		 */
+		propComplexDefault: {
+			type: Array,
+			default: () => {
+				if (typeof loggerMixin.mounted === 'function') {
+					return []
+				} else {
+					return undefined
+				}
+			}
+		},
+		/**
 		 * The color for the button.
 		 */
 		color: {
@@ -36,7 +63,7 @@ export default {
 		}),
 		/**
 		 * The size of the button
-		 * `small, normal, large`
+		 * @values small, normal, large
 		 */
 		size: VueTypes.string.def('normal'),
 		/**

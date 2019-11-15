@@ -30,7 +30,7 @@ describe('multiMd', () => {
 	}
 
 	beforeEach(() => {
-		conf = extractConfig([], CWD) as DocgenCLIConfigWithComponents
+		conf = extractConfig(CWD) as DocgenCLIConfigWithComponents
 		conf.components = '**/*.vue'
 		conf.getDocFileName = jest.fn(() => FAKE_COMPONENT_FULL_PATH)
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)

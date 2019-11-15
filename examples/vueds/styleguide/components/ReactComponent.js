@@ -10,7 +10,7 @@ const styles = ({ color, fontSize, space }) => ({
 	header: {
 		marginBottom: space[3],
 		background: '#e9f3fd',
-		margin: '-16px -64px 48px -64px',
+		margin: '-16px -32px 48px -64px',
 		padding: '64px 64px',
 	},
 	tabs: {

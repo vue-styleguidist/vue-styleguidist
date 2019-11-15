@@ -9,7 +9,8 @@
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"moduleDirectory": ["packages/vue-styleguidist/src", "node_modules"]
+				"moduleDirectory": ["packages/vue-styleguidist/src", "node_modules"],
+				"extensions": [".ts", ".tsx", ".js", ".d.ts"]
 			}
 		}
 	},
@@ -44,7 +45,7 @@
 	},
 	"overrides": [
 		{
-			"files": ["**/*.ts"],
+			"files": ["**/*.ts", "**/*.tsx"],
 			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"ecmaVersion": 2018,
@@ -54,13 +55,22 @@
 			"settings": {
 				"import/resolver": {
 					"node": {
-						"extensions": [".ts", ".js"]
+						"extensions": [".ts", ".tsx", ".js", ".d.ts"]
 					}
 				}
 			},
 			"rules": {
 				"no-unused-vars": "off",
 				"typescript/no-unused-vars": "off"
+			}
+		},
+		{
+			"files": ["**/vue-docgen-api/**"],
+			"env": {
+				"es6": true
+			},
+			"rules": {
+				"compat/compat": "off"
 			}
 		}
 	],

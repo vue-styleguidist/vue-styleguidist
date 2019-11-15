@@ -1,8 +1,8 @@
 <template>
-  <div class="Placeholder">
-    <img class="placeholder" :src="getImageUrl()" :width="width" :height="height">
-    <b class="showbefore"></b>
-  </div>
+	<div class="Placeholder">
+		<img class="placeholder" :src="getImageUrl()" :width="width" :height="height" />
+		<b class="showbefore"></b>
+	</div>
 </template>
 
 <script>
@@ -13,7 +13,8 @@ export default {
 	name: 'Placeholder',
 	props: {
 		/**
-		 * `animal, bacon, beard, cat, city, food, nature, people`
+		 * type of image used as a placeholder
+		 * @values animal, bacon, beard, cat, city, food, nature, people
 		 */
 		type: {
 			type: String,

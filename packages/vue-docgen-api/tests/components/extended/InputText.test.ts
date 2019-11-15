@@ -6,8 +6,8 @@ const InputText = path.join(__dirname, './InputText.vue')
 let docInputText: ComponentDoc
 
 describe('tests InputText', () => {
-	beforeAll(done => {
-		docInputText = parse(InputText)
+	beforeAll(async done => {
+		docInputText = await parse(InputText)
 		done()
 	})
 
@@ -28,7 +28,7 @@ describe('tests InputText', () => {
 	})
 
 	it('should the component has two props', () => {
-		expect(Object.keys(docInputText.props || {}).length).toEqual(2)
+		expect(docInputText.props && docInputText.props.length).toEqual(2)
 	})
 
 	it('should match the snapshot', () => {

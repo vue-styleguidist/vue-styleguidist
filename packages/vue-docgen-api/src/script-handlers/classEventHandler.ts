@@ -7,7 +7,7 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import resolveIdentifier from '../utils/resolveIdentifier'
 
-export default function classEventHandler(
+export default async function classEventHandler(
 	documentation: Documentation,
 	path: NodePath,
 	astPath: bt.File

@@ -1,5 +1,6 @@
 import { transform } from 'buble'
 import walkes from 'walkes'
+import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -7,7 +8,6 @@ import normalizeSfcComponent, {
 	insertCreateElementFunction,
 	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
-import isCodeVueSfc from './isCodeVueSfc'
 import getAst from './getAst'
 
 interface EvaluableComponent {

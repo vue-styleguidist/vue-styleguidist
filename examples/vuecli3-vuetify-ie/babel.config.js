@@ -5,7 +5,7 @@ module.exports = {
 			'@babel/env',
 			{
 				useBuiltIns: 'usage',
-				corejs: 2,
+				corejs: 3,
 				targets: {
 					ie: '11'
 				}

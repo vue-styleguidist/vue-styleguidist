@@ -1,12 +1,13 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "3.26.2",
+	"version": "4.0.0-beta.19",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
 		"precompile": "rimraf lib/",
-		"compile": "babel --ignore **/__tests__/*.js,**/*.spec.js -d lib/ src/",
-		"compile:watch": "yarn compile --watch"
+		"compile": "yarn typings && babel src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
+		"compile:watch": "concurrently \"yarn compile --watch\" \"yarn typings --watch\"",
+		"typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
 	},
 	"repository": {
 		"type": "git",
@@ -16,29 +17,28 @@
 		"url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
 	},
 	"license": "MIT",
-	"main": "scripts/index.js",
+	"main": "lib/scripts/index.js",
 	"bin": {
-		"vue-styleguidist": "bin/styleguidist.js"
+		"vue-styleguidist": "lib/bin/styleguidist.js"
 	},
 	"files": [
-		"bin",
 		"lib",
-		"loaders",
-		"scripts"
+		"templates"
 	],
 	"engines": {
 		"node": ">=6",
 		"npm": ">=3"
 	},
 	"dependencies": {
-		"@vxna/mini-html-webpack-template": "^0.1.7",
+		"@vxna/mini-html-webpack-template": "^1.0.0",
 		"ast-types": "^0.12.2",
 		"classnames": "^2.2.6",
-		"clean-webpack-plugin": "^0.1.19",
+		"clean-webpack-plugin": "^3.0.0",
+		"cli-progress": "^3.0.0",
 		"clipboard-copy": "^3.0.0",
 		"codemirror": "^5.39.0",
 		"common-dir": "^2.0.2",
-		"copy-webpack-plugin": "^4.5.2",
+		"copy-webpack-plugin": "^5.0.4",
 		"css-loader": "^2.1.1",
 		"es6-object-assign": "^1.1.0",
 		"es6-promise": "^4.2.6",
@@ -47,7 +47,7 @@
 		"function.name-polyfill": "^1.0.6",
 		"github-slugger": "^1.2.0",
 		"glob": "^7.1.2",
-		"glogg": "^1.0.1",
+		"glogg": "^1.0.2",
 		"hash-sum": "^1.0.2",
 		"is-directory": "^0.3.1",
 		"javascript-stringify": "^1.6.0",
@@ -56,28 +56,28 @@
 		"loader-utils": "^1.1.0",
 		"lodash": "^4.17.15",
 		"lru-cache": "^4.1.3",
-		"mini-html-webpack-plugin": "^0.2.3",
+		"mini-html-webpack-plugin": "^2.0.0",
 		"minimist": "^1.2.0",
-		"ora": "^2.1.0",
 		"prismjs": "^1.15.0",
 		"prop-types": "^15.6.2",
-		"q-i": "^2.0.1",
+		"q-i": "2.0.1",
 		"qss": "^2.0.3",
-		"react": "^16.4.1",
+		"react": "^16.8.0",
 		"react-codemirror2": "^5.1.0",
 		"react-dev-utils": "^7.0.3",
-		"react-dom": "^16.4.1",
+		"react-dom": "^16.8.0",
 		"react-group": "^1.0.6",
 		"react-icons": "^3.7.0",
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.9.4",
-		"react-styleguidist": "^9.1.16",
+		"react-styleguidist": "^10.0.0",
 		"rewrite-imports": "^2.0.3",
-		"style-loader": "^0.21.0",
+		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^1.3.0",
 		"to-ast": "^1.0.0",
-		"vue-docgen-api": "^3.26.0",
-		"vue-inbrowser-compiler": "^3.23.0",
+		"vue-docgen-api": "^4.0.0-beta.17",
+		"vue-inbrowser-compiler": "^4.0.0-beta.8",
+		"vue-inbrowser-compiler-utils": "^4.0.0-beta.8",
 		"webpack-dev-server": "^3.7.1",
 		"webpack-merge": "^4.0.0"
 	},
@@ -88,6 +88,20 @@
 		"webpack": ">=4 < 4.29"
 	},
 	"devDependencies": {
+		"@babel/types": "^7.5.5",
+		"@types/cli-progress": "^1.8.1",
+		"@types/copy-webpack-plugin": "^4.4.1",
+		"@types/escodegen": "0.0.6",
+		"@types/loader-utils": "^1.1.3",
+		"@types/lodash": "^4.14.136",
+		"@types/react-dev-utils": "^9.0.1",
+		"@types/react-dom": "^16.8.5",
+		"@types/terser-webpack-plugin": "^1.2.1",
+		"@types/webpack": "^4.32.1",
+		"@types/webpack-dev-server": "^3.1.7",
+		"@types/webpack-merge": "^4.1.5",
+		"concurrently": "^4.1.1",
+		"source-map": "0.6.1",
 		"strip-shebang": "^1.0.2",
 		"webpack": "^4.28.2"
 	}

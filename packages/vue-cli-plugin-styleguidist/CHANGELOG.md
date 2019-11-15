@@ -3,11 +3,143 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.19](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.18...v4.0.0-beta.19) (2019-11-14)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.18](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.17...v4.0.0-beta.18) (2019-11-14)
+
+
+### Features
+
+* **plugin:** better default config for ([9a19cc4](https://github.com/vue-styleguidist/vue-styleguidist/commit/9a19cc4))
+
+
+
+
+
+# [4.0.0-beta.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.16...v4.0.0-beta.17) (2019-11-14)
+
+
+### Bug Fixes
+
+* **plugin:** es6 requires fix in plugin ([205f7a1](https://github.com/vue-styleguidist/vue-styleguidist/commit/205f7a1))
+
+
+
+
+
+# [4.0.0-beta.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.15...v4.0.0-beta.16) (2019-11-13)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.15](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.14...v4.0.0-beta.15) (2019-11-13)
+
+
+### Bug Fixes
+
+* render event types as properties ([48fc5e7](https://github.com/vue-styleguidist/vue-styleguidist/commit/48fc5e7))
+
+
+
+
+
+# [4.0.0-beta.14](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.13...v4.0.0-beta.14) (2019-11-10)
+
+
+### Bug Fixes
+
+* **plugin:** load styleguidist right ([d4c6f6d](https://github.com/vue-styleguidist/vue-styleguidist/commit/d4c6f6d))
+
+
+
+
+
+# [4.0.0-beta.13](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.12...v4.0.0-beta.13) (2019-11-06)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.12](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2019-11-06)
+
+
+### Features
+
+* add plugin for docgen cli ([a545aa5](https://github.com/vue-styleguidist/vue-styleguidist/commit/a545aa5)), closes [#614](https://github.com/vue-styleguidist/vue-styleguidist/issues/614)
+
+
+
+
+
+# [4.0.0-beta.11](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.2...v4.0.0-beta.11) (2019-10-30)
+
+
+
+# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
+
+
+### Bug Fixes
+
+* move the build files to the right folder ([9944972](https://github.com/vue-styleguidist/vue-styleguidist/commit/9944972)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
+
+
+
+# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
+
+
+
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+
+# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v4.0.0-beta.7) (2019-10-25)
+
+
+
+# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
+
+
+
+# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
+
+
+
+# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
+
+
+
+# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
+
+
+
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+
+## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
+
+
+
+
+
+# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
 ## [3.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.1...v3.26.2) (2019-10-30)
 
 
 ### Bug Fixes
 
+* move the build files to the right folder ([9944972](https://github.com/vue-styleguidist/vue-styleguidist/commit/9944972)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
 * make sure defaults are there for the plugin ([eb9ef4c](https://github.com/vue-styleguidist/vue-styleguidist/commit/eb9ef4c)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
 * make sure defaults are there for the plugin ([00a05ac](https://github.com/vue-styleguidist/vue-styleguidist/commit/00a05ac)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
 
@@ -15,6 +147,73 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.6...v4.0.0-beta.7) (2019-10-25)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.0.0-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.1) (2019-10-23)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
 ## [3.26.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v3.26.1) (2019-10-30)
 
 
@@ -26,6 +225,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
 # [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist

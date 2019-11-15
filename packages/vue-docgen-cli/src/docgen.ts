@@ -1,10 +1,13 @@
 import * as path from 'path'
 import globby from 'globby'
 import { FSWatcher } from 'chokidar'
-import { DocgenCLIConfig } from './extractConfig'
+import { DocgenCLIConfig, Templates, RenderedUsage } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
 import { getWatcher, getDocMap } from './utils'
+import extractConfig from './extractConfig'
+
+export { DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
 
 export interface DocgenCLIConfigWithComponents extends DocgenCLIConfig {
 	components: string | string[]

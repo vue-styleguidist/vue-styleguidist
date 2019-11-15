@@ -3,12 +3,127 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.16...v4.0.0-beta.17) (2019-11-14)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.0.0-beta.15](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.14...v4.0.0-beta.15) (2019-11-13)
+
+
+### Features
+
+* use [@values](https://github.com/values) tag in props ([cb2fc74](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb2fc74)), closes [#345](https://github.com/vue-styleguidist/vue-styleguidist/issues/345)
+
+
+
+
+
+# [4.0.0-beta.12](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2019-11-06)
+
+
+### Features
+
+* **cli:** expose docgen-cli config interfaces ([25f0744](https://github.com/vue-styleguidist/vue-styleguidist/commit/25f0744))
+
+
+
+
+
+# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+### Features
+
+* **cli:** use writeStream for better performance ([25da08c](https://github.com/vue-styleguidist/vue-styleguidist/commit/25da08c))
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+
+
+
+
+
+# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.6...v4.0.0-beta.7) (2019-10-25)
 # [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
 
 
 ### Features
 
 * use the functional tag in docgen cli ([c6f8725](https://github.com/vue-styleguidist/vue-styleguidist/commit/c6f8725))
+
+
+
+
+
+# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.0.0-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.1) (2019-10-23)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* **docgen:** make docgen output arrays only ([d456c6c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d456c6c))
+
+
+### Code Refactoring
+
+* **docgen:** make function docgen.parse async ([e17680b](https://github.com/vue-styleguidist/vue-styleguidist/commit/e17680b))
+
+
+### BREAKING CHANGES
+
+* **docgen:** props, events, methods and slots are now all arrays
+
+Co-authored-by: Sébastien D. <demsking@gmail.com>
+* **docgen:** docgen becomes async, so do all of the handlers
+
+
+
+
+
+## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
+
+**Note:** Version bump only for package vue-docgen-cli
 
 
 

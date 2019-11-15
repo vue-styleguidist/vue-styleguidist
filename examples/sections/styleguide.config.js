@@ -1,6 +1,8 @@
 const path = require('path')
 const vueLoader = require('vue-loader')
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	title: 'Vue Style Guide Example',
 	pagePerSection: true,
@@ -92,6 +94,6 @@ module.exports = {
 	styleguideDir: 'dist',
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	}
 }

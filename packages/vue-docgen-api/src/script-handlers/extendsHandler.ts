@@ -13,7 +13,7 @@ import resolveRequired from '../utils/resolveRequired'
  * @param {Array<NodePath>} componentDefinitions
  * @param {string} originalFilePath
  */
-export default function extendsHandler(
+export default async function extendsHandler(
 	documentation: Documentation,
 	componentDefinition: NodePath,
 	astPath: bt.File,
@@ -43,7 +43,7 @@ export default function extendsHandler(
 				name: extendsFilePath[extendsVariableName].exportName,
 				path: fullFilePath
 			}
-			parseFile(documentation, {
+			await parseFile(documentation, {
 				...opt,
 				filePath: fullFilePath,
 				nameFilter: [extendsFilePath[extendsVariableName].exportName],

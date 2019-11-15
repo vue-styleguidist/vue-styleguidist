@@ -25,7 +25,9 @@ describe('slotHandler', () => {
 				functional: false,
 				rootLeadingComment: '@slot first slot found'
 			})
-			expect(doc.toObject().slots.first).toMatchObject({ description: 'first slot found' })
+			expect(doc.toObject().slots).toMatchObject([
+				{ name: 'first', description: 'first slot found' }
+			])
 			done()
 		} else {
 			done.fail()
@@ -45,7 +47,9 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			expect(doc.toObject().slots.default).toMatchObject({ description: 'a default slot' })
+			expect(doc.toObject().slots).toMatchObject([
+				{ name: 'default', description: 'a default slot' }
+			])
 			done()
 		} else {
 			done.fail()
@@ -65,73 +69,130 @@ describe('slotHandler', () => {
 		).ast
 		if (ast) {
 			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			expect(doc.toObject().slots.oeuf).toMatchObject({ description: 'a slot named oeuf' })
-			done()
-		} else {
-			done.fail()
-		}
-	})
-
-	it('should detect scoped slots', done => {
-		const ast = compile(
-			[
-				'<div title="a list of item with a scope" >',
-				'  <!-- @slot a slot named oeuf -->',
-				'  <slot name="oeuf" v-for="item in items" :item="item"/>',
-				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
-		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			expect(doc.toObject().slots.oeuf).toMatchObject({
-				scoped: true,
-				description: 'a slot named oeuf',
-				bindings: {
-					item: 'item'
+			expect(doc.toObject().slots).toMatchObject([
+				{
+					name: 'oeuf',
+					description: 'a slot named oeuf'
 				}
-			})
+			])
 			done()
 		} else {
 			done.fail()
 		}
 	})
 
-	it('should detect explicit bindings using v-bind', done => {
-		const ast = compile(
-			[
-				'<div title="a list of item with a scope" >',
-				'  <slot name="bound" v-for="item in items" v-bind="{ ...keyNames }"/>',
-				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
-		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			const slots = doc.toObject().slots
-			expect(slots.bound.bindings).toMatchObject({ 'v-bind': '{ ...keyNames }' })
-			done()
-		} else {
-			done.fail()
-		}
-	})
+	describe('bindings', () => {
+		it('should detect scoped slots', done => {
+			const ast = compile(
+				[
+					'<div title="a list of item with a scope" >',
+					'  <!-- @slot a slot named oeuf -->',
+					'  <slot name="oeuf" v-for="item in items" :item="item"/>',
+					'</div>'
+				].join('\n'),
+				{ comments: true }
+			).ast
+			if (ast) {
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				expect(doc.toObject().slots).toMatchObject([
+					{
+						name: 'oeuf',
+						scoped: true,
+						description: 'a slot named oeuf',
+						bindings: [
+							{
+								name: 'item'
+							}
+						]
+					}
+				])
+				done()
+			} else {
+				done.fail()
+			}
+		})
 
-	it('should detect implicit bindings if it is simple enough', done => {
-		const ast = compile(
-			[
-				'<div title="a list of item with a scope" >',
-				'  <slot name="bound" v-for="item in items" v-bind="{ item, otherItem: valueGiven }"/>',
-				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
-		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
-			const slots = doc.toObject().slots
-			expect(slots.bound.bindings).toMatchObject({ item: 'item', otherItem: 'valueGiven' })
-			done()
-		} else {
-			done.fail()
-		}
+		it('should detect explicit bindings using v-bind', done => {
+			const ast = compile(
+				[
+					'<div title="a list of item with a scope" >',
+					'  <slot name="bound" v-for="item in items" v-bind="{ ...keyNames }"/>',
+					'</div>'
+				].join('\n'),
+				{ comments: true }
+			).ast
+			if (ast) {
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				const slots = doc.toObject().slots || []
+				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+					{
+						name: 'v-bind'
+					}
+				])
+				done()
+			} else {
+				done.fail()
+			}
+		})
+
+		it('should detect implicit bindings if it is simple enough', done => {
+			const ast = compile(
+				[
+					'<div title="a list of item with a scope" >',
+					'	<!-- @slot Menu Item footer -->',
+					'	<slot name="bound" v-for="item in items" v-bind="{ item, otherItem: valueGiven }"/>',
+					'</div>'
+				].join('\n'),
+				{ comments: true }
+			).ast
+			if (ast) {
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				const slots = doc.toObject().slots || []
+				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+					{
+						name: 'item'
+					},
+					{
+						name: 'otherItem'
+					}
+				])
+				done()
+			} else {
+				done.fail()
+			}
+		})
+
+		it('should detect explicit bindings and allow their documentation', done => {
+			const ast = compile(
+				[
+					'<div title="a list of item with a scope" >',
+					'	<!--',
+					'		@slot Menu Item footer',
+					'		@binding {object} item menu item',
+					'		@binding {string} otherItem text of the menu item',
+					'	-->',
+					'  <slot name="bound" v-for="item in items" :item="item" :otherItem="valueGiven" />',
+					'</div>'
+				].join('\n'),
+				{ comments: true }
+			).ast
+			if (ast) {
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				const slots = doc.toObject().slots || []
+				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+					{
+						name: 'item',
+						description: 'menu item'
+					},
+					{
+						name: 'otherItem',
+						description: 'text of the menu item'
+					}
+				])
+				done()
+			} else {
+				done.fail()
+			}
+		})
 	})
 })

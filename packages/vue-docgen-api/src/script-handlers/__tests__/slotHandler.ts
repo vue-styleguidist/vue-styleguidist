@@ -16,7 +16,7 @@ describe('render function slotHandler', () => {
 	let mockSlotDescriptor: SlotDescriptor
 
 	beforeEach(() => {
-		mockSlotDescriptor = { description: '' }
+		mockSlotDescriptor = { name: 'mySlot', description: '' }
 		documentation = new Documentation()
 		const mockGetSlotDescriptor = documentation.getSlotDescriptor as jest.Mock
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
@@ -200,11 +200,20 @@ describe('render function slotHandler', () => {
 		}
 		expect(mockSlotDescriptor).toMatchInlineSnapshot(`
 		Object {
-		  "bindings": Object {
-		    "compile": "will render the compiled item",
-		    "compiling": "contains true while compiling",
-		  },
+		  "bindings": Array [
+		    Object {
+		      "description": "contains true while compiling",
+		      "name": "compiling",
+		      "title": "binding",
+		    },
+		    Object {
+		      "description": "will render the compiled item",
+		      "name": "compile",
+		      "title": "binding",
+		    },
+		  ],
 		  "description": "Use this slot carefully",
+		  "name": "mySlot",
 		}
 	`)
 		done()
@@ -267,5 +276,64 @@ export default {
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledTimes(8)
 		expect(mockSlotDescriptor.description).toEqual('the content for the pending state')
 		done()
+	})
+
+	describe('bindings', () => {
+		it('should describe slots bindings in render functions', async done => {
+			const src = `
+		export default {
+		  render(createElement) {
+			return createElement('div', [
+				/** 
+				 * @slot The header 
+				 * @binding {object} menuItem the menu item
+				 */
+				this.$scopedSlots.default({
+					menuItem: this.message
+				})
+			])
+		  }
+		}
+		`
+			const def = parse(src)
+			if (def) {
+				await slotHandler(documentation, def)
+			}
+			expect(mockSlotDescriptor.bindings).toMatchObject([
+				{
+					name: 'menuItem',
+					description: 'the menu item'
+				}
+			])
+			done()
+		})
+
+		it('should describe slots bindings in JSX', async done => {
+			const src = `
+		export default {
+		  render(createElement) {
+			return (
+			<div> 
+			  {/** 
+				* @slot The header 
+				* @binding {object} item the menu item
+				*/}
+			  <slot item={menuItem} />
+			</div>)
+		  }
+		}
+		`
+			const def = parse(src)
+			if (def) {
+				await slotHandler(documentation, def)
+			}
+			expect(mockSlotDescriptor.bindings).toMatchObject([
+				{
+					name: 'item',
+					description: 'the menu item'
+				}
+			])
+			done()
+		})
 	})
 })

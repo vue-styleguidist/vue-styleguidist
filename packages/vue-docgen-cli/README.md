@@ -47,28 +47,30 @@ yarn vue-docgen -c config/docgen.config.js
 If you specify a `docgen.config.js` file you can be more specific. But each of those configurations is optional.
 
 ```js
-const path = require("path")
+const path = require('path')
 
 module.exports = {
-    componentsRoot: "src/components", // the folder where CLI will start searching for components.
-    components: "**/[A-Z]*.vue", // the glob to define what files should be documented as components (relative to componentRoot)
-    outDir: "docs", // folder to save components docs in (relative to the current working directry)
-    apiOptions: {
-        ...require('./webpack.config').resolve, // inform vue-docgen-api of your webpack aliases
-        'jsx': true // tell vue-docgen-api that your components are using JSX to avoid conflicts with TypeScript <type> syntax
-    },
-    getDocFileName: (componentPath: string) => componentPath.replace(/\.vue$/, '.md') // specify the name of the input md file
-    getDestFile: (file: string, config: DocgenCLIConfig) => path.join(config.outDir, file).replace(/\.vue$/ ".doc.md") // specify the name of the output md file
-    templates: {
-        // global component template wrapping all others see #templates
-        component: require('templates/component'),
-        events: require('templates/events'),
-        methods: require('templates/methods'),
-        props: require('templates/props'),
-        slots: require('templates/slots'),
-        // static template to display as a tag if component is functional
-        functionalTag: '**functional**',
-    }
+  componentsRoot: 'src/components', // the folder where CLI will start searching for components.
+  components: '**/[A-Z]*.vue', // the glob to define what files should be documented as components (relative to componentRoot)
+  outDir: 'docs', // folder to save components docs in (relative to the current working directry)
+  apiOptions: {
+    ...require('./webpack.config').resolve, // inform vue-docgen-api of your webpack aliases
+    jsx: true // tell vue-docgen-api that your components are using JSX to avoid conflicts with TypeScript <type> syntax
+  },
+  getDocFileName: (componentPath: string) =>
+    componentPath.replace(/\.vue$/, '.md'), // specify the name of the input md file
+  getDestFile: (file: string, config: DocgenCLIConfig) =>
+    path.join(config.outDir, file).replace(/\.vue$/, '.doc.md'), // specify the name of the output md file
+  templates: {
+    // global component template wrapping all others see #templates
+    component: require('templates/component'),
+    events: require('templates/events'),
+    methods: require('templates/methods'),
+    props: require('templates/props'),
+    slots: require('templates/slots'),
+    // static template to display as a tag if component is functional
+    functionalTag: '**functional**'
+  }
 }
 ```
 
@@ -150,7 +152,7 @@ By default it will find the `Readme.md` sibling to the component files. Use this
 
 > type: `(file: string, config: DocgenCLIConfig) => string`, default: `(file, config) => path.resolve(config.outDir, file).replace(/\.\w+\$/, '.md')`
 
-Function returning the absolute path of the documentation markdown files. It [outFile](#outfile) is used, this config will be ignored.
+Function returning the absolute path of the documentation markdown files. If [outFile](#outfile) is used, this config will be ignored.
 
 #### watch
 

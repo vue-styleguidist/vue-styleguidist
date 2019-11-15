@@ -45,13 +45,12 @@ export function PlaygroundRenderer({
 	classes,
 	exampleIndex,
 	name,
-	padded,
 	preview,
 	previewProps,
 	tabBody,
 }) {
 	const { className, ...props } = previewProps;
-	const previewClasses = cx(classes.preview, className, { [classes.padded]: padded });
+	const previewClasses = cx(classes.preview, className );
 	return (
 		<div className={classes.root} data-testid={`${name}-example-${exampleIndex}`}>
 			<div className={previewClasses} {...props} data-preview={name} data-testid="preview-wrapper">
@@ -66,7 +65,6 @@ PlaygroundRenderer.propTypes = {
 	classes: PropTypes.object.isRequired,
 	exampleIndex: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
-	padded: PropTypes.bool.isRequired,
 	preview: PropTypes.node.isRequired,
 	previewProps: PropTypes.object.isRequired,
 	tabButtons: PropTypes.node.isRequired,

@@ -1,12 +1,14 @@
 const vueLoader = require('vue-loader')
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	title: 'Vue Styleguidist jsx',
 	components: 'src/components/**/[A-Z]*.jsx',
 	defaultExample: true,
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	version: '1.1.1',
 	webpackConfig: {

@@ -1,13 +1,14 @@
 import * as path from 'path'
-import { ComponentDoc, PropDescriptor } from '../../../src/Documentation'
+import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+import getTestDescriptor from '../../utils/getTestDescriptor'
 
 const extReq = path.join(__dirname, './external-require.vue')
 let docExt: ComponentDoc
 
 describe('tests when requiring an external js file', () => {
-	beforeEach(done => {
-		docExt = parse(extReq)
+	beforeEach(async done => {
+		docExt = await parse(extReq)
 		done()
 	})
 
@@ -16,18 +17,8 @@ describe('tests when requiring an external js file', () => {
 	})
 
 	describe('props', () => {
-		let props: { [propName: string]: PropDescriptor }
-
-		beforeAll(() => {
-			props = docExt.props ? docExt.props : {}
-		})
-
-		it('should have at least one prop', () => {
-			expect(Object.keys(props).length).toEqual(1)
-		})
-
 		it('should have a test prop', () => {
-			expect(props.test).toBeDefined()
+			expect(getTestDescriptor(docExt.props, 'test').type).toBeDefined()
 		})
 	})
 })

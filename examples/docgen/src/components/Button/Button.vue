@@ -1,6 +1,7 @@
 <template>
 	<div class="Button">
 		<button class="button" @click.prevent="onClick" :style="{ color: color, fontSize: fontSize }">
+			<!-- @slot Content of button -->
 			<slot></slot>
 		</button>
 	</div>
@@ -22,7 +23,7 @@ export default {
 		},
 		/**
 		 * The size of the button
-		 * `small, normal, large`
+		 * @values small, normal, large
 		 */
 		size: {
 			type: String,

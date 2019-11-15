@@ -1,6 +1,6 @@
 const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const vueLoader = require('vue-loader')
+
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
 module.exports = {
 	title: 'Vue Design System',
@@ -8,43 +8,12 @@ module.exports = {
 	version: require('./package.json').version,
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	/**
 	 * Enabling the following option splits sections into separate views.
 	 */
 	pagePerSection: true,
-	theme: {
-		maxWidth: 'auto',
-		color: {
-			sidebarBackground: '#02172d',
-			border: 'rgba(255, 255, 255, 0.1)',
-			link: '#258aef',
-			linkHover: '#1070d1',
-			/**
-			 * prism colors configuration
-			 */
-			codeComment: '#6d6d6d',
-			codePunctuation: '#54a3f2',
-			codeProperty: '#54a3f2',
-			codeString: '#ffcc4d',
-			codeInserted: '#EEEEEE',
-			codeOperator: '#DDDDDD',
-			codeKeyword: '#afe74c',
-			codeFunction: '#54a3f2',
-			codeVariable: '#AAAAAA',
-			codeBase: '#FFFFFF',
-			codeBackground: '#041d37'
-		},
-		sidebarWidth: 240,
-		fontFamily: {
-			base: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
-			monospace: ['Consolas', "'Liberation Mono'", 'Menlo', 'monospace']
-		},
-		fontSize: {
-			h4: '18px'
-		}
-	},
 	simpleEditor: true,
 	template: {
 		title: 'Example — Vue Design System',
@@ -67,38 +36,24 @@ module.exports = {
 	 * remove the component pathline
 	 */
 	getComponentPathLine: () => '',
-	styles: require('./styleguide/styles'),
-	webpackConfig: {
-		module: {
-			rules: [
-				{
-					test: /\.vue$/,
-					loader: 'vue-loader'
-				},
-				{
-					test: /\.js$/,
-					loader: 'babel-loader',
-					exclude: /(node_modules|packages)/
-				},
-				{
-					test: /\.css$/,
-					use: ['style-loader', 'css-loader']
-				},
-				{
-					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader']
-				}
-			]
-		},
-
-		plugins: [new vueLoader.VueLoaderPlugin()].concat(
-			process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
-		)
-	},
+	/**
+	 * load the vueds color scheme
+	 */
+	...require('./styleguide/vueds-theme'),
+	/**
+	 * import the webpack config from the project. It might be useful to add
+	 * a babel loader to get the jsx to work properly for custom components
+	 */
+	webpackConfig: require('./webpack.config'),
 	/**
 	 * We’re defining below JS and SCSS requires for the documentation.
 	 */
-	require: [path.join(__dirname, 'styleguide/loadfont.js')],
+	require: [
+		/**
+		 * load the custom font
+		 */
+		path.join(__dirname, 'styleguide/loadfont.js')
+	],
 	/**
 	 * Make sure sg opens with props and examples visible
 	 */
@@ -108,5 +63,19 @@ module.exports = {
 		ReactComponentRenderer: path.join(__dirname, 'styleguide/components/ReactComponent'),
 		PlaygroundRenderer: path.join(__dirname, 'styleguide/components/Playground')
 	},
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	sections: [
+		{
+			name: 'Getting Started',
+			content: './docs/getting-started.md',
+			sectionDepth: 1
+		},
+		{
+			name: 'Elements',
+			content: './docs/elements.md',
+			pagePerSection: true,
+			components: './src/components/**/[A-Z]*.vue',
+			sectionDepth: 2
+		}
+	]
 }

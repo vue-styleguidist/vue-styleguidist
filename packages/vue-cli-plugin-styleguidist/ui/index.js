@@ -1,5 +1,5 @@
 const describeTasks = require('./tasks')
-const config = require('./config').config
+const config = require('./config')
 
 module.exports = api => {
 	describeTasks(api)

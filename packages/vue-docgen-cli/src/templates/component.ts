@@ -1,5 +1,5 @@
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
-import { RenderedUsage, DocgenCLIConfig } from '../compileTemplates'
+import { RenderedUsage, DocgenCLIConfig } from '../config'
 
 export default (
 	renderedUsage: RenderedUsage,
@@ -9,7 +9,7 @@ export default (
 ): string => {
 	const { displayName, description, docsBlocks, tags, functional } = doc
 
-	const { deprecated, author, since, version, see, link } = tags
+	const { deprecated, author, since, version, see, link } = tags || {}
 
 	return `${
 		!config.outFile && deprecated

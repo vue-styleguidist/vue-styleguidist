@@ -28,7 +28,7 @@ describe('compile', () => {
 	}
 
 	beforeEach(() => {
-		conf = extractConfig([], CWD) as singleMd.DocgenCLIConfigWithOutFile
+		conf = extractConfig(CWD) as singleMd.DocgenCLIConfigWithOutFile
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
@@ -37,7 +37,7 @@ describe('compile', () => {
 	describe('compile', () => {
 		it('should get the current components doc', async done => {
 			await singleMd.compile(conf, [FAKE_COMPONENT_PATH], {}, {})
-			expect(writeDownMdFile).toHaveBeenCalledWith(FAKE_MD_CONTENT, MD_FILE_PATH)
+			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT], MD_FILE_PATH)
 			done()
 		})
 	})

@@ -48,8 +48,9 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run: cd packages/vue-cli-plugin-styleguidist && yarn link && cd ../..
+
       # remake the yarn link to vue-cli-plugin
-      - run: yarn install
       - run: yarn build vuecli3
       - run: yarn build vuecli-noplugin
       - run: yarn build vuecli3-vuetify-ie
@@ -81,6 +82,8 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run: cd packages/vue-cli-plugin-styleguidist && yarn link && cd ../..
+      
       # run cypress tests
       - run: yarn cross-env CY_EXAMPLE_FOLDER=basic yarn cy
       - store_artifacts:

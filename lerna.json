@@ -2,13 +2,13 @@
   "lerna": "3.13.1",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "3.26.2",
+  "version": "4.0.0-beta.19",
   "command": {
     "publish": {
       "conventionalCommits": true
     },
     "version": {
-      "message": "%s [skip ci]"
+      "message": "chore: %s [skip ci]"
     }
   }
 }

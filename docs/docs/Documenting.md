@@ -55,7 +55,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
       },
       /**
        * The size of the button
-       * `small, normal, large`
+       * @values small, normal, large
        */
       size: {
         type: String,
@@ -76,7 +76,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 </script>
 ```
 
-Notice the use of the @displayName tag to change the displayed name of your component
+Note the use of the @displayName tag to change the displayed name of your component
 
 If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
@@ -94,21 +94,38 @@ If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.h
 </script>
 ```
 
+A current pattern in VueJs component is to have a limited number of valid values for a prop.
+
+For instance, `size` would only accept `small`, `medium` and `large`.
+
+To convey this in styleguidist, use the `@values` tag
+
+```js
+export default = {
+    props: {
+      /**
+       * The size of the button
+       * @values small, normal, large
+       */
+      size: {
+        type: String,
+        default: 'normal'
+      }
+    }
+}
+```
+
 ## Events
 
-For events documentation, just add a comment right above it.
+For events documentation, just add a comment right above it. If your comment is at the start of the function, the event will not be picked up.
 
 If the event is explicitly specified, no need to tell styleguidist what it is.
 
 ```js
 /**
  * Success event.
- *
- * @type {object}
  */
-this.$emit('success', {
-  demo: 'example'
-})
+this.$emit('success')
 ```
 
 Constants will be recognized too
@@ -116,13 +133,9 @@ Constants will be recognized too
 ```js
 /**
  * Success event.
- *
- * @type {object}
  */
 const success = 'succ'
-this.$emit(success, {
-  demo: 'example'
-})
+this.$emit(success)
 ```
 
 If your event name comes from an object, precise the `@event` tag
@@ -132,16 +145,29 @@ If your event name comes from an object, precise the `@event` tag
  * Success event.
  *
  * @event success
- * @type {object}
  */
-this.$emit(EVENTS.success, {
-  demo: 'example'
-})
+this.$emit(EVENTS.success)
+```
+
+If your event returns arguments/properties use the `@property` tag to describe them
+
+> Use `@arg` or `@param` if you prefer
+
+```js
+/**
+ * Triggers when the number changes
+ *
+ * @property {number} newValue new value set
+ * @property {number} oldValue value that was set before the change
+ */
+this.$emit('change', newValue, oldValue)
 ```
 
 ## Slots
 
-Slots are automatically documented by styleguidist. To add descriptions, just add a comment just before.
+Slots are automatically documented by styleguidist.
+
+To add a description, just add a comment right before.
 
 ```html
 <template>
@@ -163,83 +189,6 @@ Slots are automatically documented by styleguidist. To add descriptions, just ad
 ## Include Mixins and Extends
 
 If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends) it will automatically be added to your main component
-
-Include a Mixin:
-
-```javascript
-// src/mixins/colorMixin.js
-
-module.exports = {
-  props: {
-    /**
-     * The color for the button example
-     */
-    color: {
-      type: String,
-      default: '#333'
-    }
-  }
-}
-```
-
-Extends a component:
-
-```vue
-// src/extends/Base.vue
-
-<template>
-  <div>
-    <h4>{{ color }}</h4>
-    <!--the appropriate input should go here-->
-  </div>
-</template>
-<script>
-export default {
-  props: {
-    /**
-     * The color for the button example
-     */
-    colorExtends: {
-      type: String,
-      default: '#333'
-    }
-  }
-}
-</script>
-```
-
-```vue
-<template>
-  <!-- -->
-</template>
-<script>
-// src/components/Button/Button.vue
-
-import colorMixin from '../../mixins/colorMixin'
-import Base from '../../extends/Base.vue'
-export default {
-  name: 'Button',
-  mixins: [colorMixin],
-  extends: Base,
-  props: {
-    /**
-     * The size of the button
-     * `small, normal, large`
-     */
-    size: {
-      default: 'normal'
-    },
-    /**
-     * Add custom click actions.
-     **/
-    onCustomClick: {
-      default: () => () => null
-    }
-  }
-  /* ... */
-}
-</script>
-```
 
 ## Usage examples and Readme files
 
