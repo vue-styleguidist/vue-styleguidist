@@ -4,15 +4,16 @@ exports[`tests button with no script block should match the snapshot 1`] = `
 Object {
   "description": "",
   "displayName": "MyButton",
-  "events": Object {},
-  "methods": Array [],
+  "events": undefined,
+  "exportName": undefined,
+  "methods": undefined,
   "props": undefined,
-  "slots": Object {
-    "default": Object {
-      "bindings": Object {},
+  "slots": Array [
+    Object {
       "description": "Use this slot default",
+      "name": "default",
     },
-  },
+  ],
   "tags": Object {},
 }
 `;

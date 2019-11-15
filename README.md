@@ -49,7 +49,7 @@ alt="Chat on Discord">
 
 ---
 
-\[BETA\] [vue-docgen-cli](packages/vue-docgen-cli) is a command line interface generating documentation files automatically from [vue-dogen-api]. Generate markdown by default but can be configured to generate whatever text format you desire.
+[vue-docgen-cli](packages/vue-docgen-cli) is a command line interface generating documentation files automatically from [vue-dogen-api]. Generate markdown by default but can be configured to generate whatever text format you desire.
 
 [![](https://img.shields.io/npm/v/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli) [![](https://img.shields.io/npm/dm/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli)
 

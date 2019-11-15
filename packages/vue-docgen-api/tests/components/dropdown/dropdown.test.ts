@@ -6,8 +6,8 @@ const button = path.join(__dirname, './dropdown.vue')
 let docDropDown: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
-	beforeEach(done => {
-		docDropDown = parse(button)
+	beforeEach(async done => {
+		docDropDown = await parse(button)
 		done()
 	})
 

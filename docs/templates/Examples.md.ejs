@@ -6,7 +6,15 @@ Check out the github links to see how it's done.
 
 <% 
 const path = require('path')
-const examples = globby.sync('examples/*/package.json', {cwd: rootFolder, absolute: true})
+const fs = require('fs')
+
+const isNetlify = process.argv.indexOf('--netlify') > 0;
+const examples = isNetlify ? 
+    fs.readFileSync(path.join(rootFolder, "netlify/examples.yml"), "utf8").trim()
+        .split(/\r?\n/).filter(e => e.length && !/^#/.test(e))
+        .map(exName => path.join(rootFolder, `examples/${exName}/package.json`))
+    : globby.sync('examples/*/package.json', {cwd: rootFolder, absolute: true})
+
 examples.forEach(function(ex) { 
     const pkg = require(ex);
     const exampleName = path.basename(path.dirname(ex))
@@ -17,7 +25,7 @@ if(pkg.description){ %>
 <%= pkg.description %><% 
 } %>
 
-- [Live Demo](https://vue-styleguidist.github.io/<%= exampleName %>/)
+- <a href="<%= process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.com' %>/<%= exampleName %>/">Live Demo</a>
 - [GitHub](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/examples/<%= exampleName %>/)<% if(pkg.keywords){ %>
 
 Keywords: <% pkg.keywords.forEach(function(word){ %><%= word %>, <% })} %> 

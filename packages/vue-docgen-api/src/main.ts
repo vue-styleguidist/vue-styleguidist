@@ -33,11 +33,11 @@ export {
  * @param filePath absolute path of the parsed file
  * @param opts
  */
-export function parse(
+export async function parse(
 	filePath: string,
 	opts?: DocGenOptions | { [alias: string]: string }
-): ComponentDoc {
-	return parsePrimitive((doc, options) => parseFile(doc, options), filePath, opts)
+): Promise<ComponentDoc> {
+	return parsePrimitive(async (doc, options) => await parseFile(doc, options), filePath, opts)
 }
 
 /**
@@ -45,27 +45,31 @@ export function parse(
  * @param filePath absolute path of the parsed file
  * @param opts
  */
-export function parseSource(
+export async function parseSource(
 	source: string,
 	filePath: string,
 	opts?: DocGenOptions | { [alias: string]: string }
-): ComponentDoc {
-	return parsePrimitive((doc, options) => parseSourceLocal(doc, source, options), filePath, opts)
+): Promise<ComponentDoc> {
+	return parsePrimitive(
+		async (doc, options) => await parseSourceLocal(doc, source, options),
+		filePath,
+		opts
+	)
 }
 
 function isOptionsObject(opts: any): opts is DocGenOptions {
 	return !!opts && (!!opts.alias || opts.jsx !== undefined)
 }
 
-function parsePrimitive(
-	createDoc: (doc: Documentation, opts: ParseOptions) => void,
+async function parsePrimitive(
+	createDoc: (doc: Documentation, opts: ParseOptions) => Promise<void>,
 	filePath: string,
 	opts?: DocGenOptions | { [alias: string]: string }
-): ComponentDoc {
+): Promise<ComponentDoc> {
 	const doc = new Documentation()
 	const options: ParseOptions = isOptionsObject(opts)
 		? { ...opts, filePath }
 		: { filePath, alias: opts }
-	createDoc(doc, options)
+	await createDoc(doc, options)
 	return doc.toObject()
 }

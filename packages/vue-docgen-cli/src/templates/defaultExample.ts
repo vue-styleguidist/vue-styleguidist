@@ -54,14 +54,14 @@ export default (doc: ComponentDoc): string => {
 	const { displayName, props, slots } = doc
 	const cleanedName = cleanName(displayName)
 	const propsAttr: string[] = props
-		? Object.keys(props)
-				.filter(p => props[p].required)
-				.map(p => ` ${p}="${getDefault(props[p])}"`)
+		? props.filter(p => p.required).map(p => ` ${p.name}="${getDefault(p)}"`)
 		: []
 	return `
 \`\`\`vue live
   <${cleanedName}${propsAttr.join(' ')}${
-		!slots.default ? '/>' : `>${getDefaultText()}</${cleanedName}>`
+		!slots || !slots.filter(s => s.name === 'default')
+			? '/>'
+			: `>${getDefaultText()}</${cleanedName}>`
 	}
 \`\`\`
 `

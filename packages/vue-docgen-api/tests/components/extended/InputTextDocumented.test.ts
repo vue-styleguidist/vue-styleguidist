@@ -1,13 +1,14 @@
 import * as path from 'path'
-import { ComponentDoc, PropDescriptor } from '../../../src/Documentation'
+import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+import getTestDescriptor from '../../utils/getTestDescriptor'
 
 const InputTextDoc = path.join(__dirname, './InputTextDocumented.vue')
 let docInputTextDoc: ComponentDoc
 
 describe('tests InputTextDoc', () => {
-	beforeAll(done => {
-		docInputTextDoc = parse(InputTextDoc)
+	beforeAll(async done => {
+		docInputTextDoc = await parse(InputTextDoc)
 		done()
 	})
 
@@ -27,17 +28,14 @@ describe('tests InputTextDoc', () => {
 		expect(typeof docInputTextDoc.props !== 'undefined').toBe(true)
 	})
 	describe('props', () => {
-		let props: { [propName: string]: PropDescriptor }
-
-		beforeAll(() => {
-			props = docInputTextDoc.props ? docInputTextDoc.props : {}
-		})
 		it('should the component has two props', () => {
-			expect(Object.keys(props).length).toEqual(2)
+			expect(docInputTextDoc.props && docInputTextDoc.props.length).toEqual(2)
 		})
 
 		it('should the component has placeholder of type string', () => {
-			expect(props.placeholder.type).toEqual({ name: 'string' })
+			expect(getTestDescriptor(docInputTextDoc.props, 'placeholder').type).toEqual({
+				name: 'string'
+			})
 		})
 	})
 

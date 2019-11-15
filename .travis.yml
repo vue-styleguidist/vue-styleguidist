@@ -2,7 +2,7 @@ language: node_js
 
 # never build when commited by the bot
 # + prevent double build on dev -> master Pull Request
-if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = master)
+if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = master OR branch = next)
 
 cache: yarn
 
@@ -18,12 +18,15 @@ install:
 branches:
   only:
     - master
+    - next
     - dev
 
 stages:
   - test
   - name: documentation
     if: type != pull_request AND branch = master
+  - name: release-beta
+    if: type != pull_request AND branch = next
   - name: release
     if: type != pull_request AND branch = master
   - name: merge-back
@@ -42,7 +45,6 @@ jobs:
     - stage: documentation
       script:
         - yarn docs:build
-        - yarn compile
 
         # Build all examples
         - cd examples
@@ -64,7 +66,6 @@ jobs:
 
     - stage: release
       script:
-        - yarn compile
         - git config --global user.name "Vue Styleguidist Bot"
         - git config --global user.email "${BOT_EMAIL}"
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
@@ -73,6 +74,17 @@ jobs:
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - yarn lerna version --yes --github-release
         - yarn lerna publish from-git --yes
+
+    - stage: release-beta
+      script:
+        - git config --global user.name "Vue Styleguidist Bot"
+        - git config --global user.email "${BOT_EMAIL}"
+        - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        - git checkout next
+        - git reset --hard
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+        - yarn lerna version --yes --github-release --conventional-prerelease --preid beta
+        - yarn lerna publish from-git --yes --dist-tag next
 
     # then merge the whole thing back to dev
     - stage: merge-back

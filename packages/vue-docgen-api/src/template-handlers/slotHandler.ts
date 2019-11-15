@@ -1,10 +1,11 @@
 import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
 import recast, { NodePath } from 'recast'
-import Documentation from '../Documentation'
+import Documentation, { Tag, ParamTag } from '../Documentation'
 import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
+import getDoclets from '../utils/getDoclets'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
@@ -54,15 +55,25 @@ export default function slotHandler(
 			slotDescriptor.scoped = true
 		}
 
-		slotDescriptor.bindings = bindings
-
 		const comment = extractLeadingComment(
 			templateAst.parent,
 			templateAst,
 			options.rootLeadingComment
 		)
-		if (comment.length && comment.search(/@slot/) !== -1) {
-			slotDescriptor.description = comment.replace('@slot', '').trim()
+		let bindingDescriptors: ParamTag[] = []
+		if (comment.length) {
+			const doclets = getDoclets(comment)
+			if (doclets.tags) {
+				slotDescriptor.description = ((doclets.tags.filter(t => t.title === 'slot')[0] as Tag)
+					.content as string).trim()
+				bindingDescriptors = doclets.tags.filter(t => t.title === 'binding') as ParamTag[]
+			}
+		}
+		if (Object.keys(bindings).length) {
+			slotDescriptor.bindings = Object.keys(bindings).map(b => {
+				const bindingDesc = bindingDescriptors.filter(t => t.name === b)[0]
+				return bindingDesc || { name: b }
+			})
 		}
 	}
 }

@@ -13,7 +13,7 @@ import resolveRequired from '../utils/resolveRequired'
  * key: mixin variable name
  * value: documentation of named mixin
  */
-export default function mixinsHandler(
+export default async function mixinsHandler(
 	documentation: Documentation,
 	componentDefinition: NodePath,
 	astPath: bt.File,
@@ -47,14 +47,16 @@ export default function mixinsHandler(
 		}
 	}
 
-	files.forEach((vars, fullFilePath) => {
+	await files.keys().reduce(async (_, fullFilePath) => {
+		await _
+		const vars = files.get(fullFilePath)
 		if (fullFilePath && vars) {
 			try {
 				const mixinVar = {
 					name: '<mixin/>',
 					path: fullFilePath
 				}
-				parseFile(documentation, {
+				await parseFile(documentation, {
 					...opt,
 					filePath: fullFilePath,
 					nameFilter: vars,
@@ -65,7 +67,7 @@ export default function mixinsHandler(
 				// eat the error
 			}
 		}
-	})
+	}, Promise.resolve())
 	documentation.set('displayName', null)
 }
 

@@ -39,16 +39,18 @@ export default {
 		}
 	},
 	methods: {
-		/** Triggered when button is clicked
-		 * @event click
-		 * @type {Event}
-		 */
-		/** Event for Alligator's example
-		 * @event gator
-		 * @type {Event}
-		 */
 		handleClick(e) {
+			/** 
+			* Triggered when button is clicked
+			* @event click
+			* @type {Event}
+			*/
 			this.$emit('click', e)
+			/** 
+			* Event for Alligator's example
+			* @event gator
+			* @type {Event}
+			*/
 			this.$emit('gator', e)
 		}
 	}

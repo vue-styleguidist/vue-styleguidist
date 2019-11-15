@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig",
+	"compilerOptions": {
+		"declaration": true,
+		"jsx": "preserve",
+		"outDir": "lib"
+	},
+	"exclude": ["node_modules", "**/__tests__/*.ts"]
+}

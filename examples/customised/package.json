@@ -1,9 +1,10 @@
 {
   "name": "vue-styleguidist-example-customised",
+  "version": "4.0.0-beta.14",
   "description": "The general interface of the output styleguide can be completely changed. Style and assets.",
   "keywords": [
-    "styled", 
-    "feature rich", 
+    "styled",
+    "feature rich",
     "branding",
     "beautiful"
   ],
@@ -41,7 +42,7 @@
     "url-loader": "^1.1.2",
     "vue-docgen-cli": "^3.20.0",
     "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^3.10.1",
+    "vue-styleguidist": "^4.0.0-beta.14",
     "vuepress": "^1.0.3",
     "webpack": "^4.10.0",
     "webpack-bundle-analyzer": "3.3.2"

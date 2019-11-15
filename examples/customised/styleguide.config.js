@@ -2,13 +2,15 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const path = require('path')
 const vueLoader = require('vue-loader')
 
+const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+
 module.exports = {
 	title: 'Style guide example',
 	components: 'src/components/**/[A-Z]*.vue',
 	showSidebar: false,
 	ribbon: {
 		text: 'Back to examples',
-		url: 'https://vue-styleguidist.github.io/Examples.html'
+		url: `${docSiteUrl}/Examples/`
 	},
 	theme: {
 		baseBackground: '#fdfdfc',
@@ -98,9 +100,5 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	styleguideDir: 'dist',
-	codeSplit: true,
-	editorConfig: {
-		theme: 'night'
-	}
+	styleguideDir: 'dist'
 }

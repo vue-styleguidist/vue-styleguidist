@@ -6,23 +6,25 @@ const button = path.join(__dirname, './InputWrapper.vue')
 let docButton: ComponentDoc
 
 describe('tests button functional', () => {
-	beforeEach(done => {
-		docButton = parse(button)
+	beforeEach(async done => {
+		docButton = await parse(button)
 		done()
 	})
 
 	it('should extract props from template if functional', () => {
-		expect(docButton.props).toMatchObject({
-			error: { type: { name: 'boolean' } },
-			label: { type: { name: 'string' } },
-			'v-model': { type: { name: 'string' } }
-		})
+		expect(docButton.props).toContainEqual(
+			expect.objectContaining({ name: 'error', type: { name: 'boolean' } })
+		)
+		expect(docButton.props).toContainEqual(
+			expect.objectContaining({ name: 'v-model', type: { name: 'string' } })
+		)
+		expect(docButton.props).toContainEqual(
+			expect.objectContaining({ name: 'label', type: { name: 'string' } })
+		)
 	})
 
 	it('should not return the value props as it is v-model', () => {
-		expect(docButton.props).not.toMatchObject({
-			value: { type: { name: 'string' } }
-		})
+		expect(docButton.props).not.toMatchObject([{ name: 'value', type: { name: 'string' } }])
 	})
 
 	it('should match the snapshot', () => {

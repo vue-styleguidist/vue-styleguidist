@@ -1,0 +1,30 @@
+{
+  "name": "vue-cli-plugin-docgen",
+  "version": "4.0.0-beta.17",
+  "description": "vue cli plugin for vue-docgen-cli",
+  "homepage": "https://vue-styleguidist.github.io",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
+  },
+  "author": "Bart Ledoux <ledouxb@me.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "null-loader": "^0.1.1",
+    "typescript": "^3.6.0",
+    "vue-docgen-cli": "^4.0.0-beta.17",
+    "webpack-merge": "^4.2.1"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": ">= 3"
+  },
+  "devDependencies": {
+    "@vue/cli": "^3.4.1",
+    "@vue/cli-test-utils": "^3.4.1"
+  }
+}

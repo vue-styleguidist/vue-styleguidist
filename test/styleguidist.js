@@ -25,5 +25,5 @@ if (/^examples[\\/]vuecli3/.test(examplePath) || examplePath === 'examples/svg-l
 	require('./run.cli')
 } else {
 	process.chdir(`./${examplePath}`)
-	require('../packages/vue-styleguidist/bin/styleguidist')
+	require('../packages/vue-styleguidist/lib/bin/styleguidist')
 }

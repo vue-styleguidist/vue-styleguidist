@@ -3,6 +3,138 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.16...v4.0.0-beta.17) (2019-11-14)
+
+
+### Features
+
+* **docgen:** refactor bindings ([b501f82](https://github.com/vue-styleguidist/vue-styleguidist/commit/b501f82))
+* use bindings comments in styleguidist ([4fb6551](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fb6551))
+
+
+
+
+
+# [4.0.0-beta.15](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.14...v4.0.0-beta.15) (2019-11-13)
+
+
+### Bug Fixes
+
+* **docgen:** avoid setting exportName to deps ([230e1e3](https://github.com/vue-styleguidist/vue-styleguidist/commit/230e1e3))
+
+
+### Features
+
+* use [@values](https://github.com/values) tag in props ([cb2fc74](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb2fc74)), closes [#345](https://github.com/vue-styleguidist/vue-styleguidist/issues/345)
+* **docgen:** accept more tags for event params ([cc55f58](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc55f58))
+* **docgen:** add exportName to CompoentDoc ([9466105](https://github.com/vue-styleguidist/vue-styleguidist/commit/9466105))
+
+
+
+
+
+# [4.0.0-beta.12](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2019-11-06)
+
+
+### Features
+
+* **cli:** expose docgen-cli config interfaces ([25f0744](https://github.com/vue-styleguidist/vue-styleguidist/commit/25f0744))
+
+
+
+
+
+# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
+
+
+### Bug Fixes
+
+* **docgen:** avoid outputing empty array ([51d42bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/51d42bf))
+
+
+### Features
+
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+
+
+
+
+
+# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.6...v4.0.0-beta.7) (2019-10-25)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+# [4.0.0-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.1) (2019-10-23)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* **docgen:** make docgen output arrays only ([d456c6c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d456c6c))
+
+
+### Code Refactoring
+
+* **docgen:** make function docgen.parse async ([e17680b](https://github.com/vue-styleguidist/vue-styleguidist/commit/e17680b))
+* **docgen:** make required always a boolean ([03bc88e](https://github.com/vue-styleguidist/vue-styleguidist/commit/03bc88e))
+
+
+### BREAKING CHANGES
+
+* **docgen:** props, events, methods and slots are now all arrays
+
+Co-authored-by: Sébastien D. <demsking@gmail.com>
+* **docgen:** required for props is never a string anymore
+* **docgen:** docgen becomes async, so do all of the handlers
+
+
+
+
+
+## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
 # [3.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.26.0) (2019-10-25)
 
 

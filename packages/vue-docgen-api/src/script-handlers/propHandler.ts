@@ -1,7 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import Documentation, { BlockTag, DocBlockTags, PropDescriptor } from '../Documentation'
+import Documentation, { BlockTag, DocBlockTags, PropDescriptor, ParamTag } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
@@ -9,7 +9,7 @@ import getMemberFilter from '../utils/getPropsFilter'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
-export default function propHandler(documentation: Documentation, path: NodePath) {
+export default async function propHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path
 			.get('properties')
@@ -44,14 +44,23 @@ export default function propHandler(documentation: Documentation, path: NodePath
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
 
-				// save real prop name for reference when v-model
-				propDescriptor.name = propNode.key.name || propNode.key.value
-
 				const propValuePath = prop.get('value')
 
-				propDescriptor.tags = jsDocTags.length ? transformTagsIntoObject(jsDocTags) : {}
 				if (jsDoc.description) {
 					propDescriptor.description = jsDoc.description
+				}
+
+				if (jsDocTags.length) {
+					propDescriptor.tags = transformTagsIntoObject(jsDocTags)
+				}
+
+				if (propDescriptor.tags && propDescriptor.tags['values']) {
+					const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
+					const choices = typeof description === 'string' ? description.split(',') : undefined
+					if (choices) {
+						propDescriptor.values = choices.map((v: string) => v.trim())
+					}
+					delete propDescriptor.tags['values']
 				}
 
 				if (bt.isArrayExpression(propValuePath.node) || bt.isIdentifier(propValuePath.node)) {
@@ -105,7 +114,6 @@ export default function propHandler(documentation: Documentation, path: NodePath
 				.forEach((e: NodePath<bt.StringLiteral>) => {
 					const propDescriptor = documentation.getPropDescriptor(e.node.value)
 					propDescriptor.type = { name: 'undefined' }
-					propDescriptor.required = ''
 				})
 		}
 	}
@@ -175,7 +183,7 @@ export function describeRequired(
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
 	propDescriptor.required =
-		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : ''
+		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : undefined
 }
 
 export function describeDefault(

@@ -1,12 +1,13 @@
 import * as path from 'path'
-import { ComponentDoc, PropDescriptor } from '../../../src/Documentation'
+import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
+import getTestDescriptor from '../../utils/getTestDescriptor'
 
 const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 describe('tests button', () => {
-	beforeAll(done => {
-		docButton = parse(button)
+	beforeAll(async done => {
+		docButton = await parse(button)
 		done()
 	})
 
@@ -19,27 +20,25 @@ describe('tests button', () => {
 	})
 
 	it('should return slots definitions', () => {
-		expect(docButton.slots).toMatchObject({
-			default: { description: 'Use this slot default' },
-			empty: { description: 'Use this slot for not button' }
-		})
+		expect(docButton.slots).toMatchObject([
+			{ name: 'default', description: 'Use this slot default' },
+			{ name: 'empty', description: 'Use this slot for not button' }
+		])
 	})
 
 	describe('props', () => {
-		let props: { [propName: string]: PropDescriptor }
-		beforeEach(() => {
-			props = docButton.props || {}
-		})
 		it('should return propNoType type as string', () => {
-			expect(props.propNoType.type).toMatchObject({ name: 'string' })
+			expect(getTestDescriptor(docButton.props, 'propNoType').type).toMatchObject({
+				name: 'string'
+			})
 		})
 
 		it('should return propA type as number', () => {
-			expect(props.propA.type).toMatchObject({ name: 'number' })
+			expect(getTestDescriptor(docButton.props, 'propA').type).toMatchObject({ name: 'number' })
 		})
 
 		it('should return propB type as string', () => {
-			expect(props.propB.type).toMatchObject({ name: 'string' })
+			expect(getTestDescriptor(docButton.props, 'propB').type).toMatchObject({ name: 'string' })
 		})
 	})
 

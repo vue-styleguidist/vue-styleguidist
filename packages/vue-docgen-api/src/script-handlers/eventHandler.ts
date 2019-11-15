@@ -17,7 +17,7 @@ export interface TypedParamTag extends ParamTag {
 	type: ParamType
 }
 
-export default function eventHandler(
+export default async function eventHandler(
 	documentation: Documentation,
 	path: NodePath,
 	astPath: bt.File
@@ -85,11 +85,16 @@ export default function eventHandler(
 	})
 }
 
+/**
+ * Accepted tags for conveying event properties
+ */
+const PROPERTY_TAGS = ['property', 'arg', 'arguments', 'param']
+
 export function setEventDescriptor(
 	eventDescriptor: EventDescriptor,
 	jsDoc: DocBlockTags
 ): EventDescriptor {
-	if (jsDoc.description.length) {
+	if (jsDoc.description && jsDoc.description.length) {
 		eventDescriptor.description = jsDoc.description
 	}
 
@@ -100,7 +105,7 @@ export function setEventDescriptor(
 		? { names: typeTags.map((t: TypedParamTag) => t.type.name) }
 		: undefined
 
-	const propertyTags = nonNullTags.filter(tg => tg.title === 'property')
+	const propertyTags = nonNullTags.filter(tg => PROPERTY_TAGS.includes(tg.title))
 	if (propertyTags.length) {
 		eventDescriptor.properties = propertyTags.map((tg: TypedParamTag) => {
 			return { type: { names: [tg.type.name] }, name: tg.name, description: tg.description }

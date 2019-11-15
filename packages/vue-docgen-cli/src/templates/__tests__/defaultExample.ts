@@ -5,61 +5,59 @@ describe('defaultExample', () => {
 		expect(
 			defaultExample({
 				displayName: 'my-component',
-				tags: {},
-				slots: {},
-				methods: [],
-				props: {
-					string: {
+				exportName: 'default',
+				props: [
+					{
 						name: 'string',
 						required: true,
 						type: { name: 'string' },
 						tags: {},
 						description: ''
 					},
-					number: {
+					{
 						name: 'number',
 						required: true,
 						type: { name: 'number' },
 						tags: {},
 						description: ''
 					},
-					boolean: {
+					{
 						name: 'boolean',
 						required: true,
 						type: { name: 'boolean' },
 						tags: {},
 						description: ''
 					},
-					array: {
+					{
 						name: 'array',
 						required: true,
 						type: { name: 'array' },
 						tags: {},
 						description: ''
 					},
-					object: {
+					{
 						name: 'object',
 						required: true,
 						type: { name: 'object' },
 						tags: {},
 						description: ''
 					},
-					date: { name: 'date', required: true, type: { name: 'date' }, tags: {}, description: '' },
-					function: {
+					{ name: 'date', required: true, type: { name: 'date' }, tags: {}, description: '' },
+					{
 						name: 'function',
 						required: true,
 						type: { name: 'func' },
 						tags: {},
 						description: ''
 					},
-					symbol: {
+					{
 						name: 'symbol',
 						required: true,
 						type: { name: 'symbol' },
 						tags: {},
 						description: ''
 					}
-				}
+				]
 			})
 		).toMatchInlineSnapshot(`
 						"
@@ -74,10 +72,8 @@ describe('defaultExample', () => {
 		expect(
 			defaultExample({
 				displayName: 'my-component',
-				tags: {},
-				slots: { default: { description: '' } },
-				methods: [],
-				props: {}
+				exportName: 'default',
+				slots: [{ name: 'default', description: '' }]
 			})
 		).toMatchInlineSnapshot(`
 				"
@@ -92,10 +88,9 @@ describe('defaultExample', () => {
 		expect(
 			defaultExample({
 				displayName: "it's my component",
+				exportName: 'default',
 				tags: {},
-				slots: { default: { description: '' } },
-				methods: [],
-				props: {}
+				slots: [{ name: 'default', description: '' }]
 			})
 		).toMatchInlineSnapshot(`
 		"

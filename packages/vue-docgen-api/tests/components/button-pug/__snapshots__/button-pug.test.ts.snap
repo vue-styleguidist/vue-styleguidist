@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests button with pug should match the snapshot 1`] = `
+Object {
+  "description": "",
+  "displayName": "MyButton",
+  "events": undefined,
+  "exportName": undefined,
+  "methods": undefined,
+  "props": undefined,
+  "slots": Array [
+    Object {
+      "description": "Use this slot default",
+      "name": "default",
+    },
+  ],
+  "tags": Object {},
+}
+`;
