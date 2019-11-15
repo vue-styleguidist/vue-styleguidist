@@ -1,6 +1,6 @@
 {
   "name": "vue-styleguidist-example-vuex",
-  "version": "4.0.0-beta.14",
+  "version": "4.0.0",
   "description": "To use `vuex` or `vue-router` you might need some trickery. Have a look at the `config/styleguide.root.js` file to get ideas on what to try.",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
@@ -27,7 +27,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^4.0.0-beta.14",
+    "vue-styleguidist": "^4.0.0",
     "webpack": "^4.10.0"
   },
   "dependencies": {

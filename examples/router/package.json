@@ -1,6 +1,6 @@
 {
 	"name": "vue-styleguidist-example-router",
-	"version": "4.0.0-beta.14",
+	"version": "4.0.0",
 	"description": "Here we experiment how to mock the router in your showcases",
 	"keywords": [
 		"routing",
@@ -40,7 +40,7 @@
 		"sass-loader": "^6.0.6",
 		"style-loader": "^0.19.0",
 		"vue-loader": "^15.2.4",
-		"vue-styleguidist": "^4.0.0-beta.14",
+		"vue-styleguidist": "^4.0.0",
 		"webpack": "^4.10.0"
 	}
 }
