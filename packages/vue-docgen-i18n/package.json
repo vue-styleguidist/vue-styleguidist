@@ -1,0 +1,20 @@
+{
+    "name": "vue-docgen-i18n",
+    "version": "4.0.1",
+    "scripts": {
+        "compile": "tsc -p ./tsconfig.build.json",
+        "compile:watch": "yarn compile --watch"
+    },
+    "bin": {
+        "vue-docgen": "lib/bin.js"
+    },
+    "main": "lib/docgen.js",
+    "dependencies": {
+        "vue-docgen-api": "^4.0.1"
+    },
+    "devDependencies": {
+        "@types/minimist": "^1.2.0",
+        "@types/mkdirp": "^0.5.2",
+        "@types/prettier": "^1.18.1"
+    }
+}
