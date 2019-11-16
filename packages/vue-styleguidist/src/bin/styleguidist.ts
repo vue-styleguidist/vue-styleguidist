@@ -5,7 +5,7 @@ import minimist from 'minimist'
 import kleur from 'kleur'
 import createLogger from 'glogg'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
-import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
+import { StyleguidistConfig } from 'types/StyleGuide'
 import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
 import * as binutils from '../scripts/binutils'
@@ -45,7 +45,7 @@ const env = command === 'build' ? 'production' : 'development'
 process.env.NODE_ENV = process.env.NODE_ENV || env
 
 // Load style guide config
-let config: ProcessedStyleGuidistConfigObject
+let config: StyleguidistConfig
 try {
 	config = getConfig(argv.config, binutils.updateConfig)
 

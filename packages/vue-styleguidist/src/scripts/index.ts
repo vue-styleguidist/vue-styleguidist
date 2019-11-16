@@ -1,7 +1,7 @@
 // Make sure user has webpack installed
 import 'react-styleguidist/lib/scripts/utils/ensureWebpack'
 import { Stats, Configuration, Compiler } from 'webpack'
-import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
+import { StyleguidistConfig } from 'types/StyleGuide'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import buildUtil from './build'
 import server from './server'
@@ -17,11 +17,7 @@ export interface StyleGuideUtils {
 	 * @return {Compiler} Webpack Compiler instance.
 	 */
 	build: (
-		callback: (
-			err: Error | undefined,
-			config: ProcessedStyleGuidistConfigObject,
-			stats: Stats
-		) => void
+		callback: (err: Error | undefined, config: StyleguidistConfig, stats: Stats) => void
 	) => Compiler.Watching | Compiler
 
 	/**
@@ -32,7 +28,7 @@ export interface StyleGuideUtils {
 	 * @return {ServerInfo.Compiler} Webpack Compiler instance.
 	 */
 	server: (
-		callback: (err: Error | undefined, config: ProcessedStyleGuidistConfigObject) => void
+		callback: (err: Error | undefined, config: StyleguidistConfig) => void
 	) => binutils.ServerInfo
 
 	/**
@@ -56,10 +52,10 @@ export interface StyleGuideUtils {
  * @returns {object} API.
  */
 export default function(
-	config: ProcessedStyleGuidistConfigObject,
-	updateConfig: (conf: ProcessedStyleGuidistConfigObject) => void
+	config: StyleguidistConfig,
+	updateConfig: (conf: StyleguidistConfig) => void
 ): StyleGuideUtils {
-	config = getConfig(config, (config: ProcessedStyleGuidistConfigObject) => {
+	config = getConfig(config, (config: StyleguidistConfig) => {
 		setupLogger(config.logger, config.verbose, {})
 		if (typeof updateConfig === 'function') {
 			updateConfig(config)
