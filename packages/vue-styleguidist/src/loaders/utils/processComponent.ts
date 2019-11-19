@@ -5,7 +5,7 @@ import getNameFromFilePath from 'react-styleguidist/lib/loaders/utils/getNameFro
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import slugger from 'react-styleguidist/lib/loaders/utils/slugger'
 import { Component } from '../../types/Component'
-import { ProcessedStyleGuidistConfigObject } from '../../types/StyleGuide'
+import { StyleguidistConfig } from '../../types/StyleGuide'
 
 const vueDocLoader = path.resolve(__dirname, '../vuedoc-loader.js')
 
@@ -27,10 +27,7 @@ function getComponentMetadataPath(filepath: string): string {
  * @param {object} config
  * @returns {object}
  */
-export default function processComponent(
-	filepath: string,
-	config: ProcessedStyleGuidistConfigObject
-): Component {
+export default function processComponent(filepath: string, config: StyleguidistConfig): Component {
 	const componentPath = path.relative(config.configDir || '', filepath)
 	const componentName = getNameFromFilePath(filepath)
 	const props = requireIt(`!!${vueDocLoader}!${filepath}`)

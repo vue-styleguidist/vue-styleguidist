@@ -6730,7 +6730,7 @@ btoa-lite@^1.0.0:
   resolved "https://registry.yarnpkg.com/btoa-lite/-/btoa-lite-1.0.0.tgz#337766da15801210fdd956c22e9c6891ab9d0337"
   integrity sha1-M3dm2hWAEhD92VbCLpxokaudAzc=
 
-buble@0.19.8, buble@^0.19.7:
+buble@0.19.8, buble@^0.19.7, buble@^0.19.8:
   version "0.19.8"
   resolved "https://registry.yarnpkg.com/buble/-/buble-0.19.8.tgz#d642f0081afab66dccd897d7b6360d94030b9d3d"
   integrity sha512-IoGZzrUTY5fKXVkgGHw3QeXFMUNBFv+9l8a4QJKG1JhG3nCMHTdEX1DCOg8568E2Q9qvAQIiSokv6Jsgx8p2cA==

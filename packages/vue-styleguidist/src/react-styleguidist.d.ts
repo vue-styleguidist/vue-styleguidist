@@ -100,9 +100,9 @@ declare module 'react-styleguidist/lib/loaders/utils/getImports' {
 
 declare module 'react-styleguidist/lib/scripts/make-webpack-config' {
 	import { Configuration } from 'webpack'
-	import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
+	import { StyleguidistConfig } from 'types/StyleGuide'
 
-	const makeWebpackConfig: (config: ProcessedStyleGuidistConfigObject, env: string) => Configuration
+	const makeWebpackConfig: (config: StyleguidistConfig, env: string) => Configuration
 	export default makeWebpackConfig
 }
 
@@ -138,7 +138,7 @@ declare module 'react-styleguidist/lib/scripts/utils/error' {
 }
 
 declare module 'react-styleguidist/lib/scripts/utils/sanitizeConfig' {
-	import { ProcessedStyleGuidistConfigObject as StyleGuidistConfigObjectSanitizeConfig } from 'types/StyleGuide'
+	import { StyleguidistConfig as StyleGuidistConfigObjectSanitizeConfig } from 'types/StyleGuide'
 
 	function sanitizeConfig(
 		config: StyleGuidistConfigObjectSanitizeConfig,
@@ -205,7 +205,7 @@ declare module 'react-styleguidist/lib/client/utils/handleHash' {
 
 declare module 'rsg-components/StyleGuide' {
 	import { FunctionComponent } from 'react'
-	import { StyleGuidistConfigObject as StyleGuideStyleGuidistConfigObject } from 'types/StyleGuide'
+	import { StyleguidistConfig as StyleGuideStyleGuidistConfigObject } from 'types/StyleGuide'
 	import { ProcessedSection as StyleGuideSection } from 'types/Section'
 	import { DISPLAY_MODE as StyleGuide_DISPLAY_MODE } from 'types/enums'
 
@@ -224,7 +224,7 @@ declare module 'rsg-components/StyleGuide' {
 }
 
 declare module 'rsg-components/slots' {
-	import { StyleGuidistConfigObject as slotsStyleGuidistConfigObject } from 'types/StyleGuide'
+	import { StyleguidistConfig as slotsStyleGuidistConfigObject } from 'types/StyleGuide'
 
 	const slots: (config?: slotsStyleGuidistConfigObject) => any
 	export default slots

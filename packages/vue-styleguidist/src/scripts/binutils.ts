@@ -11,7 +11,7 @@ import openBrowser from 'react-dev-utils/openBrowser'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import glogg from 'glogg'
 import { Bar as ProgressBar, Presets } from 'cli-progress'
-import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
+import { StyleguidistConfig } from 'types/StyleGuide'
 import server from './server'
 import build from './build'
 import consts from './consts'
@@ -24,7 +24,7 @@ export type ServerInfo = { app: WebpackDevServer; compiler: Compiler }
  * @param {object} config
  * @return {object}
  */
-export function updateConfig(config: ProcessedStyleGuidistConfigObject) {
+export function updateConfig(config: StyleguidistConfig) {
 	// Set verbose mode from config option or command line switch
 	config.verbose = config.verbose || !!process.env.VUESG_VERBOSE
 
@@ -49,7 +49,7 @@ const getProgressPlugin = (msg: string) => {
 	}
 }
 
-export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compiler {
+export function commandBuild(config: StyleguidistConfig): Compiler {
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
@@ -93,10 +93,7 @@ export function commandBuild(config: ProcessedStyleGuidistConfigObject): Compile
 	return compiler
 }
 
-export function commandServer(
-	config: ProcessedStyleGuidistConfigObject,
-	open?: boolean
-): ServerInfo {
+export function commandServer(config: StyleguidistConfig, open?: boolean): ServerInfo {
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
@@ -207,7 +204,7 @@ function printServerInstructions(urls: webpackDevServerUtils.Urls, publicPath: s
 /**
  * @param {object} config
  */
-function printBuildInstructions(config: ProcessedStyleGuidistConfigObject) {
+function printBuildInstructions(config: StyleguidistConfig) {
 	console.log('Style guide published to:\n' + kleur.underline(config.styleguideDir || ''))
 }
 
