@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.1...v4.0.2) (2019-11-18)
+
+
+### Bug Fixes
+
+* import issue conflicts with babel ([f1ac618](https://github.com/vue-styleguidist/vue-styleguidist/commit/f1ac618)), closes [#635](https://github.com/vue-styleguidist/vue-styleguidist/issues/635)
+
+
+
+
+
 ## [4.0.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0...v4.0.1) (2019-11-15)
 
 **Note:** Version bump only for package vue-styleguidist

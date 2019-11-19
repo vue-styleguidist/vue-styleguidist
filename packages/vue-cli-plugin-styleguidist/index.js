@@ -75,6 +75,10 @@ module.exports = (api, options) => {
 function getStyleguidist(args, api, options) {
 	const conf = api.resolve(args.config || './styleguide.config.js')
 	const sgConf = conf && conf.length ? require(conf) : {}
+
+	// reset the default component expression
+	sgConf.components = sgConf.components || 'src/components/**/[A-Z]*.vue'
+
 	const userWebpackConfig = sgConf.webpackConfig
 	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
 	const cliWebpackConfig = getConfig(api)
