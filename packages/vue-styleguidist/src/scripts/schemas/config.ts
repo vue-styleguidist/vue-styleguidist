@@ -9,10 +9,9 @@ import { StyleguidistConfig } from 'types/StyleGuide'
 import { Section } from 'types/Section'
 import getUserPackageJson from 'react-styleguidist/lib/scripts/utils/getUserPackageJson'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
+import fileExistsCaseInsensitive from 'react-styleguidist/lib/scripts/utils/findFileCaseInsensitive'
 import findUserWebpackConfig from '../utils/findUserWebpackConfig'
 import consts from '../consts'
-
-const fileExistsCaseInsensitive = require('react-styleguidist/lib/scripts/utils/findFileCaseInsensitive')
 
 const logger = loggerMaker('vsg')
 
