@@ -141,7 +141,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	let marker = -1
 	const requireContextCode = b.program(
 		flatten(
-			map(fullContext, (requireRequest, name) => [
+			map(fullContext, (requireRequest, name: string) => [
 				// const name$0 = require(path);
 				b.variableDeclaration('const', [
 					b.variableDeclarator(

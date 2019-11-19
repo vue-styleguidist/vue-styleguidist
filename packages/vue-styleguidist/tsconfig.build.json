@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"declaration": true,
 		"jsx": "preserve",
-		"outDir": "lib"
+		"outDir": "lib",
+		"typeRoots": ["node_modules/vue-docgen-api/src/@types", "./src/@types"]
 	},
 	"exclude": ["node_modules", "**/__tests__/*.ts"]
 }

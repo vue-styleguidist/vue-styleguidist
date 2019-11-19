@@ -89,6 +89,7 @@
 	},
 	"devDependencies": {
 		"@babel/types": "^7.5.5",
+		"@types/buble": "^0.19.2",
 		"@types/cli-progress": "^1.8.1",
 		"@types/copy-webpack-plugin": "^4.4.1",
 		"@types/escodegen": "0.0.6",
@@ -100,6 +101,7 @@
 		"@types/webpack": "^4.32.1",
 		"@types/webpack-dev-server": "^3.1.7",
 		"@types/webpack-merge": "^4.1.5",
+		"buble": "^0.19.8",
 		"concurrently": "^4.1.1",
 		"source-map": "0.6.1",
 		"strip-shebang": "^1.0.2",

@@ -5,14 +5,13 @@ import { Configuration } from 'webpack'
 import startCase from 'lodash/startCase'
 import kleur from 'kleur'
 import loggerMaker from 'glogg'
-import { ProcessedStyleGuidistConfigObject } from 'types/StyleGuide'
+import { StyleguidistConfig } from 'types/StyleGuide'
 import { Section } from 'types/Section'
 import getUserPackageJson from 'react-styleguidist/lib/scripts/utils/getUserPackageJson'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
+import fileExistsCaseInsensitive from 'react-styleguidist/lib/scripts/utils/findFileCaseInsensitive'
 import findUserWebpackConfig from '../utils/findUserWebpackConfig'
 import consts from '../consts'
-
-const fileExistsCaseInsensitive = require('react-styleguidist/lib/scripts/utils/findFileCaseInsensitive')
 
 const logger = loggerMaker('vsg')
 
@@ -53,7 +52,7 @@ export default {
 		example: 'components/**/[A-Z]*.vue'
 	},
 	configDir: {
-		process: (value: string, config: ProcessedStyleGuidistConfigObject, rootDir: string) => rootDir
+		process: (value: string, config: StyleguidistConfig, rootDir: string) => rootDir
 	},
 	context: {
 		type: 'object',
@@ -90,7 +89,7 @@ export default {
 	},
 	editorConfig: {
 		type: 'object',
-		process: (value: string, config: ProcessedStyleGuidistConfigObject) => {
+		process: (value: string, config: StyleguidistConfig) => {
 			const defaults = {
 				theme: 'base16-light',
 				mode: 'jsx',
@@ -115,7 +114,7 @@ export default {
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
 		type: 'string',
-		process: (value: string, config: ProcessedStyleGuidistConfigObject) => {
+		process: (value: string, config: StyleguidistConfig) => {
 			return config.showCode === undefined ? value : config.showCode ? 'expand' : 'collapse'
 		},
 		default: 'collapse'
@@ -249,10 +248,7 @@ export default {
 	sections: {
 		type: 'array',
 		default: [],
-		process: (
-			value: Section[] | undefined,
-			config: ProcessedStyleGuidistConfigObject
-		): Section[] => {
+		process: (value: Section[] | undefined, config: StyleguidistConfig): Section[] => {
 			if (!value) {
 				// If root `components` isn't empty, make it a first section
 				// If `components` and `sections` weren’t specified, use default pattern
@@ -411,7 +407,7 @@ export default {
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
 		type: 'string',
-		process: (value: string, config: ProcessedStyleGuidistConfigObject) => {
+		process: (value: string, config: StyleguidistConfig) => {
 			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse'
 		},
 		default: 'collapse'

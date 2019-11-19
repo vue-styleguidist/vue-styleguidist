@@ -1,4 +1,4 @@
-import { ProcessedStyleGuidistConfigObject } from '../../types/StyleGuide'
+import { StyleguidistConfig } from '../../types/StyleGuide'
 import { Component } from '../../types/Component'
 import processComponent from './processComponent'
 
@@ -11,7 +11,7 @@ import processComponent from './processComponent'
  */
 export default function getComponents(
 	components: string[],
-	config: ProcessedStyleGuidistConfigObject
+	config: StyleguidistConfig
 ): Component[] {
 	return components.map(filepath => processComponent(filepath, config))
 }

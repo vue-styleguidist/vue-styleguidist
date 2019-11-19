@@ -7,7 +7,7 @@ import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import getComponentFiles from 'react-styleguidist/lib/loaders/utils/getComponentFiles'
 import slugger from 'react-styleguidist/lib/loaders/utils/slugger'
 import { Section, ProcessedSection } from '../../types/Section'
-import { ProcessedStyleGuidistConfigObject } from '../../types/StyleGuide'
+import { StyleguidistConfig } from '../../types/StyleGuide'
 import getComponents from './getComponents'
 
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
@@ -22,7 +22,7 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
  */
 export default function getSections(
 	sections: Section[],
-	config: ProcessedStyleGuidistConfigObject,
+	config: StyleguidistConfig,
 	parentDepth?: number
 ): ProcessedSection[] {
 	return sections.map(section => processSection(section, config, parentDepth))
@@ -37,7 +37,7 @@ export default function getSections(
  */
 export function processSection(
 	section: Section,
-	config: ProcessedStyleGuidistConfigObject,
+	config: StyleguidistConfig,
 	parentDepth?: number
 ): ProcessedSection {
 	const contentRelativePath = section.content
@@ -76,7 +76,7 @@ export function processSection(
 	}
 }
 
-const getSectionComponents = (section: Section, config: ProcessedStyleGuidistConfigObject) => {
+const getSectionComponents = (section: Section, config: StyleguidistConfig) => {
 	let ignore = config.ignore ? castArray(config.ignore) : []
 	if (section.ignore) {
 		ignore = ignore.concat(castArray(section.ignore))
