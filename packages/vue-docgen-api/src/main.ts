@@ -58,7 +58,7 @@ export async function parseSource(
 }
 
 function isOptionsObject(opts: any): opts is DocGenOptions {
-	return !!opts && (!!opts.alias || opts.jsx !== undefined)
+	return !!opts && (!!opts.alias || opts.jsx !== undefined || !!opts.addScriptHandlers || !!opts.addTemplateHandlers)
 }
 
 async function parsePrimitive(
