@@ -24,6 +24,8 @@ export default async function propHandler(documentation: Documentation, path: No
 	// in case of Vue.extend() structure
 	if (bt.isCallExpression(componentCommentedPath.node)) {
 		componentCommentedPath = componentCommentedPath.parentPath.parentPath
+	} else if(bt.isVariableDeclarator(componentCommentedPath.node)) {
+		componentCommentedPath = componentCommentedPath.parentPath.parentPath.parentPath
 	} else if (bt.isDeclaration(componentCommentedPath.node)) {
 		const classDeclaration = componentCommentedPath.get('declaration')
 		if (bt.isClassDeclaration(classDeclaration.node)) {
