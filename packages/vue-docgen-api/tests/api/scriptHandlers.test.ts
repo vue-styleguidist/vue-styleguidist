@@ -1,9 +1,9 @@
 import * as path from 'path'
-import { parse, ParseOptions, TemplateParserOptions } from '../../src/main'
-import Documentation from '../../src/Documentation'
 import { NodePath } from 'ast-types'
 import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
+import { parse, ParseOptions, TemplateParserOptions } from '../../src/main'
+import Documentation from '../../src/Documentation'
 
 describe('extending handlers', () => {
 
