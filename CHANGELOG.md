@@ -26,209 +26,28 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [4.0.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0...v4.0.1) (2019-11-15)
-
-**Note:** Version bump only for package vue-styleguidist
-
-
-
-
-
-# [4.0.0-beta.20](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.19...v4.0.0-beta.20) (2019-11-15)
-
-**Note:** Version bump only for package vue-styleguidist
-
-
-
-
-
-# [4.0.0-beta.19](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.18...v4.0.0-beta.19) (2019-11-14)
+## [4.0.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.2...v4.0.1) (2019-11-15)
 
 
 ### Bug Fixes
 
 * mixed scoped and non-scoped slots render ([4161ff2](https://github.com/vue-styleguidist/vue-styleguidist/commit/4161ff2))
-
-
-### Features
-
-* review the style of default functions ([98ae04c](https://github.com/vue-styleguidist/vue-styleguidist/commit/98ae04c))
-
-
-
-
-
-# [4.0.0-beta.18](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.17...v4.0.0-beta.18) (2019-11-14)
-
-
-### Features
-
-* **plugin:** better default config for ([9a19cc4](https://github.com/vue-styleguidist/vue-styleguidist/commit/9a19cc4))
-* make arrow functions default cleaner ([f16b424](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b424))
-
-
-
-
-
-# [4.0.0-beta.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.16...v4.0.0-beta.17) (2019-11-14)
-
-
-### Bug Fixes
-
 * **plugin:** es6 requires fix in plugin ([205f7a1](https://github.com/vue-styleguidist/vue-styleguidist/commit/205f7a1))
-
-
-### Features
-
-* **docgen:** refactor bindings ([b501f82](https://github.com/vue-styleguidist/vue-styleguidist/commit/b501f82))
-* use bindings comments in styleguidist ([4fb6551](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fb6551))
-
-
-
-
-
-# [4.0.0-beta.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.15...v4.0.0-beta.16) (2019-11-13)
-
-
-### Bug Fixes
-
 * warning when unnamed event param ([df587dd](https://github.com/vue-styleguidist/vue-styleguidist/commit/df587dd))
-
-
-
-
-
-# [4.0.0-beta.15](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.14...v4.0.0-beta.15) (2019-11-13)
-
-
-### Bug Fixes
-
 * render event types as properties ([48fc5e7](https://github.com/vue-styleguidist/vue-styleguidist/commit/48fc5e7))
 * **docgen:** avoid setting exportName to deps ([230e1e3](https://github.com/vue-styleguidist/vue-styleguidist/commit/230e1e3))
-
-
-### Features
-
-* review design of all props output ([cc80bd5](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc80bd5))
-* use [@values](https://github.com/values) tag in props ([cb2fc74](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb2fc74)), closes [#345](https://github.com/vue-styleguidist/vue-styleguidist/issues/345)
-* **docgen:** accept more tags for event params ([cc55f58](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc55f58))
-* **docgen:** add exportName to CompoentDoc ([9466105](https://github.com/vue-styleguidist/vue-styleguidist/commit/9466105))
-
-
-
-
-
-# [4.0.0-beta.14](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.13...v4.0.0-beta.14) (2019-11-10)
-
-
-### Bug Fixes
-
 * **plugin:** load styleguidist right ([d4c6f6d](https://github.com/vue-styleguidist/vue-styleguidist/commit/d4c6f6d))
 * section depth needs too be taken ([b663f1e](https://github.com/vue-styleguidist/vue-styleguidist/commit/b663f1e))
 * wrongly filtered and typed props array ([3495840](https://github.com/vue-styleguidist/vue-styleguidist/commit/3495840))
-
-
-### Features
-
-* add option to disable progress bar ([6ec4e9d](https://github.com/vue-styleguidist/vue-styleguidist/commit/6ec4e9d))
-
-
-
-
-
-# [4.0.0-beta.13](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.12...v4.0.0-beta.13) (2019-11-06)
-
-
-### Bug Fixes
-
 * avoid double progressBar ([e39878e](https://github.com/vue-styleguidist/vue-styleguidist/commit/e39878e))
-
-
-
-
-
-# [4.0.0-beta.12](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2019-11-06)
-
-
-### Features
-
-* **cli:** expose docgen-cli config interfaces ([25f0744](https://github.com/vue-styleguidist/vue-styleguidist/commit/25f0744))
-* add plugin for docgen cli ([a545aa5](https://github.com/vue-styleguidist/vue-styleguidist/commit/a545aa5)), closes [#614](https://github.com/vue-styleguidist/vue-styleguidist/issues/614)
-
-
-
-
-
-# [4.0.0-beta.11](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.2...v4.0.0-beta.11) (2019-10-30)
-
-
-
-# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
-
-
-### Bug Fixes
-
 * move the build files to the right folder ([9944972](https://github.com/vue-styleguidist/vue-styleguidist/commit/9944972)), closes [#615](https://github.com/vue-styleguidist/vue-styleguidist/issues/615)
-
-
-
-# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
-
-
-### Features
-
-* add progress bar while compiling ([f16b901](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b901))
-
-
-
-# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
-
-
-### Bug Fixes
-
-* **docgen:** avoid outputing empty array ([51d42bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/51d42bf))
-
-
-### Features
-
-* **cli:** use writeStream for better performance ([25da08c](https://github.com/vue-styleguidist/vue-styleguidist/commit/25da08c))
-* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
-
-
-
-# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v4.0.0-beta.7) (2019-10-25)
-
-
-
-# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
-
-
-
-# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
-
-
-
-# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
-
-
-### Bug Fixes
-
 * publish templates with vsg ([f8df33f](https://github.com/vue-styleguidist/vue-styleguidist/commit/f8df33f))
-
-
-
-# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
-
-
-
-## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
-
-
-### Bug Fixes
-
 * passing a webpackConfig should prioitize ([683f3dc](https://github.com/vue-styleguidist/vue-styleguidist/commit/683f3dc))
 * split compiler & utils - efficient code split ([9ef9d06](https://github.com/vue-styleguidist/vue-styleguidist/commit/9ef9d06))
 * **docgen:** make docgen output arrays only ([d456c6c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d456c6c))
+* **docgen:** avoid outputing empty array ([51d42bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/51d42bf))
+* publish templates with vsg ([f8df33f](https://github.com/vue-styleguidist/vue-styleguidist/commit/f8df33f))
+
 
 
 ### Code Refactoring
@@ -237,8 +56,28 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **docgen:** make required always a boolean ([03bc88e](https://github.com/vue-styleguidist/vue-styleguidist/commit/03bc88e))
 
 
+
 ### Features
 
+* review the style of default functions ([98ae04c](https://github.com/vue-styleguidist/vue-styleguidist/commit/98ae04c))
+* **plugin:** better default config for ([9a19cc4](https://github.com/vue-styleguidist/vue-styleguidist/commit/9a19cc4))
+* make arrow functions default cleaner ([f16b424](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b424))
+* **docgen:** refactor bindings ([b501f82](https://github.com/vue-styleguidist/vue-styleguidist/commit/b501f82))
+* use bindings comments in styleguidist ([4fb6551](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fb6551))
+* review design of all props output ([cc80bd5](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc80bd5))
+* use [@values](https://github.com/values) tag in props ([cb2fc74](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb2fc74)), closes [#345](https://github.com/vue-styleguidist/vue-styleguidist/issues/345)
+* **docgen:** accept more tags for event params ([cc55f58](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc55f58))
+* **docgen:** add exportName to CompoentDoc ([9466105](https://github.com/vue-styleguidist/vue-styleguidist/commit/9466105))
+* add option to disable progress bar ([6ec4e9d](https://github.com/vue-styleguidist/vue-styleguidist/commit/6ec4e9d))
+* **cli:** expose docgen-cli config interfaces ([25f0744](https://github.com/vue-styleguidist/vue-styleguidist/commit/25f0744))
+* add plugin for docgen cli ([a545aa5](https://github.com/vue-styleguidist/vue-styleguidist/commit/a545aa5)), closes [#614](https://github.com/vue-styleguidist/vue-styleguidist/issues/614)
+* add progress bar while compiling ([f16b901](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b901))
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+* **cli:** use writeStream for better performance ([25da08c](https://github.com/vue-styleguidist/vue-styleguidist/commit/25da08c))
+* **cli:** use writeStream for better performance ([25da08c](https://github.com/vue-styleguidist/vue-styleguidist/commit/25da08c))
+* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
+* use the functional tag in docgen cli ([c6f8725](https://github.com/vue-styleguidist/vue-styleguidist/commit/c6f8725))
+* add progress bar while compiling ([f16b901](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b901))
 * change defaults for codeSplit & simpleEditor ([810bf1c](https://github.com/vue-styleguidist/vue-styleguidist/commit/810bf1c))
 
 
@@ -256,13 +95,6 @@ Co-authored-by: Sébastien D. <demsking@gmail.com>
 
 
 
-## [3.25.1-beta.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.0...v3.25.1-beta.0) (2019-10-23)
-
-
-
-
-
-# [4.0.0-beta.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2019-10-30)
 ## [3.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.1...v3.26.2) (2019-10-30)
 
 
@@ -276,89 +108,11 @@ Co-authored-by: Sébastien D. <demsking@gmail.com>
 
 
 
-# [4.0.0-beta.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2019-10-30)
-
-
-### Features
-
-* add progress bar while compiling ([f16b901](https://github.com/vue-styleguidist/vue-styleguidist/commit/f16b901))
 
 
 
 
 
-# [4.0.0-beta.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2019-10-28)
-
-
-### Bug Fixes
-
-* **docgen:** avoid outputing empty array ([51d42bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/51d42bf))
-
-
-### Features
-
-* **cli:** use writeStream for better performance ([25da08c](https://github.com/vue-styleguidist/vue-styleguidist/commit/25da08c))
-* emit types for vue-styleguidist ([f0af958](https://github.com/vue-styleguidist/vue-styleguidist/commit/f0af958))
-
-
-
-
-
-# [4.0.0-beta.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.6...v4.0.0-beta.7) (2019-10-25)
-
-
-### Features
-
-* use the functional tag in docgen cli ([c6f8725](https://github.com/vue-styleguidist/vue-styleguidist/commit/c6f8725))
-
-
-
-
-
-# [4.0.0-beta.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2019-10-24)
-
-**Note:** Version bump only for package vue-styleguidist
-
-
-
-
-
-# [4.0.0-beta.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2019-10-24)
-
-**Note:** Version bump only for package vue-styleguidist
-
-
-
-
-
-# [4.0.0-beta.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2019-10-24)
-
-
-### Bug Fixes
-
-* publish templates with vsg ([f8df33f](https://github.com/vue-styleguidist/vue-styleguidist/commit/f8df33f))
-
-
-
-
-
-# [4.0.0-beta.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.3) (2019-10-24)
-
-**Note:** Version bump only for package vue-styleguidist
-
-
-
-
-
-# [4.0.0-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.1...v4.0.0-beta.1) (2019-10-23)
-
-**Note:** Version bump only for package vue-styleguidist
-
-
-
-
-
-## [3.25.1-beta.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.25.1-beta.0...v3.25.1-beta.1) (2019-10-23)
 ## [3.26.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v3.26.0...v3.26.1) (2019-10-30)
 
 
