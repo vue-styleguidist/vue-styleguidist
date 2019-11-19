@@ -1,5 +1,8 @@
 export const name = 'EverButton'
 
+/**
+ * This is a button that represents a javascript only component, not a vue SFC
+ */
 export const Button = {
 	name,
 
