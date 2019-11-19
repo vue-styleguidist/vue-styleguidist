@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.3...v4.0.4) (2019-11-19)
+
+
+### Bug Fixes
+
+* **docgen:** fixed description extraction on non-SFC components ([85626fc](https://github.com/vue-styleguidist/vue-styleguidist/commit/85626fc))
+
+
+
+
+
 ## [4.0.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.0...v4.0.1) (2019-11-15)
 
 **Note:** Version bump only for package vue-docgen-api
