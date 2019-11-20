@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.4...v4.0.5) (2019-11-20)
+
+
+### Bug Fixes
+
+* **docgen:** ensure custom handlers are actually run ([7a0ac62](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a0ac62))
+
+
+
+
+
 ## [4.0.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.3...v4.0.4) (2019-11-19)
 
 
