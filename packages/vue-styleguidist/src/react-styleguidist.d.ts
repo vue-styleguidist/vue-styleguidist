@@ -24,7 +24,7 @@ declare module 'react-styleguidist/lib/loaders/utils/slugger' {
 
 declare module 'react-styleguidist/lib/loaders/utils/getComponentFiles' {
 	const getComponentFiles: (
-		components: string | string[] | undefined,
+		components: (() => (string | string[])) | string | string[] | undefined,
 		configDir: string,
 		ignore: string[]
 	) => string[]

@@ -19,7 +19,7 @@ interface BaseSection {
 }
 
 export interface Section extends BaseSection {
-	components?: string | string[]
+	components?:  (() => (string | string[])) | string | string[];
 	sections?: Section[]
 }
 
