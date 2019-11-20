@@ -86,7 +86,7 @@ export default {
 		type: 'function'
 	},
 	defaultExample: {
-		tstype: 'boolean | string',
+		tstype: 'string',
 		uitype: 'boolean',
 		message: 'Default Example',
 		description:
@@ -138,7 +138,7 @@ export default {
 		default: (componentPath: string) => componentPath
 	},
 	getExampleFilename: {
-		tstype: '(componentPath: string) => string | boolean',
+		tstype: '(componentPath: string) => string',
 		type: 'function',
 		default: (componentPath: string) => {
 			const files = [
@@ -308,7 +308,7 @@ export default {
 		default: '0.0.0.0'
 	},
 	serverPort: {
-		tstype: 'number | string',
+		tstype: 'number',
 		uitype: 'string',
 		message: 'Server Port',
 		description: 'Dev server port',
@@ -419,7 +419,7 @@ export default {
 		type: 'function'
 	},
 	updateExample: {
-		tstype: '(props: Example) => Example',
+		tstype: '(props: Example, ressourcePath: string) => Example',
 		type: 'function',
 		default: (props: Example) => {
 			if (props.lang === 'example') {
@@ -463,7 +463,7 @@ export default {
 		deprecated: 'Use renderRootJsx option instead'
 	},
 	webpackConfig: {
-		tstype: '(env:string) => Configuration | Configuration',
+		tstype: 'Configuration',
 		type: ['object', 'function'],
 		process: (val?: Configuration) => {
 			if (val) {

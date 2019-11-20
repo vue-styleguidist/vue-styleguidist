@@ -15,11 +15,12 @@ export interface StyleguidistContext extends loader.LoaderContext {
 export interface StyleguidistConfig {<% 
     Object.keys(schema).forEach(key => {
         const opt = schema[key]
+        const description = opt.description || opt.message
         const defaultShowable = ['boolean', 'number', 'string'].indexOf(typeof opt.default) > -1
-if(opt.description || defaultShowable || opt.deprecated){%>
+if(description || defaultShowable || opt.deprecated){%>
     /**<% 
-    if(opt.description) { %>
-     * <%- opt.description %> <%
+    if(description) { %>
+     * <%- description %> <%
     }
 
     if(opt.deprecated) { %>
