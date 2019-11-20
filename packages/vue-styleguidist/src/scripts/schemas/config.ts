@@ -6,6 +6,7 @@ import startCase from 'lodash/startCase'
 import kleur from 'kleur'
 import loggerMaker from 'glogg'
 import { StyleguidistConfig } from 'types/StyleGuide'
+import { Example } from 'types/Example'
 import { Section } from 'types/Section'
 import getUserPackageJson from 'react-styleguidist/lib/scripts/utils/getUserPackageJson'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
@@ -36,6 +37,7 @@ export default {
 		type: 'boolean'
 	},
 	compilerConfig: {
+		tstype: 'TransformOptions',
 		type: 'object',
 		default: {
 			objectAssign: 'Object.assign'
@@ -44,6 +46,7 @@ export default {
 	// `components` is a shortcut for { sections: [{ components }] },
 	// see `sections` below
 	components: {
+		tstype: '() => (string | string[]) | string | string[]',
 		uitype: 'string',
 		message: 'Components',
 		description:
@@ -52,9 +55,11 @@ export default {
 		example: 'components/**/[A-Z]*.vue'
 	},
 	configDir: {
+		uitype: 'string',
 		process: (value: string, config: StyleguidistConfig, rootDir: string) => rootDir
 	},
 	context: {
+		tstype: 'Record<string, any>',
 		type: 'object',
 		default: {},
 		example: {
@@ -62,9 +67,11 @@ export default {
 		}
 	},
 	contextDependencies: {
+		tstype: 'string[]',
 		type: 'array'
 	},
 	configureServer: {
+		tstype: '(server: WebpackDevServer, env: string) => string',
 		type: 'function'
 	},
 	copyCodeButton: {
@@ -75,9 +82,12 @@ export default {
 		default: false
 	},
 	dangerouslyUpdateWebpackConfig: {
+		tstype: '(server: Configuration, env: string) => Configuration',
+		description: 'Allows you to modify webpack config without any restrictions',
 		type: 'function'
 	},
 	defaultExample: {
+		tstype: 'string',
 		uitype: 'boolean',
 		message: 'Default Example',
 		description:
@@ -88,6 +98,7 @@ export default {
 			val === true ? path.resolve(__dirname, '../../../templates/DefaultExample.md') : val
 	},
 	editorConfig: {
+		tstype: ['{', '		theme: string', '	}'].join('\n'),
 		type: 'object',
 		process: (value: string, config: StyleguidistConfig) => {
 			const defaults = {
@@ -110,6 +121,7 @@ export default {
 		}
 	},
 	exampleMode: {
+		tstype: 'EXPAND_MODE',
 		message: 'Example Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -120,10 +132,12 @@ export default {
 		default: 'collapse'
 	},
 	getComponentPathLine: {
+		tstype: '(componentPath: string) => string',
 		type: 'function',
 		default: (componentPath: string) => componentPath
 	},
 	getExampleFilename: {
+		tstype: '(componentPath: string) => string',
 		type: 'function',
 		default: (componentPath: string) => {
 			const files = [
@@ -148,7 +162,7 @@ export default {
 		deprecated: 'Use the theme property in the editorConfig option instead'
 	},
 	ignore: {
-		uitype: 'string',
+		tstype: 'string[]',
 		message: 'Ignore',
 		description: 'What components to ignore. Can be an Array or String. Comma separated.',
 		type: 'array',
@@ -180,12 +194,20 @@ export default {
 		deprecated: 'Use pagePerSection option instead'
 	},
 	mixins: {
+		tstype: 'string[]',
 		type: 'array',
 		default: [],
 		example: ['path/to/mixin.js', 'path/to/created.js'],
 		deprecated: 'Use renderRootJsx option instead'
 	},
 	logger: {
+		tstype: [
+			'{',
+			'		info(message: string): void',
+			'		warn(message: string): void',
+			'		debug(message: string): void',
+			'	}'
+		].join('\n'),
 		type: 'object'
 	},
 	minimize: {
@@ -224,17 +246,21 @@ export default {
 		default: true
 	},
 	propsParser: {
+		tstype: '(file: string) => Promise<ComponentDoc>',
 		type: 'function'
 	},
 	require: {
+		tstype: 'string[]',
 		type: 'array',
 		default: [],
 		example: ['babel-polyfill', 'path/to/styles.css']
 	},
 	renderRootJsx: {
+		tstype: 'string',
 		type: 'directory path'
 	},
 	ribbon: {
+		tstype: ['{', '		url: string,', '		text: string', '	}'].join('\n'),
 		uitype: 'boolean',
 		message: 'Ribbon',
 		description:
@@ -246,6 +272,7 @@ export default {
 		}
 	},
 	sections: {
+		tstype: 'Section[]',
 		type: 'array',
 		default: [],
 		process: (value: Section[] | undefined, config: StyleguidistConfig): Section[] => {
@@ -279,6 +306,7 @@ export default {
 		default: '0.0.0.0'
 	},
 	serverPort: {
+		tstype: 'number',
 		uitype: 'string',
 		message: 'Server Port',
 		description: 'Dev server port',
@@ -317,9 +345,11 @@ export default {
 		default: false
 	},
 	sortProps: {
+		tstype: '(props: PropDescriptor[]) => PropDescriptor[]',
 		type: 'function'
 	},
 	styleguideComponents: {
+		tstype: '{ [name: string]: string }',
 		type: 'object'
 	},
 	styleguideDir: {
@@ -383,11 +413,13 @@ export default {
 		example: 'My Style Guide'
 	},
 	updateDocs: {
+		tstype: '(doc: ComponentProps, file: string) => ComponentProps',
 		type: 'function'
 	},
 	updateExample: {
+		tstype: '(props: Example, ressourcePath: string) => Example',
 		type: 'function',
-		default: (props: { lang: string }) => {
+		default: (props: Example) => {
 			if (props.lang === 'example') {
 				props.lang = 'js'
 				logger.warn(
@@ -403,6 +435,7 @@ export default {
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
+		tstype: 'EXPAND_MODE',
 		message: 'Usage Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -428,6 +461,7 @@ export default {
 		deprecated: 'Use renderRootJsx option instead'
 	},
 	webpackConfig: {
+		tstype: 'Configuration',
 		type: ['object', 'function'],
 		process: (val?: Configuration) => {
 			if (val) {

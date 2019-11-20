@@ -8,7 +8,7 @@ import getComponentsFromSections from './getComponentsFromSections'
 import globalizeComponent from './globalizeComponent'
 import processSections from './processSections'
 
-export const RenderJsxContext = React.createContext({})
+export const RenderJsxContext = React.createContext<React.ReactNode>(<div />)
 export const VueComponentMapContext = React.createContext({})
 
 /**
