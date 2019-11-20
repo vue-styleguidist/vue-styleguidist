@@ -165,7 +165,7 @@
     "components"
   ],
   "lint-staged": {
-    "*.js": [
+    "(*.js|*.ts)": [
       "eslint --fix",
       "prettier --write",
       "git add"
@@ -173,6 +173,11 @@
     "*.md": [
       "prettier --write",
       "git add"
+    ],
+    "packages/vue-styleguidist/src/scripts/schemas/config.ts": [
+      "yarn babel packages/vue-styleguidist/src/scripts/schemas/config.ts --out-file lib/scripts/schemas/config.js",
+      "node ./packages/vue-styleguidist/maketypes.js",
+      "git add ./packages/vue-styleguidist/src/types/StyleGuide.ts"
     ]
   },
   "gitHooks": {
