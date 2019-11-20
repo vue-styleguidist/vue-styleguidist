@@ -36,6 +36,9 @@ export interface StyleguidistConfig {
      * @default false 
      */
     copyCodeButton: boolean;
+    /**
+     * Allows you to modify webpack config without any restrictions 
+     */
     dangerouslyUpdateWebpackConfig: (server: Configuration, env: string) => Configuration;
     /**
      * Display each component with a default example, regardless of if there's a README or <docs/> block written. 

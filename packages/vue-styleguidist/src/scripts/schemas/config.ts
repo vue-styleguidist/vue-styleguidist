@@ -83,6 +83,7 @@ export default {
 	},
 	dangerouslyUpdateWebpackConfig: {
 		tstype: '(server: Configuration, env: string) => Configuration',
+		description: 'Allows you to modify webpack config without any restrictions',
 		type: 'function'
 	},
 	defaultExample: {
@@ -97,9 +98,7 @@ export default {
 			val === true ? path.resolve(__dirname, '../../../templates/DefaultExample.md') : val
 	},
 	editorConfig: {
-		tstype: ['{',
-	'		theme: string',
-	'	}'].join('\n'),
+		tstype: ['{', '		theme: string', '	}'].join('\n'),
 		type: 'object',
 		process: (value: string, config: StyleguidistConfig) => {
 			const defaults = {
@@ -122,7 +121,7 @@ export default {
 		}
 	},
 	exampleMode: {
-		tstype: "EXPAND_MODE",
+		tstype: 'EXPAND_MODE',
 		message: 'Example Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -202,11 +201,13 @@ export default {
 		deprecated: 'Use renderRootJsx option instead'
 	},
 	logger: {
-		tstype:['{',
-	'		info(message: string): void',
-	'		warn(message: string): void',
-	'		debug(message: string): void',
-	'	}'].join('\n'),
+		tstype: [
+			'{',
+			'		info(message: string): void',
+			'		warn(message: string): void',
+			'		debug(message: string): void',
+			'	}'
+		].join('\n'),
 		type: 'object'
 	},
 	minimize: {
@@ -259,10 +260,7 @@ export default {
 		type: 'directory path'
 	},
 	ribbon: {
-		tstype:['{',
-	"		url: string,",
-	"		text: string",
-	"	}"].join("\n"),
+		tstype: ['{', '		url: string,', '		text: string', '	}'].join('\n'),
 		uitype: 'boolean',
 		message: 'Ribbon',
 		description:
@@ -437,7 +435,7 @@ export default {
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
-		tstype: "EXPAND_MODE",
+		tstype: 'EXPAND_MODE',
 		message: 'Usage Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
