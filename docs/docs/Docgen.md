@@ -36,7 +36,7 @@ import { ASTElement } from 'vue-template-compiler'
 var componentInfoConfigured = parse(filePath, {
   alias: { '@assets': path.resolve(__dirname, 'src/assets') },
   resolve: [path.resolve(__dirname, 'src')],
-  addScriptHandler: [
+  addScriptHandlers: [
     function(
       documentation: Documentation,
       componentDefinition: NodePath,
@@ -46,7 +46,7 @@ var componentInfoConfigured = parse(filePath, {
       // handle custom code in script
     }
   ],
-  addTemplateHandler: [
+  addTemplateHandlers: [
     function(
       documentation: Documentation,
       templateAst: ASTElement,
