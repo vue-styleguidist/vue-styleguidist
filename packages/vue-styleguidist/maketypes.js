@@ -22,7 +22,7 @@ function render(filename) {
 					if (err) {
 						throw new Error(err)
 					} else {
-						console.log('template generated:', filename)
+						console.log('The config master file has changed and types have been updated')
 						resolve()
 					}
 				}
