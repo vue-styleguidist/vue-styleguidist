@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'clsx';
 import Link from 'rsg-components/Link';
 import Styled from 'rsg-components/Styled';
+import { useStyleGuideContext } from 'rsg-components/Context';
 import { getHash } from 'rsg-components/../utils/handleHash';
 
 const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
@@ -46,8 +47,10 @@ const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
     }
 });
 
-export function ComponentsListRenderer({ classes, items }, { config }) {
-	const { pagePerSection } = config;
+export function ComponentsListRenderer({ classes, items }) {
+	const {
+		config: { pagePerSection },
+	} = useStyleGuideContext();
 	items = items.filter(item => item.visibleName);
 
 	if (!items.length) {
