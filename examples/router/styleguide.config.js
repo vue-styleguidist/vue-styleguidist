@@ -7,7 +7,7 @@ module.exports = {
 	require: ['./router-mock.js'],
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	webpackConfig: {
 		module: {

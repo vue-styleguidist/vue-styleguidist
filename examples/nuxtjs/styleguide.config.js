@@ -8,7 +8,7 @@ module.exports = {
 	renderRootJsx: resolve(__dirname, 'styleguide/styleguide.root.js'),
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	webpackConfig: {
 		module: {

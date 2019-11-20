@@ -8,7 +8,7 @@ module.exports = {
 	require: [path.join(__dirname, './laravel-mock.js')],
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	webpackConfig: {
 		module: {

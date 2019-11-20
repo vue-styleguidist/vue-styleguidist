@@ -9,7 +9,7 @@ module.exports = {
 	require: [path.join(__dirname, './src/style.scss')],
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	webpackConfig: {
 		module: {

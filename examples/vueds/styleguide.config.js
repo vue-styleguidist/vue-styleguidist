@@ -8,7 +8,7 @@ module.exports = {
 	version: require('./package.json').version,
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	/**
 	 * Enabling the following option splits sections into separate views.
