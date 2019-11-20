@@ -48,10 +48,10 @@ jobs:
 
         # Build all examples
         - cd examples
-        - for D in *; do yarn build "${D}"; done
+        - for D in *; do yarn build "${D}"; done || exit 1
 
         # Move them to the docs
-        - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done
+        - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
 
       deploy:
         provider: pages
