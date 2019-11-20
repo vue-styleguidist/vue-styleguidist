@@ -31,20 +31,21 @@ const theme = {
 }
 
 const lightBlue = '#e9f3fd'
+const borderStyle = '1px solid #e2e6ea'
 
 module.exports = {
 	theme,
 	styles: {
 		StyleGuide: {
 			logo: {
-                isolated: false,
+				isolated: false,
 				padding: 24,
 				color: lightBlue
 			}
 		},
 		Version: {
 			version: {
-                isolated: false,
+				isolated: false,
 				color: theme.color.link,
 				margin: [[8, 0, 0]],
 				padding: [[4, 8, 5]],
@@ -60,7 +61,7 @@ module.exports = {
 		},
 		Logo: {
 			logo: {
-                isolated: false,
+				isolated: false,
 				color: lightBlue,
 				fontWeight: 400
 			}
@@ -68,8 +69,8 @@ module.exports = {
 		Link: {
 			link: {
 				'&, &:link, &:visited': {
-                    isolated: false,
-					fontWeight: 600,
+					isolated: false,
+					fontWeight: 600
 				}
 			}
 		},
@@ -87,7 +88,7 @@ module.exports = {
 		},
 		TableOfContents: {
 			input: {
-                isolated: false,
+				isolated: false,
 				padding: '8px 16px 9px',
 				color: 'white',
 				border: '1px solid transparent',
@@ -96,10 +97,10 @@ module.exports = {
 		},
 		Playground: {
 			preview: {
-                isolated: false,
+				isolated: false,
 				padding: '40px',
 				backgroundColor: '#f9fafb',
-				border: '1px solid #e2e6ea',
+				border: borderStyle,
 				boxShadow: 'inset 0 0 8px rgba(0, 17, 35, 0.05)',
 				margin: '16px 0 0',
 				borderRadius: '0',
@@ -144,7 +145,7 @@ module.exports = {
 				padding: '16px 48px 16px 16px'
 			},
 			tableHead: {
-				borderBottom: [['1px solid #e2e6ea'
+				borderBottom: borderStyle
 			},
 			cell: {
 				padding: '16px 48px 16px 16px'
