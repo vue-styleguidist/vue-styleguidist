@@ -1,3 +1,4 @@
+import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
@@ -77,7 +78,7 @@ export interface StyleguidistConfig {
 export interface StyleGuideObject {
 	sections: ProcessedSection[]
 	config: StyleguidistConfig
-	renderRootJsx: any
+	renderRootJsx: React.ReactNode
 	welcomeScreen: any
-	patterns: any
+	patterns: string[]
 }
