@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.5...v4.0.6) (2019-11-21)
+
+
+### Bug Fixes
+
+* **plugin:** avoid fork-ts success notification ([9ac7a09](https://github.com/vue-styleguidist/vue-styleguidist/commit/9ac7a09))
+
+
+
+
+
 ## [4.0.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.4...v4.0.5) (2019-11-20)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
