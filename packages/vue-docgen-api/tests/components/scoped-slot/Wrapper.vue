@@ -1,6 +1,9 @@
 <template>
-  <div class="modal-footer">
-    <!-- @slot Modal footer here -->
-    <slot name="footer" v-bind:item="item" />
-  </div>
+	<div class="modal-footer">
+		<!-- 
+      @slot Modal footer
+      @binding item an item passed to the footer
+		-->
+		<slot name="footer" :item="item" />
+	</div>
 </template>

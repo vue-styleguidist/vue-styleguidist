@@ -21,7 +21,7 @@ describe('tests wrapper with root slot', () => {
 		})
 
 		it('should have a wrapper slot.', () => {
-			expect(getTestDescriptor(docWrapper.slots, 'footer').description).toBe('Modal footer here')
+			expect(getTestDescriptor(docWrapper.slots, 'footer').description).toBe('Modal footer')
 		})
 
 		it('should show the slot as scoped', () => {
@@ -33,10 +33,15 @@ describe('tests wrapper with root slot', () => {
 			Object {
 			  "bindings": Array [
 			    Object {
-			      "name": ":item",
+			      "description": "an item passed to the footer",
+			      "name": "item",
+			      "title": "binding",
+			      "type": Object {
+			        "name": "mixed",
+			      },
 			    },
 			  ],
-			  "description": "Modal footer here",
+			  "description": "Modal footer",
 			  "name": "footer",
 			  "scoped": true,
 			}
@@ -60,11 +65,11 @@ describe('tests wrapper with root slot', () => {
 
 		it('should match the reference for the text slot', () => {
 			expect(getTestDescriptor(docApp.slots, 'text')).toMatchInlineSnapshot(`
-						Object {
-						  "description": "text slot here",
-						  "name": "text",
-						}
-				`)
+									Object {
+									  "description": "text slot here",
+									  "name": "text",
+									}
+						`)
 		})
 	})
 })
