@@ -6,6 +6,7 @@ import JsDoc from 'rsg-components/JsDoc'
 import Markdown from 'rsg-components/Markdown'
 import Slot from 'rsg-components/Slot'
 import ReactComponentRenderer from 'rsg-components-default/ReactComponent/ReactComponentRenderer'
+import Context from 'rsg-components/Context'
 import { DOCS_TAB_USAGE } from 'rsg-components/slots'
 import { DisplayModes, UsageModes } from 'rsg-components/../consts'
 import FunctionalTag from './FunctionalTag'
@@ -25,23 +26,13 @@ export default class ReactComponent extends Component {
 		exampleMode: PropTypes.string.isRequired,
 		usageMode: PropTypes.string.isRequired
 	}
-	static contextTypes = {
-		config: PropTypes.object.isRequired,
-		displayMode: PropTypes.string
+	static contextType = Context
+
+	state = {
+		activeTab: this.props.usageMode === UsageModes.expand ? DOCS_TAB_USAGE : undefined
 	}
 
-	constructor(props, context) {
-		super(props, context)
-		const { usageMode } = props
-
-		this.handleTabChange = this.handleTabChange.bind(this)
-
-		this.state = {
-			activeTab: usageMode === UsageModes.expand ? DOCS_TAB_USAGE : undefined
-		}
-	}
-
-	handleTabChange(name) {
+	handleTabChange = name => {
 		this.setState(state => ({
 			activeTab: state.activeTab !== name ? name : undefined
 		}))
@@ -62,7 +53,7 @@ export default class ReactComponent extends Component {
 		const showUsage = usageMode !== UsageModes.hide
 
 		return (
-			<DocumentedComponentContext.Provider value={this.props.component}>
+			<DocumentedComponentContext.Provider value={component}>
 				<ReactComponentRenderer
 					name={name}
 					slug={slug}

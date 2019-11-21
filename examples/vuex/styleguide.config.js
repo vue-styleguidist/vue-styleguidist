@@ -35,6 +35,6 @@ module.exports = {
 	styleguideDir: 'dist',
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	}
 }

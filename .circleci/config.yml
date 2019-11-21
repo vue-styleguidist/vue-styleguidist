@@ -35,12 +35,14 @@ jobs:
       - run: yarn build customised
       - run: yarn build sections
       - run: yarn build vuex
+      - run: yarn build functional-flag
 
       # Check that examples really works: no JS errors on load
       - run: yarn test:browser basic
       - run: yarn test:browser customised
       - run: yarn test:browser sections
       - run: yarn test:browser vuex
+      - run: yarn test:browser functional-flag
 
   examples-vuecli:
     <<: *defaults

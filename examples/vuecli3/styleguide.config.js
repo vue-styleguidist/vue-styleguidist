@@ -9,7 +9,7 @@ module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	styleguideDir: 'dist',
 	// sections: [
