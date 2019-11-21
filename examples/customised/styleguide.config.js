@@ -10,7 +10,7 @@ module.exports = {
 	showSidebar: false,
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	theme: {
 		baseBackground: '#fdfdfc',

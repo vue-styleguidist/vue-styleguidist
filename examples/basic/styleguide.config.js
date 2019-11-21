@@ -22,7 +22,7 @@ module.exports = {
 	defaultExample: true,
 	ribbon: {
 		text: 'Back to examples',
-		url: `${docSiteUrl}/Examples/`
+		url: `${docSiteUrl}/Examples.html`
 	},
 	version: '1.1.1',
 	webpackConfig: {

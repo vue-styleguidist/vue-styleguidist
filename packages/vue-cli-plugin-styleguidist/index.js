@@ -95,6 +95,20 @@ function getStyleguidist(args, api, options) {
 function getConfig(api) {
 	const conf = api.resolveChainableWebpackConfig()
 
+	// avoid annoying notification when everything works
+	if (conf.plugins.has('fork-ts-checker')) {
+		conf.plugin('fork-ts-checker').tap(args => {
+			args[0].logger = {
+				// eslint-disable-next-line no-console
+				warn: console.warn,
+				// eslint-disable-next-line no-console
+				error: console.error,
+				info: function() {}
+			}
+			return args
+		})
+	}
+
 	// because we are dealing with hot replacement in vsg
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
