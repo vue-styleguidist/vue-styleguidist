@@ -18,40 +18,46 @@ The tool can be used programmatically to extract component information and custo
 
 ```js
 var vueDocs = require('vue-docgen-api')
-var componentInfo = vueDocs.parse(filePath)
+var componentInfo
+vueDocs.parse(filePath).then(ci => {
+  componentInfo = ci
+})
 ```
 
 or with typescript
 
 ```ts
 import { parse } from 'vue-docgen-api'
-var componentInfoSimple = parse(filePath)
-var componentInfoConfigured = parse(filePath, {
-  alias: { '@assets': path.resolve(__dirname, 'src/assets') },
-  resolve: [path.resolve(__dirname, 'src')],
-  addScriptHandler: [
-    function(
-      documentation: Documentation,
-      componentDefinition: NodePath,
-      astPath: bt.File,
-      opt: ParseOptions
-    ) {
-      // handle custom code in script
-    }
-  ],
-  addTemplateHandler: [
-    function(
-      documentation: Documentation,
-      templateAst: ASTElement,
-      options: TemplateParserOptions
-    ) {
-      // handle custom directives here
-    }
-  ]
-})
+
+async function parseMyComponent(filePath: string) {
+  var componentInfoSimple = await parse(filePath)
+  var componentInfoConfigured = await parse(filePath, {
+    alias: { '@assets': path.resolve(__dirname, 'src/assets') },
+    resolve: [path.resolve(__dirname, 'src')],
+    addScriptHandler: [
+      function(
+        documentation: Documentation,
+        componentDefinition: NodePath,
+        astPath: bt.File,
+        opt: ParseOptions
+      ) {
+        // handle custom code in script
+      }
+    ],
+    addTemplateHandler: [
+      function(
+        documentation: Documentation,
+        templateAst: ASTElement,
+        options: TemplateParserOptions
+      ) {
+        // handle custom directives here
+      }
+    ]
+  })
+}
 ```
 
-### parse(filePath:string, options?: DocGenOptions)
+### async parse(filePath:string, options?: DocGenOptions)
 
 | Parameter | Type   | Description   |
 | --------- | ------ | ------------- |
@@ -61,7 +67,76 @@ var componentInfoConfigured = parse(filePath, {
 
 You can use JSDoc tags when documenting components, props and methods.
 
-## Example
+## Props
+
+```js
+export default {
+  props: {
+    /**
+     * Color of the button.
+     */
+    color: {
+      type: String,
+      default: '#FCC'
+    },
+    /**
+     * initial value to be passed but undocumented
+     * @ignore
+     */
+    initialvalue: {
+      type: Number,
+      default: 0
+    },
+    /**
+     * The size of the button allows only some values
+     * @values small, medium, large
+     */
+    size: {
+      default: 'normal'
+    }
+  }
+}
+```
+
+## Events
+
+```js
+export default {
+  methods: {
+    emitSuccess() {
+      /**
+       * Success event.
+       *
+       * @event success
+       * @property {string} content content of the first prop passed to the event
+       * @property {object} example the demo example
+       */
+      this.$emit('success', content, {
+        demo: 'example'
+      })
+    }
+  }
+}
+```
+
+## Slots
+
+```html
+<template>
+  <div>
+    <!-- @slot Use this slot header -->
+    <slot name="header"></slot>
+
+    <!--
+      @slot Modal footer
+      @binding item an item passed to the footer
+		-->
+    <slot name="footer" :item="item" />
+  </div>
+</template>
+```
+
+## Full Example
 
 For the following component
 
@@ -75,8 +150,11 @@ For the following component
       <!-- -->
     </table>
 
-    <!-- @slot Use this slot footer -->
-    <slot name="footer"></slot>
+    <!--
+      @slot Modal footer
+      @binding item an item passed to the footer
+		-->
+    <slot name="footer" :item="item" />
   </div>
 </template>
 
@@ -396,34 +474,6 @@ we are getting this output:
     }
   }
 }
-```
-
-## Events
-
-```js
-/**
- * Success event.
- *
- * @event success
- * @property {object} example the demo example
- */
-this.$emit('success', {
-  demo: 'example'
-})
-```
-
-## Slots
-
-```html
-<template>
-  <div>
-    <!-- @slot Use this slot header -->
-    <slot name="header"></slot>
-
-    <!-- @slot Use this slot footer -->
-    <slot name="footer"></slot>
-  </div>
-</template>
 ```
 
 ## Change log
