@@ -69,7 +69,9 @@ class Preview extends Component {
 		if (this.vueInstance) {
 			try {
 				this.vueInstance.$destroy();
-			} catch (err) { }
+			} catch (err) {
+				// eat the error
+			}
 			this.vueInstance = null;
 		}
 	}
