@@ -1,11 +1,11 @@
 import { BlockTag, DocBlockTags, Param, ParamType } from '../Documentation'
+import matchRecursiveRegExp from './matchRecursiveRegexp'
 
 const DOCLET_PATTERN = /^(?:\s+)?@(\w+)(?:$|\s((?:[^](?!^(?:\s+)?@\w))*))/gim
 
 function getParamInfo(content: string, hasName: boolean) {
 	content = content || ''
-	const typeSliceArray = /^\{([^}]+)\}/.exec(content)
-	const typeSlice = typeSliceArray && typeSliceArray.length ? typeSliceArray[1] : '*'
+	const typeSlice = matchRecursiveRegExp(content, '{', '}')[0] || '*'
 	const param: Param = { type: getTypeObjectFromTypeString(typeSlice) }
 
 	content = content.replace(`{${typeSlice}}`, '')
