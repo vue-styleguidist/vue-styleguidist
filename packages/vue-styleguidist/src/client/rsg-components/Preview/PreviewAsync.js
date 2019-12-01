@@ -62,6 +62,7 @@ class PreviewAsync extends Component {
 	}
 
 	unmountPreview() {
+		this.destroyVueInstance();
 		if (this.mountNode) {
 			let el = this.mountNode.children[0]
 			if (!el) {
@@ -74,6 +75,17 @@ class PreviewAsync extends Component {
 				data: {},
 				template: '<div></div> '
 			})
+		}
+	}
+
+	destroyVueInstance() {
+		if (this.vueInstance) {
+			try {
+				this.vueInstance.$destroy();
+			} catch (err) {
+				// eat the error
+			}
+			this.vueInstance = null;
 		}
 	}
 
@@ -155,7 +167,8 @@ class PreviewAsync extends Component {
 			? renderRootJsx.default(previewComponent)
 			: { render: createElement => createElement(previewComponent) }
 		try {
-			new Vue({
+			this.destroyVueInstance();
+			this.vueInstance = new Vue({
 				...extendsComponent,
 				...rootComponent,
 				el

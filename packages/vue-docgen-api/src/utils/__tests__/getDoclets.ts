@@ -46,6 +46,13 @@ describe('getDoclets', () => {
 		])
 	})
 
+	it('should extract param type with braces', () => {
+		const src = `@param {{name: string, id: number}} user`
+		expect(getDocLets(src).tags).toEqual([
+			{ name: 'user', title: 'param', type: { name: '{name: string, id: number}' } }
+		])
+	})
+
 	it('should extract description', () => {
 		const src = ['awesome method', ' ', '@version 1.2.3'].join('\n')
 		expect(getDocLets(src).description).toEqual('awesome method')
