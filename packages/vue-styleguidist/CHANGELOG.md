@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.6...v4.0.7) (2019-12-01)
+
+
+### Bug Fixes
+
+* destroy Vue component in Preview when replacing it or unmounting ([00b7658](https://github.com/vue-styleguidist/vue-styleguidist/commit/00b7658))
+
+
+
+
+
 ## [4.0.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.4...v4.0.5) (2019-11-20)
 
 **Note:** Version bump only for package vue-styleguidist

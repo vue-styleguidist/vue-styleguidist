@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.6...v4.0.7) (2019-12-01)
+
+
+### Bug Fixes
+
+* **docgen:** avoid incorrect of getting nested '}' param type ([5df05e0](https://github.com/vue-styleguidist/vue-styleguidist/commit/5df05e0))
+* destroy Vue component in Preview when replacing it or unmounting ([00b7658](https://github.com/vue-styleguidist/vue-styleguidist/commit/00b7658))
+
+
+
+
+
 ## [4.0.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.5...v4.0.6) (2019-11-21)
 
 
