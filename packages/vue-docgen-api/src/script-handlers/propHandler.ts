@@ -54,7 +54,7 @@ export default async function propHandler(documentation: Documentation, path: No
 					propDescriptor.tags = transformTagsIntoObject(jsDocTags)
 				}
 
-				parseValuesFromTags(propDescriptor.tags)
+				extractValuesFromTags(propDescriptor)
 
 				if (bt.isArrayExpression(propValuePath.node) || bt.isIdentifier(propValuePath.node)) {
 					// if it's an immediately typed property, resolve its type immediately
@@ -216,7 +216,7 @@ export function describeDefault(
 	}
 }
 
-export function parseValuesFromTags(propDescriptor: PropDescriptor) {
+export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 	if (propDescriptor.tags && propDescriptor.tags['values']) {
 		const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
 		const choices = typeof description === 'string' ? description.split(',') : undefined
