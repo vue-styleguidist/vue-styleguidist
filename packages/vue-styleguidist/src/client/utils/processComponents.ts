@@ -1,5 +1,6 @@
 import { Component } from '../../types/Component'
 import { Example } from '../../types/Example'
+import compileExamples from './compileExamples'
 
 /**
  * Do things that are hard or impossible to do in a loader: we don’t have access to component name
@@ -27,16 +28,7 @@ export default function processComponents(components: Component[]): Component[] 
 			}
 		}
 
-		newComponent.props &&
-			Array.isArray(newComponent.props.examples) &&
-			newComponent.props.examples.forEach(ex => {
-				if (ex.type === 'code') {
-					if (ex.compiled !== undefined && typeof ex.content === 'string') {
-						const content = { raw: ex.content, compiled: ex.compiled }
-						ex.content = content
-					}
-				}
-			})
+		newComponent.props && compileExamples(newComponent.props.examples)
 
 		return newComponent
 	})
