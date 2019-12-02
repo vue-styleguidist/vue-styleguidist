@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.7...v4.0.8) (2019-12-02)
+
+
+### Bug Fixes
+
+* make sections without examples pre-compile ([56d675d](https://github.com/vue-styleguidist/vue-styleguidist/commit/56d675d))
+
+
+
+
+
 ## [4.0.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.6...v4.0.7) (2019-12-01)
 
 
