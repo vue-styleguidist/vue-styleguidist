@@ -1,5 +1,6 @@
 import { ProcessedSection } from 'types/Section'
 import processComponents from './processComponents'
+import compileExamples from './compileExamples'
 
 /**
  * Recursively process each component in all sections.
@@ -8,10 +9,14 @@ import processComponents from './processComponents'
  * @return {Array}
  */
 export default function processSections(sections: ProcessedSection[]): ProcessedSection[] {
-	return sections.map(section => ({
-		...section,
-		visibleName: section.name,
-		components: processComponents(section.components || []),
-		sections: processSections(section.sections || [])
-	}))
+	return sections.map(section => {
+		compileExamples(section.content)
+
+		return {
+			...section,
+			visibleName: section.name,
+			components: processComponents(section.components || []),
+			sections: processSections(section.sections || [])
+		}
+	})
 }
