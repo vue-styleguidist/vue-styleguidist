@@ -379,6 +379,38 @@ describe('propHandler', () => {
 		})
 	})
 
+	describe('@values tag parsing', () => {
+		it('should parse the @values tag as its own', () => {
+			const src = `
+	export default {
+	  props: {
+		/**
+		 * color of the component
+		 * @values dark, light
+		 * @author me
+		 */
+		color: {
+			type: string
+		}
+	  }
+	}
+	`
+			tester(src, {
+				description: 'color of the component',
+				values: ['dark', 'light'],
+				tags: {
+					author: [
+						{
+							description: 'me',
+							title: 'author'
+						}
+					]
+				}
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('color')
+		})
+	})
+
 	describe('typescript Vue.extends', () => {
 		it('should be ok with Prop', () => {
 			const src = `
