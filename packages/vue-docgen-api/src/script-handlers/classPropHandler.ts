@@ -1,11 +1,16 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
-import Documentation, { BlockTag, DocBlockTags, ParamTag } from '../Documentation'
+import Documentation, { BlockTag, DocBlockTags } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
-import propHandler, { describeDefault, describeRequired, describeType } from './propHandler'
+import propHandler, {
+	describeDefault,
+	describeRequired,
+	describeType,
+	extractValuesFromTags
+} from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
 export default async function classPropHandler(
@@ -53,14 +58,7 @@ export default async function classPropHandler(
 					propDescriptor.description = jsDoc.description
 				}
 
-				if (propDescriptor.tags && propDescriptor.tags['values']) {
-					const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
-					const choices = typeof description === 'string' ? description.split(',') : undefined
-					if (choices) {
-						propDescriptor.values = choices.map((v: string) => v.trim())
-					}
-					delete propDescriptor.tags['values']
-				}
+				extractValuesFromTags(propDescriptor)
 
 				if (propPath.node.typeAnnotation) {
 					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
