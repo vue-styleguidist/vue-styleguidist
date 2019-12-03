@@ -103,6 +103,33 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testDescribed')
 		})
 
+		it('should parse the @values tag as its own', () => {
+			const src = `
+		@Component
+		export default class MyTest {
+		  /**
+		   * color of the component
+		   * @values dark, light
+		   * @author me
+		   **/
+		  @Prop
+		  color: string;
+		}`
+			tester(src, {
+				description: 'color of the component',
+				values: ['dark', 'light'],
+				tags: {
+					author: [
+						{
+							description: 'me',
+							title: 'author'
+						}
+					]
+				}
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('color')
+		})
+
 		it('should extract type from decorator arguments', () => {
 			const src = `
         @Component
