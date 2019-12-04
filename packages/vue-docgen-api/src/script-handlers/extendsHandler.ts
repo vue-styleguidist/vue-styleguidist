@@ -43,12 +43,15 @@ export default async function extendsHandler(
 				name: extendsFilePath[extendsVariableName].exportName,
 				path: fullFilePath
 			}
-			await parseFile(documentation, {
-				...opt,
-				filePath: fullFilePath,
-				nameFilter: [extendsFilePath[extendsVariableName].exportName],
-				extends: extendsVar
-			})
+			await parseFile(
+				{
+					...opt,
+					filePath: fullFilePath,
+					nameFilter: [extendsFilePath[extendsVariableName].exportName],
+					extends: extendsVar
+				},
+				documentation
+			)
 			extendsVar.name = documentation.get('displayName')
 		} catch (e) {
 			// eat the error
