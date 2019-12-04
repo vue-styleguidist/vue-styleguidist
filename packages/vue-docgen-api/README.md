@@ -57,11 +57,13 @@ async function parseMyComponent(filePath: string) {
 }
 ```
 
-### async parse(filePath:string, options?: DocGenOptions)
+### `parse()` vs `parseMulti()`
 
-| Parameter | Type   | Description   |
-| --------- | ------ | ------------- |
-| filePath  | string | The file path |
+The API exports two asynchronous functions `parse` and `parseMulti`. The two functions take the same set of parameters. `parse` returns a pure `ComponentDoc` whereas `parseMulti` returns an array of `CommponentDoc`
+
+When using only SFC or components that are the only one in their components, this function returns a `ComponentDoc` object. Using `parse` in most cases is simpler.
+
+If you are creating a library and your goal is to have it as generic as possible, it might be a good idea to use `parseMulti`. In some cases, developer choose to have **more than one component** exported by a file, which make `parse` throw an error.
 
 ## Using JSDoc tags
 
