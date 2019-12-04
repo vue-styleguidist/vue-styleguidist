@@ -56,12 +56,15 @@ export default async function mixinsHandler(
 					name: '<mixin/>',
 					path: fullFilePath
 				}
-				await parseFile(documentation, {
-					...opt,
-					filePath: fullFilePath,
-					nameFilter: vars,
-					mixin: mixinVar
-				})
+				await parseFile(
+					{
+						...opt,
+						filePath: fullFilePath,
+						nameFilter: vars,
+						mixin: mixinVar
+					},
+					documentation
+				)
 				mixinVar.name = documentation.get('displayName')
 			} catch (e) {
 				// eat the error

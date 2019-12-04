@@ -54,25 +54,32 @@ export interface DocGenOptions {
 }
 
 /**
- * parses the source and returns the doc
- * @param {string} source code whose documentation is parsed
- * @param {string} filePath path of the current file against whom to resolve the mixins
+ * parses the source at filePath and returns the doc
+ * @param opt ParseOptions containing the filePath and the rest of the options
+ * @param documentation documentation to be enriched if needed
  * @returns {object} documentation object
  */
-export async function parseFile(opt: ParseOptions): Promise<Documentation[]> {
+export async function parseFile(
+	opt: ParseOptions,
+	documentation?: Documentation
+): Promise<Documentation[]> {
 	const source = await read(opt.filePath, {
 		encoding: 'utf-8'
 	})
-	return parseSource(source, opt)
+	return parseSource(source, opt, documentation)
 }
 
 /**
  * parses the source and returns the doc
  * @param {string} source code whose documentation is parsed
- * @param {string} filePath path of the current file against whom to resolve the mixins
+ * @param {string} opt path of the current file against whom to resolve the mixins
  * @returns {object} documentation object
  */
-export async function parseSource(source: string, opt: ParseOptions): Promise<Documentation[]> {
+export async function parseSource(
+	source: string,
+	opt: ParseOptions,
+	documentation?: Documentation
+): Promise<Documentation[]> {
 	// if jsx option is not mentionned, parse jsx in components
 	opt.jsx = opt.jsx === undefined ? true : opt.jsx
 
@@ -82,22 +89,43 @@ export async function parseSource(source: string, opt: ParseOptions): Promise<Do
 		throw new Error(ERROR_EMPTY_DOCUMENT)
 	}
 
+	// if the parsed component is the result of a mixin or an extends
+	if (documentation) {
+		documentation.setOrigin(opt)
+	}
+
 	if (singleFileComponent) {
-		return [await parseSFC(source, opt)]
+		return [await parseSFC(documentation, source, opt)]
 	} else {
 		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
-		return (
-			(await parseScript(source, preHandlers, [...scriptHandlers, ...addScriptHandlers], opt)) || []
-		)
+		const docs =
+			(await parseScript(
+				source,
+				preHandlers,
+				[...scriptHandlers, ...addScriptHandlers],
+				opt,
+				documentation
+			)) || []
+
+		if (docs.length === 1 && !docs[0].get('displayName')) {
+			// give a component a display name if we can
+			docs[0].set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
+		}
+
+		return docs
 	}
 }
 
-async function parseSFC(source: string, opt: ParseOptions): Promise<Documentation> {
+async function parseSFC(
+	initialDoc: Documentation | undefined,
+	source: string,
+	opt: ParseOptions
+): Promise<Documentation> {
 	const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
 
-	const documentation = new Documentation()
+	const documentation = initialDoc || new Documentation()
 
 	// use padding so that errors are displayed at the correct line
 	const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)

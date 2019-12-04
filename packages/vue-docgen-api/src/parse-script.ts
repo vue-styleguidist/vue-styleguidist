@@ -71,14 +71,15 @@ async function executeHandlers(
 		compDefs.map(async name => {
 			const doc = documentation || new Documentation()
 			const compDef = componentDefinitions.get(name) as NodePath
-			// execute all handlers in order as order matters
+			// execute all prehandlers in order
 			await preHandlers.reduce(async (_, handler) => {
 				await _
 				return await handler(doc, compDef, ast, opt)
 			}, Promise.resolve())
 			await Promise.all(localHandlers.map(async handler => await handler(doc, compDef, ast, opt)))
 			// end with setting of exportname
-			// to avoid dependecies names bleeding on the main components
+			// to avoid dependencies names bleeding on the main components,
+			// do this step at the end of the function
 			doc.set('exportName', name)
 			return doc
 		})

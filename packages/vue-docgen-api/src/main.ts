@@ -9,7 +9,7 @@ import Documentation, {
 	Tag,
 	ParamTag
 } from './Documentation'
-import { DocGenOptions, parseFile, ParseOptions, parseSource as parseSourceLocal } from './parse'
+import { DocGenOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
 
 export { TemplateParserOptions } from './parse-template'
 export { ScriptHandler, TemplateHandler } from './parse'
@@ -29,7 +29,7 @@ export {
 }
 
 /**
- * Parse the components at filePath and return props, public methods, events and slots
+ * Parse the component at filePath and return props, public methods, events and slots
  * @param filePath absolute path of the parsed file
  * @param opts
  */
@@ -40,12 +40,19 @@ export async function parse(
 	return (await parsePrimitive(async options => await parseFile(options), filePath, opts))[0]
 }
 
+/**
+ * Parse all the components at filePath and returns an array of their
+ * props, public methods, events and slot
+ * @param filePath absolute path of the parsed file
+ * @param opts
+ */
 export async function parseMulti(filePath: string, opts?: DocGenOptions): Promise<ComponentDoc[]> {
 	return parsePrimitive(async options => await parseFile(options), filePath, opts)
 }
 
 /**
  * Parse the `source` assuming that it is located at `filePath` and return props, public methods, events and slots
+ * @param source source code to be parsed
  * @param filePath absolute path of the parsed file
  * @param opts
  */
@@ -55,7 +62,7 @@ export async function parseSource(
 	opts?: DocGenOptions | { [alias: string]: string }
 ): Promise<ComponentDoc> {
 	return (await parsePrimitive(
-		async options => await parseSourceLocal(source, options),
+		async options => await _parseSource(source, options),
 		filePath,
 		opts
 	))[0]
