@@ -50,11 +50,11 @@ describe('extendsHandler', () => {
 		].join('\n')
 		parseItExtends(src)
 		expect(parseFile).toHaveBeenCalledWith(
-			doc,
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
-			})
+			}),
+			doc
 		)
 	})
 
@@ -67,11 +67,11 @@ describe('extendsHandler', () => {
 		].join('\n')
 		parseItExtends(src)
 		expect(parseFile).toHaveBeenCalledWith(
-			doc,
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
-			})
+			}),
+			doc
 		)
 	})
 
@@ -84,11 +84,11 @@ describe('extendsHandler', () => {
 		].join('\n')
 		parseItExtends(src)
 		expect(parseFile).toHaveBeenCalledWith(
-			doc,
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
-			})
+			}),
+			doc
 		)
 	})
 
@@ -101,11 +101,11 @@ describe('extendsHandler', () => {
 		].join('\n')
 		parseItExtends(src)
 		expect(parseFile).toHaveBeenCalledWith(
-			doc,
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
-			})
+			}),
+			doc
 		)
 	})
 })

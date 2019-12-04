@@ -5,7 +5,12 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
-import propHandler, { describeDefault, describeRequired, describeType } from './propHandler'
+import propHandler, {
+	describeDefault,
+	describeRequired,
+	describeType,
+	extractValuesFromTags
+} from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
 export default async function classPropHandler(
@@ -52,6 +57,8 @@ export default async function classPropHandler(
 				if (jsDoc.description) {
 					propDescriptor.description = jsDoc.description
 				}
+
+				extractValuesFromTags(propDescriptor)
 
 				if (propPath.node.typeAnnotation) {
 					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)

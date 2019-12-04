@@ -54,14 +54,7 @@ export default async function propHandler(documentation: Documentation, path: No
 					propDescriptor.tags = transformTagsIntoObject(jsDocTags)
 				}
 
-				if (propDescriptor.tags && propDescriptor.tags['values']) {
-					const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
-					const choices = typeof description === 'string' ? description.split(',') : undefined
-					if (choices) {
-						propDescriptor.values = choices.map((v: string) => v.trim())
-					}
-					delete propDescriptor.tags['values']
-				}
+				extractValuesFromTags(propDescriptor)
 
 				if (bt.isArrayExpression(propValuePath.node) || bt.isIdentifier(propValuePath.node)) {
 					// if it's an immediately typed property, resolve its type immediately
@@ -220,5 +213,16 @@ export function describeDefault(
 				value: `function()${rawValue.trim()}`
 			}
 		}
+	}
+}
+
+export function extractValuesFromTags(propDescriptor: PropDescriptor) {
+	if (propDescriptor.tags && propDescriptor.tags['values']) {
+		const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
+		const choices = typeof description === 'string' ? description.split(',') : undefined
+		if (choices) {
+			propDescriptor.values = choices.map((v: string) => v.trim())
+		}
+		delete propDescriptor.tags['values']
 	}
 }

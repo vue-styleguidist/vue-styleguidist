@@ -54,107 +54,142 @@ export interface DocGenOptions {
 }
 
 /**
- * parses the source and returns the doc
- * @param {string} source code whose documentation is parsed
- * @param {string} filePath path of the current file against whom to resolve the mixins
+ * parses the source at filePath and returns the doc
+ * @param opt ParseOptions containing the filePath and the rest of the options
+ * @param documentation documentation to be enriched if needed
  * @returns {object} documentation object
  */
-export async function parseFile(documentation: Documentation, opt: ParseOptions) {
+export async function parseFile(
+	opt: ParseOptions,
+	documentation?: Documentation
+): Promise<Documentation[]> {
 	const source = await read(opt.filePath, {
 		encoding: 'utf-8'
 	})
-	return parseSource(documentation, source, opt)
+	return parseSource(source, opt, documentation)
 }
 
 /**
  * parses the source and returns the doc
  * @param {string} source code whose documentation is parsed
- * @param {string} filePath path of the current file against whom to resolve the mixins
+ * @param {string} opt path of the current file against whom to resolve the mixins
  * @returns {object} documentation object
  */
-export async function parseSource(documentation: Documentation, source: string, opt: ParseOptions) {
-	// if the parsed component is the result of a mixin or an extends
-	documentation.setOrigin(opt)
+export async function parseSource(
+	source: string,
+	opt: ParseOptions,
+	documentation?: Documentation
+): Promise<Documentation[]> {
+	// if jsx option is not mentionned, parse jsx in components
+	opt.jsx = opt.jsx === undefined ? true : opt.jsx
+
 	const singleFileComponent = /\.vue$/i.test(path.extname(opt.filePath))
-	let scriptSource: string | undefined
 
 	if (source === '') {
 		throw new Error(ERROR_EMPTY_DOCUMENT)
 	}
 
+	// if the parsed component is the result of a mixin or an extends
+	if (documentation) {
+		documentation.setOrigin(opt)
+	}
+
 	if (singleFileComponent) {
-		// use padding so that errors are displayed at the correct line
-		const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
+		return [await parseSFC(documentation, source, opt)]
+	} else {
+		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
+		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
-		if (parts.customBlocks) {
-			const docsBlocks = parts.customBlocks
-				.filter(block => block.type === 'docs' && block.content && block.content.length)
-				.map(block => block.content.trim())
+		const docs =
+			(await parseScript(
+				source,
+				preHandlers,
+				[...scriptHandlers, ...addScriptHandlers],
+				opt,
+				documentation
+			)) || []
 
-			if (docsBlocks.length) {
-				documentation.setDocsBlocks(docsBlocks)
-			}
+		if (docs.length === 1 && !docs[0].get('displayName')) {
+			// give a component a display name if we can
+			docs[0].set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
 		}
 
-		// get slots and props from template
-		if (parts.template) {
-			const extTemplSrc: string =
-				parts && parts.template && parts.template.attrs ? parts.template.attrs.src : ''
-			const extTemplSource =
-				extTemplSrc && extTemplSrc.length
-					? await read(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
-							encoding: 'utf-8'
-					  })
-					: ''
-			if (extTemplSource.length) {
-				parts.template.content = extTemplSource
-			}
-			const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
-			parseTemplate(
-				parts.template,
-				documentation,
-				[...templateHandlers, ...addTemplateHandlers],
-				opt.filePath
-			)
-		}
+		return docs
+	}
+}
 
-		const extSrc: string = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : ''
-		const extSource =
-			extSrc && extSrc.length
-				? await read(path.resolve(path.dirname(opt.filePath), extSrc), {
+async function parseSFC(
+	initialDoc: Documentation | undefined,
+	source: string,
+	opt: ParseOptions
+): Promise<Documentation> {
+	const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
+
+	const documentation = initialDoc || new Documentation()
+
+	// use padding so that errors are displayed at the correct line
+	const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
+
+	if (parts.customBlocks) {
+		const docsBlocks = parts.customBlocks
+			.filter(block => block.type === 'docs' && block.content && block.content.length)
+			.map(block => block.content.trim())
+
+		if (docsBlocks.length) {
+			documentation.setDocsBlocks(docsBlocks)
+		}
+	}
+
+	// get slots and props from template
+	if (parts.template) {
+		const extTemplSrc: string =
+			parts && parts.template && parts.template.attrs ? parts.template.attrs.src : ''
+		const extTemplSource =
+			extTemplSrc && extTemplSrc.length
+				? await read(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
 						encoding: 'utf-8'
 				  })
 				: ''
-
-		scriptSource = extSource.length ? extSource : parts.script ? parts.script.content : undefined
-		opt.lang =
-			(parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
-			/\.tsx?$/i.test(extSrc)
-				? 'ts'
-				: 'js'
-	} else {
-		scriptSource = source
-		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
+		if (extTemplSource.length) {
+			parts.template.content = extTemplSource
+		}
+		const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
+		parseTemplate(
+			parts.template,
+			documentation,
+			[...templateHandlers, ...addTemplateHandlers],
+			opt.filePath
+		)
 	}
 
-	if (scriptSource) {
-		// if jsx option is not mentionned, parse jsx in components
-		opt.jsx = opt.jsx === undefined ? true : opt.jsx
+	const extSrc: string = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : ''
+	const extSource =
+		extSrc && extSrc.length
+			? await read(path.resolve(path.dirname(opt.filePath), extSrc), {
+					encoding: 'utf-8'
+			  })
+			: ''
 
-		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
-		if (scriptSource) {
-			await parseScript(
-				scriptSource,
-				documentation,
-				preHandlers,
-				[...scriptHandlers, ...addScriptHandlers],
-				opt
-			)
-		}
+	let scriptSource = extSource.length ? extSource : parts.script ? parts.script.content : undefined
+	opt.lang =
+		(parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
+		/\.tsx?$/i.test(extSrc)
+			? 'ts'
+			: 'js'
+
+	if (scriptSource) {
+		await parseScript(
+			scriptSource,
+			preHandlers,
+			[...scriptHandlers, ...addScriptHandlers],
+			opt,
+			documentation
+		)
 	}
 
 	if (!documentation.get('displayName')) {
 		// a component should always have a display name
 		documentation.set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
 	}
+	return documentation
 }

@@ -15,7 +15,7 @@
 
 The package exposes 2 functions:
 
-### `parse(filePath:string, options?: DocGenOptions)`
+### `parse(filePath:string, options?: DocGenOptions):ComponentDoc`
 
 Parses the file at filePath. Returns and objects containing all documented and undocumented properties of the component.
 
@@ -58,9 +58,15 @@ var componentInfoConfigured = parse(filePath, {
 })
 ```
 
-### `parseSource(code: string, filePath:string, options?: DocGenOptions)`
+### `parseSource(code: string, filePath:string, options?: DocGenOptions):ComponentDoc`
 
-Same as parse, but this way you can force the content of the code. The `filePath` parameter will then only be used for dependency resolution.
+Same as `parse`, but this way you can force the content of the code. The `filePath` parameter will then only be used for dependency resolution.
+
+### `parseMulti(code: string, filePath:string, options?: DocGenOptions):ComponentDoc[]`
+
+Same as `parse`, but allows for mulitple exported components in one file.
+
+**NOTE** Return type is `Array<ComponentDoc>` instead of `ComponentDoc`. Use `exportName` to differentiate the exports.
 
 ## Documentation Object
 

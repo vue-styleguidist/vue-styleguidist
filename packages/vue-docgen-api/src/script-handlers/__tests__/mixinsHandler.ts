@@ -60,11 +60,11 @@ describe('mixinsHandler', () => {
 			await mixinsHandler(doc, path, ast, { filePath: '' })
 		}
 		expect(mockParse).toHaveBeenCalledWith(
-			doc,
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
-			})
+			}),
+			doc
 		)
 		done()
 	})
@@ -84,11 +84,11 @@ describe('mixinsHandler', () => {
 		}
 		await mixinsHandler(doc, path, ast, { filePath: '' })
 		expect(mockParse).toHaveBeenCalledWith(
-			doc,
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
-			})
+			}),
+			doc
 		)
 		done()
 	})

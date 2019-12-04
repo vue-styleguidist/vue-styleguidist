@@ -20,11 +20,11 @@ export type Handler = (
 
 export default async function parseScript(
 	source: string,
-	documentation: Documentation,
 	preHandlers: Handler[],
 	handlers: Handler[],
-	options: ParseOptions
-) {
+	options: ParseOptions,
+	documentation?: Documentation
+): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {
 		plugins.push('jsx')
@@ -41,39 +41,47 @@ export default async function parseScript(
 		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
-	await executeHandlers(preHandlers, handlers, componentDefinitions, documentation, ast, options)
+	return await executeHandlers(
+		preHandlers,
+		handlers,
+		componentDefinitions,
+		documentation,
+		ast,
+		options
+	)
 }
 
 async function executeHandlers(
 	preHandlers: Handler[],
 	localHandlers: Handler[],
 	componentDefinitions: Map<string, NodePath>,
-	documentation: Documentation,
+	documentation: Documentation | undefined,
 	ast: bt.File,
 	opt: ParseOptions
-) {
+): Promise<Documentation[] | undefined> {
 	const compDefs = componentDefinitions
 		.keys()
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
 
-	if (compDefs.length > 1) {
-		throw 'vue-docgen-api: multiple exports in a component file are not handled yet by docgen'
+	if (documentation && compDefs.length > 1) {
+		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" intead'
 	}
 
 	return await Promise.all(
 		compDefs.map(async name => {
+			const doc = documentation || new Documentation()
 			const compDef = componentDefinitions.get(name) as NodePath
-			// execute all handlers in order as order matters
+			// execute all prehandlers in order
 			await preHandlers.reduce(async (_, handler) => {
 				await _
-				return await handler(documentation, compDef, ast, opt)
+				return await handler(doc, compDef, ast, opt)
 			}, Promise.resolve())
-			await Promise.all(
-				localHandlers.map(async handler => await handler(documentation, compDef, ast, opt))
-			)
+			await Promise.all(localHandlers.map(async handler => await handler(doc, compDef, ast, opt)))
 			// end with setting of exportname
-			// to avoid dependecies names bleeding on the main components
-			documentation.set('exportName', name)
+			// to avoid dependencies names bleeding on the main components,
+			// do this step at the end of the function
+			doc.set('exportName', name)
+			return doc
 		})
 	)
 }
