@@ -57,3 +57,46 @@ export const Button = {
 		)
 	}
 }
+
+/**
+ * This is an input that represents another component extracted in the same file
+ */
+export const Input = {
+	name,
+
+	inheritAttrs: false,
+
+	props: {
+		variant: {
+			type: String,
+			default: 'solid'
+		},
+		variantColor: {
+			type: String,
+			default: 'gray'
+		},
+		size: {
+			type: [String, Number],
+			default: 'md'
+		},
+		isDisabled: {
+			type: Boolean
+		}
+	},
+
+	render(h) {
+		const childAttrs = {
+			disabled: this.isDisabled,
+			'aria-disabled': this.isDisabled
+		}
+
+		return h(
+			'input',
+			{
+				attrs: childAttrs,
+				on: this.$listeners
+			},
+			this.$slots.default
+		)
+	}
+}
