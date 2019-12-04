@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.8...v4.1.0) (2019-12-04)
+
+
+### Bug Fixes
+
+* **docgen:** support [@values](https://github.com/values) on classPropHandler ([4b7f8b6](https://github.com/vue-styleguidist/vue-styleguidist/commit/4b7f8b6))
+
+
+### Features
+
+* **docgen:** multi-components in a file ([3790837](https://github.com/vue-styleguidist/vue-styleguidist/commit/3790837))
+
+
+
+
+
 ## [4.0.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.0.6...v4.0.7) (2019-12-01)
 
 

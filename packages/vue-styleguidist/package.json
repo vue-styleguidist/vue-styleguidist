@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "4.0.8",
+	"version": "4.1.0",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
 		"compile": "yarn typings && babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
@@ -74,7 +74,7 @@
 		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^1.3.0",
 		"to-ast": "^1.0.0",
-		"vue-docgen-api": "^4.0.7",
+		"vue-docgen-api": "^4.1.0",
 		"vue-inbrowser-compiler": "^4.0.1",
 		"vue-inbrowser-compiler-utils": "^4.0.1",
 		"webpack-dev-server": "^3.7.1",
