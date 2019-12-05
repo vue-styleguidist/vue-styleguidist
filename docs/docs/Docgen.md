@@ -13,7 +13,67 @@
 
 ## API
 
-The package exposes 2 functions:
+### Type `ComponentDoc`
+
+Every parser in docgen-api returns an instannce of `ComponentDoc` or a `ComponentDoc[]`.
+
+```ts
+interface ComponentDoc {
+  /**
+   * Usual name of the component:
+   *  It will take by order of priority
+   *  - The contents of the @displayName tag of teh component
+   *  - The name of the variable containing the comopnent (or the class if class component)
+   *  - the name of the file containing the component
+   */
+  displayName: string
+
+  /**
+   * name of the export containing the component
+   * In most cases `default`
+   * If you export es6 named components you can find those names here
+   */
+  exportName: string
+
+  /**
+   * Contents of every line that is not conatined in a tag
+   * in the code block before your component
+   * @see below
+   */
+  description?: string
+  /**
+   * Array of `PropDescriptor` objects describing all props unless ignored via the @ignore tag
+   */
+  props?: PropDescriptor[]
+  /**
+   * Array of `MethodDescriptor` objects describing all methods declared public via the @public tag
+   */
+  methods?: MethodDescriptor[]
+  /**
+   * Array of `SlotDescriptor` objects describing all slots
+   */
+  slots?: SlotDescriptor[]
+  /**
+   * Array of `EventDescriptor` objects describing all event emitted by your components
+   */
+  events?: EventDescriptor[]
+  /**
+   * All tags applied to the component
+   * @remark only component tags are stored here.
+   * Prop, method and event tags are stored with the property they describe
+   */
+  tags?: { [key: string]: BlockTag[] }
+  /**
+   * When using SFC components, one can use `<docs>` blocks.
+   * This is the content of the current docs block if it was found
+   */
+  docsBlocks?: string[]
+  /**
+   * Extra free data that user can set if they need (not used in the current standard)
+   */
+  [key: string]: any
+}
+```
 
 ### `parse(filePath:string, options?: DocGenOptions):ComponentDoc`
 
