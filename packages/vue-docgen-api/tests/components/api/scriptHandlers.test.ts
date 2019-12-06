@@ -2,11 +2,9 @@ import * as path from 'path'
 import { NodePath } from 'ast-types'
 import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
-import { parse, ParseOptions, TemplateParserOptions } from '../../src/main'
-import Documentation from '../../src/Documentation'
+import { parse, ParseOptions, TemplateParserOptions, Documentation } from '../../../src/main'
 
 describe('extending handlers', () => {
-
 	it('should execute a custom script handler', async () => {
 		let hasRun = false
 
@@ -39,9 +37,8 @@ describe('extending handlers', () => {
 					hasRun = true
 				}
 			]
-		});
+		})
 
 		expect(hasRun).toBe(true)
 	})
 })
-
