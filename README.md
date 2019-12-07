@@ -10,6 +10,9 @@
 <a href="https://circleci.com/gh/vue-styleguidist/vue-styleguidist">
     <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=svg" alt="Circle CI (integration)">
 </a>
+<a href="https://codecov.io/gh/vue-styleguidist/vue-styleguidist">
+  <img src="https://codecov.io/gh/vue-styleguidist/vue-styleguidist/branch/dev/graph/badge.svg" />
+</a>
 <a href="LICENSE">
     <img src="https://img.shields.io/npm/l/vue-styleguidist.svg" alt="License">
 </a>
