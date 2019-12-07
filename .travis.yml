@@ -23,6 +23,7 @@ branches:
 
 stages:
   - test
+  - coverage
   - name: documentation
     if: type != pull_request AND branch = master
   - name: release-beta
@@ -40,6 +41,14 @@ jobs:
         # Run tests without coverage since it's 2x faster
         - yarn test:jest --runInBand
         - yarn danger ci
+
+    - stage: test
+      script:
+        - yarn lint
+        # Run tests with coverage
+        - yarn test:jest --runInBand --coverage
+        # Upload coverage report to Codecov
+        - bash <(curl -s https://codecov.io/bash)
 
     # Build & Deploy the documentation website
     - stage: documentation
