@@ -42,7 +42,7 @@ jobs:
         - yarn test:jest --runInBand
         - yarn danger ci
 
-    - stage: test
+    - stage: coverage
       script:
         - yarn lint
         # Run tests with coverage
