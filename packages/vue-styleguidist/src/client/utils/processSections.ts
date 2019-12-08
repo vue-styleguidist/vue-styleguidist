@@ -1,4 +1,4 @@
-import { ProcessedSection } from 'types/Section'
+import { ProcessedSection } from '../../types/Section'
 import processComponents from './processComponents'
 import compileExamples from './compileExamples'
 

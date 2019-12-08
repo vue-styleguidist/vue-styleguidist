@@ -1,4 +1,4 @@
-import { StyleguidistConfig } from 'types/StyleGuide'
+import { StyleguidistConfig } from '../types/StyleGuide'
 import createServer from './create-server'
 import { ServerInfo } from './binutils'
 
