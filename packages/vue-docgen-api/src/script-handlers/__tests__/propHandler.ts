@@ -377,6 +377,30 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
 		})
+
+		it('should set the v-model instead of value', () => {
+			const src = `
+        export default {
+		  model:{
+			prop: 'value'
+		  },
+          props: {
+            /**
+             * Value of the field
+             */
+            value: {
+				required: true,
+				type: undefined
+			}
+          }
+        }
+        `
+			tester(src, {
+				description: 'Value of the field'
+			})
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+		})
 	})
 
 	describe('@values tag parsing', () => {
