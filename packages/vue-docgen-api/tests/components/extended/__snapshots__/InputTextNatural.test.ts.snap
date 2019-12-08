@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests InputText as a JS file should match the snapshot 1`] = `
+Object {
+  "description": "Description InputText",
+  "displayName": "InputText",
+  "events": undefined,
+  "exportName": "default",
+  "methods": undefined,
+  "props": Array [
+    Object {
+      "description": "",
+      "extends": Object {
+        "name": "Base",
+        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
+      },
+      "name": "question",
+      "tags": Object {},
+      "type": Object {
+        "name": "undefined",
+      },
+    },
+    Object {
+      "description": "",
+      "extends": Object {
+        "name": "Base",
+        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
+      },
+      "name": "placeholder",
+      "tags": Object {},
+      "type": Object {
+        "name": "undefined",
+      },
+    },
+  ],
+  "slots": undefined,
+  "tags": Object {},
+}
+`;
