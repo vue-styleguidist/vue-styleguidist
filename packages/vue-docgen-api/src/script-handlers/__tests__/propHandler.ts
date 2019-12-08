@@ -378,7 +378,7 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
 		})
 
-		it('should set the v-model instead of value', () => {
+		it('should set the v-model instead of value with model property', () => {
 			const src = `
         export default {
 		  model:{
@@ -400,6 +400,30 @@ describe('propHandler', () => {
 			})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+		})
+
+		it('should not set the v-model instead of value if model property has only event', () => {
+			const src = `
+        export default {
+		  model:{
+			event: 'change'
+		  },
+          props: {
+            /**
+             * Value of the field
+             */
+            value: {
+				required: true,
+				type: undefined
+			}
+          }
+        }
+        `
+			tester(src, {
+				description: 'Value of the field'
+			})
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('value')
 		})
 	})
 
