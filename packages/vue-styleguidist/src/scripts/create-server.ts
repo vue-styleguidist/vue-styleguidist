@@ -1,7 +1,7 @@
 import webpack, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
-import { StyleguidistConfig } from 'types/StyleGuide'
+import { StyleguidistConfig } from '../types/StyleGuide'
 import makeWebpackConfig from './make-webpack-config'
 import { ServerInfo } from './binutils'
 

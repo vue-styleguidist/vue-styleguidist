@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Component } from 'types/Component'
+import { Component } from '../../types/Component'
 import cleanComponentName from './cleanComponentName'
 
 /**

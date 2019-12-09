@@ -1,5 +1,5 @@
-import { Component } from 'types/Component'
-import { ProcessedSection } from 'types/Section'
+import { Component } from '../../types/Component'
+import { ProcessedSection } from '../../types/Section'
 
 /**
  * Get all components in all sections
