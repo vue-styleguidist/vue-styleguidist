@@ -1,8 +1,8 @@
 // Make sure user has webpack installed
 import 'react-styleguidist/lib/scripts/utils/ensureWebpack'
 import { Stats, Configuration, Compiler } from 'webpack'
-import { StyleguidistConfig } from 'types/StyleGuide'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
+import { StyleguidistConfig } from '../types/StyleGuide'
 import buildUtil from './build'
 import server from './server'
 import makeWebpackConfig from './make-webpack-config'

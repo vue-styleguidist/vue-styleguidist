@@ -5,12 +5,12 @@ import { Configuration } from 'webpack'
 import startCase from 'lodash/startCase'
 import kleur from 'kleur'
 import loggerMaker from 'glogg'
-import { StyleguidistConfig } from 'types/StyleGuide'
-import { Example } from 'types/Example'
-import { Section } from 'types/Section'
 import getUserPackageJson from 'react-styleguidist/lib/scripts/utils/getUserPackageJson'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
 import fileExistsCaseInsensitive from 'react-styleguidist/lib/scripts/utils/findFileCaseInsensitive'
+import { Section } from '../../types/Section'
+import { Example } from '../../types/Example'
+import { StyleguidistConfig } from '../../types/StyleGuide'
 import findUserWebpackConfig from '../utils/findUserWebpackConfig'
 import consts from '../consts'
 
@@ -444,6 +444,12 @@ export default {
 			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse'
 		},
 		default: 'collapse'
+	},
+	validExtends: {
+		message: 'Should the passed filepath be parsed by docgen if mentionned extends',
+		type: 'function',
+		tstype: '(filePath: string) => boolean',
+		default: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
 	},
 	verbose: {
 		message: 'Verbose',

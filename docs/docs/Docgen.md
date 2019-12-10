@@ -128,6 +128,28 @@ Same as `parse`, but allows for mulitple exported components in one file.
 
 **NOTE** Return type is `Array<ComponentDoc>` instead of `ComponentDoc`. Use `exportName` to differentiate the exports.
 
+### options `DocGenOptions`
+
+#### `alias`
+
+This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here..
+
+#### `resolve`
+
+`resolve` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolve) too. If you haev it in webpack or use baseDir in TypeScript, you should probably see how this one works.
+
+#### `addScriptHandler` and `addTemplateHandler`
+
+The custom additiona handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+
+#### `validExtends`
+
+Function - Returns if an extended component should be parsed by docgen.
+
+**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non blocking but annoying.
+
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use it responsibly.
+
 ## Documentation Object
 
 The `Documentation` class is the container of information before getting compiled. It is easily modified and accessed. To be used and exported, one can use the `toObject()` function.

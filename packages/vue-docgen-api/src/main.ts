@@ -84,8 +84,16 @@ async function parsePrimitive(
 	opts?: DocGenOptions | { [alias: string]: string }
 ): Promise<ComponentDoc[]> {
 	const options: ParseOptions = isOptionsObject(opts)
-		? { ...opts, filePath }
-		: { filePath, alias: opts }
+		? {
+				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath),
+				...opts,
+				filePath
+		  }
+		: {
+				filePath,
+				alias: opts,
+				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+		  }
 	const docs = await createDoc(options)
 	return docs.map(d => d.toObject())
 }

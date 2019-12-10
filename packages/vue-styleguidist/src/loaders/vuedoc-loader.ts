@@ -49,7 +49,12 @@ export async function vuedocLoader(
 		modules = webpackConfig.resolve.modules
 	}
 	const defaultParser = async (file: string) =>
-		await parse(file, { alias, modules, jsx: config.jsxInComponents })
+		await parse(file, {
+			alias,
+			modules,
+			jsx: config.jsxInComponents,
+			validExtends: config.validExtends
+		})
 	const propsParser = config.propsParser || defaultParser
 
 	const docs = await propsParser(file)

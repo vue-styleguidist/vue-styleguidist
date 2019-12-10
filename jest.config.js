@@ -15,6 +15,12 @@ module.exports = {
 			'<rootDir>/node_modules/react-styleguidist/lib/client/rsg-components/$1',
 		'^.+\\.css$': '<rootDir>/test/empty.js'
 	},
+	collectCoverageFrom: [
+		'packages/*/src/**/*{!.d,}.{js,ts}',
+		'!**/*.d.ts',
+		'!packages/docgen-tests/**/*.*',
+		'!packages/vue-cli-plugin-styleguidist/**/*.*'
+	],
 	testPathIgnorePatterns: ['<rootDir>/packages/*/lib/'],
 	snapshotSerializers: ['deabsdeep/serializer', 'enzyme-to-json/serializer', 'jest-serializer-html']
 }
