@@ -496,3 +496,23 @@ module.exports = {
 ```
 
 See [`template`](/Configuration.md#template) for more details.
+
+## How to use vue-styleguidist with multiple packages for components
+
+If your base components are in one package and the derived components are in another, you will want the documenattion to reflect extended components props in the exposed ones.
+
+Say you have a `BaseButton.vue` in a `@scoped/core` package that you extend into `IconButton.vue` in the `@scoped/extended` package, the `BaseButton.vue` props are not going to be documented with `IconButton.vue`. This can be what you want, or you could be missing a lot of props.
+
+Use the [validExtends](/Configuration.md#validExtends) option to allow parsing of extended components in other packages.
+
+```javascript
+module.exports = {
+  // Add the following function to your styleguide.config.js
+  validExtends(fullFilePath) {
+    return (
+      /[\\/]@scoped[\\/]core[\\/]/.test(fullFilePath) ||
+      !/[\\/]node_modules[\\/]/.test(fullFilePath)
+    )
+  }
+}
+```
