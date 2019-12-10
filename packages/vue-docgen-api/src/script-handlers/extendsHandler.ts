@@ -37,7 +37,7 @@ export default async function extendsHandler(
 
 	// only look for documentation in the current project not in node_modules
 	const fullFilePath = pathResolver(extendsFilePath[extendsVariableName].filePath)
-	if (!/[\\/]node_modules[\\/]/.test(fullFilePath)) {
+	if (opt.validExtends(fullFilePath)) {
 		try {
 			const extendsVar = {
 				name: extendsFilePath[extendsVariableName].exportName,

@@ -445,6 +445,12 @@ export default {
 		},
 		default: 'collapse'
 	},
+	validExtends: {
+		message: 'Should the passed filepath be parsed by docgen if mentionned extends',
+		type: 'function',
+		tstype: '(filePath: string) => boolean',
+		default: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+	},
 	verbose: {
 		message: 'Verbose',
 		description: 'Print debug information. Same as --verbose command line switch.',

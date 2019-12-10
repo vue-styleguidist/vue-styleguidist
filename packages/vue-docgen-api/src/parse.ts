@@ -16,6 +16,7 @@ const ERROR_EMPTY_DOCUMENT = 'The passed source is empty'
 export { ScriptHandler, TemplateHandler }
 
 export interface ParseOptions extends DocGenOptions, Descriptor {
+	validExtends: (fullFilePath: string) => boolean
 	filePath: string
 	/**
 	 * In what language is the component written
@@ -27,7 +28,7 @@ export interface ParseOptions extends DocGenOptions, Descriptor {
 export interface DocGenOptions {
 	/**
 	 * Which exported variables should be looked at
-	 * @default undefined - means treat all dependencies
+	 * @default undefined - means treat all exports
 	 */
 	nameFilter?: string[]
 	/**
@@ -51,6 +52,11 @@ export interface DocGenOptions {
 	 * @default true - if you do not disable it, babel will fail with `(<any>window).$`
 	 */
 	jsx?: boolean
+	/**
+	 * Should extended components be parsed?
+	 * @default `fullFilePath=>!/[\\/]node_modules[\\/]/.test(fullFilePath)`
+	 */
+	validExtends?: (fullFilePath: string) => boolean
 }
 
 /**

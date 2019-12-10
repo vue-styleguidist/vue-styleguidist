@@ -35,7 +35,7 @@ async function parseMyComponent(filePath: string) {
   var componentInfoSimple = await parse(filePath)
   var componentInfoConfigured = await parse(filePath, {
     alias: { '@assets': path.resolve(__dirname, 'src/assets') },
-    resolve: [path.resolve(__dirname, 'src')],
+    modules: [path.resolve(__dirname, 'src')],
     addScriptHandler: [
       function(
         documentation: Documentation,
@@ -54,7 +54,12 @@ async function parseMyComponent(filePath: string) {
       ) {
         // handle custom directives here
       }
-    ]
+    ],
+    validExtends: (fullFilePath: string) =>
+      /[\\/]@my-component-library[\\/]/.test(fullFilePath) ||
+      !/[\\/]node_modules[\\/]/.test(fullFilePath)
+    jsx: true,
+    nameFilter: ['MyComponent']
   })
 }
 ```
@@ -66,6 +71,48 @@ The API exports two asynchronous functions `parse` and `parseMulti`. The two fun
 When using only SFC or components that are the only one in their components, this function returns a `ComponentDoc` object. Using `parse` in most cases is simpler.
 
 If you are creating a library and your goal is to have it as generic as possible, it might be a good idea to use `parseMulti`. In some cases, developer choose to have **more than one component** exported by a file, which make `parse` throw an error.
+
+### Prototypes
+
+```ts
+parse(filePath: string, options: DocGenOptions): Promise<ComponentDoc>;
+parseSource(source: string, filePath: string, opts?: DocGenOptions): Promise<ComponentDoc>;
+parseMulti(filePath: string, options: DocGenOptions): Promise<ComponentDoc[]>;
+```
+
+### options `DocGenOptions`
+
+#### `alias`
+
+This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here..
+
+#### `modules`
+
+`modules` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolvemodules) too. If you have it in webpack or use `baseDir` in your tsconfig.json, you should probably see how this one works.
+
+#### `addScriptHandler` and `addTemplateHandler`
+
+The custom additiona handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+
+#### `validExtend`
+
+Function - Returns if an extended component should be parsed by docgen.
+
+**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non blocking but annoying.
+
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use responsibly.
+
+#### `jsx`
+
+Does your component contain JSX? By default, this is set to false to avoid conflicts with the <> syntax from TypeScript.
+
+If it does, set this flag to true.
+
+#### `nameFilter`
+
+If a file exports multiple components and you only want one, use this option to filter the named exports.
+
+It is noticeably useful when browsing through extended components and mixins. If left blank (undefined), will look at all exports
 
 ## Using JSDoc tags
 

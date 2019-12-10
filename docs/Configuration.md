@@ -702,6 +702,29 @@ Defines the initial state of the props and methods tab:
 - `hide`: hide the tab and it can´t be toggled in the UI.
 - `expand`: expand the tab by default.
 
+## `validExtends`
+
+Type: `Function`, default: `fileFullPath => !/[\\/]node_modules[\\/]/.test(fileFullPath)`
+
+Function directly passed to `vue-docgen-api` to determine if a component that extends another should be parsed.
+
+The following lines will allow parsing extended components from node package `@my-library/components`.
+
+```javascript
+module.exports = {
+  validExtends(fullFilePath) {
+    return (
+      /[\\/]@my-library[\\/]components[\\/]/.test(fullFilePath) ||
+      !/[\\/]node_modules[\\/]/.test(fullFilePath)
+    )
+  }
+}
+```
+
+**NOTE** If `vue-docgen-api` fails to parse the targetted component, it will log a warning. It is not blocking but it is annoying.
+
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use it responsibly.
+
 ## `verbose`
 
 Type: `Boolean`, default: `false`
