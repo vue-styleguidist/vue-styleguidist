@@ -57,7 +57,10 @@ describe('mixinsHandler', () => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast).get('default')
 		if (path) {
-			await mixinsHandler(doc, path, ast, { filePath: '' })
+			await mixinsHandler(doc, path, ast, {
+				filePath: '',
+				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+			})
 		}
 		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -82,7 +85,10 @@ describe('mixinsHandler', () => {
 			done.fail()
 			return
 		}
-		await mixinsHandler(doc, path, ast, { filePath: '' })
+		await mixinsHandler(doc, path, ast, {
+			filePath: '',
+			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+		})
 		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
 				filePath: './component/full/path',
@@ -107,7 +113,10 @@ describe('mixinsHandler', () => {
 			return
 		}
 		mockResolvePathFrom.mockReturnValue('foo/node_modules/component/full/path')
-		await mixinsHandler(doc, path, ast, { filePath: '' })
+		await mixinsHandler(doc, path, ast, {
+			filePath: '',
+			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+		})
 		expect(mockParse).not.toHaveBeenCalled()
 		done()
 	})
@@ -126,7 +135,10 @@ describe('mixinsHandler', () => {
 			done.fail()
 			return
 		}
-		await mixinsHandler(doc, path, ast, { filePath: '' })
+		await mixinsHandler(doc, path, ast, {
+			filePath: '',
+			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+		})
 		expect(mockParse).not.toHaveBeenCalled()
 		done()
 	})

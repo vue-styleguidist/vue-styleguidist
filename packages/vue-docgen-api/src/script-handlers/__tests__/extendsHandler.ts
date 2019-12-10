@@ -37,7 +37,10 @@ describe('extendsHandler', () => {
 		const ast = babylon().parse(src)
 		const path = resolveExportedComponent(ast).get('default')
 		if (path) {
-			extendsHandler(doc, path, ast, { filePath: '' })
+			extendsHandler(doc, path, ast, {
+				filePath: '',
+				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+			})
 		}
 	}
 
