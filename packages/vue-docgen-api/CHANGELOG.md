@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.1.2...v4.2.0) (2019-12-10)
+
+
+### Features
+
+* detect model property ([1c28167](https://github.com/vue-styleguidist/vue-styleguidist/commit/1c28167)), closes [#654](https://github.com/vue-styleguidist/vue-styleguidist/issues/654)
+* **docgen:** allow to customize validExtends ([eb966c5](https://github.com/vue-styleguidist/vue-styleguidist/commit/eb966c5))
+
+
+
+
+
 ## [4.1.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.1.1...v4.1.2) (2019-12-08)
 
 **Note:** Version bump only for package vue-docgen-api
