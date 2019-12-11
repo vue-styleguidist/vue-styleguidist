@@ -134,15 +134,16 @@ export default function(
 				new CleanWebpackPlugin({
 					verbose: config.verbose === true
 				}),
-				new CopyWebpackPlugin(
-					config.assetsDir
-						? [
+				// only add plugin if assetsDir is specified
+				...(config.assetsDir
+					? [
+							new CopyWebpackPlugin([
 								{
 									from: config.assetsDir
 								}
-						  ]
-						: []
-				)
+							])
+					  ]
+					: [])
 			],
 			optimization
 		})
