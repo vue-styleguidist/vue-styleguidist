@@ -1,11 +1,9 @@
 <template>
-<div class="Button">
-	<v-btn :color="color"
-		@click.prevent="onClick"
-		:style="{ fontSize: fontSize }">
-		<slot></slot>
-	</v-btn>
-</div>
+	<div class="Button">
+		<v-btn :color="color" @click.prevent="onClick" :style="{ fontSize: fontSize }">
+			<slot></slot>
+		</v-btn>
+	</div>
 </template>
 
 <script>
@@ -19,7 +17,8 @@ export default {
 	mixins: [loggerMixin],
 	props: {
 		/**
-		 * The color for the button. `primary, secondary, accent, error, info, success, warning`
+		 * The color for the button.
+		 * @values primary, secondary, accent, error, info, success, warning
 		 *
 		 */
 		color: {
@@ -28,7 +27,7 @@ export default {
 		},
 		/**
 		 * The size of the button
-		 * `small, normal, large`
+		 * @values small, normal, large
 		 */
 		size: {
 			type: String,
