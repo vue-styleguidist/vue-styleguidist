@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.0...v4.2.1) (2019-12-11)
+
+
+### Bug Fixes
+
+* update copy-webpack-plugin to 5.1.0 ([fa2f13b](https://github.com/vue-styleguidist/vue-styleguidist/commit/fa2f13b)), closes [#675](https://github.com/vue-styleguidist/vue-styleguidist/issues/675)
+
+
+
+
+
 # [4.2.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.1.2...v4.2.0) (2019-12-10)
 
 
