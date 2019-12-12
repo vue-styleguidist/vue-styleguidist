@@ -62,8 +62,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/another/index.js",
       },
       "name": "propsAnother",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -75,8 +73,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/components/button/genericMixin.js",
       },
       "name": "secret",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -92,8 +88,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
       },
       "name": "color",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -109,7 +103,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
       },
       "name": "size",
-      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -121,13 +114,11 @@ Object {
       ],
     },
     Object {
-      "description": "",
       "mixin": Object {
         "name": "index",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "shouldBe",
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -139,8 +130,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "span",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string|number",
       },
@@ -152,8 +141,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "spanSm",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string|number",
       },
@@ -165,8 +152,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "spanMd",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string|number",
       },
@@ -182,8 +167,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "example",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "boolean",
       },
@@ -199,7 +182,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "v-model",
-      "required": undefined,
       "tags": Object {
         "model": Array [
           Object {
@@ -223,8 +205,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "example3",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "number",
       },
@@ -240,7 +220,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "onCustomClick",
-      "required": undefined,
       "tags": Object {
         "ignore": Array [
           Object {
@@ -266,8 +245,6 @@ Object {
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "funcDefault",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "func",
       },
@@ -286,14 +263,11 @@ a factory function",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "propE",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "object",
       },
     },
     Object {
-      "description": "",
       "mixin": Object {
         "name": "index",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",

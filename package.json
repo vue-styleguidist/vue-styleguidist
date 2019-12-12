@@ -83,7 +83,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "danger": "^7.0.17",
-    "deabsdeep": "^1.0.6",
+    "deabsdeep": "^2.0.1",
     "deepfreeze": "^2.0.0",
     "dog-names": "^1.0.2",
     "ejs": "^2.6.1",

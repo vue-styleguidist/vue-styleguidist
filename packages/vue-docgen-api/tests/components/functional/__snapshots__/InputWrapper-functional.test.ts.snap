@@ -23,8 +23,6 @@ Object {
       },
       "description": "Should display error?",
       "name": "error",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "boolean",
       },
@@ -36,8 +34,6 @@ Object {
       },
       "description": "Should the input be focused?",
       "name": "focused",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "boolean",
       },
@@ -49,8 +45,6 @@ Object {
       },
       "description": "Prefix icon for input field",
       "name": "icon",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -62,16 +56,12 @@ Object {
       },
       "description": "Should the input be disabled?",
       "name": "disabled",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "boolean",
       },
     },
     Object {
-      "description": "",
       "name": "value",
-      "tags": Object {},
       "type": Object {
         "name": "undefined",
       },
@@ -83,8 +73,6 @@ Object {
       },
       "description": "True if input label should always be \\"up there\\"",
       "name": "labelAlwaysFloating",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "boolean",
       },
@@ -92,7 +80,6 @@ Object {
     Object {
       "description": "Prefix string for input field",
       "name": "prefix",
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -101,7 +88,6 @@ Object {
       "description": "Input ID",
       "name": "id",
       "required": true,
-      "tags": Object {},
       "type": Object {
         "name": "string|number",
       },
@@ -110,7 +96,6 @@ Object {
       "description": "String for label text",
       "name": "label",
       "required": true,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -122,8 +107,6 @@ Object {
       },
       "description": "String with relevant error message",
       "name": "errorMessage",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },
@@ -147,7 +130,6 @@ Object {
   ],
   "slots": Array [
     Object {
-      "description": "",
       "name": "default",
     },
   ],

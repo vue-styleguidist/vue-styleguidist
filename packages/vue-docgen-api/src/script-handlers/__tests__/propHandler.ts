@@ -28,12 +28,16 @@ describe('propHandler', () => {
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 
-	function tester(src: string, matchedObj: any, plugins?: ParserPlugin[]) {
+	function parserTest(src: string, plugins?: ParserPlugin[]): PropDescriptor {
 		const def = parse(src, plugins)
 		if (def) {
 			propHandler(documentation, def)
 		}
-		expect(mockPropDescriptor).toMatchObject(matchedObj)
+		return mockPropDescriptor
+	}
+
+	function tester(src: string, matchedObj: any, plugins?: ParserPlugin[]) {
+		expect(parserTest(src, plugins)).toMatchObject(matchedObj)
 	}
 
 	describe('base', () => {
@@ -304,15 +308,14 @@ describe('propHandler', () => {
 				'}'
 			].join('\n')
 
-			tester(src, {
-				defaultValue: {
-					value: [
-						'function(){', // leave these comments
-						'    return ["normal"];', // with this format
-						'}' // to avoid prettier formatting
-					].join('\n')
-				}
-			})
+			expect(parserTest(src).defaultValue).toMatchInlineSnapshot(`
+			Object {
+			  "func": false,
+			  "value": "function(){
+			    return [\\"normal\\"];
+			}",
+			}
+		`)
 		})
 	})
 
