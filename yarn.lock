@@ -8744,13 +8744,13 @@ de-indent@^1.0.2:
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
 
-deabsdeep@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/deabsdeep/-/deabsdeep-1.0.6.tgz#df0f9e9237090f88ea8396cdecbc57b4f7b86e33"
-  integrity sha512-6I7pT9fFpLIoCNPFjHljoxmI3tvN2VOagoMfLiGXTHC5foLZ0FVJMXmRWgMgRuK2HWPE3Lf1h4uNopDnI9JiIg==
+deabsdeep@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/deabsdeep/-/deabsdeep-2.0.1.tgz#90f44447520f278dea29443da15e707e399471e5"
+  integrity sha512-T4dm3lDhtCjv0KU/7ased+R34m72x8MX9/t9DrA5X6tYeyxkfw2YhuQBSFnI6DgaXEeozwRZSbMiSmvXfmteSA==
   dependencies:
-    escape-string-regexp "^1.0.5"
-    is-plain-obj "^1.1.0"
+    escape-string-regexp "^2.0.0"
+    is-plain-obj "^2.0.0"
 
 debounce@^1.2.0:
   version "1.2.0"
@@ -9714,6 +9714,11 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2, escape-string-regexp@^1
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
+
+escape-string-regexp@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
+  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
 escodegen@^1.11.1, escodegen@^1.9.1:
   version "1.11.1"
