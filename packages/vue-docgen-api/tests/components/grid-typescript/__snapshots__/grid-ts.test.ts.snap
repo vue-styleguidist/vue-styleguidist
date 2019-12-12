@@ -8,7 +8,6 @@ Object {
     Object {
       "description": "Success event.",
       "name": "success",
-      "properties": undefined,
       "type": Object {
         "names": Array [
           "object",
@@ -18,7 +17,6 @@ Object {
     Object {
       "description": "Error event.",
       "name": "error",
-      "properties": undefined,
       "type": Object {
         "names": Array [
           "object",
@@ -30,7 +28,6 @@ Object {
   "methods": Array [
     Object {
       "description": "Sets the order",
-      "modifiers": Array [],
       "name": "sortBy",
       "params": Array [
         Object {
@@ -89,8 +86,6 @@ Object {
       },
     },
     Object {
-      "description": "",
-      "modifiers": Array [],
       "name": "publicMethod",
       "params": Array [
         Object {
@@ -124,7 +119,6 @@ Object {
       },
       "description": "object/array defaults should be returned from a factory function",
       "name": "msg",
-      "required": undefined,
       "tags": Object {
         "link": Array [
           Object {
@@ -177,10 +171,7 @@ Object {
     return [{}]
 }",
       },
-      "description": "",
       "name": "images",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "array",
       },
@@ -192,8 +183,6 @@ Object {
       },
       "description": "prop function",
       "name": "propFunc",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "func",
       },
@@ -201,8 +190,6 @@ Object {
     Object {
       "description": "get columns list",
       "name": "columns",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "array",
       },
@@ -214,7 +201,6 @@ Object {
       },
       "description": "filter key",
       "name": "filterKey",
-      "required": undefined,
       "tags": Object {
         "ignore": Array [
           Object {

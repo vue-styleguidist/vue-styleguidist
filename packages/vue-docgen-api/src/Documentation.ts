@@ -72,7 +72,7 @@ export interface PropDescriptor extends Descriptor {
 
 export interface MethodDescriptor extends Descriptor {
 	name: string
-	description: string
+	description?: string
 	returns?: UnnamedParam
 	tags?: { [key: string]: BlockTag[] }
 	params?: Param[]
@@ -146,34 +146,25 @@ export default class Documentation {
 		return vModelDescriptor && vModelDescriptor.name === propName
 			? vModelDescriptor
 			: this.getDescriptor(propName, this.propsMap, () => ({
-					description: '',
-					tags: {},
 					name: propName
 			  }))
 	}
 
 	public getMethodDescriptor(methodName: string): MethodDescriptor {
 		return this.getDescriptor(methodName, this.methodsMap, () => ({
-			name: methodName,
-			modifiers: [],
-			description: '',
-			tags: {}
+			name: methodName
 		}))
 	}
 
 	public getEventDescriptor(eventName: string): EventDescriptor {
 		return this.getDescriptor(eventName, this.eventsMap, () => ({
-			name: eventName,
-			properties: undefined,
-			description: '',
-			tags: []
+			name: eventName
 		}))
 	}
 
 	public getSlotDescriptor(slotName: string): SlotDescriptor {
 		return this.getDescriptor(slotName, this.slotsMap, () => ({
-			name: slotName,
-			description: ''
+			name: slotName
 		}))
 	}
 

@@ -178,8 +178,11 @@ export function describeRequired(
 ) {
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
-	propDescriptor.required =
+	const required =
 		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : undefined
+	if (required !== undefined) {
+		propDescriptor.required = required
+	}
 }
 
 export function describeDefault(

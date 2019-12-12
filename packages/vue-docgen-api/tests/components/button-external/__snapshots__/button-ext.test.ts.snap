@@ -8,7 +8,6 @@ Object {
     Object {
       "description": "Success event when we click",
       "name": "success",
-      "properties": undefined,
       "type": Object {
         "names": Array [
           "undefined",
@@ -20,7 +19,6 @@ Object {
   "methods": Array [
     Object {
       "description": "method testing",
-      "modifiers": Array [],
       "name": "onClick",
       "params": Array [
         Object {
@@ -44,7 +42,6 @@ Object {
     Object {
       "description": "An example of a property typed through the decorators arguments",
       "name": "propNoType",
-      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
@@ -65,7 +62,6 @@ Object {
       },
       "description": "A prop with a default value",
       "name": "propB",
-      "required": undefined,
       "tags": Object {},
       "type": Object {
         "name": "string",
