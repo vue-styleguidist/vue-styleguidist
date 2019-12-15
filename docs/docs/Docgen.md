@@ -148,13 +148,13 @@ Function - Returns if an extended component should be parsed by docgen.
 
 **NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non blocking but annoying.
 
-**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use it responsibly.
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might degrade performance. Use it responsibly.
 
 ## Documentation Object
 
-The `Documentation` class is the container of information before getting compiled. It is easily modified and accessed. To be used and exported, one can use the `toObject()` function.
+The `Documentation` class is the container of information before getting compiled. To be used and exported, use the `toObject()` function to make a neutral serializable object.
 
-The object has functions to get descriptors for props, events, methods, and slots. All those functions follow the same principle. If you call it twice with the same argument, it will return twice the same reference to the prop. this way if your prop is decorated in multiple places, it can be easily made working.
+The object has functions to get descriptors for props, events, methods, and slots. All those functions follow the same principle. If you call it twice with the same argument, it will return twice the same reference to the prop. This way if your prop is decorated in multiple places, it simplifies its documentation.
 
 ```ts
 function getPropDescriptor(propName: string): PropDescriptor

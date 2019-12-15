@@ -45,8 +45,6 @@ const styleguide = styleguidist({
 })
 ```
 
-**Note:** any output is disabled by default, you may need to define your own [logger](/Configuration.md#logger).
-
 Using a config file:
 
 ```javascript
@@ -62,6 +60,8 @@ const styleguide = styleguidist()
 ```
 
 See all available [config options](/Configuration.md).
+
+> **Note:** console output is turned off by default, you may need to define your own [logger](/Configuration.md#logger).
 
 ## Methods
 

@@ -24,9 +24,12 @@ and use [Vue CLI documentation](/VueCLI3doc.md)
 
 ## 2. Configure your style guide
 
-[Point Styleguidist to your Vue components](Components.md) and [tell it how to load your code](Webpack.md).
+Create a `styleguide.config.js` file in the same directory that your `package.json`. This will be your configuration file. In this file, you can :
 
-If you’re using [Vue-CLI 3](https://github.com/vuejs/vue-cli) you can skip the webpack step. When you install [vue-cli-plugin-styleguidist](/VueCLI3doc.md), styleguidist picks up what it needs from the CLI. Just tell it where to find the components
+- [Point Styleguidist to your Vue components](Components.md) and
+- [Tell it how to load your code](Webpack.md)
+
+If you’re using [Vue-CLI 3](https://github.com/vuejs/vue-cli) you can skip the webpack step. When you install [vue-cli-plugin-styleguidist](/VueCLI3doc.md), styleguidist picks up what it needs from the CLI. Then tell it where to find the components
 
 ## 3. Add npm scripts for convenience
 
@@ -51,6 +54,8 @@ Run **`npm run styleguide:build`** to build a static version.
 
 See how to [document your components](Documenting.md)
 
-## Have questions?
+## Have questions
 
 - [Read the cookbook](Cookbook.md)
+- [Ask on discord](https://discordapp.com/channels/325477692906536972/538786416092512278)
+- [Post Questions on Github](https://github.com/vue-styleguidist/vue-styleguidist/issues/new?template=Question.md)

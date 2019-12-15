@@ -100,7 +100,7 @@ Adds a little button on the top right hand corner of the editor to copy the cont
 
 Type: `Function`, optional
 
-> **Warning:** You may easily break Vue styleguidist using this options, try to use [webpackConfig](#webpackconfig) option instead.
+> **Warning:** You are likely to break Vue styleguidist using this options, try to use [webpackConfig](#webpackconfig) option instead.
 
 Allows you to modify webpack config without any restrictions.
 
@@ -242,7 +242,7 @@ By default, `vue-styleguidist` registers all components globally. This can be an
 - Multiple components are sharing the same name OR
 - Components are changing behaviour if another component is registered
 
-In this case, just set `locallyRegisterComponents` to `true`. It will register components only in the examples of their documentation.
+In this case, set `locallyRegisterComponents` to `true`. It will register components only in the examples of their documentation.
 
 Though if you need to register an additionl component and you are forced to use this behaviour, proceed like this:
 
@@ -504,7 +504,7 @@ See examples of [sections configuration](/docs/Components.md#sections).
 
 Type: `String`, default: `0.0.0.0`
 
-Dev server host name.
+Dev server name.
 
 ## `serverPort`
 
@@ -723,7 +723,7 @@ module.exports = {
 
 **NOTE** If `vue-docgen-api` fails to parse the targetted component, it will log a warning. It is not blocking but it is annoying.
 
-**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use it responsibly.
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might hurt performance. Use it responsibly.
 
 ## `verbose`
 
