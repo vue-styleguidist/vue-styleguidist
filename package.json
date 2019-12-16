@@ -177,7 +177,7 @@
     "packages/vue-styleguidist/src/scripts/schemas/config.ts": [
       "yarn babel packages/vue-styleguidist/src/scripts/schemas/config.ts --out-file packages/vue-styleguidist/lib/scripts/schemas/config.js",
       "node ./packages/vue-styleguidist/maketypes.js",
-      "git add ./packages/vue-styleguidist/src/types/StyleGuide.ts"
+      "git add ./packages/vue-styleguidist/src/types/StyleGuide.d.ts"
     ]
   },
   "gitHooks": {

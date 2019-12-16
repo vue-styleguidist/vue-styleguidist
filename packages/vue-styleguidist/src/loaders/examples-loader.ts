@@ -15,7 +15,7 @@ import expandDefaultComponent from 'react-styleguidist/lib/loaders/utils/expandD
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import { StyleguidistContext } from '../types/StyleGuide'
-import { Example } from '../types/Example'
+import { ExampleLoader } from '../types/Example'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import cleanComponentName from './utils/cleanComponentName'
 import importCodeExampleFile from './utils/importCodeExampleFile'
@@ -36,6 +36,10 @@ const JSX_COMPILER_UTILS_PATH = require.resolve('vue-inbrowser-compiler-utils')
 
 function isVueFile(filepath: string) {
 	return /.vue$/.test(filepath)
+}
+
+function isImport(req: any): req is { importPath: string; path: string } {
+	return !!req.importPath
 }
 
 export default function(this: StyleguidistContext, source: string) {
@@ -62,7 +66,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		source = expandDefaultComponent(source, cleanDisplayName)
 	}
 
-	const updateExample = (props: Example) => {
+	const updateExample = (props: ExampleLoader) => {
 		const p = importCodeExampleFile(props, this.resourcePath, this)
 		return config.updateExample ? config.updateExample(p, this.resourcePath) : p
 	}
@@ -93,13 +97,16 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Note that we can't just use require() directly at runtime,
 	// because webpack changes its name to something like __webpack__require__().
 	const allCodeExamples = filter(examples, { type: 'code' })
-	const requiresFromExamples = allCodeExamples.reduce((requires, example) => {
-		const requiresLocal = getExampleLiveImports(example.content)
-		const importPath = example.settings.importpath
-		return requires.concat(
-			importPath ? requiresLocal.map(path => ({ importPath, path })) : requiresLocal
-		)
-	}, [])
+	const requiresFromExamples = allCodeExamples.reduce(
+		(requires: ({ importPath: string; path: string } | string)[], example) => {
+			const requiresLocal = getExampleLiveImports(example.content)
+			const importPath = example.settings.importpath
+			return requires.concat(
+				importPath ? requiresLocal.map(path => ({ importPath, path })) : requiresLocal
+			)
+		},
+		[]
+	)
 
 	// Auto imported modules.
 	// We don't need to do anything here to support explicit imports: they will
@@ -115,27 +122,30 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	}
 
 	// All required or imported modules
-	const allModules = [...requiresFromExamples, ...values(fullContext)]
+	const allModules = [...requiresFromExamples, ...values<string>(fullContext)]
 
 	// “Prerequire” modules required in Markdown examples and context so they
 	// end up in a bundle and be available at runtime
-	const allModulesCode = allModules.reduce((requires, requireRequest) => {
-		// if we are looking at a remote example
-		// resolve the requires from there
+	const allModulesCode = allModules.reduce(
+		(requires: Record<string, Record<string, any>>, requireRequest) => {
+			// if we are looking at a remote example
+			// resolve the requires from there
 
-		if (requireRequest.importPath) {
-			if (!requires[requireRequest.importPath]) {
-				requires[requireRequest.importPath] = {}
+			if (isImport(requireRequest)) {
+				if (!requires[requireRequest.importPath]) {
+					requires[requireRequest.importPath] = {}
+				}
+				const relativePath = /^\./.test(requireRequest.path)
+					? path.join(requireRequest.importPath, requireRequest.path)
+					: requireRequest.path
+				requires[requireRequest.importPath][requireRequest.path] = requireIt(relativePath)
+			} else {
+				requires[requireRequest] = requireIt(requireRequest)
 			}
-			const relativePath = /^\./.test(requireRequest.path)
-				? path.join(requireRequest.importPath, requireRequest.path)
-				: requireRequest.path
-			requires[requireRequest.importPath][requireRequest.path] = requireIt(relativePath)
-		} else {
-			requires[requireRequest] = requireIt(requireRequest)
-		}
-		return requires
-	}, {})
+			return requires
+		},
+		{}
+	)
 
 	// Require context modules so they are available in an example
 	let marker = -1
@@ -167,8 +177,25 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map(example => {
 		if (example.type === 'code') {
+			let compiled: any = false
+			if (config.codeSplit) {
+				if (process.env.NODE_ENV === 'production') {
+					// if we are not in prod, we want to avoid running examples through
+					// buble all at the same time. We then tell it to calsculate on the fly
+					const compiledExample = compile(example.content, {
+						...config.compilerConfig,
+						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+					})
+					compiled = {
+						script: compiledExample.script,
+						template: compiledExample.template,
+						style: compiledExample.style
+					}
+				}
+			}
+
 			const importPath = example.settings && example.settings.importpath
-			example.evalInContext = {
+			const evalInContext = {
 				toAST: () =>
 					b.callExpression(
 						b.memberExpression(b.identifier('evalInContext'), b.identifier('bind')),
@@ -181,23 +208,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 						]
 					)
 			}
-			if (config.codeSplit) {
-				if (process.env.NODE_ENV !== 'production') {
-					// if we are not in prod, we want to avoid running examples through
-					// buble all at the same time. We then tell it to calsculate on the fly
-					example.compiled = false
-				} else {
-					const compiledExample = compile(example.content, {
-						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
-					})
-					example.compiled = {
-						script: compiledExample.script,
-						template: compiledExample.template,
-						style: compiledExample.style
-					}
-				}
-			}
+			return { ...example, evalInContext, compiled }
 		}
 		return example
 	})

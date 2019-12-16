@@ -78,13 +78,13 @@ declare module 'react-styleguidist/lib/loaders/utils/filterComponentsWithExample
 }
 
 declare module 'react-styleguidist/lib/loaders/utils/chunkify' {
-	import { Example } from 'types/Example'
+	import { ExampleLoader } from 'types/Example'
 
 	function chunkify(
 		markdown: string | false,
-		updateExample: (p: Example, resourcePath: string) => Example,
+		updateExample: (p: ExampleLoader, resourcePath: string) => ExampleLoader,
 		playgroundLangs: string[]
-	): any[]
+	): ExampleLoader[]
 	export default chunkify
 }
 declare module 'react-styleguidist/lib/loaders/utils/expandDefaultComponent' {
