@@ -56,7 +56,6 @@
     "@commitlint/config-conventional": "^7.5.0",
     "@types/htmlparser2": "^3.7.31",
     "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.18",
     "@types/pug": "^2.0.4",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",

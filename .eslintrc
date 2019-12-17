@@ -35,7 +35,9 @@
 			"error",
 			"ignorePackages",
 			{
-				"js": "never"
+				"js": "never",
+				"ts": "never",
+				"tsx": "never"
 			}
 		],
 		"import/no-extraneous-dependencies": "error",

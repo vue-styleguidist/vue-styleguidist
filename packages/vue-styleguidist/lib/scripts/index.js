@@ -1,27 +1,84 @@
-"use strict";
+'use strict'
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = _default;
+function _typeof(obj) {
+	if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+		_typeof = function _typeof(obj) {
+			return typeof obj
+		}
+	} else {
+		_typeof = function _typeof(obj) {
+			return obj &&
+				typeof Symbol === 'function' &&
+				obj.constructor === Symbol &&
+				obj !== Symbol.prototype
+				? 'symbol'
+				: typeof obj
+		}
+	}
+	return _typeof(obj)
+}
 
-require("react-styleguidist/lib/scripts/utils/ensureWebpack");
+Object.defineProperty(exports, '__esModule', {
+	value: true
+})
+exports['default'] = _default
 
-var _logger = _interopRequireDefault(require("react-styleguidist/lib/scripts/logger"));
+require('react-styleguidist/lib/scripts/utils/ensureWebpack')
 
-var _build = _interopRequireDefault(require("./build"));
+var _logger = _interopRequireDefault(require('react-styleguidist/lib/scripts/logger'))
 
-var _server2 = _interopRequireDefault(require("./server"));
+var _build = _interopRequireDefault(require('./build'))
 
-var _makeWebpackConfig2 = _interopRequireDefault(require("./make-webpack-config"));
+var _server2 = _interopRequireDefault(require('./server'))
 
-var _config = _interopRequireDefault(require("./config"));
+var _makeWebpackConfig2 = _interopRequireDefault(require('./make-webpack-config'))
 
-var binutils = _interopRequireWildcard(require("./binutils"));
+var _config = _interopRequireDefault(require('./config'))
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
+var binutils = _interopRequireWildcard(require('./binutils'))
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _getRequireWildcardCache() {
+	if (typeof WeakMap !== 'function') return null
+	var cache = new WeakMap()
+	_getRequireWildcardCache = function _getRequireWildcardCache() {
+		return cache
+	}
+	return cache
+}
+
+function _interopRequireWildcard(obj) {
+	if (obj && obj.__esModule) {
+		return obj
+	}
+	if (obj === null || (_typeof(obj) !== 'object' && typeof obj !== 'function')) {
+		return { default: obj }
+	}
+	var cache = _getRequireWildcardCache()
+	if (cache && cache.has(obj)) {
+		return cache.get(obj)
+	}
+	var newObj = {}
+	var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor
+	for (var key in obj) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null
+			if (desc && (desc.get || desc.set)) {
+				Object.defineProperty(newObj, key, desc)
+			} else {
+				newObj[key] = obj[key]
+			}
+		}
+	}
+	newObj['default'] = obj
+	if (cache) {
+		cache.set(obj, newObj)
+	}
+	return newObj
+}
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { default: obj }
+}
 
 // Make sure user has webpack installed
 
@@ -33,36 +90,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  * @returns {object} API.
  */
 function _default(config, updateConfig) {
-  config = (0, _config["default"])(config, function (config) {
-    (0, _logger["default"])(config.logger, config.verbose, {});
+	config = (0, _config['default'])(config, function(config) {
+		;(0, _logger['default'])(config.logger, config.verbose, {})
 
-    if (typeof updateConfig === 'function') {
-      updateConfig(config);
-    }
+		if (typeof updateConfig === 'function') {
+			updateConfig(config)
+		}
 
-    return config;
-  });
-  return {
-    build: function build(callback) {
-      return (0, _build["default"])(config, function (err, stats) {
-        return callback(err, config, stats);
-      });
-    },
-    server: function server(callback) {
-      return (0, _server2["default"])(config, function (err) {
-        return callback(err, config);
-      });
-    },
-    makeWebpackConfig: function makeWebpackConfig(env) {
-      return (0, _makeWebpackConfig2["default"])(config, env || 'production');
-    },
-    binutils: {
-      server: function server(open) {
-        return binutils.commandServer(config, open);
-      },
-      build: function build() {
-        return binutils.commandBuild(config);
-      }
-    }
-  };
+		return config
+	})
+	return {
+		build: function build(callback) {
+			return (0, _build['default'])(config, function(err, stats) {
+				return callback(err, config, stats)
+			})
+		},
+		server: function server(callback) {
+			return (0, _server2['default'])(config, function(err) {
+				return callback(err, config)
+			})
+		},
+		makeWebpackConfig: function makeWebpackConfig(env) {
+			return (0, _makeWebpackConfig2['default'])(config, env || 'production')
+		},
+		binutils: {
+			server: function server(open) {
+				return binutils.commandServer(config, open)
+			},
+			build: function build() {
+				return binutils.commandBuild(config)
+			}
+		}
+	}
 }
