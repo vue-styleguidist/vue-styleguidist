@@ -2,6 +2,7 @@
 import React from 'react'
 import copy from 'clipboard-copy'
 import { MdContentCopy } from 'react-icons/md'
+// eslint-disable-next-line import/no-unresolved,import/extensions
 import Editor from 'rsg-components/EditorNoTools'
 import ToolbarButton from 'rsg-components/ToolbarButton'
 import Styled from 'rsg-components/Styled'
