@@ -169,7 +169,7 @@ function getExpressionDescription(path: NodePath): SlotComment | undefined {
 	return parseCommentNode(node.leadingComments[node.leadingComments.length - 1])
 }
 
-function parseCommentNode(node: bt.BaseComment): SlotComment | undefined {
+function parseCommentNode(node: bt.Comment): SlotComment | undefined {
 	if (node.type !== 'CommentBlock') {
 		return undefined
 	}

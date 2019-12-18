@@ -1,13 +1,17 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { Example } from '../../types/Example'
+import { ExampleLoader } from '../../types/Example'
 
 /**
  * Extract example from file
  */
 const importRE = /^\[import\]\(([./\w]+)\)/
 
-export default function importCodeExampleFile(example: Example, mdPath: string, wp: any): Example {
+export default function importCodeExampleFile(
+	example: ExampleLoader,
+	mdPath: string,
+	wp: any
+): ExampleLoader {
 	const lang = importRE.exec(example.lang)
 	if (lang) {
 		const filePath = lang[1]

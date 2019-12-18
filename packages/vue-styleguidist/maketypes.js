@@ -31,4 +31,4 @@ function render(filename) {
 	})
 }
 
-render('StyleGuide.ts.ejs')
+render('StyleGuide.d.ts.ejs')

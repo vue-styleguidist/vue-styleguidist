@@ -388,7 +388,7 @@ module.exports = {
 
 1.  Put `debugger;` statement at the beginning of your code.
 2.  Press the ![Debugger](https://d3vv6lp55qjaqc.cloudfront.net/items/2h2q3N123N3G3R252o41/debugger.png) button in your browser’s developer tools.
-3.  Press the ![Continue](https://d3vv6lp55qjaqc.cloudfront.net/items/3b3c1P3g3O1h3q111I2l/continue.png) button and the debugger will stop execution at the next exception.
+3.  Press the ![Continue](https://d3vv6lp55qjaqc.cloudfront.net/items/3b3c1P3g3O1h3q111I2l/continue.png) button and the debugger will stop the browser from running JavaScript at the next exception.
 
 ## How to use Vagrant with Styleguidist?
 
@@ -457,7 +457,7 @@ See [this example](/Examples#router) for a concrete implementation.
 > PRO TIP: If your styleguide has `.resolve` issues in the browser console, it still seems to be using vue-router. Check if you are requiring the `router.js` file in any of the showcased components and remove the dependency. If you still can't find the culprit, follow these steps and you will find it.
 >
 > 1.  Find all mentions of `Vue.use(Router)` in your codebase
-> 1.  Add `console.trace()` just before it to get the stack trace of the way they are called
+> 1.  Add `console.trace()` on the line before it to get the stack trace of the way they are called
 > 1.  open styleguidist and look at the console of your browser
 >
 > Somewhere in your stack should be one of the displayed components. Find a way to avoid this require. If you can't find a way around this require, use a context variable to only load the router when not in styleguidist.

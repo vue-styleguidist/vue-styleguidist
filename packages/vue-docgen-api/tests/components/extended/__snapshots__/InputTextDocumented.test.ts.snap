@@ -9,26 +9,21 @@ Object {
   "methods": undefined,
   "props": Array [
     Object {
-      "description": "",
       "extends": Object {
         "name": "Base",
         "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
       },
       "name": "question",
-      "tags": Object {},
       "type": Object {
         "name": "undefined",
       },
     },
     Object {
-      "description": "",
       "extends": Object {
         "name": "Base",
         "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
       },
       "name": "placeholder",
-      "required": undefined,
-      "tags": Object {},
       "type": Object {
         "name": "string",
       },

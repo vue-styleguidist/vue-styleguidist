@@ -117,7 +117,7 @@ export default = {
 
 ## Events
 
-For events documentation, just add a comment right above it. If your comment is at the start of the function, the event will not be picked up.
+For events documentation, add a comment right above it. If your comment is at the start of the function, the event will not be picked up.
 
 If the event is explicitly specified, no need to tell styleguidist what it is.
 
@@ -167,7 +167,7 @@ this.$emit('change', newValue, oldValue)
 
 Slots are automatically documented by styleguidist.
 
-To add a description, just add a comment right before.
+To add a description, add a comment right before.
 
 ```html
 <template>
@@ -542,17 +542,35 @@ const mockData = require('./mocks');
 <Message :content="mockData.hello" />
 ```
 
-> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, just do `import { myExample as exam } from './myExample';
+> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
+>
+> ````md
+> ```js
+> import { myExample as Button } from './myExample'
+>
+> ;<div>
+>   <Button />
+> </div>
+> ```
+> ````
 
-[ BETA ] If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in `styleguide.config.js`. Using this option will force you to use proper Vue format for your examples. No more pseudo-JSX code.
-
-```jsx
-export default {
-  render() {
-    return <Button />
-  }
-}
-```
+> **Note** If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in your `styleguide.config.js`. Using this option will force you to use proper Vue format for your examples. No more pseudo-JSX code.
+>
+> This would not work with the [jsxInExample](Configuration.md#jsxInExamples) option
+>
+> ```jsx
+> <Button />
+> ```
+>
+> ...while this would be valid
+>
+> ```jsx
+> export default {
+>   render() {
+>     return <Button />
+>   }
+> }
+> ```
 
 ## Importing examples
 
