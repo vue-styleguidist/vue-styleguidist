@@ -17,6 +17,7 @@
 - [How to document styled-components?](#how-to-document-styled-components)
 - [Use vue-styleguideist with components that contain routing](#use-vue-styleguideist-with-components-that-contain-routing)
 - [How to include FontAwesome (or other icon sets) in your style guide](#how-to-include-fontawesome-or-other-icon-sets-in-your-style-guide)
+- [How to use vue-styleguidist with multiple packages for components](#how-to-use-vue-styleguidist-with-multiple-packages-for-components)
 
 <!-- tocstop -->
 
