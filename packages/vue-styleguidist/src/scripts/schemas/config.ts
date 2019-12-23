@@ -101,7 +101,7 @@ export default {
 		tstype: ['{', '		theme: string', '	}'].join('\n'),
 		type: 'object',
 		process: (value: any, config: StyleguidistConfig) => {
-			if ((config.simpleEditor == undefined || config.simpleEditor) && value) {
+			if ((config.simpleEditor === undefined || config.simpleEditor) && value) {
 				throw new StyleguidistError(
 					`
 ${kleur.bold('editorConfig')} config option is useless without activating the CodeMirror editor. 
