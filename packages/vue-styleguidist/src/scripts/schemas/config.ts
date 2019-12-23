@@ -100,7 +100,17 @@ export default {
 	editorConfig: {
 		tstype: ['{', '		theme: string', '	}'].join('\n'),
 		type: 'object',
-		process: (value: string, config: StyleguidistConfig) => {
+		process: (value: any, config: StyleguidistConfig) => {
+			if ((config.simpleEditor == undefined || config.simpleEditor) && value) {
+				throw new StyleguidistError(
+					`
+${kleur.bold('editorConfig')} config option is useless without activating the CodeMirror editor. 
+Read the documentation to see how to re-activate it.
+https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
+					'editorConfig'
+				)
+			}
+
 			const defaults = {
 				theme: 'base16-light',
 				mode: 'jsx',
@@ -110,6 +120,7 @@ export default {
 				viewportMargin: Infinity,
 				lineNumbers: false
 			}
+
 			return Object.assign(
 				{},
 				defaults,
