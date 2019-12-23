@@ -146,9 +146,21 @@ module.exports = {
 
 ## `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/packages/vue-styleguidist/scripts/schemas/config.js#L96)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
+
+> **NOTE :** From version 4.0.0, Prism is the editor by default as it is much lighter. Turn off [simpleEditor](#simpleEditor) to use CodeMirror and leverage this config.
+>
+> ```js
+> module.exports = {
+>   // ...
+>   editorConfig: {
+>     theme: 'base16-light'
+>   },
+>   simpleEditor: false
+> }
+> ```
 
 ## `getExampleFilename`
 
