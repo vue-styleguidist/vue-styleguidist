@@ -428,7 +428,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		type: 'function'
 	},
 	updateExample: {
-		tstype: '(props: Example, ressourcePath: string) => Example',
+		tstype: '(props: ExampleLoader, ressourcePath: string) => ExampleLoader',
 		type: 'function',
 		default: (props: Example) => {
 			if (props.lang === 'example') {

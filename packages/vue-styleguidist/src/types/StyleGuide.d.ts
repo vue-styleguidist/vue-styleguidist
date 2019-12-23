@@ -5,7 +5,7 @@ import { TransformOptions } from 'buble'
 import { Configuration, loader } from 'webpack'
 import { ProcessedSection, Section } from './Section'
 import { EXPAND_MODE } from './enums'
-import { Example } from './Example'
+import { Example, ExampleLoader } from './Example'
 import { ComponentProps } from './Component'
 
 export interface StyleguidistContext extends loader.LoaderContext {
@@ -185,7 +185,7 @@ export interface StyleguidistConfig {
      */
     title: string;
     updateDocs: (doc: ComponentProps, file: string) => ComponentProps;
-    updateExample: (props: Example, ressourcePath: string) => Example;
+    updateExample: (props: ExampleLoader, ressourcePath: string) => ExampleLoader;
     updateWebpackConfig: any;
     /**
      * Defines the initial state of the props and methods tab 
