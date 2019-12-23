@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.2...v4.2.3) (2019-12-23)
+
+
+### Bug Fixes
+
+* add warning when using editorConfig ([b39f6f8](https://github.com/vue-styleguidist/vue-styleguidist/commit/b39f6f851455f208a9ae9092c8226cf2f7c3322c))
+* typings of Styleguide ([f50d3b5](https://github.com/vue-styleguidist/vue-styleguidist/commit/f50d3b5b78cbab95c76f522cc2c7ae2c3b8a91c0))
+
+
+
+
+
 ## [4.2.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.1...v4.2.2) (2019-12-18)
 
 
