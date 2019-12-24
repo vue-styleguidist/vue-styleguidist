@@ -10,6 +10,10 @@
     },
     "main": "lib/docgen.js",
     "dependencies": {
+        "escodegen": "1.12.0",
+        "generate": "^0.14.0",
+        "prettier": "1.19.1",
+        "to-ast": "^1.0.0",
         "vue-docgen-api": "^4.0.1"
     },
     "devDependencies": {

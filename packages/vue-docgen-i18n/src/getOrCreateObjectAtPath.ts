@@ -1,6 +1,6 @@
 import { ObjectPath } from './traverse'
 
-const getOrCreateObjectAtPath = (obj: any, path: ObjectPath): any =>
+const getOrCreateObjectAtPath = (obj: any, path: ObjectPath, defaultValue?: any): any =>
 	path.reduce((obj, pathItem, i) => {
 		const r = obj[pathItem]
 		if (r !== undefined) {
