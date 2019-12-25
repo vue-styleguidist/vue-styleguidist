@@ -2,32 +2,31 @@ import { ComponentDoc } from 'vue-docgen-api'
 import { generate } from 'escodegen'
 import { writeFile } from 'fs'
 import { format } from 'prettier'
-import traverse from './traverse'
-import getOrCreateObjectAtPath from './getOrCreateObjectAtPath'
-
-import toAst = require('to-ast')
+import traverse from 'traverse'
+import toAst from 'to-ast'
+import { setAtPath } from './getOrCreateObjectAtPath'
 
 function generateTranslationObject(originalDoc: ComponentDoc): Record<string, any> {
 	const translations: Record<string, any> = {}
-	traverse(originalDoc, (key, object, path) => {
-		if (key === 'description') {
-			const trans = getOrCreateObjectAtPath(originalDoc, path)
-			if (trans && trans.description) {
-				getOrCreateObjectAtPath(translations, path).name = trans.name
-				getOrCreateObjectAtPath(translations, path).description = trans.description
-			}
+	const doc = traverse(originalDoc)
+	doc.forEach(function(description) {
+		if (this.key === 'description' && this.parent) {
+			setAtPath(translations, this.path, description)
 		}
 	})
-	return originalDoc
+	return translations
 }
 
-export default function generateTranslationFile(originalDoc: ComponentDoc, fileName: string) {
+export function generateTranslation(originalDoc: ComponentDoc): string {
 	const trans = generateTranslationObject(originalDoc)
 	const ast = toAst(trans)
 	// TODO: Add leading coments (original description) before
 	// each description member
-	const fileContent = `module.exports = ${generate(ast)}`
-	writeFile(fileName, format(fileContent), err => {
+	return `module.exports = ${generate(ast)}`
+}
+
+export default function genFile(originalDoc: ComponentDoc, fileName: string) {
+	writeFile(fileName, format(generateTranslation(originalDoc)), err => {
 		if (err) throw err
 	})
 }

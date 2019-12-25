@@ -1,6 +1,5 @@
 import { ComponentDoc } from 'vue-docgen-api'
-import traverse from './traverse'
-import getOrCreateObjectAtPath from './getOrCreateObjectAtPath'
+import traverse from 'traverse'
 
 /**
  * Translates the given `ComponentDoc` object using provided translations
@@ -12,13 +11,12 @@ export default function(
 	originalDoc: ComponentDoc,
 	translations: Record<string, any>
 ): ComponentDoc {
-	traverse(originalDoc, (key, object, path) => {
-		if (key === 'description') {
-			const trans = getOrCreateObjectAtPath(translations, path)
-			if (trans && trans.description) {
-				getOrCreateObjectAtPath(originalDoc, path).description = trans.description
+	const trans = traverse(translations)
+	return traverse(originalDoc).map(function() {
+		if (this.key === 'description') {
+			if (trans.has(this.path)) {
+				this.update(trans.get(this.path))
 			}
 		}
 	})
-	return originalDoc
 }

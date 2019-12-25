@@ -12,6 +12,7 @@
     "dependencies": {
         "escodegen": "1.12.0",
         "generate": "^0.14.0",
+        "traverse": "^0.6.6",
         "prettier": "1.19.1",
         "to-ast": "^1.0.0",
         "vue-docgen-api": "^4.0.1"
@@ -19,6 +20,7 @@
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/mkdirp": "^0.5.2",
-        "@types/prettier": "^1.18.1"
+        "@types/prettier": "^1.18.1",
+        "@types/traverse": "^0.6.32"
     }
 }
