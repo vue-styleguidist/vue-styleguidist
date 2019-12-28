@@ -5,7 +5,7 @@ import { format } from 'prettier'
 import traverse from 'traverse'
 import toAst from 'to-ast'
 import { walk } from 'estree-walker'
-import { setAtPath } from './getOrCreateObjectAtPath'
+import setAtPath from './setAtPath'
 
 function generateTranslationObject(originalDoc: ComponentDoc): Record<string, any> {
 	const translations: Record<string, any> = {}
