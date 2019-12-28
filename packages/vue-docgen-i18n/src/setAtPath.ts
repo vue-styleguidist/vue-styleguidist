@@ -1,4 +1,4 @@
-const getOrCreateObjectAtPath = (obj: any, path: string[], defaultValue?: any): any =>
+export default (obj: any, path: string[], value: any) => {
 	path.reduce((currentLevelObject, pathItem, i) => {
 		const r = currentLevelObject[pathItem]
 		if (r !== undefined) {
@@ -12,15 +12,9 @@ const getOrCreateObjectAtPath = (obj: any, path: string[], defaultValue?: any): 
 			} else if (typeof path[i + 1] === 'string') {
 				currentLevelObject[pathItem] = {}
 			}
-		} else if (defaultValue) {
-			currentLevelObject[pathItem] = defaultValue
+		} else {
+			currentLevelObject[pathItem] = value
 		}
 		return currentLevelObject[pathItem]
 	}, obj)
-
-export default (obj: any, path: string[], value: any) => {
-	const key = path[path.length - 1]
-	const keyInt = parseInt(key, 10)
-	const o = getOrCreateObjectAtPath(obj, path.slice(0, -1), isNaN(keyInt) ? {} : [])
-	o[isNaN(keyInt) ? key : keyInt] = value
 }
