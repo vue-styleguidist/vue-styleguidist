@@ -4,6 +4,7 @@ import { writeFile } from 'fs'
 import { format } from 'prettier'
 import traverse from 'traverse'
 import toAst from 'to-ast'
+import { walk } from 'estree-walker'
 import { setAtPath } from './getOrCreateObjectAtPath'
 
 function generateTranslationObject(originalDoc: ComponentDoc): Record<string, any> {
@@ -17,12 +18,32 @@ function generateTranslationObject(originalDoc: ComponentDoc): Record<string, an
 	return translations
 }
 
+interface LiteralNode {
+	value: string
+}
+
+function isLiteral(node: any): node is LiteralNode {
+	return !!node.value
+}
+
 export function generateTranslation(originalDoc: ComponentDoc): string {
 	const trans = generateTranslationObject(originalDoc)
 	const ast = toAst(trans)
-	// TODO: Add leading coments (original description) before
+	// Add leading coments (original description) before
 	// each description member
-	return `module.exports = ${generate(ast)}`
+	walk(ast as any, {
+		enter: node => {
+			if (
+				node.type === 'Property' &&
+				isLiteral(node.key) &&
+				node.key.value === 'description' &&
+				isLiteral(node.value)
+			) {
+				node.leadingComments = [{ type: 'Line', value: ` @orig: ${node.value.value}` }]
+			}
+		}
+	})
+	return `module.exports = ${generate(ast, { comment: true })}`
 }
 
 export default function genFile(originalDoc: ComponentDoc, fileName: string) {

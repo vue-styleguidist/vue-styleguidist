@@ -13,8 +13,14 @@ describe('generateTrans', () => {
 		expect(obj).toMatchInlineSnapshot(`
 		"module.exports = {
 		    'props': [
-		        { 'description': 'EN-1' },
-		        { 'description': 'EN-2' }
+		        {
+		            // @orig: EN-1
+		            'description': 'EN-1'
+		        },
+		        {
+		            // @orig: EN-2
+		            'description': 'EN-2'
+		        }
 		    ]
 		}"
 	`)
