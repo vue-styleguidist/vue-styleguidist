@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test a vuetify component should match the snapshot 1`] = `
+Object {
+  "description": "",
+  "displayName": "v-text-field",
+  "events": Array [
+    Object {
+      "description": "",
+      "name": "input",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "description": "",
+      "name": "change",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "description": "",
+      "name": "blur",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "description": "",
+      "name": "focus",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "description": "",
+      "name": "keydown",
+      "properties": undefined,
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+  ],
+  "exportName": "default",
+  "methods": Array [
+    Object {
+      "description": "",
+      "modifiers": Array [],
+      "name": "focus",
+      "tags": Object {
+        "access": Array [
+          Object {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+    Object {
+      "description": "",
+      "modifiers": Array [],
+      "name": "blur",
+      "tags": Object {
+        "access": Array [
+          Object {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+  ],
+  "props": Array [
+    Object {
+      "description": "",
+      "name": "appendOuterIcon",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "autofocus",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "clearable",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'$clear'",
+      },
+      "description": "",
+      "name": "clearIcon",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "counter",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean|number|string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "filled",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "flat",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "fullWidth",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "label",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "outlined",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "placeholder",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "prefix",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "prependInnerIcon",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "reverse",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "rounded",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "shaped",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "singleLine",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "solo",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "soloInverted",
+      "tags": Object {},
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "description": "",
+      "name": "suffix",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'text'",
+      },
+      "description": "",
+      "name": "type",
+      "required": undefined,
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+  ],
+  "slots": undefined,
+  "tags": Object {},
+}
+`;
