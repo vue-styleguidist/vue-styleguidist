@@ -69,7 +69,7 @@
 		"react-icons": "^3.7.0",
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.9.4",
-		"react-styleguidist": "^10.2.1",
+		"react-styleguidist": "^10.4.1",
 		"rewrite-imports": "^2.0.3",
 		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^2.2.2",
