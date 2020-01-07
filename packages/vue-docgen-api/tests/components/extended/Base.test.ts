@@ -27,7 +27,11 @@ describe('tests Base', () => {
 		expect(docBase.props).not.toBeUndefined()
 	})
 
-	it('should the component has one prop', () => {
-		expect(docBase.props && docBase.props.length).toEqual(1)
+	it('should return two props in the documentation', () => {
+		expect(docBase.props && docBase.props.map(p => p.name)).toMatchInlineSnapshot(`
+		Array [
+		  "question",
+		]
+	`)
 	})
 })

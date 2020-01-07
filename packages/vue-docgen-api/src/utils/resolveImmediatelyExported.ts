@@ -8,6 +8,8 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 
 	const importedVariablePaths: ImportedVariableSet = {}
 
+	const exportAllFiles: string[] = []
+
 	// get imported variable names and filepath
 	recast.visit(ast.program, {
 		visitImportDeclaration(astPath) {
@@ -23,7 +25,7 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 			specifiers.each((s: NodePath<bt.ImportSpecifier | bt.ImportDefaultSpecifier>) => {
 				const varName = s.node.local.name
 				const exportName = bt.isImportSpecifier(s.node) ? s.node.imported.name : 'default'
-				importedVariablePaths[varName] = { filePath, exportName }
+				importedVariablePaths[varName] = { filePath: [filePath], exportName }
 			})
 			return false
 		}
@@ -40,9 +42,9 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 
 				specifiers.each((s: NodePath<bt.ExportSpecifier>) => {
 					const varName = s.node.exported.name
-					const exportName = s.node.local.name
+					const exportName = s.node.local ? s.node.local.name : varName
 					if (variableFilter.indexOf(varName) > -1) {
-						variables[varName] = { filePath, exportName }
+						variables[varName] = { filePath: [filePath], exportName }
 					}
 				})
 			} else {
@@ -70,8 +72,19 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 				}
 			}
 			return false
+		},
+		visitExportAllDeclaration(astPath) {
+			const newFilePath = astPath.get('source').node.value
+			exportAllFiles.push(newFilePath)
+			return false
 		}
 	})
+
+	if (exportAllFiles.length) {
+		variableFilter.filter(v => !variables[v]).forEach(exportName => {
+			variables[exportName] = { filePath: exportAllFiles, exportName }
+		})
+	}
 
 	return variables
 }

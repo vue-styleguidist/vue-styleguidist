@@ -21,7 +21,7 @@ describe('mixinsHandler', () => {
 			(ast: bt.File, varNameFilter?: string[]) => { [key: string]: string }
 		>
 		resolveRequiredMock.mockReturnValue({
-			testComponent: { filePath: 'componentPath', exportName: 'default' }
+			testComponent: { filePath: ['componentPath'], exportName: 'default' }
 		})
 
 		mockResolvePathFrom = (<unknown>resolvePathFrom) as jest.Mock<
