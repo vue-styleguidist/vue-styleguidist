@@ -8,7 +8,7 @@ Object {
     Object {
       "description": "Success event.",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "success",
@@ -69,7 +69,7 @@ Object {
     Object {
       "description": "Another mixin",
       "mixin": Object {
-        "name": "index",
+        "name": "genericMixin",
         "path": "~/packages/vue-docgen-api/tests/components/button/genericMixin.js",
       },
       "name": "secret",
@@ -84,7 +84,7 @@ Object {
       },
       "description": "The color for the button example",
       "mixin": Object {
-        "name": "index",
+        "name": "colorMixin",
         "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
       },
       "name": "color",
@@ -99,7 +99,7 @@ Object {
       },
       "description": "The size of the button",
       "mixin": Object {
-        "name": "index",
+        "name": "colorMixin",
         "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
       },
       "name": "size",
@@ -115,7 +115,7 @@ Object {
     },
     Object {
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "shouldBe",
@@ -126,7 +126,7 @@ Object {
     Object {
       "description": "Number of columns (1-12) the column should span.",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "span",
@@ -137,7 +137,7 @@ Object {
     Object {
       "description": "Sm breakpoint and above",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "spanSm",
@@ -148,7 +148,7 @@ Object {
     Object {
       "description": "Md breakpoint and above",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "spanMd",
@@ -163,7 +163,7 @@ Object {
       },
       "description": "The example props",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "example",
@@ -178,7 +178,7 @@ Object {
       },
       "description": "Model example2",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "v-model",
@@ -201,7 +201,7 @@ Object {
       },
       "description": "The example3 props",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "example3",
@@ -216,7 +216,7 @@ Object {
       },
       "description": "Add custom click actions.",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "onCustomClick",
@@ -241,7 +241,7 @@ Object {
       },
       "description": "Function default",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "funcDefault",
@@ -259,7 +259,7 @@ Object {
       "description": "Object or array defaults must be returned from
 a factory function",
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "propE",
@@ -269,7 +269,7 @@ a factory function",
     },
     Object {
       "mixin": Object {
-        "name": "index",
+        "name": "multiMixin",
         "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
       },
       "name": "prop1",

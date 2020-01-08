@@ -39,12 +39,14 @@ export default async function mixinsHandler(
 	const files = new Map<string, string[]>()
 	for (const varName of Object.keys(mixinVarToFilePath)) {
 		const { filePath, exportName } = mixinVarToFilePath[varName]
-		const fullFilePath = pathResolver(filePath)
-		if (!/[\\/]node_modules[\\/]/.test(fullFilePath)) {
-			const vars = files.get(fullFilePath) || []
-			vars.push(exportName)
-			files.set(fullFilePath, vars)
-		}
+		filePath.forEach(p => {
+			const fullFilePath = pathResolver(p)
+			if (opt.validExtends(fullFilePath)) {
+				const vars = files.get(fullFilePath) || []
+				vars.push(exportName)
+				files.set(fullFilePath, vars)
+			}
+		})
 	}
 
 	await files.keys().reduce(async (_, fullFilePath) => {
@@ -66,12 +68,12 @@ export default async function mixinsHandler(
 					documentation
 				)
 				mixinVar.name = documentation.get('displayName')
+				documentation.set('displayName', null)
 			} catch (e) {
 				// eat the error
 			}
 		}
 	}, Promise.resolve())
-	documentation.set('displayName', null)
 }
 
 function getMixinsVariableNames(compDef: NodePath): string[] {
