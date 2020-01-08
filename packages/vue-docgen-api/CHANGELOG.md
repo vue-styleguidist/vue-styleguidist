@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.3...v4.3.0) (2020-01-08)
+
+
+### Features
+
+* **docgen:** resolve pass through components ([07d183f](https://github.com/vue-styleguidist/vue-styleguidist/commit/07d183faad4bb2125bb389dcc065865d2d105dcb))
+
+
+
+
+
 ## [4.2.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.1...v4.2.2) (2019-12-18)
 
 
