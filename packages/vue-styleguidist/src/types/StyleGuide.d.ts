@@ -193,6 +193,11 @@ export interface StyleguidistConfig {
      */
     usageMode: EXPAND_MODE;
     /**
+     * If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases 
+     * @default "expand" 
+     */
+    tocMode: EXPAND_MODE;
+    /**
      * Should the passed filepath be parsed by docgen if mentionned extends 
      */
     validExtends: (filePath: string) => boolean;

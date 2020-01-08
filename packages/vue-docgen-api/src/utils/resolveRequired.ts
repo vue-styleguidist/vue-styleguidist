@@ -3,7 +3,9 @@ import { NodePath } from 'ast-types'
 import recast from 'recast'
 
 interface ImportedVariable {
-	filePath: string
+	// an imported variable can have mutiple potential filepath
+	// when it is not imported explicitely but using export * from "path"
+	filePath: string[]
 	exportName: string
 }
 
@@ -39,7 +41,7 @@ export default function resolveRequired(
 					if (!varNameFilter || varNameFilter.indexOf(localVariableName) > -1) {
 						const nodeSource = (astPath.get('source') as NodePath<bt.Literal>).node
 						if (bt.isStringLiteral(nodeSource)) {
-							const filePath = nodeSource.value
+							const filePath = [nodeSource.value]
 							varToFilePath[localVariableName] = {
 								filePath,
 								exportName
@@ -88,11 +90,11 @@ export default function resolveRequired(
 
 				if (bt.isIdentifier(nodeDeclaration.id)) {
 					const varName = nodeDeclaration.id.name
-					varToFilePath[varName] = { filePath: source, exportName }
+					varToFilePath[varName] = { filePath: [source], exportName }
 				} else if (bt.isObjectPattern(nodeDeclaration.id)) {
 					nodeDeclaration.id.properties.forEach((p: bt.ObjectProperty) => {
 						const varName = p.key.name
-						varToFilePath[varName] = { filePath: source, exportName }
+						varToFilePath[varName] = { filePath: [source], exportName }
 					})
 				} else {
 					return

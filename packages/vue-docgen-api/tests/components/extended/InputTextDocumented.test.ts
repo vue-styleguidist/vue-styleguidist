@@ -28,14 +28,34 @@ describe('tests InputTextDoc', () => {
 		expect(typeof docInputTextDoc.props !== 'undefined').toBe(true)
 	})
 	describe('props', () => {
-		it('should the component has two props', () => {
-			expect(docInputTextDoc.props && docInputTextDoc.props.length).toEqual(2)
+		it('should return two props in the documentation', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name))
+				.toMatchInlineSnapshot(`
+			Array [
+			  "question",
+			  "importedProp",
+			  "otherMixinProp",
+			  "placeholder",
+			]
+		`)
 		})
 
 		it('should the component has placeholder of type string', () => {
 			expect(getTestDescriptor(docInputTextDoc.props, 'placeholder').type).toEqual({
 				name: 'string'
 			})
+		})
+
+		it('should contain mixin imported props', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain(
+				'importedProp'
+			)
+		})
+
+		it('should contain mixin imported prop other', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain(
+				'otherMixinProp'
+			)
 		})
 	})
 

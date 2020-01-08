@@ -7,7 +7,7 @@ describe('adaptRequireWithIEV', () => {
 	let set: ImportedVariableSet
 	let mockResolver: jest.Mock
 	beforeEach(() => {
-		set = { test: { filePath: 'my/path', exportName: 'exportIt' } }
+		set = { test: { filePath: ['my/path'], exportName: 'exportIt' } }
 		mockResolver = jest.fn()
 	})
 
@@ -15,5 +15,12 @@ describe('adaptRequireWithIEV', () => {
 		adaptRequireWithIEV(mockResolver, set)
 
 		expect(mockResolver).toHaveBeenCalledWith('my/path')
+	})
+
+	it('should not resolve anything if multiple path in filePath', () => {
+		set.test.filePath.push('baz')
+		adaptRequireWithIEV(mockResolver, set)
+
+		expect(mockResolver).not.toHaveBeenCalledWith()
 	})
 })

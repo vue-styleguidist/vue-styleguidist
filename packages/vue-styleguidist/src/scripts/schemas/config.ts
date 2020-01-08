@@ -456,6 +456,15 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		},
 		default: 'collapse'
 	},
+	tocMode: {
+		tstype: 'EXPAND_MODE',
+		message: 'Table Of Contents Collapsed mode',
+		description:
+			'If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases',
+		list: MODES,
+		type: 'string',
+		default: 'expand'
+	},
 	validExtends: {
 		message: 'Should the passed filepath be parsed by docgen if mentionned extends',
 		type: 'function',
