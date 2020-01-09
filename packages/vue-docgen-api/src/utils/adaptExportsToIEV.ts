@@ -7,6 +7,20 @@ import cacher from './cacher'
 import resolveImmediatelyExported from './resolveImmediatelyExported'
 import { ImportedVariableSet } from './resolveRequired'
 
+const hash = require('hash-sum')
+
+export default function recusiveAdaptExportsToIEV(
+	pathResolver: (path: string, originalDirNameOverride?: string) => string,
+	varToFilePath: ImportedVariableSet
+) {
+	// resolve imediately exported variable as many layers as they are burried
+	let hashBefore: any
+	do {
+		hashBefore = hash(varToFilePath)
+		adaptExportsToIEV(pathResolver, varToFilePath)
+	} while (hashBefore !== hash(varToFilePath))
+}
+
 /**
  * Resolves specified variables to their actual files
  * Useful when using intermeriary files like this
@@ -18,7 +32,7 @@ import { ImportedVariableSet } from './resolveRequired'
  * @param pathResolver
  * @param varToFilePath
  */
-export default function adaptExportsToIEV(
+export function adaptExportsToIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
 	varToFilePath: ImportedVariableSet
 ) {
@@ -27,13 +41,11 @@ export default function adaptExportsToIEV(
 	const filePathToVars = new Map<string, Map<string, string>>()
 	Object.keys(varToFilePath).forEach(k => {
 		const exportedVariable = varToFilePath[k]
-		if (exportedVariable.filePath.length !== 1) {
-			return
-		}
-		const filePath = exportedVariable.filePath[0]
-		const exportToLocalMap = filePathToVars.get(filePath) || new Map<string, string>()
-		exportToLocalMap.set(k, exportedVariable.exportName)
-		filePathToVars.set(filePath, exportToLocalMap)
+		exportedVariable.filePath.forEach(filePath => {
+			const exportToLocalMap = filePathToVars.get(filePath) || new Map<string, string>()
+			exportToLocalMap.set(k, exportedVariable.exportName)
+			filePathToVars.set(filePath, exportToLocalMap)
+		})
 	})
 
 	// then roll though this map and replace varToFilePath elements with their final destinations
@@ -55,17 +67,19 @@ export default function adaptExportsToIEV(
 				})
 				const astRemote = cacher(() => recast.parse(source, { parser: buildParser() }), source)
 				const returnedVariables = resolveImmediatelyExported(astRemote, exportedVariableNames)
-				exportToLocal.forEach((exported, local) => {
-					if (exported && local) {
-						const aliasedVariable = returnedVariables[exported]
-						if (aliasedVariable) {
-							aliasedVariable.filePath = aliasedVariable.filePath.map(p =>
-								pathResolver(p, path.dirname(fullFilePath))
-							)
-							varToFilePath[local] = aliasedVariable
+				if (Object.keys(returnedVariables).length) {
+					exportToLocal.forEach((exported, local) => {
+						if (exported && local) {
+							const aliasedVariable = returnedVariables[exported]
+							if (aliasedVariable) {
+								aliasedVariable.filePath = aliasedVariable.filePath.map(p =>
+									pathResolver(p, path.dirname(fullFilePath))
+								)
+								varToFilePath[local] = aliasedVariable
+							}
 						}
-					}
-				})
+					})
+				}
 			} catch (e) {
 				// ignore load errors
 			}

@@ -40,8 +40,18 @@ Object {
     },
     Object {
       "mixin": Object {
-        "name": "otherNamed",
-        "path": "~/packages/vue-docgen-api/tests/mixins/otherNamed.js",
+        "name": "deep",
+        "path": "~/packages/vue-docgen-api/tests/mixins/another/deep.js",
+      },
+      "name": "deep",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "mixin": Object {
+        "name": "deep",
+        "path": "~/packages/vue-docgen-api/tests/mixins/another/deep.js",
       },
       "name": "placeholder",
       "type": Object {
