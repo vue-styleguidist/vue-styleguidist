@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.3.0...v4.4.0) (2020-01-09)
+
+
+### Bug Fixes
+
+* update error management in docgen loader ([f23f267](https://github.com/vue-styleguidist/vue-styleguidist/commit/f23f267c630f9ee92742d000a4c1cfb8fe698635))
+* warning when documenting return of a method ([0a74e3b](https://github.com/vue-styleguidist/vue-styleguidist/commit/0a74e3bdf11fc821714ea0e0c44e008c473c9b8e))
+
+
+
+
+
 # [4.3.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.3...v4.3.0) (2020-01-08)
 
 
