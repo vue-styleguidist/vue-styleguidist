@@ -9,7 +9,11 @@
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"moduleDirectory": ["packages/vue-styleguidist/src", "node_modules"],
+				"paths": [
+					"packages/vue-styleguidist/src", 
+					"packages/vue-styleguidist/src/client", 
+					"node_modules/react-styleguidist/lib/client"
+				],
 				"extensions": [".ts", ".tsx", ".js", ".d.ts"]
 			}
 		}
@@ -22,7 +26,7 @@
 			{
 				"commonjs": true,
 				"caseSensitive": true,
-				"ignore": ["rsg-components/", "vue-inbrowser-compiler"]
+				"ignore": ["vue-inbrowser-compiler"]
 			}
 		],
 		"import/export": "error",
@@ -35,7 +39,9 @@
 			"error",
 			"ignorePackages",
 			{
-				"js": "never"
+				"js": "never",
+				"ts": "never",
+				"tsx": "never"
 			}
 		],
 		"import/no-extraneous-dependencies": "error",

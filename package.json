@@ -56,10 +56,9 @@
     "@commitlint/config-conventional": "^7.5.0",
     "@types/htmlparser2": "^3.7.31",
     "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.18",
     "@types/pug": "^2.0.4",
-    "@typescript-eslint/eslint-plugin": "^1.4.2",
-    "@typescript-eslint/parser": "^1.4.2",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
     "@vue/cli": "^4.0.5",
     "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-plugin-eslint": "^4.0.5",
@@ -83,7 +82,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "danger": "^7.0.17",
-    "deabsdeep": "^1.0.6",
+    "deabsdeep": "^2.0.1",
     "deepfreeze": "^2.0.0",
     "dog-names": "^1.0.2",
     "ejs": "^2.6.1",
@@ -131,7 +130,7 @@
     "ts-jest": "^24.0.0",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.6.0",
+    "typescript": "^3.7.3",
     "url-loader": "^1.0.1",
     "validate-commit-msg": "^2.14.0",
     "vue": "^2.6.10",
@@ -179,7 +178,7 @@
     "packages/vue-styleguidist/src/scripts/schemas/config.ts": [
       "yarn babel packages/vue-styleguidist/src/scripts/schemas/config.ts --out-file packages/vue-styleguidist/lib/scripts/schemas/config.js",
       "node ./packages/vue-styleguidist/maketypes.js",
-      "git add ./packages/vue-styleguidist/src/types/StyleGuide.ts"
+      "git add ./packages/vue-styleguidist/src/types/StyleGuide.d.ts"
     ]
   },
   "gitHooks": {

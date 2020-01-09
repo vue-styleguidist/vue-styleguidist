@@ -14,14 +14,14 @@ yarn styleguide:build
 
 Now, you should have a directory containing HTML and javascript. Let's deploy it.
 
-## Deploy on Netlify
+## Deploy on [Netlify](https://www.netlify.com/)
 
 1.  Connect Netlify to your GitHub account
 1.  Select the repo to deploy
 1.  Set the build command as `styleguidist build`
 1.  The build folder will be `styleguide` if you have `styleguide.config.js` at the root of your repository and left out the option. If you changed the `styleguideDir` option, pick the new path chosen.
 
-## Deploy on Zeit Now
+## Deploy on [Zeit Now](https://zeit.co/)
 
 Connect your GitHub account with Zeit.
 
@@ -54,7 +54,7 @@ Adjust the `distDir` config according to your [styledguideDir](/Configuration.md
 
 ## Deploy on GitHub Pages
 
-[Github Pages](https://pages.github.com/) can be very useful to host static websites. It needs a little more effort than Netlify. It uses your repository files as the static pages themselves.
+[Github Pages](https://pages.github.com/) can be very useful to serve static websites. It needs a little more effort than Netlify. It uses your repository files as the static pages themselves.
 
 1.  Create a repo called `yourgithubid.github.io`. Replace yourgithubid by your github id.
 1.  Enable GitHub pages on it. `Settings > Options > Github Pages`
@@ -66,7 +66,7 @@ Adjust the `distDir` config according to your [styledguideDir](/Configuration.md
 
 ## Automate deployment on travisCI
 
-Zeit and Netlify make it easy for your website deployment to be automated. If you are going with GitHub pages though, because it is free for instance, you might want to build automation yourself.
+Zeit and Netlify simplify your website deployment automation. If you are going with GitHub pages though, because it is free for instance, you might want to build automation yourself.
 
 This is how the very documentation you are reading is deployed automatically
 

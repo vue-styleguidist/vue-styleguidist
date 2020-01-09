@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.3...v4.3.0) (2020-01-08)
+
+
+### Features
+
+* collapsible sections ([43715a7](https://github.com/vue-styleguidist/vue-styleguidist/commit/43715a7532d07ba5f5f868a2628fbc10eae52543)), closes [#689](https://github.com/vue-styleguidist/vue-styleguidist/issues/689)
+
+
+
+
+
+## [4.2.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.2...v4.2.3) (2019-12-23)
+
+
+### Bug Fixes
+
+* add warning when using editorConfig ([b39f6f8](https://github.com/vue-styleguidist/vue-styleguidist/commit/b39f6f851455f208a9ae9092c8226cf2f7c3322c))
+* typings of Styleguide ([f50d3b5](https://github.com/vue-styleguidist/vue-styleguidist/commit/f50d3b5b78cbab95c76f522cc2c7ae2c3b8a91c0))
+
+
+
+
+
+## [4.2.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.1...v4.2.2) (2019-12-18)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
 ## [4.2.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.0...v4.2.1) (2019-12-11)
 
 

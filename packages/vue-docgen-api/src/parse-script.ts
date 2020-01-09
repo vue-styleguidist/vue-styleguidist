@@ -64,7 +64,7 @@ async function executeHandlers(
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
 
 	if (documentation && compDefs.length > 1) {
-		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" intead'
+		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
 	}
 
 	return await Promise.all(

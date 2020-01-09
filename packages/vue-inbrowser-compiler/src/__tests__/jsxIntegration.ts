@@ -376,21 +376,5 @@ describe('integration', () => {
 
 			expect(wrapper.html()).toBe('<div></div>')
 		})
-
-		test.skip('JSXSpreadChild', () => {
-			const a = ['1', '2']
-			const wrapper = shallowMount(
-				getComponent(
-					`{
-			  render(h) {
-				return <div>{...a}</div>
-			  },
-			}`,
-					{ a }
-				)
-			)
-
-			expect(wrapper.html()).toBe('<div>12</div>')
-		})
 	})
 })

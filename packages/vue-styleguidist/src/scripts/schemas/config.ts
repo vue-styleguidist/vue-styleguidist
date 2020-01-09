@@ -100,7 +100,17 @@ export default {
 	editorConfig: {
 		tstype: ['{', '		theme: string', '	}'].join('\n'),
 		type: 'object',
-		process: (value: string, config: StyleguidistConfig) => {
+		process: (value: any, config: StyleguidistConfig) => {
+			if ((config.simpleEditor === undefined || config.simpleEditor) && value) {
+				throw new StyleguidistError(
+					`
+${kleur.bold('editorConfig')} config option is useless without activating the CodeMirror editor. 
+Read the documentation to see how to re-activate it.
+https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
+					'editorConfig'
+				)
+			}
+
 			const defaults = {
 				theme: 'base16-light',
 				mode: 'jsx',
@@ -110,6 +120,7 @@ export default {
 				viewportMargin: Infinity,
 				lineNumbers: false
 			}
+
 			return Object.assign(
 				{},
 				defaults,
@@ -417,7 +428,7 @@ export default {
 		type: 'function'
 	},
 	updateExample: {
-		tstype: '(props: Example, ressourcePath: string) => Example',
+		tstype: '(props: ExampleLoader, ressourcePath: string) => ExampleLoader',
 		type: 'function',
 		default: (props: Example) => {
 			if (props.lang === 'example') {
@@ -444,6 +455,15 @@ export default {
 			return config.showUsage === undefined ? value : config.showUsage ? 'expand' : 'collapse'
 		},
 		default: 'collapse'
+	},
+	tocMode: {
+		tstype: 'EXPAND_MODE',
+		message: 'Table Of Contents Collapsed mode',
+		description:
+			'If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases',
+		list: MODES,
+		type: 'string',
+		default: 'expand'
 	},
 	validExtends: {
 		message: 'Should the passed filepath be parsed by docgen if mentionned extends',

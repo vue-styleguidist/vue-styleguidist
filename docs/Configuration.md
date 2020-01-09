@@ -100,7 +100,7 @@ Adds a little button on the top right hand corner of the editor to copy the cont
 
 Type: `Function`, optional
 
-> **Warning:** You may easily break Vue styleguidist using this options, try to use [webpackConfig](#webpackconfig) option instead.
+> **Warning:** You are likely to break Vue styleguidist using this options, try to use [webpackConfig](#webpackconfig) option instead.
 
 Allows you to modify webpack config without any restrictions.
 
@@ -146,9 +146,21 @@ module.exports = {
 
 ## `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/packages/vue-styleguidist/scripts/schemas/config.js#L96)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
+
+> **NOTE :** From version 4.0.0, Prism is the editor by default as it is much lighter. Turn off [simpleEditor](#simpleEditor) to use CodeMirror and leverage this config.
+>
+> ```js
+> module.exports = {
+>   // ...
+>   editorConfig: {
+>     theme: 'base16-light'
+>   },
+>   simpleEditor: false
+> }
+> ```
 
 ## `getExampleFilename`
 
@@ -242,7 +254,7 @@ By default, `vue-styleguidist` registers all components globally. This can be an
 - Multiple components are sharing the same name OR
 - Components are changing behaviour if another component is registered
 
-In this case, just set `locallyRegisterComponents` to `true`. It will register components only in the examples of their documentation.
+In this case, set `locallyRegisterComponents` to `true`. It will register components only in the examples of their documentation.
 
 Though if you need to register an additionl component and you are forced to use this behaviour, proceed like this:
 
@@ -504,7 +516,7 @@ See examples of [sections configuration](/docs/Components.md#sections).
 
 Type: `String`, default: `0.0.0.0`
 
-Dev server host name.
+Dev server name.
 
 ## `serverPort`
 
@@ -624,6 +636,17 @@ module.exports = {
 }
 ```
 
+## `tocMode`
+
+Type: `String` default: `expand`
+
+Defines if the table of contents sections will behave like an accordion:
+
+- `collapse`: All sections are collapsed by default
+- `expand`: Sections cannot be collapsed in the Table Of Contents
+
+Collapse the sections created in the sidebar to reduce the height of the sidebar. This can be useful in large codebases with lots of components to avoid having to scroll too far.
+
 ## `updateDocs`
 
 Type: `Function`, optional
@@ -723,7 +746,7 @@ module.exports = {
 
 **NOTE** If `vue-docgen-api` fails to parse the targetted component, it will log a warning. It is not blocking but it is annoying.
 
-**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use it responsibly.
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might hurt performance. Use it responsibly.
 
 ## `verbose`
 

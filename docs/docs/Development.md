@@ -36,7 +36,7 @@ We use webpack loaders to hot reload the style guide on changes in user componen
 - `vuedoc-loader`: loads props documentation using [vue-docgen-api](Docgen.md);
 - `examples-loader`: loads examples from Markdown files;
 
-There are two more loaders — `css-loader` and `styles-loader` but they are just one-line aliases to corresponding webpack loaders. We don’t want to rely on a webpack loader resolver because its behavior can be changed by the user’s webpack config (Create React App does that for example). This way we can bypass webpack resolver and use Node resolver instead. These loaders are used like this:
+There are two more loaders — `css-loader` and `styles-loader`. They are one-line aliases to corresponding webpack loaders. We don’t want to rely on a webpack loader resolver because its behavior can be changed by the user’s webpack config (Create React App does that for example). This way we can bypass webpack resolver and use Node resolver instead. These loaders are used like this:
 
 ```js
 require('!!../../../loaders/style-loader!../../../loaders/css-loader!codemirror/lib/codemirror.css')
@@ -73,7 +73,7 @@ All Styleguidist components should be imported like this: `import Foo from 'rsg-
 
 Each component folder usually has several files:
 
-- `Foo/Foo.js` (optional for simple components);
+- `Foo/Foo.js` (optional for litteral components);
 - `Foo/FooRenderer.js`;
 - `Foo/Foo.spec.js` — tests;
 - `Foo/index.js` — reexport of `Foo.js` or `FooRenderer.js`.
