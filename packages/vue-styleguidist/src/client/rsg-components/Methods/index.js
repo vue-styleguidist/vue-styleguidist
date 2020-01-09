@@ -20,7 +20,7 @@ function renderDescription({ description, returns, tags = {} }) {
 	return (
 		<div>
 			{description && <Markdown text={description} />}
-			{returns && <Argument block returns {...returns} />}
+			{returns && <Argument name=" " block returns {...returns} />}
 			<JsDoc {...tags} />
 		</div>
 	)

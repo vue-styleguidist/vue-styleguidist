@@ -2,7 +2,7 @@ import * as path from 'path'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
-import { parse, Tag } from 'vue-docgen-api'
+import { parse, Tag, ComponentDoc } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import { ComponentProps } from '../types/Component'
@@ -16,7 +16,12 @@ const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 export default function(this: StyleguidistContext, source: string) {
 	const callback = this.async()
 	const cb = callback ? callback : () => null
-	vuedocLoader.call(this, source).then(res => cb(undefined, res))
+	vuedocLoader
+		.call(this, source)
+		.then(res => cb(undefined, res))
+		.catch(e => {
+			throw e
+		})
 }
 
 function makeObject<T extends { name: string }>(set?: T[]): { [name: string]: T } | undefined {
@@ -57,7 +62,13 @@ export async function vuedocLoader(
 		})
 	const propsParser = config.propsParser || defaultParser
 
-	const docs = await propsParser(file)
+	let docs: ComponentDoc = { displayName: '', exportName: '' }
+	try {
+		docs = await propsParser(file)
+	} catch (e) {
+		const componentPath = path.relative(process.cwd(), file)
+		logger.warn(`Error parsing ${componentPath}: ${e}`)
+	}
 
 	let vsgDocs: ComponentProps = {
 		...docs,
