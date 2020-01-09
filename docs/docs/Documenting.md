@@ -547,7 +547,6 @@ const mockData = require('./mocks');
 > ````md
 > ```js
 > import { myExample as Button } from './myExample'
->
 > ;<div>
 >   <Button />
 > </div>

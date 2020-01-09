@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test a vuetify component should match the snapshot 1`] = `
+Object {
+  "description": "",
+  "displayName": "v-text-field",
+  "events": Array [
+    Object {
+      "name": "input",
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "name": "change",
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "name": "blur",
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "name": "focus",
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+    Object {
+      "name": "keydown",
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+  ],
+  "exportName": "default",
+  "methods": Array [
+    Object {
+      "name": "focus",
+      "tags": Object {
+        "access": Array [
+          Object {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+    Object {
+      "name": "blur",
+      "tags": Object {
+        "access": Array [
+          Object {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+  ],
+  "props": Array [
+    Object {
+      "name": "appendOuterIcon",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "name": "autofocus",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "clearable",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'$clear'",
+      },
+      "name": "clearIcon",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "name": "counter",
+      "type": Object {
+        "name": "boolean|number|string",
+      },
+    },
+    Object {
+      "name": "filled",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "flat",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "fullWidth",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "label",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "name": "outlined",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "placeholder",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "name": "prefix",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "name": "prependInnerIcon",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "name": "reverse",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "rounded",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "shaped",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "singleLine",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "solo",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "soloInverted",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
+      "name": "suffix",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'text'",
+      },
+      "name": "type",
+      "type": Object {
+        "name": "string",
+      },
+    },
+  ],
+  "slots": undefined,
+  "tags": Object {},
+}
+`;
