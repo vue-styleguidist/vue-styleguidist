@@ -18,6 +18,7 @@ const logger = createLogger('vsg')
 // Config options that should be passed to the client
 const CLIENT_CONFIG_OPTIONS = [
 	'title',
+	'tocMode',
 	'version',
 	'showCode',
 	'showUsage',
