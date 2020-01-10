@@ -9,20 +9,12 @@ Object {
   "methods": undefined,
   "props": Array [
     Object {
-      "extends": Object {
-        "name": "Base",
-        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
-      },
       "name": "question",
       "type": Object {
         "name": "undefined",
       },
     },
     Object {
-      "extends": Object {
-        "name": "Base",
-        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
-      },
       "name": "placeholder",
       "type": Object {
         "name": "undefined",

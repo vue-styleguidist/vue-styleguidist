@@ -15,6 +15,7 @@
     "pretest": "yarn lint",
     "test": "yarn test:jest --maxWorkers=2 && yarn test:plugin",
     "test:jest": "jest",
+    "test:perf": "node ./packages/vue-docgen-api/tests/perf-test.js",
     "test:plugin": "rimraf ./test/cli-packages/* && jest --config=./jest.config.plugin.js --runInBand",
     "posttest": "yarn format",
     "test:coverage": "jest --coverage",
