@@ -6,10 +6,6 @@ Object {
   "displayName": "ClassComponent",
   "events": Array [
     Object {
-      "mixin": Object {
-        "name": "mixin",
-        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
-      },
       "name": "success",
       "type": Object {
         "names": Array [
@@ -21,10 +17,6 @@ Object {
   "exportName": "default",
   "methods": Array [
     Object {
-      "mixin": Object {
-        "name": "mixin",
-        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
-      },
       "name": "onClick",
       "params": Array [
         Object {
@@ -57,10 +49,6 @@ Object {
       },
     },
     Object {
-      "mixin": Object {
-        "name": "mixin",
-        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
-      },
       "name": "bundleHash",
       "type": Object {
         "name": "number",

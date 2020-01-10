@@ -11,16 +11,18 @@ describe('adaptRequireWithIEV', () => {
 		mockResolver = jest.fn()
 	})
 
-	it('should call the resolver', () => {
-		adaptRequireWithIEV(mockResolver, set)
+	it('should call the resolver', async done => {
+		await adaptRequireWithIEV(mockResolver, set, () => true)
 
 		expect(mockResolver).toHaveBeenCalledWith('my/path')
+		done()
 	})
 
-	it('should not resolve anything if multiple path in filePath', () => {
+	it('should not resolve anything if multiple path in filePath', async done => {
 		set.test.filePath.push('baz')
-		adaptRequireWithIEV(mockResolver, set)
+		await adaptRequireWithIEV(mockResolver, set, () => true)
 
 		expect(mockResolver).not.toHaveBeenCalledWith()
+		done()
 	})
 })

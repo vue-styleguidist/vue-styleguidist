@@ -3,8 +3,7 @@ const glob = require('globby')
 const path = require('path')
 const { parse } = require('../')
 
-async function testPerformanceOfParse() {
-	const componentFiles = await glob(path.resolve(__dirname, './components/*/*.vue'))
+async function testPerformanceOfParse(componentFiles) {
 	const start = process.hrtime.bigint()
 	await Promise.all(
 		componentFiles.map(async compFile => {
@@ -25,14 +24,17 @@ async function testPerformanceOfParse() {
 	const final = process.hrtime.bigint()
 	return ((final - start) / 1000000n)
 }
+const ITERATIONS = 100n
 async function testPerformance100() {
-	let i = 100
+	let i = ITERATIONS
 	let time = 0n
+	const componentFiles = await glob('components/**/*.vue', {cwd: __dirname, absolute: true})
+
 	while (i--) {
-		const t = await testPerformanceOfParse()
-		console.log(i, t)
+		const t = await testPerformanceOfParse(componentFiles)
+		console.log("Case", ITERATIONS - i)
 		time += t
 	}
-	console.log(time / 100n)
+	console.log("Average :", time / ITERATIONS, "ms")
 }
 testPerformance100()
