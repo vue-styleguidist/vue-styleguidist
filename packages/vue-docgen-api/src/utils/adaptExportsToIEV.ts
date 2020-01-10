@@ -14,13 +14,14 @@ const hash = require('hash-sum')
 
 export default async function recusiveAdaptExportsToIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
-	varToFilePath: ImportedVariableSet
+	varToFilePath: ImportedVariableSet,
+	validExtends: (fullFilePath: string) => boolean
 ) {
 	// resolve imediately exported variable as many layers as they are burried
 	let hashBefore: any
 	do {
 		hashBefore = hash(varToFilePath)
-		await adaptExportsToIEV(pathResolver, varToFilePath)
+		await adaptExportsToIEV(pathResolver, varToFilePath, validExtends)
 	} while (hashBefore !== hash(varToFilePath))
 }
 
@@ -37,7 +38,8 @@ export default async function recusiveAdaptExportsToIEV(
  */
 export async function adaptExportsToIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
-	varToFilePath: ImportedVariableSet
+	varToFilePath: ImportedVariableSet,
+	validExtends: (fullFilePath: string) => boolean
 ) {
 	// First, create a map from filepath to localName and exportedName
 	// key: filepath, content: {key: localName, content: exportedName}
@@ -66,6 +68,9 @@ export async function adaptExportsToIEV(
 				})
 				try {
 					const fullFilePath = pathResolver(filePath)
+					if (!validExtends(fullFilePath)) {
+						return
+					}
 					const source = await read(fullFilePath, {
 						encoding: 'utf-8'
 					})
