@@ -1,5 +1,6 @@
-import * as fs from 'fs'
+import { readFile } from 'fs'
 import * as path from 'path'
+import { promisify } from 'util'
 import recast from 'recast'
 import Map from 'ts-map'
 import buildParser from '../babel-parser'
@@ -7,9 +8,11 @@ import cacher from './cacher'
 import resolveImmediatelyExported from './resolveImmediatelyExported'
 import { ImportedVariableSet } from './resolveRequired'
 
+const read = promisify(readFile)
+
 const hash = require('hash-sum')
 
-export default function recusiveAdaptExportsToIEV(
+export default async function recusiveAdaptExportsToIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
 	varToFilePath: ImportedVariableSet
 ) {
@@ -17,7 +20,7 @@ export default function recusiveAdaptExportsToIEV(
 	let hashBefore: any
 	do {
 		hashBefore = hash(varToFilePath)
-		adaptExportsToIEV(pathResolver, varToFilePath)
+		await adaptExportsToIEV(pathResolver, varToFilePath)
 	} while (hashBefore !== hash(varToFilePath))
 }
 
@@ -32,7 +35,7 @@ export default function recusiveAdaptExportsToIEV(
  * @param pathResolver
  * @param varToFilePath
  */
-export function adaptExportsToIEV(
+export async function adaptExportsToIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
 	varToFilePath: ImportedVariableSet
 ) {
@@ -52,37 +55,39 @@ export function adaptExportsToIEV(
 	// {
 	//	nameOfVariable:{filePath:['filesWhereToFindIt'], exportedName:'nameUsedInExportThatCanBeUsedForFiltering'}
 	// }
-	filePathToVars.forEach((exportToLocal, filePath) => {
-		if (filePath && exportToLocal) {
-			const exportedVariableNames: string[] = []
-			exportToLocal.forEach(exportedName => {
-				if (exportedName) {
-					exportedVariableNames.push(exportedName)
-				}
-			})
-			try {
-				const fullFilePath = pathResolver(filePath)
-				const source = fs.readFileSync(fullFilePath, {
-					encoding: 'utf-8'
+	await Promise.all(
+		filePathToVars.entries().map(async ([filePath, exportToLocal]) => {
+			if (filePath && exportToLocal) {
+				const exportedVariableNames: string[] = []
+				exportToLocal.forEach(exportedName => {
+					if (exportedName) {
+						exportedVariableNames.push(exportedName)
+					}
 				})
-				const astRemote = cacher(() => recast.parse(source, { parser: buildParser() }), source)
-				const returnedVariables = resolveImmediatelyExported(astRemote, exportedVariableNames)
-				if (Object.keys(returnedVariables).length) {
-					exportToLocal.forEach((exported, local) => {
-						if (exported && local) {
-							const aliasedVariable = returnedVariables[exported]
-							if (aliasedVariable) {
-								aliasedVariable.filePath = aliasedVariable.filePath.map(p =>
-									pathResolver(p, path.dirname(fullFilePath))
-								)
-								varToFilePath[local] = aliasedVariable
-							}
-						}
+				try {
+					const fullFilePath = pathResolver(filePath)
+					const source = await read(fullFilePath, {
+						encoding: 'utf-8'
 					})
+					const astRemote = cacher(() => recast.parse(source, { parser: buildParser() }), source)
+					const returnedVariables = resolveImmediatelyExported(astRemote, exportedVariableNames)
+					if (Object.keys(returnedVariables).length) {
+						exportToLocal.forEach((exported, local) => {
+							if (exported && local) {
+								const aliasedVariable = returnedVariables[exported]
+								if (aliasedVariable) {
+									aliasedVariable.filePath = aliasedVariable.filePath.map(p =>
+										pathResolver(p, path.dirname(fullFilePath))
+									)
+									varToFilePath[local] = aliasedVariable
+								}
+							}
+						})
+					}
+				} catch (e) {
+					// ignore load errors
 				}
-			} catch (e) {
-				// ignore load errors
 			}
-		}
-	})
+		})
+	)
 }

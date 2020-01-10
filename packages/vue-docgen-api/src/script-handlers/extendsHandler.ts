@@ -33,7 +33,7 @@ export default async function extendsHandler(
 
 	const pathResolver = makePathResolver(originalDirName, opt.alias)
 
-	resolveImmediatelyExportedRequire(pathResolver, extendsFilePath)
+	await resolveImmediatelyExportedRequire(pathResolver, extendsFilePath)
 
 	await extendsFilePath[extendsVariableName].filePath.reduce(async (_, p) => {
 		const fullFilePath = pathResolver(p)

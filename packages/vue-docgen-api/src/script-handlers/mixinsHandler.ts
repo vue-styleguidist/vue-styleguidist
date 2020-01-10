@@ -33,7 +33,7 @@ export default async function mixinsHandler(
 	// get all require / import statements
 	const mixinVarToFilePath = resolveRequired(astPath, mixinVariableNames)
 
-	resolveImmediatelyExportedRequire(pathResolver, mixinVarToFilePath)
+	await resolveImmediatelyExportedRequire(pathResolver, mixinVarToFilePath)
 
 	// get each doc for each mixin using parse
 	const files = new Map<string, string[]>()
