@@ -1,0 +1,22 @@
+{
+  "name": "preset",
+  "version": "4.4.1",
+  "description": "Use this with @vue/cli to create a basic project with Styleguidist installed",
+  "homepage": "https://vue-styleguidist.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
+  },
+  "keywords": [
+    "vue",
+    "documentation-generation",
+    "jsdoc",
+    "parse",
+    "vue-preset"
+  ],
+  "author": "Jessica Sachs",
+  "license": "MIT"
+}

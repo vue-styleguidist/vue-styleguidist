@@ -1,0 +1,20 @@
+{
+  "bare": true,
+  "useConfigFiles": true,
+  "plugins": {
+    "vue-cli-plugin-styleguidist": {},
+    "@vue/cli-plugin-babel": {},
+    "@vue/cli-plugin-router": {
+      "historyMode": true
+    },
+    "@vue/cli-plugin-vuex": {},
+    "@vue/cli-plugin-unit-jest": {}
+  },
+  "configs": {
+    "vue": {
+      "devServer": {
+        "disableHostCheck": true
+      }
+    }
+  }
+}
