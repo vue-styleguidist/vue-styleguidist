@@ -47,6 +47,10 @@ describe('tests InputTextDoc', () => {
 			})
 		})
 
+		it('should not give explicit prop no mixin of origin', () => {
+			expect(getTestDescriptor(docInputTextDoc.props, 'placeholder').mixin).toBeUndefined()
+		})
+
 		it('should contain mixin imported props', () => {
 			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain(
 				'importedProp'

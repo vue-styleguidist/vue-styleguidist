@@ -100,13 +100,14 @@ export async function parseSource(
 		documentation.setOrigin(opt)
 	}
 
+	let docs: Documentation[]
 	if (singleFileComponent) {
-		return [await parseSFC(documentation, source, opt)]
+		docs = [await parseSFC(documentation, source, opt)]
 	} else {
 		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
-		const docs =
+		docs =
 			(await parseScript(
 				source,
 				preHandlers,
@@ -119,9 +120,12 @@ export async function parseSource(
 			// give a component a display name if we can
 			docs[0].set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
 		}
-
-		return docs
 	}
+
+	if (documentation) {
+		documentation.setOrigin({})
+	}
+	return docs
 }
 
 async function parseSFC(

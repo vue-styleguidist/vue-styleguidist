@@ -120,13 +120,9 @@ export default class Documentation {
 	}
 
 	public setOrigin(origin: Descriptor) {
-		if (origin.extends) {
-			this.originExtendsMixin = { extends: origin.extends }
-		}
+		this.originExtendsMixin = origin.extends ? { extends: origin.extends } : {}
 
-		if (origin.mixin) {
-			this.originExtendsMixin = { mixin: origin.mixin }
-		}
+		this.originExtendsMixin = origin.mixin ? { mixin: origin.mixin } : {}
 	}
 
 	public setDocsBlocks(docsBlocks: string[]) {
