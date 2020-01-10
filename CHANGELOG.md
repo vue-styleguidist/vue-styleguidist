@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.1...v4.4.2) (2020-01-10)
+
+
+### Bug Fixes
+
+* resolve immediately exported vars recursively ([7b27480](https://github.com/vue-styleguidist/vue-styleguidist/commit/7b27480b2954f9d9f9307d3ac717709cae3c3194))
+* **docgen:** origin never cleared ([0dc4251](https://github.com/vue-styleguidist/vue-styleguidist/commit/0dc42513e83a46323ffb4227e4a0b5d485ca06cd))
+
+
+### Performance Improvements
+
+* avoid looking at node_modules in IEV ([55e29e3](https://github.com/vue-styleguidist/vue-styleguidist/commit/55e29e397b67bc19ebd535064d5a62fc67e690df))
+* use await for reading file async ([cf254c0](https://github.com/vue-styleguidist/vue-styleguidist/commit/cf254c0c93e2a29bc78189bbd215e65cc7804e67))
+
+
+
+
+
 ## [4.4.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.0...v4.4.1) (2020-01-09)
 
 
