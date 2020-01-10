@@ -1,3 +1,5 @@
+import extendMixin from '../../mixins/extendMixin'
+
 export const name = 'EverButton'
 
 /**
@@ -5,7 +7,7 @@ export const name = 'EverButton'
  */
 export const Button = {
 	name,
-
+	mixins: [extendMixin],
 	inheritAttrs: false,
 
 	props: {
