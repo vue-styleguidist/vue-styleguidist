@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.2...v4.4.3) (2020-01-11)
+
+
+### Bug Fixes
+
+* new Vue compatible with live require ([f3f68a8](https://github.com/vue-styleguidist/vue-styleguidist/commit/f3f68a83651c12d0293a395cc7f997c1eb2e8f36)), closes [#702](https://github.com/vue-styleguidist/vue-styleguidist/issues/702)
+
+
+
+
+
 ## [4.4.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.1...v4.4.2) (2020-01-10)
 
 
