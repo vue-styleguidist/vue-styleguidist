@@ -13,6 +13,7 @@ describe('Preview render', () => {
 			'transparent!',
 			'Reset',
 			'Push Me',
+			'Count: 42',
 			'In the docs block',
 			'Fire example event!',
 			'Open',

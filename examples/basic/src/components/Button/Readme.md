@@ -37,13 +37,11 @@ You can also use the Single File Component Format
 </template>
 <script>
 const dogNames = require('dog-names').all
-const countArray = require('~/datamock').default
-const count = countArray()
 
 // You can also use 'exports.default = {}' style module exports.
 export default {
   data() {
-    return { numClicks: 0, dogName: dogNames[0], count }
+    return { numClicks: 0, dogName: dogNames[0] }
   },
   methods: {
     pushButton() {
