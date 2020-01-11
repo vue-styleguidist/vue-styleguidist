@@ -20,6 +20,26 @@ describe('tests button with pure javascript', () => {
 		)
 	})
 
+	it('should export mixins prop', () => {
+		expect(docButton[0].props && docButton[0].props.map(p => p.name)).toMatchInlineSnapshot(`
+		Array [
+		  "color",
+		  "id",
+		  "v-model",
+		  "falseValue",
+		  "trueValue",
+		  "multiple",
+		  "label",
+		  "as",
+		  "type",
+		  "variant",
+		  "variantColor",
+		  "size",
+		  "isDisabled",
+		]
+	`)
+	})
+
 	it('should extract the export name for input', () => {
 		expect(docButton[1].exportName).toBe('Input')
 	})
