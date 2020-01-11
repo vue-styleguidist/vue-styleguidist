@@ -66,7 +66,7 @@ export default {
 another example with the `new Vue({})` format
 
 ```js
-const countArray = require('~/datamock').default
+const countArray = require('~/store/models/PolicyGroup').default
 const count = countArray()
 
 // You can also use 'exports.default = {}' style module exports.
@@ -79,10 +79,12 @@ new Vue({
       return count[this.numClicks] || this.numClicks
     }
   },
-  template: `<div>
-        <BestButton @click.native="numClicks++">Push Me</BestButton>
-        <hr />
-        <p class="text-name">Count: {{ count }}</p>
-  </div>`
+  template: `
+    <div>
+      <BestButton @click.native="numClicks++">Push Me</BestButton>
+      <hr />
+      <p class="text-name">Count: {{ count }}</p>
+    </div>
+  `
 })
 ```
