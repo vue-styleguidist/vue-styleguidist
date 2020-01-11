@@ -1,5 +1,6 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const vueLoader = require('vue-loader')
+const path = require('path')
 
 const transpileDependencies = [
 	'regexpu-core',
@@ -26,6 +27,11 @@ module.exports = {
 	},
 	version: '1.1.1',
 	webpackConfig: {
+		resolve: {
+			alias: {
+				'~': path.join(__dirname, './test')
+			}
+		},
 		module: {
 			rules: [
 				{
