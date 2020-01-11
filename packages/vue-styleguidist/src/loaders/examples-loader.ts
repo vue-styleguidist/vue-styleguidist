@@ -75,8 +75,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	const examples = chunkify(source, updateExample, customLangs)
 
 	const getScript = (code: string): string => {
-		// if in JSX mode just parse code as is
-		if (config.jsxInExamples) {
+		// if in JSX mode or new Vue() examples just parse code as is
+		if (config.jsxInExamples || /new Vue\(/.test(code)) {
 			return code
 		}
 
