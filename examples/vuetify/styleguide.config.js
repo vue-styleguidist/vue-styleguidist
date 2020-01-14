@@ -21,7 +21,7 @@ module.exports = {
 		path.join(__dirname, 'config/global.styles.scss')
 	],
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
-	validExtends: (fullFilePath) => !/(?=node_modules)(?!node_modules\/vuetify)/.test(fullFilePath),
+	validExtends: fullFilePath => !/(?=node_modules)(?!node_modules\/vuetify)/.test(fullFilePath),
 	webpackConfig: {
 		module: {
 			rules: [
@@ -48,13 +48,13 @@ module.exports = {
 							options: {
 								implementation: require('sass'),
 								sassOptions: {
-									fiber: require('fibers'),
+									fiber: require('fibers')
 									// indentedSyntax: true // optional
-								},
-							},
-						},
-					],
-				},
+								}
+							}
+						}
+					]
+				}
 			]
 		},
 		plugins: [new vueLoader.VueLoaderPlugin()]

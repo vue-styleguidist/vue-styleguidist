@@ -2,7 +2,6 @@ import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
 
-
 const field = path.join(__dirname, './VTextField.js')
 let docField: ComponentDoc
 
