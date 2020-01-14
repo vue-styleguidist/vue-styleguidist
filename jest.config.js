@@ -9,10 +9,11 @@ module.exports = {
 		'<rootDir>/packages/**/__tests__/*.(ts|js|tsx)'
 	],
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
-	modulePaths: ['./packages/vue-styleguidist/src'],
+	modulePaths: [
+		'./packages/vue-styleguidist/src/client',
+		'./node_modules/eact-styledguidist/lib/client'
+	],
 	moduleNameMapper: {
-		'^rsg-components/(.+)$':
-			'<rootDir>/node_modules/react-styleguidist/lib/client/rsg-components/$1',
 		'^.+\\.css$': '<rootDir>/test/empty.js'
 	},
 	collectCoverageFrom: [

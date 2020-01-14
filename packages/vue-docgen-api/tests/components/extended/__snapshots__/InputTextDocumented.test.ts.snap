@@ -9,20 +9,42 @@ Object {
   "methods": undefined,
   "props": Array [
     Object {
-      "extends": Object {
-        "name": "Base",
-        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
-      },
       "name": "question",
       "type": Object {
         "name": "undefined",
       },
     },
     Object {
-      "extends": Object {
-        "name": "Base",
-        "path": "~/packages/vue-docgen-api/tests/components/extended/Base.vue",
+      "mixin": Object {
+        "name": "multiNamed",
+        "path": "~/packages/vue-docgen-api/tests/mixins/multiNamed.js",
       },
+      "name": "importedProp",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "mixin": Object {
+        "name": "otherNamed",
+        "path": "~/packages/vue-docgen-api/tests/mixins/otherNamed.js",
+      },
+      "name": "otherMixinProp",
+      "type": Object {
+        "name": "number",
+      },
+    },
+    Object {
+      "mixin": Object {
+        "name": "deep",
+        "path": "~/packages/vue-docgen-api/tests/mixins/another/deep.js",
+      },
+      "name": "deep",
+      "type": Object {
+        "name": "boolean",
+      },
+    },
+    Object {
       "name": "placeholder",
       "type": Object {
         "name": "string",

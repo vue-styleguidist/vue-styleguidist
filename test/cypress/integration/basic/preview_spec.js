@@ -10,6 +10,7 @@ describe('Preview render', () => {
 			'Click Me',
 			'Push Me',
 			'Next Dog Name',
+			'Count: 42',
 			'transparent!',
 			'Reset',
 			'Push Me',
@@ -43,24 +44,24 @@ describe('Preview render', () => {
 	describe('other items', () => {
 		it('image items', () => {
 			cy.get('[class^="rsg--preview-"]')
-				.eq(12)
+				.eq(13)
 				.find('img')
 				.should('exist')
 
 			cy.get('[class^="rsg--preview-"]')
-				.eq(13)
+				.eq(14)
 				.find('img')
 				.should('exist')
 		})
 
 		it('random buttons', () => {
 			cy.get('[class^="rsg--preview-"]')
-				.eq(14)
+				.eq(15)
 				.find('button')
 				.should('exist')
 
 			cy.get('[class^="rsg--preview-"]')
-				.eq(18)
+				.eq(19)
 				.find('button')
 				.should('exist')
 		})

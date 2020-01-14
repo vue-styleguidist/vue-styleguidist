@@ -6,8 +6,8 @@ describe('resolveRequired', () => {
 		const ast = babylon().parse('import {test, bonjour} from "test/path";')
 		const varNames = resolveRequired(ast)
 		expect(varNames).toMatchObject({
-			test: { filePath: 'test/path', exportName: 'test' },
-			bonjour: { filePath: 'test/path', exportName: 'bonjour' }
+			test: { filePath: ['test/path'], exportName: 'test' },
+			bonjour: { filePath: ['test/path'], exportName: 'bonjour' }
 		})
 	})
 
@@ -15,7 +15,7 @@ describe('resolveRequired', () => {
 		const ast = babylon().parse('import bonjour from "test/path";')
 		const varNames = resolveRequired(ast)
 		expect(varNames).toMatchObject({
-			bonjour: { filePath: 'test/path', exportName: 'default' }
+			bonjour: { filePath: ['test/path'], exportName: 'default' }
 		})
 	})
 
@@ -23,7 +23,7 @@ describe('resolveRequired', () => {
 		const ast = babylon().parse('import {bonjour as hello} from "test/path";')
 		const varNames = resolveRequired(ast)
 		expect(varNames).toMatchObject({
-			hello: { filePath: 'test/path', exportName: 'bonjour' }
+			hello: { filePath: ['test/path'], exportName: 'bonjour' }
 		})
 	})
 
@@ -36,8 +36,8 @@ describe('resolveRequired', () => {
 			].join('\n')
 		)
 		expect(resolveRequired(ast)).toMatchObject({
-			hello: { filePath: 'test/pathEN', exportName: 'default' },
-			bonjour: { filePath: 'test/pathFR', exportName: 'default' }
+			hello: { filePath: ['test/pathEN'], exportName: 'default' },
+			bonjour: { filePath: ['test/pathFR'], exportName: 'default' }
 		})
 	})
 
@@ -50,9 +50,9 @@ describe('resolveRequired', () => {
 			].join('\n')
 		)
 		expect(resolveRequired(ast)).toMatchObject({
-			ciao: { filePath: 'test/pathOther', exportName: 'default' },
-			astaruego: { filePath: 'test/pathOther', exportName: 'default' },
-			sayonara: { filePath: 'test/pathJP', exportName: 'default' }
+			ciao: { filePath: ['test/pathOther'], exportName: 'default' },
+			astaruego: { filePath: ['test/pathOther'], exportName: 'default' },
+			sayonara: { filePath: ['test/pathJP'], exportName: 'default' }
 		})
 	})
 

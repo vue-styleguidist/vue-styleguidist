@@ -186,6 +186,32 @@ To add a description, add a comment right before.
 </template>
 ```
 
+In addition to documenting the slots and giving them a description, you can document the bindings. They are actually documented like props or params using the keyword `@binding`,
+
+The format will then be
+
+```html
+<!--
+  @binding {type} BindingName description of what the bindings is meant for
+  -->
+```
+
+example of a real documented slot
+
+```html
+<div slot-scope="row" class="list-item1">
+  {{row.item.text}}
+  <!--
+  	@slot Menu Item footer
+		@binding {object} icon icon of the menu item
+		@binding {string} text text of the menu item
+	-->
+  <slot name="test" :icon="row.item.icon" :text="row.item.text" />
+</div>
+```
+
+Another example of how to document bondings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+
 ## Include Mixins and Extends
 
 If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](https://vuejs.org/v2/api/#extends) it will automatically be added to your main component
@@ -547,7 +573,6 @@ const mockData = require('./mocks');
 > ````md
 > ```js
 > import { myExample as Button } from './myExample'
->
 > ;<div>
 >   <Button />
 > </div>

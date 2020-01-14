@@ -7,9 +7,7 @@ import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import astTypes from 'ast-types'
-import { parseComponent } from 'vue-template-compiler'
 import { compile } from 'vue-inbrowser-compiler'
-import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
 import expandDefaultComponent from 'react-styleguidist/lib/loaders/utils/expandDefaultComponent'
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
@@ -19,6 +17,7 @@ import { ExampleLoader } from '../types/Example'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import cleanComponentName from './utils/cleanComponentName'
 import importCodeExampleFile from './utils/importCodeExampleFile'
+import getScript from './utils/getScript'
 
 const b = astTypes.builders
 
@@ -74,23 +73,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Load examples
 	const examples = chunkify(source, updateExample, customLangs)
 
-	const getScript = (code: string): string => {
-		// if in JSX mode just parse code as is
-		if (config.jsxInExamples) {
-			return code
-		}
-
-		// script is at the beginning of a line after a return
-		// In case we are loading a vue component as an example, extract script tag
-		if (isCodeVueSfc(code)) {
-			const parts = parseComponent(code)
-			return parts && parts.script ? parts.script.content : ''
-		}
-		//else it could be the weird almost jsx of vue-styleguidist
-		return code.split(/\n[\t ]*</)[0]
-	}
-
-	const getExampleLiveImports = (source: string) => getImports(getScript(source))
+	const getExampleLiveImports = (source: string) =>
+		getImports(getScript(source, config.jsxInExamples))
 
 	// Find all import statements and require() calls in examples to make them
 	// available in webpack context at runtime.

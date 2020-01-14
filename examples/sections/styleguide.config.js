@@ -6,6 +6,7 @@ const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.git
 module.exports = {
 	title: 'Vue Style Guide Example',
 	pagePerSection: true,
+	tocMode: 'collapse',
 	sections: [
 		{
 			name: 'Documentation',

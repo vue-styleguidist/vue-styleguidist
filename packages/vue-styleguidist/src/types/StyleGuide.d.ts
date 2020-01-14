@@ -2,10 +2,11 @@ import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
+import { Styles, StyleSheet } from 'jss'
 import { Configuration, loader } from 'webpack'
 import { ProcessedSection, Section } from './Section'
 import { EXPAND_MODE } from './enums'
-import { ExampleLoader } from './Example'
+import { Example, ExampleLoader } from './Example'
 import { ComponentProps } from './Component'
 
 export interface StyleguidistContext extends loader.LoaderContext {
@@ -177,9 +178,9 @@ export interface StyleguidistConfig {
 	 * @default ""
 	 */
 	styleguidePublicPath: string
-	styles: any
+	styles: Styles | string | ((theme: any) => Styles)
 	template: any
-	theme: any
+	theme: { [name: string]: any } | string
 	/**
 	 * Style guide title
 	 */
@@ -192,6 +193,11 @@ export interface StyleguidistConfig {
 	 * @default "collapse"
 	 */
 	usageMode: EXPAND_MODE
+	/**
+	 * If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases
+	 * @default "expand"
+	 */
+	tocMode: EXPAND_MODE
 	/**
 	 * Should the passed filepath be parsed by docgen if mentionned extends
 	 */

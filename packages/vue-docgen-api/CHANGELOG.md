@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.2...v4.4.3) (2020-01-11)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## [4.4.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.1...v4.4.2) (2020-01-10)
+
+
+### Bug Fixes
+
+* resolve immediately exported vars recursively ([7b27480](https://github.com/vue-styleguidist/vue-styleguidist/commit/7b27480b2954f9d9f9307d3ac717709cae3c3194))
+* **docgen:** origin never cleared ([0dc4251](https://github.com/vue-styleguidist/vue-styleguidist/commit/0dc42513e83a46323ffb4227e4a0b5d485ca06cd))
+
+
+### Performance Improvements
+
+* avoid looking at node_modules in IEV ([55e29e3](https://github.com/vue-styleguidist/vue-styleguidist/commit/55e29e397b67bc19ebd535064d5a62fc67e690df))
+* use await for reading file async ([cf254c0](https://github.com/vue-styleguidist/vue-styleguidist/commit/cf254c0c93e2a29bc78189bbd215e65cc7804e67))
+
+
+
+
+
+# [4.4.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.3.0...v4.4.0) (2020-01-09)
+
+
+### Bug Fixes
+
+* resolve conflicts ([ff45137](https://github.com/vue-styleguidist/vue-styleguidist/commit/ff45137696424526575aec9aaf118b482ff6db80))
+* update error management in docgen loader ([f23f267](https://github.com/vue-styleguidist/vue-styleguidist/commit/f23f267c630f9ee92742d000a4c1cfb8fe698635))
+
+
+### Features
+
+* **docgen:** add vuetify exported component ([932e2ec](https://github.com/vue-styleguidist/vue-styleguidist/commit/932e2ec6e51402db365b6de15f36762bf999184e))
+
+
+
+
+
+# [4.3.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.3...v4.3.0) (2020-01-08)
+
+
+### Features
+
+* **docgen:** resolve pass through components ([07d183f](https://github.com/vue-styleguidist/vue-styleguidist/commit/07d183faad4bb2125bb389dcc065865d2d105dcb))
+
+
+
+
+
 ## [4.2.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.1...v4.2.2) (2019-12-18)
 
 

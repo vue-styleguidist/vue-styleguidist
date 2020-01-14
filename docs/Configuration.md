@@ -146,9 +146,21 @@ module.exports = {
 
 ## `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/packages/vue-styleguidist/scripts/schemas/config.js#L96)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
+
+> **NOTE :** From version 4.0.0, Prism is the editor by default as it is much lighter. Turn off [simpleEditor](#simpleEditor) to use CodeMirror and leverage this config.
+>
+> ```js
+> module.exports = {
+>   // ...
+>   editorConfig: {
+>     theme: 'base16-light'
+>   },
+>   simpleEditor: false
+> }
+> ```
 
 ## `getExampleFilename`
 
@@ -570,11 +582,30 @@ Example: If set to `/mystyleguide` the url for dev server will be `htp://localho
 
 ## `styles`
 
-Type: `object`, optional
+Type: `Object`, `String` or `Function`, optional
 
-Customize styles of any Styleguidist’s component.
+Customize styles of any Styleguidist’s component using an object, a function returning said object or a file path to a file exporting said styles.
 
 See example in the [cookbook](/docs/Cookbook.md#how-to-change-styles-of-a-style-guide).
+
+> **Note:** Using a function allows access to theme variables as seen in the example below. See available [theme variables](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/styles/theme.ts). The returned object folows the same format as when configured as a litteral.
+
+```javascript
+module.exports = {
+  styles: function(theme) {
+    return {
+      Logo: {
+        logo: {
+          // we can now change the color used in the logo item to use the theme's `link` color
+          color: theme.color.link
+        }
+      }
+    }
+  }
+}
+```
+
+**Note:** If using a file path, it has to be absolute or relative to the config file.
 
 ## `template`
 
@@ -596,11 +627,19 @@ A function that returns an HTML string, see [mini-html-webpack-plugin docs](http
 
 ## `theme`
 
-Type: `object`, optional
+Type: `Object` or `String`, optional
 
-Customize style guide UI fonts, colors, etc.
+Customize style guide UI fonts, colors, etc. using a theme object or the path to a file exporting such object.
+
+The path is relative to the config file or absolute.
 
 See example in the [cookbook](/docs/Cookbook.md#how-to-change-styles-of-a-style-guide).
+
+> **Note:** See available [theme variables](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/styles/theme.ts).
+>
+> **Note:** Styles use [JSS](https://github.com/cssinjs/jss/blob/master/docs/jss-syntax.md) with these plugins: [jss-plugin-isolate](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-isolate), [jss-plugin-nested](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-nested), [jss-plugin-camel-case](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-camel-case), [jss-plugin-default-unit](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-default-unit), [jss-plugin-compose](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-compose) and [jss-plugin-global](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-global).
+>
+> **Note:** Use [React Developer Tools](https://github.com/facebook/react) to find component and style names. For example a component `<LogoRenderer><h1 className="rsg--logo-53">` corresponds to an example above.
 
 > **Note:** This theme will only apply to styleguidist components. The side menu, the section titles, the prop definitions. The components you showcase will not be affected.
 
@@ -623,6 +662,17 @@ module.exports = {
   sortProps: props => props
 }
 ```
+
+## `tocMode`
+
+Type: `String` default: `expand`
+
+Defines if the table of contents sections will behave like an accordion:
+
+- `collapse`: All sections are collapsed by default
+- `expand`: Sections cannot be collapsed in the Table Of Contents
+
+Collapse the sections created in the sidebar to reduce the height of the sidebar. This can be useful in large codebases with lots of components to avoid having to scroll too far.
 
 ## `updateDocs`
 
@@ -675,8 +725,10 @@ module.exports = {
 
 Use it like this in your Markdown files:
 
-    ```js { "file": "./some/file.js" }
-    ```
+````md
+```js { "file": "./some/file.js" }
+```
+````
 
 You can also use this function to dynamically update some of your fenced code blocks that you do not want to be interpreted as Vue components by using the [static modifier](/docs/Documenting.md#usage-examples-and-readme-files).
 

@@ -33,32 +33,35 @@ export default async function extendsHandler(
 
 	const pathResolver = makePathResolver(originalDirName, opt.alias)
 
-	resolveImmediatelyExportedRequire(pathResolver, extendsFilePath)
+	await resolveImmediatelyExportedRequire(pathResolver, extendsFilePath, opt.validExtends)
 
-	// only look for documentation in the current project not in node_modules
-	const fullFilePath = pathResolver(extendsFilePath[extendsVariableName].filePath)
-	if (opt.validExtends(fullFilePath)) {
-		try {
-			const extendsVar = {
-				name: extendsFilePath[extendsVariableName].exportName,
-				path: fullFilePath
+	await extendsFilePath[extendsVariableName].filePath.reduce(async (_, p) => {
+		const fullFilePath = pathResolver(p)
+		// only look for documentation in the current project not in node_modules
+
+		if (opt.validExtends(fullFilePath)) {
+			try {
+				const extendsVar = {
+					name: extendsFilePath[extendsVariableName].exportName,
+					path: fullFilePath
+				}
+				await parseFile(
+					{
+						...opt,
+						filePath: fullFilePath,
+						nameFilter: [extendsFilePath[extendsVariableName].exportName],
+						extends: extendsVar
+					},
+					documentation
+				)
+				extendsVar.name = documentation.get('displayName')
+			} catch (e) {
+				// eat the error
 			}
-			await parseFile(
-				{
-					...opt,
-					filePath: fullFilePath,
-					nameFilter: [extendsFilePath[extendsVariableName].exportName],
-					extends: extendsVar
-				},
-				documentation
-			)
-			extendsVar.name = documentation.get('displayName')
-		} catch (e) {
-			// eat the error
 		}
-	}
-	// make sure that the parent name does not bleed on the new doc
-	documentation.set('displayName', null)
+		// make sure that the parent name does not bleed on the new doc
+		documentation.set('displayName', null)
+	}, {})
 }
 
 function getExtendsVariableName(compDef: NodePath): string | undefined {

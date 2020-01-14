@@ -2,6 +2,10 @@ import babylon from '../../babel-parser'
 import resolveExportedComponent from '../resolveExportedComponent'
 
 describe('resolveExportedComponent', () => {
+	it('should return exported components with vuetify format', () => {
+		const ast = babylon().parse('export default baseMixins.extend().extend({})')
+		expect(resolveExportedComponent(ast).size).toBe(1)
+	})
 	it('should return an export default', () => {
 		const ast = babylon().parse('export default {}')
 		expect(resolveExportedComponent(ast).size).toBe(1)

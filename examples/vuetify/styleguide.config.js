@@ -21,6 +21,7 @@ module.exports = {
 		path.join(__dirname, 'config/global.styles.scss')
 	],
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
+	validExtends: fullFilePath => !/(?=node_modules)(?!node_modules\/vuetify)/.test(fullFilePath),
 	webpackConfig: {
 		module: {
 			rules: [
@@ -38,8 +39,21 @@ module.exports = {
 					use: ['style-loader', 'css-loader']
 				},
 				{
-					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader']
+					test: /\.s(c|a)ss$/,
+					use: [
+						'vue-style-loader',
+						'css-loader',
+						{
+							loader: 'sass-loader',
+							options: {
+								implementation: require('sass'),
+								sassOptions: {
+									fiber: require('fibers')
+									// indentedSyntax: true // optional
+								}
+							}
+						}
+					]
 				}
 			]
 		},

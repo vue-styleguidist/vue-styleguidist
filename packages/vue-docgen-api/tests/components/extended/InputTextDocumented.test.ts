@@ -28,14 +28,43 @@ describe('tests InputTextDoc', () => {
 		expect(typeof docInputTextDoc.props !== 'undefined').toBe(true)
 	})
 	describe('props', () => {
-		it('should the component has two props', () => {
-			expect(docInputTextDoc.props && docInputTextDoc.props.length).toEqual(2)
+		it('should return props in the documentation', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name))
+				.toMatchInlineSnapshot(`
+			Array [
+			  "question",
+			  "importedProp",
+			  "otherMixinProp",
+			  "deep",
+			  "placeholder",
+			]
+		`)
 		})
 
-		it('should the component has placeholder of type string', () => {
+		it('should give the component a placeholder prop of type string', () => {
 			expect(getTestDescriptor(docInputTextDoc.props, 'placeholder').type).toEqual({
 				name: 'string'
 			})
+		})
+
+		it('should not give explicit prop no mixin of origin', () => {
+			expect(getTestDescriptor(docInputTextDoc.props, 'placeholder').mixin).toBeUndefined()
+		})
+
+		it('should contain mixin imported props', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain(
+				'importedProp'
+			)
+		})
+
+		it('should contain mixin imported prop other', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain(
+				'otherMixinProp'
+			)
+		})
+
+		it('should contain mixin imported prop from multiple layers of imports', () => {
+			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain('deep')
 		})
 	})
 

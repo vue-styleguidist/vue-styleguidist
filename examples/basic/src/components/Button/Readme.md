@@ -32,6 +32,7 @@ You can also use the Single File Component Format
         <BestButton @click.native="pushButton">Push Me</BestButton>
         <hr />
         <p class="text-name">Next Dog Name: {{ dogName }}</p>
+        <p class="text-name">Count: {{ count }}</p>
     </div>
 </template>
 <script>
@@ -58,4 +59,30 @@ export default {
   color: red;
 }
 </style>
+```
+
+another example with the `new Vue({})` format
+
+```js
+const countArray = require('~/store/models/data').default
+const count = countArray()
+
+// You can also use 'exports.default = {}' style module exports.
+new Vue({
+  data() {
+    return { numClicks: 0 }
+  },
+  computed: {
+    count() {
+      return count[this.numClicks] || this.numClicks
+    }
+  },
+  template: `
+    <div>
+      <BestButton @click.native="numClicks++">Push Me</BestButton>
+      <hr />
+      <p class="text-name">Count: {{ count }}</p>
+    </div>
+  `
+})
 ```

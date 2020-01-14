@@ -9,6 +9,12 @@
 		"noUnusedLocals": true,
 		"sourceMap": true,
 		"baseUrl": ".",
+		"paths": {
+			"rsg-components/*": [
+				"src/packages/vue-styleguidist/client/rsg-components/*",
+				"node_modules/react-styledguidist/lib/client/rsg-components/*"
+			]
+		},
 		"strictFunctionTypes": false,
 		"jsx": "preserve",
 		"types": ["jest", "node", "htmlparser2", "buble"]

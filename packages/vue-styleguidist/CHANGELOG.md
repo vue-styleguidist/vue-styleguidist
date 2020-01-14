@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.2...v4.4.3) (2020-01-11)
+
+
+### Bug Fixes
+
+* new Vue compatible with live require ([f3f68a8](https://github.com/vue-styleguidist/vue-styleguidist/commit/f3f68a83651c12d0293a395cc7f997c1eb2e8f36)), closes [#702](https://github.com/vue-styleguidist/vue-styleguidist/issues/702)
+
+
+
+
+
+## [4.4.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.1...v4.4.2) (2020-01-10)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.4.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.0...v4.4.1) (2020-01-09)
+
+
+### Bug Fixes
+
+* collapsible sections tocMode ([e5f7bfd](https://github.com/vue-styleguidist/vue-styleguidist/commit/e5f7bfdfc70acaa97ed7ae297363c418dfec3001))
+
+
+
+
+
+# [4.4.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.3.0...v4.4.0) (2020-01-09)
+
+
+### Bug Fixes
+
+* update error management in docgen loader ([f23f267](https://github.com/vue-styleguidist/vue-styleguidist/commit/f23f267c630f9ee92742d000a4c1cfb8fe698635))
+* warning when documenting return of a method ([0a74e3b](https://github.com/vue-styleguidist/vue-styleguidist/commit/0a74e3bdf11fc821714ea0e0c44e008c473c9b8e))
+
+
+
+
+
+# [4.3.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.3...v4.3.0) (2020-01-08)
+
+
+### Features
+
+* collapsible sections ([43715a7](https://github.com/vue-styleguidist/vue-styleguidist/commit/43715a7532d07ba5f5f868a2628fbc10eae52543)), closes [#689](https://github.com/vue-styleguidist/vue-styleguidist/issues/689)
+
+
+
+
+
+## [4.2.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.2...v4.2.3) (2019-12-23)
+
+
+### Bug Fixes
+
+* add warning when using editorConfig ([b39f6f8](https://github.com/vue-styleguidist/vue-styleguidist/commit/b39f6f851455f208a9ae9092c8226cf2f7c3322c))
+* typings of Styleguide ([f50d3b5](https://github.com/vue-styleguidist/vue-styleguidist/commit/f50d3b5b78cbab95c76f522cc2c7ae2c3b8a91c0))
+
+
+
+
+
 ## [4.2.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.2.1...v4.2.2) (2019-12-18)
 
 **Note:** Version bump only for package vue-styleguidist

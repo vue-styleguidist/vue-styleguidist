@@ -3,7 +3,7 @@ import RsgReactComponent from 'react-styleguidist/lib/client/rsg-components/Reac
 
 export const DocumentedComponentContext = React.createContext({})
 
-export default class ReactComponent extends Component {
+export default class VsgReactComponent extends Component {
 	static propTypes = RsgReactComponent.PropTypes
 
 	render() {

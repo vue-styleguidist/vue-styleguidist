@@ -6,7 +6,7 @@ describe('resolveImmediatelyExported', () => {
 		const ast = babylon().parse('export { test } from "test/path";')
 		const varNames = resolveImmediatelyExported(ast, ['test'])
 		expect(varNames).toMatchObject({
-			test: { filePath: 'test/path', exportName: 'test' }
+			test: { filePath: ['test/path'], exportName: 'test' }
 		})
 	})
 
@@ -14,7 +14,7 @@ describe('resolveImmediatelyExported', () => {
 		const ast = babylon().parse('export { test as changedName } from "test/path";')
 		const varNames = resolveImmediatelyExported(ast, ['changedName'])
 		expect(varNames).toMatchObject({
-			changedName: { filePath: 'test/path', exportName: 'test' }
+			changedName: { filePath: ['test/path'], exportName: 'test' }
 		})
 	})
 
@@ -27,7 +27,7 @@ describe('resolveImmediatelyExported', () => {
 		)
 		const varNames = resolveImmediatelyExported(ast, ['changedName'])
 		expect(varNames).toMatchObject({
-			changedName: { filePath: 'test/path', exportName: 'test' }
+			changedName: { filePath: ['test/path'], exportName: 'test' }
 		})
 	})
 
@@ -37,7 +37,7 @@ describe('resolveImmediatelyExported', () => {
 		)
 		const varNames = resolveImmediatelyExported(ast, ['changedName'])
 		expect(varNames).toMatchObject({
-			changedName: { filePath: 'test/path', exportName: 'default' }
+			changedName: { filePath: ['test/path'], exportName: 'default' }
 		})
 	})
 
@@ -47,7 +47,21 @@ describe('resolveImmediatelyExported', () => {
 		)
 		const varNames = resolveImmediatelyExported(ast, ['default'])
 		expect(varNames).toMatchObject({
-			default: { filePath: 'test/path', exportName: 'test' }
+			default: { filePath: ['test/path'], exportName: 'test' }
+		})
+	})
+
+	it('should resolve export all as all remaining variables', () => {
+		const ast = babylon().parse(
+			[
+				'export foo from "file/path"', // export this one to ignore
+				'export * from "test/path";'
+			].join('\n')
+		)
+		const varNames = resolveImmediatelyExported(ast, ['foo', 'baz'])
+		expect(varNames).toMatchObject({
+			foo: { filePath: ['file/path'], exportName: 'foo' },
+			baz: { filePath: ['test/path'], exportName: 'baz' }
 		})
 	})
 })

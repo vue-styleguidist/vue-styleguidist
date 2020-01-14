@@ -11,24 +11,17 @@ function ignore(): boolean {
 }
 
 function isComponentDefinition(path: NodePath): boolean {
+	const { node } = path
+
 	return (
 		// export default {}
-		bt.isObjectExpression(path.node) ||
+		bt.isObjectExpression(node) ||
 		// export const myComp = {}
-		(bt.isVariableDeclarator(path.node) &&
-			path.node.init &&
-			bt.isObjectExpression(path.node.init)) ||
-		// export default Vue.extend({})
-		(bt.isCallExpression(path.node) &&
-			bt.isMemberExpression(path.node.callee) &&
-			path.node.callee.property.name === 'extend' &&
-			((bt.isIdentifier(path.node.callee.object) && path.node.callee.object.name === 'Vue') ||
-				// or export default (Vue as VueConstructor<Vue>).extend({})
-				(bt.isTSAsExpression(path.node.callee.object) &&
-					bt.isIdentifier(path.node.callee.object.expression) &&
-					path.node.callee.object.expression.name === 'Vue'))) ||
+		(bt.isVariableDeclarator(node) && node.init && bt.isObjectExpression(node.init)) ||
 		// export default class MyComp extends VueComp
-		bt.isClassDeclaration(path.node)
+		bt.isClassDeclaration(node) ||
+		// export default whatever.extend({})
+		(bt.isCallExpression(node) && bt.isObjectExpression(node.arguments[0]))
 	)
 }
 
