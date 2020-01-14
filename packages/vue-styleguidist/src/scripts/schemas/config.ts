@@ -378,7 +378,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 	},
 	styles: {
 		type: ['object', 'existing file path', 'function'],
-		tstype: 'Styles | string | (theme: any) => Styles',
+		tstype: 'Styles | string | ((theme: any) => Styles)',
 		default: {},
 		example: {
 			Logo: {

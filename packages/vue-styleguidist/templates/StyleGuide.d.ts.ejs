@@ -19,23 +19,23 @@ export interface StyleguidistConfig {<%
         const description = opt.description || opt.message
         const defaultShowable = ['boolean', 'number', 'string'].indexOf(typeof opt.default) > -1
 if(description || defaultShowable || opt.deprecated){%>
-/**<% 
+    /**<% 
     if(description) { %>
-* <%- description %> <%
+     * <%- description %> <%
     }
 
     if(opt.deprecated) { %>
-* @deprecated <%- opt.deprecated %> <%
+     * @deprecated <%- opt.deprecated %> <%
     }
 
     if(defaultShowable) { %>
-* @default <%- JSON.stringify(opt.default) %> <%
+     * @default <%- JSON.stringify(opt.default) %> <%
     }
     %>
-*/<%
+     */<%
 }
     %>
-<%-key %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ? 
+    <%-key %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ? 
         schema[key].type : schema[key].uitype) || 'any' %>;<%
     });
 %>
