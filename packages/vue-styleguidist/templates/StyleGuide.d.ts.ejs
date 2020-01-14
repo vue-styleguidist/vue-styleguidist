@@ -2,6 +2,7 @@ import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
+import { Styles, StyleSheet } from 'jss';
 import { Configuration, loader } from 'webpack'
 import { ProcessedSection, Section } from './Section'
 import { EXPAND_MODE } from './enums'
@@ -9,7 +10,7 @@ import { Example, ExampleLoader } from './Example'
 import { ComponentProps } from './Component'
 
 export interface StyleguidistContext extends loader.LoaderContext {
-    _styleguidist: StyleguidistConfig
+_styleguidist: StyleguidistConfig
 }
 
 export interface StyleguidistConfig {<% 
@@ -41,9 +42,9 @@ if(description || defaultShowable || opt.deprecated){%>
 }
 
 export interface StyleGuideObject {
-    sections: ProcessedSection[]
-    config: StyleguidistConfig
-    renderRootJsx: React.ReactNode
-    welcomeScreen: any
-    patterns: string[]
+sections: ProcessedSection[]
+config: StyleguidistConfig
+renderRootJsx: React.ReactNode
+welcomeScreen: any
+patterns: string[]
 }

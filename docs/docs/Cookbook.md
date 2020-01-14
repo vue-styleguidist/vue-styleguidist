@@ -210,11 +210,11 @@ module.exports = {
 
 ## How to change styles of a style guide?
 
-There are two config options to change your style guide UI: [theme](/Configuration.md#theme) and [styles](/Configuration.md#styles).
+There are two config options to change your style guide UI: [theme](Configuration.md#theme) and [styles](Configuration.md#styles).
 
-Use [theme](/Configuration.md#theme) to change fonts, colors, etc.
+Use [theme](Configuration.md#theme) to change fonts, colors, etc.
 
-Use [styles](/Configuration.md#styles) to tweak the style of any particular Styleguidist component.
+Use [styles](Configuration.md#styles) to tweak the style of any particular Styleguidist component.
 
 As an example:
 
@@ -231,7 +231,9 @@ module.exports = {
   },
   styles: {
     Logo: {
+      // We're changing the LogoRenderer component
       logo: {
+        // We're changing the rsg--logo-XX class name inside the component
         animation: 'blink ease-in-out 300ms infinite'
       },
       '@keyframes blink': {
@@ -242,74 +244,27 @@ module.exports = {
 }
 ```
 
-> **Note:** See available [theme variables](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/styles/theme.js).
+> **Note:** See available [theme variables](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/styles/theme.ts).
 
-> **Note:** Styles use [JSS](https://github.com/cssinjs/jss/blob/master/docs/json-api.md) with these plugins: [jss-isolate](https://github.com/cssinjs/jss-isolate), [jss-nested](https://github.com/cssinjs/jss-nested), [jss-camel-case](https://github.com/cssinjs/jss-camel-case), [jss-default-unit](https://github.com/cssinjs/jss-default-unit), [jss-compose](https://github.com/cssinjs/jss-compose).
+> **Note:** Styles use [JSS](https://github.com/cssinjs/jss/blob/master/docs/jss-syntax.md) with these plugins: [jss-isolate](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-isolate), [jss-nested](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-nested), [jss-camel-case](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-camel-case), [jss-default-unit](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-default-unit), [jss-compose](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-compose) and [jss-global](https://github.com/cssinjs/jss/tree/master/packages/jss-plugin-global).
 
-> **Note:** Use [React Developer Tools](https://github.com/facebook/react-devtools) to find component and style names. For example a component `<LogoRenderer><h1 className="logo-524678444">…` corresponds to an example above.
+> **Note:** Use [React Developer Tools](https://github.com/facebook/react) to find component and style names. For example a component `<LogoRenderer><h1 className="rsg--logo-53">` corresponds to an example above.
 
-> **Note:** See [example](https://github.com/vue-styleguidist/buefy-styleguide-example/blob/master/docs-styleguidist/styles.js).
-
-## How to change the layout of a style guide?
-
-You can replace any Styleguidist Vue component. But in most of the cases, you’ll want to replace `*Renderer` components — all HTML is rendered by these components. For example `ReactComponentRenderer`, `ComponentsListRenderer`, `PropsRenderer`, etc. — [check the source](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/src/rsg-components) to see what components are available.
-
-You can replace the `StyleGuideRenderer` component like this:
+> **Note:** Use a function instead of an object for [styles](Configuration.md#styles) to access all theme variables in your custom styles.
 
 ```javascript
-// styleguide.config.js
-const path = require('path')
 module.exports = {
-  styleguideComponents: {
-    StyleGuideRenderer: path.join(
-      __dirname,
-      'lib/styleguide/StyleGuideRenderer'
-    )
-  },
-  webpackConfig: {
-    module: {
-      rules: [
-        {
-          test: /\.js?$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-          query: {
-            cacheDirectory: true,
-            presets: ['react', 'env']
-          }
+  styles: function(theme) {
+    return {
+      Logo: {
+        logo: {
+          // we can now change the color used in the logo item to use the theme's `link` color
+          color: theme.color.link
         }
-        /* ... */
-      ]
+      }
     }
   }
 }
-```
-
-```jsx
-// lib/styleguide/StyleGuideRenderer.js
-import React from 'react'
-const StyleGuideRenderer = ({
-  title,
-  homepageUrl,
-  components,
-  toc,
-  hasSidebar
-}) => (
-  <div className="root">
-    <h1>{title}</h1>
-    <main className="wrapper">
-      <div className="content">
-        {components}
-        <footer className="footer">
-          <Markdown
-            text={`Generated with [Vue Styleguidist](${homepageUrl})`}
-          />
-        </footer>
-      </div>
-      {hasSidebar && <div className="sidebar">{toc}</div>}
-    </main>
-  </div>
-)
 ```
 
 > NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Check out the [customized](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, it uses the following:
