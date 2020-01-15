@@ -64,7 +64,7 @@ export default {
 another example with the `new Vue({})` format
 
 ```js
-const countArray = require('~/store/models/PolicyGroup').default
+const countArray = require('~/store/models/data').default
 const count = countArray()
 
 // You can also use 'exports.default = {}' style module exports.

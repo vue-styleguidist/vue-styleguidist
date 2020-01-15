@@ -10,24 +10,18 @@ function ignore(): boolean {
 	return false
 }
 
-function isComponentDefinition(path: NodePath): boolean {		
+function isComponentDefinition(path: NodePath): boolean {
 	const { node } = path
 
 	return (
 		// export default {}
-		bt.isObjectExpression(node)
-		
+		bt.isObjectExpression(node) ||
 		// export const myComp = {}
-		|| (bt.isVariableDeclarator(node)
-			&& node.init
-			&& bt.isObjectExpression(node.init))
-
+		(bt.isVariableDeclarator(node) && node.init && bt.isObjectExpression(node.init)) ||
 		// export default class MyComp extends VueComp
-		|| bt.isClassDeclaration(node)
-
+		bt.isClassDeclaration(node) ||
 		// export default whatever.extend({})
-		|| (bt.isCallExpression(node)
-			&& bt.isObjectExpression(node.arguments[0]))
+		(bt.isCallExpression(node) && bt.isObjectExpression(node.arguments[0]))
 	)
 }
 

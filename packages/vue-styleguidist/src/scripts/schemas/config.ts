@@ -377,7 +377,8 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: ''
 	},
 	styles: {
-		type: 'object',
+		type: ['object', 'existing file path', 'function'],
+		tstype: 'Styles | string | ((theme: any) => Styles)',
 		default: {},
 		example: {
 			Logo: {
@@ -403,7 +404,8 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		}
 	},
 	theme: {
-		type: 'object',
+		type: ['object', 'existing file path'],
+		tstype: '{ [name: string]: any } | string',
 		default: {},
 		example: {
 			link: 'firebrick',

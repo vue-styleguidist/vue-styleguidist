@@ -2,6 +2,7 @@ import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
+import { Styles, StyleSheet } from 'jss'
 import { Configuration, loader } from 'webpack'
 import { ProcessedSection, Section } from './Section'
 import { EXPAND_MODE } from './enums'
@@ -177,9 +178,9 @@ export interface StyleguidistConfig {
 	 * @default ""
 	 */
 	styleguidePublicPath: string
-	styles: any
+	styles: Styles | string | ((theme: any) => Styles)
 	template: any
-	theme: any
+	theme: { [name: string]: any } | string
 	/**
 	 * Style guide title
 	 */
