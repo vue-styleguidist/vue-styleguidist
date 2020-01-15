@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.5.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.3...v4.5.0) (2020-01-15)
+
+
+### Bug Fixes
+
+* typings automated template ([711b14b](https://github.com/vue-styleguidist/vue-styleguidist/commit/711b14bffb7c733c7bdc0f75714b4ef5339dc554))
+
+
+### Features
+
+* update rsg with new theming ([af0ceb2](https://github.com/vue-styleguidist/vue-styleguidist/commit/af0ceb2bba6f9b8fe6a000c121e02b7a2e435c8c))
+
+
+
+
+
 ## [4.4.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.2...v4.4.3) (2020-01-11)
 
 
