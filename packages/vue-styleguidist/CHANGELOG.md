@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.5.0...v4.5.1) (2020-01-16)
+
+
+### Bug Fixes
+
+* requires in SFC examples ([cb22308](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb223085f0e116ebb58d133a14de3216b81f5a01)), closes [#714](https://github.com/vue-styleguidist/vue-styleguidist/issues/714)
+
+
+
+
+
 # [4.5.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.4.3...v4.5.0) (2020-01-15)
 
 
