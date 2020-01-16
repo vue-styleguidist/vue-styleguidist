@@ -96,7 +96,7 @@ it('should parse SFC with exports', () => {
         template:\`
             <button  @click.prevent="isOpen = false">Close</button>
         \`
-    }`
+	}`
 
 	const result = getScript(
 		`<script>
@@ -108,5 +108,5 @@ it('should parse SFC with exports', () => {
 		false
 	)
 
-	expect(result).toEqual(code)
+	expect(result.trim()).toEqual(code)
 })
