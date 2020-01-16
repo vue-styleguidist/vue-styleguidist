@@ -89,3 +89,24 @@ it('should parse module.exports as itself', () => {
 
 	expect(result).toEqual(code)
 })
+
+it('should parse SFC with exports', () => {
+	const code = `const merge = require("lodash/merge").default
+    module.exports = {
+        template:\`
+            <button  @click.prevent="isOpen = false">Close</button>
+        \`
+    }`
+
+	const result = getScript(
+		`<script>
+	${code}
+	</script>
+	<template>
+		<div>hello</div>
+	</template>`,
+		false
+	)
+
+	expect(result).toEqual(code)
+})
