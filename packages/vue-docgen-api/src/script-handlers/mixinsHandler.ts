@@ -1,10 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
-import * as path from 'path'
 import Documentation from '../Documentation'
 import { ParseOptions } from '../parse'
-import resolveImmediatelyExportedRequire from '../utils/adaptExportsToIEV'
-import makePathResolver from '../utils/makePathResolver'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 
