@@ -16,10 +16,9 @@ export default async function parseSFC(
 	initialDoc: Documentation | undefined,
 	source: string,
 	opt: ParseOptions
-): Promise<Documentation | undefined> {
+): Promise<Documentation[]> {
+	let documentation = initialDoc
 	const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
-
-	const documentation = initialDoc || new Documentation()
 
 	// use padding so that errors are displayed at the correct line
 	const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
@@ -40,6 +39,8 @@ export default async function parseSFC(
 			parts.template.content = extTemplSource
 		}
 		const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
+
+		documentation = initialDoc || new Documentation()
 
 		parseTemplate(
 			parts.template,
@@ -64,7 +65,21 @@ export default async function parseSFC(
 			? 'ts'
 			: 'js'
 
-	if (parts.customBlocks) {
+	const docs: Documentation[] = scriptSource
+		? (await parseScript(
+				scriptSource,
+				preHandlers,
+				[...scriptHandlers, ...addScriptHandlers],
+				opt,
+				documentation,
+				true
+		  )) || []
+		: // if there is only a template return the template's doc
+		  documentation
+			? [documentation]
+			: []
+
+	if (parts.customBlocks && documentation) {
 		const docsBlocks = parts.customBlocks
 			.filter(block => block.type === 'docs' && block.content && block.content.length)
 			.map(block => block.content.trim())
@@ -74,19 +89,9 @@ export default async function parseSFC(
 		}
 	}
 
-	if (scriptSource) {
-		await parseScript(
-			scriptSource,
-			preHandlers,
-			[...scriptHandlers, ...addScriptHandlers],
-			opt,
-			documentation
-		)
-	}
-
-	if (!documentation.get('displayName')) {
+	if (documentation && !documentation.get('displayName')) {
 		// a component should always have a display name
 		documentation.set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
 	}
-	return documentation
+	return docs
 }

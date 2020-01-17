@@ -101,8 +101,7 @@ export async function parseSource(
 
 	let docs: Documentation[]
 	if (singleFileComponent) {
-		let doc = await parseSFC(documentation, source, opt)
-		docs = doc ? [doc] : []
+		docs = await parseSFC(documentation, source, opt)
 	} else {
 		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
