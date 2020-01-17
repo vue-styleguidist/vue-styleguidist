@@ -14,17 +14,6 @@ global.mount = mount
 
 configure({ adapter: new Adapter() })
 
-// Skip createElement warnings but fail tests on any other warning
-console.error = message => {
-	if (
-		!/(Warning: Accessing PropTypes via the main React package|React.createClass is deprecated)/.test(
-			message
-		)
-	) {
-		throw new Error(message)
-	}
-}
-
 // document.createRange “polyfill” for CodeMirror
 document.createRange = function() {
 	return {

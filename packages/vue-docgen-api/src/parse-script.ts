@@ -18,12 +18,13 @@ export type Handler = (
 	opt: ParseOptions
 ) => Promise<void>
 
-export default async function parseScript(
+export default function parseScript(
 	source: string,
 	preHandlers: Handler[],
 	handlers: Handler[],
 	options: ParseOptions,
-	documentation?: Documentation
+	documentation?: Documentation,
+	isSFC: boolean = false
 ): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {
@@ -42,35 +43,39 @@ export default async function parseScript(
 		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
-	return await executeHandlers(
+	return executeHandlers(
 		preHandlers,
 		handlers,
 		componentDefinitions,
 		documentation,
 		ast,
-		options
+		options,
+		isSFC
 	)
 }
 
-async function executeHandlers(
+function executeHandlers(
 	preHandlers: Handler[],
 	localHandlers: Handler[],
 	componentDefinitions: Map<string, NodePath>,
 	documentation: Documentation | undefined,
 	ast: bt.File,
-	opt: ParseOptions
+	opt: ParseOptions,
+	isSFC: boolean
 ): Promise<Documentation[] | undefined> {
 	const compDefs = componentDefinitions
 		.keys()
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
 
-	if (documentation && compDefs.length > 1) {
+	if (!isSFC && documentation && compDefs.length > 1) {
 		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
 	}
 
-	return await Promise.all(
+	return Promise.all(
 		compDefs.map(async name => {
-			const doc = documentation || new Documentation()
+			const doc =
+				(isSFC ? (name === 'default' ? documentation : undefined) : documentation) ||
+				new Documentation()
 			const compDef = componentDefinitions.get(name) as NodePath
 			// execute all prehandlers in order
 			await preHandlers.reduce(async (_, handler) => {
