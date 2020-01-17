@@ -38,6 +38,7 @@ export default async function parseScript(
 	const componentDefinitions = resolveExportedComponent(ast)
 
 	if (componentDefinitions.size === 0) {
+		// TODO: add IEV resolution here
 		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
