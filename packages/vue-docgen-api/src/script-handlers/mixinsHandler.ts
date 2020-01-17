@@ -19,10 +19,6 @@ export default async function mixinsHandler(
 	astPath: bt.File,
 	opt: ParseOptions
 ) {
-	const originalDirName = path.dirname(opt.filePath)
-
-	const pathResolver = makePathResolver(originalDirName, opt.alias)
-
 	// filter only mixins
 	const mixinVariableNames = getMixinsVariableNames(componentDefinition)
 
@@ -33,11 +29,8 @@ export default async function mixinsHandler(
 	// get require / import statements for mixins
 	const mixinVarToFilePath = resolveRequired(astPath, mixinVariableNames)
 
-	// resolve their documentations
-	await resolveImmediatelyExportedRequire(pathResolver, mixinVarToFilePath, opt.validExtends)
-
 	// get each doc for each mixin using parse
-	await documentRequiredComponents(documentation, mixinVarToFilePath, pathResolver, 'mixin', opt)
+	await documentRequiredComponents(documentation, mixinVarToFilePath, 'mixin', opt)
 }
 
 function getMixinsVariableNames(compDef: NodePath): string[] {

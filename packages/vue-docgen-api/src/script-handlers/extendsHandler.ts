@@ -30,13 +30,7 @@ export default async function extendsHandler(
 	// get all require / import statements
 	const extendsFilePath = resolveRequired(astPath, [extendsVariableName])
 
-	const originalDirName = path.dirname(opt.filePath)
-
-	const pathResolver = makePathResolver(originalDirName, opt.alias)
-
-	await resolveImmediatelyExportedRequire(pathResolver, extendsFilePath, opt.validExtends)
-
-	await documentRequiredComponents(documentation, extendsFilePath, pathResolver, 'extends', opt)
+	await documentRequiredComponents(documentation, extendsFilePath, 'extends', opt)
 }
 
 function getExtendsVariableName(compDef: NodePath): string | undefined {
