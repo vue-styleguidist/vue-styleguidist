@@ -1,5 +1,6 @@
 import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
+import * as path from 'path'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
 import Map from 'ts-map'
@@ -7,7 +8,10 @@ import buildParser from './babel-parser'
 import Documentation from './Documentation'
 import { ParseOptions } from './parse'
 import cacher from './utils/cacher'
+import resolveImmediatelyExportedRequire from './utils/adaptExportsToIEV'
 import resolveExportedComponent from './utils/resolveExportedComponent'
+import makePathResolver from './utils/makePathResolver'
+import documentRequiredComponents from './utils/documentRequiredComponents'
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found'
 
@@ -36,11 +40,28 @@ export default function parseScript(
 		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 	}
 
-	const componentDefinitions = resolveExportedComponent(ast)
+	const [componentDefinitions, ievSet] = resolveExportedComponent(ast)
 
 	if (componentDefinitions.size === 0) {
-		// TODO: add IEV resolution here
-		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
+		// if there is any immediately exported variable
+		// resolve their documentations
+		const originalDirName = path.dirname(options.filePath)
+		const pathResolver = makePathResolver(originalDirName, options.alias)
+		await resolveImmediatelyExportedRequire(pathResolver, ievSet, options.validExtends)
+		const docs = await documentRequiredComponents(
+			documentation,
+			ievSet,
+			pathResolver,
+			undefined,
+			options
+		)
+
+		// if we do not find any compoents throw
+		if (!docs.length) {
+			throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
+		} else {
+			return docs
+		}
 	}
 
 	return executeHandlers(

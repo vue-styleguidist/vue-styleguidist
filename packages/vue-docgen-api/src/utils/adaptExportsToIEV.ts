@@ -12,7 +12,7 @@ const read = promisify(readFile)
 
 const hash = require('hash-sum')
 
-export default async function recusiveAdaptExportsToIEV(
+export default async function recursiveAdaptExportsToIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
 	varToFilePath: ImportedVariableSet,
 	validExtends: (fullFilePath: string) => boolean

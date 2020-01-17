@@ -9,7 +9,7 @@ jest.mock('../../Documentation')
 
 function parse(src: string): Map<string, NodePath> {
 	const ast = babylon({ plugins: ['typescript'] }).parse(src)
-	return resolveExportedComponent(ast)
+	return resolveExportedComponent(ast)[0]
 }
 
 describe('propHandler', () => {

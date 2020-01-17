@@ -2,10 +2,11 @@ import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import * as path from 'path'
 import Documentation from '../Documentation'
-import { parseFile, ParseOptions } from '../parse'
+import { ParseOptions } from '../parse'
 import resolveImmediatelyExportedRequire from '../utils/adaptExportsToIEV'
 import makePathResolver from '../utils/makePathResolver'
 import resolveRequired from '../utils/resolveRequired'
+import documentRequiredComponents from '../utils/documentRequiredComponents'
 
 /**
  * Returns documentation of the component referenced in the extends property of the component
@@ -35,33 +36,7 @@ export default async function extendsHandler(
 
 	await resolveImmediatelyExportedRequire(pathResolver, extendsFilePath, opt.validExtends)
 
-	await extendsFilePath[extendsVariableName].filePath.reduce(async (_, p) => {
-		const fullFilePath = pathResolver(p)
-		// only look for documentation in the current project not in node_modules
-
-		if (opt.validExtends(fullFilePath)) {
-			try {
-				const extendsVar = {
-					name: extendsFilePath[extendsVariableName].exportName,
-					path: fullFilePath
-				}
-				await parseFile(
-					{
-						...opt,
-						filePath: fullFilePath,
-						nameFilter: [extendsFilePath[extendsVariableName].exportName],
-						extends: extendsVar
-					},
-					documentation
-				)
-				extendsVar.name = documentation.get('displayName')
-			} catch (e) {
-				// eat the error
-			}
-		}
-		// make sure that the parent name does not bleed on the new doc
-		documentation.set('displayName', null)
-	}, {})
+	await documentRequiredComponents(documentation, extendsFilePath, pathResolver, 'extends', opt)
 }
 
 function getExtendsVariableName(compDef: NodePath): string | undefined {

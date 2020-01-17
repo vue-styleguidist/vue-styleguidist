@@ -8,7 +8,7 @@ jest.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = babylon().parse(src)
-	return resolveExportedComponent(ast).get('default')
+	return resolveExportedComponent(ast)[0].get('default')
 }
 
 describe('displayNameHandler', () => {
