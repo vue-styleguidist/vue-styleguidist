@@ -65,6 +65,8 @@ function executeHandlers(
 	const compDefs = componentDefinitions
 		.keys()
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
+		// default component first so in multiple exports in parse it is returned
+		.sort((_, name2) => (name2 === 'default' ? 1 : 0))
 
 	if (!isSFC && documentation && compDefs.length > 1) {
 		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
