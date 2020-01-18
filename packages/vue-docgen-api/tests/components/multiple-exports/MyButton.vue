@@ -103,6 +103,10 @@ export const Input = {
 		)
 	}
 }
+
+export default {
+	name: 'hello'
+}
 </script>
 
 <template>

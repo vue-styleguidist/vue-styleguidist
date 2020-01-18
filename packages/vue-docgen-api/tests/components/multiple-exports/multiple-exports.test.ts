@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
-import { parseMulti } from '../../../src/main'
+import { parse, parseMulti } from '../../../src/main'
 
 const button = path.join(__dirname, './MyButton.vue')
 let docButton: ComponentDoc[]
@@ -48,5 +48,21 @@ describe('tests components with multiple exports', () => {
 		expect(docButton[1].description).toBe(
 			'This is an input that represents another component extracted in the same file'
 		)
+	})
+
+	it('should throw when using parse', () => {
+		expect(async () => {
+			await parse(button)
+		}).toThrow()
+	})
+
+	it('should match inline snapshot', () => {
+		expect(docButton.map(c => c.exportName)).toMatchInlineSnapshot(`
+		Array [
+		  "Button",
+		  "Input",
+		  "default",
+		]
+	`)
 	})
 })
