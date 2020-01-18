@@ -55,9 +55,8 @@ export default async function documentRequiredComponents(
 					  }
 					: {}
 
-				docs = [
-					...docs,
-					...(await parseFile(
+				docs = docs.concat(
+					await parseFile(
 						{
 							...opt,
 							filePath: fullFilePath,
@@ -65,8 +64,8 @@ export default async function documentRequiredComponents(
 							...originVar
 						},
 						documentation
-					))
-				]
+					)
+				)
 
 				if (documentation && originObject && originVar[originObject]) {
 					originVar[originObject].name = documentation.get('displayName')
