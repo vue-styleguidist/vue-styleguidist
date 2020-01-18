@@ -34,7 +34,7 @@ export default async function parseScript(
 
 	const ast = cacher(() => recast.parse(source, { parser: buildParser({ plugins }) }), source)
 	if (!ast) {
-		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
+		throw new Error(`Unable to parse empty file "${options.filePath}"`)
 	}
 
 	const [componentDefinitions, ievSet] = resolveExportedComponent(ast)
