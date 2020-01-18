@@ -24,7 +24,7 @@ export default function parseScript(
 	handlers: Handler[],
 	options: ParseOptions,
 	documentation?: Documentation,
-	isSFC: boolean = false
+	forceSingleExport: boolean = false
 ): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {
@@ -49,7 +49,7 @@ export default function parseScript(
 		documentation,
 		ast,
 		options,
-		isSFC
+		forceSingleExport
 	)
 }
 
@@ -60,20 +60,26 @@ function executeHandlers(
 	documentation: Documentation | undefined,
 	ast: bt.File,
 	opt: ParseOptions,
-	isSFC: boolean
+	forceSingleExport: boolean
 ): Promise<Documentation[] | undefined> {
 	const compDefs = componentDefinitions
 		.keys()
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
+		// default component first so in multiple exports in parse it is returned
+		.sort((_, name2) => (name2 === 'default' ? 1 : 0))
 
-	if (!isSFC && documentation && compDefs.length > 1) {
+	if (forceSingleExport && compDefs.length > 1) {
 		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
 	}
 
 	return Promise.all(
 		compDefs.map(async name => {
+			// If there are multiple exports and an initial documentation,
+			// it means the doc is coming from an SFC template.
+			// Only enrich the doc attached to the default export
+			// NOTE: module.exports is normalized to default
 			const doc =
-				(isSFC ? (name === 'default' ? documentation : undefined) : documentation) ||
+				(compDefs.length > 1 && name !== 'default' ? undefined : documentation) ||
 				new Documentation()
 			const compDef = componentDefinitions.get(name) as NodePath
 			// execute all prehandlers in order
