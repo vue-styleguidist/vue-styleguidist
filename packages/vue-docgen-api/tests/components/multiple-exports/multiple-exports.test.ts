@@ -11,17 +11,17 @@ describe('tests components with multiple exports', () => {
 	})
 
 	it('should extract the export name', () => {
-		expect(docButton[0].exportName).toBe('Button')
+		expect(docButton[1].exportName).toBe('Button')
 	})
 
 	it('should have the correct content in the extracted definition', () => {
-		expect(docButton[0].description).toBe(
+		expect(docButton[1].description).toBe(
 			'This is a button that represents a javascript only component, not a vue SFC'
 		)
 	})
 
 	it('should export mixins prop', () => {
-		expect(docButton[0].props && docButton[0].props.map(p => p.name)).toMatchInlineSnapshot(`
+		expect(docButton[1].props && docButton[1].props.map(p => p.name)).toMatchInlineSnapshot(`
 		Array [
 		  "color",
 		  "id",
@@ -41,28 +41,29 @@ describe('tests components with multiple exports', () => {
 	})
 
 	it('should extract the export name for input', () => {
-		expect(docButton[1].exportName).toBe('Input')
+		expect(docButton[2].exportName).toBe('Input')
 	})
 
 	it('should have contain the input definition', () => {
-		expect(docButton[1].description).toBe(
+		expect(docButton[2].description).toBe(
 			'This is an input that represents another component extracted in the same file'
 		)
-	})
-
-	it('should throw when using parse', () => {
-		expect(async () => {
-			await parse(button)
-		}).toThrow()
 	})
 
 	it('should match inline snapshot', () => {
 		expect(docButton.map(c => c.exportName)).toMatchInlineSnapshot(`
 		Array [
+		  "default",
 		  "Button",
 		  "Input",
-		  "default",
 		]
 	`)
+	})
+})
+
+describe('possible multiple export in parse function', () => {
+	it('should return default when using parse', async done => {
+		const { exportName } = await parse(button)
+		expect(exportName).toBe('default')
 	})
 })
