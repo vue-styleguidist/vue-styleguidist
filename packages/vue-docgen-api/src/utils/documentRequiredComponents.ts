@@ -1,7 +1,7 @@
 import Map from 'ts-map'
 import * as path from 'path'
 import { ImportedVariableSet } from './resolveRequired'
-import resolveImmediatelyExportedRequire from '../utils/adaptExportsToIEV'
+import recursiveResolveIEV from '../utils/recursiveResolveIEV'
 import { parseFile, ParseOptions } from '../parse'
 import Documentation from '../Documentation'
 import makePathResolver from './makePathResolver'
@@ -24,8 +24,8 @@ export default async function documentRequiredComponents(
 	const originalDirName = path.dirname(opt.filePath)
 	const pathResolver = makePathResolver(originalDirName, opt.alias)
 
-	// resolve their documentations
-	await resolveImmediatelyExportedRequire(pathResolver, varToFilePath, opt.validExtends)
+	// resolve where components are through immediately exported variables
+	await recursiveResolveIEV(pathResolver, varToFilePath, opt.validExtends)
 
 	const files = new Map<string, string[]>()
 	for (const varName of Object.keys(varToFilePath)) {
