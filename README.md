@@ -26,6 +26,10 @@ alt="Chat on Discord">
 </div>
 </div>
 
+Start documenting now on codesandbox.io
+
+[![Start documenting](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vue-styleguidist-27zvi)
+
 ## Packages
 
 [vue-styleguidist](packages/vue-styleguidist) takes the results of [vue-docgen-api](packages/vue-docgen-api) and creates a website to showcase and develop components.
