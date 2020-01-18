@@ -65,5 +65,6 @@ describe('possible multiple export in parse function', () => {
 	it('should return default when using parse', async done => {
 		const { exportName } = await parse(button)
 		expect(exportName).toBe('default')
+		done()
 	})
 })
