@@ -1,6 +1,7 @@
 import * as React from 'react'
 import slots from 'rsg-components/slots'
 import StyleGuide from 'rsg-components/StyleGuide'
+import hashSum from 'hash-sum'
 import getRouteData from 'react-styleguidist/lib/client/utils/getRouteData'
 import getPageTitle from 'react-styleguidist/lib/client/utils/getPageTitle'
 import { StyleGuideObject } from '../../types/StyleGuide'
@@ -35,7 +36,7 @@ export default function renderStyleguide(
 		components.forEach(component => globalizeComponent(component))
 	}
 
-	const { title, pagePerSection } = styleguide.config
+	const { title, pagePerSection, theme, styles } = styleguide.config
 	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection)
 
 	// Update page title
@@ -52,6 +53,9 @@ export default function renderStyleguide(
 		<RenderJsxContext.Provider value={styleguide.renderRootJsx}>
 			<StyleGuide
 				codeRevision={codeRevision}
+				// only caclulate css revisions in dev when hot is on to avoid
+				// stringifying the styles in production
+				cssRevision={hashSum({ theme, styles })}
 				config={styleguide.config}
 				slots={slots(styleguide.config)}
 				welcomeScreen={styleguide.welcomeScreen}

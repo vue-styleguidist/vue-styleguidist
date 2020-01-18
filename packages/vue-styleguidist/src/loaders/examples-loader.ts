@@ -12,6 +12,7 @@ import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
 import expandDefaultComponent from 'react-styleguidist/lib/loaders/utils/expandDefaultComponent'
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
+import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModule'
 import { StyleguidistContext } from '../types/StyleGuide'
 import { ExampleLoader } from '../types/Example'
 import getComponentVueDoc from './utils/getComponentVueDoc'
@@ -132,31 +133,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	)
 
 	// Require context modules so they are available in an example
-	let marker = -1
-	const requireContextCode = b.program(
-		flatten(
-			map(fullContext, (requireRequest, name: string) => [
-				// const name$0 = require(path);
-				b.variableDeclaration('const', [
-					b.variableDeclarator(
-						b.identifier(`${name}$${++marker}`),
-						requireIt(requireRequest).toAST()
-					)
-				]),
-				// const name = name$0.default || name$0;
-				b.variableDeclaration('const', [
-					b.variableDeclarator(
-						b.identifier(name),
-						b.logicalExpression(
-							'||',
-							b.identifier(`${name}$${marker}.default`),
-							b.identifier(`${name}$${marker}`)
-						)
-					)
-				])
-			])
-		)
-	)
+
+	const requireContextCode = b.program(flatten(map(fullContext, resolveESModule)))
 
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map(example => {
