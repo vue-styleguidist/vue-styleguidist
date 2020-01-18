@@ -8,6 +8,7 @@ import Documentation from './Documentation'
 import { ParseOptions } from './parse'
 import cacher from './utils/cacher'
 import resolveExportedComponent from './utils/resolveExportedComponent'
+import documentRequiredComponents from './utils/documentRequiredComponents'
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found'
 
@@ -18,7 +19,7 @@ export type Handler = (
 	opt: ParseOptions
 ) => Promise<void>
 
-export default function parseScript(
+export default async function parseScript(
 	source: string,
 	preHandlers: Handler[],
 	handlers: Handler[],
@@ -33,13 +34,22 @@ export default function parseScript(
 
 	const ast = cacher(() => recast.parse(source, { parser: buildParser({ plugins }) }), source)
 	if (!ast) {
-		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
+		throw new Error(`Unable to parse empty file "${options.filePath}"`)
 	}
 
-	const componentDefinitions = resolveExportedComponent(ast)
+	const [componentDefinitions, ievSet] = resolveExportedComponent(ast)
 
 	if (componentDefinitions.size === 0) {
-		throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
+		// if there is any immediately exported variable
+		// resolve their documentations
+		const docs = await documentRequiredComponents(documentation, ievSet, undefined, options)
+
+		// if we do not find any compoents throw
+		if (!docs.length) {
+			throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
+		} else {
+			return docs
+		}
 	}
 
 	return executeHandlers(

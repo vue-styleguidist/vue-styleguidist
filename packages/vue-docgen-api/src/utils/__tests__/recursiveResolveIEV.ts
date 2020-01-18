@@ -1,9 +1,9 @@
-import adaptRequireWithIEV from '../adaptExportsToIEV'
+import recursiveResolveIEV from '../recursiveResolveIEV'
 import { ImportedVariableSet } from '../resolveRequired'
 
 jest.mock('../resolveImmediatelyExported')
 
-describe('adaptRequireWithIEV', () => {
+describe('recursiveResolveIEV', () => {
 	let set: ImportedVariableSet
 	let mockResolver: jest.Mock
 	beforeEach(() => {
@@ -12,7 +12,7 @@ describe('adaptRequireWithIEV', () => {
 	})
 
 	it('should call the resolver', async done => {
-		await adaptRequireWithIEV(mockResolver, set, () => true)
+		await recursiveResolveIEV(mockResolver, set, () => true)
 
 		expect(mockResolver).toHaveBeenCalledWith('my/path')
 		done()
@@ -20,7 +20,7 @@ describe('adaptRequireWithIEV', () => {
 
 	it('should not resolve anything if multiple path in filePath', async done => {
 		set.test.filePath.push('baz')
-		await adaptRequireWithIEV(mockResolver, set, () => true)
+		await recursiveResolveIEV(mockResolver, set, () => true)
 
 		expect(mockResolver).not.toHaveBeenCalledWith()
 		done()
