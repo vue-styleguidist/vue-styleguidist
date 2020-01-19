@@ -1,6 +1,8 @@
 import pick from 'lodash/pick'
 import commonDir from 'common-dir'
 import { generate } from 'escodegen'
+import flatten from 'lodash/flatten'
+import { namedTypes as t, builders as b } from 'ast-types'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
 import * as fileExistsCaseInsensitive from 'react-styleguidist/lib/scripts/utils/findFileCaseInsensitive'
@@ -10,10 +12,14 @@ import getComponentPatternsFromSections from 'react-styleguidist/lib/loaders/uti
 import filterComponentsWithExample from 'react-styleguidist/lib/loaders/utils/filterComponentsWithExample'
 import slugger from 'react-styleguidist/lib/loaders/utils/slugger'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
+import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModule'
 import { StyleguidistContext } from '../types/StyleGuide'
 import getSections from './utils/getSections'
 
 const logger = createLogger('vsg')
+
+const STYLE_VARIABLE_NAME = '__vsgStyles'
+const THEME_VARIABLE_NAME = '__vsgTheme'
 
 // Config options that should be passed to the client
 const CLIENT_CONFIG_OPTIONS = [
@@ -72,15 +78,48 @@ export function pitch(this: StyleguidistContext, source: string): string {
 		this.addContextDependency(commonDir(allComponentFiles))
 	}
 
+	const configClone = { ...config }
+	const styleContext: any[][] = []
+
+	const setVariableValueToObjectInFile = (memberName: 'theme' | 'styles', varName: string) => {
+		const configMember = config[memberName]
+		if (typeof configMember === 'string') {
+			// first attach the file as a dependency
+			this.addDependency(configMember)
+
+			// then create a variable to contain the value of the theme/style
+			styleContext.push(resolveESModule(configMember, varName))
+
+			// Finally assign the calculted value to the member of the clone
+			// NOTE: if we are mutating the config object without cloning it,
+			// it changes the value for all hmr iteration
+			// until the process is stopped.
+			const variableAst = {}
+
+			// Then override the `toAST()` function, because we know
+			// what the output of it should be, an identifier
+			Object.defineProperty(variableAst, 'toAST', {
+				enumerable: false,
+				value(): t.ASTNode {
+					return b.identifier(varName)
+				}
+			})
+			configClone[memberName] = variableAst
+		}
+	}
+
+	setVariableValueToObjectInFile('styles', STYLE_VARIABLE_NAME)
+	setVariableValueToObjectInFile('theme', THEME_VARIABLE_NAME)
+
 	const styleguide = {
-		config: pick(config, CLIENT_CONFIG_OPTIONS),
+		config: pick(configClone, CLIENT_CONFIG_OPTIONS),
 		welcomeScreen,
 		patterns,
 		sections,
 		renderRootJsx
 	}
 
-	return `
+	return `${generate(b.program(flatten(styleContext)))}
 if (module.hot) {
 	module.hot.accept([])
 }

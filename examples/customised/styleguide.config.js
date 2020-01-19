@@ -12,32 +12,8 @@ module.exports = {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
 	},
-	theme: {
-		baseBackground: '#fdfdfc',
-		link: '#274e75',
-		linkHover: '#90a7bf',
-		border: '#e0d2de',
-		font: ['Helvetica', 'sans-serif']
-	},
-	styles: {
-		Playground: {
-			preview: {
-				paddingLeft: 0,
-				paddingRight: 0,
-				borderWidth: [[0, 0, 1, 0]],
-				borderRadius: 0
-			}
-		},
-		Markdown: {
-			pre: {
-				border: 0,
-				background: 'none'
-			},
-			code: {
-				fontSize: 14
-			}
-		}
-	},
+	theme: path.join(__dirname, 'styleguide/theme.js'),
+	styles: path.join(__dirname, 'styleguide/styles.js'),
 	getComponentPathLine(componentPath) {
 		const name = path.basename(componentPath, '.js')
 		return `import { ${name} } from 'my-awesome-library';`
