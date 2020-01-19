@@ -24,11 +24,11 @@
 alt="Chat on Discord">
 </a>
 </div>
+<p>Start documenting now on codesandbox.io</p>
+<a href="https://codesandbox.io/s/vue-styleguidist-27zvi">
+    <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Start documenting"/>
+</a>
 </div>
-
-Start documenting now on codesandbox.io
-
-[![Start documenting](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vue-styleguidist-27zvi)
 
 ## Packages
 
