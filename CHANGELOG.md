@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.5.2...v4.6.0) (2020-01-19)
+
+
+### Bug Fixes
+
+* parse should export default cmp if available ([753dea4](https://github.com/vue-styleguidist/vue-styleguidist/commit/753dea4c26a3918488b08b32bfe8b7dbea109f60))
+
+
+### Features
+
+* allow iev as valid component ([21c4874](https://github.com/vue-styleguidist/vue-styleguidist/commit/21c48740823c3fd790abd689985f0558afbb374b)), closes [#713](https://github.com/vue-styleguidist/vue-styleguidist/issues/713)
+
+
+
+
+
 ## [4.5.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.5.1...v4.5.2) (2020-01-17)
 
 
