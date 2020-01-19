@@ -6,7 +6,7 @@ import flatten from 'lodash/flatten'
 import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
-import astTypes from 'ast-types'
+import { builders as b } from 'ast-types'
 import { compile } from 'vue-inbrowser-compiler'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
 import expandDefaultComponent from 'react-styleguidist/lib/loaders/utils/expandDefaultComponent'
@@ -19,8 +19,6 @@ import getComponentVueDoc from './utils/getComponentVueDoc'
 import cleanComponentName from './utils/cleanComponentName'
 import importCodeExampleFile from './utils/importCodeExampleFile'
 import getScript from './utils/getScript'
-
-const b = astTypes.builders
 
 // Hack the react scaffolding to be able to load client
 const absolutize = (filepath: string) =>
