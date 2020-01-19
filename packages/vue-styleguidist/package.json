@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "4.6.0",
+	"version": "4.6.1",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
 		"compile": "yarn typings && babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",

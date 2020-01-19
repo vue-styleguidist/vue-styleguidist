@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.6.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.6.0...v4.6.1) (2020-01-19)
+
+
+### Bug Fixes
+
+* call to  ast-types builder ([071b067](https://github.com/vue-styleguidist/vue-styleguidist/commit/071b06717b9d93c125e71ec07e054a3a9811c58f))
+* theme and styles as files ([0d33fe0](https://github.com/vue-styleguidist/vue-styleguidist/commit/0d33fe034e4ea6ea93a356b57745a8de17a32a47))
+
+
+
+
+
 # [4.6.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.5.2...v4.6.0) (2020-01-19)
 
 **Note:** Version bump only for package vue-styleguidist
