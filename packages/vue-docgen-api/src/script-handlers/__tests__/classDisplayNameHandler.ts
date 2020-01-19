@@ -7,7 +7,7 @@ jest.mock('../../Documentation')
 
 function parse(src: string) {
 	const ast = babylon().parse(src)
-	return resolveExportedComponent(ast)
+	return resolveExportedComponent(ast)[0]
 }
 
 describe('classDisplayNameHandler', () => {

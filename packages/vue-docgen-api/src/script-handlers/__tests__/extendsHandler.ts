@@ -35,7 +35,7 @@ describe('extendsHandler', () => {
 
 	async function parseItExtends(src: string) {
 		const ast = babylon().parse(src)
-		const path = resolveExportedComponent(ast).get('default')
+		const path = resolveExportedComponent(ast)[0].get('default')
 		if (path) {
 			await extendsHandler(doc, path, ast, {
 				filePath: '',
