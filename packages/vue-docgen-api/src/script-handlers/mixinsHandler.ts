@@ -1,12 +1,9 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
-import * as path from 'path'
-import Map from 'ts-map'
 import Documentation from '../Documentation'
-import { parseFile, ParseOptions } from '../parse'
-import resolveImmediatelyExportedRequire from '../utils/adaptExportsToIEV'
-import makePathResolver from '../utils/makePathResolver'
+import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
+import documentRequiredComponents from '../utils/documentRequiredComponents'
 
 /**
  * @returns {object} an object containing the documentations for each mixin
@@ -19,10 +16,6 @@ export default async function mixinsHandler(
 	astPath: bt.File,
 	opt: ParseOptions
 ) {
-	const originalDirName = path.dirname(opt.filePath)
-
-	const pathResolver = makePathResolver(originalDirName, opt.alias)
-
 	// filter only mixins
 	const mixinVariableNames = getMixinsVariableNames(componentDefinition)
 
@@ -30,50 +23,11 @@ export default async function mixinsHandler(
 		return
 	}
 
-	// get all require / import statements
+	// get require / import statements for mixins
 	const mixinVarToFilePath = resolveRequired(astPath, mixinVariableNames)
 
-	await resolveImmediatelyExportedRequire(pathResolver, mixinVarToFilePath, opt.validExtends)
-
 	// get each doc for each mixin using parse
-	const files = new Map<string, string[]>()
-	for (const varName of Object.keys(mixinVarToFilePath)) {
-		const { filePath, exportName } = mixinVarToFilePath[varName]
-		filePath.forEach(p => {
-			const fullFilePath = pathResolver(p)
-			if (opt.validExtends(fullFilePath)) {
-				const vars = files.get(fullFilePath) || []
-				vars.push(exportName)
-				files.set(fullFilePath, vars)
-			}
-		})
-	}
-
-	await files.keys().reduce(async (_, fullFilePath) => {
-		await _
-		const vars = files.get(fullFilePath)
-		if (fullFilePath && vars) {
-			try {
-				const mixinVar = {
-					name: '<mixin/>',
-					path: fullFilePath
-				}
-				await parseFile(
-					{
-						...opt,
-						filePath: fullFilePath,
-						nameFilter: vars,
-						mixin: mixinVar
-					},
-					documentation
-				)
-				mixinVar.name = documentation.get('displayName')
-				documentation.set('displayName', null)
-			} catch (e) {
-				// eat the error
-			}
-		}
-	}, Promise.resolve())
+	await documentRequiredComponents(documentation, mixinVarToFilePath, 'mixin', opt)
 }
 
 function getMixinsVariableNames(compDef: NodePath): string[] {

@@ -9,7 +9,7 @@ jest.mock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): NodePath | undefined {
 	const ast = babylon({ plugins }).parse(src)
-	return resolveExportedComponent(ast).get('default')
+	return resolveExportedComponent(ast)[0].get('default')
 }
 
 describe('propHandler', () => {

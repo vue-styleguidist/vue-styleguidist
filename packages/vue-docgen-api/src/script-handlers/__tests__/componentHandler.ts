@@ -10,7 +10,7 @@ jest.mock('../../Documentation')
 
 function parse(src: string, plugins: ParserPlugin[] = []): Map<string, NodePath> {
 	const ast = babylon({ plugins }).parse(src)
-	return resolveExportedComponent(ast)
+	return resolveExportedComponent(ast)[0]
 }
 
 describe('componentHandler', () => {

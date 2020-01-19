@@ -72,7 +72,7 @@ export default async function parseSFC(
 				[...scriptHandlers, ...addScriptHandlers],
 				opt,
 				documentation,
-				true
+				initialDoc !== undefined
 		  )) || []
 		: // if there is only a template return the template's doc
 		  documentation

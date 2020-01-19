@@ -5,6 +5,7 @@ import Map from 'ts-map'
 import isExportedAssignment from './isExportedAssignment'
 import resolveExportDeclaration from './resolveExportDeclaration'
 import resolveIdentifier from './resolveIdentifier'
+import resolveRequired, { ImportedVariableSet } from './resolveRequired'
 
 function ignore(): boolean {
 	return false
@@ -36,8 +37,11 @@ function isComponentDefinition(path: NodePath): boolean {
  * export default Definition;
  * export var Definition = ...;
  */
-export default function resolveExportedComponent(ast: bt.File): Map<string, NodePath> {
+export default function resolveExportedComponent(
+	ast: bt.File
+): [Map<string, NodePath>, ImportedVariableSet] {
 	const components = new Map<string, NodePath>()
+	const nonComponentsIdentifiers: string[] = []
 
 	function setComponent(exportName: string, definition: NodePath) {
 		if (definition && !components.get(exportName)) {
@@ -52,8 +56,12 @@ export default function resolveExportedComponent(ast: bt.File): Map<string, Node
 
 		definitions.forEach((definition: NodePath, name: string) => {
 			const realDef = resolveIdentifier(ast, definition)
-			if (realDef && isComponentDefinition(realDef)) {
-				setComponent(name, realDef)
+			if (realDef) {
+				if (isComponentDefinition(realDef)) {
+					setComponent(name, realDef)
+				}
+			} else {
+				nonComponentsIdentifiers.push(definition.value.name)
 			}
 		})
 		return false
@@ -92,9 +100,6 @@ export default function resolveExportedComponent(ast: bt.File): Map<string, Node
 			const pathRight = path.get('right')
 			const pathLeft = path.get('left')
 			const realComp = resolveIdentifier(ast, pathRight)
-			if (!realComp || !isComponentDefinition(realComp)) {
-				return false
-			}
 
 			const name =
 				bt.isMemberExpression(pathLeft.node) &&
@@ -103,12 +108,21 @@ export default function resolveExportedComponent(ast: bt.File): Map<string, Node
 					? pathLeft.node.property.name
 					: 'default'
 
-			setComponent(name, realComp)
+			if (realComp) {
+				if (isComponentDefinition(realComp)) {
+					setComponent(name, realComp)
+				}
+			} else {
+				nonComponentsIdentifiers.push(name)
+			}
+
 			return false
 		}
 	})
 
-	return components
+	const requiredValues = resolveRequired(ast, nonComponentsIdentifiers)
+
+	return [components, requiredValues]
 }
 
 function normalizeComponentPath(path: NodePath): NodePath {

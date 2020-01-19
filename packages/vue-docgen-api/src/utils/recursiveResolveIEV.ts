@@ -12,7 +12,18 @@ const read = promisify(readFile)
 
 const hash = require('hash-sum')
 
-export default async function recusiveAdaptExportsToIEV(
+/**
+ * Recursively resolves specified variables to their actual files
+ * Useful when using intermeriary files like this
+ *
+ * ```js
+ * export mixin from "path/to/mixin"
+ * ```
+ *
+ * @param pathResolver function to resolve relative to absolute path
+ * @param varToFilePath set of variables to be resolved (will be mutated into the final mapping)
+ */
+export default async function recursiveResolveIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
 	varToFilePath: ImportedVariableSet,
 	validExtends: (fullFilePath: string) => boolean
@@ -21,7 +32,7 @@ export default async function recusiveAdaptExportsToIEV(
 	let hashBefore: any
 	do {
 		hashBefore = hash(varToFilePath)
-		await adaptExportsToIEV(pathResolver, varToFilePath, validExtends)
+		await resolveIEV(pathResolver, varToFilePath, validExtends)
 	} while (hashBefore !== hash(varToFilePath))
 }
 
@@ -33,10 +44,10 @@ export default async function recusiveAdaptExportsToIEV(
  * export mixin from "path/to/mixin"
  * ```
  *
- * @param pathResolver
- * @param varToFilePath
+ * @param pathResolver function to resolve relative to absolute path
+ * @param varToFilePath set of variables to be resolved (will be mutated into the final mapping)
  */
-export async function adaptExportsToIEV(
+export async function resolveIEV(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string,
 	varToFilePath: ImportedVariableSet,
 	validExtends: (fullFilePath: string) => boolean
