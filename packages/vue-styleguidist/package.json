@@ -85,7 +85,7 @@
 		"vue": ">=2.0.0",
 		"vue-loader": ">=14.0.0",
 		"vue-template-compiler": ">=2.0.0",
-		"webpack": ">=4 < 4.29"
+		"webpack": ">=4"
 	},
 	"devDependencies": {
 		"@babel/types": "^7.5.5",
@@ -106,6 +106,6 @@
 		"ejs": "^2.7.4",
 		"source-map": "0.6.1",
 		"strip-shebang": "^1.0.2",
-		"webpack": "^4.28.2"
+		"webpack": "^4.41.5"
 	}
 }
