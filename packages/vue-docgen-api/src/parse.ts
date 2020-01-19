@@ -112,7 +112,8 @@ export async function parseSource(
 				preHandlers,
 				[...scriptHandlers, ...addScriptHandlers],
 				opt,
-				documentation
+				documentation,
+				documentation !== undefined
 			)) || []
 
 		if (docs.length === 1 && !docs[0].get('displayName')) {

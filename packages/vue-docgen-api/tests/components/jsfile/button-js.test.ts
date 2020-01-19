@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
-import { parseMulti } from '../../../src/main'
+import { parseMulti, parse } from '../../../src/main'
 
 const button = path.join(__dirname, './MyButton.js')
 let docButton: ComponentDoc[]
@@ -48,5 +48,13 @@ describe('tests button with pure javascript', () => {
 		expect(docButton[1].description).toBe(
 			'This is an input that represents another component extracted in the same file'
 		)
+	})
+})
+
+describe('possible multiple export in parse function', () => {
+	it('should return Button when using parse', async done => {
+		const { exportName } = await parse(button)
+		expect(exportName).toBe('Button')
+		done()
 	})
 })
