@@ -6,20 +6,19 @@ import flatten from 'lodash/flatten'
 import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
-import astTypes from 'ast-types'
+import { builders as b } from 'ast-types'
 import { compile } from 'vue-inbrowser-compiler'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
 import expandDefaultComponent from 'react-styleguidist/lib/loaders/utils/expandDefaultComponent'
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
+import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModule'
 import { StyleguidistContext } from '../types/StyleGuide'
 import { ExampleLoader } from '../types/Example'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import cleanComponentName from './utils/cleanComponentName'
 import importCodeExampleFile from './utils/importCodeExampleFile'
 import getScript from './utils/getScript'
-
-const b = astTypes.builders
 
 // Hack the react scaffolding to be able to load client
 const absolutize = (filepath: string) =>
@@ -132,31 +131,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	)
 
 	// Require context modules so they are available in an example
-	let marker = -1
-	const requireContextCode = b.program(
-		flatten(
-			map(fullContext, (requireRequest, name: string) => [
-				// const name$0 = require(path);
-				b.variableDeclaration('const', [
-					b.variableDeclarator(
-						b.identifier(`${name}$${++marker}`),
-						requireIt(requireRequest).toAST()
-					)
-				]),
-				// const name = name$0.default || name$0;
-				b.variableDeclaration('const', [
-					b.variableDeclarator(
-						b.identifier(name),
-						b.logicalExpression(
-							'||',
-							b.identifier(`${name}$${marker}.default`),
-							b.identifier(`${name}$${marker}`)
-						)
-					)
-				])
-			])
-		)
-	)
+
+	const requireContextCode = b.program(flatten(map(fullContext, resolveESModule)))
 
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map(example => {

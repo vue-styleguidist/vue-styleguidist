@@ -30,7 +30,7 @@
 	},
 	"dependencies": {
 		"@vxna/mini-html-webpack-template": "^1.0.0",
-		"ast-types": "^0.12.2",
+		"ast-types": "^0.13.2",
 		"classnames": "^2.2.6",
 		"clean-webpack-plugin": "^3.0.0",
 		"cli-progress": "^3.0.0",
