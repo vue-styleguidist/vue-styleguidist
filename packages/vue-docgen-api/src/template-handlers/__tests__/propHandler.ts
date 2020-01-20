@@ -14,8 +14,11 @@ describe('slotHandler', () => {
 			[
 				'<div>',
 				'  <h1>titleof the template</h1>',
-				'  <!-- @prop {number} size width of the button -->',
-				'  <!-- @prop {string} value value in the form -->',
+				'  <!--',
+				'    @prop {number} size width of the button',
+				'    @prop {string} value value in the form',
+				'   -->',
+				'  <!-- separative comment -->',
 				'  <button :style="`width:${props.size}`" :value="props.value"></button>',
 				'</div>'
 			].join('\n'),
