@@ -9,7 +9,6 @@ import getDoclets from '../utils/getDoclets'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
-const allowRE = /^(v-bind|:)/
 export default function propTemplateHandler(
 	documentation: Documentation,
 	templateAst: ASTElement,
@@ -21,6 +20,7 @@ export default function propTemplateHandler(
 	}
 }
 
+const allowRE = /^(v-bind|:|v-on|@)/
 function propsInAttributes(
 	templateAst: ASTElement,
 	documentation: Documentation,
