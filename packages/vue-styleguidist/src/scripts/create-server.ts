@@ -23,7 +23,10 @@ export default function createServer(
 					ignored: /node_modules/
 				},
 				watchContentBase: config.assetsDir !== undefined,
-				stats: webpackConfig.stats || {}
+				stats: webpackConfig.stats || {},
+				headers: {
+					'Access-Control-Allow-Origin': '*'
+				}
 			}
 		},
 		{
