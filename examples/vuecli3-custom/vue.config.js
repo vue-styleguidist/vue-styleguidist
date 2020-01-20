@@ -15,6 +15,7 @@ module.exports = {
 
 			eslintRule.exclude.add(vsgPath)
 			eslintRule.exclude.add(vueBrowserCompilerPath)
+			eslintRule.exclude.add(path.join(__dirname, 'styleguide'))
 		}
 
 		const jsRule = conf.module.rule('js')
