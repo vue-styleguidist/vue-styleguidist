@@ -2,10 +2,11 @@ import * as bt from '@babel/types'
 import recast from 'recast'
 import { ASTElement, ASTNode } from 'vue-template-compiler'
 import buildParser from '../babel-parser'
-import Documentation, { ParamTag } from '../Documentation'
+import Documentation, { Tag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
+import { setEventDescriptor } from '../script-handlers/eventHandler'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
@@ -51,23 +52,18 @@ function getEventsFromExpression(
 		}
 	})
 	if (eventsFound.length) {
-		const comments = extractLeadingComment(parentAst, item, options.rootLeadingComment)
-		comments.forEach(comment => {
-			const doclets = getDoclets(comment)
-			const eventTags =
-				doclets.tags && (doclets.tags.filter(d => d.title === 'event') as ParamTag[])
-			if (eventTags && eventTags.length) {
-				eventsFound.forEach(evtName => {
-					const eventTag = eventTags.filter(pt => pt.name === evtName)
-					if (eventTag.length) {
-						const e = documentation.getEventDescriptor(evtName)
-						if (typeof eventTag[0].description === 'string') {
-							e.description = eventTag[0].description
-						}
-						// TODO: describe arguments
-					}
-				})
-			}
+		eventsFound.forEach(evtName => {
+			extractLeadingComment(parentAst, item, options.rootLeadingComment).forEach(comment => {
+				const doclets = getDoclets(comment)
+				const eventTags = doclets.tags && (doclets.tags.filter(d => d.title === 'event') as Tag[])
+				if (
+					!(eventTags && eventTags.length && eventTags.findIndex(et => et.content === evtName) > -1)
+				) {
+					return
+				}
+				const e = documentation.getEventDescriptor(evtName)
+				setEventDescriptor(e, doclets)
+			})
 		})
 	}
 }
