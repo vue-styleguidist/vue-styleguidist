@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.0...v4.7.1) (2020-01-20)
+
+
+### Bug Fixes
+
+* make library compatible with codesandbox ([c4b531d](https://github.com/vue-styleguidist/vue-styleguidist/commit/c4b531db8d00f31eb9aad6aa240cb3ab1415541e))
+
+
+
+
+
 # [4.7.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.6.1...v4.7.0) (2020-01-20)
 
 
