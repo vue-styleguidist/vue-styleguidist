@@ -9,7 +9,6 @@ import getDoclets from '../utils/getDoclets'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
-const allowRE = /^(v-bind|:)/
 export default function propTemplateHandler(
 	documentation: Documentation,
 	templateAst: ASTElement,
@@ -21,6 +20,7 @@ export default function propTemplateHandler(
 	}
 }
 
+const allowRE = /^(v-bind|:|v-on|@)/
 function propsInAttributes(
 	templateAst: ASTElement,
 	documentation: Documentation,
@@ -79,20 +79,22 @@ function getPropsFromExpression(
 		}
 	})
 	if (propsFound.length) {
-		const comment = extractLeadingComment(parentAst, item, options.rootLeadingComment)
-		const doclets = getDoclets(comment)
-		const propTags = doclets.tags && (doclets.tags.filter(d => d.title === 'prop') as ParamTag[])
-		if (propTags && propTags.length) {
-			propsFound.forEach(pName => {
-				const propTag = propTags.filter(pt => pt.name === pName)
-				if (propTag.length) {
-					const p = documentation.getPropDescriptor(pName)
-					p.type = propTag[0].type
-					if (typeof propTag[0].description === 'string') {
-						p.description = propTag[0].description
+		const comments = extractLeadingComment(parentAst, item, options.rootLeadingComment)
+		comments.forEach(comment => {
+			const doclets = getDoclets(comment)
+			const propTags = doclets.tags && (doclets.tags.filter(d => d.title === 'prop') as ParamTag[])
+			if (propTags && propTags.length) {
+				propsFound.forEach(pName => {
+					const propTag = propTags.filter(pt => pt.name === pName)
+					if (propTag.length) {
+						const p = documentation.getPropDescriptor(pName)
+						p.type = propTag[0].type
+						if (typeof propTag[0].description === 'string') {
+							p.description = propTag[0].description
+						}
 					}
-				}
-			})
-		}
+				})
+			}
+		})
 	}
 }

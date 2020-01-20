@@ -27,7 +27,7 @@ describe('extractLeadingComment', () => {
 		if (!elt) {
 			done.fail()
 		} else {
-			expect(extractLeadingComment(elt.parent, elt, '')).toBe('single line comment')
+			expect(extractLeadingComment(elt.parent, elt, '')[0]).toBe('single line comment')
 			done()
 		}
 	})
@@ -44,9 +44,57 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			expect(extractLeadingComment(elt.parent, elt, '')).toBe(
-				['multi line comment', 'on 2 lines'].join('\n')
-			)
+			expect(extractLeadingComment(elt.parent, elt, '')).toEqual([
+				'multi line comment',
+				'on 2 lines'
+			])
+			done()
+		} else {
+			done.fail()
+		}
+	})
+
+	it('should extract multi line comment blocks', done => {
+		const elt = compileIt(
+			[
+				'<div>',
+				'  <div>Hello World !!</div>',
+				'  <!--',
+				'	multi line comment',
+				'   on 2 lines',
+				'  -->',
+				'  <!-- single line comment -->',
+				'  <h1>title of the template</h1>',
+				'</div>'
+			].join('\n')
+		)
+		if (elt) {
+			const comments = extractLeadingComment(elt.parent, elt, '')
+			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
+			expect(comments[1]).toEqual('single line comment')
+			done()
+		} else {
+			done.fail()
+		}
+	})
+
+	it('should extract comment blocks when first sibling', done => {
+		const elt = compileIt(
+			[
+				'<div>',
+				'  <!--',
+				'	multi line comment',
+				'   on 2 lines',
+				'  -->',
+				'  <!-- single line comment -->',
+				'  <h1>title of the template</h1>',
+				'</div>'
+			].join('\n')
+		)
+		if (elt) {
+			const comments = extractLeadingComment(elt.parent, elt, '')
+			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
+			expect(comments[1]).toEqual('single line comment')
 			done()
 		} else {
 			done.fail()
