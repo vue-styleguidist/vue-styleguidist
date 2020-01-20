@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.1...v4.7.2) (2020-01-20)
+
+
+### Bug Fixes
+
+* avoid cors issue on codesandbox ([26450b2](https://github.com/vue-styleguidist/vue-styleguidist/commit/26450b28535eeb032385a99799a05f6ccf1f7951))
+
+
+
+
+
 ## [4.7.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.0...v4.7.1) (2020-01-20)
 
 
