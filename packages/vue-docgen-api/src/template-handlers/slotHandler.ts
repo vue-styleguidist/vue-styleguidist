@@ -55,20 +55,22 @@ export default function slotHandler(
 			slotDescriptor.scoped = true
 		}
 
-		const comment = extractLeadingComment(
+		const comments = extractLeadingComment(
 			templateAst.parent,
 			templateAst,
 			options.rootLeadingComment
 		)
 		let bindingDescriptors: ParamTag[] = []
-		if (comment.length) {
-			const doclets = getDoclets(comment)
-			if (doclets.tags) {
-				slotDescriptor.description = ((doclets.tags.filter(t => t.title === 'slot')[0] as Tag)
-					.content as string).trim()
-				bindingDescriptors = doclets.tags.filter(t => t.title === 'binding') as ParamTag[]
+		comments.forEach(comment => {
+			if (comment.length) {
+				const doclets = getDoclets(comment)
+				if (doclets.tags) {
+					slotDescriptor.description = ((doclets.tags.filter(t => t.title === 'slot')[0] as Tag)
+						.content as string).trim()
+					bindingDescriptors = doclets.tags.filter(t => t.title === 'binding') as ParamTag[]
+				}
 			}
-		}
+		})
 		if (Object.keys(bindings).length) {
 			slotDescriptor.bindings = Object.keys(bindings).map(b => {
 				const bindingDesc = bindingDescriptors.filter(t => t.name === b)[0]

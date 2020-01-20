@@ -1,4 +1,4 @@
-import { ASTElement, ASTNode } from 'vue-template-compiler'
+import { ASTElement, ASTNode, ASTText } from 'vue-template-compiler'
 
 /**
  * Extract leading comments to an html node
@@ -10,8 +10,7 @@ export default function extractLeadingComment(
 	parentAst: ASTElement | undefined,
 	templateAst: ASTNode,
 	rootLeadingComment: string
-): string {
-	let comment = ''
+): string[] {
 	if (parentAst) {
 		const slotSiblings: ASTNode[] = parentAst.children
 		// First find the position of the slot in the list
@@ -24,23 +23,26 @@ export default function extractLeadingComment(
 		} while (currentSlotIndex < 0 && i--)
 
 		// Find the first leading comment
+		// get all siblings before the current node
 		const slotSiblingsBeforeSlot = slotSiblings.slice(0, currentSlotIndex).reverse()
 
-		for (const potentialComment of slotSiblingsBeforeSlot) {
-			// if there is text between the slot and the comment, ignore
-			if (
-				potentialComment.type !== 3 ||
-				(!potentialComment.isComment && potentialComment.text.trim().length)
-			) {
-				break
-			}
+		// find the first node that is not a potential comment
+		const indexLastComment = slotSiblingsBeforeSlot.findIndex(
+			sibling => sibling.type !== 3 || (!sibling.isComment && sibling.text.trim().length)
+		)
 
-			if (potentialComment.isComment) {
-				comment = potentialComment.text.trim() + '\n' + comment
-			}
-		}
+		// cut the comments array on this index
+		const slotPotentialComments = (indexLastComment > 0
+			? slotSiblingsBeforeSlot.slice(0, indexLastComment)
+			: slotSiblingsBeforeSlot
+		).reverse() as ASTText[]
+
+		// return each comment text
+		return slotPotentialComments
+			.filter(pc => pc.isComment)
+			.map(potentialComment => potentialComment.text.trim())
 	} else if (rootLeadingComment.length) {
-		comment = rootLeadingComment
+		return [rootLeadingComment.trim()]
 	}
-	return comment.trim()
+	return []
 }
