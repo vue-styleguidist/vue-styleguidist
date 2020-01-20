@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.6.1...v4.7.0) (2020-01-20)
+
+
+### Features
+
+* detect events in template ([327b54e](https://github.com/vue-styleguidist/vue-styleguidist/commit/327b54e5aa690aac039387cf6bb133d94c1774d9))
+* parse $emit in templates ([21d5eca](https://github.com/vue-styleguidist/vue-styleguidist/commit/21d5ecafea66a1cdc1eb58387fd19bb9cb394437)), closes [#725](https://github.com/vue-styleguidist/vue-styleguidist/issues/725)
+
+
+
+
+
 # [4.6.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.5.2...v4.6.0) (2020-01-19)
 
 
