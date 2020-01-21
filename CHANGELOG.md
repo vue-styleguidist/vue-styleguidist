@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.2...v4.7.3) (2020-01-21)
+
+
+### Bug Fixes
+
+* Revert "fix: avoid cors issue on codesandbox" ([20696ad](https://github.com/vue-styleguidist/vue-styleguidist/commit/20696ad508d97efe1e85add6704ad05154ebf359))
+* Revert "fix: make library compatible with codesandbox" ([ed32d73](https://github.com/vue-styleguidist/vue-styleguidist/commit/ed32d73dbcb8894a3f5f3bcb7d6dcb7937588b13))
+
+
+
+
+
 ## [4.7.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.1...v4.7.2) (2020-01-20)
 
 
