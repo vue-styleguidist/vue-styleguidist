@@ -17,7 +17,6 @@ export default function createServer(
 				compress: true,
 				clientLogLevel: 'none',
 				hot: true,
-				injectClient: false,
 				quiet: true,
 				watchOptions: {
 					ignored: /node_modules/
