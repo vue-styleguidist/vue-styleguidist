@@ -5,7 +5,7 @@ import cacher from './utils/cacher'
 
 export interface TemplateParserOptions {
 	functional: boolean
-	rootLeadingComment: string
+	rootLeadingComment: string[]
 }
 
 export type Handler = (
@@ -26,15 +26,13 @@ export default function parseTemplate(
 				? pug.render(tpl.content, { filename: filePath })
 				: tpl.content
 		const ast = cacher(() => compile(template, { comments: true, optimize: false }).ast, template)
-		const rootLeadingCommentArray = /^<!--(.+)-->/.exec(template.trim())
-		const rootLeadingComment =
-			rootLeadingCommentArray && rootLeadingCommentArray.length > 1
-				? rootLeadingCommentArray[1].trim()
-				: ''
+
 		const functional = !!tpl.attrs.functional
 		if (functional) {
 			documentation.set('functional', functional)
 		}
+
+		const rootLeadingComment = extractRootLeadingComments(template)
 
 		if (ast) {
 			traverse(ast, documentation, handlers, {
@@ -89,4 +87,17 @@ export function traverse(
 
 function isASTElement(node: ASTNode): node is ASTElement {
 	return !!node && (node as ASTElement).children !== undefined
+}
+
+function extractRootLeadingComments(template: string): string[] {
+	let t = template.trim()
+	const comments = []
+	while (/^<!--/.test(t)) {
+		const endOfRootLeadingComment = t.indexOf('-->')
+		const rootLeadingComment = t.slice(4, endOfRootLeadingComment).trim()
+		comments.push(rootLeadingComment)
+		t = t.slice(endOfRootLeadingComment + 3).trim()
+	}
+
+	return comments
 }

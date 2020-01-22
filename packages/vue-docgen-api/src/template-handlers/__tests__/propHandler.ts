@@ -25,7 +25,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: [] })
 			expect(doc.toObject().props).toMatchObject([
 				{ name: 'size', type: { name: 'number' }, description: 'width of the button' },
 				{ name: 'value', type: { name: 'string' }, description: 'value in the form' }
@@ -51,7 +51,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: [] })
 			expect(doc.toObject().props).toMatchObject([
 				{ name: 'name', type: { name: 'mixed' }, description: 'Your Name' },
 				{ name: 'adress', type: { name: 'string' }, description: 'Your Adress' }
@@ -73,7 +73,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: [] })
 			expect(doc.toObject().props).toBeUndefined()
 			done()
 		} else {
@@ -92,7 +92,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: [] })
 			expect(doc.toObject().props).toBeUndefined()
 			done()
 		} else {
@@ -114,7 +114,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: '' })
+			traverse(ast, doc, [propHandler], { functional: true, rootLeadingComment: [] })
 			expect(doc.toObject().props).toMatchObject([{ name: 'error', type: {} }])
 			done()
 		} else {

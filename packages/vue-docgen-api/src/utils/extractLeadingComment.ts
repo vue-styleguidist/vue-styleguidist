@@ -9,7 +9,7 @@ import { ASTElement, ASTNode, ASTText } from 'vue-template-compiler'
 export default function extractLeadingComment(
 	parentAst: ASTElement | undefined,
 	templateAst: ASTNode,
-	rootLeadingComment: string
+	rootLeadingComments: string[]
 ): string[] {
 	if (parentAst) {
 		const slotSiblings: ASTNode[] = parentAst.children
@@ -41,8 +41,8 @@ export default function extractLeadingComment(
 		return slotPotentialComments
 			.filter(pc => pc.isComment)
 			.map(potentialComment => potentialComment.text.trim())
-	} else if (rootLeadingComment.length) {
-		return [rootLeadingComment.trim()]
+	} else if (rootLeadingComments.length) {
+		return rootLeadingComments
 	}
 	return []
 }

@@ -52,18 +52,25 @@ function getEventsFromExpression(
 		}
 	})
 	if (eventsFound.length) {
-		eventsFound.forEach(evtName => {
-			extractLeadingComment(parentAst, item, options.rootLeadingComment).forEach(comment => {
-				const doclets = getDoclets(comment)
-				const eventTags = doclets.tags && (doclets.tags.filter(d => d.title === 'event') as Tag[])
-				if (
-					!(eventTags && eventTags.length && eventTags.findIndex(et => et.content === evtName) > -1)
-				) {
-					return
-				}
-				const e = documentation.getEventDescriptor(evtName)
-				setEventDescriptor(e, doclets)
+		const leadingComments = extractLeadingComment(parentAst, item, options.rootLeadingComment)
+		if (leadingComments.length) {
+			eventsFound.forEach(evtName => {
+				leadingComments.forEach(comment => {
+					const doclets = getDoclets(comment)
+					const eventTags = doclets.tags && (doclets.tags.filter(d => d.title === 'event') as Tag[])
+					if (
+						!(
+							eventTags &&
+							eventTags.length &&
+							eventTags.findIndex(et => et.content === evtName) > -1
+						)
+					) {
+						return
+					}
+					const e = documentation.getEventDescriptor(evtName)
+					setEventDescriptor(e, doclets)
+				})
 			})
-		})
+		}
 	}
 }

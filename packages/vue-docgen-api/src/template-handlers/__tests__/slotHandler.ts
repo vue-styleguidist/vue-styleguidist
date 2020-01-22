@@ -23,7 +23,7 @@ describe('slotHandler', () => {
 		if (ast) {
 			traverse(ast, doc, [slotHandler], {
 				functional: false,
-				rootLeadingComment: '@slot first slot found'
+				rootLeadingComment: ['@slot first slot found']
 			})
 			expect(doc.toObject().slots).toMatchObject([
 				{ name: 'first', description: 'first slot found' }
@@ -46,7 +46,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
 			expect(doc.toObject().slots).toMatchObject([
 				{ name: 'default', description: 'a default slot' }
 			])
@@ -68,7 +68,7 @@ describe('slotHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
 			expect(doc.toObject().slots).toMatchObject([
 				{
 					name: 'oeuf',
@@ -93,7 +93,7 @@ describe('slotHandler', () => {
 				{ comments: true }
 			).ast
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
 				expect(doc.toObject().slots).toMatchObject([
 					{
 						name: 'oeuf',
@@ -122,7 +122,7 @@ describe('slotHandler', () => {
 				{ comments: true }
 			).ast
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
 				const slots = doc.toObject().slots || []
 				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
 					{
@@ -146,7 +146,7 @@ describe('slotHandler', () => {
 				{ comments: true }
 			).ast
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
 				const slots = doc.toObject().slots || []
 				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
 					{
@@ -177,7 +177,7 @@ describe('slotHandler', () => {
 				{ comments: true }
 			).ast
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: '' })
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
 				const slots = doc.toObject().slots || []
 				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
 					{
