@@ -12,8 +12,8 @@ module.exports = {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
 	},
-	theme: path.join(__dirname, 'styleguide/theme.js'),
-	styles: path.join(__dirname, 'styleguide/styles.js'),
+	theme: './styleguide/theme.js',
+	styles: './styleguide/styles.js',
 	getComponentPathLine(componentPath) {
 		const name = path.basename(componentPath, '.js')
 		return `import { ${name} } from 'my-awesome-library';`

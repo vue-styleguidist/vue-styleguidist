@@ -23,7 +23,7 @@ describe('eventHandler', () => {
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [eventHandler], { functional: false, rootLeadingComment: '' })
+			traverse(ast, doc, [eventHandler], { functional: false, rootLeadingComment: [''] })
 			expect(doc.toObject().events).toMatchObject([
 				{
 					name: 'click',
@@ -39,20 +39,20 @@ describe('eventHandler', () => {
 	it('should match events calls property', done => {
 		const ast = compile(
 			[
-				'<div>', //
+				'<div>',
 				'  <!--',
 				'    trigered on click',
 				'    @event click',
 				'    @property {object} demo - example',
 				'    @property {number} called - test called',
 				'  -->',
-				`  <button @click="$emit('click', test)"></button>`, //
+				`  <button @click="$emit('click', test)"></button>`,
 				'</div>'
 			].join('\n'),
 			{ comments: true }
 		).ast
 		if (ast) {
-			traverse(ast, doc, [eventHandler], { functional: false, rootLeadingComment: '' })
+			traverse(ast, doc, [eventHandler], { functional: false, rootLeadingComment: [''] })
 			expect(doc.toObject().events).toMatchObject([
 				{
 					name: 'click',

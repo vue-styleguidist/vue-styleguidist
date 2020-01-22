@@ -22,6 +22,10 @@ describe('tests button with no script block', () => {
 		)
 	})
 
+	it('the onclick event should have "trigered on click" as description', () => {
+		expect(getTestDescriptor(docButton.events, 'click').description).toEqual('trigered on click')
+	})
+
 	it('should match the snapshot', () => {
 		expect(docButton).toMatchSnapshot()
 	})

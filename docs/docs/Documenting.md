@@ -119,6 +119,8 @@ export default = {
 
 For events documentation, add a comment right above it. If your comment is at the start of the function, the event will not be picked up.
 
+### In script block
+
 If the event is explicitly specified, no need to tell styleguidist what it is.
 
 ```js
@@ -161,6 +163,26 @@ If your event returns arguments/properties use the `@property` tag to describe t
  * @property {number} oldValue value that was set before the change
  */
 this.$emit('change', newValue, oldValue)
+```
+
+### In template
+
+Events emitted directly in `v-on` expressions will be detected automatically. To document them further, in the template, add a comment above the line where the `$emit()` is called.
+
+The comment block containing the documentation needs to contain one line with `@event click`. The rest of the comment block will behave like the comment blocks described in the script.
+
+`@property` to describe an argument and no tag at all to set a description to the event.
+
+```html
+<div>
+  <!--
+    trigered on click
+    @event click
+    @property {object} demo - example
+    @property {number} called - test called
+  -->
+  <button @click="$emit('click', test)"></button>
+</div>
 ```
 
 ## Slots

@@ -39,7 +39,8 @@ module.exports = {
 	/**
 	 * load the vueds color scheme
 	 */
-	...require('./styleguide/vueds-theme'),
+	theme: './styleguide/vueds-theme.js',
+	styles: './styleguide/vueds-styles.js',
 	/**
 	 * import the webpack config from the project. It might be useful to add
 	 * a babel loader to get the jsx to work properly for custom components

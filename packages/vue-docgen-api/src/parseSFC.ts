@@ -65,6 +65,18 @@ export default async function parseSFC(
 			? 'ts'
 			: 'js'
 
+	if (parts.customBlocks) {
+		documentation = documentation || new Documentation()
+
+		const docsBlocks = parts.customBlocks
+			.filter(block => block.type === 'docs' && block.content && block.content.length)
+			.map(block => block.content.trim())
+
+		if (docsBlocks.length) {
+			documentation.setDocsBlocks(docsBlocks)
+		}
+	}
+
 	const docs: Documentation[] = scriptSource
 		? (await parseScript(
 				scriptSource,
@@ -79,19 +91,10 @@ export default async function parseSFC(
 			? [documentation]
 			: []
 
-	if (parts.customBlocks && documentation) {
-		const docsBlocks = parts.customBlocks
-			.filter(block => block.type === 'docs' && block.content && block.content.length)
-			.map(block => block.content.trim())
-
-		if (docsBlocks.length) {
-			documentation.setDocsBlocks(docsBlocks)
-		}
-	}
-
 	if (documentation && !documentation.get('displayName')) {
 		// a component should always have a display name
 		documentation.set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
 	}
+
 	return docs
 }
