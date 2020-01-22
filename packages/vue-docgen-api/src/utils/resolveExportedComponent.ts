@@ -11,6 +11,22 @@ function ignore(): boolean {
 	return false
 }
 
+const VUE_COMPONENTS_KEYS = ['name', 'data', 'props', 'methods', 'computed']
+
+function isObjectExpressionComponentDefinition(node: bt.ObjectExpression): boolean {
+	return (
+		// export const test = {}
+		node.properties.length === 0 ||
+		// export const compo = {name: "Button"}
+		node.properties.some(
+			p =>
+				bt.isObjectMethod(p) || bt.isObjectProperty(p)
+					? VUE_COMPONENTS_KEYS.includes(p.key.name)
+					: false
+		)
+	)
+}
+
 function isComponentDefinition(path: NodePath): boolean {
 	const { node } = path
 
@@ -18,7 +34,10 @@ function isComponentDefinition(path: NodePath): boolean {
 		// export default {}
 		bt.isObjectExpression(node) ||
 		// export const myComp = {}
-		(bt.isVariableDeclarator(node) && node.init && bt.isObjectExpression(node.init)) ||
+		(bt.isVariableDeclarator(node) &&
+			node.init &&
+			bt.isObjectExpression(node.init) &&
+			isObjectExpressionComponentDefinition(node.init)) ||
 		// export default class MyComp extends VueComp
 		bt.isClassDeclaration(node) ||
 		// export default whatever.extend({})
