@@ -1,7 +1,12 @@
 <template>
-	<button class="buttonComponent">
+	<!--
+		trigered on click
+		@event click
+		@property {object} test - example
+	-->
+	<button class="buttonComponent" @click="$emit('click', test)">
 		<!-- @slot Use this slot default -->
-		<slot/>
+		<slot />
 	</button>
 </template>
 
