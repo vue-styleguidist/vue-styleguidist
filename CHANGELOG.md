@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.3...v4.7.4) (2020-01-22)
+
+
+### Bug Fixes
+
+* **docgen:** allow multi line root comment ([c6eacf7](https://github.com/vue-styleguidist/vue-styleguidist/commit/c6eacf72ffd60a21ca45248951076464264f5ea4))
+* **docgen:** docs only vue components ([fcc28f6](https://github.com/vue-styleguidist/vue-styleguidist/commit/fcc28f6f330736b565bd3343422a2cc8792f8200)), closes [#731](https://github.com/vue-styleguidist/vue-styleguidist/issues/731)
+* **docgen:** make events parsed in template ([e361bef](https://github.com/vue-styleguidist/vue-styleguidist/commit/e361bef34cdc78baf08f12cf69eb17069af49527))
+
+
+
+
+
 ## [4.7.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.2...v4.7.3) (2020-01-21)
 
 
