@@ -4,7 +4,7 @@
 		@event click
 		@property {object} test - example
 	-->
-	<button class="buttonComponent" @click="$emit('click', test)">
+	<button class="buttonComponent" @click="$emit('click', test)" @change.stop>
 		<!-- @slot Use this slot default -->
 		<slot />
 	</button>

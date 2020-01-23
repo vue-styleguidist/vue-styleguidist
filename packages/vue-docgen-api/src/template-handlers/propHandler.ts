@@ -32,7 +32,9 @@ function propsInAttributes(
 		// only look at expressions
 		if (allowRE.test(key)) {
 			const expression = bindings[key]
-			getPropsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+			if (expression && expression.length) {
+				getPropsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+			}
 		}
 	}
 }
