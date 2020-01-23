@@ -22,7 +22,9 @@ export default function eventHandler(
 		// only look at expressions
 		if (allowRE.test(key)) {
 			const expression = bindings[key]
-			getEventsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+			if (expression && expression.length) {
+				getEventsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+			}
 		}
 	}
 }
