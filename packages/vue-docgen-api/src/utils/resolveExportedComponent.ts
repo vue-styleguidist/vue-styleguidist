@@ -11,18 +11,19 @@ function ignore(): boolean {
 	return false
 }
 
-const VUE_COMPONENTS_KEYS = ['name', 'data', 'props', 'methods', 'computed']
+/**
+ * List of all keys that could contain documentation
+ */
+const VUE_COMPONENTS_KEYS = ['data', 'props', 'methods', 'computed']
 
 function isObjectExpressionComponentDefinition(node: bt.ObjectExpression): boolean {
 	return (
 		// export const test = {}
 		node.properties.length === 0 ||
-		// export const compo = {name: "Button"}
+		// export const compo = {data(){ return {cpm:"Button"}}
 		node.properties.some(
 			p =>
-				bt.isObjectMethod(p) || bt.isObjectProperty(p)
-					? VUE_COMPONENTS_KEYS.includes(p.key.name)
-					: false
+				(bt.isObjectMethod(p) || bt.isObjectProperty(p)) && VUE_COMPONENTS_KEYS.includes(p.key.name)
 		)
 	)
 }
@@ -31,9 +32,9 @@ function isComponentDefinition(path: NodePath): boolean {
 	const { node } = path
 
 	return (
-		// export default {}
+		// export default {} (always exported even when empty)
 		bt.isObjectExpression(node) ||
-		// export const myComp = {}
+		// export const myComp = {} (exported only when there is a componente definition or if empty)
 		(bt.isVariableDeclarator(node) &&
 			node.init &&
 			bt.isObjectExpression(node.init) &&
