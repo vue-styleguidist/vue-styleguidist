@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.4...v4.7.5) (2020-01-23)
+
+
+### Bug Fixes
+
+* **docgen:** filter components more clearly ([09b15e9](https://github.com/vue-styleguidist/vue-styleguidist/commit/09b15e9824dd7687ceb8bd94455c4ed5870b3214)), closes [#735](https://github.com/vue-styleguidist/vue-styleguidist/issues/735)
+
+
+
+
+
 ## [4.7.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.3...v4.7.4) (2020-01-22)
 
 
