@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.5...v4.7.6) (2020-01-23)
+
+
+### Bug Fixes
+
+* **docgen:** handle empty handler ([f811ed3](https://github.com/vue-styleguidist/vue-styleguidist/commit/f811ed3d6d16be36eb10071dd15381d8008e54fd)), closes [#738](https://github.com/vue-styleguidist/vue-styleguidist/issues/738)
+
+
+
+
+
 ## [4.7.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.4...v4.7.5) (2020-01-23)
 
 
