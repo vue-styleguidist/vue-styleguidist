@@ -1,6 +1,3 @@
-/**
- * @mixin
- */
 module.exports = {
 	props: {
 		/**

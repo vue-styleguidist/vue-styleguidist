@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-/**
- * @mixin
- */
 @Component({
 	props: {
 		/**

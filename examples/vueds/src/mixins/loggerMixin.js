@@ -1,8 +1,5 @@
 /* eslint-disable no-console */
 
-/**
- * @mixin
- */
 export default {
 	props: {
 		/**
