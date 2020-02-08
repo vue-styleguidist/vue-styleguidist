@@ -46,6 +46,11 @@ export interface StyleguidistConfig {
 	 * @default false
 	 */
 	defaultExample: string
+	/**
+	 * In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending comopnents or mixing mixins
+	 * @default false
+	 */
+	displayOrigins: boolean
 	editorConfig: {
 		theme: string
 	}

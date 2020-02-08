@@ -55,7 +55,7 @@ Object {
       "description": "Example prop",
       "mixin": Object {
         "name": "index",
-        "path": "~/packages/vue-docgen-api/tests/mixins/another/index.js",
+        "path": "../../mixins/another/index.js",
       },
       "name": "propsAnother",
       "type": Object {
@@ -66,7 +66,7 @@ Object {
       "description": "Another mixin",
       "mixin": Object {
         "name": "genericMixin",
-        "path": "~/packages/vue-docgen-api/tests/components/button/genericMixin.js",
+        "path": "genericMixin.js",
       },
       "name": "secret",
       "type": Object {
@@ -81,7 +81,7 @@ Object {
       "description": "The color for the button example",
       "mixin": Object {
         "name": "colorMixin",
-        "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
+        "path": "colorMixin.js",
       },
       "name": "color",
       "type": Object {
@@ -96,7 +96,7 @@ Object {
       "description": "The size of the button",
       "mixin": Object {
         "name": "colorMixin",
-        "path": "~/packages/vue-docgen-api/tests/components/button/colorMixin.js",
+        "path": "colorMixin.js",
       },
       "name": "size",
       "tags": Object {},
@@ -112,7 +112,7 @@ Object {
     Object {
       "mixin": Object {
         "name": "multiMixin",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiMixin.js",
+        "path": "../../mixins/multiMixin.js",
       },
       "name": "shouldBe",
       "type": Object {
@@ -123,7 +123,7 @@ Object {
       "description": "Prop from first mixin",
       "mixin": Object {
         "name": "namedMixin",
-        "path": "~/packages/vue-docgen-api/tests/components/button/namedMixin.js",
+        "path": "namedMixin.js",
       },
       "name": "p1",
       "type": Object {
@@ -134,7 +134,7 @@ Object {
       "description": "Prop from second mixin",
       "mixin": Object {
         "name": "namedMixin",
-        "path": "~/packages/vue-docgen-api/tests/components/button/namedMixin.js",
+        "path": "namedMixin.js",
       },
       "name": "hello2",
       "type": Object {

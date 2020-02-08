@@ -15,7 +15,7 @@ describe('mixinsHandler', () => {
 	let resolveRequiredMock: jest.Mock
 	let mockResolvePathFrom: jest.Mock
 	let mockParse: jest.Mock
-	const doc = new Documentation()
+	const doc = new Documentation('dummy/path')
 	beforeEach(() => {
 		resolveRequiredMock = (<unknown>resolveRequired) as jest.Mock<
 			(ast: bt.File, varNameFilter?: string[]) => { [key: string]: string }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Group from 'react-group'
+import map from 'lodash/map'
 import Styled from 'rsg-components/Styled'
 import Arguments from 'rsg-components/Arguments'
 import Code from 'rsg-components/Code'
@@ -10,7 +11,7 @@ import Name from 'rsg-components/Name'
 import Type from 'rsg-components/Type'
 import Para from 'rsg-components/Para'
 import Table from 'rsg-components/Table'
-import map from 'lodash/map'
+import getOriginColumn from 'rsg-components/OriginColumn'
 import { unquote, showSpaces } from '../../utils/utils'
 import propStyles from '../../utils/propStyles'
 
@@ -181,7 +182,7 @@ export function propsToArray(props) {
 	return map(props, (prop, name) => ({ ...prop, name }))
 }
 
-export const columns = (props, classes) => [
+export const columns = (events, classes) => [
 	{
 		caption: 'Event name',
 		render: renderName,
@@ -192,20 +193,20 @@ export const columns = (props, classes) => [
 		render: renderDescription(classes),
 		className: classes.description
 	},
-	...(props.some(p => p.properties || p.type)
+	...(events.some(p => p.properties || p.type)
 		? [
 				{
 					caption: 'Properties',
 					render: renderProperties
 				}
 		  ]
-		: [])
+		: []),
+	...getOriginColumn(events)
 ]
 
 function EventsRenderer({ props, classes }) {
-	return (
-		<Table columns={columns(props, classes)} rows={propsToArray(props)} getRowKey={getRowKey} />
-	)
+	const evts = propsToArray(props)
+	return <Table columns={columns(evts, classes)} rows={evts} getRowKey={getRowKey} />
 }
 
 EventsRenderer.propTypes = {

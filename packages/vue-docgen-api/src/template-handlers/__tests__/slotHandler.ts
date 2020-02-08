@@ -6,7 +6,7 @@ import slotHandler from '../slotHandler'
 describe('slotHandler', () => {
 	let doc: Documentation
 	beforeEach(() => {
-		doc = new Documentation()
+		doc = new Documentation('dummy/path')
 	})
 
 	it('should pick comments at the beginning of templates', done => {

@@ -15,7 +15,7 @@ describe('displayNameHandler', () => {
 	let documentation: Documentation
 
 	beforeEach(() => {
-		documentation = new Documentation()
+		documentation = new Documentation('dummy/path')
 	})
 
 	it('should return the right component name', () => {

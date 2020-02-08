@@ -6,7 +6,7 @@ import eventHandler from '../eventHandler'
 describe('eventHandler', () => {
 	let doc: Documentation
 	beforeEach(() => {
-		doc = new Documentation()
+		doc = new Documentation('dummy/path')
 	})
 
 	it('should match events calls in attributes expressions', done => {
