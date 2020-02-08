@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-
-export default {
+export const myProps = {
 	props: {
 		/**
 		 * @ignore
@@ -9,7 +8,10 @@ export default {
 			type: String,
 			default: '#333'
 		}
-	},
+	}
+}
+
+export const logger = {
 	mounted() {
 		this.hello()
 	},

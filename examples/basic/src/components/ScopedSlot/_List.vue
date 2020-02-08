@@ -1,6 +1,9 @@
 <template>
   <div>
-    <slot v-for="item in items" :item="item">
+    <slot
+      v-for="item in items"
+      :item="item"
+    >
       <!-- fallback content here -->
     </slot>
   </div>
