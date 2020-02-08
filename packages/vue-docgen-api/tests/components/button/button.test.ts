@@ -79,6 +79,20 @@ describe('tests button', () => {
 			)
 		})
 
+		it('should give no origin to the native prop "span"', () => {
+			expect(getTestDescriptor(docButton.props, 'span').mixin).toBeUndefined()
+		})
+
+		it('should have a prop "p1" from the mixin "namedMixin"', () => {
+			expect(getTestDescriptor(docButton.props, 'p1').mixin).not.toBeUndefined()
+			expect(getTestDescriptor(docButton.props, 'p1').mixin).toMatchInlineSnapshot(`
+			Object {
+			  "name": "namedMixin",
+			  "path": "~/packages/vue-docgen-api/tests/components/button/namedMixin.js",
+			}
+		`)
+		})
+
 		it('should give the size prop 3 valid values', () => {
 			expect(getTestDescriptor(docButton.props, 'size').values).toEqual([
 				'small',
@@ -98,8 +112,9 @@ describe('tests button', () => {
 				value: `'#333'`
 			})
 		})
-		it('should the component has fourteen props', () => {
-			expect(docButton.props && docButton.props.length).toEqual(15)
+
+		it('should the component has seventeen props', () => {
+			expect(docButton.props && docButton.props.length).toEqual(17)
 		})
 
 		it('should the component has propsAnother prop default equal "blue"', () => {
