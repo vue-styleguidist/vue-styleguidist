@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.6...v4.7.7) (2020-02-10)
+
+
+### Bug Fixes
+
+* import of named mixins failing ([185fb22](https://github.com/vue-styleguidist/vue-styleguidist/commit/185fb229d5404ed5e26e319b499cf13b1e3a5a8a))
+* **docgen:** use webpack modules when resolving paths ([6b5b87f](https://github.com/vue-styleguidist/vue-styleguidist/commit/6b5b87f65e219ce5798ac0ea044271a25d6ad086)), closes [#743](https://github.com/vue-styleguidist/vue-styleguidist/issues/743)
+
+
+
+
+
 ## [4.7.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.5...v4.7.6) (2020-01-23)
 
 
