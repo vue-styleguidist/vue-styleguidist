@@ -61,11 +61,13 @@ This command will run the `customised` example. It will look for `examples/custo
 
 ### yarn build
 
-Same command as `yarn start` but will run the build script of styleguidist to see what the final bundle is going to look like.
+Same command as `yarn start` but will start the basic example of styleguidist to see what the final bundle is going to look like.
 
 ## Commit Message Guidelines
 
-We have very precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. But also, we use the git commit messages to **generate the RxJS change log**. Helper script `npm run commit` provides command line based wizard to format commit message easily.
+We have very precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. But also, we use the git commit messages to **generate the Vue-Styleguidist change log**. Helper script `npx git-cz` provides a command-line based wizard to format commit messages easily. If you want to be complete and specify a scope, you will need to read through.
+
+If you are using VSCode, check out the [commitizen plugin](https://marketplace.visualstudio.com/items?itemName=KnisterPeter.vscode-commitizen)
 
 ## Commit Message Format
 
@@ -102,7 +104,18 @@ Must be one of the following:
 
 ### Scope
 
-The scope could be anything specifying place of the commit change. For example `docgen`, `plugin`, `compiler`, etc.
+The scope could be anything specifying place of the commit change.
+
+The valid scopes are:
+
+- `docgen` when you touch the vue-docgen-api
+- `compiler` for the in-browser compiler
+- `plugin` will update the vue-cli-plugin
+- `cli` if you have changed the markdown generator
+
+The scopes are not controlled so you can misspell with only consequences that you will have 2 entries in the changelog instead of one.
+
+If you don't specify a scope, it is assumed that you only touched vue-styleguidist.
 
 ### Subject
 
