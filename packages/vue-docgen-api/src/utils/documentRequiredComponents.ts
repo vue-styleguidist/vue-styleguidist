@@ -22,7 +22,7 @@ export default async function documentRequiredComponents(
 	opt: ParseOptions
 ): Promise<Documentation[]> {
 	const originalDirName = path.dirname(opt.filePath)
-	const pathResolver = makePathResolver(originalDirName, opt.alias)
+	const pathResolver = makePathResolver(originalDirName, opt.alias, opt.modules)
 
 	// resolve where components are through immediately exported variables
 	await recursiveResolveIEV(pathResolver, varToFilePath, opt.validExtends)
