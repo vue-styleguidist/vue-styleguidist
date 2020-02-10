@@ -120,6 +120,28 @@ Object {
       },
     },
     Object {
+      "description": "Prop from first mixin",
+      "mixin": Object {
+        "name": "namedMixin",
+        "path": "~/packages/vue-docgen-api/tests/components/button/namedMixin.js",
+      },
+      "name": "p1",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "Prop from second mixin",
+      "mixin": Object {
+        "name": "namedMixin",
+        "path": "~/packages/vue-docgen-api/tests/components/button/namedMixin.js",
+      },
+      "name": "hello2",
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
       "description": "Number of columns (1-12) the column should span.",
       "name": "span",
       "type": Object {

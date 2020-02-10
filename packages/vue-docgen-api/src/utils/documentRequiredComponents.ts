@@ -22,7 +22,7 @@ export default async function documentRequiredComponents(
 	opt: ParseOptions
 ): Promise<Documentation[]> {
 	const originalDirName = path.dirname(opt.filePath)
-	const pathResolver = makePathResolver(originalDirName, opt.alias)
+	const pathResolver = makePathResolver(originalDirName, opt.alias, opt.modules)
 
 	// resolve where components are through immediately exported variables
 	await recursiveResolveIEV(pathResolver, varToFilePath, opt.validExtends)
@@ -45,39 +45,46 @@ export default async function documentRequiredComponents(
 		await _
 		const vars = files.get(fullFilePath)
 		if (fullFilePath && vars) {
-			try {
-				const originVar = originObject
-					? {
-							[originObject]: {
-								name: '-',
-								path: fullFilePath
-							}
-					  }
-					: {}
-
+			// if we are in a mixin or an extend we want to apply
+			// all props on the current doc, instad of creating anther one
+			if (originObject) {
+				try {
+					const originVar = {
+						[originObject]: {
+							name: '-',
+							path: fullFilePath
+						}
+					}
+					await vars.reduce(async (_, v) => {
+						await _
+						await parseFile(
+							{
+								...opt,
+								filePath: fullFilePath,
+								nameFilter: [v],
+								...originVar
+							},
+							documentation
+						)
+					}, Promise.resolve())
+					if (documentation && originVar[originObject]) {
+						originVar[originObject].name = documentation.get('displayName')
+						documentation.set('displayName', null)
+					}
+				} catch (e) {
+					// eat the error
+				}
+			} else {
 				docs = docs.concat(
 					await parseFile(
 						{
 							...opt,
 							filePath: fullFilePath,
-							nameFilter: vars,
-							...originVar
+							nameFilter: vars
 						},
 						documentation
 					)
 				)
-
-				if (documentation && originObject && originVar[originObject]) {
-					originVar[originObject].name = documentation.get('displayName')
-					documentation.set('displayName', null)
-				}
-			} catch (e) {
-				if (originObject) {
-					// eat the error
-				} else {
-					// we still want non extensions errors to show
-					throw e
-				}
 			}
 		}
 	}, Promise.resolve())

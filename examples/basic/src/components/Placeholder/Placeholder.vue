@@ -1,8 +1,13 @@
 <template>
-	<div class="Placeholder">
-		<img class="placeholder" :src="getImageUrl()" :width="width" :height="height" />
-		<b class="showbefore"></b>
-	</div>
+  <div class="Placeholder">
+    <img
+      class="placeholder"
+      :src="getImageUrl()"
+      :width="width"
+      :height="height"
+    >
+    <b class="showbefore" />
+  </div>
 </template>
 
 <script>

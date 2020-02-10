@@ -1,8 +1,11 @@
 <template functional>
   <!-- @prop {string} id name attribute of the button -->
-  <button :name="props.id" style="background:pink">
+  <button
+    :name="props.id"
+    style="background:pink"
+  >
     <!-- @slot name of the button -->
-    <slot/>
+    <slot />
   </button>
 </template>
 

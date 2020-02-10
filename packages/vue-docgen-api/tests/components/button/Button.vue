@@ -16,6 +16,7 @@ import genericMixin from './genericMixin'
 import colorMixin from './colorMixin'
 import review from '@utils/review.json'
 import { multi, hidden } from '@mixins/multiMixin'
+import { first, second } from './namedMixin'
 
 Vue.use(ClientTable)
 
@@ -31,7 +32,7 @@ console.log('mixin loaded but not parsed', hidden)
  */
 export default {
 	name: NAME,
-	mixins: [another, genericMixin, colorMixin, multi],
+	mixins: [another, genericMixin, colorMixin, multi, first, second ],
 	props: {
 		/**
 		 * The size of the button

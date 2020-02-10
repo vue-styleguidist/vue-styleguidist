@@ -1,15 +1,19 @@
 <template>
   <div>
-    <input @input="updateValue($event.target.value)" @change="emitChange" v-model="val" ref="input">
-    <button @click="fireEvent()">Fire example event!</button>
+    <input
+      ref="input"
+      v-model="val"
+      @input="updateValue($event.target.value)"
+      @change="emitChange"
+    >
+    <button @click="fireEvent()">
+      Fire example event!
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-	mounted() {
-		this.updateValue(this.value)
-	},
 	name: 'Input',
 	props: {
 		/**
@@ -38,6 +42,15 @@ export default {
 		return {
 			val: ''
 		}
+	},
+	watch: {
+		// watch value prop
+		value(val) {
+			this.updateValue(val)
+		}
+	},
+	mounted() {
+		this.updateValue(this.value)
 	},
 	methods: {
 		// format the value of input
@@ -80,12 +93,6 @@ export default {
 			 * @type {string}
 			 */
 			this.$emit('fire', 'hello fire!!')
-		}
-	},
-	watch: {
-		// watch value prop
-		value(val) {
-			this.updateValue(val)
 		}
 	}
 }
