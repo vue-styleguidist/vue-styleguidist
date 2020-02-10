@@ -77,7 +77,7 @@ Note that the current monorepo relies on `yarn` workspaces. Don't forget to inst
 We work on this project because we love the open source community and learn new things.
 
 - Rafael: You can buy me a cup of coffee :) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc)
-- Bart: Help me get to conferences ;) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/elevatebart)
+- Bart: Pays for Netlify ;) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/elevatebart)
 
 Logo by [Benjamin Cognard](https://twitter.com/benbnur).
 
