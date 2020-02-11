@@ -194,5 +194,25 @@ describe('slotHandler', () => {
 				done.fail()
 			}
 		})
+
+		it('should not fail on non-dcumented slots', done => {
+			const ast = compile(
+				[
+					'<div>', //
+					'	<!-- test -->', //
+					'  <slot />',
+					'</div>'
+				].join('\n'),
+				{ comments: true }
+			).ast
+			if (ast) {
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				const slots = doc.toObject().slots || []
+				expect(slots.length).toBe(1)
+				done()
+			} else {
+				done.fail()
+			}
+		})
 	})
 })

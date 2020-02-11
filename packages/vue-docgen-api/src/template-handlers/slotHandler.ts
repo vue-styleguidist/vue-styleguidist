@@ -65,8 +65,8 @@ export default function slotHandler(
 			if (comment.length) {
 				const doclets = getDoclets(comment)
 				if (doclets.tags) {
-					slotDescriptor.description = ((doclets.tags.filter(t => t.title === 'slot')[0] as Tag)
-						.content as string).trim()
+					const slotTag = doclets.tags.filter(t => t.title === 'slot')[0] as Tag
+					slotDescriptor.description = slotTag && (slotTag.content as string).trim()
 					bindingDescriptors = doclets.tags.filter(t => t.title === 'binding') as ParamTag[]
 				}
 			}
