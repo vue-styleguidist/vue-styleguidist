@@ -277,6 +277,39 @@ export default {
 		expect(mockSlotDescriptor.description).toEqual('the content for the pending state')
 		done()
 	})
+	describe('tags', () => {
+		it('should extract tags from the description block', async done => {
+			const src = `
+	export default {
+	  render(createElement) {
+		return createElement('div', [
+			/**
+			 * @slot 
+			 * @ignore
+			 */
+			this.$scopedSlots.default
+		])
+	  }
+	}
+	`
+			const def = parse(src)
+			if (def) {
+				await slotHandler(documentation, def)
+			}
+			expect(mockSlotDescriptor.tags).not.toBeUndefined()
+			expect(mockSlotDescriptor.tags).toMatchInlineSnapshot(`
+			Object {
+			  "ignore": Array [
+			    Object {
+			      "description": true,
+			      "title": "ignore",
+			    },
+			  ],
+			}
+		`)
+			done()
+		})
+	})
 
 	describe('bindings', () => {
 		it('should describe slots bindings in render functions', async done => {

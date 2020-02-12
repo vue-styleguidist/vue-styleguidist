@@ -1,11 +1,11 @@
 import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
 import recast, { NodePath } from 'recast'
-import Documentation, { Tag, ParamTag } from '../Documentation'
+import Documentation, { ParamTag } from '../Documentation'
 import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
-import getDoclets from '../utils/getDoclets'
+import { parseSlotDocBlock } from '../script-handlers/slotHandler'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
@@ -61,13 +61,15 @@ export default function slotHandler(
 			options.rootLeadingComment
 		)
 		let bindingDescriptors: ParamTag[] = []
+
 		comments.forEach(comment => {
+			// if a comment contains @slot,
+			// use it to determine bindings and tags
+			// if multiple @slot, use the last one
 			if (comment.length) {
-				const doclets = getDoclets(comment)
-				if (doclets.tags) {
-					slotDescriptor.description = ((doclets.tags.filter(t => t.title === 'slot')[0] as Tag)
-						.content as string).trim()
-					bindingDescriptors = doclets.tags.filter(t => t.title === 'binding') as ParamTag[]
+				const doclets = parseSlotDocBlock(comment, slotDescriptor)
+				if (doclets && doclets.bindings) {
+					bindingDescriptors = doclets.bindings
 				}
 			}
 		})

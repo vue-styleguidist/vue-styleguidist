@@ -85,6 +85,7 @@ export interface SlotDescriptor extends Descriptor {
 	description?: string
 	bindings?: ParamTag[]
 	scoped?: boolean
+	tags?: { [key: string]: BlockTag[] }
 }
 
 export interface ComponentDoc {
