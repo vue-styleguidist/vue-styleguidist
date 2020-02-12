@@ -214,5 +214,37 @@ describe('slotHandler', () => {
 				done.fail()
 			}
 		})
+
+		it('should extract tags from a slot', done => {
+			const ast = compile(
+				[
+					'<div>', //
+					'	<!--',
+					'		@slot',
+					'		@ignore',
+					'    -->', //
+					'  <slot />',
+					'</div>'
+				].join('\n'),
+				{ comments: true }
+			).ast
+			if (ast) {
+				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				const slots = doc.toObject().slots || []
+				expect(slots[0].tags).toMatchInlineSnapshot(`
+			Object {
+			  "ignore": Array [
+			    Object {
+			      "description": true,
+			      "title": "ignore",
+			    },
+			  ],
+			}
+		`)
+				done()
+			} else {
+				done.fail()
+			}
+		})
 	})
 })
