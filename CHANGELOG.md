@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.8.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.7...v4.8.0) (2020-02-12)
+
+
+### Bug Fixes
+
+* **docgen:** protect empty comments before slots ([6484a10](https://github.com/vue-styleguidist/vue-styleguidist/commit/6484a106b2964c5f1858171ad4ad40642a4f98b9)), closes [#749](https://github.com/vue-styleguidist/vue-styleguidist/issues/749)
+
+
+### Features
+
+* add tags to slots ([dcbddf8](https://github.com/vue-styleguidist/vue-styleguidist/commit/dcbddf82631d53422d5666ca1eb1971d828b4f04))
+
+
+
+
+
 ## [4.7.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.6...v4.7.7) (2020-02-10)
 
 
