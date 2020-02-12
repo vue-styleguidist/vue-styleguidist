@@ -1,9 +1,10 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import Documentation, { ParamTag, ParamType, Tag } from '../Documentation'
+import Documentation, { ParamTag, ParamType, Tag, SlotDescriptor } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 import { parseDocblock } from '../utils/getDocblock'
+import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 
 export interface TypedParamTag extends ParamTag {
 	type: ParamType
@@ -38,10 +39,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 						pathCall.node.callee.object.property.name === '$scopedSlots')
 				) {
 					const doc = documentation.getSlotDescriptor(pathCall.node.callee.property.name)
-					const comment = getSlotComment(pathCall)
-					if (comment && (!doc.description || !doc.description.length)) {
-						doc.description = comment.description
-					}
+					const comment = getSlotComment(pathCall, doc)
 					const bindings = pathCall.node.arguments[0]
 					if (bt.isObjectExpression(bindings) && bindings.properties.length) {
 						doc.bindings = getBindings(bindings, comment ? comment.bindings : undefined)
@@ -60,11 +58,8 @@ export default async function slotHandler(documentation: Documentation, path: No
 						pathMember.node.object.property.name === '$scopedSlots') &&
 					bt.isIdentifier(pathMember.node.property)
 				) {
-					const comment = getSlotComment(pathMember)
 					const doc = documentation.getSlotDescriptor(pathMember.node.property.name)
-					if (comment && comment.description) {
-						doc.description = comment.description
-					}
+					getSlotComment(pathMember, doc)
 					return false
 				}
 				this.traverse(pathMember)
@@ -81,10 +76,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 					const parentNode = pathJSX.parentPath.node
 					let comment: SlotComment | undefined
 					if (bt.isJSXElement(parentNode)) {
-						comment = getJSXDescription(nodeJSX, parentNode.children)
-						if (comment) {
-							doc.description = comment.description
-						}
+						comment = getJSXDescription(nodeJSX, parentNode.children, doc)
 					}
 					const bindings = nodeJSX.openingElement.attributes
 					if (bindings && bindings.length) {
@@ -114,12 +106,13 @@ function getName(nodeJSX: bt.JSXElement): string {
 	return nameNode && bt.isStringLiteral(nameNode) ? nameNode.value : 'default'
 }
 
-type SlotComment = {
-	description?: string
-	bindings?: ParamTag[]
-}
+type SlotComment = Pick<SlotDescriptor, 'bindings'>
 
-function getJSXDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): SlotComment | undefined {
+function getJSXDescription(
+	nodeJSX: bt.JSXElement,
+	siblings: bt.Node[],
+	descriptor: SlotDescriptor
+): SlotComment | undefined {
 	if (!siblings) {
 		return undefined
 	}
@@ -139,12 +132,12 @@ function getJSXDescription(nodeJSX: bt.JSXElement, siblings: bt.Node[]): SlotCom
 	const cmts = commentExpression.expression.innerComments
 	const lastComment = cmts[cmts.length - 1]
 
-	return parseCommentNode(lastComment)
+	return parseCommentNode(lastComment, descriptor)
 }
 
-function getSlotComment(path: NodePath): SlotComment | undefined {
-	const desc = getExpressionDescription(path)
-	if (desc && desc.description && desc.description.length) {
+function getSlotComment(path: NodePath, descriptor: SlotDescriptor): SlotComment | undefined {
+	const desc = getExpressionDescription(path, descriptor)
+	if (desc) {
 		return desc
 	}
 	// in case we don't find a description on the expression,
@@ -157,23 +150,30 @@ function getSlotComment(path: NodePath): SlotComment | undefined {
 	}
 
 	// 2: extract the description if it exists
-	return path ? getExpressionDescription(path) : undefined
+	return path ? getExpressionDescription(path, descriptor) : undefined
 }
 
-function getExpressionDescription(path: NodePath): SlotComment | undefined {
+function getExpressionDescription(
+	path: NodePath,
+	descriptor: SlotDescriptor
+): SlotComment | undefined {
 	const node = path.node
 	if (!node.leadingComments || node.leadingComments.length === 0) {
 		return undefined
 	}
 
-	return parseCommentNode(node.leadingComments[node.leadingComments.length - 1])
+	return parseCommentNode(node.leadingComments[node.leadingComments.length - 1], descriptor)
 }
 
-function parseCommentNode(node: bt.Comment): SlotComment | undefined {
+function parseCommentNode(node: bt.Comment, descriptor: SlotDescriptor): SlotComment | undefined {
 	if (node.type !== 'CommentBlock') {
 		return undefined
 	}
-	const docBlock = parseDocblock(node.value).trim()
+	return parseSlotDocBlock(node.value, descriptor)
+}
+
+export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
+	const docBlock = parseDocblock(str).trim()
 	const jsDoc = getDoclets(docBlock)
 	if (!jsDoc.tags) {
 		return undefined
@@ -181,9 +181,17 @@ function parseCommentNode(node: bt.Comment): SlotComment | undefined {
 	const slotTags = jsDoc.tags.filter(t => t.title === 'slot')
 	if (slotTags.length) {
 		const tagContent = (slotTags[0] as Tag).content
-		return typeof tagContent === 'string'
-			? { description: tagContent, bindings: jsDoc.tags.filter(t => t.title === 'binding') }
-			: undefined
+		const description = typeof tagContent === 'string' ? tagContent : undefined
+		if (description && (!descriptor.description || !descriptor.description.length)) {
+			descriptor.description = description
+		}
+		const tags = jsDoc.tags.filter(t => t.title !== 'slot' && t.title !== 'binding')
+		if (tags.length) {
+			descriptor.tags = transformTagsIntoObject(tags)
+		}
+		return {
+			bindings: jsDoc.tags.filter(t => t.title === 'binding')
+		}
 	}
 	return undefined
 }
