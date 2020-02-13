@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.8.0...v4.8.1) (2020-02-13)
+
+
+### Bug Fixes
+
+* protect slots in if statements ([1d3d29e](https://github.com/vue-styleguidist/vue-styleguidist/commit/1d3d29e25ee31d6e2ffdc616247d29dadec6700f)), closes [#753](https://github.com/vue-styleguidist/vue-styleguidist/issues/753)
+
+
+
+
+
 # [4.8.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.7.7...v4.8.0) (2020-02-12)
 
 
