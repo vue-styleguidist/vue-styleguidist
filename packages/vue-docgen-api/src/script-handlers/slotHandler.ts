@@ -93,7 +93,10 @@ export default async function slotHandler(documentation: Documentation, path: No
 }
 
 function isStatement(path: NodePath): boolean {
-	return path && (bt.isDeclaration(path.node) || bt.isReturnStatement(path.node))
+	return (
+		path &&
+		(bt.isDeclaration(path.node) || bt.isReturnStatement(path.node) || bt.isIfStatement(path.node))
+	)
 }
 
 function getName(nodeJSX: bt.JSXElement): string {
@@ -158,7 +161,7 @@ function getExpressionDescription(
 	descriptor: SlotDescriptor
 ): SlotComment | undefined {
 	const node = path.node
-	if (!node.leadingComments || node.leadingComments.length === 0) {
+	if (!node || !node.leadingComments || node.leadingComments.length === 0) {
 		return undefined
 	}
 
