@@ -174,6 +174,27 @@ describe('render function slotHandler', () => {
 		done()
 	})
 
+	it('should not fail if forEach is following usage of the slot', async done => {
+		const src = `
+      export default {
+        render(h) {
+			if (this.$slots.default) {
+				this.$slots.default.forEach(() => {
+				  console.log('foo');
+				})
+			}
+			return h('hr');
+		}
+      };
+  `
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
+		done()
+	})
+
 	it('should detect scopedSlots in renderless components', async done => {
 		const src = `
       export default {
