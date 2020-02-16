@@ -125,6 +125,14 @@ For components that do not have an example, a default one can be used. When set 
 
 When writing your own default example file, `__COMPONENT__` will be replaced by the actual component name at compile time.
 
+## `displayOrigins`
+
+Type: `Boolean`, default: `false`
+
+When turned on, displays if a prop, event, slot or methods is from the current file or is configured in a mixin or an extended component.
+
+If it is external, it displays the name of the component and on hover displays the relative path to the file.
+
 ## `getComponentPathLine`
 
 Type: `Function`, default: component file name
