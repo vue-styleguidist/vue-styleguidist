@@ -89,6 +89,7 @@
 	},
 	"devDependencies": {
 		"@babel/types": "^7.5.5",
+		"@testing-library/react": "^9.4.0",
 		"@types/buble": "^0.19.2",
 		"@types/cli-progress": "^1.8.1",
 		"@types/copy-webpack-plugin": "^4.4.1",
