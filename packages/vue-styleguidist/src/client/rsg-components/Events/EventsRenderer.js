@@ -108,7 +108,7 @@ function renderProperties(prop) {
 			})
 			return total
 		}, [])
-	} else {
+	} else if (prop.type) {
 		properties = [
 			{
 				name: '<anonymous>',
@@ -192,10 +192,14 @@ export const columns = (props, classes) => [
 		render: renderDescription(classes),
 		className: classes.description
 	},
-	{
-		caption: 'Properties',
-		render: renderProperties
-	}
+	...(props.some(p => p.properties || p.type)
+		? [
+				{
+					caption: 'Properties',
+					render: renderProperties
+				}
+		  ]
+		: [])
 ]
 
 function EventsRenderer({ props, classes }) {
