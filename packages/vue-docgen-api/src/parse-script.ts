@@ -90,7 +90,7 @@ function executeHandlers(
 			// NOTE: module.exports is normalized to default
 			const doc =
 				(compDefs.length > 1 && name !== 'default' ? undefined : documentation) ||
-				new Documentation()
+				new Documentation(opt.filePath)
 			const compDef = componentDefinitions.get(name) as NodePath
 			// execute all prehandlers in order
 			await preHandlers.reduce(async (_, handler) => {

@@ -6,7 +6,7 @@ import propHandler from '../propHandler'
 describe('slotHandler', () => {
 	let doc: Documentation
 	beforeEach(() => {
-		doc = new Documentation()
+		doc = new Documentation('dummy/path')
 	})
 
 	it('should match props in attributes expressions', done => {

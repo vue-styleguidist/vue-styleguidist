@@ -6,7 +6,7 @@ import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
 import Table from 'rsg-components/Table'
 import Arguments from 'rsg-components/Arguments'
-import map from 'lodash/map'
+import getOriginColumn from 'rsg-components/OriginColumn'
 import propStyles from '../../utils/propStyles'
 
 function renderDescription(prop) {
@@ -21,10 +21,6 @@ function renderName(prop) {
 
 export function getRowKey(row) {
 	return row.name
-}
-
-export function propsToArray(props) {
-	return map(props, (prop, name) => ({ ...prop, name }))
 }
 
 export function renderBindings({ bindings }) {
@@ -54,12 +50,12 @@ export const columns = (slots, classes) => [
 					render: renderBindings
 				}
 		  ]
-		: [])
+		: []),
+	...getOriginColumn(slots)
 ]
 
 function SlotsTableRenderer({ props: slots, classes }) {
-	const slotsArray = propsToArray(slots)
-	return <Table columns={columns(slotsArray, classes)} rows={slotsArray} getRowKey={getRowKey} />
+	return <Table columns={columns(slots, classes)} rows={slots} getRowKey={getRowKey} />
 }
 
 SlotsTableRenderer.propTypes = {

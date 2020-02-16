@@ -41,7 +41,7 @@ Object {
       "description": "color of the button",
       "mixin": Object {
         "name": "mixin",
-        "path": "~/packages/vue-docgen-api/tests/components/class-component/mixin.ts",
+        "path": "mixin.ts",
       },
       "name": "color",
       "type": Object {

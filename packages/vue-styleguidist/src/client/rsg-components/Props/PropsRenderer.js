@@ -9,6 +9,7 @@ import JsDoc from 'rsg-components/JsDoc'
 import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
 import Table from 'rsg-components/Table'
+import getOriginColumn from 'rsg-components/OriginColumn'
 import styles from '../../utils/propStyles'
 import renderDefaultHoc from './renderDefault'
 import renderTypeBox from './renderType'
@@ -79,7 +80,8 @@ export const columns = (props, classes) => [
 	{
 		caption: 'Default',
 		render: renderDefaultHoc(classes)
-	}
+	},
+	...getOriginColumn(props)
 ]
 
 function PropsRenderer({ props, classes }) {

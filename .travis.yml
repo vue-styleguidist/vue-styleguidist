@@ -48,7 +48,7 @@ jobs:
         # Run tests with coverage
         - yarn test:jest --runInBand --coverage
         # Upload coverage report to Codecov
-        - bash <(curl -s https://codecov.io/bash)
+        - curl -s https://codecov.io/bash | bash
 
     # Build & Deploy the documentation website
     - stage: documentation

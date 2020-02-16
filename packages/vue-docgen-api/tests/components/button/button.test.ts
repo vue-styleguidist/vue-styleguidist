@@ -88,7 +88,7 @@ describe('tests button', () => {
 			expect(getTestDescriptor(docButton.props, 'p1').mixin).toMatchInlineSnapshot(`
 			Object {
 			  "name": "namedMixin",
-			  "path": "~/packages/vue-docgen-api/tests/components/button/namedMixin.js",
+			  "path": "namedMixin.js",
 			}
 		`)
 		})

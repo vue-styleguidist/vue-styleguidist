@@ -63,6 +63,7 @@ function onRead({ data }) {
 					'ribbon',
 					'styleguideDir',
 					'assetsDir',
+					'displayOrigins',
 					'minimize'
 				]
 					.map(key => filteredSchema[key])

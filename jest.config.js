@@ -1,6 +1,6 @@
 module.exports = {
 	transform: {
-		'^.+\\.ts$': 'ts-jest',
+		'^.+\\.tsx?$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest'
 	},
 	moduleFileExtensions: ['ts', 'js', 'json', 'tsx'],
@@ -17,7 +17,7 @@ module.exports = {
 		'^.+\\.css$': '<rootDir>/test/empty.js'
 	},
 	collectCoverageFrom: [
-		'packages/*/src/**/*{!.d,}.{js,ts}',
+		'packages/*/src/**/*{!.d,}.{js,ts,tsx}',
 		'!**/*.d.ts',
 		'!packages/docgen-tests/**/*.*',
 		'!packages/vue-cli-plugin-styleguidist/**/*.*'

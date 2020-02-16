@@ -17,8 +17,8 @@ describe('eventHandler', () => {
 	let mockEventDescriptor: EventDescriptor
 
 	beforeEach(() => {
-		mockEventDescriptor = { name: 'success', description: '', properties: [] }
-		documentation = new Documentation()
+		mockEventDescriptor = { name: 'success' }
+		documentation = new Documentation('dummy/path')
 		const mockGetEventDescriptor = documentation.getEventDescriptor as jest.Mock
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})
@@ -64,6 +64,26 @@ describe('eventHandler', () => {
 		expect(mockEventDescriptor).toMatchObject(eventComp)
 	})
 
+	it('should find simple events emmitted', () => {
+		const src = `
+    export default {
+      methods: {
+        testEmit() {
+            /**
+             * Describe the event
+             */
+            this.$emit('success')
+        }
+      }
+    }
+    `
+		const def = parse(src)
+		if (def.component) {
+			eventHandler(documentation, def.component, def.ast)
+		}
+		expect(mockEventDescriptor.properties).toBeUndefined()
+	})
+
 	it('should find events undocumented properties', () => {
 		const src = `
     export default {
@@ -80,7 +100,6 @@ describe('eventHandler', () => {
 		}
 		const eventComp: EventDescriptor = {
 			name: 'success',
-			description: '',
 			type: {
 				names: ['undefined']
 			},

@@ -16,7 +16,7 @@
 			]
 		},
 		"strictFunctionTypes": false,
-		"jsx": "preserve",
+		"jsx": "react",
 		"types": ["jest", "node", "htmlparser2", "buble"]
 	},
 	"include": ["packages/**/*.ts", "test/**/*.ts"],
