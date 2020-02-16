@@ -8,9 +8,9 @@ interface OriginInfo {
 function renderOrigin(prop: { extends?: OriginInfo; mixin?: OriginInfo }) {
 	const { extends: ext, mixin } = prop
 	return ext ? (
-		<div title={ext.path}>extends: {ext.name}</div>
+		<span title={`extends: ${ext.path}`}>E: {ext.name}</span>
 	) : (
-		mixin && <div title={mixin.path}>mixin: {mixin.name}</div>
+		mixin && <span title={`mixin: ${mixin.path}`}>M: {mixin.name}</span>
 	)
 }
 

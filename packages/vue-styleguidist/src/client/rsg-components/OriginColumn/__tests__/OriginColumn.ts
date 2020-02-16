@@ -14,18 +14,29 @@ describe('OriginColumn', () => {
 		const columns = getOriginColumn(props)
 		expect(columns.length).toBe(1)
 
-		const renderv = columns[0].render(props[0])
-		if (renderv) {
-			const { getByText } = render(renderv)
-			expect(getByText('mixin: myMixin')).toMatchInlineSnapshot(`
-			<div
-			  title="mixin/path"
+		const renderedColumn1 = columns[0].render(props[0])
+		const renderedColumn2 = columns[0].render(props[1])
+		if (renderedColumn1 && renderedColumn2) {
+			const { getByText: c1 } = render(renderedColumn1)
+			expect(c1('M: myMixin')).toMatchInlineSnapshot(`
+			<span
+			  title="mixin: mixin/path"
 			>
-			  mixin: 
+			  M: 
 			  myMixin
-			</div>
+			</span>
+		`)
+			const { getByText: c2 } = render(renderedColumn2)
+			expect(c2('E: myExtends')).toMatchInlineSnapshot(`
+			<span
+			  title="extends: extends/path"
+			>
+			  E: 
+			  myExtends
+			</span>
 		`)
 		}
-		expect(renderv).not.toBeUndefined()
+		expect(renderedColumn1).not.toBeUndefined()
+		expect(renderedColumn2).not.toBeUndefined()
 	})
 })
