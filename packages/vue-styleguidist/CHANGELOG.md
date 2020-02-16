@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.9.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.8.1...v4.9.0) (2020-02-16)
+
+
+### Bug Fixes
+
+* make origin column smaller ([4b7027e](https://github.com/vue-styleguidist/vue-styleguidist/commit/4b7027ec27a03c8be588d93c3d2e8772e07d45d9))
+* stop rendering bad event properties ([26fccd9](https://github.com/vue-styleguidist/vue-styleguidist/commit/26fccd9a78aba06f0a8403a8ff3123b8a8851aba))
+
+
+### Features
+
+* origin column on props event methods & slots ([8b0650f](https://github.com/vue-styleguidist/vue-styleguidist/commit/8b0650f08d3c4cde0970fd87aabb439cd1e06ef0))
+
+
+
+
+
 ## [4.8.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.8.0...v4.8.1) (2020-02-13)
 
 **Note:** Version bump only for package vue-styleguidist
