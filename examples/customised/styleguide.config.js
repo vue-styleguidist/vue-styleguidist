@@ -8,6 +8,8 @@ module.exports = {
 	title: 'Style guide example',
 	components: 'src/components/**/[A-Z]*.vue',
 	showSidebar: false,
+	jssThemedEditor: false,
+	require: ['./styleguide/vsc-prism.css'],
 	ribbon: {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`

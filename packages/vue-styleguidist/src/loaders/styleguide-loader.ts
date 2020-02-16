@@ -37,7 +37,8 @@ const CLIENT_CONFIG_OPTIONS = [
 	'ribbon',
 	'pagePerSection',
 	'mountPointId',
-	'jsxInExamples'
+	'jsxInExamples',
+	'jssThemedEditor'
 ]
 
 export default function() {}
