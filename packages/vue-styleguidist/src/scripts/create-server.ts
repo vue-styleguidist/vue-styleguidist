@@ -18,6 +18,8 @@ export default function createServer(
 				clientLogLevel: 'none',
 				hot: true,
 				quiet: true,
+				disableHostCheck: true,
+				injectClient: false,
 				watchOptions: {
 					ignored: /node_modules/
 				},
