@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.9.0...v4.9.1) (2020-02-16)
+
+
+### Bug Fixes
+
+* create-server bis for csb ([0768c51](https://github.com/vue-styleguidist/vue-styleguidist/commit/0768c5143d41762caf59f5d07a1e0bc74a2570e3))
+* update create-server for codesandbox ([4906894](https://github.com/vue-styleguidist/vue-styleguidist/commit/4906894767b9d14bb028a358bfaed69049fed91d))
+
+
+
+
+
 # [4.9.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.8.1...v4.9.0) (2020-02-16)
 
 
