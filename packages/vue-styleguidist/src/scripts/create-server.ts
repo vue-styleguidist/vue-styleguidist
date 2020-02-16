@@ -19,7 +19,7 @@ export default function createServer(
 				hot: true,
 				quiet: true,
 				disableHostCheck: true,
-				injectClient: true,
+				injectClient: false,
 				watchOptions: {
 					ignored: /node_modules/
 				},
