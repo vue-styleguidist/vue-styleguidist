@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import map from 'lodash/map'
 import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
@@ -22,10 +21,6 @@ function renderName(prop) {
 
 export function getRowKey(row) {
 	return row.name
-}
-
-export function propsToArray(props) {
-	return map(props, (prop, name) => ({ ...prop, name }))
 }
 
 export function renderBindings({ bindings }) {
@@ -60,8 +55,7 @@ export const columns = (slots, classes) => [
 ]
 
 function SlotsTableRenderer({ props: slots, classes }) {
-	const slotsArray = propsToArray(slots)
-	return <Table columns={columns(slotsArray, classes)} rows={slotsArray} getRowKey={getRowKey} />
+	return <Table columns={columns(slots, classes)} rows={slots} getRowKey={getRowKey} />
 }
 
 SlotsTableRenderer.propTypes = {

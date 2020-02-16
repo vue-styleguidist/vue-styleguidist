@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import map from 'lodash/map'
 import Styled from 'rsg-components/Styled'
 import Arguments from 'rsg-components/Arguments'
 import JsDoc from 'rsg-components/JsDoc'
@@ -88,10 +87,6 @@ export function getRowKey(row) {
 	return row.name
 }
 
-export function propsToArray(props) {
-	return map(props, (prop, name) => ({ ...prop, name }))
-}
-
 export const columns = (events, classes) => [
 	{
 		caption: 'Event name',
@@ -114,9 +109,8 @@ export const columns = (events, classes) => [
 	...getOriginColumn(events)
 ]
 
-function EventsRenderer({ props, classes }) {
-	const evts = propsToArray(props)
-	return <Table columns={columns(evts, classes)} rows={evts} getRowKey={getRowKey} />
+function EventsRenderer({ props: events, classes }) {
+	return <Table columns={columns(events, classes)} rows={events} getRowKey={getRowKey} />
 }
 
 EventsRenderer.propTypes = {

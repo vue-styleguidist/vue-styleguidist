@@ -26,14 +26,6 @@ export default function(this: StyleguidistContext, source: string) {
 		})
 }
 
-function makeObject<T extends { name: string }>(set?: T[]): { [name: string]: T } | undefined {
-	if (!set) return undefined
-	return set.reduce((acc: { [name: string]: T }, item: T) => {
-		acc[item.name] = item
-		return acc
-	}, {})
-}
-
 export async function vuedocLoader(
 	this: StyleguidistContext,
 	source: string
@@ -86,9 +78,7 @@ export async function vuedocLoader(
 	}
 
 	let vsgDocs: ComponentProps = {
-		...docs,
-		events: makeObject(docs.events),
-		slots: makeObject(docs.slots)
+		...docs
 	}
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
