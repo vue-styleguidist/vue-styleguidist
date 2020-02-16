@@ -17,7 +17,7 @@ Object {
     Object {
       "mixin": Object {
         "name": "multiNamed",
-        "path": "~/packages/vue-docgen-api/tests/mixins/multiNamed.js",
+        "path": "../../mixins/multiNamed.js",
       },
       "name": "importedProp",
       "type": Object {
@@ -27,7 +27,7 @@ Object {
     Object {
       "mixin": Object {
         "name": "otherNamed",
-        "path": "~/packages/vue-docgen-api/tests/mixins/otherNamed.js",
+        "path": "../../mixins/otherNamed.js",
       },
       "name": "otherMixinProp",
       "type": Object {
@@ -37,7 +37,7 @@ Object {
     Object {
       "mixin": Object {
         "name": "deep",
-        "path": "~/packages/vue-docgen-api/tests/mixins/another/deep.js",
+        "path": "../../mixins/another/deep.js",
       },
       "name": "deep",
       "type": Object {

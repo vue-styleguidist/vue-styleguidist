@@ -40,7 +40,7 @@ export default async function parseSFC(
 		}
 		const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
 
-		documentation = initialDoc || new Documentation()
+		documentation = initialDoc || new Documentation(opt.filePath)
 
 		parseTemplate(
 			parts.template,
@@ -66,7 +66,7 @@ export default async function parseSFC(
 			: 'js'
 
 	if (parts.customBlocks) {
-		documentation = documentation || new Documentation()
+		documentation = documentation || new Documentation(opt.filePath)
 
 		const docsBlocks = parts.customBlocks
 			.filter(block => block.type === 'docs' && block.content && block.content.length)

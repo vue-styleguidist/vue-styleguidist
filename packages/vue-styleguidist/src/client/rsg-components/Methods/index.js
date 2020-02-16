@@ -8,6 +8,7 @@ import Arguments from 'rsg-components/Arguments'
 import Name from 'rsg-components/Name'
 import JsDoc from 'rsg-components/JsDoc'
 import Table from 'rsg-components/Table'
+import getOriginColumn from 'rsg-components/OriginColumn'
 import propStyles from '../../utils/propStyles'
 
 const getRowKey = row => row.name
@@ -44,7 +45,8 @@ export const columns = (methods, classes) => [
 	{
 		caption: 'Parameters',
 		render: renderParameters
-	}
+	},
+	...getOriginColumn(methods)
 ]
 
 function MethodsRenderer({ methods, classes }) {

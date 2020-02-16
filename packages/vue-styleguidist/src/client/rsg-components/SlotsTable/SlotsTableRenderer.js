@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
+import map from 'lodash/map'
 import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
 import Table from 'rsg-components/Table'
 import Arguments from 'rsg-components/Arguments'
-import map from 'lodash/map'
+import getOriginColumn from 'rsg-components/OriginColumn'
 import propStyles from '../../utils/propStyles'
 
 function renderDescription(prop) {
@@ -54,7 +55,8 @@ export const columns = (slots, classes) => [
 					render: renderBindings
 				}
 		  ]
-		: [])
+		: []),
+	...getOriginColumn(slots)
 ]
 
 function SlotsTableRenderer({ props: slots, classes }) {

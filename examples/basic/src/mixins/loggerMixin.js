@@ -2,6 +2,13 @@
 export const myProps = {
 	props: {
 		/**
+		 * This prop comes from the loginMixin mixin
+		 */
+		inMixin: {
+			type: Boolean,
+			default: true
+		},
+		/**
 		 * @ignore
 		 */
 		propA: {

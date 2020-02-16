@@ -18,7 +18,7 @@ describe('classEventHandler', () => {
 
 	beforeEach(() => {
 		mockEventDescriptor = { name: 'success' }
-		documentation = new Documentation()
+		documentation = new Documentation('dummy/path')
 		const mockGetEventDescriptor = documentation.getEventDescriptor as jest.Mock
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})

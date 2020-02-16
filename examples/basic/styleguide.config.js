@@ -82,5 +82,6 @@ module.exports = {
 	compilerConfig: {
 		target: { ie: 11 }
 	},
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	displayOrigins: true
 }

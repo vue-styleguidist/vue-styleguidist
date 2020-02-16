@@ -23,7 +23,7 @@ describe('propHandler', () => {
 			tags: {}
 		}
 		const MockDocumentation = Documentation
-		documentation = new MockDocumentation()
+		documentation = new MockDocumentation('test/path')
 		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})

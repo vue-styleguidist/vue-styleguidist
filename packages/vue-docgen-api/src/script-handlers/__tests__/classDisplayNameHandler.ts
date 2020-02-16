@@ -14,7 +14,7 @@ describe('classDisplayNameHandler', () => {
 	let documentation: Documentation
 
 	beforeEach(() => {
-		documentation = new Documentation()
+		documentation = new Documentation('dummy/path')
 	})
 
 	it('should extract the name of the component from the classname', () => {
