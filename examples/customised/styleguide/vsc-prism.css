@@ -25,6 +25,11 @@ code[class*='language-']::selection {
 	background: #b3d4fc;
 }
 
+.prism-editor[class*='language-']::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
 @media print {
 	pre[class*='language-'],
 	code[class*='language-'] {
@@ -36,9 +41,25 @@ pre[class*='language-'] {
 	padding: 1em;
 	margin: 0.5em 0;
 	overflow: auto;
-	/* because of issue https://github.com/satya164/react-simple-code-editor/issues/56 */
-	background: #1e1e1e !important;
+	background: #1e1e1e;
 }
+
+/* start hack */
+/** 
+ *	because of the following issue 
+ * 	https://github.com/satya164/react-simple-code-editor/issues/56 
+ *	we move some properties to the container
+ */
+div.prism-editor {
+	background: #1e1e1e;
+	color: #d4d4d4;
+}
+
+.prism-editor[class*='language-'] textarea::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+/* end hack */
 
 :not(pre) > code[class*='language-'] {
 	padding: 0.1em 0.3em;

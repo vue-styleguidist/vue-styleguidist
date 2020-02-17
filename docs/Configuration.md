@@ -214,7 +214,32 @@ If you want to use a theme defined in CSS, set this to false and require the CSS
 
 [prism themes repo](https://github.com/PrismJS/prism-themes/)
 
-> **Note:** There is [a bug in prism editor](https://github.com/satya164/react-simple-code-editor/issues/56) that prevents us from changing the editor's background unless forced. Use `!important` on the `background` property that is not applied to workaround it.
+> **Note:** There is [a bug in prism editor](https://github.com/satya164/react-simple-code-editor/issues/56) that prevents us from changing the editor's background and font-color easily. Workaround: If you get a theme with
+>
+> ```css
+> pre[class*='language-'] {
+>   padding: 1em;
+>   margin: 0.5em 0;
+>   overflow: auto;
+>   background: #1e1e1e;
+> }
+> ```
+>
+> Use the `div.prism-editor` class to change the background instead
+>
+> ```css
+> pre[class*='language-'] {
+>   padding: 1em;
+>   margin: 0.5em 0;
+>   overflow: auto;
+> }
+>
+> div.prism-editor {
+>   background: #1e1e1e;
+> }
+> ```
+>
+> checkout [examples/customised](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/customised/styleguide/vsc-prism.css) for an example of implementation
 
 ## `jsxInComponents`
 
