@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.10.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.9.1...v4.10.0) (2020-02-17)
+
+
+### Features
+
+* allow usage of prism themes ([921dbd5](https://github.com/vue-styleguidist/vue-styleguidist/commit/921dbd5e26c420d692f607a7f18bcff4e626d404))
+
+
+### Reverts
+
+* Revert "refactor: avoid converting events and slots" ([d8e4d4d](https://github.com/vue-styleguidist/vue-styleguidist/commit/d8e4d4dfab49c26be1ca2e254144b57c69a3019e))
+
+
+
+
+
 ## [4.9.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.9.0...v4.9.1) (2020-02-16)
 
 
