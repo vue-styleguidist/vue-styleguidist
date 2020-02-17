@@ -3,13 +3,18 @@ import {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
-	BlockTag,
-	ComponentDoc
+	BlockTag
 } from 'vue-docgen-api'
 import * as b from '@babel/types'
 import { Example } from './Example'
 
-export interface ComponentProps extends ComponentDoc {
+export interface ComponentProps {
+	displayName: string
+	description?: string
+	props?: PropDescriptor[]
+	methods?: MethodDescriptor[]
+	slots?: { [name: string]: SlotDescriptor }
+	events?: { [name: string]: EventDescriptor }
 	tags?: {
 		[key: string]: BlockTag[]
 	}
