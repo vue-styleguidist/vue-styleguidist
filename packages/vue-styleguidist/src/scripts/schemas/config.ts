@@ -186,6 +186,13 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		type: 'array',
 		default: ['**/__tests__/**', `**/*.test.vue`, `**/*.spec.vue`, '**/*.d.ts']
 	},
+	jssThemedEditor: {
+		message: 'Should PrismJs editors be themed using JSS',
+		description:
+			'By default, the PrismJs editor is themed in the theme files. If you want to use a theme defined in CSS, set this to false and require the CSS file in the `require` config.',
+		type: 'boolean',
+		default: true
+	},
 	jsxInComponents: {
 		message: 'JSX in Components',
 		description:

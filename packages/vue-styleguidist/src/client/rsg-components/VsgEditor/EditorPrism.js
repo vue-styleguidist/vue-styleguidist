@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import Styled from 'rsg-components/Styled'
 import { polyfill } from 'react-lifecycles-compat'
@@ -10,6 +11,7 @@ import 'prismjs/components/prism-markup'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
+import { useStyleGuideContext } from 'rsg-components/Context'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
 
 const highlight = lang => {
@@ -18,13 +20,9 @@ const highlight = lang => {
 }
 
 const styles = ({ fontFamily, fontSize, color, borderRadius }) => ({
-	container: {
-		position: 'relative'
-	},
 	root: {
 		fontFamily: fontFamily.monospace,
 		fontSize: fontSize.small,
-		background: color.codeBackground,
 		borderRadius,
 		'& textarea': {
 			isolate: false,
@@ -38,21 +36,18 @@ const styles = ({ fontFamily, fontSize, color, borderRadius }) => ({
 			outline: 0,
 			borderColor: `${color.link} !important`,
 			boxShadow: [[0, 0, 0, 2, color.focus]]
-		},
-		...prismTheme({ color })
+		}
 	},
-	copyButton: {
-		position: 'absolute',
-		right: 12,
-		top: 12,
-		zIndex: 3,
-		cursor: 'pointer'
+	jssEditor: {
+		background: color.codeBackground,
+		...prismTheme({ color })
 	}
 })
 
-export class Editor extends Component {
+export class UnconfiguredEditor extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
+		jssThemedEditor: PropTypes.bool.isRequired,
 		onChange: PropTypes.func.isRequired,
 		classes: PropTypes.object.isRequired
 	}
@@ -80,18 +75,32 @@ export class Editor extends Component {
 	}
 
 	render() {
+		const { root, jssEditor } = this.props.classes
+		const isVueSFC = isCodeVueSfc(this.state.code)
+		const { jssThemedEditor } = this.props
 		return (
 			<SimpleEditor
-				className={this.props.classes.root}
+				className={cx(root, jssThemedEditor && jssEditor)}
 				value={this.state.code}
 				onValueChange={this.handleChange}
-				highlight={highlight(isCodeVueSfc(this.state.code) ? 'html' : 'jsx')}
+				highlight={highlight(isVueSFC ? 'html' : 'jsx')}
 				// Padding should be passed via a prop (not CSS) for a proper
 				// cursor position calculation
 				padding={space[2]}
+				// to make sure the css styles for prism are taken into account
+				preClassName={!jssThemedEditor && isVueSFC ? 'language-html' : 'language-jsx'}
 			/>
 		)
 	}
 }
 
-export default Styled(styles)(polyfill(Editor))
+const PEditor = polyfill(UnconfiguredEditor)
+
+function Editor(props) {
+	const {
+		config: { jssThemedEditor }
+	} = useStyleGuideContext()
+	return <PEditor {...props} jssThemedEditor={jssThemedEditor} />
+}
+
+export default Styled(styles)(Editor)

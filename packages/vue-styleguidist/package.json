@@ -69,7 +69,7 @@
 		"react-group": "^1.0.6",
 		"react-icons": "^3.7.0",
 		"react-lifecycles-compat": "^3.0.4",
-		"react-simple-code-editor": "^0.9.4",
+		"react-simple-code-editor": "^0.11.0",
 		"react-styleguidist": "^10.6.2",
 		"rewrite-imports": "^2.0.3",
 		"style-loader": "^1.0.0",
