@@ -78,9 +78,10 @@ export class UnconfiguredEditor extends Component {
 		const { root, jssEditor } = this.props.classes
 		const isVueSFC = isCodeVueSfc(this.state.code)
 		const { jssThemedEditor } = this.props
+		const langClass = isVueSFC ? 'language-html' : 'language-jsx'
 		return (
 			<SimpleEditor
-				className={cx(root, jssThemedEditor && jssEditor)}
+				className={cx(root, jssThemedEditor ? jssEditor : langClass, 'prism-editor')}
 				value={this.state.code}
 				onValueChange={this.handleChange}
 				highlight={highlight(isVueSFC ? 'html' : 'jsx')}
@@ -88,7 +89,7 @@ export class UnconfiguredEditor extends Component {
 				// cursor position calculation
 				padding={space[2]}
 				// to make sure the css styles for prism are taken into account
-				preClassName={!jssThemedEditor && isVueSFC ? 'language-html' : 'language-jsx'}
+				preClassName={!jssThemedEditor && langClass}
 			/>
 		)
 	}
