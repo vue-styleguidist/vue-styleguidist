@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.10.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.10.0...v4.10.1) (2020-02-17)
+
+
+### Bug Fixes
+
+* update Prism theming & docs ([70514b9](https://github.com/vue-styleguidist/vue-styleguidist/commit/70514b95cea7d689ff404491ddf6d73c20f547a3))
+
+
+
+
+
 # [4.10.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.9.1...v4.10.0) (2020-02-17)
 
 
