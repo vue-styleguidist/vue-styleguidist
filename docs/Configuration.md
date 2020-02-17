@@ -204,6 +204,18 @@ Array of [glob pattern](https://github.com/isaacs/node-glob#glob-primer) that sh
 
 > **Note:** You should pass glob patterns, for example, use `**/components/Button.vue` instead of `components/Button.vue`.
 
+## `jssThemedEditor`
+
+Type: `Boolean`, default: `true`
+
+Should integrated PrismJs editors be themed using JSS in the theme option.
+
+If you want to use a theme defined in CSS, set this to false and require the CSS file in the `require` config.
+
+[prism themes repo](https://github.com/PrismJS/prism-themes/)
+
+> **Note:** There is [a bug in prism editor](https://github.com/satya164/react-simple-code-editor/issues/56) that prevents us from changing the editor's background unless forced. Use `!important` on the `background` property that is not applied to workaround it.
+
 ## `jsxInComponents`
 
 Type: `Boolean`, default: `true`

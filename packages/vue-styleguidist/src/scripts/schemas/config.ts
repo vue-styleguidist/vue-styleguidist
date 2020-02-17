@@ -189,7 +189,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 	jssThemedEditor: {
 		message: 'Should PrismJs editors be themed using JSS',
 		description:
-			'By default, the PrismJs editor is themed in the theme files. If you want ot use a them defined in css, set this to false and require the css in the `require` config.',
+			'By default, the PrismJs editor is themed in the theme files. If you want to use a theme defined in CSS, set this to false and require the CSS file in the `require` config.',
 		type: 'boolean',
 		default: true
 	},

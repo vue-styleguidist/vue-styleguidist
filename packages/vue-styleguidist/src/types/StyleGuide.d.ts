@@ -71,7 +71,7 @@ export interface StyleguidistConfig {
      */
     ignore: string[];
     /**
-     * By default, the PrismJs editor is themed in the theme files. If you want ot use a them defined in css, set this to false and require the css in the `require` config. 
+     * By default, the PrismJs editor is themed in the theme files. If you want to use a theme defined in CSS, set this to false and require the CSS file in the `require` config. 
      * @default true 
      */
     jssThemedEditor: boolean;
