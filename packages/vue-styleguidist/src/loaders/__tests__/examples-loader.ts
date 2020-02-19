@@ -9,8 +9,16 @@ jest.mock('vue-inbrowser-compiler-utils', () => {
 	}
 })
 
+jest.mock('vue-docgen-api', () => {
+	return {
+		parse: (file: string) => ({ displayName: file }),
+		getDefaultExample: () => 'default example',
+		cleanName: (name: string) => name
+	}
+})
+
 const query = {
-	file: '../foo.js',
+	file: 'foo.vue',
 	displayName: 'FooComponent',
 	shouldShowDefaultExample: false
 }
@@ -61,21 +69,18 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 
 		<div>
 		  \\n\\t
-		  <FooComponent>
+		  <foo.vue>
 		    \\n\\t\\t
 		    <span>
 		      text
 		    </span>
 		    \\n\\t\\t
 		    <span>
-		      Name of component: FooComponent
+		      Name of component: foo.vue
 		    </span>
 		    \\n\\t
-		  </FooComponent>
-		  \\n\\t
-		  <FooComponent>
-		  </FooComponent>
-		  \\n
+		  </foo.vue>
+		  \\n\\tdefault example\\n
 		</div>
 
 	`)

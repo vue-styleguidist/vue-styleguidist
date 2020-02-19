@@ -1,9 +1,9 @@
-import defaultExample from '../defaultExample'
+import getDefaultExample from '../getDefaultExample'
 
-describe('defaultExample', () => {
+describe('getDefaultExample', () => {
 	it('should match each prop type with its default', () => {
 		expect(
-			defaultExample({
+			getDefaultExample({
 				displayName: 'my-component',
 				exportName: 'default',
 				props: [
@@ -60,44 +60,44 @@ describe('defaultExample', () => {
 				]
 			})
 		).toMatchInlineSnapshot(`
-		"
-		\`\`\`vue live
-		<my-component string=\\"lorem ipsum\\"  number=\\"42\\"  boolean=\\"true\\"  array=\\"[1, 2, 3]\\"  object=\\"{}\\"  date=\\"new Date('2012-12-12')\\"  function=\\"() => void\\"  symbol=\\"lorem ipsum\\" />
-		\`\`\`
-			"
+
+		<my-component string="Default Example Usage"
+		              :number="42"
+		              :boolean="true"
+		              :array="[1, 2, 3]"
+		              :object="{}"
+		              :date="new Date('2012-12-12')"
+		              :function="() => void"
+		              :symbol="Default Example Usage"
+		>
+		</my-component>
+
 	`)
 	})
 
 	it('should use the default slot if provided', () => {
 		expect(
-			defaultExample({
+			getDefaultExample({
 				displayName: 'my-component',
 				exportName: 'default',
 				slots: [{ name: 'default', description: '' }]
 			})
 		).toMatchInlineSnapshot(`
-		"
-		\`\`\`vue live
-		<my-component>lorem ipsum</my-component>
-		\`\`\`
-			"
+
+		<my-component>
+		  Default Example Usage
+		</my-component>
+
 	`)
 	})
 
 	it('should remove all invalid character', () => {
 		expect(
-			defaultExample({
+			getDefaultExample({
 				displayName: "it's my component",
 				exportName: 'default',
-				tags: {},
-				slots: [{ name: 'default', description: '' }]
+				tags: {}
 			})
-		).toMatchInlineSnapshot(`
-		"
-		\`\`\`vue live
-		<itsmycomponent>lorem ipsum</itsmycomponent>
-		\`\`\`
-			"
-	`)
+		).toBe(`<itsmycomponent />`)
 	})
 })
