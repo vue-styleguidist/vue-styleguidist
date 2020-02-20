@@ -7,26 +7,19 @@ import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import { builders as b } from 'ast-types'
+import { parse } from 'vue-docgen-api'
 import { compile } from 'vue-inbrowser-compiler'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
-import expandDefaultComponent from 'react-styleguidist/lib/loaders/utils/expandDefaultComponent'
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModule'
 import { StyleguidistContext } from '../types/StyleGuide'
 import { ExampleLoader } from '../types/Example'
+import expandDefaultComponent from './utils/expandDefaultComponent'
 import getComponentVueDoc from './utils/getComponentVueDoc'
-import cleanComponentName from './utils/cleanComponentName'
 import importCodeExampleFile from './utils/importCodeExampleFile'
+import absolutize from './utils/absolutize'
 import getScript from './utils/getScript'
-
-// Hack the react scaffolding to be able to load client
-const absolutize = (filepath: string) =>
-	path.resolve(
-		path.dirname(require.resolve('vue-styleguidist')),
-		'../loaders/utils/client',
-		filepath
-	)
 
 const REQUIRE_IN_RUNTIME_PATH = absolutize('requireInRuntime')
 const EVAL_IN_CONTEXT_PATH = absolutize('evalInContext')
@@ -58,10 +51,11 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	const options = loaderUtils.getOptions(this) || {}
 	const { file, displayName, shouldShowDefaultExample, customLangs } = options
 
-	const cleanDisplayName = displayName ? cleanComponentName(displayName) : undefined
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
 	if (shouldShowDefaultExample && source) {
-		source = expandDefaultComponent(source, cleanDisplayName)
+		const fullFilePath = path.join(path.dirname(filePath), file)
+		const docs = await parse(fullFilePath)
+		source = expandDefaultComponent(source, docs)
 	}
 
 	const updateExample = (props: ExampleLoader) => {
