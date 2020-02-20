@@ -102,9 +102,9 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 
 it('should pass updateExample function from config to chunkify', done => {
 	const exampleMarkdown = `
-	\`\`\`jsx static
-	<h1>Hello world!</h2>
-	\`\`\`
+\`\`\`jsx static
+<h1>Hello world!</h2>
+\`\`\`
 	`
 	const updateExample = jest.fn(props => props)
 	const callback = () => {
@@ -123,7 +123,7 @@ it('should pass updateExample function from config to chunkify', done => {
 		{
 			async: () => callback,
 			request: 'Readme.md',
-			query: getQuery(),
+			query: getQuery({ customLangs: ['vue', 'jsx'] }),
 			resourcePath: '/path/to/foo/examples/file',
 			_styleguidist: {
 				updateExample
@@ -136,10 +136,10 @@ it('should pass updateExample function from config to chunkify', done => {
 it('should generate require map when require() is used', done => {
 	const exampleMarkdown = `
 	One:
-	\`\`\`
-			const _ = require('lodash');
-			<X/>
-	\`\`\`
+\`\`\`
+const _ = require('lodash');
+<X/>
+\`\`\`
 	Two:
 		<Y/>
 	`
@@ -163,10 +163,10 @@ it('should generate require map when require() is used', done => {
 it('should generate require map when import is used', done => {
 	const exampleMarkdown = `
 	One:
-	\`\`\`
-			import _ from 'lodash';
-		<X/>
-	\`\`\`
+\`\`\`
+	import _ from 'lodash';
+	<X/>
+\`\`\`
 	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
