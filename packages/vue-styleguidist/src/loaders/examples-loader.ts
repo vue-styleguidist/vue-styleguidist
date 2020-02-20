@@ -18,15 +18,8 @@ import { ExampleLoader } from '../types/Example'
 import expandDefaultComponent from './utils/expandDefaultComponent'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import importCodeExampleFile from './utils/importCodeExampleFile'
+import absolutize from './utils/absolutize'
 import getScript from './utils/getScript'
-
-// Hack the react scaffolding to be able to load client
-const absolutize = (filepath: string) =>
-	path.resolve(
-		path.dirname(require.resolve('vue-styleguidist')),
-		'../loaders/utils/client',
-		filepath
-	)
 
 const REQUIRE_IN_RUNTIME_PATH = absolutize('requireInRuntime')
 const EVAL_IN_CONTEXT_PATH = absolutize('evalInContext')

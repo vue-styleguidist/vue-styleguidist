@@ -17,6 +17,8 @@ jest.mock('vue-docgen-api', () => {
 	}
 })
 
+jest.mock('../utils/absolutize', () => (p: string) => p)
+
 const query = {
 	file: 'foo.vue',
 	displayName: 'FooComponent',
@@ -53,14 +55,14 @@ text
 
 it('should replace all occurrences of __COMPONENT__ with provided query.displayName', done => {
 	const exampleMarkdown = `
-<div>
-	<__COMPONENT__>
-		<span>text</span>
-		<span>Name of component: __COMPONENT__</span>
-	</__COMPONENT__>
-	<__COMPONENT__ />
-</div>
-`
+	<div>
+		<__COMPONENT__>
+			<span>text</span>
+			<span>Name of component: __COMPONENT__</span>
+		</__COMPONENT__>
+		<__COMPONENT__ />
+	</div>
+	`
 
 	const callback = (err: string, result: string) => {
 		expect(result).not.toMatch(/__COMPONENT__/)
@@ -100,10 +102,10 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 
 it('should pass updateExample function from config to chunkify', done => {
 	const exampleMarkdown = `
-\`\`\`jsx static
-<h1>Hello world!</h2>
-\`\`\`
-`
+	\`\`\`jsx static
+	<h1>Hello world!</h2>
+	\`\`\`
+	`
 	const updateExample = jest.fn(props => props)
 	const callback = () => {
 		expect(updateExample).toHaveBeenCalledWith(
@@ -133,14 +135,14 @@ it('should pass updateExample function from config to chunkify', done => {
 
 it('should generate require map when require() is used', done => {
 	const exampleMarkdown = `
-One:
-\`\`\`
-		const _ = require('lodash');
-		<X/>
-\`\`\`
-Two:
-	<Y/>
-`
+	One:
+	\`\`\`
+			const _ = require('lodash');
+			<X/>
+	\`\`\`
+	Two:
+		<Y/>
+	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -160,12 +162,12 @@ Two:
 
 it('should generate require map when import is used', done => {
 	const exampleMarkdown = `
-One:
-\`\`\`
-		import _ from 'lodash';
-	<X/>
-\`\`\`
-`
+	One:
+	\`\`\`
+			import _ from 'lodash';
+		<X/>
+	\`\`\`
+	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -186,9 +188,9 @@ One:
 
 it('should work with multiple JSX element on the root level', done => {
 	const exampleMarkdown = `
-	<X/>
-	<Y/>
-`
+		<X/>
+		<Y/>
+	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -207,8 +209,8 @@ it('should work with multiple JSX element on the root level', done => {
 
 it('should works for any Markdown file, without a current component', done => {
 	const exampleMarkdown = `
-    import FooComponent from '../foo.js';
-	<FooComponent/>`
+		import FooComponent from '../foo.js';
+		<FooComponent/>`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -233,20 +235,20 @@ it('should import external dependency in a vue component example', done => {
 		}
 	})
 	const exampleMarkdown = `
-One:
-
-\`\`\`
-		<template>
-			<div/>
-		</template>
-		<script>
-			import _ from 'lodash';
-			import FooComponent from '../foo.js';
-			<FooComponent/>
-		</script>
-\`\`\`
-
-		`
+	One:
+	
+	\`\`\`
+			<template>
+				<div/>
+			</template>
+			<script>
+				import _ from 'lodash';
+				import FooComponent from '../foo.js';
+				<FooComponent/>
+			</script>
+	\`\`\`
+	
+			`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(result).toMatch(`'lodash': require('lodash')`)
