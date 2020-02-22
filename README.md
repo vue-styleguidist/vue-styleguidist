@@ -8,7 +8,7 @@
     <img src="https://travis-ci.com/vue-styleguidist/vue-styleguidist.svg?branch=dev" alt="Travis CI (unit & lint)">
 </a>
 <a href="https://circleci.com/gh/vue-styleguidist/vue-styleguidist">
-    <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=svg" alt="Circle CI (integration)">
+    <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=shield" alt="Circle CI (integration)">
 </a>
 <a href="https://codecov.io/gh/vue-styleguidist/vue-styleguidist">
   <img src="https://codecov.io/gh/vue-styleguidist/vue-styleguidist/branch/dev/graph/badge.svg" />
@@ -34,31 +34,31 @@ alt="Chat on Discord">
 
 [vue-styleguidist](packages/vue-styleguidist) takes the results of [vue-docgen-api](packages/vue-docgen-api) and creates a website to showcase and develop components.
 
-[![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dm/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
+[![](https://img.shields.io/npm/v/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist) [![](https://img.shields.io/npm/dw/vue-styleguidist.svg)](https://www.npmjs.com/package/vue-styleguidist)
 
 ---
 
 [vue-docgen-api](packages/vue-docgen-api) parses vue components and load their documentation in a JavaScript object.
 
-[![](https://img.shields.io/npm/v/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api) [![](https://img.shields.io/npm/dm/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api)
+[![](https://img.shields.io/npm/v/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api) [![](https://img.shields.io/npm/dw/vue-docgen-api.svg)](https://www.npmjs.com/package/vue-docgen-api)
 
 ---
 
 [vue-inbrowser-compiler](packages/vue-inbrowser-compiler) takes vue components code written in es6 and uses buble to make it compatible with all browser.
 
-[![](https://img.shields.io/npm/v/vue-inbrowser-compiler.svg)](https://www.npmjs.com/package/vue-inbrowser-compiler) [![](https://img.shields.io/npm/dm/vue-inbrowser-compiler.svg)](https://www.npmjs.com/package/vue-inbrowser-compiler)
+[![](https://img.shields.io/npm/v/vue-inbrowser-compiler.svg)](https://www.npmjs.com/package/vue-inbrowser-compiler) [![](https://img.shields.io/npm/dw/vue-inbrowser-compiler.svg)](https://www.npmjs.com/package/vue-inbrowser-compiler)
 
 ---
 
 [vue-cli-plugin-styleguidist](packages/vue-cli-plugin-styleguidist) configures vue-styleguidist to work with [vue-cli 3](https://cli.vuejs.org/guide/).
 
-[![](https://img.shields.io/npm/v/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist) [![](https://img.shields.io/npm/dm/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist)
+[![](https://img.shields.io/npm/v/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist) [![](https://img.shields.io/npm/dw/vue-cli-plugin-styleguidist.svg)](https://www.npmjs.com/package/vue-cli-plugin-styleguidist)
 
 ---
 
 [vue-docgen-cli](packages/vue-docgen-cli) is a command line interface generating documentation files automatically from [vue-dogen-api]. Generate markdown by default but can be configured to generate whatever text format you desire.
 
-[![](https://img.shields.io/npm/v/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli) [![](https://img.shields.io/npm/dm/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli)
+[![](https://img.shields.io/npm/v/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli) [![](https://img.shields.io/npm/dw/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli)
 
 ## Documentation
 
@@ -75,9 +75,6 @@ Note that the current monorepo relies on `yarn` workspaces. Don't forget to inst
 [Artem Sapegin](http://sapegin.me), [Rafael Escala](https://github.com/rafaesc), [Bart Ledoux](https://github.com/elevatebart), [react-styleguidist contributors](https://github.com/styleguidist/react-styleguidist/graphs/contributors) and [vue-styleguidist contributors](https://github.com/vue-styleguidist/vue-styleguidist/graphs/contributors). Thanks to the team of react-styleguidist for the amazing tool.
 
 We work on this project because we love the open-source community and learn new things.
-
-- Rafael: You can buy me a cup of coffee :) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/rafaesc)
-- Bart: Pays for Netlify ;) [![Paypal.me donate](https://img.shields.io/badge/Paypal.me-donate-yellow.svg)](https://www.paypal.me/elevatebart)
 
 Logo by [Benjamin Cognard](https://twitter.com/benbnur).
 
