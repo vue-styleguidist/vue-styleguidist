@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import Vue from 'vue'
 import { compile } from 'vue-inbrowser-compiler'
 import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
+import cleanName from 'vue-docgen-api/dist/utils/cleanName'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
-import cleanComponentName from '../../utils/cleanComponentName'
 
 class Preview extends Component {
 	static propTypes = {
@@ -49,7 +49,7 @@ class Preview extends Component {
 	}
 
 	unmountPreview() {
-		this.destroyVueInstance();
+		this.destroyVueInstance()
 		if (this.mountNode) {
 			let el = this.mountNode.children[0]
 			if (!el) {
@@ -68,11 +68,11 @@ class Preview extends Component {
 	destroyVueInstance() {
 		if (this.vueInstance) {
 			try {
-				this.vueInstance.$destroy();
+				this.vueInstance.$destroy()
 			} catch (err) {
 				// eat the error
 			}
-			this.vueInstance = null;
+			this.vueInstance = null
 		}
 	}
 
@@ -138,7 +138,7 @@ class Preview extends Component {
 			// already set it should not be changed
 			!previewComponent.components
 		) {
-			component.displayName = cleanComponentName(component.name)
+			component.displayName = cleanName(component.name)
 			// register component locally
 			previewComponent.components = {
 				[component.displayName]: component.module.default || component.module
@@ -150,7 +150,7 @@ class Preview extends Component {
 			? renderRootJsx.default(previewComponent)
 			: { render: createElement => createElement(previewComponent) }
 		try {
-			this.destroyVueInstance();
+			this.destroyVueInstance()
 			this.vueInstance = new Vue({
 				...extendsComponent,
 				...rootComponent,

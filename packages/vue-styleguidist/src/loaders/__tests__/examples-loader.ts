@@ -9,8 +9,18 @@ jest.mock('vue-inbrowser-compiler-utils', () => {
 	}
 })
 
+jest.mock('vue-docgen-api', () => {
+	return {
+		parse: (file: string) => ({ displayName: file }),
+		getDefaultExample: () => 'default example',
+		cleanName: (name: string) => name
+	}
+})
+
+jest.mock('../utils/absolutize', () => (p: string) => p)
+
 const query = {
-	file: '../foo.js',
+	file: 'foo.vue',
 	displayName: 'FooComponent',
 	shouldShowDefaultExample: false
 }
@@ -45,14 +55,14 @@ text
 
 it('should replace all occurrences of __COMPONENT__ with provided query.displayName', done => {
 	const exampleMarkdown = `
-<div>
-	<__COMPONENT__>
-		<span>text</span>
-		<span>Name of component: __COMPONENT__</span>
-	</__COMPONENT__>
-	<__COMPONENT__ />
-</div>
-`
+	<div>
+		<__COMPONENT__>
+			<span>text</span>
+			<span>Name of component: __COMPONENT__</span>
+		</__COMPONENT__>
+		<__COMPONENT__ />
+	</div>
+	`
 
 	const callback = (err: string, result: string) => {
 		expect(result).not.toMatch(/__COMPONENT__/)
@@ -61,21 +71,18 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 
 		<div>
 		  \\n\\t
-		  <FooComponent>
+		  <foo.vue>
 		    \\n\\t\\t
 		    <span>
 		      text
 		    </span>
 		    \\n\\t\\t
 		    <span>
-		      Name of component: FooComponent
+		      Name of component: foo.vue
 		    </span>
 		    \\n\\t
-		  </FooComponent>
-		  \\n\\t
-		  <FooComponent>
-		  </FooComponent>
-		  \\n
+		  </foo.vue>
+		  \\n\\tdefault example\\n
 		</div>
 
 	`)
@@ -98,7 +105,7 @@ it('should pass updateExample function from config to chunkify', done => {
 \`\`\`jsx static
 <h1>Hello world!</h2>
 \`\`\`
-`
+	`
 	const updateExample = jest.fn(props => props)
 	const callback = () => {
 		expect(updateExample).toHaveBeenCalledWith(
@@ -116,7 +123,7 @@ it('should pass updateExample function from config to chunkify', done => {
 		{
 			async: () => callback,
 			request: 'Readme.md',
-			query: getQuery(),
+			query: getQuery({ customLangs: ['vue', 'jsx'] }),
 			resourcePath: '/path/to/foo/examples/file',
 			_styleguidist: {
 				updateExample
@@ -128,14 +135,14 @@ it('should pass updateExample function from config to chunkify', done => {
 
 it('should generate require map when require() is used', done => {
 	const exampleMarkdown = `
-One:
+	One:
 \`\`\`
-		const _ = require('lodash');
-		<X/>
+const _ = require('lodash');
+<X/>
 \`\`\`
-Two:
-	<Y/>
-`
+	Two:
+		<Y/>
+	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -155,12 +162,12 @@ Two:
 
 it('should generate require map when import is used', done => {
 	const exampleMarkdown = `
-One:
+	One:
 \`\`\`
-		import _ from 'lodash';
+	import _ from 'lodash';
 	<X/>
 \`\`\`
-`
+	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -181,9 +188,9 @@ One:
 
 it('should work with multiple JSX element on the root level', done => {
 	const exampleMarkdown = `
-	<X/>
-	<Y/>
-`
+		<X/>
+		<Y/>
+	`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -202,8 +209,8 @@ it('should work with multiple JSX element on the root level', done => {
 
 it('should works for any Markdown file, without a current component', done => {
 	const exampleMarkdown = `
-    import FooComponent from '../foo.js';
-	<FooComponent/>`
+		import FooComponent from '../foo.js';
+		<FooComponent/>`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
@@ -228,20 +235,20 @@ it('should import external dependency in a vue component example', done => {
 		}
 	})
 	const exampleMarkdown = `
-One:
-
-\`\`\`
-		<template>
-			<div/>
-		</template>
-		<script>
-			import _ from 'lodash';
-			import FooComponent from '../foo.js';
-			<FooComponent/>
-		</script>
-\`\`\`
-
-		`
+	One:
+	
+	\`\`\`
+			<template>
+				<div/>
+			</template>
+			<script>
+				import _ from 'lodash';
+				import FooComponent from '../foo.js';
+				<FooComponent/>
+			</script>
+	\`\`\`
+	
+			`
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(result).toMatch(`'lodash': require('lodash')`)

@@ -27,6 +27,8 @@ export {
 	Tag,
 	ParamTag
 }
+export { default as getDefaultExample } from './utils/getDefaultExample'
+export { default as cleanName } from './utils/cleanName'
 
 /**
  * Parse the component at filePath and return props, public methods, events and slots
