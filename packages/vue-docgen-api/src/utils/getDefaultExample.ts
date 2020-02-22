@@ -56,9 +56,12 @@ export default (doc: ComponentDoc): string => {
 	const { displayName, props, slots } = doc
 	const cleanedName = cleanName(displayName)
 	const propsAttr: string[] = props
-		? props.map(
-				p => ` ${!p || !p.type || p.type.name === 'string' ? '' : ':'}${p.name}="${getDefault(p)}"`
-		  )
+		? props
+				.filter(p => p.required)
+				.map(
+					p =>
+						` ${!p || !p.type || p.type.name === 'string' ? '' : ':'}${p.name}="${getDefault(p)}"`
+				)
 		: []
 	return `<${cleanedName}${propsAttr.join(' ')}${
 		!slots || !slots.filter(s => s.name === 'default')

@@ -62,7 +62,7 @@ describe('defaultExample', () => {
 		).toMatchInlineSnapshot(`
 		"
 		\`\`\`vue live
-		<my-component string=\\"Default Example Usage\\"  :number=\\"42\\"  :boolean=\\"true\\"  :array=\\"[1, 2, 3]\\"  :object=\\"{}\\"  :date=\\"new Date('2012-12-12')\\"  :function=\\"() => void\\"  :symbol=\\"Default Example Usage\\" />
+		<my-component string=\\"lorem ipsum\\"  number=\\"42\\"  boolean=\\"true\\"  array=\\"[1, 2, 3]\\"  object=\\"{}\\"  date=\\"new Date('2012-12-12')\\"  function=\\"() => void\\"  symbol=\\"lorem ipsum\\" />
 		\`\`\`
 			"
 	`)
@@ -78,7 +78,7 @@ describe('defaultExample', () => {
 		).toMatchInlineSnapshot(`
 		"
 		\`\`\`vue live
-		<my-component>Default Example Usage</my-component>
+		<my-component>lorem ipsum</my-component>
 		\`\`\`
 			"
 	`)
@@ -95,7 +95,7 @@ describe('defaultExample', () => {
 		).toMatchInlineSnapshot(`
 		"
 		\`\`\`vue live
-		<itsmycomponent>Default Example Usage</itsmycomponent>
+		<itsmycomponent>lorem ipsum</itsmycomponent>
 		\`\`\`
 			"
 	`)
