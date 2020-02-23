@@ -27,7 +27,8 @@ export default function renderStyleguide(
 	doc = document,
 	hist = window.history
 ) {
-	const allSections = processSections(styleguide.sections)
+	const exampleFileNames: string[] = []
+	const allSections = processSections({ sections: styleguide.sections, exampleFileNames })
 
 	if (!styleguide.config.locallyRegisterComponents) {
 		// Globalize all components, not just ones we see on the screen, to make

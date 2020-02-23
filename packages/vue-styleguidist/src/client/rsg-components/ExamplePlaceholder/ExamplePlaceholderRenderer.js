@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import map from 'lodash/map'
 import getDefaultExample from 'vue-docgen-api/dist/utils/getDefaultExample'
 import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
@@ -22,6 +23,10 @@ const styles = ({ fontFamily, fontSize, color }) => ({
 		}
 	}
 })
+
+export function propsToArray(props) {
+	return map(props, (prop, name) => ({ ...prop, name }))
+}
 
 export class ExamplePlaceholderRendererWithDoc extends Component {
 	static propTypes = {
@@ -61,7 +66,11 @@ export class ExamplePlaceholderRendererWithDoc extends Component {
 			return <div />
 		}
 
-		const { classes, name, component } = this.props
+		const {
+			classes,
+			name,
+			component: { props }
+		} = this.props
 
 		if (isVisible) {
 			return (
@@ -71,11 +80,16 @@ Create **Readme.md** or **${name}.md** file in the component’s folder like thi
 
     ${name} example:
 
-    \`\`\`js
-    ${getDefaultExample(component.props)}
+    \`\`\`vue
+    ${getDefaultExample({
+			...props,
+			props: propsToArray(props.props),
+			slots: propsToArray(props.slots),
+			events: propsToArray(props.events)
+		})}
     \`\`\`
 
-You can add examples and documentation in the \`<docs>\` block of your component as well.
+You can also add examples and documentation in the \`<docs>\` block of your \`.vue\` Single File Component.
 
 You may need to **restart** the style guide server after adding an example file.
 

@@ -11,6 +11,7 @@ import getExamples from './utils/getExamples'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
+import consts from '../scripts/consts'
 
 const logger = createLogger('vsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
@@ -123,6 +124,24 @@ export async function vuedocLoader(
 
 	const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
 	if (!ignoreExamplesInFile) {
+		if (process.env.NODE_ENV !== 'production' && examplesFile && global) {
+			global.VUE_STYLEGUIDIST = global.VUE_STYLEGUIDIST || {}
+			if (global.VUE_STYLEGUIDIST[examplesFile]) {
+				// eslint-disable-next-line no-console
+				console.warn(
+					'\n\n' +
+						`WARNING: ${path.relative(process.cwd(), examplesFile)}\n` +
+						`this file is used by multiple components.\n` +
+						` - ${path.relative(process.cwd(), global.VUE_STYLEGUIDIST[examplesFile])}\n` +
+						` - ${path.relative(process.cwd(), file)}\n` +
+						'It will be displayed more than once in the styleguide\n' +
+						'Check out this cookbook receipe to solve the issue\n' +
+						`${consts.DOCS_COOKBOOK}#i-have-multiple-components-in-the-same-folder-what-can-i-do\n`
+				)
+			} else {
+				global.VUE_STYLEGUIDIST[examplesFile] = file
+			}
+		}
 		vsgDocs.examples = getExamples(
 			file,
 			examplesFile,

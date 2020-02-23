@@ -2,6 +2,11 @@ import { Component } from '../../types/Component'
 import { Example } from '../../types/Example'
 import compileExamples from './compileExamples'
 
+interface ComponentsAndFiles {
+	exampleFileNames: string[]
+	components: Component[]
+}
+
 /**
  * Do things that are hard or impossible to do in a loader: we don’t have access to component name
  * and props in the styleguide-loader because we’re using `require` to load the component module.
@@ -9,7 +14,10 @@ import compileExamples from './compileExamples'
  * @param {Array} components
  * @return {Array}
  */
-export default function processComponents(components: Component[]): Component[] {
+export default function processComponents({
+	exampleFileNames,
+	components
+}: ComponentsAndFiles): Component[] {
 	return components.map(component => {
 		const newComponent: Component = {
 			...component,
@@ -29,6 +37,10 @@ export default function processComponents(components: Component[]): Component[] 
 		}
 
 		newComponent.props && compileExamples(newComponent.props.examples)
+		if (component.props && component.props.examplesFile) {
+			const { examplesFile } = component.props
+			exampleFileNames.push(examplesFile)
+		}
 
 		return newComponent
 	})
