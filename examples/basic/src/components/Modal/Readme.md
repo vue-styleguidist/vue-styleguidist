@@ -4,7 +4,7 @@ You can modify the code through the playground
     const merge = require("lodash/merge").default
 
     <button @click.prevent="isOpen = true">Open</button>
-    <Modal :showModal="isOpen">
+    <Modal :showModal="isOpen" @close="isOpen = false">
       <h1 slot="head">Hallo!</h1>
       <div slot="body">
         <button  @click.prevent="isOpen = false">Close</button>
@@ -25,27 +25,35 @@ You can also develop more complex examples, instantiating Vue
       data(){
         return {
           showModal: false,
-          countdown: timeCountdown
+          countdown: timeCountdown,
         }
       },
       watch:{
           showModal(value) {
             if (value) {
-              var cycle = setInterval(()=>{
+              this.cycle = setInterval(()=>{
                 this.countdown--;
                 if (this.countdown === 0) {
                   this.showModal = false;
                   this.countdown = timeCountdown;
-                  clearInterval(cycle);
+                  clearInterval(this.cycle);
                 }
               },1000);
+            }else{
+              clearInterval(this.cycle);
             }
           },
+      },
+      methods: {
+        closeModal() {
+          this.showModal = false;
+          clearInterval(this.cycle);
+        }
       },
       template: `
         <div>
           <button @click.prevent="showModal = true">Open Modal</button>
-          <Modal :showModal="showModal">
+          <Modal :showModal="showModal" @close="closeModal">
             <h1 slot="head">Title</h1>
             <div slot="body">
               Countdown to close mode {{ countdown }}

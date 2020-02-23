@@ -1,7 +1,9 @@
 <template>
   <div>
+    <button @click="$emit('close')">
+      X
+    </button>
     <slot />
-    <button>X</button>
   </div>
 </template>
 
@@ -12,5 +14,8 @@
 export default {}
 </script>
 
-<style>
+<style scoped>
+button {
+	float: right;
+}
 </style>

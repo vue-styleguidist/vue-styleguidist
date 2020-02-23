@@ -94,7 +94,7 @@ If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.h
 </script>
 ```
 
-A current pattern in VueJs component is to have a limited number of valid values for a prop.
+A common pattern in VueJs components is to have a limited number of valid values for a prop.
 
 For instance, `size` would only accept `small`, `medium` and `large`.
 

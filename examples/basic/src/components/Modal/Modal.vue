@@ -6,7 +6,10 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <ModalHeader class="modal-head">
+          <ModalHeader
+            class="modal-head"
+            @close="$emit('close')"
+          >
             <!-- @slot Use this slot header -->
             <slot name="head" />
           </ModalHeader>
