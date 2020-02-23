@@ -171,7 +171,7 @@ Events emitted directly in `v-on` expressions will be detected automatically. To
 
 The comment block containing the documentation needs to contain one line with `@event click`. The rest of the comment block will behave like the comment blocks described in the script.
 
-`@property` to describe an argument and no tag at all to set a description to the event.
+`@property` to describe an argument and no tag at all to set the description of the event.
 
 ```html
 <div>
@@ -208,7 +208,7 @@ To add a description, add a comment right before.
 </template>
 ```
 
-In addition to documenting the slots and giving them a description, you can document the bindings. They are actually documented like props or params using the keyword `@binding`,
+In addition to documenting the slots and giving them a description, you can document the bindings. They are documented like props or params using the keyword `@binding`,
 
 The format will then be
 
@@ -241,6 +241,8 @@ If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](htt
 ## Usage examples and Readme files
 
 Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a Vue component with an interactive playground.
+
+If you want to ignore the readme file for one component, use the `@example [none]` doclet. Use this when multiple components in the same folder share a `ReadMe` file. This will prevent the examples from being rendered multiple times.
 
     Vue component example:
 
@@ -337,7 +339,7 @@ Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in th
 
 You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
 
-## External examples using doclet tags
+### External examples using doclet tags
 
 Additional example files can be associated with components using `@example` doclet syntax.
 
@@ -356,6 +358,10 @@ export default {
 ```
 
 > **Note:** You’ll need a regular example file (like `Readme.md`) too when [skipComponentsWithoutExample](/Configuration.md#skipcomponentswithoutexample) is `true`.
+
+### Ignore examples files
+
+The `@examples` doclet can also be used to ignore the connected `ReadMe` file. Use it to avoid rendering examples multiple times.
 
 ## Public methods
 

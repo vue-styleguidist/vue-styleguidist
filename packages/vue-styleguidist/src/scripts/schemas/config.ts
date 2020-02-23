@@ -172,7 +172,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 
 			return false
 		},
-		example: (componentPath: string) => componentPath.replace(/\.jsx?$/, '.examples.md')
+		example: (componentPath: string) => componentPath.replace(/\.(jsx|vue)?$/, '.examples.md')
 	},
 	highlightTheme: {
 		type: 'string',
