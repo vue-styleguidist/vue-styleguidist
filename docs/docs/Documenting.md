@@ -11,7 +11,6 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Slots](#slots)
 - [Include Mixins and Extends](#include-mixins-and-extends)
 - [Usage examples and Readme files](#usage-examples-and-readme-files)
-- [External examples using doclet tags](#external-examples-using-doclet-tags)
 - [Public methods](#public-methods)
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
@@ -362,6 +361,18 @@ export default {
 ### Ignore examples files
 
 The `@examples` doclet can also be used to ignore the connected `ReadMe` file. Use it to avoid rendering examples multiple times.
+
+```js
+/**
+ * Component is described here.
+ *
+ * @example [none]
+ */
+export default {
+  name: 'Button'
+  // ...
+}
+```
 
 ## Public methods
 

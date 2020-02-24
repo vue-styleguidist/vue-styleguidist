@@ -5,7 +5,7 @@
 <!-- toc -->
 
 - [How it works](#how-it-works)
-- [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
+- [Webpack loaders and Webpack configuration](#webpack-loaders-and-webpack-configuration)
 - [React components](#react-components)
 - [Styles](#styles)
 - [Render vue components](#render-vue-components)
