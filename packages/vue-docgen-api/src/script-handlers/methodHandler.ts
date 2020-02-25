@@ -38,28 +38,24 @@ export default async function methodHandler(documentation: Documentation, path: 
 						p = val
 					}
 				}
-				if (bt.isFunction(p.node)) {
-					methodName = bt.isObjectMethod(p.node) ? p.node.key.name : methodName
+				methodName = bt.isObjectMethod(p.node) ? p.node.key.name : methodName
 
-					const docBlock = getDocblock(bt.isObjectMethod(p.node) ? p : p.parentPath)
+				const docBlock = getDocblock(bt.isObjectMethod(p.node) ? p : p.parentPath)
 
-					const jsDoc: DocBlockTags = docBlock
-						? getDoclets(docBlock)
-						: { description: '', tags: [] }
-					const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
+				const jsDoc: DocBlockTags = docBlock ? getDoclets(docBlock) : { description: '', tags: [] }
+				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
-					// ignore the method if there is no public tag
-					if (!jsDocTags.some((t: Tag) => t.title === 'access' && t.content === 'public')) {
-						return
-					}
-
-					const methodDescriptor = documentation.getMethodDescriptor(methodName)
-
-					if (jsDoc.description) {
-						methodDescriptor.description = jsDoc.description
-					}
-					setMethodDescriptor(methodDescriptor, p as NodePath<bt.Function>, jsDocTags)
+				// ignore the method if there is no public tag
+				if (!jsDocTags.some((t: Tag) => t.title === 'access' && t.content === 'public')) {
+					return
 				}
+
+				const methodDescriptor = documentation.getMethodDescriptor(methodName)
+
+				if (jsDoc.description) {
+					methodDescriptor.description = jsDoc.description
+				}
+				setMethodDescriptor(methodDescriptor, p as NodePath<bt.Function>, jsDocTags)
 			})
 		}
 	}
