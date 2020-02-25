@@ -17,22 +17,22 @@ describe('tests button', () => {
 	})
 
 	it('should return an object', () => {
-		expect(typeof docButton).toEqual('object')
+		expect(typeof docButton).toBe('object')
 	})
 
 	describe('general information', () => {
 		it('The component name should be buttonComponent', () => {
-			expect(docButton.displayName).toEqual('Best Button')
+			expect(docButton.displayName).toBe('Best Button')
 		})
 
 		it('The component should have a description', () => {
-			expect(docButton.description).toEqual(
+			expect(docButton.description).toBe(
 				'This is an example of creating a reusable button component and using it with external data.'
 			)
 		})
 
 		it('should the component has two tags', () => {
-			expect(docButton.tags && Object.keys(docButton.tags).length).toEqual(2)
+			expect(docButton.tags && Object.keys(docButton.tags).length).toBe(2)
 		})
 
 		it('should the component has authors', () => {
@@ -74,9 +74,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has size prop description equal The size of the button', () => {
-			expect(getTestDescriptor(docButton.props, 'size').description).toEqual(
-				'The size of the button'
-			)
+			expect(getTestDescriptor(docButton.props, 'size').description).toBe('The size of the button')
 		})
 
 		it('should give no origin to the native prop "span"', () => {
@@ -102,7 +100,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has color prop description equal The color for the button example', () => {
-			expect(getTestDescriptor(docButton.props, 'color').description).toEqual(
+			expect(getTestDescriptor(docButton.props, 'color').description).toBe(
 				'The color for the button example'
 			)
 		})
@@ -114,7 +112,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has seventeen props', () => {
-			expect(docButton.props && docButton.props.length).toEqual(17)
+			expect(docButton.props && docButton.props.length).toBe(17)
 		})
 
 		it('should the component has propsAnother prop default equal "blue"', () => {
@@ -128,19 +126,19 @@ describe('tests button', () => {
 		})
 
 		it("should span has as description 'Number of columns (1-12) the column should span.'", () => {
-			expect(getTestDescriptor(docButton.props, 'span').description).toEqual(
+			expect(getTestDescriptor(docButton.props, 'span').description).toBe(
 				'Number of columns (1-12) the column should span.'
 			)
 		})
 
 		it("should span has as description 'Sm breakpoint and above'", () => {
-			expect(getTestDescriptor(docButton.props, 'spanSm').description).toEqual(
+			expect(getTestDescriptor(docButton.props, 'spanSm').description).toBe(
 				'Sm breakpoint and above'
 			)
 		})
 
 		it("should spanMd has as description 'Md breakpoint and above'", () => {
-			expect(getTestDescriptor(docButton.props, 'spanMd').description).toEqual(
+			expect(getTestDescriptor(docButton.props, 'spanMd').description).toBe(
 				'Md breakpoint and above'
 			)
 		})
@@ -168,7 +166,7 @@ describe('tests button', () => {
 		})
 
 		it('should value default example props description to be The example props', () => {
-			expect(getTestDescriptor(docButton.props, 'example').description).toEqual('The example props')
+			expect(getTestDescriptor(docButton.props, 'example').description).toBe('The example props')
 		})
 
 		it('should v-model to be string', () => {
@@ -182,7 +180,7 @@ describe('tests button', () => {
 		})
 
 		it('should value default v-model props description to be Model example2', () => {
-			expect(getTestDescriptor(docButton.props, 'v-model').description).toEqual('Model example2')
+			expect(getTestDescriptor(docButton.props, 'v-model').description).toBe('Model example2')
 		})
 
 		it('should propE to be string', () => {
@@ -273,13 +271,13 @@ describe('tests button', () => {
 		})
 
 		it('should the description of success event is Success event.', () => {
-			expect(getTestDescriptor(docButton.events, 'success').description).toEqual('Success event.')
+			expect(getTestDescriptor(docButton.events, 'success').description).toBe('Success event.')
 		})
 	})
 
 	describe('slots', () => {
 		it('should have a slot.', () => {
-			expect(docButton.slots && docButton.slots.length).toEqual(1)
+			expect(docButton.slots && docButton.slots.length).toBe(1)
 		})
 
 		it('should have a default slot.', () => {
@@ -287,7 +285,7 @@ describe('tests button', () => {
 		})
 
 		it('the default slot should have "Use this slot default" as description', () => {
-			expect(getTestDescriptor(docButton.slots, 'default').description).toEqual(
+			expect(getTestDescriptor(docButton.slots, 'default').description).toBe(
 				'Use this slot default'
 			)
 		})
