@@ -27,6 +27,14 @@ export default async function documentRequiredComponents(
 	// resolve where components are through immediately exported variables
 	await recursiveResolveIEV(pathResolver, varToFilePath, opt.validExtends)
 
+	// if we are in a mixin or an extend we want to add
+	// all props on the current doc, instead of creating another one
+	if (originObject && documentation) {
+		return [
+			await enrichDocumentation(documentation, varToFilePath, originObject, opt, pathResolver)
+		]
+	}
+
 	const files = new Map<string, string[]>()
 	for (const varName of Object.keys(varToFilePath)) {
 		const { filePath, exportName } = varToFilePath[varName]
@@ -44,50 +52,66 @@ export default async function documentRequiredComponents(
 	await files.keys().reduce(async (_, fullFilePath) => {
 		await _
 		const vars = files.get(fullFilePath)
-		if (fullFilePath && vars) {
-			// if we are in a mixin or an extend we want to apply
-			// all props on the current doc, instad of creating anther one
-			if (originObject && documentation) {
-				try {
-					const originVar = {
-						[originObject]: {
-							name: '-',
-							path: path.relative(path.dirname(documentation.componentFullfilePath), fullFilePath)
+		docs = docs.concat(
+			await parseFile(
+				{
+					...opt,
+					filePath: fullFilePath,
+					nameFilter: vars
+				},
+				documentation
+			)
+		)
+	}, Promise.resolve())
+	return docs
+}
+
+async function enrichDocumentation(
+	documentation: Documentation,
+	varToFilePath: ImportedVariableSet,
+	originObject: 'extends' | 'mixin',
+	opt: ParseOptions,
+	pathResolver: (pat?: string) => string
+): Promise<Documentation> {
+	await Object.keys(varToFilePath).reduce(async (_, varName) => {
+		const { filePath, exportName } = varToFilePath[varName]
+
+		// If there is more than one filepath for a variable, only one
+		// will be valid. if not the parser of the browser will shout.
+		// We therefore do not care in which order the filepath go as
+		// long as we follow the variables order
+		await Promise.all(
+			filePath.map(async p => {
+				const fullFilePath = pathResolver(p)
+				if (opt.validExtends(fullFilePath)) {
+					try {
+						const originVar = {
+							[originObject]: {
+								name: '-',
+								path: path.relative(path.dirname(documentation.componentFullfilePath), fullFilePath)
+							}
 						}
-					}
-					await vars.reduce(async (_, v) => {
-						await _
+
 						await parseFile(
 							{
 								...opt,
 								filePath: fullFilePath,
-								nameFilter: [v],
+								nameFilter: [exportName],
 								...originVar
 							},
 							documentation
 						)
-					}, Promise.resolve())
-					if (documentation && originVar[originObject]) {
-						originVar[originObject].name =
-							documentation.get('displayName') || documentation.get('exportName')
-						documentation.set('displayName', null)
+						if (documentation && originVar[originObject]) {
+							originVar[originObject].name =
+								documentation.get('displayName') || documentation.get('exportName')
+							documentation.set('displayName', null)
+						}
+					} catch (e) {
+						// eat the error
 					}
-				} catch (e) {
-					// eat the error
 				}
-			} else {
-				docs = docs.concat(
-					await parseFile(
-						{
-							...opt,
-							filePath: fullFilePath,
-							nameFilter: vars
-						},
-						documentation
-					)
-				)
-			}
-		}
+			})
+		)
 	}, Promise.resolve())
-	return docs
+	return documentation
 }

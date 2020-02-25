@@ -89,7 +89,7 @@ export class UnconfiguredEditor extends Component {
 				// cursor position calculation
 				padding={space[2]}
 				// to make sure the css styles for prism are taken into account
-				preClassName={!jssThemedEditor && langClass}
+				preClassName={cx(!jssThemedEditor && langClass)}
 			/>
 		)
 	}

@@ -9,15 +9,15 @@
 - [How to hide some components in a style guide but make them available in examples?](#how-to-hide-some-components-in-a-style-guide-but-make-them-available-in-examples)
 - [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
 - [How to change styles of a style guide?](#how-to-change-styles-of-a-style-guide)
-- [How to change the layout of a style guide?](#how-to-change-the-layout-of-a-style-guide)
 - [How to change style guide dev server logs output?](#how-to-change-style-guide-dev-server-logs-output)
 - [How to debug my components and examples?](#how-to-debug-my-components-and-examples)
 - [How to debug the exceptions thrown from my components?](#how-to-debug-the-exceptions-thrown-from-my-components)
 - [How to use Vagrant with Styleguidist?](#how-to-use-vagrant-with-styleguidist)
 - [How to document styled-components?](#how-to-document-styled-components)
-- [Use vue-styleguideist with components that contain routing](#use-vue-styleguideist-with-components-that-contain-routing)
+- [Use vue-styleguidist with components that contain routing](#use-vue-styleguidist-with-components-that-contain-routing)
 - [How to include FontAwesome (or other icon sets) in your style guide](#how-to-include-fontawesome-or-other-icon-sets-in-your-style-guide)
 - [How to use vue-styleguidist with multiple packages for components](#how-to-use-vue-styleguidist-with-multiple-packages-for-components)
+- [I have multiple components in the same folder what can I do?](#i-have-multiple-components-in-the-same-folder-what-can-i-do)
 
 <!-- tocstop -->
 
@@ -391,7 +391,7 @@ const _StyledTitle = styled.h1`
 export default class StyledTitle extends Vue {}
 ```
 
-## Use vue-styleguideist with components that contain routing
+## Use vue-styleguidist with components that contain routing
 
 If your components contain `<router-link>` the best way is, in your styleguide to mock it. In the `styelguide.config,js` file add `styleguide.global.required.js` (see below) to the [require](/Configuration.md#require) parameter. Styleguidist will render `router-link` as an anchor or tag of your choosing. Don't use `vue-router` inside vue-styleguidist. It will conflict with its internal router.
 
@@ -455,7 +455,7 @@ See [`template`](/Configuration.md#template) for more details.
 
 ## How to use vue-styleguidist with multiple packages for components
 
-If your base components are in one package and the derived components are in another, you will want the documenattion to reflect extended components props in the exposed ones.
+If your base components are in one package and the derived components are in another, you will want the documentation to reflect extended components props in the exposed ones.
 
 Say you have a `BaseButton.vue` in a `@scoped/core` package that you extend into `IconButton.vue` in the `@scoped/extended` package, the `BaseButton.vue` props are not going to be documented with `IconButton.vue`. This can be what you want, or you could be missing a lot of props.
 
@@ -472,3 +472,31 @@ module.exports = {
   }
 }
 ```
+
+## I have multiple components in the same folder what can I do?
+
+If multiple documented components live in the same folder, and you are using a `ReadMe` file to document them, the content of the readme is going to show for every component.
+
+Three solutions are available depending on taste and context.
+
+### the docs block
+
+The simplest solution is to use the `<docs>` block instead. It works well with Vetur syntax highlighting and allows you to never forget to update the documentation.
+
+Trade-off: Markdown files can be read without rendering, in Github for example while coding the component itself. Vue files cannot.
+
+### Named readmes
+
+Use the name of the component file switching `.vue` with `.md` and you can have one documentation file per component in the folder.
+
+Trade-off: When you enter a folder, Github automatically displays the readme file if it exists. The files you would be writing would not be readmes. No automated file would be loaded.
+
+### Remove unwanted documentations
+
+[Documentation](/docs/Documenting.html#ignore-examples-files)
+
+In the tags of a component, an `@example` doclet can be specified. It is usually used to tell styleguidist where to find more documentation.
+
+It can also be used with the special value `[none]`. It will then hide the example file that would normally be associated with the component.
+
+If you hide with `@examples [none]` all non-main components, the only remaining readme displayed will the main one. We get our `readme` file back.

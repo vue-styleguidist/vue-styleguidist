@@ -85,7 +85,7 @@ import { parse } from 'vue-docgen-api'
 var componentInfoSimple = parse(filePath)
 ```
 
-In the options, specify the changes you made to node resolution through your webpack config. Write additional script and template handlers and push them in the options object to parse non-standard elements.
+In the options, specify the changes you made to node resolution through your Webpack config. Write additional script and template handlers and push them in the options object to parse non-standard elements.
 
 ```ts
 import * as bt from '@babel/types'
@@ -124,7 +124,7 @@ Same as `parse`, but this way you can force the content of the code. The `filePa
 
 ### `parseMulti(code: string, filePath:string, options?: DocGenOptions):ComponentDoc[]`
 
-Same as `parse`, but allows for mulitple exported components in one file.
+Same as `parse`, but allows for multiple exported components in one file.
 
 **NOTE** Return type is `Array<ComponentDoc>` instead of `ComponentDoc`. Use `exportName` to differentiate the exports.
 
@@ -132,21 +132,21 @@ Same as `parse`, but allows for mulitple exported components in one file.
 
 #### `alias`
 
-This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here..
+This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here.
 
 #### `resolve`
 
-`resolve` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolve) too. If you haev it in webpack or use baseDir in TypeScript, you should probably see how this one works.
+`resolve` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolve) too. If you have it in Webpack or use `baseDir` in TypeScript, you should probably see how this one works.
 
 #### `addScriptHandler` and `addTemplateHandler`
 
-The custom additiona handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+The custom additional handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
 
 #### `validExtends`
 
 Function - Returns if an extended component should be parsed by docgen.
 
-**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non blocking but annoying.
+**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non-blocking but annoying.
 
 **NOTE** If you allow all of `node_modules` to try to be parsed, you might degrade performance. Use it responsibly.
 
@@ -164,7 +164,7 @@ function getPropDescriptor(propName: string): PropDescriptor
 
 First, we use babel to parse the comments in the code.
 
-Then we use vue-template-compiler to parse the HTML template.
+Then we use `vue-template-compiler` to parse the HTML template.
 
 These parsers give us Abstract Syntax Trees (AST). We then traverse them with handlers to extract the info we need from components and their JSdoc.
 

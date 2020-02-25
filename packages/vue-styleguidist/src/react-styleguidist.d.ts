@@ -235,3 +235,8 @@ declare module 'rsg-components/slots' {
 	const slots: (config?: slotsStyleGuidistConfigObject) => any
 	export default slots
 }
+
+declare module 'rsg-components/DuplicateDocumentationAlert' {
+	const DuplicateDocumentationAlert: (props: { duplicateDocumentationFilenames: string[] }) => any
+	export default DuplicateDocumentationAlert
+}

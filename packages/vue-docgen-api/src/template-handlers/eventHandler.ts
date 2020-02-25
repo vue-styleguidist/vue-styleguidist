@@ -44,7 +44,6 @@ function getEventsFromExpression(
 			const obj = path.node ? path.node.callee : undefined
 			const args = path.node ? path.node.arguments : undefined
 			if (obj && args && bt.isIdentifier(obj) && obj.name === '$emit' && args.length) {
-				// TODO: resolve variable if any
 				const evtName = bt.isStringLiteral(args[0]) ? args[0].value : '<undefined>'
 				documentation.getEventDescriptor(evtName)
 				eventsFound.push(evtName)
