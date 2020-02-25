@@ -108,6 +108,24 @@ describe('methodHandler', () => {
 				name: 'testArrowFunction'
 			})
 		})
+
+		it('should return the method if it is a returned function', () => {
+			const src = `
+      export default {
+        methods: {
+          /**
+           * @public
+           */
+          testHighFunction: waitFor('thingToWait', () => {
+            return 'test';
+          }),
+        }
+      }
+      `
+			tester(src, {
+				name: 'testHighFunction'
+			})
+		})
 	})
 
 	it('should return their parameters', () => {

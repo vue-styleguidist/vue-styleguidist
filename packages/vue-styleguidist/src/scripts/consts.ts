@@ -7,5 +7,6 @@ export default {
 	DOCS_CONFIG: DOCS_HOMEPAGE + 'docs/Configuration',
 	DOCS_COMPONENTS: DOCS_HOMEPAGE + 'docs/Components',
 	DOCS_WEBPACK: DOCS_HOMEPAGE + 'docs/Webpack',
-	DOCS_DOCUMENTING: DOCS_HOMEPAGE + 'docs/Documenting'
+	DOCS_DOCUMENTING: DOCS_HOMEPAGE + 'docs/Documenting',
+	DOCS_COOKBOOK: DOCS_HOMEPAGE + 'docs/Cookbook'
 }

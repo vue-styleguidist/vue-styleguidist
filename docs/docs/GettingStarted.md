@@ -2,7 +2,7 @@
 
 ## 1. Install
 
-Install webpack if you don’t have it already, this is how we determine if your version of webpack is compatible with styleguidist.
+Install Webpack if you don’t have it already, this is how we determine if your version of Webpack is compatible with styleguidist.
 
 ```bash
 npm install --save-dev webpack
