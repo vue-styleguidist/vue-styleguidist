@@ -13,6 +13,12 @@ declare module 'glogg' {
 	export = getLogger
 }
 
+declare namespace NodeJS {
+	interface Global {
+		VUE_STYLEGUIDIST: Record<string, string>
+	}
+}
+
 declare module 'lru-cache' {
 	class LRUCache {
 		constructor(num: number)

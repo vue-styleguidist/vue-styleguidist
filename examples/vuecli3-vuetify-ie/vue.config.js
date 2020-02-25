@@ -27,8 +27,10 @@ module.exports = {
 		const eslintRule = conf.module.rule('eslint')
 		if (eslintRule) {
 			const vsgPath = path.resolve(path.dirname(require.resolve('vue-styleguidist')), '../')
+			const docgenPath = path.resolve(path.dirname(require.resolve('vue-docgen-api')), '../')
 
 			eslintRule.exclude.add(vsgPath)
+			eslintRule.exclude.add(docgenPath)
 			eslintRule.exclude.add(vueBrowserCompilerPath)
 		}
 

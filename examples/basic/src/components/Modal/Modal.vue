@@ -6,10 +6,13 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-head">
+          <ModalHeader
+            class="modal-head"
+            @close="$emit('close')"
+          >
             <!-- @slot Use this slot header -->
             <slot name="head" />
-          </div>
+          </ModalHeader>
           <div class="modal-body">
             <!-- @slot Use this slot body -->
             <slot name="body" />
@@ -21,12 +24,15 @@
 </template>
 
 <script>
+import ModalHeader from './ModalHeader.vue'
+
 /**
  * Modal example [modal-component](https://vuejs.org/v2/examples/modal.html).
  * @author [Vue](https://vuejs.org/v2/examples/modal.html)
  */
 export default {
 	name: 'Modal',
+	components: { ModalHeader },
 	props: {
 		/**
 		 * Show modal

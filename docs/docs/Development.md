@@ -5,7 +5,7 @@
 <!-- toc -->
 
 - [How it works](#how-it-works)
-- [Webpack loaders and webpack configuration](#webpack-loaders-and-webpack-configuration)
+- [Webpack loaders and Webpack configuration](#webpack-loaders-and-webpack-configuration)
 - [React components](#react-components)
 - [Styles](#styles)
 - [Render vue components](#render-vue-components)
@@ -14,7 +14,7 @@
 
 Styleguidist isn’t an ordinary single-page app and some design decisions may look confusing to an outsider. In this guide, we’ll explain these decisions to un-confuse potential contributors.
 
-The main thing is that we’re running two apps at the same time: user’s components and Styleguidist UI. They share a webpack configuration and have styles in the same scope (there’s only one scope in CSS). And we can control only one of these two apps: Styleguidist UI. That puts us under some restrictions:
+The main thing is that we’re running two apps at the same time: user’s components and Styleguidist UI. They share a Webpack configuration and have styles in the same scope (there’s only one scope in CSS). And we can control only one of these two apps: Styleguidist UI. That puts us under some restrictions:
 
 - Our styles should not affect user component styles.
 - User styles (especially global like Bootstrap) should not affect Styleguidist UI.
@@ -28,25 +28,25 @@ Styleguidist uses Markdown for documentation: each JavaScript code block is rend
 
 Webpack loaders (see below) generate JavaScript modules. In each of these modules, each component specified by the user is parsed with their documentation and examples. The whole module is then passed to a React app which renders the style guide.
 
-## Webpack loaders and webpack configuration
+## Webpack loaders and Webpack configuration
 
-We use webpack loaders to hot reload the style guide on changes in user components, styles, and Markdown documentation. We have three loaders ([loaders](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/loaders) folder):
+We use Webpack loaders to hot reload the style guide on changes in user components, styles, and Markdown documentation. We have three loaders ([loaders](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/loaders) folder):
 
 - `styleguide-loader`: loads components and sections;
 - `vuedoc-loader`: loads props documentation using [vue-docgen-api](Docgen.md);
 - `examples-loader`: loads examples from Markdown files;
 
-There are two more loaders — `css-loader` and `styles-loader`. They are one-line aliases to corresponding webpack loaders. We don’t want to rely on a webpack loader resolver because its behavior can be changed by the user’s webpack config (Create React App does that for example). This way we can bypass webpack resolver and use Node resolver instead. These loaders are used like this:
+There are two more loaders — `css-loader` and `styles-loader`. They are one-line aliases to corresponding Webpack loaders. We don’t want to rely on a Webpack loader resolver because its behavior can be changed by the user’s Webpack config (Create React App does that for example). This way we can bypass Webpack resolver and use Node resolver instead. These loaders are used like this:
 
 ```js
 require('!!../../../loaders/style-loader!../../../loaders/css-loader!codemirror/lib/codemirror.css')
 ```
 
-`!!` prefix tells webpack not to use any other loaders that may be listed in a webpack configuration to load this module. This ensures that the user’s webpack configuration won’t affect Styleguidist.
+`!!` prefix tells Webpack not to use any other loaders that may be listed in a Webpack configuration to load this module. This ensures that the user’s Webpack configuration won’t affect Styleguidist.
 
-Styleguidist tries to load and reuse a user’s webpack config (`webpack.config.js` in the project root folder). It works most of the time but has some restrictions: Styleguidist [ignores](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/scripts/utils/mergeWebpackConfig.js) some fields and plugins because they are already included (like `webpack.HotModuleReplacementPlugin`), don’t make sense for a style guide (like `output`) or may break Styleguidist (like `entry`).
+Styleguidist tries to load and reuse a user’s Webpack config (`webpack.config.js` in the project root folder). It works most of the time but has some restrictions: Styleguidist [ignores](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/scripts/utils/mergeWebpackConfig.js) some fields and plugins because they are already included (like `webpack.HotModuleReplacementPlugin`), don’t make sense for a style guide (like `output`) or may break Styleguidist (like `entry`).
 
-We’re trying to keep Styleguidist’s own [webpack config](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/scripts/make-webpack-config.js) minimal to reduce clashes with user’s configuration.
+We’re trying to keep Styleguidist’s own [Webpack config](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/scripts/make-webpack-config.js) minimal to reduce clashes with user’s configuration.
 
 ## React components
 
