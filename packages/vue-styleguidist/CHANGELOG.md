@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.12.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.0...v4.12.1) (2020-02-26)
+
+
+### Bug Fixes
+
+* remove annoying warning about double use ([1dce586](https://github.com/vue-styleguidist/vue-styleguidist/commit/1dce586111f53975a5585da1d5f580aa06b6c425))
+
+
+
+
+
 # [4.12.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.11.0...v4.12.0) (2020-02-25)
 
 
