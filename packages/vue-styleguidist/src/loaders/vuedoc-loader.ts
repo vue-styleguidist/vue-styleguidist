@@ -127,19 +127,24 @@ export async function vuedocLoader(
 		if (process.env.NODE_ENV !== 'production' && examplesFile && global) {
 			global.VUE_STYLEGUIDIST = global.VUE_STYLEGUIDIST || {}
 			if (global.VUE_STYLEGUIDIST[examplesFile]) {
-				// eslint-disable-next-line no-console
-				console.warn(
-					'\n\n' +
-						`WARNING: ${path.relative(process.cwd(), examplesFile)}\n` +
-						`this file is used by multiple components.\n` +
-						` - ${path.relative(process.cwd(), global.VUE_STYLEGUIDIST[examplesFile])}\n` +
-						` - ${path.relative(process.cwd(), file)}\n` +
-						'It will be displayed more than once in the styleguide\n' +
-						'Check out this cookbook receipe to solve the issue\n' +
-						`${consts.DOCS_COOKBOOK}#i-have-multiple-components-in-the-same-folder-what-can-i-do\n`
-				)
+				const relativeFile = path.relative(process.cwd(), file)
+				if (global.VUE_STYLEGUIDIST[examplesFile] !== relativeFile) {
+					// eslint-disable-next-line no-console
+					console.warn(
+						'\n\n' +
+							`WARNING: ${path.relative(process.cwd(), examplesFile)}\n` +
+							`this file is used by multiple components.\n` +
+							` - ${global.VUE_STYLEGUIDIST[examplesFile]}\n` +
+							` - ${relativeFile}\n` +
+							'It will be displayed more than once in the styleguide\n' +
+							'Check out this cookbook receipe to solve the issue\n' +
+							`${
+								consts.DOCS_COOKBOOK
+							}#i-have-multiple-components-in-the-same-folder-what-can-i-do\n`
+					)
+				}
 			} else {
-				global.VUE_STYLEGUIDIST[examplesFile] = file
+				global.VUE_STYLEGUIDIST[examplesFile] = path.relative(process.cwd(), file)
 			}
 		}
 		vsgDocs.examples = getExamples(
