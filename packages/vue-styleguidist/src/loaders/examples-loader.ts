@@ -55,6 +55,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	if (shouldShowDefaultExample && source) {
 		const fullFilePath = path.join(path.dirname(filePath), file)
 		const docs = await parse(fullFilePath)
+		this.addDependency(fullFilePath)
 		source = expandDefaultComponent(source, docs)
 	}
 
