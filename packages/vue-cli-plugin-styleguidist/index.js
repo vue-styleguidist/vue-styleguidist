@@ -25,7 +25,8 @@ module.exports = (api, options) => {
 			description: 'build the styleguidist website',
 			usage: 'vue-cli-service styleguidist:build [options]',
 			options: {
-				'--config': 'path to the config file'
+				'--config': 'path to the config file',
+				'--verbose': 'show the full log'
 			}
 		},
 		args => {
@@ -39,7 +40,9 @@ module.exports = (api, options) => {
 			description: 'launch the styleguidist dev server',
 			usage: 'vue-cli-service styleguidist [options]',
 			options: {
-				'--config': 'path to the config file'
+				'--config': 'path to the config file',
+				'--verbose': 'show the full log',
+				'--port': 'port to start the server on'
 			}
 		},
 
@@ -79,11 +82,19 @@ function getStyleguidist(args, api, options) {
 	// reset the default component expression
 	sgConf.components = sgConf.components || 'src/components/**/[A-Z]*.vue'
 
+	if (args.verbose !== undefined) {
+		sgConf.verbose = !!args.verbose
+	}
+
+	if (args.port !== undefined) {
+		sgConf.serverPort = parseInt(args.port, 10)
+	}
+
 	const userWebpackConfig = sgConf.webpackConfig
 	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
 	const cliWebpackConfig = getConfig(api)
 	return styleguidist(
-		conf,
+		sgConf,
 		config => (config.webpackConfig = merge(cliWebpackConfig, userWebpackConfig))
 	)
 }
