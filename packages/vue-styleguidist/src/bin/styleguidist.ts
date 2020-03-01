@@ -47,9 +47,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || env
 // Load style guide config
 let config: StyleguidistConfig
 try {
-	config = getConfig(argv.config, binutils.updateConfig)
-
 	process.env.VUESG_VERBOSE = argv.verbose
+
+	config = getConfig(argv.config, binutils.updateConfig)
 
 	binutils.verbose('Styleguidist config:', config)
 
