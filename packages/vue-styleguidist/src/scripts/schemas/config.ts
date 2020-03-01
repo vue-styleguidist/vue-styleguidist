@@ -268,7 +268,9 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 	progressBar: {
 		message: 'Display a progress bar while building',
 		type: 'boolean',
-		default: true
+		default: true,
+		process: (value: boolean | undefined, config: StyleguidistConfig): boolean =>
+			value === undefined && !config.verbose ? true : !!value
 	},
 	propsParser: {
 		tstype: '(file: string) => Promise<ComponentDoc>',
