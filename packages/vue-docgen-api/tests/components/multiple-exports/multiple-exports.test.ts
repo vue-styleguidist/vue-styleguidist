@@ -4,24 +4,31 @@ import { parse, parseMulti } from '../../../src/main'
 
 const button = path.join(__dirname, './MyButton.vue')
 let docButton: ComponentDoc[]
+let buttonDoc: ComponentDoc
+let inputDoc: ComponentDoc
 describe('tests components with multiple exports', () => {
 	beforeAll(async done => {
 		docButton = await parseMulti(button)
+		buttonDoc = docButton.find(d => d.exportName === 'Button') || {
+			displayName: '<none>',
+			exportName: '<none>'
+		}
+
+		inputDoc = docButton.find(d => d.exportName === 'Input') || {
+			displayName: '<none>',
+			exportName: '<none>'
+		}
 		done()
 	})
 
-	it('should extract the export name', () => {
-		expect(docButton[1].exportName).toBe('Button')
-	})
-
 	it('should have the correct content in the extracted definition', () => {
-		expect(docButton[1].description).toBe(
+		expect(buttonDoc.description).toBe(
 			'This is a button that represents a javascript only component, not a vue SFC'
 		)
 	})
 
 	it('should export mixins prop', () => {
-		expect(docButton[1].props && docButton[1].props.map(p => p.name)).toMatchInlineSnapshot(`
+		expect(buttonDoc.props && buttonDoc.props.map(p => p.name)).toMatchInlineSnapshot(`
 		Array [
 		  "color",
 		  "id",
@@ -40,12 +47,8 @@ describe('tests components with multiple exports', () => {
 	`)
 	})
 
-	it('should extract the export name for input', () => {
-		expect(docButton[2].exportName).toBe('Input')
-	})
-
 	it('should have contain the input definition', () => {
-		expect(docButton[2].description).toBe(
+		expect(inputDoc.description).toBe(
 			'This is an input that represents another component extracted in the same file'
 		)
 	})
