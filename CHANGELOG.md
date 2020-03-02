@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.12.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.1...v4.12.2) (2020-03-02)
+
+
+### Bug Fixes
+
+* **plugin:** pass cli options down to vsg ([6765aee](https://github.com/vue-styleguidist/vue-styleguidist/commit/6765aee4a72b8ab36eb0094ead8a92d7b4a6789c)), closes [#771](https://github.com/vue-styleguidist/vue-styleguidist/issues/771)
+* allow examples start with < & pure template ([3860129](https://github.com/vue-styleguidist/vue-styleguidist/commit/3860129c4c7bac644df39e6ac3a128a4e09ea84d))
+* avoid progress bar when verbose ([75f77d0](https://github.com/vue-styleguidist/vue-styleguidist/commit/75f77d0d6f92fa2f72ec9f625ec72c3c76077c92))
+* bring back the full power of verbose option ([210bae2](https://github.com/vue-styleguidist/vue-styleguidist/commit/210bae2c9e5b935c17cb7add5bfdef9459b90a6c))
+* hot reload default examples ([295cfe5](https://github.com/vue-styleguidist/vue-styleguidist/commit/295cfe553ce8d5e48a3c7607672017246d65d992))
+
+
+
+
+
 ## [4.12.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.0...v4.12.1) (2020-02-26)
 
 

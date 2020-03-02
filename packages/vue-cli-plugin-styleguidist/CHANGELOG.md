@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.12.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.1...v4.12.2) (2020-03-02)
+
+
+### Bug Fixes
+
+* **plugin:** pass cli options down to vsg ([6765aee](https://github.com/vue-styleguidist/vue-styleguidist/commit/6765aee4a72b8ab36eb0094ead8a92d7b4a6789c)), closes [#771](https://github.com/vue-styleguidist/vue-styleguidist/issues/771)
+
+
+
+
+
 ## [4.12.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.0...v4.12.1) (2020-02-26)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
