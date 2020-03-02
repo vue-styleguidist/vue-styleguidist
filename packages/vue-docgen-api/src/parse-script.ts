@@ -63,7 +63,7 @@ export default async function parseScript(
 	)
 }
 
-function executeHandlers(
+async function executeHandlers(
 	preHandlers: Handler[],
 	localHandlers: Handler[],
 	componentDefinitions: Map<string, NodePath>,
@@ -75,14 +75,12 @@ function executeHandlers(
 	const compDefs = componentDefinitions
 		.keys()
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
-		// default component first so in multiple exports in parse it is returned
-		.sort((name1, name2) => (name2 === 'default' ? 1 : name1 === 'default' ? -1 : 0))
 
 	if (forceSingleExport && compDefs.length > 1) {
 		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
 	}
 
-	return Promise.all(
+	const docs = await Promise.all(
 		compDefs.map(async name => {
 			// If there are multiple exports and an initial documentation,
 			// it means the doc is coming from an SFC template.
@@ -104,5 +102,10 @@ function executeHandlers(
 			doc.set('exportName', name)
 			return doc
 		})
+	)
+
+	// default component first so in multiple exports in parse it is returned
+	return docs.sort(
+		(a, b) => (a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0)
 	)
 }
