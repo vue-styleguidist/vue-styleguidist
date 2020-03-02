@@ -99,19 +99,13 @@ export async function vuedocLoader(
 	} else if (docs.tags) {
 		const examples = docs.tags.examples
 		if (examples) {
-			const examplePath = (examples[examples.length - 1] as Tag).content
-			if (examples.length > 1) {
-				logger.warn(
-					`More than one @example tags specified in component ${path.relative(
-						process.cwd(),
-						file
-					)}\nUsing the last tag to build examples: '${examplePath}'`
-				)
-			}
-			if (examplePath === '[none]') {
+			const examplePaths = examples.map((a: Tag) => a.content)
+			if (examplePaths[0] === '[none]') {
 				ignoreExamplesInFile = true
 			} else {
-				vsgDocs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${examplePath}`)
+				vsgDocs.example = examplePaths.map(p =>
+					requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${p}`)
+				)
 			}
 		}
 	}
@@ -129,10 +123,9 @@ export async function vuedocLoader(
 			if (global.VUE_STYLEGUIDIST[examplesFile]) {
 				const relativeFile = path.relative(process.cwd(), file)
 				if (global.VUE_STYLEGUIDIST[examplesFile] !== relativeFile) {
-					// eslint-disable-next-line no-console
-					console.warn(
+					logger.warn(
 						'\n\n' +
-							`WARNING: ${path.relative(process.cwd(), examplesFile)}\n` +
+							`${path.relative(process.cwd(), examplesFile)}\n` +
 							`this file is used by multiple components.\n` +
 							` - ${global.VUE_STYLEGUIDIST[examplesFile]}\n` +
 							` - ${relativeFile}\n` +

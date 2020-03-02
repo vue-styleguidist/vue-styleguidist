@@ -31,7 +31,7 @@ export default function processComponents({
 				// Append @example doclet to all examples
 				examples: [
 					...((component.props.examples || []) as Example[]),
-					...(component.props.example || [])
+					...(component.props.example || []).flat()
 				]
 			}
 		}
