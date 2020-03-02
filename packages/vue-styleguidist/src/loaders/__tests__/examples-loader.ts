@@ -94,7 +94,8 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 			async: () => callback,
 			request: 'Readme.md',
 			query: getQuery({ shouldShowDefaultExample: true }),
-			_styleguidist: {}
+			_styleguidist: {},
+			addDependency: jest.fn()
 		} as any,
 		exampleMarkdown
 	)
