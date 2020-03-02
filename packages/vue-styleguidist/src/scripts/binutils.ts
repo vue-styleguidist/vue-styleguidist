@@ -16,7 +16,7 @@ import server from './server'
 import build from './build'
 import consts from './consts'
 
-const logger = glogg('vsg')
+const logger = glogg('rsg')
 
 export type ServerInfo = { app: WebpackDevServer; compiler: Compiler }
 

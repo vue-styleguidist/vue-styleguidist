@@ -14,7 +14,7 @@ import { StyleguidistConfig } from '../../types/StyleGuide'
 import findUserWebpackConfig from '../utils/findUserWebpackConfig'
 import consts from '../consts'
 
-const logger = loggerMaker('vsg')
+const logger = loggerMaker('rsg')
 
 const DEFAULT_COMPONENTS_PATTERN = `src/{components,Components}/**/*.vue`
 

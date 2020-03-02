@@ -10,7 +10,7 @@ import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
 import * as binutils from '../scripts/binutils'
 
-const logger = createLogger('vsg-bin')
+const logger = createLogger('rsg')
 
 const argv = minimist(process.argv.slice(2))
 const command = argv._[0]
