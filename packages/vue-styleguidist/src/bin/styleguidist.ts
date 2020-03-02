@@ -10,7 +10,7 @@ import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
 import * as binutils from '../scripts/binutils'
 
-const logger = createLogger('vsg-bin')
+const logger = createLogger('rsg')
 
 const argv = minimist(process.argv.slice(2))
 const command = argv._[0]
@@ -47,9 +47,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || env
 // Load style guide config
 let config: StyleguidistConfig
 try {
-	config = getConfig(argv.config, binutils.updateConfig)
-
 	process.env.VUESG_VERBOSE = argv.verbose
+
+	config = getConfig(argv.config, binutils.updateConfig)
 
 	binutils.verbose('Styleguidist config:', config)
 

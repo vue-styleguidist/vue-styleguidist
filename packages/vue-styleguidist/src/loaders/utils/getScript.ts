@@ -19,5 +19,5 @@ export default (code: string, jsxInExamples: boolean): string => {
 	}
 
 	//else it could be the weird almost jsx of vue-styleguidist
-	return code.split(/\n[\t ]*</)[0]
+	return /^</.test(code.trim()) ? '' : code.split(/\n[\t ]*</)[0]
 }

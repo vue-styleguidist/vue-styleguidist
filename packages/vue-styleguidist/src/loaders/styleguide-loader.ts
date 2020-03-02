@@ -16,7 +16,7 @@ import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModul
 import { StyleguidistContext } from '../types/StyleGuide'
 import getSections from './utils/getSections'
 
-const logger = createLogger('vsg')
+const logger = createLogger('rsg')
 
 const STYLE_VARIABLE_NAME = '__vsgStyles'
 const THEME_VARIABLE_NAME = '__vsgTheme'

@@ -13,7 +13,7 @@ import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
 import consts from '../scripts/consts'
 
-const logger = createLogger('vsg')
+const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
 export default function(this: StyleguidistContext, source: string) {
