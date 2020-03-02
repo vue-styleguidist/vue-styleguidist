@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.13.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.2...v4.13.0) (2020-03-02)
+
+
+### Bug Fixes
+
+* avoid systematic verbose ([d43c6b0](https://github.com/vue-styleguidist/vue-styleguidist/commit/d43c6b0d8b6b5c782d806925eccd6d4b95526292))
+* use logger instead on console ([01ac6dc](https://github.com/vue-styleguidist/vue-styleguidist/commit/01ac6dc3ad67848d51033dec1be3245f30afdba3))
+
+
+### Features
+
+* allow mutiple extra example files ([d06283b](https://github.com/vue-styleguidist/vue-styleguidist/commit/d06283b841bca17db6125deb83bffc3ec565ac35))
+
+
+
+
+
 ## [4.12.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.12.1...v4.12.2) (2020-03-02)
 
 
