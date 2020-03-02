@@ -9,6 +9,15 @@ it('should return given code if code can be parsed properly', () => {
 	expect(result).toEqual(code)
 })
 
+it('should return empty if only a template is given', () => {
+	const code = `<FunctionalButton id="test">
+    In the docs block
+</FunctionalButton>`
+	const result = getScript(code, false)
+
+	expect(result).toEqual('')
+})
+
 it('should return script part if SFC is detected', () => {
 	const code = `export default {
         proper:'test'
