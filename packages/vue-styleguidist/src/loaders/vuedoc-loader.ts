@@ -129,10 +129,9 @@ export async function vuedocLoader(
 			if (global.VUE_STYLEGUIDIST[examplesFile]) {
 				const relativeFile = path.relative(process.cwd(), file)
 				if (global.VUE_STYLEGUIDIST[examplesFile] !== relativeFile) {
-					// eslint-disable-next-line no-console
-					console.warn(
+					logger.warn(
 						'\n\n' +
-							`WARNING: ${path.relative(process.cwd(), examplesFile)}\n` +
+							`${path.relative(process.cwd(), examplesFile)}\n` +
 							`this file is used by multiple components.\n` +
 							` - ${global.VUE_STYLEGUIDIST[examplesFile]}\n` +
 							` - ${relativeFile}\n` +
