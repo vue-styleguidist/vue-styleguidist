@@ -1,13 +1,13 @@
 import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
-import { parse } from '../../../src/main'
+import { parseMulti } from '../../../src/main'
 
 const button = path.join(__dirname, './iev.js')
 let docDropDown: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
 	beforeEach(async done => {
-		docDropDown = await parse(button)
+		docDropDown = (await parseMulti(button))[0]
 		done()
 	})
 
@@ -17,5 +17,9 @@ describe('tests wrapper with root slot', () => {
 
 	it('should pick up the component name', () => {
 		expect(docDropDown.displayName).toBe('iev')
+	})
+
+	it('should pick up the export name', () => {
+		expect(docDropDown.exportName).toBe('iev')
 	})
 })
