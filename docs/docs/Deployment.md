@@ -18,7 +18,7 @@ Now, you should have a directory containing HTML and javascript. Let's deploy it
 
 1.  Connect Netlify to your GitHub account
 1.  Select the repo to deploy
-1.  Set the build command as `styleguidist build`
+1.  Set the build command as `vue-styleguidist build`
 1.  The build folder will be `styleguide` if you have `styleguide.config.js` at the root of your repository and left out the option. If you changed the `styleguideDir` option, pick the new path chosen.
 
 ## Deploy on [Zeit Now](https://zeit.co/)
