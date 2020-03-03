@@ -36,8 +36,17 @@ function getEventsFromExpression(
 	documentation: Documentation,
 	options: TemplateParserOptions
 ) {
-	// this allows for weird expressions like {[t]:val} to be parsed properly
-	const ast = parser.parse(`(() => (${expression}))()`)
+	let ast
+	try {
+		// this allows for weird expressions like {[t]:val} to be parsed properly
+		ast = parser.parse(/\n/.test(expression) ? expression : `(() => (${expression}))()`)
+	} catch (e) {
+		throw Error(
+			`Could not parse template expression:\n` + //
+			`${expression}\n` + //
+				`Err: ${e.message}`
+		)
+	}
 	const eventsFound: string[] = []
 	recast.visit(ast.program, {
 		visitCallExpression(path) {
