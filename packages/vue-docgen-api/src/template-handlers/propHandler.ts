@@ -1,13 +1,11 @@
 import * as bt from '@babel/types'
 import recast from 'recast'
 import { ASTElement, ASTExpression, ASTNode } from 'vue-template-compiler'
-import buildParser from '../babel-parser'
 import Documentation, { ParamTag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
-
-const parser = buildParser({ plugins: ['typescript'] })
+import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 
 export default function propTemplateHandler(
 	documentation: Documentation,
@@ -58,8 +56,7 @@ function getPropsFromExpression(
 	documentation: Documentation,
 	options: TemplateParserOptions
 ) {
-	// this allows for weird expressions like {[t]:val} to be parsed properly
-	const ast = parser.parse(`(() => (${expression}))()`)
+	const ast = getTemplateExpressionAST(expression)
 	const propsFound: string[] = []
 	recast.visit(ast.program, {
 		visitMemberExpression(path) {
