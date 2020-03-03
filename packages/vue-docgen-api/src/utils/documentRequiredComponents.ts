@@ -35,35 +35,42 @@ export default async function documentRequiredComponents(
 		]
 	}
 
-	const files = new Map<string, string[]>()
+	const files = new Map<string, Array<{ exportName: string; varName: string }>>()
 	for (const varName of Object.keys(varToFilePath)) {
 		const { filePath, exportName } = varToFilePath[varName]
 		filePath.forEach(p => {
 			const fullFilePath = pathResolver(p)
 			if (opt.validExtends(fullFilePath)) {
 				const vars = files.get(fullFilePath) || []
-				vars.push(exportName)
+				vars.push({ exportName, varName })
 				files.set(fullFilePath, vars)
 			}
 		})
 	}
 
-	let docs: Documentation[] = []
-	await files.keys().reduce(async (_, fullFilePath) => {
-		await _
-		const vars = files.get(fullFilePath)
-		docs = docs.concat(
-			await parseFile(
-				{
-					...opt,
-					filePath: fullFilePath,
-					nameFilter: vars
-				},
-				documentation
-			)
+	const docsArray = await Promise.all(
+		files.keys().map(
+			async (fullFilePath): Promise<Documentation[]> => {
+				const vars = files.get(fullFilePath) || []
+				const temporaryDocs = await parseFile(
+					{
+						...opt,
+						filePath: fullFilePath,
+						nameFilter: vars.map(v => v.exportName)
+					},
+					documentation
+				)
+				// update varnames with the original iev names
+				temporaryDocs.forEach(d =>
+					d.set('exportName', (vars.find(v => v.exportName === d.get('exportName')) || {}).varName)
+				)
+				return temporaryDocs
+			}
 		)
-	}, Promise.resolve())
-	return docs
+	)
+
+	// flatten array of docs
+	return docsArray.reduce((a, i) => a.concat(i), [])
 }
 
 async function enrichDocumentation(
@@ -74,6 +81,7 @@ async function enrichDocumentation(
 	pathResolver: (pat?: string) => string
 ): Promise<Documentation> {
 	await Object.keys(varToFilePath).reduce(async (_, varName) => {
+		await _
 		const { filePath, exportName } = varToFilePath[varName]
 
 		// If there is more than one filepath for a variable, only one

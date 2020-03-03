@@ -1,6 +1,9 @@
 <template>
 	<!-- here is a nice component template -->
-	<button class="buttonComponent" @click.prevent="onClick">
+	<button class="buttonComponent" @click.prevent="
+	onClick()
+	console.log('count', count)
+	">
 		<!-- @slot Use this slot default -->
 		<slot></slot>
 	</button>
@@ -32,7 +35,7 @@ console.log('mixin loaded but not parsed', hidden)
  */
 export default {
 	name: NAME,
-	mixins: [another, genericMixin, colorMixin, multi, first, second ],
+	mixins: [another, genericMixin, colorMixin, multi, first, second],
 	props: {
 		/**
 		 * The size of the button

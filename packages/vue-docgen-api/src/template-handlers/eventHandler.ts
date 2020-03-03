@@ -1,14 +1,12 @@
 import * as bt from '@babel/types'
 import recast from 'recast'
 import { ASTElement, ASTNode } from 'vue-template-compiler'
-import buildParser from '../babel-parser'
 import Documentation, { Tag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
 import { setEventDescriptor } from '../script-handlers/eventHandler'
-
-const parser = buildParser({ plugins: ['typescript'] })
+import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 
 const allowRE = /^(v-on|@)/
 export default function eventHandler(
@@ -36,8 +34,8 @@ function getEventsFromExpression(
 	documentation: Documentation,
 	options: TemplateParserOptions
 ) {
-	// this allows for weird expressions like {[t]:val} to be parsed properly
-	const ast = parser.parse(`(() => (${expression}))()`)
+	const ast = getTemplateExpressionAST(expression)
+
 	const eventsFound: string[] = []
 	recast.visit(ast.program, {
 		visitCallExpression(path) {
