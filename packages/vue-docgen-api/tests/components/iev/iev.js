@@ -1,3 +1,4 @@
-import IEV from './iev.vue'
+import iev from './iev.vue'
+import ievNamed from './ievNamed.vue'
 
-export default IEV
+export { ievNamed, iev }
