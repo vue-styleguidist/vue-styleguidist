@@ -115,6 +115,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "minimist": "^1.2.0",
     "node-sass": "^4.13.0",
+    "nuxt-property-decorator": "^2.5.1",
     "prettier": "1.13.7",
     "prop-types": "^15.6.2",
     "puppeteer": "^1.12.2",
