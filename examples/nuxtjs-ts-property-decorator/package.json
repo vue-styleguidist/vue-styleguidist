@@ -1,5 +1,5 @@
 {
-  "name": "vue-styleguidist-example-nuxtjs",
+  "name": "vue-styleguidist-example-nuxtjs-ts-property-decorator",
   "version": "4.0.0",
   "description": "Use beside Nuxt.js and generate your styleguide besides your main app",
   "keywords": [
