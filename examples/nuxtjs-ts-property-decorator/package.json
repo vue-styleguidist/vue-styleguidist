@@ -8,7 +8,7 @@
     "production ready",
     "scaffolding"
   ],
-  "author": "Knovour <knovour@gmail.com>",
+  "author": "Ozum <ozum@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
