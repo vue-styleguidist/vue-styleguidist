@@ -1,5 +1,5 @@
+import flatten from 'lodash/flatten'
 import { Component } from '../../types/Component'
-import { Example } from '../../types/Example'
 import compileExamples from './compileExamples'
 
 interface ComponentsAndFiles {
@@ -19,6 +19,7 @@ export default function processComponents({
 	components
 }: ComponentsAndFiles): Component[] {
 	return components.map(component => {
+		const props = component.props
 		const newComponent: Component = {
 			...component,
 
@@ -27,16 +28,16 @@ export default function processComponents({
 			visibleName: component.props.visibleName || component.props.displayName,
 
 			props: {
-				...component.props,
+				...props,
 				// Append @example doclet to all examples
 				examples: [
-					...((component.props.examples || []) as Example[]),
-					...(component.props.example || []).flat()
+					...(props.examples || []), //
+					...flatten(props.example) //
 				]
 			}
 		}
 
-		newComponent.props && compileExamples(newComponent.props.examples)
+		newComponent.props && compileExamples(newComponent.props.examples || [])
 		if (component.props && component.props.examplesFile) {
 			const { examplesFile } = component.props
 			exampleFileNames.push(examplesFile)

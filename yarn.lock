@@ -2713,6 +2713,11 @@
   dependencies:
     "@types/express" "*"
 
+"@types/doctrine@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@types/doctrine/-/doctrine-0.0.3.tgz#e892d293c92c9c1d3f9af72c15a554fbc7e0895a"
+  integrity sha1-6JLSk8ksnB0/mvcsFaVU+8fgiVo=
+
 "@types/domhandler@*":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@types/domhandler/-/domhandler-2.4.1.tgz#7b3b347f7762180fbcb1ece1ce3dd0ebbb8c64cf"
@@ -17390,7 +17395,7 @@ react-simple-code-editor@^0.11.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.11.0.tgz#bb57c7c29b570f2ab229872599eac184f5bc673c"
   integrity sha512-xGfX7wAzspl113ocfKQAR8lWPhavGWHL3xSzNLeseDRHysT+jzRBi/ExdUqevSMos+7ZtdfeuBOXtgk9HTwsrw==
 
-react-styleguidist@^11.0.1:
+react-styleguidist@^11.0.0, react-styleguidist@^11.0.1:
   version "11.0.1"
   resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-11.0.1.tgz#6aee297b609c0ed18ce6c27c81cfc29e00fddfef"
   integrity sha512-kMfJH730OPouU8Sl9neNjWCr72Lq2fx+JPNDrYcUqJXfz0z0fUUDW9DOuvw54f+u6hFSCin3/qdnH2JpIOH6HQ==

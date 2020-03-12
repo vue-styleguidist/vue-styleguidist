@@ -1,5 +1,5 @@
-import { StyleguidistConfig } from '../../types/StyleGuide'
-import { Component } from '../../types/Component'
+import * as Rsg from 'react-styleguidist'
+import { SanitizedStyleguidistConfig } from '../../types/StyleGuide'
 import processComponent from './processComponent'
 
 /**
@@ -11,7 +11,7 @@ import processComponent from './processComponent'
  */
 export default function getComponents(
 	components: string[],
-	config: StyleguidistConfig
-): Component[] {
+	config: SanitizedStyleguidistConfig
+): Rsg.LoaderComponent[] {
 	return components.map(filepath => processComponent(filepath, config))
 }

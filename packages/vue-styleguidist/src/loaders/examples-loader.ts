@@ -9,12 +9,12 @@ import toAst from 'to-ast'
 import { builders as b } from 'ast-types'
 import { parse } from 'vue-docgen-api'
 import { compile } from 'vue-inbrowser-compiler'
+import * as Rsg from 'react-styleguidist'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModule'
 import { StyleguidistContext } from '../types/StyleGuide'
-import { ExampleLoader } from '../types/Example'
 import expandDefaultComponent from './utils/expandDefaultComponent'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import importCodeExampleFile from './utils/importCodeExampleFile'
@@ -44,7 +44,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	let source: string | false = src
 	if (!filePath) return ''
 	if (isVueFile(filePath)) {
-		// if it's a vue file, the examples are in a docs block
+		// if it's a vue file, the examples could be in a docs block
 		source = getComponentVueDoc(src, filePath)
 	}
 	const config = this._styleguidist
@@ -59,13 +59,13 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		source = expandDefaultComponent(source, docs)
 	}
 
-	const updateExample = (props: ExampleLoader) => {
+	const updateExample = (props: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>) => {
 		const p = importCodeExampleFile(props, this.resourcePath, this)
 		return config.updateExample ? config.updateExample(p, this.resourcePath) : p
 	}
 
 	// Load examples
-	const examples = chunkify(source, updateExample, customLangs)
+	const examples = source ? chunkify(source, updateExample, customLangs) : []
 
 	const getExampleLiveImports = (source: string) =>
 		getImports(getScript(source, config.jsxInExamples))
@@ -78,7 +78,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	const requiresFromExamples = allCodeExamples.reduce(
 		(requires: ({ importPath: string; path: string } | string)[], example) => {
 			const requiresLocal = getExampleLiveImports(example.content)
-			const importPath = example.settings.importpath
+			const importPath = example.settings && example.settings.importpath
 			return requires.concat(
 				importPath ? requiresLocal.map(path => ({ importPath, path })) : requiresLocal
 			)

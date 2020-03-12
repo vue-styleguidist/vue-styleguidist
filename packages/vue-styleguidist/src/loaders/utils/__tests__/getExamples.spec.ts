@@ -33,10 +33,10 @@ it('getExamples() should return require with examples-loader is component has ex
 	done()
 })
 
-it('getExamples() should return an empty array if component has no example file', () => {
+it('getExamples() should return null if component has no example file', () => {
 	const file = 'file.md'
 	const examplesFile = 'foo'
 	const result = getExamples(file, examplesFile)
 
-	expect(result).toEqual([])
+	expect(result).toEqual(null)
 })

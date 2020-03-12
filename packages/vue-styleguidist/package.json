@@ -4,7 +4,7 @@
 	"version": "4.13.1",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
-		"compile": "yarn typings && babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
+		"compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx && yarn typings",
 		"compile:watch": "concurrently \"yarn compile --watch\" \"yarn typings --watch\"",
 		"typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
 	},

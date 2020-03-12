@@ -1,14 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TabButton from 'rsg-components/TabButton'
+import isEmpty from 'lodash/isEmpty'
+import { PropDescriptor, MethodDescriptor } from 'vue-docgen-api'
 
-const UsageTabButton = props => {
+export interface UsageTabButtonProps {
+	name: string
+	onClick: (e: React.MouseEvent) => void
+	active?: boolean
+	props: {
+		props?: PropDescriptor[]
+		methods?: MethodDescriptor[]
+	}
+}
+
+const UsageTabButton = (props: UsageTabButtonProps) => {
 	const component = props.props
-	const showButton =
-		component.props ||
-		(component.methods && component.methods.length > 0) ||
-		(component.slots && Object.keys(component.slots).length > 0) ||
-		(component.events && Object.keys(component.events).length > 0)
+	const showButton = !isEmpty(component.props) || !isEmpty(component.methods)
 	return showButton ? <TabButton {...props}>Props, methods, events & slots</TabButton> : null
 }
 
@@ -17,9 +25,7 @@ UsageTabButton.propTypes = {
 	name: PropTypes.string.isRequired,
 	props: PropTypes.shape({
 		props: PropTypes.array,
-		methods: PropTypes.array,
-		events: PropTypes.object,
-		slots: PropTypes.object
+		methods: PropTypes.array
 	}).isRequired,
 	active: PropTypes.bool
 }

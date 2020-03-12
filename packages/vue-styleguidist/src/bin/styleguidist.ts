@@ -5,7 +5,7 @@ import minimist from 'minimist'
 import kleur from 'kleur'
 import createLogger from 'glogg'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
-import { StyleguidistConfig } from '../types/StyleGuide'
+import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
 import * as binutils from '../scripts/binutils'
@@ -45,7 +45,7 @@ const env = command === 'build' ? 'production' : 'development'
 process.env.NODE_ENV = process.env.NODE_ENV || env
 
 // Load style guide config
-let config: StyleguidistConfig
+let config: SanitizedStyleguidistConfig
 try {
 	if (argv.verbose) {
 		process.env.VUESG_VERBOSE = 'true'
@@ -67,7 +67,7 @@ try {
 	}
 } catch (err) {
 	if (err instanceof StyleguidistError) {
-		const link = consts.DOCS_CONFIG + (err.anchor ? `#${err.anchor.toLowerCase()}` : '')
+		const link = consts.DOCS_CONFIG + (err.extra ? `#${err.extra.toLowerCase()}` : '')
 		binutils.printErrorWithLink(
 			err.message,
 			`${err.extra}\n\nLearn how to configure your style guide:`,

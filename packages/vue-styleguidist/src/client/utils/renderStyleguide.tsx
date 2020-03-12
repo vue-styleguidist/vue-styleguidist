@@ -38,10 +38,10 @@ export default function renderStyleguide(
 	}
 
 	const { title, pagePerSection, theme, styles } = styleguide.config
-	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection)
+	const { sections, displayMode } = getRouteData(allSections as any, loc.hash, pagePerSection)
 
 	// Update page title
-	doc.title = getPageTitle(sections, title, displayMode)
+	doc.title = getPageTitle(sections, title || '', displayMode)
 
 	// If the current hash location was set to just `/` (e.g. when navigating back from isolated view to overview)
 	// replace the URL with one without hash, to present the user with a single address of the overview screen
@@ -57,12 +57,12 @@ export default function renderStyleguide(
 				// only caclulate css revisions in dev when hot is on to avoid
 				// stringifying the styles in production
 				cssRevision={hashSum({ theme, styles })}
-				config={styleguide.config}
-				slots={slots(styleguide.config)}
+				config={styleguide.config as any}
+				slots={slots(styleguide.config as any)}
 				welcomeScreen={styleguide.welcomeScreen}
 				patterns={styleguide.patterns}
 				sections={sections}
-				allSections={allSections}
+				allSections={allSections as any}
 				displayMode={displayMode}
 				pagePerSection={pagePerSection}
 			/>
