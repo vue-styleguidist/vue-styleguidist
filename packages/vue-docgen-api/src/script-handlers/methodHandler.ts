@@ -89,7 +89,7 @@ function describeParams(
 ) {
 	// if there is no parameter no need to parse them
 	const fExp = methodPath.node
-	if (!fExp.params.length && !jsDocParamTags.length) {
+	if (!fExp.params || !jsDocParamTags || (!fExp.params.length && !jsDocParamTags.length)) {
 		return
 	}
 
