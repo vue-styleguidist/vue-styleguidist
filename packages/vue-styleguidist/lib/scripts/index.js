@@ -5,7 +5,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports.default = _default;
 
 require("react-styleguidist/lib/scripts/utils/ensureWebpack");
 
@@ -23,9 +23,9 @@ var binutils = _interopRequireWildcard(require("./binutils"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Make sure user has webpack installed
 
@@ -37,8 +37,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  * @returns {object} API.
  */
 function _default(config, updateConfig) {
-  config = (0, _config["default"])(config, function (config) {
-    (0, _logger["default"])(config.logger, config.verbose, {});
+  config = (0, _config.default)(config, function (config) {
+    (0, _logger.default)(config.logger, config.verbose, {});
 
     if (typeof updateConfig === 'function') {
       updateConfig(config);
@@ -48,17 +48,17 @@ function _default(config, updateConfig) {
   });
   return {
     build: function build(callback) {
-      return (0, _build["default"])(config, function (err, stats) {
+      return (0, _build.default)(config, function (err, stats) {
         return callback(err, config, stats);
       });
     },
     server: function server(callback) {
-      return (0, _server2["default"])(config, function (err) {
+      return (0, _server2.default)(config, function (err) {
         return callback(err, config);
       });
     },
     makeWebpackConfig: function makeWebpackConfig(env) {
-      return (0, _makeWebpackConfig2["default"])(config, env || 'production');
+      return (0, _makeWebpackConfig2.default)(config, env || 'production');
     },
     binutils: {
       server: function server(open) {
