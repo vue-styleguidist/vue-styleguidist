@@ -39,6 +39,7 @@ export default async function documentRequiredComponents(
 	for (const varName of Object.keys(varToFilePath)) {
 		const { filePath, exportName } = varToFilePath[varName]
 		filePath.forEach(p => {
+			if (!opt.validExtends(p)) return
 			const fullFilePath = pathResolver(p)
 			if (fullFilePath && opt.validExtends(fullFilePath)) {
 				const vars = files.get(fullFilePath) || []
@@ -90,6 +91,7 @@ async function enrichDocumentation(
 		// long as we follow the variables order
 		await Promise.all(
 			filePath.map(async p => {
+				if (!opt.validExtends(p)) return
 				const fullFilePath = pathResolver(p)
 
 				if (fullFilePath && opt.validExtends(fullFilePath)) {
