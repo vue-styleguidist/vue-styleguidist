@@ -1,2 +1,2 @@
 /lib
-/tests/Button.FR.js
+/__e2e__/__mocks__/Button.FR.js

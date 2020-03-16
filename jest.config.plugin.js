@@ -1,5 +1,5 @@
 module.exports = {
 	...require('./jest.config'),
-	testMatch: ['<rootDir>/packages/vue-cli-plugin-styleguidist/__e2e__/*.js'],
+	testMatch: ['<rootDir>/packages/*/__e2e__/*.{js,ts}'],
 	setupFiles: ['./test/jestsetup.plugin.js']
 }
