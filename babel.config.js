@@ -24,21 +24,13 @@ module.exports = {
 	],
 	overrides: [
 		{
-			include: [
-				'src/bin',
-				'src/loaders',
-				'src/scripts',
-				'packages/vue-docgen-api/src',
-				'packages/vue-docgen-cli/src'
-			],
-			exclude: ['packages/vue-styleguidist/src/loaders/utils/client'],
+			include: ['packages/vue-docgen-api/src', 'packages/vue-docgen-cli/src'],
 			presets: [
 				[
 					'@babel/env',
 					{
-						modules: 'cjs',
 						targets: {
-							node: 10
+							node: 8
 						},
 						forceAllTransforms: true
 					}

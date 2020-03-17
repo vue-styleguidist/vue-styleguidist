@@ -93,7 +93,6 @@ module.exports = {
 				  }
 	}),
 	styleguideDir: 'dist',
-	codeSplit: true,
 	ribbon: {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
