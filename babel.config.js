@@ -3,18 +3,13 @@ module.exports = {
 		[
 			'@babel/env',
 			{
-				useBuiltIns: 'usage',
-				corejs: 3,
 				targets: {
-					chrome: 59,
-					ie: 11
+					node: 8
 				},
-				forceAllTransforms: true,
-				modules: false
+				forceAllTransforms: true
 			}
 		],
-		'@babel/typescript',
-		'@babel/react'
+		'@babel/typescript'
 	],
 	plugins: [
 		'@babel/plugin-syntax-dynamic-import',
@@ -23,21 +18,6 @@ module.exports = {
 		'@babel/plugin-transform-runtime'
 	],
 	overrides: [
-		{
-			include: ['packages/vue-docgen-api/src', 'packages/vue-docgen-cli/src'],
-			presets: [
-				[
-					'@babel/env',
-					{
-						targets: {
-							node: 8
-						},
-						forceAllTransforms: true
-					}
-				],
-				'@babel/typescript'
-			]
-		},
 		{
 			include: ['test/cli-packages'],
 			presets: ['@vue/app']

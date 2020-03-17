@@ -6,19 +6,23 @@ module.exports = {
 	overrides: [
 		...babelCore.overrides,
 		{
-			include: ['src/bin', 'src/loaders', 'src/scripts'],
-			exclude: ['src/loaders/utils/client'],
+			include: ['src/client'],
 			presets: [
 				[
 					'@babel/env',
 					{
+						useBuiltIns: 'usage',
+						corejs: 3,
 						targets: {
-							node: 8
+							chrome: 59,
+							ie: 11
 						},
-						forceAllTransforms: true
+						forceAllTransforms: true,
+						modules: false
 					}
 				],
-				'@babel/typescript'
+				'@babel/typescript',
+				'@babel/react'
 			]
 		}
 	]
