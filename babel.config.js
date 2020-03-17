@@ -8,19 +8,26 @@ module.exports = {
 				targets: {
 					chrome: 59,
 					ie: 11
-				}
+				},
+				forceAllTransforms: true,
+				modules: false
 			}
 		],
 		'@babel/typescript',
 		'@babel/react'
 	],
-	plugins: ['@babel/plugin-proposal-class-properties'],
+	plugins: [
+		'@babel/plugin-syntax-dynamic-import',
+		'@babel/plugin-proposal-class-properties',
+		'@babel/plugin-proposal-object-rest-spread',
+		'@babel/plugin-transform-runtime'
+	],
 	overrides: [
 		{
 			include: [
-				'packages/vue-styleguidist/src/bin',
-				'packages/vue-styleguidist/src/loaders',
-				'packages/vue-styleguidist/src/scripts',
+				'src/bin',
+				'src/loaders',
+				'src/scripts',
 				'packages/vue-docgen-api/src',
 				'packages/vue-docgen-cli/src'
 			],
@@ -37,11 +44,6 @@ module.exports = {
 					}
 				],
 				'@babel/typescript'
-			],
-			plugins: [
-				'@babel/plugin-syntax-dynamic-import',
-				'@babel/plugin-proposal-class-properties',
-				'@babel/plugin-proposal-object-rest-spread'
 			]
 		},
 		{
