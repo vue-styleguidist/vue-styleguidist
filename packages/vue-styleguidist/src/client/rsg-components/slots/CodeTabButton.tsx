@@ -1,13 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import TabButton from 'rsg-components/TabButton';
+import React from 'react'
+import PropTypes from 'prop-types'
+import TabButton from 'rsg-components/TabButton'
 
-const CodeTabButton = (props: any) => <TabButton {...props}>View Code</TabButton>;
+interface CodeTabeButtonProps {
+	onClick: (e: React.MouseEvent) => void
+	name: string
+	active?: boolean
+}
+
+const CodeTabButton = (props: CodeTabeButtonProps) => <TabButton {...props}>View Code</TabButton>
 
 CodeTabButton.propTypes = {
 	onClick: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
-	active: PropTypes.bool,
-};
+	active: PropTypes.bool
+}
 
-export default CodeTabButton;
+export default CodeTabButton
