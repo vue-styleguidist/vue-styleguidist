@@ -1,13 +1,17 @@
 // Make sure user has webpack installed
 import 'react-styleguidist/lib/scripts/utils/ensureWebpack'
 import { Stats, Configuration, Compiler } from 'webpack'
+import { Theme } from 'react-styleguidist'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
-import { StyleguidistConfig } from '../types/StyleGuide'
+import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
+import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import buildUtil from './build'
 import server from './server'
 import makeWebpackConfig from './make-webpack-config'
 import getConfig from './config'
 import * as binutils from './binutils'
+
+export type ThemeConfig = RecursivePartial<Theme>
 
 export interface StyleGuideUtils {
 	/**
@@ -17,7 +21,7 @@ export interface StyleGuideUtils {
 	 * @return {Compiler} Webpack Compiler instance.
 	 */
 	build: (
-		callback: (err: Error | undefined, config: StyleguidistConfig, stats: Stats) => void
+		callback: (err: Error | undefined, config: SanitizedStyleguidistConfig, stats: Stats) => void
 	) => Compiler.Watching | Compiler
 
 	/**
@@ -28,7 +32,7 @@ export interface StyleGuideUtils {
 	 * @return {ServerInfo.Compiler} Webpack Compiler instance.
 	 */
 	server: (
-		callback: (err: Error | undefined, config: StyleguidistConfig) => void
+		callback: (err: Error | undefined, config: SanitizedStyleguidistConfig) => void
 	) => binutils.ServerInfo
 
 	/**
@@ -52,10 +56,10 @@ export interface StyleGuideUtils {
  * @returns {object} API.
  */
 export default function(
-	config: StyleguidistConfig,
-	updateConfig: (conf: StyleguidistConfig) => void
+	config: SanitizedStyleguidistConfig,
+	updateConfig: (conf: SanitizedStyleguidistConfig) => void
 ): StyleGuideUtils {
-	config = getConfig(config, (config: StyleguidistConfig) => {
+	config = getConfig(config, (config: SanitizedStyleguidistConfig) => {
 		setupLogger(config.logger, config.verbose, {})
 		if (typeof updateConfig === 'function') {
 			updateConfig(config)

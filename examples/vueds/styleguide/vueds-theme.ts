@@ -1,5 +1,7 @@
-module.exports = {
-	maxWidth: 'auto',
+import { ThemeConfig } from 'vue-styleguidist'
+
+const theme: ThemeConfig = {
+	maxWidth: 10000,
 	color: {
 		sidebarBackground: '#02172d',
 		border: 'rgba(255, 255, 255, 0.1)',
@@ -26,6 +28,8 @@ module.exports = {
 		monospace: ['Consolas', "'Liberation Mono'", 'Menlo', 'monospace']
 	},
 	fontSize: {
-		h4: '18px'
+		h4: 18
 	}
 }
+
+export default theme

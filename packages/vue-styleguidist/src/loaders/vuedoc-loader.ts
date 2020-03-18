@@ -5,7 +5,7 @@ import createLogger from 'glogg'
 import { parse, ComponentDoc, Tag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
-import { ComponentProps } from '../types/Component'
+import { LoaderComponentProps } from '../types/Component'
 import { StyleguidistContext } from '../types/StyleGuide'
 import getExamples from './utils/getExamples'
 import getComponentVueDoc from './utils/getComponentVueDoc'
@@ -86,7 +86,7 @@ export async function vuedocLoader(
 		stripOutOrigins(docs)
 	}
 
-	let vsgDocs: ComponentProps = {
+	let vsgDocs: LoaderComponentProps = {
 		...docs,
 		events: makeObject(docs.events),
 		slots: makeObject(docs.slots)

@@ -1,0 +1,77 @@
+/**
+ * /!\ WARNING /!\
+ * Do not edit manually.
+ * This file is the compilation of 
+ * Template: packages/vue-styleguidist/templates/StyleGuide.ts.ejs
+ * Config Data: packages/vue-styleguidist/src/scripts/schemas/config.ts
+ */
+
+import React from 'react'
+import WebpackDevServer from 'webpack-dev-server'
+import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
+import { TransformOptions } from 'buble'
+import { Styles } from 'jss';
+import { Configuration, loader } from 'webpack'
+import * as Rsg from 'react-styleguidist'
+import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
+import { ProcessedSection } from './Section'
+import { LoaderComponentProps } from './Component'
+
+export interface StyleguidistContext extends loader.LoaderContext {
+    _styleguidist: SanitizedStyleguidistConfig
+}
+
+export interface BaseStyleguidistConfig 
+    extends Omit<
+        Rsg.SanitizedStyleguidistConfig,
+        'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
+    > {<% 
+    Object.keys(schema).forEach(key => {
+        const opt = schema[key]
+        if(opt.inherit) return;
+        const description = opt.description || opt.message
+        const defaultShowable = ['boolean', 'number', 'string'].indexOf(typeof opt.default) > -1
+if(description || defaultShowable || opt.deprecated){%>
+    /**<% 
+    if(description) { %>
+     * <%- description %> <%
+    }
+
+    if(opt.deprecated) { %>
+     * @deprecated <%- opt.deprecated %> <%
+    }
+
+    if(defaultShowable) { %>
+     * @default <%- JSON.stringify(opt.default) %> <%
+    }
+    %>
+     */<%
+}
+    %>
+    <%-key %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ? 
+        schema[key].type : schema[key].uitype) || 'any' %>;<%
+    });
+%>
+}
+
+export interface SanitizedStyleguidistConfig extends BaseStyleguidistConfig {
+	sections: Rsg.ConfigSection[];
+}
+
+/**
+ * definition of the config object where everything is optional
+ * note that teh default example can be both a string and a boolean but ends
+ * up only being a string after sanitizing
+ */
+export interface StyleguidistConfig
+	extends RecursivePartial<Omit<SanitizedStyleguidistConfig, 'defaultExample'>> {
+	defaultExample?: string | boolean;
+}
+
+export interface StyleGuideObject {
+    sections: ProcessedSection[]
+    config: StyleguidistConfig
+    renderRootJsx: React.ReactNode
+    welcomeScreen: any
+    patterns: string[]
+}

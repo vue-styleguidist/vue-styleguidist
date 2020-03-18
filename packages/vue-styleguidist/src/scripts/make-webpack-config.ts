@@ -10,7 +10,7 @@ import forEach from 'lodash/forEach'
 import isFunction from 'lodash/isFunction'
 import makeWebpackConfig from 'react-styleguidist/lib/scripts/make-webpack-config'
 import StyleguidistOptionsPlugin from 'react-styleguidist/lib/scripts/utils/StyleguidistOptionsPlugin'
-import { StyleguidistConfig } from '../types/StyleGuide'
+import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import mergeWebpackConfig from './utils/mergeWebpackConfig'
 
 const RENDERER_REGEXP = /Renderer$/
@@ -18,7 +18,7 @@ const RENDERER_REGEXP = /Renderer$/
 const sourceDir = path.resolve(__dirname, '../client')
 
 export default function(
-	config: StyleguidistConfig,
+	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
 ): Configuration {
 	process.env.NODE_ENV = process.env.NODE_ENV || env
@@ -82,7 +82,7 @@ export default function(
 			// in order to avoid collision with the preload plugins
 			// that are loaded by the vue cli
 			// we have to load these plugins last
-			new StyleguidistOptionsPlugin(config),
+			new StyleguidistOptionsPlugin(config as any),
 			new MiniHtmlWebpackPlugin(htmlPluginOptions),
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -247,7 +247,7 @@ export default function(
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
-	const resolve = makeWebpackConfig(config, env).resolve
+	const resolve = makeWebpackConfig(config as any, env).resolve
 	if (resolve && resolve.alias) {
 		webpackAlias[RSG_COMPONENTS_ALIAS] = resolve.alias[RSG_COMPONENTS_ALIAS]
 	}

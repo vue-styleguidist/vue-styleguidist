@@ -1,9 +1,9 @@
-import { StyleguidistConfig } from '../types/StyleGuide'
+import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import createServer from './create-server'
 import { ServerInfo } from './binutils'
 
 export default function server(
-	config: StyleguidistConfig,
+	config: SanitizedStyleguidistConfig,
 	callback: (err?: Error) => void
 ): ServerInfo {
 	const env = 'development'

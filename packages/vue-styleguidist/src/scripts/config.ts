@@ -6,7 +6,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
 import sanitizeConfig from 'react-styleguidist/lib/scripts/utils/sanitizeConfig'
 import schema from './schemas/config'
-import { StyleguidistConfig } from '../types/StyleGuide'
+import { StyleguidistConfig, SanitizedStyleguidistConfig } from '../types/StyleGuide'
 
 const CONFIG_FILENAME = 'styleguide.config.js'
 
@@ -19,8 +19,8 @@ const CONFIG_FILENAME = 'styleguide.config.js'
  */
 export default function getConfig(
 	configParam: string | StyleguidistConfig | { serverPort?: string | number },
-	update?: (conf: StyleguidistConfig | {}) => StyleguidistConfig
-): StyleguidistConfig {
+	update?: (conf: SanitizedStyleguidistConfig | {}) => SanitizedStyleguidistConfig
+): SanitizedStyleguidistConfig {
 	let configFilepath
 	let config: StyleguidistConfig | { serverPort?: string | number }
 	if (isString(configParam)) {
@@ -54,7 +54,7 @@ export default function getConfig(
 	}
 
 	try {
-		return sanitizeConfig(config as StyleguidistConfig, schema, configDir)
+		return sanitizeConfig(config as StyleguidistConfig, schema as any, configDir) as any
 	} catch (exception) {
 		/* eslint-disable */
 		console.log(exception instanceof StyleguidistError, exception.constructor.name)
