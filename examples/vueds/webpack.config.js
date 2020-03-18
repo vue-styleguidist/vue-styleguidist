@@ -14,6 +14,14 @@ module.exports = {
 				exclude: /(node_modules|packages)/
 			},
 			{
+				test: /\.tsx?$/,
+				loader: 'ts-loader',
+				exclude: /node_modules/,
+				options: {
+					appendTsSuffixTo: [/\.vue$/]
+				}
+			},
+			{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader']
 			},

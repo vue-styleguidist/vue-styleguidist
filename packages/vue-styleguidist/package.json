@@ -4,7 +4,7 @@
 	"version": "4.13.1",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
-		"compile": "yarn typings && babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
+		"compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx && yarn typings",
 		"compile:watch": "concurrently \"yarn compile --watch\" \"yarn typings --watch\"",
 		"typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
 	},
@@ -70,7 +70,7 @@
 		"react-icons": "^3.7.0",
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.11.0",
-		"react-styleguidist": "^10.6.2",
+		"react-styleguidist": "^11.0.1",
 		"rewrite-imports": "^2.0.3",
 		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^2.2.2",

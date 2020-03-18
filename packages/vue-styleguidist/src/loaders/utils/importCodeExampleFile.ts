@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { ExampleLoader } from '../../types/Example'
+import * as Rsg from 'react-styleguidist'
 
 /**
  * Extract example from file
@@ -8,11 +8,11 @@ import { ExampleLoader } from '../../types/Example'
 const importRE = /^\[import\]\(([./\w]+)\)/
 
 export default function importCodeExampleFile(
-	example: ExampleLoader,
+	example: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>,
 	mdPath: string,
 	wp: any
-): ExampleLoader {
-	const lang = importRE.exec(example.lang)
+): Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'> {
+	const lang = importRE.exec(example.lang || '')
 	if (lang) {
 		const filePath = lang[1]
 		const absoluteFilePath = path.resolve(path.dirname(mdPath), filePath)

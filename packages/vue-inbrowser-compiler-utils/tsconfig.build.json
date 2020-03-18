@@ -6,6 +6,6 @@
 		"sourceMap": false,
 		"module": "es2015"
 	},
-	"include": ["src/**/*.ts"],
+	"include": ["src/**/*.ts", "../../@types/**/*"],
 	"exclude": ["node_modules", "src/**/__tests__/**/*.ts"]
 }

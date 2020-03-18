@@ -1,12 +1,12 @@
 import webpack, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
-import { StyleguidistConfig } from '../types/StyleGuide'
+import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import makeWebpackConfig from './make-webpack-config'
 import { ServerInfo } from './binutils'
 
 export default function createServer(
-	config: StyleguidistConfig,
+	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
 ): ServerInfo {
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)

@@ -1,10 +1,10 @@
 {
-	"extends": "./tsconfig",
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"declaration": true,
-		"jsx": "preserve",
-		"outDir": "lib",
-		"typeRoots": ["node_modules/vue-docgen-api/src/@types", "./src/@types"]
+		"lib": ["dom", "esnext"],
+		"outDir": "lib"
 	},
-	"exclude": ["node_modules", "**/__tests__/*.ts"]
+	"include": ["./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"],
+	"exclude": ["**/__tests__/*.ts", "**/__tests__/*.tsx"]
 }

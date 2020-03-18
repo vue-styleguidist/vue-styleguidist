@@ -18,7 +18,7 @@ export default function processSections({
 	exampleFileNames
 }: SectionAndFiles): ProcessedSection[] {
 	return sections.map(section => {
-		compileExamples(section.content)
+		compileExamples(section.content || [])
 		const { components = [], sections } = section
 
 		return {

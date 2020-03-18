@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JsDoc should render Markdown 1`] = `
+<div>
+  <div
+    class="vsg-jsdoc-tag rsg--wrapper-0"
+  >
+    <span
+      class="vsg-tag-name rsg--name-1"
+    >
+      Deprecated
+      :
+    </span>
+    <span
+      class="vsg-tag-value undefined"
+    >
+      <span
+        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+      >
+        Use 
+        <em
+          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8 rsg--em-10"
+        >
+          another
+        </em>
+         method
+      </span>
+    </span>
+  </div>
+  <div
+    class="vsg-jsdoc-tag rsg--wrapper-0"
+  >
+    <span
+      class="vsg-tag-name rsg--name-1"
+    >
+      See
+      :
+    </span>
+    <span
+      class="vsg-tag-value undefined"
+    >
+      <div>
+        <span
+          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        >
+          <a
+            class="rsg--link-13"
+            href="#TestLink"
+          >
+            See 1
+          </a>
+        </span>
+        <span
+          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        >
+          <a
+            class="rsg--link-13"
+            href="#TestLink2"
+          >
+            See 2
+          </a>
+        </span>
+      </div>
+    </span>
+  </div>
+  <div
+    class="vsg-jsdoc-tag rsg--wrapper-0"
+  >
+    <span
+      class="vsg-tag-name rsg--name-1"
+    >
+      Link
+      :
+    </span>
+    <span
+      class="vsg-tag-value undefined"
+    >
+      <span
+        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+      >
+        <a
+          class="rsg--link-13"
+          href="#TestLink"
+        >
+          Link 1
+        </a>
+      </span>
+    </span>
+  </div>
+  <div
+    class="vsg-jsdoc-tag rsg--wrapper-0"
+  >
+    <span
+      class="vsg-tag-name rsg--name-1"
+    >
+      Author
+      :
+    </span>
+    <span
+      class="vsg-tag-value undefined"
+    >
+      <span
+        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+      >
+        <a
+          class="rsg--link-13"
+          href="#TestLink"
+        >
+          Author 1
+        </a>
+        , 
+        <a
+          class="rsg--link-13"
+          href="#TestLink2"
+        >
+          Author 2
+        </a>
+      </span>
+    </span>
+  </div>
+  <div
+    class="vsg-jsdoc-tag rsg--wrapper-0"
+  >
+    <span
+      class="vsg-tag-name rsg--name-1"
+    >
+      Version
+      :
+    </span>
+    <span
+      class="vsg-tag-value undefined"
+    >
+      <span
+        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+      >
+        2.0.0
+      </span>
+    </span>
+  </div>
+  <div
+    class="vsg-jsdoc-tag rsg--wrapper-0"
+  >
+    <span
+      class="vsg-tag-name rsg--name-1"
+    >
+      Since
+      :
+    </span>
+    <span
+      class="vsg-tag-value undefined"
+    >
+      <span
+        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+      >
+        1.0.0
+      </span>
+    </span>
+  </div>
+</div>
+`;

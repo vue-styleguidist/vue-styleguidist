@@ -39,7 +39,7 @@ module.exports = {
 	/**
 	 * load the vueds color scheme
 	 */
-	theme: './styleguide/vueds-theme.js',
+	theme: './styleguide/vueds-theme.ts',
 	styles: './styleguide/vueds-styles.js',
 	/**
 	 * import the webpack config from the project. It might be useful to add

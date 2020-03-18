@@ -5,13 +5,14 @@ import createLogger from 'glogg'
 import { parse, ComponentDoc, Tag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
-import { ComponentProps } from '../types/Component'
+import { LoaderComponentProps } from '../types/Component'
 import { StyleguidistContext } from '../types/StyleGuide'
 import getExamples from './utils/getExamples'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
 import consts from '../scripts/consts'
+import mergeWebpackConfig from '../scripts/utils/mergeWebpackConfig'
 
 const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
@@ -48,7 +49,12 @@ export async function vuedocLoader(
 		config.contextDependencies.forEach(dir => this.addContextDependency(dir))
 	}
 
-	const webpackConfig = config.webpackConfig ? config.webpackConfig : {}
+	// resolve webpack config as functions or objects
+	const webpackConfig = mergeWebpackConfig(
+		{},
+		config.webpackConfig,
+		process.env.NODE_ENV || 'production'
+	)
 
 	let alias: { [key: string]: string } | undefined
 	let modules: string[] | undefined
@@ -86,7 +92,7 @@ export async function vuedocLoader(
 		stripOutOrigins(docs)
 	}
 
-	let vsgDocs: ComponentProps = {
+	let vsgDocs: LoaderComponentProps = {
 		...docs,
 		events: makeObject(docs.events),
 		slots: makeObject(docs.slots)

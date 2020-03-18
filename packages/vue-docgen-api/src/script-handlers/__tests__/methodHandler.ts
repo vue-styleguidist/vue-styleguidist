@@ -2,7 +2,7 @@ import { NodePath } from 'ast-types'
 import babylon from '../../babel-parser'
 import Documentation, { MethodDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import propHandler from '../methodHandler'
+import methodHandler from '../methodHandler'
 
 jest.mock('../../Documentation')
 
@@ -34,7 +34,10 @@ describe('methodHandler', () => {
 	function tester(src: string, matchedObj: any) {
 		const def = parse(src)
 		if (def) {
-			propHandler(documentation, def)
+			methodHandler(documentation, def).catch(e => {
+				// eslint-disable-next-line no-console
+				console.error(e)
+			})
 		}
 		expect(mockMethodDescriptor).toMatchObject(matchedObj)
 	}
@@ -318,7 +321,7 @@ describe('methodHandler', () => {
 
 			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def)
+				methodHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'publicMethod',
@@ -346,7 +349,7 @@ describe('methodHandler', () => {
 
 			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def)
+				methodHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'publicMethod',
@@ -372,7 +375,7 @@ describe('methodHandler', () => {
 
 			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def)
+				methodHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'publicMethod',
@@ -399,7 +402,7 @@ describe('methodHandler', () => {
 
 			const def = parseTS(src)
 			if (def) {
-				propHandler(documentation, def)
+				methodHandler(documentation, def)
 			}
 			expect(mockMethodDescriptor).toMatchObject({
 				name: 'twoMethod',

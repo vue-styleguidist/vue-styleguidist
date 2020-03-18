@@ -3,11 +3,11 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { castArray } from 'lodash'
+import * as Rsg from 'react-styleguidist'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import getComponentFiles from 'react-styleguidist/lib/loaders/utils/getComponentFiles'
 import slugger from 'react-styleguidist/lib/loaders/utils/slugger'
-import { Section, ProcessedSection } from '../../types/Section'
-import { StyleguidistConfig } from '../../types/StyleGuide'
+import { SanitizedStyleguidistConfig } from '../../types/StyleGuide'
 import getComponents from './getComponents'
 
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
@@ -21,10 +21,10 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
  * @returns {Array}
  */
 export default function getSections(
-	sections: Section[],
-	config: StyleguidistConfig,
+	sections: Rsg.ConfigSection[],
+	config: SanitizedStyleguidistConfig,
 	parentDepth?: number
-): ProcessedSection[] {
+): Rsg.LoaderSection[] {
 	return sections.map(section => processSection(section, config, parentDepth))
 }
 
@@ -36,10 +36,10 @@ export default function getSections(
  * @returns {object}
  */
 export function processSection(
-	section: Section,
-	config: StyleguidistConfig,
+	section: Rsg.ConfigSection,
+	config: SanitizedStyleguidistConfig,
 	parentDepth?: number
-): ProcessedSection {
+): Rsg.LoaderSection {
 	const contentRelativePath = section.content
 
 	// Try to load section content file
@@ -68,7 +68,6 @@ export function processSection(
 		description: section.description,
 		slug: slugger.slug(section.name || ''),
 		sections: getSections(section.sections || [], config, sectionDepth),
-		filepath: contentRelativePath,
 		href: section.href,
 		components: getSectionComponents(section, config),
 		content,
@@ -76,7 +75,10 @@ export function processSection(
 	}
 }
 
-const getSectionComponents = (section: Section, config: StyleguidistConfig) => {
+const getSectionComponents = (
+	section: Rsg.ConfigSection,
+	config: SanitizedStyleguidistConfig
+): Rsg.LoaderComponent[] => {
 	let ignore = config.ignore ? castArray(config.ignore) : []
 	if (section.ignore) {
 		ignore = ignore.concat(castArray(section.ignore))

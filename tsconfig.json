@@ -11,14 +11,17 @@
 		"baseUrl": ".",
 		"paths": {
 			"rsg-components/*": [
-				"src/packages/vue-styleguidist/client/rsg-components/*",
-				"node_modules/react-styledguidist/lib/client/rsg-components/*"
+				"packages/vue-styleguidist/src/client/rsg-components/*",
+				"node_modules/react-styleguidist/lib/client/rsg-components/*"
 			]
 		},
 		"strictFunctionTypes": false,
-		"jsx": "react",
-		"types": ["jest", "node", "htmlparser2", "buble"]
+		"jsx": "react"
 	},
-	"include": ["packages/**/*.ts", "test/**/*.ts"],
-	"exclude": ["node_modules"]
+	"include": [
+		"@types/**/*",
+		"packages/**/*.ts",
+		"test/**/*.ts",
+		"node_modules/react-styleguidist/lib/client/rsg-components/**/*"
+	]
 }

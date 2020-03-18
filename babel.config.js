@@ -4,8 +4,7 @@ module.exports = {
 			'@babel/env',
 			{
 				targets: {
-					chrome: 59,
-					ie: 11
+					node: 8
 				},
 				forceAllTransforms: true
 			}
@@ -15,11 +14,32 @@ module.exports = {
 	plugins: [
 		'@babel/plugin-syntax-dynamic-import',
 		'@babel/plugin-proposal-class-properties',
-		'@babel/plugin-proposal-object-rest-spread'
+		'@babel/plugin-proposal-object-rest-spread',
+		'@babel/plugin-transform-runtime'
+	],
+	overrides: [
+		{
+			include: ['test/cli-packages'],
+			presets: ['@vue/app']
+		}
 	],
 	env: {
 		test: {
-			presets: ['@babel/env', '@babel/react'],
+			presets: [
+				[
+					'@babel/env',
+					{
+						loose: true,
+						modules: 'commonjs',
+						useBuiltIns: 'usage',
+						corejs: 3,
+						targets: {
+							node: 'current'
+						}
+					}
+				],
+				'@babel/react'
+			],
 			plugins: [
 				'@babel/plugin-syntax-dynamic-import',
 				'@babel/plugin-proposal-class-properties',
@@ -27,41 +47,5 @@ module.exports = {
 				'@babel/plugin-transform-runtime'
 			]
 		}
-	},
-	overrides: [
-		{
-			test: './test/cli-packages',
-			presets: ['@vue/app']
-		},
-		{
-			test: /packages[\\/]vue-styleguidist[\\/]src[\\/]loaders[\\/]/,
-			presets: [
-				[
-					'@babel/env',
-					{
-						targets: {
-							node: 10
-						}
-					}
-				]
-			]
-		},
-		{
-			test: /packages[\\/]vue-styleguidist[\\/]src[\\/]client[\\/]/,
-			presets: [
-				[
-					'@babel/env',
-					{
-						targets: {
-							chrome: 59,
-							ie: 11
-						},
-						forceAllTransforms: true,
-						modules: false
-					}
-				],
-				'@babel/react'
-			]
-		}
-	]
+	}
 }

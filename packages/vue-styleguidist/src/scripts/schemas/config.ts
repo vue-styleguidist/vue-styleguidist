@@ -8,8 +8,7 @@ import loggerMaker from 'glogg'
 import getUserPackageJson from 'react-styleguidist/lib/scripts/utils/getUserPackageJson'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
 import fileExistsCaseInsensitive from 'react-styleguidist/lib/scripts/utils/findFileCaseInsensitive'
-import { Section } from '../../types/Section'
-import { Example } from '../../types/Example'
+import * as Rsg from 'react-styleguidist'
 import { StyleguidistConfig } from '../../types/StyleGuide'
 import findUserWebpackConfig from '../utils/findUserWebpackConfig'
 import consts from '../consts'
@@ -46,7 +45,7 @@ export default {
 	// `components` is a shortcut for { sections: [{ components }] },
 	// see `sections` below
 	components: {
-		tstype: '() => (string | string[]) | string | string[]',
+		tstype: '(() => string[]) | string | string[]',
 		uitype: 'string',
 		message: 'Components',
 		description:
@@ -139,7 +138,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		}
 	},
 	exampleMode: {
-		tstype: 'EXPAND_MODE',
+		tstype: 'Rsg.EXPAND_MODE',
 		message: 'Example Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -299,10 +298,16 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		}
 	},
 	sections: {
-		tstype: 'Section[]',
+		// sections will be different in the loader and browser config
+		// we therfore avoid assigning them a type here so that we can
+		// assign it variably
+		inherit: true,
 		type: 'array',
 		default: [],
-		process: (value: Section[] | undefined, config: StyleguidistConfig): Section[] => {
+		process: (
+			value: Rsg.ConfigSection[] | undefined,
+			config: StyleguidistConfig
+		): Rsg.ConfigSection[] => {
 			if (!value) {
 				// If root `components` isn't empty, make it a first section
 				// If `components` and `sections` weren’t specified, use default pattern
@@ -442,13 +447,18 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		example: 'My Style Guide'
 	},
 	updateDocs: {
-		tstype: '(doc: ComponentProps, file: string) => ComponentProps',
+		tstype: '(doc: LoaderComponentProps, file: string) => LoaderComponentProps',
 		type: 'function'
 	},
 	updateExample: {
-		tstype: '(props: ExampleLoader, ressourcePath: string) => ExampleLoader',
+		tstype: [
+			'(',
+			"		props: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>,",
+			'		ressourcePath: string',
+			'	) => Rsg.CodeExample'
+		].join('\n'),
 		type: 'function',
-		default: (props: Example) => {
+		default: (props: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>) => {
 			if (props.lang === 'example') {
 				props.lang = 'js'
 				logger.warn(
@@ -464,7 +474,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
-		tstype: 'EXPAND_MODE',
+		tstype: 'Rsg.EXPAND_MODE',
 		message: 'Usage Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -475,7 +485,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: 'collapse'
 	},
 	tocMode: {
-		tstype: 'EXPAND_MODE',
+		tstype: 'Rsg.EXPAND_MODE',
 		message: 'Table Of Contents Collapsed mode',
 		description:
 			'If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases',
