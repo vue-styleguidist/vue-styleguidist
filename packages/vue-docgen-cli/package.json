@@ -1,6 +1,6 @@
 {
     "name": "vue-docgen-cli",
-    "version": "4.13.1",
+    "version": "4.14.0",
     "scripts": {
         "compile": "tsc -p ./tsconfig.build.json",
         "compile:watch": "yarn compile --watch"
@@ -15,7 +15,7 @@
         "minimist": "^1.2.0",
         "mkdirp": "^0.5.1",
         "prettier": "^1.18.2",
-        "vue-docgen-api": "^4.13.1"
+        "vue-docgen-api": "^4.14.0"
     },
     "devDependencies": {
         "@types/minimist": "^1.2.0",

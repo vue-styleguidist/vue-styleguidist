@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.14.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.13.1...v4.14.0) (2020-03-18)
+
+
+### Bug Fixes
+
+* allow webpackConfig functions to return alias ([5a6b6a3](https://github.com/vue-styleguidist/vue-styleguidist/commit/5a6b6a30ba609b2ddfbf0b6d894e802ca157f724)), closes [#793](https://github.com/vue-styleguidist/vue-styleguidist/issues/793)
+* make interface for codetabbutton exported ([ccd52d8](https://github.com/vue-styleguidist/vue-styleguidist/commit/ccd52d83ed7fafa6faf2f7ad9e31ff7ef0fd375f))
+
+
+### Features
+
+* expose typescript types for theming ([3110fb5](https://github.com/vue-styleguidist/vue-styleguidist/commit/3110fb5b8342b3c89a70e9ecaf710a4c3a77bee5))
+
+
+
+
+
 ## [4.13.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.13.0...v4.13.1) (2020-03-03)
 
 

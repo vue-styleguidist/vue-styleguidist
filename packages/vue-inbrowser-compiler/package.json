@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler",
-  "version": "4.2.2",
+  "version": "4.14.0",
   "description": "compile vue single file components right in your browser",
   "module": "lib/vue-inbrowser-compiler.esm.js",
   "main": "lib/vue-inbrowser-compiler.cjs.js",
@@ -22,7 +22,7 @@
     "acorn-jsx": "^5.0.1",
     "buble": "^0.19.7",
     "camelcase": "^5.3.1",
-    "vue-inbrowser-compiler-utils": "^4.0.1",
+    "vue-inbrowser-compiler-utils": "^4.14.0",
     "walkes": "^0.2.1"
   },
   "devDependencies": {
