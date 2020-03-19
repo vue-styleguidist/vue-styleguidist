@@ -6,11 +6,6 @@ module.exports = [
 			'This is an example of creating a reusable button component and using it with external data.',
 		props: [
 			{
-				name: 'size',
-				/* @orig: The size of the button*/
-				description: 'The size of the button'
-			},
-			{
 				name: 'span',
 				/* @orig: Number of columns (1-12) the column should span.*/
 				description: 'Number of columns (1-12) the column should span.'
@@ -19,6 +14,11 @@ module.exports = [
 				name: 'spanSm',
 				/* @orig: Sm breakpoint and above*/
 				description: 'Sm breakpoint and above'
+			},
+			{
+				name: 'size',
+				/* @orig: The size of the button*/
+				description: 'taille du bouton'
 			},
 			{
 				name: 'spanMd',

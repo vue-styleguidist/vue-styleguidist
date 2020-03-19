@@ -1,12 +1,13 @@
 import * as path from 'path'
 
 import { ComponentDoc } from '../../../src/Documentation'
-import { parse } from '../../../src/main'
+import { parse, PropDescriptor } from '../../../src/main'
 
 const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 
 describe('tests button', () => {
+	let sizeProp: PropDescriptor = { name: '<default>' }
 	beforeAll(async done => {
 		docButton = await parse(button, {
 			alias: {
@@ -16,6 +17,8 @@ describe('tests button', () => {
 			translation: 'FR'
 		})
 		done()
+
+		sizeProp = (docButton.props && docButton.props.find(p => p.name === 'size')) || sizeProp
 	})
 
 	it('should return an object', () => {
@@ -23,10 +26,8 @@ describe('tests button', () => {
 	})
 
 	describe('props', () => {
-		it('The prop name should be translated', () => {
-			expect(docButton.props && docButton.props.find(p => p.name === 'size')).toBe(
-				'taille du bouton'
-			)
+		it('The prop description should be translated', () => {
+			expect(sizeProp.description).toBe('taille du bouton')
 		})
 	})
 })

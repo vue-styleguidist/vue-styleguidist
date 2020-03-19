@@ -21,7 +21,7 @@ export { TemplateHandlers }
 import mergeTranslations from './mergeTranslations'
 
 export interface DocGenOptions extends DCOptions {
-	translations?: string
+	translation?: string
 }
 
 export { TemplateParserOptions } from './parse-template'
@@ -110,5 +110,5 @@ async function parsePrimitive(
 	const docs = await createDocs(options)
 	return docs
 		.map(d => d.toObject())
-		.map(d => (opts && opts.translations ? mergeTranslations(d, filePath, opts.translations) : d))
+		.map(d => (opts && opts.translation ? mergeTranslations(d, filePath, opts.translation) : d))
 }
