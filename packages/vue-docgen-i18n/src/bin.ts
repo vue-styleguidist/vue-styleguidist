@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist'
-import { parse } from 'vue-docgen-api'
+import { parseMulti } from 'vue-docgen-api'
 import * as path from 'path'
 import globby from 'globby'
 import generate from './generateTrans'
@@ -19,7 +19,7 @@ pathArray.forEach(async p => {
 		console.warn(`No files detected with glob ${p}`)
 	}
 	files.forEach(async p1 => {
-		const doc = await parse(p1, { validExtends: () => false })
+		const doc = await parseMulti(p1, { validExtends: () => false })
 		generate(
 			doc,
 			`${path.join(path.dirname(p1), path.basename(p1).replace(/\.\w+$/, ''))}.${lang}.js`
