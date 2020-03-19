@@ -8,8 +8,16 @@ import generate from './generateTrans'
 
 const { _: pathArray, lang = 'trad' } = minimist(process.argv.slice(2))
 
+if (!pathArray.length) {
+	throw Error('You must provide a array of path to run')
+}
+
 pathArray.forEach(async p => {
 	const files = await globby(p, { cwd: process.cwd(), absolute: true })
+	if (!files.length) {
+		// eslint-disable-next-line no-console
+		console.warn(`No files detected with glob ${p}`)
+	}
 	files.forEach(async p1 => {
 		const doc = await parse(p1, { validExtends: () => false })
 		generate(
