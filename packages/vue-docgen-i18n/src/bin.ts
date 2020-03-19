@@ -9,7 +9,8 @@ import generate from './generateTrans'
 const { _: pathArray, lang = 'trad' } = minimist(process.argv.slice(2))
 
 if (!pathArray.length) {
-	throw Error('You must provide a array of path to run')
+	// eslint-disable-next-line no-console
+	console.warn('You must provide a array of path to run')
 }
 
 pathArray.forEach(async p => {

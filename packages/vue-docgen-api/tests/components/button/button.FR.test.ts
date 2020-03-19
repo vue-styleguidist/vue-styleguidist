@@ -13,7 +13,7 @@ describe('tests button', () => {
 				'@mixins': path.resolve(__dirname, '../../mixins'),
 				'@utils': path.resolve(__dirname, '../../utils')
 			},
-			lang: 'FR'
+			translation: 'FR'
 		})
 		done()
 	})
