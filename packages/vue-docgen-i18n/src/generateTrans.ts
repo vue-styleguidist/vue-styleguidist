@@ -7,7 +7,7 @@ import toAst from 'to-ast'
 import { walk } from 'estree-walker'
 import setAtPath from './setAtPath'
 
-const EXCLUDED_KEYS = ['author', 'version', 'model']
+const EXCLUDED_KEYS = ['author', 'version', 'model', 'ignore']
 
 function generateTranslationObject(originalDoc: ComponentDoc): Record<string, any> {
 	const translations: Record<string, any> = {}
@@ -23,6 +23,9 @@ function generateTranslationObject(originalDoc: ComponentDoc): Record<string, an
 				EXCLUDED_KEYS.includes(this.parent.parent.key || '')
 			)
 		) {
+			if (this.parent.keys && this.parent.keys.includes('name')) {
+				setAtPath(translations, [...this.parent.path, 'name'], this.parent.node.name)
+			}
 			setAtPath(translations, this.path, description)
 		}
 	})

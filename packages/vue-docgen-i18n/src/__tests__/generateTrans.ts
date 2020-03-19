@@ -14,10 +14,12 @@ describe('generateTrans', () => {
 		"module.exports = {
 		    'props': [
 		        {
+		            'name': 'foo',
 		            /* @orig: EN-1*/
 		            'description': 'EN-1'
 		        },
 		        {
+		            'name': 'bar',
 		            /* @orig: EN-2*/
 		            'description': 'EN-2'
 		        }
