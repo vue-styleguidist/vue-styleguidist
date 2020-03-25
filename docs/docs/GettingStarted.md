@@ -57,5 +57,5 @@ See how to [document your components](Documenting.md)
 ## Have questions
 
 - [Read the cookbook](Cookbook.md)
-- [Ask on discord](https://discordapp.com/channels/325477692906536972/538786416092512278)
+- [Ask on discord](https://discordapp.com/channels/325477692906536972/538786416092512278) (requires [Vue Land](https://vue.land/) account)
 - [Post Questions on Github](https://github.com/vue-styleguidist/vue-styleguidist/issues/new?template=Question.md)
