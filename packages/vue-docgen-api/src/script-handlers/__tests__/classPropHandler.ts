@@ -44,6 +44,7 @@ describe('propHandler', () => {
 			tester(src, {})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('someData')
 		})
+
 		it('should detect all data that have the prop decorator', () => {
 			const src = `
         @Component
@@ -53,6 +54,19 @@ describe('propHandler', () => {
         }`
 			tester(src, {
 				type: { name: 'string' }
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test')
+		})
+
+		it('should detect all data with composite types', () => {
+			const src = `
+        @Component
+        export default class MyComp {
+          @Prop
+          test: string | null;
+        }`
+			tester(src, {
+				type: { name: 'string | null' }
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test')
 		})

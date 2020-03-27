@@ -23,5 +23,6 @@
 		"packages/**/*.ts",
 		"test/**/*.ts",
 		"node_modules/react-styleguidist/lib/client/rsg-components/**/*"
-	]
+	],
+	"exclude": ["test/**/*.d.ts"]
 }
