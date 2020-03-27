@@ -18,7 +18,6 @@
     "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "dependencies": {
-    "core-js": "^3.4.1",
     "vue": "^2.6.10",
     "vuetify": "^2.0.0"
   },
