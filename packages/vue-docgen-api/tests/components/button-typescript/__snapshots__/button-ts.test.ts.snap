@@ -72,7 +72,7 @@ Object {
       "name": "propC",
       "tags": Object {},
       "type": Object {
-        "name": "TSUnionType",
+        "name": "string | boolean",
       },
     },
   ],

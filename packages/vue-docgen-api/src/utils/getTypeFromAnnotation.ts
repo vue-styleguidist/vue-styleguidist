@@ -32,9 +32,11 @@ function getTypeObjectFromTSType(type: bt.TSType): ParamType {
 	const name =
 		bt.isTSTypeReference(type) && bt.isIdentifier(type.typeName)
 			? type.typeName.name
-			: TS_TYPE_NAME_MAP[type.type]
-				? TS_TYPE_NAME_MAP[type.type]
-				: type.type
+			: bt.isTSUnionType(type)
+				? type.types.map(t => TS_TYPE_NAME_MAP[t.type]).join(' | ')
+				: TS_TYPE_NAME_MAP[type.type]
+					? TS_TYPE_NAME_MAP[type.type]
+					: type.type
 
 	return { name }
 }
