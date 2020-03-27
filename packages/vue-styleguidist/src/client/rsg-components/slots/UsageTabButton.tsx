@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TabButton from 'rsg-components/TabButton'
 import isEmpty from 'lodash/isEmpty'
-import { PropDescriptor, MethodDescriptor } from 'vue-docgen-api'
+import { PropDescriptor, MethodDescriptor, EventDescriptor, SlotDescriptor } from 'vue-docgen-api'
 
 export interface UsageTabButtonProps {
 	name: string
@@ -11,12 +11,18 @@ export interface UsageTabButtonProps {
 	props: {
 		props?: PropDescriptor[]
 		methods?: MethodDescriptor[]
+		events?: EventDescriptor[]
+		slots?: SlotDescriptor[]
 	}
 }
 
 const UsageTabButton = (props: UsageTabButtonProps) => {
 	const component = props.props
-	const showButton = !isEmpty(component.props) || !isEmpty(component.methods)
+	const showButton =
+		!isEmpty(component.props) ||
+		!isEmpty(component.methods) ||
+		!isEmpty(component.events) ||
+		!isEmpty(component.slots)
 	return showButton ? <TabButton {...props}>Props, methods, events & slots</TabButton> : null
 }
 
