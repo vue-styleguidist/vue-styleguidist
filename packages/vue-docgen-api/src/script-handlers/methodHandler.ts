@@ -155,7 +155,11 @@ function describeReturns(
 	jsDocReturnTags: ParamTag[]
 ) {
 	if (jsDocReturnTags.length) {
-		methodDescriptor.returns = jsDocReturnTags[0]
+		const ret = jsDocReturnTags[0]
+		if (ret.name && ret.description) {
+			ret.description = `${ret.name} ${ret.description}`
+		}
+		methodDescriptor.returns = ret
 	}
 
 	if (!methodDescriptor.returns || !methodDescriptor.returns.type) {
