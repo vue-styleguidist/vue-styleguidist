@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface OriginInfo {
+export interface OriginInfo {
 	name: string
 	path: string
 }
