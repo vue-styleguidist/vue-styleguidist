@@ -1,4 +1,6 @@
-export default ({ space }: { space: number[] }) => ({
+import * as Rsg from 'react-styleguidist'
+
+const methodStyles = ({ space }: Rsg.Theme) => ({
 	name: {
 		'& code': {
 			isolate: false,
@@ -37,3 +39,5 @@ export default ({ space }: { space: number[] }) => ({
 		margin: 0
 	}
 })
+
+export default methodStyles

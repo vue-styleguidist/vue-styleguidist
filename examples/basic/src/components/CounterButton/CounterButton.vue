@@ -49,6 +49,8 @@ export default {
 		 * @param {Number} newValue New value for the counter
 		 * @param {Object} target target of the counter
 		 * @returns {string} Test
+		 * @throws throws this when needed
+		 * @throws {InvalidArgument} when the newValue is null
 		 */
 		set(newValue, target) {
 			this.value = parseInt(newValue, 10)
