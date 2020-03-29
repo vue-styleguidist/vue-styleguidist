@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.15.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.14.0...v4.15.0) (2020-03-29)
+
+
+### Bug Fixes
+
+* **docgen:** remove TSUnionType ([2f32e5f](https://github.com/vue-styleguidist/vue-styleguidist/commit/2f32e5f4b6972610a7406d98601b7faa2ac7d354)), closes [#796](https://github.com/vue-styleguidist/vue-styleguidist/issues/796)
+
+
+### Features
+
+* **docgen:** parse the throws tag ([2f70045](https://github.com/vue-styleguidist/vue-styleguidist/commit/2f7004551ea71a2a469053ccb348f3bea21ac867))
+
+
+
+
+
 # [4.14.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.13.1...v4.14.0) (2020-03-18)
 
 
