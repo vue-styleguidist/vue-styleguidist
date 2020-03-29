@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MethodsRenderer should render JsDoc tags 1`] = `
+<div>
+  <ul>
+    <li>
+      <div>
+        <code
+          class="rsg--name-13"
+        >
+          Foo()
+        </code>
+      </div>
+      <div>
+        <div
+          class="vsg-jsdoc-tag undefined"
+        >
+          <span
+            class="vsg-tag-name rsg--name-0"
+          >
+            Since
+            :
+          </span>
+          <span
+            class="vsg-tag-value undefined"
+          >
+            <span
+              class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+            >
+              1.0.0
+            </span>
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`MethodsRenderer should render a table 1`] = `
+<div>
+  <table
+    class="rsg--table-8"
+  >
+    <thead
+      class="rsg--tableHead-9"
+    >
+      <tr>
+        <th
+          class="rsg--cellHeading-10"
+        >
+          Method name
+        </th>
+        <th
+          class="rsg--cellHeading-10"
+        >
+          Description
+        </th>
+        <th
+          class="rsg--cellHeading-10"
+        >
+          Parameters
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="rsg--dataRow-11"
+      >
+        <td
+          class="rsg--cell-12 rsg--name-0"
+        >
+          <code
+            class="rsg--name-13"
+          >
+            method()
+          </code>
+        </td>
+        <td
+          class="rsg--cell-12 rsg--description-3"
+        >
+          <p
+            class="rsg--para-15"
+          >
+            Public
+          </p>
+        </td>
+        <td
+          class="rsg--cell-12"
+        />
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`MethodsRenderer should render deprecated JsDoc tags 1`] = `
+<div>
+  <ul>
+    <li>
+      <div>
+        <code
+          class="rsg--name-13 rsg--isDeprecated-14"
+        >
+          Foo()
+        </code>
+      </div>
+      <div>
+        <div
+          class="vsg-jsdoc-tag undefined"
+        >
+          <span
+            class="vsg-tag-name rsg--name-0"
+          >
+            Deprecated
+            :
+          </span>
+          <span
+            class="vsg-tag-value undefined"
+          >
+            <span
+              class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+            >
+              Use 
+              <em
+                class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25 rsg--em-27"
+              >
+                another
+              </em>
+               method
+            </span>
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`MethodsRenderer should render parameters 1`] = `
+<div>
+  <ul>
+    <li>
+      <div>
+        <code
+          class="rsg--name-13"
+        >
+          method()
+        </code>
+      </div>
+      <div>
+        <p
+          class="rsg--para-15"
+        >
+          Public
+        </p>
+      </div>
+      <div>
+        <div
+          class="rsg--root-16"
+        >
+          <div
+            class="rsg--block-18"
+          >
+            <span>
+              <code
+                class="rsg--name-13"
+              >
+                value
+              </code>
+              :
+            </span>
+             
+            <span
+              class="rsg--type-19"
+            >
+              Number
+            </span>
+             
+            —
+             
+            <span
+              class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+            >
+              Description
+            </span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`MethodsRenderer should render public method 1`] = `
+<div>
+  <ul>
+    <li>
+      <div>
+        <code
+          class="rsg--name-13"
+        >
+          method()
+        </code>
+      </div>
+      <div>
+        <p
+          class="rsg--para-15"
+        >
+          Public
+        </p>
+      </div>
+      <div />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`MethodsRenderer should render returns 1`] = `
+<div>
+  <ul>
+    <li>
+      <div>
+        <code
+          class="rsg--name-13"
+        >
+          method()
+        </code>
+      </div>
+      <div>
+        <div>
+          Returns:
+           
+          <span
+            class="rsg--type-19"
+          >
+            Number
+          </span>
+           
+          —
+           
+          <span
+            class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+          >
+            Description
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+  </ul>
+</div>
+`;
