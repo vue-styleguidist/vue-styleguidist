@@ -5,8 +5,9 @@ const DOCLET_PATTERN = /^(?:\s+)?@(\w+)(?:$|\s((?:[^](?!^(?:\s+)?@\w))*))/gim
 
 function getParamInfo(content: string, hasName: boolean) {
 	content = content || ''
-	const typeSlice = matchRecursiveRegExp(content, '{', '}')[0] || '*'
-	const param: Param = { type: getTypeObjectFromTypeString(typeSlice) }
+	const typeSlice = matchRecursiveRegExp(content, '{', '}')[0] || ''
+	const param: Param =
+		hasName || typeSlice.length ? { type: getTypeObjectFromTypeString(typeSlice) } : {}
 
 	content = content.replace(`{${typeSlice}}`, '')
 
@@ -45,6 +46,8 @@ function getTypeObjectFromTypeString(typeSlice: string): ParamType {
 	}
 }
 
+const UNNAMED_TAG_TITLES = ['returns', 'throws']
+
 const TYPED_TAG_TITLES = [
 	'param',
 	'arg',
@@ -52,6 +55,7 @@ const TYPED_TAG_TITLES = [
 	'property',
 	'type',
 	'returns',
+	'throws',
 	'prop',
 	'binding'
 ]
@@ -70,7 +74,7 @@ export default function getDocblockTags(str: string): DocBlockTags {
 	for (; match; match = DOCLET_PATTERN.exec(str)) {
 		const title = match[1]
 		if (TYPED_TAG_TITLES.indexOf(title) > -1) {
-			tags.push({ title, ...getParamInfo(match[2], title !== 'returns') })
+			tags.push({ title, ...getParamInfo(match[2], UNNAMED_TAG_TITLES.indexOf(title) < 0) })
 		} else if (ACCESS_TAG_TITLES.indexOf(title) > -1) {
 			tags.push({ title: 'access', content: title })
 		} else {

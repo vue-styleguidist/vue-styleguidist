@@ -74,6 +74,7 @@ export interface MethodDescriptor extends Descriptor {
 	name: string
 	description?: string
 	returns?: UnnamedParam
+	throws?: UnnamedParam
 	tags?: { [key: string]: BlockTag[] }
 	params?: Param[]
 	modifiers?: string[]
