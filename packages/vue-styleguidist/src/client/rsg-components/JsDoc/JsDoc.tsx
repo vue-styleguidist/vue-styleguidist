@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import * as Rsg from 'react-styleguidist'
 import map from 'lodash/map'
+import capitalize from 'lodash/capitalize'
+import { Param } from 'vue-docgen-api'
 import Markdown from 'rsg-components/Markdown'
 import Argument from 'rsg-components/Argument'
-import capitalize from 'lodash/capitalize'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
-import { Param } from 'vue-docgen-api'
 
 export interface TagProps {
 	deprecated?: Param[]
