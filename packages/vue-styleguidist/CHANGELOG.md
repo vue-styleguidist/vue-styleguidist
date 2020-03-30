@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.0...v4.15.1) (2020-03-30)
+
+
+### Bug Fixes
+
+* default example parser with alias ([361051c](https://github.com/vue-styleguidist/vue-styleguidist/commit/361051c2108cb471317721dce5917f044d446fff)), closes [#806](https://github.com/vue-styleguidist/vue-styleguidist/issues/806)
+* proper highlihght for pseudo JSX ([ed6e16f](https://github.com/vue-styleguidist/vue-styleguidist/commit/ed6e16fd2b8266194a392a2e4885554155cbdbdc))
+
+
+
+
+
 # [4.15.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.14.0...v4.15.0) (2020-03-29)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.0...v4.15.1) (2020-03-30)
+
+
+### Bug Fixes
+
+* **docgen:** allow single slots to not documented ([34381d1](https://github.com/vue-styleguidist/vue-styleguidist/commit/34381d162f914f2ad94f382acb09227365ec4fc0))
+
+
+
+
+
 # [4.15.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.14.0...v4.15.0) (2020-03-29)
 
 
