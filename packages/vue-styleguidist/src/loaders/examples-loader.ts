@@ -7,7 +7,6 @@ import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import { builders as b } from 'ast-types'
-import { parse } from 'vue-docgen-api'
 import { compile } from 'vue-inbrowser-compiler'
 import * as Rsg from 'react-styleguidist'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
@@ -20,6 +19,7 @@ import getComponentVueDoc from './utils/getComponentVueDoc'
 import importCodeExampleFile from './utils/importCodeExampleFile'
 import absolutize from './utils/absolutize'
 import getScript from './utils/getScript'
+import getParser from './utils/getParser'
 
 const REQUIRE_IN_RUNTIME_PATH = absolutize('requireInRuntime')
 const EVAL_IN_CONTEXT_PATH = absolutize('evalInContext')
@@ -54,7 +54,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
 	if (shouldShowDefaultExample && source) {
 		const fullFilePath = path.join(path.dirname(filePath), file)
-		const docs = await parse(fullFilePath)
+		const propsParser = getParser(config)
+		const docs = await propsParser(fullFilePath)
 		this.addDependency(fullFilePath)
 		source = expandDefaultComponent(source, docs)
 	}

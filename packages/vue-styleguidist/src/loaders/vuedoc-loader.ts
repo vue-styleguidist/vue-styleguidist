@@ -2,7 +2,7 @@ import * as path from 'path'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
-import { parse, ComponentDoc, Tag } from 'vue-docgen-api'
+import { ComponentDoc, Tag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import { LoaderComponentProps } from '../types/Component'
@@ -11,8 +11,8 @@ import getExamples from './utils/getExamples'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
+import getParser from './utils/getParser'
 import consts from '../scripts/consts'
-import mergeWebpackConfig from '../scripts/utils/mergeWebpackConfig'
 
 const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
@@ -49,27 +49,7 @@ export async function vuedocLoader(
 		config.contextDependencies.forEach(dir => this.addContextDependency(dir))
 	}
 
-	// resolve webpack config as functions or objects
-	const webpackConfig = mergeWebpackConfig(
-		{},
-		config.webpackConfig,
-		process.env.NODE_ENV || 'production'
-	)
-
-	let alias: { [key: string]: string } | undefined
-	let modules: string[] | undefined
-	if (webpackConfig.resolve) {
-		alias = webpackConfig.resolve.alias
-		modules = webpackConfig.resolve.modules
-	}
-	const defaultParser = async (file: string) =>
-		await parse(file, {
-			alias,
-			modules,
-			jsx: config.jsxInComponents,
-			validExtends: config.validExtends
-		})
-	const propsParser = config.propsParser || defaultParser
+	const propsParser = getParser(config)
 
 	let docs: ComponentDoc = { displayName: '', exportName: '' }
 	try {

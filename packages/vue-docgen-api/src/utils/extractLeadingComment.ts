@@ -13,6 +13,10 @@ export default function extractLeadingComment(
 ): string[] {
 	if (parentAst) {
 		const slotSiblings: ASTNode[] = parentAst.children
+		// if the slot has no comment siblings, the slot is not documented
+		if (slotSiblings.length < 1) {
+			return []
+		}
 		// First find the position of the slot in the list
 		let i = slotSiblings.length - 1
 		let currentSlotIndex = -1
