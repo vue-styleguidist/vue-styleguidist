@@ -38,8 +38,8 @@ export default function processComponent(
 	const componentMetadataPath = getComponentMetadataPath(filepath)
 	const hasExamplesFile = examplesFile && fs.existsSync(examplesFile)
 	let hasInternalExamples = false
-	if (!hasExamplesFile && fs.existsSync(componentPath)) {
-		const customBlocks = parseComponent(fs.readFileSync(componentPath, 'utf8')).customBlocks
+	if (!hasExamplesFile && fs.existsSync(filepath)) {
+		const customBlocks = parseComponent(fs.readFileSync(filepath, 'utf8')).customBlocks
 		hasInternalExamples = !!customBlocks && customBlocks.findIndex(p => p.type === 'docs') >= 0
 	}
 	const hasExamples = hasExamplesFile || hasInternalExamples
