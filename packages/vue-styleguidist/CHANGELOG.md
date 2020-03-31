@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.1...v4.15.2) (2020-03-31)
+
+
+### Bug Fixes
+
+* allow ignoreWithoutExamples to work with docs ([f5bbc41](https://github.com/vue-styleguidist/vue-styleguidist/commit/f5bbc416e108db1b313d4a2c55c8e1bc845d03ca))
+
+
+
+
+
 ## [4.15.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.0...v4.15.1) (2020-03-30)
 
 
