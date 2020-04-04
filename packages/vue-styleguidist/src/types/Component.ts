@@ -24,6 +24,7 @@ interface BaseComponentProps {
 	docsBlocks?: string[]
 	visibleName?: string
 	examplesFile?: string
+	subComponents?: BaseComponentProps[]
 }
 
 export interface LoaderComponentProps extends BaseComponentProps {
