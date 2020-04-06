@@ -68,7 +68,6 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 		expect(result).not.toMatch(/__COMPONENT__/)
 		const mth = result.match(/<div>(.*?)<\/div>/)
 		expect(mth && mth[0]).toMatchInlineSnapshot(`
-
 		<div>
 		  \\n\\t
 		  <foo.vue>
@@ -84,7 +83,6 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 		  </foo.vue>
 		  \\n\\tdefault example\\n
 		</div>
-
 	`)
 		done()
 	}
