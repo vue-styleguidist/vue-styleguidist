@@ -5,7 +5,7 @@ import Documentation, { Descriptor } from './Documentation'
 import parseScript, { Handler as ScriptHandler } from './parse-script'
 import { Handler as TemplateHandler } from './parse-template'
 
-import scriptHandlers, { preHandlers } from './script-handlers'
+import defaultScriptHandlers, { preHandlers } from './script-handlers'
 import parseSFC from './parseSFC'
 
 const read = promisify(readFile)
@@ -46,6 +46,19 @@ export interface DocGenOptions {
 	 * Handlers that will be added at the end of the template analysis
 	 */
 	addTemplateHandlers?: TemplateHandler[]
+	/**
+	 * Handlers that will replace the extend and mixins analyzer
+	 * They will be run before the main component analysis to avoid bleeding onto the main
+	 */
+	scriptPreHandlers?: ScriptHandler[]
+	/**
+	 * Handlers that will replace the main script analysis
+	 */
+	scriptHandlers?: ScriptHandler[]
+	/**
+	 * Handlers that will replace the template analysis
+	 */
+	templateHandlers?: TemplateHandler[]
 	/**
 	 * Does parsed components use jsx?
 	 * @default true - if you do not disable it, babel will fail with `(<any>window).$`
@@ -103,14 +116,17 @@ export async function parseSource(
 	if (singleFileComponent) {
 		docs = await parseSFC(documentation, source, opt)
 	} else {
-		const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
+		const scriptHandlers = opt.scriptHandlers || [
+			...defaultScriptHandlers,
+			...(opt.addScriptHandlers || [])
+		]
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
 		docs =
 			(await parseScript(
 				source,
-				preHandlers,
-				[...scriptHandlers, ...addScriptHandlers],
+				opt.scriptPreHandlers || preHandlers,
+				scriptHandlers,
 				opt,
 				documentation,
 				documentation !== undefined
