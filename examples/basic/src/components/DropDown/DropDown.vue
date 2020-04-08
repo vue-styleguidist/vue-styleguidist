@@ -12,12 +12,3 @@ export default {
 	name: 'DropDown'
 }
 </script>
-
-<docs>
-```jsx
-<DropDown>
-    <MyOption val="1">test</MyOption>
-    <MyOption val="2">other</MyOption>
-</DropDown>
-```
-</docs>
