@@ -94,9 +94,7 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 		vsgDocs.subComponents = await Promise.all(
 			vsgDocs.tags.requires
 				.map((t: ParamTag) => t.description)
-				.filter(<(file: string | boolean | undefined) => file is string>(
-					(file => typeof file === 'string')
-				))
+				.filter(<(file?: string | boolean) => file is string>(file => typeof file === 'string'))
 				.map(async filePath => {
 					const fullSubComponentFilePath = path.join(path.dirname(file), filePath)
 					this.addDependency(fullSubComponentFilePath)
@@ -109,9 +107,8 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 							content: ''
 						}
 					] as any
-					const comp = processComponent(fullSubComponentFilePath, config, props)
 
-					return comp
+					return processComponent(fullSubComponentFilePath, config, props)
 				})
 		)
 	}

@@ -9,6 +9,11 @@ import getMemberFilter from '../utils/getPropsFilter'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
+/**
+ * Extract props information form an object-style VueJs component
+ * @param documentation
+ * @param path
+ */
 export default async function propHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path

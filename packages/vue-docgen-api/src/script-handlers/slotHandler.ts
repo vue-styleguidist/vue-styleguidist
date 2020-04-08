@@ -10,6 +10,11 @@ export interface TypedParamTag extends ParamTag {
 	type: ParamType
 }
 
+/**
+ * Extract slots information form the render function of an object-style VueJs component
+ * @param documentation
+ * @param path
+ */
 export default async function slotHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const renderPath = path

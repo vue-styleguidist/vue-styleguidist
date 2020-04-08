@@ -7,6 +7,12 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import resolveIdentifier from '../utils/resolveIdentifier'
 
+/**
+ * Extracts all events from a class-style component code
+ * @param documentation
+ * @param path
+ * @param astPath
+ */
 export default async function classEventHandler(
 	documentation: Documentation,
 	path: NodePath,

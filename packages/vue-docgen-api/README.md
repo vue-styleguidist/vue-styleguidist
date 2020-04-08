@@ -55,6 +55,35 @@ async function parseMyComponent(filePath: string) {
         // handle custom directives here
       }
     ],
+    preScriptHandlers: [
+      function(
+        documentation: Documentation,
+        componentDefinition: NodePath,
+        astPath: bt.File,
+        opt: ParseOptions
+      ) {
+        // replaces handlers run before the scriptHandlers
+      }
+    ],
+    scriptHandlers: [
+      function(
+        documentation: Documentation,
+        componentDefinition: NodePath,
+        astPath: bt.File,
+        opt: ParseOptions
+      ) {
+        // replaces all the scriptHandlers
+      }
+    ],
+    templateHandlers: [
+      function(
+        documentation: Documentation,
+        templateAst: ASTElement,
+        options: TemplateParserOptions
+      ) {
+        // replaces all the templateHandlers
+      }
+    ],
     validExtends: (fullFilePath: string) =>
       /[\\/]@my-component-library[\\/]/.test(fullFilePath) ||
       !/[\\/]node_modules[\\/]/.test(fullFilePath)
@@ -92,15 +121,34 @@ This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/re
 
 #### `addScriptHandler` and `addTemplateHandler`
 
-The custom additiona handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+The custom additional handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+
+#### `preScriptHandlers`, `scriptHandlers` and `templateHandlers`
+
+Replaces all of the handlers by those specified. If each of those 3 `handlers` are set to [], the library will only parse the given component. It will not run any standard handlers anymore.
+
+> **NOTE** Standard handlers are available as namespaces. Import and use them this way:
+>
+> ```js
+> import {
+>   parse,
+>   ScriptHandlers,
+>   TemplateHandlers
+> } from 'vue-docgen-api'
+>
+> parse('myComp', {
+>   scriptHandlers: [ScriptHandlers.componentHandler],
+>   templateHandlers: [TemplateHandlers.slotHandler]
+> })
+> ```
 
 #### `validExtend`
 
 Function - Returns if an extended component should be parsed by docgen.
 
-**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non blocking but annoying.
+**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non-blocking but annoying.
 
-**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill preformance. Use responsibly.
+**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill performance. Use responsibly.
 
 #### `jsx`
 

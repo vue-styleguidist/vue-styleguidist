@@ -5,7 +5,12 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import { setMethodDescriptor } from './methodHandler'
 
-export default async function methodHandler(documentation: Documentation, path: NodePath) {
+/**
+ * Extracts all information about methods in a class-style Component
+ * @param documentation
+ * @param path
+ */
+export default async function classMethodHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isClassDeclaration(path.node)) {
 		const methods: MethodDescriptor[] = documentation.get('methods') || []
 		const allMethods = path

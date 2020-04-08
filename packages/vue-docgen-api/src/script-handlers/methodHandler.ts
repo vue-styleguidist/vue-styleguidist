@@ -14,6 +14,11 @@ import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getMemberFilter from '../utils/getPropsFilter'
 
+/**
+ * Extracts methods information from an object-style VueJs component
+ * @param documentation
+ * @param path
+ */
 export default async function methodHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
 		const methodsPath = path
