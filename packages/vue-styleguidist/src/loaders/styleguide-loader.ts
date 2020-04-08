@@ -38,7 +38,8 @@ const CLIENT_CONFIG_OPTIONS = [
 	'pagePerSection',
 	'mountPointId',
 	'jsxInExamples',
-	'jssThemedEditor'
+	'jssThemedEditor',
+	'locallyRegisterComponents'
 ]
 
 export default function() {}
