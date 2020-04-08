@@ -94,7 +94,13 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 				.filter(<(file: string | boolean | undefined) => file is string>(
 					(file => typeof file === 'string')
 				))
-				.map(filePath => getVsgDocs(path.join(path.dirname(file), filePath)))
+				.map(async filePath => {
+					const fullSubComponentFilePath = path.join(path.dirname(file), filePath)
+					return {
+						props: await getVsgDocs(fullSubComponentFilePath),
+						module: requireIt(fullSubComponentFilePath)
+					}
+				})
 		)
 	}
 

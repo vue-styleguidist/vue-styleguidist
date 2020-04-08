@@ -3,19 +3,21 @@
     <slot />
   </select>
 </template>
+
 <script>
 /**
- * @requires ./Option.vue
+ * @requires ./MyOption.vue
  */
 export default {
 	name: 'DropDown'
 }
 </script>
+
 <docs>
 ```jsx
 <DropDown>
-    <Option val="1">test</Option>
-    <Option val="1">other</Option>
+    <MyOption val="1">test</MyOption>
+    <MyOption val="2">other</MyOption>
 </DropDown>
 ```
 </docs>

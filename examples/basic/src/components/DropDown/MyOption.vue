@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-	name: 'Option',
+	name: 'MyOption',
 	props: {
 		val: {
 			type: String,

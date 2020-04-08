@@ -11,13 +11,19 @@ const isEs6Export = (module: any): module is { default: VueConstructor } => !!mo
  */
 export default function globalizeComponent(component: Component) {
 	const displayName = component.props.displayName
-	if (!component.name) {
+	if (!displayName) {
 		return
 	}
+
 	const configComponent = isEs6Export(component.module)
 		? component.module.default
 		: component.module
+
 	if (configComponent) {
 		Vue.component(cleanName(displayName || ''), configComponent)
+	}
+
+	if (component.props.subComponents) {
+		component.props.subComponents.forEach(c => globalizeComponent(c))
 	}
 }

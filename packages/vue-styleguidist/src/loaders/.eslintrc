@@ -3,6 +3,6 @@
 		"es6": true
 	},
 	"rules": {
-		"compat/compat": false
+		"compat/compat": "off"
 	}
 }
