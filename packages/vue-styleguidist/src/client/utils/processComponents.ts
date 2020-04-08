@@ -19,7 +19,7 @@ export default function processComponents({
 	components
 }: ComponentsAndFiles): Component[] {
 	return components.map(component => {
-		const props = component.props
+		const { props } = component
 		const newComponent: Component = {
 			...component,
 
@@ -35,6 +35,14 @@ export default function processComponents({
 					...flatten(props.example) //
 				]
 			}
+		}
+
+		if (props.subComponents) {
+			props.subComponents.forEach(c => {
+				// Add .name shortcuts for names instead of .props.displayName.
+				c.name = c.props.displayName
+				c.visibleName = c.props.visibleName || c.props.displayName
+			})
 		}
 
 		newComponent.props && compileExamples(newComponent.props.examples || [])

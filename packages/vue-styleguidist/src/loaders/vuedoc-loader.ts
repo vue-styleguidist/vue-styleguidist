@@ -13,6 +13,7 @@ import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
 import getParser from './utils/getParser'
 import consts from '../scripts/consts'
+import processComponent from './utils/processComponent'
 
 const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
@@ -56,7 +57,7 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 			logger.warn(`Error parsing ${componentPath}: ${e}`)
 		}
 
-		// set dependency tree for mixins an extends
+		// set dependency tree for mixins and extends
 		const originFiles = findOrigins(docs)
 		const basedir = path.dirname(file)
 		originFiles.forEach(extensionFile => {
@@ -86,6 +87,8 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 
 	let vsgDocs = await getVsgDocs(file)
 
+	// @requires sub-components
+
 	if (vsgDocs.tags && vsgDocs.tags.requires) {
 		// eslint-disable-next-line
 		vsgDocs.subComponents = await Promise.all(
@@ -96,15 +99,24 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 				))
 				.map(async filePath => {
 					const fullSubComponentFilePath = path.join(path.dirname(file), filePath)
-					return {
-						props: await getVsgDocs(fullSubComponentFilePath),
-						module: requireIt(fullSubComponentFilePath)
-					}
+					this.addDependency(fullSubComponentFilePath)
+					const props = await getVsgDocs(fullSubComponentFilePath)
+
+					// set examples to avoid placeholder
+					props.examples = [
+						{
+							type: 'markdown',
+							content: ''
+						}
+					] as any
+					const comp = processComponent(fullSubComponentFilePath, config, props)
+
+					return comp
 				})
 		)
 	}
 
-	// EXAMPLES
+	// examples
 
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
@@ -125,8 +137,8 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 		}
 	}
 
-	const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
 	if (!ignoreExamplesInFile) {
+		const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
 		if (process.env.NODE_ENV !== 'production' && examplesFile && global) {
 			global.VUE_STYLEGUIDIST = global.VUE_STYLEGUIDIST || {}
 			if (global.VUE_STYLEGUIDIST[examplesFile]) {

@@ -29,7 +29,7 @@ interface BaseComponentProps {
 export interface LoaderComponentProps extends BaseComponentProps {
 	examples?: Rsg.RequireItResult | null
 	example?: Rsg.RequireItResult | Rsg.RequireItResult[] | null
-	subComponents?: { props: LoaderComponentProps; module: Rsg.RequireItResult }[]
+	subComponents?: Rsg.LoaderComponent[]
 }
 
 export interface LoaderComponent extends Omit<Rsg.LoaderComponent, 'props'> {

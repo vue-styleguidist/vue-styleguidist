@@ -10,7 +10,7 @@ const isEs6Export = (module: any): module is { default: VueConstructor } => !!mo
  * @param {Object} component
  */
 export default function globalizeComponent(component: Component) {
-	const displayName = component.props.displayName
+	const displayName = component.props.displayName || ''
 	if (!component.name) {
 		return
 	}
@@ -20,7 +20,7 @@ export default function globalizeComponent(component: Component) {
 		: component.module
 
 	if (configComponent) {
-		Vue.component(cleanName(displayName || ''), configComponent)
+		Vue.component(cleanName(displayName), configComponent)
 	}
 
 	if (component.props.subComponents) {
