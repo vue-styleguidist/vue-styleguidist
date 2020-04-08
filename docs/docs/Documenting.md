@@ -517,9 +517,50 @@ You can mark your public methods with JSDoc `@public` tag to get them published 
 </script>
 ```
 
+## Composable Components
+
+When a component is a list or a table it is easier to write it using a composition API.
+
+For example, a dropdown element would be easier to read this way
+
+```html
+<DropDown>
+  <Choice val="1">value 1</Choice>
+  <Choice val="2">value 2</Choice>
+</DropDown>
+```
+
+than with a prop
+
+```html
+<DropDown :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"/>
+```
+
+Here is how Vue Styleguidist helps document this pattern: Please add `@requires` doclets to the main component.
+
+In the previous example we have a `DropDown` component that requires a `Choice` component to render properly. Here is how DropDown should look like.
+
+```vue
+<template>
+  <select>
+    <slot />
+  </select>
+</template>
+<script>
+/**
+ * @requires ./Choice.vue
+ */
+export default {
+  name: 'DropDown'
+}
+</script>
+```
+
+> **NOTE** Now `Choice` will be documented **only** as a part of `DropDown`. It will not have its own page or its own examples. Its props will be displayed with `DropDown`s, and it will be made available in `DropDown`s examples.
+
 ## TypeScript, Flow and Class-style Components
 
-Vue styleguidist understands TypeScript & Flow annotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well, with or without TypeScript.
+Vue Styleguidist understands TypeScript & Flow annotations. Write components in a typed language, types are documented automatically. It is compatible with class style components as well, with or without TypeScript.
 
 ```ts
 import { Component, Prop, Vue } from 'vue-property-decorator'
