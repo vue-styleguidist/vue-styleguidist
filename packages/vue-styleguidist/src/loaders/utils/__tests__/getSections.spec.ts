@@ -1,7 +1,19 @@
 import path from 'path'
 import * as Rsg from 'react-styleguidist'
-import getSections, { processSection } from '../getSections'
+import getSections, { processSection, getRequiredComponents } from '../getSections'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
+
+jest.mock('vue-docgen-api', () => ({
+	parseMulti: () =>
+		Promise.resolve([
+			{
+				tags: {
+					requires: [{ description: 'path/to/require1' }, { description: 'path/to/require2' }]
+				}
+			}
+		]),
+	ScriptHandlers: {}
+}))
 
 const configDir = path.resolve(__dirname, '../../../../../../test')
 const config = {
@@ -160,6 +172,19 @@ describe('getSections', () => {
 				]
 			}
 		])
+		done()
+	})
+})
+
+describe('getRequiredComponents', () => {
+	it('should return an array of all requires tags contents', async done => {
+		const requiredFiles = await getRequiredComponents(['source/of/file'], false)
+		expect(requiredFiles).toMatchInlineSnapshot(`
+		Array [
+		  "~/source/of/path/to/require1",
+		  "~/source/of/path/to/require2",
+		]
+	`)
 		done()
 	})
 })
