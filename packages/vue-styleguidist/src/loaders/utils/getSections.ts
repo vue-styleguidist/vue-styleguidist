@@ -26,7 +26,7 @@ export default async function getSections(
 	config: SanitizedStyleguidistConfig,
 	componentFiles: string[],
 	requiredComponents?: string[],
-	parentDepth = 0
+	parentDepth?: number
 ): Promise<Rsg.LoaderSection[]> {
 	return Promise.all(
 		sections.map(
