@@ -3,6 +3,13 @@ import path from 'path'
 import { readFileSync } from 'fs'
 import * as styleguideLoader from '../styleguide-loader'
 
+jest.mock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
+	'foo',
+	'bar'
+])
+
+jest.mock('../utils/getSections', () => () => [])
+
 describe('styleguide-loader', () => {
 	const file = path.resolve(__dirname, '../../../../../test/components/Button.vue')
 	const configDir = path.resolve(__dirname, '../../../../../test')
@@ -22,8 +29,10 @@ describe('styleguide-loader', () => {
 					sections: [{ components: 'components/**/*.js' }],
 					configDir,
 					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: (filepath: string) => filepath
+					getComponentPathLine: (filepath: string) => filepath,
+					theme: 'path/to/themeFile.js'
 				},
+				addDependency: () => {},
 				addContextDependency: () => {}
 			} as any,
 			readFileSync(file, 'utf8')
