@@ -6,7 +6,7 @@ describe('Styleguidist core', () => {
 	})
 
 	it('shows a table of contents', () => {
-		cy.get('nav > ul > li').should('have.length', 11)
+		cy.get('nav > ul > li').should('have.length.above', 5)
 	})
 
 	it('shows multiple components in normal mode', () => {
