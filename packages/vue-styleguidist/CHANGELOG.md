@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.2...v4.16.0) (2020-04-09)
+
+
+### Features
+
+* Document composite components ([#815](https://github.com/vue-styleguidist/vue-styleguidist/issues/815)) ([a6a3d11](https://github.com/vue-styleguidist/vue-styleguidist/commit/a6a3d11c320a3501ea1e63acdf3108d191cc6390)), closes [#809](https://github.com/vue-styleguidist/vue-styleguidist/issues/809)
+
+
+
+
+
 ## [4.15.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.1...v4.15.2) (2020-03-31)
 
 
