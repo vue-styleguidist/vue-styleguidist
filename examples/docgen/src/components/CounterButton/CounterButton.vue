@@ -24,7 +24,7 @@ export default {
 			 * @event after
 			 * @type {number}
 			 */
-			this.$emit('after', this.value)
+			this.$emit('after', this.count)
 		}
 	}
 }

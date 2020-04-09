@@ -11,6 +11,20 @@ import propHandler from './propHandler'
 import slotHandler from './slotHandler'
 import { Handler } from '../parse-script'
 
+export {
+	classDisplayNameHandler,
+	classMethodHandler,
+	classPropHandler,
+	componentHandler,
+	displayNameHandler,
+	eventHandler,
+	extendsHandler,
+	methodHandler,
+	mixinsHandler,
+	propHandler,
+	slotHandler
+}
+
 const defaultHandlers: Handler[] = [
 	displayNameHandler,
 	componentHandler,

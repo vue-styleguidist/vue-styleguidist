@@ -7,8 +7,8 @@ import cacher from './utils/cacher'
 import parseTemplate, { Handler as TemplateHandler } from './parse-template'
 import Documentation from './Documentation'
 import { ParseOptions } from './parse'
-import parseScript, { Handler as ScriptHandler } from './parse-script'
-import scriptHandlers, { preHandlers } from './script-handlers'
+import parseScript from './parse-script'
+import defaultScriptHandlers, { preHandlers } from './script-handlers'
 
 const read = promisify(readFile)
 
@@ -18,7 +18,6 @@ export default async function parseSFC(
 	opt: ParseOptions
 ): Promise<Documentation[]> {
 	let documentation = initialDoc
-	const addScriptHandlers: ScriptHandler[] = opt.addScriptHandlers || []
 
 	// use padding so that errors are displayed at the correct line
 	const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
@@ -77,11 +76,16 @@ export default async function parseSFC(
 		}
 	}
 
+	const scriptHandlers = opt.scriptHandlers || [
+		...defaultScriptHandlers,
+		...(opt.addScriptHandlers || [])
+	]
+
 	const docs: Documentation[] = scriptSource
 		? (await parseScript(
 				scriptSource,
-				preHandlers,
-				[...scriptHandlers, ...addScriptHandlers],
+				opt.scriptPreHandlers || preHandlers,
+				scriptHandlers,
 				opt,
 				documentation,
 				initialDoc !== undefined

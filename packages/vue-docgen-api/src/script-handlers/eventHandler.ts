@@ -17,6 +17,12 @@ export interface TypedParamTag extends ParamTag {
 	type: ParamType
 }
 
+/**
+ * Extracts events information from an object-style VueJs component
+ * @param documentation
+ * @param path
+ * @param astPath
+ */
 export default async function eventHandler(
 	documentation: Documentation,
 	path: NodePath,

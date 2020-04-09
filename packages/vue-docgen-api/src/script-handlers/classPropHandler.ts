@@ -13,6 +13,11 @@ import propHandler, {
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
+/**
+ * Extracts prop information from a class-style VueJs component
+ * @param documentation
+ * @param path
+ */
 export default async function classPropHandler(
 	documentation: Documentation,
 	path: NodePath<bt.ClassDeclaration>

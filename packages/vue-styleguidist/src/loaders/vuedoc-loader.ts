@@ -2,7 +2,7 @@ import * as path from 'path'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
-import { ComponentDoc, Tag } from 'vue-docgen-api'
+import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import { LoaderComponentProps } from '../types/Component'
@@ -13,6 +13,7 @@ import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
 import getParser from './utils/getParser'
 import consts from '../scripts/consts'
+import processComponent from './utils/processComponent'
 
 const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
@@ -36,12 +37,8 @@ function makeObject<T extends { name: string }>(set?: T[]): { [name: string]: T 
 	}, {})
 }
 
-export async function vuedocLoader(
-	this: StyleguidistContext,
-	source: string
-): Promise<string | undefined> {
-	const file = this.request.split('!').pop()
-	if (!file) return
+export async function vuedocLoader(this: StyleguidistContext, source: string): Promise<string> {
+	const file = this.request.split('!').pop() as string
 	const config = this._styleguidist
 
 	// Setup Webpack context dependencies to enable hot reload when adding new files or updating any of component dependencies
@@ -51,39 +48,80 @@ export async function vuedocLoader(
 
 	const propsParser = getParser(config)
 
-	let docs: ComponentDoc = { displayName: '', exportName: '' }
-	try {
-		docs = await propsParser(file)
-	} catch (e) {
-		const componentPath = path.relative(process.cwd(), file)
-		logger.warn(`Error parsing ${componentPath}: ${e}`)
+	const getVsgDocs = async (file: string): Promise<LoaderComponentProps> => {
+		let docs: ComponentDoc = { displayName: '', exportName: '' }
+		try {
+			docs = await propsParser(file)
+		} catch (e) {
+			const componentPath = path.relative(process.cwd(), file)
+			logger.warn(`Error parsing ${componentPath}: ${e}`)
+		}
+
+		// set dependency tree for mixins and extends
+		const originFiles = findOrigins(docs)
+		const basedir = path.dirname(file)
+		originFiles.forEach(extensionFile => {
+			this.addDependency(path.join(basedir, extensionFile))
+		})
+
+		// strip out origins if config is set to false to
+		// keep origins from displaying
+		if (!config.displayOrigins) {
+			stripOutOrigins(docs)
+		}
+
+		const inSideVsgDocs = {
+			...docs,
+			events: makeObject(docs.events),
+			slots: makeObject(docs.slots)
+		}
+
+		if (docs.props) {
+			const filteredProps = docs.props.filter(prop => !prop.tags || !prop.tags.ignore)
+			const sortProps = config.sortProps || defaultSortProps
+			inSideVsgDocs.props = filteredProps ? sortProps(filteredProps) : undefined
+		}
+
+		return inSideVsgDocs
 	}
 
-	// set dependency tree for mixins an extends
-	const originFiles = findOrigins(docs)
-	const basedir = path.dirname(file)
-	originFiles.forEach(extensionFile => {
-		this.addDependency(path.join(basedir, extensionFile))
-	})
+	let vsgDocs = await getVsgDocs(file)
 
-	// strip out origins if config is set to false to
-	// keep origins from displaying
-	if (!config.displayOrigins) {
-		stripOutOrigins(docs)
+	// @requires sub-components
+
+	if (vsgDocs.tags && vsgDocs.tags.requires) {
+		// eslint-disable-next-line
+		vsgDocs.subComponents = await Promise.all(
+			vsgDocs.tags.requires
+				.map((t: ParamTag) => t.description)
+				.filter(<(file?: string | boolean) => file is string>(file => typeof file === 'string'))
+				.map(async filePath => {
+					const fullSubComponentFilePath = path.join(path.dirname(file), filePath)
+					this.addDependency(fullSubComponentFilePath)
+					const props = await getVsgDocs(fullSubComponentFilePath)
+
+					// set examples to avoid placeholder
+					props.examples = [
+						{
+							type: 'markdown',
+							content: ''
+						}
+					] as any
+
+					return processComponent(fullSubComponentFilePath, config, props)
+				})
+		)
 	}
 
-	let vsgDocs: LoaderComponentProps = {
-		...docs,
-		events: makeObject(docs.events),
-		slots: makeObject(docs.slots)
-	}
+	// examples
+
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
 	let ignoreExamplesInFile = false
 	if (componentVueDoc) {
 		vsgDocs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
-	} else if (docs.tags) {
-		const examples = docs.tags.examples
+	} else if (vsgDocs.tags) {
+		const examples = vsgDocs.tags.examples
 		if (examples) {
 			const examplePaths = examples.map((a: Tag) => a.content)
 			if (examplePaths[0] === '[none]') {
@@ -96,14 +134,8 @@ export async function vuedocLoader(
 		}
 	}
 
-	if (docs.props) {
-		const filteredProps = docs.props.filter(prop => !prop.tags || !prop.tags.ignore)
-		const sortProps = config.sortProps || defaultSortProps
-		vsgDocs.props = filteredProps ? sortProps(filteredProps) : undefined
-	}
-
-	const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
 	if (!ignoreExamplesInFile) {
+		const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
 		if (process.env.NODE_ENV !== 'production' && examplesFile && global) {
 			global.VUE_STYLEGUIDIST = global.VUE_STYLEGUIDIST || {}
 			if (global.VUE_STYLEGUIDIST[examplesFile]) {
@@ -129,7 +161,7 @@ export async function vuedocLoader(
 		vsgDocs.examples = getExamples(
 			file,
 			examplesFile,
-			docs.displayName,
+			vsgDocs.displayName,
 			config.defaultExample,
 			isComponentDocInVueFile
 		)

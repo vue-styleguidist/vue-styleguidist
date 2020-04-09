@@ -3,6 +3,11 @@ import { NodePath } from 'ast-types'
 import Documentation from '../Documentation'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
+/**
+ * Extracts the name of the component from a class-style component
+ * @param documentation
+ * @param path
+ */
 export default async function classDisplayNameHandler(
 	documentation: Documentation,
 	path: NodePath

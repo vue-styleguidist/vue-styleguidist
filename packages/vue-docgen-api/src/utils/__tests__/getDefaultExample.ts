@@ -60,7 +60,6 @@ describe('getDefaultExample', () => {
 				]
 			})
 		).toMatchInlineSnapshot(`
-
 		<my-component string="Default Example Usage"
 		              :number="42"
 		              :boolean="true"
@@ -71,7 +70,6 @@ describe('getDefaultExample', () => {
 		              :symbol="Default Example Usage"
 		>
 		</my-component>
-
 	`)
 	})
 
@@ -83,11 +81,9 @@ describe('getDefaultExample', () => {
 				slots: [{ name: 'default', description: '' }]
 			})
 		).toMatchInlineSnapshot(`
-
 		<my-component>
 		  Default Example Usage
 		</my-component>
-
 	`)
 	})
 

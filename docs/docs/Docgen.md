@@ -114,6 +114,35 @@ var componentInfoConfigured = parse(filePath, {
     ) {
       // handle custom directives here
     }
+  ],
+  preScriptHandlers: [
+    function(
+      documentation: Documentation,
+      componentDefinition: NodePath,
+      astPath: bt.File,
+      opt: ParseOptions
+    ) {
+      // replaces handlers run before the scriptHandlers
+    }
+  ],
+  scriptHandlers: [
+    function(
+      documentation: Documentation,
+      componentDefinition: NodePath,
+      astPath: bt.File,
+      opt: ParseOptions
+    ) {
+      // replaces all the scriptHandlers
+    }
+  ],
+  templateHandlers: [
+    function(
+      documentation: Documentation,
+      templateAst: ASTElement,
+      options: TemplateParserOptions
+    ) {
+      // replaces all the templateHandlers
+    }
   ]
 })
 ```
@@ -138,19 +167,40 @@ This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/re
 
 `resolve` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolve) too. If you have it in Webpack or use `baseDir` in TypeScript, you should probably see how this one works.
 
-#### `addScriptHandler` and `addTemplateHandler`
+#### `addScriptHandlers` and `addTemplateHandlers`
 
-The custom additional handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+The additional custom handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
+
+#### `preScriptHandlers`, `scriptHandlers` and `templateHandlers`
+
+Replaces all of the handlers by those specified. If each of those 3 `handlers` are set to [], the library will only parse the given component. It will not run any standard handlers anymore.
+
+> **NOTE** Standard handlers are available as namespaces. Import and use them this way:
+>
+> ```js
+> import {
+>   parse,
+>   ScriptHandlers,
+>   TemplateHandlers
+> } from 'vue-docgen-api'
+>
+> parse('myComp', {
+>   scriptHandlers: [ScriptHandlers.componentHandler],
+>   templateHandlers: [TemplateHandlers.slotHandler]
+> })
+> ```
 
 #### `validExtends`
 
 Function - Returns if an extended component should be parsed by docgen.
 
-**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non-blocking but annoying.
+> **NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non-blocking but annoying.
 
-**NOTE** If you allow all of `node_modules` to try to be parsed, you might degrade performance. Use it responsibly.
+> **NOTE** If you allow all of `node_modules` to try to be parsed, you might degrade performance. Use it responsibly.
 
-## Documentation Object
+## Architecture
+
+### Documentation Object
 
 The `Documentation` class is the container of information before getting compiled. To be used and exported, use the `toObject()` function to make a neutral serializable object.
 
@@ -160,7 +210,7 @@ The object has functions to get descriptors for props, events, methods, and slot
 function getPropDescriptor(propName: string): PropDescriptor
 ```
 
-## Parsers
+### Parsers
 
 First, we use babel to parse the comments in the code.
 
@@ -168,7 +218,7 @@ Then we use `vue-template-compiler` to parse the HTML template.
 
 These parsers give us Abstract Syntax Trees (AST). We then traverse them with handlers to extract the info we need from components and their JSdoc.
 
-## Handlers
+### Handlers
 
 Script and template have 2 different AST structure. It makes sense that they have different handlers. There are a few standard handlers in docgen. You can add your own using the `addScriptHandler` or `addTemplateHandler` options.
 

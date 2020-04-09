@@ -10,6 +10,11 @@ import Documentation, {
 	ParamTag
 } from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
+import * as ScriptHandlers from './script-handlers'
+import * as TemplateHandlers from './template-handlers'
+
+export { ScriptHandlers }
+export { TemplateHandlers }
 
 export { TemplateParserOptions } from './parse-template'
 export { ScriptHandler, TemplateHandler } from './parse'

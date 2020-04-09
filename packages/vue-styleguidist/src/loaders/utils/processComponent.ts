@@ -29,11 +29,12 @@ function getComponentMetadataPath(filepath: string): string {
  */
 export default function processComponent(
 	filepath: string,
-	config: SanitizedStyleguidistConfig
+	config: SanitizedStyleguidistConfig,
+	propsPlaceholder?: any
 ): Rsg.LoaderComponent {
 	const componentPath = path.relative(config.configDir || '', filepath)
 	const componentName = getNameFromFilePath(filepath)
-	const props = requireIt(`!!${vueDocLoader}!${filepath}`)
+	const props = propsPlaceholder || requireIt(`!!${vueDocLoader}!${filepath}`)
 	const examplesFile = config.getExampleFilename(filepath)
 	const componentMetadataPath = getComponentMetadataPath(filepath)
 	const hasExamplesFile = examplesFile && fs.existsSync(examplesFile)
