@@ -160,6 +160,13 @@ class PreviewAsync extends Component {
 			previewComponent.components = {
 				[component.displayName]: component.module.default || component.module
 			}
+
+			if (component.props.subComponents) {
+				component.props.subComponents.forEach(c => {
+					c.displayName = cleanName(c.name)
+					previewComponent.components[c.displayName] = c.module.default || c.module
+				})
+			}
 		}
 
 		// then we just have to render the setup previewComponent in the prepared slot

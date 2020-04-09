@@ -6,9 +6,14 @@ import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 
 /**
- * @returns {object} an object containing the documentations for each mixin
- * key: mixin variable name
- * value: documentation of named mixin
+ * Look in the mixin section of a component.
+ * Parse the file mixins point to.
+ * Add the necessary info to the current doc object.
+ * Must be run first as mixins do not override components.
+ * @param documentation
+ * @param componentDefinition
+ * @param astPath
+ * @param opt
  */
 export default async function mixinsHandler(
 	documentation: Documentation,

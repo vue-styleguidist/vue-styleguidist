@@ -59,22 +59,17 @@ export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props
 		<>
 			{props.throws &&
 				props.throws.map((throws, i) => (
-					<>
-						<JsDocRenderer key={i} field="throws" classes={classes}>
-							{
-								<Argument
-									key={i}
-									name=""
-									{...throws}
-									description={
-										typeof throws.description === 'boolean'
-											? throws.description.toString()
-											: throws.description
-									}
-								/>
+					<JsDocRenderer key={i} field="throws" classes={classes}>
+						<Argument
+							name=""
+							{...throws}
+							description={
+								typeof throws.description === 'boolean'
+									? throws.description.toString()
+									: throws.description
 							}
-						</JsDocRenderer>
-					</>
+						/>
+					</JsDocRenderer>
 				))}
 			{map(fields, (format: (v: Param[]) => string, field: keyof TagProps) => {
 				const value = props[field]

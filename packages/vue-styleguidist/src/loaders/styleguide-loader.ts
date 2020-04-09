@@ -38,11 +38,24 @@ const CLIENT_CONFIG_OPTIONS = [
 	'pagePerSection',
 	'mountPointId',
 	'jsxInExamples',
-	'jssThemedEditor'
+	'jssThemedEditor',
+	'locallyRegisterComponents'
 ]
 
 export default function() {}
-export function pitch(this: StyleguidistContext, source: string): string {
+
+export function pitch(this: StyleguidistContext, source: string) {
+	const callback = this.async()
+	const cb = callback ? callback : () => null
+	pitchAsync
+		.call(this, source)
+		.then(res => cb(undefined, res))
+		.catch(e => {
+			throw e
+		})
+}
+
+export async function pitchAsync(this: StyleguidistContext, source: string): Promise<string> {
 	// Clear cache so it would detect new or renamed files
 	fileExistsCaseInsensitive.clearCache()
 
@@ -52,16 +65,17 @@ export function pitch(this: StyleguidistContext, source: string): string {
 	const config = this._styleguidist
 	if (!config.sections) return ''
 
-	let sections = getSections(config.sections, config)
-	if (config.skipComponentsWithoutExample) {
-		sections = filterComponentsWithExample(sections)
-	}
-
 	const allComponentFiles = getComponentFilesFromSections(
 		config.sections,
 		config.configDir,
 		config.ignore
 	)
+
+	let sections = await getSections(config.sections, config, allComponentFiles)
+	if (config.skipComponentsWithoutExample) {
+		sections = filterComponentsWithExample(sections)
+	}
+
 	const allContentPages = getAllContentPages(sections)
 
 	// Nothing to show in the style guide

@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getSections should return an array 1`] = `
+Array [
+  Object {
+    "components": Array [],
+    "content": Object {
+      "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!~/test/components/ReadMe.md",
+    },
+    "description": undefined,
+    "exampleMode": "collapse",
+    "external": undefined,
+    "href": undefined,
+    "name": "Readme",
+    "sectionDepth": 0,
+    "sections": Array [],
+    "slug": "readme-1",
+    "usageMode": "collapse",
+  },
+  Object {
+    "components": Array [
+      Object {
+        "filepath": "components/Button.vue",
+        "hasExamples": true,
+        "metadata": Object {},
+        "module": Object {
+          "require": "~/test/components/Button.vue",
+        },
+        "pathLine": "components/Button.vue",
+        "props": Object {
+          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+        },
+        "slug": "button-2",
+      },
+    ],
+    "content": undefined,
+    "description": undefined,
+    "exampleMode": "collapse",
+    "external": undefined,
+    "href": undefined,
+    "name": "Components",
+    "sectionDepth": 0,
+    "sections": Array [],
+    "slug": "components-1",
+    "usageMode": "collapse",
+  },
+  Object {
+    "components": Array [
+      Object {
+        "filepath": "components/Button.vue",
+        "hasExamples": true,
+        "metadata": Object {},
+        "module": Object {
+          "require": "~/test/components/Button.vue",
+        },
+        "pathLine": "components/Button.vue",
+        "props": Object {
+          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+        },
+        "slug": "button-3",
+      },
+    ],
+    "content": undefined,
+    "description": undefined,
+    "exampleMode": "collapse",
+    "external": undefined,
+    "href": undefined,
+    "name": "Ignore",
+    "sectionDepth": 0,
+    "sections": Array [],
+    "slug": "ignore-1",
+    "usageMode": "collapse",
+  },
+]
+`;
+
+exports[`processSection should return an object for section with components 1`] = `
+Object {
+  "components": Array [
+    Object {
+      "filepath": "components/Button.vue",
+      "hasExamples": true,
+      "metadata": Object {},
+      "module": Object {
+        "require": "~/test/components/Button.vue",
+      },
+      "pathLine": "components/Button.vue",
+      "props": Object {
+        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+      },
+      "slug": "button",
+    },
+  ],
+  "content": undefined,
+  "description": undefined,
+  "exampleMode": "collapse",
+  "external": undefined,
+  "href": undefined,
+  "name": "Components",
+  "sectionDepth": 0,
+  "sections": Array [],
+  "slug": "components",
+  "usageMode": "collapse",
+}
+`;
+
+exports[`processSection should return an object for section with content 1`] = `
+Object {
+  "components": Array [],
+  "content": Object {
+    "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!~/test/components/ReadMe.md",
+  },
+  "description": undefined,
+  "exampleMode": "collapse",
+  "external": undefined,
+  "href": undefined,
+  "name": "Readme",
+  "sectionDepth": 0,
+  "sections": Array [],
+  "slug": "readme",
+  "usageMode": "collapse",
+}
+`;
+
+exports[`processSection should return an object for section without ignored components 1`] = `
+Object {
+  "components": Array [
+    Object {
+      "filepath": "components/Button.vue",
+      "hasExamples": true,
+      "metadata": Object {},
+      "module": Object {
+        "require": "~/test/components/Button.vue",
+      },
+      "pathLine": "components/Button.vue",
+      "props": Object {
+        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+      },
+      "slug": "button-1",
+    },
+  ],
+  "content": undefined,
+  "description": undefined,
+  "exampleMode": "collapse",
+  "external": undefined,
+  "href": undefined,
+  "name": "Ignore",
+  "sectionDepth": 0,
+  "sections": Array [],
+  "slug": "ignore",
+  "usageMode": "collapse",
+}
+`;
