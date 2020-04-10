@@ -71,7 +71,7 @@ export async function pitchAsync(this: StyleguidistContext, source: string): Pro
 		config.ignore
 	)
 
-	let sections = await getSections(config.sections, config, allComponentFiles)
+	let sections = await getSections(config.sections, { config, componentFiles: allComponentFiles })
 	if (config.skipComponentsWithoutExample) {
 		sections = filterComponentsWithExample(sections)
 	}

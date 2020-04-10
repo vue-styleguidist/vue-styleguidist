@@ -6,7 +6,7 @@ import Styled, { JssInjectedProps } from 'react-styleguidist/lib/client/rsg-comp
 
 interface ReactComponentProps extends JssInjectedProps {
 	component: Rsg.Component & {
-		props: { subComponents?: (Rsg.Component & { parentName?: string })[] }
+		subComponents?: (Rsg.Component & { parentName?: string })[]
 	}
 	depth: number
 	exampleMode?: string
@@ -35,9 +35,9 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 				<DocumentedComponentContext.Provider value={this.props.component}>
 					<RsgReactComponent {...this.props} />
 				</DocumentedComponentContext.Provider>
-				{this.props.component.props.subComponents ? (
+				{this.props.component.subComponents ? (
 					<div className={this.props.classes.subComponents}>
-						{this.props.component.props.subComponents.map((c, i) => {
+						{this.props.component.subComponents.map((c, i) => {
 							c.parentName = this.props.component.visibleName
 							return (
 								<DocumentedComponentContext.Provider

@@ -23,7 +23,7 @@ export default function globalizeComponent(component: Component) {
 		Vue.component(cleanName(displayName), configComponent)
 	}
 
-	if (component.props.subComponents) {
-		component.props.subComponents.forEach(c => globalizeComponent(c))
+	if (component.subComponents) {
+		component.subComponents.forEach(c => globalizeComponent(c))
 	}
 }

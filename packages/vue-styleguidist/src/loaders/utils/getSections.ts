@@ -13,6 +13,14 @@ import getComponents from './getComponents'
 
 const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
 
+export interface SectionFunctionOptions {
+	config: SanitizedStyleguidistConfig
+	componentFiles: string[]
+	requiredComponents?: Record<string, string[]>
+	requiredComponentsList?: string[]
+	parentDepth?: number
+}
+
 /**
  * Return object for one level of sections.
  *
@@ -23,28 +31,20 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
  */
 export default async function getSections(
 	sections: Rsg.ConfigSection[],
-	config: SanitizedStyleguidistConfig,
-	componentFiles: string[],
-	requiredComponents?: string[],
-	parentDepth?: number
+	opts: SectionFunctionOptions
 ): Promise<Rsg.LoaderSection[]> {
-	return Promise.all(
-		sections.map(
-			async section =>
-				await processSection(
-					section,
-					config,
-					componentFiles,
-					requiredComponents ||
-						(await getRequiredComponents(componentFiles, config.jsxInComponents)),
-					parentDepth
-				)
-		)
-	)
+	const { config, componentFiles } = opts
+
+	if (!opts.requiredComponents) {
+		opts.requiredComponents = await getRequiredComponents(componentFiles, config.jsxInComponents)
+		opts.requiredComponentsList = flatten(Object.values(opts.requiredComponents))
+	}
+
+	return Promise.all(sections.map(async section => await processSection(section, opts)))
 }
 
 /**
- * returns all the `@required` file path in the analyzed components
+ * Returns all the `@required` file path in the analyzed components
  * this way we can ignore them when analyzing the components in the menu
  * and only add them as a subsection for a parent component
  * @param componentFiles all the component file paths to be analyzed
@@ -52,17 +52,19 @@ export default async function getSections(
 export async function getRequiredComponents(
 	componentFiles: string[],
 	jsx: boolean
-): Promise<string[]> {
-	return flatten(
-		await Promise.all(
-			componentFiles.map(async componentPath => {
-				const compDirName = path.dirname(componentPath)
-				const docs = await parseMulti(componentPath, {
-					scriptPreHandlers: [],
-					scriptHandlers: [ScriptHandlers.componentHandler],
-					jsx
-				})
-				return docs.reduce((acc: string[], doc) => {
+): Promise<Record<string, string[]>> {
+	const pathsArrays = await Promise.all(
+		componentFiles.map(async componentPath => {
+			const compDirName = path.dirname(componentPath)
+
+			const docs = await parseMulti(componentPath, {
+				scriptPreHandlers: [],
+				scriptHandlers: [ScriptHandlers.componentHandler],
+				jsx
+			})
+
+			return docs.reduce(
+				(acc: string[], doc) => {
 					if (doc.tags && doc.tags.requires) {
 						acc = acc.concat(
 							doc.tags.requires.map((t: ParamTag) =>
@@ -71,10 +73,16 @@ export async function getRequiredComponents(
 						)
 					}
 					return acc
-				}, [])
-			})
-		)
+				},
+				[componentPath]
+			)
+		})
 	)
+	return pathsArrays.reduce((acc: Record<string, string[]>, pa) => {
+		const parentComponent = pa[0]
+		acc[parentComponent] = pa.slice(1)
+		return acc
+	}, {})
 }
 
 /**
@@ -86,11 +94,9 @@ export async function getRequiredComponents(
  */
 export async function processSection(
 	section: Rsg.ConfigSection,
-	config: SanitizedStyleguidistConfig,
-	componentFiles: string[],
-	requiredComponents: string[],
-	parentDepth?: number
+	opts: SectionFunctionOptions
 ): Promise<Rsg.LoaderSection> {
+	const { config, parentDepth } = opts
 	const contentRelativePath = section.content
 
 	// Try to load section content file
@@ -118,15 +124,9 @@ export async function processSection(
 		sectionDepth,
 		description: section.description,
 		slug: slugger.slug(section.name || ''),
-		sections: await getSections(
-			section.sections || [],
-			config,
-			componentFiles,
-			requiredComponents,
-			sectionDepth
-		),
+		sections: await getSections(section.sections || [], { ...opts, parentDepth: sectionDepth }),
 		href: section.href,
-		components: getSectionComponents(section, config, requiredComponents),
+		components: getSectionComponents(section, opts),
 		content,
 		external: section.external
 	}
@@ -134,16 +134,22 @@ export async function processSection(
 
 const getSectionComponents = (
 	section: Rsg.ConfigSection,
-	config: SanitizedStyleguidistConfig,
-	requiredComponents: string[]
+	opts: SectionFunctionOptions
 ): Rsg.LoaderComponent[] => {
+	const { config, requiredComponentsList, requiredComponents } = opts
 	let ignore = config.ignore ? castArray(config.ignore) : []
+
 	if (section.ignore) {
 		ignore = ignore.concat(castArray(section.ignore))
 	}
-	if (requiredComponents.length) {
-		ignore = ignore.concat(requiredComponents)
+
+	if (requiredComponentsList) {
+		ignore = ignore.concat(requiredComponentsList)
 	}
 
-	return getComponents(getComponentFiles(section.components, config.configDir, ignore), config)
+	return getComponents(
+		getComponentFiles(section.components, config.configDir, ignore),
+		config,
+		requiredComponents
+	)
 }
