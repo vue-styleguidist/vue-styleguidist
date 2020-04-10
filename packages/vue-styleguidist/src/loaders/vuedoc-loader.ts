@@ -103,8 +103,8 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 					// set examples to avoid placeholder
 					props.examples = [
 						{
-							type: 'markdown',
-							content: ''
+							// unknown types are ignored
+							type: 'empty'
 						}
 					] as any
 
