@@ -65,7 +65,7 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 			<Heading level={headingLevel} id={id}>
 				<a href={href} className={sectionNameClasses}>
 					{children}
-					{parentName && <span className={classes.parentName}>of {parentName}</span>}
+					{parentName && <span className={classes.parentName}>{parentName}</span>}
 				</a>
 			</Heading>
 			<div className={classes.toolbar}>{toolbar}</div>
