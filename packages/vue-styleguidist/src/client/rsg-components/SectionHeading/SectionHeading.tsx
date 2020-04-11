@@ -9,7 +9,10 @@ interface SectionHeadingProps {
 	children?: React.ReactNode
 	id: string
 	slotName: string
-	slotProps: Rsg.Component & { isolated: boolean; parentName?: string }
+	slotProps: Rsg.Component & {
+		isolated: boolean
+		parentComponent?: { href: string; visibleName: string }
+	}
 	depth: number
 	deprecated?: boolean
 	pagePerSection?: boolean
@@ -27,13 +30,16 @@ const SectionHeading: React.FunctionComponent<SectionHeadingProps> = ({
 		? getUrl({ slug: id, id: rest.depth !== 1, takeHash: true })
 		: getUrl({ slug: id, anchor: true })
 
+	const parentHref = slotProps.parentComponent && slotProps.parentComponent.href
+
 	return (
 		<SectionHeadingRenderer
-			toolbar={slotProps.parentName ? null : <Slot name={slotName} props={slotProps} />}
+			toolbar={slotProps.parentComponent ? null : <Slot name={slotName} props={slotProps} />}
 			id={id}
 			href={href}
 			{...rest}
-			parentName={slotProps.parentName}
+			parentName={slotProps.parentComponent && slotProps.parentComponent.visibleName}
+			parentHref={parentHref}
 		>
 			{children}
 		</SectionHeadingRenderer>
@@ -46,7 +52,10 @@ SectionHeading.propTypes = {
 	slotName: PropTypes.string.isRequired,
 	slotProps: PropTypes.shape({
 		isolated: PropTypes.bool.isRequired,
-		parentName: PropTypes.string
+		parentComponent: PropTypes.shape({
+			href: PropTypes.string,
+			visibleName: PropTypes.string.isRequired
+		})
 	}).isRequired,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,

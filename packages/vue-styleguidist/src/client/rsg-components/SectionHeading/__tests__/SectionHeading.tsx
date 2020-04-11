@@ -13,7 +13,7 @@ describe('SectionHeading', () => {
 			<SectionHeading
 				id="section"
 				slotName="slot"
-				slotProps={{ foo: 1, bar: 'baz' } as any}
+				slotProps={{ foo: 1, bar: 'baz', isolated: false } as any}
 				depth={2}
 			>
 				A Section
@@ -101,7 +101,7 @@ describe('SectionHeading', () => {
 				id="section"
 				pagePerSection
 				slotName="slot"
-				slotProps={{ foo: 1, bar: 'baz' } as any}
+				slotProps={{ foo: 1, bar: 'baz', isolated: false } as any}
 				depth={2}
 			>
 				A Section

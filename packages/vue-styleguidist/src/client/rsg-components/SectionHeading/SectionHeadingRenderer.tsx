@@ -29,6 +29,7 @@ const styles = ({ color, space, fontSize }: Rsg.Theme) => ({
 		}
 	},
 	parentName: {
+		cursor: 'pointer',
 		fontSize: fontSize.h5,
 		fontStyle: 'italic',
 		margin: space[1]
@@ -43,6 +44,7 @@ interface SectionHeadingRendererProps extends JssInjectedProps {
 	depth: number
 	deprecated?: boolean
 	parentName?: string
+	parentHref?: string
 }
 
 const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProps> = ({
@@ -53,7 +55,8 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 	href,
 	depth,
 	deprecated,
-	parentName
+	parentName,
+	parentHref
 }) => {
 	const headingLevel = Math.min(6, depth)
 	const sectionNameClasses = cx(classes.sectionName, {
@@ -65,8 +68,13 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 			<Heading level={headingLevel} id={id}>
 				<a href={href} className={sectionNameClasses}>
 					{children}
-					{parentName && <span className={classes.parentName}>{parentName}</span>}
 				</a>
+				{parentName &&
+					parentHref && (
+						<a href={parentHref} className={classes.parentName}>
+							{parentName}
+						</a>
+					)}
 			</Heading>
 			<div className={classes.toolbar}>{toolbar}</div>
 		</div>
@@ -81,6 +89,7 @@ SectionHeadingRenderer.propTypes = {
 	href: PropTypes.string.isRequired,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
-	parentName: PropTypes.string
+	parentName: PropTypes.string,
+	parentHref: PropTypes.string
 }
 export default Styled<SectionHeadingRendererProps>(styles as any)(SectionHeadingRenderer)

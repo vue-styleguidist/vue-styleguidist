@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import * as Rsg from 'react-styleguidist'
 import PropTypes from 'prop-types'
+import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Context from 'rsg-components/Context'
 import RsgReactComponent from 'react-styleguidist/lib/client/rsg-components/ReactComponent/ReactComponent'
-import Styled, { JssInjectedProps } from 'react-styleguidist/lib/client/rsg-components/Styled'
+import getUrl from 'react-styleguidist/lib/client/utils/getUrl'
 
 interface ReactComponentProps extends JssInjectedProps {
 	component: Rsg.Component & {
-		subComponents?: (Rsg.Component & { parentName?: string })[]
+		subComponents?: (Rsg.Component & {
+			parentComponent?: { href?: string; visibleName?: string }
+		})[]
 	}
 	depth: number
 	exampleMode?: string
@@ -24,21 +28,47 @@ const styles = ({ space }: Rsg.Theme) => ({
 export const DocumentedComponentContext = React.createContext({})
 
 export class VsgReactComponent extends Component<ReactComponentProps> {
-	static propTypes = {
+	public static propTypes = {
 		...RsgReactComponent.propTypes,
 		classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired
 	}
 
+	public static contextType = Context
+
 	render() {
+		const {
+			config: { pagePerSection }
+		} = this.context
+
+		const { component, classes } = this.props
+
+		const getFinalUrl = (slug: string, depth: number) =>
+			pagePerSection
+				? getUrl({ slug, id: depth !== 1, takeHash: true })
+				: getUrl({ slug, anchor: true })
+
+		if (component.subComponents && component.props) {
+			const links = component.subComponents.map(
+				c => `[${c.visibleName}](${getFinalUrl(c.slug || '', this.props.depth)})`
+			)
+			component.props.description =
+				`**Requires** ${links.join(', ')}\n\n` + (component.props.description || '')
+		}
+
+		const parentHref = component.props ? getFinalUrl(component.slug || '', this.props.depth) : ''
+
 		return (
 			<>
-				<DocumentedComponentContext.Provider value={this.props.component}>
+				<DocumentedComponentContext.Provider value={component}>
 					<RsgReactComponent {...this.props} />
 				</DocumentedComponentContext.Provider>
-				{this.props.component.subComponents ? (
-					<div className={this.props.classes.subComponents}>
-						{this.props.component.subComponents.map((c, i) => {
-							c.parentName = this.props.component.visibleName
+				{component.subComponents ? (
+					<div className={classes.subComponents}>
+						{component.subComponents.map((c, i) => {
+							c.parentComponent = {
+								href: parentHref,
+								visibleName: component.visibleName
+							}
 							return (
 								<DocumentedComponentContext.Provider
 									key={(c.props && c.props.displayName) || i}
