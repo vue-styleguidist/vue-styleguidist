@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SectionHeading should forward slot properties to the toolbar 1`] = `
+<div>
+  <div
+    class="rsg--wrapper-0"
+  >
+    <h2
+      class="rsg--heading-6 rsg--heading2-8"
+      id="section"
+    >
+      <a
+        class="rsg--sectionName-2"
+        href="/#section"
+      >
+        A Section
+      </a>
+    </h2>
+    <div
+      class="rsg--toolbar-1"
+    >
+      <div />
+    </div>
+  </div>
+</div>
+`;
