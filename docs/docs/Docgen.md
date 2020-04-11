@@ -15,15 +15,15 @@
 
 ### Type `ComponentDoc`
 
-Every parser in docgen-api returns an instannce of `ComponentDoc` or a `ComponentDoc[]`.
+Every parser in docgen-api returns an instance of `ComponentDoc` or a `ComponentDoc[]`.
 
 ```ts
 interface ComponentDoc {
   /**
    * Usual name of the component:
    *  It will take by order of priority
-   *  - The contents of the @displayName tag of teh component
-   *  - The name of the variable containing the comopnent (or the class if class component)
+   *  - The contents of the @displayName tag of the component
+   *  - The name of the variable containing the component (or the class if class component)
    *  - the name of the file containing the component
    */
   displayName: string
@@ -36,7 +36,7 @@ interface ComponentDoc {
   exportName: string
 
   /**
-   * Contents of every line that is not conatined in a tag
+   * Contents of every line that is not contained in a tag
    * in the code block before your component
    * @see below
    */
@@ -161,7 +161,7 @@ Same as `parse`, but allows for multiple exported components in one file.
 
 #### `alias`
 
-This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here.
+This is a mirror to the [webpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here.
 
 #### `resolve`
 
@@ -194,7 +194,7 @@ Replaces all of the handlers by those specified. If each of those 3 `handlers` a
 
 Function - Returns if an extended component should be parsed by docgen.
 
-> **NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non-blocking but annoying.
+> **NOTE** If docgen fails to parse the targeted component, it will log a warning. It is non-blocking but annoying.
 
 > **NOTE** If you allow all of `node_modules` to try to be parsed, you might degrade performance. Use it responsibly.
 
