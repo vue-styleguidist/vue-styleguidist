@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.17.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.16.0...v4.17.0) (2020-04-12)
+
+
+### Bug Fixes
+
+* adapt style of sub-component ([a58f99a](https://github.com/vue-styleguidist/vue-styleguidist/commit/a58f99a4942301137b0601bb39b490243e765455))
+* remove the word "of" for sub-components ([a9f8a30](https://github.com/vue-styleguidist/vue-styleguidist/commit/a9f8a308049e15554a84d6832cbb0b5d2c6665fc))
+
+
+### Features
+
+* enable indpdt HMR on sub-components ([3626933](https://github.com/vue-styleguidist/vue-styleguidist/commit/36269332f42ad3a497e763887f929dec0df24c8d))
+
+
+
+
+
 # [4.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.2...v4.16.0) (2020-04-09)
 
 
