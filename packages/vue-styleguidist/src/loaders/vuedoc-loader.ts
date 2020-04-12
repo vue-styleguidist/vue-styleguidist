@@ -2,7 +2,8 @@ import * as path from 'path'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
-import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
+import loaderUtils from 'loader-utils'
+import { ComponentDoc, Tag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import { LoaderComponentProps } from '../types/Component'
@@ -13,7 +14,6 @@ import findOrigins from './utils/findOrigins'
 import stripOutOrigins from './utils/stripOutOrigins'
 import getParser from './utils/getParser'
 import consts from '../scripts/consts'
-import processComponent from './utils/processComponent'
 
 const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
@@ -40,6 +40,8 @@ function makeObject<T extends { name: string }>(set?: T[]): { [name: string]: T 
 export async function vuedocLoader(this: StyleguidistContext, source: string): Promise<string> {
 	const file = this.request.split('!').pop() as string
 	const config = this._styleguidist
+
+	const { noExample = false } = loaderUtils.getOptions(this) || {}
 
 	// Setup Webpack context dependencies to enable hot reload when adding new files or updating any of component dependencies
 	if (config.contextDependencies) {
@@ -87,37 +89,12 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 
 	let vsgDocs = await getVsgDocs(file)
 
-	// @requires sub-components
-
-	if (vsgDocs.tags && vsgDocs.tags.requires) {
-		// eslint-disable-next-line
-		vsgDocs.subComponents = await Promise.all(
-			vsgDocs.tags.requires
-				.map((t: ParamTag) => t.description)
-				.filter(<(file?: string | boolean) => file is string>(file => typeof file === 'string'))
-				.map(async filePath => {
-					const fullSubComponentFilePath = path.join(path.dirname(file), filePath)
-					this.addDependency(fullSubComponentFilePath)
-					const props = await getVsgDocs(fullSubComponentFilePath)
-
-					// set examples to avoid placeholder
-					props.examples = [
-						{
-							type: 'markdown',
-							content: ''
-						}
-					] as any
-
-					return processComponent(fullSubComponentFilePath, config, props)
-				})
-		)
-	}
-
 	// examples
 
 	const componentVueDoc = getComponentVueDoc(source, file)
 	const isComponentDocInVueFile = !!componentVueDoc
-	let ignoreExamplesInFile = false
+
+	let ignoreExamplesInFile = noExample
 	if (componentVueDoc) {
 		vsgDocs.example = requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${file}`)
 	} else if (vsgDocs.tags) {
@@ -165,6 +142,12 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 			config.defaultExample,
 			isComponentDocInVueFile
 		)
+	} else {
+		vsgDocs.examples = [
+			{
+				type: 'noexample'
+			}
+		] as any
 	}
 
 	if (config.updateDocs) {

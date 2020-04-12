@@ -30,11 +30,12 @@ function getComponentMetadataPath(filepath: string): string {
 export default function processComponent(
 	filepath: string,
 	config: SanitizedStyleguidistConfig,
-	propsPlaceholder?: any
-): Rsg.LoaderComponent {
+	subComponentPaths?: string[],
+	ignoreExample?: boolean
+): Rsg.LoaderComponent & { subComponents?: Rsg.LoaderComponent[] } {
 	const componentPath = path.relative(config.configDir || '', filepath)
 	const componentName = getNameFromFilePath(filepath)
-	const props = propsPlaceholder || requireIt(`!!${vueDocLoader}!${filepath}`)
+	const props = requireIt(`!!${vueDocLoader}${ignoreExample ? '?noExample=1' : ''}!${filepath}`)
 	const examplesFile = config.getExampleFilename(filepath)
 	const componentMetadataPath = getComponentMetadataPath(filepath)
 	const hasExamplesFile = examplesFile && fs.existsSync(examplesFile)
@@ -44,6 +45,10 @@ export default function processComponent(
 		hasInternalExamples = !!customBlocks && customBlocks.findIndex(p => p.type === 'docs') >= 0
 	}
 	const hasExamples = hasExamplesFile || hasInternalExamples
+	const subComponents: Rsg.LoaderComponent[] | undefined =
+		subComponentPaths && subComponentPaths.length
+			? subComponentPaths.map(subFilePath => processComponent(subFilePath, config, undefined, true))
+			: undefined
 
 	return {
 		filepath: componentPath,
@@ -52,6 +57,7 @@ export default function processComponent(
 		module: requireIt(filepath),
 		props,
 		hasExamples,
-		metadata: fs.existsSync(componentMetadataPath) ? requireIt(componentMetadataPath) : {}
+		metadata: fs.existsSync(componentMetadataPath) ? requireIt(componentMetadataPath) : {},
+		subComponents
 	}
 }

@@ -3,18 +3,6 @@ import * as Rsg from 'react-styleguidist'
 import getSections, { processSection, getRequiredComponents } from '../getSections'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
-jest.mock('vue-docgen-api', () => ({
-	parseMulti: () =>
-		Promise.resolve([
-			{
-				tags: {
-					requires: [{ description: 'path/to/require1' }, { description: 'path/to/require2' }]
-				}
-			}
-		]),
-	ScriptHandlers: {}
-}))
-
 const configDir = path.resolve(__dirname, '../../../../../../test')
 const config = {
 	configDir,
@@ -96,21 +84,21 @@ function filterSectionDepth(section: Rsg.LoaderSection): Rsg.ConfigSection {
 
 describe('processSection', () => {
 	it('should return an object for section with content', async done => {
-		const result = await processSection(sections[0], config, [], [])
+		const result = await processSection(sections[0], { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
 		done()
 	})
 
 	it('should return an object for section with components', async done => {
-		const result = await processSection(sections[1], config, [], [])
+		const result = await processSection(sections[1], { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
 		done()
 	})
 
 	it('should return an object for section without ignored components', async done => {
-		const result = await processSection(sections[2], config, [], [])
+		const result = await processSection(sections[2], { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
 		done()
@@ -119,14 +107,14 @@ describe('processSection', () => {
 
 describe('getSections', () => {
 	it('should return an array', async done => {
-		const result = await getSections(sections, config, [])
+		const result = await getSections(sections, { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
 		done()
 	})
 
 	it('should return an array of sectionsWithDepth with sectionDepth decreasing', async done => {
-		const result = await getSections(sectionsWithDepth, config, [])
+		const result = await getSections(sectionsWithDepth, { config, componentFiles: [] })
 
 		expect(result.map(filterSectionDepth)).toEqual([
 			{
@@ -155,7 +143,7 @@ describe('getSections', () => {
 	})
 
 	it('should return an array of sectionsWithBadDepth taking the sectionDepth of the first depth of the sections', async done => {
-		const result = await getSections(sectionsWithBadDepth, config, [])
+		const result = await getSections(sectionsWithBadDepth, { config, componentFiles: [] })
 
 		expect(result.map(filterSectionDepth)).toEqual([
 			{
@@ -176,14 +164,31 @@ describe('getSections', () => {
 	})
 })
 
+jest.mock('vue-docgen-api', () => ({
+	parseMulti: () =>
+		Promise.resolve([
+			{
+				tags: {
+					requires: [
+						{ description: 'path/to/require1' }, //
+						{ description: 'path/to/require2' } //
+					]
+				}
+			}
+		]),
+	ScriptHandlers: {}
+}))
+
 describe('getRequiredComponents', () => {
 	it('should return an array of all requires tags contents', async done => {
 		const requiredFiles = await getRequiredComponents(['source/of/file'], false)
 		expect(requiredFiles).toMatchInlineSnapshot(`
-		Array [
-		  "~/source/of/path/to/require1",
-		  "~/source/of/path/to/require2",
-		]
+		Object {
+		  "source/of/file": Array [
+		    "~/source/of/path/to/require1",
+		    "~/source/of/path/to/require2",
+		  ],
+		}
 	`)
 		done()
 	})

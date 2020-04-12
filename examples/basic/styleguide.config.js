@@ -25,6 +25,13 @@ module.exports = {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
 	},
+	getComponentPathLine(componentPath) {
+		const componentFileName = path.basename(componentPath, '.vue')
+		return `import ${componentFileName} from '${componentPath.replace(
+			/^src\//,
+			'my-library/dist/'
+		)}'`
+	},
 	version: '1.1.1',
 	webpackConfig: {
 		resolve: {
