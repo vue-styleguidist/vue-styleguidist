@@ -1,38 +1,88 @@
 import React, { Component } from 'react'
 import * as Rsg from 'react-styleguidist'
+import PropTypes from 'prop-types'
+import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Context from 'rsg-components/Context'
 import RsgReactComponent from 'react-styleguidist/lib/client/rsg-components/ReactComponent/ReactComponent'
+import getUrl from 'react-styleguidist/lib/client/utils/getUrl'
 
-interface ReactComponentProps {
-	component: Rsg.Component & { props: { subComponents?: Rsg.Component[] } }
+interface ReactComponentProps extends JssInjectedProps {
+	component: Rsg.Component & {
+		subComponents?: (Rsg.Component & {
+			parentComponent?: { href?: string; visibleName?: string }
+		})[]
+	}
 	depth: number
 	exampleMode?: string
 	usageMode?: string
 }
 
+const styles = ({ space }: Rsg.Theme) => ({
+	subComponents: {
+		borderLeft: '1px solid #CCCCCC',
+		padding: `${space[2]}px 0 0 ${space[3]}px`,
+		marginBottom: space[4]
+	}
+})
+
 export const DocumentedComponentContext = React.createContext({})
 
-export default class VsgReactComponent extends Component<ReactComponentProps> {
-	static propTypes = RsgReactComponent.propTypes
+export class VsgReactComponent extends Component<ReactComponentProps> {
+	public static propTypes = {
+		...RsgReactComponent.propTypes,
+		classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired
+	}
+
+	public static contextType = Context
 
 	render() {
+		const {
+			config: { pagePerSection }
+		} = this.context
+
+		const { component, classes } = this.props
+
+		const getFinalUrl = (slug: string, depth: number) =>
+			pagePerSection
+				? getUrl({ slug, id: depth !== 1, takeHash: true })
+				: getUrl({ slug, anchor: true })
+
+		if (component.subComponents && component.props) {
+			const links = component.subComponents.map(
+				c => `[${c.visibleName}](${getFinalUrl(c.slug || '', this.props.depth)})`
+			)
+			component.props.description =
+				`**Requires** ${links.join(', ')}\n\n` + (component.props.description || '')
+		}
+
+		const parentHref = component.props ? getFinalUrl(component.slug || '', this.props.depth) : ''
+
 		return (
 			<>
-				<DocumentedComponentContext.Provider value={this.props.component}>
+				<DocumentedComponentContext.Provider value={component}>
 					<RsgReactComponent {...this.props} />
 				</DocumentedComponentContext.Provider>
-				{this.props.component.props.subComponents ? (
-					<div>
-						{this.props.component.props.subComponents.map((c, i) => (
-							<DocumentedComponentContext.Provider
-								key={(c.props && c.props.displayName) || i}
-								value={c}
-							>
-								<RsgReactComponent {...this.props} component={c} depth={this.props.depth + 1} />
-							</DocumentedComponentContext.Provider>
-						))}
+				{component.subComponents ? (
+					<div className={classes.subComponents}>
+						{component.subComponents.map((c, i) => {
+							c.parentComponent = {
+								href: parentHref,
+								visibleName: component.visibleName
+							}
+							return (
+								<DocumentedComponentContext.Provider
+									key={(c.props && c.props.displayName) || i}
+									value={c}
+								>
+									<RsgReactComponent {...this.props} component={c} depth={this.props.depth + 1} />
+								</DocumentedComponentContext.Provider>
+							)
+						})}
 					</div>
 				) : null}
 			</>
 		)
 	}
 }
+
+export default Styled<ReactComponentProps>(styles as any)(VsgReactComponent as any)

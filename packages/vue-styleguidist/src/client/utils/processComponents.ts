@@ -37,8 +37,8 @@ export default function processComponents({
 			}
 		}
 
-		if (props.subComponents) {
-			props.subComponents.forEach(c => {
+		if (component.subComponents) {
+			component.subComponents.forEach(c => {
 				// Add .name shortcuts for names instead of .props.displayName.
 				c.name = c.props.displayName
 				c.visibleName = c.props.visibleName || c.props.displayName

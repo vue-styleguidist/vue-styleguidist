@@ -29,7 +29,6 @@ interface BaseComponentProps {
 export interface LoaderComponentProps extends BaseComponentProps {
 	examples?: Rsg.RequireItResult | null
 	example?: Rsg.RequireItResult | Rsg.RequireItResult[] | null
-	subComponents?: Rsg.LoaderComponent[]
 }
 
 export interface LoaderComponent extends Omit<Rsg.LoaderComponent, 'props'> {
@@ -39,10 +38,10 @@ export interface LoaderComponent extends Omit<Rsg.LoaderComponent, 'props'> {
 export interface ComponentProps extends BaseComponentProps {
 	examples?: (CodeExample | Rsg.MarkdownExample)[]
 	example?: (CodeExample | Rsg.MarkdownExample)[] | (CodeExample | Rsg.MarkdownExample)[][]
-	subComponents?: Component[]
 }
 
 export interface Component extends Omit<Rsg.Component, 'props' | 'module'> {
 	props: ComponentProps
 	module: { default: VueConstructor } | VueConstructor
+	subComponents?: Component[]
 }

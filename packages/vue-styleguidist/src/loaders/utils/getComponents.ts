@@ -11,7 +11,14 @@ import processComponent from './processComponent'
  */
 export default function getComponents(
 	components: string[],
-	config: SanitizedStyleguidistConfig
+	config: SanitizedStyleguidistConfig,
+	subComponentsPaths?: Record<string, string[]>
 ): Rsg.LoaderComponent[] {
-	return components.map(filepath => processComponent(filepath, config))
+	return components.map(filepath =>
+		processComponent(
+			filepath,
+			config,
+			subComponentsPaths ? subComponentsPaths[filepath] : undefined
+		)
+	)
 }
