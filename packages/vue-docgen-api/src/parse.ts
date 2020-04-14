@@ -1,4 +1,5 @@
 import { readFile } from 'fs'
+import * as pug from 'pug'
 import * as path from 'path'
 import { promisify } from 'util'
 import Documentation, { Descriptor } from './Documentation'
@@ -69,6 +70,10 @@ export interface DocGenOptions {
 	 * @default `fullFilePath=>!/[\\/]node_modules[\\/]/.test(fullFilePath)`
 	 */
 	validExtends?: (fullFilePath: string) => boolean
+	/**
+	 * all pug options passed to the pug compiler if you use it
+	 */
+	pugOptions?: pug.Options
 }
 
 /**
