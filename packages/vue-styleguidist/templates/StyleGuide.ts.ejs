@@ -48,7 +48,7 @@ if(description || defaultShowable || opt.deprecated){%>
      */<%
 }
     %>
-    <%-key %><%- opt.default ? '' : '?' %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ? 
+    <%-key %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ? 
         schema[key].type : schema[key].uitype) || 'any' %>;<%
     });
 %>
