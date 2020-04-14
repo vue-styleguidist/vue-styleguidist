@@ -29,7 +29,7 @@ export interface BaseStyleguidistConfig
     /**
      * Your application static assets folder, will be accessible as / in the style guide dev server. 
      */
-    assetsDir: string;
+    assetsDir?: string;
     /**
      * Should the styleguide try code splitting for better performance? NOte that you will need the proper transform in your babel config 
      * @default true 
@@ -39,31 +39,31 @@ export interface BaseStyleguidistConfig
     /**
      * Where to find the components. Takes in a String or an Array of glob paths. Comma separated. 
      */
-    components: (() => string[]) | string | string[];
-    configDir: string;
+    components?: (() => string[]) | string | string[];
+    configDir?: string;
     context: Record<string, any>;
-    contextDependencies: string[];
-    configureServer: (server: WebpackDevServer, env: string) => string;
+    contextDependencies?: string[];
+    configureServer?: (server: WebpackDevServer, env: string) => string;
     /**
      * Add a button on the top right of the code sections to copy to clipboard the current contents of the editor 
      * @default false 
      */
-    copyCodeButton: boolean;
+    copyCodeButton?: boolean;
     /**
      * Allows you to modify webpack config without any restrictions 
      */
-    dangerouslyUpdateWebpackConfig: (server: Configuration, env: string) => Configuration;
+    dangerouslyUpdateWebpackConfig?: (server: Configuration, env: string) => Configuration;
     /**
      * Display each component with a default example, regardless of if there's a README or <docs/> block written. 
      * @default false 
      */
-    defaultExample: string;
+    defaultExample?: string;
     /**
      * In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending comopnents or mixing mixins 
      * @default false 
      */
-    displayOrigins: boolean;
-    editorConfig: {
+    displayOrigins?: boolean;
+    editorConfig?: {
 		theme: string
 	};
     /**
@@ -96,22 +96,22 @@ export interface BaseStyleguidistConfig
      * Allow exmaples to contain JSX syntax. Use proper JSX Vue component format in examples. 
      * @default false 
      */
-    jsxInExamples: boolean;
+    jsxInExamples?: boolean;
     /**
      * Register components on their examples only instead of globally Vue.components() 
      * @default false 
      */
-    locallyRegisterComponents: boolean;
+    locallyRegisterComponents?: boolean;
     /**
      * @deprecated Use pagePerSection option instead 
      * @default false 
      */
-    navigation: boolean;
+    navigation?: boolean;
     /**
      * @deprecated Use renderRootJsx option instead 
      */
     mixins: string[];
-    logger: {
+    logger?: {
 		info(message: string): void
 		warn(message: string): void
 		debug(message: string): void
@@ -130,25 +130,25 @@ export interface BaseStyleguidistConfig
      * Render one section or component per page. If true, each section will be a single page. 
      * @default false 
      */
-    pagePerSection: boolean;
+    pagePerSection?: boolean;
     /**
      * @default 500 
      */
     previewDelay: number;
-    printBuildInstructions: any;
-    printServerInstructions: any;
+    printBuildInstructions?: any;
+    printServerInstructions?: any;
     /**
      * Display a progress bar while building 
      * @default true 
      */
     progressBar: boolean;
-    propsParser: (file: string) => Promise<ComponentDoc> | undefined;
+    propsParser?: (file: string) => Promise<ComponentDoc>;
     require: string[];
-    renderRootJsx: string;
+    renderRootJsx?: string;
     /**
      * Shows 'Fork Me' ribbon in the top-right corner. If ribbon key is present, then it's required to add url property; text property is optional. If you want to change styling of the ribbon, please, refer to the theme section in the documentation. 
      */
-    ribbon: {
+    ribbon?: {
 		url: string,
 		text: string
 	};
@@ -166,12 +166,12 @@ export interface BaseStyleguidistConfig
      * @deprecated Use exampleMode option instead 
      * @default false 
      */
-    showCode: boolean;
+    showCode?: boolean;
     /**
      * @deprecated Use usageMode option instead 
      * @default false 
      */
-    showUsage: boolean;
+    showUsage?: boolean;
     /**
      * Toggle sidebar visibility. Sidebar will be hidden when opening components or examples in isolation mode even if this value is set to true. When set to false, sidebar will always be hidden. 
      * @default true 
@@ -186,9 +186,9 @@ export interface BaseStyleguidistConfig
      * Ignore components that don’t have an example file (as determined by getExampleFilename). These components won’t be accessible from other examples unless you manually require them. 
      * @default false 
      */
-    skipComponentsWithoutExample: boolean;
-    sortProps: (props: PropDescriptor[]) => PropDescriptor[];
-    styleguideComponents: { [name: string]: string };
+    skipComponentsWithoutExample?: boolean;
+    sortProps?: (props: PropDescriptor[]) => PropDescriptor[];
+    styleguideComponents?: { [name: string]: string };
     /**
      * Folder for static HTML style guide generated with `styleguidist build` command. 
      * @default "styleguide" 
@@ -198,20 +198,20 @@ export interface BaseStyleguidistConfig
      * configures the prefix of the server and built urls. 
      * @default "" 
      */
-    styleguidePublicPath: string;
+    styleguidePublicPath?: string;
     styles: Styles | string | ((theme: any) => Styles);
     template: any;
     theme: { [name: string]: any } | string;
     /**
      * Style guide title 
      */
-    title: string;
-    updateDocs: (doc: LoaderComponentProps, file: string) => LoaderComponentProps;
+    title?: string;
+    updateDocs?: (doc: LoaderComponentProps, file: string) => LoaderComponentProps;
     updateExample: (
 		props: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>,
 		ressourcePath: string
 	) => Rsg.CodeExample;
-    updateWebpackConfig: any;
+    updateWebpackConfig?: any;
     /**
      * Defines the initial state of the props and methods tab 
      * @default "collapse" 
@@ -230,16 +230,16 @@ export interface BaseStyleguidistConfig
      * Print debug information. Same as --verbose command line switch. 
      * @default false 
      */
-    verbose: boolean;
+    verbose?: boolean;
     /**
      * The version # of the Styleguide 
      */
-    version: string;
+    version?: string;
     /**
      * @deprecated Use renderRootJsx option instead 
      */
-    vuex: any;
-    webpackConfig: Configuration;
+    vuex?: any;
+    webpackConfig?: Configuration;
 }
 
 export interface SanitizedStyleguidistConfig extends BaseStyleguidistConfig {
