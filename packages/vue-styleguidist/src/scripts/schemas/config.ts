@@ -272,7 +272,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 			value === undefined && !config.verbose ? true : !!value
 	},
 	propsParser: {
-		tstype: '(file: string) => Promise<ComponentDoc>',
+		tstype: '(file: string) => Promise<ComponentDoc> | undefined',
 		type: 'function'
 	},
 	require: {
