@@ -23,7 +23,20 @@ describe('getTypeFromAnnotation', () => {
 	it('should extract type array', () => {
 		expect(getTypeFromAnnotation(getAnnotation('string[]'))).toMatchInlineSnapshot(`
 		Object {
-		  "name": "string[]",
+		  "elements": Array [
+		    Object {
+		      "name": "string",
+		    },
+		  ],
+		  "name": "Array",
+		}
+	`)
+	})
+
+	it('should extract identified type', () => {
+		expect(getTypeFromAnnotation(getAnnotation('MetaType'))).toMatchInlineSnapshot(`
+		Object {
+		  "name": "MetaType",
 		}
 	`)
 	})
@@ -31,7 +44,25 @@ describe('getTypeFromAnnotation', () => {
 	it('should extract composed type', () => {
 		expect(getTypeFromAnnotation(getAnnotation('MetaType<string>'))).toMatchInlineSnapshot(`
 		Object {
+		  "elements": Array [
+		    Object {
+		      "name": "string",
+		    },
+		  ],
 		  "name": "MetaType",
+		}
+	`)
+	})
+
+	it('should extract explicit Array type', () => {
+		expect(getTypeFromAnnotation(getAnnotation('Array<Book>'))).toMatchInlineSnapshot(`
+		Object {
+		  "elements": Array [
+		    Object {
+		      "name": "Book",
+		    },
+		  ],
+		  "name": "Array",
 		}
 	`)
 	})
@@ -43,7 +74,50 @@ describe('getTypeFromAnnotation', () => {
 			)
 		).toMatchInlineSnapshot(`
 		Object {
-		  "name": "string literal | 3 | Book | string[] | number[] | Book[] | Book[]",
+		  "elements": Array [
+		    Object {
+		      "name": "\\"string literal\\"",
+		    },
+		    Object {
+		      "name": "3",
+		    },
+		    Object {
+		      "name": "Book",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "string",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "number",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "Book",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "Book",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		  ],
+		  "name": "union",
 		}
 	`)
 	})
@@ -55,7 +129,50 @@ describe('getTypeFromAnnotation', () => {
 			)
 		).toMatchInlineSnapshot(`
 		Object {
-		  "name": "string literal & 3 & Book & string[] & number[] & Book[] & Book[]",
+		  "elements": Array [
+		    Object {
+		      "name": "\\"string literal\\"",
+		    },
+		    Object {
+		      "name": "3",
+		    },
+		    Object {
+		      "name": "Book",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "string",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "number",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "Book",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		    Object {
+		      "elements": Array [
+		        Object {
+		          "name": "Book",
+		        },
+		      ],
+		      "name": "Array",
+		    },
+		  ],
+		  "name": "intersection",
 		}
 	`)
 	})
