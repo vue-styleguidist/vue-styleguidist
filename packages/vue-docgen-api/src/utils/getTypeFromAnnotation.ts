@@ -25,18 +25,56 @@ const TS_TYPE_NAME_MAP: { [name: string]: string } = {
 	TSVoidKeyword: 'void',
 	TSUndefinedKeyword: 'undefined',
 	TSNullKeyword: 'null',
-	TSNeverKeyword: 'never'
+	TSNeverKeyword: 'never',
+	TSThisType: 'this'
+}
+
+function printUnionOrIntersectionType(t: bt.TSType): string | number | boolean {
+	if (bt.isTSArrayType(t)) {
+		return printArrayType(t)
+	}
+
+	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName) && t.typeName.name === 'Array') {
+		return printArrayTypeFromGeneric(t)
+	}
+
+	return printType(t)
+}
+
+function printArrayType(t: bt.TSArrayType) {
+	return `${printType(t.elementType)}[]`
+}
+
+function printArrayTypeFromGeneric(t: bt.TSTypeReference) {
+	const type = t.typeParameters ? t.typeParameters.params[0] : undefined
+	return `${printType(type)}[]`
+}
+
+function printType(t: bt.TSType | undefined): string {
+	if (!t) {
+		return ''
+	}
+
+	if (TS_TYPE_NAME_MAP[t.type]) {
+		return TS_TYPE_NAME_MAP[t.type]
+	}
+
+	if (bt.isTSLiteralType(t)) {
+		return String(t.literal.value)
+	}
+
+	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
+		return t.typeName.name
+	}
+
+	return t.type
 }
 
 function getTypeObjectFromTSType(type: bt.TSType): ParamType {
 	const name =
-		bt.isTSTypeReference(type) && bt.isIdentifier(type.typeName)
-			? type.typeName.name
-			: bt.isTSUnionType(type)
-				? type.types.map(t => TS_TYPE_NAME_MAP[t.type]).join(' | ')
-				: TS_TYPE_NAME_MAP[type.type]
-					? TS_TYPE_NAME_MAP[type.type]
-					: type.type
+		bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
+			? type.types.map(printUnionOrIntersectionType).join(bt.isTSUnionType(type) ? ' | ' : ' & ')
+			: printType(type)
 
 	return { name }
 }
