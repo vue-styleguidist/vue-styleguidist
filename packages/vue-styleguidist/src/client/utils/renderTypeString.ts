@@ -5,16 +5,16 @@ export default function renderTypeString(type: ParamType): string {
 		return 'unknown'
 	}
 
-	const { name } = type
+	const { name, elements } = type
 
 	switch (name) {
 		case 'Array':
-			return type.elements ? `${renderTypeString(type.elements[0])}[]` : name
+			return elements ? `${renderTypeString(elements[0])}[]` : name
 		case 'union':
-			return (type.elements || []).map(renderTypeString).join(' | ')
+			return (elements || []).map(renderTypeString).join(' | ')
 		case 'intersection':
-			return (type.elements || []).map(renderTypeString).join(' & ')
+			return (elements || []).map(renderTypeString).join(' & ')
 		default:
-			return name
+			return `${name}${elements ? `<${elements.map(renderTypeString).join(', ')}>` : ''}`
 	}
 }

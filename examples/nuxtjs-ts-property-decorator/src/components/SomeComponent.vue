@@ -12,18 +12,32 @@ interface Book {
 	desc: string
 }
 
+interface KeyedBook<K> extends Book {
+	key: K
+}
+
 @Component
 export default class SomeComponent extends Vue {
 	/** Description for propA */
 	@Prop({ default: 3 })
-	readonly propA!: 'string literal' | 3 | Book | string[] | number[] | Book[] | Array<Book>
+	readonly propA!:
+		| 'string literal'
+		| 3
+		| Book
+		| string[]
+		| number[]
+		| Book[]
+		| Array<Book>
+		| KeyedBook<string>
 
 	/** Description for propB */
 	@Prop({ default: 4 })
 	readonly propB!: 'string literal' & 3 & Book & string[] & number[] & Book[] & Array<Book>
 
 	/**
-	 * Description for mwthod. Don't froget to put `@public`.
+	 * Description for method.
+	 *
+	 * Don't forget to add an `@public` doclet.
 	 * @public
 	 */
 	public onClick(name: string[], hello: Array<Book>) {
