@@ -18,14 +18,15 @@ export default class SomeComponent extends Vue {
 	@Prop({ default: 3 })
 	readonly propA!: 'string literal' | 3 | Book | string[] | number[] | Book[] | Array<Book>
 
-	@Prop({ default: 3 })
+	/** Description for propB */
+	@Prop({ default: 4 })
 	readonly propB!: 'string literal' & 3 & Book & string[] & number[] & Book[] & Array<Book>
 
 	/**
 	 * Description for mwthod. Don't froget to put `@public`.
 	 * @public
 	 */
-	public onClick(name: string) {
+	public onClick(name: string[], hello: Array<Book>) {
 		/**
 		 * Success event when we click.
 		 * @property {string} name description of name.
@@ -35,3 +36,9 @@ export default class SomeComponent extends Vue {
 	}
 }
 </script>
+
+<docs>
+```jsx
+<SomeComponent />
+```
+</docs>
