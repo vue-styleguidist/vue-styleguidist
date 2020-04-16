@@ -25,8 +25,43 @@ const TS_TYPE_NAME_MAP: { [name: string]: string } = {
 	TSVoidKeyword: 'void',
 	TSUndefinedKeyword: 'undefined',
 	TSNullKeyword: 'null',
-	TSNeverKeyword: 'never',
-	TSThisType: 'this'
+	TSNeverKeyword: 'never'
+}
+
+function printArrayType(t: bt.TSArrayType) {
+	return `${printType(t.elementType)}[]`
+}
+
+function printArrayTypeFromGeneric(t: bt.TSTypeReference) {
+	const type = t.typeParameters ? t.typeParameters.params[0] : undefined
+	return `${printType(type)}[]`
+}
+
+function printType(t?: bt.TSType): string {
+	if (!t) {
+		return ''
+	}
+
+	if (bt.isTSArrayType(t)) {
+		if (t.elementType) {
+			return `${printType(t.elementType)}[]`
+		}
+		return 'array'
+	}
+
+	if (bt.isTSLiteralType(t)) {
+		return t.literal.value.toString()
+	}
+
+	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
+		return t.typeName.name
+	}
+
+	if (TS_TYPE_NAME_MAP[t.type]) {
+		return TS_TYPE_NAME_MAP[t.type]
+	}
+
+	return t.type
 }
 
 function printUnionOrIntersectionType(t: bt.TSType): string | number | boolean {
@@ -39,35 +74,6 @@ function printUnionOrIntersectionType(t: bt.TSType): string | number | boolean {
 	}
 
 	return printType(t)
-}
-
-function printArrayType(t: bt.TSArrayType) {
-	return `${printType(t.elementType)}[]`
-}
-
-function printArrayTypeFromGeneric(t: bt.TSTypeReference) {
-	const type = t.typeParameters ? t.typeParameters.params[0] : undefined
-	return `${printType(type)}[]`
-}
-
-function printType(t: bt.TSType | undefined): string {
-	if (!t) {
-		return ''
-	}
-
-	if (TS_TYPE_NAME_MAP[t.type]) {
-		return TS_TYPE_NAME_MAP[t.type]
-	}
-
-	if (bt.isTSLiteralType(t)) {
-		return String(t.literal.value)
-	}
-
-	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
-		return t.typeName.name
-	}
-
-	return t.type
 }
 
 function getTypeObjectFromTSType(type: bt.TSType): ParamType {

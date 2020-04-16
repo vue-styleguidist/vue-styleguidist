@@ -23,23 +23,39 @@ describe('getTypeFromAnnotation', () => {
 	it('should extract type array', () => {
 		expect(getTypeFromAnnotation(getAnnotation('string[]'))).toMatchInlineSnapshot(`
 		Object {
-		  "name": "TSArrayType",
+		  "name": "string[]",
 		}
 	`)
-	})
-
-	it('should extract composite type', () => {
-		expect(getTypeFromAnnotation(getAnnotation('string | number'))).toMatchInlineSnapshot(`
-		Object {
-		  "name": "string | number",
-		}
-    `)
 	})
 
 	it('should extract composed type', () => {
 		expect(getTypeFromAnnotation(getAnnotation('MetaType<string>'))).toMatchInlineSnapshot(`
 		Object {
 		  "name": "MetaType",
+		}
+	`)
+	})
+
+	it('should extract union type', () => {
+		expect(
+			getTypeFromAnnotation(
+				getAnnotation('"string literal" | 3 | Book | string[] | number[] | Book[] | Array<Book>')
+			)
+		).toMatchInlineSnapshot(`
+		Object {
+		  "name": "string literal | 3 | Book | string[] | number[] | Book[] | Book[]",
+		}
+	`)
+	})
+
+	it('should extract intersection type', () => {
+		expect(
+			getTypeFromAnnotation(
+				getAnnotation('"string literal" & 3 & Book & string[] & number[] & Book[] & Array<Book>')
+			)
+		).toMatchInlineSnapshot(`
+		Object {
+		  "name": "string literal & 3 & Book & string[] & number[] & Book[] & Book[]",
 		}
 	`)
 	})
