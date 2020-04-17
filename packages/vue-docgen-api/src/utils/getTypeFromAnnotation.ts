@@ -25,64 +25,42 @@ const TS_TYPE_NAME_MAP: { [name: string]: string } = {
 	TSVoidKeyword: 'void',
 	TSUndefinedKeyword: 'undefined',
 	TSNullKeyword: 'null',
-	TSNeverKeyword: 'never'
+	TSNeverKeyword: 'never',
+	TSArrayType: 'Array',
+	TSUnionType: 'union',
+	TSIntersectionType: 'intersection'
 }
 
-function printArrayType(t: bt.TSArrayType) {
-	return `${printType(t.elementType)}[]`
-}
-
-function printArrayTypeFromGeneric(t: bt.TSTypeReference) {
-	const type = t.typeParameters ? t.typeParameters.params[0] : undefined
-	return `${printType(type)}[]`
-}
-
-function printType(t?: bt.TSType): string {
+function printType(t?: bt.TSType): ParamType {
 	if (!t) {
-		return ''
-	}
-
-	if (bt.isTSArrayType(t)) {
-		if (t.elementType) {
-			return `${printType(t.elementType)}[]`
-		}
-		return 'array'
+		return { name: '' }
 	}
 
 	if (bt.isTSLiteralType(t)) {
-		return t.literal.value.toString()
+		return { name: JSON.stringify(t.literal.value) }
 	}
 
 	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
-		return t.typeName.name
+		const out: ParamType = { name: t.typeName.name }
+		if (t.typeParameters && t.typeParameters.params) {
+			out.elements = t.typeParameters.params.map(getTypeObjectFromTSType)
+		}
+		return out
 	}
 
 	if (TS_TYPE_NAME_MAP[t.type]) {
-		return TS_TYPE_NAME_MAP[t.type]
+		return { name: TS_TYPE_NAME_MAP[t.type] }
 	}
 
-	return t.type
-}
-
-function printUnionOrIntersectionType(t: bt.TSType): string | number | boolean {
-	if (bt.isTSArrayType(t)) {
-		return printArrayType(t)
-	}
-
-	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName) && t.typeName.name === 'Array') {
-		return printArrayTypeFromGeneric(t)
-	}
-
-	return printType(t)
+	return { name: t.type }
 }
 
 function getTypeObjectFromTSType(type: bt.TSType): ParamType {
-	const name =
-		bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
-			? type.types.map(printUnionOrIntersectionType).join(bt.isTSUnionType(type) ? ' | ' : ' & ')
+	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
+		? { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
+		: bt.isTSArrayType(type)
+			? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
 			: printType(type)
-
-	return { name }
 }
 
 const FLOW_TYPE_NAME_MAP: { [name: string]: string } = {

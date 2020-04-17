@@ -66,7 +66,7 @@ describe('propHandler', () => {
           test: string | null;
         }`
 			tester(src, {
-				type: { name: 'string | null' }
+				type: { name: 'union', elements: [{ name: 'string' }, { name: 'null' }] }
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test')
 		})

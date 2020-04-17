@@ -7,7 +7,8 @@ import Documentation, {
 	MethodDescriptor,
 	Param,
 	Tag,
-	ParamTag
+	ParamTag,
+	ParamType
 } from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
 import * as ScriptHandlers from './script-handlers'
@@ -30,7 +31,8 @@ export {
 	MethodDescriptor,
 	Param,
 	Tag,
-	ParamTag
+	ParamTag,
+	ParamType
 }
 export { default as getDefaultExample } from './utils/getDefaultExample'
 export { default as cleanName } from './utils/cleanName'

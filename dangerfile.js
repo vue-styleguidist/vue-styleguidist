@@ -8,6 +8,16 @@ var gzipSize = require('gzip-size')
 var validateMessage = require('validate-commit-msg')
 var glob = require('globby')
 
+if (danger.github.pr.base.ref === 'master' && danger.github.pr.head.ref !== 'dev') {
+	warn(
+		[
+			'On this repository, all Pull Requests have to me merged to the `dev` branch before going to `master`.',
+			'',
+			'`master` branch is only used for releasing versions.'
+		].join('\n')
+	)
+}
+
 if (danger.github.pr.head.ref !== 'dev' || danger.github.pr.base.ref !== 'master') {
 	const packages = ['package.json', ...glob.sync('packages/*/package.json')]
 
