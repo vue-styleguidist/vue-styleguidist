@@ -68,6 +68,7 @@ export interface UnconfiguredEditorProps extends JssInjectedProps {
 	jssThemedEditor: boolean
 	jsxInExamples: boolean
 	onChange: (val: string) => void
+	editorPadding?: number
 }
 
 export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
@@ -76,7 +77,8 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		code: PropTypes.string.isRequired,
 		jssThemedEditor: PropTypes.bool.isRequired,
 		jsxInExamples: PropTypes.bool.isRequired,
-		onChange: PropTypes.func.isRequired
+		onChange: PropTypes.func.isRequired,
+		editorPadding: PropTypes.number
 	}
 
 	state = { code: this.props.code, prevCode: this.props.code }
@@ -110,7 +112,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 	render() {
 		const { root, jssEditor } = this.props.classes
 		const isVueSFC = isCodeVueSfc(this.state.code)
-		const { jssThemedEditor, jsxInExamples } = this.props
+		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props
 		const langClass = isVueSFC ? 'language-html' : 'language-jsx'
 		return (
 			<SimpleEditor
@@ -120,7 +122,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 				highlight={highlight(isVueSFC ? 'html' : 'vsg', jsxInExamples)}
 				// Padding should be passed via a prop (not CSS) for a proper
 				// cursor position calculation
-				padding={space[2]}
+				padding={editorPadding || space[2]}
 				// to make sure the css styles for prism are taken into account
 				preClassName={cx(!jssThemedEditor && langClass)}
 			/>

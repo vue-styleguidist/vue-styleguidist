@@ -10,6 +10,7 @@ import JsDoc from 'rsg-components/JsDoc'
 import Table from 'rsg-components/Table'
 import getOriginColumn from 'rsg-components/OriginColumn'
 import methodStyles from '../../utils/propStyles'
+import renderTypeString from '../../utils/renderTypeString'
 
 const getRowKey = (row: MethodDescriptor) => row.name
 
@@ -27,7 +28,8 @@ function renderDescription({ description, returns, tags = {} }: MethodDescriptor
 					<Argument
 						name=""
 						{...returns}
-						description={typeof returns.description === 'boolean' ? '' : returns.description}
+						type={returns.type ? { name: renderTypeString(returns.type) } : undefined}
+						description={returns.description as string}
 					/>
 				</div>
 			)}
@@ -42,8 +44,9 @@ function renderParameters({ params = [] }: MethodDescriptor) {
 			args={params.map(p => ({
 				block: true,
 				...p,
+				type: p.type ? { name: renderTypeString(p.type) } : undefined,
 				name: p.name || '',
-				description: typeof p.description === 'boolean' ? '' : p.description
+				description: p.description as string
 			}))}
 		/>
 	)
