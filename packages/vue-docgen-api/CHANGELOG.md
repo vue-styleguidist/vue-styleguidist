@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.17.0...v4.18.0) (2020-04-17)
+
+
+### Bug Fixes
+
+* **docgen:**  fix ts array, intersection type print ([4ca38bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/4ca38bf6a6e5fd39e87276332461c24ddb01cc5a))
+
+
+### Features
+
+* **docgen:** extract type values properly ([6ffd571](https://github.com/vue-styleguidist/vue-styleguidist/commit/6ffd571fe1d51048a413eb0908d873da916d3dda))
+
+
+
+
+
 # [4.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.2...v4.16.0) (2020-04-09)
 
 

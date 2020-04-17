@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.17.0...v4.18.0) (2020-04-17)
+
+
+### Bug Fixes
+
+* **docgen:**  fix ts array, intersection type print ([4ca38bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/4ca38bf6a6e5fd39e87276332461c24ddb01cc5a))
+* rendering of composed types ([86eb6bd](https://github.com/vue-styleguidist/vue-styleguidist/commit/86eb6bd8200c38bb4b7435d2ce3657aea1e35698))
+
+
+### Features
+
+* **docgen:** extract type values properly ([6ffd571](https://github.com/vue-styleguidist/vue-styleguidist/commit/6ffd571fe1d51048a413eb0908d873da916d3dda))
+* allow change padding of prism based editor ([d09b546](https://github.com/vue-styleguidist/vue-styleguidist/commit/d09b5466b3a230906da6d3c77ea177c1797abe72))
+* render complex types properly ([a756455](https://github.com/vue-styleguidist/vue-styleguidist/commit/a756455bf17e751d2b4f6179e79f3fc6a2920a97))
+
+
+
+
+
 # [4.17.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.16.0...v4.17.0) (2020-04-12)
 
 
