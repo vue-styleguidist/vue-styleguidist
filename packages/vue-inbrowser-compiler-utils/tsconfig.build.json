@@ -4,8 +4,9 @@
 		"outDir": "lib",
 		"declaration": true,
 		"sourceMap": false,
-		"module": "es2015"
+		"module": "es2015",
+		"types": ["node"]
 	},
-	"include": ["src/**/*.ts", "../../@types/**/*"],
+	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules", "src/**/__tests__/**/*.ts"]
 }

@@ -1,15 +1,21 @@
-import { ASTElement, compile } from 'vue-template-compiler'
+import { parse, BaseElementNode } from '@vue/compiler-dom'
 import extractLeadingComment from '../extractLeadingComment'
 
-function compileIt(src: string): ASTElement | undefined {
-	const ast = compile(src, { comments: true }).ast
-	if (ast) {
-		const firstHeader = ast.children.filter((a: ASTElement) => a.tag === 'h1') as ASTElement[]
+function isBaseElementNode(a: any): a is BaseElementNode {
+	return a.tag !== undefined
+}
+
+function compileIt(src: string): { parent: BaseElementNode; child: BaseElementNode } | undefined {
+	const [ast] = parse(src).children
+	if (isBaseElementNode(ast)) {
+		const firstHeader = (ast.children.filter(
+			a => isBaseElementNode(a) && a.tag === 'h1'
+		) as unknown) as BaseElementNode[]
 		if (firstHeader.length) {
-			return firstHeader[0]
+			return { parent: ast, child: firstHeader[0] }
 		}
 	}
-	return ast
+	return undefined
 }
 
 describe('extractLeadingComment', () => {
@@ -27,7 +33,7 @@ describe('extractLeadingComment', () => {
 		if (!elt) {
 			done.fail()
 		} else {
-			expect(extractLeadingComment(elt.parent, elt, [])[0]).toBe('single line comment')
+			expect(extractLeadingComment(elt.parent, elt.child, [])[0]).toBe('single line comment')
 			done()
 		}
 	})
@@ -44,7 +50,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			expect(extractLeadingComment(elt.parent, elt, [])).toEqual([
+			expect(extractLeadingComment(elt.parent, elt.child, [])).toEqual([
 				'multi line comment',
 				'on 2 lines'
 			])
@@ -69,7 +75,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			const comments = extractLeadingComment(elt.parent, elt, [])
+			const comments = extractLeadingComment(elt.parent, elt.child, [])
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
 			done()
@@ -92,7 +98,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			const comments = extractLeadingComment(elt.parent, elt, [])
+			const comments = extractLeadingComment(elt.parent, elt.child, [])
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
 			done()

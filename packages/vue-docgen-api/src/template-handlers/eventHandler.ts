@@ -1,6 +1,12 @@
 import * as bt from '@babel/types'
 import recast from 'recast'
-import { ASTElement, ASTNode } from 'vue-template-compiler'
+import {
+	TemplateChildNode,
+	BaseElementNode,
+	NodeTypes,
+	AttributeNode,
+	TextNode
+} from '@vue/compiler-dom'
 import Documentation, { Tag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
@@ -9,27 +15,44 @@ import { setEventDescriptor } from '../script-handlers/eventHandler'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 
 const allowRE = /^(v-on|@)/
+
+function isBaseElementNode(node: any): node is BaseElementNode {
+	return !!node.props
+}
+
+function isAttribute(prop: any): prop is AttributeNode {
+	return prop.type === NodeTypes.ATTRIBUTE
+}
+
 export default function eventHandler(
 	documentation: Documentation,
-	templateAst: ASTElement,
+	templateAst: TemplateChildNode,
 	options: TemplateParserOptions
 ) {
-	const bindings = templateAst.attrsMap
-	const keys = Object.keys(bindings)
-	for (const key of keys) {
-		// only look at expressions
-		if (allowRE.test(key)) {
-			const expression = bindings[key]
-			if (expression && expression.length) {
-				getEventsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+	if (isBaseElementNode(templateAst)) {
+		templateAst.props.forEach(prop => {
+			if (isAttribute(prop)) {
+				if (allowRE.test(prop.name)) {
+					// only look at expressions
+					const expression = prop.value
+					if (expression && expression.content.length) {
+						getEventsFromExpression(
+							templateAst.parent,
+							templateAst,
+							expression.content,
+							documentation,
+							options
+						)
+					}
+				}
 			}
-		}
+		})
 	}
 }
 
 function getEventsFromExpression(
-	parentAst: ASTElement | undefined,
-	item: ASTNode,
+	parentAst: TemplateChildNode,
+	item: TemplateChildNode,
 	expression: string,
 	documentation: Documentation,
 	options: TemplateParserOptions
