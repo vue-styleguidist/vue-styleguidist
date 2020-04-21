@@ -5,4 +5,4 @@
       Click Me
     </button>
   </slot>
-<template>
+</template>

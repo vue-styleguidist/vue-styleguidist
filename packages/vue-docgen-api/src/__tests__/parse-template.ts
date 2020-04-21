@@ -12,6 +12,17 @@ describe('parse-template', () => {
 	it('should parse components with multi head', () => {
 		content = '<div></div><!-- comment -->'
 		parseTemplate({ content, attrs: {} }, doc, [], path)
-		expect(doc.toObject()).toMatchInlineSnapshot()
+		expect(doc.toObject()).toMatchInlineSnapshot(`
+		Object {
+		  "description": "",
+		  "displayName": undefined,
+		  "events": undefined,
+		  "exportName": undefined,
+		  "methods": undefined,
+		  "props": undefined,
+		  "slots": undefined,
+		  "tags": Object {},
+		}
+	`)
 	})
 })
