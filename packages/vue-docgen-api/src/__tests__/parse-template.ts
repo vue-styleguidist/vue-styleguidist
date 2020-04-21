@@ -9,8 +9,9 @@ describe('parse-template', () => {
 		doc = new Documentation(path)
 	})
 
-	it('figure it out', () => {
+	it('should parse components with multi head', () => {
+		content = '<div></div><!-- comment -->'
 		parseTemplate({ content, attrs: {} }, doc, [], path)
-		expect(true).toBeTruthy()
+		expect(doc.toObject()).toMatchInlineSnapshot()
 	})
 })

@@ -32,6 +32,7 @@
     "@babel/types": "^7.6.0",
     "@vue/compiler-dom": "3.0.0-beta.2",
     "@vue/compiler-sfc": "3.0.0-beta.2",
+    "@vue/shared": "3.0.0-beta.2",
     "ast-types": "^0.12.2",
     "hash-sum": "^1.0.2",
     "lru-cache": "^4.1.5",

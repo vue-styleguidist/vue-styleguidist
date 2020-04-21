@@ -22,9 +22,8 @@ describe('eventHandler', () => {
 			].join('\n')
 		)
 		if (ast) {
-			traverse(ast.children[0], doc, [eventHandler], {
-				functional: false,
-				rootLeadingComment: ['']
+			traverse(ast.children[0], doc, [eventHandler], ast.children, {
+				functional: false
 			})
 			expect(doc.toObject().events).toMatchObject([
 				{
@@ -53,9 +52,8 @@ describe('eventHandler', () => {
 			].join('\n')
 		)
 		if (ast) {
-			traverse(ast.children[0], doc, [eventHandler], {
-				functional: false,
-				rootLeadingComment: ['']
+			traverse(ast.children[0], doc, [eventHandler], ast.children, {
+				functional: false
 			})
 			expect(doc.toObject().events).toMatchObject([
 				{

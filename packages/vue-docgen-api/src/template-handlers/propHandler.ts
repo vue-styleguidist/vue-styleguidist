@@ -1,61 +1,64 @@
 import * as bt from '@babel/types'
 import recast from 'recast'
-import { ASTElement, ASTExpression, ASTNode } from 'vue-template-compiler'
+import { Node, TemplateChildNode, ExpressionNode } from '@vue/compiler-dom'
 import Documentation, { ParamTag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
+import {
+	isBaseElementNode,
+	isDirectiveNode,
+	isExpressionNode,
+	isInterpolationNode
+} from '../utils/guards'
 
 export default function propTemplateHandler(
 	documentation: Documentation,
-	templateAst: ASTElement,
+	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
 	if (options.functional) {
-		propsInAttributes(templateAst, documentation, options)
-		propsInInterpolation(templateAst, documentation, options)
+		propsInAttributes(documentation, templateAst, siblings)
+		propsInInterpolation(documentation, templateAst, siblings)
 	}
 }
 
-const allowRE = /^(v-bind|:|v-on|@)/
 function propsInAttributes(
-	templateAst: ASTElement,
 	documentation: Documentation,
-	options: TemplateParserOptions
+	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[]
 ) {
-	const bindings = templateAst.attrsMap
-	const keys = Object.keys(bindings)
-	for (const key of keys) {
-		// only look at expressions
-		if (allowRE.test(key)) {
-			const expression = bindings[key]
-			if (expression && expression.length) {
-				getPropsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+	if (isBaseElementNode(templateAst)) {
+		templateAst.props.forEach(prop => {
+			if (isDirectiveNode(prop)) {
+				getPropsFromExpression(documentation, templateAst, prop.exp, siblings)
 			}
-		}
-	}
-}
-
-function propsInInterpolation(
-	templateAst: ASTElement,
-	documentation: Documentation,
-	options: TemplateParserOptions
-) {
-	if (templateAst.children) {
-		templateAst.children.filter(c => c.type === 2).forEach((expr: ASTExpression) => {
-			getPropsFromExpression(templateAst, expr, expr.expression, documentation, options)
 		})
 	}
 }
 
-function getPropsFromExpression(
-	parentAst: ASTElement | undefined,
-	item: ASTNode,
-	expression: string,
+function propsInInterpolation(
 	documentation: Documentation,
-	options: TemplateParserOptions
+	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[]
 ) {
+	if (isInterpolationNode(templateAst)) {
+		getPropsFromExpression(documentation, templateAst, templateAst.content, siblings)
+	}
+}
+
+function getPropsFromExpression(
+	documentation: Documentation,
+	item: Node,
+	exp: ExpressionNode | undefined,
+	siblings: TemplateChildNode[]
+) {
+	if (!isExpressionNode(exp)) {
+		return
+	}
+	const expression = exp.content
 	const ast = getTemplateExpressionAST(expression)
 	const propsFound: string[] = []
 	recast.visit(ast.program, {
@@ -78,7 +81,7 @@ function getPropsFromExpression(
 		}
 	})
 	if (propsFound.length) {
-		const comments = extractLeadingComment(parentAst, item, options.rootLeadingComment)
+		const comments = extractLeadingComment(siblings, item)
 		comments.forEach(comment => {
 			const doclets = getDoclets(comment)
 			const propTags = doclets.tags && (doclets.tags.filter(d => d.title === 'prop') as ParamTag[])

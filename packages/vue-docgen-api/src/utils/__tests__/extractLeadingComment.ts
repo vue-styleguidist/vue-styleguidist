@@ -33,7 +33,7 @@ describe('extractLeadingComment', () => {
 		if (!elt) {
 			done.fail()
 		} else {
-			expect(extractLeadingComment(elt.parent, elt.child, [])[0]).toBe('single line comment')
+			expect(extractLeadingComment(elt.parent.children, elt.child)[0]).toBe('single line comment')
 			done()
 		}
 	})
@@ -50,7 +50,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			expect(extractLeadingComment(elt.parent, elt.child, [])).toEqual([
+			expect(extractLeadingComment(elt.parent.children, elt.child)).toEqual([
 				'multi line comment',
 				'on 2 lines'
 			])
@@ -75,7 +75,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			const comments = extractLeadingComment(elt.parent, elt.child, [])
+			const comments = extractLeadingComment(elt.parent.children, elt.child)
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
 			done()
@@ -98,7 +98,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (elt) {
-			const comments = extractLeadingComment(elt.parent, elt.child, [])
+			const comments = extractLeadingComment(elt.parent.children, elt.child)
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
 			done()

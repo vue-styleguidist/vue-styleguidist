@@ -1,4 +1,4 @@
-import { compile } from 'vue-template-compiler'
+import { parse } from '@vue/compiler-dom'
 import Documentation from '../../Documentation'
 import { traverse } from '../../parse-template'
 import slotHandler from '../slotHandler'
@@ -9,21 +9,41 @@ describe('slotHandler', () => {
 		doc = new Documentation('dummy/path')
 	})
 
-	it('should pick comments at the beginning of templates', done => {
-		const ast = compile(
+	it('should detect slots', done => {
+		const ast = parse(
 			[
+				'<div>',
+				'  <h1>titleof the template</h1>',
+				'  <!-- @slot a default slot-->',
+				'  <slot></slot>',
+				'</div>'
+			].join('\n')
+		)
+		if (ast) {
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			expect(doc.toObject().slots).toMatchObject([
+				{ name: 'default', description: 'a default slot' }
+			])
+			done()
+		} else {
+			done.fail()
+		}
+	})
+
+	it('should pick comments at the beginning of templates', done => {
+		const ast = parse(
+			[
+				'<!-- @slot first slot found -->',
 				'<slot name="first">',
 				'  <div>',
 				'    <h1>titleof the template</h1>',
 				'  </div>',
 				'</slot>'
-			].join('\n'),
-			{ comments: true }
-		).ast
+			].join('\n')
+		)
 		if (ast) {
-			traverse(ast, doc, [slotHandler], {
-				functional: false,
-				rootLeadingComment: ['@slot first slot found']
+			traverse(ast.children[1], doc, [slotHandler], ast.children, {
+				functional: false
 			})
 			expect(doc.toObject().slots).toMatchObject([
 				{ name: 'first', description: 'first slot found' }
@@ -34,41 +54,18 @@ describe('slotHandler', () => {
 		}
 	})
 
-	it('should pick comments before slots', done => {
-		const ast = compile(
-			[
-				'<div>',
-				'  <h1>titleof the template</h1>',
-				'  <!-- @slot a default slot-->',
-				'  <slot></slot>',
-				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
-		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
-			expect(doc.toObject().slots).toMatchObject([
-				{ name: 'default', description: 'a default slot' }
-			])
-			done()
-		} else {
-			done.fail()
-		}
-	})
-
 	it('should pick up the name of a slot', done => {
-		const ast = compile(
+		const ast = parse(
 			[
 				'<div>',
 				'  <h1>titleof the template</h1>',
 				'  <!-- @slot a slot named oeuf -->',
 				'  <slot name="oeuf"></slot>',
 				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
+			].join('\n')
+		)
 		if (ast) {
-			traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 			expect(doc.toObject().slots).toMatchObject([
 				{
 					name: 'oeuf',
@@ -83,17 +80,16 @@ describe('slotHandler', () => {
 
 	describe('bindings', () => {
 		it('should detect scoped slots', done => {
-			const ast = compile(
+			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
 					'  <!-- @slot a slot named oeuf -->',
 					'  <slot name="oeuf" v-for="item in items" :item="item"/>',
 					'</div>'
-				].join('\n'),
-				{ comments: true }
-			).ast
+				].join('\n')
+			)
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 				expect(doc.toObject().slots).toMatchObject([
 					{
 						name: 'oeuf',
@@ -113,16 +109,15 @@ describe('slotHandler', () => {
 		})
 
 		it('should detect explicit bindings using v-bind', done => {
-			const ast = compile(
+			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
 					'  <slot name="bound" v-for="item in items" v-bind="{ ...keyNames }"/>',
 					'</div>'
-				].join('\n'),
-				{ comments: true }
-			).ast
+				].join('\n')
+			)
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 				const slots = doc.toObject().slots || []
 				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
 					{
@@ -136,17 +131,16 @@ describe('slotHandler', () => {
 		})
 
 		it('should detect implicit bindings if it is simple enough', done => {
-			const ast = compile(
+			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
 					'	<!-- @slot Menu Item footer -->',
 					'	<slot name="bound" v-for="item in items" v-bind="{ item, otherItem: valueGiven }"/>',
 					'</div>'
-				].join('\n'),
-				{ comments: true }
-			).ast
+				].join('\n')
+			)
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 				const slots = doc.toObject().slots || []
 				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
 					{
@@ -163,7 +157,7 @@ describe('slotHandler', () => {
 		})
 
 		it('should detect explicit bindings and allow their documentation', done => {
-			const ast = compile(
+			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
 					'	<!--',
@@ -173,11 +167,10 @@ describe('slotHandler', () => {
 					'	-->',
 					'  <slot name="bound" v-for="item in items" :item="item" :otherItem="valueGiven" />',
 					'</div>'
-				].join('\n'),
-				{ comments: true }
-			).ast
+				].join('\n')
+			)
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 				const slots = doc.toObject().slots || []
 				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
 					{
@@ -196,17 +189,16 @@ describe('slotHandler', () => {
 		})
 
 		it('should not fail on non-dcumented slots', done => {
-			const ast = compile(
+			const ast = parse(
 				[
 					'<div>', //
 					'	<!-- test -->', //
 					'  <slot />',
 					'</div>'
-				].join('\n'),
-				{ comments: true }
-			).ast
+				].join('\n')
+			)
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 				const slots = doc.toObject().slots || []
 				expect(slots.length).toBe(1)
 				done()
@@ -216,7 +208,7 @@ describe('slotHandler', () => {
 		})
 
 		it('should extract tags from a slot', done => {
-			const ast = compile(
+			const ast = parse(
 				[
 					'<div>', //
 					'	<!--',
@@ -225,11 +217,10 @@ describe('slotHandler', () => {
 					'    -->', //
 					'  <slot />',
 					'</div>'
-				].join('\n'),
-				{ comments: true }
-			).ast
+				].join('\n')
+			)
 			if (ast) {
-				traverse(ast, doc, [slotHandler], { functional: false, rootLeadingComment: [] })
+				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 				const slots = doc.toObject().slots || []
 				expect(slots[0].tags).toMatchInlineSnapshot(`
 			Object {

@@ -1,46 +1,32 @@
 import * as bt from '@babel/types'
 import recast from 'recast'
-import {
-	TemplateChildNode,
-	BaseElementNode,
-	NodeTypes,
-	AttributeNode,
-	TextNode
-} from '@vue/compiler-dom'
+import { TemplateChildNode, BaseElementNode } from '@vue/compiler-dom'
 import Documentation, { Tag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
 import { setEventDescriptor } from '../script-handlers/eventHandler'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
-
-const allowRE = /^(v-on|@)/
-
-function isBaseElementNode(node: any): node is BaseElementNode {
-	return !!node.props
-}
-
-function isAttribute(prop: any): prop is AttributeNode {
-	return prop.type === NodeTypes.ATTRIBUTE
-}
+import { isBaseElementNode, isDirectiveNode, isExpressionNode } from '../utils/guards'
 
 export default function eventHandler(
 	documentation: Documentation,
 	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
 	if (isBaseElementNode(templateAst)) {
 		templateAst.props.forEach(prop => {
-			if (isAttribute(prop)) {
-				if (allowRE.test(prop.name)) {
+			if (isDirectiveNode(prop)) {
+				if (prop.name == 'on') {
 					// only look at expressions
-					const expression = prop.value
-					if (expression && expression.content.length) {
+					const expression = prop.exp
+					if (isExpressionNode(expression)) {
 						getEventsFromExpression(
-							templateAst.parent,
 							templateAst,
 							expression.content,
 							documentation,
+							siblings,
 							options
 						)
 					}
@@ -51,10 +37,10 @@ export default function eventHandler(
 }
 
 function getEventsFromExpression(
-	parentAst: TemplateChildNode,
-	item: TemplateChildNode,
+	item: BaseElementNode,
 	expression: string,
 	documentation: Documentation,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
 	const ast = getTemplateExpressionAST(expression)
@@ -74,7 +60,7 @@ function getEventsFromExpression(
 		}
 	})
 	if (eventsFound.length) {
-		const leadingComments = extractLeadingComment(parentAst, item, options.rootLeadingComment)
+		const leadingComments = extractLeadingComment(siblings, item)
 		if (leadingComments.length) {
 			eventsFound.forEach(evtName => {
 				leadingComments.forEach(comment => {

@@ -1,17 +1,17 @@
 import * as pug from 'pug'
-import { parse, TemplateChildNode, RootNode, BaseElementNode } from '@vue/compiler-dom'
+import { parse, TemplateChildNode, RootNode } from '@vue/compiler-dom'
 import { SFCTemplateBlock } from '@vue/compiler-sfc'
 import Documentation from './Documentation'
 import cacher from './utils/cacher'
 
 export interface TemplateParserOptions {
 	functional: boolean
-	rootLeadingComment: string[]
 }
 
 export type Handler = (
 	documentation: Documentation,
 	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) => void
 
@@ -34,20 +34,17 @@ export default function parseTemplate(
 			documentation.set('functional', functional)
 		}
 
-		const rootLeadingComment = extractRootLeadingComments(source)
-
 		if (ast) {
 			ast.children.forEach(child =>
-				traverse(child, documentation, handlers, {
-					functional,
-					rootLeadingComment
+				traverse(child, documentation, handlers, ast.children, {
+					functional
 				})
 			)
 		}
 	}
 }
 
-function hasChildren(child: any): child is BaseElementNode {
+function hasChildren(child: any): child is { children: TemplateChildNode[] } {
 	return !!child.children
 }
 
@@ -55,37 +52,21 @@ export function traverse(
 	templateAst: TemplateChildNode,
 	documentation: Documentation,
 	handlers: Handler[],
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
 	const traverseAstChildren = (templateAst: TemplateChildNode) => {
 		if (hasChildren(templateAst)) {
 			const { children } = templateAst
 			for (const childNode of children) {
-				if (hasChildren(childNode)) {
-					traverse(childNode, documentation, handlers, options)
-				}
+				traverse(childNode, documentation, handlers, children, options)
 			}
 		}
 	}
 
-	if (templateAst.type === 1) {
-		handlers.forEach(handler => {
-			handler(documentation, templateAst, options)
-		})
-	}
+	handlers.forEach(handler => {
+		handler(documentation, templateAst, siblings, options)
+	})
 
 	traverseAstChildren(templateAst)
-}
-
-function extractRootLeadingComments(template: string): string[] {
-	let t = template.trim()
-	const comments = []
-	while (/^<!--/.test(t)) {
-		const endOfRootLeadingComment = t.indexOf('-->')
-		const rootLeadingComment = t.slice(4, endOfRootLeadingComment).trim()
-		comments.push(rootLeadingComment)
-		t = t.slice(endOfRootLeadingComment + 3).trim()
-	}
-
-	return comments
 }
