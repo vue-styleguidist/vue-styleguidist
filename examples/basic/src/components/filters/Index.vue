@@ -9,7 +9,7 @@ import Input from '../Input/Input.vue'
 import { logger } from '../../mixins/loggerMixin'
 
 /**
- * @displayName notnot
+ * @displayName FilterWithSlot
  */
 export default {
 	components: { Input },
