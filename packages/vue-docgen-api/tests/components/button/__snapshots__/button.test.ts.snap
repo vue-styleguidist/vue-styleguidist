@@ -136,7 +136,7 @@ Object {
       },
       "description": "Example prop",
       "mixin": Object {
-        "name": "index",
+        "name": "another",
         "path": "../../mixins/another/index.js",
       },
       "name": "propsAnother",
