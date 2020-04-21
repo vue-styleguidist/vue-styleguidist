@@ -84,9 +84,9 @@
 		"webpack-merge": "^4.0.0"
 	},
 	"peerDependencies": {
-		"vue": ">=3.0.0",
+		"vue": ">=2.0.0",
 		"vue-loader": ">=14.0.0",
-		"@vue/compiler-sfc": ">=3.0.0",
+		"vue-template-compiler": ">=2.0.0",
 		"webpack": ">=4"
 	},
 	"devDependencies": {
