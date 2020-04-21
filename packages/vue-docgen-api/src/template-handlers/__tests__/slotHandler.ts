@@ -84,7 +84,7 @@ describe('slotHandler', () => {
 				[
 					'<div title="a list of item with a scope" >',
 					'  <!-- @slot a slot named oeuf -->',
-					'  <slot name="oeuf" v-for="item in items" :item="item"/>',
+					'  <slot name="oeuf" v-for="item in items" :item="itemValue"/>',
 					'</div>'
 				].join('\n')
 			)

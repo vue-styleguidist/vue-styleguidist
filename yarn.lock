@@ -3858,7 +3858,7 @@
     "@vue/compiler-core" "3.0.0-beta.2"
     "@vue/shared" "3.0.0-beta.2"
 
-"@vue/compiler-sfc@3.0.0-beta.2", "@vue/compiler-sfc@^3.0.0-beta.2":
+"@vue/compiler-sfc@3.0.0-beta.2":
   version "3.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-3.0.0-beta.2.tgz#610697d29e067165d5e2ccf81bdd238399b6d156"
   integrity sha512-v3zQ8fR+Oc8U/WZFmJY641b05ayP1cdngZMn8PUgPecRwjQkdR/k9ikCMZpsrWtoS4am0e3PHyCt/BBZCxA4nA==
