@@ -27,10 +27,11 @@ module.exports = {
 	},
 	getComponentPathLine(componentPath) {
 		const componentFileName = path.basename(componentPath, '.vue')
-		return `import ${componentFileName} from '${componentPath.replace(
-			/^src\//,
-			'my-library/dist/'
-		)}'`
+		const name =
+			componentFileName.toLowerCase() === 'index'
+				? path.basename(path.dirname(componentPath))
+				: componentFileName
+		return `import ${name} from '${componentPath.replace(/^src\//, 'my-library/dist/')}'`
 	},
 	version: '1.1.1',
 	webpackConfig: {
