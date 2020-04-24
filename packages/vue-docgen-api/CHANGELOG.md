@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.18.0...v4.19.0) (2020-04-24)
+
+
+### Bug Fixes
+
+* **docgen:** accept named typescript exports ([b256b17](https://github.com/vue-styleguidist/vue-styleguidist/commit/b256b174347766d31ab55fab948849037f32d930)), closes [#813](https://github.com/vue-styleguidist/vue-styleguidist/issues/813)
+* tag titles are no longer filtered out ([2a91b3e](https://github.com/vue-styleguidist/vue-styleguidist/commit/2a91b3e8c9aa2d1e1596cdf7998ed1af4cddf780))
+
+
+### Features
+
+* **docgen:** deal with index as filename ([61d28f5](https://github.com/vue-styleguidist/vue-styleguidist/commit/61d28f5ba60b36a8d8af55c4366497b369d940e5))
+
+
+
+
+
 # [4.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.17.0...v4.18.0) (2020-04-17)
 
 
