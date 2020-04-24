@@ -136,7 +136,7 @@ Object {
       },
       "description": "Example prop",
       "mixin": Object {
-        "name": "index",
+        "name": "another",
         "path": "../../mixins/another/index.js",
       },
       "name": "propsAnother",
@@ -246,6 +246,20 @@ a factory function",
       "name": "example",
       "type": Object {
         "name": "boolean",
+      },
+    },
+    Object {
+      "name": "customTag",
+      "tags": Object {
+        "asdf": Array [
+          Object {
+            "description": "qwerty",
+            "title": "asdf",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "string",
       },
     },
     Object {

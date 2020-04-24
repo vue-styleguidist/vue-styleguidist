@@ -42,7 +42,13 @@ function isComponentDefinition(path: NodePath): boolean {
 		// export default class MyComp extends VueComp
 		bt.isClassDeclaration(node) ||
 		// export default whatever.extend({})
-		(bt.isCallExpression(node) && bt.isObjectExpression(node.arguments[0]))
+		(bt.isCallExpression(node) && bt.isObjectExpression(node.arguments[0])) ||
+		// export const myComp = whatever.extend({})
+		(bt.isVariableDeclarator(node) &&
+			node.init &&
+			bt.isCallExpression(node.init) &&
+			bt.isObjectExpression(node.init.arguments[0])) ||
+		false
 	)
 }
 

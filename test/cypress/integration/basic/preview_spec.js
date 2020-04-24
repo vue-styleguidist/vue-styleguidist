@@ -11,6 +11,7 @@ describe('Preview render', () => {
 		'transparent!',
 		'Reset',
 		'option 1',
+		'Fire example event!',
 		'Push Me',
 		'In the docs block',
 		'Fire example event!',

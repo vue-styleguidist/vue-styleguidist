@@ -97,7 +97,10 @@ export default async function parseSFC(
 
 	if (documentation && !documentation.get('displayName')) {
 		// a component should always have a display name
-		documentation.set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
+		// give a component a display name if we can
+		const displayName = path.basename(opt.filePath).replace(/\.\w+$/, '')
+		const dirName = path.basename(path.dirname(opt.filePath))
+		documentation.set('displayName', displayName.toLowerCase() === 'index' ? dirName : displayName)
 	}
 
 	return docs
