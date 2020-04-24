@@ -115,7 +115,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has seventeen props', () => {
-			expect(docButton.props && docButton.props.length).toBe(17)
+			expect(docButton.props && docButton.props.length).toBe(18)
 		})
 
 		it('should the component has propsAnother prop default equal "blue"', () => {
@@ -231,6 +231,17 @@ describe('tests button', () => {
 
 		it('should ignore multi mixins props that are not appended', () => {
 			expect(getTestDescriptor(docButton.props, 'shouldNotBe').type).toBeUndefined()
+		})
+
+		it('should pass through any custom doclets', () => {
+			expect(getTestDescriptor(docButton.props, 'customTag').tags).toMatchObject({
+				asdf: [
+					{
+						description: 'qwerty',
+						title: 'asdf'
+					}
+				]
+			})
 		})
 	})
 

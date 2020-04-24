@@ -249,6 +249,20 @@ a factory function",
       },
     },
     Object {
+      "name": "customTag",
+      "tags": Object {
+        "asdf": Array [
+          Object {
+            "description": "qwerty",
+            "title": "asdf",
+          },
+        ],
+      },
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
       "defaultValue": Object {
         "func": false,
         "value": "'#333'",
