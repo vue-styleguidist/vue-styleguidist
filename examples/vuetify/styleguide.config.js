@@ -1,5 +1,4 @@
 const path = require('path')
-const vueLoader = require('vue-loader')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
@@ -22,44 +21,7 @@ module.exports = {
 	],
 	renderRootJsx: path.join(__dirname, 'config/styleguide.root.js'),
 	validExtends: fullFilePath => !/(?=node_modules)(?!node_modules\/vuetify)/.test(fullFilePath),
-	webpackConfig: {
-		module: {
-			rules: [
-				{
-					test: /\.vue$/,
-					loader: 'vue-loader'
-				},
-				{
-					test: /\.js?$/,
-					exclude: /node_modules/,
-					loader: 'babel-loader'
-				},
-				{
-					test: /\.css$/,
-					use: ['style-loader', 'css-loader']
-				},
-				{
-					test: /\.s(c|a)ss$/,
-					use: [
-						'vue-style-loader',
-						'css-loader',
-						{
-							loader: 'sass-loader',
-							options: {
-								implementation: require('sass'),
-								sassOptions: {
-									fiber: require('fibers')
-									// indentedSyntax: true // optional
-								}
-							}
-						}
-					]
-				}
-			]
-		},
-		plugins: [new vueLoader.VueLoaderPlugin()]
-	},
-	usageMode: 'expand',
+	usageMode: 'collapse',
 	exampleMode: 'expand',
 	styleguideDir: 'dist',
 	ribbon: {
