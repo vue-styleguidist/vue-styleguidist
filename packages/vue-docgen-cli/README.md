@@ -14,11 +14,13 @@ yarn add -D vue-docgen-cli
 
 ## Usage
 
-In a terminal window type the following command at the root of your project. If your components are in the `src/components` folder, this will generate one `.md` file per component.
+In a terminal window, navigate to the root of your project, then type the following command.
 
 ```sh
 yarn vue-docgen src/components/**/*.vue docs/components
 ```
+
+If your components are in the `src/components` folder, this will generate one `.md` file per component.
 
 ## Config
 
@@ -28,7 +30,7 @@ yarn vue-docgen src/components/**/*.vue docs/components
 
 #### `-w` or `--watch`
 
-Should vue-docgen whatch for modifications of your components and update generated markdown files accordingly?
+Should vue-docgen watch for modifications of your components and update generated markdown files accordingly?
 
 ```sh
 yarn vue-docgen -w
@@ -36,7 +38,7 @@ yarn vue-docgen -w
 
 #### `-c` or `--config`
 
-Specify the path of your configuration file. By default, docgen will look for `docgen.config.js` in the current folder.
+Specify the path of your configuration file. By default, `docgen` will look for `docgen.config.js` in the current folder.
 
 ```sh
 yarn vue-docgen -c config/docgen.config.js
@@ -44,7 +46,11 @@ yarn vue-docgen -c config/docgen.config.js
 
 ### Config File
 
-If you specify a `docgen.config.js` file you can be more specific. But each of those configurations is optional.
+Create a `docgen.config.js` at the root of your project to avoid having to specify command-line arguments everytime.
+
+All of the command-line arguments, except for the `--config`, can be replaced by lines in the `docgen.config.js` file.
+
+In a config file you can even be more specific. Each of the following configurations is optional.
 
 ```js
 const path = require('path')
@@ -105,7 +111,7 @@ module.exports = {
 
 > type: `string`, default: `path.dirname(configFilePath)`
 
-The folder where cli will start searching for components. Since the folder structure will be kept from source to destination, it avoids having uselessly deep scaffodlings.
+The folder where CLI will start searching for components. Since the folder structure will be kept from source to destination, it avoids having uselessly deep scaffoldings.
 
 ```txt
    src
@@ -158,7 +164,7 @@ Function returning the absolute path of the documentation markdown files. If [ou
 
 > type: `boolean`, default: `false`
 
-Should vue-docgen keep on watching your files for changes once generation is done?
+Should vue-docgen keep on watching your files for changes once the first files are generated?
 
 #### templates
 
@@ -255,7 +261,7 @@ module.exports = {
 
 > type: `boolean`, default: `false`
 
-Generate example for components that have neither `<docs>` block nor a markdown file to provide examples of usage.
+Generate an example for components that have neither `<docs>` block nor a markdown file to provide examples of usage.
 
 #### cwd
 

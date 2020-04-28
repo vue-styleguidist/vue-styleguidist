@@ -30,6 +30,12 @@ alt="Chat on Discord">
 </a>
 </div>
 
+## Sponsor(s)
+
+A big thank you to our first sponsor. His contribution helps pay for the Netlify build minutes.
+
+[Marcello Bachechi](https://github.com/pilotkid)
+
 ## Packages
 
 [vue-styleguidist](packages/vue-styleguidist) takes the results of [vue-docgen-api](packages/vue-docgen-api) and creates a website to showcase and develop components.
