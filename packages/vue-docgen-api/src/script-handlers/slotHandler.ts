@@ -143,7 +143,10 @@ function getJSXDescription(
 	return parseCommentNode(lastComment, descriptor)
 }
 
-function getSlotComment(path: NodePath, descriptor: SlotDescriptor): SlotComment | undefined {
+export function getSlotComment(
+	path: NodePath,
+	descriptor: SlotDescriptor
+): SlotComment | undefined {
 	const desc = getExpressionDescription(path, descriptor)
 	if (desc) {
 		return desc
