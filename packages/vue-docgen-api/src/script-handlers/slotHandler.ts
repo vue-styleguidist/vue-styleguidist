@@ -207,7 +207,10 @@ export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
 	return undefined
 }
 
-function getBindings(node: bt.ObjectExpression, bindings: ParamTag[] | undefined): ParamTag[] {
+function getBindings(
+	node: bt.ObjectExpression,
+	bindingsFromComments: ParamTag[] | undefined
+): ParamTag[] {
 	return node.properties.reduce((bindings: ParamTag[], prop: bt.ObjectProperty) => {
 		if (prop.key) {
 			const name = prop.key.name
@@ -216,15 +219,12 @@ function getBindings(node: bt.ObjectExpression, bindings: ParamTag[] | undefined
 					? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
 					: undefined
 			if (!description) {
-				const descbinding = bindings ? bindings.filter(b => b.name === name)[0] : undefined
+				const descbinding = bindingsFromComments
+					? bindingsFromComments.filter(b => b.name === name)[0]
+					: undefined
 				if (descbinding) {
 					bindings.push(descbinding)
-				} else {
-					bindings.push({
-						title: 'binding',
-						name,
-						description
-					})
+					return bindings
 				}
 			} else {
 				bindings.push({

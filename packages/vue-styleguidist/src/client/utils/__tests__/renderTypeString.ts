@@ -24,6 +24,6 @@ describe('renderTypeString', () => {
 	})
 
 	it('should render undefined as untyped', () => {
-		expect(renderTypeString({ name: 'undefined' })).toMatchInlineSnapshot(`"untyped"`)
+		expect(renderTypeString({ name: 'undefined' })).toMatchInlineSnapshot(`"-"`)
 	})
 })
