@@ -205,24 +205,35 @@ export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
 }
 
 function getBindings(node: bt.ObjectExpression, bindings: ParamTag[] | undefined): ParamTag[] {
-	return node.properties.map((prop: bt.ObjectProperty) => {
-		const name = prop.key.name
-		const description: string | boolean | undefined =
-			prop.leadingComments && prop.leadingComments.length
-				? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
-				: undefined
-		if (!description) {
-			const descbinding = bindings ? bindings.filter(b => b.name === name)[0] : undefined
-			if (descbinding) {
-				return descbinding
+	return node.properties.reduce((bindings: ParamTag[], prop: bt.ObjectProperty) => {
+		if (prop.key) {
+			const name = prop.key.name
+			const description: string | boolean | undefined =
+				prop.leadingComments && prop.leadingComments.length
+					? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
+					: undefined
+			if (!description) {
+				const descbinding = bindings ? bindings.filter(b => b.name === name)[0] : undefined
+				if (descbinding) {
+					bindings.push(descbinding)
+				} else {
+					bindings.push({
+						title: 'binding',
+						name,
+						description
+					})
+				}
+			} else {
+				bindings.push({
+					title: 'binding',
+					name,
+					description
+				})
 			}
 		}
-		return {
-			title: 'binding',
-			name,
-			description
-		}
-	})
+
+		return bindings
+	}, [])
 }
 
 function getBindingsFromJSX(attr: bt.JSXAttribute, bindings: ParamTag[] | undefined): ParamTag {
