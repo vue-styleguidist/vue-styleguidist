@@ -1,6 +1,7 @@
 const vsg = require('vue-styleguidist')
 const merge = require('webpack-merge')
 const configSchemaImport = require('vue-styleguidist/lib/scripts/schemas/config')
+const NullLoader = require('null-loader').default
 
 const configSchema = configSchemaImport.default || configSchemaImport
 const styleguidist = vsg.default || vsg
@@ -12,8 +13,8 @@ module.exports = (api, options) => {
 		module: {
 			rules: [
 				{
-					resourceQuery: /blockType=docs/,
-					loader: 'null-loader'
+					loader: NullLoader,
+					resourceQuery: /blockType=docs/
 				}
 			]
 		}
