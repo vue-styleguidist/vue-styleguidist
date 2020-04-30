@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.19.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.2...v4.19.3) (2020-04-30)
+
+
+### Bug Fixes
+
+* **plugin:** update null-loader + avoid conflicts ([07f6a98](https://github.com/vue-styleguidist/vue-styleguidist/commit/07f6a98dc391a02d503c62debcfd3b8b7950d0e9))
+
+
+
+
+
 ## [4.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.1...v4.19.2) (2020-04-29)
 
 
