@@ -15,7 +15,6 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "null-loader": "^4.0.0",
     "vue-styleguidist": "^4.19.2",
     "webpack-merge": "^4.2.1"
   },
