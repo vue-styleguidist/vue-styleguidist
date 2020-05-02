@@ -14,15 +14,7 @@ export default previewComponent => {
 		vuetify,
 		i18n,
 		render(createElement) {
-			return createElement(
-				'v-app',
-				{
-					props: {
-						id: 'v-app'
-					}
-				},
-				[createElement(Languages), createElement(Object.assign(previewComponent))]
-			)
+			return createElement('v-app', [createElement(Languages), createElement(previewComponent)])
 		}
 	}
 }

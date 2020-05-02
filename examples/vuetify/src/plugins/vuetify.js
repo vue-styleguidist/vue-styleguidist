@@ -1,11 +1,10 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuetify from 'vuetify/lib'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(Vuetify)
 
-const opts = {
+export const opts = {
 	theme: {
 		primary: '#5656ca',
 		secondary: '#424242',

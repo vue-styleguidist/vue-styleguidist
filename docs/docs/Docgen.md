@@ -5,9 +5,7 @@
 <!-- toc -->
 
 - [API](#api)
-- [Documentation Object](#documentation-object)
-- [Parsers](#parsers)
-- [Handlers](#handlers)
+- [Architecture](#architecture)
 
 <!-- tocstop -->
 
