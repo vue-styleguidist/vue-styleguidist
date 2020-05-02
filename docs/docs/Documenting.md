@@ -15,6 +15,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
 - [Methods](#methods)
+- [Composable Components](#composable-components)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
 - [Writing code examples](#writing-code-examples)
