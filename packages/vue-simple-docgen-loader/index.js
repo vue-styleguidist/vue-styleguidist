@@ -21,10 +21,8 @@ async function asyncLoader() {
           if (module.hot) {
               module.hot.accept([])
           }
-          module.exports = ${generate(toAst(docs))}
-      `
+          module.exports = ${generate(toAst(docs))}`
 	} catch (error) {
-		// eslint-disable-next-line no-console
-		console.error('[vue-docgen-simple-loader]', error)
+		this.emitError(error)
 	}
 }
