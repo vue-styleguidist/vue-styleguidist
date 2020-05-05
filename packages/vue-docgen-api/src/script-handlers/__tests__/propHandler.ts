@@ -511,4 +511,47 @@ describe('propHandler', () => {
 			)
 		})
 	})
+
+	describe('@type', () => {
+		it('should use @type typings', () => {
+			const src = `
+			export default {
+			  props: {
+				/**
+				 * @type {{ bar: number, foo: string }}
+				 */
+				blockData: {
+					type: Object,
+					default: () => {},
+				},
+			  }
+			};`
+			tester(src, {
+				type: {
+					name: '{ bar: number, foo: string }'
+				}
+			})
+		})
+
+		it('should extract values from @type typings', () => {
+			const src = `
+			export default {
+			  props: {
+				/**
+				 * @type { "bar + boo" | "foo & baz" }}
+				 */
+				blockData: {
+					type: String,
+					default: () => {},
+				},
+			  }
+			};`
+			tester(src, {
+				values: ['bar + boo', 'foo & baz'],
+				type: {
+					name: 'string'
+				}
+			})
+		})
+	})
 })

@@ -1,11 +1,18 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import Documentation, { BlockTag, DocBlockTags, PropDescriptor, ParamTag } from '../Documentation'
+import Documentation, {
+	BlockTag,
+	DocBlockTags,
+	PropDescriptor,
+	ParamTag,
+	UnnamedParam
+} from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getMemberFilter from '../utils/getPropsFilter'
+import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
@@ -124,6 +131,34 @@ export function describeType(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
 ) {
+	if (propDescriptor.tags && propDescriptor.tags.type) {
+		const [{ type: typeDesc }] = propDescriptor.tags.type as UnnamedParam[]
+		if (typeDesc) {
+			const typedAST = getTemplateExpressionAST(`const a:${typeDesc.name}`)
+			let typeValues: string[] | undefined
+			recast.visit(typedAST.program, {
+				visitVariableDeclaration(path) {
+					const { typeAnnotation } = path.get('declarations', 0, 'id', 'typeAnnotation').value
+					if (
+						bt.isTSUnionType(typeAnnotation) &&
+						typeAnnotation.types.every(t => bt.isTSLiteralType(t))
+					) {
+						typeValues = typeAnnotation.types.map((t: bt.TSLiteralType) =>
+							t.literal.value.toString()
+						)
+					}
+					return false
+				}
+			})
+			if (typeValues) {
+				propDescriptor.values = typeValues
+			} else {
+				propDescriptor.type = typeDesc
+				return
+			}
+		}
+	}
+
 	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
 	if (typeArray.length) {
 		propDescriptor.type = getTypeFromTypePath(typeArray[0].get('value'))
