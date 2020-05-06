@@ -9,7 +9,8 @@ import propHandler, {
 	describeDefault,
 	describeRequired,
 	describeType,
-	extractValuesFromTags
+	extractValuesFromTags,
+	getValuesFromTypeAnnotation
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
@@ -66,7 +67,16 @@ export default async function classPropHandler(
 				extractValuesFromTags(propDescriptor)
 
 				if (propPath.node.typeAnnotation) {
-					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+					const values =
+						!!bt.isTSTypeAnnotation(propPath.node.typeAnnotation) &&
+						getValuesFromTypeAnnotation(propPath.node.typeAnnotation.typeAnnotation)
+					if (values) {
+						propDescriptor.values = values
+						propDescriptor.type = { name: 'string' }
+					} else {
+						// type
+						propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+					}
 				}
 
 				const propDecoratorPath = propDeco[0].get('expression')

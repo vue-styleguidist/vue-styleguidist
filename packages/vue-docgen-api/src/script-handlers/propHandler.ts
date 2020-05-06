@@ -239,9 +239,14 @@ function getTypeFromTypePath(
 function getValuesFromTypePath(typeAnnotation: bt.TSType): string[] | undefined {
 	if (bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters) {
 		const type = resolveParenthesis(typeAnnotation.typeParameters.params[0])
-		if (bt.isTSUnionType(type) && type.types.every(t => bt.isTSLiteralType(t))) {
-			return type.types.map(t => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
-		}
+		return getValuesFromTypeAnnotation(type)
+	}
+	return undefined
+}
+
+export function getValuesFromTypeAnnotation(type: bt.TSType): string[] | undefined {
+	if (bt.isTSUnionType(type) && type.types.every(t => bt.isTSLiteralType(t))) {
+		return type.types.map(t => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
 	}
 	return undefined
 }
