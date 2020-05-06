@@ -486,6 +486,30 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
+		it('should parse values in TypeScript typings', () => {
+			const src = `
+			  export default Vue.extend({
+				props: {
+				  tsvalue: {
+					type: String as Prop<('foo' | 'bar')>,
+					required: true
+				  }
+				}
+			  });`
+			tester(
+				src,
+				{
+					values: ['foo', 'bar'],
+					type: {
+						name: 'string'
+					},
+					required: true
+				},
+				['typescript']
+			)
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
+		})
+
 		it('should understand As anotations at the end of a prop definition', () => {
 			const src = `
 			export default Vue.extend({
@@ -509,6 +533,49 @@ describe('propHandler', () => {
 				},
 				['typescript']
 			)
+		})
+	})
+
+	describe('@type', () => {
+		it('should use @type typings', () => {
+			const src = `
+			export default {
+			  props: {
+				/**
+				 * @type {{ bar: number, foo: string }}
+				 */
+				blockData: {
+					type: Object,
+					default: () => {},
+				},
+			  }
+			};`
+			tester(src, {
+				type: {
+					name: '{ bar: number, foo: string }'
+				}
+			})
+		})
+
+		it('should extract values from @type typings', () => {
+			const src = `
+			export default {
+			  props: {
+				/**
+				 * @type { "bar + boo" | "foo & baz" }}
+				 */
+				blockData: {
+					type: String,
+					default: () => {},
+				},
+			  }
+			};`
+			tester(src, {
+				values: ['bar + boo', 'foo & baz'],
+				type: {
+					name: 'string'
+				}
+			})
 		})
 	})
 })
