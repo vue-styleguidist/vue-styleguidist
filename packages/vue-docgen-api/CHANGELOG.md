@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.5...v4.20.0) (2020-05-06)
+
+
+### Features
+
+* **docgen:** make values work for class type ([c003176](https://github.com/vue-styleguidist/vue-styleguidist/commit/c003176186616975afa72083efb22a1e4f45eb8a))
+* **docgen:** record [@type](https://github.com/type) values ([452ccb5](https://github.com/vue-styleguidist/vue-styleguidist/commit/452ccb5c3a708a047183a1684201c17487cf10ec))
+* **docgen:** resolve values in as types ([7648a4e](https://github.com/vue-styleguidist/vue-styleguidist/commit/7648a4e199314af25cc25183f1fd2f506da447fa))
+
+
+
+
+
 ## [4.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.1...v4.19.2) (2020-04-29)
 
 

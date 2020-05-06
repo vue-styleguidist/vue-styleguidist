@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.5...v4.20.0) (2020-05-06)
+
+
+### Bug Fixes
+
+* **loader:** use emit error to thow parsing errors ([8978f54](https://github.com/vue-styleguidist/vue-styleguidist/commit/8978f54c85f3144eb4ab1b3a46fd65f801f8031d))
+
+
+### Features
+
+* add vue docgen simple laoder ([6d7e8f4](https://github.com/vue-styleguidist/vue-styleguidist/commit/6d7e8f49ed446fbb656616ebf87172fba459fb4a))
+* **docgen:** make values work for class type ([c003176](https://github.com/vue-styleguidist/vue-styleguidist/commit/c003176186616975afa72083efb22a1e4f45eb8a))
+* **docgen:** record [@type](https://github.com/type) values ([452ccb5](https://github.com/vue-styleguidist/vue-styleguidist/commit/452ccb5c3a708a047183a1684201c17487cf10ec))
+* **docgen:** resolve values in as types ([7648a4e](https://github.com/vue-styleguidist/vue-styleguidist/commit/7648a4e199314af25cc25183f1fd2f506da447fa))
+
+
+
+
+
 ## [4.19.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.4...v4.19.5) (2020-05-02)
 
 **Note:** Version bump only for package vue-styleguidist
