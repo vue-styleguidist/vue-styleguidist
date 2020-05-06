@@ -486,6 +486,30 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
+		it('should parse values in TypeScript typings', () => {
+			const src = `
+			  export default Vue.extend({
+				props: {
+				  tsvalue: {
+					type: String as Prop<('foo' | 'bar')>,
+					required: true
+				  }
+				}
+			  });`
+			tester(
+				src,
+				{
+					values: ['foo', 'bar'],
+					type: {
+						name: 'string'
+					},
+					required: true
+				},
+				['typescript']
+			)
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
+		})
+
 		it('should understand As anotations at the end of a prop definition', () => {
 			const src = `
 			export default Vue.extend({
