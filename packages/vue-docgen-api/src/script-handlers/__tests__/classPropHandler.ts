@@ -124,22 +124,26 @@ describe('propHandler', () => {
 		  /**
 		   * color of the component
 		   * @values dark, light
-		   * @author me
 		   **/
 		  @Prop
 		  color: string;
 		}`
 			tester(src, {
 				description: 'color of the component',
-				values: ['dark', 'light'],
-				tags: {
-					author: [
-						{
-							description: 'me',
-							title: 'author'
-						}
-					]
-				}
+				values: ['dark', 'light']
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('color')
+		})
+
+		it('should parse get the values from TS type', () => {
+			const src = `
+		@Component
+		export default class MyTest {
+		  @Prop
+		  color: "dark" | "light";
+		}`
+			tester(src, {
+				values: ['dark', 'light']
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('color')
 		})

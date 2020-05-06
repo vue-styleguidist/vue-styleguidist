@@ -1,11 +1,18 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types'
 import recast from 'recast'
-import Documentation, { BlockTag, DocBlockTags, PropDescriptor, ParamTag } from '../Documentation'
+import Documentation, {
+	BlockTag,
+	DocBlockTags,
+	PropDescriptor,
+	ParamTag,
+	UnnamedParam
+} from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getMemberFilter from '../utils/getPropsFilter'
+import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
@@ -86,14 +93,13 @@ export default async function propHandler(documentation: Documentation, path: No
 				} else if (bt.isTSAsExpression(propValuePath.node)) {
 					// standard default + type + required with TS as annotation
 					const propPropertiesPath = propValuePath
-						.get('expression')
-						.get('properties')
+						.get('expression', 'properties')
 						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
 						NodePath<bt.ObjectProperty>
 					>
 
-					// type
-					propDescriptor.type = getTypeFromTypePath(propValuePath)
+					// type and values
+					describeTypeAndValuesFromPath(propValuePath, propDescriptor)
 
 					// required
 					describeRequired(propPropertiesPath, propDescriptor)
@@ -124,9 +130,37 @@ export function describeType(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
 ) {
+	if (propDescriptor.tags && propDescriptor.tags.type) {
+		const [{ type: typeDesc }] = propDescriptor.tags.type as UnnamedParam[]
+		if (typeDesc) {
+			const typedAST = getTemplateExpressionAST(`const a:${typeDesc.name}`)
+			let typeValues: string[] | undefined
+			recast.visit(typedAST.program, {
+				visitVariableDeclaration(path) {
+					const { typeAnnotation } = path.get('declarations', 0, 'id', 'typeAnnotation').value
+					if (
+						bt.isTSUnionType(typeAnnotation) &&
+						typeAnnotation.types.every(t => bt.isTSLiteralType(t))
+					) {
+						typeValues = typeAnnotation.types.map((t: bt.TSLiteralType) =>
+							t.literal.value.toString()
+						)
+					}
+					return false
+				}
+			})
+			if (typeValues) {
+				propDescriptor.values = typeValues
+			} else {
+				propDescriptor.type = typeDesc
+				return
+			}
+		}
+	}
+
 	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
 	if (typeArray.length) {
-		propDescriptor.type = getTypeFromTypePath(typeArray[0].get('value'))
+		describeTypeAndValuesFromPath(typeArray[0].get('value'), propDescriptor)
 	} else {
 		// deduce the type from default expression
 		const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
@@ -154,14 +188,39 @@ const VALID_VUE_TYPES = [
 	'symbol'
 ]
 
-function getTypeFromTypePath(typePath: NodePath): { name: string; func?: boolean } {
+function resolveParenthesis(typeAnnotation: bt.TSType): bt.TSType {
+	let finalAnno = typeAnnotation
+	while (bt.isTSParenthesizedType(finalAnno)) {
+		finalAnno = finalAnno.typeAnnotation
+	}
+	return finalAnno
+}
+
+function describeTypeAndValuesFromPath(
+	propPropertiesPath: NodePath<bt.TSAsExpression>,
+	propDescriptor: PropDescriptor
+) {
+	// values
+	const values = getValuesFromTypePath(propPropertiesPath.node.typeAnnotation)
+
+	if (values) {
+		propDescriptor.values = values
+		propDescriptor.type = { name: 'string' }
+	} else {
+		// type
+		propDescriptor.type = getTypeFromTypePath(propPropertiesPath)
+	}
+}
+
+function getTypeFromTypePath(
+	typePath: NodePath<bt.TSAsExpression>
+): { name: string; func?: boolean } {
 	const typeNode = typePath.node
+	const { typeAnnotation } = typeNode
 
 	const typeName =
-		bt.isTSAsExpression(typeNode) &&
-		bt.isTSTypeReference(typeNode.typeAnnotation) &&
-		typeNode.typeAnnotation.typeParameters
-			? recast.print(typeNode.typeAnnotation.typeParameters.params[0]).code
+		bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters
+			? recast.print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
 			: bt.isArrayExpression(typeNode)
 				? typePath
 						.get('elements')
@@ -175,6 +234,21 @@ function getTypeFromTypePath(typePath: NodePath): { name: string; func?: boolean
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}
+}
+
+function getValuesFromTypePath(typeAnnotation: bt.TSType): string[] | undefined {
+	if (bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters) {
+		const type = resolveParenthesis(typeAnnotation.typeParameters.params[0])
+		return getValuesFromTypeAnnotation(type)
+	}
+	return undefined
+}
+
+export function getValuesFromTypeAnnotation(type: bt.TSType): string[] | undefined {
+	if (bt.isTSUnionType(type) && type.types.every(t => bt.isTSLiteralType(t))) {
+		return type.types.map(t => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
+	}
+	return undefined
 }
 
 export function describeRequired(
