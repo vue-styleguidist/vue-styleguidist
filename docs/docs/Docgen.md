@@ -6,6 +6,7 @@
 
 - [API](#api)
 - [Architecture](#architecture)
+- [Custom Tags](#custom-tags)
 
 <!-- tocstop -->
 
@@ -299,5 +300,48 @@ export default function slotHandler(
     buttons.push(templateAst.attrsMap['name'])
     documentation.set('buttons', buttons)
   }
+}
+```
+## Custom Tags
+
+The API collects any custom doclets your code blocks contain. For a given slot, prop or root component documentation (the comment block before `export default`), any unrecognized doclet tags will get pushed to a separate `tags` object. For example, imagine that in your documentation, you wanted to give your documentation readers a textbox that had a two-way binding to your slot so they could preview their slot content in the actual component. You would want some mock data available for when the user hasn't entered anything. You could provide that mock data like so:
+
+```html
+<template>
+  <button>
+    <!--
+      @slot The text on the button
+      @mock Click me
+    -->
+    <slot />
+  </button>
+</template>
+```
+
+The output object for this component would show something like this:
+
+```js
+{
+  "displayName": "Button",
+  "exportName": "Button",
+  "tags": {}, // top-level comment block custom tags would go here
+  // ...
+  "props": [{
+    // ...
+    "tags": {}, // prop-level custom tags would go here
+    // ...
+  }]
+  // ...
+  "slots": [{
+    "name": "default",
+    "description": "The text on the button",
+    "tags": {
+      "mock": [{
+        "description": "Click me",
+        "title":"mock"
+      }]
+    }
+  }],
+  // ...
 }
 ```
