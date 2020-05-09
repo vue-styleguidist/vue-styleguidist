@@ -12,9 +12,19 @@ import Documentation, {
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import resolveIdentifier from '../utils/resolveIdentifier'
+import getMemberFilter from '../utils/getPropsFilter'
 
 export interface TypedParamTag extends ParamTag {
 	type: ParamType
+}
+
+function getCommentBlockAndTags(
+	p: NodePath,
+	{ commentIndex } = { commentIndex: 1 }
+): DocBlockTags | null {
+	const docBlock = getDocblock(p, { commentIndex })
+
+	return docBlock ? getDoclets(docBlock) : null
 }
 
 /**
@@ -28,6 +38,55 @@ export default async function eventHandler(
 	path: NodePath,
 	astPath: bt.File
 ) {
+	if (bt.isObjectExpression(path.node)) {
+		const methodsPath = path
+			.get('properties')
+			.filter(
+				(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
+			) as Array<NodePath<bt.ObjectProperty>>
+
+		// if no method return
+		if (!methodsPath.length) {
+			return
+		}
+
+		const methodsObject = methodsPath[0].get('value')
+		if (bt.isObjectExpression(methodsObject.node)) {
+			methodsObject.get('properties').each((p: NodePath) => {
+				const commentedMethod = bt.isObjectMethod(p.node) ? p : p.parentPath
+				const { tags: jsDocTags } = getCommentBlockAndTags(commentedMethod) || {}
+
+				if (!jsDocTags) {
+					return
+				}
+
+				const [firesTags] = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
+				if (firesTags) {
+					const eventName = firesTags.content as string
+					const eventDescriptor = documentation.getEventDescriptor(eventName)
+					let currentBlock: DocBlockTags | null = {}
+					let foundEventDesciptor: DocBlockTags | undefined
+					let commentIndex = 1
+					while (currentBlock && !foundEventDesciptor) {
+						currentBlock = getCommentBlockAndTags(commentedMethod, { commentIndex: ++commentIndex })
+						if (
+							currentBlock &&
+							currentBlock.tags &&
+							currentBlock.tags.some(
+								(tag: Tag) => tag.title === 'event' && tag.content === eventName
+							)
+						) {
+							foundEventDesciptor = currentBlock
+						}
+					}
+
+					if (foundEventDesciptor) {
+						setEventDescriptor(eventDescriptor, foundEventDesciptor)
+					}
+				}
+			})
+		}
+	}
 	recast.visit(path.node, {
 		visitCallExpression(pathExpression) {
 			if (
