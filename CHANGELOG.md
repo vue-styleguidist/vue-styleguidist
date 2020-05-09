@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.20.0...v4.21.0) (2020-05-09)
+
+
+### Features
+
+* **docgen:** allow to force events definitions ([#854](https://github.com/vue-styleguidist/vue-styleguidist/issues/854)) ([7a2105c](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a2105c84aa9b08d1b380ea56b698aaedad1e9e8))
+
+
+
+
+
 # [4.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.5...v4.20.0) (2020-05-06)
 
 
