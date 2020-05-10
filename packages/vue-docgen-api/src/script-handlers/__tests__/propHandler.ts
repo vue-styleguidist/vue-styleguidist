@@ -7,6 +7,13 @@ import propHandler from '../propHandler'
 
 jest.mock('../../Documentation')
 
+function removeWhitespaceForTest(defaultValue: PropDescriptor['defaultValue'] = { value: '' }) {
+	return {
+		func: defaultValue.func,
+		value: defaultValue.value.replace(/\s|\n|\t/g, '')
+	}
+}
+
 function parse(src: string, plugins?: ParserPlugin[]): NodePath | undefined {
 	const ast = babylon({ plugins }).parse(src)
 	return resolveExportedComponent(ast)[0].get('default')
@@ -265,21 +272,6 @@ describe('propHandler', () => {
 			})
 		})
 
-		it('should return the body of the function as default value without parenthesis', () => {
-			const src = `
-        export default {
-          props: {
-            test: {
-              default: () => ({})
-            }
-          }
-        }
-        `
-			tester(src, {
-				defaultValue: { value: `{}` }
-			})
-		})
-
 		it('should be ok with the default between quotes', () => {
 			const src = `
         export default {
@@ -310,12 +302,230 @@ describe('propHandler', () => {
 
 			expect(parserTest(src).defaultValue).toMatchInlineSnapshot(`
 			Object {
-			  "func": false,
-			  "value": "function(){
+			  "func": true,
+			  "value": "() => {
 			    return [\\"normal\\"];
 			}",
 			}
 		`)
+		})
+
+		describe('propType object should extract return statement', () => {
+			it('arrow functions with parentheses', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Object,
+              default: () => ({ a: 1 })
+            }
+          }
+        }
+				`
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `{a:1}` })
+			})
+
+			it('arrow functions', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Object,
+              default: () => { return { a: 1 } }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `{a:1}` })
+			})
+
+			it('object methods', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Object,
+              default () { return { a: 1 } }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `{a:1}` })
+			})
+
+			it('old-school functions', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Object,
+              default: function () { return { a: 1 } }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `{a:1}` })
+			})
+		})
+
+		describe('propType array should extract return statement', () => {
+			it('arrow functions with parentheses', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Array,
+              default: () => ([{a: 1}])
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `[{a:1}]` })
+			})
+
+			it('arrow functions without parentheses and without body', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Array,
+              default: () => [{a: 1}]
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `[{a:1}]` })
+			})
+
+			it('arrow functions', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Array,
+              default: () => { return [{a: 1}] }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `[{a:1}]` })
+			})
+
+			it('object methods', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Array,
+              default () { return [{a: 1}] }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `[{a:1}]` })
+			})
+
+			it('old-school functions', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+							type: Array,
+              default: function () { return [{a: 1}] }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `[{a:1}]` })
+			})
+		})
+
+		describe('propType function should keep function', () => {
+			it('arrow functions with parentheses', () => {
+				const src = [
+					'export default {',
+					'	props: {',
+					'		test: {',
+					'     type: Function,',
+					'			default: (a, b) => ({ a, b })',
+					'		}',
+					'	}',
+					'}'
+				].join('\n')
+
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `(a,b)=>({a,b})` })
+			})
+
+			it('arrow functions', () => {
+				const src = [
+					'export default {',
+					'	props: {',
+					'		test: {',
+					'     type: Function,',
+					'			default: (a, b) => { return { a, b } }',
+					'		}',
+					'	}',
+					'}'
+				].join('\n')
+
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `(a,b)=>{return{a,b};}` })
+			})
+
+			it('object methods', () => {
+				const src = [
+					'export default {',
+					'	props: {',
+					'		test: {',
+					'     type: [Function],',
+					'			default (a, b) { return { a, b } }',
+					'		}',
+					'	}',
+					'}'
+				].join('\n')
+
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `(a,b)=>{return{a,b};}` })
+			})
+
+			it('old-school functions', () => {
+				const src = [
+					'export default {',
+					'	props: {',
+					'		test: {',
+					'     type: [Function],',
+					'			default: function (a, b) { return { a, b } }',
+					'		}',
+					'	}',
+					'}'
+				].join('\n')
+
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: `function(a,b){return{a,b};}` })
+			})
 		})
 	})
 

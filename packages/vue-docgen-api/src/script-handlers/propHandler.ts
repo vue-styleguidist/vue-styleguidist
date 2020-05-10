@@ -16,6 +16,27 @@ import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
+function getRawValueParsedFromFunctionsBlockStatementNode(
+	blockStatementNode: bt.BlockStatement
+): string {
+	const bodyNodeArray = blockStatementNode.body
+	const lastNode = bodyNodeArray.slice(-1)[0]
+	if (!bt.isReturnStatement(lastNode)) {
+		throw new Error(
+			'Something went wrong when trying to retrieve the return statement from your default value function.'
+		)
+	}
+	// retrieve the "return statement" from the object method body
+	const rawValue = recast.print(lastNode).code
+	// will look like `return {};`
+	return rawValue.replace('return ', '').replace(';', '')
+}
+
+function removeParenthesesIfPresent(str: string): string {
+	if (str[0] !== '(' || str[str.length - 1] !== ')') return str
+	return str.slice(1, -1)
+}
+
 /**
  * Extract props information form an object-style VueJs component
  * @param documentation
@@ -89,7 +110,11 @@ export default async function propHandler(documentation: Documentation, path: No
 					describeRequired(propPropertiesPath, propDescriptor)
 
 					// default
-					describeDefault(propPropertiesPath, propDescriptor)
+					describeDefault(
+						propPropertiesPath,
+						propDescriptor,
+						(propDescriptor.type && propDescriptor.type.name) || ''
+					)
 				} else if (bt.isTSAsExpression(propValuePath.node)) {
 					// standard default + type + required with TS as annotation
 					const propPropertiesPath = propValuePath
@@ -105,7 +130,11 @@ export default async function propHandler(documentation: Documentation, path: No
 					describeRequired(propPropertiesPath, propDescriptor)
 
 					// default
-					describeDefault(propPropertiesPath, propDescriptor)
+					describeDefault(
+						propPropertiesPath,
+						propDescriptor,
+						(propDescriptor.type && propDescriptor.type.name) || ''
+					)
 				} else {
 					// in any other case, just display the code for the typing
 					propDescriptor.type = {
@@ -266,38 +295,102 @@ export function describeRequired(
 
 export function describeDefault(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
-	propDescriptor: PropDescriptor
-) {
+	propDescriptor: PropDescriptor,
+	propType: string
+): void {
 	const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
 	if (defaultArray.length) {
-		if (bt.isObjectProperty(defaultArray[0].value)) {
-			let defaultPath = defaultArray[0].get('value')
-
-			let parenthesized = false
-			if (
-				bt.isArrowFunctionExpression(defaultPath.node) &&
-				bt.isObjectExpression(defaultPath.node.body) // if () => ({})
-			) {
-				defaultPath = defaultPath.get('body')
-				const extra = (defaultPath.node as any).extra
-				if (extra && extra.parenthesized) {
-					parenthesized = true
+		/**
+		 * This means the default value is formatted like so: `default: any`
+		 */
+		const defaultValueIsProp = bt.isObjectProperty(defaultArray[0].value)
+		/**
+		 * This means the default value is formatted like so: `default () { return {} }`
+		 */
+		const defaultValueIsObjectMethod = bt.isObjectMethod(defaultArray[0].value)
+		// objects and arrays should try to extract the body from functions
+		if (propType === 'object' || propType === 'array') {
+			if (defaultValueIsProp) {
+				/* todo: add correct type info here ↓ */
+				const defaultFunction = defaultArray[0].get('value')
+				const isArrowFunction = bt.isArrowFunctionExpression(defaultFunction.node)
+				const isOldSchoolFunction = bt.isFunctionExpression(defaultFunction.node)
+				// check if the prop value is a function
+				if (!isArrowFunction && !isOldSchoolFunction) {
+					throw new Error(
+						'A default value needs to be a function when your type is an object or array'
+					)
+				}
+				// retrieve the function "body" from the arrow function
+				if (isArrowFunction) {
+					const arrowFunctionBody = defaultFunction.get('body')
+					// arrow function looks like `() => { return {} }`
+					if (bt.isBlockStatement(arrowFunctionBody.node)) {
+						const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
+							arrowFunctionBody.node
+						)
+						propDescriptor.defaultValue = {
+							func: false,
+							value: rawValueParsed
+						}
+						return
+					}
+					// arrow function looks like `() => ({})`
+					const rawValue = recast.print(arrowFunctionBody).code
+					const rawValueParsed = removeParenthesesIfPresent(rawValue)
+					propDescriptor.defaultValue = {
+						func: false,
+						value: rawValueParsed
+					}
+					return
 				}
 			}
-
-			const rawValue = recast.print(defaultPath).code
+			// defaultValue was either an ObjectMethod or an oldSchoolFunction
+			// in either case we need to retrieve the blockStatement and work with that
+			/* todo: add correct type info here ↓ */
+			const defaultBlockStatement = defaultValueIsObjectMethod
+				? defaultArray[0].get('body')
+				: defaultArray[0].get('value').get('body')
+			const defaultBlockStatementNode: bt.BlockStatement = defaultBlockStatement.node
+			const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
+				defaultBlockStatementNode
+			)
 			propDescriptor.defaultValue = {
-				func: bt.isFunction(defaultPath.node),
-				value: parenthesized ? rawValue.slice(1, rawValue.length - 1) : rawValue
+				func: false,
+				value: rawValueParsed
 			}
-		} else {
-			let defaultPath = defaultArray[0].get('body')
-			const rawValue = recast.print(defaultPath).code
-			propDescriptor.defaultValue = {
-				func: bt.isFunction(defaultPath.node),
-				value: `function()${rawValue.trim()}`
-			}
+			return
 		}
+		// otherwise the rest should return whatever there is
+		if (defaultValueIsProp) {
+			// in this case, just return the rawValue
+			/* todo: add correct type info here ↓ */
+			const defaultPath = defaultArray[0].get('value')
+			const rawValue = recast.print(defaultPath).code
+			propDescriptor.defaultValue = {
+				func: bt.isFunction(defaultPath.node),
+				value: rawValue
+			}
+			return
+		}
+		if (defaultValueIsObjectMethod) {
+			// in this case, just the function needs to be reconstructed a bit
+			/* todo: add correct type info here ↓ */
+			const defaultObjectMethod = defaultArray[0].get('value')
+			const paramNodeArray = defaultObjectMethod.node.params
+			const params = paramNodeArray.map((p: any) => p.name).join(', ')
+			/* todo: add correct type info here ↓ */
+			const defaultBlockStatement = defaultArray[0].get('body')
+			const rawValue = recast.print(defaultBlockStatement).code
+			// the function should be reconstructed as arrow function, because Object Methods and arrow functions have the same `this`, whereas "old-school" functions do not.
+			const rawValueParsed = `(${params}) => ${rawValue.trim()}`
+			propDescriptor.defaultValue = {
+				func: true,
+				value: rawValueParsed
+			}
+			return
+		}
+		throw new Error('Your default value was formatted incorrectly')
 	}
 }
 
