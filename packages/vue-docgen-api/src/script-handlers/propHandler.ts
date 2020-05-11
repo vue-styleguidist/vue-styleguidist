@@ -388,8 +388,8 @@ export function describeDefault(
 			/* todo: add correct type info here ↓ */
 			const defaultBlockStatement = defaultArray[0].get('body')
 			const rawValue = recast.print(defaultBlockStatement).code
-			// the function should be reconstructed as arrow function, because Object Methods and arrow functions have the same `this`, whereas "old-school" functions do not.
-			const rawValueParsed = `(${params}) => ${rawValue.trim()}`
+			// the function should be reconstructed as "old-school" function, because they have the same handling of "this", whereas arrow functions do not.
+			const rawValueParsed = `function(${params}) ${rawValue.trim()}`
 			propDescriptor.defaultValue = {
 				func: true,
 				value: rawValueParsed

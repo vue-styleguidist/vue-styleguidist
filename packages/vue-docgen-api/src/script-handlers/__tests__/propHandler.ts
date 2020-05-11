@@ -303,7 +303,7 @@ describe('propHandler', () => {
 			expect(parserTest(src).defaultValue).toMatchInlineSnapshot(`
       Object {
         "func": true,
-        "value": "() => {
+        "value": "function() {
           return [\\"normal\\"];
       }",
       }
@@ -463,8 +463,8 @@ describe('propHandler', () => {
           props: {
             test: {
               type: Array,
-              default: function () { 
-				if (logger.mounted) { 
+              default: function () {
+				if (logger.mounted) {
 				  return []
 				} else {
 				  return undefined
@@ -488,8 +488,8 @@ describe('propHandler', () => {
           props: {
             test: {
               type: Array,
-              default: () => { 
-				if (logger.mounted) { 
+              default: () => {
+				if (logger.mounted) {
 				  return []
 				} else {
 				  return undefined
@@ -557,7 +557,7 @@ describe('propHandler', () => {
 
 				const testParsed = parserTest(src)
 				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
-				expect(defaultValue).toMatchObject({ value: `(a,b)=>{return{a,b};}` })
+				expect(defaultValue).toMatchObject({ value: `function(a,b){return{a,b};}` })
 			})
 
 			it('old-school functions', () => {
