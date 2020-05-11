@@ -114,13 +114,13 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 	}
 
 	if (!ignoreExamplesInFile) {
-		const examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
-		if (process.env.NODE_ENV !== 'production' && examplesFile && global) {
-			global.VUE_STYLEGUIDIST = global.VUE_STYLEGUIDIST || {}
-			if (global.VUE_STYLEGUIDIST[examplesFile]) {
-				const relativeFile = path.relative(process.cwd(), file)
-				if (global.VUE_STYLEGUIDIST[examplesFile] !== relativeFile) {
-					if (await exists(file)) {
+		let examplesFile = config.getExampleFilename ? config.getExampleFilename(file) : false
+		if (examplesFile && (await exists(examplesFile))) {
+			if (process.env.NODE_ENV !== 'production' && examplesFile && global) {
+				global.VUE_STYLEGUIDIST = global.VUE_STYLEGUIDIST || {}
+				if (global.VUE_STYLEGUIDIST[examplesFile]) {
+					const relativeFile = path.relative(process.cwd(), file)
+					if (global.VUE_STYLEGUIDIST[examplesFile] !== relativeFile) {
 						logger.warn(
 							'\n\n' +
 								`${path.relative(process.cwd(), examplesFile)}\n` +
@@ -132,10 +132,12 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 								`${consts.DOCS_COOKBOOK}#i-have-multiple-components-in-the-same-folder-what-can-i-do\n`
 						)
 					}
+				} else {
+					global.VUE_STYLEGUIDIST[examplesFile] = path.relative(process.cwd(), file)
 				}
-			} else {
-				global.VUE_STYLEGUIDIST[examplesFile] = path.relative(process.cwd(), file)
 			}
+		} else {
+			examplesFile = false
 		}
 		vsgDocs.examples = getExamples(
 			file,
