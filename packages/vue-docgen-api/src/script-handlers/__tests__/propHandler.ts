@@ -290,24 +290,24 @@ describe('propHandler', () => {
 		it('should be ok with the default as a method', () => {
 			const src = [
 				'export default {',
-				'	props: {',
-				'		test: {',
-				'			default() {',
-				'				return ["normal"]',
-				'			}',
-				'		}',
-				'	}',
+				'  props: {',
+				'    test: {',
+				'      default() {',
+				'        return ["normal"]',
+				'      }',
+				'    }',
+				'  }',
 				'}'
 			].join('\n')
 
 			expect(parserTest(src).defaultValue).toMatchInlineSnapshot(`
-			Object {
-			  "func": true,
-			  "value": "() => {
-			    return [\\"normal\\"];
-			}",
-			}
-		`)
+      Object {
+        "func": true,
+        "value": "() => {
+          return [\\"normal\\"];
+      }",
+      }
+    `)
 		})
 
 		describe('propType object should extract return statement', () => {
@@ -316,12 +316,12 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Object,
+              type: Object,
               default: () => ({ a: 1 })
             }
           }
         }
-				`
+        `
 				const testParsed = parserTest(src)
 				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
 				expect(defaultValue).toMatchObject({ value: `{a:1}` })
@@ -332,7 +332,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Object,
+              type: Object,
               default: () => { return { a: 1 } }
             }
           }
@@ -348,7 +348,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Object,
+              type: Object,
               default () { return { a: 1 } }
             }
           }
@@ -364,7 +364,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Object,
+              type: Object,
               default: function () { return { a: 1 } }
             }
           }
@@ -382,7 +382,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Array,
+              type: Array,
               default: () => ([{a: 1}])
             }
           }
@@ -398,7 +398,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Array,
+              type: Array,
               default: () => [{a: 1}]
             }
           }
@@ -414,7 +414,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Array,
+              type: Array,
               default: () => { return [{a: 1}] }
             }
           }
@@ -430,7 +430,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Array,
+              type: Array,
               default () { return [{a: 1}] }
             }
           }
@@ -446,7 +446,7 @@ describe('propHandler', () => {
         export default {
           props: {
             test: {
-							type: Array,
+              type: Array,
               default: function () { return [{a: 1}] }
             }
           }
@@ -462,12 +462,12 @@ describe('propHandler', () => {
 			it('arrow functions with parentheses', () => {
 				const src = [
 					'export default {',
-					'	props: {',
-					'		test: {',
-					'     type: Function,',
-					'			default: (a, b) => ({ a, b })',
-					'		}',
-					'	}',
+					'  props: {',
+					'    test: {',
+					'      type: Function,',
+					'      default: (a, b) => ({ a, b })',
+					'    }',
+					'  }',
 					'}'
 				].join('\n')
 
@@ -479,12 +479,12 @@ describe('propHandler', () => {
 			it('arrow functions', () => {
 				const src = [
 					'export default {',
-					'	props: {',
-					'		test: {',
-					'     type: Function,',
-					'			default: (a, b) => { return { a, b } }',
-					'		}',
-					'	}',
+					'  props: {',
+					'    test: {',
+					'      type: Function,',
+					'      default: (a, b) => { return { a, b } }',
+					'    }',
+					'  }',
 					'}'
 				].join('\n')
 
@@ -496,12 +496,12 @@ describe('propHandler', () => {
 			it('object methods', () => {
 				const src = [
 					'export default {',
-					'	props: {',
-					'		test: {',
-					'     type: [Function],',
-					'			default (a, b) { return { a, b } }',
-					'		}',
-					'	}',
+					'  props: {',
+					'    test: {',
+					'      type: [Function],',
+					'      default (a, b) { return { a, b } }',
+					'    }',
+					'  }',
 					'}'
 				].join('\n')
 
@@ -513,12 +513,12 @@ describe('propHandler', () => {
 			it('old-school functions', () => {
 				const src = [
 					'export default {',
-					'	props: {',
-					'		test: {',
-					'     type: [Function],',
-					'			default: function (a, b) { return { a, b } }',
-					'		}',
-					'	}',
+					'  props: {',
+					'    test: {',
+					'      type: [Function],',
+					'      default: function (a, b) { return { a, b } }',
+					'    }',
+					'  }',
 					'}'
 				].join('\n')
 
@@ -578,9 +578,9 @@ describe('propHandler', () => {
              * @model
              */
             value: {
-				required: true,
-				type: undefined
-			}
+        required: true,
+        type: undefined
+      }
           }
         }
         `
@@ -594,17 +594,17 @@ describe('propHandler', () => {
 		it('should set the v-model instead of value with model property', () => {
 			const src = `
         export default {
-		  model:{
-			prop: 'value'
-		  },
+      model:{
+      prop: 'value'
+      },
           props: {
             /**
              * Value of the field
              */
             value: {
-				required: true,
-				type: undefined
-			}
+        required: true,
+        type: undefined
+      }
           }
         }
         `
@@ -618,17 +618,17 @@ describe('propHandler', () => {
 		it('should not set the v-model instead of value if model property has only event', () => {
 			const src = `
         export default {
-		  model:{
-			event: 'change'
-		  },
+      model:{
+      event: 'change'
+      },
           props: {
             /**
              * Value of the field
              */
             value: {
-				required: true,
-				type: undefined
-			}
+        required: true,
+        type: undefined
+      }
           }
         }
         `
@@ -643,19 +643,19 @@ describe('propHandler', () => {
 	describe('@values tag parsing', () => {
 		it('should parse the @values tag as its own', () => {
 			const src = `
-	export default {
-	  props: {
-		/**
-		 * color of the component
-		 * @values dark, light
-		 * @author me
-		 */
-		color: {
-			type: string
-		}
-	  }
-	}
-	`
+  export default {
+    props: {
+    /**
+     * color of the component
+     * @values dark, light
+     * @author me
+     */
+    color: {
+      type: string
+    }
+    }
+  }
+  `
 			tester(src, {
 				description: 'color of the component',
 				values: ['dark', 'light'],
@@ -675,14 +675,14 @@ describe('propHandler', () => {
 	describe('typescript Vue.extends', () => {
 		it('should be ok with Prop', () => {
 			const src = `
-			  export default Vue.extend({
-				props: {
-				  tsvalue: {
-					type: [String, Number] as Prop<SelectOption['value']>,
-					required: true
-				  }
-				}
-			  });`
+        export default Vue.extend({
+        props: {
+          tsvalue: {
+          type: [String, Number] as Prop<SelectOption['value']>,
+          required: true
+          }
+        }
+        });`
 			tester(
 				src,
 				{
@@ -698,14 +698,14 @@ describe('propHandler', () => {
 
 		it('should parse values in TypeScript typings', () => {
 			const src = `
-			  export default Vue.extend({
-				props: {
-				  tsvalue: {
-					type: String as Prop<('foo' | 'bar')>,
-					required: true
-				  }
-				}
-			  });`
+        export default Vue.extend({
+        props: {
+          tsvalue: {
+          type: String as Prop<('foo' | 'bar')>,
+          required: true
+          }
+        }
+        });`
 			tester(
 				src,
 				{
@@ -722,14 +722,14 @@ describe('propHandler', () => {
 
 		it('should understand As anotations at the end of a prop definition', () => {
 			const src = `
-			export default Vue.extend({
-			  props: {
-				blockData: {
-					type: Array,
-					default: () => [],
-				} as PropOptions<SocialNetwork[]>,
-			  }
-			});`
+      export default Vue.extend({
+        props: {
+        blockData: {
+          type: Array,
+          default: () => [],
+        } as PropOptions<SocialNetwork[]>,
+        }
+      });`
 			tester(
 				src,
 				{
@@ -749,17 +749,17 @@ describe('propHandler', () => {
 	describe('@type', () => {
 		it('should use @type typings', () => {
 			const src = `
-			export default {
-			  props: {
-				/**
-				 * @type {{ bar: number, foo: string }}
-				 */
-				blockData: {
-					type: Object,
-					default: () => {},
-				},
-			  }
-			};`
+      export default {
+        props: {
+        /**
+         * @type {{ bar: number, foo: string }}
+         */
+        blockData: {
+          type: Object,
+          default: () => {},
+        },
+        }
+      };`
 			tester(src, {
 				type: {
 					name: '{ bar: number, foo: string }'
@@ -769,17 +769,17 @@ describe('propHandler', () => {
 
 		it('should extract values from @type typings', () => {
 			const src = `
-			export default {
-			  props: {
-				/**
-				 * @type { "bar + boo" | "foo & baz" }}
-				 */
-				blockData: {
-					type: String,
-					default: () => {},
-				},
-			  }
-			};`
+      export default {
+        props: {
+        /**
+         * @type { "bar + boo" | "foo & baz" }}
+         */
+        blockData: {
+          type: String,
+          default: () => {},
+        },
+        }
+      };`
 			tester(src, {
 				values: ['bar + boo', 'foo & baz'],
 				type: {
