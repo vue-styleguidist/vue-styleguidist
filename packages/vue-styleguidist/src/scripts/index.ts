@@ -10,6 +10,7 @@ import server from './server'
 import makeWebpackConfig from './make-webpack-config'
 import getConfig from './config'
 import * as binutils from './binutils'
+import isPromise from './utils/isPromise'
 
 export type ThemeConfig = RecursivePartial<Theme>
 
@@ -31,9 +32,7 @@ export interface StyleGuideUtils {
 	 * @return {ServerInfo.App} Webpack-Dev-Server.
 	 * @return {ServerInfo.Compiler} Webpack Compiler instance.
 	 */
-	server: (
-		callback: (err: Error | undefined, config: SanitizedStyleguidistConfig) => void
-	) => binutils.ServerInfo
+	server: (callback: (err: Error | undefined, config: SanitizedStyleguidistConfig) => void) => binutils.ServerInfo
 
 	/**
 	 * Return Styleguidist Webpack config.
@@ -58,8 +57,8 @@ export interface StyleGuideUtils {
 export default function(
 	config: SanitizedStyleguidistConfig,
 	updateConfig: (conf: SanitizedStyleguidistConfig) => void
-): StyleGuideUtils {
-	config = getConfig(config, (config: SanitizedStyleguidistConfig) => {
+): StyleGuideUtils | Promise<StyleGuideUtils> {
+	const configInternal = getConfig(config, (config: SanitizedStyleguidistConfig) => {
 		setupLogger(config.logger, config.verbose, {})
 		if (typeof updateConfig === 'function') {
 			updateConfig(config)
@@ -67,6 +66,14 @@ export default function(
 		return config
 	})
 
+	if (isPromise(configInternal)) {
+		return configInternal.then(conf => exportBuildUtils(conf))
+	} else {
+		return exportBuildUtils(configInternal)
+	}
+}
+
+function exportBuildUtils(config: SanitizedStyleguidistConfig): StyleGuideUtils {
 	return {
 		build(callback) {
 			return buildUtil(config, (err, stats) => callback(err, config, stats))
