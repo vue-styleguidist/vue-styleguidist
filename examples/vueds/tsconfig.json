@@ -1,0 +1,3 @@
+{
+  "includes": ["(src|styleguide)/**/*.(ts|tsx)"]
+}

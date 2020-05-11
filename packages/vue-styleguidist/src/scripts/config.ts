@@ -20,9 +20,9 @@ const CONFIG_FILENAME = 'styleguide.config.js'
 export default function getConfig(
 	configParam: string | StyleguidistConfig | { serverPort?: string | number },
 	update?: (conf: SanitizedStyleguidistConfig | {}) => SanitizedStyleguidistConfig
-): SanitizedStyleguidistConfig {
+): Promise<SanitizedStyleguidistConfig> | SanitizedStyleguidistConfig {
 	let configFilepath
-	let config: StyleguidistConfig | { serverPort?: string | number }
+	let config: StyleguidistConfig | { serverPort?: string | number } | (() => Promise<StyleguidistConfig>)
 	if (isString(configParam)) {
 		// Load config from a given file
 		configFilepath = path.resolve(process.cwd(), configParam)
@@ -42,12 +42,23 @@ export default function getConfig(
 		config = require(configFilepath)
 	}
 
+	const configDir = typeof configFilepath === 'string' ? path.dirname(configFilepath) : process.cwd()
+
+	if (typeof config === 'function') {
+		return config().then(conf => postTreatConfig(configDir, conf, update))
+	}
+
+	return postTreatConfig(configDir, config, update)
+}
+
+function postTreatConfig(
+	configDir: string,
+	config: StyleguidistConfig | { serverPort?: string | number },
+	update?: (conf: SanitizedStyleguidistConfig | {}) => SanitizedStyleguidistConfig
+): SanitizedStyleguidistConfig {
 	if (update) {
 		config = update(config)
 	}
-
-	const configDir =
-		typeof configFilepath === 'string' ? path.dirname(configFilepath) : process.cwd()
 
 	if (config.serverPort && isString(config.serverPort)) {
 		config.serverPort = parseInt(config.serverPort)

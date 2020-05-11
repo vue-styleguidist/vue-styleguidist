@@ -9,6 +9,7 @@ import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
 import * as binutils from '../scripts/binutils'
+import isPromise from '../scripts/utils/isPromise'
 
 const logger = createLogger('rsg')
 
@@ -51,8 +52,25 @@ try {
 		process.env.VUESG_VERBOSE = 'true'
 	}
 
-	config = getConfig(argv.config, binutils.updateConfig)
+	const conf = getConfig(argv.config, binutils.updateConfig)
 
+	if (isPromise(conf)) {
+		conf.then(runit)
+	} else {
+		runit(conf)
+	}
+} catch (err) {
+	if (err instanceof StyleguidistError) {
+		const link = consts.DOCS_CONFIG + (err.extra ? `#${err.extra.toLowerCase()}` : '')
+		binutils.printErrorWithLink(err.message, `${err.extra}\n\nLearn how to configure your style guide:`, link)
+		process.exit(1)
+	} else {
+		throw err
+	}
+}
+
+function runit(conf: SanitizedStyleguidistConfig) {
+	config = conf
 	binutils.verbose('Styleguidist config:', config)
 
 	switch (command) {
@@ -64,17 +82,5 @@ try {
 			break
 		default:
 			binutils.commandHelp()
-	}
-} catch (err) {
-	if (err instanceof StyleguidistError) {
-		const link = consts.DOCS_CONFIG + (err.extra ? `#${err.extra.toLowerCase()}` : '')
-		binutils.printErrorWithLink(
-			err.message,
-			`${err.extra}\n\nLearn how to configure your style guide:`,
-			link
-		)
-		process.exit(1)
-	} else {
-		throw err
 	}
 }
