@@ -456,6 +456,56 @@ describe('propHandler', () => {
 				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
 				expect(defaultValue).toMatchObject({ value: `[{a:1}]` })
 			})
+
+			it('should deal properly with multilple returns', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+              type: Array,
+              default: function () { 
+				if (logger.mounted) { 
+				  return []
+				} else {
+				  return undefined
+				}
+			  }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({
+					func: true,
+					value: `function(){if(logger.mounted){return[];}else{returnundefined;}}`
+				})
+			})
+
+			it('should deal properly with multilple returns in arrow functions', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+              type: Array,
+              default: () => { 
+				if (logger.mounted) { 
+				  return []
+				} else {
+				  return undefined
+				}
+			  }
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({
+					func: true,
+					value: `()=>{if(logger.mounted){return[];}else{returnundefined;}}`
+				})
+			})
 		})
 
 		describe('propType function should keep function', () => {

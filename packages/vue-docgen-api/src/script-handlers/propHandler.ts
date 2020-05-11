@@ -18,23 +18,15 @@ type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
 function getRawValueParsedFromFunctionsBlockStatementNode(
 	blockStatementNode: bt.BlockStatement
-): string {
-	const bodyNodeArray = blockStatementNode.body
-	const lastNode = bodyNodeArray.slice(-1)[0]
-	if (!bt.isReturnStatement(lastNode)) {
-		throw new Error(
-			'Something went wrong when trying to retrieve the return statement from your default value function.'
-		)
+): string | null {
+	const { body } = blockStatementNode
+	// if there is more than a return statement in the body,
+	// we cannot resolve the new object, we let the function display as a function
+	if (body.length !== 1 || !bt.isReturnStatement(body[0])) {
+		return null
 	}
-	// retrieve the "return statement" from the object method body
-	const rawValue = recast.print(lastNode).code
-	// will look like `return {};`
-	return rawValue.replace('return ', '').replace(';', '')
-}
-
-function removeParenthesesIfPresent(str: string): string {
-	if (str[0] !== '(' || str[str.length - 1] !== ')') return str
-	return str.slice(1, -1)
+	const [ret] = body
+	return ret.argument ? recast.print(ret.argument).code : null
 }
 
 /**
@@ -329,18 +321,30 @@ export function describeDefault(
 						const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
 							arrowFunctionBody.node
 						)
+						if (rawValueParsed) {
+							propDescriptor.defaultValue = {
+								func: false,
+								value: rawValueParsed
+							}
+							return
+						}
+					}
+
+					if (
+						bt.isArrayExpression(arrowFunctionBody.node) ||
+						bt.isObjectExpression(arrowFunctionBody.node)
+					) {
 						propDescriptor.defaultValue = {
 							func: false,
-							value: rawValueParsed
+							value: recast.print(arrowFunctionBody.node).code
 						}
 						return
 					}
+
 					// arrow function looks like `() => ({})`
-					const rawValue = recast.print(arrowFunctionBody).code
-					const rawValueParsed = removeParenthesesIfPresent(rawValue)
 					propDescriptor.defaultValue = {
-						func: false,
-						value: rawValueParsed
+						func: true,
+						value: recast.print(defaultFunction).code
 					}
 					return
 				}
@@ -355,11 +359,13 @@ export function describeDefault(
 			const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
 				defaultBlockStatementNode
 			)
-			propDescriptor.defaultValue = {
-				func: false,
-				value: rawValueParsed
+			if (rawValueParsed) {
+				propDescriptor.defaultValue = {
+					func: false,
+					value: rawValueParsed
+				}
+				return
 			}
-			return
 		}
 		// otherwise the rest should return whatever there is
 		if (defaultValueIsProp) {
