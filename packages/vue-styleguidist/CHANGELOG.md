@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.21.0...v4.22.0) (2020-05-11)
+
+
+### Features
+
+* allow for config to be an async function ([fb16a67](https://github.com/vue-styleguidist/vue-styleguidist/commit/fb16a678770162dcb37de5400259c2935566e5fb))
+
+
+
+
+
 # [4.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.20.0...v4.21.0) (2020-05-09)
 
 **Note:** Version bump only for package vue-styleguidist

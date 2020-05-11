@@ -23,6 +23,8 @@ var _config = _interopRequireDefault(require("./config"));
 
 var binutils = _interopRequireWildcard(require("./binutils"));
 
+var _isPromise = _interopRequireDefault(require("./utils/isPromise"));
+
 // Make sure user has webpack installed
 
 /**
@@ -33,7 +35,7 @@ var binutils = _interopRequireWildcard(require("./binutils"));
  * @returns {object} API.
  */
 function _default(config, updateConfig) {
-  config = (0, _config["default"])(config, function (config) {
+  var configInternal = (0, _config["default"])(config, function (config) {
     (0, _logger["default"])(config.logger, config.verbose, {});
 
     if (typeof updateConfig === 'function') {
@@ -42,6 +44,17 @@ function _default(config, updateConfig) {
 
     return config;
   });
+
+  if ((0, _isPromise["default"])(configInternal)) {
+    return configInternal.then(function (conf) {
+      return exportBuildUtils(conf);
+    });
+  } else {
+    return exportBuildUtils(configInternal);
+  }
+}
+
+function exportBuildUtils(config) {
   return {
     build: function build(callback) {
       return (0, _build["default"])(config, function (err, stats) {
