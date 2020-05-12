@@ -198,13 +198,9 @@ describe('propHandler', () => {
 		})
 
 		it('should still return props with prop-types', () => {
-			const src = [
-				'export default {',
-				'  props:{',
-				"    test: PropTypes.oneOf(['News', 'Photos'])",
-				'  }',
-				'}'
-			].join('\n')
+			const src = ['export default {', '  props:{', "    test: PropTypes.oneOf(['News', 'Photos'])", '  }', '}'].join(
+				'\n'
+			)
 			tester(src, {
 				type: {
 					func: true
@@ -504,6 +500,44 @@ describe('propHandler', () => {
 				expect(defaultValue).toMatchObject({
 					func: true,
 					value: `()=>{if(logger.mounted){return[];}else{returnundefined;}}`
+				})
+			})
+
+			it('should parse "null" as default for objects without error', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+              type: Array,
+              default: null
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({
+					func: false,
+					value: `null`
+				})
+			})
+
+			it('should parse "undefined" as default for objects without error', () => {
+				const src = `
+        export default {
+          props: {
+            test: {
+              type: Array,
+              default: undefined
+            }
+          }
+        }
+        `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({
+					func: false,
+					value: 'undefined'
 				})
 			})
 		})
