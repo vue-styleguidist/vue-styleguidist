@@ -85,13 +85,13 @@ export default async function propHandler(documentation: Documentation, path: No
 					>
 
 					// type
-					describeType(propPropertiesPath, propDescriptor)
+					const litteralType = describeType(propPropertiesPath, propDescriptor)
 
 					// required
 					describeRequired(propPropertiesPath, propDescriptor)
 
 					// default
-					describeDefault(propPropertiesPath, propDescriptor, (propDescriptor.type && propDescriptor.type.name) || '')
+					describeDefault(propPropertiesPath, propDescriptor, litteralType || '')
 				} else if (bt.isTSAsExpression(propValuePath.node)) {
 					// standard default + type + required with TS as annotation
 					const propPropertiesPath = propValuePath
@@ -126,10 +126,18 @@ export default async function propHandler(documentation: Documentation, path: No
 	}
 }
 
+/**
+ * Deal with the description of the type
+ * @param propPropertiesPath
+ * @param propDescriptor
+ * @returns the unaltered type member of the prop object
+ */
 export function describeType(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
-) {
+): string | undefined {
+	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
+
 	if (propDescriptor.tags && propDescriptor.tags.type) {
 		const [{ type: typeDesc }] = propDescriptor.tags.type as UnnamedParam[]
 		if (typeDesc) {
@@ -148,14 +156,13 @@ export function describeType(
 				propDescriptor.values = typeValues
 			} else {
 				propDescriptor.type = typeDesc
-				return
+				return getTypeFromTypePath(typeArray[0].get('value')).name
 			}
 		}
 	}
 
-	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
 	if (typeArray.length) {
-		describeTypeAndValuesFromPath(typeArray[0].get('value'), propDescriptor)
+		return describeTypeAndValuesFromPath(typeArray[0].get('value'), propDescriptor)
 	} else {
 		// deduce the type from default expression
 		const defaultArray = propPropertiesPath.filter(getMemberFilter('default'))
@@ -184,17 +191,21 @@ function resolveParenthesis(typeAnnotation: bt.TSType): bt.TSType {
 function describeTypeAndValuesFromPath(
 	propPropertiesPath: NodePath<bt.TSAsExpression>,
 	propDescriptor: PropDescriptor
-) {
+): string {
 	// values
 	const values = getValuesFromTypePath(propPropertiesPath.node.typeAnnotation)
 
+	// if it has an "as" annotation defining values
 	if (values) {
 		propDescriptor.values = values
 		propDescriptor.type = { name: 'string' }
 	} else {
-		// type
+		// Get natural type from its identifier
+		// (classic way)
+		// type: Object
 		propDescriptor.type = getTypeFromTypePath(propPropertiesPath)
 	}
+	return propDescriptor.type.name
 }
 
 function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression>): { name: string; func?: boolean } {
@@ -217,6 +228,12 @@ function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression>): { name: str
 	}
 }
 
+/**
+ * When a prop is type annotated with the "as" keyword,
+ * It means that its possible values can be extracted from it
+ * this extracts the values from the as
+ * @param typeAnnotation the as annotation
+ */
 function getValuesFromTypePath(typeAnnotation: bt.TSType): string[] | undefined {
 	if (bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters) {
 		const type = resolveParenthesis(typeAnnotation.typeParameters.params[0])
