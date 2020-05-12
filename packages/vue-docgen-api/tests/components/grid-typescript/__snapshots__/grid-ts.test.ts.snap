@@ -166,10 +166,8 @@ Object {
     },
     Object {
       "defaultValue": Object {
-        "func": true,
-        "value": "function() {
-    return [{}]
-}",
+        "func": false,
+        "value": "[{}]",
       },
       "name": "images",
       "type": Object {

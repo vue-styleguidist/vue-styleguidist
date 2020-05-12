@@ -146,10 +146,8 @@ Object {
     },
     Object {
       "defaultValue": Object {
-        "func": true,
-        "value": "() => {
-    return { message: 'hello' }
-}",
+        "func": false,
+        "value": "{ message: 'hello' }",
       },
       "description": "Object or array defaults must be returned from
 a factory function",
