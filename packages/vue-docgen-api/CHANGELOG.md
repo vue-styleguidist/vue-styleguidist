@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.22.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.1...v4.22.2) (2020-05-12)
+
+
+### Bug Fixes
+
+* **docgen:** error when parsing default prop ([1fe3dfe](https://github.com/vue-styleguidist/vue-styleguidist/commit/1fe3dfeeaccdf2c1d5d6b2033b0b1ac8db510103))
+
+
+
+
+
 ## [4.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.0...v4.22.1) (2020-05-12)
 
 
