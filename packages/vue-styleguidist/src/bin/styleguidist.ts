@@ -55,9 +55,11 @@ try {
 	const conf = getConfig(argv.config, binutils.updateConfig)
 
 	if (isPromise(conf)) {
-		conf.then(runit)
+		conf.then(runIt).catch(e => {
+			throw e
+		})
 	} else {
-		runit(conf)
+		runIt(conf)
 	}
 } catch (err) {
 	if (err instanceof StyleguidistError) {
@@ -69,7 +71,7 @@ try {
 	}
 }
 
-function runit(conf: SanitizedStyleguidistConfig) {
+function runIt(conf: SanitizedStyleguidistConfig) {
 	config = conf
 	binutils.verbose('Styleguidist config:', config)
 
