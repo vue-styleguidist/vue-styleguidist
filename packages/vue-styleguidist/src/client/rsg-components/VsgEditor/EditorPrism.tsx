@@ -20,12 +20,11 @@ import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
+			if (!code) {
+				return ''
+			}
 			const scriptCode = getScript(code, jsxInExamples)
-			const scriptCodeHighlighted = prismHighlight(
-				scriptCode,
-				languages[jsxInExamples ? 'jsx' : 'js'],
-				lang
-			)
+			const scriptCodeHighlighted = prismHighlight(scriptCode, languages[jsxInExamples ? 'jsx' : 'js'], lang)
 			if (code.length === scriptCode.length) {
 				return scriptCodeHighlighted
 			}
@@ -83,10 +82,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 
 	state = { code: this.props.code, prevCode: this.props.code }
 
-	static getDerivedStateFromProps(
-		nextProps: UnconfiguredEditorProps,
-		prevState: { code: string; prevCode: string }
-	) {
+	static getDerivedStateFromProps(nextProps: UnconfiguredEditorProps, prevState: { code: string; prevCode: string }) {
 		const { code } = nextProps
 		if (prevState.prevCode !== code) {
 			return {
@@ -97,10 +93,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		return null
 	}
 
-	shouldComponentUpdate(
-		nextProps: UnconfiguredEditorProps,
-		nextState: { code: string; prevCode: string }
-	) {
+	shouldComponentUpdate(nextProps: UnconfiguredEditorProps, nextState: { code: string; prevCode: string }) {
 		return nextState.code !== this.state.code
 	}
 

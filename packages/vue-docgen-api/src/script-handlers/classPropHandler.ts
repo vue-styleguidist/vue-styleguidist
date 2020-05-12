@@ -93,7 +93,11 @@ export default async function classPropHandler(
 						if (!propPath.node.typeAnnotation) {
 							describeType(propsPath, propDescriptor)
 						}
-						describeDefault(propsPath, propDescriptor)
+						describeDefault(
+							propsPath,
+							propDescriptor,
+							(propDescriptor.type && propDescriptor.type.name) || ''
+						)
 						describeRequired(propsPath, propDescriptor)
 					}
 				}
