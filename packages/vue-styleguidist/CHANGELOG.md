@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.22.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.2...v4.22.3) (2020-05-12)
+
+
+### Bug Fixes
+
+* throw when errors in promise ([7b534df](https://github.com/vue-styleguidist/vue-styleguidist/commit/7b534df46ea7ca6587e9444ba1299cdc0ecd64d5))
+
+
+
+
+
 ## [4.22.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.1...v4.22.2) (2020-05-12)
 
 **Note:** Version bump only for package vue-styleguidist
