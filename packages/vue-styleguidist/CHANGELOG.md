@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.0...v4.22.1) (2020-05-12)
+
+
+### Bug Fixes
+
+* allow default example with custom format ([7ac7f57](https://github.com/vue-styleguidist/vue-styleguidist/commit/7ac7f57f0359be7c2b19017c6a8a4a1616c3cfd8))
+* only display warning when file exists ([cfe1f9f](https://github.com/vue-styleguidist/vue-styleguidist/commit/cfe1f9faa9f109413ee7f59f611fed9a2d37579e))
+* protect editor for null code ([8c428a4](https://github.com/vue-styleguidist/vue-styleguidist/commit/8c428a47fd11763f1762cca91996813ccb774211))
+
+
+
+
+
 # [4.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.21.0...v4.22.0) (2020-05-11)
 
 

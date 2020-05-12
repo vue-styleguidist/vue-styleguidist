@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.0...v4.22.1) (2020-05-12)
+
+
+### Bug Fixes
+
+* **docgen:** correctly extract default values ([349ad81](https://github.com/vue-styleguidist/vue-styleguidist/commit/349ad812894120e1c4816df55a427a8724b99b8c))
+* avoid error when multiple return in a default ([3e4c53d](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e4c53d8836c40d826c26de768e4b41e8d3b4205))
+* **docgen:** object Methods should return regular functions ([79a7fa2](https://github.com/vue-styleguidist/vue-styleguidist/commit/79a7fa2271d93dc71c6651e262ea25a244ee656a))
+
+
+
+
+
 # [4.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.20.0...v4.21.0) (2020-05-09)
 
 
