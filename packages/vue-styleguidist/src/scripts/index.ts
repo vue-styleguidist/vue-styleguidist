@@ -67,7 +67,9 @@ export default function(
 	})
 
 	if (isPromise(configInternal)) {
-		return configInternal.then(conf => exportBuildUtils(conf))
+		return configInternal.then(conf => exportBuildUtils(conf)).catch(e => {
+			throw e
+		})
 	} else {
 		return exportBuildUtils(configInternal)
 	}
