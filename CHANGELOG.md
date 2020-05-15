@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.0...v4.23.1) (2020-05-15)
+
+
+### Bug Fixes
+
+* only collapse subcomponents when > 3 ([76b4331](https://github.com/vue-styleguidist/vue-styleguidist/commit/76b43316a63d40027e2345ee855d9aee25836493))
+
+
+
+
+
 # [4.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.3...v4.23.0) (2020-05-15)
 
 
