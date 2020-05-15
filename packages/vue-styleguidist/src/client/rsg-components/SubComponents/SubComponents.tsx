@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import * as Rsg from 'react-styleguidist'
+import Link from 'rsg-components/Link'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
 
 export interface SubComponentsProps {
@@ -9,7 +10,7 @@ export interface SubComponentsProps {
 }
 
 const styles = ({ space, fontFamily }: Rsg.Theme) => ({
-	requires: {
+	root: {
 		isolate: false,
 		fontFamily: fontFamily.base,
 		overflow: 'hidden',
@@ -17,22 +18,46 @@ const styles = ({ space, fontFamily }: Rsg.Theme) => ({
 		textOverflow: 'ellipsis',
 		marginBottom: space[3]
 	},
-	requiresOpen: {
+	toggler: {
 		isolate: false,
-		overflow: 'visible',
-		whiteSpace: 'normal'
+		cursor: 'pointer'
+	},
+	title: {
+		isolate: false,
+		marginRight: space[1]
+	},
+	open: {
+		isolate: false,
+		display: 'flex',
+		flexWrap: 'wrap'
+	},
+	element: {
+		// To override the isolation of link we need to wrap
+		// this selector
+		'$root &': {
+			isolate: false,
+			marginRight: space[1]
+		}
 	}
 })
 
 export const SubComponents: React.FC<SubComponentsProps & JssInjectedProps> = ({ classes, ...props }) => {
-	const [requiresOpen, setOpen] = useState(false)
+	// only collapse if there is more than 3 requires
+	const collapsibleSubComponents = props.subComponents.length > 3
+	const [open, setOpen] = useState(!collapsibleSubComponents)
 	return (
-		<div className={clsx(classes.requires, requiresOpen && classes.requiresOpen)}>
-			<b onClick={() => setOpen(!requiresOpen)}>{requiresOpen ? '-' : '+'} Requires </b>
+		<div className={clsx(classes.root, open && classes.open)}>
+			<b
+				onClick={() => setOpen(!collapsibleSubComponents || !open)}
+				className={clsx(classes.title, collapsibleSubComponents && classes.toggler)}
+			>
+				{collapsibleSubComponents ? (open ? '-' : '+') : ''} Requires
+				{collapsibleSubComponents ? ` (${props.subComponents.length})` : ''}
+			</b>
 			{props.subComponents.map((subComponent, i) => (
-				<a key={i} href={subComponent.url}>
+				<Link key={i} href={subComponent.url} className={classes.element}>
 					{subComponent.name}
-				</a>
+				</Link>
 			))}
 		</div>
 	)
