@@ -6,7 +6,7 @@ exports[`JsDoc should render Markdown 1`] = `
     class="vsg-jsdoc-tag rsg--wrapper-0"
   >
     <span
-      class="vsg-tag-name rsg--name-1"
+      class="vsg-tag-name rsg--name-2"
     >
       Deprecated
       :
@@ -15,11 +15,11 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
       >
         Use 
         <em
-          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8 rsg--em-10"
+          class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9 rsg--em-11"
         >
           another
         </em>
@@ -31,7 +31,7 @@ exports[`JsDoc should render Markdown 1`] = `
     class="vsg-jsdoc-tag rsg--wrapper-0"
   >
     <span
-      class="vsg-tag-name rsg--name-1"
+      class="vsg-tag-name rsg--name-2"
     >
       See
       :
@@ -41,20 +41,20 @@ exports[`JsDoc should render Markdown 1`] = `
     >
       <div>
         <span
-          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+          class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
         >
           <a
-            class="rsg--link-13"
+            class="rsg--link-14"
             href="#TestLink"
           >
             See 1
           </a>
         </span>
         <span
-          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+          class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
         >
           <a
-            class="rsg--link-13"
+            class="rsg--link-14"
             href="#TestLink2"
           >
             See 2
@@ -67,7 +67,7 @@ exports[`JsDoc should render Markdown 1`] = `
     class="vsg-jsdoc-tag rsg--wrapper-0"
   >
     <span
-      class="vsg-tag-name rsg--name-1"
+      class="vsg-tag-name rsg--name-2"
     >
       Link
       :
@@ -76,10 +76,10 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
       >
         <a
-          class="rsg--link-13"
+          class="rsg--link-14"
           href="#TestLink"
         >
           Link 1
@@ -91,7 +91,7 @@ exports[`JsDoc should render Markdown 1`] = `
     class="vsg-jsdoc-tag rsg--wrapper-0"
   >
     <span
-      class="vsg-tag-name rsg--name-1"
+      class="vsg-tag-name rsg--name-2"
     >
       Author
       :
@@ -100,17 +100,17 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
       >
         <a
-          class="rsg--link-13"
+          class="rsg--link-14"
           href="#TestLink"
         >
           Author 1
         </a>
         , 
         <a
-          class="rsg--link-13"
+          class="rsg--link-14"
           href="#TestLink2"
         >
           Author 2
@@ -122,7 +122,7 @@ exports[`JsDoc should render Markdown 1`] = `
     class="vsg-jsdoc-tag rsg--wrapper-0"
   >
     <span
-      class="vsg-tag-name rsg--name-1"
+      class="vsg-tag-name rsg--name-2"
     >
       Version
       :
@@ -131,7 +131,7 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
       >
         2.0.0
       </span>
@@ -141,7 +141,7 @@ exports[`JsDoc should render Markdown 1`] = `
     class="vsg-jsdoc-tag rsg--wrapper-0"
   >
     <span
-      class="vsg-tag-name rsg--name-1"
+      class="vsg-tag-name rsg--name-2"
     >
       Since
       :
@@ -150,7 +150,7 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-4 rsg--inheritSize-5 rsg--baseColor-9"
       >
         1.0.0
       </span>

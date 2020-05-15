@@ -43,16 +43,14 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 		const { component, classes } = this.props
 
 		const getFinalUrl = (slug: string, depth: number) =>
-			pagePerSection
-				? getUrl({ slug, id: depth !== 1, takeHash: true })
-				: getUrl({ slug, anchor: true })
+			pagePerSection ? getUrl({ slug, id: depth !== 1, takeHash: true }) : getUrl({ slug, anchor: true })
 
 		if (component.subComponents && component.props) {
-			const links = component.subComponents.map(
-				c => `[${c.visibleName}](${getFinalUrl(c.slug || '', this.props.depth)})`
-			)
-			component.props.description =
-				`**Requires** ${links.join(', ')}\n\n` + (component.props.description || '')
+			const links = component.subComponents.map(c => ({
+				name: c.visibleName,
+				url: getFinalUrl(c.slug || '', this.props.depth)
+			}))
+			component.props.tags = { ...component.props.tags, subComponents: links as any }
 		}
 
 		const parentHref = component.props ? getFinalUrl(component.slug || '', this.props.depth) : ''
@@ -70,10 +68,7 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 								visibleName: component.visibleName
 							}
 							return (
-								<DocumentedComponentContext.Provider
-									key={(c.props && c.props.displayName) || i}
-									value={c}
-								>
+								<DocumentedComponentContext.Provider key={(c.props && c.props.displayName) || i} value={c}>
 									<RsgReactComponent {...this.props} component={c} depth={this.props.depth + 1} />
 								</DocumentedComponentContext.Provider>
 							)

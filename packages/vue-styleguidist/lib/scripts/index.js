@@ -48,6 +48,8 @@ function _default(config, updateConfig) {
   if ((0, _isPromise["default"])(configInternal)) {
     return configInternal.then(function (conf) {
       return exportBuildUtils(conf);
+    })["catch"](function (e) {
+      throw e;
     });
   } else {
     return exportBuildUtils(configInternal);
