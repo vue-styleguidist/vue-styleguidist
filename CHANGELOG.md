@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.3...v4.23.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* default editor font-family ([909a47f](https://github.com/vue-styleguidist/vue-styleguidist/commit/909a47f9d888d9f1411ef63ed1b5a62f602823e6))
+* issues with deprecated and requires ([efa53c9](https://github.com/vue-styleguidist/vue-styleguidist/commit/efa53c98d8fefdcc51ffeee65a99948e1f7700eb)), closes [#870](https://github.com/vue-styleguidist/vue-styleguidist/issues/870) [#871](https://github.com/vue-styleguidist/vue-styleguidist/issues/871)
+
+
+### Features
+
+* **docgen:** allow to have more than 1 values tag ([3e84005](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e840058615aea163e5ca5e8f3ab1ec9324ffd4a))
+
+
+
+
+
 ## [4.22.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.2...v4.22.3) (2020-05-12)
 
 
