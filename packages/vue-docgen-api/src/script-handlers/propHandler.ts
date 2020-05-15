@@ -347,10 +347,10 @@ export function describeDefault(
 				return
 			}
 		}
+
 		// otherwise the rest should return whatever there is
 		if (defaultValueIsProp) {
 			// in this case, just return the rawValue
-			/* TODO: add correct type info here ↓ */
 			const defaultPath = defaultArray[0].get('value')
 			const rawValue = recast.print(defaultPath).code
 			propDescriptor.defaultValue = {
@@ -359,13 +359,13 @@ export function describeDefault(
 			}
 			return
 		}
+
 		if (defaultValueIsObjectMethod) {
 			// in this case, just the function needs to be reconstructed a bit
-			/* TODO: add correct type info here ↓ */
 			const defaultObjectMethod = defaultArray[0].get('value')
 			const paramNodeArray = defaultObjectMethod.node.params
 			const params = paramNodeArray.map((p: any) => p.name).join(', ')
-			/* TODO: add correct type info here ↓ */
+
 			const defaultBlockStatement = defaultArray[0].get('body')
 			const rawValue = recast.print(defaultBlockStatement).code
 			// the function should be reconstructed as "old-school" function, because they have the same handling of "this", whereas arrow functions do not.
@@ -382,11 +382,16 @@ export function describeDefault(
 
 export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 	if (propDescriptor.tags && propDescriptor.tags['values']) {
-		const description = ((propDescriptor.tags['values'][0] as any) as ParamTag).description
-		const choices = typeof description === 'string' ? description.split(',') : undefined
-		if (choices) {
-			propDescriptor.values = choices.map((v: string) => v.trim())
-		}
+		const values = propDescriptor.tags['values'].map(tag => {
+			const description = ((tag as any) as ParamTag).description
+			const choices = typeof description === 'string' ? description.split(',') : undefined
+			if (choices) {
+				return choices.map((v: string) => v.trim())
+			}
+			return []
+		})
+		propDescriptor.values = ([] as string[]).concat(...values)
+
 		delete propDescriptor.tags['values']
 	}
 }

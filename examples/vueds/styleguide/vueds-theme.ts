@@ -25,7 +25,7 @@ const theme: ThemeConfig = {
 	sidebarWidth: 240,
 	fontFamily: {
 		base: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
-		monospace: ['Consolas', "'Liberation Mono'", 'Menlo', 'monospace']
+		monospace: ['Menlo', 'monospace']
 	},
 	fontSize: {
 		h4: 18

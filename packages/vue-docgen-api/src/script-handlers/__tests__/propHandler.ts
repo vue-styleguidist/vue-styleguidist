@@ -283,12 +283,12 @@ describe('propHandler', () => {
             test: {
               type: Array,
               default: function () {
-				if (logger.mounted) {
-				  return []
-				} else {
-				  return undefined
-				}
-			  }
+                if (logger.mounted) {
+                  return []
+                } else {
+                  return undefined
+                }
+              }
             }
           }
         }
@@ -308,12 +308,12 @@ describe('propHandler', () => {
             test: {
               type: Array,
               default: () => {
-				if (logger.mounted) {
-				  return []
-				} else {
-				  return undefined
-				}
-			  }
+                if (logger.mounted) {
+                  return []
+                } else {
+                  return undefined
+                }
+              }
             }
           }
         }
@@ -350,18 +350,18 @@ describe('propHandler', () => {
 			'if prop is of type %p,\n\t given %p as default,\n\t should parse as %p,\n\t comment types are %p',
 			(propType, input, output, commentsBlockType) => {
 				const src = `
-				export default {
-				  props: {
-					/**
-					 * ${commentsBlockType.length ? `@type ${commentsBlockType}` : ''}
-					 */
-					test: {
-					  type: ${propType},
-					  ${input}
-					}
-				  }
-				}
-				`
+                export default {
+                  props: {
+                    /**
+                     * ${commentsBlockType.length ? `@type ${commentsBlockType}` : ''}
+                     */
+                    test: {
+                      type: ${propType},
+                      ${input}
+                    }
+                  }
+                }
+                `
 				const testParsed = parserTest(src)
 				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
 				expect(defaultValue).toMatchObject({ value: output })
@@ -485,20 +485,21 @@ describe('propHandler', () => {
 			const src = `
   export default {
     props: {
-    /**
-     * color of the component
-     * @values dark, light
-     * @author me
-     */
-    color: {
-      type: string
-    }
+        /**
+         * color of the component
+         * @values dark, light
+         * @values red, blue
+         * @author me
+         */
+        color: {
+            type: String
+        }
     }
   }
   `
 			tester(src, {
 				description: 'color of the component',
-				values: ['dark', 'light'],
+				values: ['dark', 'light', 'red', 'blue'],
 				tags: {
 					author: [
 						{

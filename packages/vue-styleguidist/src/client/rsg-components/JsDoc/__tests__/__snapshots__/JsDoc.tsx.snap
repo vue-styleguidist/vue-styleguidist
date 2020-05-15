@@ -9,17 +9,16 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Deprecated
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
       >
         Use 
         <em
-          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8 rsg--em-10"
+          class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10 rsg--em-12"
         >
           another
         </em>
@@ -34,27 +33,26 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       See
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
     >
       <div>
         <span
-          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+          class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
         >
           <a
-            class="rsg--link-13"
+            class="rsg--link-15"
             href="#TestLink"
           >
             See 1
           </a>
         </span>
         <span
-          class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+          class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
         >
           <a
-            class="rsg--link-13"
+            class="rsg--link-15"
             href="#TestLink2"
           >
             See 2
@@ -70,16 +68,15 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Link
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
       >
         <a
-          class="rsg--link-13"
+          class="rsg--link-15"
           href="#TestLink"
         >
           Link 1
@@ -94,23 +91,22 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Author
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
       >
         <a
-          class="rsg--link-13"
+          class="rsg--link-15"
           href="#TestLink"
         >
           Author 1
         </a>
         , 
         <a
-          class="rsg--link-13"
+          class="rsg--link-15"
           href="#TestLink2"
         >
           Author 2
@@ -125,13 +121,12 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Version
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
       >
         2.0.0
       </span>
@@ -144,13 +139,12 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Since
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
     >
       <span
-        class="rsg--text-3 rsg--inheritSize-4 rsg--baseColor-8"
+        class="rsg--text-5 rsg--inheritSize-6 rsg--baseColor-10"
       >
         1.0.0
       </span>

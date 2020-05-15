@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import * as Rsg from 'react-styleguidist'
 import map from 'lodash/map'
@@ -16,27 +17,42 @@ export interface TagProps {
 	version?: Param[]
 	since?: Param[]
 	throws?: Param[]
+	subComponents?: { name: string; url: string }[]
 }
 
-const styles = ({ space, color }: Rsg.Theme) => ({
+const styles = ({ space, color, fontFamily }: Rsg.Theme) => ({
 	wrapper: {
+		isolate: false,
 		color: color.base,
 		fontSize: 'inherit',
 		lineHeight: 1.5
 	},
 	name: {
 		marginRight: space[1]
+	},
+	requires: {
+		isolate: false,
+		fontFamily: fontFamily.base,
+		overflow: 'hidden',
+		whiteSpace: 'nowrap',
+		textOverflow: 'ellipsis',
+		marginBottom: space[3]
+	},
+	requiresOpen: {
+		isolate: false,
+		overflow: 'visible',
+		whiteSpace: 'normal'
 	}
 })
 
 const list = (array: Param[]) => array.map(item => item.description).join(', ')
 const paragraphs = (array: Param[]) => array.map(item => item.description).join('\n\n')
 
-const fields: Record<keyof Omit<TagProps, 'throws'>, (v: Param[]) => string> = {
-	deprecated: (value: Param[]) => `${value[0].description}`,
+const fields: Record<keyof Omit<TagProps, 'throws' | 'subComponents'>, (v: Param[]) => string> = {
+	deprecated: (value: Param[]) => (typeof value[0].description === 'string' ? `${value[0].description}` : ''),
 	see: (value: Param[]) => paragraphs(value),
 	link: (value: Param[]) => paragraphs(value),
-	author: (value: Param[]) => list(value),
+	author: (value: Param[]) => `${list(value)}`,
 	version: (value: Param[]) => `${value[0].description}`,
 	since: (value: Param[]) => `${value[0].description}`
 }
@@ -49,25 +65,32 @@ interface JsDocRendererProps {
 
 const JsDocRenderer = ({ classes, field, children }: JsDocRendererProps) => (
 	<div className={`vsg-jsdoc-tag ${classes.wrapper}`} key={field}>
-		<span className={`vsg-tag-name ${classes.name}`}>{capitalize(field)}:</span>
+		<span className={`vsg-tag-name ${classes.name}`}>{capitalize(field)}</span>
 		<span className={`vsg-tag-value ${classes.value}`}>{children}</span>
 	</div>
 )
 
 export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props }) => {
+	const [requiresOpen, setOpen] = useState(false)
 	return (
 		<>
+			{props.subComponents && (
+				<div className={clsx(classes.requires, requiresOpen && classes.requiresOpen)}>
+					<b onClick={() => setOpen(!requiresOpen)}>{requiresOpen ? '-' : '+'} Requires </b>
+					{props.subComponents.map((subComponent, i) => (
+						<a key={i} href={subComponent.url}>
+							{subComponent.name}
+						</a>
+					))}
+				</div>
+			)}
 			{props.throws &&
 				props.throws.map((throws, i) => (
 					<JsDocRenderer key={i} field="throws" classes={classes}>
 						<Argument
 							name=""
 							{...throws}
-							description={
-								typeof throws.description === 'boolean'
-									? throws.description.toString()
-									: throws.description
-							}
+							description={typeof throws.description === 'boolean' ? throws.description.toString() : throws.description}
 						/>
 					</JsDocRenderer>
 				))}
@@ -95,4 +118,4 @@ JsDoc.propTypes = {
 	throws: PropTypes.array
 }
 
-export default Styled<TagProps & JssInjectedProps>(styles)(JsDoc)
+export default Styled<TagProps & JssInjectedProps>(styles as any)(JsDoc)
