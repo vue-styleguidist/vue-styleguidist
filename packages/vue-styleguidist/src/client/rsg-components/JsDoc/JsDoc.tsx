@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import clsx from 'clsx'
+import React from 'react'
 import PropTypes from 'prop-types'
 import * as Rsg from 'react-styleguidist'
 import map from 'lodash/map'
@@ -8,6 +7,7 @@ import { Param } from 'vue-docgen-api'
 import Markdown from 'rsg-components/Markdown'
 import Argument from 'rsg-components/Argument'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import SubComponents from 'rsg-components/SubComponents'
 
 export interface TagProps {
 	deprecated?: Param[]
@@ -22,26 +22,12 @@ export interface TagProps {
 
 const styles = ({ space, color, fontFamily }: Rsg.Theme) => ({
 	wrapper: {
-		isolate: false,
 		color: color.base,
 		fontSize: 'inherit',
 		lineHeight: 1.5
 	},
 	name: {
 		marginRight: space[1]
-	},
-	requires: {
-		isolate: false,
-		fontFamily: fontFamily.base,
-		overflow: 'hidden',
-		whiteSpace: 'nowrap',
-		textOverflow: 'ellipsis',
-		marginBottom: space[3]
-	},
-	requiresOpen: {
-		isolate: false,
-		overflow: 'visible',
-		whiteSpace: 'normal'
 	}
 })
 
@@ -71,19 +57,9 @@ const JsDocRenderer = ({ classes, field, children }: JsDocRendererProps) => (
 )
 
 export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props }) => {
-	const [requiresOpen, setOpen] = useState(false)
 	return (
 		<>
-			{props.subComponents && (
-				<div className={clsx(classes.requires, requiresOpen && classes.requiresOpen)}>
-					<b onClick={() => setOpen(!requiresOpen)}>{requiresOpen ? '-' : '+'} Requires </b>
-					{props.subComponents.map((subComponent, i) => (
-						<a key={i} href={subComponent.url}>
-							{subComponent.name}
-						</a>
-					))}
-				</div>
-			)}
+			{props.subComponents && <SubComponents subComponents={props.subComponents} />}
 			{props.throws &&
 				props.throws.map((throws, i) => (
 					<JsDocRenderer key={i} field="throws" classes={classes}>
@@ -118,4 +94,4 @@ JsDoc.propTypes = {
 	throws: PropTypes.array
 }
 
-export default Styled<TagProps & JssInjectedProps>(styles as any)(JsDoc)
+export default Styled<TagProps & JssInjectedProps>(styles)(JsDoc)
