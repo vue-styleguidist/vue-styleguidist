@@ -367,22 +367,6 @@ describe('propHandler', () => {
 				expect(defaultValue).toMatchObject({ value: output })
 			}
 		)
-
-		it('test', () => {
-			const src = `
-                export default {
-                  props: {
-                    test: {
-                      type: String,
-                      default: 'test',
-                    }
-                  }
-                }
-                `
-			const testParsed = parserTest(src)
-			const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
-			expect(defaultValue).toMatchObject({ value: 'test' })
-		})
 	})
 
 	describe('description', () => {
