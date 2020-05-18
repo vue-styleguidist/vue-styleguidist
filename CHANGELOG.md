@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.1...v4.23.2) (2020-05-18)
+
+
+### Bug Fixes
+
+* protect async config against parsing error ([95c6c09](https://github.com/vue-styleguidist/vue-styleguidist/commit/95c6c0969946ddb057da8d5823852d12c42f0f07))
+
+
+
+
+
 ## [4.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.0...v4.23.1) (2020-05-15)
 
 
