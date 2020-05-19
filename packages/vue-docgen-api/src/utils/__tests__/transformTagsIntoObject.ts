@@ -26,4 +26,15 @@ describe('transformTagsIntoObject', () => {
 			]
 		})
 	})
+
+	it('should parse custom tags', () => {
+		expect(transformTagsIntoObject([{ title: 'asdf', content: 'qwerty' }])).toMatchObject({
+			asdf: [
+				{
+					title: 'asdf',
+					description: 'qwerty'
+				}
+			]
+		})
+	})
 })

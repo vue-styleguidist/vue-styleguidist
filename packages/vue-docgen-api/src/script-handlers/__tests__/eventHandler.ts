@@ -208,4 +208,45 @@ describe('eventHandler', () => {
 		const def = parse(src)
 		expect(() => eventHandler(documentation, def.component as any, def.ast)).not.toThrow()
 	})
+
+	it('should allow forced events', () => {
+		const src = `
+	export default {
+		methods: {
+			/** 
+			 * Define the event just before the function block
+			 *
+			 * @event updating
+			 * @property { String } prop1 - first prop given by the event
+			 */
+			/** 
+			 * Some comment for the function
+			 * @fires updating
+			 * @arg { String } name updated property name
+			 * @arg newValue new value that we want to update
+			 */
+			onUpdate (name, newValue) {
+				// some external method, for example from a method
+				// (bind to the Vue instance) provided by a standard js class
+			}
+		}	
+	}`
+		const def = parse(src)
+		if (def.component) {
+			eventHandler(documentation, def.component, def.ast)
+		}
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('updating')
+		expect(mockEventDescriptor).toMatchObject({
+			name: 'success',
+			description: 'Define the event just before the function block',
+			properties: [
+				{
+					name: 'prop1',
+					type: {
+						names: [' String ']
+					}
+				}
+			]
+		})
+	})
 })

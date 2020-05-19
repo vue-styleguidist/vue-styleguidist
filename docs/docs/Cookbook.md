@@ -23,37 +23,42 @@
 
 ## How to add third-party plugins to the style guide?
 
-If you need to load vue plugins from a third party. You can add it, creating a .js file that installs the plugins and then adds it into the `styleguide.config.js` file
+Styleguidist does not load a `main.js` file. To install plugins and component libraries, you will need to require then somewhere else.
 
-Use [require](/Configuration.md#require) option:
+First create a `.js` file that installs the plugins. Then add it into the `styleguide.config.js` file [require](/Configuration.md#require) option:
 
-```javascript
-// styleguide/global.requires.js
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import VeeValidate from 'vee-validate'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-
-Vue.use(VueI18n)
-Vue.use(VeeValidate)
-Vue.use(Vuetify)
-```
+`styleguide.config.js`
 
 ```javascript
-// styleguide.config.js
 module.exports = {
   require: [path.join(__dirname, 'styleguide/global.requires.js')]
 }
 ```
 
-If you need to change the root component of each preview example, you can change the root component of the preview. Creating a .js file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
+`styleguide/global.requires.js`
+
+```javascript
+import Vue from 'vue'
+import VeeValidate from 'vee-validate'
+import VueI18n from 'vue-i18n'
+// import full version fo vuetify (see NOTE)
+import Vuetify from 'vuetify'
+// get the exported options from the plugin to avoid rewriting them
+import { opts } from '../src/plugins/vuetify'
+
+Vue.use(VueI18n)
+Vue.use(VeeValidate)
+Vue.use(Vuetify, opts)
+```
+
+If you need to change the root component of each preview example, you can change the root component of the preview. Creating a `.js` file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
 
 Use [renderRootJsx](/Configuration.md#renderrootjsx) option:
 
 ```javascript
 // config/styleguide.root.js
 import VueI18n from 'vue-i18n'
+import Vuetify from 'vuetify'
 import messages from './i18n'
 
 const i18n = new VueI18n({
@@ -65,17 +70,12 @@ export default previewComponent => {
   // https://vuejs.org/v2/guide/render-function.html
   return {
     i18n,
+    // let's not forget to add all necessary info to
+    // each vue app root about vuetify
+    vuetify: new Vuetify(),
     render(createElement) {
       // v-app to support vuetify plugin
-      return createElement(
-        'v-app',
-        {
-          props: {
-            id: 'v-app'
-          }
-        },
-        [createElement(previewComponent)]
-      )
+      return createElement('v-app', [createElement(previewComponent)])
     }
   }
 }
@@ -89,6 +89,8 @@ module.exports = {
 ```
 
 See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuetify).
+
+**NOTE** Since Styleguidist creates one root per example (for isolation), installing Vuetify with the default optimized way will not work. Instead, you should prefer installing it globally by following the setup above.
 
 ## How to add vuex to the style guide?
 
@@ -181,16 +183,48 @@ module.exports = {
 
 ## How to hide some components in a style guide but make them available in examples?
 
-Enable [skipComponentsWithoutExample](/Configuration.md#skipcomponentswithoutexample) option and do not add example file (`Readme.md` by default) to components you want to ignore.
+Use the `require` option to register them in advance. And ignore them in your
 
-Require these components in your examples:
+In `styleguide.config.js` set the require option to load a file
 
-```jsx
-const Vue = require('vue').default
-const Button = require('./Button.vue').default
-Vue.component('Button', Button)
+```js
+module.exports = {
+  require: ['./docs/install.components.js'],
+  // avoid loading components that start with _
+  components: 'src/components/**/[a-zA-Z]*.vue'
+}
+```
 
-<Button>Push Me</Button>
+Then in `docs/install.components.js` use require (or require.context) to load your components.
+
+```js
+import Vue from 'vue'
+import * as path from 'path'
+
+const registerAllComponents = components => {
+  // For each matching file name...
+  components.keys().forEach(fileName => {
+    // Get the component config
+    const componentConfig = components(fileName)
+
+    // get the component name from the object
+    const componentName =
+      componentConfig.default.name ||
+      componentConfig.name ||
+      path.basename(fileName, '.vue').replace(/[^0-9a-zA-Z]/, '')
+
+    // Globally register the component
+    Vue.component(
+      componentName,
+      componentConfig.default || componentConfig
+    )
+  })
+}
+
+// register all components with a file name starting with _
+registerAllComponents(
+  require.context('../src/', true, /[\\/]_.+\.vue$/)
+)
 ```
 
 ## How to add custom JavaScript and CSS or polyfills?

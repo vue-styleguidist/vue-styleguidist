@@ -6,18 +6,15 @@ const configSchema = configSchemaImport.default || configSchemaImport
 const styleguidist = vsg.default || vsg
 
 module.exports = (api, options) => {
-	api.configureWebpack(() => ({
+	api.chainWebpack(webpackConfig => {
 		// make sure that the docs blocks
 		// are ignored during normal serve & build
-		module: {
-			rules: [
-				{
-					resourceQuery: /blockType=docs/,
-					loader: 'null-loader'
-				}
-			]
-		}
-	}))
+		webpackConfig.module
+			.rule('docs')
+			.resourceQuery(/blockType=docs/)
+			.use('docs-ignore-loader')
+			.loader(require.resolve('./empty-object-loader'))
+	})
 
 	api.registerCommand(
 		'styleguidist:build',

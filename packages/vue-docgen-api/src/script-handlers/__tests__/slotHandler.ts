@@ -78,6 +78,30 @@ describe('render function slotHandler', () => {
 		done()
 	})
 
+	it('should be fine with scoped slots iand a spread parameter', async done => {
+		const src = `
+    export default {
+      render(h) {
+		const stuff = {
+            foo: 'foo',
+            bar: 'bar',
+        };
+        return h('div', [
+          this.$scopedSlots.myOtherScopedSlot({
+            ...stuff
+          })
+        ])
+      }
+    }
+    `
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('myOtherScopedSlot')
+		done()
+	})
+
 	it('should find slots in jsx render', async done => {
 		const src = `
     export default {

@@ -19,7 +19,6 @@ exports[`MethodsRenderer should render JsDoc tags 1`] = `
             class="vsg-tag-name rsg--name-0"
           >
             Since
-            :
           </span>
           <span
             class="vsg-tag-value undefined"
@@ -114,7 +113,6 @@ exports[`MethodsRenderer should render deprecated JsDoc tags 1`] = `
             class="vsg-tag-name rsg--name-0"
           >
             Deprecated
-            :
           </span>
           <span
             class="vsg-tag-value undefined"

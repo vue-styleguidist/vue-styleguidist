@@ -10,28 +10,6 @@ import Table from 'rsg-components/Table'
 import getOriginColumn from 'rsg-components/OriginColumn'
 import propStyles from '../../utils/propStyles'
 
-function renderType(type) {
-	if (!type) {
-		return 'unknown'
-	}
-	let name = type.name
-	const names = type.names
-
-	if (names) {
-		name = names.join('|')
-	}
-	switch (name) {
-		case 'arrayOf':
-			return `${type.value.name}[]`
-		case 'objectOf':
-			return `{${renderType(type.value)}}`
-		case 'instanceOf':
-			return type.value
-		default:
-			return name
-	}
-}
-
 function renderDescription(myClasses) {
 	return function renderDesc(prop) {
 		const { description, tags = {} } = prop
@@ -54,9 +32,10 @@ function renderProperties(prop) {
 			total.push({
 				name: current.name,
 				type: {
-					name: renderType(
-						total.length || current.type.names[0] !== 'undefined' ? current.type : prop.type
-					)
+					name:
+						total.length || current.type.names[0] !== 'undefined'
+							? current.type.names.join(' | ')
+							: prop.type.names.join(' | ')
 				},
 				description: current.description,
 
@@ -70,7 +49,7 @@ function renderProperties(prop) {
 			{
 				name: '<anonymous>',
 				type: {
-					name: renderType(prop.type)
+					name: prop.type.names.join(' | ')
 				}
 			}
 		]

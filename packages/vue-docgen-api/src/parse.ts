@@ -139,7 +139,9 @@ export async function parseSource(
 
 		if (docs.length === 1 && !docs[0].get('displayName')) {
 			// give a component a display name if we can
-			docs[0].set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
+			const displayName = path.basename(opt.filePath).replace(/\.\w+$/, '')
+			const dirName = path.basename(path.dirname(opt.filePath))
+			docs[0].set('displayName', displayName.toLowerCase() === 'index' ? dirName : displayName)
 		}
 	}
 

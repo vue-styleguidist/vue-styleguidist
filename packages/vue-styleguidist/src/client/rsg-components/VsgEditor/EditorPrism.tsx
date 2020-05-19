@@ -20,12 +20,11 @@ import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
+			if (!code) {
+				return ''
+			}
 			const scriptCode = getScript(code, jsxInExamples)
-			const scriptCodeHighlighted = prismHighlight(
-				scriptCode,
-				languages[jsxInExamples ? 'jsx' : 'js'],
-				lang
-			)
+			const scriptCodeHighlighted = prismHighlight(scriptCode, languages[jsxInExamples ? 'jsx' : 'js'], lang)
 			if (code.length === scriptCode.length) {
 				return scriptCodeHighlighted
 			}
@@ -40,7 +39,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 
 const styles = ({ fontFamily, fontSize, color, borderRadius }: Rsg.Theme) => ({
 	root: {
-		fontFamily: fontFamily.monospace[0],
+		fontFamily: fontFamily.monospace,
 		fontSize: fontSize.small,
 		borderRadius,
 		'& textarea': {
@@ -68,6 +67,7 @@ export interface UnconfiguredEditorProps extends JssInjectedProps {
 	jssThemedEditor: boolean
 	jsxInExamples: boolean
 	onChange: (val: string) => void
+	editorPadding?: number
 }
 
 export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
@@ -76,15 +76,13 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		code: PropTypes.string.isRequired,
 		jssThemedEditor: PropTypes.bool.isRequired,
 		jsxInExamples: PropTypes.bool.isRequired,
-		onChange: PropTypes.func.isRequired
+		onChange: PropTypes.func.isRequired,
+		editorPadding: PropTypes.number
 	}
 
 	state = { code: this.props.code, prevCode: this.props.code }
 
-	static getDerivedStateFromProps(
-		nextProps: UnconfiguredEditorProps,
-		prevState: { code: string; prevCode: string }
-	) {
+	static getDerivedStateFromProps(nextProps: UnconfiguredEditorProps, prevState: { code: string; prevCode: string }) {
 		const { code } = nextProps
 		if (prevState.prevCode !== code) {
 			return {
@@ -95,10 +93,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		return null
 	}
 
-	shouldComponentUpdate(
-		nextProps: UnconfiguredEditorProps,
-		nextState: { code: string; prevCode: string }
-	) {
+	shouldComponentUpdate(nextProps: UnconfiguredEditorProps, nextState: { code: string; prevCode: string }) {
 		return nextState.code !== this.state.code
 	}
 
@@ -110,7 +105,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 	render() {
 		const { root, jssEditor } = this.props.classes
 		const isVueSFC = isCodeVueSfc(this.state.code)
-		const { jssThemedEditor, jsxInExamples } = this.props
+		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props
 		const langClass = isVueSFC ? 'language-html' : 'language-jsx'
 		return (
 			<SimpleEditor
@@ -120,7 +115,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 				highlight={highlight(isVueSFC ? 'html' : 'vsg', jsxInExamples)}
 				// Padding should be passed via a prop (not CSS) for a proper
 				// cursor position calculation
-				padding={space[2]}
+				padding={editorPadding || space[2]}
 				// to make sure the css styles for prism are taken into account
 				preClassName={cx(!jssThemedEditor && langClass)}
 			/>

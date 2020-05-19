@@ -15,6 +15,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
 - [Methods](#methods)
+- [Composable Components](#composable-components)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
 - [Writing code examples](#writing-code-examples)
@@ -26,9 +27,7 @@ Vue styleguidist generates documentation for your components based on the commen
 
 Vue styleguidist will display the contents of your components’ JSDoc comment blocks.
 
-> **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
-
-> **Note:** You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
+> **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library. You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
 ```html
 <template>
@@ -75,7 +74,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 </script>
 ```
 
-Note the use of the @displayName tag to change the displayed name of your component
+Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come *before* the `export default` in your script tag.
 
 If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
@@ -230,6 +229,8 @@ example of a real documented slot
   <slot name="test" :icon="row.item.icon" :text="row.item.text" />
 </div>
 ```
+
+> **Note:** The docblock must be part of the **same** comment block. Multiple individual comments do not get parsed together.
 
 Another example of how to document bondings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
 

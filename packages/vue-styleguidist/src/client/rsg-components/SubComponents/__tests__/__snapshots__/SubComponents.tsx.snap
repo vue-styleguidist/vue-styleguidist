@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JsDoc should render Markdown 1`] = `
+<div>
+  <div
+    class="rsg--root-0 rsg--open-3"
+  >
+    <b
+      class="rsg--title-2"
+    >
+      
+       Requires
+      
+    </b>
+    <a
+      class="rsg--link-6 rsg--element-4"
+      href="#comp/options"
+    >
+      option
+    </a>
+  </div>
+</div>
+`;

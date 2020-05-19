@@ -8,14 +8,13 @@ const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 
 describe('tests button', () => {
-	beforeAll(async done => {
+	beforeAll(async (done) => {
 		docButton = await parse(button, {
 			'@mixins': path.resolve(__dirname, '../../mixins'),
 			'@utils': path.resolve(__dirname, '../../utils')
 		})
 		// make sure all props are always in the same order
-		docButton.props =
-			docButton.props && docButton.props.sort((p1, p2) => (p1.name < p2.name ? 1 : -1))
+		docButton.props = docButton.props?.sort((p1, p2) => (p1.name < p2.name ? 1 : -1))
 		done()
 	})
 
@@ -39,7 +38,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has authors', () => {
-			expect(docButton.tags && docButton.tags.author).toMatchInlineSnapshot(`
+			expect(docButton.tags?.author).toMatchInlineSnapshot(`
 									Array [
 									  Object {
 									    "description": "[Rafael](https://github.com/rafaesc92)",
@@ -50,7 +49,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has version', () => {
-			expect(docButton.tags && docButton.tags.version).toMatchInlineSnapshot(`
+			expect(docButton.tags?.version).toMatchInlineSnapshot(`
 									Array [
 									  Object {
 									    "description": "1.0.5",
@@ -95,17 +94,11 @@ describe('tests button', () => {
 		})
 
 		it('should give the size prop 3 valid values', () => {
-			expect(getTestDescriptor(docButton.props, 'size').values).toEqual([
-				'small',
-				'medium',
-				'large'
-			])
+			expect(getTestDescriptor(docButton.props, 'size').values).toEqual(['small', 'medium', 'large'])
 		})
 
 		it('should the component has color prop description equal The color for the button example', () => {
-			expect(getTestDescriptor(docButton.props, 'color').description).toBe(
-				'The color for the button example'
-			)
+			expect(getTestDescriptor(docButton.props, 'color').description).toBe('The color for the button example')
 		})
 
 		it('should the component has color prop default equal #333', () => {
@@ -115,7 +108,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has seventeen props', () => {
-			expect(docButton.props && docButton.props.length).toBe(17)
+			expect(docButton.props?.length).toBe(18)
 		})
 
 		it('should the component has propsAnother prop default equal "blue"', () => {
@@ -135,15 +128,11 @@ describe('tests button', () => {
 		})
 
 		it("should span has as description 'Sm breakpoint and above'", () => {
-			expect(getTestDescriptor(docButton.props, 'spanSm').description).toBe(
-				'Sm breakpoint and above'
-			)
+			expect(getTestDescriptor(docButton.props, 'spanSm').description).toBe('Sm breakpoint and above')
 		})
 
 		it("should spanMd has as description 'Md breakpoint and above'", () => {
-			expect(getTestDescriptor(docButton.props, 'spanMd').description).toBe(
-				'Md breakpoint and above'
-			)
+			expect(getTestDescriptor(docButton.props, 'spanMd').description).toBe('Md breakpoint and above')
 		})
 
 		it('should spanSm to be string|number', () => {
@@ -193,8 +182,8 @@ describe('tests button', () => {
 		it('should value default propE to be a funtion', () => {
 			const dv = getTestDescriptor(docButton.props, 'propE').defaultValue
 			const functionNoSpaceNoReturn = dv ? dv.value.replace(/[ \n\r]/g, '') : ''
-			expect(functionNoSpaceNoReturn).toEqual(`()=>{return{message:'hello'}}`)
-			expect(dv ? dv.func : false).toBeTruthy()
+			expect(functionNoSpaceNoReturn).toEqual(`{message:'hello'}`)
+			expect(dv ? dv.func : true).toBeFalsy()
 		})
 
 		it('should example3 to be number', () => {
@@ -210,9 +199,7 @@ describe('tests button', () => {
 		})
 
 		it('should value default example3 props description to be The example3 props', () => {
-			expect(getTestDescriptor(docButton.props, 'example3').description).toEqual(
-				'The example3 props'
-			)
+			expect(getTestDescriptor(docButton.props, 'example3').description).toEqual('The example3 props')
 		})
 
 		it('should onCustomClick to be ignored', () => {
@@ -231,6 +218,17 @@ describe('tests button', () => {
 
 		it('should ignore multi mixins props that are not appended', () => {
 			expect(getTestDescriptor(docButton.props, 'shouldNotBe').type).toBeUndefined()
+		})
+
+		it('should pass through any custom doclets', () => {
+			expect(getTestDescriptor(docButton.props, 'customTag').tags).toMatchObject({
+				asdf: [
+					{
+						description: 'qwerty',
+						title: 'asdf'
+					}
+				]
+			})
 		})
 	})
 
@@ -284,13 +282,11 @@ describe('tests button', () => {
 		})
 
 		it('should have a default slot.', () => {
-			expect(docButton.slots && docButton.slots.find(s => s.name === 'default')).not.toBeUndefined()
+			expect(docButton.slots && docButton.slots.find((s) => s.name === 'default')).not.toBeUndefined()
 		})
 
 		it('the default slot should have "Use this slot default" as description', () => {
-			expect(getTestDescriptor(docButton.slots, 'default').description).toBe(
-				'Use this slot default'
-			)
+			expect(getTestDescriptor(docButton.slots, 'default').description).toBe('Use this slot default')
 		})
 	})
 

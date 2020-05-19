@@ -25,20 +25,42 @@ const TS_TYPE_NAME_MAP: { [name: string]: string } = {
 	TSVoidKeyword: 'void',
 	TSUndefinedKeyword: 'undefined',
 	TSNullKeyword: 'null',
-	TSNeverKeyword: 'never'
+	TSNeverKeyword: 'never',
+	TSArrayType: 'Array',
+	TSUnionType: 'union',
+	TSIntersectionType: 'intersection'
+}
+
+function printType(t?: bt.TSType): ParamType {
+	if (!t) {
+		return { name: '' }
+	}
+
+	if (bt.isTSLiteralType(t)) {
+		return { name: JSON.stringify(t.literal.value) }
+	}
+
+	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
+		const out: ParamType = { name: t.typeName.name }
+		if (t.typeParameters?.params) {
+			out.elements = t.typeParameters.params.map(getTypeObjectFromTSType)
+		}
+		return out
+	}
+
+	if (TS_TYPE_NAME_MAP[t.type]) {
+		return { name: TS_TYPE_NAME_MAP[t.type] }
+	}
+
+	return { name: t.type }
 }
 
 function getTypeObjectFromTSType(type: bt.TSType): ParamType {
-	const name =
-		bt.isTSTypeReference(type) && bt.isIdentifier(type.typeName)
-			? type.typeName.name
-			: bt.isTSUnionType(type)
-				? type.types.map(t => TS_TYPE_NAME_MAP[t.type]).join(' | ')
-				: TS_TYPE_NAME_MAP[type.type]
-					? TS_TYPE_NAME_MAP[type.type]
-					: type.type
-
-	return { name }
+	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
+		? { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
+		: bt.isTSArrayType(type)
+		? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
+		: printType(type)
 }
 
 const FLOW_TYPE_NAME_MAP: { [name: string]: string } = {
@@ -59,7 +81,7 @@ function getTypeObjectFromFlowType(type: bt.FlowType): ParamType {
 	const name = FLOW_TYPE_NAME_MAP[type.type]
 		? FLOW_TYPE_NAME_MAP[type.type]
 		: bt.isGenericTypeAnnotation(type) && bt.isIdentifier(type.id)
-			? type.id.name
-			: type.type
+		? type.id.name
+		: type.type
 	return { name }
 }

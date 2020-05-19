@@ -9,7 +9,8 @@ import propHandler, {
 	describeDefault,
 	describeRequired,
 	describeType,
-	extractValuesFromTags
+	extractValuesFromTags,
+	getValuesFromTypeAnnotation
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
@@ -18,10 +19,7 @@ import getArgFromDecorator from '../utils/getArgFromDecorator'
  * @param documentation
  * @param path
  */
-export default async function classPropHandler(
-	documentation: Documentation,
-	path: NodePath<bt.ClassDeclaration>
-) {
+export default async function classPropHandler(documentation: Documentation, path: NodePath<bt.ClassDeclaration>) {
 	if (bt.isClassDeclaration(path.node)) {
 		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
 
@@ -35,9 +33,7 @@ export default async function classPropHandler(
 			.filter((p: NodePath) => bt.isClassProperty(p.node) && !!p.node.decorators)
 			.forEach((propPath: NodePath<bt.ClassProperty>) => {
 				const propDeco = (propPath.get('decorators') || []).filter((p: NodePath<bt.Decorator>) => {
-					const exp = bt.isCallExpression(p.node.expression)
-						? p.node.expression.callee
-						: p.node.expression
+					const exp = bt.isCallExpression(p.node.expression) ? p.node.expression.callee : p.node.expression
 					return bt.isIdentifier(exp) && exp.name === 'Prop'
 				})
 
@@ -64,9 +60,19 @@ export default async function classPropHandler(
 				}
 
 				extractValuesFromTags(propDescriptor)
-
+				let litteralType: string | undefined
 				if (propPath.node.typeAnnotation) {
-					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+					const values =
+						!!bt.isTSTypeAnnotation(propPath.node.typeAnnotation) &&
+						getValuesFromTypeAnnotation(propPath.node.typeAnnotation.typeAnnotation)
+					if (values) {
+						propDescriptor.values = values
+						propDescriptor.type = { name: 'string' }
+						litteralType = 'string'
+					} else {
+						// type
+						propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+					}
 				}
 
 				const propDecoratorPath = propDeco[0].get('expression')
@@ -76,14 +82,13 @@ export default async function classPropHandler(
 					if (propDecoratorArg && bt.isObjectExpression(propDecoratorArg.node)) {
 						const propsPath = propDecoratorArg
 							.get('properties')
-							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
-							NodePath<bt.ObjectProperty>
-						>
+							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<NodePath<bt.ObjectProperty>>
+
 						// if there is no type annotation, get it from the decorators arguments
 						if (!propPath.node.typeAnnotation) {
-							describeType(propsPath, propDescriptor)
+							litteralType = describeType(propsPath, propDescriptor)
 						}
-						describeDefault(propsPath, propDescriptor)
+						describeDefault(propsPath, propDescriptor, litteralType || '')
 						describeRequired(propsPath, propDescriptor)
 					}
 				}

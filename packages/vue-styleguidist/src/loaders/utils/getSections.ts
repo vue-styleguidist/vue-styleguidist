@@ -40,7 +40,7 @@ export default async function getSections(
 		opts.requiredComponentsList = flatten(Object.values(opts.requiredComponents))
 	}
 
-	return Promise.all(sections.map(async section => await processSection(section, opts)))
+	return Promise.all(sections.map(async (section) => await processSection(section, opts)))
 }
 
 /**
@@ -49,38 +49,36 @@ export default async function getSections(
  * and only add them as a subsection for a parent component
  * @param componentFiles all the component file paths to be analyzed
  */
-export async function getRequiredComponents(
-	componentFiles: string[],
-	jsx: boolean
-): Promise<Record<string, string[]>> {
+export async function getRequiredComponents(componentFiles: string[], jsx: boolean): Promise<Record<string, string[]>> {
 	const pathsArrays = await Promise.all(
-		componentFiles.map(async componentPath => {
+		componentFiles.map(async (componentPath) => {
 			const compDirName = path.dirname(componentPath)
 
-			const docs = await parseMulti(componentPath, {
-				scriptPreHandlers: [],
-				scriptHandlers: [ScriptHandlers.componentHandler],
-				jsx
-			})
-
-			return docs.reduce(
-				(acc: string[], doc) => {
-					if (doc.tags && doc.tags.requires) {
-						acc = acc.concat(
-							doc.tags.requires.map((t: ParamTag) =>
-								path.resolve(compDirName, t.description as string)
+			try {
+				const docs = await parseMulti(componentPath, {
+					scriptPreHandlers: [],
+					scriptHandlers: [ScriptHandlers.componentHandler],
+					jsx
+				})
+				return docs.reduce(
+					(acc: string[], doc) => {
+						if (doc.tags && doc.tags.requires) {
+							acc = acc.concat(
+								doc.tags.requires.map((t: ParamTag) => path.resolve(compDirName, t.description as string))
 							)
-						)
-					}
-					return acc
-				},
-				[componentPath]
-			)
+						}
+						return acc
+					},
+					[componentPath]
+				)
+			} catch (e) {
+				// eat the error (reported in vuedoc-loader)
+			}
 		})
 	)
 	return pathsArrays.reduce((acc: Record<string, string[]>, pa) => {
-		const parentComponent = pa[0]
-		acc[parentComponent] = pa.slice(1)
+		const parentComponent = (pa && pa[0]) || 'undefined'
+		acc[parentComponent] = (pa && pa.slice(1)) || []
 		return acc
 	}, {})
 }
@@ -132,10 +130,7 @@ export async function processSection(
 	}
 }
 
-const getSectionComponents = (
-	section: Rsg.ConfigSection,
-	opts: SectionFunctionOptions
-): Rsg.LoaderComponent[] => {
+const getSectionComponents = (section: Rsg.ConfigSection, opts: SectionFunctionOptions): Rsg.LoaderComponent[] => {
 	const { config, requiredComponentsList, requiredComponents } = opts
 	let ignore = config.ignore ? castArray(config.ignore) : []
 
@@ -147,9 +142,5 @@ const getSectionComponents = (
 		ignore = ignore.concat(requiredComponentsList)
 	}
 
-	return getComponents(
-		getComponentFiles(section.components, config.configDir, ignore),
-		config,
-		requiredComponents
-	)
+	return getComponents(getComponentFiles(section.components, config.configDir, ignore), config, requiredComponents)
 }

@@ -3,6 +3,212 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.1...v4.23.2) (2020-05-18)
+
+
+### Bug Fixes
+
+* protect async config against parsing error ([95c6c09](https://github.com/vue-styleguidist/vue-styleguidist/commit/95c6c0969946ddb057da8d5823852d12c42f0f07))
+
+
+
+
+
+## [4.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.0...v4.23.1) (2020-05-15)
+
+
+### Bug Fixes
+
+* only collapse subcomponents when > 3 ([76b4331](https://github.com/vue-styleguidist/vue-styleguidist/commit/76b43316a63d40027e2345ee855d9aee25836493))
+
+
+
+
+
+# [4.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.3...v4.23.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* default editor font-family ([909a47f](https://github.com/vue-styleguidist/vue-styleguidist/commit/909a47f9d888d9f1411ef63ed1b5a62f602823e6))
+* issues with deprecated and requires ([efa53c9](https://github.com/vue-styleguidist/vue-styleguidist/commit/efa53c98d8fefdcc51ffeee65a99948e1f7700eb)), closes [#870](https://github.com/vue-styleguidist/vue-styleguidist/issues/870) [#871](https://github.com/vue-styleguidist/vue-styleguidist/issues/871)
+
+
+### Features
+
+* **docgen:** allow to have more than 1 values tag ([3e84005](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e840058615aea163e5ca5e8f3ab1ec9324ffd4a))
+
+
+
+
+
+## [4.22.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.2...v4.22.3) (2020-05-12)
+
+
+### Bug Fixes
+
+* **docgen:** fix default parsing for [@type](https://github.com/type) props ([1fc4b03](https://github.com/vue-styleguidist/vue-styleguidist/commit/1fc4b03eb408f535f7bb8e85bb8037800aee2eb1)), closes [#866](https://github.com/vue-styleguidist/vue-styleguidist/issues/866)
+* throw when errors in promise ([7b534df](https://github.com/vue-styleguidist/vue-styleguidist/commit/7b534df46ea7ca6587e9444ba1299cdc0ecd64d5))
+
+
+
+
+
+## [4.22.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.1...v4.22.2) (2020-05-12)
+
+
+### Bug Fixes
+
+* **docgen:** error when parsing default prop ([1fe3dfe](https://github.com/vue-styleguidist/vue-styleguidist/commit/1fe3dfeeaccdf2c1d5d6b2033b0b1ac8db510103))
+
+
+
+
+
+## [4.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.0...v4.22.1) (2020-05-12)
+
+
+### Bug Fixes
+
+* **docgen:** correctly extract default values ([349ad81](https://github.com/vue-styleguidist/vue-styleguidist/commit/349ad812894120e1c4816df55a427a8724b99b8c))
+* allow default example with custom format ([7ac7f57](https://github.com/vue-styleguidist/vue-styleguidist/commit/7ac7f57f0359be7c2b19017c6a8a4a1616c3cfd8))
+* avoid error when multiple return in a default ([3e4c53d](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e4c53d8836c40d826c26de768e4b41e8d3b4205))
+* only display warning when file exists ([cfe1f9f](https://github.com/vue-styleguidist/vue-styleguidist/commit/cfe1f9faa9f109413ee7f59f611fed9a2d37579e))
+* protect editor for null code ([8c428a4](https://github.com/vue-styleguidist/vue-styleguidist/commit/8c428a47fd11763f1762cca91996813ccb774211))
+* **docgen:** object Methods should return regular functions ([79a7fa2](https://github.com/vue-styleguidist/vue-styleguidist/commit/79a7fa2271d93dc71c6651e262ea25a244ee656a))
+
+
+
+
+
+# [4.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.21.0...v4.22.0) (2020-05-11)
+
+
+### Features
+
+* allow for config to be an async function ([fb16a67](https://github.com/vue-styleguidist/vue-styleguidist/commit/fb16a678770162dcb37de5400259c2935566e5fb))
+
+
+
+
+
+# [4.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.20.0...v4.21.0) (2020-05-09)
+
+
+### Features
+
+* **docgen:** allow to force events definitions ([#854](https://github.com/vue-styleguidist/vue-styleguidist/issues/854)) ([7a2105c](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a2105c84aa9b08d1b380ea56b698aaedad1e9e8))
+
+
+
+
+
+# [4.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.5...v4.20.0) (2020-05-06)
+
+
+### Bug Fixes
+
+* **loader:** use emit error to thow parsing errors ([8978f54](https://github.com/vue-styleguidist/vue-styleguidist/commit/8978f54c85f3144eb4ab1b3a46fd65f801f8031d))
+
+
+### Features
+
+* add vue docgen simple laoder ([6d7e8f4](https://github.com/vue-styleguidist/vue-styleguidist/commit/6d7e8f49ed446fbb656616ebf87172fba459fb4a))
+* **docgen:** make values work for class type ([c003176](https://github.com/vue-styleguidist/vue-styleguidist/commit/c003176186616975afa72083efb22a1e4f45eb8a))
+* **docgen:** record [@type](https://github.com/type) values ([452ccb5](https://github.com/vue-styleguidist/vue-styleguidist/commit/452ccb5c3a708a047183a1684201c17487cf10ec))
+* **docgen:** resolve values in as types ([7648a4e](https://github.com/vue-styleguidist/vue-styleguidist/commit/7648a4e199314af25cc25183f1fd2f506da447fa))
+
+
+
+
+
+## [4.19.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.4...v4.19.5) (2020-05-02)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.19.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.3...v4.19.4) (2020-05-01)
+
+
+### Bug Fixes
+
+* **plugin:** use a custom loader to deal with docs ([57abe6e](https://github.com/vue-styleguidist/vue-styleguidist/commit/57abe6e7c4ae34f7b0c26d5a8fe834b5a8133b8b))
+
+
+
+
+
+## [4.19.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.2...v4.19.3) (2020-04-30)
+
+
+### Bug Fixes
+
+* **plugin:** update null-loader + avoid conflicts ([07f6a98](https://github.com/vue-styleguidist/vue-styleguidist/commit/07f6a98dc391a02d503c62debcfd3b8b7950d0e9))
+
+
+
+
+
+## [4.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.1...v4.19.2) (2020-04-29)
+
+
+### Bug Fixes
+
+* show - instead of undefined for untyped props ([f5a3e82](https://github.com/vue-styleguidist/vue-styleguidist/commit/f5a3e82e0d702edc8a6d57cc1db5e3e2d432cfc3)), closes [#831](https://github.com/vue-styleguidist/vue-styleguidist/issues/831)
+* **docgen:** allow functional render slots ([2b36e38](https://github.com/vue-styleguidist/vue-styleguidist/commit/2b36e38042fb4836eb8afb68df3ebf74cac3b8e3)), closes [#837](https://github.com/vue-styleguidist/vue-styleguidist/issues/837)
+* **docgen:** scoped slots bindings can spread ([d0a939c](https://github.com/vue-styleguidist/vue-styleguidist/commit/d0a939c4edb9fdd2986a5695e9894c462be01e36)), closes [#833](https://github.com/vue-styleguidist/vue-styleguidist/issues/833)
+
+
+
+
+
+## [4.19.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.0...v4.19.1) (2020-04-28)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.18.0...v4.19.0) (2020-04-24)
+
+
+### Bug Fixes
+
+* **docgen:** accept named typescript exports ([b256b17](https://github.com/vue-styleguidist/vue-styleguidist/commit/b256b174347766d31ab55fab948849037f32d930)), closes [#813](https://github.com/vue-styleguidist/vue-styleguidist/issues/813)
+* tag titles are no longer filtered out ([2a91b3e](https://github.com/vue-styleguidist/vue-styleguidist/commit/2a91b3e8c9aa2d1e1596cdf7998ed1af4cddf780))
+
+
+### Features
+
+* **docgen:** deal with index as filename ([61d28f5](https://github.com/vue-styleguidist/vue-styleguidist/commit/61d28f5ba60b36a8d8af55c4366497b369d940e5))
+
+
+
+
+
+# [4.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.17.0...v4.18.0) (2020-04-17)
+
+
+### Bug Fixes
+
+* **docgen:**  fix ts array, intersection type print ([4ca38bf](https://github.com/vue-styleguidist/vue-styleguidist/commit/4ca38bf6a6e5fd39e87276332461c24ddb01cc5a))
+* rendering of composed types ([86eb6bd](https://github.com/vue-styleguidist/vue-styleguidist/commit/86eb6bd8200c38bb4b7435d2ce3657aea1e35698))
+
+
+### Features
+
+* **docgen:** extract type values properly ([6ffd571](https://github.com/vue-styleguidist/vue-styleguidist/commit/6ffd571fe1d51048a413eb0908d873da916d3dda))
+* allow change padding of prism based editor ([d09b546](https://github.com/vue-styleguidist/vue-styleguidist/commit/d09b5466b3a230906da6d3c77ea177c1797abe72))
+* render complex types properly ([a756455](https://github.com/vue-styleguidist/vue-styleguidist/commit/a756455bf17e751d2b4f6179e79f3fc6a2920a97))
+
+
+
+
+
 # [4.17.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.16.0...v4.17.0) (2020-04-12)
 
 

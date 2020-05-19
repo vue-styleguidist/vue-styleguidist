@@ -8,7 +8,7 @@ Big pink button:
 
 ```jsx
 <Button size="large" color="warning">
-  {{$t("message.hello")}}
+  <v-icon>house</v-icon> {{$t("message.hello")}}
 </Button>
 ```
 

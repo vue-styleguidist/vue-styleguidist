@@ -12,6 +12,11 @@ module.exports = () => {
 		title,
 		description,
 		head: [
+			['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/favicons/apple-touch-icon.png' }],
+			['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/favicons/favicon-32x32.png' }],
+			['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/favicons/favicon-16x16.png' }],
+			['link', { rel: 'mask-icon', href: '/assets/favicons/safari-pinned-tab.svg', color: '#41B883' }],
+			['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/assets/favicons/favicon.ico' }],
 			['meta', { prefix: ogprefix, property: 'og:title', content: titleShare }],
 			['meta', { prefix: ogprefix, property: 'twitter:title', content: titleShare }],
 			['meta', { prefix: ogprefix, property: 'og:type', content: 'website' }],
@@ -21,8 +26,7 @@ module.exports = () => {
 				{
 					prefix: ogprefix,
 					property: 'og:image',
-					content:
-						'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png'
+					content: '/assets/logo.png'
 				}
 			]
 		],
@@ -44,9 +48,7 @@ module.exports = () => {
 			},
 			nav: [
 				{ text: 'Docs', link: '/docs/GettingStarted' },
-				...(fs.existsSync(path.resolve(__dirname, '../Examples.md'))
-					? [{ text: 'Examples', link: '/Examples' }]
-					: []),
+				...(fs.existsSync(path.resolve(__dirname, '../Examples.md')) ? [{ text: 'Examples', link: '/Examples' }] : []),
 				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc' },
 				{ text: 'Reference', link: '/Configuration' }
 			],
@@ -61,9 +63,7 @@ module.exports = () => {
 					'/docs/API',
 					'/docs/Deployment',
 					'/docs/Docgen',
-					...(fs.existsSync(path.resolve(__dirname, '../docs/docgen-cli.md'))
-						? ['/docs/docgen-cli.md']
-						: []),
+					...(fs.existsSync(path.resolve(__dirname, '../docs/docgen-cli.md')) ? ['/docs/docgen-cli.md'] : []),
 					'/docs/Development'
 				],
 				'/Configuration': ['/Configuration'],

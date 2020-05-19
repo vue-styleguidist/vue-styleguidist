@@ -159,9 +159,8 @@ class Preview extends Component {
 			this.destroyVueInstance()
 			this.vueInstance = new Vue({
 				...extendsComponent,
-				...rootComponent,
-				el
-			})
+				...rootComponent
+			}).$mount(el)
 		} catch (err) {
 			this.handleError(err)
 		}

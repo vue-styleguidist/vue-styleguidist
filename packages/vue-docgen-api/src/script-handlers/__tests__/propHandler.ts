@@ -7,6 +7,13 @@ import propHandler from '../propHandler'
 
 jest.mock('../../Documentation')
 
+function removeWhitespaceForTest(defaultValue: PropDescriptor['defaultValue'] = { value: '' }) {
+	return {
+		func: defaultValue.func,
+		value: defaultValue.value.replace(/\s|\n|\t/g, '')
+	}
+}
+
 function parse(src: string, plugins?: ParserPlugin[]): NodePath | undefined {
 	const ast = babylon({ plugins }).parse(src)
 	return resolveExportedComponent(ast)[0].get('default')
@@ -191,13 +198,9 @@ describe('propHandler', () => {
 		})
 
 		it('should still return props with prop-types', () => {
-			const src = [
-				'export default {',
-				'  props:{',
-				"    test: PropTypes.oneOf(['News', 'Photos'])",
-				'  }',
-				'}'
-			].join('\n')
+			const src = ['export default {', '  props:{', "    test: PropTypes.oneOf(['News', 'Photos'])", '  }', '}'].join(
+				'\n'
+			)
 			tester(src, {
 				type: {
 					func: true
@@ -235,21 +238,6 @@ describe('propHandler', () => {
 	})
 
 	describe('defaultValue', () => {
-		it('should return the right default', () => {
-			const src = `
-        export default {
-          props: {
-            test: {
-              default: ['hello']
-            }
-          }
-        }
-        `
-			tester(src, {
-				defaultValue: { value: `["hello"]` }
-			})
-		})
-
 		it('should be ok with just the default', () => {
 			const src = `
         export default {
@@ -265,58 +253,120 @@ describe('propHandler', () => {
 			})
 		})
 
-		it('should return the body of the function as default value without parenthesis', () => {
-			const src = `
-        export default {
-          props: {
-            test: {
-              default: () => ({})
-            }
-          }
-        }
-        `
-			tester(src, {
-				defaultValue: { value: `{}` }
-			})
-		})
-
-		it('should be ok with the default between quotes', () => {
-			const src = `
-        export default {
-          'props': {
-            'test': {
-              'default': 'normal'
-            }
-          }
-        }
-        `
-			tester(src, {
-				defaultValue: { value: `"normal"` }
-			})
-		})
-
 		it('should be ok with the default as a method', () => {
 			const src = [
 				'export default {',
-				'	props: {',
-				'		test: {',
-				'			default() {',
-				'				return ["normal"]',
-				'			}',
-				'		}',
-				'	}',
+				'  props: {',
+				'    test: {',
+				'      default() {',
+				'        return ["normal"]',
+				'      }',
+				'    }',
+				'  }',
 				'}'
 			].join('\n')
 
 			expect(parserTest(src).defaultValue).toMatchInlineSnapshot(`
-			Object {
-			  "func": false,
-			  "value": "function(){
-			    return [\\"normal\\"];
-			}",
-			}
-		`)
+      Object {
+        "func": true,
+        "value": "function() {
+          return [\\"normal\\"];
+      }",
+      }
+    `)
 		})
+
+		it('should deal properly with multilple returns', () => {
+			const src = `
+        export default {
+          props: {
+            test: {
+              type: Array,
+              default: function () {
+                if (logger.mounted) {
+                  return []
+                } else {
+                  return undefined
+                }
+              }
+            }
+          }
+        }
+        `
+			const testParsed = parserTest(src)
+			const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+			expect(defaultValue).toMatchObject({
+				func: true,
+				value: `function(){if(logger.mounted){return[];}else{returnundefined;}}`
+			})
+		})
+
+		it('should deal properly with multilple returns in arrow functions', () => {
+			const src = `
+        export default {
+          props: {
+            test: {
+              type: Array,
+              default: () => {
+                if (logger.mounted) {
+                  return []
+                } else {
+                  return undefined
+                }
+              }
+            }
+          }
+        }
+        `
+			const testParsed = parserTest(src)
+			const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+			expect(defaultValue).toMatchObject({
+				func: true,
+				value: `()=>{if(logger.mounted){return[];}else{returnundefined;}}`
+			})
+		})
+
+		// type, format of default input, result of parsing
+		test.each([
+			['Object', 'default: () => ({ a: 1 })', '{a:1}', ''],
+			['Object', 'default: () => { return { a: 1 } }', '{a:1}', ''],
+			['Object', 'default () { return { a: 1 } }', '{a:1}', ''],
+			['Object', 'default: function () { return { a: 1 } }', '{a:1}', ''],
+			['Object', 'default: () => ({ a: 1 })', '{a:1}', '{{a: number}}'],
+			['Object', 'default: null', 'null', ''],
+			['Object', 'default: undefined', 'undefined', ''],
+			['Array', 'default: () => ([{a: 1}])', '[{a:1}]', ''],
+			['Array', 'default: () => [{a: 1}]', '[{a:1}]', ''],
+			['Array', 'default: () => { return [{a: 1}] }', '[{a:1}]', ''],
+			['Array', 'default () { return [{a: 1}] }', '[{a:1}]', ''],
+			['Array', 'default: function () { return [{a: 1}] }', '[{a:1}]', ''],
+			['Array', 'default: null', 'null', ''],
+			['Array', 'default: undefined', 'undefined', ''],
+			['Function', 'default: (a, b) => ({ a, b })', '(a,b)=>({a,b})', ''],
+			['Function', 'default (a, b) { return { a, b } }', 'function(a,b){return{a,b};}', ''],
+			['Function', 'default: (a, b) => { return { a, b } }', '(a,b)=>{return{a,b};}', ''],
+			['Function', 'default: function (a, b) { return { a, b } }', 'function(a,b){return{a,b};}', '']
+		])(
+			'if prop is of type %p,\n\t given %p as default,\n\t should parse as %p,\n\t comment types are %p',
+			(propType, input, output, commentsBlockType) => {
+				const src = `
+                export default {
+                  props: {
+                    /**
+                     * ${commentsBlockType.length ? `@type ${commentsBlockType}` : ''}
+                     */
+                    test: {
+                      type: ${propType},
+                      ${input}
+                    }
+                  }
+                }
+                `
+				const testParsed = parserTest(src)
+				const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+				expect(defaultValue).toMatchObject({ value: output })
+			}
+		)
 	})
 
 	describe('description', () => {
@@ -368,9 +418,9 @@ describe('propHandler', () => {
              * @model
              */
             value: {
-				required: true,
-				type: undefined
-			}
+        required: true,
+        type: undefined
+      }
           }
         }
         `
@@ -384,17 +434,17 @@ describe('propHandler', () => {
 		it('should set the v-model instead of value with model property', () => {
 			const src = `
         export default {
-		  model:{
-			prop: 'value'
-		  },
+      model:{
+      prop: 'value'
+      },
           props: {
             /**
              * Value of the field
              */
             value: {
-				required: true,
-				type: undefined
-			}
+        required: true,
+        type: undefined
+      }
           }
         }
         `
@@ -408,17 +458,17 @@ describe('propHandler', () => {
 		it('should not set the v-model instead of value if model property has only event', () => {
 			const src = `
         export default {
-		  model:{
-			event: 'change'
-		  },
+      model:{
+      event: 'change'
+      },
           props: {
             /**
              * Value of the field
              */
             value: {
-				required: true,
-				type: undefined
-			}
+        required: true,
+        type: undefined
+      }
           }
         }
         `
@@ -433,22 +483,23 @@ describe('propHandler', () => {
 	describe('@values tag parsing', () => {
 		it('should parse the @values tag as its own', () => {
 			const src = `
-	export default {
-	  props: {
-		/**
-		 * color of the component
-		 * @values dark, light
-		 * @author me
-		 */
-		color: {
-			type: string
-		}
-	  }
-	}
-	`
+  export default {
+    props: {
+        /**
+         * color of the component
+         * @values dark, light
+         * @values red, blue
+         * @author me
+         */
+        color: {
+            type: String
+        }
+    }
+  }
+  `
 			tester(src, {
 				description: 'color of the component',
-				values: ['dark', 'light'],
+				values: ['dark', 'light', 'red', 'blue'],
 				tags: {
 					author: [
 						{
@@ -465,14 +516,14 @@ describe('propHandler', () => {
 	describe('typescript Vue.extends', () => {
 		it('should be ok with Prop', () => {
 			const src = `
-			  export default Vue.extend({
-				props: {
-				  tsvalue: {
-					type: [String, Number] as Prop<SelectOption['value']>,
-					required: true
-				  }
-				}
-			  });`
+        export default Vue.extend({
+        props: {
+          tsvalue: {
+          type: [String, Number] as Prop<SelectOption['value']>,
+          required: true
+          }
+        }
+        });`
 			tester(
 				src,
 				{
@@ -486,16 +537,40 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
+		it('should parse values in TypeScript typings', () => {
+			const src = `
+        export default Vue.extend({
+        props: {
+          tsvalue: {
+          type: String as Prop<('foo' | 'bar')>,
+          required: true
+          }
+        }
+        });`
+			tester(
+				src,
+				{
+					values: ['foo', 'bar'],
+					type: {
+						name: 'string'
+					},
+					required: true
+				},
+				['typescript']
+			)
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
+		})
+
 		it('should understand As anotations at the end of a prop definition', () => {
 			const src = `
-			export default Vue.extend({
-			  props: {
-				blockData: {
-					type: Array,
-					default: () => [],
-				} as PropOptions<SocialNetwork[]>,
-			  }
-			});`
+      export default Vue.extend({
+        props: {
+        blockData: {
+          type: Array,
+          default: () => [],
+        } as PropOptions<SocialNetwork[]>,
+        }
+      });`
 			tester(
 				src,
 				{
@@ -509,6 +584,49 @@ describe('propHandler', () => {
 				},
 				['typescript']
 			)
+		})
+	})
+
+	describe('@type', () => {
+		it('should use @type typings', () => {
+			const src = `
+      export default {
+        props: {
+        /**
+         * @type {{ bar: number, foo: string }}
+         */
+        blockData: {
+          type: Object,
+          default: () => {},
+        },
+        }
+      };`
+			tester(src, {
+				type: {
+					name: '{ bar: number, foo: string }'
+				}
+			})
+		})
+
+		it('should extract values from @type typings', () => {
+			const src = `
+      export default {
+        props: {
+        /**
+         * @type { "bar + boo" | "foo & baz" }}
+         */
+        blockData: {
+          type: String,
+          default: () => {},
+        },
+        }
+      };`
+			tester(src, {
+				values: ['bar + boo', 'foo & baz'],
+				type: {
+					name: 'string'
+				}
+			})
 		})
 	})
 })

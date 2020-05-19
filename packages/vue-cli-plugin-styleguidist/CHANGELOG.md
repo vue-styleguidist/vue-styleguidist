@@ -3,6 +3,140 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.1...v4.23.2) (2020-05-18)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.0...v4.23.1) (2020-05-15)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.3...v4.23.0) (2020-05-15)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.22.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.2...v4.22.3) (2020-05-12)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.22.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.1...v4.22.2) (2020-05-12)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.0...v4.22.1) (2020-05-12)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.21.0...v4.22.0) (2020-05-11)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.20.0...v4.21.0) (2020-05-09)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.5...v4.20.0) (2020-05-06)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.19.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.4...v4.19.5) (2020-05-02)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.19.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.3...v4.19.4) (2020-05-01)
+
+
+### Bug Fixes
+
+* **plugin:** use a custom loader to deal with docs ([57abe6e](https://github.com/vue-styleguidist/vue-styleguidist/commit/57abe6e7c4ae34f7b0c26d5a8fe834b5a8133b8b))
+
+
+
+
+
+## [4.19.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.2...v4.19.3) (2020-04-30)
+
+
+### Bug Fixes
+
+* **plugin:** update null-loader + avoid conflicts ([07f6a98](https://github.com/vue-styleguidist/vue-styleguidist/commit/07f6a98dc391a02d503c62debcfd3b8b7950d0e9))
+
+
+
+
+
+## [4.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.1...v4.19.2) (2020-04-29)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+## [4.19.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.0...v4.19.1) (2020-04-28)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.18.0...v4.19.0) (2020-04-24)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
+# [4.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.17.0...v4.18.0) (2020-04-17)
+
+**Note:** Version bump only for package vue-cli-plugin-styleguidist
+
+
+
+
+
 # [4.17.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.16.0...v4.17.0) (2020-04-12)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist

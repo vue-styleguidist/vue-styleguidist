@@ -3,6 +3,151 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.1...v4.23.2) (2020-05-18)
+
+
+### Bug Fixes
+
+* protect async config against parsing error ([95c6c09](https://github.com/vue-styleguidist/vue-styleguidist/commit/95c6c0969946ddb057da8d5823852d12c42f0f07))
+
+
+
+
+
+## [4.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.0...v4.23.1) (2020-05-15)
+
+
+### Bug Fixes
+
+* only collapse subcomponents when > 3 ([76b4331](https://github.com/vue-styleguidist/vue-styleguidist/commit/76b43316a63d40027e2345ee855d9aee25836493))
+
+
+
+
+
+# [4.23.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.3...v4.23.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* default editor font-family ([909a47f](https://github.com/vue-styleguidist/vue-styleguidist/commit/909a47f9d888d9f1411ef63ed1b5a62f602823e6))
+* issues with deprecated and requires ([efa53c9](https://github.com/vue-styleguidist/vue-styleguidist/commit/efa53c98d8fefdcc51ffeee65a99948e1f7700eb)), closes [#870](https://github.com/vue-styleguidist/vue-styleguidist/issues/870) [#871](https://github.com/vue-styleguidist/vue-styleguidist/issues/871)
+
+
+
+
+
+## [4.22.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.2...v4.22.3) (2020-05-12)
+
+
+### Bug Fixes
+
+* throw when errors in promise ([7b534df](https://github.com/vue-styleguidist/vue-styleguidist/commit/7b534df46ea7ca6587e9444ba1299cdc0ecd64d5))
+
+
+
+
+
+## [4.22.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.1...v4.22.2) (2020-05-12)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.22.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.22.0...v4.22.1) (2020-05-12)
+
+
+### Bug Fixes
+
+* allow default example with custom format ([7ac7f57](https://github.com/vue-styleguidist/vue-styleguidist/commit/7ac7f57f0359be7c2b19017c6a8a4a1616c3cfd8))
+* only display warning when file exists ([cfe1f9f](https://github.com/vue-styleguidist/vue-styleguidist/commit/cfe1f9faa9f109413ee7f59f611fed9a2d37579e))
+* protect editor for null code ([8c428a4](https://github.com/vue-styleguidist/vue-styleguidist/commit/8c428a47fd11763f1762cca91996813ccb774211))
+
+
+
+
+
+# [4.22.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.21.0...v4.22.0) (2020-05-11)
+
+
+### Features
+
+* allow for config to be an async function ([fb16a67](https://github.com/vue-styleguidist/vue-styleguidist/commit/fb16a678770162dcb37de5400259c2935566e5fb))
+
+
+
+
+
+# [4.21.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.20.0...v4.21.0) (2020-05-09)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.20.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.5...v4.20.0) (2020-05-06)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.19.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.4...v4.19.5) (2020-05-02)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.19.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.1...v4.19.2) (2020-04-29)
+
+
+### Bug Fixes
+
+* show - instead of undefined for untyped props ([f5a3e82](https://github.com/vue-styleguidist/vue-styleguidist/commit/f5a3e82e0d702edc8a6d57cc1db5e3e2d432cfc3)), closes [#831](https://github.com/vue-styleguidist/vue-styleguidist/issues/831)
+
+
+
+
+
+## [4.19.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.19.0...v4.19.1) (2020-04-28)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.19.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.18.0...v4.19.0) (2020-04-24)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.18.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.17.0...v4.18.0) (2020-04-17)
+
+
+### Bug Fixes
+
+* rendering of composed types ([86eb6bd](https://github.com/vue-styleguidist/vue-styleguidist/commit/86eb6bd8200c38bb4b7435d2ce3657aea1e35698))
+
+
+### Features
+
+* allow change padding of prism based editor ([d09b546](https://github.com/vue-styleguidist/vue-styleguidist/commit/d09b5466b3a230906da6d3c77ea177c1797abe72))
+* render complex types properly ([a756455](https://github.com/vue-styleguidist/vue-styleguidist/commit/a756455bf17e751d2b4f6179e79f3fc6a2920a97))
+
+
+
+
+
 # [4.17.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.16.0...v4.17.0) (2020-04-12)
 
 

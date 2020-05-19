@@ -32,6 +32,8 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
+    "file-loader": "^6.0.0",
+    "material-design-icons-iconfont": "^5.0.1",
     "sass-loader": "^8.0.0",
     "style-loader": "^0.19.0",
     "vue-loader": "^15.2.4",

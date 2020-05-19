@@ -80,6 +80,10 @@ export default {
 			default: 16
 		},
 		/**
+		 * @asdf qwerty
+		 */
+		customTag: String,
+		/**
 		 * @ignore
 		 * Add custom click actions.
 		 **/

@@ -72,7 +72,15 @@ Object {
       "name": "propC",
       "tags": Object {},
       "type": Object {
-        "name": "string | boolean",
+        "elements": Array [
+          Object {
+            "name": "string",
+          },
+          Object {
+            "name": "boolean",
+          },
+        ],
+        "name": "union",
       },
     },
   ],
