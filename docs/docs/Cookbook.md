@@ -18,6 +18,7 @@
 - [How to include FontAwesome (or other icon sets) in your style guide](#how-to-include-fontawesome-or-other-icon-sets-in-your-style-guide)
 - [How to use vue-styleguidist with multiple packages for components](#how-to-use-vue-styleguidist-with-multiple-packages-for-components)
 - [I have multiple components in the same folder what can I do?](#i-have-multiple-components-in-the-same-folder-what-can-i-do)
+- [How do I integrate Styleguidist into an existing Nuxtjs site?](#how-do-i-integrate-styleguidist-into-an-existing-nuxtjs-site)
 
 <!-- tocstop -->
 
@@ -534,3 +535,26 @@ In the tags of a component, an `@example` doclet can be specified. It is usually
 It can also be used with the special value `[none]`. It will then hide the example file that would normally be associated with the component.
 
 If you hide with `@examples [none]` all non-main components, the only remaining readme displayed will the main one. We get our `readme` file back.
+
+## How do I integrate Styleguidist into an existing Nuxtjs site?
+Suppose you have an existing Nuxtjs site or are using Nuxtjs as your development environment for your component library. While you could also encourage users to clone your repo and build the docs, it would be nice to integrate them into your existing Nuxtjs site. This is possible (with some caveats). 
+
+First you need to determine the route you want your styleguist docs to be at. For example you may want your docs to be at `www.mysite.com/docs`. If styleguidist was a pure nuxt page, under the Nuxtjs convention, it would be the file `pages/docs.vue`. So wherever you want your styleguidist documentation to reside you can **not** have a `pages/<dest>.vue` file there!
+
+Next you need to set up the generate properties of the `nuxt.config.js`. If you are deploying on GitLab, it might be something like this:
+```js
+// nuxt.config.js
+export default {
+  // ...
+  generate: {
+    dir: 'public'
+  },
+  // ...
+}
+```
+
+If you have generated a nuxtjs site before and looked at the output (here under a dir call `public`) you will see that each `pages/<dest>.vue` is a sub directory. This is why you can not have your desired location for styleguidest also be a `dest.vue` file.
+
+Now you will want to update your `styleguide.config.js` file to point `styleguidDir` to the `nuxt.config.js`'s `generate.dir`, e.g. if you wanted the `/docs` to be where the styleguideist documentation to be and `generate.dir='public'` then `styleguidDir=public/docs`.
+
+Then the last thing is to remember the order of operations. First you generate nuxt (`npm run generate`) and then `build` your styleguidist docs. 
