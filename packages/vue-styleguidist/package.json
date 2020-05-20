@@ -72,7 +72,7 @@
 		"react-icons": "^3.7.0",
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.11.0",
-		"react-styleguidist": "^11.0.1",
+		"react-styleguidist": "^11.0.6",
 		"rewrite-imports": "^2.0.3",
 		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^2.2.2",
@@ -80,7 +80,7 @@
 		"vue-docgen-api": "^4.23.1",
 		"vue-inbrowser-compiler": "^4.16.0",
 		"vue-inbrowser-compiler-utils": "^4.16.0",
-		"webpack-dev-server": "^3.10.3",
+		"webpack-dev-server": "^3.11.0",
 		"webpack-merge": "^4.0.0"
 	},
 	"peerDependencies": {
@@ -113,5 +113,8 @@
 		"source-map": "0.6.1",
 		"strip-shebang": "^1.0.2",
 		"webpack": "^4.41.5"
+	},
+	"resolutions": {
+		"**/http-proxy": "1.18.1"
 	}
 }

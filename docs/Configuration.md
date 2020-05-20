@@ -10,7 +10,7 @@ Your application static assets folder, will be accessible as `/` in the style gu
 
 ## `codeSplit`
 
-Type: `Boolean`, default: false
+Type: `Boolean`, default: true
 
 By default vue-styleguidist will build one single bundle for all your javascript. When this flag is on, the editor (CodeMirror) is loaded as a separate bundle and so is the compiler. Each of those 2 bundles are about 400Kb. It allows for a faster initial load.
 
@@ -285,7 +285,7 @@ module.exports = {
     // Suppress messages
     info: () => {},
     // Override display function
-    warn: message => console.warn(`NOOOOOO: ${message}`)
+    warn: (message) => console.warn(`NOOOOOO: ${message}`)
   }
 }
 ```
@@ -318,7 +318,7 @@ export default {
 </script>
 
 <template>
-  <MyButton><MyIcon name=Save/>Save Form</MyButton>
+  <MyButton><MyIcon name="Save" />Save Form</MyButton>
 </template>
 ```
 
@@ -422,9 +422,7 @@ Function that allows you to override the printing of build messages to console.l
 module.exports = {
   printBuildInstructions(config) {
     console.log(
-      `Style guide published to ${
-        config.styleguideDir
-      }. Something else interesting.`
+      `Style guide published to ${config.styleguideDir}. Something else interesting.`
     )
   }
 }
@@ -637,7 +635,7 @@ See example in the [cookbook](/docs/Cookbook.md#how-to-change-styles-of-a-style-
 
 ```javascript
 module.exports = {
-  styles: function(theme) {
+  styles: function (theme) {
     return {
       Logo: {
         logo: {
@@ -704,7 +702,7 @@ To disable sorting, use the identity function:
 
 ```javascript
 module.exports = {
-  sortProps: props => props
+  sortProps: (props) => props
 }
 ```
 
