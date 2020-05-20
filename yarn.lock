@@ -9210,10 +9210,15 @@ core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
 
-core-js@^3.0.1, core-js@^3.3.5, core-js@^3.4.0, core-js@^3.4.1, core-js@^3.4.4, core-js@^3.6.0:
+core-js@^3.0.1, core-js@^3.4.0, core-js@^3.4.1, core-js@^3.4.4, core-js@^3.6.0:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.2.tgz#2799ea1a59050f0acf50dfe89b916d6503b16caa"
   integrity sha512-hIE5dXkRzRvnZ5vhkRfQxUvDxQZmD9oueA08jDYRBKJHx+VIl/Pne/e0A4x9LObEEthC/TqiZybUoNM4tRgnKg==
+
+core-js@^3.6.4:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -19670,10 +19675,10 @@ react-simple-code-editor@^0.11.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.11.0.tgz#bb57c7c29b570f2ab229872599eac184f5bc673c"
   integrity sha512-xGfX7wAzspl113ocfKQAR8lWPhavGWHL3xSzNLeseDRHysT+jzRBi/ExdUqevSMos+7ZtdfeuBOXtgk9HTwsrw==
 
-react-styleguidist@^11.0.0, react-styleguidist@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-11.0.1.tgz#6aee297b609c0ed18ce6c27c81cfc29e00fddfef"
-  integrity sha512-kMfJH730OPouU8Sl9neNjWCr72Lq2fx+JPNDrYcUqJXfz0z0fUUDW9DOuvw54f+u6hFSCin3/qdnH2JpIOH6HQ==
+react-styleguidist@^11.0.6:
+  version "11.0.6"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-11.0.6.tgz#bc7c25029fcb835ebee9c9bc7f914c6b7014a537"
+  integrity sha512-jrbCdUW8fUC2IusY12JQb6UrABLixQeW9N7sxwKe7QPzy+qc+cpiaR51LFvcwLeGBigaEzNJcLvlTtxspt1YRQ==
   dependencies:
     "@vxna/mini-html-webpack-template" "^1.0.0"
     acorn "^6.4.1"
@@ -19685,7 +19690,7 @@ react-styleguidist@^11.0.0, react-styleguidist@^11.0.1:
     clsx "^1.0.4"
     common-dir "^3.0.0"
     copy-webpack-plugin "^5.1.0"
-    core-js "^3.3.5"
+    core-js "^3.6.4"
     doctrine "^3.0.0"
     es6-object-assign "~1.1.0"
     es6-promise "^4.2.8"
@@ -19709,7 +19714,7 @@ react-styleguidist@^11.0.0, react-styleguidist@^11.0.1:
     kleur "^3.0.3"
     leven "^3.1.0"
     listify "^1.0.0"
-    loader-utils "^1.2.3"
+    loader-utils "^2.0.0"
     lodash "^4.17.15"
     lowercase-keys "^2.0.0"
     markdown-to-jsx "^6.10.3"
