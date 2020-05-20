@@ -80,7 +80,7 @@
 		"vue-docgen-api": "^4.23.1",
 		"vue-inbrowser-compiler": "^4.16.0",
 		"vue-inbrowser-compiler-utils": "^4.16.0",
-		"webpack-dev-server": "^3.10.3",
+		"webpack-dev-server": "^3.11.0",
 		"webpack-merge": "^4.0.0"
 	},
 	"peerDependencies": {
@@ -113,5 +113,8 @@
 		"source-map": "0.6.1",
 		"strip-shebang": "^1.0.2",
 		"webpack": "^4.41.5"
+	},
+	"resolutions": {
+		"**/http-proxy": "1.18.1"
 	}
 }
