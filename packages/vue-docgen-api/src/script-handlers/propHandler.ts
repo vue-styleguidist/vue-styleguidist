@@ -387,6 +387,10 @@ function describeValues(
 	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
 	propDescriptor: PropDescriptor
 ) {
+	if (propDescriptor.values) {
+		return
+	}
+
 	const validatorArray = propPropertiesPath.filter(getMemberFilter('validator'))
 	const validatorNode = validatorArray.length ? validatorArray[0].get('value').node : undefined
 
