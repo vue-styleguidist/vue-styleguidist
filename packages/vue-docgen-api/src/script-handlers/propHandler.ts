@@ -394,39 +394,44 @@ function describeValues(
 	const validatorArray = propPropertiesPath.filter(getMemberFilter('validator'))
 	const validatorNode = validatorArray.length ? validatorArray[0].get('value').node : undefined
 
-	const [exp, varName] =
+	const returnedExpression =
 		bt.isMethod(validatorNode) &&
 		validatorNode.body.body.length === 1 &&
-		bt.isIdentifier(validatorNode.params[0]) &&
 		bt.isReturnStatement(validatorNode.body.body[0])
-			? [validatorNode.body.body[0].argument, validatorNode.params[0].name]
-			: bt.isArrowFunctionExpression(validatorNode) && bt.isIdentifier(validatorNode.params[0])
-			? [validatorNode.body, validatorNode.params[0].name]
-			: []
+			? validatorNode.body.body[0].argument
+			: bt.isArrowFunctionExpression(validatorNode)
+			? validatorNode.body
+			: undefined
 
-	if (bt.isBinaryExpression(exp)) {
+	const varName =
+		(bt.isMethod(validatorNode) || bt.isArrowFunctionExpression(validatorNode)) &&
+		bt.isIdentifier(validatorNode.params[0])
+			? validatorNode.params[0].name
+			: undefined
+
+	if (bt.isBinaryExpression(returnedExpression)) {
 		let valuesNode: bt.Node | undefined
 
-		switch (exp.operator) {
+		switch (returnedExpression.operator) {
 			case '>':
 				if (
-					bt.isUnaryExpression(exp.right) &&
-					exp.right.operator === '-' &&
-					bt.isNumericLiteral(exp.right.argument) &&
-					exp.right.argument.value === 1
+					bt.isUnaryExpression(returnedExpression.right) &&
+					returnedExpression.right.operator === '-' &&
+					bt.isNumericLiteral(returnedExpression.right.argument) &&
+					returnedExpression.right.argument.value === 1
 				) {
-					valuesNode = exp.left
+					valuesNode = returnedExpression.left
 				}
 				break
 
 			case '<':
 				if (
-					bt.isUnaryExpression(exp.left) &&
-					exp.left.operator === '-' &&
-					bt.isNumericLiteral(exp.left.argument) &&
-					exp.left.argument.value === 1
+					bt.isUnaryExpression(returnedExpression.left) &&
+					returnedExpression.left.operator === '-' &&
+					bt.isNumericLiteral(returnedExpression.left.argument) &&
+					returnedExpression.left.argument.value === 1
 				) {
-					valuesNode = exp.right
+					valuesNode = returnedExpression.right
 				}
 				break
 			default:
