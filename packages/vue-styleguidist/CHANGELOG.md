@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.2...v4.23.3) (2020-05-20)
+
+
+### Bug Fixes
+
+* dependency update for security ([e227276](https://github.com/vue-styleguidist/vue-styleguidist/commit/e2272766ec4469ba4fd00bb6a7e9f288e3171c75))
+
+
+
+
+
 ## [4.23.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.1...v4.23.2) (2020-05-18)
 
 

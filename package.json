@@ -127,7 +127,7 @@
 		"raf": "^3.4.0",
 		"react": "^16.4.1",
 		"react-dom": "^16.8.3",
-		"react-styleguidist": "^11.0.0",
+		"react-styleguidist": "^11.0.6",
 		"react-test-renderer": "^16.4.1",
 		"rimraf": "^2.6.2",
 		"sass": "^1.23.7",

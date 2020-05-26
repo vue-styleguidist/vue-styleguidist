@@ -511,6 +511,37 @@ describe('propHandler', () => {
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('color')
 		})
+
+		it('should check the validator method for super standard values', () => {
+			const src = `
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator(va){
+				return ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
+			} 
+        }
+    }
+  }
+  `
+			expect(parserTest(src).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
+
+		it('should check the validator arrow function for super standard values', () => {
+			const src = `
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator: (va) => 
+				['dark', 'light', 'red', 'blue'].indexOf(va) > -1
+        }
+    }
+  }
+  `
+			expect(parserTest(src).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
 	})
 
 	describe('typescript Vue.extends', () => {

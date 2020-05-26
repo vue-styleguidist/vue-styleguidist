@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.23.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.2...v4.23.3) (2020-05-20)
+
+
+### Bug Fixes
+
+* **utils:** protect docgen-cli when in SSG ([af269f6](https://github.com/vue-styleguidist/vue-styleguidist/commit/af269f6fe071d9adb67b5e11fd61e1bbc3de0963)), closes [#876](https://github.com/vue-styleguidist/vue-styleguidist/issues/876)
+
+
+
+
+
 # [4.16.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.15.2...v4.16.0) (2020-04-09)
 
 **Note:** Version bump only for package vue-inbrowser-compiler-utils
