@@ -46,7 +46,7 @@ export default async function propHandler(documentation: Documentation, path: No
 
 			// filter non object properties
 			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as Array<NodePath<bt.Property>>
-			objPropFiltered.forEach(prop => {
+			objPropFiltered.forEach((prop) => {
 				const propNode = prop.node
 
 				// description
@@ -56,7 +56,7 @@ export default async function propHandler(documentation: Documentation, path: No
 
 				// if it's the v-model describe it only as such
 				const propertyName = propNode.key.name || propNode.key.value
-				const isPropertyModel = jsDocTags.some(t => t.title === 'model') || propertyName === modelPropertyName
+				const isPropertyModel = jsDocTags.some((t) => t.title === 'model') || propertyName === modelPropertyName
 				const propName = isPropertyModel ? 'v-model' : propertyName
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
@@ -92,6 +92,9 @@ export default async function propHandler(documentation: Documentation, path: No
 
 					// default
 					describeDefault(propPropertiesPath, propDescriptor, litteralType || '')
+
+					// validator => values
+					describeValues(propPropertiesPath, propDescriptor)
 				} else if (bt.isTSAsExpression(propValuePath.node)) {
 					// standard default + type + required with TS as annotation
 					const propPropertiesPath = propValuePath
@@ -146,7 +149,7 @@ export function describeType(
 			recast.visit(typedAST.program, {
 				visitVariableDeclaration(path) {
 					const { typeAnnotation } = path.get('declarations', 0, 'id', 'typeAnnotation').value
-					if (bt.isTSUnionType(typeAnnotation) && typeAnnotation.types.every(t => bt.isTSLiteralType(t))) {
+					if (bt.isTSUnionType(typeAnnotation) && typeAnnotation.types.every((t) => bt.isTSLiteralType(t))) {
 						typeValues = typeAnnotation.types.map((t: bt.TSLiteralType) => t.literal.value.toString())
 					}
 					return false
@@ -216,13 +219,13 @@ function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression>): { name: str
 		bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters
 			? recast.print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
 			: bt.isArrayExpression(typeNode)
-				? typePath
-						.get('elements')
-						.map((t: NodePath) => getTypeFromTypePath(t).name)
-						.join('|')
-				: typeNode && bt.isIdentifier(typeNode) && VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
-					? typeNode.name.toLowerCase()
-					: recast.print(typeNode).code
+			? typePath
+					.get('elements')
+					.map((t: NodePath) => getTypeFromTypePath(t).name)
+					.join('|')
+			: typeNode && bt.isIdentifier(typeNode) && VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
+			? typeNode.name.toLowerCase()
+			: recast.print(typeNode).code
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}
@@ -243,8 +246,8 @@ function getValuesFromTypePath(typeAnnotation: bt.TSType): string[] | undefined 
 }
 
 export function getValuesFromTypeAnnotation(type: bt.TSType): string[] | undefined {
-	if (bt.isTSUnionType(type) && type.types.every(t => bt.isTSLiteralType(t))) {
-		return type.types.map(t => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
+	if (bt.isTSUnionType(type) && type.types.every((t) => bt.isTSLiteralType(t))) {
+		return type.types.map((t) => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
 	}
 	return undefined
 }
@@ -380,9 +383,81 @@ export function describeDefault(
 	}
 }
 
+function describeValues(
+	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
+	propDescriptor: PropDescriptor
+) {
+	if (propDescriptor.values) {
+		return
+	}
+
+	const validatorArray = propPropertiesPath.filter(getMemberFilter('validator'))
+	const validatorNode = validatorArray.length ? validatorArray[0].get('value').node : undefined
+
+	const returnedExpression =
+		bt.isMethod(validatorNode) &&
+		validatorNode.body.body.length === 1 &&
+		bt.isReturnStatement(validatorNode.body.body[0])
+			? validatorNode.body.body[0].argument
+			: bt.isArrowFunctionExpression(validatorNode)
+			? validatorNode.body
+			: undefined
+
+	const varName =
+		(bt.isMethod(validatorNode) || bt.isArrowFunctionExpression(validatorNode)) &&
+		bt.isIdentifier(validatorNode.params[0])
+			? validatorNode.params[0].name
+			: undefined
+
+	if (bt.isBinaryExpression(returnedExpression)) {
+		let valuesNode: bt.Node | undefined
+
+		switch (returnedExpression.operator) {
+			case '>':
+				if (
+					bt.isUnaryExpression(returnedExpression.right) &&
+					returnedExpression.right.operator === '-' &&
+					bt.isNumericLiteral(returnedExpression.right.argument) &&
+					returnedExpression.right.argument.value === 1
+				) {
+					valuesNode = returnedExpression.left
+				}
+				break
+
+			case '<':
+				if (
+					bt.isUnaryExpression(returnedExpression.left) &&
+					returnedExpression.left.operator === '-' &&
+					bt.isNumericLiteral(returnedExpression.left.argument) &&
+					returnedExpression.left.argument.value === 1
+				) {
+					valuesNode = returnedExpression.right
+				}
+				break
+			default:
+				return
+		}
+
+		const values: string[] | undefined =
+			bt.isCallExpression(valuesNode) &&
+			bt.isIdentifier(valuesNode.arguments[0]) &&
+			varName === valuesNode.arguments[0].name &&
+			bt.isMemberExpression(valuesNode.callee) &&
+			bt.isIdentifier(valuesNode.callee.property) &&
+			valuesNode.callee.property.name === 'indexOf' &&
+			bt.isArrayExpression(valuesNode.callee.object)
+				? valuesNode.callee.object.elements.map((e: bt.StringLiteral) => e.value)
+				: undefined
+
+		if (values) {
+			propDescriptor.values = values
+		}
+	}
+}
+
 export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 	if (propDescriptor.tags && propDescriptor.tags['values']) {
-		const values = propDescriptor.tags['values'].map(tag => {
+		const values = propDescriptor.tags['values'].map((tag) => {
 			const description = ((tag as any) as ParamTag).description
 			const choices = typeof description === 'string' ? description.split(',') : undefined
 			if (choices) {
