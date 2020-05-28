@@ -64,14 +64,19 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		const p = importCodeExampleFile(example, this.resourcePath, this)
 		if (p.settings) {
 			const settings = p.settings
-			// code to satisfy react-styleguidist and transfer some properties to the props object
-			p.settings.props = Object.keys(settings).reduce((obj: Record<string, any>, key: string) => {
+			// code to satisfy react-styleguidist and transfer properties to the props object
+			// those properties will be added litterally to the wrapping div of the example
+			const props = Object.keys(settings).reduce((obj: Record<string, any> | null, key: string) => {
 				if (['style', 'className'].indexOf(key) !== -1 || /^data-/.test(key)) {
+					obj = obj || {}
 					obj[key] = settings[key]
 					delete settings[key]
 				}
 				return obj
-			}, {})
+			}, null)
+			if (props) {
+				p.settings.props = props
+			}
 		}
 		return config.updateExample ? config.updateExample(p, this.resourcePath) : p
 	}
