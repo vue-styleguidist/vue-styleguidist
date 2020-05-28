@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* **docgen:** priority to documented values ([696bd87](https://github.com/vue-styleguidist/vue-styleguidist/commit/696bd873a914a4d5057f3dda27f3f9f7eaffa0a2))
+
+
+### Features
+
+* **docgen:** detect values in validator ([8d681a6](https://github.com/vue-styleguidist/vue-styleguidist/commit/8d681a66576990f2acdc265cea7f4ffa4659b14e))
+
+
+
+
+
 ## [4.23.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.0...v4.23.1) (2020-05-15)
 
 **Note:** Version bump only for package vue-docgen-api

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* adjust structure of examples ([b80a86c](https://github.com/vue-styleguidist/vue-styleguidist/commit/b80a86c3aad769530cdab4ea911639088a2b8dac))
+* classname and style were ignored ([563b313](https://github.com/vue-styleguidist/vue-styleguidist/commit/563b3134ee1304790d06b2f4d394cc79400be9da))
+
+
+
+
+
 ## [4.23.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.2...v4.23.3) (2020-05-20)
 
 
