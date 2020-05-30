@@ -64,7 +64,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
        */
       onClick: {
         type: Function,
-        default: event => {
+        default: (event) => {
           console.log('You have clicked me!', event.target)
         }
       }
@@ -74,7 +74,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 </script>
 ```
 
-Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come *before* the `export default` in your script tag.
+Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come _before_ the `export default` in your script tag.
 
 If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
@@ -428,7 +428,7 @@ For instance, if the display name is set as
  **/
 ```
 
-To reference it in examples, one has to call `<WonderfulButton/>`.
+To reference it in examples, one has to call `<WonderfulButton/>`. See to [How to use component name in docs with a different displayName](./Cookbook.md#how-to-use-component-name-in-docs-with-a-different-displayname)
 
 ## Methods
 
@@ -486,7 +486,7 @@ You can mark your public methods with JSDoc `@public` tag to get them published 
        */
       onClick: {
         type: Function,
-        default: event => {
+        default: (event) => {
           console.log('You have clicked me!', event.target)
         }
       }
@@ -534,7 +534,9 @@ For example, a dropdown element would be easier to read this way
 than with a prop
 
 ```html
-<DropDown :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"/>
+<DropDown
+  :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"
+/>
 ```
 
 Here is how Vue Styleguidist helps document this pattern: Please add `@requires` doclets to the main component.
