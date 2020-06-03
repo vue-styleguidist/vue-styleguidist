@@ -11,7 +11,10 @@ import { RenderJsxContext } from '../../utils/renderStyleguide'
 
 class Preview extends Component {
 	static propTypes = {
-		code: PropTypes.string.isRequired,
+		code: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]).isRequired,
 		evalInContext: PropTypes.func.isRequired,
 		vuex: PropTypes.object,
 		component: PropTypes.object,
@@ -82,7 +85,7 @@ class Preview extends Component {
 		})
 
 		const { code, vuex, component, renderRootJsx } = this.props
-		if (!code) {
+		if (!code || !code.raw) {
 			return
 		}
 
@@ -90,7 +93,10 @@ class Preview extends Component {
 		let previewComponent = {}
 
 		try {
-			const example = compile(code, {
+			const example = compile(
+				typeof code === 'object'
+				? code.raw
+				: code, {
 				...this.context.config.compilerConfig,
 				...(this.context.config.jsxInExamples
 					? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
