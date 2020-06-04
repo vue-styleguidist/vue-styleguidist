@@ -1,26 +1,21 @@
 <template>
-  <div>
-    <input
-      ref="input"
-      v-model="val"
-      @input="updateValue($event.target.value)"
-      @change="emitChange"
-    >
-    <button @click="fireEvent()">
-      Fire example event!
-    </button>
-  </div>
+	<div>
+		<input ref="input" v-model="val" @input="updateValue($event.target.value)" @change="emitChange" />
+		<button @click="fireEvent()">
+			Fire example event!
+		</button>
+	</div>
 </template>
 
 <script>
 export default {
 	name: 'Input',
+	model: {
+		prop: 'value'
+	},
 	props: {
-		/**
-		 * @model
-		 */
 		value: {
-			required: true,
+			default: null,
 			type: [Number, String]
 		},
 		/**
@@ -55,7 +50,7 @@ export default {
 	methods: {
 		// format the value of input
 		formatValue(val) {
-			const formattedValue = val.toString().replace(this.regExp, this.replacement)
+			const formattedValue = !val ? '' : val.toString().replace(this.regExp, this.replacement)
 
 			return formattedValue
 		},
@@ -98,5 +93,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
