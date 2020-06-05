@@ -143,23 +143,6 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map((example) => {
 		if (example.type === 'code') {
-			let compiled: any = false
-			if (config.codeSplit) {
-				if (process.env.NODE_ENV === 'production') {
-					// if we are not in prod, we want to avoid running examples through
-					// buble all at the same time. We then tell it to calsculate on the fly
-					const compiledExample = compile(example.content, {
-						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
-					})
-					compiled = {
-						script: compiledExample.script,
-						template: compiledExample.template,
-						style: compiledExample.style
-					}
-				}
-			}
-
 			const importPath = example.settings && example.settings.importpath
 			const evalInContext = {
 				toAST: () =>
@@ -171,7 +154,24 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 						])
 					])
 			}
-			return { ...example, evalInContext, compiled }
+
+			if (config.codeSplit) {
+				let compiled: any = false
+				if (process.env.NODE_ENV === 'production') {
+					// if we are not in prod, we want to avoid running examples through
+					// buble all at the same time. We then tell it to calculate on the fly
+					const compiledExample = compile(example.content, {
+						...config.compilerConfig,
+						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+					})
+					compiled = {
+						...compiledExample
+					}
+				}
+				return { ...example, evalInContext, compiled }
+			}
+
+			return { ...example, evalInContext }
 		}
 		return example
 	})
