@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.24.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.0...v4.24.1) (2020-06-05)
+
+
+### Bug Fixes
+
+* repair codesplit false ([c42b522](https://github.com/vue-styleguidist/vue-styleguidist/commit/c42b522b3f249a8cdf3802ade056595d20372dfa))
+
+
+
+
+
 # [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
 
 
