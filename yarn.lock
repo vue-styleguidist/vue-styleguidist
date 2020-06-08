@@ -4112,6 +4112,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.11.tgz#61d4886e2424da73b7b25547f59fdcb534c165a3"
   integrity sha512-lCvvI24L21ZVeIiyIUHZ5Oflv1hhHQ5E1S25IRlKIXaRkVgmXpJMI3wUJkmym2bTbCe+WoIibQnMVAU3FguaOg==
 
+"@types/node@13.11.1":
+  version "13.11.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.11.1.tgz#49a2a83df9d26daacead30d0ccc8762b128d53c7"
+  integrity sha512-eWQGP3qtxwL8FGneRrC5DwrJLGN4/dH1clNTuLfN81HCrxVtxRjygDTUoZJ5ASlDEeo0ppYFQjQIlXhtXpOn6g==
+
 "@types/node@>= 8", "@types/node@>=6":
   version "13.1.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.5.tgz#4d5efc52a1d3e45d13e5ec9f911cbc5b089ccaec"
@@ -9740,10 +9745,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-danger@^10.1.1:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-10.1.1.tgz#25400316f27720f14059476c6b9ab40d96564681"
-  integrity sha512-kRJW7TrVYe3nzTILRahXuEvG/+EZwyHrDXTTHA6nkd+4Ga+F4A4AFNkT7d0hEi7OlhhVx8W9BkxNcSO1xEJrAA==
+danger@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-10.2.0.tgz#e3500c2003aa85dca029ba695cd04a85afcc34ff"
+  integrity sha512-3fVMm3l5Nu5hVh8ddHYmB5iMQcDgECGXXeU2cql1y9yuLq7SYHGt6hbXkEQyEg6z1UGhmRKoCR+iHc2Emnvusg==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.43.1"
