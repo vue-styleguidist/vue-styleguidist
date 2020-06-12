@@ -1,10 +1,10 @@
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
-import { RenderedUsage, DocgenCLIConfig } from '../config'
+import { RenderedUsage, SafeDocgenCLIConfig } from '../config'
 
 export default (
 	renderedUsage: RenderedUsage,
 	doc: ComponentDoc,
-	config: DocgenCLIConfig,
+	config: SafeDocgenCLIConfig,
 	fileName: string
 ): string => {
 	const { displayName, description, docsBlocks, tags, functional } = doc
@@ -27,11 +27,11 @@ title: ${displayName}
   ${description ? '> ' + description : ''}
   
   ${functional ? renderedUsage.functionalTag : ''}
-  ${author ? author.map(a => `Author: ${(a as ParamTag).description}\n`) : ''}
+  ${author ? author.map((a) => `Author: ${(a as ParamTag).description}\n`) : ''}
   ${since ? `Since: ${(since[0] as ParamTag).description}\n` : ''}
   ${version ? `Version: ${(version[0] as ParamTag).description}\n` : ''}
-  ${see ? see.map(s => `[See](${(s as ParamTag).description})\n`) : ''}
-  ${link ? link.map(l => `[See](${(l as ParamTag).description})\n`) : ''}
+  ${see ? see.map((s) => `[See](${(s as ParamTag).description})\n`) : ''}
+  ${link ? link.map((l) => `[See](${(l as ParamTag).description})\n`) : ''}
 
   ${renderedUsage.props}
   ${renderedUsage.methods}

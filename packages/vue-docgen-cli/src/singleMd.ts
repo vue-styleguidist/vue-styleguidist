@@ -15,7 +15,7 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param config
  * @param _compile
  */
-export default function(
+export default function (
 	files: string[],
 	watcher: FSWatcher | undefined,
 	config: DocgenCLIConfigWithOutFile,
@@ -30,9 +30,10 @@ export default function(
 	const fileCache = {}
 	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap)
 
-	compileSingleDocWithConfig()
 	if (watcher) {
 		watcher.on('add', compileSingleDocWithConfig).on('change', compileSingleDocWithConfig)
+	} else {
+		compileSingleDocWithConfig()
 	}
 }
 
