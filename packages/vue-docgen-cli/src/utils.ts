@@ -5,7 +5,7 @@ import chokidar, { FSWatcher } from 'chokidar'
 import mkdirpNative from 'mkdirp'
 import prettier from 'prettier'
 import compileTemplates from './compileTemplates'
-import { DocgenCLIConfig } from './config'
+import { SafeDocgenCLIConfig } from './config'
 
 const readFile = promisify(fs.readFile)
 const mkdirp = promisify(mkdirpNative)
@@ -22,7 +22,7 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
 	await mkdirp(destFolder)
 	let writeStream = fs.createWriteStream(destFilePath)
 	if (Array.isArray(content)) {
-		content.forEach(cont => {
+		content.forEach((cont) => {
 			writeStream.write(prettyMd(cont))
 		})
 	} else {
@@ -38,7 +38,7 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
  * @param config configuration
  * @param file relative path of the parsed component
  */
-export async function compileMarkdown(config: DocgenCLIConfig, file: string): Promise<string> {
+export async function compileMarkdown(config: SafeDocgenCLIConfig, file: string): Promise<string> {
 	const componentAbsolutePath = path.join(config.componentsRoot, file)
 	const docFilePath = config.getDocFileName(componentAbsolutePath)
 	var extraContent: string | undefined = undefined
@@ -57,11 +57,7 @@ export async function compileMarkdown(config: DocgenCLIConfig, file: string): Pr
  * @param cwd cwd to pass to chokidar
  * @param additionalFilesWatched the files found by globby to
  */
-export function getWatcher(
-	components: string | string[],
-	cwd: string,
-	additionalFilesWatched: string[]
-): FSWatcher {
+export function getWatcher(components: string | string[], cwd: string, additionalFilesWatched: string[]): FSWatcher {
 	const w = chokidar.watch(components, { cwd })
 	w.add(additionalFilesWatched)
 	return w
@@ -82,8 +78,8 @@ export function getDocMap(
 	root: string
 ): { [filepath: string]: string } {
 	const docMap: { [filepath: string]: string } = {}
-	files.forEach(f => {
-		const docFilePath = getDocFileName(f)
+	files.forEach((f) => {
+		const docFilePath = getDocFileName(path.join(root, f))
 		docMap[path.relative(root, docFilePath)] = f
 	})
 	return docMap

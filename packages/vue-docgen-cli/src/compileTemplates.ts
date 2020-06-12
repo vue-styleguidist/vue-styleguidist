@@ -6,7 +6,7 @@ import props from './templates/props'
 import component from './templates/component'
 import defaultExample from './templates/defaultExample'
 import functionalTag from './templates/functionalTag'
-import { DocgenCLIConfig } from './config'
+import { SafeDocgenCLIConfig } from './config'
 
 export { mdclean } from './templates/utils'
 export { events, methods, slots, props, component, defaultExample, functionalTag }
@@ -14,7 +14,7 @@ export { default as docgen } from './docgen'
 
 export default async (
 	absolutePath: string,
-	config: DocgenCLIConfig,
+	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
 	extraMd?: string
 ): Promise<string> => {

@@ -13,7 +13,7 @@ const unlink = promisify(fs.unlink)
  * @param files
  * @param config
  */
-export default function(
+export default function (
 	files: string[],
 	watcher: FSWatcher | undefined,
 	config: DocgenCLIConfigWithComponents,
@@ -21,8 +21,6 @@ export default function(
 	_compile = compile
 ) {
 	const compileWithConfig = _compile.bind(null, config, docMap)
-
-	files.forEach(compileWithConfig)
 
 	if (watcher) {
 		watcher
@@ -33,6 +31,10 @@ export default function(
 			.on('unlink', (relPath: string) => {
 				unlink(config.getDestFile(relPath, config))
 			})
+	} else {
+		files.forEach((f) => {
+			compileWithConfig(f)
+		})
 	}
 }
 
