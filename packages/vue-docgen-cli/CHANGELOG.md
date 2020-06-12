@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.24.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.1...v4.24.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* **cli:** allow partial templates ([62f00b6](https://github.com/vue-styleguidist/vue-styleguidist/commit/62f00b6eb7b1083d66723eb20858dd2447c09f67))
+* **cli:** refresh when updating markdown files ([2c3c502](https://github.com/vue-styleguidist/vue-styleguidist/commit/2c3c5026b5624693dad2c3f1e851a4e5e634971f)), closes [#885](https://github.com/vue-styleguidist/vue-styleguidist/issues/885)
+
+
+
+
+
 # [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
 
 **Note:** Version bump only for package vue-docgen-cli
