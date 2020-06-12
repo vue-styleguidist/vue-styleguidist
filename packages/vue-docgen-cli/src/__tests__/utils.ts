@@ -170,10 +170,10 @@ describe('getDocMap', () => {
 		})
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {
-		  "components/Button/Readme.md": "src/components/Button/Button.vue",
-		  "components/CounterButton/Readme.md": "src/components/CounterButton/CounterButton.vue",
-		  "components/Input/Readme.md": "src/components/Input/Input.vue",
-		  "components/PushButton/Readme.md": "src/components/PushButton/PushButton.vue",
+		  "src/components/Button/Readme.md": "src/components/Button/Button.vue",
+		  "src/components/CounterButton/Readme.md": "src/components/CounterButton/CounterButton.vue",
+		  "src/components/Input/Readme.md": "src/components/Input/Input.vue",
+		  "src/components/PushButton/Readme.md": "src/components/PushButton/PushButton.vue",
 		}
 	`)
 	})

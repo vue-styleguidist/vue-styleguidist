@@ -33,17 +33,13 @@ export default async (config: SafeDocgenCLIConfig) => {
 	// for every component file in the glob,
 	const files = await globby(config.components, { cwd: config.componentsRoot })
 
+	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
+
 	// then create the watcher if necessary
 	var watcher: FSWatcher | undefined
 	if (config.watch) {
-		watcher = getWatcher(
-			config.components,
-			config.componentsRoot,
-			files.map((f) => path.relative(config.componentsRoot, config.getDocFileName(f)))
-		)
+		watcher = getWatcher(config.components, config.componentsRoot, Object.keys(docMap))
 	}
-
-	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
 
 	if (config.outFile) {
 		// create one combined documentation file
