@@ -1,23 +1,23 @@
 import * as path from 'path'
 import globby from 'globby'
 import { FSWatcher } from 'chokidar'
-import { DocgenCLIConfig, Templates, RenderedUsage } from './config'
+import { SafeDocgenCLIConfig, Templates, RenderedUsage } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
 import { getWatcher, getDocMap } from './utils'
 import extractConfig from './extractConfig'
 
-export { DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
+export { SafeDocgenCLIConfig as DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
 
-export interface DocgenCLIConfigWithComponents extends DocgenCLIConfig {
+export interface DocgenCLIConfigWithComponents extends SafeDocgenCLIConfig {
 	components: string | string[]
 }
 
-function hasComponents(config: DocgenCLIConfig): config is DocgenCLIConfigWithComponents {
+function hasComponents(config: SafeDocgenCLIConfig): config is DocgenCLIConfigWithComponents {
 	return !!config.components
 }
 
-export default async (config: DocgenCLIConfig) => {
+export default async (config: SafeDocgenCLIConfig) => {
 	// if at a level that has no components (top level) just give up
 	if (!hasComponents(config)) return
 
@@ -39,7 +39,7 @@ export default async (config: DocgenCLIConfig) => {
 		watcher = getWatcher(
 			config.components,
 			config.componentsRoot,
-			files.map(f => path.relative(config.componentsRoot, config.getDocFileName(f)))
+			files.map((f) => path.relative(config.componentsRoot, config.getDocFileName(f)))
 		)
 	}
 

@@ -7,7 +7,7 @@ import {
 	ComponentDoc
 } from 'vue-docgen-api'
 
-export interface DocgenCLIConfig {
+export interface SafeDocgenCLIConfig {
 	/**
 	 * Should we add default examples
 	 * @default true
@@ -49,7 +49,7 @@ export interface DocgenCLIConfig {
 	 * @param file original file
 	 * @param config config file
 	 */
-	getDestFile(file: string, config: DocgenCLIConfig): string
+	getDestFile(file: string, config: SafeDocgenCLIConfig): string
 	/**
 	 * Should vue-docgen keep on watching your files for changes once generation is done?
 	 */
@@ -65,7 +65,12 @@ export interface DocgenCLIConfig {
 	/**
 	 * if you want to force the current working directory to another absolute path
 	 */
-	pages?: DocgenCLIConfig[]
+	pages?: SafeDocgenCLIConfig[]
+}
+
+export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
+	templates: Partial<Templates>
+	pages?: DocgenCLIConfig
 }
 
 export interface Templates {
@@ -73,12 +78,7 @@ export interface Templates {
 	slots(slots: SlotDescriptor[]): string
 	methods(methods: MethodDescriptor[]): string
 	events(events: EventDescriptor[]): string
-	component(
-		usage: RenderedUsage,
-		doc: ComponentDoc,
-		config: DocgenCLIConfig,
-		componentRelativePath: string
-	): string
+	component(usage: RenderedUsage, doc: ComponentDoc, config: SafeDocgenCLIConfig, componentRelativePath: string): string
 	defaultExample(doc: ComponentDoc): string
 	functionalTag: string
 }
