@@ -21,7 +21,7 @@
 		"test:coverage": "jest --coverage",
 		"start": "node test/styleguidist.js server",
 		"start:empty": "node bin/styleguidist.js server",
-		"lint": "eslint . --cache --fix --ext .ts,.js --cache-location node_modules/.eslint_cache/",
+		"lint": "eslint . --cache --fix --ext .ts,.tsx,.js --cache-location node_modules/.eslint_cache/",
 		"cli": "node test/run.cli.js",
 		"compile": "lerna run compile",
 		"compile:watch": "lerna run compile:watch --parallel",

@@ -64,6 +64,7 @@ export const SubComponents: React.FC<SubComponentsProps & JssInjectedProps> = ({
 }
 
 SubComponents.propTypes = {
+	classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
 	subComponents: PropTypes.arrayOf(
 		PropTypes.shape({
 			name: PropTypes.string.isRequired,
