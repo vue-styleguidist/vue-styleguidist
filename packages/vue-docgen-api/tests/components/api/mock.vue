@@ -12,7 +12,7 @@ export default {
 			 * @param {Object|String} option
 			 * @return {Object|String}
 			 */
-			default: option => option,
+			default: option => option
 		}
 	}
 }

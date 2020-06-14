@@ -28,7 +28,7 @@
 		"build": "node test/styleguidist.js build",
 		"test:browser": "node test/browser.js",
 		"precommit": "lint-staged",
-		"format": "prettier --write **/*.{js,md,vue,ts}",
+		"format": "prettier --write **/*.{js,md,vue,ts,tsx}",
 		"cy:open": "cypress open",
 		"cy:serve": "node test/run.server.js",
 		"cy:run": "cypress run --spec \"test/cypress/integration/$CY_EXAMPLE_FOLDER/*spec.js\"",

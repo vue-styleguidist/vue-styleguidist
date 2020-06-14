@@ -5,6 +5,7 @@
 	"useTabs": true,
 	"proseWrap": "never",
 	"semi": false,
+	"arrowParens": "avoid",
 	"overrides": [
 		{
 			"files": "*.md",

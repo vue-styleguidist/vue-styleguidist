@@ -1,34 +1,29 @@
 <template>
-  <div>
-    <!-- @slot Use this slot header -->
-    <slot name="header"></slot>
-    <table class="grid">
-      <thead>
-        <tr>
-          <th
-            v-for="key in columns"
-            :key="key"
-            @click="sortBy(key)"
-            :class="{ active: sortKey == key }"
-          >
-            {{ key | capitalize }}
-            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="entry in filteredData" :key="entry">
-          <td v-for="key in columns" :key="key">{{entry[key]}}</td>
-        </tr>
-      </tbody>
-    </table>
+	<div>
+		<!-- @slot Use this slot header -->
+		<slot name="header"></slot>
+		<table class="grid">
+			<thead>
+				<tr>
+					<th v-for="key in columns" :key="key" @click="sortBy(key)" :class="{ active: sortKey == key }">
+						{{ key | capitalize }}
+						<span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="entry in filteredData" :key="entry">
+					<td v-for="key in columns" :key="key">{{ entry[key] }}</td>
+				</tr>
+			</tbody>
+		</table>
 
-    <!-- @slot Use this slot footer -->
-    <slot name="footer"></slot>
-  </div>
+		<!-- @slot Use this slot footer -->
+		<slot name="footer"></slot>
+	</div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import Vue from 'vue'
 import text from './utils'
 
@@ -70,7 +65,7 @@ export default Vue.extend({
 
 		images: {
 			type: Array,
-			default: function() {
+			default: function () {
 				return [{}]
 			}
 		},
@@ -78,7 +73,7 @@ export default Vue.extend({
 		 * prop function
 		 */
 		propFunc: {
-			default: function() {}
+			default: function () {}
 		},
 		/**
 		 * get columns list
@@ -97,7 +92,7 @@ export default Vue.extend({
 	},
 	data(): IData {
 		var sortOrders: { [key: string]: number } = {}
-		;(this as any).columns.forEach(function(key: string) {
+		;(this as any).columns.forEach(function (key: string) {
 			sortOrders[key] = 1
 		})
 		return {
@@ -113,18 +108,14 @@ export default Vue.extend({
 			var order = this.sortOrders[sortKey] || 1
 			var data = this.$props.data
 			if (filterKey) {
-				data = data.filter(function(row: { [key: string]: string }) {
-					return Object.keys(row).some(function(key) {
-						return (
-							String(row[key])
-								.toLowerCase()
-								.indexOf(filterKey) > -1
-						)
+				data = data.filter(function (row: { [key: string]: string }) {
+					return Object.keys(row).some(function (key) {
+						return String(row[key]).toLowerCase().indexOf(filterKey) > -1
 					})
 				})
 			}
 			if (sortKey) {
-				data = data.slice().sort(function(a: any, b: any) {
+				data = data.slice().sort(function (a: any, b: any) {
 					a = a[sortKey]
 					b = b[sortKey]
 					return (a === b ? 0 : a > b ? 1 : -1) * order

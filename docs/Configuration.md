@@ -285,7 +285,7 @@ module.exports = {
     // Suppress messages
     info: () => {},
     // Override display function
-    warn: (message) => console.warn(`NOOOOOO: ${message}`)
+    warn: message => console.warn(`NOOOOOO: ${message}`)
   }
 }
 ```
@@ -702,7 +702,7 @@ To disable sorting, use the identity function:
 
 ```javascript
 module.exports = {
-  sortProps: (props) => props
+  sortProps: props => props
 }
 ```
 

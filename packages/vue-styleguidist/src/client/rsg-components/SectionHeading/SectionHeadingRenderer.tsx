@@ -69,12 +69,11 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 				<a href={href} className={sectionNameClasses}>
 					{children}
 				</a>
-				{parentName &&
-					parentHref && (
-						<a href={parentHref} className={classes.parentName}>
-							{parentName}
-						</a>
-					)}
+				{parentName && parentHref && (
+					<a href={parentHref} className={classes.parentName}>
+						{parentName}
+					</a>
+				)}
 			</Heading>
 			<div className={classes.toolbar}>{toolbar}</div>
 		</div>

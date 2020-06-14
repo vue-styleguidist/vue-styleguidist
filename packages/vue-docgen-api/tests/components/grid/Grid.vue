@@ -1,26 +1,26 @@
 <template>
-  <div>
-    <!-- @slot Use this slot header -->
-    <slot name="header"></slot>
-    <table class="grid">
-      <thead>
-        <tr>
-          <th v-for="key in columns" @click="sortBy(key)" :class="{ active: sortKey == key }">
-            {{ key | capitalize }}
-            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="entry in filteredData">
-          <td v-for="key in columns">{{entry[key]}}</td>
-        </tr>
-      </tbody>
-    </table>
+	<div>
+		<!-- @slot Use this slot header -->
+		<slot name="header"></slot>
+		<table class="grid">
+			<thead>
+				<tr>
+					<th v-for="key in columns" @click="sortBy(key)" :class="{ active: sortKey == key }">
+						{{ key | capitalize }}
+						<span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="entry in filteredData">
+					<td v-for="key in columns">{{ entry[key] }}</td>
+				</tr>
+			</tbody>
+		</table>
 
-    <!-- @slot Use this slot footer -->
-    <slot name="footer"></slot>
-  </div>
+		<!-- @slot Use this slot footer -->
+		<slot name="footer"></slot>
+	</div>
 </template>
 
 <script>
@@ -54,7 +54,7 @@ export default {
 
 		images: {
 			type: Array,
-			default: function() {
+			default: function () {
 				return [{}]
 			}
 		},
@@ -62,7 +62,7 @@ export default {
 		 * prop function
 		 */
 		propFunc: {
-			default: function() {}
+			default: function () {}
 		},
 		/**
 		 * get columns list
@@ -79,7 +79,7 @@ export default {
 	},
 	data() {
 		var sortOrders = {}
-		this.columns.forEach(function(key) {
+		this.columns.forEach(function (key) {
 			sortOrders[key] = 1
 		})
 		return {
@@ -88,24 +88,20 @@ export default {
 		}
 	},
 	computed: {
-		filteredData: function() {
+		filteredData: function () {
 			var sortKey = this.sortKey
 			var filterKey = this.filterKey && this.filterKey.toLowerCase()
 			var order = this.sortOrders[sortKey] || 1
 			var data = this.data
 			if (filterKey) {
-				data = data.filter(function(row) {
-					return Object.keys(row).some(function(key) {
-						return (
-							String(row[key])
-								.toLowerCase()
-								.indexOf(filterKey) > -1
-						)
+				data = data.filter(function (row) {
+					return Object.keys(row).some(function (key) {
+						return String(row[key]).toLowerCase().indexOf(filterKey) > -1
 					})
 				})
 			}
 			if (sortKey) {
-				data = data.slice().sort(function(a, b) {
+				data = data.slice().sort(function (a, b) {
 					a = a[sortKey]
 					b = b[sortKey]
 					return (a === b ? 0 : a > b ? 1 : -1) * order
@@ -115,7 +111,7 @@ export default {
 		}
 	},
 	filters: {
-		capitalize: function(str) {
+		capitalize: function (str) {
 			return str.charAt(0).toUpperCase() + str.slice(1)
 		}
 	},
@@ -129,7 +125,7 @@ export default {
 		 * @param {string} key Key to order
 		 * @returns {string} Test
 		 */
-		sortBy: function(key) {
+		sortBy: function (key) {
 			this.sortKey = key
 			this.sortOrders[key] = this.sortOrders[key] * -1
 
@@ -144,7 +140,7 @@ export default {
 			})
 		},
 
-		hiddenMethod: function() {
+		hiddenMethod: function () {
 			/**
 			 * Error event.
 			 *
