@@ -211,8 +211,8 @@ function describeTypeAndValuesFromPath(
 	return propDescriptor.type.name
 }
 
-function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression>): { name: string; func?: boolean } {
-	const typeNode = typePath.node as any
+function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression | bt.Identifier>): { name: string; func?: boolean } {
+	const typeNode = typePath.node
 	const { typeAnnotation } = typeNode
 
 	const typeName =

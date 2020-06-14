@@ -573,8 +573,8 @@ describe('propHandler', () => {
         export default Vue.extend({
         props: {
           tsvalue: {
-          type: String as Prop<('foo' | 'bar')>,
-          required: true
+          	type: String as Prop<('foo' | 'bar')>,
+        	required: true
           }
         }
         });`
