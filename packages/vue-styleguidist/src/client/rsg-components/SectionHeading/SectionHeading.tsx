@@ -51,11 +51,7 @@ SectionHeading.propTypes = {
 	id: PropTypes.string.isRequired,
 	slotName: PropTypes.string.isRequired,
 	slotProps: PropTypes.shape({
-		isolated: PropTypes.bool.isRequired,
-		parentComponent: PropTypes.shape({
-			href: PropTypes.string,
-			visibleName: PropTypes.string.isRequired
-		})
+		isolated: PropTypes.bool.isRequired
 	}).isRequired,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
