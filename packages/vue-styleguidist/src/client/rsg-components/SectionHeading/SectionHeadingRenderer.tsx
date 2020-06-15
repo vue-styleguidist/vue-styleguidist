@@ -4,7 +4,6 @@ import * as Rsg from 'react-styleguidist'
 import cx from 'clsx'
 import Heading from 'rsg-components/Heading'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
-import { pathToFileURL } from 'url'
 
 const styles = ({ color, space, fontSize }: Rsg.Theme) => ({
 	wrapper: {
