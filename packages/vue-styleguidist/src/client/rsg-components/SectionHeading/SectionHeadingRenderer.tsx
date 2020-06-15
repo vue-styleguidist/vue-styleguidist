@@ -4,6 +4,7 @@ import * as Rsg from 'react-styleguidist'
 import cx from 'clsx'
 import Heading from 'rsg-components/Heading'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import { pathToFileURL } from 'url'
 
 const styles = ({ color, space, fontSize }: Rsg.Theme) => ({
 	wrapper: {
@@ -36,16 +37,19 @@ const styles = ({ color, space, fontSize }: Rsg.Theme) => ({
 	}
 })
 
-interface SectionHeadingRendererProps extends JssInjectedProps {
-	children?: React.ReactNode
-	toolbar?: React.ReactNode
-	id: string
-	href: string
-	depth: number
-	deprecated?: boolean
-	parentName?: string
-	parentHref?: string
+const localPropTypes = {
+	classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
+	children: PropTypes.node,
+	toolbar: PropTypes.node,
+	id: PropTypes.string.isRequired,
+	href: PropTypes.string.isRequired,
+	depth: PropTypes.number.isRequired,
+	deprecated: PropTypes.bool,
+	parentName: PropTypes.string,
+	parentHref: PropTypes.string
 }
+
+type SectionHeadingRendererProps = PropTypes.InferProps<typeof localPropTypes> & JssInjectedProps
 
 const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProps> = ({
 	classes,
@@ -80,15 +84,5 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 	)
 }
 
-SectionHeadingRenderer.propTypes = {
-	classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
-	children: PropTypes.node,
-	toolbar: PropTypes.node,
-	id: PropTypes.string.isRequired,
-	href: PropTypes.string.isRequired,
-	depth: PropTypes.number.isRequired,
-	deprecated: PropTypes.bool,
-	parentName: PropTypes.string,
-	parentHref: PropTypes.string
-}
+SectionHeadingRenderer.propTypes = localPropTypes
 export default Styled<SectionHeadingRendererProps>(styles as any)(SectionHeadingRenderer)

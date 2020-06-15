@@ -1,22 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as Rsg from 'react-styleguidist'
 import Slot from 'rsg-components/Slot'
 import SectionHeadingRenderer from 'rsg-components/SectionHeading/SectionHeadingRenderer'
 import getUrl from 'react-styleguidist/lib/client/utils/getUrl'
 
-interface SectionHeadingProps {
-	children?: React.ReactNode
-	id: string
-	slotName: string
-	slotProps: Rsg.Component & {
-		isolated: boolean
-		parentComponent?: { href: string; visibleName: string }
-	}
-	depth: number
-	deprecated?: boolean
-	pagePerSection?: boolean
+const localPropTypes = {
+	children: PropTypes.node,
+	id: PropTypes.string.isRequired,
+	slotName: PropTypes.string.isRequired,
+	slotProps: PropTypes.shape({
+		isolated: PropTypes.bool.isRequired,
+		parentComponent: PropTypes.shape({
+			href: PropTypes.string.isRequired,
+			visibleName: PropTypes.string.isRequired
+		})
+	}).isRequired,
+	depth: PropTypes.number.isRequired,
+	deprecated: PropTypes.bool,
+	pagePerSection: PropTypes.bool
 }
+
+type SectionHeadingProps = PropTypes.InferProps<typeof localPropTypes>
 
 const SectionHeading: React.FunctionComponent<SectionHeadingProps> = ({
 	slotName,
@@ -46,16 +50,6 @@ const SectionHeading: React.FunctionComponent<SectionHeadingProps> = ({
 	)
 }
 
-SectionHeading.propTypes = {
-	children: PropTypes.node,
-	id: PropTypes.string.isRequired,
-	slotName: PropTypes.string.isRequired,
-	slotProps: PropTypes.shape({
-		isolated: PropTypes.bool.isRequired
-	}).isRequired,
-	depth: PropTypes.number.isRequired,
-	deprecated: PropTypes.bool,
-	pagePerSection: PropTypes.bool
-}
+SectionHeading.propTypes = localPropTypes
 
 export default SectionHeading
