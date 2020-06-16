@@ -17,7 +17,7 @@ Create **styleguide.config.js** file in your project root directory like this:
       components: 'src/components/**/*.vue'
     };
 
-Read more in the [locating components guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Components.md).
+Read more in the [locating components guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/docs/Components.md).
 				"
   />
 </div>
