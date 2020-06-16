@@ -121,7 +121,7 @@ module.exports = {
 
 Type: `Boolean` or `String`, default: `false`
 
-For components that do not have an example, a default one can be used. When set to `true`, the [DefaultExample.md](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/scripts/templates/DefaultExample.md) is used, or you can provide the path to your own example Markdown file.
+For components that do not have an example, a default one can be used. When set to `true`, the [DefaultExample.md](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/packages/vue-styleguidist/scripts/templates/DefaultExample.md) is used, or you can provide the path to your own example Markdown file.
 
 When writing your own default example file, `__COMPONENT__` will be replaced by the actual component name at compile time.
 
@@ -154,7 +154,7 @@ module.exports = {
 
 ## `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
 
@@ -603,9 +603,9 @@ module.exports = {
 }
 ```
 
-See an example of [customized style guide](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised).
+See an example of [customized style guide](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/customised).
 
-If you want to wrap, rather than replace a component, make sure to import the default implementation using the full path to `vue-styleguidist`. See an example of [wrapping a Styleguidist component](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/customised/styleguide/components/SectionsRenderer.js).
+If you want to wrap, rather than replace a component, make sure to import the default implementation using the full path to `vue-styleguidist`. See an example of [wrapping a Styleguidist component](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/customised/styleguide/components/SectionsRenderer.js).
 
 **Note**: these components are not guaranteed to be safe from breaking changes in vue-styleguidist updates.
 

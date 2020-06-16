@@ -337,7 +337,7 @@ If you want to ignore the readme file for one component, use the `@example [none
 
 > **Note:** You can configure examples file name with the [getExampleFilename](/Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Button/Button.vue#L85)
 
 ### External examples using doclet tags
 

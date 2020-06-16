@@ -72,7 +72,7 @@ Docs are available at https://vue-styleguidist.github.io/ - we are still working
 
 ## Contributing
 
-Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/.github/CONTRIBUTING.md).
+Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/.github/CONTRIBUTING.md).
 
 Note that the current monorepo relies on `yarn` workspaces. Don't forget to install yarn, `npm i --global yarn`, before cloning.
 
@@ -86,4 +86,4 @@ Logo by [Benjamin Cognard](https://twitter.com/benbnur).
 
 ## License
 
-[MIT License](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/LICENSE)
+[MIT License](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/LICENSE)

@@ -71,16 +71,16 @@ Zeit and Netlify simplify your website deployment automation. If you are going w
 This is how the very documentation you are reading is deployed automatically
 
 ```yml
-    deploy:
-        provider: pages
-        skip-cleanup: true
-        local-dir: styleguide
-        target-branch: master
-        repo: yourgithubid/yourgithubid.github.io
-        github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-        keep-history: true
-        on:
-            branch: master # only deploy when a commit or a merge is pushed to master
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: styleguide
+  target-branch: docs
+  repo: yourgithubid/yourgithubid.github.io
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: delivery # only deploy when a commit or a merge is pushed to delivery
 ```
 
 [Read More](https://docs.travis-ci.com/user/deployment/pages/)
