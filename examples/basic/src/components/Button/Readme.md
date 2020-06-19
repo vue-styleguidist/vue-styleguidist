@@ -18,7 +18,7 @@ Big pink button and small blue button:
 
 And you _can_ **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
 
-Fenced code blocks with `vue`, `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
+Fenced code blocks with `vue`, `html`, `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
 
 ```jsx
 <BestButton>Push Me</BestButton>
