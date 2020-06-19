@@ -1,12 +1,12 @@
 Basic button:
 
-```jsx
+```html
 <BestButton>Push Me</BestButton>
 ```
 
 Big pink button and small blue button:
 
-```vue
+```html
 <BestButton size="large" color="deeppink">
   Click Me
 </BestButton>
