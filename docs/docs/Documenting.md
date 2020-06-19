@@ -64,7 +64,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
        */
       onClick: {
         type: Function,
-        default: (event) => {
+        default: event => {
           console.log('You have clicked me!', event.target)
         }
       }
@@ -240,7 +240,7 @@ If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](htt
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a Vue component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
 
 If you want to ignore the readme file for one component, use the `@example [none]` doclet. Use this when multiple components in the same folder share a `ReadMe` file. This will prevent the examples from being rendered multiple times.
 
@@ -486,7 +486,7 @@ You can mark your public methods with JSDoc `@public` tag to get them published 
        */
       onClick: {
         type: Function,
-        default: (event) => {
+        default: event => {
           console.log('You have clicked me!', event.target)
         }
       }
