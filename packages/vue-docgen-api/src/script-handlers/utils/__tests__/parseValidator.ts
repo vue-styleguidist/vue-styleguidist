@@ -44,4 +44,9 @@ describe('parseValidatorForValues', () => {
 		const validator = getValidator(`validator: a => ['sm', 'md', 'lg'].includes(a)`)
 		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
 	})
+
+	it('should not fail if a member of the array is an object', () => {
+		const validator = getValidator(`validator: a => ['sm', {foo:'bar'}, 'lg'].includes(a)`)
+		expect(parseValidatorForValues(validator)).toEqual(['sm', 'lg'])
+	})
 })

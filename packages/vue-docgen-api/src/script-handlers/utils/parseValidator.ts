@@ -1,5 +1,24 @@
 import * as bt from '@babel/types'
 
+/**
+ * Determines if node contains the value -1
+ * @param node
+ */
+function isMinusOne(node: bt.Expression): boolean {
+	return (
+		bt.isUnaryExpression(node) &&
+		node.operator === '-' &&
+		bt.isNumericLiteral(node.argument) &&
+		node.argument.value === 1
+	)
+}
+
+function extractStringArray(valuesObjectNode: bt.Expression): string[] | undefined {
+	return bt.isArrayExpression(valuesObjectNode)
+		? valuesObjectNode.elements.map((e: bt.StringLiteral) => e.value).filter(e => e)
+		: undefined
+}
+
 export default function parseValidatorForValues(
 	validatorNode: bt.Method | bt.ArrowFunctionExpression
 ): string[] | undefined {
@@ -19,24 +38,22 @@ export default function parseValidatorForValues(
 
 		switch (returnedExpression.operator) {
 			case '>':
-				if (
-					bt.isUnaryExpression(returnedExpression.right) &&
-					returnedExpression.right.operator === '-' &&
-					bt.isNumericLiteral(returnedExpression.right.argument) &&
-					returnedExpression.right.argument.value === 1
-				) {
+				if (isMinusOne(returnedExpression.right)) {
 					valuesNode = returnedExpression.left
 				}
 				break
 
 			case '<':
-				if (
-					bt.isUnaryExpression(returnedExpression.left) &&
-					returnedExpression.left.operator === '-' &&
-					bt.isNumericLiteral(returnedExpression.left.argument) &&
-					returnedExpression.left.argument.value === 1
-				) {
+				if (isMinusOne(returnedExpression.left)) {
 					valuesNode = returnedExpression.right
+				}
+				break
+			case '!==':
+			case '!=':
+				if (isMinusOne(returnedExpression.left)) {
+					valuesNode = returnedExpression.right
+				} else if (isMinusOne(returnedExpression.right)) {
+					valuesNode = returnedExpression.left
 				}
 				break
 			default:
@@ -49,11 +66,14 @@ export default function parseValidatorForValues(
 			varName === valuesNode.arguments[0].name &&
 			bt.isMemberExpression(valuesNode.callee) &&
 			bt.isIdentifier(valuesNode.callee.property) &&
-			valuesNode.callee.property.name === 'indexOf' &&
-			bt.isArrayExpression(valuesNode.callee.object)
-				? valuesNode.callee.object.elements.map((e: bt.StringLiteral) => e.value)
+			valuesNode.callee.property.name === 'indexOf'
+				? extractStringArray(valuesNode.callee.object)
 				: undefined
 		return values
+	} else if (bt.isCallExpression(returnedExpression)) {
+		if (bt.isMemberExpression(returnedExpression.callee) && returnedExpression.callee.property.name === 'includes') {
+			return extractStringArray(returnedExpression.callee.object)
+		}
 	}
 	return
 }
