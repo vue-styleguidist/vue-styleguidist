@@ -1,9 +1,12 @@
 <template>
 	<!-- here is a nice component template -->
-	<button class="buttonComponent" @click.prevent="
-	onClick()
-	console.log('count', count)
-	">
+	<button
+		class="buttonComponent"
+		@click.prevent="
+			onClick()
+			console.log('count', count)
+		"
+	>
 		<!-- @slot Use this slot default -->
 		<slot></slot>
 	</button>

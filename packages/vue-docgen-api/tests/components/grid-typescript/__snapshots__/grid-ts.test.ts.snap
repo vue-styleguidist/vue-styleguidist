@@ -177,7 +177,7 @@ Object {
     Object {
       "defaultValue": Object {
         "func": true,
-        "value": "function() {}",
+        "value": "function () {}",
       },
       "description": "prop function",
       "name": "propFunc",

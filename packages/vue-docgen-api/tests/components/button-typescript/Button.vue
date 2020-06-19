@@ -1,11 +1,11 @@
 <template>
-  <button class="buttonComponent" @click.prevent="onClick">
-    <!-- @slot Use this slot default -->
-    <slot></slot>
-  </button>
+	<button class="buttonComponent" @click.prevent="onClick">
+		<!-- @slot Use this slot default -->
+		<slot></slot>
+	</button>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 /**

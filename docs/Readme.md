@@ -4,6 +4,7 @@ heroImage: >-
   https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/delivery/assets/logo.png
 
 
+
 actionText: Get Started →
 actionLink: /docs/GettingStarted.html
 features:

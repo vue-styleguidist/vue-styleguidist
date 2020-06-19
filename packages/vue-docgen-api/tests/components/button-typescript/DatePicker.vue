@@ -1,18 +1,18 @@
 <template>
-  <div class="input-group date">
-    <input
-      ref="inputDate"
-      type="text"
-      :data-value="date"
-      :value="date"
-      class="form-control"
-      :style="`background: ${color}`"
-      :disabled="disabled"
-    >
-    <span class="input-group-addon" :style="`background: ${color}`">
-      <span class="glyphicon glyphicon-calendar"/>
-    </span>
-  </div>
+	<div class="input-group date">
+		<input
+			ref="inputDate"
+			type="text"
+			:data-value="date"
+			:value="date"
+			class="form-control"
+			:style="`background: ${color}`"
+			:disabled="disabled"
+		/>
+		<span class="input-group-addon" :style="`background: ${color}`">
+			<span class="glyphicon glyphicon-calendar" />
+		</span>
+	</div>
 </template>
 
 <script lang="ts">

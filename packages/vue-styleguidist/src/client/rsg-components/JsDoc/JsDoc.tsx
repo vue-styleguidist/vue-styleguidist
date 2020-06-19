@@ -85,6 +85,7 @@ export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props
 
 JsDoc.propTypes = {
 	classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
+	subComponents: PropTypes.array,
 	deprecated: PropTypes.array,
 	see: PropTypes.array,
 	link: PropTypes.array,

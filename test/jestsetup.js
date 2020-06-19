@@ -15,7 +15,7 @@ global.mount = mount
 configure({ adapter: new Adapter() })
 
 // document.createRange “polyfill” for CodeMirror
-document.createRange = function() {
+document.createRange = function () {
 	return {
 		setEnd: () => {},
 		setStart: () => {},
@@ -36,8 +36,8 @@ document.createRange = function() {
 window.requestAnimationFrame = a => a()
 
 jest.mock('react-scripts/config/webpack.config.dev', () => ({ cra: true }), { virtual: true })
-jest.mock('webpack-dev-server', function() {
-	return function() {
+jest.mock('webpack-dev-server', function () {
+	return function () {
 		return {
 			app: {}
 		}
