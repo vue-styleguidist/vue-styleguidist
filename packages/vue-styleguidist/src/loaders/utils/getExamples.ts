@@ -34,7 +34,7 @@ export default function getExamples(
 		displayName,
 		file: relativePath,
 		shouldShowDefaultExample: !examplesFile && !!defaultExample && !isComponentDocInVueFile,
-		customLangs: 'vue|js|jsx'
+		customLangs: 'vue|js|jsx|html'
 	}
 
 	if (examplesFile && fs.existsSync(examplesFile)) {
