@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
+
+**Note:** Version bump only for package vue-simple-docgen-loader
+
+
+
+
+
 # [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
 
 **Note:** Version bump only for package vue-simple-docgen-loader

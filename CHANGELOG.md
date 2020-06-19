@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
+
+
+### Bug Fixes
+
+* yarn upgrade revert ([4fe3218](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fe32181053234630df418673616b5ca61321c5c))
+
+
+### Features
+
+* **docgen:** allow other forms of validation ([dd2400c](https://github.com/vue-styleguidist/vue-styleguidist/commit/dd2400cbaecad10209625c2046674d037e387d93))
+* 🎸 Add support for html language in examples ([77e225a](https://github.com/vue-styleguidist/vue-styleguidist/commit/77e225a3afcda1dabe87d7e52042748e48799d6b))
+
+
+
+
+
 ## [4.24.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.2...v4.24.3) (2020-06-16)
 
 **Note:** Version bump only for package vue-styleguidist
