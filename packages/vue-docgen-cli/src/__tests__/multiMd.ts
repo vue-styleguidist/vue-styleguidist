@@ -10,7 +10,7 @@ const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 var mockCompileMarkdown: jest.Mock
 var mockWriteDownMdFile: jest.Mock
 jest.mock('../utils', () => {
-	mockCompileMarkdown = jest.fn(async () => FAKE_MD_CONTENT)
+	mockCompileMarkdown = jest.fn(async () => ({ content: FAKE_MD_CONTENT, dependencies: [] }))
 	mockWriteDownMdFile = jest.fn(() => Promise.resolve())
 	return {
 		compileMarkdown: mockCompileMarkdown,
@@ -38,26 +38,28 @@ describe('multiMd', () => {
 
 	describe('compile', () => {
 		it('should get the current components doc', async done => {
-			await multiMd.compile(conf, {}, FAKE_COMPONENT_PATH)
+			await multiMd.compile(conf, {}, w, FAKE_COMPONENT_PATH)
 			expect(writeDownMdFile).toHaveBeenCalledWith(FAKE_MD_CONTENT, MD_FILE_PATH)
 			done()
 		})
 	})
 
 	describe('default', () => {
-		it('should build one md from each file passed', () => {
+		it('should build one md from each file passed', async done => {
 			jest.spyOn(multiMd, 'compile').mockImplementation(() => Promise.resolve())
-			multiMd.default(FILES, w, conf, {}, multiMd.compile)
+			await multiMd.default(FILES, w, conf, {}, multiMd.compile)
 			expect(multiMd.compile).toHaveBeenCalledTimes(FILES.length)
+			done()
 		})
 
-		it('should watch file changes if a watcher is passed', () => {
+		it('should watch file changes if a watcher is passed', async done => {
 			conf.watch = true
 			fakeOn.mockClear()
-			multiMd.default(FILES, w, conf, {})
+			await multiMd.default(FILES, w, conf, {})
 			expect(fakeOn).toHaveBeenCalledWith('add', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('change', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('unlink', expect.any(Function))
+			done()
 		})
 	})
 })

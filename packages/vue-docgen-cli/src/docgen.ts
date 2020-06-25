@@ -2,8 +2,8 @@ import * as path from 'path'
 import { SafeDocgenCLIConfig, Templates, RenderedUsage } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
-import { getSources } from './utils'
 import extractConfig from './extractConfig'
+import getSources from './getSources'
 
 export { SafeDocgenCLIConfig as DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
 
@@ -32,15 +32,16 @@ export default async (config: SafeDocgenCLIConfig) => {
 	const { watcher, componentFiles, docMap } = await getSources(
 		config.components,
 		config.componentsRoot,
-		config.getDocFileName
+		config.getDocFileName,
+		config.apiOptions
 	)
 
 	if (config.outFile) {
 		// create one combined documentation file
-		singleMd(componentFiles, watcher, config as DocgenCLIConfigWithOutFile, docMap)
+		await singleMd(componentFiles, watcher, config as DocgenCLIConfigWithOutFile, docMap)
 	} else {
 		// create one documentation file per component
-		multiMd(componentFiles, watcher, config, docMap)
+		await multiMd(componentFiles, watcher, config, docMap)
 	}
 
 	if (!config.watch) {

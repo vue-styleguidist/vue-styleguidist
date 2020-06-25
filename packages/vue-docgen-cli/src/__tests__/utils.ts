@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { writeDownMdFile, compileMarkdown, getDocMap, getSources } from '../utils'
+import { writeDownMdFile, compileMarkdown, getDocMap } from '../utils'
 import extractConfig from '../extractConfig'
 import { SafeDocgenCLIConfig } from '../config'
 
@@ -123,26 +123,6 @@ describe('compileMarkdown', () => {
 	})
 })
 
-var mockWatch: jest.Mock, mockAddWatch: jest.Mock, fakeOn: jest.Mock, mockGetWatched: jest.Mock
-
-jest.mock('chokidar', () => {
-	mockAddWatch = jest.fn()
-	fakeOn = jest.fn((item, cb) => {
-		if (item === 'ready') {
-			cb()
-		}
-	})
-	mockGetWatched = jest.fn(() => ({ dir: FILES }))
-	mockWatch = jest.fn(() => ({
-		add: mockAddWatch,
-		on: fakeOn,
-		getWatched: mockGetWatched
-	}))
-	return {
-		watch: mockWatch
-	}
-})
-
 const FILES = [
 	'src/components/Button/Button.vue',
 	'src/components/Input/Input.vue',
@@ -150,24 +130,7 @@ const FILES = [
 	'src/components/PushButton/PushButton.vue'
 ]
 
-const COMPONENTS_GLOB = 'components/**/*.vue'
-
 const getDocFileName = (componentPath: string) => path.resolve(path.dirname(componentPath), 'Readme.md')
-
-describe('getSources', () => {
-	it('should be a function', async done => {
-		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
-		expect(componentFiles).toMatchInlineSnapshot(`
-		Array [
-		  "dir/src/components/Button/Button.vue",
-		  "dir/src/components/Input/Input.vue",
-		  "dir/src/components/CounterButton/CounterButton.vue",
-		  "dir/src/components/PushButton/PushButton.vue",
-		]
-	`)
-		done()
-	})
-})
 
 describe('getDocMap', () => {
 	it('should return relative maps', () => {

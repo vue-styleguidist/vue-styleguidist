@@ -15,7 +15,7 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param config
  * @param _compile
  */
-export default function (
+export default async function (
 	files: string[],
 	watcher: FSWatcher,
 	config: DocgenCLIConfigWithOutFile,
@@ -28,9 +28,9 @@ export default function (
 	// `key`: filePath of source component
 	// `content`: markdown compiled for it
 	const fileCache = {}
-	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap)
+	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap, watcher)
 
-	compileSingleDocWithConfig()
+	await compileSingleDocWithConfig()
 
 	if (config.watch) {
 		watcher.on('add', compileSingleDocWithConfig).on('change', compileSingleDocWithConfig)
@@ -51,12 +51,18 @@ export async function compile(
 	files: string[],
 	cachedContent: { [filepath: string]: string },
 	docMap: { [filepath: string]: string },
+	watcher: FSWatcher,
 	changedFilePath?: string
 ) {
 	// this local function will enrich the cachedContent with the
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
-		cachedContent[filePath] = await compileMarkdown(config, filePath)
+		const { content, dependencies } = await compileMarkdown(config, filePath)
+		dependencies.forEach(d => {
+			watcher.add(d)
+			docMap[d] = filePath
+		})
+		cachedContent[filePath] = content
 		return true
 	}
 

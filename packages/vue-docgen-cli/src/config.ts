@@ -6,6 +6,9 @@ import {
 	EventDescriptor,
 	ComponentDoc
 } from 'vue-docgen-api'
+import { ContentAndDependencies } from './compileTemplates'
+
+export { ContentAndDependencies }
 
 export interface SafeDocgenCLIConfig {
 	/**
@@ -74,11 +77,18 @@ export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' |
 }
 
 export interface Templates {
-	props(props: PropDescriptor[]): string
-	slots(slots: SlotDescriptor[]): string
-	methods(methods: MethodDescriptor[]): string
-	events(events: EventDescriptor[]): string
-	component(usage: RenderedUsage, doc: ComponentDoc, config: SafeDocgenCLIConfig, componentRelativePath: string): string
+	props(props: PropDescriptor[], subComponent?: boolean): string
+	slots(slots: SlotDescriptor[], subComponent?: boolean): string
+	methods(methods: MethodDescriptor[], subComponent?: boolean): string
+	events(events: EventDescriptor[], subComponent?: boolean): string
+	component(
+		usage: RenderedUsage,
+		doc: ComponentDoc,
+		config: SafeDocgenCLIConfig,
+		componentRelativePath: string,
+		requiresMd: ContentAndDependencies[],
+		subComponent?: boolean
+	): string
 	defaultExample(doc: ComponentDoc): string
 	functionalTag: string
 }
