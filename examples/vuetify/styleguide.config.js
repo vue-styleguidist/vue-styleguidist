@@ -3,6 +3,7 @@ const path = require('path')
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
 module.exports = {
+	webpackConfig: require('./webpack.config.js'),
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	template: {
