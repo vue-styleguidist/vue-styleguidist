@@ -25,9 +25,9 @@ describe('multiMd', () => {
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: DocgenCLIConfigWithComponents
 	const fakeOn = jest.fn()
-	let w = {
+	let w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
-	}
+	} as unknown) as FSWatcher
 
 	beforeEach(() => {
 		conf = extractConfig(CWD) as DocgenCLIConfigWithComponents
@@ -47,13 +47,14 @@ describe('multiMd', () => {
 	describe('default', () => {
 		it('should build one md from each file passed', () => {
 			jest.spyOn(multiMd, 'compile').mockImplementation(() => Promise.resolve())
-			multiMd.default(FILES, undefined, conf, {}, multiMd.compile)
+			multiMd.default(FILES, w, conf, {}, multiMd.compile)
 			expect(multiMd.compile).toHaveBeenCalledTimes(FILES.length)
 		})
 
 		it('should watch file changes if a watcher is passed', () => {
+			conf.watch = true
 			fakeOn.mockClear()
-			multiMd.default(FILES, (w as unknown) as FSWatcher, conf, {})
+			multiMd.default(FILES, w, conf, {})
 			expect(fakeOn).toHaveBeenCalledWith('add', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('change', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('unlink', expect.any(Function))

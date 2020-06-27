@@ -22,7 +22,7 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
 	await mkdirp(destFolder)
 	let writeStream = fs.createWriteStream(destFilePath)
 	if (Array.isArray(content)) {
-		content.forEach((cont) => {
+		content.forEach(cont => {
 			writeStream.write(prettyMd(cont))
 		})
 	} else {
@@ -51,16 +51,33 @@ export async function compileMarkdown(config: SafeDocgenCLIConfig, file: string)
 }
 
 /**
- * returns a chokidar watcher watching not only the files in
- * the glob but their corresponding doc files
+ *
  * @param components glob or globs to watch
- * @param cwd cwd to pass to chokidar
- * @param additionalFilesWatched the files found by globby to
+ * @param cwd option to pass chokidar
+ * @param getDocFileName a function to go from component to doc file
  */
-export function getWatcher(components: string | string[], cwd: string, additionalFilesWatched: string[]): FSWatcher {
-	const w = chokidar.watch(components, { cwd })
-	w.add(additionalFilesWatched)
-	return w
+export async function getSources(
+	components: string | string[],
+	cwd: string,
+	getDocFileName: (componentPath: string) => string
+): Promise<{ watcher: FSWatcher; docMap: { [filepath: string]: string }; componentFiles: string[] }> {
+	const watcher = chokidar.watch(components, { cwd })
+	await ready(watcher)
+	const watchedFilesObject = watcher.getWatched()
+	const componentFiles = Object.keys(watchedFilesObject).reduce(
+		(acc: string[], directory) => acc.concat(watchedFilesObject[directory].map(p => path.join(directory, p))),
+		[]
+	)
+	const docMap = getDocMap(componentFiles, getDocFileName, cwd)
+	watcher.add(Object.keys(docMap))
+
+	return { watcher, docMap, componentFiles }
+}
+
+function ready(watcher: FSWatcher): Promise<null> {
+	return new Promise(function (resolve) {
+		watcher.on('ready', resolve)
+	})
 }
 
 /**
@@ -78,7 +95,7 @@ export function getDocMap(
 	root: string
 ): { [filepath: string]: string } {
 	const docMap: { [filepath: string]: string } = {}
-	files.forEach((f) => {
+	files.forEach(f => {
 		const docFilePath = getDocFileName(path.join(root, f))
 		docMap[path.relative(root, docFilePath)] = f
 	})

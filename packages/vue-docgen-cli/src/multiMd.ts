@@ -15,14 +15,17 @@ const unlink = promisify(fs.unlink)
  */
 export default function (
 	files: string[],
-	watcher: FSWatcher | undefined,
+	watcher: FSWatcher,
 	config: DocgenCLIConfigWithComponents,
 	docMap: { [filepath: string]: string },
 	_compile = compile
 ) {
 	const compileWithConfig = _compile.bind(null, config, docMap)
+	files.forEach(f => {
+		compileWithConfig(f)
+	})
 
-	if (watcher) {
+	if (config.watch) {
 		watcher
 			// on filechange, recompile the corresponding file
 			.on('add', compileWithConfig)
@@ -31,16 +34,11 @@ export default function (
 			.on('unlink', (relPath: string) => {
 				unlink(config.getDestFile(relPath, config))
 			})
-	} else {
-		files.forEach((f) => {
-			compileWithConfig(f)
-		})
 	}
 }
 
 /**
- * /**
- * Compile a markdown flie from a components and save it
+ * Compile a markdown file from a components and save it
  * This will use the filePath to know where to save
  * @param config config passed to the current chunk
  * @param docMap a map of each documentation file to the component they refer to
@@ -53,8 +51,9 @@ export async function compile(
 ) {
 	const componentFile = docMap[filePath] || filePath
 	const file = config.getDestFile(componentFile, config)
-	// if getDestFile is null,will not be create files
+	// if getDestFile is null, will not create files
 	if (file) {
-		writeDownMdFile(await compileMarkdown(config, componentFile), file)
+		const content = await compileMarkdown(config, componentFile)
+		writeDownMdFile(content, file)
 	}
 }
