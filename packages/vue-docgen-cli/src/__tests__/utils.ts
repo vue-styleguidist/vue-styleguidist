@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { writeDownMdFile, compileMarkdown, getDocMap, getWatcher } from '../utils'
+import { writeDownMdFile, compileMarkdown, getDocMap, getSources } from '../utils'
 import extractConfig from '../extractConfig'
 import { SafeDocgenCLIConfig } from '../config'
 
@@ -32,7 +32,7 @@ jest.mock('fs', () => {
 	mockFs = {
 		readFile: jest.fn((a, b, c) => c()),
 		writeFile: jest.fn((a, b, c) => c()),
-		createWriteStream: (a) => cws,
+		createWriteStream: a => cws,
 		existsSync: jest.fn(() => false)
 	}
 	return mockFs
@@ -59,13 +59,13 @@ jest.mock('../compileTemplates', () => {
 })
 
 describe('writeDownMdFile', () => {
-	it('should pretify before saving', async (done) => {
+	it('should pretify before saving', async done => {
 		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
 		expect(mockPrettierFormat).toHaveBeenCalledWith(UGLY_MD, { parser: 'markdown' })
 		done()
 	})
 
-	it('should then save the pretified markdown', async (done) => {
+	it('should then save the pretified markdown', async done => {
 		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
 		expect(cws.write).toHaveBeenCalledWith(PRETTY_MD)
 		done()
@@ -86,13 +86,13 @@ describe('compileMarkdown', () => {
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
 	})
 
-	it('should call getDocFileName to determine the extra docs file bs path', async (done) => {
+	it('should call getDocFileName to determine the extra docs file bs path', async done => {
 		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
 		expect(conf.getDocFileName).toHaveBeenCalledWith(path.join(CWD, FAKE_COMPONENT_PATH))
 		done()
 	})
 
-	it('should call compileTemplates with the right name and config', async (done) => {
+	it('should call compileTemplates with the right name and config', async done => {
 		conf.componentsRoot = COMPONENT_ROOT
 		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
 		expect(mockCompileTemplates).toHaveBeenCalledWith(
@@ -104,7 +104,7 @@ describe('compileMarkdown', () => {
 		done()
 	})
 
-	it('should add extra content if it exists', async (done) => {
+	it('should add extra content if it exists', async done => {
 		conf.componentsRoot = COMPONENT_ROOT
 		mockFs.readFile.mockImplementation((file: string, opt: any, cb: (e: any, content: string | null) => void) => {
 			if (file === FAKE_COMPONENT_FULL_PATH) {
@@ -123,11 +123,20 @@ describe('compileMarkdown', () => {
 	})
 })
 
-var mockWatch: jest.Mock, mockAddWatch: jest.Mock
+var mockWatch: jest.Mock, mockAddWatch: jest.Mock, fakeOn: jest.Mock, mockGetWatched: jest.Mock
+
 jest.mock('chokidar', () => {
 	mockAddWatch = jest.fn()
+	fakeOn = jest.fn((item, cb) => {
+		if (item === 'ready') {
+			cb()
+		}
+	})
+	mockGetWatched = jest.fn(() => ({ dir: FILES }))
 	mockWatch = jest.fn(() => ({
-		add: mockAddWatch
+		add: mockAddWatch,
+		on: fakeOn,
+		getWatched: mockGetWatched
 	}))
 	return {
 		watch: mockWatch
@@ -145,17 +154,18 @@ const COMPONENTS_GLOB = 'components/**/*.vue'
 
 const getDocFileName = (componentPath: string) => path.resolve(path.dirname(componentPath), 'Readme.md')
 
-describe('getWatcher', () => {
-	it('should watch the files passed', () => {
-		mockWatch.mockClear()
-		getWatcher(COMPONENTS_GLOB, 'src', FILES)
-		expect(mockWatch).toHaveBeenCalledWith(COMPONENTS_GLOB, expect.any(Object))
-	})
-
-	it('should add all the additional files', () => {
-		mockAddWatch.mockClear()
-		getWatcher(COMPONENTS_GLOB, 'src', FILES)
-		expect(mockAddWatch).toHaveBeenCalledWith(FILES)
+describe('getSources', () => {
+	it('should be a function', async done => {
+		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
+		expect(componentFiles).toMatchInlineSnapshot(`
+		Array [
+		  "dir/src/components/Button/Button.vue",
+		  "dir/src/components/Input/Input.vue",
+		  "dir/src/components/CounterButton/CounterButton.vue",
+		  "dir/src/components/PushButton/PushButton.vue",
+		]
+	`)
+		done()
 	})
 })
 
@@ -163,7 +173,7 @@ describe('getDocMap', () => {
 	it('should return relative maps', () => {
 		const docMap = getDocMap(FILES, getDocFileName, 'src')
 		// normalize path for windows users
-		Object.keys(docMap).map((k) => {
+		Object.keys(docMap).map(k => {
 			const path = docMap[k]
 			delete docMap[k]
 			docMap[k.replace(/\\/g, '/')] = path
