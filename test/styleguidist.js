@@ -16,7 +16,7 @@ if (examplePath.indexOf('examples/') !== 0) {
 }
 
 if (/^examples[\\/]vuecli3/.test(examplePath) || examplePath === 'examples/svg-loader') {
-	process.chdir(`./${examplePath}`)
+	process.chdir(path.join(__dirname, `../${examplePath}`))
 	const command = process.argv[2] === 'server' ? '' : `:${process.argv[2]}`
 	process.argv[2] = `styleguidist${command}`
 	require('@vue/cli-service/bin/vue-cli-service')
