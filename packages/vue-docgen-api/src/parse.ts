@@ -77,14 +77,15 @@ export interface DocGenOptions {
  * @param documentation documentation to be enriched if needed
  * @returns {object} documentation object
  */
-export async function parseFile(
-	opt: ParseOptions,
-	documentation?: Documentation
-): Promise<Documentation[]> {
-	const source = await read(opt.filePath, {
-		encoding: 'utf-8'
-	})
-	return parseSource(source, opt, documentation)
+export async function parseFile(opt: ParseOptions, documentation?: Documentation): Promise<Documentation[]> {
+	try {
+		const source = await read(opt.filePath, {
+			encoding: 'utf-8'
+		})
+		return parseSource(source, opt, documentation)
+	} catch (e) {
+		throw Error(`Could not read file ${opt.filePath}`)
+	}
 }
 
 /**
@@ -116,10 +117,7 @@ export async function parseSource(
 	if (singleFileComponent) {
 		docs = await parseSFC(documentation, source, opt)
 	} else {
-		const scriptHandlers = opt.scriptHandlers || [
-			...defaultScriptHandlers,
-			...(opt.addScriptHandlers || [])
-		]
+		const scriptHandlers = opt.scriptHandlers || [...defaultScriptHandlers, ...(opt.addScriptHandlers || [])]
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
 		docs =
