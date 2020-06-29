@@ -1,6 +1,8 @@
 language: node_js
+os: linux
+dist: xenial
 
-# never build when commited by the bot
+# never build when committed by the bot
 # + prevent double build on dev -> delivery Pull Request
 if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = delivery OR branch = next)
 
