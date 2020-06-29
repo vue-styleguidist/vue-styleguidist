@@ -49,8 +49,11 @@ async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions
 	// eslint-disable-next-line no-console
 	console.log('cwd', cwd)
 	const compDirName = path.dirname(compPath)
+	const absoluteComponentPath = path.join(cwd, compPath)
+	// eslint-disable-next-line no-console
+	console.log('absoluteComponentPath', absoluteComponentPath)
 	try {
-		const { tags } = await parse(path.join(cwd, compPath), {
+		const { tags } = await parse(absoluteComponentPath, {
 			...optionsApi,
 			scriptHandlers: [ScriptHandlers.componentHandler]
 		})
