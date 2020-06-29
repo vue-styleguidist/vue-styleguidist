@@ -41,10 +41,12 @@ export async function compileMarkdown(config: SafeDocgenCLIConfig, file: string)
 	const componentAbsolutePath = path.join(config.componentsRoot, file)
 	const docFilePath = config.getDocFileName(componentAbsolutePath)
 	var extraContent: string | undefined = undefined
-	try {
-		extraContent = await readFile(docFilePath, 'utf8')
-	} catch (e) {
-		// eat error if file not found
+	if (docFilePath) {
+		try {
+			extraContent = await readFile(docFilePath, 'utf8')
+		} catch (e) {
+			// eat error if file not found
+		}
 	}
 	return compileTemplates(componentAbsolutePath, config, file, extraContent)
 }
@@ -60,13 +62,29 @@ export async function compileMarkdown(config: SafeDocgenCLIConfig, file: string)
  */
 export function getDocMap(
 	files: string[],
-	getDocFileName: (file: string) => string,
+	getDocFileName: (file: string) => string | false,
 	root: string
 ): { [filepath: string]: string } {
 	const docMap: { [filepath: string]: string } = {}
 	files.forEach(f => {
 		const docFilePath = getDocFileName(path.join(root, f))
-		docMap[path.relative(root, docFilePath)] = f
+		if (docFilePath) {
+			docMap[path.relative(root, docFilePath)] = f
+		}
 	})
 	return docMap
+}
+
+/**
+ * Find a file in a directory, case-insensitive
+ *
+ * @param {string} filepath
+ * @return {string|undefined} File path with correct case
+ */
+export function findFileCaseInsensitive(filepath: string): string | undefined {
+	const dir = path.dirname(filepath)
+	const fileNameLower = path.basename(filepath).toLowerCase()
+	const files = fs.readdirSync(dir)
+	const found = files.find(file => file.toLowerCase() === fileNameLower)
+	return found && path.join(dir, found)
 }

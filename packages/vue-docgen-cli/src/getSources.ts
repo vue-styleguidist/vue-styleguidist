@@ -12,7 +12,7 @@ import { getDocMap } from './utils'
 export default async function getSources(
 	components: string | string[],
 	cwd: string,
-	getDocFileName: (componentPath: string) => string,
+	getDocFileName: (componentPath: string) => string | false,
 	optionsApi: DocGenOptions = {}
 ): Promise<{ watcher: FSWatcher; docMap: { [filepath: string]: string }; componentFiles: string[] }> {
 	const watcher = chokidar.watch(components, { cwd })
