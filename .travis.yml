@@ -29,10 +29,10 @@ stages:
     if: type != pull_request AND branch = delivery
   - name: release-beta
     if: type != pull_request AND branch = next
-  - name: release
-    if: type != pull_request AND branch = delivery
-  - name: merge-back
-    if: type != pull_request AND branch = delivery
+  # - name: release
+  #   if: type != pull_request AND branch = delivery
+  # - name: merge-back
+  #   if: type != pull_request AND branch = delivery
 
 jobs:
   include:
