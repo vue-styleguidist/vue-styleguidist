@@ -26,6 +26,6 @@ if (/^examples[\\/]vuecli3/.test(examplePath) || examplePath === 'examples/svg-l
 	process.argv[3] = command === 'server' ? 'dev' : command
 	require('./run.cli')
 } else {
-	process.chdir(path.join(__dirname, '..', `./${examplePath}`))
+	process.chdir(path.join(__dirname, `../${examplePath}`))
 	require('../packages/vue-styleguidist/lib/bin/styleguidist')
 }
