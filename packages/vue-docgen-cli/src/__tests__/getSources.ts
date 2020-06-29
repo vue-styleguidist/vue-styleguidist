@@ -1,7 +1,7 @@
 import getSources from '../getSources'
 
-var mockWatch: jest.Mock, mockAddWatch: jest.Mock, fakeOn: jest.Mock, mockGetWatched: jest.Mock
-let fakeWatcher: any
+var mockWatch: jest.Mock, mockAddWatch: jest.Mock, fakeOn: jest.Mock, mockGlobby: jest.Mock
+var fakeWatcher: any
 jest.mock('chokidar', () => {
 	mockAddWatch = jest.fn()
 	fakeOn = jest.fn((item, cb) => {
@@ -9,11 +9,9 @@ jest.mock('chokidar', () => {
 			cb()
 		}
 	})
-	mockGetWatched = jest.fn(() => ({ dir: FILES }))
 	fakeWatcher = {
 		add: mockAddWatch,
-		on: fakeOn,
-		getWatched: mockGetWatched
+		on: fakeOn
 	}
 	mockWatch = jest.fn(() => fakeWatcher)
 	return {
@@ -27,6 +25,11 @@ jest.mock('vue-docgen-api', () => ({
 		componentHandler: jest.fn()
 	}
 }))
+
+jest.mock('globby', () => {
+	mockGlobby = jest.fn(() => FILES)
+	return mockGlobby
+})
 
 const FILES = [
 	'src/components/Button/Button.vue',
@@ -44,10 +47,10 @@ describe('getSources', () => {
 		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(componentFiles).toMatchInlineSnapshot(`
 		Array [
-		  "dir/src/components/Button/Button.vue",
-		  "dir/src/components/Input/Input.vue",
-		  "dir/src/components/CounterButton/CounterButton.vue",
-		  "dir/src/components/PushButton/PushButton.vue",
+		  "src/components/Button/Button.vue",
+		  "src/components/Input/Input.vue",
+		  "src/components/CounterButton/CounterButton.vue",
+		  "src/components/PushButton/PushButton.vue",
 		]
 	`)
 		done()
@@ -57,10 +60,10 @@ describe('getSources', () => {
 		const { docMap } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {
-		  "../path/to/Readme.md+here/dir/src/components/Button/Button.vue": "dir/src/components/Button/Button.vue",
-		  "../path/to/Readme.md+here/dir/src/components/CounterButton/CounterButton.vue": "dir/src/components/CounterButton/CounterButton.vue",
-		  "../path/to/Readme.md+here/dir/src/components/Input/Input.vue": "dir/src/components/Input/Input.vue",
-		  "../path/to/Readme.md+here/dir/src/components/PushButton/PushButton.vue": "dir/src/components/PushButton/PushButton.vue",
+		  "../path/to/Readme.md+here/src/components/Button/Button.vue": "src/components/Button/Button.vue",
+		  "../path/to/Readme.md+here/src/components/CounterButton/CounterButton.vue": "src/components/CounterButton/CounterButton.vue",
+		  "../path/to/Readme.md+here/src/components/Input/Input.vue": "src/components/Input/Input.vue",
+		  "../path/to/Readme.md+here/src/components/PushButton/PushButton.vue": "src/components/PushButton/PushButton.vue",
 		}
 	`)
 		done()

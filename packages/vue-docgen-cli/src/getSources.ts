@@ -1,4 +1,5 @@
 import * as path from 'path'
+import glob from 'globby'
 import chokidar, { FSWatcher } from 'chokidar'
 import { parse, ParamTag, ScriptHandlers, DocGenOptions } from 'vue-docgen-api'
 import { getDocMap } from './utils'
@@ -16,17 +17,8 @@ export default async function getSources(
 	optionsApi: DocGenOptions = {}
 ): Promise<{ watcher: FSWatcher; docMap: { [filepath: string]: string }; componentFiles: string[] }> {
 	const watcher = chokidar.watch(components, { cwd })
-	await ready(watcher)
-	const watchedFilesObject = watcher.getWatched()
 
-	const allComponentFiles = Object.keys(watchedFilesObject).reduce(
-		(acc: string[], directory) =>
-			// only read real directories (on travis, getWatched returns directories and globs)
-			/^[_A-Za-z]/.test(directory)
-				? acc.concat(watchedFilesObject[directory].map(basename => path.join(directory, basename)))
-				: acc,
-		[]
-	)
+	const allComponentFiles = await glob(components, { cwd })
 
 	// we will parse each of the discovered components looking for @requires
 	// and @example/examples to add them to the watcher.
@@ -65,10 +57,4 @@ async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions
 		throw new Error(`Error parsing ${absoluteComponentPath} for @requires tags: ${e.message}`)
 	}
 	return []
-}
-
-function ready(watcher: FSWatcher): Promise<null> {
-	return new Promise(function (resolve) {
-		watcher.on('ready', resolve)
-	})
 }

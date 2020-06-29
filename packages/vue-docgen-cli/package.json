@@ -11,6 +11,7 @@
 	"main": "lib/docgen.js",
 	"dependencies": {
 		"chokidar": "^3.0.2",
+		"globby": "^10.0.1",
 		"minimist": "^1.2.0",
 		"mkdirp": "^0.5.1",
 		"prettier": "^1.18.2",
