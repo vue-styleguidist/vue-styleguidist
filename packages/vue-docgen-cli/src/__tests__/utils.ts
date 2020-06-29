@@ -1,7 +1,5 @@
 import * as path from 'path'
-import { writeDownMdFile, compileMarkdown, getDocMap, getSources } from '../utils'
-import extractConfig from '../extractConfig'
-import { SafeDocgenCLIConfig } from '../config'
+import { writeDownMdFile, getDocMap } from '../utils'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
@@ -72,77 +70,6 @@ describe('writeDownMdFile', () => {
 	})
 })
 
-describe('compileMarkdown', () => {
-	const CWD = 'here'
-	const FAKE_COMPONENT_PATH = 'here'
-	const COMPONENT_ROOT = 'componets/are/here'
-	const FAKE_COMPONENT_FULL_PATH = 'component/is/here'
-	const EXTRA_CONTENT = 'extra content documentation'
-	let conf: SafeDocgenCLIConfig
-
-	beforeEach(() => {
-		conf = extractConfig(CWD)
-		conf.getDocFileName = jest.fn(() => FAKE_COMPONENT_FULL_PATH)
-		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
-	})
-
-	it('should call getDocFileName to determine the extra docs file bs path', async done => {
-		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
-		expect(conf.getDocFileName).toHaveBeenCalledWith(path.join(CWD, FAKE_COMPONENT_PATH))
-		done()
-	})
-
-	it('should call compileTemplates with the right name and config', async done => {
-		conf.componentsRoot = COMPONENT_ROOT
-		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
-		expect(mockCompileTemplates).toHaveBeenCalledWith(
-			path.join(COMPONENT_ROOT, FAKE_COMPONENT_PATH),
-			conf,
-			FAKE_COMPONENT_PATH,
-			undefined
-		)
-		done()
-	})
-
-	it('should add extra content if it exists', async done => {
-		conf.componentsRoot = COMPONENT_ROOT
-		mockFs.readFile.mockImplementation((file: string, opt: any, cb: (e: any, content: string | null) => void) => {
-			if (file === FAKE_COMPONENT_FULL_PATH) {
-				cb(null, EXTRA_CONTENT)
-			}
-			cb(null, null)
-		})
-		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
-		expect(mockCompileTemplates).toHaveBeenCalledWith(
-			path.join(COMPONENT_ROOT, FAKE_COMPONENT_PATH),
-			conf,
-			FAKE_COMPONENT_PATH,
-			EXTRA_CONTENT
-		)
-		done()
-	})
-})
-
-var mockWatch: jest.Mock, mockAddWatch: jest.Mock, fakeOn: jest.Mock, mockGetWatched: jest.Mock
-
-jest.mock('chokidar', () => {
-	mockAddWatch = jest.fn()
-	fakeOn = jest.fn((item, cb) => {
-		if (item === 'ready') {
-			cb()
-		}
-	})
-	mockGetWatched = jest.fn(() => ({ dir: FILES }))
-	mockWatch = jest.fn(() => ({
-		add: mockAddWatch,
-		on: fakeOn,
-		getWatched: mockGetWatched
-	}))
-	return {
-		watch: mockWatch
-	}
-})
-
 const FILES = [
 	'src/components/Button/Button.vue',
 	'src/components/Input/Input.vue',
@@ -150,24 +77,7 @@ const FILES = [
 	'src/components/PushButton/PushButton.vue'
 ]
 
-const COMPONENTS_GLOB = 'components/**/*.vue'
-
 const getDocFileName = (componentPath: string) => path.resolve(path.dirname(componentPath), 'Readme.md')
-
-describe('getSources', () => {
-	it('should be a function', async done => {
-		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
-		expect(componentFiles).toMatchInlineSnapshot(`
-		Array [
-		  "dir/src/components/Button/Button.vue",
-		  "dir/src/components/Input/Input.vue",
-		  "dir/src/components/CounterButton/CounterButton.vue",
-		  "dir/src/components/PushButton/PushButton.vue",
-		]
-	`)
-		done()
-	})
-})
 
 describe('getDocMap', () => {
 	it('should return relative maps', () => {

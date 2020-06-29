@@ -8,12 +8,10 @@ const DOC_MAP = {
 
 var mockGetSources: jest.Mock
 var mockWatcher: unknown
-jest.mock('../utils', () => {
+jest.mock('../getSources', () => {
 	mockWatcher = { on: jest.fn(), close: jest.fn() }
 	mockGetSources = jest.fn(() => Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP }))
-	return {
-		getSources: mockGetSources
-	}
+	return mockGetSources
 })
 
 var mockSingle: jest.Mock
