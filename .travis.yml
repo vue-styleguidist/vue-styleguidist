@@ -18,28 +18,19 @@ branches:
     - dev
 
 stages:
-  - name: test
-    if: type != pull_request AND branch = never
-  - name: coverage
-    if: type != pull_request AND branch = never
+  - test
+  - coverage
   - name: documentation
-    if: type != pull_request AND branch = never
-  - docgen
+    if: type != pull_request AND branch = delivery
   - name: release-beta
     if: type != pull_request AND branch = next
   - name: release
-    if: type != pull_request AND branch = never
-    # if: type != pull_request AND branch = delivery
+    if: type != pull_request AND branch = delivery
   - name: merge-back
-    if: type != pull_request AND branch = never
-    # if: type != pull_request AND branch = delivery
+    if: type != pull_request AND branch = delivery
 
 jobs:
   include:
-    - stage: docgen
-      script:
-        - yarn build docgen
-
     - stage: test
       script:
         - yarn lint
@@ -69,6 +60,7 @@ jobs:
 
       deploy:
         provider: pages
+        skip-cleanup: true
         local-dir: docs/dist
         target-branch: master
         repo: vue-styleguidist/vue-styleguidist.github.io
