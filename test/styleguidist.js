@@ -1,3 +1,5 @@
+const path = require('path')
+
 /**
  * this file is supposed to be run in node to test the examples
  * one can run `npm run start vuex` and get the vuex example
@@ -24,6 +26,6 @@ if (/^examples[\\/]vuecli3/.test(examplePath) || examplePath === 'examples/svg-l
 	process.argv[3] = command === 'server' ? 'dev' : command
 	require('./run.cli')
 } else {
-	process.chdir(`./${examplePath}`)
+	process.chdir(path.join(__dirname, '..', `./${examplePath}`))
 	require('../packages/vue-styleguidist/lib/bin/styleguidist')
 }
