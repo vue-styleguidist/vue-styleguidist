@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* compile issue linked to progress bar fix ([5c55eaf](https://github.com/vue-styleguidist/vue-styleguidist/commit/5c55eaf5927bbb3e9479a916f9c59cab6416a56c))
+* progressbar assumed custom webpack ([96e28e6](https://github.com/vue-styleguidist/vue-styleguidist/commit/96e28e64ff139922ce5b8e2e05ac48266ae02592)), closes [#903](https://github.com/vue-styleguidist/vue-styleguidist/issues/903)
+
+
+### Features
+
+* **cli:** allow for case insensitive readme ([80e0d8b](https://github.com/vue-styleguidist/vue-styleguidist/commit/80e0d8b51bc8f8c23a385438d6d626a753bb27fd))
+* **cli:** render [@requires](https://github.com/requires) & [@example](https://github.com/example) ([94a2537](https://github.com/vue-styleguidist/vue-styleguidist/commit/94a25375c59c3bf94436aa28ece852ff66f3226c)), closes [#901](https://github.com/vue-styleguidist/vue-styleguidist/issues/901)
+
+
+
+
+
 # [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
 
 

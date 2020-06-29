@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
+
+
+### Features
+
+* **cli:** allow for case insensitive readme ([80e0d8b](https://github.com/vue-styleguidist/vue-styleguidist/commit/80e0d8b51bc8f8c23a385438d6d626a753bb27fd))
+* **cli:** render [@requires](https://github.com/requires) & [@example](https://github.com/example) ([94a2537](https://github.com/vue-styleguidist/vue-styleguidist/commit/94a25375c59c3bf94436aa28ece852ff66f3226c)), closes [#901](https://github.com/vue-styleguidist/vue-styleguidist/issues/901)
+
+
+
+
+
 # [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
 
 **Note:** Version bump only for package vue-docgen-cli
