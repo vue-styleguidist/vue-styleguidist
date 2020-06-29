@@ -39,7 +39,11 @@ export default async function getDocsBlocks(
 		const examplesFilePaths = getExamplesFilePaths(doc.tags, componentDirname)
 		await Promise.all(
 			examplesFilePaths.map(async examplePath => {
-				docsBlocks.push(await readFile(examplePath, 'utf8'))
+				try {
+					docsBlocks.push(await readFile(examplePath, 'utf8'))
+				} catch (e) {
+					// eat error if file not found
+				}
 			})
 		)
 	}

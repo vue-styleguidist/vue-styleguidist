@@ -33,7 +33,12 @@ export default async function (
 			.on('change', compileWithConfig)
 			// on file delete, delete corresponding md file
 			.on('unlink', (relPath: string) => {
-				unlink(config.getDestFile(relPath, config))
+				if (files.includes(relPath)) {
+					unlink(config.getDestFile(relPath, config))
+				} else {
+					// if it's not a main file recompile the file connected to it
+					compileWithConfig(docMap[relPath])
+				}
 			})
 	}
 }
@@ -57,15 +62,19 @@ export async function compile(
 
 	// if getDestFile is null, will not create files
 	if (file) {
-		const { content, dependencies } = await compileTemplates(
-			path.join(config.componentsRoot, componentFile),
-			config,
-			componentFile
-		)
-		dependencies.forEach(d => {
-			watcher.add(d)
-			docMap[d] = componentFile
-		})
-		writeDownMdFile(content, file)
+		try {
+			const { content, dependencies } = await compileTemplates(
+				path.join(config.componentsRoot, componentFile),
+				config,
+				componentFile
+			)
+			dependencies.forEach(d => {
+				watcher.add(d)
+				docMap[d] = componentFile
+			})
+			writeDownMdFile(content, file)
+		} catch (e) {
+			throw new Error(`Error compiling file ${file}: ${e.message}`)
+		}
 	}
 }

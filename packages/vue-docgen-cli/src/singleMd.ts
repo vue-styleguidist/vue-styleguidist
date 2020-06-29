@@ -75,13 +75,20 @@ export async function compile(
 	if (changedFilePath) {
 		// resolve the real component file path before updating if needed
 		changedFilePath = docMap[changedFilePath] || changedFilePath
-
-		// if in chokidar mode (watch), the path of the file that was just changed
-		// is passed as an argument. We only affect the changed file and avoid re-parsing the rest
-		await cacheMarkDownContent(changedFilePath)
+		try {
+			// if in chokidar mode (watch), the path of the file that was just changed
+			// is passed as an argument. We only affect the changed file and avoid re-parsing the rest
+			await cacheMarkDownContent(changedFilePath)
+		} catch (e) {
+			throw new Error(`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${e.message}`)
+		}
 	} else {
-		// if we are initializing the current file, parse all components
-		await Promise.all(files.map(cacheMarkDownContent))
+		try {
+			// if we are initializing the current file, parse all components
+			await Promise.all(files.map(cacheMarkDownContent))
+		} catch (e) {
+			throw new Error(`Error compiling file ${config.outFile}: ${e.message}`)
+		}
 	}
 	// and finally save all concatenated values to the markdown file
 	writeDownMdFile(Object.values(cachedContent), config.outFile)

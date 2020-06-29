@@ -26,32 +26,40 @@ export default async function getSources(
 	// we will parse each of the discovered components looking for @requires
 	// and @example/examples to add them to the watcher.
 	// when we save those files we want the watcher to recompile
-	const requiredComponents = (
-		await Promise.all(allComponentFiles.map(async compPath => getRequiredComponents(compPath, optionsApi, cwd)))
-	).reduce((acc, components) => acc.concat(components), [])
+	try {
+		const requiredComponents = (
+			await Promise.all(allComponentFiles.map(async compPath => getRequiredComponents(compPath, optionsApi, cwd)))
+		).reduce((acc, components) => acc.concat(components), [])
 
-	const componentFiles = allComponentFiles.filter(compPath => !requiredComponents.includes(compPath))
+		const componentFiles = allComponentFiles.filter(compPath => !requiredComponents.includes(compPath))
 
-	const docMap = getDocMap(
-		// if a component is required, it cannot be the direct target of a ReadMe doc
-		// if we let it be this target it could override a legitimate target.
-		componentFiles,
-		getDocFileName,
-		cwd
-	)
-	watcher.add(Object.keys(docMap))
+		const docMap = getDocMap(
+			// if a component is required, it cannot be the direct target of a ReadMe doc
+			// if we let it be this target it could override a legitimate target.
+			componentFiles,
+			getDocFileName,
+			cwd
+		)
+		watcher.add(Object.keys(docMap))
 
-	return { watcher, docMap, componentFiles }
+		return { watcher, docMap, componentFiles }
+	} catch (e) {
+		throw new Error(`Error parsing requires tags: ${e.message}`)
+	}
 }
 
 async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions, cwd: string): Promise<string[]> {
 	const compDirName = path.dirname(compPath)
-	const { tags } = await parse(path.join(cwd, compPath), {
-		...optionsApi,
-		scriptHandlers: [ScriptHandlers.componentHandler]
-	})
-	if (tags?.requires?.length) {
-		return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
+	try {
+		const { tags } = await parse(path.join(cwd, compPath), {
+			...optionsApi,
+			scriptHandlers: [ScriptHandlers.componentHandler]
+		})
+		if (tags?.requires?.length) {
+			return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
+		}
+	} catch (e) {
+		throw new Error(`Error parsing ${compPath} for requires tags: ${e.message}`)
 	}
 	return []
 }
