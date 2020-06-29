@@ -18,13 +18,17 @@ export default async function getSources(
 	const watcher = chokidar.watch(components, { cwd })
 	await ready(watcher)
 	const watchedFilesObject = watcher.getWatched()
+
+	// eslint-disable-next-line no-console
+	console.log('watchedFilesObject', watchedFilesObject)
+
 	const allComponentFiles = Object.keys(watchedFilesObject).reduce(
 		(acc: string[], directory) => acc.concat(watchedFilesObject[directory].map(p => path.join(directory, p))),
 		[]
 	)
 
 	// eslint-disable-next-line no-console
-	console.log(allComponentFiles)
+	console.log('allComponentFiles', allComponentFiles)
 
 	// we will parse each of the discovered components looking for @requires
 	// and @example/examples to add them to the watcher.
