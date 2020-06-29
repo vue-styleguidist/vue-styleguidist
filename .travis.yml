@@ -22,10 +22,13 @@ branches:
     - dev
 
 stages:
-  - test
-  - coverage
+  - name: test
+    if: type != pull_request AND branch = never
+  - name: coverage
+    if: type != pull_request AND branch = never
   - name: documentation
-    if: type != pull_request AND branch = delivery
+    if: type != pull_request AND branch = never
+  - docgen
   - name: release-beta
     if: type != pull_request AND branch = next
   - name: release
@@ -37,6 +40,10 @@ stages:
 
 jobs:
   include:
+    - stage: docgen
+      script:
+        - yarn build docgen
+
     - stage: test
       script:
         - yarn lint
