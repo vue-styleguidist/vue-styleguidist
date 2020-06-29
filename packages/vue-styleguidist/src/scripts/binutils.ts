@@ -97,7 +97,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
-		!(config.webpackConfig?.plugins || []).some(p => p.constructor === ProgressPlugin)
+		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(p => p.constructor === ProgressPlugin)
 	) {
 		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
 		bar = localBar
