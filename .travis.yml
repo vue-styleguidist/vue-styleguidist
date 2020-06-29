@@ -60,6 +60,7 @@ jobs:
 
       deploy:
         provider: pages
+        cleanup: false
         local-dir: docs/dist
         target-branch: master
         repo: vue-styleguidist/vue-styleguidist.github.io
