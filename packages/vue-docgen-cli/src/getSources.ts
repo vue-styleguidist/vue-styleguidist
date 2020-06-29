@@ -44,18 +44,13 @@ export default async function getSources(
 }
 
 async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions, cwd: string): Promise<string[]> {
-	// eslint-disable-next-line no-console
-	console.log('compPath', compPath)
-	// eslint-disable-next-line no-console
-	console.log('cwd', cwd)
 	const compDirName = path.dirname(compPath)
 	const absoluteComponentPath = path.join(cwd, compPath)
-	// eslint-disable-next-line no-console
-	console.log('absoluteComponentPath', absoluteComponentPath)
 	try {
 		const { tags } = await parse(absoluteComponentPath, {
 			...optionsApi,
-			scriptHandlers: [ScriptHandlers.componentHandler]
+			scriptHandlers: [ScriptHandlers.componentHandler],
+			jsx: !!optionsApi.jsx
 		})
 		if (tags?.requires?.length) {
 			return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
