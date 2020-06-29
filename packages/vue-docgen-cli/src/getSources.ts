@@ -48,15 +48,16 @@ async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions
 	const absoluteComponentPath = path.join(cwd, compPath)
 	try {
 		const { tags } = await parse(absoluteComponentPath, {
+			// make sure that this is recognized as an option bag
+			jsx: false,
 			...optionsApi,
-			scriptHandlers: [ScriptHandlers.componentHandler],
-			jsx: !!optionsApi.jsx
+			scriptHandlers: [ScriptHandlers.componentHandler]
 		})
 		if (tags?.requires?.length) {
 			return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
 		}
 	} catch (e) {
-		throw new Error(`Error parsing ${compPath} for requires tags: ${e.message}`)
+		throw new Error(`Error parsing ${compPath} for @requires tags: ${e.message}`)
 	}
 	return []
 }

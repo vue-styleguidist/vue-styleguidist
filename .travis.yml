@@ -22,26 +22,21 @@ branches:
     - dev
 
 stages:
-  - docgen
   - test
   - coverage
   - name: documentation
     if: type != pull_request AND branch = delivery
   - name: release-beta
     if: type != pull_request AND branch = next
-  # - name: release
-  #   if: type != pull_request AND branch = delivery
-  # - name: merge-back
-  #   if: type != pull_request AND branch = delivery
+  - name: release
+    if: type != pull_request AND branch = never
+    # if: type != pull_request AND branch = delivery
+  - name: merge-back
+    if: type != pull_request AND branch = never
+    # if: type != pull_request AND branch = delivery
 
 jobs:
   include:
-    - stage: docgen
-      script:
-        # Build docgen examples
-        - cd examples
-        - yarn build docgen
-
     - stage: test
       script:
         - yarn lint
