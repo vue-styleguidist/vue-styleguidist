@@ -23,6 +23,9 @@ export default async function getSources(
 		[]
 	)
 
+	// eslint-disable-next-line no-console
+	console.log(allComponentFiles)
+
 	// we will parse each of the discovered components looking for @requires
 	// and @example/examples to add them to the watcher.
 	const requiredComponents = (
@@ -46,13 +49,6 @@ export default async function getSources(
 async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions, cwd: string): Promise<string[]> {
 	const compDirName = path.dirname(compPath)
 	const absoluteComponentPath = path.join(cwd, compPath)
-	// eslint-disable-next-line no-console
-	console.log(absoluteComponentPath, {
-		// make sure that this is recognized as an option bag
-		jsx: false,
-		...optionsApi,
-		scriptHandlers: [ScriptHandlers.componentHandler]
-	})
 	try {
 		const { tags } = await parse(absoluteComponentPath, {
 			// make sure that this is recognized as an option bag
