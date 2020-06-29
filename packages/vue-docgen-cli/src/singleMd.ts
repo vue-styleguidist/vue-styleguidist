@@ -1,6 +1,8 @@
+import * as path from 'path'
 import { FSWatcher } from 'chokidar'
-import { compileMarkdown, writeDownMdFile } from './utils'
+import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
+import compileTemplates from './compileTemplates'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
 	outFile: string
@@ -15,9 +17,9 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param config
  * @param _compile
  */
-export default function (
+export default async function (
 	files: string[],
-	watcher: FSWatcher | undefined,
+	watcher: FSWatcher,
 	config: DocgenCLIConfigWithOutFile,
 	docMap: { [filepath: string]: string },
 	_compile = compile
@@ -28,12 +30,12 @@ export default function (
 	// `key`: filePath of source component
 	// `content`: markdown compiled for it
 	const fileCache = {}
-	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap)
+	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap, watcher)
 
-	if (watcher) {
+	await compileSingleDocWithConfig()
+
+	if (config.watch) {
 		watcher.on('add', compileSingleDocWithConfig).on('change', compileSingleDocWithConfig)
-	} else {
-		compileSingleDocWithConfig()
 	}
 }
 
@@ -51,12 +53,22 @@ export async function compile(
 	files: string[],
 	cachedContent: { [filepath: string]: string },
 	docMap: { [filepath: string]: string },
+	watcher: FSWatcher,
 	changedFilePath?: string
 ) {
 	// this local function will enrich the cachedContent with the
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
-		cachedContent[filePath] = await compileMarkdown(config, filePath)
+		const { content, dependencies } = await compileTemplates(
+			path.join(config.componentsRoot, filePath),
+			config,
+			filePath
+		)
+		dependencies.forEach(d => {
+			watcher.add(d)
+			docMap[d] = filePath
+		})
+		cachedContent[filePath] = content
 		return true
 	}
 

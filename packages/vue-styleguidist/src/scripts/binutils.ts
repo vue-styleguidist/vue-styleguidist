@@ -75,7 +75,7 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 	verbose('Webpack config:', compiler.options)
 
 	// Custom error reporting
-	compiler.hooks.done.tap('vsrDoneBuilding', function(stats: Stats) {
+	compiler.hooks.done.tap('vsrDoneBuilding', function (stats: Stats) {
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
 		if (bar) {
@@ -97,7 +97,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
-		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
+		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(p => p.constructor === ProgressPlugin)
 	) {
 		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
 		bar = localBar
@@ -108,11 +108,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 			console.error(err)
 		} else {
 			const isHttps = compiler.options.devServer && compiler.options.devServer.https
-			const urls = webpackDevServerUtils.prepareUrls(
-				isHttps ? 'https' : 'http',
-				config.serverHost,
-				config.serverPort
-			)
+			const urls = webpackDevServerUtils.prepareUrls(isHttps ? 'https' : 'http', config.serverHost, config.serverPort)
 
 			if (config.printServerInstructions) {
 				config.printServerInstructions(config, { isHttps: !!isHttps })
@@ -138,7 +134,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	verbose('Webpack config:', compiler.options)
 
 	// Custom error reporting
-	compiler.hooks.done.tap('vsgErrorDone', function(stats: Stats) {
+	compiler.hooks.done.tap('vsgErrorDone', function (stats: Stats) {
 		if (bar) {
 			bar.stop()
 			moveCursor(process.stdout, 0, -1)
@@ -164,12 +160,7 @@ export function commandHelp() {
 		[
 			kleur.underline('Usage'),
 			'',
-			'    ' +
-				kleur.bold('styleguidist') +
-				' ' +
-				kleur.cyan('<command>') +
-				' ' +
-				kleur.yellow('[<options>]'),
+			'    ' + kleur.bold('styleguidist') + ' ' + kleur.cyan('<command>') + ' ' + kleur.yellow('[<options>]'),
 			'',
 			kleur.underline('Commands'),
 			'',
@@ -304,9 +295,7 @@ function printAllWarnings(warnings: string[], originalWarnings: string[]) {
  * @param {object} errors
  */
 function printStyleguidistError(errors: string[]) {
-	const styleguidistError = errors.find(message =>
-		message.includes('Module build failed: Error: Styleguidist:')
-	)
+	const styleguidistError = errors.find(message => message.includes('Module build failed: Error: Styleguidist:'))
 	if (!styleguidistError) {
 		return
 	}
@@ -326,18 +315,12 @@ function printNoLoaderError(errors: string[]) {
 		return
 	}
 
-	const noLoaderError = errors.find(message =>
-		message.includes('You may need an appropriate loader')
-	)
+	const noLoaderError = errors.find(message => message.includes('You may need an appropriate loader'))
 	if (!noLoaderError) {
 		return
 	}
 
-	printErrorWithLink(
-		noLoaderError,
-		'Learn how to add webpack loaders to your style guide:',
-		consts.DOCS_WEBPACK
-	)
+	printErrorWithLink(noLoaderError, 'Learn how to add webpack loaders to your style guide:', consts.DOCS_WEBPACK)
 	process.exit(1)
 }
 

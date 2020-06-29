@@ -1,4 +1,3 @@
-import { FSWatcher } from 'chokidar'
 import extractConfig from '../extractConfig'
 import docgen, { DocgenCLIConfig } from '../docgen'
 
@@ -7,23 +6,12 @@ const DOC_MAP = {
 	'src/comps/button/Readme.md': 'src/comps/button/button.vue'
 }
 
-var mockGlobby: jest.Mock
-jest.mock('globby', () => {
-	mockGlobby = jest.fn(() => Promise.resolve(FILES))
-	return mockGlobby
-})
-
-var mockGetWatcher: jest.Mock
-var mockGetDocMap: jest.Mock
-var mockWatcher: FSWatcher
-jest.mock('../utils', () => {
-	mockWatcher = ({ on: jest.fn() } as unknown) as FSWatcher
-	mockGetWatcher = jest.fn(() => mockWatcher)
-	mockGetDocMap = jest.fn(() => DOC_MAP)
-	return {
-		getWatcher: mockGetWatcher,
-		getDocMap: mockGetDocMap
-	}
+var mockGetSources: jest.Mock
+var mockWatcher: unknown
+jest.mock('../getSources', () => {
+	mockWatcher = { on: jest.fn(), close: jest.fn() }
+	mockGetSources = jest.fn(() => Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP }))
+	return mockGetSources
 })
 
 var mockSingle: jest.Mock
@@ -49,24 +37,17 @@ describe('docgen', () => {
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
 	})
 
-	it('should just return when no components are specified', async done => {
-		delete conf.components
-		await docgen(conf)
-		expect(mockGlobby).not.toHaveBeenCalled()
-		done()
-	})
-
 	it('should call multi by default', async done => {
 		await docgen(conf)
 		expect(mockMulti).toHaveBeenCalled()
-		expect(mockMulti).toHaveBeenCalledWith(FILES, undefined, conf, DOC_MAP)
+		expect(mockMulti).toHaveBeenCalledWith(FILES, mockWatcher, conf, DOC_MAP)
 		done()
 	})
 
 	it('should call single if an outfile is specified', async done => {
 		conf.outFile = 'test.md'
 		await docgen(conf)
-		expect(mockSingle).toHaveBeenCalledWith(FILES, undefined, conf, DOC_MAP)
+		expect(mockSingle).toHaveBeenCalledWith(FILES, mockWatcher, conf, DOC_MAP)
 		done()
 	})
 
@@ -78,7 +59,6 @@ describe('docgen', () => {
 	})
 
 	afterEach(() => {
-		mockGlobby.mockClear()
 		mockMulti.mockClear()
 		mockSingle.mockClear()
 	})

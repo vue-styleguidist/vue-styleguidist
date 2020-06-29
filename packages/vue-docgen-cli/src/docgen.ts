@@ -1,11 +1,9 @@
 import * as path from 'path'
-import globby from 'globby'
-import { FSWatcher } from 'chokidar'
 import { SafeDocgenCLIConfig, Templates, RenderedUsage } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
-import { getWatcher, getDocMap } from './utils'
 import extractConfig from './extractConfig'
+import getSources from './getSources'
 
 export { SafeDocgenCLIConfig as DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
 
@@ -30,22 +28,23 @@ export default async (config: SafeDocgenCLIConfig) => {
 	// avoiding to repeat the start path
 	config.outFile = config.outFile ? path.resolve(config.outDir, config.outFile) : undefined
 
-	// for every component file in the glob,
-	const files = await globby(config.components, { cwd: config.componentsRoot })
-
-	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
-
 	// then create the watcher if necessary
-	var watcher: FSWatcher | undefined
-	if (config.watch) {
-		watcher = getWatcher(config.components, config.componentsRoot, Object.keys(docMap))
-	}
+	const { watcher, componentFiles, docMap } = await getSources(
+		config.components,
+		config.componentsRoot,
+		config.getDocFileName,
+		config.apiOptions
+	)
 
 	if (config.outFile) {
 		// create one combined documentation file
-		singleMd(files, watcher, config as DocgenCLIConfigWithOutFile, docMap)
+		await singleMd(componentFiles, watcher, config as DocgenCLIConfigWithOutFile, docMap)
 	} else {
 		// create one documentation file per component
-		multiMd(files, watcher, config, docMap)
+		await multiMd(componentFiles, watcher, config, docMap)
+	}
+
+	if (!config.watch) {
+		watcher.close()
 	}
 }

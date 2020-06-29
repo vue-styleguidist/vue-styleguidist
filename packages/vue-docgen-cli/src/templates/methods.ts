@@ -33,7 +33,7 @@ const returnsTemplate = (ret: Param) => {
   `
 }
 
-const tmpl = function(methods: MethodDescriptor[]) {
+const tmpl = function (methods: MethodDescriptor[]) {
 	let ret = ''
 
 	methods.forEach(m => {
@@ -48,7 +48,7 @@ const tmpl = function(methods: MethodDescriptor[]) {
 	return ret
 }
 
-export default (methods: MethodDescriptor[]): string => {
+export default (methods: MethodDescriptor[], subComponent = false): string => {
 	if (Object.keys(methods).length === 0) return ''
 	return `
   ## Methods
