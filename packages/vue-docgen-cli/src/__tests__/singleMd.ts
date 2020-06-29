@@ -6,15 +6,18 @@ import { writeDownMdFile } from '../utils'
 const FAKE_MD_CONTENT = '## fake markdonw Content'
 const FILES = ['src/comps/button/button.vue']
 
-var mockCompileMarkdown: jest.Mock
 var mockWriteDownMdFile: jest.Mock
 jest.mock('../utils', () => {
-	mockCompileMarkdown = jest.fn(async () => ({ content: FAKE_MD_CONTENT, dependencies: [] }))
 	mockWriteDownMdFile = jest.fn(() => Promise.resolve())
 	return {
-		compileMarkdown: mockCompileMarkdown,
 		writeDownMdFile: mockWriteDownMdFile
 	}
+})
+
+var mockCompileMarkdown: jest.Mock
+jest.mock('../compileTemplates', () => {
+	mockCompileMarkdown = jest.fn(async () => ({ content: FAKE_MD_CONTENT, dependencies: [] }))
+	return mockCompileMarkdown
 })
 
 describe('compile', () => {

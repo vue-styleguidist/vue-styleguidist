@@ -1,8 +1,10 @@
 import * as fs from 'fs'
+import * as path from 'path'
 import { FSWatcher } from 'chokidar'
 import { promisify } from 'util'
-import { compileMarkdown, writeDownMdFile } from './utils'
+import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
+import compileTemplates from './compileTemplates'
 
 const unlink = promisify(fs.unlink)
 
@@ -55,7 +57,11 @@ export async function compile(
 
 	// if getDestFile is null, will not create files
 	if (file) {
-		const { content, dependencies } = await compileMarkdown(config, componentFile)
+		const { content, dependencies } = await compileTemplates(
+			path.join(config.componentsRoot, componentFile),
+			config,
+			componentFile
+		)
 		dependencies.forEach(d => {
 			watcher.add(d)
 			docMap[d] = componentFile

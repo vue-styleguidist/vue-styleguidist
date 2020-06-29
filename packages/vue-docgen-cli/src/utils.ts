@@ -3,10 +3,7 @@ import * as fs from 'fs'
 import { promisify } from 'util'
 import mkdirpNative from 'mkdirp'
 import prettier from 'prettier'
-import compileTemplates, { ContentAndDependencies } from './compileTemplates'
-import { SafeDocgenCLIConfig } from './config'
 
-const readFile = promisify(fs.readFile)
 const mkdirp = promisify(mkdirpNative)
 
 /**
@@ -30,25 +27,6 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
 
 	// close the stream
 	writeStream.close()
-}
-
-/**
- * From one component, get a markdown documentation and return it as string
- * @param config configuration
- * @param file relative path of the parsed component
- */
-export async function compileMarkdown(config: SafeDocgenCLIConfig, file: string): Promise<ContentAndDependencies> {
-	const componentAbsolutePath = path.join(config.componentsRoot, file)
-	const docFilePath = config.getDocFileName(componentAbsolutePath)
-	var extraContent: string | undefined = undefined
-	if (docFilePath) {
-		try {
-			extraContent = await readFile(docFilePath, 'utf8')
-		} catch (e) {
-			// eat error if file not found
-		}
-	}
-	return compileTemplates(componentAbsolutePath, config, file, extraContent)
 }
 
 /**

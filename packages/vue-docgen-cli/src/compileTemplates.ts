@@ -37,7 +37,6 @@ export default async function compiletemplates(
 	absolutePath: string,
 	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
-	extraMd?: string,
 	subComponent = false
 ): Promise<ContentAndDependencies> {
 	const { apiOptions: options, templates } = config
@@ -54,9 +53,7 @@ export default async function compiletemplates(
 		}
 
 		if (!subComponent) {
-			if (extraMd?.length || doc.tags?.example || doc.tags?.examples) {
-				doc.docsBlocks = await getDocsBlocks(absolutePath, doc, extraMd)
-			}
+			doc.docsBlocks = await getDocsBlocks(absolutePath, doc, config.getDocFileName)
 
 			if (!doc.docsBlocks?.length && config.defaultExamples) {
 				doc.docsBlocks = [templates.defaultExample(doc)]
@@ -74,7 +71,6 @@ export default async function compiletemplates(
 								path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
 								config,
 								path.join(componentRelativeDirectoryPath, requireTag.description as string),
-								'',
 								true
 							)
 						)
@@ -82,7 +78,7 @@ export default async function compiletemplates(
 				: []
 
 		return {
-			content: templates.component(renderedUsage, doc, config, componentRelativePath, requiresMd),
+			content: templates.component(renderedUsage, doc, config, componentRelativePath, requiresMd, subComponent),
 			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
 		}
 	} catch (e) {

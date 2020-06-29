@@ -1,7 +1,5 @@
 import * as path from 'path'
-import { writeDownMdFile, compileMarkdown, getDocMap } from '../utils'
-import extractConfig from '../extractConfig'
-import { SafeDocgenCLIConfig } from '../config'
+import { writeDownMdFile, getDocMap } from '../utils'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
@@ -68,57 +66,6 @@ describe('writeDownMdFile', () => {
 	it('should then save the pretified markdown', async done => {
 		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
 		expect(cws.write).toHaveBeenCalledWith(PRETTY_MD)
-		done()
-	})
-})
-
-describe('compileMarkdown', () => {
-	const CWD = 'here'
-	const FAKE_COMPONENT_PATH = 'here'
-	const COMPONENT_ROOT = 'componets/are/here'
-	const FAKE_COMPONENT_FULL_PATH = 'component/is/here'
-	const EXTRA_CONTENT = 'extra content documentation'
-	let conf: SafeDocgenCLIConfig
-
-	beforeEach(() => {
-		conf = extractConfig(CWD)
-		conf.getDocFileName = jest.fn(() => FAKE_COMPONENT_FULL_PATH)
-		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
-	})
-
-	it('should call getDocFileName to determine the extra docs file bs path', async done => {
-		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
-		expect(conf.getDocFileName).toHaveBeenCalledWith(path.join(CWD, FAKE_COMPONENT_PATH))
-		done()
-	})
-
-	it('should call compileTemplates with the right name and config', async done => {
-		conf.componentsRoot = COMPONENT_ROOT
-		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
-		expect(mockCompileTemplates).toHaveBeenCalledWith(
-			path.join(COMPONENT_ROOT, FAKE_COMPONENT_PATH),
-			conf,
-			FAKE_COMPONENT_PATH,
-			undefined
-		)
-		done()
-	})
-
-	it('should add extra content if it exists', async done => {
-		conf.componentsRoot = COMPONENT_ROOT
-		mockFs.readFile.mockImplementation((file: string, opt: any, cb: (e: any, content: string | null) => void) => {
-			if (file === FAKE_COMPONENT_FULL_PATH) {
-				cb(null, EXTRA_CONTENT)
-			}
-			cb(null, null)
-		})
-		await compileMarkdown(conf, FAKE_COMPONENT_PATH)
-		expect(mockCompileTemplates).toHaveBeenCalledWith(
-			path.join(COMPONENT_ROOT, FAKE_COMPONENT_PATH),
-			conf,
-			FAKE_COMPONENT_PATH,
-			EXTRA_CONTENT
-		)
 		done()
 	})
 })

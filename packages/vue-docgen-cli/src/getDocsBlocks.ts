@@ -20,11 +20,17 @@ export function getExamplesFilePaths(tags: { [key: string]: (Tag | ParamTag)[] }
 export default async function getDocsBlocks(
 	absolutePath: string,
 	doc: Pick<ComponentDoc, 'tags' | 'docsBlocks'>,
-	extraMd?: string
+	getDocFileName: (file: string) => string | false
 ): Promise<string[]> {
 	const docsBlocks = doc.docsBlocks || []
-	if (extraMd?.length) {
-		docsBlocks.push(extraMd)
+
+	const docFilePath = getDocFileName(absolutePath)
+	if (docFilePath) {
+		try {
+			docsBlocks.push(await readFile(docFilePath, 'utf8'))
+		} catch (e) {
+			// eat error if file not found
+		}
 	}
 
 	// load @examples tags into the docsBlocks

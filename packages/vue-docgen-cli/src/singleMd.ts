@@ -1,6 +1,8 @@
+import * as path from 'path'
 import { FSWatcher } from 'chokidar'
-import { compileMarkdown, writeDownMdFile } from './utils'
+import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
+import compileTemplates from './compileTemplates'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
 	outFile: string
@@ -57,7 +59,11 @@ export async function compile(
 	// this local function will enrich the cachedContent with the
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
-		const { content, dependencies } = await compileMarkdown(config, filePath)
+		const { content, dependencies } = await compileTemplates(
+			path.join(config.componentsRoot, filePath),
+			config,
+			filePath
+		)
 		dependencies.forEach(d => {
 			watcher.add(d)
 			docMap[d] = filePath
