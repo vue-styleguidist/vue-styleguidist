@@ -57,7 +57,7 @@ async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions
 			return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
 		}
 	} catch (e) {
-		throw new Error(`Error parsing ${compPath} for @requires tags: ${e.message}`)
+		throw new Error(`Error parsing ${absoluteComponentPath} for @requires tags: ${e.message}`)
 	}
 	return []
 }
