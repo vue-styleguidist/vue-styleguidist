@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.26.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.0...v4.26.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* use globby again for kickstarting chokidar ([3e79e0d](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e79e0dfe3ff4a59192ec65dc66fd1411dca814a))
+
+
+
+
+
 # [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
 
 
