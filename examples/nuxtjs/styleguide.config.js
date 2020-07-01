@@ -1,17 +1,40 @@
 const { resolve } = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
+const { getWebpackConfig } = require('nuxt')
+
+const FILTERED_PLUGINS = [
+  'WebpackBarPlugin',
+  'VueSSRClientPlugin',
+  'HotModuleReplacementPlugin',
+  'FriendlyErrorsWebpackPlugin',
+  'HtmlWebpackPlugin',
+]
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
-function wait(time) {
-	// eslint-disable-next-line compat/compat
-	return new Promise(function(resolve) {
-		setTimeout(resolve, time)
-	})
-}
-
 module.exports = async () => {
-	await wait(600)
+	// get the webpack config directly from nuxt
+	const nuxtWebpackConfig = await getWebpackConfig('client', {
+		for: 'dev',
+	})
+
+	const webpackConfig = {
+		module: {
+			rules: [
+				...nuxtWebpackConfig.module.rules.filter(
+					// remove the eslint-loader
+					a => a.loader !== 'eslint-loader',
+				),
+			],
+		},
+		resolve: { ...nuxtWebpackConfig.resolve },
+		plugins: [
+			...nuxtWebpackConfig.plugins.filter(
+				// And some other plugins that could conflcit with ours
+				p => FILTERED_PLUGINS.indexOf(p.constructor.name) === -1,
+			),
+		],
+	}
+
 	return {
 		components: './src/components/**/[A-Z]*.vue',
 		renderRootJsx: resolve(__dirname, 'styleguide/styleguide.root.js'),
@@ -19,29 +42,7 @@ module.exports = async () => {
 			text: 'Back to examples',
 			url: `${docSiteUrl}/Examples.html`
 		},
-		webpackConfig: {
-			module: {
-				rules: [
-					{
-						test: /\.vue$/,
-						loader: 'vue-loader'
-					},
-					{
-						test: /\.js$/,
-						exclude: /node_modules/,
-						use: {
-							loader: 'babel-loader',
-							options: require('./babel.config')
-						}
-					},
-					{
-						test: /\.css$/,
-						use: ['vue-style-loader', 'css-loader']
-					}
-				]
-			},
-			plugins: [new VueLoaderPlugin()]
-		},
+		webpackConfig,
 		usageMode: 'expand',
 		styleguideDir: 'dist'
 	}
