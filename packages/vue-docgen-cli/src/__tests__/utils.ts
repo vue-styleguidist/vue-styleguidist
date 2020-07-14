@@ -36,11 +36,13 @@ jest.mock('fs', () => {
 	return mockFs
 })
 
-var mockPrettierFormat: jest.Mock
+var mockPrettierFormat: jest.Mock, mockResolveConfig: jest.Mock
 jest.mock('prettier', () => {
 	mockPrettierFormat = jest.fn(() => PRETTY_MD)
+	mockResolveConfig = jest.fn(() => ({}))
 	return {
-		format: mockPrettierFormat
+		format: mockPrettierFormat,
+		resolveConfig: mockResolveConfig
 	}
 })
 
@@ -66,6 +68,13 @@ describe('writeDownMdFile', () => {
 	it('should then save the pretified markdown', async done => {
 		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
 		expect(cws.write).toHaveBeenCalledWith(PRETTY_MD)
+		done()
+	})
+
+	it('should resolve the config from the filesystem', async done => {
+		mockResolveConfig.mockReturnValue({ semi: false })
+		await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
+		expect(mockPrettierFormat).toHaveBeenCalledWith(UGLY_MD, { semi: false, parser: 'markdown' })
 		done()
 	})
 })
