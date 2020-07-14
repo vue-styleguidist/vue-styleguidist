@@ -23,12 +23,16 @@
     <img src="https://img.shields.io/discord/325477692906536972.svg?logo=discord"
 alt="Chat on Discord">
 </a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist.svg?type=shield"/></a>
 </div>
 <p>Start documenting now on codesandbox.io</p>
 <a href="https://codesandbox.io/s/github/vue-styleguidist/vue-styleguidist-example">
     <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Start documenting"/>
 </a>
 </div>
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist?ref=badge_large)
 
 ## Sponsor(s)
 
