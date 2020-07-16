@@ -39,7 +39,7 @@ jest.mock('fs', () => {
 var mockPrettierFormat: jest.Mock, mockResolveConfig: jest.Mock
 jest.mock('prettier', () => {
 	mockPrettierFormat = jest.fn(() => PRETTY_MD)
-	mockResolveConfig = jest.fn(() => ({}))
+	mockResolveConfig = jest.fn(() => null)
 	return {
 		format: mockPrettierFormat,
 		resolveConfig: mockResolveConfig
