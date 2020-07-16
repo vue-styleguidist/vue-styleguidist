@@ -52,15 +52,7 @@ export default async function parseScript(
 		}
 	}
 
-	return executeHandlers(
-		preHandlers,
-		handlers,
-		componentDefinitions,
-		documentation,
-		ast,
-		options,
-		forceSingleExport
-	)
+	return executeHandlers(preHandlers, handlers, componentDefinitions, documentation, ast, options, forceSingleExport)
 }
 
 async function executeHandlers(
@@ -87,8 +79,7 @@ async function executeHandlers(
 			// Only enrich the doc attached to the default export
 			// NOTE: module.exports is normalized to default
 			const doc =
-				(compDefs.length > 1 && name !== 'default' ? undefined : documentation) ||
-				new Documentation(opt.filePath)
+				(compDefs.length > 1 && name !== 'default' ? undefined : documentation) || new Documentation(opt.filePath)
 			const compDef = componentDefinitions.get(name) as NodePath
 			// execute all prehandlers in order
 			await preHandlers.reduce(async (_, handler) => {
@@ -105,7 +96,5 @@ async function executeHandlers(
 	)
 
 	// default component first so in multiple exports in parse it is returned
-	return docs.sort(
-		(a, b) => (a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0)
-	)
+	return docs.sort((a, b) => (a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0))
 }

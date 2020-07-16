@@ -30,9 +30,7 @@ export default async function documentRequiredComponents(
 	// if we are in a mixin or an extend we want to add
 	// all props on the current doc, instead of creating another one
 	if (originObject && documentation) {
-		return [
-			await enrichDocumentation(documentation, varToFilePath, originObject, opt, pathResolver)
-		]
+		return [await enrichDocumentation(documentation, varToFilePath, originObject, opt, pathResolver)]
 	}
 
 	const files = new Map<string, Array<{ exportName: string; varName: string }>>()
@@ -110,8 +108,7 @@ async function enrichDocumentation(
 							documentation
 						)
 						if (documentation && originVar[originObject]) {
-							originVar[originObject].name =
-								documentation.get('displayName') || documentation.get('exportName')
+							originVar[originObject].name = documentation.get('displayName') || documentation.get('exportName')
 							documentation.set('displayName', null)
 						}
 					} catch (e) {
