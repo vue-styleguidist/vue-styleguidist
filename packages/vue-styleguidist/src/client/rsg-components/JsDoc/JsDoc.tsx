@@ -35,7 +35,8 @@ const list = (array: Param[]) => array.map(item => item.description).join(', ')
 const paragraphs = (array: Param[]) => array.map(item => item.description).join('\n\n')
 
 const fields: Record<keyof Omit<TagProps, 'throws' | 'subComponents'>, (v: Param[]) => string> = {
-	deprecated: (value: Param[]) => (typeof value[0].description === 'string' ? `${value[0].description}` : ''),
+	deprecated: (value: Param[]) =>
+		typeof value[0].description === 'string' ? `${value[0].description}` : '',
 	see: (value: Param[]) => paragraphs(value),
 	link: (value: Param[]) => paragraphs(value),
 	author: (value: Param[]) => `${list(value)}`,
@@ -66,7 +67,11 @@ export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props
 						<Argument
 							name=""
 							{...throws}
-							description={typeof throws.description === 'boolean' ? throws.description.toString() : throws.description}
+							description={
+								typeof throws.description === 'boolean'
+									? throws.description.toString()
+									: throws.description
+							}
 						/>
 					</JsDocRenderer>
 				))}

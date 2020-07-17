@@ -14,7 +14,7 @@ function run(config: SafeDocgenCLIConfig) {
 	if (pages) {
 		// to avoid re-rendering the same pages
 		delete config.pages
-		pages.forEach((page) => {
+		pages.forEach(page => {
 			const pageConf = { ...config, ...page }
 			run(pageConf)
 		})

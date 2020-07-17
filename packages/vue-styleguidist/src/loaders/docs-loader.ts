@@ -2,7 +2,7 @@
 import { loader } from 'webpack'
 import { RawSourceMap } from 'source-map'
 
-export default function(this: loader.LoaderContext, source: string | Buffer, map?: RawSourceMap) {
+export default function (this: loader.LoaderContext, source: string | Buffer, map?: RawSourceMap) {
 	const cb = this.async()
 	cb &&
 		cb(

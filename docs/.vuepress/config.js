@@ -11,6 +11,7 @@ module.exports = () => {
 		dest: 'docs/dist',
 		title,
 		description,
+		// prettier-ignore
 		head: [
 			['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/favicons/apple-touch-icon.png' }],
 			['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/favicons/favicon-32x32.png' }],
@@ -48,7 +49,9 @@ module.exports = () => {
 			},
 			nav: [
 				{ text: 'Docs', link: '/docs/GettingStarted' },
-				...(fs.existsSync(path.resolve(__dirname, '../Examples.md')) ? [{ text: 'Examples', link: '/Examples' }] : []),
+				...(fs.existsSync(path.resolve(__dirname, '../Examples.md'))
+					? [{ text: 'Examples', link: '/Examples' }]
+					: []),
 				{ text: 'Vue CLI Plugin', link: '/VueCLI3doc' },
 				{ text: 'Reference', link: '/Configuration' }
 			],
@@ -63,7 +66,9 @@ module.exports = () => {
 					'/docs/API',
 					'/docs/Deployment',
 					'/docs/Docgen',
-					...(fs.existsSync(path.resolve(__dirname, '../docs/docgen-cli.md')) ? ['/docs/docgen-cli.md'] : []),
+					...(fs.existsSync(path.resolve(__dirname, '../docs/docgen-cli.md'))
+						? ['/docs/docgen-cli.md']
+						: []),
 					'/docs/Development'
 				],
 				'/Configuration': ['/Configuration'],

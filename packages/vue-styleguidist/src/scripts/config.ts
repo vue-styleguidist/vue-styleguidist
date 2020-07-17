@@ -22,7 +22,10 @@ export default function getConfig(
 	update?: (conf: SanitizedStyleguidistConfig | {}) => SanitizedStyleguidistConfig
 ): Promise<SanitizedStyleguidistConfig> | SanitizedStyleguidistConfig {
 	let configFilepath
-	let config: StyleguidistConfig | { serverPort?: string | number } | (() => Promise<StyleguidistConfig>)
+	let config:
+		| StyleguidistConfig
+		| { serverPort?: string | number }
+		| (() => Promise<StyleguidistConfig>)
 	if (isString(configParam)) {
 		// Load config from a given file
 		configFilepath = path.resolve(process.cwd(), configParam)
@@ -42,7 +45,8 @@ export default function getConfig(
 		config = require(configFilepath)
 	}
 
-	const configDir = typeof configFilepath === 'string' ? path.dirname(configFilepath) : process.cwd()
+	const configDir =
+		typeof configFilepath === 'string' ? path.dirname(configFilepath) : process.cwd()
 
 	if (typeof config === 'function') {
 		return config().then(conf => postTreatConfig(configDir, conf, update))

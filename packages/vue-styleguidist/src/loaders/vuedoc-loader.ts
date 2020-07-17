@@ -22,7 +22,7 @@ const exists = promisify(fs.exists)
 const logger = createLogger('rsg')
 const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
-export default function(this: StyleguidistContext, source: string) {
+export default function (this: StyleguidistContext, source: string) {
 	const callback = this.async()
 	const cb = callback ? callback : () => null
 	vuedocLoader
@@ -108,7 +108,9 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 			if (examplePaths[0] === '[none]') {
 				ignoreExamplesInFile = true
 			} else {
-				vsgDocs.example = examplePaths.map(p => requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${p}`))
+				vsgDocs.example = examplePaths.map(p =>
+					requireIt(`!!${examplesLoader}?customLangs=vue|js|jsx!${p}`)
+				)
 			}
 		}
 	}

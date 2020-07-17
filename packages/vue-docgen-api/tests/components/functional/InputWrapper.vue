@@ -11,7 +11,8 @@
 		<label
 			:class="{
 				[$style.label]: true,
-				[$style.labelFloating]: props.focused || (typeof props.value !== 'undefined' && props.value !== ''),
+				[$style.labelFloating]:
+					props.focused || (typeof props.value !== 'undefined' && props.value !== ''),
 				[$style.labelAlwaysFloating]: props.labelAlwaysFloating || props.prefix || props.disabled
 			}"
 			:for="props.id"

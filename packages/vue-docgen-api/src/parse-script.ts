@@ -105,7 +105,7 @@ async function executeHandlers(
 	)
 
 	// default component first so in multiple exports in parse it is returned
-	return docs.sort(
-		(a, b) => (a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0)
+	return docs.sort((a, b) =>
+		a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0
 	)
 }

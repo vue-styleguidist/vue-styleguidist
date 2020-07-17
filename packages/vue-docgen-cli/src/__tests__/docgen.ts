@@ -10,7 +10,9 @@ var mockGetSources: jest.Mock
 var mockWatcher: unknown
 jest.mock('../getSources', () => {
 	mockWatcher = { on: jest.fn(), close: jest.fn() }
-	mockGetSources = jest.fn(() => Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP }))
+	mockGetSources = jest.fn(() =>
+		Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP })
+	)
 	return mockGetSources
 })
 

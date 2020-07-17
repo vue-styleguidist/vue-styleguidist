@@ -41,7 +41,10 @@ const styles = ({ space, fontFamily }: Rsg.Theme) => ({
 	}
 })
 
-export const SubComponents: React.FC<SubComponentsProps & JssInjectedProps> = ({ classes, ...props }) => {
+export const SubComponents: React.FC<SubComponentsProps & JssInjectedProps> = ({
+	classes,
+	...props
+}) => {
 	// only collapse if there is more than 3 requires
 	const collapsibleSubComponents = props.subComponents.length > 3
 	const [open, setOpen] = useState(!collapsibleSubComponents)

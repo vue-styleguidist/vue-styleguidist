@@ -80,7 +80,9 @@ export async function compile(
 			// is passed as an argument. We only affect the changed file and avoid re-parsing the rest
 			await cacheMarkDownContent(changedFilePath)
 		} catch (e) {
-			throw new Error(`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${e.message}`)
+			throw new Error(
+				`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${e.message}`
+			)
 		}
 	} else {
 		try {
