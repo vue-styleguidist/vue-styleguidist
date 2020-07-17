@@ -8,7 +8,7 @@ const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 
 describe('tests button', () => {
-	beforeAll(async (done) => {
+	beforeAll(async done => {
 		docButton = await parse(button, {
 			'@mixins': path.resolve(__dirname, '../../mixins'),
 			'@utils': path.resolve(__dirname, '../../utils')
@@ -94,11 +94,17 @@ describe('tests button', () => {
 		})
 
 		it('should give the size prop 3 valid values', () => {
-			expect(getTestDescriptor(docButton.props, 'size').values).toEqual(['small', 'medium', 'large'])
+			expect(getTestDescriptor(docButton.props, 'size').values).toEqual([
+				'small',
+				'medium',
+				'large'
+			])
 		})
 
 		it('should the component has color prop description equal The color for the button example', () => {
-			expect(getTestDescriptor(docButton.props, 'color').description).toBe('The color for the button example')
+			expect(getTestDescriptor(docButton.props, 'color').description).toBe(
+				'The color for the button example'
+			)
 		})
 
 		it('should the component has color prop default equal #333', () => {
@@ -128,11 +134,15 @@ describe('tests button', () => {
 		})
 
 		it("should span has as description 'Sm breakpoint and above'", () => {
-			expect(getTestDescriptor(docButton.props, 'spanSm').description).toBe('Sm breakpoint and above')
+			expect(getTestDescriptor(docButton.props, 'spanSm').description).toBe(
+				'Sm breakpoint and above'
+			)
 		})
 
 		it("should spanMd has as description 'Md breakpoint and above'", () => {
-			expect(getTestDescriptor(docButton.props, 'spanMd').description).toBe('Md breakpoint and above')
+			expect(getTestDescriptor(docButton.props, 'spanMd').description).toBe(
+				'Md breakpoint and above'
+			)
 		})
 
 		it('should spanSm to be string|number', () => {
@@ -199,7 +209,9 @@ describe('tests button', () => {
 		})
 
 		it('should value default example3 props description to be The example3 props', () => {
-			expect(getTestDescriptor(docButton.props, 'example3').description).toEqual('The example3 props')
+			expect(getTestDescriptor(docButton.props, 'example3').description).toEqual(
+				'The example3 props'
+			)
 		})
 
 		it('should onCustomClick to be ignored', () => {
@@ -282,11 +294,13 @@ describe('tests button', () => {
 		})
 
 		it('should have a default slot.', () => {
-			expect(docButton.slots && docButton.slots.find((s) => s.name === 'default')).not.toBeUndefined()
+			expect(docButton.slots && docButton.slots.find(s => s.name === 'default')).not.toBeUndefined()
 		})
 
 		it('the default slot should have "Use this slot default" as description', () => {
-			expect(getTestDescriptor(docButton.slots, 'default').description).toBe('Use this slot default')
+			expect(getTestDescriptor(docButton.slots, 'default').description).toBe(
+				'Use this slot default'
+			)
 		})
 	})
 

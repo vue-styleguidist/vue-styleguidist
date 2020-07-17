@@ -24,7 +24,9 @@ describe('extendsHandler', () => {
 			testComponent: { filePath: ['./componentPath'], exportName: 'default' }
 		})
 
-		mockResolvePathFrom = (<unknown>resolvePathFrom) as jest.Mock<(path: string, from: string) => string>
+		mockResolvePathFrom = (<unknown>resolvePathFrom) as jest.Mock<
+			(path: string, from: string) => string
+		>
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
 		mockParse = parseFile as jest.Mock

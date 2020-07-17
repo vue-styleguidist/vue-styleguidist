@@ -58,7 +58,7 @@ const mergeFn = (
 	fn1: (...argz1: any[]) => void,
 	fn2: (...argz2: any[]) => void
 ): ((...argz: any[]) => void) =>
-	function(this: any, ...argzMain: any[]) {
+	function (this: any, ...argzMain: any[]) {
 		fn1 && fn1.apply(this, argzMain)
 		fn2 && fn2.apply(this, argzMain)
 	}

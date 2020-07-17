@@ -5,7 +5,12 @@
 		<table class="grid">
 			<thead>
 				<tr>
-					<th v-for="key in columns" :key="key" @click="sortBy(key)" :class="{ active: sortKey == key }">
+					<th
+						v-for="key in columns"
+						:key="key"
+						@click="sortBy(key)"
+						:class="{ active: sortKey == key }"
+					>
 						{{ key | capitalize }}
 						<span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
 					</th>

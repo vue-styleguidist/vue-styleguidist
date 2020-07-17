@@ -15,7 +15,11 @@ export default async function getSources(
 	cwd: string,
 	getDocFileName: (componentPath: string) => string | false,
 	optionsApi: DocGenOptions = {}
-): Promise<{ watcher: FSWatcher; docMap: { [filepath: string]: string }; componentFiles: string[] }> {
+): Promise<{
+	watcher: FSWatcher
+	docMap: { [filepath: string]: string }
+	componentFiles: string[]
+}> {
 	const watcher = chokidar.watch(components, { cwd })
 
 	const allComponentFiles = await glob(components, { cwd })
@@ -23,10 +27,14 @@ export default async function getSources(
 	// we will parse each of the discovered components looking for @requires
 	// and @example/examples to add them to the watcher.
 	const requiredComponents = (
-		await Promise.all(allComponentFiles.map(async compPath => getRequiredComponents(compPath, optionsApi, cwd)))
+		await Promise.all(
+			allComponentFiles.map(async compPath => getRequiredComponents(compPath, optionsApi, cwd))
+		)
 	).reduce((acc, components) => acc.concat(components), [])
 
-	const componentFiles = allComponentFiles.filter(compPath => !requiredComponents.includes(compPath))
+	const componentFiles = allComponentFiles.filter(
+		compPath => !requiredComponents.includes(compPath)
+	)
 
 	const docMap = getDocMap(
 		// if a component is required, it cannot be the direct target of a ReadMe doc
@@ -40,7 +48,11 @@ export default async function getSources(
 	return { watcher, docMap, componentFiles }
 }
 
-async function getRequiredComponents(compPath: string, optionsApi: DocGenOptions, cwd: string): Promise<string[]> {
+async function getRequiredComponents(
+	compPath: string,
+	optionsApi: DocGenOptions,
+	cwd: string
+): Promise<string[]> {
 	const compDirName = path.dirname(compPath)
 	const absoluteComponentPath = path.join(cwd, compPath)
 	try {

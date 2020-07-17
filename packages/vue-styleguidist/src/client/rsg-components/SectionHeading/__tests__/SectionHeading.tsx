@@ -10,7 +10,12 @@ describe('SectionHeading', () => {
 
 	test('should forward slot properties to the toolbar', () => {
 		const { container } = render(
-			<SectionHeading id="section" slotName="slot" slotProps={{ foo: 1, bar: 'baz', isolated: false } as any} depth={2}>
+			<SectionHeading
+				id="section"
+				slotName="slot"
+				slotProps={{ foo: 1, bar: 'baz', isolated: false } as any}
+				depth={2}
+			>
 				A Section
 			</SectionHeading>
 		)
@@ -42,7 +47,13 @@ describe('SectionHeading', () => {
 
 	test('render a deprecated section heading', () => {
 		const { container } = render(
-			<SectionHeadingRenderer id="section" href="/section" depth={2} toolbar={<FakeToolbar />} deprecated>
+			<SectionHeadingRenderer
+				id="section"
+				href="/section"
+				depth={2}
+				toolbar={<FakeToolbar />}
+				deprecated
+			>
 				A Section
 			</SectionHeadingRenderer>
 		)

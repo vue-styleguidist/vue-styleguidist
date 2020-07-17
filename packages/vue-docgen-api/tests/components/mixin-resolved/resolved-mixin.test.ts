@@ -24,11 +24,15 @@ describe('tests button', () => {
 		})
 
 		it('should return the "propsAnother" prop description from a vue file mixin', () => {
-			expect(getTestDescriptor(docButton.props, 'propsAnother').description).toBe('Example prop in vue file')
+			expect(getTestDescriptor(docButton.props, 'propsAnother').description).toBe(
+				'Example prop in vue file'
+			)
 		})
 
 		it('should return the "funcMixinProp" prop description from a mixin factory', () => {
-			expect(getTestDescriptor(docButton.props, 'funcMixinProp').description).toBe('Example prop from a function')
+			expect(getTestDescriptor(docButton.props, 'funcMixinProp').description).toBe(
+				'Example prop from a function'
+			)
 		})
 	})
 })

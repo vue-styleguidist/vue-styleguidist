@@ -111,7 +111,7 @@ function getConfig(api) {
 				warn: console.warn,
 				// eslint-disable-next-line no-console
 				error: console.error,
-				info: function() {}
+				info: function () {}
 			}
 			return args
 		})

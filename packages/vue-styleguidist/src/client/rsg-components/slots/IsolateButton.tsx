@@ -22,7 +22,11 @@ const IsolateButton = ({ name, example, isolated }: IsolateButtonProps) => {
 			<MdFullscreenExit />
 		</ToolbarButton>
 	) : (
-		<ToolbarButton href={getUrl({ name, example, isolated: true })} title="Open isolated" testId={testID}>
+		<ToolbarButton
+			href={getUrl({ name, example, isolated: true })}
+			title="Open isolated"
+			testId={testID}
+		>
 			<MdFullscreen />
 		</ToolbarButton>
 	)

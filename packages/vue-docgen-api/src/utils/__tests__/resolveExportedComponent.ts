@@ -115,13 +115,17 @@ describe('resolveExportedComponent', () => {
 
 	describe('TypeScript', () => {
 		it('should return exported typescript extend style components', () => {
-			const ast = babylon({ plugins: ['typescript'] }).parse(['export default Vue.extend({})'].join('\n'))
+			const ast = babylon({ plugins: ['typescript'] }).parse(
+				['export default Vue.extend({})'].join('\n')
+			)
 			const [components] = resolveExportedComponent(ast)
 			expect(components.size).toBe(1)
 		})
 
 		it('should return exported named typescript extend style components', () => {
-			const ast = babylon({ plugins: ['typescript'] }).parse(['export const Foo = Vue.extend({})'].join('\n'))
+			const ast = babylon({ plugins: ['typescript'] }).parse(
+				['export const Foo = Vue.extend({})'].join('\n')
+			)
 			const [components] = resolveExportedComponent(ast)
 			expect(components.size).toBe(1)
 		})

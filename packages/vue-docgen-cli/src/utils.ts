@@ -14,7 +14,8 @@ const mkdirp = promisify(mkdirpNative)
  */
 export async function writeDownMdFile(content: string | string[], destFilePath: string) {
 	const conf = await prettier.resolveConfig(destFilePath)
-	const prettyMd = (cont: string) => prettier.format(cont, Object.assign(conf || {}, { parser: 'markdown' }))
+	const prettyMd = (cont: string) =>
+		prettier.format(cont, Object.assign(conf || {}, { parser: 'markdown' }))
 	const destFolder = path.dirname(destFilePath)
 	await mkdirp(destFolder)
 	let writeStream = fs.createWriteStream(destFilePath)

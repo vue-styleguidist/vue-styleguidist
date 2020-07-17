@@ -38,12 +38,16 @@ export default async function mixinsHandler(
 function getMixinsVariableNames(compDef: NodePath): string[] {
 	const varNames: string[] = []
 	if (bt.isObjectExpression(compDef.node)) {
-		const mixinProp = compDef.get('properties').filter((p: NodePath<bt.Property>) => p.node.key.name === 'mixins')
+		const mixinProp = compDef
+			.get('properties')
+			.filter((p: NodePath<bt.Property>) => p.node.key.name === 'mixins')
 		const mixinPath = mixinProp.length ? (mixinProp[0] as NodePath<bt.Property>) : undefined
 
 		if (mixinPath) {
 			const mixinPropertyValue =
-				mixinPath.node.value && bt.isArrayExpression(mixinPath.node.value) ? mixinPath.node.value.elements : []
+				mixinPath.node.value && bt.isArrayExpression(mixinPath.node.value)
+					? mixinPath.node.value.elements
+					: []
 			mixinPropertyValue.forEach((e: bt.Node | null) => {
 				if (!e) return
 				if (bt.isCallExpression(e)) {

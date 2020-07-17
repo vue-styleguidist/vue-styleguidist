@@ -198,9 +198,13 @@ describe('propHandler', () => {
 		})
 
 		it('should still return props with prop-types', () => {
-			const src = ['export default {', '  props:{', "    test: PropTypes.oneOf(['News', 'Photos'])", '  }', '}'].join(
-				'\n'
-			)
+			const src = [
+				'export default {',
+				'  props:{',
+				"    test: PropTypes.oneOf(['News', 'Photos'])",
+				'  }',
+				'}'
+			].join('\n')
 			tester(src, {
 				type: {
 					func: true
@@ -345,7 +349,12 @@ describe('propHandler', () => {
 			['Function', 'default: (a, b) => ({ a, b })', '(a,b)=>({a,b})', ''],
 			['Function', 'default (a, b) { return { a, b } }', 'function(a,b){return{a,b};}', ''],
 			['Function', 'default: (a, b) => { return { a, b } }', '(a,b)=>{return{a,b};}', ''],
-			['Function', 'default: function (a, b) { return { a, b } }', 'function(a,b){return{a,b};}', '']
+			[
+				'Function',
+				'default: function (a, b) { return { a, b } }',
+				'function(a,b){return{a,b};}',
+				''
+			]
 		])(
 			'if prop is of type %p,\n\t given %p as default,\n\t should parse as %p,\n\t comment types are %p',
 			(propType, input, output, commentsBlockType) => {
