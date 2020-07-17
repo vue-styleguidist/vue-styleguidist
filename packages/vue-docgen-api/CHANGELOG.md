@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.27.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.3...v4.27.0) (2020-07-17)
+
+
+### Features
+
+* **docgen:** resolve dynamic mixins ([0dbe049](https://github.com/vue-styleguidist/vue-styleguidist/commit/0dbe0493e786b49903d0cef0255df531713186fa))
+
+
+
+
+
 # [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
 
 **Note:** Version bump only for package vue-docgen-api

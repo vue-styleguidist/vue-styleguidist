@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.27.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.3...v4.27.0) (2020-07-17)
+
+**Note:** Version bump only for package vue-inbrowser-compiler
+
+
+
+
+
 ## [4.23.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.2...v4.23.3) (2020-05-20)
 
 **Note:** Version bump only for package vue-inbrowser-compiler
