@@ -86,7 +86,8 @@ const FILES = [
 	'src/components/PushButton/PushButton.vue'
 ]
 
-const getDocFileName = (componentPath: string) => path.resolve(path.dirname(componentPath), 'Readme.md')
+const getDocFileName = (componentPath: string) =>
+	path.resolve(path.dirname(componentPath), 'Readme.md')
 
 describe('getDocMap', () => {
 	it('should return relative maps', () => {

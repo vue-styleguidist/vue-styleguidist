@@ -202,4 +202,66 @@ describe('resolveExportedComponent', () => {
 			expect(comps.size).toBe(1)
 		})
 	})
+
+	describe('normal functions', () => {
+		it('should resolve a component if the body returns an object', () => {
+			const ast = babylon().parse(`export default function (cmp){
+				return {
+					props:{
+						test:String
+					}
+				}
+			};`)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(1)
+		})
+
+		it('should resolve a component if the body returns an object and if it has a name', () => {
+			const ast = babylon().parse(`export default function test(cmp){
+				return {
+					props:{
+						test:String
+					}
+				}
+			};`)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(1)
+		})
+
+		it('should resolve a component if the body returns an object es5 version', () => {
+			const ast = babylon().parse(`module.exports = function (cmp){
+				return {
+					props:{
+						test: String
+					}
+				}
+			};`)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(1)
+		})
+	})
+
+	describe('arrow functions', () => {
+		it('should resolve a component if the body is a pure object', () => {
+			const ast = babylon().parse(`export default (cmp) => ({
+				props:{
+					test: String
+				}
+			});`)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(1)
+		})
+
+		it('should resolve a component if the body returns an object', () => {
+			const ast = babylon().parse(`export default (cmp) => {
+				return {
+					props:{
+						test:String
+					}
+				}
+			};`)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(1)
+		})
+	})
 })

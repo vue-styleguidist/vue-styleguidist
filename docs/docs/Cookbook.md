@@ -68,7 +68,7 @@ const i18n = new VueI18n({
   messages
 })
 
-export default (previewComponent) => {
+export default previewComponent => {
   // https://vuejs.org/v2/guide/render-function.html
   return {
     i18n,
@@ -112,7 +112,7 @@ const store = new Vuex.Store({
   mutations
 })
 
-export default (previewComponent) => {
+export default previewComponent => {
   // https://vuejs.org/v2/guide/render-function.html
   return {
     store,
@@ -203,9 +203,9 @@ Then in `docs/install.components.js` use require (or require.context) to load yo
 import Vue from 'vue'
 import * as path from 'path'
 
-const registerAllComponents = (components) => {
+const registerAllComponents = components => {
   // For each matching file name...
-  components.keys().forEach((fileName) => {
+  components.keys().forEach(fileName => {
     // Get the component config
     const componentConfig = components(fileName)
 

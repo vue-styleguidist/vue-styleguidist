@@ -11,12 +11,12 @@ module.exports = async function generate_toc() {
 		files.map(file => {
 			return new Promise((resolve, reject) => {
 				const filePath = path.join(docsFolder, file)
-				fs.readFile(filePath, { encoding: 'utf8' }, function(err, data) {
+				fs.readFile(filePath, { encoding: 'utf8' }, function (err, data) {
 					fs.writeFile(
 						filePath,
 						toc.insert(data, file === 'Configuration.md' ? { maxdepth: 4 } : { maxdepth: 2 }),
 						{ encoding: 'utf8' },
-						function(err) {
+						function (err) {
 							if (err) {
 								reject(err)
 							} else {

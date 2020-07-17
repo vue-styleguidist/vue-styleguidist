@@ -1,6 +1,14 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import { component, events, methods, props, slots, defaultExample, functionalTag } from './compileTemplates'
+import {
+	component,
+	events,
+	methods,
+	props,
+	slots,
+	defaultExample,
+	functionalTag
+} from './compileTemplates'
 import { SafeDocgenCLIConfig, DocgenCLIConfig } from './config'
 import { findFileCaseInsensitive } from './utils'
 
@@ -10,7 +18,9 @@ export default (
 	configFileFromCmd?: string,
 	pathArray: string[] = []
 ): SafeDocgenCLIConfig => {
-	const configFilePath = configFileFromCmd ? path.resolve(cwd, configFileFromCmd) : path.join(cwd, 'docgen.config.js')
+	const configFilePath = configFileFromCmd
+		? path.resolve(cwd, configFileFromCmd)
+		: path.join(cwd, 'docgen.config.js')
 	const [componentsFromCmd, outDirFromCmd] = pathArray
 
 	const config: Partial<DocgenCLIConfig> = {

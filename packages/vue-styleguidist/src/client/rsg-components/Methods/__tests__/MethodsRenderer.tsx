@@ -74,7 +74,9 @@ describe('MethodsRenderer', () => {
 	})
 
 	it('should render returns', async done => {
-		const actual = await renderMethodsSection(['/**\n * @public\n * @returns {Number} - Description\n */\nmethod() {}'])
+		const actual = await renderMethodsSection([
+			'/**\n * @public\n * @returns {Number} - Description\n */\nmethod() {}'
+		])
 
 		expect(actual.container).toMatchSnapshot()
 		done()

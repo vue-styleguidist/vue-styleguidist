@@ -5,7 +5,10 @@ import { dirname, join } from 'path'
 
 const readFile = promisify(rf)
 
-export function getExamplesFilePaths(tags: { [key: string]: (Tag | ParamTag)[] }, componentDirname: string): string[] {
+export function getExamplesFilePaths(
+	tags: { [key: string]: (Tag | ParamTag)[] },
+	componentDirname: string
+): string[] {
 	const exampleTags = [...(tags.example || []), ...(tags.examples || [])]
 
 	return (

@@ -31,7 +31,9 @@ export default function parseValidatorForValues(
 			? validatorNode.body
 			: undefined
 
-	const varName = bt.isIdentifier(validatorNode.params[0]) ? validatorNode.params[0].name : undefined
+	const varName = bt.isIdentifier(validatorNode.params[0])
+		? validatorNode.params[0].name
+		: undefined
 
 	if (bt.isBinaryExpression(returnedExpression)) {
 		let valuesNode: bt.Node | undefined
@@ -71,7 +73,10 @@ export default function parseValidatorForValues(
 				: undefined
 		return values
 	} else if (bt.isCallExpression(returnedExpression)) {
-		if (bt.isMemberExpression(returnedExpression.callee) && returnedExpression.callee.property.name === 'includes') {
+		if (
+			bt.isMemberExpression(returnedExpression.callee) &&
+			returnedExpression.callee.property.name === 'includes'
+		) {
 			return extractStringArray(returnedExpression.callee.object)
 		}
 	}

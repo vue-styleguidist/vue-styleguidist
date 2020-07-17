@@ -21,7 +21,8 @@ export interface ContentAndDependencies {
 
 export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: string): string[] {
 	if (!doc.tags) return []
-	const requireDep = doc.tags.requires?.map((t: ParamTag) => path.join(compDirName, t.description as string)) || []
+	const requireDep =
+		doc.tags.requires?.map((t: ParamTag) => path.join(compDirName, t.description as string)) || []
 	const examplesDep = getExamplesFilePaths(doc.tags, compDirName)
 	return [...requireDep, ...examplesDep]
 }
@@ -78,7 +79,14 @@ export default async function compiletemplates(
 				: []
 
 		return {
-			content: templates.component(renderedUsage, doc, config, componentRelativePath, requiresMd, subComponent),
+			content: templates.component(
+				renderedUsage,
+				doc,
+				config,
+				componentRelativePath,
+				requiresMd,
+				subComponent
+			),
 			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
 		}
 	} catch (e) {
