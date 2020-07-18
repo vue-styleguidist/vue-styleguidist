@@ -96,6 +96,7 @@ export default function resolveExportedComponent(
 	ast: bt.File
 ): [Map<string, NodePath>, ImportedVariableSet] {
 	const components = new Map<string, NodePath>()
+	const ievPureExports: ImportedVariableSet = {}
 	const nonComponentsIdentifiers: string[] = []
 
 	function setComponent(exportName: string, definition: NodePath) {
@@ -109,19 +110,28 @@ export default function resolveExportedComponent(
 	function exportDeclaration(path: NodePath) {
 		const definitions = resolveExportDeclaration(path)
 
+		const sourcePath: string = path.get('source').value?.value
+
 		definitions.forEach((definition: NodePath, name: string) => {
-			const realDef = resolveIdentifier(ast, definition)
-			if (realDef) {
-				if (isComponentDefinition(realDef)) {
-					setComponent(name, realDef)
-				} else {
-					const returnedObject = getReturnedObject(realDef)
-					if (returnedObject && isObjectExpressionComponentDefinition(returnedObject.node)) {
-						setComponent(name, returnedObject)
-					}
+			if (sourcePath) {
+				ievPureExports[name] = {
+					exportName: definition.value.name,
+					filePath: [sourcePath]
 				}
 			} else {
-				nonComponentsIdentifiers.push(definition.value.name)
+				const realDef = resolveIdentifier(ast, definition)
+				if (realDef) {
+					if (isComponentDefinition(realDef)) {
+						setComponent(name, realDef)
+					} else {
+						const returnedObject = getReturnedObject(realDef)
+						if (returnedObject && isObjectExpressionComponentDefinition(returnedObject.node)) {
+							setComponent(name, returnedObject)
+						}
+					}
+				} else {
+					nonComponentsIdentifiers.push(definition.value.name)
+				}
 			}
 		})
 		return false
@@ -185,7 +195,10 @@ export default function resolveExportedComponent(
 		}
 	})
 
-	const requiredValues = resolveRequired(ast, nonComponentsIdentifiers)
+	const requiredValues = Object.assign(
+		ievPureExports,
+		resolveRequired(ast, nonComponentsIdentifiers)
+	)
 
 	return [components, requiredValues]
 }
