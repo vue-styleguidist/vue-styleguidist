@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.27.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.27.0...v4.27.1) (2020-07-19)
+
+
+### Bug Fixes
+
+* **docgen:** allow export - as - from "-" ([f7ac47c](https://github.com/vue-styleguidist/vue-styleguidist/commit/f7ac47cf89667e389670c11f44f3edc7e1cdfd0f)), closes [#911](https://github.com/vue-styleguidist/vue-styleguidist/issues/911)
+
+
+
+
+
 # [4.27.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.3...v4.27.0) (2020-07-17)
 
 
