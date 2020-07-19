@@ -137,6 +137,16 @@ describe('resolveExportedComponent', () => {
 			const [components] = resolveExportedComponent(ast)
 			expect(components.size).toBe(1)
 		})
+	})
+
+	describe('immediately exported variables', () => {
+		it('should return the properer ievs when "export {foo as bar}"', () => {
+			const ast = babylon({ plugins: ['typescript'] }).parse(
+				'export { baz as default } from "file/path"'
+			)
+			const [, iev] = resolveExportedComponent(ast)
+			expect(iev.default.exportName).toBe('baz')
+		})
 
 		it('should extract IEV aliased and return them', () => {
 			const ast = babylon({ plugins: ['typescript'] }).parse(
@@ -145,7 +155,7 @@ describe('resolveExportedComponent', () => {
 					'export default foo'
 				].join('\n')
 			)
-			const [comps, iev] = resolveExportedComponent(ast)
+			const [, iev] = resolveExportedComponent(ast)
 			expect(iev).toMatchInlineSnapshot(`
 			Object {
 			  "foo": Object {
@@ -156,7 +166,6 @@ describe('resolveExportedComponent', () => {
 			  },
 			}
 		`)
-			expect(comps.size).toBe(0)
 		})
 
 		it('should extract IEV and return them', () => {
