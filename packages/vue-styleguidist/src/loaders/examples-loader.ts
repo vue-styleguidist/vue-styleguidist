@@ -55,9 +55,13 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	if (shouldShowDefaultExample && source) {
 		const fullFilePath = path.join(path.dirname(filePath), file)
 		const propsParser = getParser(config)
-		const docs = await propsParser(fullFilePath)
-		this.addDependency(fullFilePath)
-		source = expandDefaultComponent(source, docs)
+		try {
+			const docs = await propsParser(fullFilePath)
+			this.addDependency(fullFilePath)
+			source = expandDefaultComponent(source, docs)
+		} catch (e) {
+			// eat the error since it will be reported by vuedoc-loader
+		}
 	}
 
 	const updateExample = (example: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>) => {
