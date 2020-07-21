@@ -23,6 +23,7 @@
     <img src="https://img.shields.io/discord/325477692906536972.svg?logo=discord"
 alt="Chat on Discord">
 </a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist.svg?type=shield"/></a>
 </div>
 <p>Start documenting now on codesandbox.io</p>
 <a href="https://codesandbox.io/s/github/vue-styleguidist/vue-styleguidist-example">
@@ -30,11 +31,14 @@ alt="Chat on Discord">
 </a>
 </div>
 
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fvue-styleguidist%2Fvue-styleguidist?ref=badge_large)
+
 ## Sponsor(s)
 
-A big thank you to our first sponsor. His contribution helps pay for the Netlify build minutes.
+A big thank you to our first two sponsors. Their contributions pay for the Netlify build minutes.
 
-[Marcello Bachechi](https://github.com/pilotkid)
+[Marcello Bachechi](https://github.com/pilotkid) & [Walter Tommasi](https://github.com/jtommy)
 
 ## Packages
 
@@ -72,7 +76,7 @@ Docs are available at https://vue-styleguidist.github.io/ - we are still working
 
 ## Contributing
 
-Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/.github/CONTRIBUTING.md).
+Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/.github/CONTRIBUTING.md).
 
 Note that the current monorepo relies on `yarn` workspaces. Don't forget to install yarn, `npm i --global yarn`, before cloning.
 
@@ -86,4 +90,4 @@ Logo by [Benjamin Cognard](https://twitter.com/benbnur).
 
 ## License
 
-[MIT License](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/LICENSE)
+[MIT License](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/LICENSE)

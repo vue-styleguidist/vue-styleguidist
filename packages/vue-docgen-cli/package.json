@@ -1,25 +1,25 @@
 {
-    "name": "vue-docgen-cli",
-    "version": "4.23.1",
-    "scripts": {
-        "compile": "tsc -p ./tsconfig.build.json",
-        "compile:watch": "yarn compile --watch"
-    },
-    "bin": {
-        "vue-docgen": "lib/bin.js"
-    },
-    "main": "lib/docgen.js",
-    "dependencies": {
-        "chokidar": "^3.0.2",
-        "globby": "^10.0.1",
-        "minimist": "^1.2.0",
-        "mkdirp": "^0.5.1",
-        "prettier": "^1.18.2",
-        "vue-docgen-api": "^4.23.1"
-    },
-    "devDependencies": {
-        "@types/minimist": "^1.2.0",
-        "@types/mkdirp": "^0.5.2",
-        "@types/prettier": "^1.18.1"
-    }
+	"name": "vue-docgen-cli",
+	"version": "4.27.1",
+	"scripts": {
+		"compile": "tsc -p ./tsconfig.build.json",
+		"compile:watch": "yarn compile --watch"
+	},
+	"bin": {
+		"vue-docgen": "lib/bin.js"
+	},
+	"main": "lib/docgen.js",
+	"dependencies": {
+		"chokidar": "^3.0.2",
+		"globby": "^10.0.1",
+		"minimist": "^1.2.0",
+		"mkdirp": "^0.5.1",
+		"prettier": "^1.18.2",
+		"vue-docgen-api": "^4.27.1"
+	},
+	"devDependencies": {
+		"@types/minimist": "^1.2.0",
+		"@types/mkdirp": "^0.5.2",
+		"@types/prettier": "^1.18.1"
+	}
 }

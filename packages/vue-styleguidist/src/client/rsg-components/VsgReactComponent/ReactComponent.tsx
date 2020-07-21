@@ -43,7 +43,9 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 		const { component, classes } = this.props
 
 		const getFinalUrl = (slug: string, depth: number) =>
-			pagePerSection ? getUrl({ slug, id: depth !== 1, takeHash: true }) : getUrl({ slug, anchor: true })
+			pagePerSection
+				? getUrl({ slug, id: depth !== 1, takeHash: true })
+				: getUrl({ slug, anchor: true })
 
 		if (component.subComponents && component.props) {
 			const links = component.subComponents.map(c => ({
@@ -68,7 +70,10 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 								visibleName: component.visibleName
 							}
 							return (
-								<DocumentedComponentContext.Provider key={(c.props && c.props.displayName) || i} value={c}>
+								<DocumentedComponentContext.Provider
+									key={(c.props && c.props.displayName) || i}
+									value={c}
+								>
 									<RsgReactComponent {...this.props} component={c} depth={this.props.depth + 1} />
 								</DocumentedComponentContext.Provider>
 							)

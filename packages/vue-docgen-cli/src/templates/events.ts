@@ -11,7 +11,7 @@ const tmpl = (events: EventDescriptor[]) => {
 	return ret
 }
 
-export default (events: EventDescriptor[]): string => {
+export default (events: EventDescriptor[], subComponent = false): string => {
 	return `
   ## Events
   | Event name     | Type        | Description  |

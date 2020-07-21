@@ -75,7 +75,7 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 	verbose('Webpack config:', compiler.options)
 
 	// Custom error reporting
-	compiler.hooks.done.tap('vsrDoneBuilding', function(stats: Stats) {
+	compiler.hooks.done.tap('vsrDoneBuilding', function (stats: Stats) {
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
 		if (bar) {
@@ -97,7 +97,9 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
-		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
+		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(
+			p => p.constructor === ProgressPlugin
+		)
 	) {
 		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
 		bar = localBar
@@ -138,7 +140,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	verbose('Webpack config:', compiler.options)
 
 	// Custom error reporting
-	compiler.hooks.done.tap('vsgErrorDone', function(stats: Stats) {
+	compiler.hooks.done.tap('vsgErrorDone', function (stats: Stats) {
 		if (bar) {
 			bar.stop()
 			moveCursor(process.stdout, 0, -1)

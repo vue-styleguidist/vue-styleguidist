@@ -1,18 +1,20 @@
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
-import { RenderedUsage, DocgenCLIConfig } from '../config'
+import { RenderedUsage, SafeDocgenCLIConfig, ContentAndDependencies } from '../config'
 
 export default (
 	renderedUsage: RenderedUsage,
 	doc: ComponentDoc,
-	config: DocgenCLIConfig,
-	fileName: string
+	config: SafeDocgenCLIConfig,
+	fileName: string,
+	requiresMd: ContentAndDependencies[],
+	subComponent = false
 ): string => {
 	const { displayName, description, docsBlocks, tags, functional } = doc
 
 	const { deprecated, author, since, version, see, link } = tags || {}
 
 	return `${
-		!config.outFile && deprecated
+		!config.outFile && !subComponent && deprecated
 			? // to avoid having the squiggles in the left menu for deprecated items
 			  // use the frontmatter feature of vuepress
 			  `
@@ -38,5 +40,11 @@ title: ${displayName}
   ${renderedUsage.events}
   ${renderedUsage.slots}
   ${docsBlocks ? '---\n' + docsBlocks.join('\n---\n') : ''}
+
+  ${
+		requiresMd.length
+			? '---\n' + requiresMd.map(component => component.content).join('\n---\n')
+			: ''
+	}
   `
 }

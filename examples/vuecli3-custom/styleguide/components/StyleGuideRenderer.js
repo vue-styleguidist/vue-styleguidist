@@ -78,7 +78,7 @@ export function StyleGuideRenderer({
 						<nav className={classes.nav}>
 							<a
 								className={classes.headerLink}
-								href="https://github.com/vue-styleguidist/vue-styleguidist/tree/master/docs"
+								href="https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/docs"
 							>
 								Docs
 							</a>

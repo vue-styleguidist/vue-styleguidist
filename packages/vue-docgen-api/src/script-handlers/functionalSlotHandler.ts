@@ -43,9 +43,9 @@ export default async function slotHandler(documentation: Documentation, path: No
 				visitMemberExpression(pathMember) {
 					if (
 						bt.isIdentifier(pathMember.node.object) &&
-						(pathMember.node.object.name === contextVariableName &&
-							bt.isIdentifier(pathMember.node.property) &&
-							pathMember.node.property.name === 'children')
+						pathMember.node.object.name === contextVariableName &&
+						bt.isIdentifier(pathMember.node.property) &&
+						pathMember.node.property.name === 'children'
 					) {
 						const doc = documentation.getSlotDescriptor('default')
 						getSlotComment(pathMember, doc)

@@ -86,10 +86,14 @@ export async function parseFile(
 	opt: ParseOptions,
 	documentation?: Documentation
 ): Promise<Documentation[]> {
-	const source = await read(opt.filePath, {
-		encoding: 'utf-8'
-	})
-	return parseSource(source, opt, documentation)
+	try {
+		const source = await read(opt.filePath, {
+			encoding: 'utf-8'
+		})
+		return parseSource(source, opt, documentation)
+	} catch (e) {
+		throw Error(`Could not read file ${opt.filePath}`)
+	}
 }
 
 /**

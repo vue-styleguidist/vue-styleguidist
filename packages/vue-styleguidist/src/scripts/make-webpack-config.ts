@@ -17,7 +17,7 @@ const RENDERER_REGEXP = /Renderer$/
 
 const sourceDir = path.resolve(__dirname, '../client')
 
-export default function(
+export default function (
 	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
 ): Configuration {
@@ -228,7 +228,7 @@ export default function(
 
 	buildEditorComponentChain(customComponents)
 
-	Object.keys(customComponents).forEach(function(key) {
+	Object.keys(customComponents).forEach(function (key) {
 		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(sourceSrc, customComponents[key])
 
 		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =

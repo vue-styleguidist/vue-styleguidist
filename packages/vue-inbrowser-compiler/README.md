@@ -44,7 +44,7 @@ The formats of the code here are the same as vue-live and vue-styleguidist
 Most common use case is a simple vue template.
 
 ```html
-<Button color="blue">Test This Buttton</Button>
+<button color="blue">Test This Buttton</button>
 ```
 
 will be transformed into
@@ -122,20 +122,20 @@ new Vue({
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      msg: "Push Me"
-    };
+  export default {
+    data() {
+      return {
+        msg: 'Push Me'
+      }
+    }
   }
-};
 </script>
 
 <style>
-.hello {
-  text-align: center;
-  color: #900;
-}
+  .hello {
+    text-align: center;
+    color: #900;
+  }
 </style>
 ```
 

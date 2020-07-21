@@ -17,7 +17,7 @@ const tmpl = (props: PropDescriptor[]): string => {
 	return ret
 }
 
-export default (props: PropDescriptor[]): string => {
+export default (props: PropDescriptor[], subComponent = false): string => {
 	return `
   ## Props
   | Prop name     | Description | Type      | Values      | Default     |

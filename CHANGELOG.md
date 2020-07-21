@@ -3,6 +3,146 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.27.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.27.0...v4.27.1) (2020-07-19)
+
+
+### Bug Fixes
+
+* **docgen:** allow export - as - from "-" ([f7ac47c](https://github.com/vue-styleguidist/vue-styleguidist/commit/f7ac47cf89667e389670c11f44f3edc7e1cdfd0f)), closes [#911](https://github.com/vue-styleguidist/vue-styleguidist/issues/911)
+
+
+
+
+
+# [4.27.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.3...v4.27.0) (2020-07-17)
+
+
+### Bug Fixes
+
+* **cli:** docgen-cli does not require prettierrc ([a12bc82](https://github.com/vue-styleguidist/vue-styleguidist/commit/a12bc822fcc342ac762de9102989adde02b8b8c9)), closes [#914](https://github.com/vue-styleguidist/vue-styleguidist/issues/914)
+
+
+### Features
+
+* **cli:** resolve prettier config for MD gen ([0c04a73](https://github.com/vue-styleguidist/vue-styleguidist/commit/0c04a73dbe694ddc925661826fea54172242e49d))
+* **docgen:** resolve dynamic mixins ([0dbe049](https://github.com/vue-styleguidist/vue-styleguidist/commit/0dbe0493e786b49903d0cef0255df531713186fa))
+
+
+
+
+
+## [4.26.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.2...v4.26.3) (2020-07-16)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.1...v4.26.2) (2020-07-14)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.26.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.0...v4.26.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* use globby again for kickstarting chokidar ([3e79e0d](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e79e0dfe3ff4a59192ec65dc66fd1411dca814a))
+
+
+
+
+
+# [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* compile issue linked to progress bar fix ([5c55eaf](https://github.com/vue-styleguidist/vue-styleguidist/commit/5c55eaf5927bbb3e9479a916f9c59cab6416a56c))
+* progressbar assumed custom webpack ([96e28e6](https://github.com/vue-styleguidist/vue-styleguidist/commit/96e28e64ff139922ce5b8e2e05ac48266ae02592)), closes [#903](https://github.com/vue-styleguidist/vue-styleguidist/issues/903)
+
+
+### Features
+
+* **cli:** allow for case insensitive readme ([80e0d8b](https://github.com/vue-styleguidist/vue-styleguidist/commit/80e0d8b51bc8f8c23a385438d6d626a753bb27fd))
+* **cli:** render [@requires](https://github.com/requires) & [@example](https://github.com/example) ([94a2537](https://github.com/vue-styleguidist/vue-styleguidist/commit/94a25375c59c3bf94436aa28ece852ff66f3226c)), closes [#901](https://github.com/vue-styleguidist/vue-styleguidist/issues/901)
+
+
+
+
+
+# [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
+
+
+### Bug Fixes
+
+* yarn upgrade revert ([4fe3218](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fe32181053234630df418673616b5ca61321c5c))
+
+
+### Features
+
+* **docgen:** allow other forms of validation ([dd2400c](https://github.com/vue-styleguidist/vue-styleguidist/commit/dd2400cbaecad10209625c2046674d037e387d93))
+* 🎸 Add support for html language in examples ([77e225a](https://github.com/vue-styleguidist/vue-styleguidist/commit/77e225a3afcda1dabe87d7e52042748e48799d6b))
+
+
+
+
+
+## [4.24.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.2...v4.24.3) (2020-06-16)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.24.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.1...v4.24.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* **cli:** allow partial templates ([62f00b6](https://github.com/vue-styleguidist/vue-styleguidist/commit/62f00b6eb7b1083d66723eb20858dd2447c09f67))
+* **cli:** refresh when updating markdown files ([2c3c502](https://github.com/vue-styleguidist/vue-styleguidist/commit/2c3c5026b5624693dad2c3f1e851a4e5e634971f)), closes [#885](https://github.com/vue-styleguidist/vue-styleguidist/issues/885)
+* node types incompatible with typescript ([28e9f68](https://github.com/vue-styleguidist/vue-styleguidist/commit/28e9f681059ae06ea9566ec00cb158b4491f858a))
+
+
+
+
+
+## [4.24.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.0...v4.24.1) (2020-06-05)
+
+
+### Bug Fixes
+
+* repair codesplit false ([c42b522](https://github.com/vue-styleguidist/vue-styleguidist/commit/c42b522b3f249a8cdf3802ade056595d20372dfa))
+
+
+
+
+
+# [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* adjust structure of examples ([b80a86c](https://github.com/vue-styleguidist/vue-styleguidist/commit/b80a86c3aad769530cdab4ea911639088a2b8dac))
+* classname and style were ignored ([563b313](https://github.com/vue-styleguidist/vue-styleguidist/commit/563b3134ee1304790d06b2f4d394cc79400be9da))
+* **docgen:** priority to documented values ([696bd87](https://github.com/vue-styleguidist/vue-styleguidist/commit/696bd873a914a4d5057f3dda27f3f9f7eaffa0a2))
+
+
+### Features
+
+* **docgen:** detect values in validator ([8d681a6](https://github.com/vue-styleguidist/vue-styleguidist/commit/8d681a66576990f2acdc265cea7f4ffa4659b14e))
+
+
+
+
+
 ## [4.23.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.2...v4.23.3) (2020-05-20)
 
 

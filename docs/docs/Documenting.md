@@ -74,7 +74,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 </script>
 ```
 
-Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come *before* the `export default` in your script tag.
+Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come _before_ the `export default` in your script tag.
 
 If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
@@ -240,7 +240,7 @@ If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](htt
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a Vue component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
 
 If you want to ignore the readme file for one component, use the `@example [none]` doclet. Use this when multiple components in the same folder share a `ReadMe` file. This will prevent the examples from being rendered multiple times.
 
@@ -337,7 +337,7 @@ If you want to ignore the readme file for one component, use the `@example [none
 
 > **Note:** You can configure examples file name with the [getExampleFilename](/Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Button/Button.vue#L85)
 
 ### External examples using doclet tags
 
@@ -428,7 +428,7 @@ For instance, if the display name is set as
  **/
 ```
 
-To reference it in examples, one has to call `<WonderfulButton/>`.
+To reference it in examples, one has to call `<WonderfulButton/>`. See to [How to use component name in docs with a different displayName](./Cookbook.md#how-to-use-component-name-in-docs-with-a-different-displayname)
 
 ## Methods
 
@@ -534,7 +534,9 @@ For example, a dropdown element would be easier to read this way
 than with a prop
 
 ```html
-<DropDown :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"/>
+<DropDown
+  :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"
+/>
 ```
 
 Here is how Vue Styleguidist helps document this pattern: Please add `@requires` doclets to the main component.

@@ -11,7 +11,9 @@ export default function ColumnsRenderer({ methods }: { methods: MethodDescriptor
 		<ul>
 			{methods.map((row, rowIdx) => (
 				<li key={rowIdx}>
-					{columns(methods, {}).map((col, colIdx) => <div key={colIdx}>{col.render(row)}</div>)}
+					{columns(methods, {}).map((col, colIdx) => (
+						<div key={colIdx}>{col.render(row)}</div>
+					))}
 				</li>
 			))}
 		</ul>

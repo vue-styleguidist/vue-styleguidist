@@ -52,6 +52,35 @@ function isComponentDefinition(path: NodePath): boolean {
 	)
 }
 
+function getReturnStatementObject(realDef: NodePath): NodePath | undefined {
+	let returnedObjectPath: NodePath | undefined
+	recast.visit(realDef.get('body'), {
+		visitReturnStatement(rPath) {
+			const returnArg = rPath.get('argument')
+			if (bt.isObjectExpression(returnArg.node)) {
+				returnedObjectPath = returnArg
+			}
+			return false
+		}
+	})
+	return returnedObjectPath
+}
+
+function getReturnedObject(realDef: NodePath): NodePath | undefined {
+	const { node } = realDef
+
+	if (bt.isArrowFunctionExpression(node)) {
+		if (bt.isObjectExpression(realDef.get('body').node)) {
+			return realDef.get('body')
+		}
+		return getReturnStatementObject(realDef)
+	}
+
+	if (bt.isFunctionDeclaration(node) || bt.isFunctionExpression(node)) {
+		return getReturnStatementObject(realDef)
+	}
+}
+
 /**
  * Given an AST, this function tries to find the exported component definitions.
  *
@@ -67,6 +96,7 @@ export default function resolveExportedComponent(
 	ast: bt.File
 ): [Map<string, NodePath>, ImportedVariableSet] {
 	const components = new Map<string, NodePath>()
+	const ievPureExports: ImportedVariableSet = {}
 	const nonComponentsIdentifiers: string[] = []
 
 	function setComponent(exportName: string, definition: NodePath) {
@@ -80,14 +110,28 @@ export default function resolveExportedComponent(
 	function exportDeclaration(path: NodePath) {
 		const definitions = resolveExportDeclaration(path)
 
+		const sourcePath: string = path.get('source').value?.value
+
 		definitions.forEach((definition: NodePath, name: string) => {
-			const realDef = resolveIdentifier(ast, definition)
-			if (realDef) {
-				if (isComponentDefinition(realDef)) {
-					setComponent(name, realDef)
+			if (sourcePath) {
+				ievPureExports[name] = {
+					exportName: definition.value.name,
+					filePath: [sourcePath]
 				}
 			} else {
-				nonComponentsIdentifiers.push(definition.value.name)
+				const realDef = resolveIdentifier(ast, definition)
+				if (realDef) {
+					if (isComponentDefinition(realDef)) {
+						setComponent(name, realDef)
+					} else {
+						const returnedObject = getReturnedObject(realDef)
+						if (returnedObject && isObjectExpressionComponentDefinition(returnedObject.node)) {
+							setComponent(name, returnedObject)
+						}
+					}
+				} else {
+					nonComponentsIdentifiers.push(definition.value.name)
+				}
 			}
 		})
 		return false
@@ -137,6 +181,11 @@ export default function resolveExportedComponent(
 			if (realComp) {
 				if (isComponentDefinition(realComp)) {
 					setComponent(name, realComp)
+				} else {
+					const returnedObject = getReturnedObject(realComp)
+					if (returnedObject && isObjectExpressionComponentDefinition(returnedObject.node)) {
+						setComponent(name, returnedObject)
+					}
 				}
 			} else {
 				nonComponentsIdentifiers.push(name)
@@ -146,7 +195,10 @@ export default function resolveExportedComponent(
 		}
 	})
 
-	const requiredValues = resolveRequired(ast, nonComponentsIdentifiers)
+	const requiredValues = Object.assign(
+		ievPureExports,
+		resolveRequired(ast, nonComponentsIdentifiers)
+	)
 
 	return [components, requiredValues]
 }

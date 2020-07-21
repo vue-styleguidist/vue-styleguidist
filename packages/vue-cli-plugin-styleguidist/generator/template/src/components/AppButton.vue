@@ -1,8 +1,8 @@
 <template>
-  <button :style="styles" @click="handleClick">
-    <!-- @slot Use this slot to place the button content -->
-    <slot></slot>
-  </button>
+	<button :style="styles" @click="handleClick">
+		<!-- @slot Use this slot to place the button content -->
+		<slot></slot>
+	</button>
 </template>
 
 <script>
@@ -40,15 +40,15 @@ export default {
 	methods: {
 		handleClick(e) {
 			/** Triggered when button is clicked
-			* @event click
-			* @type {Event}
-			*/
+			 * @event click
+			 * @type {Event}
+			 */
 			this.$emit('click', e)
-			
+
 			/** Event for Alligator's example
-			* @event gator
-			* @type {Event}
-			*/
+			 * @event gator
+			 * @type {Event}
+			 */
 			this.$emit('gator', e)
 		}
 	}

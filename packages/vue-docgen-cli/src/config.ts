@@ -6,8 +6,11 @@ import {
 	EventDescriptor,
 	ComponentDoc
 } from 'vue-docgen-api'
+import { ContentAndDependencies } from './compileTemplates'
 
-export interface DocgenCLIConfig {
+export { ContentAndDependencies }
+
+export interface SafeDocgenCLIConfig {
 	/**
 	 * Should we add default examples
 	 * @default true
@@ -43,13 +46,13 @@ export interface DocgenCLIConfig {
 	 * Use this to point docgen to the files that contain documentation specific to a component.
 	 * @param componentPath the path of the parsed components this doc is attached to
 	 */
-	getDocFileName(componentPath: string): string
+	getDocFileName(componentPath: string): string | false
 	/**
 	 * Function returning the absolute path of the documentation markdown files. If [outFile](#outfile) is used, this config will be ignored.
 	 * @param file original file
 	 * @param config config file
 	 */
-	getDestFile(file: string, config: DocgenCLIConfig): string
+	getDestFile(file: string, config: SafeDocgenCLIConfig): string
 	/**
 	 * Should vue-docgen keep on watching your files for changes once generation is done?
 	 */
@@ -65,19 +68,26 @@ export interface DocgenCLIConfig {
 	/**
 	 * if you want to force the current working directory to another absolute path
 	 */
-	pages?: DocgenCLIConfig[]
+	pages?: SafeDocgenCLIConfig[]
+}
+
+export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
+	templates: Partial<Templates>
+	pages?: DocgenCLIConfig
 }
 
 export interface Templates {
-	props(props: PropDescriptor[]): string
-	slots(slots: SlotDescriptor[]): string
-	methods(methods: MethodDescriptor[]): string
-	events(events: EventDescriptor[]): string
+	props(props: PropDescriptor[], subComponent?: boolean): string
+	slots(slots: SlotDescriptor[], subComponent?: boolean): string
+	methods(methods: MethodDescriptor[], subComponent?: boolean): string
+	events(events: EventDescriptor[], subComponent?: boolean): string
 	component(
 		usage: RenderedUsage,
 		doc: ComponentDoc,
-		config: DocgenCLIConfig,
-		componentRelativePath: string
+		config: SafeDocgenCLIConfig,
+		componentRelativePath: string,
+		requiresMd: ContentAndDependencies[],
+		subComponent?: boolean
 	): string
 	defaultExample(doc: ComponentDoc): string
 	functionalTag: string

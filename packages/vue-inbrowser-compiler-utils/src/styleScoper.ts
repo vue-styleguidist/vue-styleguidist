@@ -5,7 +5,7 @@ export default function scoper(css: string, suffix: string) {
 	const re = /([^\r\n,{}]+)(,(?=[^}]*{)|s*{)/g
 
 	// `after` is going to contain eithe a comma or an opening curly bracket
-	css = css.replace(re, function(full, selector, after) {
+	css = css.replace(re, function (full, selector, after) {
 		// if non-rule delimiter
 		if (selector.match(/^\s*(@media|@keyframes|to|from|@font-face)/)) {
 			return selector + after
@@ -21,7 +21,7 @@ export default function scoper(css: string, suffix: string) {
 
 		// deal with :scope pseudo selectors
 		if (selector && selector.match(/:scope/)) {
-			selector = selector.replace(/([^\s]*):scope/, function(full: string, cutSelector: string) {
+			selector = selector.replace(/([^\s]*):scope/, function (full: string, cutSelector: string) {
 				if (cutSelector === '') {
 					return '> *'
 				}

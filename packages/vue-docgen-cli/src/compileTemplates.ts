@@ -1,4 +1,5 @@
-import { parse } from 'vue-docgen-api'
+import * as path from 'path'
+import { parse, ComponentDoc, ParamTag } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import slots from './templates/slots'
@@ -6,35 +7,89 @@ import props from './templates/props'
 import component from './templates/component'
 import defaultExample from './templates/defaultExample'
 import functionalTag from './templates/functionalTag'
-import { DocgenCLIConfig } from './config'
+import { SafeDocgenCLIConfig } from './config'
+import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
 
 export { mdclean } from './templates/utils'
 export { events, methods, slots, props, component, defaultExample, functionalTag }
 export { default as docgen } from './docgen'
 
-export default async (
+export interface ContentAndDependencies {
+	content: string
+	dependencies: string[]
+}
+
+export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: string): string[] {
+	if (!doc.tags) return []
+	const requireDep =
+		doc.tags.requires?.map((t: ParamTag) => path.join(compDirName, t.description as string)) || []
+	const examplesDep = getExamplesFilePaths(doc.tags, compDirName)
+	return [...requireDep, ...examplesDep]
+}
+
+/**
+ *
+ * @param absolutePath
+ * @param config
+ * @param componentRelativePath
+ * @param extraMd
+ */
+export default async function compiletemplates(
 	absolutePath: string,
-	config: DocgenCLIConfig,
+	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
-	extraMd?: string
-): Promise<string> => {
+	subComponent = false
+): Promise<ContentAndDependencies> {
 	const { apiOptions: options, templates } = config
-	const doc = await parse(absolutePath, options)
-	const { props, events, methods, slots } = doc
+	try {
+		const doc = await parse(absolutePath, options)
+		const { props, events, methods, slots } = doc
 
-	const renderedUsage = {
-		props: props ? templates.props(props) : '',
-		slots: slots ? templates.slots(slots) : '',
-		methods: methods ? templates.methods(methods) : '',
-		events: events ? templates.events(events) : '',
-		functionalTag: templates.functionalTag
+		const renderedUsage = {
+			props: props ? templates.props(props, subComponent) : '',
+			slots: slots ? templates.slots(slots, subComponent) : '',
+			methods: methods ? templates.methods(methods, subComponent) : '',
+			events: events ? templates.events(events, subComponent) : '',
+			functionalTag: templates.functionalTag
+		}
+
+		if (!subComponent) {
+			doc.docsBlocks = await getDocsBlocks(absolutePath, doc, config.getDocFileName)
+
+			if (!doc.docsBlocks?.length && config.defaultExamples) {
+				doc.docsBlocks = [templates.defaultExample(doc)]
+			}
+		}
+
+		const componentRelativeDirectoryPath = path.dirname(componentRelativePath)
+		const componentAbsoluteDirectoryPath = path.dirname(absolutePath)
+
+		const requiresMd =
+			!subComponent && doc.tags?.requires
+				? await Promise.all(
+						doc.tags.requires.map((requireTag: ParamTag) =>
+							compiletemplates(
+								path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
+								config,
+								path.join(componentRelativeDirectoryPath, requireTag.description as string),
+								true
+							)
+						)
+				  )
+				: []
+
+		return {
+			content: templates.component(
+				renderedUsage,
+				doc,
+				config,
+				componentRelativePath,
+				requiresMd,
+				subComponent
+			),
+			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
+		}
+	} catch (e) {
+		throw new Error(`Error parsing file ${absolutePath}:` + e.message)
 	}
-
-	if (extraMd && extraMd.length) {
-		doc.docsBlocks = [...(doc.docsBlocks || []), extraMd]
-	} else if (!doc.docsBlocks && config.defaultExamples) {
-		doc.docsBlocks = [templates.defaultExample(doc)]
-	}
-
-	return templates.component(renderedUsage, doc, config, componentRelativePath)
 }

@@ -80,15 +80,7 @@ export const MethodsRenderer: React.FC<MethodsRendererProps> = ({ methods, class
 
 MethodsRenderer.propTypes = {
 	classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
-	methods: PropTypes.arrayOf(
-		PropTypes.shape({
-			name: PropTypes.string.isRequired,
-			description: PropTypes.string,
-			returns: PropTypes.object,
-			params: PropTypes.array,
-			tags: PropTypes.object
-		}).isRequired
-	).isRequired
+	methods: PropTypes.array.isRequired
 }
 
 export default Styled<MethodsRendererProps>(methodStyles as any)(MethodsRenderer)

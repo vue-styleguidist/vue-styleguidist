@@ -217,17 +217,17 @@ export default (slots: {
   | Name          | Description  | Bindings |
   | ------------- | ------------ | -------- |
 ${slotNames
-    .map(slotName => {
-      const { description, bindings } = slots[slotName]
-      const readableBindings = // serialize bindings to display them ina readable manner
-        bindings && Object.keys(bindings).length
-          ? JSON.stringify(bindings, null, 2)
-          : ''
-      return cleanReturn(
-        `| ${slotName} | ${description} | ${readableBindings} |`
-      ) // remplace returns by <br> to allow them in a table cell
-    })
-    .join('\n')}
+  .map(slotName => {
+    const { description, bindings } = slots[slotName]
+    const readableBindings = // serialize bindings to display them ina readable manner
+      bindings && Object.keys(bindings).length
+        ? JSON.stringify(bindings, null, 2)
+        : ''
+    return cleanReturn(
+      `| ${slotName} | ${description} | ${readableBindings} |`
+    ) // remplace returns by <br> to allow them in a table cell
+  })
+  .join('\n')}
   `
 }
 ```

@@ -15,6 +15,7 @@ module.exports = async () => {
 	)
 
 	return {
+		base: "/docgen/",
 		dest: path.join(__dirname, '../../dist'),
 		title: 'VuePress DocGen Live',
 		themeConfig: {

@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.27.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.27.0...v4.27.1) (2020-07-19)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.27.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.3...v4.27.0) (2020-07-17)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* compile issue linked to progress bar fix ([5c55eaf](https://github.com/vue-styleguidist/vue-styleguidist/commit/5c55eaf5927bbb3e9479a916f9c59cab6416a56c))
+* progressbar assumed custom webpack ([96e28e6](https://github.com/vue-styleguidist/vue-styleguidist/commit/96e28e64ff139922ce5b8e2e05ac48266ae02592)), closes [#903](https://github.com/vue-styleguidist/vue-styleguidist/issues/903)
+
+
+
+
+
+# [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
+
+
+### Bug Fixes
+
+* yarn upgrade revert ([4fe3218](https://github.com/vue-styleguidist/vue-styleguidist/commit/4fe32181053234630df418673616b5ca61321c5c))
+
+
+### Features
+
+* 🎸 Add support for html language in examples ([77e225a](https://github.com/vue-styleguidist/vue-styleguidist/commit/77e225a3afcda1dabe87d7e52042748e48799d6b))
+
+
+
+
+
+## [4.24.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.2...v4.24.3) (2020-06-16)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.24.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.0...v4.24.1) (2020-06-05)
+
+
+### Bug Fixes
+
+* repair codesplit false ([c42b522](https://github.com/vue-styleguidist/vue-styleguidist/commit/c42b522b3f249a8cdf3802ade056595d20372dfa))
+
+
+
+
+
+# [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* adjust structure of examples ([b80a86c](https://github.com/vue-styleguidist/vue-styleguidist/commit/b80a86c3aad769530cdab4ea911639088a2b8dac))
+* classname and style were ignored ([563b313](https://github.com/vue-styleguidist/vue-styleguidist/commit/563b3134ee1304790d06b2f4d394cc79400be9da))
+
+
+
+
+
 ## [4.23.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.2...v4.23.3) (2020-05-20)
 
 

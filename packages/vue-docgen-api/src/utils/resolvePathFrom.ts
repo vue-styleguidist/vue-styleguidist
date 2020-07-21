@@ -1,12 +1,13 @@
-const { join } = require('path')
+import { join } from 'path'
+import missingFilesCache from './missing-files-cache'
 
 const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 
-export default function resolvePathFrom(path: string, from: string[]): string {
-	let finalPath: string = ''
+export default function resolvePathFrom(path: string, from: string[]): string | null {
+	let finalPath: string | null = null
 
 	SUFFIXES.forEach(s => {
-		if (!finalPath.length) {
+		if (!finalPath) {
 			try {
 				finalPath = require.resolve(`${path}${s}`, {
 					paths: from
@@ -15,7 +16,7 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 				// eat the error
 			}
 		}
-		if (!finalPath.length) {
+		if (!finalPath) {
 			try {
 				finalPath = require.resolve(join(path, `index${s}`), {
 					paths: from
@@ -24,7 +25,7 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 				// eat the error
 			}
 		}
-		if (!finalPath.length) {
+		if (!finalPath) {
 			for (let i = 0; i < from.length; i++) {
 				try {
 					finalPath = require.resolve(join(from[i], `${path}${s}`))
@@ -49,11 +50,14 @@ export default function resolvePathFrom(path: string, from: string[]): string {
 		// eat the error
 	}
 
-	if (!finalPath.length) {
-		// eslint-disable-next-line no-console
-		console.warn(
-			`Neither '${path}.vue' nor '${path}.js(x)' or '${path}/index.js(x)' or '${path}/index.ts(x)' could be found in '${from}'`
-		)
+	if (!finalPath) {
+		if (!missingFilesCache[path]) {
+			// eslint-disable-next-line no-console
+			console.warn(
+				`Neither '${path}.vue' nor '${path}.js(x)' or '${path}/index.js(x)' or '${path}/index.ts(x)' could be found in '${from}'`
+			)
+			missingFilesCache[path] = true
+		}
 	}
 
 	return finalPath

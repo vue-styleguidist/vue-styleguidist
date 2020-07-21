@@ -9,28 +9,43 @@ import {
 	defaultExample,
 	functionalTag
 } from './compileTemplates'
-import { DocgenCLIConfig } from './config'
+import { SafeDocgenCLIConfig, DocgenCLIConfig } from './config'
+import { findFileCaseInsensitive } from './utils'
 
 export default (
 	cwd: string,
 	watch: boolean = false,
 	configFileFromCmd?: string,
 	pathArray: string[] = []
-): DocgenCLIConfig => {
+): SafeDocgenCLIConfig => {
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
 		: path.join(cwd, 'docgen.config.js')
 	const [componentsFromCmd, outDirFromCmd] = pathArray
 
-	const config: DocgenCLIConfig = {
+	const config: Partial<DocgenCLIConfig> = {
 		cwd,
 		watch,
 		componentsRoot: path.dirname(configFilePath),
 		components: componentsFromCmd || 'src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}',
 		outDir: outDirFromCmd,
-		getDocFileName: (componentPath: string) =>
-			path.resolve(path.dirname(componentPath), 'Readme.md'),
-		getDestFile: (file: string, config: DocgenCLIConfig): string =>
+		getDocFileName: (componentPath: string): string | false => {
+			const files = [
+				path.join(path.dirname(componentPath), 'Readme.md'),
+				// ComponentName.md
+				componentPath.replace(path.extname(componentPath), '.md'),
+				// FolderName.md when component definition file is index.js
+				path.join(path.dirname(componentPath), path.basename(path.dirname(componentPath)) + '.md')
+			]
+			for (const file of files) {
+				const existingFile = findFileCaseInsensitive(file)
+				if (existingFile) {
+					return existingFile
+				}
+			}
+			return false
+		},
+		getDestFile: (file: string, config: SafeDocgenCLIConfig): string =>
 			path.resolve(config.outDir, file).replace(/\.\w+$/, '.md'),
 		...(fs.existsSync(configFilePath) ? require(configFilePath) : undefined)
 	}
@@ -49,5 +64,5 @@ export default (
 		...config.templates
 	}
 
-	return config
+	return config as SafeDocgenCLIConfig
 }

@@ -20,9 +20,7 @@ const command = argv._[0]
 process.on('uncaughtException', (err: any) => {
 	if (err.code === 'EADDRINUSE') {
 		binutils.printErrorWithLink(
-			`Another server is running at port ${
-				config.serverPort
-			} already. Please stop it or change the default port to continue.`,
+			`Another server is running at port ${config.serverPort} already. Please stop it or change the default port to continue.`,
 			'You can change the port using the `serverPort` option in your style guide config:',
 			consts.DOCS_CONFIG
 		)
@@ -64,7 +62,11 @@ try {
 } catch (err) {
 	if (err instanceof StyleguidistError) {
 		const link = consts.DOCS_CONFIG + (err.extra ? `#${err.extra.toLowerCase()}` : '')
-		binutils.printErrorWithLink(err.message, `${err.extra}\n\nLearn how to configure your style guide:`, link)
+		binutils.printErrorWithLink(
+			err.message,
+			`${err.extra}\n\nLearn how to configure your style guide:`,
+			link
+		)
 		process.exit(1)
 	} else {
 		throw err

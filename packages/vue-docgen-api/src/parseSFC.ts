@@ -86,9 +86,9 @@ export default async function parseSFC(
 				initialDoc !== undefined
 		  )) || []
 		: // if there is only a template return the template's doc
-		  documentation
-			? [documentation]
-			: []
+		documentation
+		? [documentation]
+		: []
 
 	if (documentation && !documentation.get('displayName')) {
 		// a component should always have a display name

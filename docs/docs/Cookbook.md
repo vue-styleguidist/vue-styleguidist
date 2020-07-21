@@ -19,6 +19,7 @@
 - [How to use vue-styleguidist with multiple packages for components](#how-to-use-vue-styleguidist-with-multiple-packages-for-components)
 - [I have multiple components in the same folder what can I do?](#i-have-multiple-components-in-the-same-folder-what-can-i-do)
 - [How do I integrate Styleguidist into an existing Nuxtjs site?](#how-do-i-integrate-styleguidist-into-an-existing-nuxtjs-site)
+- [How to use component name in docs with a different displayName](#how-to-use-component-name-in-docs-with-a-different-displayname)
 
 <!-- tocstop -->
 
@@ -89,7 +90,7 @@ module.exports = {
 }
 ```
 
-See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuetify).
+See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/vuetify).
 
 **NOTE** Since Styleguidist creates one root per example (for isolation), installing Vuetify with the default optimized way will not work. Instead, you should prefer installing it globally by following the setup above.
 
@@ -131,7 +132,7 @@ module.exports = {
 }
 ```
 
-See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuex).
+See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/vuex).
 
 ## How to add dummy data to the style guide?
 
@@ -289,7 +290,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  styles: function(theme) {
+  styles: function (theme) {
     return {
       Logo: {
         logo: {
@@ -302,7 +303,7 @@ module.exports = {
 }
 ```
 
-> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Check out the [customized](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, it uses the following:
+> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Check out the [customized](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/customised) example, it uses the following:
 
 ```jsx
 // SectionsRenderer.js
@@ -537,18 +538,20 @@ It can also be used with the special value `[none]`. It will then hide the examp
 If you hide with `@examples [none]` all non-main components, the only remaining readme displayed will the main one. We get our `readme` file back.
 
 ## How do I integrate Styleguidist into an existing Nuxtjs site?
-Suppose you have an existing Nuxtjs site or are using Nuxtjs as your development environment for your component library. While you could also encourage users to clone your repo and build the docs, it would be nice to integrate them into your existing Nuxtjs site. This is possible (with some caveats). 
+
+Suppose you have an existing Nuxtjs site or are using Nuxtjs as your development environment for your component library. While you could also encourage users to clone your repo and build the docs, it would be nice to integrate them into your existing Nuxtjs site. This is possible (with some caveats).
 
 First you need to determine the route you want your styleguist docs to be at. For example you may want your docs to be at `www.mysite.com/docs`. If styleguidist was a pure nuxt page, under the Nuxtjs convention, it would be the file `pages/docs.vue`. So wherever you want your styleguidist documentation to reside you can **not** have a `pages/<dest>.vue` file there!
 
 Next you need to set up the generate properties of the `nuxt.config.js`. If you are deploying on GitLab, it might be something like this:
+
 ```js
 // nuxt.config.js
 export default {
   // ...
   generate: {
     dir: 'public'
-  },
+  }
   // ...
 }
 ```
@@ -557,4 +560,76 @@ If you have generated a nuxtjs site before and looked at the output (here under 
 
 Now you will want to update your `styleguide.config.js` file to point `styleguidDir` to the `nuxt.config.js`'s `generate.dir`, e.g. if you wanted the `/docs` to be where the styleguideist documentation to be and `generate.dir='public'` then `styleguidDir=public/docs`.
 
-Then the last thing is to remember the order of operations. First you generate nuxt (`npm run generate`) and then `build` your styleguidist docs. 
+Then the last thing is to remember the order of operations. First you generate nuxt (`npm run generate`) and then `build` your styleguidist docs.
+
+## How to use component name in `<docs>` with a different displayName
+
+When using `displayName`, components in the `<docs>` block must be imported with their `displayName` instead of their `name`.  
+This is not ideal as your examples are not using the real component name.
+
+A way to get around the problem is to create an alias component, with its original name.
+
+Modify the [root element](/Configuration.html#renderrootjsx) as follow:
+
+```js
+// config/styleguide.root.js
+import Vue from 'vue';
+
+export default previewComponent => {
+  return {
+    render(createElement) {
+      return createElement(previewComponent);
+    },
+    created() {
+      // For each globally registered component,
+      // create an alias if its name doesn't match its displayName
+      Object.entries(Vue.options.components).forEach(c => {
+        const displayName = c[0];
+        const component = c[1];
+        const { name } = component.extendOptions;
+
+        // If display name is different than name, create an alias of the component
+        // Ex: AcAlert component displayName is Alert
+        //     We then create AcAlert, an alias of Alert, to be used in <docs> block
+        if (displayName !== name) {
+          Vue.component(name, component);
+        }
+      });
+    },
+}
+```
+
+```js
+module.exports = {
+  renderRootJsx: path.join(__dirname, 'config/styleguide.root.js')
+}
+```
+
+You can now use `<AcAlert />` in `<docs>` while the left menu displays `Alert`.  
+Example:
+
+````vue
+<script>
+/**
+ * @displayName Alert
+ */
+export default {
+  name: 'AcAlert'
+}
+</script>
+
+<template>
+  <div>AcAlert</div>
+</template>
+
+<docs>
+  # Usage ```js
+  <AcAlert />
+  <Alert
+/></docs>
+````
+
+</docs>
+```
+
+> :warning: The search menu won't be able to find `AcAlert` anymore, as it searches through the page names, thus `Alert`.

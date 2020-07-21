@@ -35,7 +35,7 @@ const merge = mergeBase({
 //make it a typeguard
 function isFunc(
 	conf: Configuration | ((env: string) => Configuration)
-): conf is ((env: string) => Configuration) {
+): conf is (env: string) => Configuration {
 	return isFunction(conf)
 }
 

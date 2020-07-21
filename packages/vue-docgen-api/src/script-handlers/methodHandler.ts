@@ -79,7 +79,11 @@ export function setMethodDescriptor(
 	)
 
 	// returns
-	describeReturns(method, methodDescriptor, jsDocTags.filter(t => t.title === 'returns'))
+	describeReturns(
+		method,
+		methodDescriptor,
+		jsDocTags.filter(t => t.title === 'returns')
+	)
 
 	// tags
 	methodDescriptor.tags = transformTagsIntoObject(jsDocTags)
