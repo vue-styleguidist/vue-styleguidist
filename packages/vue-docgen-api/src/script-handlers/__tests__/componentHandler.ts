@@ -137,9 +137,9 @@ describe('componentHandler', () => {
 
 	it('should extract the @displayName tag seperately', () => {
 		const src = `
-		/**
-		 * @displayName Best Button Ever
-		 */
+	/**
+	 * @displayName Best Button Ever
+	 */
     export default {
     }
     `
@@ -148,5 +148,21 @@ describe('componentHandler', () => {
 			componentHandler(documentation, def)
 		}
 		expect(documentation.set).toHaveBeenCalledWith('displayName', 'Best Button Ever')
+	})
+
+	it('should extract the @displayName tag seperately if iev', () => {
+		const src = `
+	/**
+	 * Best Button Ever
+	 */
+	const a = {}
+
+    export default a
+    `
+		const def = parse(src).get('default')
+		if (def) {
+			componentHandler(documentation, def)
+		}
+		expect(documentation.set).toHaveBeenCalledWith('description', 'Best Button Ever')
 	})
 })

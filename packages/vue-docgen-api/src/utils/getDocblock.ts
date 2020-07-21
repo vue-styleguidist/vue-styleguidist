@@ -30,8 +30,9 @@ export default function getDocblock(
 ): string | null {
 	commentIndex = commentIndex || 1
 	let comments: bt.Comment[] = []
-	if (path.node.leadingComments) {
-		comments = path.node.leadingComments.filter(
+	const allComments = path.node.leadingComments
+	if (allComments) {
+		comments = allComments.filter(
 			(comment: bt.Comment) =>
 				comment.type === 'CommentBlock' && DOCBLOCK_HEADER.test(comment.value)
 		)
