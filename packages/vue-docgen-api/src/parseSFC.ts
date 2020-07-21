@@ -41,12 +41,7 @@ export default async function parseSFC(
 
 		documentation = initialDoc || new Documentation(opt.filePath)
 
-		parseTemplate(
-			parts.template,
-			documentation,
-			[...templateHandlers, ...addTemplateHandlers],
-			opt.filePath
-		)
+		parseTemplate(parts.template, documentation, [...templateHandlers, ...addTemplateHandlers], opt)
 	}
 
 	const extSrc: string = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : ''
