@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.28.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.28.0...v4.28.1) (2020-07-27)
+
+
+### Bug Fixes
+
+* delegated component exports ([046f96b](https://github.com/vue-styleguidist/vue-styleguidist/commit/046f96bc1e9d6d4f9514b74c2666710cf09019a5))
+
+
+
+
+
 # [4.28.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.27.1...v4.28.0) (2020-07-21)
 
 
