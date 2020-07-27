@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../../babel-parser'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
 import classEventHandler from '../classEventHandler'

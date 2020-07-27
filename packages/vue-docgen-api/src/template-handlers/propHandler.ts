@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import recast from 'recast'
+import { visit } from 'recast'
 import { ASTElement, ASTExpression, ASTNode } from 'vue-template-compiler'
 import Documentation, { ParamTag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
@@ -60,7 +60,7 @@ function getPropsFromExpression(
 ) {
 	const ast = getTemplateExpressionAST(expression)
 	const propsFound: string[] = []
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		visitMemberExpression(path) {
 			const obj = path.node ? path.node.object : undefined
 			const propName = path.node ? path.node.property : undefined

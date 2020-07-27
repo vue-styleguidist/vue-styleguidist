@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 
 /**
  * true if the left part of the expression of the NodePath is of form `exports.foo = ...;` or

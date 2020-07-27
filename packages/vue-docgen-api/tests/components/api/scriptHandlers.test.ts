@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
 import { parse, ParseOptions, TemplateParserOptions, Documentation } from '../../../src/main'

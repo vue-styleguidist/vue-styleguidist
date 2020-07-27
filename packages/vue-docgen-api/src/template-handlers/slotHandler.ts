@@ -1,6 +1,7 @@
 import * as bt from '@babel/types'
 import { ASTElement } from 'vue-template-compiler'
-import recast, { NodePath } from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit, print } from 'recast'
 import Documentation, { ParamTag } from '../Documentation'
 import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
@@ -27,7 +28,7 @@ export default function slotHandler(
 			const vBindCode = templateAst.attrsMap['v-bind']
 			const ast = parser.parse(`() => (${vBindCode})`)
 			let rawVBind = false
-			recast.visit(ast.program, {
+			visit(ast.program, {
 				visitObjectExpression(path) {
 					if (!path.node) {
 						return false
@@ -35,7 +36,7 @@ export default function slotHandler(
 					path.get('properties').each((property: NodePath) => {
 						const node = property.node
 						if (bt.isProperty(node) || bt.isObjectProperty(node)) {
-							bindings[node.key.name] = recast.print(property.get('value')).code
+							bindings[node.key.name] = print(property.get('value')).code
 						} else {
 							rawVBind = true
 						}
