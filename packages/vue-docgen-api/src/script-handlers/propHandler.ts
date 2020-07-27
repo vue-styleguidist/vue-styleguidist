@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit, print } from 'recast'
 import Documentation, {
 	BlockTag,
 	DocBlockTags,
@@ -27,7 +27,7 @@ function getRawValueParsedFromFunctionsBlockStatementNode(
 		return null
 	}
 	const [ret] = body
-	return ret.argument ? recast.print(ret.argument).code : null
+	return ret.argument ? print(ret.argument).code : null
 }
 
 /**
@@ -130,7 +130,7 @@ export default async function propHandler(documentation: Documentation, path: No
 				} else {
 					// in any other case, just display the code for the typing
 					propDescriptor.type = {
-						name: recast.print(prop.get('value')).code,
+						name: print(prop.get('value')).code,
 						func: true
 					}
 				}
@@ -164,7 +164,7 @@ export function describeType(
 		if (typeDesc) {
 			const typedAST = getTemplateExpressionAST(`const a:${typeDesc.name}`)
 			let typeValues: string[] | undefined
-			recast.visit(typedAST.program, {
+			visit(typedAST.program, {
 				visitVariableDeclaration(path) {
 					const { typeAnnotation } = path.get('declarations', 0, 'id', 'typeAnnotation').value
 					if (
@@ -252,7 +252,7 @@ function getTypeFromTypePath(
 
 	const typeName =
 		bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters
-			? recast.print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
+			? print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
 			: bt.isArrayExpression(typeNode)
 			? typePath
 					.get('elements')
@@ -262,7 +262,7 @@ function getTypeFromTypePath(
 			  bt.isIdentifier(typeNode) &&
 			  VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
 			? typeNode.name.toLowerCase()
-			: recast.print(typeNode).code
+			: print(typeNode).code
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}
@@ -332,7 +332,7 @@ export function describeDefault(
 				) {
 					propDescriptor.defaultValue = {
 						func: false,
-						value: recast.print(defaultFunction.node).code
+						value: print(defaultFunction.node).code
 					}
 					return
 				}
@@ -366,7 +366,7 @@ export function describeDefault(
 					) {
 						propDescriptor.defaultValue = {
 							func: false,
-							value: recast.print(arrowFunctionBody.node).code
+							value: print(arrowFunctionBody.node).code
 						}
 						return
 					}
@@ -374,7 +374,7 @@ export function describeDefault(
 					// arrow function looks like `() => ({})`
 					propDescriptor.defaultValue = {
 						func: true,
-						value: recast.print(defaultFunction).code
+						value: print(defaultFunction).code
 					}
 					return
 				}
@@ -402,7 +402,7 @@ export function describeDefault(
 		if (defaultValueIsProp) {
 			// in this case, just return the rawValue
 			const defaultPath = defaultArray[0].get('value')
-			const rawValue = recast.print(defaultPath).code
+			const rawValue = print(defaultPath).code
 			propDescriptor.defaultValue = {
 				func: bt.isFunction(defaultPath.node),
 				value: rawValue
@@ -417,7 +417,7 @@ export function describeDefault(
 			const params = paramNodeArray.map((p: any) => p.name).join(', ')
 
 			const defaultBlockStatement = defaultArray[0].get('body')
-			const rawValue = recast.print(defaultBlockStatement).code
+			const rawValue = print(defaultBlockStatement).code
 			// the function should be reconstructed as "old-school" function, because they have the same handling of "this", whereas arrow functions do not.
 			const rawValueParsed = `function(${params}) ${rawValue.trim()}`
 			propDescriptor.defaultValue = {

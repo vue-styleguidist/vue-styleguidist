@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Map from 'ts-map'
 import isExportedAssignment from './isExportedAssignment'
 import resolveExportDeclaration from './resolveExportDeclaration'
@@ -54,7 +54,7 @@ function isComponentDefinition(path: NodePath): boolean {
 
 function getReturnStatementObject(realDef: NodePath): NodePath | undefined {
 	let returnedObjectPath: NodePath | undefined
-	recast.visit(realDef.get('body'), {
+	visit(realDef.get('body'), {
 		visitReturnStatement(rPath) {
 			const returnArg = rPath.get('argument')
 			if (bt.isObjectExpression(returnArg.node)) {
@@ -137,7 +137,7 @@ export default function resolveExportedComponent(
 		return false
 	}
 
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		// for perf resons,
 		// look only at the root,
 		// ignore all traversing except for if

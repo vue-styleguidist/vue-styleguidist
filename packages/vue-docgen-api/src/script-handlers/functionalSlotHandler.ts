@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Documentation, { ParamTag, ParamType } from '../Documentation'
 import { getSlotComment } from './slotHandler'
 
@@ -38,7 +38,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 		const contextVariable = renderValuePath.get('params', 1)
 		if (contextVariable.value) {
 			const contextVariableName = contextVariable.value.name
-			recast.visit(renderValuePath.node, {
+			visit(renderValuePath.node, {
 				// context.children
 				visitMemberExpression(pathMember) {
 					if (

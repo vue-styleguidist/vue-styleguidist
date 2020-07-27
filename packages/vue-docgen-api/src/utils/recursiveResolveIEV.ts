@@ -1,7 +1,7 @@
 import { readFile } from 'fs'
 import * as path from 'path'
 import { promisify } from 'util'
-import recast from 'recast'
+import { parse } from 'recast'
 import Map from 'ts-map'
 import buildParser from '../babel-parser'
 import cacher from './cacher'
@@ -85,7 +85,7 @@ export async function resolveIEV(
 					const source = await read(fullFilePath, {
 						encoding: 'utf-8'
 					})
-					const astRemote = cacher(() => recast.parse(source, { parser: buildParser() }), source)
+					const astRemote = cacher(() => parse(source, { parser: buildParser() }), source)
 					const returnedVariables = resolveImmediatelyExported(astRemote, exportedVariableNames)
 					if (Object.keys(returnedVariables).length) {
 						exportToLocal.forEach((exported, local) => {

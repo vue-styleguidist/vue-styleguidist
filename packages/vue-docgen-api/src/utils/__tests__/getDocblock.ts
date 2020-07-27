@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import babylon from '../../babel-parser'
 import getDocblock from '../getDocblock'
 
@@ -26,7 +26,7 @@ describe('getDocblock', () => {
 
 function getFirstVariablePath(ast: bt.File): NodePath {
 	const varPath: NodePath[] = []
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		visitVariableDeclaration: (a: NodePath) => {
 			varPath.push(a)
 			return false

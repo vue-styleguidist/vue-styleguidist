@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Documentation, { Tag } from '../Documentation'
 import { setEventDescriptor } from './eventHandler'
 import getDocblock from '../utils/getDocblock'
@@ -19,7 +19,7 @@ export default async function classEventHandler(
 	astPath: bt.File
 ) {
 	if (bt.isClassDeclaration(path.node)) {
-		recast.visit(path.node, {
+		visit(path.node, {
 			visitClassMethod(path) {
 				if (
 					path.node.decorators &&

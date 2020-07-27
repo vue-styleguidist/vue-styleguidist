@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Documentation, {
 	BlockTag,
 	DocBlockTags,
@@ -87,7 +87,7 @@ export default async function eventHandler(
 			})
 		}
 	}
-	recast.visit(path.node, {
+	visit(path.node, {
 		visitCallExpression(pathExpression) {
 			if (
 				bt.isMemberExpression(pathExpression.node.callee) &&

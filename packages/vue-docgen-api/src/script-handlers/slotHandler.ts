@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Documentation, { ParamTag, ParamType, Tag, SlotDescriptor } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 import { parseDocblock } from '../utils/getDocblock'
@@ -32,7 +32,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 		const renderValuePath = bt.isObjectProperty(renderPath[0].node)
 			? renderPath[0].get('value')
 			: renderPath[0]
-		recast.visit(renderValuePath.node, {
+		visit(renderValuePath.node, {
 			// this.$slots.default()
 			visitCallExpression(pathCall) {
 				if (
