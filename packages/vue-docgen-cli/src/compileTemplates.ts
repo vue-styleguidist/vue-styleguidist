@@ -39,7 +39,7 @@ export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: st
  * @param componentRelativePath
  * @param extraMd
  */
-export default async function compiletemplates(
+export default async function compileTemplates(
 	absolutePath: string,
 	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
@@ -51,12 +51,13 @@ export default async function compiletemplates(
 		const { props, events, methods, slots } = doc
 		const isSubComponent = subComponent
 		const hasSubComponents = !!doc.tags?.requires
+		const subComponentOptions = { isSubComponent, hasSubComponents }
 
 		const renderedUsage = {
-			props: props ? templates.props(props, { isSubComponent, hasSubComponents }) : '',
-			slots: slots ? templates.slots(slots, { isSubComponent, hasSubComponents }) : '',
-			methods: methods ? templates.methods(methods, { isSubComponent, hasSubComponents }) : '',
-			events: events ? templates.events(events, { isSubComponent, hasSubComponents }) : '',
+			props: props ? templates.props(props, subComponentOptions) : '',
+			slots: slots ? templates.slots(slots, subComponentOptions) : '',
+			methods: methods ? templates.methods(methods, subComponentOptions) : '',
+			events: events ? templates.events(events, subComponentOptions) : '',
 			functionalTag: templates.functionalTag
 		}
 
@@ -74,7 +75,7 @@ export default async function compiletemplates(
 		const requiresMd = doc.tags?.requires
 			? await Promise.all(
 					doc.tags.requires.map((requireTag: ParamTag) =>
-						compiletemplates(
+						compileTemplates(
 							path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
 							config,
 							path.join(componentRelativeDirectoryPath, requireTag.description as string),
@@ -85,10 +86,14 @@ export default async function compiletemplates(
 			: []
 
 		return {
-			content: templates.component(renderedUsage, doc, config, componentRelativePath, requiresMd, {
-				isSubComponent,
-				hasSubComponents
-			}),
+			content: templates.component(
+				renderedUsage,
+				doc,
+				config,
+				componentRelativePath,
+				requiresMd,
+				subComponentOptions
+			),
 			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
 		}
 	} catch (e) {
