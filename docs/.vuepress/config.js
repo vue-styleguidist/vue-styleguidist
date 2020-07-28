@@ -41,6 +41,7 @@ module.exports = () => {
 		],
 		themeConfig: {
 			repo: 'vue-styleguidist/vue-styleguidist',
+			docsBranch: 'dev',
 			editLinks: true,
 			docsDir: 'docs',
 			algolia: {

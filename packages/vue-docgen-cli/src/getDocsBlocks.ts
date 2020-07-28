@@ -1,7 +1,8 @@
-import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
+import { dirname, join, relative } from 'path'
 import { readFile as rf } from 'fs'
 import { promisify } from 'util'
-import { dirname, join } from 'path'
+import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
+import { findFileCaseInsensitive } from './utils'
 
 const readFile = promisify(rf)
 
@@ -23,17 +24,27 @@ export function getExamplesFilePaths(
 export default async function getDocsBlocks(
 	absolutePath: string,
 	doc: Pick<ComponentDoc, 'tags' | 'docsBlocks'>,
-	getDocFileName: (file: string) => string | false
+	getDocFileName: (file: string) => string | false,
+	rootPath: string,
+	editLinkLabel: string,
+	getRepoEditUrl?: (path: string) => string
 ): Promise<string[]> {
 	const docsBlocks = doc.docsBlocks || []
 
-	const docFilePath = getDocFileName(absolutePath)
+	const docFilePath = getRepoEditUrl
+		? findFileCaseInsensitive(getDocFileName(absolutePath) || '')
+		: getDocFileName(absolutePath)
 	if (docFilePath) {
-		try {
-			docsBlocks.push(await readFile(docFilePath, 'utf8'))
-		} catch (e) {
-			// eat error if file not found
+		docsBlocks.push(`${
+			getRepoEditUrl
+				? `
+<a href="${getRepoEditUrl(
+						relative(rootPath, docFilePath)
+				  )}" class="docgen-edit-link">${editLinkLabel}</a>
+`
+				: ''
 		}
+${await readFile(docFilePath, 'utf8')}`)
 	}
 
 	// load @examples tags into the docsBlocks
@@ -42,10 +53,16 @@ export default async function getDocsBlocks(
 		const examplesFilePaths = getExamplesFilePaths(doc.tags, componentDirname)
 		await Promise.all(
 			examplesFilePaths.map(async examplePath => {
-				try {
-					docsBlocks.push(await readFile(examplePath, 'utf8'))
-				} catch (e) {
-					// eat error if file not found
+				const ep = getRepoEditUrl ? findFileCaseInsensitive(examplePath) : examplePath
+				if (ep) {
+					docsBlocks.push(`${
+						getRepoEditUrl
+							? `
+<a href="${getRepoEditUrl(relative(rootPath, ep))}" class="docgen-edit-link">${editLinkLabel}</a>
+`
+							: ''
+					}
+${await readFile(ep, 'utf8')}`)
 				}
 			})
 		)

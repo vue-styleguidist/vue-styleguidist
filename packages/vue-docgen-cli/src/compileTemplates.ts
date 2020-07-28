@@ -19,6 +19,11 @@ export interface ContentAndDependencies {
 	dependencies: string[]
 }
 
+export interface SubTemplateOptions {
+	isSubComponent?: boolean
+	hasSubComponents?: boolean
+}
+
 export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: string): string[] {
 	if (!doc.tags) return []
 	const requireDep =
@@ -28,33 +33,47 @@ export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: st
 }
 
 /**
- *
+ * Umbrella that calls docgen
+ * Calls each template provided by the user
+ * And generates a markdown string + the list of dependencies
  * @param absolutePath
  * @param config
  * @param componentRelativePath
  * @param extraMd
+ * @returns content will contain the markdown text, dependencies contains
+ * an array of path to files that should trigger the update of this file
  */
-export default async function compiletemplates(
+export default async function compileTemplates(
 	absolutePath: string,
 	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
 	subComponent = false
 ): Promise<ContentAndDependencies> {
-	const { apiOptions: options, templates } = config
+	const { apiOptions: options, templates, cwd } = config
 	try {
 		const doc = await parse(absolutePath, options)
 		const { props, events, methods, slots } = doc
+		const isSubComponent = subComponent
+		const hasSubComponents = !!doc.tags?.requires
+		const subComponentOptions = { isSubComponent, hasSubComponents }
 
 		const renderedUsage = {
-			props: props ? templates.props(props, subComponent) : '',
-			slots: slots ? templates.slots(slots, subComponent) : '',
-			methods: methods ? templates.methods(methods, subComponent) : '',
-			events: events ? templates.events(events, subComponent) : '',
+			props: props ? templates.props(props, subComponentOptions) : '',
+			slots: slots ? templates.slots(slots, subComponentOptions) : '',
+			methods: methods ? templates.methods(methods, subComponentOptions) : '',
+			events: events ? templates.events(events, subComponentOptions) : '',
 			functionalTag: templates.functionalTag
 		}
 
 		if (!subComponent) {
-			doc.docsBlocks = await getDocsBlocks(absolutePath, doc, config.getDocFileName)
+			doc.docsBlocks = await getDocsBlocks(
+				absolutePath,
+				doc,
+				config.getDocFileName,
+				cwd,
+				config.editLinkLabel,
+				config.getRepoEditUrl
+			)
 
 			if (!doc.docsBlocks?.length && config.defaultExamples) {
 				doc.docsBlocks = [templates.defaultExample(doc)]
@@ -64,19 +83,18 @@ export default async function compiletemplates(
 		const componentRelativeDirectoryPath = path.dirname(componentRelativePath)
 		const componentAbsoluteDirectoryPath = path.dirname(absolutePath)
 
-		const requiresMd =
-			!subComponent && doc.tags?.requires
-				? await Promise.all(
-						doc.tags.requires.map((requireTag: ParamTag) =>
-							compiletemplates(
-								path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
-								config,
-								path.join(componentRelativeDirectoryPath, requireTag.description as string),
-								true
-							)
+		const requiresMd = doc.tags?.requires
+			? await Promise.all(
+					doc.tags.requires.map((requireTag: ParamTag) =>
+						compileTemplates(
+							path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
+							config,
+							path.join(componentRelativeDirectoryPath, requireTag.description as string),
+							true
 						)
-				  )
-				: []
+					)
+			  )
+			: []
 
 		return {
 			content: templates.component(
@@ -85,7 +103,7 @@ export default async function compiletemplates(
 				config,
 				componentRelativePath,
 				requiresMd,
-				subComponent
+				subComponentOptions
 			),
 			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
 		}

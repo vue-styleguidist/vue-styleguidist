@@ -1,5 +1,6 @@
 import { EventDescriptor } from 'vue-docgen-api'
 import { mdclean } from './utils'
+import { SubTemplateOptions } from '../compileTemplates'
 
 const tmpl = (events: EventDescriptor[]) => {
 	let ret = ''
@@ -11,9 +12,10 @@ const tmpl = (events: EventDescriptor[]) => {
 	return ret
 }
 
-export default (events: EventDescriptor[], subComponent = false): string => {
+export default (events: EventDescriptor[], opt: SubTemplateOptions = {}): string => {
 	return `
-  ## Events
+${opt.isSubComponent || opt.hasSubComponents ? '#' : ''}## Events
+
   | Event name     | Type        | Description  |
   | ------------- |------------- | -------------|
   ${tmpl(events)}

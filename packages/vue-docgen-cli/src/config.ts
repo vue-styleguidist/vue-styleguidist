@@ -6,9 +6,9 @@ import {
 	EventDescriptor,
 	ComponentDoc
 } from 'vue-docgen-api'
-import { ContentAndDependencies } from './compileTemplates'
+import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
-export { ContentAndDependencies }
+export { ContentAndDependencies, SubTemplateOptions }
 
 export interface SafeDocgenCLIConfig {
 	/**
@@ -69,6 +69,26 @@ export interface SafeDocgenCLIConfig {
 	 * if you want to force the current working directory to another absolute path
 	 */
 	pages?: SafeDocgenCLIConfig[]
+	/**
+	 * for edit links
+	 */
+	docsRepo?: string
+	/**
+	 * for edit links
+	 */
+	docsBranch?: string
+	/**
+	 * for edit links
+	 */
+	docsFolder?: string
+	/**
+	 * Determines the urls behind each edit on github link
+	 */
+	getRepoEditUrl?: (relativePath: string) => string
+	/**
+	 *
+	 */
+	editLinkLabel: string
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
@@ -77,17 +97,17 @@ export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' |
 }
 
 export interface Templates {
-	props(props: PropDescriptor[], subComponent?: boolean): string
-	slots(slots: SlotDescriptor[], subComponent?: boolean): string
-	methods(methods: MethodDescriptor[], subComponent?: boolean): string
-	events(events: EventDescriptor[], subComponent?: boolean): string
+	props(props: PropDescriptor[], opt?: SubTemplateOptions): string
+	slots(slots: SlotDescriptor[], opt?: SubTemplateOptions): string
+	methods(methods: MethodDescriptor[], opt?: SubTemplateOptions): string
+	events(events: EventDescriptor[], opt?: SubTemplateOptions): string
 	component(
 		usage: RenderedUsage,
 		doc: ComponentDoc,
 		config: SafeDocgenCLIConfig,
 		componentRelativePath: string,
 		requiresMd: ContentAndDependencies[],
-		subComponent?: boolean
+		opt?: SubTemplateOptions
 	): string
 	defaultExample(doc: ComponentDoc): string
 	functionalTag: string
