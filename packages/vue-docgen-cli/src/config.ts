@@ -69,6 +69,26 @@ export interface SafeDocgenCLIConfig {
 	 * if you want to force the current working directory to another absolute path
 	 */
 	pages?: SafeDocgenCLIConfig[]
+	/**
+	 * for edit links
+	 */
+	docsRepo?: string
+	/**
+	 * for edit links
+	 */
+	docsBranch?: string
+	/**
+	 * for edit links
+	 */
+	docsFolder?: string
+	/**
+	 * Determines the urls behind each edit on github link
+	 */
+	getRepoEditUrl?: (relativePath: string) => string
+	/**
+	 *
+	 */
+	editLinkLabel: string
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {

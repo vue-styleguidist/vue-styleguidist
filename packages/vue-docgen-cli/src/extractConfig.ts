@@ -47,7 +47,16 @@ export default (
 		},
 		getDestFile: (file: string, config: SafeDocgenCLIConfig): string =>
 			path.resolve(config.outDir, file).replace(/\.\w+$/, '.md'),
+		editLinkLabel: 'edit on github',
 		...(fs.existsSync(configFilePath) ? require(configFilePath) : undefined)
+	}
+
+	if (!config.getRepoEditUrl && config.docsRepo) {
+		const branch = config.docsBranch || 'master'
+		const dir = config.docsFolder || ''
+		config.getRepoEditUrl = (p: string) => {
+			return `https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}`
+		}
 	}
 
 	// only default outDir if `outFile` is null to avoid confusion
