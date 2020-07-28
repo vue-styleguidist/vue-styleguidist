@@ -16,6 +16,9 @@ module.exports = async () => {
 
 	return {
 		base: "/docgen/",
+		head: [
+			['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		],
 		dest: path.join(__dirname, '../../dist'),
 		title: 'VuePress DocGen Live',
 		themeConfig: {
