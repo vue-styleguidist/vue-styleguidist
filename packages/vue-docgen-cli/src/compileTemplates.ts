@@ -49,7 +49,7 @@ export default async function compileTemplates(
 	componentRelativePath: string,
 	subComponent = false
 ): Promise<ContentAndDependencies> {
-	const { apiOptions: options, templates } = config
+	const { apiOptions: options, templates, cwd } = config
 	try {
 		const doc = await parse(absolutePath, options)
 		const { props, events, methods, slots } = doc
@@ -66,7 +66,14 @@ export default async function compileTemplates(
 		}
 
 		if (!subComponent) {
-			doc.docsBlocks = await getDocsBlocks(absolutePath, doc, config.getDocFileName)
+			doc.docsBlocks = await getDocsBlocks(
+				absolutePath,
+				doc,
+				config.getDocFileName,
+				cwd,
+				config.editLinkLabel,
+				config.getRepoEditUrl
+			)
 
 			if (!doc.docsBlocks?.length && config.defaultExamples) {
 				doc.docsBlocks = [templates.defaultExample(doc)]

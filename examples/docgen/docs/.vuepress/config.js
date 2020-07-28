@@ -4,7 +4,7 @@ const cwd = path.join(__dirname, '..')
 const { parse } = require('vue-docgen-api')
 
 module.exports = async () => {
-	const docFiles = glob.sync('components/**/*.md', { cwd }).map((f) => '/' + f)
+	const sidebar = glob.sync('components/**/*.md', { cwd }).map((f) => '/' + f)
 	const components = await Promise.all(
 		glob.sync('../src/components/**/*.{vue,js,jsx,ts,tsx}', { cwd, absolute: true }).map(async (path) => {
 			return {
@@ -16,11 +16,13 @@ module.exports = async () => {
 
 	return {
 		base: "/docgen/",
+		head: [
+			['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		],
 		dest: path.join(__dirname, '../../dist'),
 		title: 'VuePress DocGen Live',
 		themeConfig: {
-			search: false,
-			sidebar: docFiles
+			sidebar
 		},
 		plugins: [
 			['live'],
