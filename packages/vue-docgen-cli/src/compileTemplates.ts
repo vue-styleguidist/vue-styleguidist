@@ -19,6 +19,11 @@ export interface ContentAndDependencies {
 	dependencies: string[]
 }
 
+export interface SubTemplateOptions {
+	isSubComponent?: boolean
+	hasSubComponents?: boolean
+}
+
 export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: string): string[] {
 	if (!doc.tags) return []
 	const requireDep =
@@ -44,12 +49,14 @@ export default async function compiletemplates(
 	try {
 		const doc = await parse(absolutePath, options)
 		const { props, events, methods, slots } = doc
+		const isSubComponent = subComponent
+		const hasSubComponents = !!doc.tags?.requires
 
 		const renderedUsage = {
-			props: props ? templates.props(props, subComponent) : '',
-			slots: slots ? templates.slots(slots, subComponent) : '',
-			methods: methods ? templates.methods(methods, subComponent) : '',
-			events: events ? templates.events(events, subComponent) : '',
+			props: props ? templates.props(props, { isSubComponent, hasSubComponents }) : '',
+			slots: slots ? templates.slots(slots, { isSubComponent, hasSubComponents }) : '',
+			methods: methods ? templates.methods(methods, { isSubComponent, hasSubComponents }) : '',
+			events: events ? templates.events(events, { isSubComponent, hasSubComponents }) : '',
 			functionalTag: templates.functionalTag
 		}
 
@@ -64,29 +71,24 @@ export default async function compiletemplates(
 		const componentRelativeDirectoryPath = path.dirname(componentRelativePath)
 		const componentAbsoluteDirectoryPath = path.dirname(absolutePath)
 
-		const requiresMd =
-			!subComponent && doc.tags?.requires
-				? await Promise.all(
-						doc.tags.requires.map((requireTag: ParamTag) =>
-							compiletemplates(
-								path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
-								config,
-								path.join(componentRelativeDirectoryPath, requireTag.description as string),
-								true
-							)
+		const requiresMd = doc.tags?.requires
+			? await Promise.all(
+					doc.tags.requires.map((requireTag: ParamTag) =>
+						compiletemplates(
+							path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
+							config,
+							path.join(componentRelativeDirectoryPath, requireTag.description as string),
+							true
 						)
-				  )
-				: []
+					)
+			  )
+			: []
 
 		return {
-			content: templates.component(
-				renderedUsage,
-				doc,
-				config,
-				componentRelativePath,
-				requiresMd,
-				subComponent
-			),
+			content: templates.component(renderedUsage, doc, config, componentRelativePath, requiresMd, {
+				isSubComponent,
+				hasSubComponents
+			}),
 			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
 		}
 	} catch (e) {

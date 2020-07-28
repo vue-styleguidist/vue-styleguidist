@@ -1,9 +1,10 @@
 import { SlotDescriptor } from 'vue-docgen-api'
 import { mdclean } from './utils'
+import { SubTemplateOptions } from '../compileTemplates'
 
-export default (slots: SlotDescriptor[], subComponent = false): string => {
+export default (slots: SlotDescriptor[], opt: SubTemplateOptions = {}): string => {
 	return `
-## Slots
+${opt.isSubComponent || opt.hasSubComponents ? '#' : ''}## Slots
 
 | Name          | Description  | Bindings |
 | ------------- | ------------ | -------- |

@@ -1,5 +1,6 @@
 import { PropDescriptor } from 'vue-docgen-api'
 import { mdclean } from './utils'
+import { SubTemplateOptions } from '../compileTemplates'
 
 const tmpl = (props: PropDescriptor[]): string => {
 	let ret = ''
@@ -17,9 +18,10 @@ const tmpl = (props: PropDescriptor[]): string => {
 	return ret
 }
 
-export default (props: PropDescriptor[], subComponent = false): string => {
+export default (props: PropDescriptor[], opt: SubTemplateOptions = {}): string => {
 	return `
-  ## Props
+${opt.isSubComponent || opt.hasSubComponents ? '#' : ''}## Props
+
   | Prop name     | Description | Type      | Values      | Default     |
   | ------------- |-------------| --------- | ----------- | ----------- |
   ${tmpl(props)}
