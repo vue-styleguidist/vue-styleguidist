@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.29.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.28.1...v4.29.0) (2020-07-28)
+
+
+### Features
+
+* **cli:** add edit on github button for readme ([298bb68](https://github.com/vue-styleguidist/vue-styleguidist/commit/298bb68cfd3937729a13c06c61a8dff1a5d88c63))
+* **cli:** update handling of subcomponents ([7d6f0ae](https://github.com/vue-styleguidist/vue-styleguidist/commit/7d6f0ae9c158b1ea39a70edbc499270f9a0b6605))
+
+
+
+
+
 ## [4.28.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.28.0...v4.28.1) (2020-07-27)
 
 
