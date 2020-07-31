@@ -7,7 +7,7 @@ import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
 import { setEventDescriptor } from '../script-handlers/eventHandler'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
-import { isBaseElementNode, isDirectiveNode, isExpressionNode } from '../utils/guards'
+import { isBaseElementNode, isDirectiveNode, isSimpleExpressionNode } from '../utils/guards'
 
 export default function eventHandler(
 	documentation: Documentation,
@@ -21,7 +21,7 @@ export default function eventHandler(
 				if (prop.name == 'on') {
 					// only look at expressions
 					const expression = prop.exp
-					if (isExpressionNode(expression)) {
+					if (isSimpleExpressionNode(expression)) {
 						getEventsFromExpression(
 							templateAst,
 							expression.content,

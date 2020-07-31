@@ -3,7 +3,7 @@ import {
 	isBaseElementNode,
 	isDirectiveNode,
 	isAttributeNode,
-	isExpressionNode,
+	isSimpleExpressionNode,
 	isCompoundExpressionNode,
 	isInterpolationNode
 } from '../guards'
@@ -14,7 +14,7 @@ describe('guards', () => {
 		expect(isBaseElementNode()).toBeFalsy()
 		expect(isDirectiveNode()).toBeFalsy()
 		expect(isAttributeNode()).toBeFalsy()
-		expect(isExpressionNode()).toBeFalsy()
+		expect(isSimpleExpressionNode()).toBeFalsy()
 		expect(isCompoundExpressionNode()).toBeFalsy()
 		expect(isInterpolationNode()).toBeFalsy()
 	})

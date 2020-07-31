@@ -26,7 +26,7 @@ export function isAttributeNode(prop?: Node): prop is AttributeNode {
 	return !!prop && prop.type === NodeTypes.ATTRIBUTE
 }
 
-export function isExpressionNode(exp?: Node): exp is SimpleExpressionNode {
+export function isSimpleExpressionNode(exp?: Node): exp is SimpleExpressionNode {
 	return !!exp && exp.type === NodeTypes.SIMPLE_EXPRESSION
 }
 

@@ -11,7 +11,7 @@ import {
 	isBaseElementNode,
 	isAttributeNode,
 	isDirectiveNode,
-	isExpressionNode
+	isSimpleExpressionNode
 } from '../utils/guards'
 
 const parser = buildParser({ plugins: ['typescript'] })
@@ -58,7 +58,7 @@ export default function slotHandler(
 		// deal with v-bind="" props
 		const simpleVBind = bindings.find(b => isDirectiveNode(b) && !b.arg) as DirectiveNode
 		let rawVBind = false
-		if (simpleVBind && isExpressionNode(simpleVBind.exp)) {
+		if (simpleVBind && isSimpleExpressionNode(simpleVBind.exp)) {
 			const ast = parser.parse(`() => (${simpleVBind.exp.content})`)
 			visit(ast.program, {
 				visitObjectExpression(path) {
@@ -96,7 +96,7 @@ export default function slotHandler(
 
 					// resolve name of binding
 					const name =
-						isDirectiveNode(b) && b.arg && isExpressionNode(b.arg)
+						isDirectiveNode(b) && b.arg && isSimpleExpressionNode(b.arg)
 							? b.arg.content
 							: `${isDirectiveNode(b) ? 'v-' : ''}${b.name}`
 					const bindingDesc = bindingDescriptors.filter(t => t.name === name)[0]

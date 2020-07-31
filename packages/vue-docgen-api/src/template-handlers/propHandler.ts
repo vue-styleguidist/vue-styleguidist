@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { visit } from 'recast'
-import { Node, TemplateChildNode, ExpressionNode } from '@vue/compiler-dom'
+import { Node, TemplateChildNode, SimpleExpressionNode } from '@vue/compiler-dom'
 import Documentation, { ParamTag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
@@ -9,7 +9,7 @@ import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 import {
 	isBaseElementNode,
 	isDirectiveNode,
-	isExpressionNode,
+	isSimpleExpressionNode,
 	isInterpolationNode
 } from '../utils/guards'
 
@@ -32,7 +32,7 @@ function propsInAttributes(
 ) {
 	if (isBaseElementNode(templateAst)) {
 		templateAst.props.forEach(prop => {
-			if (isDirectiveNode(prop)) {
+			if (isDirectiveNode(prop) && isSimpleExpressionNode(prop.exp)) {
 				getPropsFromExpression(documentation, templateAst, prop.exp, siblings)
 			}
 		})
@@ -44,7 +44,7 @@ function propsInInterpolation(
 	templateAst: TemplateChildNode,
 	siblings: TemplateChildNode[]
 ) {
-	if (isInterpolationNode(templateAst)) {
+	if (isInterpolationNode(templateAst) && isSimpleExpressionNode(templateAst.content)) {
 		getPropsFromExpression(documentation, templateAst, templateAst.content, siblings)
 	}
 }
@@ -52,12 +52,9 @@ function propsInInterpolation(
 function getPropsFromExpression(
 	documentation: Documentation,
 	item: Node,
-	exp: ExpressionNode | undefined,
+	exp: SimpleExpressionNode,
 	siblings: TemplateChildNode[]
 ) {
-	if (!isExpressionNode(exp)) {
-		return
-	}
 	const expression = exp.content
 	const ast = getTemplateExpressionAST(expression)
 	const propsFound: string[] = []
