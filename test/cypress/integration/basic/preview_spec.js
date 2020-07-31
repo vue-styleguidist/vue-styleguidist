@@ -11,6 +11,7 @@ describe('Preview render', () => {
 		'transparent!',
 		'Reset',
 		'option 1',
+		'Fire example event!',
 		'Push Me',
 		'In the docs block',
 		'Fire example event!',
@@ -37,9 +38,7 @@ describe('Preview render', () => {
 		texts.forEach((text, i) => {
 			it(`item ${i + 1} : ${text}`, () => {
 				if (text.length && text !== BTN && text !== IMG) {
-					cy.get('[class^="rsg--preview-"]')
-						.eq(i)
-						.should('contain', text)
+					cy.get('[class^="rsg--preview-"]').eq(i).should('contain', text)
 				}
 			})
 		})
@@ -49,10 +48,7 @@ describe('Preview render', () => {
 		it('image items', () => {
 			texts.forEach((t, i) => {
 				if (t === IMG) {
-					cy.get('[class^="rsg--preview-"]')
-						.eq(i)
-						.find('img')
-						.should('exist')
+					cy.get('[class^="rsg--preview-"]').eq(i).find('img').should('exist')
 				}
 			})
 		})
@@ -60,12 +56,18 @@ describe('Preview render', () => {
 		it('random buttons', () => {
 			texts.forEach((t, i) => {
 				if (t === BTN) {
-					cy.get('[class^="rsg--preview-"]')
-						.eq(i)
-						.find('button')
-						.should('exist')
+					cy.get('[class^="rsg--preview-"]').eq(i).find('button').should('exist')
 				}
 			})
+		})
+	})
+
+	describe('extra classes', () => {
+		it('should add extra class to "I’m transparent!"', () => {
+			cy.get('button')
+				.contains('I’m transparent!')
+				.parents('[class^="rsg--preview-"]')
+				.should('have.class', 'checks')
 		})
 	})
 })

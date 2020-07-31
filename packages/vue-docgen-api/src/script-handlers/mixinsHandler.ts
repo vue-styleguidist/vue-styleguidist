@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import Documentation from '../Documentation'
 import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
@@ -49,7 +49,11 @@ function getMixinsVariableNames(compDef: NodePath): string[] {
 					? mixinPath.node.value.elements
 					: []
 			mixinPropertyValue.forEach((e: bt.Node | null) => {
-				if (e && bt.isIdentifier(e)) {
+				if (!e) return
+				if (bt.isCallExpression(e)) {
+					e = e.callee
+				}
+				if (bt.isIdentifier(e)) {
 					varNames.push(e.name)
 				}
 			})

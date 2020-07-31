@@ -1,11 +1,11 @@
 <template>
-  <button class="buttonComponent" @click.prevent="onClick">
-    <!-- @slot Use this slot default -->
-    <slot></slot>
-  </button>
+	<button class="buttonComponent" @click.prevent="onClick">
+		<!-- @slot Use this slot default -->
+		<slot></slot>
+	</button>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import myMixin from './mixin'
 import Component, { mixins } from 'vue-class-component'
 

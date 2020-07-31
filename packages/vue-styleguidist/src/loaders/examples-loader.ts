@@ -33,7 +33,7 @@ function isImport(req: any): req is { importPath: string; path: string } {
 	return !!req.importPath
 }
 
-export default function(this: StyleguidistContext, source: string) {
+export default function (this: StyleguidistContext, source: string) {
 	const callback = this.async()
 	const cb = callback ? callback : () => null
 	examplesLoader.call(this, source).then(res => cb(undefined, res))
@@ -55,13 +55,33 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	if (shouldShowDefaultExample && source) {
 		const fullFilePath = path.join(path.dirname(filePath), file)
 		const propsParser = getParser(config)
-		const docs = await propsParser(fullFilePath)
-		this.addDependency(fullFilePath)
-		source = expandDefaultComponent(source, docs)
+		try {
+			const docs = await propsParser(fullFilePath)
+			this.addDependency(fullFilePath)
+			source = expandDefaultComponent(source, docs)
+		} catch (e) {
+			// eat the error since it will be reported by vuedoc-loader
+		}
 	}
 
-	const updateExample = (props: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>) => {
-		const p = importCodeExampleFile(props, this.resourcePath, this)
+	const updateExample = (example: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>) => {
+		const p = importCodeExampleFile(example, this.resourcePath, this)
+		if (p.settings) {
+			const settings = p.settings
+			// code to satisfy react-styleguidist and transfer properties to the props object
+			// those properties will be added litterally to the wrapping div of the example
+			const props = Object.keys(settings).reduce((obj: Record<string, any> | null, key: string) => {
+				if (['style', 'className'].indexOf(key) !== -1 || /^data-/.test(key)) {
+					obj = obj || {}
+					obj[key] = settings[key]
+					delete settings[key]
+				}
+				return obj
+			}, null)
+			if (props) {
+				p.settings.props = props
+			}
+		}
 		return config.updateExample ? config.updateExample(p, this.resourcePath) : p
 	}
 
@@ -133,23 +153,6 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map(example => {
 		if (example.type === 'code') {
-			let compiled: any = false
-			if (config.codeSplit) {
-				if (process.env.NODE_ENV === 'production') {
-					// if we are not in prod, we want to avoid running examples through
-					// buble all at the same time. We then tell it to calsculate on the fly
-					const compiledExample = compile(example.content, {
-						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
-					})
-					compiled = {
-						script: compiledExample.script,
-						template: compiledExample.template,
-						style: compiledExample.style
-					}
-				}
-			}
-
 			const importPath = example.settings && example.settings.importpath
 			const evalInContext = {
 				toAST: () =>
@@ -164,7 +167,24 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 						]
 					)
 			}
-			return { ...example, evalInContext, compiled }
+
+			if (config.codeSplit) {
+				let compiled: any = false
+				if (process.env.NODE_ENV === 'production') {
+					// if we are not in prod, we want to avoid running examples through
+					// buble all at the same time. We then tell it to calculate on the fly
+					const compiledExample = compile(example.content, {
+						...config.compilerConfig,
+						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+					})
+					compiled = {
+						...compiledExample
+					}
+				}
+				return { ...example, evalInContext, compiled }
+			}
+
+			return { ...example, evalInContext }
 		}
 		return example
 	})

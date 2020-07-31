@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 
 function ignore(): boolean {
 	return false
@@ -14,7 +14,7 @@ export default function resolveIdentifier(ast: bt.File, path: NodePath): NodePat
 	const varName = path.node.name
 	let comp: NodePath | null = null
 
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		// to look only at the root we ignore all traversing
 		visitFunctionDeclaration: ignore,
 		visitFunctionExpression: ignore,

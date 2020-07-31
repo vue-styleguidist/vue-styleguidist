@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Documentation, { ParamTag, ParamType, Tag, SlotDescriptor } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 import { parseDocblock } from '../utils/getDocblock'
@@ -32,7 +32,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 		const renderValuePath = bt.isObjectProperty(renderPath[0].node)
 			? renderPath[0].get('value')
 			: renderPath[0]
-		recast.visit(renderValuePath.node, {
+		visit(renderValuePath.node, {
 			// this.$slots.default()
 			visitCallExpression(pathCall) {
 				if (
@@ -143,7 +143,10 @@ function getJSXDescription(
 	return parseCommentNode(lastComment, descriptor)
 }
 
-function getSlotComment(path: NodePath, descriptor: SlotDescriptor): SlotComment | undefined {
+export function getSlotComment(
+	path: NodePath,
+	descriptor: SlotDescriptor
+): SlotComment | undefined {
 	const desc = getExpressionDescription(path, descriptor)
 	if (desc) {
 		return desc
@@ -204,25 +207,36 @@ export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
 	return undefined
 }
 
-function getBindings(node: bt.ObjectExpression, bindings: ParamTag[] | undefined): ParamTag[] {
-	return node.properties.map((prop: bt.ObjectProperty) => {
-		const name = prop.key.name
-		const description: string | boolean | undefined =
-			prop.leadingComments && prop.leadingComments.length
-				? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
-				: undefined
-		if (!description) {
-			const descbinding = bindings ? bindings.filter(b => b.name === name)[0] : undefined
-			if (descbinding) {
-				return descbinding
+function getBindings(
+	node: bt.ObjectExpression,
+	bindingsFromComments: ParamTag[] | undefined
+): ParamTag[] {
+	return node.properties.reduce((bindings: ParamTag[], prop: bt.ObjectProperty) => {
+		if (prop.key) {
+			const name = prop.key.name
+			const description: string | boolean | undefined =
+				prop.leadingComments && prop.leadingComments.length
+					? parseDocblock(prop.leadingComments[prop.leadingComments.length - 1].value)
+					: undefined
+			if (!description) {
+				const descbinding = bindingsFromComments
+					? bindingsFromComments.filter(b => b.name === name)[0]
+					: undefined
+				if (descbinding) {
+					bindings.push(descbinding)
+					return bindings
+				}
+			} else {
+				bindings.push({
+					title: 'binding',
+					name,
+					description
+				})
 			}
 		}
-		return {
-			title: 'binding',
-			name,
-			description
-		}
-	})
+
+		return bindings
+	}, [])
 }
 
 function getBindingsFromJSX(attr: bt.JSXAttribute, bindings: ParamTag[] | undefined): ParamTag {

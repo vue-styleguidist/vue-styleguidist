@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import Documentation, { BlockTag, DocBlockTags } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
@@ -9,7 +9,8 @@ import propHandler, {
 	describeDefault,
 	describeRequired,
 	describeType,
-	extractValuesFromTags
+	extractValuesFromTags,
+	getValuesFromTypeAnnotation
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
 
@@ -64,9 +65,19 @@ export default async function classPropHandler(
 				}
 
 				extractValuesFromTags(propDescriptor)
-
+				let litteralType: string | undefined
 				if (propPath.node.typeAnnotation) {
-					propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+					const values =
+						!!bt.isTSTypeAnnotation(propPath.node.typeAnnotation) &&
+						getValuesFromTypeAnnotation(propPath.node.typeAnnotation.typeAnnotation)
+					if (values) {
+						propDescriptor.values = values
+						propDescriptor.type = { name: 'string' }
+						litteralType = 'string'
+					} else {
+						// type
+						propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+					}
 				}
 
 				const propDecoratorPath = propDeco[0].get('expression')
@@ -79,11 +90,12 @@ export default async function classPropHandler(
 							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
 							NodePath<bt.ObjectProperty>
 						>
+
 						// if there is no type annotation, get it from the decorators arguments
 						if (!propPath.node.typeAnnotation) {
-							describeType(propsPath, propDescriptor)
+							litteralType = describeType(propsPath, propDescriptor)
 						}
-						describeDefault(propsPath, propDescriptor)
+						describeDefault(propsPath, propDescriptor, litteralType || '')
 						describeRequired(propsPath, propDescriptor)
 					}
 				}

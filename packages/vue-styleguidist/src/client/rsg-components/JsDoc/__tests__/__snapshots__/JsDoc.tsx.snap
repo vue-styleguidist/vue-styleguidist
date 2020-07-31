@@ -9,7 +9,6 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Deprecated
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
@@ -34,7 +33,6 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       See
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
@@ -70,7 +68,6 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Link
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
@@ -94,7 +91,6 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Author
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
@@ -125,7 +121,6 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Version
-      :
     </span>
     <span
       class="vsg-tag-value undefined"
@@ -144,7 +139,6 @@ exports[`JsDoc should render Markdown 1`] = `
       class="vsg-tag-name rsg--name-1"
     >
       Since
-      :
     </span>
     <span
       class="vsg-tag-value undefined"

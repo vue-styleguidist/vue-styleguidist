@@ -166,10 +166,8 @@ Object {
     },
     Object {
       "defaultValue": Object {
-        "func": true,
-        "value": "function() {
-    return [{}]
-}",
+        "func": false,
+        "value": "[{}]",
       },
       "name": "images",
       "type": Object {
@@ -179,7 +177,7 @@ Object {
     Object {
       "defaultValue": Object {
         "func": true,
-        "value": "function() {}",
+        "value": "function () {}",
       },
       "description": "prop function",
       "name": "propFunc",

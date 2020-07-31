@@ -7,6 +7,7 @@ import { Param } from 'vue-docgen-api'
 import Markdown from 'rsg-components/Markdown'
 import Argument from 'rsg-components/Argument'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import SubComponents from 'rsg-components/SubComponents'
 
 export interface TagProps {
 	deprecated?: Param[]
@@ -16,9 +17,10 @@ export interface TagProps {
 	version?: Param[]
 	since?: Param[]
 	throws?: Param[]
+	subComponents?: { name: string; url: string }[]
 }
 
-const styles = ({ space, color }: Rsg.Theme) => ({
+const styles = ({ space, color, fontFamily }: Rsg.Theme) => ({
 	wrapper: {
 		color: color.base,
 		fontSize: 'inherit',
@@ -32,11 +34,12 @@ const styles = ({ space, color }: Rsg.Theme) => ({
 const list = (array: Param[]) => array.map(item => item.description).join(', ')
 const paragraphs = (array: Param[]) => array.map(item => item.description).join('\n\n')
 
-const fields: Record<keyof Omit<TagProps, 'throws'>, (v: Param[]) => string> = {
-	deprecated: (value: Param[]) => `${value[0].description}`,
+const fields: Record<keyof Omit<TagProps, 'throws' | 'subComponents'>, (v: Param[]) => string> = {
+	deprecated: (value: Param[]) =>
+		typeof value[0].description === 'string' ? `${value[0].description}` : '',
 	see: (value: Param[]) => paragraphs(value),
 	link: (value: Param[]) => paragraphs(value),
-	author: (value: Param[]) => list(value),
+	author: (value: Param[]) => `${list(value)}`,
 	version: (value: Param[]) => `${value[0].description}`,
 	since: (value: Param[]) => `${value[0].description}`
 }
@@ -49,7 +52,7 @@ interface JsDocRendererProps {
 
 const JsDocRenderer = ({ classes, field, children }: JsDocRendererProps) => (
 	<div className={`vsg-jsdoc-tag ${classes.wrapper}`} key={field}>
-		<span className={`vsg-tag-name ${classes.name}`}>{capitalize(field)}:</span>
+		<span className={`vsg-tag-name ${classes.name}`}>{capitalize(field)}</span>
 		<span className={`vsg-tag-value ${classes.value}`}>{children}</span>
 	</div>
 )
@@ -57,6 +60,7 @@ const JsDocRenderer = ({ classes, field, children }: JsDocRendererProps) => (
 export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props }) => {
 	return (
 		<>
+			{props.subComponents && <SubComponents subComponents={props.subComponents} />}
 			{props.throws &&
 				props.throws.map((throws, i) => (
 					<JsDocRenderer key={i} field="throws" classes={classes}>
@@ -86,6 +90,7 @@ export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props
 
 JsDoc.propTypes = {
 	classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
+	subComponents: PropTypes.array,
 	deprecated: PropTypes.array,
 	see: PropTypes.array,
 	link: PropTypes.array,

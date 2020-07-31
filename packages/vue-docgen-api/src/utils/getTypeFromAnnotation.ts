@@ -42,7 +42,7 @@ function printType(t?: bt.TSType): ParamType {
 
 	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
 		const out: ParamType = { name: t.typeName.name }
-		if (t.typeParameters && t.typeParameters.params) {
+		if (t.typeParameters?.params) {
 			out.elements = t.typeParameters.params.map(getTypeObjectFromTSType)
 		}
 		return out
@@ -59,8 +59,8 @@ function getTypeObjectFromTSType(type: bt.TSType): ParamType {
 	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
 		? { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
 		: bt.isTSArrayType(type)
-			? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
-			: printType(type)
+		? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
+		: printType(type)
 }
 
 const FLOW_TYPE_NAME_MAP: { [name: string]: string } = {
@@ -81,7 +81,7 @@ function getTypeObjectFromFlowType(type: bt.FlowType): ParamType {
 	const name = FLOW_TYPE_NAME_MAP[type.type]
 		? FLOW_TYPE_NAME_MAP[type.type]
 		: bt.isGenericTypeAnnotation(type) && bt.isIdentifier(type.id)
-			? type.id.name
-			: type.type
+		? type.id.name
+		: type.type
 	return { name }
 }

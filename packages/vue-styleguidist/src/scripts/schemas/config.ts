@@ -100,7 +100,7 @@ export default {
 		type: 'boolean',
 		message: 'Show the origins of each prop',
 		description:
-			'In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending comopnents or mixing mixins',
+			'In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending components or mixing mixins',
 		default: false
 	},
 	editorConfig: {

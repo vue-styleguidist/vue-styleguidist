@@ -48,11 +48,11 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 				: getUrl({ slug, anchor: true })
 
 		if (component.subComponents && component.props) {
-			const links = component.subComponents.map(
-				c => `[${c.visibleName}](${getFinalUrl(c.slug || '', this.props.depth)})`
-			)
-			component.props.description =
-				`**Requires** ${links.join(', ')}\n\n` + (component.props.description || '')
+			const links = component.subComponents.map(c => ({
+				name: c.visibleName,
+				url: getFinalUrl(c.slug || '', this.props.depth)
+			}))
+			component.props.tags = { ...component.props.tags, subComponents: links as any }
 		}
 
 		const parentHref = component.props ? getFinalUrl(component.slug || '', this.props.depth) : ''

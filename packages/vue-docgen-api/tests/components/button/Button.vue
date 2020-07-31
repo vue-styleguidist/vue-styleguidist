@@ -1,9 +1,12 @@
 <template>
 	<!-- here is a nice component template -->
-	<button class="buttonComponent" @click.prevent="
-	onClick()
-	console.log('count', count)
-	">
+	<button
+		class="buttonComponent"
+		@click.prevent="
+			onClick()
+			console.log('count', count)
+		"
+	>
 		<!-- @slot Use this slot default -->
 		<slot></slot>
 	</button>
@@ -79,6 +82,10 @@ export default {
 			type: Number,
 			default: 16
 		},
+		/**
+		 * @asdf qwerty
+		 */
+		customTag: String,
 		/**
 		 * @ignore
 		 * Add custom click actions.

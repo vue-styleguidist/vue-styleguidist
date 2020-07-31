@@ -1,17 +1,20 @@
 {
-  "printWidth": 100,
-  "singleQuote": true,
-  "trailingComma": "none",
-  "useTabs": true,
-  "proseWrap": "never",
-  "semi": false,
-  "overrides": [{
-    "files": "*.md",
-    "options": {
-      "printWidth": 70,
-      "useTabs": false,
-      "semi": false,
-      "trailingComma": "none"
-    }
-  }]
+	"printWidth": 100,
+	"singleQuote": true,
+	"trailingComma": "none",
+	"useTabs": true,
+	"proseWrap": "never",
+	"semi": false,
+	"arrowParens": "avoid",
+	"overrides": [
+		{
+			"files": "*.md",
+			"options": {
+				"printWidth": 70,
+				"useTabs": false,
+				"semi": false,
+				"trailingComma": "none"
+			}
+		}
+	]
 }

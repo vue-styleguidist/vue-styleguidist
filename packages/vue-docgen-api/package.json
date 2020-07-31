@@ -1,50 +1,50 @@
 {
-  "name": "vue-docgen-api",
-  "version": "4.18.0",
-  "description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
-  "homepage": "https://vue-styleguidist.github.io",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
-  "scripts": {
-    "compile": "tsc -p ./tsconfig.build.json",
-    "compile:watch": "yarn compile --watch"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
-  },
-  "keywords": [
-    "vue",
-    "documentation-generation",
-    "jsdoc",
-    "parse"
-  ],
-  "author": "Rafael Escala",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/parser": "^7.6.0",
-    "@babel/types": "^7.6.0",
-    "@vue/compiler-dom": "^3.0.0-beta.3",
-    "@vue/compiler-sfc": "^3.0.0-beta.3",
-    "ast-types": "^0.12.2",
-    "hash-sum": "^1.0.2",
-    "lru-cache": "^4.1.5",
-    "pug": "^2.0.3",
-    "recast": "^0.17.3",
-    "ts-map": "^1.0.3"
-  },
-  "devDependencies": {
-    "globby": "^10.0.1",
-    "vue": "^3.0.0-beta.3",
-    "vue-class-component": "^7.0.2",
-    "vue-clickaway": "^2.2.2",
-    "vue-property-decorator": "^7.3.0",
-    "vuetify": "^2.2.3"
-  }
+	"name": "vue-docgen-api",
+	"version": "4.29.1",
+	"description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
+	"homepage": "https://vue-styleguidist.github.io",
+	"main": "dist/main.js",
+	"types": "dist/main.d.ts",
+	"scripts": {
+		"compile": "tsc -p ./tsconfig.build.json",
+		"compile:watch": "yarn compile --watch"
+	},
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
+	},
+	"bugs": {
+		"url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
+	},
+	"keywords": [
+		"vue",
+		"documentation-generation",
+		"jsdoc",
+		"parse"
+	],
+	"author": "Rafael Escala",
+	"license": "MIT",
+	"dependencies": {
+		"@babel/parser": "^7.6.0",
+		"@babel/types": "^7.6.0",
+		"@vue/compiler-dom": "^3.0.0-rc.5",
+		"@vue/compiler-sfc": "^3.0.0-rc.5",
+		"ast-types": "0.13.3",
+		"hash-sum": "^1.0.2",
+		"lru-cache": "^4.1.5",
+		"pug": "^3.0.0",
+		"recast": "0.19.1",
+		"ts-map": "^1.0.3"
+	},
+	"devDependencies": {
+		"globby": "^10.0.1",
+		"vue": "^2.6.10",
+		"vue-class-component": "^7.0.2",
+		"vue-clickaway": "^2.2.2",
+		"vue-property-decorator": "^7.3.0",
+		"vuetify": "^2.2.3"
+	}
 }

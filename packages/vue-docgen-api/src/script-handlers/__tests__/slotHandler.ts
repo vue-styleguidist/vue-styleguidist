@@ -1,4 +1,4 @@
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import buildParser from '../../babel-parser'
 import Documentation, { SlotDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
@@ -65,6 +65,30 @@ describe('render function slotHandler', () => {
         return createElement('div', [
           this.$scopedSlots.myOtherScopedSlot({
             text: this.message
+          })
+        ])
+      }
+    }
+    `
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('myOtherScopedSlot')
+		done()
+	})
+
+	it('should be fine with scoped slots iand a spread parameter', async done => {
+		const src = `
+    export default {
+      render(h) {
+		const stuff = {
+            foo: 'foo',
+            bar: 'bar',
+        };
+        return h('div', [
+          this.$scopedSlots.myOtherScopedSlot({
+            ...stuff
           })
         ])
       }

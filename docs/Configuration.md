@@ -10,7 +10,7 @@ Your application static assets folder, will be accessible as `/` in the style gu
 
 ## `codeSplit`
 
-Type: `Boolean`, default: false
+Type: `Boolean`, default: true
 
 By default vue-styleguidist will build one single bundle for all your javascript. When this flag is on, the editor (CodeMirror) is loaded as a separate bundle and so is the compiler. Each of those 2 bundles are about 400Kb. It allows for a faster initial load.
 
@@ -121,7 +121,7 @@ module.exports = {
 
 Type: `Boolean` or `String`, default: `false`
 
-For components that do not have an example, a default one can be used. When set to `true`, the [DefaultExample.md](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/scripts/templates/DefaultExample.md) is used, or you can provide the path to your own example Markdown file.
+For components that do not have an example, a default one can be used. When set to `true`, the [DefaultExample.md](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/packages/vue-styleguidist/scripts/templates/DefaultExample.md) is used, or you can provide the path to your own example Markdown file.
 
 When writing your own default example file, `__COMPONENT__` will be replaced by the actual component name at compile time.
 
@@ -154,7 +154,7 @@ module.exports = {
 
 ## `editorConfig`
 
-Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
+Type: `Object`, default: [scripts/schemas/config.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/packages/vue-styleguidist/src/scripts/schemas/config.ts#L103-L112)
 
 Source code editor options, see [CodeMirror docs](https://codemirror.net/doc/manual.html#config) for all available options.
 
@@ -318,7 +318,7 @@ export default {
 </script>
 
 <template>
-  <MyButton><MyIcon name=Save/>Save Form</MyButton>
+  <MyButton><MyIcon name="Save" />Save Form</MyButton>
 </template>
 ```
 
@@ -422,9 +422,7 @@ Function that allows you to override the printing of build messages to console.l
 module.exports = {
   printBuildInstructions(config) {
     console.log(
-      `Style guide published to ${
-        config.styleguideDir
-      }. Something else interesting.`
+      `Style guide published to ${config.styleguideDir}. Something else interesting.`
     )
   }
 }
@@ -605,9 +603,9 @@ module.exports = {
 }
 ```
 
-See an example of [customized style guide](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised).
+See an example of [customized style guide](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/customised).
 
-If you want to wrap, rather than replace a component, make sure to import the default implementation using the full path to `vue-styleguidist`. See an example of [wrapping a Styleguidist component](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/customised/styleguide/components/SectionsRenderer.js).
+If you want to wrap, rather than replace a component, make sure to import the default implementation using the full path to `vue-styleguidist`. See an example of [wrapping a Styleguidist component](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/customised/styleguide/components/SectionsRenderer.js).
 
 **Note**: these components are not guaranteed to be safe from breaking changes in vue-styleguidist updates.
 
@@ -637,7 +635,7 @@ See example in the [cookbook](/docs/Cookbook.md#how-to-change-styles-of-a-style-
 
 ```javascript
 module.exports = {
-  styles: function(theme) {
+  styles: function (theme) {
     return {
       Logo: {
         logo: {

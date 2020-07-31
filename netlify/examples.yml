@@ -6,9 +6,9 @@ basic
 # vueds
 
 # build examples with docgen and vuepress
-# docgen
+docgen
 
-nuxtjs-ts-property-decorator
+# nuxtjs-ts-property-decorator
 
 # build cli examples to make sure they build
 # vuecli3-class-pug-ts

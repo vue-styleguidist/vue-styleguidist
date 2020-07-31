@@ -22,4 +22,8 @@ describe('renderTypeString', () => {
 			renderTypeString({ name: 'intersection', elements: [{ name: 'foo' }, { name: 'bar' }] })
 		).toMatchInlineSnapshot(`"foo & bar"`)
 	})
+
+	it('should render undefined as untyped', () => {
+		expect(renderTypeString({ name: 'undefined' })).toMatchInlineSnapshot(`"-"`)
+	})
 })

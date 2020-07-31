@@ -1,9 +1,9 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import { ImportedVariableSet } from './resolveRequired'
 
-export default function(ast: bt.File, variableFilter: string[]): ImportedVariableSet {
+export default function (ast: bt.File, variableFilter: string[]): ImportedVariableSet {
 	const variables: ImportedVariableSet = {}
 
 	const importedVariablePaths: ImportedVariableSet = {}
@@ -11,7 +11,7 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 	const exportAllFiles: string[] = []
 
 	// get imported variable names and filepath
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		visitImportDeclaration(astPath) {
 			if (!astPath.node.source) {
 				return false
@@ -31,7 +31,7 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 		}
 	})
 
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		visitExportNamedDeclaration(astPath) {
 			const specifiers = astPath.get('specifiers')
 			if (astPath.node.source) {
@@ -81,9 +81,11 @@ export default function(ast: bt.File, variableFilter: string[]): ImportedVariabl
 	})
 
 	if (exportAllFiles.length) {
-		variableFilter.filter(v => !variables[v]).forEach(exportName => {
-			variables[exportName] = { filePath: exportAllFiles, exportName }
-		})
+		variableFilter
+			.filter(v => !variables[v])
+			.forEach(exportName => {
+				variables[exportName] = { filePath: exportAllFiles, exportName }
+			})
 	}
 
 	return variables

@@ -40,7 +40,7 @@ export default async function documentRequiredComponents(
 		const { filePath, exportName } = varToFilePath[varName]
 		filePath.forEach(p => {
 			const fullFilePath = pathResolver(p)
-			if (opt.validExtends(fullFilePath)) {
+			if (fullFilePath && opt.validExtends(fullFilePath)) {
 				const vars = files.get(fullFilePath) || []
 				vars.push({ exportName, varName })
 				files.set(fullFilePath, vars)
@@ -78,7 +78,7 @@ async function enrichDocumentation(
 	varToFilePath: ImportedVariableSet,
 	originObject: 'extends' | 'mixin',
 	opt: ParseOptions,
-	pathResolver: (pat?: string) => string
+	pathResolver: (pat?: string) => string | null
 ): Promise<Documentation> {
 	await Object.keys(varToFilePath).reduce(async (_, varName) => {
 		await _
@@ -91,7 +91,8 @@ async function enrichDocumentation(
 		await Promise.all(
 			filePath.map(async p => {
 				const fullFilePath = pathResolver(p)
-				if (opt.validExtends(fullFilePath)) {
+
+				if (fullFilePath && opt.validExtends(fullFilePath)) {
 					try {
 						const originVar = {
 							[originObject]: {

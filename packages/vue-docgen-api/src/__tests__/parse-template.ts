@@ -11,7 +11,7 @@ describe('parse-template', () => {
 
 	it('should parse components with multi head', () => {
 		content = '<div></div><!-- comment -->'
-		parseTemplate({ content, attrs: {} }, doc, [], path)
+		parseTemplate({ content, attrs: {} }, doc, [], { filePath: path, validExtends: () => true })
 		expect(doc.toObject()).toMatchInlineSnapshot(`
 		Object {
 		  "description": "",

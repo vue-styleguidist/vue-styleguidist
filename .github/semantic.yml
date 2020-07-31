@@ -1,6 +1,6 @@
 # Always validate all commits, and ignore the PR title
 commitsOnly: true
 
-# Allow use of Merge commits (eg on github: "Merge branch 'master' into feature/ride-unicorns")
+# Allow use of Merge commits (eg on github: "Merge branch 'delivery' into feature/ride-unicorns")
 # this is only relevant when using commitsOnly: true (or titleAndCommits: true)
 allowMergeCommits: true

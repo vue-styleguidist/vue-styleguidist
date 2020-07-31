@@ -15,6 +15,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Ignoring props](#ignoring-props)
 - [Using JSDoc tags](#using-jsdoc-tags)
 - [Methods](#methods)
+- [Composable Components](#composable-components)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
 - [Writing code examples](#writing-code-examples)
@@ -26,9 +27,7 @@ Vue styleguidist generates documentation for your components based on the commen
 
 Vue styleguidist will display the contents of your components’ JSDoc comment blocks.
 
-> **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library.
-
-> **Note:** You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
+> **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library. You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
 ```html
 <template>
@@ -75,7 +74,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 </script>
 ```
 
-Note the use of the @displayName tag to change the displayed name of your component
+Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come _before_ the `export default` in your script tag.
 
 If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
@@ -231,6 +230,8 @@ example of a real documented slot
 </div>
 ```
 
+> **Note:** The docblock must be part of the **same** comment block. Multiple individual comments do not get parsed together.
+
 Another example of how to document bondings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
 
 ## Include Mixins and Extends
@@ -239,7 +240,7 @@ If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](htt
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx` or `javascript` will be rendered as a Vue component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
 
 If you want to ignore the readme file for one component, use the `@example [none]` doclet. Use this when multiple components in the same folder share a `ReadMe` file. This will prevent the examples from being rendered multiple times.
 
@@ -336,7 +337,7 @@ If you want to ignore the readme file for one component, use the `@example [none
 
 > **Note:** You can configure examples file name with the [getExampleFilename](/Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Button/Button.vue#L85)
 
 ### External examples using doclet tags
 
@@ -427,7 +428,7 @@ For instance, if the display name is set as
  **/
 ```
 
-To reference it in examples, one has to call `<WonderfulButton/>`.
+To reference it in examples, one has to call `<WonderfulButton/>`. See to [How to use component name in docs with a different displayName](./Cookbook.md#how-to-use-component-name-in-docs-with-a-different-displayname)
 
 ## Methods
 
@@ -533,7 +534,9 @@ For example, a dropdown element would be easier to read this way
 than with a prop
 
 ```html
-<DropDown :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"/>
+<DropDown
+  :choices="[{val:1,text:'value 1'}, {val:2,text:'value 2'}]"
+/>
 ```
 
 Here is how Vue Styleguidist helps document this pattern: Please add `@requires` doclets to the main component.

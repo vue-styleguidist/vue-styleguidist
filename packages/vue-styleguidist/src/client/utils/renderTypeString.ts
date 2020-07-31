@@ -14,6 +14,8 @@ export default function renderTypeString(type: ParamType): string {
 			return (elements || []).map(renderTypeString).join(' | ')
 		case 'intersection':
 			return (elements || []).map(renderTypeString).join(' & ')
+		case 'undefined':
+			return '-'
 		default:
 			return `${name}${elements ? `<${elements.map(renderTypeString).join(', ')}>` : ''}`
 	}

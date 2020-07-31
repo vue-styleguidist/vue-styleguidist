@@ -1,6 +1,7 @@
 import * as bt from '@babel/types'
 import { TemplateChildNode, DirectiveNode } from '@vue/compiler-dom'
-import recast, { NodePath } from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit, print } from 'recast'
 import Documentation, { ParamTag } from '../Documentation'
 import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
@@ -59,7 +60,7 @@ export default function slotHandler(
 		let rawVBind = false
 		if (simpleVBind && isExpressionNode(simpleVBind.exp)) {
 			const ast = parser.parse(`() => (${simpleVBind.exp.content})`)
-			recast.visit(ast.program, {
+			visit(ast.program, {
 				visitObjectExpression(path) {
 					if (!path.node) {
 						return false
@@ -67,7 +68,7 @@ export default function slotHandler(
 					path.get('properties').each((property: NodePath) => {
 						const node = property.node
 						if (bt.isProperty(node) || bt.isObjectProperty(node)) {
-							const name = recast.print(property.get('key')).code
+							const name = print(property.get('key')).code
 							const bindingDesc = bindingDescriptors.filter(t => t.name === name)[0]
 							simpleBindings.push(
 								bindingDesc

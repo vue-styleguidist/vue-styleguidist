@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import recast from 'recast'
+import { visit } from 'recast'
 import { TemplateChildNode, BaseElementNode } from '@vue/compiler-dom'
 import Documentation, { Tag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
@@ -46,7 +46,7 @@ function getEventsFromExpression(
 	const ast = getTemplateExpressionAST(expression)
 
 	const eventsFound: string[] = []
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		visitCallExpression(path) {
 			const obj = path.node ? path.node.callee : undefined
 			const args = path.node ? path.node.arguments : undefined

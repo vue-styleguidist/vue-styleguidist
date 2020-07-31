@@ -3,7 +3,7 @@ import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
 
-const buildStyles = function(styles: string[] | undefined): string | undefined {
+const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
 	if (styles) {
 		styles.forEach(it => {

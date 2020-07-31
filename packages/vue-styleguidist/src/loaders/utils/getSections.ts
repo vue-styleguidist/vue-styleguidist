@@ -57,30 +57,33 @@ export async function getRequiredComponents(
 		componentFiles.map(async componentPath => {
 			const compDirName = path.dirname(componentPath)
 
-			const docs = await parseMulti(componentPath, {
-				scriptPreHandlers: [],
-				scriptHandlers: [ScriptHandlers.componentHandler],
-				jsx
-			})
-
-			return docs.reduce(
-				(acc: string[], doc) => {
-					if (doc.tags && doc.tags.requires) {
-						acc = acc.concat(
-							doc.tags.requires.map((t: ParamTag) =>
-								path.resolve(compDirName, t.description as string)
+			try {
+				const docs = await parseMulti(componentPath, {
+					scriptPreHandlers: [],
+					scriptHandlers: [ScriptHandlers.componentHandler],
+					jsx
+				})
+				return docs.reduce(
+					(acc: string[], doc) => {
+						if (doc.tags && doc.tags.requires) {
+							acc = acc.concat(
+								doc.tags.requires.map((t: ParamTag) =>
+									path.resolve(compDirName, t.description as string)
+								)
 							)
-						)
-					}
-					return acc
-				},
-				[componentPath]
-			)
+						}
+						return acc
+					},
+					[componentPath]
+				)
+			} catch (e) {
+				// eat the error (reported in vuedoc-loader)
+			}
 		})
 	)
 	return pathsArrays.reduce((acc: Record<string, string[]>, pa) => {
-		const parentComponent = pa[0]
-		acc[parentComponent] = pa.slice(1)
+		const parentComponent = (pa && pa[0]) || 'undefined'
+		acc[parentComponent] = (pa && pa.slice(1)) || []
 		return acc
 	}, {})
 }

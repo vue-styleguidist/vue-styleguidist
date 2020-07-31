@@ -23,9 +23,9 @@ export interface StyleguidistContext extends loader.LoaderContext {
 
 export interface BaseStyleguidistConfig
 	extends Omit<
-			Rsg.SanitizedStyleguidistConfig,
-			'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
-		> {
+		Rsg.SanitizedStyleguidistConfig,
+		'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
+	> {
 	/**
 	 * Your application static assets folder, will be accessible as / in the style guide dev server.
 	 */
@@ -59,7 +59,7 @@ export interface BaseStyleguidistConfig
 	 */
 	defaultExample: string
 	/**
-	 * In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending comopnents or mixing mixins
+	 * In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending components or mixing mixins
 	 * @default false
 	 */
 	displayOrigins: boolean

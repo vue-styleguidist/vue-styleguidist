@@ -3,7 +3,7 @@ import * as path from 'path'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
 
-const docs = path.join(__dirname, './Filters.vue')
+const docs = path.join(__dirname, './Index.vue')
 let filterDocs: ComponentDoc
 
 describe('docs only vue file', () => {
@@ -14,5 +14,9 @@ describe('docs only vue file', () => {
 
 	it('should return an object', () => {
 		expect(filterDocs.slots).not.toBeUndefined()
+	})
+
+	it('should parse the @displayName', () => {
+		expect(filterDocs.displayName).toBe('NotFilters')
 	})
 })

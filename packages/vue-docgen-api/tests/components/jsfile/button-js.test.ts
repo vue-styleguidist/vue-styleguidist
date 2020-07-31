@@ -3,7 +3,8 @@ import { ComponentDoc } from '../../../src/Documentation'
 import { parseMulti, parse } from '../../../src/main'
 
 const button = path.join(__dirname, './MyButton.js')
-let docButton: ComponentDoc[]
+const apollo = path.join(__dirname, './apollo.js')
+let docButton: ComponentDoc[], apolloDoc: ComponentDoc
 describe('tests button with pure javascript', () => {
 	beforeAll(async done => {
 		docButton = await parseMulti(button)
@@ -55,6 +56,14 @@ describe('possible multiple export in parse function', () => {
 	it('should return Button when using parse', async done => {
 		const { exportName } = await parse(button)
 		expect(exportName).toBe('Button')
+		done()
+	})
+})
+
+describe('apollo', () => {
+	it('should extract the apollo desc name', async done => {
+		apolloDoc = await parse(apollo)
+		expect(apolloDoc.description).toBe('Apollo desc')
 		done()
 	})
 })

@@ -9,6 +9,7 @@ import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
 import * as binutils from '../scripts/binutils'
+import isPromise from '../scripts/utils/isPromise'
 
 const logger = createLogger('rsg')
 
@@ -19,9 +20,7 @@ const command = argv._[0]
 process.on('uncaughtException', (err: any) => {
 	if (err.code === 'EADDRINUSE') {
 		binutils.printErrorWithLink(
-			`Another server is running at port ${
-				config.serverPort
-			} already. Please stop it or change the default port to continue.`,
+			`Another server is running at port ${config.serverPort} already. Please stop it or change the default port to continue.`,
 			'You can change the port using the `serverPort` option in your style guide config:',
 			consts.DOCS_CONFIG
 		)
@@ -51,19 +50,14 @@ try {
 		process.env.VUESG_VERBOSE = 'true'
 	}
 
-	config = getConfig(argv.config, binutils.updateConfig)
+	const conf = getConfig(argv.config, binutils.updateConfig)
 
-	binutils.verbose('Styleguidist config:', config)
-
-	switch (command) {
-		case 'build':
-			binutils.commandBuild(config)
-			break
-		case 'server':
-			binutils.commandServer(config, argv.open)
-			break
-		default:
-			binutils.commandHelp()
+	if (isPromise(conf)) {
+		conf.then(runIt).catch(e => {
+			throw e
+		})
+	} else {
+		runIt(conf)
 	}
 } catch (err) {
 	if (err instanceof StyleguidistError) {
@@ -76,5 +70,21 @@ try {
 		process.exit(1)
 	} else {
 		throw err
+	}
+}
+
+function runIt(conf: SanitizedStyleguidistConfig) {
+	config = conf
+	binutils.verbose('Styleguidist config:', config)
+
+	switch (command) {
+		case 'build':
+			binutils.commandBuild(config)
+			break
+		case 'server':
+			binutils.commandServer(config, argv.open)
+			break
+		default:
+			binutils.commandHelp()
 	}
 }

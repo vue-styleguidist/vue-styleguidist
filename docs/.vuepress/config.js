@@ -11,7 +11,13 @@ module.exports = () => {
 		dest: 'docs/dist',
 		title,
 		description,
+		// prettier-ignore
 		head: [
+			['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/favicons/apple-touch-icon.png' }],
+			['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/favicons/favicon-32x32.png' }],
+			['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/favicons/favicon-16x16.png' }],
+			['link', { rel: 'mask-icon', href: '/assets/favicons/safari-pinned-tab.svg', color: '#41B883' }],
+			['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/assets/favicons/favicon.ico' }],
 			['meta', { prefix: ogprefix, property: 'og:title', content: titleShare }],
 			['meta', { prefix: ogprefix, property: 'twitter:title', content: titleShare }],
 			['meta', { prefix: ogprefix, property: 'og:type', content: 'website' }],
@@ -21,8 +27,7 @@ module.exports = () => {
 				{
 					prefix: ogprefix,
 					property: 'og:image',
-					content:
-						'https://raw.githubusercontent.com/vue-styleguidist/vue-styleguidist/master/assets/logo.png'
+					content: '/assets/logo.png'
 				}
 			]
 		],
@@ -36,6 +41,7 @@ module.exports = () => {
 		],
 		themeConfig: {
 			repo: 'vue-styleguidist/vue-styleguidist',
+			docsBranch: 'dev',
 			editLinks: true,
 			docsDir: 'docs',
 			algolia: {

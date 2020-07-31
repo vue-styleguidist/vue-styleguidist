@@ -1,8 +1,8 @@
 language: node_js
 
 # never build when commited by the bot
-# + prevent double build on dev -> master Pull Request
-if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = master OR branch = next)
+# + prevent double build on dev -> delivery Pull Request
+if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = delivery OR branch = next)
 
 cache: yarn
 
@@ -14,10 +14,10 @@ install:
   - yarn install
 
 # In order to avoid double build on pull requests,
-# only build on pushes on master and on pushes on pull requests
+# only build on pushes on delivery and on pushes on pull requests
 branches:
   only:
-    - master
+    - delivery
     - next
     - dev
 
@@ -25,13 +25,13 @@ stages:
   - test
   - coverage
   - name: documentation
-    if: type != pull_request AND branch = master
+    if: type != pull_request AND branch = delivery
   - name: release-beta
     if: type != pull_request AND branch = next
   - name: release
-    if: type != pull_request AND branch = master
+    if: type != pull_request AND branch = delivery
   - name: merge-back
-    if: type != pull_request AND branch = master
+    if: type != pull_request AND branch = delivery
 
 jobs:
   include:
@@ -57,7 +57,7 @@ jobs:
 
         # Build all examples
         - cd examples
-        - for D in *; do yarn build "${D}"; done || exit 1
+        - for D in *; do node ../test/styleguidist.js build "${D}"; done || exit 1
 
         # Move them to the docs
         - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
@@ -71,14 +71,14 @@ jobs:
         github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
         keep-history: true
         on:
-          branch: master
+          branch: delivery
 
     - stage: release
       script:
         - git config --global user.name "Vue Styleguidist Bot"
         - git config --global user.email "${BOT_EMAIL}"
         - git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
-        - git checkout master
+        - git checkout delivery
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - yarn lerna version --yes --github-release
@@ -106,6 +106,6 @@ jobs:
         - git checkout github/dev
         - git checkout -b dev
         - git status -v
-        - git merge master --no-edit
+        - git merge delivery --no-edit
         - git branch --set-upstream-to github/dev
         - git push

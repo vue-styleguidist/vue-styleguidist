@@ -42,12 +42,7 @@ export default async function parseSFC(
 
 		documentation = initialDoc || new Documentation(opt.filePath)
 
-		parseTemplate(
-			parts.template,
-			documentation,
-			[...templateHandlers, ...addTemplateHandlers],
-			opt.filePath
-		)
+		parseTemplate(parts.template, documentation, [...templateHandlers, ...addTemplateHandlers], opt)
 	}
 
 	const extSrc = (parts && parts.script && parts.script.attrs
@@ -94,13 +89,16 @@ export default async function parseSFC(
 				initialDoc !== undefined
 		  )) || []
 		: // if there is only a template return the template's doc
-		  documentation
-			? [documentation]
-			: []
+		documentation
+		? [documentation]
+		: []
 
 	if (documentation && !documentation.get('displayName')) {
 		// a component should always have a display name
-		documentation.set('displayName', path.basename(opt.filePath).replace(/\.\w+$/, ''))
+		// give a component a display name if we can
+		const displayName = path.basename(opt.filePath).replace(/\.\w+$/, '')
+		const dirName = path.basename(path.dirname(opt.filePath))
+		documentation.set('displayName', displayName.toLowerCase() === 'index' ? dirName : displayName)
 	}
 
 	return docs

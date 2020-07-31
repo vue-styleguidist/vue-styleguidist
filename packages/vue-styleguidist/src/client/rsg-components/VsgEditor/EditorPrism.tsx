@@ -20,6 +20,9 @@ import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
+			if (!code) {
+				return ''
+			}
 			const scriptCode = getScript(code, jsxInExamples)
 			const scriptCodeHighlighted = prismHighlight(
 				scriptCode,
@@ -40,7 +43,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 
 const styles = ({ fontFamily, fontSize, color, borderRadius }: Rsg.Theme) => ({
 	root: {
-		fontFamily: fontFamily.monospace[0],
+		fontFamily: fontFamily.monospace,
 		fontSize: fontSize.small,
 		borderRadius,
 		'& textarea': {

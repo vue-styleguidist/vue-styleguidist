@@ -14,11 +14,13 @@ yarn add -D vue-docgen-cli
 
 ## Usage
 
-In a terminal window type the following command at the root of your project. If your components are in the `src/components` folder, this will generate one `.md` file per component.
+In a terminal window, navigate to the root of your project, then type the following command.
 
 ```sh
 yarn vue-docgen src/components/**/*.vue docs/components
 ```
+
+If your components are in the `src/components` folder, this will generate one `.md` file per component.
 
 ## Config
 
@@ -28,7 +30,7 @@ yarn vue-docgen src/components/**/*.vue docs/components
 
 #### `-w` or `--watch`
 
-Should vue-docgen whatch for modifications of your components and update generated markdown files accordingly?
+Should vue-docgen watch for modifications of your components and update generated markdown files accordingly?
 
 ```sh
 yarn vue-docgen -w
@@ -36,7 +38,7 @@ yarn vue-docgen -w
 
 #### `-c` or `--config`
 
-Specify the path of your configuration file. By default, docgen will look for `docgen.config.js` in the current folder.
+Specify the path of your configuration file. By default, `docgen` will look for `docgen.config.js` in the current folder.
 
 ```sh
 yarn vue-docgen -c config/docgen.config.js
@@ -44,7 +46,11 @@ yarn vue-docgen -c config/docgen.config.js
 
 ### Config File
 
-If you specify a `docgen.config.js` file you can be more specific. But each of those configurations is optional.
+Create a `docgen.config.js` at the root of your project to avoid having to specify command-line arguments everytime.
+
+All of the command-line arguments, except for the `--config`, can be replaced by lines in the `docgen.config.js` file.
+
+In a config file you can even be more specific. Each of the following configurations is optional.
 
 ```js
 const path = require('path')
@@ -70,7 +76,11 @@ module.exports = {
     slots: require('templates/slots'),
     // static template to display as a tag if component is functional
     functionalTag: '**functional**'
-  }
+  },
+  docsRepo: 'profile/repo',
+  docsBranch: 'master',
+  docsFolder: ''
+  editLinkLabel: 'Edit on github'
 }
 ```
 
@@ -105,7 +115,7 @@ module.exports = {
 
 > type: `string`, default: `path.dirname(configFilePath)`
 
-The folder where cli will start searching for components. Since the folder structure will be kept from source to destination, it avoids having uselessly deep scaffodlings.
+The folder where CLI will start searching for components. Since the folder structure will be kept from source to destination, it avoids having uselessly deep scaffoldings.
 
 ```txt
    src
@@ -158,7 +168,7 @@ Function returning the absolute path of the documentation markdown files. If [ou
 
 > type: `boolean`, default: `false`
 
-Should vue-docgen keep on watching your files for changes once generation is done?
+Should vue-docgen keep on watching your files for changes once the first files are generated?
 
 #### templates
 
@@ -175,8 +185,12 @@ export default function component(
   renderedUsage: RenderedUsage, // props, events, methods and slots documentation rendered
   doc: ComponentDoc, // the object returned by vue-docgen-api
   config: DocgenCLIConfig, // the local config, useful to know the context
-  fileName: string // the name of the current file in the doc (to explain how to import it)
-): string {
+  fileName: string, // the name of the current file in the doc (to explain how to import it)
+  requiresMd: ContentAndDependencies[], // a list of all the documentation files
+  // attached to the component documented. It includes documentation of subcomponents
+  { isSubComponent, hasSubComponents }: SubTemplateOptions // are we documenting
+): // a sub-component or does the current component have subcomponents
+string {
   const { displayName, description, docsBlocks } = doc
   return `
   # ${displayName}
@@ -198,9 +212,15 @@ And the partial for slots
 import { SlotDescriptor } from 'vue-docgen-api'
 import { cleanReturn } from './utils'
 
-export default (slots: {
-  [slotName: string]: SlotDescriptor
-}): string => {
+export default (
+  slots: {
+    [slotName: string]: SlotDescriptor
+  },
+  opt?: {
+    isSubComponent: boolean
+    hasSubComponents: boolean
+  }
+): string => {
   const slotNames = Object.keys(slots)
   if (!slotNames.length) {
     return '' // if no slots avoid creating the section
@@ -211,17 +231,17 @@ export default (slots: {
   | Name          | Description  | Bindings |
   | ------------- | ------------ | -------- |
 ${slotNames
-    .map(slotName => {
-      const { description, bindings } = slots[slotName]
-      const readableBindings = // serialize bindings to display them ina readable manner
-        bindings && Object.keys(bindings).length
-          ? JSON.stringify(bindings, null, 2)
-          : ''
-      return cleanReturn(
-        `| ${slotName} | ${description} | ${readableBindings} |`
-      ) // remplace returns by <br> to allow them in a table cell
-    })
-    .join('\n')}
+  .map(slotName => {
+    const { description, bindings } = slots[slotName]
+    const readableBindings = // serialize bindings to display them ina readable manner
+      bindings && Object.keys(bindings).length
+        ? JSON.stringify(bindings, null, 2)
+        : ''
+    return cleanReturn(
+      `| ${slotName} | ${description} | ${readableBindings} |`
+    ) // remplace returns by <br> to allow them in a table cell
+  })
+  .join('\n')}
   `
 }
 ```
@@ -255,13 +275,43 @@ module.exports = {
 
 > type: `boolean`, default: `false`
 
-Generate example for components that have neither `<docs>` block nor a markdown file to provide examples of usage.
+Generate an example for components that have neither `<docs>` block nor a markdown file to provide examples of usage.
 
 #### cwd
 
 > type: `string`, optional
 
 Force the Current Working Directory. Useful in monorepos.
+
+#### getRepoEditUrl
+
+> type: `(relativePath: string) => string`, default: `` p => `https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}` ``
+
+Gets the link to the documentation edition from
+
+#### docsRepo
+
+> type: `string`, optional
+
+If you specify the docsRepo, and you do not want to specify `getRepoEditUrl` you will get links to edit the docs near each readme files.
+
+#### docsBranch
+
+> type: `string`, default: `master`
+
+The branch you want the edit links to send you to
+
+#### docsFolder
+
+> type: `string`, default: ``
+
+If the root folder is not at the root of your repo, use this parameter
+
+#### editLinkLabel
+
+> type: `string`, default: `Edit on github`
+
+The label we can read on edit button
 
 ## Change log
 

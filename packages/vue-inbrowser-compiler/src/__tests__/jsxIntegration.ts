@@ -251,7 +251,7 @@ describe('integration', () => {
 					id: 'hehe'
 				},
 				on: {
-					click: function() {
+					click: function () {
 						calls.push(3)
 					}
 				},
@@ -259,7 +259,7 @@ describe('integration', () => {
 					innerHTML: 2
 				},
 				hook: {
-					insert: function() {
+					insert: function () {
 						calls.push(1)
 					}
 				},

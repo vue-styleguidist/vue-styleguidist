@@ -7,6 +7,10 @@ import scoper from './styleScoper'
  * @param {string} suffix string to add to each selector as a scoped style to avoid conflicts
  */
 export default function addScopedStyle(css: string, suffix: string) {
+	// protect server side rendering
+	if (typeof document === 'undefined') {
+		return
+	}
 	const head = document.head || document.getElementsByTagName('head')[0]
 	const newstyle = document.createElement('style')
 	newstyle.dataset.cssscoper = 'true'

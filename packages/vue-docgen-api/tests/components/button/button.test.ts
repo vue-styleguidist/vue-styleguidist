@@ -14,8 +14,7 @@ describe('tests button', () => {
 			'@utils': path.resolve(__dirname, '../../utils')
 		})
 		// make sure all props are always in the same order
-		docButton.props =
-			docButton.props && docButton.props.sort((p1, p2) => (p1.name < p2.name ? 1 : -1))
+		docButton.props = docButton.props?.sort((p1, p2) => (p1.name < p2.name ? 1 : -1))
 		done()
 	})
 
@@ -39,7 +38,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has authors', () => {
-			expect(docButton.tags && docButton.tags.author).toMatchInlineSnapshot(`
+			expect(docButton.tags?.author).toMatchInlineSnapshot(`
 									Array [
 									  Object {
 									    "description": "[Rafael](https://github.com/rafaesc92)",
@@ -50,7 +49,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has version', () => {
-			expect(docButton.tags && docButton.tags.version).toMatchInlineSnapshot(`
+			expect(docButton.tags?.version).toMatchInlineSnapshot(`
 									Array [
 									  Object {
 									    "description": "1.0.5",
@@ -115,7 +114,7 @@ describe('tests button', () => {
 		})
 
 		it('should the component has seventeen props', () => {
-			expect(docButton.props && docButton.props.length).toBe(17)
+			expect(docButton.props?.length).toBe(18)
 		})
 
 		it('should the component has propsAnother prop default equal "blue"', () => {
@@ -193,8 +192,8 @@ describe('tests button', () => {
 		it('should value default propE to be a funtion', () => {
 			const dv = getTestDescriptor(docButton.props, 'propE').defaultValue
 			const functionNoSpaceNoReturn = dv ? dv.value.replace(/[ \n\r]/g, '') : ''
-			expect(functionNoSpaceNoReturn).toEqual(`()=>{return{message:'hello'}}`)
-			expect(dv ? dv.func : false).toBeTruthy()
+			expect(functionNoSpaceNoReturn).toEqual(`{message:'hello'}`)
+			expect(dv ? dv.func : true).toBeFalsy()
 		})
 
 		it('should example3 to be number', () => {
@@ -231,6 +230,17 @@ describe('tests button', () => {
 
 		it('should ignore multi mixins props that are not appended', () => {
 			expect(getTestDescriptor(docButton.props, 'shouldNotBe').type).toBeUndefined()
+		})
+
+		it('should pass through any custom doclets', () => {
+			expect(getTestDescriptor(docButton.props, 'customTag').tags).toMatchObject({
+				asdf: [
+					{
+						description: 'qwerty',
+						title: 'asdf'
+					}
+				]
+			})
 		})
 	})
 

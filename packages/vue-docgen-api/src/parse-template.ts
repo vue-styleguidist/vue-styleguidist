@@ -3,6 +3,7 @@ import { parse, TemplateChildNode, RootNode } from '@vue/compiler-dom'
 import { SFCTemplateBlock } from '@vue/compiler-sfc'
 import Documentation from './Documentation'
 import cacher from './utils/cacher'
+import { ParseOptions } from './parse'
 
 export interface TemplateParserOptions {
 	functional: boolean
@@ -19,12 +20,13 @@ export default function parseTemplate(
 	tpl: Pick<SFCTemplateBlock, 'content' | 'attrs'>,
 	documentation: Documentation,
 	handlers: Handler[],
-	filePath: string
+	opts: ParseOptions
 ) {
+	const { filePath, pugOptions } = opts
 	if (tpl && tpl.content) {
 		const source =
 			tpl.attrs && tpl.attrs.lang === 'pug'
-				? pug.render(tpl.content, { filename: filePath })
+				? pug.render(tpl.content, { ...pugOptions, filename: filePath })
 				: tpl.content
 
 		const ast: RootNode = cacher(() => parse(source), source)
