@@ -93,8 +93,10 @@ export default function resolveRequired(
 					varToFilePath[varName] = { filePath: [source], exportName }
 				} else if (bt.isObjectPattern(nodeDeclaration.id)) {
 					nodeDeclaration.id.properties.forEach((p: bt.ObjectProperty) => {
-						const varName = p.key.name
-						varToFilePath[varName] = { filePath: [source], exportName }
+						if (bt.isIdentifier(p.key)) {
+							const varName = p.key.name
+							varToFilePath[varName] = { filePath: [source], exportName }
+						}
 					})
 				} else {
 					return

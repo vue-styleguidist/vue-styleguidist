@@ -35,7 +35,7 @@ export default function slotHandler(
 					}
 					path.get('properties').each((property: NodePath) => {
 						const node = property.node
-						if (bt.isProperty(node) || bt.isObjectProperty(node)) {
+						if ((bt.isProperty(node) || bt.isObjectProperty(node)) && bt.isIdentifier(node.key)) {
 							bindings[node.key.name] = print(property.get('value')).code
 						} else {
 							rawVBind = true
