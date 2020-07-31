@@ -66,7 +66,15 @@ export default async function propHandler(documentation: Documentation, path: No
 				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
 				// if it's the v-model describe it only as such
-				const propertyName = propNode.key.name || propNode.key.value
+				const propertyName = bt.isIdentifier(propNode.key)
+					? propNode.key.name
+					: bt.isStringLiteral(propNode.key)
+					? propNode.key.value
+					: null
+
+				if (!propertyName) {
+					return
+				}
 				const isPropertyModel =
 					jsDocTags.some(t => t.title === 'model') || propertyName === modelPropertyName
 				const propName = isPropertyModel ? 'v-model' : propertyName

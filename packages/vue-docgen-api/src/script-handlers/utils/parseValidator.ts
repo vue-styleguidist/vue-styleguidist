@@ -46,13 +46,13 @@ export default function parseValidatorForValues(
 				break
 
 			case '<':
-				if (isMinusOne(returnedExpression.left)) {
+				if (bt.isExpression(returnedExpression.left) && isMinusOne(returnedExpression.left)) {
 					valuesNode = returnedExpression.right
 				}
 				break
 			case '!==':
 			case '!=':
-				if (isMinusOne(returnedExpression.left)) {
+				if (bt.isExpression(returnedExpression.left) && isMinusOne(returnedExpression.left)) {
 					valuesNode = returnedExpression.right
 				} else if (isMinusOne(returnedExpression.right)) {
 					valuesNode = returnedExpression.left
@@ -75,6 +75,7 @@ export default function parseValidatorForValues(
 	} else if (bt.isCallExpression(returnedExpression)) {
 		if (
 			bt.isMemberExpression(returnedExpression.callee) &&
+			bt.isIdentifier(returnedExpression.callee.property) &&
 			returnedExpression.callee.property.name === 'includes'
 		) {
 			return extractStringArray(returnedExpression.callee.object)

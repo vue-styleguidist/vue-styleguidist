@@ -3,6 +3,7 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
 import Documentation, { ParamTag, ParamType } from '../Documentation'
 import { getSlotComment } from './slotHandler'
+import getProperties from './utils/getProperties'
 
 export interface TypedParamTag extends ParamTag {
 	type: ParamType
@@ -15,21 +16,14 @@ export interface TypedParamTag extends ParamTag {
  */
 export default async function slotHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
-		const functionalPath: NodePath<bt.BooleanLiteral>[] = path
-			.get('properties')
-			.filter((p: NodePath) => bt.isObjectProperty(p.node) && p.node.key.name === 'functional')
+		const functionalPath: NodePath<bt.BooleanLiteral>[] = getProperties(path, 'functional')
 
 		// if no prop return
 		if (!functionalPath.length || !functionalPath[0].get('value')) {
 			return
 		}
 
-		const renderPath = path
-			.get('properties')
-			.filter(
-				(p: NodePath) =>
-					(bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)) && p.node.key.name === 'render'
-			)
+		const renderPath = getProperties(path, 'render')
 
 		const renderValuePath = bt.isObjectProperty(renderPath[0].node)
 			? renderPath[0].get('value')

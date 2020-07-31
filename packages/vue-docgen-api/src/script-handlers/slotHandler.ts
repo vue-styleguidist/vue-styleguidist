@@ -5,6 +5,7 @@ import Documentation, { ParamTag, ParamType, Tag, SlotDescriptor } from '../Docu
 import getDoclets from '../utils/getDoclets'
 import { parseDocblock } from '../utils/getDocblock'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import getProperties from './utils/getProperties'
 
 export interface TypedParamTag extends ParamTag {
 	type: ParamType
@@ -17,12 +18,7 @@ export interface TypedParamTag extends ParamTag {
  */
 export default async function slotHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
-		const renderPath = path
-			.get('properties')
-			.filter(
-				(p: NodePath) =>
-					(bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)) && p.node.key.name === 'render'
-			)
+		const renderPath = getProperties(path, 'render')
 
 		// if no prop return
 		if (!renderPath.length) {
@@ -40,6 +36,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 					bt.isMemberExpression(pathCall.node.callee.object) &&
 					bt.isThisExpression(pathCall.node.callee.object.object) &&
 					bt.isIdentifier(pathCall.node.callee.property) &&
+					bt.isIdentifier(pathCall.node.callee.object.property) &&
 					(pathCall.node.callee.object.property.name === '$slots' ||
 						pathCall.node.callee.object.property.name === '$scopedSlots')
 				) {
@@ -212,7 +209,7 @@ function getBindings(
 	bindingsFromComments: ParamTag[] | undefined
 ): ParamTag[] {
 	return node.properties.reduce((bindings: ParamTag[], prop: bt.ObjectProperty) => {
-		if (prop.key) {
+		if (bt.isIdentifier(prop.key)) {
 			const name = prop.key.name
 			const description: string | boolean | undefined =
 				prop.leadingComments && prop.leadingComments.length

@@ -4,6 +4,7 @@ import Documentation from '../Documentation'
 import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
+import getProperties from './utils/getProperties'
 
 /**
  * Look in the mixin section of a component.
@@ -38,9 +39,8 @@ export default async function mixinsHandler(
 function getMixinsVariableNames(compDef: NodePath): string[] {
 	const varNames: string[] = []
 	if (bt.isObjectExpression(compDef.node)) {
-		const mixinProp = compDef
-			.get('properties')
-			.filter((p: NodePath<bt.Property>) => p.node.key.name === 'mixins')
+		const mixinProp = getProperties(compDef, 'mixins')
+
 		const mixinPath = mixinProp.length ? (mixinProp[0] as NodePath<bt.Property>) : undefined
 
 		if (mixinPath) {
