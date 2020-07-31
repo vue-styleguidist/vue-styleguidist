@@ -1,3 +1,5 @@
 reportStatus: true
 minApprovals:
-  OWNER: 1
+  OWNER: 0
+requiredLabels:
+  - automerge
