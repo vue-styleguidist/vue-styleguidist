@@ -1,3 +1,3 @@
-requiredLabels:
-  - automerge
 reportStatus: true
+minApprovals:
+  OWNER: 1
