@@ -23,7 +23,9 @@ function isObjectExpressionComponentDefinition(node: bt.ObjectExpression): boole
 		// export const compo = {data(){ return {cpm:"Button"}}
 		node.properties.some(
 			p =>
-				(bt.isObjectMethod(p) || bt.isObjectProperty(p)) && VUE_COMPONENTS_KEYS.includes(p.key.name)
+				(bt.isObjectMethod(p) || bt.isObjectProperty(p)) &&
+				bt.isIdentifier(p.key) &&
+				VUE_COMPONENTS_KEYS.includes(p.key.name)
 		)
 	)
 }
