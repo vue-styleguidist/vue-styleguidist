@@ -24,16 +24,15 @@ export default async function parseSFC(
 
 	// get slots and props from template
 	if (parts.template) {
-		const extTemplSrc = (parts && parts.template && parts.template.attrs
-			? parts.template.attrs.src
-			: '') as string
+		const extTemplSrc = parts?.template?.attrs?.src
 
 		const extTemplSource =
-			extTemplSrc && extTemplSrc.length
+			extTemplSrc && typeof extTemplSrc === 'string' && extTemplSrc.length
 				? await read(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
 						encoding: 'utf-8'
 				  })
-				: ''
+				: // if we don't have a content to the binding, use empty string
+				  ''
 
 		if (extTemplSource.length) {
 			parts.template.content = extTemplSource
