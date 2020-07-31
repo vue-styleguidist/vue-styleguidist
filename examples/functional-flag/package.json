@@ -43,7 +43,7 @@
     "vue": "2.X.X",
     "vue-loader": "^15.2.4",
     "vue-styleguidist": "^4.0.0",
-    "webpack": "^4.10.0",
+    "webpack": "^4.44.1",
     "webpack-bundle-analyzer": "3.3.2"
   }
 }
