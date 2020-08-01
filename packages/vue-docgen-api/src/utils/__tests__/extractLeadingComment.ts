@@ -22,9 +22,7 @@ describe('extractLeadingComment', () => {
 	it('should not fail when no comment', done => {
 		const elt = compileIt(
 			[
-				'<div>',
-				' <div>Hello World !!</div>',
-				' <div>Happy Day !!</div>',
+				'<div>', //
 				' <h1>title of the template</h1>',
 				'</div>'
 			].join('\n')
@@ -32,7 +30,7 @@ describe('extractLeadingComment', () => {
 		if (!elt) {
 			done.fail()
 		} else {
-			expect(extractLeadingComment(elt.parent.children, elt.child).length).toBe(0)
+			expect(extractLeadingComment([], elt.child).length).toBe(0)
 			done()
 		}
 	})
