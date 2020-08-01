@@ -9,7 +9,7 @@ describe('slotHandler', () => {
 		doc = new Documentation('dummy/path')
 	})
 
-	it('should detect slots', done => {
+	it('should detect slots', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -19,18 +19,11 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n')
 		)
-		if (ast) {
-			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-			expect(doc.toObject().slots).toMatchObject([
-				{ name: 'default', description: 'a default slot' }
-			])
-			done()
-		} else {
-			done.fail()
-		}
+		traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+		expect(doc.toObject().slots).toMatchObject([{ name: 'default', description: 'a default slot' }])
 	})
 
-	it('should pick comments at the beginning of templates', done => {
+	it('should pick comments at the beginning of templates', () => {
 		const ast = parse(
 			[
 				'<!-- @slot first slot found -->',
@@ -41,20 +34,14 @@ describe('slotHandler', () => {
 				'</slot>'
 			].join('\n')
 		)
-		if (ast) {
-			traverse(ast.children[1], doc, [slotHandler], ast.children, {
-				functional: false
-			})
-			expect(doc.toObject().slots).toMatchObject([
-				{ name: 'first', description: 'first slot found' }
-			])
-			done()
-		} else {
-			done.fail()
-		}
+
+		traverse(ast.children[1], doc, [slotHandler], ast.children, {
+			functional: false
+		})
+		expect(doc.toObject().slots).toMatchObject([{ name: 'first', description: 'first slot found' }])
 	})
 
-	it('should pick up the name of a slot', done => {
+	it('should pick up the name of a slot', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -64,22 +51,17 @@ describe('slotHandler', () => {
 				'</div>'
 			].join('\n')
 		)
-		if (ast) {
-			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-			expect(doc.toObject().slots).toMatchObject([
-				{
-					name: 'oeuf',
-					description: 'a slot named oeuf'
-				}
-			])
-			done()
-		} else {
-			done.fail()
-		}
+		traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+		expect(doc.toObject().slots).toMatchObject([
+			{
+				name: 'oeuf',
+				description: 'a slot named oeuf'
+			}
+		])
 	})
 
 	describe('bindings', () => {
-		it('should detect scoped slots', done => {
+		it('should detect scoped slots', () => {
 			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
@@ -88,27 +70,22 @@ describe('slotHandler', () => {
 					'</div>'
 				].join('\n')
 			)
-			if (ast) {
-				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-				expect(doc.toObject().slots).toMatchObject([
-					{
-						name: 'oeuf',
-						scoped: true,
-						description: 'a slot named oeuf',
-						bindings: [
-							{
-								name: 'item'
-							}
-						]
-					}
-				])
-				done()
-			} else {
-				done.fail()
-			}
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			expect(doc.toObject().slots).toMatchObject([
+				{
+					name: 'oeuf',
+					scoped: true,
+					description: 'a slot named oeuf',
+					bindings: [
+						{
+							name: 'item'
+						}
+					]
+				}
+			])
 		})
 
-		it('should detect explicit bindings using v-bind', done => {
+		it('should detect explicit bindings using v-bind', () => {
 			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
@@ -116,21 +93,16 @@ describe('slotHandler', () => {
 					'</div>'
 				].join('\n')
 			)
-			if (ast) {
-				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-				const slots = doc.toObject().slots || []
-				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
-					{
-						name: 'v-bind'
-					}
-				])
-				done()
-			} else {
-				done.fail()
-			}
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			const slots = doc.toObject().slots || []
+			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+				{
+					name: 'v-bind'
+				}
+			])
 		})
 
-		it('should detect implicit bindings if it is simple enough', done => {
+		it('should detect implicit bindings if it is simple enough', () => {
 			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
@@ -139,24 +111,19 @@ describe('slotHandler', () => {
 					'</div>'
 				].join('\n')
 			)
-			if (ast) {
-				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-				const slots = doc.toObject().slots || []
-				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
-					{
-						name: 'item'
-					},
-					{
-						name: 'otherItem'
-					}
-				])
-				done()
-			} else {
-				done.fail()
-			}
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			const slots = doc.toObject().slots || []
+			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+				{
+					name: 'item'
+				},
+				{
+					name: 'otherItem'
+				}
+			])
 		})
 
-		it('should detect explicit bindings and allow their documentation', done => {
+		it('should detect explicit bindings and allow their documentation', () => {
 			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
@@ -169,45 +136,48 @@ describe('slotHandler', () => {
 					'</div>'
 				].join('\n')
 			)
-			if (ast) {
-				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-				const slots = doc.toObject().slots || []
-				expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
-					{
-						name: 'item',
-						description: 'menu item'
-					},
-					{
-						name: 'otherItem',
-						description: 'text of the menu item'
-					}
-				])
-				done()
-			} else {
-				done.fail()
-			}
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			const slots = doc.toObject().slots || []
+			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+				{
+					name: 'item',
+					description: 'menu item'
+				},
+				{
+					name: 'otherItem',
+					description: 'text of the menu item'
+				}
+			])
 		})
 
-		it('should not fail on non-dcumented slots', done => {
+		it('should not fail on slots', () => {
 			const ast = parse(
 				[
 					'<div>', //
-					'	<!-- test -->', //
+					'  <!-- test -->', //
 					'  <slot />',
 					'</div>'
 				].join('\n')
 			)
-			if (ast) {
-				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-				const slots = doc.toObject().slots || []
-				expect(slots.length).toBe(1)
-				done()
-			} else {
-				done.fail()
-			}
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			const slots = doc.toObject().slots || []
+			expect(slots.length).toBe(1)
 		})
 
-		it('should extract tags from a slot', done => {
+		it('should not fail on non-commented slots', () => {
+			const ast = parse(
+				[
+					'<div>', //
+					'  <slot />',
+					'</div>'
+				].join('\n')
+			)
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			const slots = doc.toObject().slots || []
+			expect(slots.length).toBe(1)
+		})
+
+		it('should extract tags from a slot', () => {
 			const ast = parse(
 				[
 					'<div>', //
@@ -219,10 +189,9 @@ describe('slotHandler', () => {
 					'</div>'
 				].join('\n')
 			)
-			if (ast) {
-				traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-				const slots = doc.toObject().slots || []
-				expect(slots[0].tags).toMatchInlineSnapshot(`
+			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+			const slots = doc.toObject().slots || []
+			expect(slots[0].tags).toMatchInlineSnapshot(`
 			Object {
 			  "ignore": Array [
 			    Object {
@@ -232,10 +201,6 @@ describe('slotHandler', () => {
 			  ],
 			}
 		`)
-				done()
-			} else {
-				done.fail()
-			}
 		})
 	})
 })
