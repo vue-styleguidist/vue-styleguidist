@@ -1,3 +1,6 @@
+reportStatus: true
+minApprovals: NONE
+updateBranch: true
+deleteBranchAfterMerge: true
 requiredLabels:
   - automerge
-reportStatus: true
