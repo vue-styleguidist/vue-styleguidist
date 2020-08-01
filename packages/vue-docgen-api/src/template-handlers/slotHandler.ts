@@ -62,9 +62,6 @@ export default function slotHandler(
 			const ast = parser.parse(`() => (${simpleVBind.exp.content})`)
 			visit(ast.program, {
 				visitObjectExpression(path) {
-					if (!path.node) {
-						return false
-					}
 					path.get('properties').each((property: NodePath) => {
 						const node = property.node
 						if (bt.isProperty(node) || bt.isObjectProperty(node)) {
