@@ -23,8 +23,6 @@ jobs:
           git config user.name "Vue Styleguidist Bot"
           git config user.email "${BOT_EMAIL}"
           git fetch origin delivery dev
-          git checkout origin/delivery
-          git checkout -b delivery
-          git branch --set-upstream-to origin/delivery
-          git merge origin/dev --no-edit -m "chore: deliver"
+          git switch delivery
+          git merge dev --no-edit -m "chore: deliver"
           git push
