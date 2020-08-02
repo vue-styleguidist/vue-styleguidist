@@ -68,11 +68,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 			},
 			visitJSXElement(pathJSX) {
 				const tagName = pathJSX.node.openingElement.name
-				const nodeJSX = pathJSX.node
-				if (!bt.isJSXElement(nodeJSX)) {
-					this.traverse(pathJSX)
-					return
-				}
+				const nodeJSX = pathJSX.node as bt.JSXElement
 				if (bt.isJSXIdentifier(tagName) && tagName.name === 'slot') {
 					const doc = documentation.getSlotDescriptor(getName(nodeJSX))
 					const parentNode = pathJSX.parentPath.node
@@ -118,9 +114,6 @@ function getJSXDescription(
 	siblings: bt.Node[],
 	descriptor: SlotDescriptor
 ): SlotComment | undefined {
-	if (!siblings) {
-		return undefined
-	}
 	const indexInParent = siblings.indexOf(nodeJSX)
 
 	let commentExpression: bt.JSXExpressionContainer | null = null
@@ -183,7 +176,7 @@ function parseCommentNode(node: bt.Comment, descriptor: SlotDescriptor): SlotCom
 export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
 	const docBlock = parseDocblock(str).trim()
 	const jsDoc = getDoclets(docBlock)
-	if (!jsDoc.tags) {
+	if (!jsDoc.tags?.length) {
 		return undefined
 	}
 	const slotTags = jsDoc.tags.filter(t => t.title === 'slot')

@@ -1,8 +1,5 @@
 import * as path from 'path'
-import { NodePath } from 'ast-types/lib/node-path'
-import * as bt from '@babel/types'
-import { ASTElement } from 'vue-template-compiler'
-import { parse, ParseOptions, TemplateParserOptions, Documentation } from '../../../src/main'
+import { parse } from '../../../src/main'
 
 describe('extending handlers', () => {
 	it('should execute a custom script handler', async () => {
@@ -10,12 +7,7 @@ describe('extending handlers', () => {
 
 		await parse(path.resolve(__dirname, 'mock.vue'), {
 			addScriptHandlers: [
-				async function handler(
-					doc: Documentation,
-					componentDefinition: NodePath,
-					ast: bt.File,
-					opt: ParseOptions
-				) {
+				async function handler() {
 					hasRun = true
 				}
 			]
@@ -29,11 +21,7 @@ describe('extending handlers', () => {
 
 		await parse(path.resolve(__dirname, 'mock.vue'), {
 			addTemplateHandlers: [
-				async function handler(
-					documentation: Documentation,
-					templateAst: ASTElement,
-					options: TemplateParserOptions
-				) {
+				async function handler() {
 					hasRun = true
 				}
 			]

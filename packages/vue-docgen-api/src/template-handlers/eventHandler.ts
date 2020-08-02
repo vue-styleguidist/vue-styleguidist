@@ -1,37 +1,46 @@
 import * as bt from '@babel/types'
 import { visit } from 'recast'
-import { ASTElement, ASTNode } from 'vue-template-compiler'
+import { TemplateChildNode, BaseElementNode } from '@vue/compiler-dom'
 import Documentation, { Tag } from '../Documentation'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
 import { setEventDescriptor } from '../script-handlers/eventHandler'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
+import { isBaseElementNode, isDirectiveNode, isSimpleExpressionNode } from '../utils/guards'
 
-const allowRE = /^(v-on|@)/
 export default function eventHandler(
 	documentation: Documentation,
-	templateAst: ASTElement,
+	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
-	const bindings = templateAst.attrsMap
-	const keys = Object.keys(bindings)
-	for (const key of keys) {
-		// only look at expressions
-		if (allowRE.test(key)) {
-			const expression = bindings[key]
-			if (expression && expression.length) {
-				getEventsFromExpression(templateAst.parent, templateAst, expression, documentation, options)
+	if (isBaseElementNode(templateAst)) {
+		templateAst.props.forEach(prop => {
+			if (isDirectiveNode(prop)) {
+				if (prop.name == 'on') {
+					// only look at expressions
+					const expression = prop.exp
+					if (isSimpleExpressionNode(expression)) {
+						getEventsFromExpression(
+							templateAst,
+							expression.content,
+							documentation,
+							siblings,
+							options
+						)
+					}
+				}
 			}
-		}
+		})
 	}
 }
 
 function getEventsFromExpression(
-	parentAst: ASTElement | undefined,
-	item: ASTNode,
+	item: BaseElementNode,
 	expression: string,
 	documentation: Documentation,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
 	const ast = getTemplateExpressionAST(expression)
@@ -51,7 +60,7 @@ function getEventsFromExpression(
 		}
 	})
 	if (eventsFound.length) {
-		const leadingComments = extractLeadingComment(parentAst, item, options.rootLeadingComment)
+		const leadingComments = extractLeadingComment(siblings, item)
 		if (leadingComments.length) {
 			eventsFound.forEach(evtName => {
 				leadingComments.forEach(comment => {

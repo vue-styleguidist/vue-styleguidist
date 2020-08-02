@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { ASTElement } from 'vue-template-compiler'
+import { TemplateChildNode, DirectiveNode } from '@vue/compiler-dom'
 import { NodePath } from 'ast-types/lib/node-path'
 import { visit, print } from 'recast'
 import Documentation, { ParamTag } from '../Documentation'
@@ -7,60 +7,38 @@ import buildParser from '../babel-parser'
 import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import { parseSlotDocBlock } from '../script-handlers/slotHandler'
+import {
+	isBaseElementNode,
+	isAttributeNode,
+	isDirectiveNode,
+	isSimpleExpressionNode
+} from '../utils/guards'
 
 const parser = buildParser({ plugins: ['typescript'] })
 
 export default function slotHandler(
 	documentation: Documentation,
-	templateAst: ASTElement,
+	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
-	if (templateAst.tag === 'slot') {
-		const bindings = extractAndFilterAttr(templateAst.attrsMap)
+	if (isBaseElementNode(templateAst) && templateAst.tag === 'slot') {
+		const nameProp = templateAst.props.filter(isAttributeNode).find(b => b.name === 'name')
+		const slotName =
+			nameProp && nameProp.value && nameProp.value.content ? nameProp.value.content : 'default'
 
-		let name = 'default'
-		if (bindings.name) {
-			name = bindings.name
-			delete bindings.name
-		}
+		const bindings = templateAst.props.filter(
+			// only keep simple binds and static attributes
+			b => b.name !== 'name' && (b.name === 'bind' || isAttributeNode(b))
+		)
 
-		if (bindings['']) {
-			const vBindCode = templateAst.attrsMap['v-bind']
-			const ast = parser.parse(`() => (${vBindCode})`)
-			let rawVBind = false
-			visit(ast.program, {
-				visitObjectExpression(path) {
-					if (!path.node) {
-						return false
-					}
-					path.get('properties').each((property: NodePath) => {
-						const node = property.node
-						if ((bt.isProperty(node) || bt.isObjectProperty(node)) && bt.isIdentifier(node.key)) {
-							bindings[node.key.name] = print(property.get('value')).code
-						} else {
-							rawVBind = true
-						}
-					})
-					return false
-				}
-			})
-			if (rawVBind) {
-				bindings['v-bind'] = vBindCode
-			}
-			delete bindings['']
-		}
+		const slotDescriptor = documentation.getSlotDescriptor(slotName)
 
-		const slotDescriptor = documentation.getSlotDescriptor(name)
-
-		if (bindings && Object.keys(bindings).length) {
+		if (bindings.length) {
 			slotDescriptor.scoped = true
 		}
 
-		const comments = extractLeadingComment(
-			templateAst.parent,
-			templateAst,
-			options.rootLeadingComment
-		)
+		const comments = extractLeadingComment(siblings, templateAst)
 		let bindingDescriptors: ParamTag[] = []
 
 		comments.forEach(comment => {
@@ -74,25 +52,55 @@ export default function slotHandler(
 				}
 			}
 		})
-		if (Object.keys(bindings).length) {
-			slotDescriptor.bindings = Object.keys(bindings).map(b => {
-				const bindingDesc = bindingDescriptors.filter(t => t.name === b)[0]
-				return bindingDesc || { name: b }
+
+		const simpleBindings: ParamTag[] = []
+
+		// deal with v-bind="" props
+		const simpleVBind = bindings.find(b => isDirectiveNode(b) && !b.arg) as DirectiveNode
+		let rawVBind = false
+		if (simpleVBind && isSimpleExpressionNode(simpleVBind.exp)) {
+			const ast = parser.parse(`() => (${simpleVBind.exp.content})`)
+			visit(ast.program, {
+				visitObjectExpression(path) {
+					path.get('properties').each((property: NodePath) => {
+						const node = property.node
+						if (bt.isProperty(node) || bt.isObjectProperty(node)) {
+							const name = print(property.get('key')).code
+							const bindingDesc = bindingDescriptors.filter(t => t.name === name)[0]
+							simpleBindings.push(
+								bindingDesc
+									? bindingDesc
+									: {
+											name,
+											title: 'binding'
+									  }
+							)
+						} else {
+							rawVBind = true
+						}
+					})
+					return false
+				}
 			})
 		}
-	}
-}
 
-const dirRE = /^(v-|:|@)/
-const allowRE = /^(v-bind|:)/
+		if (bindings.length) {
+			slotDescriptor.bindings = simpleBindings.concat(
+				bindings.reduce((acc: ParamTag[], b) => {
+					if (!rawVBind && isDirectiveNode(b) && !b.arg) {
+						return acc
+					}
 
-function extractAndFilterAttr(attrsMap: Record<string, any>): Record<string, any> {
-	const res: Record<string, any> = {}
-	const keys = Object.keys(attrsMap)
-	for (const key of keys) {
-		if (!dirRE.test(key) || allowRE.test(key)) {
-			res[key.replace(allowRE, '')] = attrsMap[key]
+					// resolve name of binding
+					const name =
+						isDirectiveNode(b) && b.arg && isSimpleExpressionNode(b.arg)
+							? b.arg.content
+							: `${isDirectiveNode(b) ? 'v-' : ''}${b.name}`
+					const bindingDesc = bindingDescriptors.filter(t => t.name === name)[0]
+					acc.push(bindingDesc ? bindingDesc : { name, title: 'binding' })
+					return acc
+				}, [])
+			)
 		}
 	}
-	return res
 }

@@ -1,4 +1,4 @@
-import { compile } from 'vue-template-compiler'
+import { parse } from '@vue/compiler-dom'
 import Documentation from '../../Documentation'
 import { traverse } from '../../parse-template'
 import eventHandler from '../eventHandler'
@@ -10,7 +10,7 @@ describe('eventHandler', () => {
 	})
 
 	it('should match events calls in attributes expressions', done => {
-		const ast = compile(
+		const ast = parse(
 			[
 				'<div>',
 				'  <!--',
@@ -19,11 +19,12 @@ describe('eventHandler', () => {
 				'  -->',
 				`  <button @click="$emit('click', 23, 1)"></button>`,
 				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
+			].join('\n')
+		)
 		if (ast) {
-			traverse(ast, doc, [eventHandler], { functional: false, rootLeadingComment: [''] })
+			traverse(ast.children[0], doc, [eventHandler], ast.children, {
+				functional: false
+			})
 			expect(doc.toObject().events).toMatchObject([
 				{
 					name: 'click',
@@ -37,7 +38,7 @@ describe('eventHandler', () => {
 	})
 
 	it('should match events calls property', done => {
-		const ast = compile(
+		const ast = parse(
 			[
 				'<div>',
 				'  <!--',
@@ -48,11 +49,12 @@ describe('eventHandler', () => {
 				'  -->',
 				`  <button @click="$emit('click', test)"></button>`,
 				'</div>'
-			].join('\n'),
-			{ comments: true }
-		).ast
+			].join('\n')
+		)
 		if (ast) {
-			traverse(ast, doc, [eventHandler], { functional: false, rootLeadingComment: [''] })
+			traverse(ast.children[0], doc, [eventHandler], ast.children, {
+				functional: false
+			})
 			expect(doc.toObject().events).toMatchObject([
 				{
 					name: 'click',

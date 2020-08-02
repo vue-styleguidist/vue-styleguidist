@@ -1,4 +1,4 @@
-import { parseComponent } from 'vue-template-compiler'
+import { parse as parseComponent } from '@vue/compiler-sfc'
 import * as path from 'path'
 import { readFile } from 'fs'
 import { promisify } from 'util'
@@ -20,19 +20,19 @@ export default async function parseSFC(
 	let documentation = initialDoc
 
 	// use padding so that errors are displayed at the correct line
-	const parts = cacher(() => parseComponent(source, { pad: 'line' }), source)
+	const { descriptor: parts } = cacher(() => parseComponent(source, { pad: 'line' }), source)
 
 	// get slots and props from template
 	if (parts.template) {
-		const extTemplSrc: string =
-			parts && parts.template && parts.template.attrs ? parts.template.attrs.src : ''
+		const extTemplSrc = parts?.template?.attrs?.src
 
 		const extTemplSource =
-			extTemplSrc && extTemplSrc.length
+			extTemplSrc && typeof extTemplSrc === 'string' && extTemplSrc.length
 				? await read(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
 						encoding: 'utf-8'
 				  })
-				: ''
+				: // if we don't have a content to the binding, use empty string
+				  ''
 
 		if (extTemplSource.length) {
 			parts.template.content = extTemplSource
@@ -44,7 +44,9 @@ export default async function parseSFC(
 		parseTemplate(parts.template, documentation, [...templateHandlers, ...addTemplateHandlers], opt)
 	}
 
-	const extSrc: string = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : ''
+	const extSrc = (parts && parts.script && parts.script.attrs
+		? parts.script.attrs.src
+		: '') as string
 	const extSource =
 		extSrc && extSrc.length
 			? await read(path.resolve(path.dirname(opt.filePath), extSrc), {
