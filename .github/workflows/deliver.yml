@@ -21,9 +21,15 @@ jobs:
     - run: |
           git config user.name "Vue Styleguidist Bot"
           git config user.email "${BOT_EMAIL}"
+          git fetch origin dev
+          git branch --set-upstream-to origin/dev
     - name: Create Pull Request
+      id: cpr
       uses: peter-evans/create-pull-request@v3
       with:
         title: 'chore: deliver'
         base: delivery
         branch: dev
+    - name: Display PR Number
+      run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
