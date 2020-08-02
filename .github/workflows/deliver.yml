@@ -23,7 +23,8 @@ jobs:
           git config user.name "Vue Styleguidist Bot"
           git config user.email "${BOT_EMAIL}"
           git fetch origin delivery dev
-          git pull
+          git pull --ff-only
           git switch delivery
+          git pull --ff-only
           git merge dev --no-edit -m "chore: deliver"
           git push
