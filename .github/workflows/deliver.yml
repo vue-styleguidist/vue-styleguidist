@@ -24,6 +24,6 @@ jobs:
           git fetch origin delivery
           git checkout origin/delivery
           git checkout -b delivery
-          git branch --set-upstream-to github/dev
+          git branch --set-upstream-to github/delivery
           git merge dev --no-edit -m "chore:\ deliver"
           git push
