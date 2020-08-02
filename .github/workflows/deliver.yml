@@ -21,7 +21,7 @@ jobs:
     - run: |
           git config user.name "Vue Styleguidist Bot"
           git config user.email "${BOT_EMAIL}"
-          git fetch origin delivery dev --unshallow
-          git switch delivery
-          git merge dev --no-edit -m "chore: deliver"
-          git push
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        title: 'chore: deliver' 
