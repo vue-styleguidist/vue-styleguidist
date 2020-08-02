@@ -19,12 +19,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - run: |
-          git status
           git config user.name "Vue Styleguidist Bot"
           git config user.email "${BOT_EMAIL}"
-          git fetch origin delivery dev
-          git pull --ff-only
+          git fetch origin delivery dev --unshallow
           git switch delivery
-          git pull --ff-only
           git merge dev --no-edit -m "chore: deliver"
           git push
