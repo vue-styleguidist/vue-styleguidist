@@ -4,14 +4,17 @@ language: node_js
 # + prevent double build on dev -> delivery Pull Request
 if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = delivery OR branch = next)
 
-cache: yarn
+cache:
+  npm: false
+  directories:
+    - '~/.pnpm-store'
 
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
-  - export PATH="$HOME/.yarn/bin:$PATH"
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - pnpm config set store-dir ~/.pnpm-store
 
 install:
-  - yarn install
+  - pnpm install
 
 # In order to avoid double build on pull requests,
 # only build on pushes on delivery and on pushes on pull requests
@@ -37,23 +40,23 @@ jobs:
   include:
     - stage: test
       script:
-        - yarn lint
+        - pnpm lint
         # Run tests without coverage since it's 2x faster
-        - yarn test:jest --runInBand
-        - yarn danger ci
+        - pnpm test:jest --runInBand
+        - pnpm danger ci
 
     - stage: coverage
       script:
-        - yarn lint
+        - pnpm lint
         # Run tests with coverage
-        - yarn test:jest --runInBand --coverage
+        - pnpm test:jest --runInBand --coverage
         # Upload coverage report to Codecov
         - curl -s https://codecov.io/bash | bash
 
     # Build & Deploy the documentation website
     - stage: documentation
       script:
-        - yarn docs:build
+        - pnpm docs:build
 
         # Build all examples
         - cd examples
@@ -81,8 +84,8 @@ jobs:
         - git checkout delivery
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - yarn lerna version --yes --github-release
-        - yarn lerna publish from-git --yes
+        - pnpm lerna version --yes --github-release
+        - pnpm lerna publish from-git --yes
 
     - stage: release-beta
       script:
@@ -92,8 +95,8 @@ jobs:
         - git checkout next
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - yarn lerna version --yes --github-release --conventional-prerelease --preid beta
-        - yarn lerna publish from-git --yes --dist-tag next
+        - pnpm lerna version --yes --github-release --conventional-prerelease --preid beta
+        - pnpm lerna publish from-git --yes --dist-tag next
 
     # then merge the whole thing back to dev
     - stage: merge-back
