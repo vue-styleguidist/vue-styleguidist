@@ -4,7 +4,7 @@
 # it is going to be executed in the root of the repo
 # => no need to cd ..
 node ./docs/.vuepress/preprocess.js --netlify
-yarn vuepress build docs
+pnpm vuepress build docs
 
 # since netlify does not have time to compile all examples
 # only update the examples that are laoded 
@@ -15,7 +15,7 @@ while IFS= read -r line; do
     example=${line%'\r'/};
     if  [[ $example != '' ]] && [[ $example != \#* ]]; then
     (
-        yarn build ${example};
+        pnpm build ${example};
         mv "examples/${example}/dist" "docs/dist/${example}";
     )
     fi
