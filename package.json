@@ -34,10 +34,8 @@
 		"docs": "vuepress dev docs",
 		"docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
 		"maketypes": "pnpm babel packages/vue-styleguidist/src/scripts/schemas/config.ts --out-file packages/vue-styleguidist/lib/scripts/schemas/config.js && node packages/vue-styleguidist/maketypes.js",
-		"link:vsg": "cd ./packages/vue-styleguidist && pnpm link && cd ../.. && pnpm link vue-styleguidist",
-		"link:plugin": "cd ./packages/vue-cli-plugin-styleguidist && pnpm link && cd ../.. && pnpm link vue-cli-plugin-styleguidist",
 		"preinstall": "npx only-allow pnpm",
-		"postinstall": "pnpm compile && pnpm link:vsg && pnpm link:plugin"
+		"postinstall": "pnpm compile"
 	},
 	"license": "MIT",
 	"engines": {
@@ -191,7 +189,7 @@
 			"git add"
 		],
 		"packages/vue-styleguidist/src/scripts/schemas/config.ts": [
-			"yarn maketypes",
+			"pnpm maketypes",
 			"git add ./packages/vue-styleguidist/src/types/StyleGuide.ts"
 		]
 	},
