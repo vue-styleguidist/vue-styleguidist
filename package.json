@@ -1,8 +1,5 @@
 {
 	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
 	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
 	"repository": {
 		"type": "git",

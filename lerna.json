@@ -1,7 +1,7 @@
 {
-	"lerna": "3.13.1",
+	"lerna": "3.22.1",
 	"npmClient": "pnpm",
-	"useWorkspaces": true,
+	"packages": ["packages/*"],
 	"version": "4.31.1",
 	"command": {
 		"publish": {
