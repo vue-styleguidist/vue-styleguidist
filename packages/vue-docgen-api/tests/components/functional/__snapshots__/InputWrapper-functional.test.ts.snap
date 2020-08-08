@@ -6,10 +6,10 @@ Object {
   "displayName": "InputWrapper",
   "docsBlocks": Array [
     "\`\` \`jsx
-<input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\">
-  …
-</input-wrapper>
-\`\` \`",
+  <input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\">
+    …
+  </input-wrapper>
+  \`\` \`",
   ],
   "events": undefined,
   "exportName": "default",

@@ -4,7 +4,7 @@ import { Stats, Configuration, Compiler } from 'webpack'
 import { Theme } from 'react-styleguidist'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
-import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
+import { SanitizedStyleguidistConfig, StyleguidistConfig } from '../types/StyleGuide'
 import buildUtil from './build'
 import server from './server'
 import makeWebpackConfig from './make-webpack-config'
@@ -13,6 +13,7 @@ import * as binutils from './binutils'
 import isPromise from './utils/isPromise'
 
 export type ThemeConfig = RecursivePartial<Theme>
+export { StyleguidistConfig as Config }
 
 export interface StyleGuideUtils {
 	/**

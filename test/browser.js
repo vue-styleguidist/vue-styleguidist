@@ -35,7 +35,9 @@ const launchPuppeteer = async () => {
 		}
 	})
 
-	const url = /https?/.test(args[0]) ? args[0] : `file://${path.resolve(`examples/${args[0]}/dist/index.html`)}`
+	const url = /https?/.test(args[0])
+		? args[0]
+		: `file://${path.resolve(`examples/${args[0]}/dist/index.html`)}`
 	await page.goto(url)
 
 	if (args[1]) {

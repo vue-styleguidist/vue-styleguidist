@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Keep to the latest version to get all security updates. 
+Keep to the latest version to get all security updates.
 
 There should not be any breaking changes or visible updates when upgrading a minor version.
 

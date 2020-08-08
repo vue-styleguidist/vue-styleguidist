@@ -8,10 +8,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = _default;
+Object.defineProperty(exports, "Config", {
+  enumerable: true,
+  get: function get() {
+    return _StyleGuide.StyleguidistConfig;
+  }
+});
 
 require("react-styleguidist/lib/scripts/utils/ensureWebpack");
 
 var _logger = _interopRequireDefault(require("react-styleguidist/lib/scripts/logger"));
+
+var _StyleGuide = require("../types/StyleGuide");
 
 var _build = _interopRequireDefault(require("./build"));
 

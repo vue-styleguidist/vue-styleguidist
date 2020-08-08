@@ -21,7 +21,7 @@ if (danger.github.pr.base.ref === 'delivery' && danger.github.pr.head.ref !== 'd
 if (danger.github.pr.head.ref !== 'dev' || danger.github.pr.base.ref !== 'delivery') {
 	const packages = ['package.json', ...glob.sync('packages/*/package.json')]
 
-	const changePackages = packages.filter((f) => {
+	const changePackages = packages.filter(f => {
 		danger.git.modified_files.includes(f)
 	})
 
@@ -33,7 +33,9 @@ if (danger.github.pr.head.ref !== 'dev' || danger.github.pr.base.ref !== 'delive
 		
 If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in yarn.lock file.`)
 		} else {
-			warn(`Changes were made to all the following files \`${changePackages.join('`, `')}\`, but not to \`yarn.lock\`.
+			warn(`Changes were made to all the following files \`${changePackages.join(
+				'`, `'
+			)}\`, but not to \`yarn.lock\`.
 		
 If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in yarn.lock file.`)
 		}
@@ -53,7 +55,10 @@ Please remove \`yarn.lock\` changes from your pull request. Try to run \`git che
 	var modifiedBinFiles = danger.git.modified_files.filter(function (filePath) {
 		return filePath.match(/\.(png|jpeg|lock)$/i)
 	})
-	if (!modifiedBinFiles.length && danger.github.pr.additions + danger.github.pr.deletions > bigPRThreshold) {
+	if (
+		!modifiedBinFiles.length &&
+		danger.github.pr.additions + danger.github.pr.deletions > bigPRThreshold
+	) {
 		warn(':exclamation: Big PR (' + ++errorCount + ')')
 		markdown(
 			'> (' +
