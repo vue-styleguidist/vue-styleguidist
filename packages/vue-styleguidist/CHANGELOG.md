@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.30.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.1...v4.30.0) (2020-08-08)
+
+
+### Bug Fixes
+
+* add js changes in config ([bf9880d](https://github.com/vue-styleguidist/vue-styleguidist/commit/bf9880da4292e171574a075feb838728a528b702))
+
+
+### Features
+
+* export config types to help configure ([0b44fc6](https://github.com/vue-styleguidist/vue-styleguidist/commit/0b44fc61bf6113aeb33a9b520cb3458df66b93f5))
+
+
+
+
+
 ## [4.29.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.0...v4.29.1) (2020-07-30)
 
 **Note:** Version bump only for package vue-styleguidist

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.30.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.1...v4.30.0) (2020-08-08)
+
+
+### Bug Fixes
+
+* add js changes in config ([bf9880d](https://github.com/vue-styleguidist/vue-styleguidist/commit/bf9880da4292e171574a075feb838728a528b702))
+* slot handler with vue 3 ([cec6a54](https://github.com/vue-styleguidist/vue-styleguidist/commit/cec6a54a7ee79415d75d0542bb8bd9704dfa5454))
+
+
+### Features
+
+* export config types to help configure ([0b44fc6](https://github.com/vue-styleguidist/vue-styleguidist/commit/0b44fc61bf6113aeb33a9b520cb3458df66b93f5))
+* **docgen:** make props detector work [WIP] ([886d222](https://github.com/vue-styleguidist/vue-styleguidist/commit/886d2223c960ef329fddcb076821b5d4dc9aeb81))
+* figure out the move to vue 3 [WIP] ([30ab312](https://github.com/vue-styleguidist/vue-styleguidist/commit/30ab31228345e6d43062740f7c9af0222457472f))
+
+
+
+
+
 ## [4.29.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.0...v4.29.1) (2020-07-30)
 
 **Note:** Version bump only for package vue-styleguidist
