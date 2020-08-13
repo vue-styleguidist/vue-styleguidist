@@ -1,7 +1,8 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import Documentation from '../Documentation'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
+import getProperties from './utils/getProperties'
 
 /**
  * Extracts the name of the component from a class-style component
@@ -17,15 +18,12 @@ export default async function classDisplayNameHandler(
 
 		let displayName: string | undefined
 		if (config && bt.isObjectExpression(config.node)) {
-			config
-				.get('properties')
-				.filter((p: NodePath) => bt.isObjectProperty(p.node) && p.node.key.name === 'name')
-				.forEach((p: NodePath<bt.ObjectProperty>) => {
-					const valuePath = p.get('value')
-					if (bt.isStringLiteral(valuePath.node)) {
-						displayName = valuePath.node.value
-					}
-				})
+			getProperties(config, 'name').forEach((p: NodePath<bt.ObjectProperty>) => {
+				const valuePath = p.get('value')
+				if (bt.isStringLiteral(valuePath.node)) {
+					displayName = valuePath.node.value
+				}
+			})
 		} else {
 			displayName = path.node.id ? path.node.id.name : undefined
 		}

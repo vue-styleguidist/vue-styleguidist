@@ -1,4 +1,4 @@
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../../babel-parser'
 import Documentation, { MethodDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'

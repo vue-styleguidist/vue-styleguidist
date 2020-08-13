@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 
 interface ImportedVariable {
 	// an imported variable can have mutiple potential filepath
@@ -24,7 +24,7 @@ export default function resolveRequired(
 ): ImportedVariableSet {
 	const varToFilePath: ImportedVariableSet = {}
 
-	recast.visit(ast.program, {
+	visit(ast.program, {
 		visitImportDeclaration(astPath: NodePath) {
 			const specifiers = astPath.get('specifiers')
 
@@ -93,8 +93,10 @@ export default function resolveRequired(
 					varToFilePath[varName] = { filePath: [source], exportName }
 				} else if (bt.isObjectPattern(nodeDeclaration.id)) {
 					nodeDeclaration.id.properties.forEach((p: bt.ObjectProperty) => {
-						const varName = p.key.name
-						varToFilePath[varName] = { filePath: [source], exportName }
+						if (bt.isIdentifier(p.key)) {
+							const varName = p.key.name
+							varToFilePath[varName] = { filePath: [source], exportName }
+						}
 					})
 				} else {
 					return

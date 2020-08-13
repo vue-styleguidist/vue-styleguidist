@@ -35,7 +35,8 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
     "concurrently": "^4.1.1",
-    "css-loader": "^2.1.0",
+    "css-loader": "^3.6.0",
+    "lodash": "^4.17.15",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^0.19.0",
@@ -44,7 +45,7 @@
     "vue-loader": "^15.2.4",
     "vue-styleguidist": "^4.0.0",
     "vuepress": "^1.0.3",
-    "webpack": "^4.10.0",
+    "webpack": "^4.44.1",
     "webpack-bundle-analyzer": "3.3.2"
   }
 }

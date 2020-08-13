@@ -42,7 +42,7 @@ const CLIENT_CONFIG_OPTIONS = [
 	'locallyRegisterComponents'
 ]
 
-export default function() {}
+export default function () {}
 
 export function pitch(this: StyleguidistContext, source: string) {
 	const callback = this.async()

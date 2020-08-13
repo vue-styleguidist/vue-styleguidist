@@ -1,4 +1,4 @@
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import buildParser from '../../babel-parser'
 import Documentation, { SlotDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
@@ -20,6 +20,16 @@ describe('render function slotHandler', () => {
 		documentation = new Documentation('dummy/path')
 		const mockGetSlotDescriptor = documentation.getSlotDescriptor as jest.Mock
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
+	})
+
+	it('should not return anything if no render function', async done => {
+		const src = 'export default {}'
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+		expect(documentation.getSlotDescriptor).not.toHaveBeenCalled()
+		done()
 	})
 
 	it('should find slots in render function', async done => {
@@ -124,8 +134,8 @@ describe('render function slotHandler', () => {
 		const src = `
     export default {
       render(createElement) {
-        return (<div>, 
-          <slot/>
+        return (<div> 
+          <slot />
         </div>)
       }
     }
@@ -142,7 +152,7 @@ describe('render function slotHandler', () => {
 		const src = `
     export default {
       render(createElement) {
-        return (<div>, 
+        return (<div>
           {/** @slot Use this slot header */}
           <slot/>
         </div>)
@@ -175,6 +185,48 @@ describe('render function slotHandler', () => {
 		}
 
 		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
+		done()
+	})
+
+	it('should not allow describing slots using double //', async done => {
+		const src = `
+    export default {
+      render: function (createElement) {
+        return createElement(
+        	'div', 
+        	// @slot Use this slot header
+        	this.$slots.mySlot
+        )
+      }
+    }
+    `
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+
+		expect(mockSlotDescriptor.description).toEqual('')
+		done()
+	})
+
+	it('should not allow describing slots without @slot tag', async done => {
+		const src = `
+    export default {
+      render: function (createElement) {
+        return createElement(
+        	'div', 
+        	/* Use this slot header */
+        	this.$slots.mySlot
+        )
+      }
+    }
+    `
+		const def = parse(src)
+		if (def) {
+			await slotHandler(documentation, def)
+		}
+
+		expect(mockSlotDescriptor.description).toEqual('')
 		done()
 	})
 

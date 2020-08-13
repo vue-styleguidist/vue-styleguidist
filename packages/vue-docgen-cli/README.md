@@ -76,7 +76,11 @@ module.exports = {
     slots: require('templates/slots'),
     // static template to display as a tag if component is functional
     functionalTag: '**functional**'
-  }
+  },
+  docsRepo: 'profile/repo',
+  docsBranch: 'master',
+  docsFolder: ''
+  editLinkLabel: 'Edit on github'
 }
 ```
 
@@ -181,8 +185,12 @@ export default function component(
   renderedUsage: RenderedUsage, // props, events, methods and slots documentation rendered
   doc: ComponentDoc, // the object returned by vue-docgen-api
   config: DocgenCLIConfig, // the local config, useful to know the context
-  fileName: string // the name of the current file in the doc (to explain how to import it)
-): string {
+  fileName: string, // the name of the current file in the doc (to explain how to import it)
+  requiresMd: ContentAndDependencies[], // a list of all the documentation files
+  // attached to the component documented. It includes documentation of subcomponents
+  { isSubComponent, hasSubComponents }: SubTemplateOptions // are we documenting
+): // a sub-component or does the current component have subcomponents
+string {
   const { displayName, description, docsBlocks } = doc
   return `
   # ${displayName}
@@ -204,9 +212,15 @@ And the partial for slots
 import { SlotDescriptor } from 'vue-docgen-api'
 import { cleanReturn } from './utils'
 
-export default (slots: {
-  [slotName: string]: SlotDescriptor
-}): string => {
+export default (
+  slots: {
+    [slotName: string]: SlotDescriptor
+  },
+  opt?: {
+    isSubComponent: boolean
+    hasSubComponents: boolean
+  }
+): string => {
   const slotNames = Object.keys(slots)
   if (!slotNames.length) {
     return '' // if no slots avoid creating the section
@@ -217,17 +231,17 @@ export default (slots: {
   | Name          | Description  | Bindings |
   | ------------- | ------------ | -------- |
 ${slotNames
-    .map(slotName => {
-      const { description, bindings } = slots[slotName]
-      const readableBindings = // serialize bindings to display them ina readable manner
-        bindings && Object.keys(bindings).length
-          ? JSON.stringify(bindings, null, 2)
-          : ''
-      return cleanReturn(
-        `| ${slotName} | ${description} | ${readableBindings} |`
-      ) // remplace returns by <br> to allow them in a table cell
-    })
-    .join('\n')}
+  .map(slotName => {
+    const { description, bindings } = slots[slotName]
+    const readableBindings = // serialize bindings to display them ina readable manner
+      bindings && Object.keys(bindings).length
+        ? JSON.stringify(bindings, null, 2)
+        : ''
+    return cleanReturn(
+      `| ${slotName} | ${description} | ${readableBindings} |`
+    ) // remplace returns by <br> to allow them in a table cell
+  })
+  .join('\n')}
   `
 }
 ```
@@ -268,6 +282,36 @@ Generate an example for components that have neither `<docs>` block nor a markdo
 > type: `string`, optional
 
 Force the Current Working Directory. Useful in monorepos.
+
+#### getRepoEditUrl
+
+> type: `(relativePath: string) => string`, default: `` p => `https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}` ``
+
+Gets the link to the documentation edition from
+
+#### docsRepo
+
+> type: `string`, optional
+
+If you specify the docsRepo, and you do not want to specify `getRepoEditUrl` you will get links to edit the docs near each readme files.
+
+#### docsBranch
+
+> type: `string`, default: `master`
+
+The branch you want the edit links to send you to
+
+#### docsFolder
+
+> type: `string`, default: ``
+
+If the root folder is not at the root of your repo, use this parameter
+
+#### editLinkLabel
+
+> type: `string`, default: `Edit on github`
+
+The label we can read on edit button
 
 ## Change log
 

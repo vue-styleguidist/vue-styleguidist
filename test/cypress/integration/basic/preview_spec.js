@@ -64,7 +64,10 @@ describe('Preview render', () => {
 
 	describe('extra classes', () => {
 		it('should add extra class to "I’m transparent!"', () => {
-			cy.get('button').contains('I’m transparent!').parents('[class^="rsg--preview-"]').should('have.class', 'checks')
+			cy.get('button')
+				.contains('I’m transparent!')
+				.parents('[class^="rsg--preview-"]')
+				.should('have.class', 'checks')
 		})
 	})
 })

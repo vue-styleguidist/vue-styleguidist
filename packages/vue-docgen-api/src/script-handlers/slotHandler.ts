@@ -1,10 +1,11 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import Documentation, { ParamTag, ParamType, Tag, SlotDescriptor } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 import { parseDocblock } from '../utils/getDocblock'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import getProperties from './utils/getProperties'
 
 export interface TypedParamTag extends ParamTag {
 	type: ParamType
@@ -17,12 +18,7 @@ export interface TypedParamTag extends ParamTag {
  */
 export default async function slotHandler(documentation: Documentation, path: NodePath) {
 	if (bt.isObjectExpression(path.node)) {
-		const renderPath = path
-			.get('properties')
-			.filter(
-				(p: NodePath) =>
-					(bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)) && p.node.key.name === 'render'
-			)
+		const renderPath = getProperties(path, 'render')
 
 		// if no prop return
 		if (!renderPath.length) {
@@ -32,7 +28,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 		const renderValuePath = bt.isObjectProperty(renderPath[0].node)
 			? renderPath[0].get('value')
 			: renderPath[0]
-		recast.visit(renderValuePath.node, {
+		visit(renderValuePath.node, {
 			// this.$slots.default()
 			visitCallExpression(pathCall) {
 				if (
@@ -40,6 +36,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 					bt.isMemberExpression(pathCall.node.callee.object) &&
 					bt.isThisExpression(pathCall.node.callee.object.object) &&
 					bt.isIdentifier(pathCall.node.callee.property) &&
+					bt.isIdentifier(pathCall.node.callee.object.property) &&
 					(pathCall.node.callee.object.property.name === '$slots' ||
 						pathCall.node.callee.object.property.name === '$scopedSlots')
 				) {
@@ -71,11 +68,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 			},
 			visitJSXElement(pathJSX) {
 				const tagName = pathJSX.node.openingElement.name
-				const nodeJSX = pathJSX.node
-				if (!bt.isJSXElement(nodeJSX)) {
-					this.traverse(pathJSX)
-					return
-				}
+				const nodeJSX = pathJSX.node as bt.JSXElement
 				if (bt.isJSXIdentifier(tagName) && tagName.name === 'slot') {
 					const doc = documentation.getSlotDescriptor(getName(nodeJSX))
 					const parentNode = pathJSX.parentPath.node
@@ -121,9 +114,6 @@ function getJSXDescription(
 	siblings: bt.Node[],
 	descriptor: SlotDescriptor
 ): SlotComment | undefined {
-	if (!siblings) {
-		return undefined
-	}
 	const indexInParent = siblings.indexOf(nodeJSX)
 
 	let commentExpression: bt.JSXExpressionContainer | null = null
@@ -186,7 +176,7 @@ function parseCommentNode(node: bt.Comment, descriptor: SlotDescriptor): SlotCom
 export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
 	const docBlock = parseDocblock(str).trim()
 	const jsDoc = getDoclets(docBlock)
-	if (!jsDoc.tags) {
+	if (!jsDoc.tags?.length) {
 		return undefined
 	}
 	const slotTags = jsDoc.tags.filter(t => t.title === 'slot')
@@ -212,7 +202,7 @@ function getBindings(
 	bindingsFromComments: ParamTag[] | undefined
 ): ParamTag[] {
 	return node.properties.reduce((bindings: ParamTag[], prop: bt.ObjectProperty) => {
-		if (prop.key) {
+		if (bt.isIdentifier(prop.key)) {
 			const name = prop.key.name
 			const description: string | boolean | undefined =
 				prop.leadingComments && prop.leadingComments.length

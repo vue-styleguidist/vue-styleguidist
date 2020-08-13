@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import Documentation from '../Documentation'
 import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
@@ -54,7 +54,9 @@ function getExtendsVariableNameFromCompDef(compDef: NodePath): NodePath | undefi
 	}
 	const compDefProperties = compDef.get('properties')
 	const pathExtends = compDefProperties.value
-		? compDefProperties.filter((p: NodePath<bt.Property>) => p.node.key.name === 'extends')
+		? compDefProperties.filter(
+				(p: NodePath<bt.Property>) => bt.isIdentifier(p.node.key) && p.node.key.name === 'extends'
+		  )
 		: []
 	return pathExtends.length ? pathExtends[0] : undefined
 }

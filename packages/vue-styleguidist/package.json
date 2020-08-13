@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist",
 	"description": "Vue components style guide generator",
-	"version": "4.24.1",
+	"version": "4.30.0",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
 		"compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx && yarn typings",
@@ -30,7 +30,7 @@
 	},
 	"dependencies": {
 		"@vxna/mini-html-webpack-template": "^1.0.0",
-		"ast-types": "^0.13.2",
+		"ast-types": "^0.13.3",
 		"classnames": "^2.2.6",
 		"clean-webpack-plugin": "^3.0.0",
 		"cli-progress": "^3.0.0",
@@ -77,13 +77,14 @@
 		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^2.2.2",
 		"to-ast": "^1.0.0",
-		"vue-docgen-api": "^4.24.0",
-		"vue-inbrowser-compiler": "^4.23.3",
-		"vue-inbrowser-compiler-utils": "^4.23.3",
+		"vue-docgen-api": "^4.30.0",
+		"vue-inbrowser-compiler": "^4.27.0",
+		"vue-inbrowser-compiler-utils": "^4.27.0",
 		"webpack-dev-server": "^3.11.0",
 		"webpack-merge": "^4.0.0"
 	},
 	"peerDependencies": {
+		"pug": ">=3.0.0",
 		"vue": ">=2.0.0",
 		"vue-loader": ">=14.0.0",
 		"vue-template-compiler": ">=2.0.0",
@@ -112,7 +113,7 @@
 		"ejs": "^2.7.4",
 		"source-map": "0.6.1",
 		"strip-shebang": "^1.0.2",
-		"webpack": "^4.41.5"
+		"webpack": "^4.44.1"
 	},
 	"resolutions": {
 		"**/http-proxy": "1.18.1"

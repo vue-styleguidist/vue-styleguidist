@@ -1,7 +1,7 @@
 import { readFile } from 'fs'
 import * as path from 'path'
 import { promisify } from 'util'
-import recast from 'recast'
+import { parse } from 'recast'
 import Map from 'ts-map'
 import buildParser from '../babel-parser'
 import cacher from './cacher'
@@ -24,7 +24,7 @@ const hash = require('hash-sum')
  * @param varToFilePath set of variables to be resolved (will be mutated into the final mapping)
  */
 export default async function recursiveResolveIEV(
-	pathResolver: (path: string, originalDirNameOverride?: string) => string,
+	pathResolver: (path: string, originalDirNameOverride?: string) => string | null,
 	varToFilePath: ImportedVariableSet,
 	validExtends: (fullFilePath: string) => boolean
 ) {
@@ -48,7 +48,7 @@ export default async function recursiveResolveIEV(
  * @param varToFilePath set of variables to be resolved (will be mutated into the final mapping)
  */
 export async function resolveIEV(
-	pathResolver: (path: string, originalDirNameOverride?: string) => string,
+	pathResolver: (path: string, originalDirNameOverride?: string) => string | null,
 	varToFilePath: ImportedVariableSet,
 	validExtends: (fullFilePath: string) => boolean
 ) {
@@ -79,22 +79,22 @@ export async function resolveIEV(
 				})
 				try {
 					const fullFilePath = pathResolver(filePath)
-					if (!validExtends(fullFilePath)) {
+					if (!fullFilePath || !validExtends(fullFilePath)) {
 						return
 					}
 					const source = await read(fullFilePath, {
 						encoding: 'utf-8'
 					})
-					const astRemote = cacher(() => recast.parse(source, { parser: buildParser() }), source)
+					const astRemote = cacher(() => parse(source, { parser: buildParser() }), source)
 					const returnedVariables = resolveImmediatelyExported(astRemote, exportedVariableNames)
 					if (Object.keys(returnedVariables).length) {
 						exportToLocal.forEach((exported, local) => {
 							if (exported && local) {
 								const aliasedVariable = returnedVariables[exported]
 								if (aliasedVariable) {
-									aliasedVariable.filePath = aliasedVariable.filePath.map(p =>
-										pathResolver(p, path.dirname(fullFilePath))
-									)
+									aliasedVariable.filePath = aliasedVariable.filePath
+										.map(p => pathResolver(p, path.dirname(fullFilePath)))
+										.filter(a => a) as string[]
 									varToFilePath[local] = aliasedVariable
 								}
 							}

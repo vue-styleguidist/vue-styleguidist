@@ -70,11 +70,9 @@ export async function parseSource(
 	filePath: string,
 	opts?: DocGenOptions | { [alias: string]: string }
 ): Promise<ComponentDoc> {
-	return (await parsePrimitive(
-		async options => await _parseSource(source, options),
-		filePath,
-		opts
-	))[0]
+	return (
+		await parsePrimitive(async options => await _parseSource(source, options), filePath, opts)
+	)[0]
 }
 
 function isOptionsObject(opts: any): opts is DocGenOptions {

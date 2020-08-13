@@ -34,7 +34,7 @@ function generate(keys: string[], dep: string, base?: string, fn?: string, offse
 	return out
 }
 
-export default function(str: string, offset: number, fn = 'require') {
+export default function (str: string, offset: number, fn = 'require') {
 	return str
 		.replace(NAMED, (_, asterisk, base, req, dep) =>
 			generate(req ? req.split(',').filter((d: string) => d.trim()) : [], dep, base, fn, offset)

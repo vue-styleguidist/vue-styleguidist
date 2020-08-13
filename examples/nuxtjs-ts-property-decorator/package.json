@@ -19,7 +19,7 @@
     "styleguide:build": "vue-styleguidist build --config styleguide.config.js"
   },
   "dependencies": {
-    "nuxt": "^2.3.4",
+    "nuxt": "^2.12.2",
     "vue": "^2.6.10",
     "vuex": "^3.1.0"
   },
@@ -30,7 +30,7 @@
     "@nuxtjs/axios": "5.4.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.0",
+    "css-loader": "^3.6.0",
     "node-sass": "^4.13.0",
     "nuxt-property-decorator": "^2.5.1",
     "sass-loader": "^8.0.0",

@@ -1,7 +1,7 @@
 import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
+import { NodePath } from 'ast-types/lib/node-path'
+import { parse } from 'recast'
 import Map from 'ts-map'
 import buildParser from './babel-parser'
 import Documentation from './Documentation'
@@ -32,7 +32,7 @@ export default async function parseScript(
 		plugins.push('jsx')
 	}
 
-	const ast = cacher(() => recast.parse(source, { parser: buildParser({ plugins }) }), source)
+	const ast = cacher(() => parse(source, { parser: buildParser({ plugins }) }), source)
 	if (!ast) {
 		throw new Error(`Unable to parse empty file "${options.filePath}"`)
 	}
@@ -105,7 +105,7 @@ async function executeHandlers(
 	)
 
 	// default component first so in multiple exports in parse it is returned
-	return docs.sort(
-		(a, b) => (a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0)
+	return docs.sort((a, b) =>
+		a.get('exportName') === 'default' ? -1 : b.get('exportName') === 'default' ? 1 : 0
 	)
 }

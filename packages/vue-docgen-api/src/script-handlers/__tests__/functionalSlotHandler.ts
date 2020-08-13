@@ -1,4 +1,4 @@
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import buildParser from '../../babel-parser'
 import Documentation, { SlotDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'

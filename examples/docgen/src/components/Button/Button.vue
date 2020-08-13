@@ -10,6 +10,8 @@
 <script>
 /**
  * The only true button.
+ * 
+ * @example ./Second-ReadMe.md
  */
 export default {
 	name: 'Button',

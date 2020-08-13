@@ -36,7 +36,7 @@ function isImport(req: any): req is { importPath: string; path: string } {
 export default function (this: StyleguidistContext, source: string) {
 	const callback = this.async()
 	const cb = callback ? callback : () => null
-	examplesLoader.call(this, source).then((res) => cb(undefined, res))
+	examplesLoader.call(this, source).then(res => cb(undefined, res))
 }
 
 export async function examplesLoader(this: StyleguidistContext, src: string): Promise<string> {
@@ -55,9 +55,13 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	if (shouldShowDefaultExample && source) {
 		const fullFilePath = path.join(path.dirname(filePath), file)
 		const propsParser = getParser(config)
-		const docs = await propsParser(fullFilePath)
-		this.addDependency(fullFilePath)
-		source = expandDefaultComponent(source, docs)
+		try {
+			const docs = await propsParser(fullFilePath)
+			this.addDependency(fullFilePath)
+			source = expandDefaultComponent(source, docs)
+		} catch (e) {
+			// eat the error since it will be reported by vuedoc-loader
+		}
 	}
 
 	const updateExample = (example: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>) => {
@@ -84,7 +88,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Load examples
 	const examples = source ? chunkify(source, updateExample, customLangs) : []
 
-	const getExampleLiveImports = (source: string) => getImports(getScript(source, config.jsxInExamples))
+	const getExampleLiveImports = (source: string) =>
+		getImports(getScript(source, config.jsxInExamples))
 
 	// Find all import statements and require() calls in examples to make them
 	// available in webpack context at runtime.
@@ -95,7 +100,9 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		(requires: ({ importPath: string; path: string } | string)[], example) => {
 			const requiresLocal = getExampleLiveImports(example.content)
 			const importPath = example.settings && example.settings.importpath
-			return requires.concat(importPath ? requiresLocal.map((path) => ({ importPath, path })) : requiresLocal)
+			return requires.concat(
+				importPath ? requiresLocal.map(path => ({ importPath, path })) : requiresLocal
+			)
 		},
 		[]
 	)
@@ -118,41 +125,47 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 
 	// “Prerequire” modules required in Markdown examples and context so they
 	// end up in a bundle and be available at runtime
-	const allModulesCode = allModules.reduce((requires: Record<string, Record<string, any>>, requireRequest) => {
-		// if we are looking at a remote example
-		// resolve the requires from there
+	const allModulesCode = allModules.reduce(
+		(requires: Record<string, Record<string, any>>, requireRequest) => {
+			// if we are looking at a remote example
+			// resolve the requires from there
 
-		if (isImport(requireRequest)) {
-			if (!requires[requireRequest.importPath]) {
-				requires[requireRequest.importPath] = {}
+			if (isImport(requireRequest)) {
+				if (!requires[requireRequest.importPath]) {
+					requires[requireRequest.importPath] = {}
+				}
+				const relativePath = /^\./.test(requireRequest.path)
+					? path.join(requireRequest.importPath, requireRequest.path)
+					: requireRequest.path
+				requires[requireRequest.importPath][requireRequest.path] = requireIt(relativePath)
+			} else {
+				requires[requireRequest] = requireIt(requireRequest)
 			}
-			const relativePath = /^\./.test(requireRequest.path)
-				? path.join(requireRequest.importPath, requireRequest.path)
-				: requireRequest.path
-			requires[requireRequest.importPath][requireRequest.path] = requireIt(relativePath)
-		} else {
-			requires[requireRequest] = requireIt(requireRequest)
-		}
-		return requires
-	}, {})
+			return requires
+		},
+		{}
+	)
 
 	// Require context modules so they are available in an example
 
 	const requireContextCode = b.program(flatten(map(fullContext, resolveESModule)))
 
 	// Stringify examples object except the evalInContext function
-	const examplesWithEval = examples.map((example) => {
+	const examplesWithEval = examples.map(example => {
 		if (example.type === 'code') {
 			const importPath = example.settings && example.settings.importpath
 			const evalInContext = {
 				toAST: () =>
-					b.callExpression(b.memberExpression(b.identifier('evalInContext'), b.identifier('bind')), [
-						b.identifier('null'),
-						b.callExpression(b.memberExpression(b.identifier('requireInRuntime'), b.identifier('bind')), [
+					b.callExpression(
+						b.memberExpression(b.identifier('evalInContext'), b.identifier('bind')),
+						[
 							b.identifier('null'),
-							importPath ? b.literal(importPath) : b.identifier('null')
-						])
-					])
+							b.callExpression(
+								b.memberExpression(b.identifier('requireInRuntime'), b.identifier('bind')),
+								[b.identifier('null'), importPath ? b.literal(importPath) : b.identifier('null')]
+							)
+						]
+					)
 			}
 
 			if (config.codeSplit) {

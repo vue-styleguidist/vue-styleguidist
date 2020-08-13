@@ -1,27 +1,41 @@
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
-import { RenderedUsage, DocgenCLIConfig } from '../config'
+import { RenderedUsage, SafeDocgenCLIConfig, ContentAndDependencies } from '../config'
+import { SubTemplateOptions } from '../compileTemplates'
 
 export default (
 	renderedUsage: RenderedUsage,
 	doc: ComponentDoc,
-	config: DocgenCLIConfig,
-	fileName: string
+	config: SafeDocgenCLIConfig,
+	fileName: string,
+	requiresMd: ContentAndDependencies[],
+	{ isSubComponent, hasSubComponents }: SubTemplateOptions
 ): string => {
 	const { displayName, description, docsBlocks, tags, functional } = doc
 
 	const { deprecated, author, since, version, see, link } = tags || {}
 
+	const frontMatter = []
+	if (!config.outFile && deprecated)
+		// to avoid having the squiggles in the left menu for deprecated items
+		// use the frontmatter feature of vuepress
+		frontMatter.push(`title: ${displayName}`)
+
+	if (isSubComponent || hasSubComponents)
+		// show more than one level on subcomponents
+		frontMatter.push('sidebarDepth: 2')
+
 	return `${
-		!config.outFile && deprecated
-			? // to avoid having the squiggles in the left menu for deprecated items
-			  // use the frontmatter feature of vuepress
-			  `
+		frontMatter.length && !isSubComponent
+			? `
 ---
-title: ${displayName}
----`
+${frontMatter.join('\n')}
+---
+`
 			: ''
 	}
-  # ${deprecated ? `~~${displayName}~~` : displayName}
+  ${isSubComponent || hasSubComponents ? '#' : ''}# ${
+		deprecated ? `~~${displayName}~~` : displayName
+	}
 
   ${deprecated ? `> **Deprecated** ${(deprecated[0] as ParamTag).description}\n` : ''}
   ${description ? '> ' + description : ''}
@@ -38,5 +52,11 @@ title: ${displayName}
   ${renderedUsage.events}
   ${renderedUsage.slots}
   ${docsBlocks ? '---\n' + docsBlocks.join('\n---\n') : ''}
+
+  ${
+		requiresMd.length
+			? '---\n' + requiresMd.map(component => component.content).join('\n---\n')
+			: ''
+	}
   `
 }

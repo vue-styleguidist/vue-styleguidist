@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import Documentation, {
 	BlockTag,
 	DocBlockTags,
@@ -36,14 +36,15 @@ export default async function methodHandler(documentation: Documentation, path: 
 		if (bt.isObjectExpression(methodsObject.node)) {
 			methodsObject.get('properties').each((p: NodePath) => {
 				let methodName = '<anonymous>'
-				if (bt.isObjectProperty(p.node)) {
+				if (bt.isObjectProperty(p.node) && bt.isIdentifier(p.node.key)) {
 					const val = p.get('value')
 					methodName = p.node.key.name
 					if (!Array.isArray(val)) {
 						p = val
 					}
 				}
-				methodName = bt.isObjectMethod(p.node) ? p.node.key.name : methodName
+				methodName =
+					bt.isObjectMethod(p.node) && bt.isIdentifier(p.node.key) ? p.node.key.name : methodName
 
 				const docBlock = getDocblock(bt.isObjectMethod(p.node) ? p : p.parentPath)
 
@@ -79,7 +80,11 @@ export function setMethodDescriptor(
 	)
 
 	// returns
-	describeReturns(method, methodDescriptor, jsDocTags.filter(t => t.title === 'returns'))
+	describeReturns(
+		method,
+		methodDescriptor,
+		jsDocTags.filter(t => t.title === 'returns')
+	)
 
 	// tags
 	methodDescriptor.tags = transformTagsIntoObject(jsDocTags)

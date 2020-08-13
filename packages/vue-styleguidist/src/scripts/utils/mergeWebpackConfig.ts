@@ -35,7 +35,7 @@ const merge = mergeBase({
 //make it a typeguard
 function isFunc(
 	conf: Configuration | ((env: string) => Configuration)
-): conf is ((env: string) => Configuration) {
+): conf is (env: string) => Configuration {
 	return isFunction(conf)
 }
 
@@ -55,7 +55,7 @@ export default function mergeWebpackConfig(
 	baseConfig: Configuration,
 	userConfig: Configuration | ((env: string) => Configuration),
 	env: string
-) {
+): Configuration {
 	const userConfigObject = isFunc(userConfig) ? userConfig(env) : userConfig
 	const safeUserConfig = omit(userConfigObject, IGNORE_SECTIONS.concat(IGNORE_SECTIONS_ENV[env]))
 	return merge(baseConfig, safeUserConfig)

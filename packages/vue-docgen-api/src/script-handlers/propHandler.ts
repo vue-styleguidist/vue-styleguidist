@@ -1,16 +1,25 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
-import recast from 'recast'
-import Documentation, { BlockTag, DocBlockTags, PropDescriptor, ParamTag, UnnamedParam } from '../Documentation'
+import { NodePath } from 'ast-types/lib/node-path'
+import { visit, print } from 'recast'
+import Documentation, {
+	BlockTag,
+	DocBlockTags,
+	PropDescriptor,
+	ParamTag,
+	UnnamedParam
+} from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getMemberFilter from '../utils/getPropsFilter'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
+import parseValidatorForValues from './utils/parseValidator'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
-function getRawValueParsedFromFunctionsBlockStatementNode(blockStatementNode: bt.BlockStatement): string | null {
+function getRawValueParsedFromFunctionsBlockStatementNode(
+	blockStatementNode: bt.BlockStatement
+): string | null {
 	const { body } = blockStatementNode
 	// if there is more than a return statement in the body,
 	// we cannot resolve the new object, we let the function display as a function
@@ -18,7 +27,7 @@ function getRawValueParsedFromFunctionsBlockStatementNode(blockStatementNode: bt
 		return null
 	}
 	const [ret] = body
-	return ret.argument ? recast.print(ret.argument).code : null
+	return ret.argument ? print(ret.argument).code : null
 }
 
 /**
@@ -45,8 +54,10 @@ export default async function propHandler(documentation: Documentation, path: No
 			const objProp = propsValuePath.get('properties')
 
 			// filter non object properties
-			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as Array<NodePath<bt.Property>>
-			objPropFiltered.forEach((prop) => {
+			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as Array<
+				NodePath<bt.Property>
+			>
+			objPropFiltered.forEach(prop => {
 				const propNode = prop.node
 
 				// description
@@ -55,8 +66,17 @@ export default async function propHandler(documentation: Documentation, path: No
 				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
 				// if it's the v-model describe it only as such
-				const propertyName = propNode.key.name || propNode.key.value
-				const isPropertyModel = jsDocTags.some((t) => t.title === 'model') || propertyName === modelPropertyName
+				const propertyName = bt.isIdentifier(propNode.key)
+					? propNode.key.name
+					: bt.isStringLiteral(propNode.key)
+					? propNode.key.value
+					: null
+
+				if (!propertyName) {
+					return
+				}
+				const isPropertyModel =
+					jsDocTags.some(t => t.title === 'model') || propertyName === modelPropertyName
 				const propName = isPropertyModel ? 'v-model' : propertyName
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
@@ -80,9 +100,9 @@ export default async function propHandler(documentation: Documentation, path: No
 					// standard default + type + required
 					const propPropertiesPath = propValuePath
 						.get('properties')
-						.filter((p: NodePath) => bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)) as Array<
-						NodePath<bt.ObjectProperty | bt.ObjectMethod>
-					>
+						.filter(
+							(p: NodePath) => bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)
+						) as Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>
 
 					// type
 					const litteralType = describeType(propPropertiesPath, propDescriptor)
@@ -99,7 +119,9 @@ export default async function propHandler(documentation: Documentation, path: No
 					// standard default + type + required with TS as annotation
 					const propPropertiesPath = propValuePath
 						.get('expression', 'properties')
-						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<NodePath<bt.ObjectProperty>>
+						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
+						NodePath<bt.ObjectProperty>
+					>
 
 					// type and values
 					describeTypeAndValuesFromPath(propValuePath, propDescriptor)
@@ -108,11 +130,15 @@ export default async function propHandler(documentation: Documentation, path: No
 					describeRequired(propPropertiesPath, propDescriptor)
 
 					// default
-					describeDefault(propPropertiesPath, propDescriptor, (propDescriptor.type && propDescriptor.type.name) || '')
+					describeDefault(
+						propPropertiesPath,
+						propDescriptor,
+						(propDescriptor.type && propDescriptor.type.name) || ''
+					)
 				} else {
 					// in any other case, just display the code for the typing
 					propDescriptor.type = {
-						name: recast.print(prop.get('value')).code,
+						name: print(prop.get('value')).code,
 						func: true
 					}
 				}
@@ -146,11 +172,16 @@ export function describeType(
 		if (typeDesc) {
 			const typedAST = getTemplateExpressionAST(`const a:${typeDesc.name}`)
 			let typeValues: string[] | undefined
-			recast.visit(typedAST.program, {
+			visit(typedAST.program, {
 				visitVariableDeclaration(path) {
 					const { typeAnnotation } = path.get('declarations', 0, 'id', 'typeAnnotation').value
-					if (bt.isTSUnionType(typeAnnotation) && typeAnnotation.types.every((t) => bt.isTSLiteralType(t))) {
-						typeValues = typeAnnotation.types.map((t: bt.TSLiteralType) => t.literal.value.toString())
+					if (
+						bt.isTSUnionType(typeAnnotation) &&
+						typeAnnotation.types.every(t => bt.isTSLiteralType(t))
+					) {
+						typeValues = typeAnnotation.types.map((t: bt.TSLiteralType) =>
+							t.literal.value.toString()
+						)
 					}
 					return false
 				}
@@ -172,7 +203,8 @@ export function describeType(
 		if (defaultArray.length) {
 			const typeNode = defaultArray[0].node
 			if (bt.isObjectProperty(typeNode)) {
-				const func = bt.isArrowFunctionExpression(typeNode.value) || bt.isFunctionExpression(typeNode.value)
+				const func =
+					bt.isArrowFunctionExpression(typeNode.value) || bt.isFunctionExpression(typeNode.value)
 				const typeValueNode = defaultArray[0].get('value').node as ValueLitteral
 				const typeName = typeof typeValueNode.value
 				propDescriptor.type = { name: func ? 'func' : typeName }
@@ -181,7 +213,16 @@ export function describeType(
 	}
 }
 
-const VALID_VUE_TYPES = ['string', 'number', 'boolean', 'array', 'object', 'date', 'function', 'symbol']
+const VALID_VUE_TYPES = [
+	'string',
+	'number',
+	'boolean',
+	'array',
+	'object',
+	'date',
+	'function',
+	'symbol'
+]
 
 function resolveParenthesis(typeAnnotation: bt.TSType): bt.TSType {
 	let finalAnno = typeAnnotation
@@ -211,21 +252,25 @@ function describeTypeAndValuesFromPath(
 	return propDescriptor.type.name
 }
 
-function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression>): { name: string; func?: boolean } {
+function getTypeFromTypePath(
+	typePath: NodePath<bt.TSAsExpression | bt.Identifier>
+): { name: string; func?: boolean } {
 	const typeNode = typePath.node
 	const { typeAnnotation } = typeNode
 
 	const typeName =
 		bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters
-			? recast.print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
+			? print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
 			: bt.isArrayExpression(typeNode)
 			? typePath
 					.get('elements')
 					.map((t: NodePath) => getTypeFromTypePath(t).name)
 					.join('|')
-			: typeNode && bt.isIdentifier(typeNode) && VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
+			: typeNode &&
+			  bt.isIdentifier(typeNode) &&
+			  VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
 			? typeNode.name.toLowerCase()
-			: recast.print(typeNode).code
+			: print(typeNode).code
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}
@@ -246,8 +291,8 @@ function getValuesFromTypePath(typeAnnotation: bt.TSType): string[] | undefined 
 }
 
 export function getValuesFromTypeAnnotation(type: bt.TSType): string[] | undefined {
-	if (bt.isTSUnionType(type) && type.types.every((t) => bt.isTSLiteralType(t))) {
-		return type.types.map((t) => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
+	if (bt.isTSUnionType(type) && type.types.every(t => bt.isTSLiteralType(t))) {
+		return type.types.map(t => (bt.isTSLiteralType(t) ? t.literal.value.toString() : ''))
 	}
 	return undefined
 }
@@ -258,7 +303,8 @@ export function describeRequired(
 ) {
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
 	const requiredNode = requiredArray.length ? requiredArray[0].get('value').node : undefined
-	const required = requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : undefined
+	const required =
+		requiredNode && bt.isBooleanLiteral(requiredNode) ? requiredNode.value : undefined
 	if (required !== undefined) {
 		propDescriptor.required = required
 	}
@@ -294,21 +340,25 @@ export function describeDefault(
 				) {
 					propDescriptor.defaultValue = {
 						func: false,
-						value: recast.print(defaultFunction.node).code
+						value: print(defaultFunction.node).code
 					}
 					return
 				}
 
 				// check if the prop value is a function
 				if (!isArrowFunction && !isOldSchoolFunction) {
-					throw new Error('A default value needs to be a function when your type is an object or array')
+					throw new Error(
+						'A default value needs to be a function when your type is an object or array'
+					)
 				}
 				// retrieve the function "body" from the arrow function
 				if (isArrowFunction) {
 					const arrowFunctionBody = defaultFunction.get('body')
 					// arrow function looks like `() => { return {} }`
 					if (bt.isBlockStatement(arrowFunctionBody.node)) {
-						const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(arrowFunctionBody.node)
+						const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
+							arrowFunctionBody.node
+						)
 						if (rawValueParsed) {
 							propDescriptor.defaultValue = {
 								func: false,
@@ -318,10 +368,13 @@ export function describeDefault(
 						}
 					}
 
-					if (bt.isArrayExpression(arrowFunctionBody.node) || bt.isObjectExpression(arrowFunctionBody.node)) {
+					if (
+						bt.isArrayExpression(arrowFunctionBody.node) ||
+						bt.isObjectExpression(arrowFunctionBody.node)
+					) {
 						propDescriptor.defaultValue = {
 							func: false,
-							value: recast.print(arrowFunctionBody.node).code
+							value: print(arrowFunctionBody.node).code
 						}
 						return
 					}
@@ -329,7 +382,7 @@ export function describeDefault(
 					// arrow function looks like `() => ({})`
 					propDescriptor.defaultValue = {
 						func: true,
-						value: recast.print(defaultFunction).code
+						value: print(defaultFunction).code
 					}
 					return
 				}
@@ -341,7 +394,9 @@ export function describeDefault(
 				? defaultArray[0].get('body')
 				: defaultArray[0].get('value').get('body')
 			const defaultBlockStatementNode: bt.BlockStatement = defaultBlockStatement.node
-			const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(defaultBlockStatementNode)
+			const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
+				defaultBlockStatementNode
+			)
 			if (rawValueParsed) {
 				propDescriptor.defaultValue = {
 					func: false,
@@ -355,7 +410,7 @@ export function describeDefault(
 		if (defaultValueIsProp) {
 			// in this case, just return the rawValue
 			const defaultPath = defaultArray[0].get('value')
-			const rawValue = recast.print(defaultPath).code
+			const rawValue = print(defaultPath).code
 			propDescriptor.defaultValue = {
 				func: bt.isFunction(defaultPath.node),
 				value: rawValue
@@ -370,7 +425,7 @@ export function describeDefault(
 			const params = paramNodeArray.map((p: any) => p.name).join(', ')
 
 			const defaultBlockStatement = defaultArray[0].get('body')
-			const rawValue = recast.print(defaultBlockStatement).code
+			const rawValue = print(defaultBlockStatement).code
 			// the function should be reconstructed as "old-school" function, because they have the same handling of "this", whereas arrow functions do not.
 			const rawValueParsed = `function(${params}) ${rawValue.trim()}`
 			propDescriptor.defaultValue = {
@@ -392,63 +447,9 @@ function describeValues(
 	}
 
 	const validatorArray = propPropertiesPath.filter(getMemberFilter('validator'))
-	const validatorNode = validatorArray.length ? validatorArray[0].get('value').node : undefined
-
-	const returnedExpression =
-		bt.isMethod(validatorNode) &&
-		validatorNode.body.body.length === 1 &&
-		bt.isReturnStatement(validatorNode.body.body[0])
-			? validatorNode.body.body[0].argument
-			: bt.isArrowFunctionExpression(validatorNode)
-			? validatorNode.body
-			: undefined
-
-	const varName =
-		(bt.isMethod(validatorNode) || bt.isArrowFunctionExpression(validatorNode)) &&
-		bt.isIdentifier(validatorNode.params[0])
-			? validatorNode.params[0].name
-			: undefined
-
-	if (bt.isBinaryExpression(returnedExpression)) {
-		let valuesNode: bt.Node | undefined
-
-		switch (returnedExpression.operator) {
-			case '>':
-				if (
-					bt.isUnaryExpression(returnedExpression.right) &&
-					returnedExpression.right.operator === '-' &&
-					bt.isNumericLiteral(returnedExpression.right.argument) &&
-					returnedExpression.right.argument.value === 1
-				) {
-					valuesNode = returnedExpression.left
-				}
-				break
-
-			case '<':
-				if (
-					bt.isUnaryExpression(returnedExpression.left) &&
-					returnedExpression.left.operator === '-' &&
-					bt.isNumericLiteral(returnedExpression.left.argument) &&
-					returnedExpression.left.argument.value === 1
-				) {
-					valuesNode = returnedExpression.right
-				}
-				break
-			default:
-				return
-		}
-
-		const values: string[] | undefined =
-			bt.isCallExpression(valuesNode) &&
-			bt.isIdentifier(valuesNode.arguments[0]) &&
-			varName === valuesNode.arguments[0].name &&
-			bt.isMemberExpression(valuesNode.callee) &&
-			bt.isIdentifier(valuesNode.callee.property) &&
-			valuesNode.callee.property.name === 'indexOf' &&
-			bt.isArrayExpression(valuesNode.callee.object)
-				? valuesNode.callee.object.elements.map((e: bt.StringLiteral) => e.value)
-				: undefined
-
+	if (validatorArray.length) {
+		const validatorNode = validatorArray[0].get('value').node
+		const values = parseValidatorForValues(validatorNode)
 		if (values) {
 			propDescriptor.values = values
 		}
@@ -457,7 +458,7 @@ function describeValues(
 
 export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 	if (propDescriptor.tags && propDescriptor.tags['values']) {
-		const values = propDescriptor.tags['values'].map((tag) => {
+		const values = propDescriptor.tags['values'].map(tag => {
 			const description = ((tag as any) as ParamTag).description
 			const choices = typeof description === 'string' ? description.split(',') : undefined
 			if (choices) {

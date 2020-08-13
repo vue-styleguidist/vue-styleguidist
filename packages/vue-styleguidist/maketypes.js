@@ -10,7 +10,7 @@ function render(filename) {
 	const filepath = path.resolve(__dirname, `./templates/${filename}`)
 	// eslint-disable-next-line no-undef
 	return new Promise(resolve => {
-		ejs.renderFile(filepath, { schema }, function(err, str) {
+		ejs.renderFile(filepath, { schema }, function (err, str) {
 			if (err) {
 				throw new Error(err)
 			}
@@ -18,11 +18,11 @@ function render(filename) {
 				path.resolve(__dirname, './src/types', filename.replace(/\.ejs$/, '')),
 				str,
 				'utf8',
-				function(err) {
+				function (err) {
 					if (err) {
 						throw new Error(err)
 					} else {
-						console.log('The config master file has changed and types have been updated')
+						console.log('The config source file has changed and types have been updated')
 						resolve()
 					}
 				}

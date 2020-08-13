@@ -3,13 +3,13 @@
 import minimist from 'minimist'
 import extractConfig from './extractConfig'
 import docgen from './docgen'
-import { DocgenCLIConfig } from './config'
+import { SafeDocgenCLIConfig } from './config'
 
 /**
  * run the `config` recursively on pages
  * @param config
  */
-function run(config: DocgenCLIConfig) {
+function run(config: SafeDocgenCLIConfig) {
 	const { pages } = config
 	if (pages) {
 		// to avoid re-rendering the same pages

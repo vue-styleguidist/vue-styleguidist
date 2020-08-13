@@ -1,6 +1,7 @@
 import * as bt from '@babel/types'
-import { NodePath } from 'ast-types'
+import { NodePath } from 'ast-types/lib/node-path'
 import Documentation from '../Documentation'
+import getProperties from './utils/getProperties'
 
 /**
  * Extracts component name from an object-style VueJs component
@@ -9,9 +10,7 @@ import Documentation from '../Documentation'
  */
 export default async function displayNameHandler(documentation: Documentation, compDef: NodePath) {
 	if (bt.isObjectExpression(compDef.node)) {
-		const namePath = compDef
-			.get('properties')
-			.filter((p: NodePath) => bt.isObjectProperty(p.node) && p.node.key.name === 'name')
+		const namePath = getProperties(compDef, 'name')
 
 		// if no prop return
 		if (!namePath.length) {

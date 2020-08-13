@@ -68,7 +68,7 @@ const i18n = new VueI18n({
   messages
 })
 
-export default (previewComponent) => {
+export default previewComponent => {
   // https://vuejs.org/v2/guide/render-function.html
   return {
     i18n,
@@ -90,7 +90,7 @@ module.exports = {
 }
 ```
 
-See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuetify).
+See an example of [style guide with vuetify and vue-i18n](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/vuetify).
 
 **NOTE** Since Styleguidist creates one root per example (for isolation), installing Vuetify with the default optimized way will not work. Instead, you should prefer installing it globally by following the setup above.
 
@@ -112,7 +112,7 @@ const store = new Vuex.Store({
   mutations
 })
 
-export default (previewComponent) => {
+export default previewComponent => {
   // https://vuejs.org/v2/guide/render-function.html
   return {
     store,
@@ -132,7 +132,7 @@ module.exports = {
 }
 ```
 
-See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/vuex).
+See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/vuex).
 
 ## How to add dummy data to the style guide?
 
@@ -203,9 +203,9 @@ Then in `docs/install.components.js` use require (or require.context) to load yo
 import Vue from 'vue'
 import * as path from 'path'
 
-const registerAllComponents = (components) => {
+const registerAllComponents = components => {
   // For each matching file name...
-  components.keys().forEach((fileName) => {
+  components.keys().forEach(fileName => {
     // Get the component config
     const componentConfig = components(fileName)
 
@@ -303,7 +303,7 @@ module.exports = {
 }
 ```
 
-> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Check out the [customized](https://github.com/vue-styleguidist/vue-styleguidist/tree/master/examples/customised) example, it uses the following:
+> NOTA: If you need to reference the original component, you can do so by importing the `rsg-components-default` version. Check out the [customized](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/customised) example, it uses the following:
 
 ```jsx
 // SectionsRenderer.js

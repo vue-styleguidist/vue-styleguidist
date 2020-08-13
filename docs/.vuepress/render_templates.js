@@ -11,7 +11,7 @@ module.exports = async function render() {
 		files.map(filename => {
 			const filepath = path.resolve(templateFolder, filename)
 			return new Promise(resolve => {
-				ejs.renderFile(filepath, { globby, path, rootFolder, require }, function(err, str) {
+				ejs.renderFile(filepath, { globby, path, rootFolder, require }, function (err, str) {
 					if (err) {
 						throw new Error(err)
 					}
@@ -19,7 +19,7 @@ module.exports = async function render() {
 						path.resolve(__dirname, '../', filename.replace(/\.ejs$/, '')),
 						str,
 						'utf8',
-						function(err) {
+						function (err) {
 							if (err) {
 								throw new Error(err)
 							} else {

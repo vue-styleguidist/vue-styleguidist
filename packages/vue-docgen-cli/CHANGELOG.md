@@ -3,6 +3,125 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.30.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.1...v4.30.0) (2020-08-08)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.29.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.0...v4.29.1) (2020-07-30)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.29.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.28.1...v4.29.0) (2020-07-28)
+
+
+### Features
+
+* **cli:** add edit on github button for readme ([298bb68](https://github.com/vue-styleguidist/vue-styleguidist/commit/298bb68cfd3937729a13c06c61a8dff1a5d88c63))
+* **cli:** update handling of subcomponents ([7d6f0ae](https://github.com/vue-styleguidist/vue-styleguidist/commit/7d6f0ae9c158b1ea39a70edbc499270f9a0b6605))
+
+
+
+
+
+## [4.28.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.28.0...v4.28.1) (2020-07-27)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.28.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.27.1...v4.28.0) (2020-07-21)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.27.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.27.0...v4.27.1) (2020-07-19)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.27.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.3...v4.27.0) (2020-07-17)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.26.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.2...v4.26.3) (2020-07-16)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.26.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.1...v4.26.2) (2020-07-14)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.26.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.26.0...v4.26.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* use globby again for kickstarting chokidar ([3e79e0d](https://github.com/vue-styleguidist/vue-styleguidist/commit/3e79e0dfe3ff4a59192ec65dc66fd1411dca814a))
+
+
+
+
+
+# [4.26.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.25.0...v4.26.0) (2020-06-29)
+
+
+### Features
+
+* **cli:** allow for case insensitive readme ([80e0d8b](https://github.com/vue-styleguidist/vue-styleguidist/commit/80e0d8b51bc8f8c23a385438d6d626a753bb27fd))
+* **cli:** render [@requires](https://github.com/requires) & [@example](https://github.com/example) ([94a2537](https://github.com/vue-styleguidist/vue-styleguidist/commit/94a25375c59c3bf94436aa28ece852ff66f3226c)), closes [#901](https://github.com/vue-styleguidist/vue-styleguidist/issues/901)
+
+
+
+
+
+# [4.25.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.3...v4.25.0) (2020-06-19)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.24.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.1...v4.24.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* **cli:** allow partial templates ([62f00b6](https://github.com/vue-styleguidist/vue-styleguidist/commit/62f00b6eb7b1083d66723eb20858dd2447c09f67))
+* **cli:** refresh when updating markdown files ([2c3c502](https://github.com/vue-styleguidist/vue-styleguidist/commit/2c3c5026b5624693dad2c3f1e851a4e5e634971f)), closes [#885](https://github.com/vue-styleguidist/vue-styleguidist/issues/885)
+
+
+
+
+
 # [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
 
 **Note:** Version bump only for package vue-docgen-cli

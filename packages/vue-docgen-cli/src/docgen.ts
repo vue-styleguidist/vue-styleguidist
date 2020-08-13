@@ -1,23 +1,21 @@
 import * as path from 'path'
-import globby from 'globby'
-import { FSWatcher } from 'chokidar'
-import { DocgenCLIConfig, Templates, RenderedUsage } from './config'
+import { SafeDocgenCLIConfig, Templates, RenderedUsage } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
-import { getWatcher, getDocMap } from './utils'
 import extractConfig from './extractConfig'
+import getSources from './getSources'
 
-export { DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
+export { SafeDocgenCLIConfig as DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
 
-export interface DocgenCLIConfigWithComponents extends DocgenCLIConfig {
+export interface DocgenCLIConfigWithComponents extends SafeDocgenCLIConfig {
 	components: string | string[]
 }
 
-function hasComponents(config: DocgenCLIConfig): config is DocgenCLIConfigWithComponents {
+function hasComponents(config: SafeDocgenCLIConfig): config is DocgenCLIConfigWithComponents {
 	return !!config.components
 }
 
-export default async (config: DocgenCLIConfig) => {
+export default async (config: SafeDocgenCLIConfig) => {
 	// if at a level that has no components (top level) just give up
 	if (!hasComponents(config)) return
 
@@ -30,26 +28,23 @@ export default async (config: DocgenCLIConfig) => {
 	// avoiding to repeat the start path
 	config.outFile = config.outFile ? path.resolve(config.outDir, config.outFile) : undefined
 
-	// for every component file in the glob,
-	const files = await globby(config.components, { cwd: config.componentsRoot })
-
 	// then create the watcher if necessary
-	var watcher: FSWatcher | undefined
-	if (config.watch) {
-		watcher = getWatcher(
-			config.components,
-			config.componentsRoot,
-			files.map(f => path.relative(config.componentsRoot, config.getDocFileName(f)))
-		)
-	}
-
-	const docMap = getDocMap(files, config.getDocFileName, config.componentsRoot)
+	const { watcher, componentFiles, docMap } = await getSources(
+		config.components,
+		config.componentsRoot,
+		config.getDocFileName,
+		config.apiOptions
+	)
 
 	if (config.outFile) {
 		// create one combined documentation file
-		singleMd(files, watcher, config as DocgenCLIConfigWithOutFile, docMap)
+		await singleMd(componentFiles, watcher, config as DocgenCLIConfigWithOutFile, docMap)
 	} else {
 		// create one documentation file per component
-		multiMd(files, watcher, config, docMap)
+		await multiMd(componentFiles, watcher, config, docMap)
+	}
+
+	if (!config.watch) {
+		watcher.close()
 	}
 }

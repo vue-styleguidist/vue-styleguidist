@@ -1,4 +1,5 @@
 import { readFile } from 'fs'
+import * as pug from 'pug'
 import * as path from 'path'
 import { promisify } from 'util'
 import Documentation, { Descriptor } from './Documentation'
@@ -69,6 +70,10 @@ export interface DocGenOptions {
 	 * @default `fullFilePath=>!/[\\/]node_modules[\\/]/.test(fullFilePath)`
 	 */
 	validExtends?: (fullFilePath: string) => boolean
+	/**
+	 * all pug options passed to the pug compiler if you use it
+	 */
+	pugOptions?: pug.Options
 }
 
 /**
@@ -81,10 +86,14 @@ export async function parseFile(
 	opt: ParseOptions,
 	documentation?: Documentation
 ): Promise<Documentation[]> {
-	const source = await read(opt.filePath, {
-		encoding: 'utf-8'
-	})
-	return parseSource(source, opt, documentation)
+	try {
+		const source = await read(opt.filePath, {
+			encoding: 'utf-8'
+		})
+		return parseSource(source, opt, documentation)
+	} catch (e) {
+		throw Error(`Could not read file ${opt.filePath}`)
+	}
 }
 
 /**
