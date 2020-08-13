@@ -31,23 +31,42 @@ export default async function slotHandler(documentation: Documentation, path: No
 
 		const contextVariable = renderValuePath.get('params', 1)
 		if (contextVariable.value) {
-			const contextVariableName = contextVariable.value.name
-			visit(renderValuePath.node, {
-				// context.children
-				visitMemberExpression(pathMember) {
-					if (
-						bt.isIdentifier(pathMember.node.object) &&
-						pathMember.node.object.name === contextVariableName &&
-						bt.isIdentifier(pathMember.node.property) &&
-						pathMember.node.property.name === 'children'
-					) {
-						const doc = documentation.getSlotDescriptor('default')
-						getSlotComment(pathMember, doc)
-						return false
+			if (bt.isIdentifier(contextVariable.value)) {
+				const contextVariableName = contextVariable.value.name
+				visit(renderValuePath.node, {
+					// context.children
+					visitMemberExpression(pathMember) {
+						if (
+							bt.isIdentifier(pathMember.node.object) &&
+							pathMember.node.object.name === contextVariableName &&
+							bt.isIdentifier(pathMember.node.property) &&
+							pathMember.node.property.name === 'children'
+						) {
+							const doc = documentation.getSlotDescriptor('default')
+							getSlotComment(pathMember, doc)
+							return false
+						}
+						this.traverse(pathMember)
 					}
-					this.traverse(pathMember)
-				}
-			})
+				})
+			} else {
+				const childrenVarValueName = contextVariable
+					.get('properties')
+					.value.filter(
+						(a: bt.ObjectProperty) => bt.isIdentifier(a.key) && a.key.name === 'children'
+					)[0]?.value.name
+				visit(renderValuePath.node, {
+					// destructured children
+					visitIdentifier(pathMember) {
+						if (pathMember.node.name === childrenVarValueName) {
+							const doc = documentation.getSlotDescriptor('default')
+							getSlotComment(pathMember, doc)
+							return false
+						}
+						this.traverse(pathMember)
+					}
+				})
+			}
 		}
 	}
 }

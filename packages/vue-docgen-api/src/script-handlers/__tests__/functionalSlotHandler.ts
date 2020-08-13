@@ -41,6 +41,25 @@ describe('functional render function slotHandler', () => {
 		done()
 	})
 
+	it('should find children default slots in destructured render function params', async done => {
+		const src = `
+    export default {
+	  functional: true,
+      render: function (createElement, { data, children:cld }) {
+		/* @slot describe destructured default */
+        return createElement('div', data, cld)
+      }
+    }
+    `
+		const def = parse(src)
+		if (def) {
+			await functionalSlotHandler(documentation, def)
+		}
+		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
+		expect(mockSlotDescriptor.description).toBe('describe destructured default')
+		done()
+	})
+
 	it('should parse functional components without context', async done => {
 		const src = `
     export default {
