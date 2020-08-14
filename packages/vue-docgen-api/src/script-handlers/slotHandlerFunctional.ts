@@ -24,6 +24,9 @@ export default async function slotHandler(documentation: Documentation, path: No
 		}
 
 		const renderPath = getProperties(path, 'render')
+		if (!renderPath || !renderPath.length) {
+			return
+		}
 
 		const renderValuePath = bt.isObjectProperty(renderPath[0].node)
 			? renderPath[0].get('value')
