@@ -175,5 +175,34 @@ describe('propHandler', () => {
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped')
 		})
+
+		it('should parse union types properly', () => {
+			const src = `
+			import Vue from 'vue'
+			import { Prop, Component } from 'vue-property-decorator'
+			
+			@Component({})
+			export default class BaseCheckbox extends Vue {
+			  @Prop({ default: '' }) id!: string | number
+			  // [… more props here]
+			}`
+			tester(src, {
+				type: { name: 'union' }
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('id')
+			expect(mockPropDescriptor.type).toMatchInlineSnapshot(`
+			Object {
+			  "elements": Array [
+			    Object {
+			      "name": "string",
+			    },
+			    Object {
+			      "name": "number",
+			    },
+			  ],
+			  "name": "union",
+			}
+		`)
+		})
 	})
 })
