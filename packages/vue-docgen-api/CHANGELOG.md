@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.31.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.30.0...v4.31.0) (2020-08-15)
+
+
+### Features
+
+* **docgen:** allow destructured children in func ([1f9d9b6](https://github.com/vue-styleguidist/vue-styleguidist/commit/1f9d9b6df6f81cbe56aa31b3fa3fd50ff9dd858c))
+* **docgen:** undetecteable slots definition ([be867bd](https://github.com/vue-styleguidist/vue-styleguidist/commit/be867bda8270a47a197c0f04f47d1a35425feace))
+
+
+
+
+
 # [4.30.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.1...v4.30.0) (2020-08-08)
 
 

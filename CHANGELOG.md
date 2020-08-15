@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.31.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.30.0...v4.31.0) (2020-08-15)
+
+
+### Bug Fixes
+
+* node types incompatible with typescript ([28e9f68](https://github.com/vue-styleguidist/vue-styleguidist/commit/28e9f681059ae06ea9566ec00cb158b4491f858a))
+
+
+### Features
+
+* **docgen:** allow destructured children in func ([1f9d9b6](https://github.com/vue-styleguidist/vue-styleguidist/commit/1f9d9b6df6f81cbe56aa31b3fa3fd50ff9dd858c))
+* **docgen:** undetecteable slots definition ([be867bd](https://github.com/vue-styleguidist/vue-styleguidist/commit/be867bda8270a47a197c0f04f47d1a35425feace))
+
+
+
+## [4.24.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.24.0...v4.24.1) (2020-06-05)
+
+
+### Bug Fixes
+
+* repair codesplit false ([c42b522](https://github.com/vue-styleguidist/vue-styleguidist/commit/c42b522b3f249a8cdf3802ade056595d20372dfa))
+
+
+
+# [4.24.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.23.3...v4.24.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* adjust structure of examples ([b80a86c](https://github.com/vue-styleguidist/vue-styleguidist/commit/b80a86c3aad769530cdab4ea911639088a2b8dac))
+* classname and style were ignored ([563b313](https://github.com/vue-styleguidist/vue-styleguidist/commit/563b3134ee1304790d06b2f4d394cc79400be9da))
+
+
+
+
+
 # [4.30.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.29.1...v4.30.0) (2020-08-08)
 
 
