@@ -242,7 +242,9 @@ The comment block containing the documentation needs to contain one line with `@
 
 ## Slots
 
-Slots are automatically documented by styleguidist.
+Static slots are automatically documented by styleguidist.
+
+### In the template
 
 To add a description, add a comment right before.
 
@@ -290,6 +292,75 @@ example of a real documented slot
 > **Note:** The docblock must be part of the **same** comment block. Multiple individual comments do not get parsed together.
 
 Another example of how to document bondings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+
+### In a render function
+
+If your component is rendered using jsx, tsx or is using the render function styleguidist will still try to detect your slots.
+
+Here are two examples that are detected and documented:
+
+Detect a default slot
+
+```js
+export default {
+  render(createElement) {
+    return createElement('div', [
+      /**
+       * @slot The header
+       * @binding {object} menuItem the menu item
+       */
+      this.$scopedSlots.default({
+        menuItem: this.message
+      })
+    ])
+  }
+}
+```
+
+In a functional component:
+
+```js
+export default {
+  functional: true,
+  render: function (createElement, { data, children: cld }) {
+    /* @slot describe destructured default */
+    return createElement('div', data, cld)
+  }
+}
+```
+
+If vue-styleguidist does not detect your slots, you can explicitly tell it with a comment block before the render function:
+
+```js
+export default {
+  /**
+   * Place the content of your menuitem here,
+   * the value of index and content will be passed down to you
+   * @slot menuContent
+   * @binding {number} index the index in the list
+   * @binding {string} content text of the item
+   */
+  render: function () {
+    // ...
+  }
+}
+```
+
+If you have multiple slots, place multiple blocks one after another:
+
+```js
+export default {
+  /**
+   * @slot content
+   */
+  /**
+   * @slot icon
+   */
+  render: function () {
+    // ...
+  }
+}
+```
 
 ## Include Mixins and Extends
 

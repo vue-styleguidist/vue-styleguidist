@@ -25,7 +25,7 @@
 		"jsdoc",
 		"parse"
 	],
-	"author": "Rafael Escala",
+	"author": "elevatebart",
 	"license": "MIT",
 	"dependencies": {
 		"@babel/parser": "^7.6.0",
