@@ -7,13 +7,13 @@ Vue styleguidist generates documentation for your components based on the commen
 <!-- toc -->
 
 - [Code comments](#code-comments)
+- [Available Tags](#available-tags)
 - [Events](#events)
 - [Slots](#slots)
 - [Include Mixins and Extends](#include-mixins-and-extends)
 - [Usage examples and Readme files](#usage-examples-and-readme-files)
 - [Public methods](#public-methods)
 - [Ignoring props](#ignoring-props)
-- [Using JSDoc tags](#using-jsdoc-tags)
 - [Methods](#methods)
 - [Composable Components](#composable-components)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
@@ -76,7 +76,7 @@ Vue styleguidist will display the contents of your components’ JSDoc comment b
 
 Note the use of the @displayName tag to change the displayed name of your component. This top-level comment block must come _before_ the `export default` in your script tag.
 
-If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
+If you want to document a custom [v-model](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model), you have to add `model` tag in comment
 
 ```html
 <script>
@@ -92,11 +92,17 @@ If you want to create a custom [v-model](https://vuejs.org/v2/guide/components.h
 </script>
 ```
 
+## Available Tags
+
+You can use the following tags when documenting components, props and methods.
+
+### @values
+
 A common pattern in VueJs components is to have a limited number of valid values for a prop.
 
 For instance, `size` would only accept `small`, `medium` and `large`.
 
-To convey this in styleguidist, use the `@values` tag
+To document this in styleguidist, use the `@values` tag:
 
 ```js
 export default = {
@@ -112,6 +118,57 @@ export default = {
     }
 }
 ```
+
+See also:
+
+- [Live Example](https://vue-styleguidist.github.io/basic/#button)
+
+### @example
+
+Provide an example of how to use a documented item. The text that follows this tag will be displayed as highlighted code.
+
+See also:
+
+- This is a JSDoc tag: [@example](http://usejsdoc.org/tags-example.html)
+
+### @deprecated
+
+The @deprecated tag marks a symbol in your code as being deprecated:
+
+```js
+/**
+ * An example-less button.
+ * @deprecated Use the [only true button component](#button) instead
+ */
+```
+
+See also:
+
+- [Live Example](https://vue-styleguidist.github.io/basic/#randombutton)
+- This is a JSDoc tag: [@deprecated](http://usejsdoc.org/tags-deprecated.html)
+
+### @see, @link
+
+- This is a JSDoc tag: [@see, @link](http://usejsdoc.org/tags-see.html)
+
+### @author
+
+- This is a JSDoc tag: [@author](http://usejsdoc.org/tags-author.html)
+
+### @since
+
+- This is a JSDoc tag: [@since](http://usejsdoc.org/tags-since.html)
+
+### @version
+
+- This is a JSDoc tag: [@version](http://usejsdoc.org/tags-version.html)
+
+### @ignore
+
+By default, all props your components have are considered to be public and are published. In some rare cases, you might want to remove a prop from the documentation while keeping it in the code. The `@ignore` tag allows you to do this. See here for more:
+
+- [Ignoring Props](#ignoring-props)
+- This is a JSDoc tag: [@ignore](http://usejsdoc.org/tags-ignore.html)
 
 ## Events
 
@@ -405,16 +462,6 @@ By default, all props your components have are considered to be public and are p
       default: '#333'
     }
 ```
-
-## Using JSDoc tags
-
-You can use the following [JSDoc](http://usejsdoc.org/) tags when documenting components, props and methods:
-
-- [@deprecated](http://usejsdoc.org/tags-deprecated.html)
-- [@see, @link](http://usejsdoc.org/tags-see.html)
-- [@author](http://usejsdoc.org/tags-author.html)
-- [@since](http://usejsdoc.org/tags-since.html)
-- [@version](http://usejsdoc.org/tags-version.html)
 
 ### displayName
 
