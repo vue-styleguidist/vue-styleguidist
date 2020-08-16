@@ -1,39 +1,40 @@
 {
-  "name": "vue-inbrowser-compiler",
-  "version": "4.27.0",
-  "description": "compile vue single file components right in your browser",
-  "module": "lib/vue-inbrowser-compiler.esm.js",
-  "main": "lib/vue-inbrowser-compiler.cjs.js",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "compile": "rollup -c && tsc --emitDeclarationOnly -p ./tsconfig.build.json",
-    "compile:watch": "rollup -c --watch && tsc --emitDeclarationOnly -p ./tsconfig.build.json --watch"
-  },
-  "keywords": [
-    "vue",
-    "compile",
-    "live",
-    "browser",
-    "buble",
-    "acorn"
-  ],
-  "dependencies": {
-    "acorn": "^6.1.1",
-    "acorn-jsx": "^5.0.1",
-    "buble": "^0.19.7",
-    "camelcase": "^5.3.1",
-    "vue-inbrowser-compiler-utils": "^4.27.0",
-    "walkes": "^0.2.1"
-  },
-  "devDependencies": {
-    "@types/buble": "^0.19.2",
-    "@vue/test-utils": "^1.0.0-beta.29",
-    "rollup": "^1.19.4",
-    "rollup-plugin-commonjs": "^10.0.2",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.22.1",
-    "vue": "^2.6.10"
-  },
-  "author": "Bart Ledoux <ledouxb@me.com>",
-  "license": "MIT"
+	"name": "vue-inbrowser-compiler",
+	"version": "4.27.0",
+	"description": "compile vue single file components right in your browser",
+	"module": "lib/vue-inbrowser-compiler.esm.js",
+	"main": "lib/vue-inbrowser-compiler.cjs.js",
+	"types": "lib/index.d.ts",
+	"scripts": {
+		"compile": "tsc --emitDeclarationOnly -p ./tsconfig.build.json && rollup -c",
+		"compile:watch": "rollup -c --watch && tsc --emitDeclarationOnly -p ./tsconfig.build.json --watch"
+	},
+	"keywords": [
+		"vue",
+		"compile",
+		"live",
+		"browser",
+		"buble",
+		"acorn"
+	],
+	"dependencies": {
+		"acorn": "^6.1.1",
+		"acorn-jsx": "^5.0.1",
+		"buble": "^0.19.7",
+		"camelcase": "^5.3.1",
+		"vue-inbrowser-compiler-utils": "^4.27.0",
+		"walkes": "^0.2.1"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^15.0.0",
+		"@rollup/plugin-node-resolve": "^9.0.0",
+		"@types/buble": "^0.19.2",
+		"@vue/test-utils": "^1.0.0-beta.29",
+		"rollup": "^2.26.3",
+		"rollup-plugin-typescript2": "^0.27.2",
+		"typescript": "^3.9.7",
+		"vue": "^2.6.10"
+	},
+	"author": "Bart Ledoux <ledouxb@me.com>",
+	"license": "MIT"
 }
