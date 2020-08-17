@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import map from 'lodash/map'
-import getDefaultExample from 'vue-docgen-api/dist/utils/getDefaultExample'
+import { getDefaultExample } from 'vue-inbrowser-compiler-utils'
 import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
 import { DOCS_DOCUMENTING } from '../../../scripts/consts'
