@@ -35,7 +35,7 @@ export {
 	ParamType
 }
 export { default as getDefaultExample } from './utils/getDefaultExample'
-export { default as cleanName } from './utils/cleanName'
+export { cleanName } from 'vue-inbrowser-compiler-utils'
 
 /**
  * Parse the component at filePath and return props, public methods, events and slots

@@ -1,5 +1,5 @@
+import { cleanName } from 'vue-inbrowser-compiler-utils'
 import { PropDescriptor, ComponentDoc } from '../Documentation'
-import cleanName from './cleanName'
 
 function getDefaultText(): string {
 	return 'Default Example Usage'
