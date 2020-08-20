@@ -29,7 +29,7 @@ export default function parseTemplate(
 				? pug.render(tpl.content, { ...pugOptions, filename: filePath })
 				: tpl.content
 
-		const ast: RootNode = cacher(() => parse(source), source)
+		const ast: RootNode = cacher(() => parse(source, { comments: true }), source)
 
 		const functional = !!tpl.attrs.functional
 		if (functional) {

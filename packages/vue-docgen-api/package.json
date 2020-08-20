@@ -30,8 +30,8 @@
 	"dependencies": {
 		"@babel/parser": "^7.6.0",
 		"@babel/types": "^7.6.0",
-		"@vue/compiler-dom": "^3.0.0-rc.5",
-		"@vue/compiler-sfc": "^3.0.0-rc.5",
+		"@vue/compiler-dom": "^3.0.0-rc.6",
+		"@vue/compiler-sfc": "^3.0.0-rc.6",
 		"ast-types": "0.13.3",
 		"hash-sum": "^1.0.2",
 		"lru-cache": "^4.1.5",
