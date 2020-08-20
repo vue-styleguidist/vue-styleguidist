@@ -1,5 +1,5 @@
 import Vue, { VueConstructor } from 'vue'
-import cleanName from 'vue-docgen-api/dist/utils/cleanName'
+import { cleanName } from 'vue-inbrowser-compiler-utils'
 import { Component } from '../../types/Component'
 
 const isEs6Export = (module: any): module is { default: VueConstructor } => !!module.default

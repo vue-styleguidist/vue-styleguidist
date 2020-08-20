@@ -1,4 +1,4 @@
-import { PropDescriptor, ComponentDoc } from '../Documentation'
+import { PropDescriptor, ComponentDoc } from './types'
 import cleanName from './cleanName'
 
 function getDefaultText(): string {

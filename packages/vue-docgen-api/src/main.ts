@@ -1,10 +1,10 @@
 import Documentation, {
 	ComponentDoc,
-	BlockTag,
 	PropDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
 	MethodDescriptor,
+	BlockTag,
 	Param,
 	Tag,
 	ParamTag,
@@ -34,8 +34,7 @@ export {
 	ParamTag,
 	ParamType
 }
-export { default as getDefaultExample } from './utils/getDefaultExample'
-export { default as cleanName } from './utils/cleanName'
+export { cleanName, getDefaultExample } from 'vue-inbrowser-compiler-utils'
 
 /**
  * Parse the component at filePath and return props, public methods, events and slots

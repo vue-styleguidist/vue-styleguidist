@@ -5,6 +5,7 @@
       :style="{ color: color, fontSize: fontSize }"
       @click.prevent="onClick"
     >
+      <!-- @slot content of the button -->
       <slot />
     </button>
   </div>
