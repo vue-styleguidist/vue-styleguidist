@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.31.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.31.0...v4.31.1) (2020-08-20)
+
+
+### Bug Fixes
+
+* **docgen:** keep comments in the template in prod ([b9e4a89](https://github.com/vue-styleguidist/vue-styleguidist/commit/b9e4a89817a91731a40671760f7c7dc482090a25)), closes [#942](https://github.com/vue-styleguidist/vue-styleguidist/issues/942)
+
+
+
+
+
 # [4.31.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.30.0...v4.31.0) (2020-08-15)
 
 
