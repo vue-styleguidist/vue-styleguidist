@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.31.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.31.0...v4.31.1) (2020-08-20)
+
+
+### Bug Fixes
+
+* cypress tetss failing using previewAsync ([62c7716](https://github.com/vue-styleguidist/vue-styleguidist/commit/62c7716f2785feee2c63ba664cd0aaee5f707622))
+
+
+
+
+
 # [4.31.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.30.0...v4.31.0) (2020-08-15)
 
 **Note:** Version bump only for package vue-styleguidist
