@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation, { BlockTag, DocBlockTags } from '../Documentation'
+import Documentation, { BlockTag, DocBlockTags, ParamType } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
@@ -78,6 +78,8 @@ export default function classPropHandler(
 						// type
 						propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
 					}
+				} else if (propPath.node.value) {
+					propDescriptor.type = getTypeFromInitValue(propPath.node.value)
 				}
 
 				const propDecoratorPath = propDeco[0].get('expression')
@@ -101,4 +103,17 @@ export default function classPropHandler(
 			})
 	}
 	return Promise.resolve()
+}
+
+function getTypeFromInitValue(node: any): ParamType | undefined {
+	if (bt.isNumberLiteral(node) || bt.isNumericLiteral(node)) {
+		return { name: 'number' }
+	}
+	if (bt.isStringLiteral(node) || bt.isTemplateLiteral(node)) {
+		return { name: 'string' }
+	}
+	if (bt.isBooleanLiteral(node)) {
+		return { name: 'boolean' }
+	}
+	return undefined
 }
