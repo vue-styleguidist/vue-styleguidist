@@ -43,7 +43,7 @@ describe('integration', () => {
 			  }`)
 			)
 
-			expect(wrapper.is('div')).toBeTruthy()
+			expect(wrapper.element.tagName).toBe('DIV')
 			expect(wrapper.text()).toBe('test')
 		})
 
@@ -60,7 +60,7 @@ describe('integration', () => {
 				)
 			)
 
-			expect(wrapper.is('div')).toBeTruthy()
+			expect(wrapper.element.tagName).toBe('DIV')
 			expect(wrapper.text()).toBe('foo')
 		})
 

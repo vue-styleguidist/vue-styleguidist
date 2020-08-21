@@ -1,6 +1,5 @@
 import vm from 'vm'
 import path from 'path'
-import { readFileSync } from 'fs'
 import * as styleguideLoader from '../styleguide-loader'
 
 jest.mock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
@@ -20,23 +19,20 @@ describe('styleguide-loader', () => {
 			expect(() => new vm.Script(result)).not.toThrow()
 		}
 
-		styleguideLoader.pitch.call(
-			{
-				async: () => callback,
-				request: file,
+		styleguideLoader.pitch.call({
+			async: () => callback,
+			request: file,
 
-				_styleguidist: {
-					sections: [{ components: 'components/**/*.js' }],
-					configDir,
-					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: (filepath: string) => filepath,
-					theme: 'path/to/themeFile.js'
-				},
-				addDependency: () => {},
-				addContextDependency: () => {}
-			} as any,
-			readFileSync(file, 'utf8')
-		)
+			_styleguidist: {
+				sections: [{ components: 'components/**/*.js' }],
+				configDir,
+				getExampleFilename: () => 'Readme.md',
+				getComponentPathLine: (filepath: string) => filepath,
+				theme: 'path/to/themeFile.js'
+			},
+			addDependency: () => {},
+			addContextDependency: () => {}
+		} as any)
 	})
 
 	it('should add context dependencies to webpack from contextDependencies config option', () => {
@@ -48,21 +44,18 @@ describe('styleguide-loader', () => {
 
 		const contextDependencies = ['foo', 'bar']
 		const addContextDependency = jest.fn()
-		styleguideLoader.pitch.call(
-			{
-				async: () => callback,
-				request: file,
+		styleguideLoader.pitch.call({
+			async: () => callback,
+			request: file,
 
-				_styleguidist: {
-					sections: [{ components: 'components/**/*.js' }],
-					configDir,
-					getExampleFilename: () => 'Readme.md',
-					getComponentPathLine: (filepath: string) => filepath,
-					contextDependencies
-				},
-				addContextDependency
-			} as any,
-			readFileSync(file, 'utf8')
-		)
+			_styleguidist: {
+				sections: [{ components: 'components/**/*.js' }],
+				configDir,
+				getExampleFilename: () => 'Readme.md',
+				getComponentPathLine: (filepath: string) => filepath,
+				contextDependencies
+			},
+			addContextDependency
+		} as any)
 	})
 })
