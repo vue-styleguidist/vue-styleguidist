@@ -41,15 +41,8 @@ jobs:
     - stage: test
       script:
         - pnpm lint
-        # Run tests without coverage since it's 2x faster
-        - pnpm test:jest --runInBand
-        - pnpm danger ci
-
-    - stage: coverage
-      script:
-        - pnpm lint
         # Run tests with coverage
-        - pnpm test:jest --runInBand --coverage
+        - pnpm test:jest -- --runInBand --coverage
         # Upload coverage report to Codecov
         - curl -s https://codecov.io/bash | bash
 
