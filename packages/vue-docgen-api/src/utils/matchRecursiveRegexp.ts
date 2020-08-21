@@ -23,11 +23,15 @@ export function matchRecursiveRegExp(str: string, left: string, right: string, f
 		t = 0
 		while ((m = x.exec(str))) {
 			if (l.test(m[0])) {
-				if (!t++) {s = x.lastIndex}
+				if (!t++) {
+					s = x.lastIndex
+				}
 			} else if (t) {
 				if (!--t) {
 					a.push(str.slice(s, m.index))
-					if (!g) {return a}
+					if (!g) {
+						return a
+					}
 				}
 			}
 		}

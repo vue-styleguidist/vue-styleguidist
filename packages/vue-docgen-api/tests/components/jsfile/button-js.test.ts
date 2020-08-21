@@ -4,7 +4,8 @@ import { parseMulti, parse } from '../../../src/main'
 
 const button = path.join(__dirname, './MyButton.js')
 const apollo = path.join(__dirname, './apollo.js')
-let docButton: ComponentDoc[]; let apolloDoc: ComponentDoc
+let docButton: ComponentDoc[]
+let apolloDoc: ComponentDoc
 describe('tests button with pure javascript', () => {
 	beforeAll(async () => {
 		docButton = await parseMulti(button)

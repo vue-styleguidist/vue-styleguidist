@@ -1,6 +1,9 @@
 import getSources from '../getSources'
 
-let mockWatch: jest.Mock; let mockAddWatch: jest.Mock; let fakeOn: jest.Mock; let mockGlobby: jest.Mock
+let mockWatch: jest.Mock
+let mockAddWatch: jest.Mock
+let fakeOn: jest.Mock
+let mockGlobby: jest.Mock
 let fakeWatcher: any
 jest.mock('chokidar', () => {
 	mockAddWatch = jest.fn()

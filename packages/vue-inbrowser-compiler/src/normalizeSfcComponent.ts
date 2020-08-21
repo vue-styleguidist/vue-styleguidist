@@ -20,7 +20,9 @@ const buildStyles = function (styles: string[] | undefined): string | undefined 
 
 function getSingleFileComponentParts(code: string) {
 	const parts = parseComponent(code)
-	if (parts.script) {parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')}
+	if (parts.script) {
+		parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
+	}
 	return parts
 }
 
@@ -33,7 +35,9 @@ function injectTemplateAndParseExport(
 } {
 	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
 
-	if (!parts.script) {return { component: `{\ntemplate: \`${templateString}\` }` }}
+	if (!parts.script) {
+		return { component: `{\ntemplate: \`${templateString}\` }` }
+	}
 
 	const comp = parseScriptCode(parts.script)
 	if (templateString) {
