@@ -40,29 +40,26 @@ describe('multiMd', () => {
 	})
 
 	describe('compile', () => {
-		it('should get the current components doc', async done => {
+		it('should get the current components doc', async () => {
 			await multiMd.compile(conf, {}, w, FAKE_COMPONENT_PATH)
 			expect(writeDownMdFile).toHaveBeenCalledWith(FAKE_MD_CONTENT, MD_FILE_PATH)
-			done()
 		})
 	})
 
 	describe('default', () => {
-		it('should build one md from each file passed', async done => {
+		it('should build one md from each file passed', async () => {
 			jest.spyOn(multiMd, 'compile').mockImplementation(() => Promise.resolve())
 			await multiMd.default(FILES, w, conf, {}, multiMd.compile)
 			expect(multiMd.compile).toHaveBeenCalledTimes(FILES.length)
-			done()
 		})
 
-		it('should watch file changes if a watcher is passed', async done => {
+		it('should watch file changes if a watcher is passed', async () => {
 			conf.watch = true
 			fakeOn.mockClear()
 			await multiMd.default(FILES, w, conf, {})
 			expect(fakeOn).toHaveBeenCalledWith('add', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('change', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('unlink', expect.any(Function))
-			done()
 		})
 	})
 })

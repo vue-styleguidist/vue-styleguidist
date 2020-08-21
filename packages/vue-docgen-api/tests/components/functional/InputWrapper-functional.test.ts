@@ -6,9 +6,8 @@ const button = path.join(__dirname, './InputWrapper.vue')
 let docButton: ComponentDoc
 
 describe('tests button functional', () => {
-	beforeEach(async done => {
+	beforeEach(async () => {
 		docButton = await parse(button)
-		done()
 	})
 
 	it('should extract props from template if functional', () => {

@@ -6,9 +6,8 @@ import getTestDescriptor from '../../utils/getTestDescriptor'
 const typescriptGrid = path.join(__dirname, './Grid.vue')
 let docGrid: ComponentDoc
 describe('tests typescript grid', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docGrid = await parse(typescriptGrid)
-		done()
 	})
 
 	it('should return an object', () => {

@@ -6,9 +6,8 @@ import getTestDescriptor from '../../utils/getTestDescriptor'
 const button = path.join(__dirname, './MyButton.vue')
 let docButton: ComponentDoc
 describe('tests button with pug', () => {
-	beforeEach(async done => {
+	beforeEach(async () => {
 		docButton = await parse(button)
-		done()
 	})
 
 	it('should have a slot.', () => {

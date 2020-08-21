@@ -44,7 +44,7 @@ describe('extendsHandler', () => {
 		}
 	}
 
-	it('should resolve extended modules variables in import default', async done => {
+	it('should resolve extended modules variables in import default', async () => {
 		const src = [
 			'import testComponent from "./testComponent"',
 			'export default {',
@@ -59,10 +59,9 @@ describe('extendsHandler', () => {
 			}),
 			doc
 		)
-		done()
 	})
 
-	it('should resolve extended modules variables in require', async done => {
+	it('should resolve extended modules variables in require', async () => {
 		const src = [
 			'const testComponent = require("./testComponent");',
 			'export default {',
@@ -77,10 +76,9 @@ describe('extendsHandler', () => {
 			}),
 			doc
 		)
-		done()
 	})
 
-	it('should resolve extended modules variables in import', async done => {
+	it('should resolve extended modules variables in import', async () => {
 		const src = [
 			'import { test as testComponent, other } from "./testComponent"',
 			'export default {',
@@ -95,10 +93,9 @@ describe('extendsHandler', () => {
 			}),
 			doc
 		)
-		done()
 	})
 
-	it('should resolve extended modules variables in class style components', async done => {
+	it('should resolve extended modules variables in class style components', async () => {
 		const src = [
 			'import { testComponent } from "./testComponent";',
 			'@Component',
@@ -113,6 +110,5 @@ describe('extendsHandler', () => {
 			}),
 			doc
 		)
-		done()
 	})
 })

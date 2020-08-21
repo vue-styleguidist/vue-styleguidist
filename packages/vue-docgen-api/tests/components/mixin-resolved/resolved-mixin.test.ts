@@ -8,14 +8,13 @@ const button = path.join(__dirname, './button.vue')
 let docButton: ComponentDoc
 
 describe('tests button', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docButton = await parse(button, {
 			alias: {
 				'@mixins': path.resolve(__dirname, '../../mixins')
 			},
 			modules: [path.resolve(__dirname, '../../mixins')]
 		})
-		done()
 	})
 
 	describe('props', () => {

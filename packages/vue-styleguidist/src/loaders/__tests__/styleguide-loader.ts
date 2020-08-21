@@ -14,11 +14,10 @@ describe('styleguide-loader', () => {
 	const file = path.resolve(__dirname, '../../../../../test/components/Button.vue')
 	const configDir = path.resolve(__dirname, '../../../../../test')
 
-	it('should return valid, parsable JS', done => {
+	it('should return valid, parsable JS', () => {
 		const callback = (err: string, result: string) => {
 			expect(result).toBeTruthy()
 			expect(() => new vm.Script(result)).not.toThrow()
-			done()
 		}
 
 		styleguideLoader.pitch.call(
@@ -39,12 +38,11 @@ describe('styleguide-loader', () => {
 		)
 	})
 
-	it('should add context dependencies to webpack from contextDependencies config option', done => {
+	it('should add context dependencies to webpack from contextDependencies config option', () => {
 		const callback = () => {
 			expect(addContextDependency).toHaveBeenCalledTimes(2)
 			expect(addContextDependency).toHaveBeenCalledWith(contextDependencies[0])
 			expect(addContextDependency).toHaveBeenCalledWith(contextDependencies[1])
-			done()
 		}
 
 		const contextDependencies = ['foo', 'bar']

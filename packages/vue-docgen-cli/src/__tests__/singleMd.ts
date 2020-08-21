@@ -38,28 +38,25 @@ describe('compile', () => {
 	})
 
 	describe('compile', () => {
-		it('should get the current components doc', async done => {
+		it('should get the current components doc', async () => {
 			await singleMd.compile(conf, [FAKE_COMPONENT_PATH], {}, {}, w)
 			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT], MD_FILE_PATH)
-			done()
 		})
 	})
 
 	describe('default', () => {
-		it('should build one md from merging contents', async done => {
+		it('should build one md from merging contents', async () => {
 			jest.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
 			await singleMd.default(FILES, w, conf, {}, singleMd.compile)
 			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, w)
-			done()
 		})
 
-		it('should watch file changes if a watcher is passed', async done => {
+		it('should watch file changes if a watcher is passed', async () => {
 			conf.watch = true
 			fakeOn.mockClear()
 			await singleMd.default(FILES, w, conf, {})
 			expect(fakeOn).toHaveBeenCalledWith('add', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('change', expect.any(Function))
-			done()
 		})
 	})
 })

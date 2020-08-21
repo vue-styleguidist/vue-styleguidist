@@ -39,25 +39,22 @@ describe('docgen', () => {
 		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
 	})
 
-	it('should call multi by default', async done => {
+	it('should call multi by default', async () => {
 		await docgen(conf)
 		expect(mockMulti).toHaveBeenCalled()
 		expect(mockMulti).toHaveBeenCalledWith(FILES, mockWatcher, conf, DOC_MAP)
-		done()
 	})
 
-	it('should call single if an outfile is specified', async done => {
+	it('should call single if an outfile is specified', async () => {
 		conf.outFile = 'test.md'
 		await docgen(conf)
 		expect(mockSingle).toHaveBeenCalledWith(FILES, mockWatcher, conf, DOC_MAP)
-		done()
 	})
 
-	it('if watch is passed should pass a watcher to compiler', async done => {
+	it('if watch is passed should pass a watcher to compiler', async () => {
 		conf.watch = true
 		await docgen(conf)
 		expect(mockMulti).toHaveBeenCalledWith(FILES, mockWatcher, conf, DOC_MAP)
-		done()
 	})
 
 	afterEach(() => {

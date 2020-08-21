@@ -6,9 +6,8 @@ const field = path.join(__dirname, './VTextField.js')
 let docField: ComponentDoc
 
 describe('test a vuetify component', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docField = await parse(field)
-		done()
 	})
 
 	it('should extract the export name', () => {

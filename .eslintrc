@@ -10,8 +10,7 @@
 		"import/resolver": {
 			"node": {
 				"paths": [
-					"packages/vue-styleguidist/src", 
-					"packages/vue-styleguidist/src/client", 
+					"packages/vue-styleguidist/src/client",
 					"node_modules/react-styleguidist/lib/client"
 				],
 				"extensions": [".ts", ".tsx", ".js", ".d.ts"]
@@ -44,7 +43,6 @@
 				"tsx": "never"
 			}
 		],
-		"import/no-extraneous-dependencies": "error",
 		"import/newline-after-import": "error",
 		"import/prefer-default-export": "error",
 		"import/no-named-default": "error"
@@ -67,7 +65,8 @@
 			},
 			"rules": {
 				"no-unused-vars": "off",
-				"typescript/no-unused-vars": "off"
+				"typescript/no-unused-vars": "off",
+				"import/no-extraneous-dependencies": "off"
 			}
 		},
 		{

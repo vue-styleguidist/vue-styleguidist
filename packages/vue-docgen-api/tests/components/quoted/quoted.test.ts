@@ -6,9 +6,8 @@ const exampleQuoted = path.join(__dirname, './example.vue')
 let docQuoted: ComponentDoc
 
 describe('test example vuex', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docQuoted = await parse(exampleQuoted)
-		done()
 	})
 
 	it('should return an object', () => {

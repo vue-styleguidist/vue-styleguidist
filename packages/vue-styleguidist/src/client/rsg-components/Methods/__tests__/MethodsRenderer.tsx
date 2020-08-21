@@ -6,7 +6,7 @@ import { parseSource, MethodDescriptor } from 'vue-docgen-api'
 import MethodsRenderer, { columns } from '../MethodsRenderer'
 
 // Test renderers with clean readable snapshot diffs
-export default function ColumnsRenderer({ methods }: { methods: MethodDescriptor[] }) {
+function ColumnsRenderer({ methods }: { methods: MethodDescriptor[] }) {
 	return (
 		<ul>
 			{methods.map((row, rowIdx) => (
@@ -57,29 +57,26 @@ describe('MethodsRenderer', () => {
 		expect(actual.container).toMatchSnapshot()
 	})
 
-	it('should render public method', async done => {
+	it('should render public method', async () => {
 		const actual = await renderMethodsSection(['/**\n * Public\n * @public\n */\nmethod() {}'])
 
 		expect(actual.container).toMatchSnapshot()
-		done()
 	})
 
-	it('should render parameters', async done => {
+	it('should render parameters', async () => {
 		const actual = await renderMethodsSection([
 			'/**\n * Public\n * @public\n * @param {Number} value - Description\n */\nmethod(value) {}'
 		])
 
 		expect(actual.container).toMatchSnapshot()
-		done()
 	})
 
-	it('should render returns', async done => {
+	it('should render returns', async () => {
 		const actual = await renderMethodsSection([
 			'/**\n * @public\n * @returns {Number} - Description\n */\nmethod() {}'
 		])
 
 		expect(actual.container).toMatchSnapshot()
-		done()
 	})
 
 	it('should render JsDoc tags', () => {

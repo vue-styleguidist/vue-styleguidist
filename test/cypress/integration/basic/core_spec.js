@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 describe('Styleguidist core', () => {
 	beforeEach(() => cy.visit('/'))
 
@@ -14,9 +15,7 @@ describe('Styleguidist core', () => {
 	})
 
 	it('shows single component in isolated mode', () => {
-		cy.get('[title="Open isolated"]')
-			.first()
-			.click()
+		cy.get('[title="Open isolated"]').first().click()
 		cy.get('[data-testid$=container]').should('have.length', 1)
 	})
 })

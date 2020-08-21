@@ -7,7 +7,7 @@ let docButton: ComponentDoc[]
 let buttonDoc: ComponentDoc
 let inputDoc: ComponentDoc
 describe('tests components with multiple exports', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docButton = await parseMulti(button)
 		buttonDoc = docButton.find(d => d.exportName === 'Button') || {
 			displayName: '<none>',
@@ -18,7 +18,6 @@ describe('tests components with multiple exports', () => {
 			displayName: '<none>',
 			exportName: '<none>'
 		}
-		done()
 	})
 
 	it('should have the correct content in the extracted definition', () => {
@@ -65,9 +64,8 @@ describe('tests components with multiple exports', () => {
 })
 
 describe('possible multiple export in parse function', () => {
-	it('should return default when using parse', async done => {
+	it('should return default when using parse', async () => {
 		const { exportName } = await parse(button)
 		expect(exportName).toBe('default')
-		done()
 	})
 })
