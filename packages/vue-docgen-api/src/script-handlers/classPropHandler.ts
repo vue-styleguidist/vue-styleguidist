@@ -106,7 +106,7 @@ export default function classPropHandler(
 }
 
 function getTypeFromInitValue(node: any): ParamType | undefined {
-	if (bt.isNumberLiteral(node) || bt.isNumericLiteral(node)) {
+	if (bt.isNumericLiteral(node)) {
 		return { name: 'number' }
 	}
 	if (bt.isStringLiteral(node) || bt.isTemplateLiteral(node)) {
