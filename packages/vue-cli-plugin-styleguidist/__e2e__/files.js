@@ -21,14 +21,10 @@ async function createAndInstall(name, options) {
 	return project
 }
 
-function checkProject(project) {
-	expect(project.has('styleguide.config.js')).toBeTruthy()
-}
-
 test('invoke should create a config file', async () => {
 	const project = await createAndInstall(`files-invoke`, { plugins: {} })
 	await project.run(`${require.resolve('@vue/cli/bin/vue')} invoke vue-cli-plugin-styleguidist`)
-	checkProject(project)
+	expect(project.has('styleguide.config.js')).toBeTruthy()
 })
 
 test('create should create a config file', async () => {
@@ -36,5 +32,4 @@ test('create should create a config file', async () => {
 		plugins: { 'vue-cli-plugin-styleguidist': {} }
 	})
 	expect(project.has('styleguide.config.js')).toBeTruthy()
-	checkProject(project)
 })

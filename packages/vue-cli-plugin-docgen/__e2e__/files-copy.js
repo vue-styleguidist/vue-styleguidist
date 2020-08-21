@@ -21,14 +21,10 @@ async function createAndInstall(name, options) {
 	return project
 }
 
-function checkProject(project) {
-	expect(project.has('docgen.config.js')).toBeTruthy()
-}
-
 test('invoke should create a config file', async () => {
 	const project = await createAndInstall(`docgen-files-invoke`, { plugins: {} })
 	await project.run(`${require.resolve('@vue/cli/bin/vue')} invoke vue-cli-plugin-docgen`)
-	checkProject(project)
+	expect(project.has('docgen.config.js')).toBeTruthy()
 })
 
 test('create should create a config file', async () => {
@@ -36,5 +32,4 @@ test('create should create a config file', async () => {
 		plugins: { 'vue-cli-plugin-docgen': {} }
 	})
 	expect(project.has('docgen.config.js')).toBeTruthy()
-	checkProject(project)
 })

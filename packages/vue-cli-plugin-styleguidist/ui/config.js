@@ -9,7 +9,7 @@ const TYPE_MAP = {
 
 function onRead({ data }) {
 	const styleguide = data.styleguide || {}
-	const filteredSchema = Object.keys(configSchema).reduce(function(acc, key) {
+	const filteredSchema = Object.keys(configSchema).reduce(function (acc, key) {
 		const configParam = configSchema[key]
 
 		// Since for some parameters, multiple types are allowed,
@@ -82,12 +82,12 @@ function onRead({ data }) {
 
 function onWrite({ api, prompts }) {
 	const styleguideData = {}
-	for (const prompt of prompts) {
-		const result = prompt.valueChanged
+	prompts.forEach(ppt => {
+		const result = ppt.valueChanged
 		if (result) {
-			styleguideData[prompt.id] = prompt.value
+			styleguideData[ppt.id] = ppt.value
 		}
-	}
+	})
 	api.setData('styleguide', styleguideData)
 }
 

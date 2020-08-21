@@ -53,7 +53,7 @@ describe('mixinsHandler', () => {
 			'  mixins:[testComponent,other]',
 			'}'
 		].join('\n')
-	])('should resolve extended modules variables', async (src, done) => {
+	])('should resolve extended modules variables', async src => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
 		if (path) {
