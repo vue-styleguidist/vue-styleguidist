@@ -7,7 +7,7 @@ import { DocgenCLIConfigWithComponents } from '../docgen'
 const FAKE_MD_CONTENT = '## fake markdonw Content'
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 
-var mockWriteDownMdFile: jest.Mock
+let mockWriteDownMdFile: jest.Mock
 jest.mock('../utils', () => {
 	mockWriteDownMdFile = jest.fn(() => Promise.resolve())
 	return {
@@ -15,7 +15,7 @@ jest.mock('../utils', () => {
 	}
 })
 
-var mockCompileMarkdown: jest.Mock
+let mockCompileMarkdown: jest.Mock
 jest.mock('../compileTemplates', () => {
 	mockCompileMarkdown = jest.fn(async () => ({ content: FAKE_MD_CONTENT, dependencies: [] }))
 	return mockCompileMarkdown
@@ -28,7 +28,7 @@ describe('multiMd', () => {
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: DocgenCLIConfigWithComponents
 	const fakeOn = jest.fn()
-	let w = ({
+	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
 

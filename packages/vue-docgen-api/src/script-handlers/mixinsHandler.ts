@@ -49,7 +49,7 @@ function getMixinsVariableNames(compDef: NodePath): string[] {
 					? mixinPath.node.value.elements
 					: []
 			mixinPropertyValue.forEach((e: bt.Node | null) => {
-				if (!e) return
+				if (!e) {return}
 				if (bt.isCallExpression(e)) {
 					e = e.callee
 				}
@@ -58,8 +58,7 @@ function getMixinsVariableNames(compDef: NodePath): string[] {
 				}
 			})
 		}
-	} else {
-		if (
+	} else if (
 			bt.isClassDeclaration(compDef.node) &&
 			compDef.node.superClass &&
 			bt.isCallExpression(compDef.node.superClass) &&
@@ -67,10 +66,9 @@ function getMixinsVariableNames(compDef: NodePath): string[] {
 			compDef.node.superClass.callee.name === 'mixins'
 		) {
 			return compDef.node.superClass.arguments.reduce((acc: string[], a) => {
-				if (bt.isIdentifier(a)) acc.push(a.name)
+				if (bt.isIdentifier(a)) {acc.push(a.name)}
 				return acc
 			}, [])
 		}
-	}
 	return varNames
 }

@@ -42,7 +42,7 @@ export default function (this: StyleguidistContext, source: string) {
 export async function examplesLoader(this: StyleguidistContext, src: string): Promise<string> {
 	const filePath = this.request.split('!').pop()
 	let source: string | false = src
-	if (!filePath) return ''
+	if (!filePath) {return ''}
 	if (isVueFile(filePath)) {
 		// if it's a vue file, the examples could be in a docs block
 		source = getComponentVueDoc(src, filePath)

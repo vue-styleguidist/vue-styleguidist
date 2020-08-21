@@ -54,9 +54,7 @@ export default async function propHandler(documentation: Documentation, path: No
 			const objProp = propsValuePath.get('properties')
 
 			// filter non object properties
-			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as Array<
-				NodePath<bt.Property>
-			>
+			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as NodePath<bt.Property>[]
 			objPropFiltered.forEach(prop => {
 				const propNode = prop.node
 
@@ -102,7 +100,7 @@ export default async function propHandler(documentation: Documentation, path: No
 						.get('properties')
 						.filter(
 							(p: NodePath) => bt.isObjectProperty(p.node) || bt.isObjectMethod(p.node)
-						) as Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>
+						) as NodePath<bt.ObjectProperty | bt.ObjectMethod>[]
 
 					// type
 					const litteralType = describeType(propPropertiesPath, propDescriptor)
@@ -119,9 +117,7 @@ export default async function propHandler(documentation: Documentation, path: No
 					// standard default + type + required with TS as annotation
 					const propPropertiesPath = propValuePath
 						.get('expression', 'properties')
-						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
-						NodePath<bt.ObjectProperty>
-					>
+						.filter((p: NodePath) => bt.isObjectProperty(p.node)) as NodePath<bt.ObjectProperty>[]
 
 					// type and values
 					describeTypeAndValuesFromPath(propValuePath, propDescriptor)
@@ -162,7 +158,7 @@ export default async function propHandler(documentation: Documentation, path: No
  * @returns the unaltered type member of the prop object
  */
 export function describeType(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
+	propPropertiesPath: NodePath<bt.ObjectProperty | bt.ObjectMethod>[],
 	propDescriptor: PropDescriptor
 ): string | undefined {
 	const typeArray = propPropertiesPath.filter(getMemberFilter('type'))
@@ -298,7 +294,7 @@ export function getValuesFromTypeAnnotation(type: bt.TSType): string[] | undefin
 }
 
 export function describeRequired(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
+	propPropertiesPath: NodePath<bt.ObjectProperty | bt.ObjectMethod>[],
 	propDescriptor: PropDescriptor
 ) {
 	const requiredArray = propPropertiesPath.filter(getMemberFilter('required'))
@@ -311,7 +307,7 @@ export function describeRequired(
 }
 
 export function describeDefault(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
+	propPropertiesPath: NodePath<bt.ObjectProperty | bt.ObjectMethod>[],
 	propDescriptor: PropDescriptor,
 	propType: string
 ): void {
@@ -439,7 +435,7 @@ export function describeDefault(
 }
 
 function describeValues(
-	propPropertiesPath: Array<NodePath<bt.ObjectProperty | bt.ObjectMethod>>,
+	propPropertiesPath: NodePath<bt.ObjectProperty | bt.ObjectMethod>[],
 	propDescriptor: PropDescriptor
 ) {
 	if (propDescriptor.values) {
@@ -457,8 +453,8 @@ function describeValues(
 }
 
 export function extractValuesFromTags(propDescriptor: PropDescriptor) {
-	if (propDescriptor.tags && propDescriptor.tags['values']) {
-		const values = propDescriptor.tags['values'].map(tag => {
+	if (propDescriptor.tags && propDescriptor.tags.values) {
+		const values = propDescriptor.tags.values.map(tag => {
 			const description = ((tag as any) as ParamTag).description
 			const choices = typeof description === 'string' ? description.split(',') : undefined
 			if (choices) {
@@ -468,7 +464,7 @@ export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 		})
 		propDescriptor.values = ([] as string[]).concat(...values)
 
-		delete propDescriptor.tags['values']
+		delete propDescriptor.tags.values
 	}
 }
 

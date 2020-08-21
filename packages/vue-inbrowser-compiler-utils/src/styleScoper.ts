@@ -14,7 +14,7 @@ export default function scoper(css: string, suffix: string) {
 		// don't scope the part of the selector after ::v-deep
 		const arrayDeep = /(.*)(::v-deep|>>>|\/deep\/)(.*)/g.exec(selector)
 		if (arrayDeep) {
-			var [, beforeVDeep, , afterVDeep] = arrayDeep
+			const [, beforeVDeep, , afterVDeep] = arrayDeep
 			selector = beforeVDeep
 			after = afterVDeep + after
 		}

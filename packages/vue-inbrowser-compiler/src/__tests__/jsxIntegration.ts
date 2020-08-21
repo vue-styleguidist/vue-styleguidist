@@ -1,3 +1,4 @@
+/* eslint-disable no-new-func */
 import Vue from 'vue'
 import { transform } from 'buble'
 import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'
@@ -251,7 +252,7 @@ describe('integration', () => {
 					id: 'hehe'
 				},
 				on: {
-					click: function () {
+					click() {
 						calls.push(3)
 					}
 				},
@@ -259,7 +260,7 @@ describe('integration', () => {
 					innerHTML: 2
 				},
 				hook: {
-					insert: function () {
+					insert() {
 						calls.push(1)
 					}
 				},

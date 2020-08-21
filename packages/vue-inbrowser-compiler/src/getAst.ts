@@ -1,6 +1,5 @@
 import { Parser, Node } from 'acorn'
-
-const jsx = require('acorn-jsx')
+import jsx = require('acorn-jsx')
 
 const extendedParser = Parser.extend(jsx())
 

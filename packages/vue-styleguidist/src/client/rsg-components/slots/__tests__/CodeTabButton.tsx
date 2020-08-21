@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import CodeTabButton from '../CodeTabButton'
 
 it('should renderer a link to isolated mode', () => {
-	const actual = render(<CodeTabButton name="Pizza" onClick={() => {}} active={true} />)
+	const actual = render(<CodeTabButton name="Pizza" onClick={() => {}} active />)
 
 	expect(actual.container).toMatchInlineSnapshot(`
 		<div>

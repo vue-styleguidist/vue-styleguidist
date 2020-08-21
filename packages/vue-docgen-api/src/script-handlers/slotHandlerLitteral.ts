@@ -18,7 +18,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 	if (bt.isObjectExpression(path.node)) {
 		const renderPath = getProperties(path, 'render')
 
-		if (!renderPath.length) return
+		if (!renderPath.length) {return}
 
 		let i = 0
 		let docBlock = getDocblock(renderPath[0], { commentIndex: i })

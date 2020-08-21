@@ -81,5 +81,5 @@ export default function parseValidatorForValues(
 			return extractStringArray(returnedExpression.callee.object)
 		}
 	}
-	return
+	
 }

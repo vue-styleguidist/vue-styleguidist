@@ -49,23 +49,29 @@
 	},
 	"overrides": [
 		{
-			"files": ["**/*.ts", "**/*.tsx"],
+			"files": ["packages/**/*.ts", "packages/**/*.tsx"],
 			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"ecmaVersion": 2018,
 				"sourceType": "module"
 			},
+			"extends": ["tamia/typescript-react"],
 			"plugins": ["@typescript-eslint"],
 			"settings": {
 				"import/resolver": {
+					"typescript": {},
 					"node": {
 						"extensions": [".ts", ".tsx", ".js", ".d.ts"]
 					}
 				}
 			},
 			"rules": {
+				"@typescript-eslint/no-use-before-define": "off",
+				"@typescript-eslint/naming-convention": "off",
+				"@typescript-eslint/no-unused-expressions": "off",
 				"no-unused-vars": "off",
 				"typescript/no-unused-vars": "off",
+				"import/no-unresolved": "error",
 				"import/no-extraneous-dependencies": "off"
 			}
 		},

@@ -77,7 +77,7 @@ export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props
 				))}
 			{map(fields, (format: (v: Param[]) => string, field: keyof TagProps) => {
 				const value = props[field]
-				if (!value || !Array.isArray(value)) return null
+				if (!value || !Array.isArray(value)) {return null}
 				return (
 					<JsDocRenderer key={field} field={field} classes={classes}>
 						{<Markdown text={format(value) || ''} inline />}

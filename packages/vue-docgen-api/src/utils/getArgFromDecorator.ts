@@ -8,7 +8,7 @@ export default function getArgFromDecorator(
 		.filter((p: NodePath) => {
 			const exp = p.get('expression')
 			const decoratorIdenifier = bt.isCallExpression(exp.node) ? exp.node.callee : exp.node
-			return 'Component' === (bt.isIdentifier(decoratorIdenifier) ? decoratorIdenifier.name : null)
+			return (bt.isIdentifier(decoratorIdenifier) ? decoratorIdenifier.name : null) === 'Component'
 		}, null)[0]
 		.get('expression')
 	if (bt.isCallExpression(expForDecorator.node)) {

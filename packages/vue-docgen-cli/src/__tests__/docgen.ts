@@ -6,8 +6,8 @@ const DOC_MAP = {
 	'src/comps/button/Readme.md': 'src/comps/button/button.vue'
 }
 
-var mockGetSources: jest.Mock
-var mockWatcher: unknown
+let mockGetSources: jest.Mock
+let mockWatcher: unknown
 jest.mock('../getSources', () => {
 	mockWatcher = { on: jest.fn(), close: jest.fn() }
 	mockGetSources = jest.fn(() =>
@@ -16,13 +16,13 @@ jest.mock('../getSources', () => {
 	return mockGetSources
 })
 
-var mockSingle: jest.Mock
+let mockSingle: jest.Mock
 jest.mock('../singleMd', () => {
 	mockSingle = jest.fn()
 	return mockSingle
 })
 
-var mockMulti: jest.Mock
+let mockMulti: jest.Mock
 jest.mock('../multiMd', () => {
 	mockMulti = jest.fn()
 	return mockMulti

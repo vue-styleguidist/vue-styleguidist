@@ -63,7 +63,7 @@ export async function pitchAsync(this: StyleguidistContext, source: string): Pro
 	slugger.reset()
 
 	const config = this._styleguidist
-	if (!config.sections) return ''
+	if (!config.sections) {return ''}
 
 	const allComponentFiles = getComponentFilesFromSections(
 		config.sections,

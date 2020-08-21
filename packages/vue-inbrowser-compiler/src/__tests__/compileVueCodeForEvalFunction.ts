@@ -1,3 +1,4 @@
+/* eslint-disable no-new-func */
 import compileVueCodeForEvalFunction from '../compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {

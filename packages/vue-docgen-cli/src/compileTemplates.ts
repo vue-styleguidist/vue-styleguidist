@@ -25,7 +25,7 @@ export interface SubTemplateOptions {
 }
 
 export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: string): string[] {
-	if (!doc.tags) return []
+	if (!doc.tags) {return []}
 	const requireDep =
 		doc.tags.requires?.map((t: ParamTag) => path.join(compDirName, t.description as string)) || []
 	const examplesDep = getExamplesFilePaths(doc.tags, compDirName)

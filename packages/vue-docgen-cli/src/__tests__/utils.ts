@@ -5,7 +5,7 @@ const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
 const MD_FILE_PATH = 'test/file'
 
-var mockFs: {
+let mockFs: {
 	readFile: jest.Mock
 	writeFile: jest.Mock
 	existsSync: jest.Mock
@@ -36,7 +36,7 @@ jest.mock('fs', () => {
 	return mockFs
 })
 
-var mockPrettierFormat: jest.Mock, mockResolveConfig: jest.Mock
+let mockPrettierFormat: jest.Mock; let mockResolveConfig: jest.Mock
 jest.mock('prettier', () => {
 	mockPrettierFormat = jest.fn(() => PRETTY_MD)
 	mockResolveConfig = jest.fn(() => null)
@@ -46,13 +46,13 @@ jest.mock('prettier', () => {
 	}
 })
 
-var mockMkdirp: jest.Mock
+let mockMkdirp: jest.Mock
 jest.mock('mkdirp', () => {
 	mockMkdirp = jest.fn((p, c) => c())
 	return mockMkdirp
 })
 
-var mockCompileTemplates: jest.Mock
+let mockCompileTemplates: jest.Mock
 jest.mock('../compileTemplates', () => {
 	mockCompileTemplates = jest.fn()
 	return mockCompileTemplates

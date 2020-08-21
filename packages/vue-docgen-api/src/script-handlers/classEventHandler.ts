@@ -38,8 +38,7 @@ export default async function classEventHandler(
 					// if someone wants to document it with anything else, they can force it
 					if (eventTags.length) {
 						eventName = (eventTags[0] as Tag).content as string
-					} else {
-						if (exp.get('arguments').value.length) {
+					} else if (exp.get('arguments').value.length) {
 							let firstArg = exp.get('arguments', 0)
 							if (bt.isIdentifier(firstArg.node)) {
 								firstArg = resolveIdentifier(astPath, firstArg)
@@ -54,7 +53,6 @@ export default async function classEventHandler(
 						} else {
 							return false
 						}
-					}
 
 					const evtDescriptor = documentation.getEventDescriptor(eventName)
 					setEventDescriptor(evtDescriptor, doclets)

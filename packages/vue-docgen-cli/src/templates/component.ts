@@ -18,11 +18,11 @@ export default (
 	if (!config.outFile && deprecated)
 		// to avoid having the squiggles in the left menu for deprecated items
 		// use the frontmatter feature of vuepress
-		frontMatter.push(`title: ${displayName}`)
+		{frontMatter.push(`title: ${displayName}`)}
 
 	if (isSubComponent || hasSubComponents)
 		// show more than one level on subcomponents
-		frontMatter.push('sidebarDepth: 2')
+		{frontMatter.push('sidebarDepth: 2')}
 
 	return `${
 		frontMatter.length && !isSubComponent

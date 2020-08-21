@@ -39,7 +39,7 @@ export interface ParamTag extends RootTag, Param {}
 
 export interface DocBlockTags {
 	description?: string
-	tags?: Array<ParamTag | Tag>
+	tags?: (ParamTag | Tag)[]
 }
 
 interface EventType {

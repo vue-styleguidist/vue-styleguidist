@@ -14,7 +14,7 @@ import { findFileCaseInsensitive } from './utils'
 
 export default (
 	cwd: string,
-	watch: boolean = false,
+	watch = false,
 	configFileFromCmd?: string,
 	pathArray: string[] = []
 ): SafeDocgenCLIConfig => {

@@ -33,7 +33,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 				return scriptCodeHighlighted
 			}
 			const templateCode = code.slice(scriptCode.length)
-			return scriptCodeHighlighted + prismHighlight(templateCode, languages['html'], lang)
+			return scriptCodeHighlighted + prismHighlight(templateCode, languages.html, lang)
 		}
 	} else {
 		const langScheme = languages[lang]

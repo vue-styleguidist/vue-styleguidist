@@ -25,7 +25,7 @@ export default async function parseScript(
 	handlers: Handler[],
 	options: ParseOptions,
 	documentation?: Documentation,
-	forceSingleExport: boolean = false
+	forceSingleExport = false
 ): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {

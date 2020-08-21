@@ -24,6 +24,7 @@ describe('styleguide-loader', () => {
 			{
 				async: () => callback,
 				request: file,
+
 				_styleguidist: {
 					sections: [{ components: 'components/**/*.js' }],
 					configDir,
@@ -51,6 +52,7 @@ describe('styleguide-loader', () => {
 			{
 				async: () => callback,
 				request: file,
+
 				_styleguidist: {
 					sections: [{ components: 'components/**/*.js' }],
 					configDir,

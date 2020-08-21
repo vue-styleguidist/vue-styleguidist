@@ -87,9 +87,7 @@ export default async function classPropHandler(
 					if (propDecoratorArg && bt.isObjectExpression(propDecoratorArg.node)) {
 						const propsPath = propDecoratorArg
 							.get('properties')
-							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
-							NodePath<bt.ObjectProperty>
-						>
+							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as NodePath<bt.ObjectProperty>[]
 
 						// if there is no type annotation, get it from the decorators arguments
 						if (!propPath.node.typeAnnotation) {

@@ -43,7 +43,7 @@ export default async function eventHandler(
 			.get('properties')
 			.filter(
 				(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
-			) as Array<NodePath<bt.ObjectProperty>>
+			) as NodePath<bt.ObjectProperty>[]
 
 		// if no method return
 		if (!methodsPath.length) {

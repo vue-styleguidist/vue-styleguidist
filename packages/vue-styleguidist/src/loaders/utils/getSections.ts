@@ -79,6 +79,7 @@ export async function getRequiredComponents(
 			} catch (e) {
 				// eat the error (reported in vuedoc-loader)
 			}
+			return []
 		})
 	)
 	return pathsArrays.reduce((acc: Record<string, string[]>, pa) => {
