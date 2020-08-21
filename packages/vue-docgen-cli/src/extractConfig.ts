@@ -45,8 +45,8 @@ export default (
 			}
 			return false
 		},
-		getDestFile: (file: string, config: SafeDocgenCLIConfig): string =>
-			path.resolve(config.outDir, file).replace(/\.\w+$/, '.md'),
+		getDestFile: (file: string, conf: SafeDocgenCLIConfig): string =>
+			path.resolve(conf.outDir, file).replace(/\.\w+$/, '.md'),
 		editLinkLabel: 'edit on github',
 		...(fs.existsSync(configFilePath) ? require(configFilePath) : undefined)
 	}

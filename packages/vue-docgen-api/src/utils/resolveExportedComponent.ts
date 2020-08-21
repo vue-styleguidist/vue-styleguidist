@@ -81,6 +81,7 @@ function getReturnedObject(realDef: NodePath): NodePath | undefined {
 	if (bt.isFunctionDeclaration(node) || bt.isFunctionExpression(node)) {
 		return getReturnStatementObject(realDef)
 	}
+	return undefined
 }
 
 /**

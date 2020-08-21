@@ -1,6 +1,5 @@
-// tslint:disable-next-line:no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
 const LRUCache = require('lru-cache')
-// tslint:disable-next-line:no-var-requires
 const hash = require('hash-sum')
 
 const cache = new LRUCache(250)

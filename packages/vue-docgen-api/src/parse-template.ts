@@ -57,9 +57,9 @@ export function traverse(
 	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {
-	const traverseAstChildren = (templateAst: TemplateChildNode) => {
-		if (hasChildren(templateAst)) {
-			const { children } = templateAst
+	const traverseAstChildren = (ast: TemplateChildNode) => {
+		if (hasChildren(ast)) {
+			const { children } = ast
 			for (const childNode of children) {
 				traverse(childNode, documentation, handlers, children, options)
 			}

@@ -98,8 +98,6 @@ export default function resolveRequired(
 							varToFilePath[varName] = { filePath: [source], exportName }
 						}
 					})
-				} else {
-					
 				}
 			})
 			return false

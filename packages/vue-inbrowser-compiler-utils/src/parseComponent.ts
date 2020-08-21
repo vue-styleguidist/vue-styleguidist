@@ -72,9 +72,9 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 	}
 	if (styles) {
 		descriptor.styles = styles
-		let i = styles.length
-		while (i--) {
-			check = check.replace(stylesWithWrapper[i], '').trim()
+		let j = styles.length
+		while (j--) {
+			check = check.replace(stylesWithWrapper[j], '').trim()
 		}
 	}
 	return check.length ? {} : descriptor

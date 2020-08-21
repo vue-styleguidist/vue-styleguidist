@@ -19,10 +19,10 @@ import getArgFromDecorator from '../utils/getArgFromDecorator'
  * @param documentation
  * @param path
  */
-export default async function classPropHandler(
+export default function classPropHandler(
 	documentation: Documentation,
 	path: NodePath<bt.ClassDeclaration>
-) {
+): Promise<void> {
 	if (bt.isClassDeclaration(path.node)) {
 		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
 
@@ -43,12 +43,12 @@ export default async function classPropHandler(
 				})
 
 				if (!propDeco.length) {
-					return
+					return undefined
 				}
 
 				const propName = bt.isIdentifier(propPath.node.key) ? propPath.node.key.name : undefined
 				if (!propName) {
-					return
+					return undefined
 				}
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
@@ -97,6 +97,8 @@ export default async function classPropHandler(
 						describeRequired(propsPath, propDescriptor)
 					}
 				}
+				return undefined
 			})
 	}
+	return Promise.resolve()
 }

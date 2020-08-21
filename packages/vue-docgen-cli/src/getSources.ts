@@ -28,9 +28,9 @@ export default async function getSources(
 	// and @example/examples to add them to the watcher.
 	const requiredComponents = (
 		await Promise.all(
-			allComponentFiles.map(async compPath => getRequiredComponents(compPath, optionsApi, cwd))
+			allComponentFiles.map(compPath => getRequiredComponents(compPath, optionsApi, cwd))
 		)
-	).reduce((acc, components) => acc.concat(components), [])
+	).reduce((acc, comps) => acc.concat(comps), [])
 
 	const componentFiles = allComponentFiles.filter(
 		compPath => !requiredComponents.includes(compPath)

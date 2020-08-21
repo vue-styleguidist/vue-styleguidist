@@ -30,13 +30,14 @@ jest.mock('fs', () => {
 	mockFs = {
 		readFile: jest.fn((a, b, c) => c()),
 		writeFile: jest.fn((a, b, c) => c()),
-		createWriteStream: a => cws,
+		createWriteStream: () => cws,
 		existsSync: jest.fn(() => false)
 	}
 	return mockFs
 })
 
-let mockPrettierFormat: jest.Mock; let mockResolveConfig: jest.Mock
+let mockPrettierFormat: jest.Mock
+let mockResolveConfig: jest.Mock
 jest.mock('prettier', () => {
 	mockPrettierFormat = jest.fn(() => PRETTY_MD)
 	mockResolveConfig = jest.fn(() => null)
@@ -90,10 +91,10 @@ describe('getDocMap', () => {
 	it('should return relative maps', () => {
 		const docMap = getDocMap(FILES, getDocFileName, 'src')
 		// normalize path for windows users
-		Object.keys(docMap).map(k => {
-			const path = docMap[k]
+		Object.keys(docMap).forEach(k => {
+			const rawPath = docMap[k]
 			delete docMap[k]
-			docMap[k.replace(/\\/g, '/')] = path
+			docMap[k.replace(/\\/g, '/')] = rawPath
 		})
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {

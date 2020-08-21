@@ -41,7 +41,7 @@ export default class Documentation {
 	private originExtendsMixin: Descriptor
 	public readonly componentFullfilePath: string
 
-	constructor(fullFilePath: string) {
+	public constructor(fullFilePath: string) {
 		this.componentFullfilePath = fullFilePath
 		this.propsMap = new Map()
 		this.methodsMap = new Map()

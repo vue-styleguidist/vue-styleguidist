@@ -58,7 +58,7 @@ describe('functional render function slotHandler', () => {
 		expect(mockSlotDescriptor.description).toBe('describe destructured default')
 	})
 
-	it('should parse functional components without context', async () => {
+	it('should parse functional components without context', () => {
 		const src = `
     export default {
 	  functional: true,
@@ -73,7 +73,7 @@ describe('functional render function slotHandler', () => {
 				await slotHandlerFunctional(documentation, def)
 			}).not.toThrow()
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 })

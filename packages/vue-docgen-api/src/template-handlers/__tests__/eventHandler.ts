@@ -32,7 +32,7 @@ describe('eventHandler', () => {
 				}
 			])
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -71,7 +71,7 @@ describe('eventHandler', () => {
 				}
 			])
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 })

@@ -1,5 +1,7 @@
 import { Parser, Node } from 'acorn'
-import jsx = require('acorn-jsx')
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const jsx = require('acorn-jsx')
 
 const extendedParser = Parser.extend(jsx())
 

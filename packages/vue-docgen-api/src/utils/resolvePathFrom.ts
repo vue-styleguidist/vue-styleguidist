@@ -43,6 +43,7 @@ export default function resolvePathFrom(path: string, from: string[]): string | 
 		const packagePath = require.resolve(join(path, 'package.json'), {
 			paths: from
 		})
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const pkg = require(packagePath)
 		// if it is an es6 module use the module instead of commonjs
 		finalPath = require.resolve(join(path, pkg.module || pkg.main))

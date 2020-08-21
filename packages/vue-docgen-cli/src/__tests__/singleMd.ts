@@ -16,7 +16,9 @@ jest.mock('../utils', () => {
 
 let mockCompileMarkdown: jest.Mock
 jest.mock('../compileTemplates', () => {
-	mockCompileMarkdown = jest.fn(async () => ({ content: FAKE_MD_CONTENT, dependencies: [] }))
+	mockCompileMarkdown = jest.fn(() =>
+		Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] })
+	)
 	return mockCompileMarkdown
 })
 

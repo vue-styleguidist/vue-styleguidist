@@ -28,7 +28,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (!elt) {
-			throw 'fail'
+			throw Error('fail')
 		} else {
 			expect(extractLeadingComment([], elt.child).length).toBe(0)
 		}
@@ -46,7 +46,7 @@ describe('extractLeadingComment', () => {
 			].join('\n')
 		)
 		if (!elt) {
-			throw 'fail'
+			throw Error('fail')
 		} else {
 			expect(extractLeadingComment(elt.parent.children, elt.child)[0]).toBe('single line comment')
 		}
@@ -69,7 +69,7 @@ describe('extractLeadingComment', () => {
 				'on 2 lines'
 			])
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -92,7 +92,7 @@ describe('extractLeadingComment', () => {
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -114,7 +114,7 @@ describe('extractLeadingComment', () => {
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 })

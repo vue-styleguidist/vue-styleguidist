@@ -35,7 +35,7 @@ function getRawValueParsedFromFunctionsBlockStatementNode(
  * @param documentation
  * @param path
  */
-export default async function propHandler(documentation: Documentation, path: NodePath) {
+export default function propHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const propsPath = path
 			.get('properties')
@@ -43,7 +43,7 @@ export default async function propHandler(documentation: Documentation, path: No
 
 		// if no prop return
 		if (!propsPath.length) {
-			return
+			return Promise.resolve()
 		}
 
 		const modelPropertyName = getModelPropName(path)
@@ -54,7 +54,9 @@ export default async function propHandler(documentation: Documentation, path: No
 			const objProp = propsValuePath.get('properties')
 
 			// filter non object properties
-			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as NodePath<bt.Property>[]
+			const objPropFiltered = objProp.filter((p: NodePath) => bt.isProperty(p.node)) as NodePath<
+				bt.Property
+			>[]
 			objPropFiltered.forEach(prop => {
 				const propNode = prop.node
 
@@ -149,6 +151,7 @@ export default async function propHandler(documentation: Documentation, path: No
 				})
 		}
 	}
+	return Promise.resolve()
 }
 
 /**
@@ -207,6 +210,7 @@ export function describeType(
 			}
 		}
 	}
+	return undefined
 }
 
 const VALID_VUE_TYPES = [

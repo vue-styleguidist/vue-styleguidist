@@ -54,7 +54,7 @@ export async function parse(
  * @param filePath absolute path of the parsed file
  * @param opts
  */
-export async function parseMulti(filePath: string, opts?: DocGenOptions): Promise<ComponentDoc[]> {
+export function parseMulti(filePath: string, opts?: DocGenOptions): Promise<ComponentDoc[]> {
 	return parsePrimitive(async options => await parseFile(options), filePath, opts)
 }
 

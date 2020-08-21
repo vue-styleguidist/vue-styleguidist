@@ -43,14 +43,14 @@ var _isPromise = _interopRequireDefault(require("./utils/isPromise"));
  * @returns {object} API.
  */
 function _default(config, updateConfig) {
-  var configInternal = (0, _config["default"])(config, function (config) {
-    (0, _logger["default"])(config.logger, config.verbose, {});
+  var configInternal = (0, _config["default"])(config, function (cfg) {
+    (0, _logger["default"])(cfg.logger, cfg.verbose, {});
 
     if (typeof updateConfig === 'function') {
-      updateConfig(config);
+      updateConfig(cfg);
     }
 
-    return config;
+    return cfg;
   });
 
   if ((0, _isPromise["default"])(configInternal)) {

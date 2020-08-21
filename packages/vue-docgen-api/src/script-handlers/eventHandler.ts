@@ -33,11 +33,11 @@ function getCommentBlockAndTags(
  * @param path
  * @param astPath
  */
-export default async function eventHandler(
+export default function eventHandler(
 	documentation: Documentation,
 	path: NodePath,
 	astPath: bt.File
-) {
+): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const methodsPath = path
 			.get('properties')
@@ -47,7 +47,7 @@ export default async function eventHandler(
 
 		// if no method return
 		if (!methodsPath.length) {
-			return
+			return Promise.resolve()
 		}
 
 		const methodsObject = methodsPath[0].get('value')
@@ -146,8 +146,10 @@ export default async function eventHandler(
 				return false
 			}
 			this.traverse(pathExpression)
+			return undefined
 		}
 	})
+	return Promise.resolve()
 }
 
 /**

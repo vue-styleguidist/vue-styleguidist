@@ -21,7 +21,7 @@ export default function scoper(css: string, suffix: string) {
 
 		// deal with :scope pseudo selectors
 		if (selector && selector.match(/:scope/)) {
-			selector = selector.replace(/([^\s]*):scope/, function (full: string, cutSelector: string) {
+			selector = selector.replace(/([^\s]*):scope/, function (ful: string, cutSelector: string) {
 				if (cutSelector === '') {
 					return '> *'
 				}

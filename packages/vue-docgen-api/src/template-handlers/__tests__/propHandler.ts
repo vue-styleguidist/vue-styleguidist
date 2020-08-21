@@ -32,7 +32,7 @@ describe('slotHandler', () => {
 				{ name: 'value', type: { name: 'string' }, description: 'value in the form' }
 			])
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -58,7 +58,7 @@ describe('slotHandler', () => {
 				{ name: 'adress', type: { name: 'string' }, description: 'Your Adress' }
 			])
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -77,7 +77,7 @@ describe('slotHandler', () => {
 			})
 			expect(doc.toObject().props).toBeUndefined()
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -96,7 +96,7 @@ describe('slotHandler', () => {
 			})
 			expect(doc.toObject().props).toBeUndefined()
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 
@@ -118,7 +118,7 @@ describe('slotHandler', () => {
 			})
 			expect(doc.toObject().props).toMatchObject([{ name: 'error', type: {} }])
 		} else {
-			throw 'fail'
+			throw Error('fail')
 		}
 	})
 })
