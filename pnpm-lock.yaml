@@ -47,7 +47,6 @@ importers:
       cross-env: 5.2.1
       css-loader: 3.6.0_webpack@4.44.1
       danger: 10.3.0
-      danger-plugin-conventional-commitlint: 1.0.4
       deabsdeep: 2.0.1
       deepfreeze: 2.0.0
       dog-names: 1.0.2
@@ -172,7 +171,6 @@ importers:
       cross-env: ^5.2.0
       css-loader: ^3.6.0
       danger: ^10.2.0
-      danger-plugin-conventional-commitlint: ^1.0.4
       deabsdeep: ^2.0.1
       deepfreeze: ^2.0.0
       dog-names: ^1.0.2
@@ -3293,14 +3291,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-pSUrNud5L/8y+cLWo3LEa8Ce4bAAR33xMderFUhuNPHj7TwpNS7L4ROMnhL4ZlCYRazCRDlnPaJLPikMoWThfA==
-  /@commitlint/ensure/8.3.4:
-    dependencies:
-      lodash: 4.17.15
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-8NW77VxviLhD16O3EUd02lApMFnrHexq10YS4F4NftNoErKbKaJ0YYedktk2boKrtNRf/gQHY/Qf65edPx4ipw==
   /@commitlint/execute-rule/7.6.0:
     dependencies:
       babel-runtime: 6.26.0
@@ -3326,14 +3316,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-By/mLNhz+6Rtix9+Kyof1gdKiELchAnQHpdeKIHIOe9sjbvd3HqDoFHh/mGMMRnGIPMZOX5TO8Fqy3A/2HqlTw==
-  /@commitlint/is-ignored/8.3.5:
-    dependencies:
-      semver: 6.3.0
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-Zo+8a6gJLFDTqyNRx53wQi/XTiz8mncvmWf/4oRG+6WRcBfjSSHY7KPVj5Y6UaLy2EgZ0WQ2Tt6RdTDeQiQplA==
   /@commitlint/lint/7.6.0:
     dependencies:
       '@commitlint/is-ignored': 7.6.0
@@ -3346,18 +3328,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-aUIFX0lPRZL7WmT8W8qzogJD4LmHk6JPG3XUAX+K0pOHGjC/0ALvSAytvoLXy4fvmSnGJkXmWhzSW7c0Spa14Q==
-  /@commitlint/lint/8.3.5:
-    dependencies:
-      '@commitlint/is-ignored': 8.3.5
-      '@commitlint/parse': 8.3.4
-      '@commitlint/rules': 8.3.4
-      babel-runtime: 6.26.0
-      lodash: 4.17.15
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-02AkI0a6PU6rzqUvuDkSi6rDQ2hUgkq9GpmdJqfai5bDbxx2939mK4ZO+7apbIh4H6Pae7EpYi7ffxuJgm+3hQ==
   /@commitlint/load/7.6.2:
     dependencies:
       '@commitlint/execute-rule': 7.6.0
@@ -3377,12 +3347,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-PtP4jhBYGXLaQQC5jel+RQczG2tS3Cy6rRxQioUfCUaEg/LV029ao/KcL1kHEBJ8hSW/SUmnvDaD9Y6nozLQMA==
-  /@commitlint/message/8.3.4:
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-nEj5tknoOKXqBsaQtCtgPcsAaf5VCg3+fWhss4Vmtq40633xLq0irkdDdMEsYIx8rGR0XPBTukqzln9kAWCkcA==
   /@commitlint/parse/7.6.0:
     dependencies:
       conventional-changelog-angular: 1.6.6
@@ -3393,16 +3357,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1x60kTqz2VBCjYE+8MV5BhE+ShPo7MgVlrMWSlxiiJDWP5CvWa+SBbUayDJ7rtOXimjTASZ9ZNZTuFPdJE/Y7A==
-  /@commitlint/parse/8.3.4:
-    dependencies:
-      conventional-changelog-angular: 1.6.6
-      conventional-commits-parser: 3.1.0
-      lodash: 4.17.20
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-b3uQvpUQWC20EBfKSfMRnyx5Wc4Cn778bVeVOFErF/cXQK725L1bYFvPnEjQO/GT8yGVzq2wtLaoEqjm1NJ/Bw==
   /@commitlint/read/7.6.0:
     dependencies:
       '@commitlint/top-level': 7.6.0
@@ -3437,29 +3391,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-shLJdMUwdVeE5UgOE8E+c+PFS7+0FFGfheMa3s6ZK+xX8pTUxseXZu9iCF4mwF+WWkVk518xPuNLvmYE96salQ==
-  /@commitlint/rules/8.3.4:
-    dependencies:
-      '@commitlint/ensure': 8.3.4
-      '@commitlint/message': 8.3.4
-      '@commitlint/to-lines': 8.3.4
-      babel-runtime: 6.26.0
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-xuC9dlqD5xgAoDFgnbs578cJySvwOSkMLQyZADb1xD5n7BNcUJfP8WjT9W1Aw8K3Wf8+Ym/ysr9FZHXInLeaRg==
   /@commitlint/to-lines/7.6.0:
     dev: true
     engines:
       node: '>=4'
     resolution:
       integrity: sha512-L/Vl5ThRuBHnSNZBtc+p2LCs2ayxWodC+I/X3NKUywSmr6kKpJJCFqHHHqPu+yXwGUPwqCMQhogIGLuv9TtWWw==
-  /@commitlint/to-lines/8.3.4:
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-5AvcdwRsMIVq0lrzXTwpbbG5fKRTWcHkhn/hCXJJ9pm1JidsnidS1y0RGkb3O50TEHGewhXwNoavxW9VToscUA==
   /@commitlint/top-level/7.6.0:
     dependencies:
       find-up: 2.1.0
@@ -11108,14 +11045,6 @@ packages:
   /cyclist/1.0.1:
     resolution:
       integrity: sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
-  /danger-plugin-conventional-commitlint/1.0.4:
-    dependencies:
-      '@commitlint/lint': 8.3.5
-    dev: true
-    engines:
-      node: '>=10.18.0'
-    resolution:
-      integrity: sha512-0sXHIC82hb9Al+KfgTQBO/WxsHhBsf8Ql0cgzxtBixM/Uhv8Yo5uo5BsO97jRwt+wnKMmQxEWEqXrJDRL21JXw==
   /danger/10.3.0:
     dependencies:
       '@babel/polyfill': 7.10.4
@@ -17466,10 +17395,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
-  /lodash/4.17.15:
-    dev: true
-    resolution:
-      integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
   /lodash/4.17.19:
     resolution:
       integrity: sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==

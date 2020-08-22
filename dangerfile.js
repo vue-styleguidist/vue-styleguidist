@@ -4,16 +4,6 @@ import { danger, warn, fail } from 'danger'
 var fs = require('fs')
 var path = require('path')
 var glob = require('globby')
-var commitlint = require('danger-plugin-conventional-commitlint').default
-var configConventional = require('@commitlint/config-conventional').default
-
-//validate commit message in PR if it conforms conventional change log, notify if it doesn't.
-;(async function dangerReport() {
-	const commitlintConfig = {
-		severity: 'warn'
-	}
-	await commitlint(configConventional.rules, commitlintConfig)
-})()
 
 if (danger.github.pr.base.ref === 'delivery' && danger.github.pr.head.ref !== 'dev') {
 	warn(

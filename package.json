@@ -85,7 +85,6 @@
 		"cross-env": "^5.2.0",
 		"css-loader": "^3.6.0",
 		"danger": "^10.2.0",
-		"danger-plugin-conventional-commitlint": "^1.0.4",
 		"deabsdeep": "^2.0.1",
 		"deepfreeze": "^2.0.0",
 		"dog-names": "^1.0.2",
