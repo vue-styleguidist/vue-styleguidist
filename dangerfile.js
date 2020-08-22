@@ -3,10 +3,17 @@ import { danger, warn, fail } from 'danger'
 
 var fs = require('fs')
 var path = require('path')
-var getSize = require('get-folder-size')
-var gzipSize = require('gzip-size')
-var validateMessage = require('validate-commit-msg')
 var glob = require('globby')
+var commitlint = require('danger-plugin-conventional-commitlint').default
+var configConventional = require('@commitlint/config-conventional').default
+
+//validate commit message in PR if it conforms conventional change log, notify if it doesn't.
+;(async function dangerReport() {
+	const commitlintConfig = {
+		severity: 'warn'
+	}
+	await commitlint(configConventional.rules, commitlintConfig)
+})()
 
 if (danger.github.pr.base.ref === 'delivery' && danger.github.pr.head.ref !== 'dev') {
 	warn(
@@ -84,12 +91,6 @@ Please remove \`yarn.lock\` changes from your pull request. Try to run \`git che
 	if (testFilesIncludeExclusion.length > 0) {
 		fail('an `only` was left in tests (' + testFilesIncludeExclusion + ')')
 	}
-
-	//validate commit message in PR if it conforms conventional change log, notify if it doesn't.
-	var messageConventionValid = danger.git.commits.reduce(function (acc, value) {
-		var valid = validateMessage(value.message)
-		return valid && acc
-	}, true)
 
 	if (!messageConventionValid) {
 		warn('commit message does not follows conventional change log (' + ++errorCount + ')')
