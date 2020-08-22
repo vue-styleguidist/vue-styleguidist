@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:4.9.0
+    - image: cypress/included:5.0.0
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -21,12 +21,10 @@ jobs:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - '~/.pnpm-store'
-            - '~/.cache/Cypress'
       - persist_to_workspace:
           root: ~/
           paths:
             - vue-styleguidist
-            - '~/.cache/Cypress'
 
   examples-basic:
     <<: *defaults
