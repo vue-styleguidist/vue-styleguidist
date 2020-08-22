@@ -9,6 +9,10 @@ export default {
 	input: resolve('./src/index.ts'),
 	output: [
 		{
+			file: pkg.main,
+			format: 'cjs'
+		},
+		{
 			file: pkg.module,
 			format: 'es' // the preferred format
 		}
