@@ -4,8 +4,6 @@ defaults: &defaults
   docker:
     - image: cypress/included:4.9.0
   working_directory: ~/vue-styleguidist
-    - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-    - run: pnpm config set store-dir ~/.pnpm-store
 
 jobs:
   install:
@@ -16,6 +14,8 @@ jobs:
       - restore_cache:
           keys:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install
       - save_cache:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
@@ -33,18 +33,18 @@ jobs:
           at: ~/
 
       # Build all examples
-      - run: pnpm build basic
-      - run: pnpm build customised
-      - run: pnpm build sections
-      - run: pnpm build vuex
-      - run: pnpm build functional-flag
+      - run: npm run build basic
+      - run: npm run build customised
+      - run: npm run build sections
+      - run: npm run build vuex
+      - run: npm run build functional-flag
 
       # Check that examples really works: no JS errors on load
-      - run: pnpm test:browser basic
-      - run: pnpm test:browser customised
-      - run: pnpm test:browser sections
-      - run: pnpm test:browser vuex
-      - run: pnpm test:browser functional-flag
+      - run: npm run test:browser basic
+      - run: npm run test:browser customised
+      - run: npm run test:browser sections
+      - run: npm run test:browser vuex
+      - run: npm run test:browser functional-flag
 
   examples-vuecli:
     <<: *defaults
@@ -53,12 +53,12 @@ jobs:
           at: ~/
 
       # remake the pnpm link to vue-cli-plugin
-      - run: pnpm build vuecli3
-      - run: pnpm build vuecli-noplugin
-      - run: pnpm build vuecli3-vuetify-ie
-      - run: pnpm test:browser vuecli3
-      - run: pnpm test:browser vuecli-noplugin
-      - run: pnpm test:browser vuecli3-vuetify-ie
+      - run: npm run build vuecli3
+      - run: npm run build vuecli-noplugin
+      - run: npm run build vuecli3-vuetify-ie
+      - run: npm run test:browser vuecli3
+      - run: npm run test:browser vuecli-noplugin
+      - run: npm run test:browser vuecli3-vuetify-ie
 
   examples-other:
     <<: *defaults
@@ -67,16 +67,16 @@ jobs:
           at: ~/
 
       # Build all examples
-      - run: pnpm build jsx
-      - run: pnpm build jsx-examples
-      - run: pnpm build nuxtjs
-      - run: pnpm build vuetify
+      - run: npm run build jsx
+      - run: npm run build jsx-examples
+      - run: npm run build nuxtjs
+      - run: npm run build vuetify
 
       # Check that examples really works: no JS errors on load
-      - run: pnpm test:browser jsx
-      - run: pnpm test:browser jsx-examples
-      - run: pnpm test:browser nuxtjs
-      - run: pnpm test:browser vuetify
+      - run: npm run test:browser jsx
+      - run: npm run test:browser jsx-examples
+      - run: npm run test:browser nuxtjs
+      - run: npm run test:browser vuetify
 
   cypress:
     <<: *defaults
@@ -85,11 +85,11 @@ jobs:
           at: ~/
 
       # run cypress tests
-      - run: CY_EXAMPLE_FOLDER=basic pnpm cy
+      - run: CY_EXAMPLE_FOLDER=basic npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots
-      - run: CY_EXAMPLE_FOLDER=jsx-examples pnpm cy
+      - run: CY_EXAMPLE_FOLDER=jsx-examples npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots
