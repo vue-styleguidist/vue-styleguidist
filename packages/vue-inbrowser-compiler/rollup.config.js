@@ -9,11 +9,6 @@ export default {
 	input: resolve('./src/index.ts'),
 	output: [
 		{
-			file: pkg.main,
-			name: 'vueInbrowserCompiler',
-			format: 'umd'
-		},
-		{
 			file: pkg.module,
 			format: 'es' // the preferred format
 		}
