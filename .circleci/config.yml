@@ -16,7 +16,8 @@ jobs:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm config set store-dir ~/.pnpm-store
-      - run: pnpm i
+      - run: ./createbins.sh
+      - run: pnpm install
       - save_cache:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
