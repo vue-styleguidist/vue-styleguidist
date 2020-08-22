@@ -1051,6 +1051,7 @@ importers:
       ts-map: 1.0.3
       vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
     devDependencies:
+      '@test-vue-docgen/mixins': 'link:../docgen-tests'
       globby: 10.0.2
       vue: 2.6.11
       vue-class-component: 7.2.5_vue@2.6.11
@@ -1060,6 +1061,7 @@ importers:
     specifiers:
       '@babel/parser': ^7.6.0
       '@babel/types': ^7.6.0
+      '@test-vue-docgen/mixins': 3.15.4
       '@vue/compiler-dom': ^3.0.0-rc.6
       '@vue/compiler-sfc': ^3.0.0-rc.6
       ast-types: 0.13.3

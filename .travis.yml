@@ -12,7 +12,6 @@ cache:
 before_install:
   - curl -L https://unpkg.com/@pnpm/self-installer | node
   - pnpm config set store-dir ~/.pnpm-store
-  - ./createbins.sh
 
 install:
   - pnpm install

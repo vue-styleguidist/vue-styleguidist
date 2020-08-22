@@ -4,6 +4,8 @@ defaults: &defaults
   docker:
     - image: cypress/included:4.9.0
   working_directory: ~/vue-styleguidist
+    - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+    - run: pnpm config set store-dir ~/.pnpm-store
 
 jobs:
   install:
@@ -14,9 +16,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm config set store-dir ~/.pnpm-store
-      - run: ./createbins.sh
       - run: pnpm install
       - save_cache:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
@@ -86,11 +85,11 @@ jobs:
           at: ~/
 
       # run cypress tests
-      - run: pnpm cross-env CY_EXAMPLE_FOLDER=basic pnpm cy
+      - run: CY_EXAMPLE_FOLDER=basic pnpm cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots
-      - run: pnpm cross-env CY_EXAMPLE_FOLDER=jsx-examples pnpm cy
+      - run: CY_EXAMPLE_FOLDER=jsx-examples pnpm cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots
