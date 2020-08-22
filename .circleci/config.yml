@@ -21,10 +21,12 @@ jobs:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - '~/.pnpm-store'
+            - '/root/.cache/Cypress'
       - persist_to_workspace:
           root: ~/
           paths:
             - vue-styleguidist
+            - '/root/.cache/Cypress'
 
   examples-basic:
     <<: *defaults
