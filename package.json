@@ -140,6 +140,7 @@
 		"semver": "^5.5.0",
 		"start-server-and-test": "^1.9.1",
 		"strip-shebang": "^1.0.2",
+		"style-loader": "^1.2.1",
 		"ts-jest": "^26.2.0",
 		"tslib": "^2.0.0",
 		"tslint": "^5.9.1",
