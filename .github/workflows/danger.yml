@@ -11,3 +11,5 @@ jobs:
     steps:
       - name: Danger JS Action
         uses: danger/danger-js@9.1.8
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
