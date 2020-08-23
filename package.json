@@ -20,7 +20,6 @@
 		"start": "node test/styleguidist.js server",
 		"start:empty": "node bin/styleguidist.js server",
 		"lint": "eslint . --cache --fix --ext .ts,.tsx,.js --cache-location node_modules/.eslint_cache/",
-		"eslint": "eslint . --ext .ts,.tsx,.js",
 		"cli": "node test/run.cli.js",
 		"compile": "pnpm recursive run compile",
 		"build": "node test/styleguidist.js build",
