@@ -10,8 +10,7 @@ export default {
 	output: [
 		{
 			file: pkg.main,
-			name: 'vueInbrowserCompiler',
-			format: 'umd'
+			format: 'cjs'
 		},
 		{
 			file: pkg.module,

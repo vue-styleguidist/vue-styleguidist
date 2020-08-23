@@ -1,56 +1,57 @@
 {
-  "name": "vue-styleguidist-example-vuecli3-vuetify-ie",
-  "version": "4.0.0",
-  "description": "Use vuetify, with internationalization within the vue cli. Make sure you have a look at the vue.config.js transpiledDependencies",
-  "keywords": [
-    "internet explorer",
-    "compatible",
-    "IE11",
-    "vuetify",
-    "i18n"
-  ],
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build"
-  },
-  "dependencies": {
-    "vue": "^2.6.10",
-    "vuetify": "^2.0.0"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.4.4",
-    "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-service": "^4.0.5",
-    "babel-polyfill": "^6.26.0",
-    "sass": "^1.17.4",
-    "sass-loader": "^8.0.0",
-    "vue-cli-plugin-styleguidist": "^4.0.0",
-    "vue-cli-plugin-vuetify": "^0.6.1",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.2.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+	"name": "vue-styleguidist-example-vuecli3-vuetify-ie",
+	"version": "4.0.0",
+	"description": "Use vuetify, with internationalization within the vue cli. Make sure you have a look at the vue.config.js transpiledDependencies",
+	"keywords": [
+		"internet explorer",
+		"compatible",
+		"IE11",
+		"vuetify",
+		"i18n"
+	],
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint",
+		"styleguide": "vue-cli-service styleguidist",
+		"styleguide:build": "vue-cli-service styleguidist:build"
+	},
+	"dependencies": {
+		"vue": "^2.6.10",
+		"vue-i18n": "^8.21.0",
+		"vuetify": "^2.0.0"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.4.4",
+		"@vue/cli-plugin-babel": "^4.0.5",
+		"@vue/cli-plugin-eslint": "^4.0.5",
+		"@vue/cli-service": "^4.0.5",
+		"babel-polyfill": "^6.26.0",
+		"sass": "^1.17.4",
+		"sass-loader": "^8.0.0",
+		"vue-cli-plugin-styleguidist": "^4.0.0",
+		"vue-cli-plugin-vuetify": "^0.6.1",
+		"vue-template-compiler": "^2.6.10",
+		"vuetify-loader": "^1.2.2"
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"eslint:recommended"
+		],
+		"rules": {},
+		"parserOptions": {
+			"parser": "babel-eslint"
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not ie <= 8"
+	]
 }

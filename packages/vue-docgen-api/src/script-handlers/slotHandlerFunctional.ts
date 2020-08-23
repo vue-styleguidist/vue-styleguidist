@@ -14,18 +14,18 @@ export interface TypedParamTag extends ParamTag {
  * @param documentation
  * @param path
  */
-export default async function slotHandler(documentation: Documentation, path: NodePath) {
+export default function slotHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const functionalPath: NodePath<bt.BooleanLiteral>[] = getProperties(path, 'functional')
 
 		// if no prop return
 		if (!functionalPath.length || !functionalPath[0].get('value')) {
-			return
+			return Promise.resolve()
 		}
 
 		const renderPath = getProperties(path, 'render')
 		if (!renderPath || !renderPath.length) {
-			return
+			return Promise.resolve()
 		}
 
 		const renderValuePath = bt.isObjectProperty(renderPath[0].node)
@@ -50,6 +50,7 @@ export default async function slotHandler(documentation: Documentation, path: No
 							return false
 						}
 						this.traverse(pathMember)
+						return undefined
 					}
 				})
 			} else {
@@ -67,9 +68,11 @@ export default async function slotHandler(documentation: Documentation, path: No
 							return false
 						}
 						this.traverse(pathMember)
+						return undefined
 					}
 				})
 			}
 		}
 	}
+	return Promise.resolve()
 }

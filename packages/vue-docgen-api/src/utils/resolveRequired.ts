@@ -60,7 +60,7 @@ export default function resolveRequired(
 			}
 			astPath.node.declarations.forEach(nodeDeclaration => {
 				let sourceNode: bt.Node
-				let source: string = ''
+				let source = ''
 
 				const { init, exportName } =
 					nodeDeclaration.init && bt.isMemberExpression(nodeDeclaration.init)
@@ -98,8 +98,6 @@ export default function resolveRequired(
 							varToFilePath[varName] = { filePath: [source], exportName }
 						}
 					})
-				} else {
-					return
 				}
 			})
 			return false

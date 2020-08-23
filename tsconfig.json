@@ -12,7 +12,7 @@
 		"paths": {
 			"rsg-components/*": [
 				"packages/vue-styleguidist/src/client/rsg-components/*",
-				"node_modules/react-styleguidist/lib/client/rsg-components/*"
+				"packages/vue-styleguidist/node_modules/react-styleguidist/lib/client/rsg-components/*"
 			]
 		},
 		"strictFunctionTypes": false,

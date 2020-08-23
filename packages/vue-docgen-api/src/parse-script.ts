@@ -25,7 +25,7 @@ export default async function parseScript(
 	handlers: Handler[],
 	options: ParseOptions,
 	documentation?: Documentation,
-	forceSingleExport: boolean = false
+	forceSingleExport = false
 ): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {
@@ -77,7 +77,9 @@ async function executeHandlers(
 		.filter(name => name && (!opt.nameFilter || opt.nameFilter.indexOf(name) > -1))
 
 	if (forceSingleExport && compDefs.length > 1) {
-		throw 'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
+		throw Error(
+			'vue-docgen-api: multiple exports in a component file are not handled by docgen.parse, Please use "docgen.parseMulti" instead'
+		)
 	}
 
 	const docs = await Promise.all(

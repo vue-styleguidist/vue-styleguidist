@@ -3,7 +3,13 @@ import { render } from '@testing-library/react'
 import SectionHeading from '../index'
 import SectionHeadingRenderer from '../SectionHeadingRenderer'
 
-jest.mock('rsg-components/Slot', () => () => <div />)
+jest.mock(
+	'rsg-components/Slot',
+	() =>
+		function slotMock() {
+			return <div />
+		}
+)
 
 describe('SectionHeading', () => {
 	const FakeToolbar = () => <div>Fake toolbar</div>

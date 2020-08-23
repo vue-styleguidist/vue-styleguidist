@@ -8,8 +8,8 @@
 	"rules": {
 		"valid-jsdoc": 0,
 		"no-console": 0,
-		"react/prefer-stateless-function": 0,
-		"react/react-in-jsx-scope": 0,
-		"react/no-unknown-property": 0
+		"vue/max-attributes-per-line": 0,
+		"vue/html-self-closing": 0,
+		"vue/html-indent": ["warn", "tab"]
 	}
 }

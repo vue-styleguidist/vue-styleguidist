@@ -9,10 +9,10 @@ import getProperties from './utils/getProperties'
  * @param documentation
  * @param path
  */
-export default async function classDisplayNameHandler(
+export default function classDisplayNameHandler(
 	documentation: Documentation,
 	path: NodePath
-) {
+): Promise<void> {
 	if (bt.isClassDeclaration(path.node)) {
 		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
 
@@ -32,4 +32,5 @@ export default async function classDisplayNameHandler(
 			documentation.set('displayName', displayName)
 		}
 	}
+	return Promise.resolve()
 }

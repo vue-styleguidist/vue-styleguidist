@@ -10,7 +10,7 @@ function alias(previousKey: string) {
 	return { key, name: name[0] }
 }
 
-function generate(keys: string[], dep: string, base?: string, fn?: string, offset: number = 0) {
+function generate(keys: string[], dep: string, base?: string, fn?: string, offset = 0) {
 	const depEnd = dep.split('/').pop()
 	const tmp = depEnd
 		? depEnd.replace(/\W/g, '_') + '$' + offset // uniqueness

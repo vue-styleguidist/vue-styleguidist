@@ -2,7 +2,6 @@ import * as bt from '@babel/types'
 import { visit } from 'recast'
 import { TemplateChildNode, BaseElementNode } from '@vue/compiler-dom'
 import Documentation, { Tag } from '../Documentation'
-import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import getDoclets from '../utils/getDoclets'
 import { setEventDescriptor } from '../script-handlers/eventHandler'
@@ -12,23 +11,16 @@ import { isBaseElementNode, isDirectiveNode, isSimpleExpressionNode } from '../u
 export default function eventHandler(
 	documentation: Documentation,
 	templateAst: TemplateChildNode,
-	siblings: TemplateChildNode[],
-	options: TemplateParserOptions
+	siblings: TemplateChildNode[]
 ) {
 	if (isBaseElementNode(templateAst)) {
 		templateAst.props.forEach(prop => {
 			if (isDirectiveNode(prop)) {
-				if (prop.name == 'on') {
+				if (prop.name === 'on') {
 					// only look at expressions
 					const expression = prop.exp
 					if (isSimpleExpressionNode(expression)) {
-						getEventsFromExpression(
-							templateAst,
-							expression.content,
-							documentation,
-							siblings,
-							options
-						)
+						getEventsFromExpression(templateAst, expression.content, documentation, siblings)
 					}
 				}
 			}
@@ -40,8 +32,7 @@ function getEventsFromExpression(
 	item: BaseElementNode,
 	expression: string,
 	documentation: Documentation,
-	siblings: TemplateChildNode[],
-	options: TemplateParserOptions
+	siblings: TemplateChildNode[]
 ) {
 	const ast = getTemplateExpressionAST(expression)
 
@@ -57,6 +48,7 @@ function getEventsFromExpression(
 				return false
 			}
 			this.traverse(path)
+			return undefined
 		}
 	})
 	if (eventsFound.length) {

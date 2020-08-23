@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:4.9.0
+    - image: cypress/included:5.0.0
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -13,12 +13,14 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-vue-styleguidist-{{ checksum "yarn.lock" }}
-      - run: yarn
+            - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: pnpm config set store-dir ~/.pnpm-store
+      - run: pnpm install
       - save_cache:
-          key: v1-vue-styleguidist-{{ checksum "yarn.lock" }}
+          key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
-            - node_modules/
+            - '~/.pnpm-store'
       - persist_to_workspace:
           root: ~/
           paths:
@@ -31,18 +33,18 @@ jobs:
           at: ~/
 
       # Build all examples
-      - run: yarn build basic
-      - run: yarn build customised
-      - run: yarn build sections
-      - run: yarn build vuex
-      - run: yarn build functional-flag
+      - run: npm run build basic -- --ci
+      - run: npm run build customised -- --ci
+      - run: npm run build sections -- --ci
+      - run: npm run build vuex -- --ci
+      - run: npm run build functional-flag -- --ci
 
       # Check that examples really works: no JS errors on load
-      - run: yarn test:browser basic
-      - run: yarn test:browser customised
-      - run: yarn test:browser sections
-      - run: yarn test:browser vuex
-      - run: yarn test:browser functional-flag
+      - run: npm run test:browser basic
+      - run: npm run test:browser customised
+      - run: npm run test:browser sections
+      - run: npm run test:browser vuex
+      - run: npm run test:browser functional-flag
 
   examples-vuecli:
     <<: *defaults
@@ -50,15 +52,13 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: cd packages/vue-cli-plugin-styleguidist && yarn link && cd ../..
-
-      # remake the yarn link to vue-cli-plugin
-      - run: yarn build vuecli3
-      - run: yarn build vuecli-noplugin
-      - run: yarn build vuecli3-vuetify-ie
-      - run: yarn test:browser vuecli3
-      - run: yarn test:browser vuecli-noplugin
-      - run: yarn test:browser vuecli3-vuetify-ie
+      # remake the pnpm link to vue-cli-plugin
+      - run: npm run build vuecli3 -- --ci
+      - run: npm run build vuecli-noplugin -- --ci
+      - run: npm run build vuecli3-vuetify-ie -- --ci
+      - run: npm run test:browser vuecli3
+      - run: npm run test:browser vuecli-noplugin
+      - run: npm run test:browser vuecli3-vuetify-ie
 
   examples-other:
     <<: *defaults
@@ -67,16 +67,16 @@ jobs:
           at: ~/
 
       # Build all examples
-      - run: yarn build jsx
-      - run: yarn build jsx-examples
-      - run: yarn build nuxtjs
-      - run: yarn build vuetify
+      - run: npm run build jsx -- --ci
+      - run: npm run build jsx-examples -- --ci
+      - run: npm run build nuxtjs -- --ci
+      - run: npm run build vuetify -- --ci
 
       # Check that examples really works: no JS errors on load
-      - run: yarn test:browser jsx
-      - run: yarn test:browser jsx-examples
-      - run: yarn test:browser nuxtjs
-      - run: yarn test:browser vuetify
+      - run: npm run test:browser jsx
+      - run: npm run test:browser jsx-examples
+      - run: npm run test:browser nuxtjs
+      - run: npm run test:browser vuetify
 
   cypress:
     <<: *defaults
@@ -84,14 +84,12 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: cd packages/vue-cli-plugin-styleguidist && yarn link && cd ../..
-
       # run cypress tests
-      - run: yarn cross-env CY_EXAMPLE_FOLDER=basic yarn cy
+      - run: CY_EXAMPLE_FOLDER=basic npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots
-      - run: yarn cross-env CY_EXAMPLE_FOLDER=jsx-examples yarn cy
+      - run: CY_EXAMPLE_FOLDER=jsx-examples npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots

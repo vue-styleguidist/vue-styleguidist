@@ -1,7 +1,7 @@
 <template>
-  <div class="RandomButton">
-    <button class="random-button" @click.prevent="handleClick">{{ label }}</button>
-  </div>
+	<div class="RandomButton">
+		<button class="random-button" @click.prevent="handleClick">{{ label }}</button>
+	</div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 import getParser from '../getParser'
 
-var parseMock: jest.Mock
+let parseMock: jest.Mock
 jest.mock('vue-docgen-api', () => {
 	parseMock = jest.fn()
 	return {

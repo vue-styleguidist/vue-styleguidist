@@ -14,14 +14,14 @@ export default function scoper(css: string, suffix: string) {
 		// don't scope the part of the selector after ::v-deep
 		const arrayDeep = /(.*)(::v-deep|>>>|\/deep\/)(.*)/g.exec(selector)
 		if (arrayDeep) {
-			var [, beforeVDeep, , afterVDeep] = arrayDeep
+			const [, beforeVDeep, , afterVDeep] = arrayDeep
 			selector = beforeVDeep
 			after = afterVDeep + after
 		}
 
 		// deal with :scope pseudo selectors
 		if (selector && selector.match(/:scope/)) {
-			selector = selector.replace(/([^\s]*):scope/, function (full: string, cutSelector: string) {
+			selector = selector.replace(/([^\s]*):scope/, function (ful: string, cutSelector: string) {
 				if (cutSelector === '') {
 					return '> *'
 				}

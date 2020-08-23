@@ -27,12 +27,11 @@ describe('classPropHandler', () => {
 		})
 	})
 
-	function tester(src: string, matchedObj: any) {
+	function tester(src: string) {
 		const def = parseTS(src).get('default')
 		if (def) {
 			classMethodHandler(documentation, def)
 		}
-		expect(mockMethodDescriptor).toMatchObject(matchedObj)
 	}
 
 	it('should detect public methods', () => {
@@ -46,7 +45,9 @@ describe('classPropHandler', () => {
 
           }
         }`
-		tester(src, { name: 'myMethod' })
+
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({ name: 'myMethod' })
 	})
 
 	it('should detect public methods params', () => {
@@ -60,7 +61,8 @@ describe('classPropHandler', () => {
 
           }
         }`
-		tester(src, { name: 'myMethod', params: [{ name: 'param1' }] })
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({ name: 'myMethod', params: [{ name: 'param1' }] })
 	})
 
 	it('should detect public methods params with default values', () => {
@@ -74,7 +76,8 @@ describe('classPropHandler', () => {
 
           }
         }`
-		tester(src, { name: 'myMethod', params: [{ name: 'param1' }] })
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({ name: 'myMethod', params: [{ name: 'param1' }] })
 	})
 
 	it('should detect public methods params types', () => {
@@ -88,7 +91,11 @@ describe('classPropHandler', () => {
 
           }
         }`
-		tester(src, { name: 'myMethod', params: [{ name: 'param1', type: { name: 'string' } }] })
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
+			name: 'myMethod',
+			params: [{ name: 'param1', type: { name: 'string' } }]
+		})
 	})
 
 	it('should detect public methods return types', () => {
@@ -102,6 +109,10 @@ describe('classPropHandler', () => {
             return 1;
           }
         }`
-		tester(src, { name: 'myMethod', returns: { type: { name: 'number' } } })
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
+			name: 'myMethod',
+			returns: { type: { name: 'number' } }
+		})
 	})
 })

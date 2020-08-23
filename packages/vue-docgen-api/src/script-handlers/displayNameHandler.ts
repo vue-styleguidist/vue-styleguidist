@@ -8,13 +8,16 @@ import getProperties from './utils/getProperties'
  * @param documentation
  * @param path
  */
-export default async function displayNameHandler(documentation: Documentation, compDef: NodePath) {
+export default function displayNameHandler(
+	documentation: Documentation,
+	compDef: NodePath
+): Promise<void> {
 	if (bt.isObjectExpression(compDef.node)) {
 		const namePath = getProperties(compDef, 'name')
 
 		// if no prop return
 		if (!namePath.length) {
-			return
+			return Promise.resolve()
 		}
 
 		const nameValuePath = namePath[0].get('value')
@@ -34,6 +37,7 @@ export default async function displayNameHandler(documentation: Documentation, c
 		}
 		documentation.set('displayName', displayName)
 	}
+	return Promise.resolve()
 }
 
 function getDeclaredConstantValue(prog: NodePath<bt.Program>, nameConstId: string): string | null {

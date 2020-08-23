@@ -10,6 +10,7 @@ import { ImportedVariableSet } from './resolveRequired'
 
 const read = promisify(readFile)
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const hash = require('hash-sum')
 
 /**
@@ -32,6 +33,8 @@ export default async function recursiveResolveIEV(
 	let hashBefore: any
 	do {
 		hashBefore = hash(varToFilePath)
+		// in this case I need to resolve IEV in sequence in case they are defined multiple times
+		// eslint-disable-next-line no-await-in-loop
 		await resolveIEV(pathResolver, varToFilePath, validExtends)
 	} while (hashBefore !== hash(varToFilePath))
 }

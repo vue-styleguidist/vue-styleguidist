@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation, { BlockTag, DocBlockTags } from '../Documentation'
+import Documentation, { BlockTag, DocBlockTags, ParamType } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
@@ -19,10 +19,10 @@ import getArgFromDecorator from '../utils/getArgFromDecorator'
  * @param documentation
  * @param path
  */
-export default async function classPropHandler(
+export default function classPropHandler(
 	documentation: Documentation,
 	path: NodePath<bt.ClassDeclaration>
-) {
+): Promise<void> {
 	if (bt.isClassDeclaration(path.node)) {
 		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
 
@@ -43,12 +43,12 @@ export default async function classPropHandler(
 				})
 
 				if (!propDeco.length) {
-					return
+					return undefined
 				}
 
 				const propName = bt.isIdentifier(propPath.node.key) ? propPath.node.key.name : undefined
 				if (!propName) {
-					return
+					return undefined
 				}
 
 				const propDescriptor = documentation.getPropDescriptor(propName)
@@ -78,6 +78,8 @@ export default async function classPropHandler(
 						// type
 						propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
 					}
+				} else if (propPath.node.value) {
+					propDescriptor.type = getTypeFromInitValue(propPath.node.value)
 				}
 
 				const propDecoratorPath = propDeco[0].get('expression')
@@ -87,9 +89,7 @@ export default async function classPropHandler(
 					if (propDecoratorArg && bt.isObjectExpression(propDecoratorArg.node)) {
 						const propsPath = propDecoratorArg
 							.get('properties')
-							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as Array<
-							NodePath<bt.ObjectProperty>
-						>
+							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as NodePath<bt.ObjectProperty>[]
 
 						// if there is no type annotation, get it from the decorators arguments
 						if (!propPath.node.typeAnnotation) {
@@ -99,6 +99,21 @@ export default async function classPropHandler(
 						describeRequired(propsPath, propDescriptor)
 					}
 				}
+				return undefined
 			})
 	}
+	return Promise.resolve()
+}
+
+function getTypeFromInitValue(node: any): ParamType | undefined {
+	if (bt.isNumericLiteral(node)) {
+		return { name: 'number' }
+	}
+	if (bt.isStringLiteral(node) || bt.isTemplateLiteral(node)) {
+		return { name: 'string' }
+	}
+	if (bt.isBooleanLiteral(node)) {
+		return { name: 'boolean' }
+	}
+	return undefined
 }

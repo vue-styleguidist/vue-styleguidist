@@ -79,7 +79,10 @@ function runIt(conf: SanitizedStyleguidistConfig) {
 
 	switch (command) {
 		case 'build':
-			binutils.commandBuild(config)
+			binutils.commandBuild({
+				...config,
+				progressBar: argv.ci !== undefined ? !argv.ci : config.progressBar
+			})
 			break
 		case 'server':
 			binutils.commandServer(config, argv.open)

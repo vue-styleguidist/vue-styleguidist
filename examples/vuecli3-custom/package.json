@@ -1,75 +1,77 @@
 {
-  "name": "vue-styleguidist-example-vuecli3-custom",
-  "version": "4.0.0",
-  "description": "If you want to customize the styleguide and use the vue cli plugin change a little bit your babel config. This way your styleguide compoents are compiled with react jsx engine instead of vue",
-  "private": true,
-  "keywords": [
-    "styled",
-    "feature rich",
-    "branding",
-    "beautiful",
-    "vuecli3",
-    "plugin"
-  ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build"
-  },
-  "dependencies": {
-    "vue": "^2.5.16"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.4.4",
-    "@babel/preset-react": "^7.0.0",
-    "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-service": "^4.0.5",
-    "eslint-plugin-react": "^7.10.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "vue-cli-plugin-styleguidist": "^4.0.0",
-    "vue-template-compiler": "^2.5.16"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "overrides": [
-      {
-        "files": [
-          "./styleguide/**/*.js"
-        ],
-        "plugins": [
-          "react"
-        ],
-        "parserOptions": {
-          "ecmaFeatures": {
-            "jsx": true
-          }
-        }
-      }
-    ]
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+	"name": "vue-styleguidist-example-vuecli3-custom",
+	"version": "4.0.0",
+	"description": "If you want to customize the styleguide and use the vue cli plugin change a little bit your babel config. This way your styleguide compoents are compiled with react jsx engine instead of vue",
+	"private": true,
+	"keywords": [
+		"styled",
+		"feature rich",
+		"branding",
+		"beautiful",
+		"vuecli3",
+		"plugin"
+	],
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint",
+		"styleguide": "vue-cli-service styleguidist",
+		"styleguide:build": "vue-cli-service styleguidist:build"
+	},
+	"dependencies": {
+		"vue": "^2.5.16"
+	},
+	"devDependencies": {
+		"@vue/babel-preset-app": "^4.5.4",
+		"@babel/preset-env": "^7.4.4",
+		"@babel/preset-react": "^7.0.0",
+		"@vue/cli-plugin-babel": "^4.0.5",
+		"@vue/cli-plugin-eslint": "^4.0.5",
+		"@vue/cli-service": "^4.0.5",
+		"autoprefixer": "^9.8.6",
+		"eslint-plugin-react": "^7.20.6",
+		"prop-types": "^15.6.2",
+		"react": "^16.4.1",
+		"vue-cli-plugin-styleguidist": "^4.0.0",
+		"vue-template-compiler": "^2.5.16"
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"eslint:recommended"
+		],
+		"rules": {},
+		"parserOptions": {
+			"parser": "babel-eslint"
+		},
+		"overrides": [
+			{
+				"files": [
+					"./styleguide/**/*.js"
+				],
+				"plugins": [
+					"react"
+				],
+				"parserOptions": {
+					"ecmaFeatures": {
+						"jsx": true
+					}
+				}
+			}
+		]
+	},
+	"postcss": {
+		"plugins": {
+			"autoprefixer": {}
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not ie <= 8"
+	]
 }

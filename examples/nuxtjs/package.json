@@ -1,35 +1,41 @@
 {
-  "name": "vue-styleguidist-example-nuxtjs",
-  "version": "4.0.0",
-  "description": "Use beside Nuxt.js and generate your styleguide besides your main app",
-  "keywords": [
-    "nuxt",
-    "nuxtjs",
-    "production ready",
-    "scaffolding"
-  ],
-  "author": "Knovour <knovour@gmail.com>",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "styleguide": "vue-styleguidist server --config styleguide.config.js",
-    "styleguide:build": "vue-styleguidist build --config styleguide.config.js"
-  },
-  "dependencies": {
-    "nuxt": "^2.12.2",
-    "vue": "^2.6.10",
-    "vuex": "^3.1.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
-    "vue-styleguidist": "^4.0.0",
-    "webpack": "^4.10.0"
-  }
+	"name": "vue-styleguidist-example-nuxtjs",
+	"version": "4.0.0",
+	"description": "Use beside Nuxt.js and generate your styleguide besides your main app",
+	"keywords": [
+		"nuxt",
+		"nuxtjs",
+		"production ready",
+		"scaffolding"
+	],
+	"author": "Knovour <knovour@gmail.com>",
+	"private": true,
+	"scripts": {
+		"dev": "nuxt",
+		"build": "nuxt build",
+		"start": "nuxt start",
+		"generate": "nuxt generate",
+		"styleguide": "vue-styleguidist server --config styleguide.config.js",
+		"styleguide:build": "vue-styleguidist build --config styleguide.config.js"
+	},
+	"dependencies": {
+		"nuxt": "^2.12.2",
+		"vue": "^2.6.10",
+		"vuex": "^3.1.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.2.2",
+		"@babel/plugin-transform-runtime": "^7.2.0",
+		"@babel/preset-env": "^7.3.1",
+		"css-loader": "^3.6.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"node-sass": "^4.13.0",
+		"postcss-loader": "^3.0.0",
+		"sass-loader": "^8.0.0",
+		"vue-loader": "15.9.3",
+		"vue-style-loader": "^4.1.2",
+		"vue-styleguidist": "^4.0.0",
+		"webpack": "^4.10.0"
+	}
 }

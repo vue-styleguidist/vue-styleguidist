@@ -1,16 +1,29 @@
 # This file contains all examples built in the netlify build process
 # Netlify build is limited to 15 min. It cannot build it all.
 basic
-# customised
-# jsx-examples
-# vueds
+customised
+dashed-component
+vueds
+jsx-examples
+functional-flag
+svg-loader
+jsx
+router
+vuetify
+vuex
+with-laravel-token
+with-sass-loader
 
 # build examples with docgen and vuepress
 docgen
 
-# nuxtjs-ts-property-decorator
+# nuxtjs
+nuxtjs
+nuxtjs-ts-property-decorator
 
 # build cli examples to make sure they build
-# vuecli3-class-pug-ts
-# vuecli3-custom
-# vuecli3-vuetify-ie
+vuecli-noplugin
+vuecli3
+vuecli3-class-pug-ts
+vuecli3-custom
+vuecli3-vuetify-ie

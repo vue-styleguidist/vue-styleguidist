@@ -22,7 +22,7 @@ describe('functional render function slotHandler', () => {
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 
-	it('should find slots in functional render function', async done => {
+	it('should find slots in functional render function', async () => {
 		const src = `
     export default {
 	  functional: true,
@@ -38,10 +38,9 @@ describe('functional render function slotHandler', () => {
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
 		expect(mockSlotDescriptor.description).toBe('describe default slot')
-		done()
 	})
 
-	it('should find children default slots in destructured render function params', async done => {
+	it('should find children default slots in destructured render function params', async () => {
 		const src = `
     export default {
 	  functional: true,
@@ -57,10 +56,9 @@ describe('functional render function slotHandler', () => {
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
 		expect(mockSlotDescriptor.description).toBe('describe destructured default')
-		done()
 	})
 
-	it('should parse functional components without context', async done => {
+	it('should parse functional components without context', () => {
 		const src = `
     export default {
 	  functional: true,
@@ -73,10 +71,9 @@ describe('functional render function slotHandler', () => {
 		if (def) {
 			expect(async () => {
 				await slotHandlerFunctional(documentation, def)
-				done()
 			}).not.toThrow()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 })

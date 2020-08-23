@@ -11,9 +11,8 @@ let docApp: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
 	describe('wrapper', () => {
-		beforeEach(async done => {
+		beforeEach(async () => {
 			docWrapper = await parse(wrapper)
-			done()
 		})
 
 		it('should have a slot.', () => {
@@ -50,9 +49,8 @@ describe('tests wrapper with root slot', () => {
 	})
 
 	describe('app', () => {
-		beforeEach(async done => {
+		beforeEach(async () => {
 			docApp = await parse(app)
-			done()
 		})
 
 		it('should have a slot', () => {

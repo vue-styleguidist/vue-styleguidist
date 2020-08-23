@@ -21,11 +21,7 @@ test/cypress/videos/
 /docs/docs/docgen-cli.md
 
 # examples build artefacts
-/examples/*/dist/build
-/examples/*/dist/css/*.css
-/examples/*/dist/index.html
-/examples/*/dist/report.html
-/examples/*/dist/favicon.ico
+/examples/*/dist/
 
 # docs generted using run.cli
 /examples/*/docs/components/**/*.md

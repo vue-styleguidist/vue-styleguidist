@@ -1,8 +1,8 @@
 <template>
-  <option :value="val">
-    <!-- @slot text displayed in the option -->
-    <slot />
-  </option>
+	<option :value="val">
+		<!-- @slot text displayed in the option -->
+		<slot />
+	</option>
 </template>
 <script>
 export default {

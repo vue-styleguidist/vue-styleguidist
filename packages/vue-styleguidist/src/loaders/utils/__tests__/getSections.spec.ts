@@ -83,37 +83,33 @@ function filterSectionDepth(section: Rsg.LoaderSection): Rsg.ConfigSection {
 }
 
 describe('processSection', () => {
-	it('should return an object for section with content', async done => {
+	it('should return an object for section with content', async () => {
 		const result = await processSection(sections[0], { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
-		done()
 	})
 
-	it('should return an object for section with components', async done => {
+	it('should return an object for section with components', async () => {
 		const result = await processSection(sections[1], { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
-		done()
 	})
 
-	it('should return an object for section without ignored components', async done => {
+	it('should return an object for section without ignored components', async () => {
 		const result = await processSection(sections[2], { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
-		done()
 	})
 })
 
 describe('getSections', () => {
-	it('should return an array', async done => {
+	it('should return an array', async () => {
 		const result = await getSections(sections, { config, componentFiles: [] })
 
 		expect(result).toMatchSnapshot()
-		done()
 	})
 
-	it('should return an array of sectionsWithDepth with sectionDepth decreasing', async done => {
+	it('should return an array of sectionsWithDepth with sectionDepth decreasing', async () => {
 		const result = await getSections(sectionsWithDepth, { config, componentFiles: [] })
 
 		expect(result.map(filterSectionDepth)).toEqual([
@@ -139,10 +135,9 @@ describe('getSections', () => {
 				]
 			}
 		])
-		done()
 	})
 
-	it('should return an array of sectionsWithBadDepth taking the sectionDepth of the first depth of the sections', async done => {
+	it('should return an array of sectionsWithBadDepth taking the sectionDepth of the first depth of the sections', async () => {
 		const result = await getSections(sectionsWithBadDepth, { config, componentFiles: [] })
 
 		expect(result.map(filterSectionDepth)).toEqual([
@@ -160,7 +155,6 @@ describe('getSections', () => {
 				]
 			}
 		])
-		done()
 	})
 })
 
@@ -180,7 +174,7 @@ jest.mock('vue-docgen-api', () => ({
 }))
 
 describe('getRequiredComponents', () => {
-	it('should return an array of all requires tags contents', async done => {
+	it('should return an array of all requires tags contents', async () => {
 		const requiredFiles = await getRequiredComponents(['source/of/file'], false)
 		expect(requiredFiles).toMatchInlineSnapshot(`
 		Object {
@@ -190,6 +184,5 @@ describe('getRequiredComponents', () => {
 		  ],
 		}
 	`)
-		done()
 	})
 })

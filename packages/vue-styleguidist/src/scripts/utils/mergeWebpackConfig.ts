@@ -1,8 +1,7 @@
 import { Configuration, Plugin } from 'webpack'
-
-const isFunction = require('lodash/isFunction')
-const omit = require('lodash/omit')
-const mergeBase = require('webpack-merge')
+import isFunction from 'lodash/isFunction'
+import omit from 'lodash/omit'
+import mergeBase from 'webpack-merge'
 
 const IGNORE_SECTIONS = ['entry', 'output', 'watch', 'stats', 'styleguidist']
 const IGNORE_SECTIONS_ENV: { [key: string]: string[] } = {

@@ -33,7 +33,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 				return scriptCodeHighlighted
 			}
 			const templateCode = code.slice(scriptCode.length)
-			return scriptCodeHighlighted + prismHighlight(templateCode, languages['html'], lang)
+			return scriptCodeHighlighted + prismHighlight(templateCode, languages.html, lang)
 		}
 	} else {
 		const langScheme = languages[lang]
@@ -75,7 +75,7 @@ export interface UnconfiguredEditorProps extends JssInjectedProps {
 }
 
 export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
-	static propTypes = {
+	public static propTypes = {
 		classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
 		code: PropTypes.string.isRequired,
 		jssThemedEditor: PropTypes.bool.isRequired,
@@ -84,9 +84,9 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		editorPadding: PropTypes.number
 	}
 
-	state = { code: this.props.code, prevCode: this.props.code }
+	public state = { code: this.props.code, prevCode: this.props.code }
 
-	static getDerivedStateFromProps(
+	public static getDerivedStateFromProps(
 		nextProps: UnconfiguredEditorProps,
 		prevState: { code: string; prevCode: string }
 	) {
@@ -100,19 +100,19 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		return null
 	}
 
-	shouldComponentUpdate(
+	public shouldComponentUpdate(
 		nextProps: UnconfiguredEditorProps,
 		nextState: { code: string; prevCode: string }
 	) {
 		return nextState.code !== this.state.code
 	}
 
-	handleChange = (code: string) => {
+	public handleChange = (code: string) => {
 		this.setState({ code })
 		this.props.onChange(code)
 	}
 
-	render() {
+	public render() {
 		const { root, jssEditor } = this.props.classes
 		const isVueSFC = isCodeVueSfc(this.state.code)
 		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props

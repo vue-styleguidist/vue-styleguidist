@@ -59,7 +59,7 @@ export default function parseValidatorForValues(
 				}
 				break
 			default:
-				return
+				return undefined
 		}
 
 		const values: string[] | undefined =
@@ -81,5 +81,5 @@ export default function parseValidatorForValues(
 			return extractStringArray(returnedExpression.callee.object)
 		}
 	}
-	return
+	return undefined
 }

@@ -6,9 +6,8 @@ const Base = path.join(__dirname, './Base.vue')
 let docBase: ComponentDoc
 
 describe('tests Base', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docBase = await parse(Base)
-		done()
 	})
 
 	it('should return an object', () => {

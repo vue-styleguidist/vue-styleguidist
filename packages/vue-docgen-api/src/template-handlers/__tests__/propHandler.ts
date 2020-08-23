@@ -9,7 +9,7 @@ describe('slotHandler', () => {
 		doc = new Documentation('dummy/path')
 	})
 
-	it('should match props in attributes expressions', done => {
+	it('should match props in attributes expressions', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -31,13 +31,12 @@ describe('slotHandler', () => {
 				{ name: 'size', type: { name: 'number' }, description: 'width of the button' },
 				{ name: 'value', type: { name: 'string' }, description: 'value in the form' }
 			])
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 
-	it('should match props in interpolated text', done => {
+	it('should match props in interpolated text', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -58,13 +57,12 @@ describe('slotHandler', () => {
 				{ name: 'name', type: { name: 'mixed' }, description: 'Your Name' },
 				{ name: 'adress', type: { name: 'string' }, description: 'Your Adress' }
 			])
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 
-	it('should not match props if in a string litteral', done => {
+	it('should not match props if in a string litteral', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -78,13 +76,12 @@ describe('slotHandler', () => {
 				functional: true
 			})
 			expect(doc.toObject().props).toBeUndefined()
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 
-	it('should not match props if in a non evaluated attribute', done => {
+	it('should not match props if in a non evaluated attribute', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -98,13 +95,12 @@ describe('slotHandler', () => {
 				functional: true
 			})
 			expect(doc.toObject().props).toBeUndefined()
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 
-	it('should find props in object defined', done => {
+	it('should find props in object defined', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -121,9 +117,8 @@ describe('slotHandler', () => {
 				functional: true
 			})
 			expect(doc.toObject().props).toMatchObject([{ name: 'error', type: {} }])
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 })

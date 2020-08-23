@@ -1,6 +1,3 @@
 # ignore build file
 /lib/**/*.js
 /lib/**/*.d.ts
-# but keep track the index file to keep 
-# yarn workspaces linking the plugins with it
-!/lib/scripts/index.js

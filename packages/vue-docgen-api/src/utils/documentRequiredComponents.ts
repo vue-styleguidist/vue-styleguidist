@@ -35,7 +35,7 @@ export default async function documentRequiredComponents(
 		]
 	}
 
-	const files = new Map<string, Array<{ exportName: string; varName: string }>>()
+	const files = new Map<string, { exportName: string; varName: string }[]>()
 	for (const varName of Object.keys(varToFilePath)) {
 		const { filePath, exportName } = varToFilePath[varName]
 		filePath.forEach(p => {

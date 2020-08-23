@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<input ref="input" v-model="val" @input="updateValue($event.target.value)" @change="emitChange" />
+		<input
+			ref="input"
+			v-model="val"
+			@input="updateValue($event.target.value)"
+			@change="emitChange"
+		/>
 		<button @click="fireEvent()">
 			Fire example event!
 		</button>

@@ -22,7 +22,7 @@ describe('render function slotHandler', () => {
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 
-	it('should provide an escape hatch for unexpected slots', async done => {
+	it('should provide an escape hatch for unexpected slots', async () => {
 		const src = `
 export default {
   /**
@@ -38,10 +38,9 @@ export default {
 			await slotHandlerLitteral(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('icon')
-		done()
 	})
 
-	it('should allow for multiple slots', async done => {
+	it('should allow for multiple slots', async () => {
 		const src = `
 export default {
   /**
@@ -61,10 +60,9 @@ export default {
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('one')
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('two')
-		done()
 	})
 
-	it('should use default is no name is provided', async done => {
+	it('should use default is no name is provided', async () => {
 		const src = `
 export default {
   /**
@@ -80,10 +78,9 @@ export default {
 			await slotHandlerLitteral(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
-		done()
 	})
 
-	it('should describe slot using the description', async done => {
+	it('should describe slot using the description', async () => {
 		const src = `
 export default {
   /**
@@ -100,10 +97,9 @@ export default {
 			await slotHandlerLitteral(documentation, def)
 		}
 		expect(mockSlotDescriptor.description).toBe('describe the default slot')
-		done()
 	})
 
-	it('should allow binding description', async done => {
+	it('should allow binding description', async () => {
 		const src = `
 export default {
   /**
@@ -121,6 +117,5 @@ export default {
 			await slotHandlerLitteral(documentation, def)
 		}
 		expect(mockSlotDescriptor.bindings).toMatchObject([{ name: 'index' }, { name: 'content' }])
-		done()
 	})
 })

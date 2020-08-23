@@ -10,5 +10,5 @@ import Component from 'vue-class-component'
 	}
 })
 export default class MyMixin extends Vue {
-	mixinValue = 'Hello'
+	public mixinValue = 'Hello'
 }

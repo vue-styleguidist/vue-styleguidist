@@ -1,4 +1,3 @@
-
 <script>
 import { VBtn } from 'vuetify/lib'
 import loggerMixin from '../../mixins/loggerMixin'
@@ -38,6 +37,6 @@ export default {
 				console.log('You have clicked me!', event.target)
 			}
 		}
-	},
+	}
 }
 </script>

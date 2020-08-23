@@ -8,14 +8,13 @@ const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 
 describe('tests button', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docButton = await parse(button, {
 			'@mixins': path.resolve(__dirname, '../../mixins'),
 			'@utils': path.resolve(__dirname, '../../utils')
 		})
 		// make sure all props are always in the same order
 		docButton.props = docButton.props?.sort((p1, p2) => (p1.name < p2.name ? 1 : -1))
-		done()
 	})
 
 	it('should return an object', () => {

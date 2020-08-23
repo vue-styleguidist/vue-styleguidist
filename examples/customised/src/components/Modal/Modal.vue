@@ -1,20 +1,20 @@
 <template>
-<transition name="Modal" v-if="showModal">
-	<div class="modal-mask">
-		<div class="modal-wrapper">
-			<div class="modal-container">
-				<div class="modal-head">
-					<!-- @slot Use this slot header -->
-					<slot name="head"></slot>
-				</div>
-				<div class="modal-body">
-					<!-- @slot Use this slot body -->
-					<slot name="body"></slot>
+	<transition name="Modal" v-if="showModal">
+		<div class="modal-mask">
+			<div class="modal-wrapper">
+				<div class="modal-container">
+					<div class="modal-head">
+						<!-- @slot Use this slot header -->
+						<slot name="head"></slot>
+					</div>
+					<div class="modal-body">
+						<!-- @slot Use this slot body -->
+						<slot name="body"></slot>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</transition>
+	</transition>
 </template>
 
 <script>

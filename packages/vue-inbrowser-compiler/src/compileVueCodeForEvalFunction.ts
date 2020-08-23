@@ -35,9 +35,9 @@ export default function compileVueCodeForEvalFunction(
 }
 
 function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
-	let style,
-		vsgMode = false,
-		template
+	let style
+	let vsgMode = false
+	let template
 
 	// if the component is written as a Vue sfc,
 	// transform it in to a "return"

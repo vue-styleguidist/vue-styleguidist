@@ -1,7 +1,10 @@
 import getSources from '../getSources'
 
-var mockWatch: jest.Mock, mockAddWatch: jest.Mock, fakeOn: jest.Mock, mockGlobby: jest.Mock
-var fakeWatcher: any
+let mockWatch: jest.Mock
+let mockAddWatch: jest.Mock
+let fakeOn: jest.Mock
+let mockGlobby: jest.Mock
+let fakeWatcher: any
 jest.mock('chokidar', () => {
 	mockAddWatch = jest.fn()
 	fakeOn = jest.fn((item, cb) => {
@@ -43,7 +46,7 @@ const COMPONENTS_GLOB = 'components/**/*.vue'
 const getDocFileName = (componentPath: string) => `path/to/Readme.md+${componentPath}`
 
 describe('getSources', () => {
-	it('should return component files from chokidar', async done => {
+	it('should return component files from chokidar', async () => {
 		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(componentFiles).toMatchInlineSnapshot(`
 		Array [
@@ -53,10 +56,9 @@ describe('getSources', () => {
 		  "src/components/PushButton/PushButton.vue",
 		]
 	`)
-		done()
 	})
 
-	it('should return a docMap using the getDocFileName', async done => {
+	it('should return a docMap using the getDocFileName', async () => {
 		const { docMap } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(docMap).toMatchInlineSnapshot(`
 		Object {
@@ -66,12 +68,10 @@ describe('getSources', () => {
 		  "../path/to/Readme.md+here/src/components/PushButton/PushButton.vue": "src/components/PushButton/PushButton.vue",
 		}
 	`)
-		done()
 	})
 
-	it('should return the watcher so it can be enriched', async done => {
+	it('should return the watcher so it can be enriched', async () => {
 		const { watcher } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(watcher).toBe(fakeWatcher)
-		done()
 	})
 })

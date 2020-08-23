@@ -6,9 +6,8 @@ import getTestDescriptor from '../../utils/getTestDescriptor'
 const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 describe('tests button', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docButton = await parse(button)
-		done()
 	})
 
 	it('should return an object', () => {

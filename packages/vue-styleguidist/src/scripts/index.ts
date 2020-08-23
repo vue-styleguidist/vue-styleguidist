@@ -61,12 +61,12 @@ export default function (
 	config: SanitizedStyleguidistConfig,
 	updateConfig: (conf: SanitizedStyleguidistConfig) => void
 ): StyleGuideUtils | Promise<StyleGuideUtils> {
-	const configInternal = getConfig(config, (config: SanitizedStyleguidistConfig) => {
-		setupLogger(config.logger, config.verbose, {})
+	const configInternal = getConfig(config, (cfg: SanitizedStyleguidistConfig) => {
+		setupLogger(cfg.logger, cfg.verbose, {})
 		if (typeof updateConfig === 'function') {
-			updateConfig(config)
+			updateConfig(cfg)
 		}
-		return config
+		return cfg
 	})
 
 	if (isPromise(configInternal)) {

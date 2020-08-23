@@ -7,7 +7,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
  */
 @Component
 export default class MyComponent extends Vue {
-	public aHiddenData: string = ''
+	public aHiddenData = ''
 
 	/**
 	 * An example of a property typed through the decorators arguments
@@ -16,15 +16,25 @@ export default class MyComponent extends Vue {
 	public propNoType = ''
 
 	/**
-	 * An example of a property typed through the annotation
+	 * An example of a property typed through the init value (number)
 	 */
-	@Prop() public propA: number = 0
+	@Prop() public propAnum = 0
+
+	/**
+	 * An example of a property typed through the init value (string)
+	 */
+	@Prop() public propAstr = 'aa'
+
+	/**
+	 * An example of a property typed through the init value (interpolation)
+	 */
+	@Prop() public propAinter = `aa${33}`
 
 	/**
 	 * A prop with a default value
 	 */
 	@Prop({ default: 'default value' })
-	public propB: string = 'hello'
+	public propB = 'hello'
 
 	/**
 	 * A prop with a hybrid type

@@ -20,7 +20,9 @@ const buildStyles = function (styles: string[] | undefined): string | undefined 
 
 function getSingleFileComponentParts(code: string) {
 	const parts = parseComponent(code)
-	if (parts.script) parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
+	if (parts.script) {
+		parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
+	}
 	return parts
 }
 
@@ -33,7 +35,9 @@ function injectTemplateAndParseExport(
 } {
 	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
 
-	if (!parts.script) return { component: `{\ntemplate: \`${templateString}\` }` }
+	if (!parts.script) {
+		return { component: `{\ntemplate: \`${templateString}\` }` }
+	}
 
 	const comp = parseScriptCode(parts.script)
 	if (templateString) {
@@ -104,7 +108,7 @@ export function parseScriptCode(
 		)
 		endIndex += JSX_ADDON_LENGTH
 	}
-	let component = code.slice(startIndex + 1, endIndex - 1)
+	const component = code.slice(startIndex + 1, endIndex - 1)
 	return {
 		preprocessing,
 		component,

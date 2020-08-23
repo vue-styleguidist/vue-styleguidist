@@ -25,7 +25,9 @@ export interface SubTemplateOptions {
 }
 
 export function getDependencies(doc: Pick<ComponentDoc, 'tags'>, compDirName: string): string[] {
-	if (!doc.tags) return []
+	if (!doc.tags) {
+		return []
+	}
 	const requireDep =
 		doc.tags.requires?.map((t: ParamTag) => path.join(compDirName, t.description as string)) || []
 	const examplesDep = getExamplesFilePaths(doc.tags, compDirName)
@@ -52,16 +54,16 @@ export default async function compileTemplates(
 	const { apiOptions: options, templates, cwd } = config
 	try {
 		const doc = await parse(absolutePath, options)
-		const { props, events, methods, slots } = doc
+		const { props: p, events: e, methods: m, slots: s } = doc
 		const isSubComponent = subComponent
 		const hasSubComponents = !!doc.tags?.requires
 		const subComponentOptions = { isSubComponent, hasSubComponents }
 
 		const renderedUsage = {
-			props: props ? templates.props(props, subComponentOptions) : '',
-			slots: slots ? templates.slots(slots, subComponentOptions) : '',
-			methods: methods ? templates.methods(methods, subComponentOptions) : '',
-			events: events ? templates.events(events, subComponentOptions) : '',
+			props: p ? templates.props(p, subComponentOptions) : '',
+			slots: s ? templates.slots(s, subComponentOptions) : '',
+			methods: m ? templates.methods(m, subComponentOptions) : '',
+			events: e ? templates.events(e, subComponentOptions) : '',
 			functionalTag: templates.functionalTag
 		}
 

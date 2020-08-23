@@ -7,9 +7,8 @@ const grid = path.join(__dirname, './Grid.vue')
 let docGrid: ComponentDoc
 
 describe('tests grid', () => {
-	beforeEach(async done => {
+	beforeEach(async () => {
 		docGrid = await parse(grid)
-		done()
 	})
 
 	it('should return an object', () => {

@@ -7,7 +7,7 @@ export interface VsgSFCDescriptor extends VsgSFCDescriptorSimple {
 	styles?: string[]
 }
 
-const PARTS: Array<keyof VsgSFCDescriptorSimple> = ['template', 'script']
+const PARTS: (keyof VsgSFCDescriptorSimple)[] = ['template', 'script']
 
 export default function parseComponent(code: string): VsgSFCDescriptor {
 	// reinintialize regexp after each tour
@@ -44,8 +44,8 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 	// we assume that
 	const styleRE = /(<style[^>]*>)([^<]+)(<.......)/g
 	const styleFollowUpRE = /()([^<]+)(<.......)/g
-	let styleAnalyzed: string = ''
-	let stylesWithWrapper: string[] = []
+	let styleAnalyzed = ''
+	const stylesWithWrapper: string[] = []
 	let stylePart: RegExpExecArray | undefined | null = styleRE.exec(check)
 	let styleHeader: string = stylePart ? stylePart[1] : ''
 	let styles: string[] | undefined
@@ -72,9 +72,9 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 	}
 	if (styles) {
 		descriptor.styles = styles
-		let i = styles.length
-		while (i--) {
-			check = check.replace(stylesWithWrapper[i], '').trim()
+		let j = styles.length
+		while (j--) {
+			check = check.replace(stylesWithWrapper[j], '').trim()
 		}
 	}
 	return check.length ? {} : descriptor

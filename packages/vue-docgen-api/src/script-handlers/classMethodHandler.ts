@@ -10,7 +10,10 @@ import { setMethodDescriptor } from './methodHandler'
  * @param documentation
  * @param path
  */
-export default async function classMethodHandler(documentation: Documentation, path: NodePath) {
+export default function classMethodHandler(
+	documentation: Documentation,
+	path: NodePath
+): Promise<void> {
 	if (bt.isClassDeclaration(path.node)) {
 		const methods: MethodDescriptor[] = documentation.get('methods') || []
 		const allMethods = path
@@ -32,14 +35,16 @@ export default async function classMethodHandler(documentation: Documentation, p
 
 			// ignore the method if there is no public tag
 			if (!jsDocTags.some((t: Tag) => t.title === 'access' && t.content === 'public')) {
-				return
+				return Promise.resolve()
 			}
 			const methodDescriptor = documentation.getMethodDescriptor(methodName)
 			if (jsDoc.description) {
 				methodDescriptor.description = jsDoc.description
 			}
 			setMethodDescriptor(methodDescriptor, methodPath, jsDocTags)
+			return true
 		})
 		documentation.set('methods', methods)
 	}
+	return Promise.resolve()
 }

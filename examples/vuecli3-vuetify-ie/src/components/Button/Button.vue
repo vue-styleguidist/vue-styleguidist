@@ -1,9 +1,9 @@
 <template>
-  <div class="Button">
-    <v-btn :color="color" @click.prevent="onClick" :style="{ fontSize: fontSize }">
-      <slot></slot>
-    </v-btn>
-  </div>
+	<div class="Button">
+		<v-btn :color="color" @click.prevent="onClick" :style="{ fontSize: fontSize }">
+			<slot></slot>
+		</v-btn>
+	</div>
 </template>
 
 <script>

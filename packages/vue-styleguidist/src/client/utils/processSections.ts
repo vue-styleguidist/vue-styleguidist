@@ -19,13 +19,13 @@ export default function processSections({
 }: SectionAndFiles): ProcessedSection[] {
 	return sections.map(section => {
 		compileExamples(section.content || [])
-		const { components = [], sections } = section
+		const { components = [], sections: sectionsInside } = section
 
 		return {
 			...section,
 			visibleName: section.name,
 			components: processComponents({ components, exampleFileNames }),
-			sections: processSections({ sections, exampleFileNames })
+			sections: processSections({ sections: sectionsInside, exampleFileNames })
 		}
 	})
 }

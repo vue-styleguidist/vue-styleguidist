@@ -1,14 +1,14 @@
 {
-  "lerna": "3.13.1",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
-  "version": "4.31.1",
-  "command": {
-    "publish": {
-      "conventionalCommits": true
-    },
-    "version": {
-      "message": "chore: %s [skip ci]"
-    }
-  }
+	"lerna": "3.22.1",
+	"npmClient": "pnpm",
+	"packages": ["packages/*"],
+	"version": "4.31.1",
+	"command": {
+		"publish": {
+			"conventionalCommits": true
+		},
+		"version": {
+			"message": "chore: %s [skip ci]"
+		}
+	}
 }
