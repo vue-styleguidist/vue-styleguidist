@@ -1,8 +1,8 @@
 module.exports = {
 	srcDir: 'src/',
 	/*
-  ** Headers of the page
-  */
+	 ** Headers of the page
+	 */
 	head: {
 		title: 'styleguide',
 		meta: [
@@ -14,7 +14,7 @@ module.exports = {
 	},
 	build: {
 		babel: {
-			babelrc: true,
+			babelrc: true
 		}
 	},
 	/*

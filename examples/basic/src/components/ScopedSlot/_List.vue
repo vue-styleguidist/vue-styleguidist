@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <slot
-      v-for="item in items"
-      :item="item"
-    >
-      <!-- fallback content here -->
-    </slot>
-  </div>
+	<div>
+		<slot v-for="item in items" :item="item">
+			<!-- fallback content here -->
+		</slot>
+	</div>
 </template>
 
 <script>

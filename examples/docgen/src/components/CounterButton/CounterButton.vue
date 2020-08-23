@@ -1,6 +1,6 @@
 <template>
 	<div class="CounterButton">
-		<button class="button" @click.prevent="increment">{{count}}</button>
+		<button class="button" @click.prevent="increment">{{ count }}</button>
 	</div>
 </template>
 

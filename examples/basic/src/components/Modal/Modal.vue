@@ -1,26 +1,20 @@
 <template>
-  <transition
-    v-if="showModal"
-    name="Modal"
-  >
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <ModalHeader
-            class="modal-head"
-            @close="$emit('close')"
-          >
-            <!-- @slot Use this slot header -->
-            <slot name="head" />
-          </ModalHeader>
-          <div class="modal-body">
-            <!-- @slot Use this slot body -->
-            <slot name="body" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </transition>
+	<transition v-if="showModal" name="Modal">
+		<div class="modal-mask">
+			<div class="modal-wrapper">
+				<div class="modal-container">
+					<ModalHeader class="modal-head" @close="$emit('close')">
+						<!-- @slot Use this slot header -->
+						<slot name="head" />
+					</ModalHeader>
+					<div class="modal-body">
+						<!-- @slot Use this slot body -->
+						<slot name="body" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</transition>
 </template>
 
 <script>

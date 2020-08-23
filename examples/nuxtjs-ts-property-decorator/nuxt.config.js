@@ -1,8 +1,8 @@
 module.exports = {
 	srcDir: 'src/',
 	/*
-  ** Headers of the page
-  */
+	 ** Headers of the page
+	 */
 	head: {
 		title: 'styleguide',
 		meta: [
@@ -13,8 +13,8 @@ module.exports = {
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
 	},
 	/*
-  ** Customize the progress bar color
-  */
+	 ** Customize the progress bar color
+	 */
 	loading: { color: '#3B8070' },
 	modules: ['@nuxtjs/axios']
 }

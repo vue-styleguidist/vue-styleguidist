@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Input />
-    <slot />
-  </div>
+	<div>
+		<Input />
+		<slot />
+	</div>
 </template>
 <script>
 import Input from '../Input/Input.vue'

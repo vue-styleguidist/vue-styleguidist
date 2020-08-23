@@ -1,12 +1,12 @@
 <template>
-  <button @click="onClick($event)">
-    <span v-if="!!$slots.leftIcon" class="left-icon">
-      <!-- @slot Use this slot to place the left icon content -->
-      <slot name="leftIcon"/>
-    </span>
-    <!-- @slot Use this slot to place the button content -->
-    <slot>No content provided</slot>
-  </button>
+	<button @click="onClick($event)">
+		<span v-if="!!$slots.leftIcon" class="left-icon">
+			<!-- @slot Use this slot to place the left icon content -->
+			<slot name="leftIcon" />
+		</span>
+		<!-- @slot Use this slot to place the button content -->
+		<slot>No content provided</slot>
+	</button>
 </template>
 
 <script>

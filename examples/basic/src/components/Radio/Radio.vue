@@ -1,23 +1,18 @@
 <template>
-  <div>
-    <template v-for="op in options">
-      <input
-        :key="op.value"
-        type="radio"
-        :value="op.value"
-        name="hello"
-      >
-      <label
-        :key="`${op.value}-label`"
-        :for="op.value"
-      >{{ op.text }}</label>
-    </template>
-  </div>
+	<div>
+		<template v-for="op in options">
+			<input :key="op.value" type="radio" :value="op.value" name="hello" />
+			<label :key="`${op.value}-label`" :for="op.value">{{ op.text }}</label>
+		</template>
+	</div>
 </template>
 <script>
 export default {
 	props: {
-		options: Array
+		options: {
+			type: Array,
+			default: () => []
+		}
 	}
 }
 </script>
@@ -42,7 +37,7 @@ To keep your code tidy and the navigation easy, keep then in the same directory 
 
 ````markdown
 ```[import](./examples/_example.js)
-If you do this, vscode will not recognize the import as a link.<template>
+If you do this, vscode will not recognize the import as a link.
 Prefer examples in the same folder as your comoponent.
 ```
 ````

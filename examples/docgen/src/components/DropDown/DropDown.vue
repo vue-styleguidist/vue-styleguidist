@@ -1,8 +1,8 @@
 <template>
-  <select name="mySelect">
-    <!-- @slot where the options will be listed -->
-    <slot />
-  </select>
+	<select name="mySelect">
+		<!-- @slot where the options will be listed -->
+		<slot />
+	</select>
 </template>
 
 <script>
