@@ -52,8 +52,14 @@
 			"files": ["packages/vue-styleguidist/src/client/**/*.*"],
 			"extends": ["plugin:react/recommended"],
 			"settings": {
-				"react": {
-					"version": "detect"
+				"import/resolver": {
+					"node": {
+						"paths": [
+							"packages/vue-styleguidist/src/client",
+							"packages/vue-styleguidist/node_modules/react-styleguidist/lib/client"
+						],
+						"extensions": [".ts", ".tsx", ".js", ".d.ts"]
+					}
 				}
 			}
 		},
