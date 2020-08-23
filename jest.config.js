@@ -12,7 +12,7 @@ module.exports = {
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
 	modulePaths: [
 		'./packages/vue-styleguidist/src/client',
-		'./node_modules/react-styleguidist/lib/client'
+		'./packages/vue-styleguidist/node_modules/react-styleguidist/lib/client'
 	],
 	moduleNameMapper: {
 		'^.+\\.css$': '<rootDir>/test/empty.js'
