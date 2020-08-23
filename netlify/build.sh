@@ -16,7 +16,7 @@ while IFS= read -r line; do
     if  [[ $example != '' ]] && [[ $example != \#* ]]; then
     (
         npm run build ${example} -- --ci;
-        # mv "examples/${example}/dist" "docs/dist/${example}";
+        mv "examples/${example}/dist" "docs/dist/${example}";
     )
     fi
 )

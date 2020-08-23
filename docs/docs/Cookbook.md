@@ -19,7 +19,7 @@
 - [How to use vue-styleguidist with multiple packages for components](#how-to-use-vue-styleguidist-with-multiple-packages-for-components)
 - [I have multiple components in the same folder what can I do?](#i-have-multiple-components-in-the-same-folder-what-can-i-do)
 - [How do I integrate Styleguidist into an existing Nuxtjs site?](#how-do-i-integrate-styleguidist-into-an-existing-nuxtjs-site)
-- [How to use component name in docs with a different displayName](#how-to-use-component-name-in-docs-with-a-different-displayname)
+- [How to use component name in examples with a different displayName](#how-to-use-component-name-in-examples-with-a-different-displayname)
 
 <!-- tocstop -->
 
@@ -562,7 +562,7 @@ Now you will want to update your `styleguide.config.js` file to point `styleguid
 
 Then the last thing is to remember the order of operations. First you generate nuxt (`npm run generate`) and then `build` your styleguidist docs.
 
-## How to use component name in `<docs>` with a different displayName
+## How to use component name in examples with a different displayName
 
 When using `displayName`, components in the `<docs>` block must be imported with their `displayName` instead of their `name`.  
 This is not ideal as your examples are not using the real component name.
