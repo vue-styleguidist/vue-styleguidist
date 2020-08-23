@@ -33,11 +33,11 @@ jobs:
           at: ~/
 
       # Build all examples
-      - run: npm run build basic
-      - run: npm run build customised
-      - run: npm run build sections
-      - run: npm run build vuex
-      - run: npm run build functional-flag
+      - run: npm run build basic -- --ci
+      - run: npm run build customised -- --ci
+      - run: npm run build sections -- --ci
+      - run: npm run build vuex -- --ci
+      - run: npm run build functional-flag -- --ci
 
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser basic
@@ -53,9 +53,9 @@ jobs:
           at: ~/
 
       # remake the pnpm link to vue-cli-plugin
-      - run: npm run build vuecli3
-      - run: npm run build vuecli-noplugin
-      - run: npm run build vuecli3-vuetify-ie
+      - run: npm run build vuecli3 -- --ci
+      - run: npm run build vuecli-noplugin -- --ci
+      - run: npm run build vuecli3-vuetify-ie -- --ci
       - run: npm run test:browser vuecli3
       - run: npm run test:browser vuecli-noplugin
       - run: npm run test:browser vuecli3-vuetify-ie
@@ -67,10 +67,10 @@ jobs:
           at: ~/
 
       # Build all examples
-      - run: npm run build jsx
-      - run: npm run build jsx-examples
-      - run: npm run build nuxtjs
-      - run: npm run build vuetify
+      - run: npm run build jsx -- --ci
+      - run: npm run build jsx-examples -- --ci
+      - run: npm run build nuxtjs -- --ci
+      - run: npm run build vuetify -- --ci
 
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser jsx
