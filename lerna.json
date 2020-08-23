@@ -1,8 +1,10 @@
 {
 	"lerna": "3.22.1",
 	"npmClient": "pnpm",
-	"packages": ["packages/*"],
-	"version": "4.31.1",
+	"packages": [
+		"packages/*"
+	],
+	"version": "4.31.2",
 	"command": {
 		"publish": {
 			"conventionalCommits": true
