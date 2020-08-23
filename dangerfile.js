@@ -22,26 +22,26 @@ if (danger.github.pr.head.ref !== 'dev' || danger.github.pr.base.ref !== 'delive
 		danger.git.modified_files.includes(f)
 	})
 
-	const lockfileChanged = danger.git.modified_files.includes('yarn.lock')
+	const lockfileChanged = danger.git.modified_files.includes('pnpm-lock.yaml')
 
 	if (!lockfileChanged && changePackages.length) {
 		if (changePackages.length === 1) {
-			warn(`Changes were made to \`${changePackages[0]}\`, but not to \`yarn.lock\`.
+			warn(`Changes were made to \`${changePackages[0]}\`, but not to \`pnpm-lock.yaml\`.
 		
-If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in yarn.lock file.`)
+If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in pnpm-lock.yaml file.`)
 		} else {
 			warn(`Changes were made to all the following files \`${changePackages.join(
 				'`, `'
-			)}\`, but not to \`yarn.lock\`.
+			)}\`, but not to \`pnpm-lock.yaml\`.
 		
-If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in yarn.lock file.`)
+If you’ve changed any dependencies (added, removed or updated any packages), please run \`yarn install\` and commit changes in pnpm-lock.yaml file.`)
 		}
 	}
 
 	if (changePackages.length > 0 && lockfileChanged) {
-		warn(`Changes were made to \`yarn.lock\`, but to no \`package.json\` file in the package.
+		warn(`Changes were made to \`pnpm-lock.yaml\`, but to no \`package.json\` file in the package.
 
-Please remove \`yarn.lock\` changes from your pull request. Try to run \`git checkout dev -- yarn.lock\` and commit changes.`)
+Please remove \`pnpm-lock.yaml\` changes from your pull request. Try to run \`git checkout dev -- pnpm-lock.yaml\` and commit changes.`)
 	}
 
 	var errorCount = 0
