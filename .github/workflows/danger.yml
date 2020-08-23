@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger JS Action
-        run: npx -p globby danger ci
+        run: npx -p globby -p danger -c "danger ci"
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
