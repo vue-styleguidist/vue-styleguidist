@@ -20,7 +20,6 @@ importers:
       '@types/htmlparser2': 3.10.1
       '@types/jest': 23.3.14
       '@types/node': 13.11.1
-      '@types/pug': 2.0.4
       '@typescript-eslint/eslint-plugin': 2.34.0_2e4469632c799ff14f45b2ba5b89a853
       '@typescript-eslint/parser': 2.34.0_eslint@7.7.0+typescript@3.9.7
       '@vue/cli-service': 4.5.4_b80d90cd1b1a8b8e7d36a5075d6887a5
@@ -28,13 +27,9 @@ importers:
       '@vue/eslint-config-typescript': 4.0.0_eslint@7.7.0+typescript@3.9.7
       '@vuepress/plugin-google-analytics': 1.5.3
       '@vuepress/plugin-register-components': 1.0.3
-      babel-core: 7.0.0-bridge.0_@babel+core@7.11.1
       babel-eslint: 9.0.0
       babel-jest: 25.5.1_@babel+core@7.11.1
       babel-loader: 8.1.0_7e7526731d462686de4308c8ba1cfd85
-      babel-plugin-syntax-jsx: 6.18.0
-      babel-plugin-system-import-transformer: 3.1.0
-      babel-plugin-transform-vue-jsx: 3.7.0
       cheerio: 1.0.0-rc.3
       concurrently: 4.1.2
       core-js: 3.6.5
@@ -64,6 +59,7 @@ importers:
       inquirer: 5.2.0
       jest: 26.4.1
       jest-serializer-html: 7.0.0
+      jss: 10.4.0
       keymirror: 0.1.1
       lerna: 3.22.1
       lint-staged: 7.3.0
@@ -118,7 +114,6 @@ importers:
       '@types/htmlparser2': ^3.7.31
       '@types/jest': ^23.3.10
       '@types/node': 13.11.1
-      '@types/pug': ^2.0.4
       '@typescript-eslint/eslint-plugin': ^2.11.0
       '@typescript-eslint/parser': ^2.11.0
       '@vue/cli-service': ^4.5.4
@@ -126,13 +121,9 @@ importers:
       '@vue/eslint-config-typescript': ^4.0.0
       '@vuepress/plugin-google-analytics': ^1.0.3
       '@vuepress/plugin-register-components': 1.0.3
-      babel-core: ^7.0.0-bridge.0
       babel-eslint: ^9.0.0
       babel-jest: ^25.2.6
       babel-loader: ^8.0.5
-      babel-plugin-syntax-jsx: ^6.18.0
-      babel-plugin-system-import-transformer: ^3.1.0
-      babel-plugin-transform-vue-jsx: ^3.7.0
       cheerio: ^1.0.0-rc.2
       concurrently: ^4.1.1
       core-js: ^3.4.1
@@ -162,6 +153,7 @@ importers:
       inquirer: ^5.2.0
       jest: ^26.4.1
       jest-serializer-html: ^7.0.0
+      jss: ^10.0.0
       keymirror: ^0.1.1
       lerna: ^3.22.1
       lint-staged: ^7.2.0
@@ -1032,6 +1024,7 @@ importers:
       vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
     devDependencies:
       '@test-vue-docgen/mixins': 'link:../docgen-tests'
+      '@types/pug': 2.0.4
       globby: 10.0.2
       vue: 2.6.11
       vue-class-component: 7.2.5_vue@2.6.11
@@ -1042,6 +1035,7 @@ importers:
       '@babel/parser': ^7.6.0
       '@babel/types': ^7.6.0
       '@test-vue-docgen/mixins': 3.15.4
+      '@types/pug': ^2.0.4
       '@vue/compiler-dom': ^3.0.0-rc.6
       '@vue/compiler-sfc': ^3.0.0-rc.6
       ast-types: 0.13.3
@@ -1167,7 +1161,7 @@ importers:
       hash-sum: 1.0.2
       is-directory: 0.3.1
       javascript-stringify: 1.6.0
-      jss: 10.3.0
+      jss: 10.4.0
       kleur: 2.0.2
       leven: 2.1.0
       loader-utils: 1.4.0
@@ -5579,7 +5573,7 @@ packages:
     dependencies:
       '@types/domhandler': 2.4.1
       '@types/domutils': 1.7.2
-      '@types/node': 13.11.1
+      '@types/node': 14.0.27
     dev: true
     resolution:
       integrity: sha512-fCxmHS4ryCUCfV9+CJZY1UjkbR+6Al/EQdX5Jh03qBj9gdlPG5q+7uNoDgE/ZNXb3XNWSAQgqKIWnbRCbOyyWA==
@@ -8677,28 +8671,6 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-B/hVMRv8Nh1sQ1a3EY8I0n4Y1Wty3NrR5ebOyVT302op+DOAau+xNEImGMsUWOC3++ZlMooCytKz+NgN8aKGbA==
-  /babel-plugin-syntax-dynamic-import/6.18.0:
-    dev: true
-    resolution:
-      integrity: sha1-jWomIpyDdFqZgqRBBRVyyqF5sdo=
-  /babel-plugin-syntax-jsx/6.18.0:
-    dev: true
-    resolution:
-      integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=
-  /babel-plugin-system-import-transformer/3.1.0:
-    dependencies:
-      babel-plugin-syntax-dynamic-import: 6.18.0
-    dev: true
-    resolution:
-      integrity: sha1-038Mro5h7zkGAggzHZMbXmMNfF8=
-  /babel-plugin-transform-vue-jsx/3.7.0:
-    dependencies:
-      esutils: 2.0.3
-    dev: true
-    peerDependencies:
-      babel-helper-vue-jsx-merge-props: ^2.0.0
-    resolution:
-      integrity: sha512-W39X07/n3oJMQd8tALBO+440NraGSF//Lo1ydd/9Nme3+QiRGFBb1Q39T9iixh0jZPPbfv3so18tNoIgLatymw==
   /babel-plugin-transform-vue-jsx/4.0.1:
     dependencies:
       esutils: 2.0.3
@@ -10919,7 +10891,6 @@ packages:
     resolution:
       integrity: sha512-ul26pfSQTZW8dcOnD2iiJssfXw0gdNVX9IJDH/X3K5DGPfj+fUYe3kB+swUY6BF3oZDxaID3AJt+9/ojSAE05A==
   /csstype/3.0.2:
-    dev: true
     resolution:
       integrity: sha512-ofovWglpqoqbfLNOTBNZLSbMuGrblAf1efvvArGKOZMBrIoJeu5UsAipQolkijtyQx5MtAzT/J9IHj/CEY1mJw==
   /csv-parser/1.12.1:
@@ -16649,6 +16620,14 @@ packages:
       tiny-warning: 1.0.3
     resolution:
       integrity: sha512-B5sTRW9B6uHaUVzSo9YiMEOEp3UX8lWevU0Fsv+xtRnsShmgCfIYX44bTH8bPJe6LQKqEXku3ulKuHLbxBS97Q==
+  /jss/10.4.0:
+    dependencies:
+      '@babel/runtime': 7.11.2
+      csstype: 3.0.2
+      is-in-browser: 1.1.3
+      tiny-warning: 1.0.3
+    resolution:
+      integrity: sha512-l7EwdwhsDishXzqTc3lbsbyZ83tlUl5L/Hb16pHCvZliA9lRDdNBZmHzeJHP0sxqD0t1mrMmMR8XroR12JBYzw==
   /jstransformer/1.0.0:
     dependencies:
       is-promise: 2.2.2
