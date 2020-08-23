@@ -12,15 +12,17 @@
 				<a
 					href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
 					target="_blank"
-					>babel</a
 				>
+					babel
+				</a>
 			</li>
 			<li>
 				<a
 					href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
 					target="_blank"
-					>eslint</a
 				>
+					eslint
+				</a>
 			</li>
 		</ul>
 		<h3>Essential Links</h3>
@@ -35,9 +37,9 @@
 			<li><a href="https://router.vuejs.org" target="_blank">vue-router</a></li>
 			<li><a href="https://vuex.vuejs.org" target="_blank">vuex</a></li>
 			<li>
-				<a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank"
-					>vue-devtools</a
-				>
+				<a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank">
+					vue-devtools
+				</a>
 			</li>
 			<li><a href="https://vue-loader.vuejs.org" target="_blank">vue-loader</a></li>
 			<li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
@@ -49,7 +51,10 @@
 export default {
 	name: 'HelloWorld',
 	props: {
-		msg: String
+		msg: {
+			type: String,
+			default: ''
+		}
 	}
 }
 </script>
