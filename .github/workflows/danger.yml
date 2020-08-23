@@ -6,7 +6,7 @@ on:
       - opened
       - edited
 jobs:
-  automerge:
+  danger:
     runs-on: ubuntu-latest
     steps:
       - name: Danger JS Action
