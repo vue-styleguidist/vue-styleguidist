@@ -1,10 +1,9 @@
 <template>
-<div class="CounterButton">
-	<button class="button"
-		@click.prevent="increment">
-		{{value}}
-	</button>
-</div>
+	<div class="CounterButton">
+		<button class="button" @click.prevent="increment">
+			{{ value }}
+		</button>
+	</div>
 </template>
 
 <script>

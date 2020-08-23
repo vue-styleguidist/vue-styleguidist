@@ -11,18 +11,16 @@ describe('recursiveResolveIEV', () => {
 		mockResolver = jest.fn()
 	})
 
-	it('should call the resolver', async done => {
+	it('should call the resolver', async () => {
 		await recursiveResolveIEV(mockResolver, set, () => true)
 
 		expect(mockResolver).toHaveBeenCalledWith('my/path')
-		done()
 	})
 
-	it('should not resolve anything if multiple path in filePath', async done => {
+	it('should not resolve anything if multiple path in filePath', async () => {
 		set.test.filePath.push('baz')
 		await recursiveResolveIEV(mockResolver, set, () => true)
 
 		expect(mockResolver).not.toHaveBeenCalledWith()
-		done()
 	})
 })

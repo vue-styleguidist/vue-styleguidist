@@ -6,9 +6,8 @@ const InputText = path.join(__dirname, './InputTextNatural.js')
 let docInputText: ComponentDoc
 
 describe('tests InputText as a JS file', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docInputText = await parse(InputText)
-		done()
 	})
 
 	it('should return an object', () => {

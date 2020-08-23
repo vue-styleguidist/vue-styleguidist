@@ -35,7 +35,9 @@ export default function (this: StyleguidistContext, source: string) {
 }
 
 function makeObject<T extends { name: string }>(set?: T[]): { [name: string]: T } | undefined {
-	if (!set) return undefined
+	if (!set) {
+		return undefined
+	}
 	return set.reduce((acc: { [name: string]: T }, item: T) => {
 		acc[item.name] = item
 		return acc
@@ -55,18 +57,18 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 
 	const propsParser = getParser(config)
 
-	const getVsgDocs = async (file: string): Promise<LoaderComponentProps> => {
+	const getVsgDocs = async (internalFile: string): Promise<LoaderComponentProps> => {
 		let docs: ComponentDoc = { displayName: '', exportName: '' }
 		try {
-			docs = await propsParser(file)
+			docs = await propsParser(internalFile)
 		} catch (e) {
-			const componentPath = path.relative(process.cwd(), file)
+			const componentPath = path.relative(process.cwd(), internalFile)
 			logger.warn(`Error parsing ${componentPath}: ${e}`)
 		}
 
 		// set dependency tree for mixins and extends
 		const originFiles = findOrigins(docs)
-		const basedir = path.dirname(file)
+		const basedir = path.dirname(internalFile)
 		originFiles.forEach(extensionFile => {
 			this.addDependency(path.join(basedir, extensionFile))
 		})

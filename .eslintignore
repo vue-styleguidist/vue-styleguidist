@@ -1,4 +1,5 @@
 node_modules
+@types/*
 examples/*/styleguide/*
 examples/*/dist/*
 packages/*/lib/**/*

@@ -43,10 +43,6 @@ describe('propHandler', () => {
 		return mockPropDescriptor
 	}
 
-	function tester(src: string, matchedObj: any, plugins?: ParserPlugin[]) {
-		expect(parserTest(src, plugins)).toMatchObject(matchedObj)
-	}
-
 	describe('base', () => {
 		it('should accept an array of string as props', () => {
 			const src = `
@@ -76,8 +72,8 @@ describe('propHandler', () => {
             }
           }
         }
-        `
-			tester(src, {
+		`
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'array' }
 			})
 		})
@@ -90,7 +86,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'array' }
 			})
 		})
@@ -105,7 +101,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'string|number' }
 			})
 		})
@@ -118,7 +114,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'array' }
 			})
 		})
@@ -146,7 +142,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'string' }
 			})
 		})
@@ -159,7 +155,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'string|number' }
 			})
 		})
@@ -174,7 +170,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: { name: 'boolean' }
 			})
 		})
@@ -190,7 +186,7 @@ describe('propHandler', () => {
 				'  }',
 				'}'
 			].join('\n')
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: {
 					func: true
 				}
@@ -205,7 +201,7 @@ describe('propHandler', () => {
 				'  }',
 				'}'
 			].join('\n')
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: {
 					func: true
 				}
@@ -214,7 +210,7 @@ describe('propHandler', () => {
 
 		it('should still return props with delegated types', () => {
 			const src = ['export default {', '  props: {', '    toto', '  }', '}'].join('\n')
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: {}
 			})
 		})
@@ -235,7 +231,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				required: true
 			})
 		})
@@ -252,7 +248,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				defaultValue: { value: `"normal"` }
 			})
 		})
@@ -392,7 +388,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				description: 'test description'
 			})
 		})
@@ -411,7 +407,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				description: 'test description'
 			})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('test')
@@ -433,7 +429,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				description: 'Binding from v-model'
 			})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
@@ -457,7 +453,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				description: 'Value of the field'
 			})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
@@ -481,7 +477,7 @@ describe('propHandler', () => {
           }
         }
         `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				description: 'Value of the field'
 			})
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
@@ -506,7 +502,7 @@ describe('propHandler', () => {
     }
   }
   `
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				description: 'color of the component',
 				values: ['dark', 'light', 'red', 'blue'],
 				tags: {
@@ -564,16 +560,12 @@ describe('propHandler', () => {
           }
         }
         });`
-			tester(
-				src,
-				{
-					type: {
-						name: 'SelectOption["value"]'
-					},
-					required: true
+			expect(parserTest(src, ['typescript'])).toMatchObject({
+				type: {
+					name: 'SelectOption["value"]'
 				},
-				['typescript']
-			)
+				required: true
+			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
@@ -587,17 +579,13 @@ describe('propHandler', () => {
           }
         }
         });`
-			tester(
-				src,
-				{
-					values: ['foo', 'bar'],
-					type: {
-						name: 'string'
-					},
-					required: true
+			expect(parserTest(src, ['typescript'])).toMatchObject({
+				values: ['foo', 'bar'],
+				type: {
+					name: 'string'
 				},
-				['typescript']
-			)
+				required: true
+			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
@@ -611,19 +599,15 @@ describe('propHandler', () => {
         } as PropOptions<SocialNetwork[]>,
         }
       });`
-			tester(
-				src,
-				{
-					type: {
-						name: 'SocialNetwork[]'
-					},
-					defaultValue: {
-						func: true,
-						value: '() => []'
-					}
+			expect(parserTest(src, ['typescript'])).toMatchObject({
+				type: {
+					name: 'SocialNetwork[]'
 				},
-				['typescript']
-			)
+				defaultValue: {
+					func: true,
+					value: '() => []'
+				}
+			})
 		})
 	})
 
@@ -641,7 +625,7 @@ describe('propHandler', () => {
         },
         }
       };`
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				type: {
 					name: '{ bar: number, foo: string }'
 				}
@@ -661,7 +645,7 @@ describe('propHandler', () => {
         },
         }
       };`
-			tester(src, {
+			expect(parserTest(src)).toMatchObject({
 				values: ['bar + boo', 'foo & baz'],
 				type: {
 					name: 'string'

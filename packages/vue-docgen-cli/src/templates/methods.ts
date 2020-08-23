@@ -51,7 +51,9 @@ ${subComponent ? '#' : ''}### ${m.name ? m.name : ''}
 }
 
 export default (methods: MethodDescriptor[], opt: SubTemplateOptions = {}): string => {
-	if (Object.keys(methods).length === 0) return ''
+	if (Object.keys(methods).length === 0) {
+		return ''
+	}
 	return `
 ${opt.isSubComponent || opt.hasSubComponents ? '#' : ''}## Methods
 

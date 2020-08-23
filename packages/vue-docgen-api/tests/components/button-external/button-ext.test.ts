@@ -6,9 +6,8 @@ import getTestDescriptor from '../../utils/getTestDescriptor'
 const button = path.join(__dirname, './Button.vue')
 let docButton: ComponentDoc
 describe('tests button', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docButton = await parse(button)
-		done()
 	})
 
 	it('should return an object', () => {
@@ -33,8 +32,18 @@ describe('tests button', () => {
 			})
 		})
 
-		it('should return propA type as number', () => {
-			expect(getTestDescriptor(docButton.props, 'propA').type).toMatchObject({ name: 'number' })
+		it('should return propAnum type as number', () => {
+			expect(getTestDescriptor(docButton.props, 'propAnum').type).toMatchObject({ name: 'number' })
+		})
+
+		it('should return propAstr type as string', () => {
+			expect(getTestDescriptor(docButton.props, 'propAstr').type).toMatchObject({ name: 'string' })
+		})
+
+		it('should return propAinter type as string', () => {
+			expect(getTestDescriptor(docButton.props, 'propAinter').type).toMatchObject({
+				name: 'string'
+			})
 		})
 
 		it('should return propB type as string', () => {

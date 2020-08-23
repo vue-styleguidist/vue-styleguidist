@@ -31,20 +31,17 @@ async function createAndInstall(name, options) {
 	return project
 }
 
-async function checkProject(project) {
-	const pkg = JSON.parse(await project.read('package.json'))
-	expect(pkg.main).toBe('dist/YourLib.umd.js')
-}
-
 test('invoke should create a config file', async () => {
 	const project = await createAndInstall(`files-invoke-lib`, { plugins: {} })
 	await project.run(`${require.resolve('@vue/cli/bin/vue')} invoke vue-cli-plugin-styleguidist`)
-	checkProject(project)
+	const pkg = JSON.parse(await project.read('package.json'))
+	expect(pkg.main).toBe('dist/YourLib.umd.js')
 })
 
 test('create should create a config file', async () => {
 	const project = await createAndInstall(`files-create-lib`, {
 		plugins: { 'vue-cli-plugin-styleguidist': {} }
 	})
-	checkProject(project)
+	const pkg = JSON.parse(await project.read('package.json'))
+	expect(pkg.main).toBe('dist/YourLib.umd.js')
 })

@@ -11,7 +11,7 @@ import getProperties from './utils/getProperties'
  * @param documentation
  * @param path
  */
-export default async function propHandler(documentation: Documentation, path: NodePath) {
+export default function propHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	// deal with functional flag
 	if (bt.isObjectExpression(path.node)) {
 		const functionalPath = getProperties(path, 'functional')
@@ -43,7 +43,7 @@ export default async function propHandler(documentation: Documentation, path: No
 
 	// if no prop return
 	if (!docBlock || !docBlock.length) {
-		return
+		return Promise.resolve()
 	}
 
 	const jsDoc = getDoclets(docBlock)
@@ -70,4 +70,5 @@ export default async function propHandler(documentation: Documentation, path: No
 	} else {
 		documentation.set('tags', {})
 	}
+	return Promise.resolve()
 }

@@ -1,4 +1,3 @@
-examples/
 packages/*/lib/
 packages/*/dist/
 packages/*/tests/perf-test.js

@@ -7,9 +7,8 @@ const docs = path.join(__dirname, './docs.vue')
 let onlyDocs: ComponentDoc
 
 describe('docs only vue file', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		onlyDocs = await parse(docs)
-		done()
 	})
 
 	it('should return an object', () => {

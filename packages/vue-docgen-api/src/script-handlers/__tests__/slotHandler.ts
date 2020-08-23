@@ -22,17 +22,16 @@ describe('render function slotHandler', () => {
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 
-	it('should not return anything if no render function', async done => {
+	it('should not return anything if no render function', async () => {
 		const src = 'export default {}'
 		const def = parse(src)
 		if (def) {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).not.toHaveBeenCalled()
-		done()
 	})
 
-	it('should find slots in render function', async done => {
+	it('should find slots in render function', async () => {
 		const src = `
     export default {
       render: function (createElement) {
@@ -45,10 +44,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('mySlot')
-		done()
 	})
 
-	it('should find scoped slots in render function', async done => {
+	it('should find scoped slots in render function', async () => {
 		const src = `
     export default {
       render: function (createElement) {
@@ -65,10 +63,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('myScopedSlot')
-		done()
 	})
 
-	it('should find scoped slots in render object method', async done => {
+	it('should find scoped slots in render object method', async () => {
 		const src = `
     export default {
       render(createElement) {
@@ -85,10 +82,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('myOtherScopedSlot')
-		done()
 	})
 
-	it('should be fine with scoped slots iand a spread parameter', async done => {
+	it('should be fine with scoped slots iand a spread parameter', async () => {
 		const src = `
     export default {
       render(h) {
@@ -109,10 +105,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('myOtherScopedSlot')
-		done()
 	})
 
-	it('should find slots in jsx render', async done => {
+	it('should find slots in jsx render', async () => {
 		const src = `
     export default {
       render(createElement) {
@@ -127,10 +122,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('myMain')
-		done()
 	})
 
-	it('should find default slots in jsx render', async done => {
+	it('should find default slots in jsx render', async () => {
 		const src = `
     export default {
       render(createElement) {
@@ -145,10 +139,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
-		done()
 	})
 
-	it('should allow describing slots in jsx render', async done => {
+	it('should allow describing slots in jsx render', async () => {
 		const src = `
     export default {
       render(createElement) {
@@ -164,10 +157,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
-		done()
 	})
 
-	it('should allow describing slots in render', async done => {
+	it('should allow describing slots in render', async () => {
 		const src = `
     export default {
       render: function (createElement) {
@@ -185,10 +177,9 @@ describe('render function slotHandler', () => {
 		}
 
 		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
-		done()
 	})
 
-	it('should not allow describing slots using double //', async done => {
+	it('should not allow describing slots using double //', async () => {
 		const src = `
     export default {
       render: function (createElement) {
@@ -206,10 +197,9 @@ describe('render function slotHandler', () => {
 		}
 
 		expect(mockSlotDescriptor.description).toEqual('')
-		done()
 	})
 
-	it('should not allow describing slots without @slot tag', async done => {
+	it('should not allow describing slots without @slot tag', async () => {
 		const src = `
     export default {
       render: function (createElement) {
@@ -227,10 +217,9 @@ describe('render function slotHandler', () => {
 		}
 
 		expect(mockSlotDescriptor.description).toEqual('')
-		done()
 	})
 
-	it('should allow describing scopedSlots in render', async done => {
+	it('should allow describing scopedSlots in render', async () => {
 		const src = `
       export default {
         render(h) {
@@ -247,10 +236,9 @@ describe('render function slotHandler', () => {
 		}
 
 		expect(mockSlotDescriptor.description).toEqual('It is the default slot')
-		done()
 	})
 
-	it('should not fail if forEach is following usage of the slot', async done => {
+	it('should not fail if forEach is following usage of the slot', async () => {
 		const src = `
       export default {
         render(h) {
@@ -268,10 +256,9 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
-		done()
 	})
 
-	it('should detect scopedSlots in renderless components', async done => {
+	it('should detect scopedSlots in renderless components', async () => {
 		const src = `
       export default {
         render () {
@@ -313,10 +300,9 @@ describe('render function slotHandler', () => {
 		  "name": "mySlot",
 		}
 	`)
-		done()
 	})
 
-	it('should allow describing scoped slots in render', async done => {
+	it('should allow describing scoped slots in render', async () => {
 		const src = `
     export default {
       render: function (createElement) {
@@ -330,10 +316,9 @@ describe('render function slotHandler', () => {
 		}
 
 		expect(mockSlotDescriptor.description).toEqual('Use this slot header')
-		done()
 	})
 
-	it('should allow to assign slots to variables', async done => {
+	it('should allow to assign slots to variables', async () => {
 		const src = `
 export default {
 	render(h) {
@@ -372,10 +357,9 @@ export default {
 		}
 		expect(documentation.getSlotDescriptor).toHaveBeenCalledTimes(8)
 		expect(mockSlotDescriptor.description).toEqual('the content for the pending state')
-		done()
 	})
 	describe('tags', () => {
-		it('should extract tags from the description block', async done => {
+		it('should extract tags from the description block', async () => {
 			const src = `
 	export default {
 	  render(createElement) {
@@ -404,12 +388,11 @@ export default {
 			  ],
 			}
 		`)
-			done()
 		})
 	})
 
 	describe('bindings', () => {
-		it('should describe slots bindings in render functions', async done => {
+		it('should describe slots bindings in render functions', async () => {
 			const src = `
 		export default {
 		  render(createElement) {
@@ -435,10 +418,9 @@ export default {
 					description: 'the menu item'
 				}
 			])
-			done()
 		})
 
-		it('should describe slots bindings in JSX', async done => {
+		it('should describe slots bindings in JSX', async () => {
 			const src = `
 		export default {
 		  render(createElement) {
@@ -463,7 +445,6 @@ export default {
 					description: 'the menu item'
 				}
 			])
-			done()
 		})
 	})
 })

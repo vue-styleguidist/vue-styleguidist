@@ -35,12 +35,12 @@ function onRead({ data }) {
 
 function onWrite({ api, prompts }) {
 	const docgenData = {}
-	for (const prompt of prompts) {
-		const result = prompt.valueChanged
+	prompts.forEach(ppt => {
+		const result = ppt.valueChanged
 		if (result) {
-			docgenData[prompt.id] = prompt.value
+			docgenData[ppt.id] = ppt.value
 		}
-	}
+	})
 	api.setData('docgen', docgenData)
 }
 

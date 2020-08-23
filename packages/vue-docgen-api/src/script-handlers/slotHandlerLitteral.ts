@@ -14,18 +14,20 @@ export interface TypedParamTag extends ParamTag {
  * @param documentation
  * @param path
  */
-export default async function slotHandler(documentation: Documentation, path: NodePath) {
+export default function slotHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const renderPath = getProperties(path, 'render')
 
-		if (!renderPath.length) return
+		if (!renderPath.length) {
+			return Promise.resolve()
+		}
 
 		let i = 0
 		let docBlock = getDocblock(renderPath[0], { commentIndex: i })
 		while (docBlock) {
 			// if no doc block return
 			if (!docBlock || !docBlock.length) {
-				return
+				return Promise.resolve()
 			}
 
 			const jsDoc = getDoclets(docBlock)
@@ -44,4 +46,5 @@ export default async function slotHandler(documentation: Documentation, path: No
 			docBlock = getDocblock(renderPath[0], { commentIndex: ++i })
 		}
 	}
+	return Promise.resolve()
 }

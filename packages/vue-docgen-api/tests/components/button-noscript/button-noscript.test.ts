@@ -7,9 +7,8 @@ const button = path.join(__dirname, './MyButton.vue')
 let docButton: ComponentDoc
 
 describe('tests button with no script block', () => {
-	beforeEach(async done => {
+	beforeEach(async () => {
 		docButton = await parse(button)
-		done()
 	})
 
 	it('should have a slot.', () => {

@@ -6,9 +6,8 @@ const button = path.join(__dirname, './iev.js')
 let docDropDown: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
-	beforeEach(async done => {
+	beforeEach(async () => {
 		docDropDown = (await parseMulti(button))[0]
-		done()
 	})
 
 	it('should return an object', () => {

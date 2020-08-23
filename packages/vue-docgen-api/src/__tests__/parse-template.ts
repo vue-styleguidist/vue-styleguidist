@@ -2,7 +2,7 @@ import parseTemplate from '../parse-template'
 import Documentation from '../Documentation'
 
 describe('parse-template', () => {
-	let content: string = ''
+	let content = ''
 	let doc: Documentation
 	const path = 'file/path'
 	beforeEach(() => {

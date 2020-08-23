@@ -1,14 +1,10 @@
 <template>
-  <div class="Button">
-    <button
-      class="button"
-      :style="{ color: color, fontSize: fontSize }"
-      @click.prevent="onClick"
-    >
-      <!-- @slot content of the button -->
-      <slot />
-    </button>
-  </div>
+	<div class="Button">
+		<button class="button" :style="{ color: color, fontSize: fontSize }" @click.prevent="onClick">
+			<!-- @slot content of the button -->
+			<slot />
+		</button>
+	</div>
 </template>
 
 <script>

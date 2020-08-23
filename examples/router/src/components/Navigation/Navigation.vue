@@ -1,9 +1,9 @@
 <template>
-  <nav class="navbar">
-    <div v-for="nav_item in mainMenuLinks" :key="nav_item.title" class="nav-links">
-      <router-link :to="nav_item.path" exact>{{ nav_item.title }}</router-link>
-    </div>
-  </nav>
+	<nav class="navbar">
+		<div v-for="nav_item in mainMenuLinks" :key="nav_item.title" class="nav-links">
+			<router-link :to="nav_item.path" exact>{{ nav_item.title }}</router-link>
+		</div>
+	</nav>
 </template>
 
 <script>

@@ -6,7 +6,7 @@ import { writeDownMdFile } from '../utils'
 const FAKE_MD_CONTENT = '## fake markdonw Content'
 const FILES = ['src/comps/button/button.vue']
 
-var mockWriteDownMdFile: jest.Mock
+let mockWriteDownMdFile: jest.Mock
 jest.mock('../utils', () => {
 	mockWriteDownMdFile = jest.fn(() => Promise.resolve())
 	return {
@@ -14,9 +14,11 @@ jest.mock('../utils', () => {
 	}
 })
 
-var mockCompileMarkdown: jest.Mock
+let mockCompileMarkdown: jest.Mock
 jest.mock('../compileTemplates', () => {
-	mockCompileMarkdown = jest.fn(async () => ({ content: FAKE_MD_CONTENT, dependencies: [] }))
+	mockCompileMarkdown = jest.fn(() =>
+		Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] })
+	)
 	return mockCompileMarkdown
 })
 
@@ -26,7 +28,7 @@ describe('compile', () => {
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: singleMd.DocgenCLIConfigWithOutFile
 	const fakeOn = jest.fn()
-	let w = ({
+	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
 
@@ -38,28 +40,25 @@ describe('compile', () => {
 	})
 
 	describe('compile', () => {
-		it('should get the current components doc', async done => {
+		it('should get the current components doc', async () => {
 			await singleMd.compile(conf, [FAKE_COMPONENT_PATH], {}, {}, w)
 			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT], MD_FILE_PATH)
-			done()
 		})
 	})
 
 	describe('default', () => {
-		it('should build one md from merging contents', async done => {
+		it('should build one md from merging contents', async () => {
 			jest.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
 			await singleMd.default(FILES, w, conf, {}, singleMd.compile)
 			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, w)
-			done()
 		})
 
-		it('should watch file changes if a watcher is passed', async done => {
+		it('should watch file changes if a watcher is passed', async () => {
 			conf.watch = true
 			fakeOn.mockClear()
 			await singleMd.default(FILES, w, conf, {})
 			expect(fakeOn).toHaveBeenCalledWith('add', expect.any(Function))
 			expect(fakeOn).toHaveBeenCalledWith('change', expect.any(Function))
-			done()
 		})
 	})
 })

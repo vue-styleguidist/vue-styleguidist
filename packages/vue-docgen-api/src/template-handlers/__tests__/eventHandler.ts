@@ -9,7 +9,7 @@ describe('eventHandler', () => {
 		doc = new Documentation('dummy/path')
 	})
 
-	it('should match events calls in attributes expressions', done => {
+	it('should match events calls in attributes expressions', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -31,13 +31,12 @@ describe('eventHandler', () => {
 					description: 'trigered on click'
 				}
 			])
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 
-	it('should match events calls property', done => {
+	it('should match events calls property', () => {
 		const ast = parse(
 			[
 				'<div>',
@@ -71,9 +70,8 @@ describe('eventHandler', () => {
 					]
 				}
 			])
-			done()
 		} else {
-			done.fail()
+			throw Error('fail')
 		}
 	})
 })

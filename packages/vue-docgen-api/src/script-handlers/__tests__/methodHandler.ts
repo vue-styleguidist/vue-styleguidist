@@ -31,7 +31,7 @@ describe('methodHandler', () => {
 		})
 	})
 
-	function tester(src: string, matchedObj: any) {
+	function tester(src: string) {
 		const def = parse(src)
 		if (def) {
 			methodHandler(documentation, def).catch(e => {
@@ -39,7 +39,6 @@ describe('methodHandler', () => {
 				console.error(e)
 			})
 		}
-		expect(mockMethodDescriptor).toMatchObject(matchedObj)
 	}
 
 	it('should ignore every method not tagged as @public', () => {
@@ -52,7 +51,8 @@ describe('methodHandler', () => {
         }
       }
     }`
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: ''
 		})
 	})
@@ -71,7 +71,8 @@ describe('methodHandler', () => {
       }
     }
     `
-			tester(src, {
+			tester(src)
+			expect(mockMethodDescriptor).toMatchObject({
 				name: 'testFunction'
 			})
 		})
@@ -89,7 +90,8 @@ describe('methodHandler', () => {
           }
         }
         `
-			tester(src, {
+			tester(src)
+			expect(mockMethodDescriptor).toMatchObject({
 				name: 'testMethod'
 			})
 		})
@@ -107,7 +109,8 @@ describe('methodHandler', () => {
         }
       }
       `
-			tester(src, {
+			tester(src)
+			expect(mockMethodDescriptor).toMatchObject({
 				name: 'testArrowFunction'
 			})
 		})
@@ -125,7 +128,8 @@ describe('methodHandler', () => {
         }
       }
       `
-			tester(src, {
+			tester(src)
+			expect(mockMethodDescriptor).toMatchObject({
 				name: 'testHighFunction'
 			})
 		})
@@ -144,7 +148,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'testWithMultipleParams',
 			params: [{ name: 'param1' }, { name: 'param2' }]
 		})
@@ -163,7 +168,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'testWithMultipleParamsDefaulted',
 			params: [{ name: 'param1' }, { name: 'param2' }]
 		})
@@ -184,7 +190,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'describedFunc',
 			description: 'it returns 2'
 		})
@@ -205,7 +212,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'describedParams',
 			params: [{ name: 'p1' }, { name: 'p2', description: 'multiplier', type: { name: 'string' } }]
 		})
@@ -226,7 +234,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'describedParams',
 			params: [{ name: 'p1' }, { name: 'p2', description: 'multiplier', type: { name: 'string' } }]
 		})
@@ -247,7 +256,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'describedParams',
 			params: [{ name: 'p1' }, { name: 'p2', description: 'multiplier', type: { name: 'string' } }]
 		})
@@ -269,7 +279,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'describedParams',
 			params: [
 				{ description: 'unnamed param', type: { name: 'string' } },
@@ -294,7 +305,8 @@ describe('methodHandler', () => {
       }
     }
     `
-		tester(src, {
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
 			name: 'describedParams',
 			params: [
 				{ name: 'p', description: 'unnamed param', type: { name: 'string' } },

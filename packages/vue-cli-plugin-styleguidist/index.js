@@ -23,7 +23,9 @@ module.exports = (api, options) => {
 			usage: 'vue-cli-service styleguidist:build [options]',
 			options: {
 				'--config': 'path to the config file',
-				'--verbose': 'show the full log'
+				'--verbose': 'show the full log',
+				'--ci':
+					'use when buidling on the ci, removes the progress bar for clearer log and faster build'
 			}
 		},
 		args => {
@@ -85,6 +87,11 @@ function getStyleguidist(args, api, options) {
 
 	if (args.port !== undefined) {
 		sgConf.serverPort = parseInt(args.port, 10)
+	}
+
+	// remove the progress bar for faster compile
+	if (args.ci) {
+		sgConf.progressBar = false
 	}
 
 	const userWebpackConfig = sgConf.webpackConfig

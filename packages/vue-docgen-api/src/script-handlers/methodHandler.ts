@@ -19,17 +19,17 @@ import getMemberFilter from '../utils/getPropsFilter'
  * @param documentation
  * @param path
  */
-export default async function methodHandler(documentation: Documentation, path: NodePath) {
+export default function methodHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const methodsPath = path
 			.get('properties')
 			.filter(
 				(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
-			) as Array<NodePath<bt.ObjectProperty>>
+			) as NodePath<bt.ObjectProperty>[]
 
 		// if no method return
 		if (!methodsPath.length) {
-			return
+			return Promise.resolve()
 		}
 
 		const methodsObject = methodsPath[0].get('value')
@@ -65,6 +65,7 @@ export default async function methodHandler(documentation: Documentation, path: 
 			})
 		}
 	}
+	return Promise.resolve()
 }
 
 export function setMethodDescriptor(

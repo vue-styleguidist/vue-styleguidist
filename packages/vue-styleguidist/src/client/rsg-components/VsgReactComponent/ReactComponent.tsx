@@ -35,7 +35,7 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 
 	public static contextType = Context
 
-	render() {
+	public render() {
 		const {
 			config: { pagePerSection }
 		} = this.context

@@ -17,7 +17,9 @@ function hasComponents(config: SafeDocgenCLIConfig): config is DocgenCLIConfigWi
 
 export default async (config: SafeDocgenCLIConfig) => {
 	// if at a level that has no components (top level) just give up
-	if (!hasComponents(config)) return
+	if (!hasComponents(config)) {
+		return
+	}
 
 	// if componentsRoot is not specified we start with current cwd
 	config.componentsRoot = path.resolve(config.cwd, config.componentsRoot)

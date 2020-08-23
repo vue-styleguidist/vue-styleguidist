@@ -18,7 +18,7 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
 		prettier.format(cont, Object.assign(conf || {}, { parser: 'markdown' }))
 	const destFolder = path.dirname(destFilePath)
 	await mkdirp(destFolder)
-	let writeStream = fs.createWriteStream(destFilePath)
+	const writeStream = fs.createWriteStream(destFilePath)
 	if (Array.isArray(content)) {
 		content.forEach(cont => {
 			writeStream.write(prettyMd(cont))

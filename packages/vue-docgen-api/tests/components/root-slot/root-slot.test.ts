@@ -7,9 +7,8 @@ const button = path.join(__dirname, './Wrapper.vue')
 let docButton: ComponentDoc
 
 describe('tests wrapper with root slot', () => {
-	beforeEach(async done => {
+	beforeEach(async () => {
 		docButton = await parse(button)
-		done()
 	})
 
 	it('should have a slot.', () => {

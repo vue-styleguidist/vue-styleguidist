@@ -4,7 +4,6 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit, print } from 'recast'
 import Documentation, { ParamTag } from '../Documentation'
 import buildParser from '../babel-parser'
-import { TemplateParserOptions } from '../parse-template'
 import extractLeadingComment from '../utils/extractLeadingComment'
 import { parseSlotDocBlock } from '../script-handlers/slotHandler'
 import {
@@ -19,8 +18,7 @@ const parser = buildParser({ plugins: ['typescript'] })
 export default function slotHandler(
 	documentation: Documentation,
 	templateAst: TemplateChildNode,
-	siblings: TemplateChildNode[],
-	options: TemplateParserOptions
+	siblings: TemplateChildNode[]
 ) {
 	if (isBaseElementNode(templateAst) && templateAst.tag === 'slot') {
 		const nameProp = templateAst.props.filter(isAttributeNode).find(b => b.name === 'name')

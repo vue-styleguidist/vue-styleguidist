@@ -1,7 +1,7 @@
 <template>
-  <div class="language">
-    <v-select :items="items" v-model="e1" label="Language" single-line></v-select>
-  </div>
+	<div class="language">
+		<v-select :items="items" v-model="e1" label="Language" single-line></v-select>
+	</div>
 </template>
 
 <script>

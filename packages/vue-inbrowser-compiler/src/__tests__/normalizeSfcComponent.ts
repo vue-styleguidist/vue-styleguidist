@@ -1,6 +1,7 @@
 import normalizeSfcComponent from '../normalizeSfcComponent'
 
 function evalFunction(sut: { script: string }): any {
+	// eslint-disable-next-line no-new-func
 	return new Function('require', sut.script)(() => ({
 		default: { component: jest.fn() }
 	}))

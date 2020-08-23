@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 describe('Preview render', () => {
 	before(() => {
 		// Open simple button component in isolation
@@ -9,9 +10,7 @@ describe('Preview render', () => {
 		texts.forEach((text, i) => {
 			it(`item ${i + 1} : ${text}`, () => {
 				if (text.length) {
-					cy.get('[class^="rsg--preview-"]')
-						.eq(i)
-						.should('contain', text)
+					cy.get('[class^="rsg--preview-"]').eq(i).should('contain', text)
 				}
 			})
 		})

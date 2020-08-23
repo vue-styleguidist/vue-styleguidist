@@ -54,7 +54,11 @@ export default async function parseSFC(
 			  })
 			: ''
 
-	let scriptSource = extSource.length ? extSource : parts.script ? parts.script.content : undefined
+	const scriptSource = extSource.length
+		? extSource
+		: parts.script
+		? parts.script.content
+		: undefined
 	opt.lang =
 		(parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
 		/\.tsx?$/i.test(extSrc)

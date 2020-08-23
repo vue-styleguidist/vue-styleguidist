@@ -17,14 +17,14 @@ describe('mixinsHandler', () => {
 	let mockParse: jest.Mock
 	const doc = new Documentation('dummy/path')
 	beforeEach(() => {
-		resolveRequiredMock = (<unknown>resolveRequired) as jest.Mock<
+		resolveRequiredMock = (resolveRequired as unknown) as jest.Mock<
 			(ast: bt.File, varNameFilter?: string[]) => { [key: string]: string }
 		>
 		resolveRequiredMock.mockReturnValue({
 			testComponent: { filePath: ['componentPath'], exportName: 'default' }
 		})
 
-		mockResolvePathFrom = (<unknown>resolvePathFrom) as jest.Mock<
+		mockResolvePathFrom = (resolvePathFrom as unknown) as jest.Mock<
 			(path: string, from: string) => string
 		>
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
@@ -53,7 +53,7 @@ describe('mixinsHandler', () => {
 			'  mixins:[testComponent,other]',
 			'}'
 		].join('\n')
-	])('should resolve extended modules variables', async (src, done) => {
+	])('should resolve extended modules variables', async src => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
 		if (path) {
@@ -69,10 +69,9 @@ describe('mixinsHandler', () => {
 			}),
 			doc
 		)
-		done()
 	})
 
-	it('should resolve mixins modules variables in class style components', async done => {
+	it('should resolve mixins modules variables in class style components', async () => {
 		const src = [
 			'import { testMixin, otherMixin  } from "./mixins";',
 			'@Component',
@@ -82,7 +81,6 @@ describe('mixinsHandler', () => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
 		if (!path) {
-			done.fail()
 			return
 		}
 		await mixinsHandler(doc, path, ast, {
@@ -96,10 +94,9 @@ describe('mixinsHandler', () => {
 			}),
 			doc
 		)
-		done()
 	})
 
-	it('should ignore mixins coming from node_modules', async done => {
+	it('should ignore mixins coming from node_modules', async () => {
 		const src = [
 			'import { VueMixin  } from "vue-mixins";',
 			'export default {',
@@ -109,7 +106,6 @@ describe('mixinsHandler', () => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
 		if (!path) {
-			done.fail()
 			return
 		}
 		mockResolvePathFrom.mockReturnValue('foo/node_modules/component/full/path')
@@ -118,10 +114,9 @@ describe('mixinsHandler', () => {
 			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
 		})
 		expect(mockParse).not.toHaveBeenCalled()
-		done()
 	})
 
-	it('should ignore variables that are not mixins', async done => {
+	it('should ignore variables that are not mixins', async () => {
 		const src = [
 			'const { maxin } = require("./maxins");',
 			'const foo = require("./bar")',
@@ -132,7 +127,6 @@ describe('mixinsHandler', () => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
 		if (!path) {
-			done.fail()
 			return
 		}
 		await mixinsHandler(doc, path, ast, {
@@ -140,6 +134,5 @@ describe('mixinsHandler', () => {
 			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
 		})
 		expect(mockParse).not.toHaveBeenCalled()
-		done()
 	})
 })

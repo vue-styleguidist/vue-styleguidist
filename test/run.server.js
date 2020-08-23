@@ -19,6 +19,8 @@ delete config.ribbon
 delete config.usageMode
 delete config.exampleMode
 
+process.chdir(path.join(__dirname, `../examples/${exampleName}`))
+
 styleguidist(config).server((err, config) => {
 	if (err) {
 		console.warn(err)

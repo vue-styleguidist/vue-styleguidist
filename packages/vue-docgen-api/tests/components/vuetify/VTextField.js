@@ -179,11 +179,12 @@ export default baseMixins.extend().extend({
 
 	created() {
 		/* istanbul ignore next */
+		// eslint-disable-next-line no-prototype-builtins
 		if (this.$attrs.hasOwnProperty('box')) {
 			breaking('box', 'filled', this)
 		}
 		/* istanbul ignore next */
-
+		// eslint-disable-next-line no-prototype-builtins
 		if (this.$attrs.hasOwnProperty('browser-autocomplete')) {
 			breaking('browser-autocomplete', 'autocomplete', this)
 		}

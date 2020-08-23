@@ -42,7 +42,9 @@ export default function (this: StyleguidistContext, source: string) {
 export async function examplesLoader(this: StyleguidistContext, src: string): Promise<string> {
 	const filePath = this.request.split('!').pop()
 	let source: string | false = src
-	if (!filePath) return ''
+	if (!filePath) {
+		return ''
+	}
 	if (isVueFile(filePath)) {
 		// if it's a vue file, the examples could be in a docs block
 		source = getComponentVueDoc(src, filePath)
@@ -88,8 +90,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Load examples
 	const examples = source ? chunkify(source, updateExample, customLangs) : []
 
-	const getExampleLiveImports = (source: string) =>
-		getImports(getScript(source, config.jsxInExamples))
+	const getExampleLiveImports = (srci: string) => getImports(getScript(srci, config.jsxInExamples))
 
 	// Find all import statements and require() calls in examples to make them
 	// available in webpack context at runtime.
@@ -101,7 +102,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 			const requiresLocal = getExampleLiveImports(example.content)
 			const importPath = example.settings && example.settings.importpath
 			return requires.concat(
-				importPath ? requiresLocal.map(path => ({ importPath, path })) : requiresLocal
+				importPath ? requiresLocal.map(p => ({ importPath, path: p })) : requiresLocal
 			)
 		},
 		[]

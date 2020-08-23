@@ -4,7 +4,7 @@ import { RawSourceMap } from 'source-map'
 
 export default function (this: loader.LoaderContext, source: string | Buffer, map?: RawSourceMap) {
 	const cb = this.async()
-	cb &&
+	if (cb) {
 		cb(
 			null,
 			`export default function (Component) {
@@ -12,4 +12,5 @@ export default function (this: loader.LoaderContext, source: string | Buffer, ma
 	  }`,
 			map
 		)
+	}
 }

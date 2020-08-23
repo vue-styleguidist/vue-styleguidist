@@ -28,7 +28,9 @@ module.exports = {
 	getComponentPathLine(componentPath) {
 		const componentFileName = path.basename(componentPath, '.vue')
 		const name =
-			componentFileName.toLowerCase() === 'index' ? path.basename(path.dirname(componentPath)) : componentFileName
+			componentFileName.toLowerCase() === 'index'
+				? path.basename(path.dirname(componentPath))
+				: componentFileName
 		return `import ${name} from '${componentPath.replace(/^src\//, 'my-library/dist/')}'`
 	},
 	version: '1.1.1',
@@ -46,9 +48,12 @@ module.exports = {
 				},
 				{
 					test: /\.js$/,
-					exclude: (modulePath) =>
-						(/node_modules/.test(modulePath) || /packages[\\/]vue-styleguidist[\\/]lib/.test(modulePath)) &&
-						!transpileDependencies.some((mod) => new RegExp(`node_modules[\\\\/]${mod}[\\\\/]`).test(modulePath)),
+					exclude: modulePath =>
+						(/node_modules/.test(modulePath) ||
+							/packages[\\/]vue-styleguidist[\\/]lib/.test(modulePath)) &&
+						!transpileDependencies.some(mod =>
+							new RegExp(`node_modules[\\\\/]${mod}[\\\\/]`).test(modulePath)
+						),
 					use: {
 						loader: 'babel-loader',
 						options: {

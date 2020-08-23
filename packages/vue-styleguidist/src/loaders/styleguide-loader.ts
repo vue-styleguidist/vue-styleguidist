@@ -44,18 +44,18 @@ const CLIENT_CONFIG_OPTIONS = [
 
 export default function () {}
 
-export function pitch(this: StyleguidistContext, source: string) {
+export function pitch(this: StyleguidistContext) {
 	const callback = this.async()
 	const cb = callback ? callback : () => null
 	pitchAsync
-		.call(this, source)
+		.call(this)
 		.then(res => cb(undefined, res))
 		.catch(e => {
 			throw e
 		})
 }
 
-export async function pitchAsync(this: StyleguidistContext, source: string): Promise<string> {
+export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 	// Clear cache so it would detect new or renamed files
 	fileExistsCaseInsensitive.clearCache()
 
@@ -63,7 +63,9 @@ export async function pitchAsync(this: StyleguidistContext, source: string): Pro
 	slugger.reset()
 
 	const config = this._styleguidist
-	if (!config.sections) return ''
+	if (!config.sections) {
+		return ''
+	}
 
 	const allComponentFiles = getComponentFilesFromSections(
 		config.sections,

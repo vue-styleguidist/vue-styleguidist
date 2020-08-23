@@ -27,7 +27,7 @@ const query = {
 
 const getQuery = (options = {}) => encode({ ...query, ...options }, '?')
 
-it('should return valid, parsable JS', done => {
+it('should return valid, parsable JS', () => {
 	const exampleMarkdown = `
 # header
 	<div/>
@@ -39,7 +39,6 @@ text
 	const callback = (err: string, result: string) => {
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
 		expect(result).toBeTruthy()
-		done()
 	}
 
 	examplesLoader.call(
@@ -53,7 +52,7 @@ text
 	)
 })
 
-it('should replace all occurrences of __COMPONENT__ with provided query.displayName', done => {
+it('should replace all occurrences of __COMPONENT__ with provided query.displayName', () => {
 	const exampleMarkdown = `
 	<div>
 		<__COMPONENT__>
@@ -84,7 +83,6 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 		  \\n\\tdefault example\\n
 		</div>
 	`)
-		done()
 	}
 
 	examplesLoader.call(
@@ -99,7 +97,7 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 	)
 })
 
-it('should pass updateExample function from config to chunkify', done => {
+it('should pass updateExample function from config to chunkify', () => {
 	const exampleMarkdown = `
 \`\`\`jsx static
 <h1>Hello world!</h2>
@@ -115,7 +113,6 @@ it('should pass updateExample function from config to chunkify', done => {
 			},
 			'/path/to/foo/examples/file'
 		)
-		done()
 	}
 
 	examplesLoader.call(
@@ -132,7 +129,7 @@ it('should pass updateExample function from config to chunkify', done => {
 	)
 })
 
-it('should generate require map when require() is used', done => {
+it('should generate require map when require() is used', () => {
 	const exampleMarkdown = `
 	One:
 \`\`\`
@@ -146,7 +143,6 @@ const _ = require('lodash');
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
 		expect(result).toMatch(`'lodash': require('lodash')`)
-		done()
 	}
 	examplesLoader.call(
 		{
@@ -159,7 +155,7 @@ const _ = require('lodash');
 	)
 })
 
-it('should generate require map when import is used', done => {
+it('should generate require map when import is used', () => {
 	const exampleMarkdown = `
 	One:
 \`\`\`
@@ -171,7 +167,6 @@ it('should generate require map when import is used', done => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
 		expect(result).toMatch(`'lodash': require('lodash')`)
-		done()
 	}
 
 	examplesLoader.call(
@@ -185,7 +180,7 @@ it('should generate require map when import is used', done => {
 	)
 })
 
-it('should work with multiple JSX element on the root level', done => {
+it('should work with multiple JSX element on the root level', () => {
 	const exampleMarkdown = `
 		<X/>
 		<Y/>
@@ -193,7 +188,6 @@ it('should work with multiple JSX element on the root level', done => {
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
-		done()
 	}
 	examplesLoader.call(
 		{
@@ -206,7 +200,7 @@ it('should work with multiple JSX element on the root level', done => {
 	)
 })
 
-it('should works for any Markdown file, without a current component', done => {
+it('should works for any Markdown file, without a current component', () => {
 	const exampleMarkdown = `
 		import FooComponent from '../foo.js';
 		<FooComponent/>`
@@ -214,7 +208,6 @@ it('should works for any Markdown file, without a current component', done => {
 		expect(result).toBeTruthy()
 		expect(() => new Function(result)).not.toThrow(SyntaxError)
 		expect(result).not.toMatch('undefined')
-		done()
 	}
 	examplesLoader.call(
 		{
@@ -227,7 +220,7 @@ it('should works for any Markdown file, without a current component', done => {
 	)
 })
 
-it('should import external dependency in a vue component example', done => {
+it('should import external dependency in a vue component example', () => {
 	jest.mock('vue-inbrowser-compiler-utils', () => {
 		return {
 			isCodeVueSfc: () => true
@@ -251,7 +244,6 @@ it('should import external dependency in a vue component example', done => {
 	const callback = (err: string, result: string) => {
 		expect(result).toBeTruthy()
 		expect(result).toMatch(`'lodash': require('lodash')`)
-		done()
 	}
 	examplesLoader.call(
 		{

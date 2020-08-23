@@ -7,8 +7,9 @@ describe('extending handlers', () => {
 
 		await parse(path.resolve(__dirname, 'mock.vue'), {
 			addScriptHandlers: [
-				async function handler() {
+				function handler() {
 					hasRun = true
+					return Promise.resolve()
 				}
 			]
 		})
@@ -21,8 +22,9 @@ describe('extending handlers', () => {
 
 		await parse(path.resolve(__dirname, 'mock.vue'), {
 			addTemplateHandlers: [
-				async function handler() {
+				function handler() {
 					hasRun = true
+					return Promise.resolve()
 				}
 			]
 		})
