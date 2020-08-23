@@ -3,11 +3,8 @@
 # NOTA: even is the script is in a netlify subfolder,
 # it is going to be executed in the root of the repo
 # => no need to cd ..
-npm install --save-dev pnpm@3
-npx pnpm@3 install -r --store=node_modules/.pnpm-store
-
-node ./docs/.vuepress/preprocess.js --netlify
-npm run vuepress build docs
+# node ./docs/.vuepress/preprocess.js --netlify
+# npm run vuepress build docs
 
 # since netlify does not have time to compile all examples
 # only update the examples that are laoded 
@@ -18,8 +15,8 @@ while IFS= read -r line; do
     example=${line%'\r'/};
     if  [[ $example != '' ]] && [[ $example != \#* ]]; then
     (
-        npm run build ${example};
-        mv "examples/${example}/dist" "docs/dist/${example}";
+        npm run build ${example} -- --ci;
+        # mv "examples/${example}/dist" "docs/dist/${example}";
     )
     fi
 )

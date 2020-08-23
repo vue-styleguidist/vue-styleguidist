@@ -1,5 +1,5 @@
 {
-	"extends": ["eslint:recommended", "plugin:jest/recommended", "plugin:react/recommended"],
+	"extends": ["eslint:recommended", "plugin:jest/recommended"],
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
@@ -48,6 +48,15 @@
 		"import/no-named-default": "error"
 	},
 	"overrides": [
+		{
+			"files": ["packages/vue-styleguidist/src/client/**/*.*"],
+			"extends": ["plugin:react/recommended"],
+			"settings": {
+				"react": {
+					"version": "detect"
+				}
+			}
+		},
 		{
 			"files": ["packages/**/*.ts", "packages/**/*.tsx"],
 			"parser": "@typescript-eslint/parser",
