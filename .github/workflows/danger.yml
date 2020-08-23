@@ -1,0 +1,13 @@
+name: danger
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+      - edited
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Danger JS Action
+        uses: danger/danger-js@9.1.8
