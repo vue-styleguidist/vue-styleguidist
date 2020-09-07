@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Logo from 'rsg-components/Logo'
-import Markdown from 'rsg-components/Markdown'
+import StyleguideFooter from 'rsg-components/StyleguideFooter'
 import Styled from 'rsg-components/Styled'
 
 const xsmall = '@media (max-width: 600px)'
@@ -54,16 +54,10 @@ const styles = ({ font, base, light, link, baseBackground, mq }) => ({
 	},
 	components: {
 		overflow: 'auto' // To prevent the pane from growing out of the screen
-	},
-	footer: {
-		display: 'block',
-		color: light,
-		fontFamily: font,
-		fontSize: 12
 	}
 })
 
-export function StyleGuideRenderer({ classes, title, homepageUrl, children }) {
+export function StyleGuideRenderer({ classes, homepageUrl, title, children }) {
 	return (
 		<div className={classes.root}>
 			<header className={classes.header}>
@@ -86,9 +80,7 @@ export function StyleGuideRenderer({ classes, title, homepageUrl, children }) {
 			</header>
 			<main className={classes.content}>
 				{children}
-				<footer className={classes.footer}>
-					<Markdown text={`Generated with [Vue Styleguidist](${homepageUrl}) ❤️`} />
-				</footer>
+				<StyleguideFooter homepageUrl={homepageUrl} />
 			</main>
 		</div>
 	)
