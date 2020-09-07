@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import Markdown from 'rsg-components/Markdown'
 import Styled from 'rsg-components/Styled'
 
-const styles = ({ fontFamily, color }: Rsg.Theme) => ({
+const styles = ({ fontFamily, fontSize, color }: Rsg.Theme) => ({
 	root: {
 		display: 'block',
 		color: color.light,
-		fontFamily,
-		fontSize: 12
+		fontFamily: fontFamily.base,
+		fontSize: fontSize.small
 	}
 })
 
@@ -24,7 +24,7 @@ export const StyleguideFooterRenderer: React.FC<StyleguideFooterRendererProps> =
 }) => {
 	return (
 		<footer className={classes.root}>
-			<Markdown text={`Generated with [Vue Styleguidist](${homepageUrl}) ❤️`} />
+			<Markdown text={`Generated with [Vue Styleguidist](${homepageUrl})`} />
 		</footer>
 	)
 }
