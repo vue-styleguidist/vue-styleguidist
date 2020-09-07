@@ -49,4 +49,9 @@ describe('parseValidatorForValues', () => {
 		const validator = getValidator(`validator: a => ['sm', {foo:'bar'}, 'lg'].includes(a)`)
 		expect(parseValidatorForValues(validator)).toEqual(['sm', 'lg'])
 	})
+
+	it('should simply ignore references to functions', () => {
+		const validator = getValidator(`validator: isItAnEvenNumber`)
+		expect(parseValidatorForValues(validator)).toBeUndefined()
+	})
 })
