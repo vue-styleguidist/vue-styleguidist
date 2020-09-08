@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.32.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.31.2...v4.32.0) (2020-09-08)
+
+
+### Bug Fixes
+
+* use the footer somewhere else than in example ([9a802c8](https://github.com/vue-styleguidist/vue-styleguidist/commit/9a802c8323ca0177c5c017b3e5946270e382406f))
+
+
+### Features
+
+* extract footer from styleguidist for custom ([907271f](https://github.com/vue-styleguidist/vue-styleguidist/commit/907271f6f6beaf0f70c7f51ac1fe070731e74551)), closes [#935](https://github.com/vue-styleguidist/vue-styleguidist/issues/935)
+
+
+
+
+
 ## [4.31.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.31.1...v4.31.2) (2020-08-23)
 
 **Note:** Version bump only for package vue-styleguidist

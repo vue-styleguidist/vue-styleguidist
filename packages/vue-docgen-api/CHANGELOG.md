@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.32.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.31.2...v4.32.0) (2020-09-08)
+
+
+### Bug Fixes
+
+* parsing of validator with a function ref ([17472c3](https://github.com/vue-styleguidist/vue-styleguidist/commit/17472c3a26a2b43da26de6169388b35f8338195f)), closes [#954](https://github.com/vue-styleguidist/vue-styleguidist/issues/954)
+
+
+
+
+
 ## [4.31.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.31.1...v4.31.2) (2020-08-23)
 
 **Note:** Version bump only for package vue-docgen-api
