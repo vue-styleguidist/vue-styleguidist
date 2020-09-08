@@ -77,8 +77,8 @@ jobs:
         - git checkout delivery
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - npx lerna version -- --yes --github-release
-        - npx lerna publish from-git -- --yes
+        - npx lerna version --yes --github-release
+        - npx lerna publish from-git --yes
 
     - stage: release-beta
       script:
