@@ -31,9 +31,10 @@ export default function parseValidatorForValues(
 			? validatorNode.body
 			: undefined
 
-	const varName = bt.isIdentifier(validatorNode.params[0])
-		? validatorNode.params[0].name
-		: undefined
+	const varName =
+		validatorNode.params && bt.isIdentifier(validatorNode.params[0])
+			? validatorNode.params[0].name
+			: undefined
 
 	if (bt.isBinaryExpression(returnedExpression)) {
 		let valuesNode: bt.Node | undefined

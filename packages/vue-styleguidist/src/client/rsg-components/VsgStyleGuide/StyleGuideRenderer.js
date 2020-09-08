@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Logo from 'rsg-components/Logo'
-import Markdown from 'rsg-components/Markdown'
+import StyleguideFooter from 'rsg-components/StyleguideFooter'
 import Styled from 'rsg-components/Styled'
 import cx from 'classnames'
 import Ribbon from 'rsg-components/Ribbon'
 import Version from 'rsg-components/Version'
 import { HOMEPAGE } from '../../../scripts/consts'
 
-const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth }) => ({
+const styles = ({ color, sidebarWidth, mq, space, maxWidth }) => ({
 	root: {
 		minHeight: '100vh',
 		backgroundColor: color.baseBackground
@@ -49,12 +49,6 @@ const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth
 	logo: {
 		padding: space[2],
 		borderBottom: [[1, color.border, 'solid']]
-	},
-	footer: {
-		display: 'block',
-		color: color.light,
-		fontFamily: fontFamily.base,
-		fontSize: fontSize.small
 	}
 })
 
@@ -63,9 +57,7 @@ export function StyleGuideRenderer({ classes, title, version, children, toc, has
 		<div className={cx(classes.root, hasSidebar && classes.hasSidebar)}>
 			<main className={classes.content}>
 				{children}
-				<footer className={classes.footer}>
-					<Markdown text={`Generated with [Vue Styleguidist](${HOMEPAGE})`} />
-				</footer>
+				<StyleguideFooter homepageUrl={HOMEPAGE} />
 			</main>
 			{hasSidebar && (
 				<div className={classes.sidebar}>
