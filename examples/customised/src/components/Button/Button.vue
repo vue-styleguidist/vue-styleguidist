@@ -1,7 +1,6 @@
 <template>
 	<div class="Button">
-		<button class="button" :style="{ color: color, fontSize: fontSize }">
-			@click.prevent="onClick"
+		<button class="button" :style="{ color: color, fontSize: fontSize }" @click.prevent="onClick">
 			<slot />
 		</button>
 	</div>
