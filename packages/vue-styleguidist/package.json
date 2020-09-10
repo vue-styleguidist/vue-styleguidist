@@ -4,8 +4,9 @@
 	"version": "4.32.1",
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
-		"compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx && yarn typings",
-		"compile:watch": "concurrently \"yarn compile --watch\" \"yarn typings --watch\"",
+		"compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
+		"postcompile": "pnpm run typings",
+		"compile:watch": "concurrently \"pnpm run compile -- --watch\" \"pnpm run typings -- --watch\"",
 		"typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
 	},
 	"repository": {
@@ -68,11 +69,11 @@
 		"react-codemirror2": "^5.1.0",
 		"react-dev-utils": "^7.0.3",
 		"react-dom": "^16.8.0",
-		"react-group": "^1.0.6",
+		"react-group": "^3.0.2",
 		"react-icons": "^3.7.0",
 		"react-lifecycles-compat": "^3.0.4",
 		"react-simple-code-editor": "^0.11.0",
-		"react-styleguidist": "^11.0.8",
+		"react-styleguidist": "^11.0.9",
 		"rewrite-imports": "^2.0.3",
 		"style-loader": "^1.0.0",
 		"terser-webpack-plugin": "^2.2.2",

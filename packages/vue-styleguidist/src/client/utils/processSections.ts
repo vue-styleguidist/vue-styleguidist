@@ -1,5 +1,6 @@
+import getUrl from 'react-styleguidist/lib/client/utils/getUrl'
 import { ProcessedSection } from '../../types/Section'
-import processComponents from './processComponents'
+import processComponents, { HrefOptions } from './processComponents'
 import compileExamples from './compileExamples'
 
 interface SectionAndFiles {
@@ -13,19 +14,35 @@ interface SectionAndFiles {
  * @param {Array} sections
  * @return {Array}
  */
-export default function processSections({
-	sections,
-	exampleFileNames
-}: SectionAndFiles): ProcessedSection[] {
+export default function processSections(
+	{ sections, exampleFileNames }: SectionAndFiles,
+	{ useRouterLinks, useHashId = false, hashPath = [] }: HrefOptions
+): ProcessedSection[] {
 	return sections.map(section => {
+		const options = {
+			useRouterLinks,
+			useHashId: section.sectionDepth === 0,
+			hashPath: [...hashPath, section.name ? section.name : '-']
+		}
 		compileExamples(section.content || [])
 		const { components = [], sections: sectionsInside } = section
+
+		const href =
+			section.href ||
+			getUrl({
+				name: section.name,
+				slug: section.slug,
+				anchor: !useRouterLinks,
+				hashPath: useRouterLinks ? hashPath : false,
+				useSlugAsIdParam: useRouterLinks ? useHashId : false
+			})
 
 		return {
 			...section,
 			visibleName: section.name,
-			components: processComponents({ components, exampleFileNames }),
-			sections: processSections({ sections: sectionsInside, exampleFileNames })
+			href,
+			components: processComponents({ components, exampleFileNames }, options),
+			sections: processSections({ sections: sectionsInside, exampleFileNames }, options)
 		}
 	})
 }

@@ -24,7 +24,7 @@ exports[`MethodsRenderer should render JsDoc tags 1`] = `
             class="vsg-tag-value undefined"
           >
             <span
-              class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+              class="rsg--text-17 rsg--inheritSize-18 rsg--baseColor-22"
             >
               1.0.0
             </span>
@@ -118,11 +118,11 @@ exports[`MethodsRenderer should render deprecated JsDoc tags 1`] = `
             class="vsg-tag-value undefined"
           >
             <span
-              class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+              class="rsg--text-17 rsg--inheritSize-18 rsg--baseColor-22"
             >
               Use 
               <em
-                class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25 rsg--em-27"
+                class="rsg--text-17 rsg--inheritSize-18 rsg--baseColor-22 rsg--em-24"
               >
                 another
               </em>
@@ -156,12 +156,8 @@ exports[`MethodsRenderer should render parameters 1`] = `
         </p>
       </div>
       <div>
-        <div
-          class="rsg--root-16"
-        >
-          <div
-            class="rsg--block-18"
-          >
+        <div>
+          <div>
             <span>
               <code
                 class="rsg--name-13"
@@ -172,7 +168,7 @@ exports[`MethodsRenderer should render parameters 1`] = `
             </span>
              
             <span
-              class="rsg--type-19"
+              class="rsg--type-16"
             >
               Number
             </span>
@@ -180,7 +176,7 @@ exports[`MethodsRenderer should render parameters 1`] = `
             —
              
             <span
-              class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+              class="rsg--text-17 rsg--inheritSize-18 rsg--baseColor-22"
             >
               Description
             </span>
@@ -232,7 +228,7 @@ exports[`MethodsRenderer should render returns 1`] = `
           Returns:
            
           <span
-            class="rsg--type-19"
+            class="rsg--type-16"
           >
             Number
           </span>
@@ -240,7 +236,7 @@ exports[`MethodsRenderer should render returns 1`] = `
           —
            
           <span
-            class="rsg--text-20 rsg--inheritSize-21 rsg--baseColor-25"
+            class="rsg--text-17 rsg--inheritSize-18 rsg--baseColor-22"
           >
             Description
           </span>
