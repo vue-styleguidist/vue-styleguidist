@@ -11,7 +11,7 @@ exports[`SectionHeading should forward slot properties to the toolbar 1`] = `
     >
       <a
         class="rsg--sectionName-2"
-        href="/#section"
+        href="slotHref"
       >
         A Section
       </a>

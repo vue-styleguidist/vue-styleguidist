@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Slot from 'rsg-components/Slot'
 import SectionHeadingRenderer from 'rsg-components/SectionHeading/SectionHeadingRenderer'
-import getUrl from 'react-styleguidist/lib/client/utils/getUrl'
 
 const localPropTypes = {
 	children: PropTypes.node,
@@ -15,6 +14,7 @@ const localPropTypes = {
 			visibleName: PropTypes.string.isRequired
 		})
 	}).isRequired,
+	href: PropTypes.string.isRequired,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
 	pagePerSection: PropTypes.bool
@@ -27,20 +27,14 @@ const SectionHeading: React.FunctionComponent<SectionHeadingProps> = ({
 	slotProps,
 	children,
 	id,
-	pagePerSection,
 	...rest
 }) => {
-	const href = pagePerSection
-		? getUrl({ slug: id, id: rest.depth !== 1, takeHash: true })
-		: getUrl({ slug: id, anchor: true })
-
 	const parentHref = slotProps.parentComponent && slotProps.parentComponent.href
 
 	return (
 		<SectionHeadingRenderer
 			toolbar={slotProps.parentComponent ? null : <Slot name={slotName} props={slotProps} />}
 			id={id}
-			href={href}
 			{...rest}
 			parentName={slotProps.parentComponent && slotProps.parentComponent.visibleName}
 			parentHref={parentHref}

@@ -44,7 +44,7 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 
 		const getFinalUrl = (slug: string, depth: number) =>
 			pagePerSection
-				? getUrl({ slug, id: depth !== 1, takeHash: true })
+				? getUrl({ slug, useSlugAsIdParam: depth !== 1, takeHash: true })
 				: getUrl({ slug, anchor: true })
 
 		if (component.subComponents && component.props) {

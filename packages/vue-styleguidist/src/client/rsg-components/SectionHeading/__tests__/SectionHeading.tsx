@@ -21,6 +21,7 @@ describe('SectionHeading', () => {
 				slotName="slot"
 				slotProps={{ foo: 1, bar: 'baz', isolated: false } as any}
 				depth={2}
+				href="slotHref"
 			>
 				A Section
 			</SectionHeading>
@@ -99,21 +100,5 @@ describe('SectionHeading', () => {
 		  </a>
 		</h6>
 	`)
-	})
-
-	test('the href have id=section query parameter ', () => {
-		const { getByRole } = render(
-			<SectionHeading
-				id="section"
-				pagePerSection
-				slotName="slot"
-				slotProps={{ foo: 1, bar: 'baz', isolated: false } as any}
-				depth={2}
-			>
-				A Section
-			</SectionHeading>
-		)
-
-		expect(getByRole('link').getAttribute('href')).toEqual('/?id=section')
 	})
 })
