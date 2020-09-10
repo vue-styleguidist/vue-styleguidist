@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.32.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.1...v4.32.2) (2020-09-10)
+
+
+### Bug Fixes
+
+* update react-styleguidist and merge conflicts ([ba1c341](https://github.com/vue-styleguidist/vue-styleguidist/commit/ba1c341808427d529a28abcac7a11433d2ad3389))
+
+
+
+
+
 ## [4.32.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.0...v4.32.1) (2020-09-08)
 
 **Note:** Version bump only for package vue-styleguidist
