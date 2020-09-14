@@ -2,8 +2,9 @@ import React from 'react'
 import * as Rsg from 'react-styleguidist'
 import PropTypes from 'prop-types'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
-import Argument, { ArgumentProps } from 'rsg-components/Argument'
+import Argument from 'rsg-components/Argument'
 import Heading from 'rsg-components/Heading'
+import { ArgumentProps } from '../Argument/ArgumentRenderer'
 
 export const styles = ({ space }: Rsg.Theme) => ({
 	root: {
@@ -49,7 +50,7 @@ ArgumentsRenderer.propTypes = {
 		PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			type: PropTypes.object,
-			description: PropTypes.string.isRequired
+			description: PropTypes.string
 		}).isRequired
 	).isRequired,
 	heading: PropTypes.bool
