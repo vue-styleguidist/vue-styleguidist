@@ -17,7 +17,8 @@ export interface ArgumentProps {
 	name: string
 	type?: any
 	default?: string
-	description?: string
+	// the null is to satisfy proptypes of arguments
+	description?: string | null
 	returns?: boolean
 	block?: boolean
 }

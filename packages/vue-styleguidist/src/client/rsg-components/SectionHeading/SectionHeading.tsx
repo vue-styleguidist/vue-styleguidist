@@ -14,7 +14,7 @@ const localPropTypes = {
 			visibleName: PropTypes.string.isRequired
 		})
 	}).isRequired,
-	href: PropTypes.string.isRequired,
+	href: PropTypes.string,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
 	pagePerSection: PropTypes.bool
