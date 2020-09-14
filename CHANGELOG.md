@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.32.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.2...v4.32.3) (2020-09-14)
+
+
+### Bug Fixes
+
+* no undefined consts ([9e28ebf](https://github.com/vue-styleguidist/vue-styleguidist/commit/9e28ebf18b4e0cea1341756d45747b1c8173af48))
+* remove warning on arguments (description req) ([0aa01cd](https://github.com/vue-styleguidist/vue-styleguidist/commit/0aa01cda611164cd5ace1a091fe0ab93ff7861cf))
+* warning on SectionHeader ([1aaf4ee](https://github.com/vue-styleguidist/vue-styleguidist/commit/1aaf4ee4569848202f009e19529a541b9e4d0840))
+
+
+
+
+
 ## [4.32.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.1...v4.32.2) (2020-09-10)
 
 
