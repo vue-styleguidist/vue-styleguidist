@@ -6,7 +6,7 @@ import Styled from 'rsg-components/Styled'
 import cx from 'classnames'
 import Ribbon from 'rsg-components/Ribbon'
 import Version from 'rsg-components/Version'
-import { HOMEPAGE } from '../../../scripts/consts'
+import consts from '../../../scripts/consts'
 
 const styles = ({ color, sidebarWidth, mq, space, maxWidth }) => ({
 	root: {
@@ -57,7 +57,7 @@ export function StyleGuideRenderer({ classes, title, version, children, toc, has
 		<div className={cx(classes.root, hasSidebar && classes.hasSidebar)}>
 			<main className={classes.content}>
 				{children}
-				<StyleguideFooter homepageUrl={HOMEPAGE} />
+				<StyleguideFooter homepageUrl={consts.HOMEPAGE} />
 			</main>
 			{hasSidebar && (
 				<div className={classes.sidebar}>
