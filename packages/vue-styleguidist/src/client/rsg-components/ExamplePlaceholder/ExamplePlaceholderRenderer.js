@@ -4,7 +4,7 @@ import map from 'lodash/map'
 import { getDefaultExample } from 'vue-inbrowser-compiler-utils'
 import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
-import { DOCS_DOCUMENTING } from '../../../scripts/consts'
+import consts from '../../../scripts/consts'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 
 const styles = ({ fontFamily, fontSize, color }) => ({
@@ -93,7 +93,7 @@ You can also add examples and documentation in the \`<docs>\` block of your \`.v
 
 You may need to **restart** the style guide server after adding an example file.
 
-Read more in the [documenting components guide](${DOCS_DOCUMENTING}).
+Read more in the [documenting components guide](${consts.DOCS_DOCUMENTING}).
 					`}
 				/>
 			)
