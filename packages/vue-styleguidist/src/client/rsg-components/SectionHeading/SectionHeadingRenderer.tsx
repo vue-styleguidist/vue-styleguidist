@@ -41,7 +41,7 @@ const localPropTypes = {
 	children: PropTypes.node,
 	toolbar: PropTypes.node,
 	id: PropTypes.string.isRequired,
-	href: PropTypes.string.isRequired,
+	href: PropTypes.string,
 	depth: PropTypes.number.isRequired,
 	deprecated: PropTypes.bool,
 	parentName: PropTypes.string,
@@ -69,9 +69,13 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 	return (
 		<div className={classes.wrapper}>
 			<Heading level={headingLevel} id={id}>
-				<a href={href} className={sectionNameClasses}>
-					{children}
-				</a>
+				{href ? (
+					<a href={href} className={sectionNameClasses}>
+						{children}
+					</a>
+				) : (
+					<span className={sectionNameClasses}>{children}</span>
+				)}
 				{parentName && parentHref && (
 					<a href={parentHref} className={classes.parentName}>
 						{parentName}
