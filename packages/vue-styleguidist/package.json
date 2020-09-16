@@ -91,6 +91,11 @@
 		"vue-template-compiler": ">=2.0.0",
 		"webpack": ">=4"
 	},
+	"peerDependenciesMeta": {
+		"pug": {
+			"optional": true
+		}
+	},
 	"devDependencies": {
 		"@babel/types": "^7.5.5",
 		"@testing-library/react": "^9.4.0",
