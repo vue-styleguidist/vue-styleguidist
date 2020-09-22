@@ -94,13 +94,15 @@ export default {
 }
 ```
 
-The `theme` object will be merged with the [standard theme](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/styles/theme.ts) and injected in all components that take it as a parameter.
+Since vue-styleguidist is based on react-styleguidist, they share the same [theme interface](https://github.com/styleguidist/react-styleguidist/blob/master/src/typings/RsgTheme.ts).
+
+The `theme` object we provide will be merged with the [standard theme](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/styles/theme.ts) and injected in all components that take it as a parameter.
 
 ### Styled Components
 
-If we want to adjust the styles of a specific component, and we want to keep the HTML output and the inner logic, we can use the [styles](/Configuration.md#styles) options in our `styleguide.config.js`.
+If we want to adjust the styles of a specific component, and we want to keep the HTML output plus the inner logic, we can use the [styles](/Configuration.md#styles) options in our `styleguide.config.js`.
 
-Since we wnt to change the heading of a section and we previously found the component, we will change the styles of the `Heading` component we found above.
+Since we want to change the heading of a section and we previously found the component, we will change the styles of the `Heading` component we found above.
 
 We start by looking at the components [original styles](https://github.com/styleguidist/react-styleguidist/blob/master/src/client/rsg-components/Heading/HeadingRenderer.tsx#L7-L34).
 
@@ -197,6 +199,6 @@ module.exports = {
 }
 ```
 
-We are now free to modify the ccomponent file we own. Once we start the styleguide development environment, every save of our new component file will be reflected on the rendering using hotm module replacement.
+We are now free to modify the component file we own. Once we start the styleguide development environment, every save of our new component file will be reflected on the rendering using hotm module replacement.
 
 Happy Styling!
