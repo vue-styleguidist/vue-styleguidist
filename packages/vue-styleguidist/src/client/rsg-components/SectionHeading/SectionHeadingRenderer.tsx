@@ -16,7 +16,7 @@ const styles = ({ color, space, fontSize }: Rsg.Theme) => ({
 		marginLeft: 'auto'
 	},
 	sectionName: {
-		'&:hover, &:active': {
+		'a&:hover, a&:active': {
 			isolate: false,
 			textDecoration: 'underline',
 			cursor: 'pointer'
