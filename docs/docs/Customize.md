@@ -48,7 +48,7 @@ Vue Styleguidist is made on top of React-Styleguidist. To avoid duplication, a l
 
 To find the source code of the component we want to customize, we look first in [vue-styleguidist](https://github.com/vue-styleguidist/vue-styleguidist/tree/dev/packages/vue-styleguidist/src/client/rsg-components). This is where webpack will look for it first as well.
 
-> **NOTE:** There is no `...Renderer` or `Styled()` components in this list. If the component we want to customize end with `renderer`, we will look for the components without the suffix. The idea is the same with `Styled()`, though styled components can often be ignored.
+> **NOTE:** There is no `...Renderer` or `Styled` components in this list. If the component we want to customize end with `renderer`, we will look for the components without the suffix. The idea is the same with `Styled`, though styled components can often be ignored.
 
 ### Then in react-styleguidist
 
