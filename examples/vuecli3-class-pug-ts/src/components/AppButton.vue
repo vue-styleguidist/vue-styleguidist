@@ -1,7 +1,7 @@
 <template lang="pug">
-  button(:style="styles" @click="handleClick")
-    // @slot Use this slot to place the button content
-    slot
+button(:style="styles" @click="handleClick")
+	// @slot Use this slot to place the button content
+	slot
 </template>
 
 <script lang="ts">
