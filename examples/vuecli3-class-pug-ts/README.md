@@ -6,7 +6,7 @@ How to start locally:
 
 ```
 git clone https://github.com/vue-styleguidist/vue-styleguidist.git
-cd vue-styleguidist/examples/pug-ts-cli-class
+cd vue-styleguidist/examples/vuecli3-class-pug-ts
 npm install
 npm run styleguide
 ```
