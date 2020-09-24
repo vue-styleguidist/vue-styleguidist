@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.32.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.3...v4.32.4) (2020-09-24)
+
+
+### Bug Fixes
+
+* **docgen:** allow base indent in pug templates ([0950074](https://github.com/vue-styleguidist/vue-styleguidist/commit/09500746aa648b03a59550f7e591aa5243727612)), closes [#979](https://github.com/vue-styleguidist/vue-styleguidist/issues/979)
+
+
+
+
+
 ## [4.32.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.0...v4.32.1) (2020-09-08)
 
 **Note:** Version bump only for package vue-docgen-api
