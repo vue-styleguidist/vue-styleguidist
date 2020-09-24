@@ -1,4 +1,4 @@
-# Configuring webpack
+# Configuring Webpack
 
 Vue styleguidist uses [webpack](https://webpack.js.org/) under the hood and it needs to know how to load your project’s files.
 

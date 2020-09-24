@@ -1,4 +1,4 @@
-# Developer guide
+# Developer Guide
 
 > Vue Styleguidist created from [React Styleguidist](https://github.com/styleguidist/react-styleguidist), implement additional support to read and compile .vue files.
 

@@ -6,7 +6,7 @@ const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.git
 
 module.exports = {
 	title: 'Style guide example',
-	components: 'src/components/**/[A-Z]*.vue',
+	components: 'src/components/**/[A-Z]*.{vue,jsx}',
 	showSidebar: false,
 	jssThemedEditor: false,
 	require: ['./styleguide/vsc-prism.css'],
@@ -43,7 +43,7 @@ module.exports = {
 					loader: 'vue-loader'
 				},
 				{
-					test: /\.js?$/,
+					test: /\.jsx?$/,
 					loader: 'babel-loader',
 					exclude: /(node_modules|packages)/,
 					query: {

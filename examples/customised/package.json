@@ -34,6 +34,7 @@
 		"@babel/preset-env": "^7.3.1",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-loader": "^8.0.5",
+		"babel-plugin-transform-vue-jsx": "4.0.1",
 		"concurrently": "^4.1.1",
 		"css-loader": "^3.6.0",
 		"lodash": "^4.17.15",
