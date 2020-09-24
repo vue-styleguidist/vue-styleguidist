@@ -246,11 +246,11 @@ module.exports = {
 
 ## How to change styles of a style guide?
 
-There are two config options to change your style guide UI: [theme](Configuration.md#theme) and [styles](Configuration.md#styles).
+There are two config options to change your style guide UI: [theme](/Configuration.md#theme) and [styles](/Configuration.md#styles).
 
-Use [theme](Configuration.md#theme) to change fonts, colors, etc.
+Use [theme](/Configuration.md#theme) to change fonts, colors, etc.
 
-Use [styles](Configuration.md#styles) to tweak the style of any particular Styleguidist component.
+Use [styles](/Configuration.md#styles) to tweak the style of any particular Styleguidist component.
 
 As an example:
 
@@ -286,7 +286,7 @@ module.exports = {
 
 > **Note:** Use [React Developer Tools](https://github.com/facebook/react) to find component and style names. For example a component `<LogoRenderer><h1 className="rsg--logo-53">` corresponds to an example above.
 
-> **Note:** Use a function instead of an object for [styles](Configuration.md#styles) to access all theme variables in your custom styles.
+> **Note:** Use a function instead of an object for [styles](/Configuration.md#styles) to access all theme variables in your custom styles.
 
 ```javascript
 module.exports = {
@@ -569,7 +569,7 @@ This is not ideal as your examples are not using the real component name.
 
 A way to get around the problem is to create an alias component, with its original name.
 
-Modify the [root element](/Configuration.html#renderrootjsx) as follow:
+Modify the [root element](/Configuration.md#renderrootjsx) as follow:
 
 ```js
 // config/styleguide.root.js
