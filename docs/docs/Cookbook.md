@@ -185,19 +185,34 @@ module.exports = {
 
 ## How to hide some components in a style guide but make them available in examples?
 
-Use the `require` option to register them in advance. And ignore them in your
+- Unless we use [locallyRegisterComponents](/Configuration.md#locallyregistercomponents) all documented components are available in every example.
+- If we exclude components from the sidebar and documentation, using the [ignore](/Configuration.md#ignore) configuration they become unavailable for examples.
+- Use the [require](/Configuration.md#require) option to load a file where we will register our hidden components.
 
-In `styleguide.config.js` set the require option to load a file
+### A concrete example:
+
+**Problem:** I do not want to document any component whose filename starts with an underscore (`_`).
 
 ```js
 module.exports = {
+  // load install.components.js for every page and example
   require: ['./docs/install.components.js'],
-  // avoid loading components that start with _
-  components: 'src/components/**/[a-zA-Z]*.vue'
+  // register all the components
+  components: 'src/components/**/*.vue',
+  // avoid documenting components that start with _
+  ignore: ['**/_*.vue']
 }
 ```
 
-Then in `docs/install.components.js` use require (or require.context) to load your components.
+If you started with a vue-cli install, or just installed styleguidist, `docs/install.components.js` the file metionned in the [require](/Configuration.md#require) option does not exist in your codebase.
+
+> **NOTE** `docs/install.components.js` above is a file name we chose. It matters not to styleguidist what name you choose so choose one that makes sense to you.
+
+First we create `docs/install.components.js`. Then, we will use the node 6 function require (or require.context since we are in webpack context) to gather the components we want to use in examples.
+
+Finally, we will register them using the `Vue.component()` function.
+
+The components starting with an underscore are now available in every example (without the underscore).
 
 ```js
 import Vue from 'vue'
@@ -213,6 +228,8 @@ const registerAllComponents = components => {
     const componentName =
       componentConfig.default.name ||
       componentConfig.name ||
+      // or from the filename, removing any character
+      // that would not fit in a component name
       path.basename(fileName, '.vue').replace(/[^0-9a-zA-Z]/, '')
 
     // Globally register the component
