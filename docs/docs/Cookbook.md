@@ -187,13 +187,11 @@ module.exports = {
 
 - Unless we use [locallyRegisterComponents](/Configuration.md#locallyregistercomponents) all documented components are available in every example.
 - If we exclude components from the sidebar and documentation, using the [ignore](/Configuration.md#ignore) configuration they become unavailable for examples.
-- Use the `require` option to load a file that will register the missing components in the Vue instance used in our examples.
+- Use the [require](/Configuration.md#require) option to load a file where we will register our hidden components.
 
 ### A concrete example:
 
 **Problem:** I do not want to document any component whose filename starts with an underscore (`_`).
-
-In `styleguide.config.js` we set the require option to load the installing file. We also exclude all files starting with an underscore from the styleguide.
 
 ```js
 module.exports = {
@@ -206,11 +204,13 @@ module.exports = {
 }
 ```
 
-At this point, if we start styleguidist, we should not see any of the components staring with an undersocre in the sidebar.
+If you started with a vue-cli install, or just installed styleguidist, `docs/install.components.js` the file metionned in the [require](/Configuration.md#require) option does not exist in your codebase.
 
-In `docs/install.components.js` we will use require (or require.context) to gather the components we want to use in examples.
+> **NOTE** `docs/install.components.js` above is a file name we chose. It matters not to styleguidist what name you choose so choose one that makes sense to you.
 
-And we will register them using the `Vue.component()` function.
+First we create `docs/install.components.js`. Then, we will use the node 6 function require (or require.context since we are in webpack context) to gather the components we want to use in examples.
+
+Finally, we will register them using the `Vue.component()` function.
 
 The components starting with an underscore are now available in every example (without the underscore).
 
