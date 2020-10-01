@@ -3,7 +3,7 @@ import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../../babel-parser'
 import Documentation, { EventDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import eventHandler from '../eventHandler'
+import eventHandler, { eventHandlerEmits } from '../eventHandler'
 
 jest.mock('../../Documentation')
 
@@ -249,6 +249,7 @@ describe('eventHandler', () => {
 			]
 		})
 	})
+
 	describe('vue 3 event descriptors', () => {
 		it('should detect events as an array', () => {
 			const src = `
@@ -258,7 +259,7 @@ describe('eventHandler', () => {
 			`
 			const def = parse(src)
 			if (def.component) {
-				eventHandler(documentation, def.component, def.ast)
+				eventHandlerEmits(documentation, def.component)
 			}
 			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('in-focus')
 			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('submit')
@@ -268,14 +269,14 @@ describe('eventHandler', () => {
 			const src = `
 	export default {
 		emits: {
-			'in-focus':undefined, 
-			'submit':undefined
+			'in-focus': undefined, 
+			submit: undefined
 		}
 	}
 			`
 			const def = parse(src)
 			if (def.component) {
-				eventHandler(documentation, def.component, def.ast)
+				eventHandlerEmits(documentation, def.component)
 			}
 			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('in-focus')
 			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('submit')
@@ -298,10 +299,10 @@ describe('eventHandler', () => {
 			`
 			const def = parse(src)
 			if (def.component) {
-				eventHandler(documentation, def.component, def.ast)
+				eventHandlerEmits(documentation, def.component)
 			}
 			const eventComp: EventDescriptor = {
-				name: 'submit',
+				name: 'success',
 				description: 'The form is being submitted'
 			}
 			expect(mockEventDescriptor).toMatchObject(eventComp)
@@ -314,21 +315,53 @@ describe('eventHandler', () => {
 			/**
 			 * The button has gathered focus
 			 */
-			'in-focus':undefined, 
+			'in-focus': undefined, 
 			/**
 			 * The form is being submitted
 			 */
-			'submit':undefined
+			submit: undefined
 		}
 	}
 			`
 			const def = parse(src)
 			if (def.component) {
-				eventHandler(documentation, def.component, def.ast)
+				eventHandlerEmits(documentation, def.component)
 			}
 			const eventComp: EventDescriptor = {
-				name: 'submit',
+				name: 'success',
 				description: 'The form is being submitted'
+			}
+			expect(mockEventDescriptor).toMatchObject(eventComp)
+		})
+
+		it('should extract arguments (array)', () => {
+			const src = `
+	export default {
+		emits: [
+			'click',
+			/**
+			 * The form is being submitted
+			 * @arg {string} payload
+			 */
+			'submit'
+		]
+	}
+			`
+			const def = parse(src)
+			if (def.component) {
+				eventHandlerEmits(documentation, def.component)
+			}
+			const eventComp: EventDescriptor = {
+				name: 'success',
+				description: 'The form is being submitted',
+				properties: [
+					{
+						name: 'payload',
+						type: {
+							names: ['string']
+						}
+					}
+				]
 			}
 			expect(mockEventDescriptor).toMatchObject(eventComp)
 		})
