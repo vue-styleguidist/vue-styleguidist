@@ -23,12 +23,13 @@ function getCommentBlockAndTags(
 	{ commentIndex } = { commentIndex: 1 }
 ): DocBlockTags | null {
 	const docBlock = getDocblock(p, { commentIndex })
-
 	return docBlock ? getDoclets(docBlock) : null
 }
 
 /**
- * Extracts events information from an object-style VueJs component
+ * Extracts events information from a VueJs component
+ * wether it's a class based component or an option based one
+ *
  * @param documentation
  * @param path
  * @param astPath
@@ -39,54 +40,11 @@ export default function eventHandler(
 	astPath: bt.File
 ): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
-		const methodsPath = path
-			.get('properties')
-			.filter(
-				(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
-			) as NodePath<bt.ObjectProperty>[]
-
-		// if no method return
-		if (!methodsPath.length) {
-			return Promise.resolve()
-		}
-
-		const methodsObject = methodsPath[0].get('value')
-		if (bt.isObjectExpression(methodsObject.node)) {
-			methodsObject.get('properties').each((p: NodePath) => {
-				const commentedMethod = bt.isObjectMethod(p.node) ? p : p.parentPath
-				const { tags: jsDocTags } = getCommentBlockAndTags(commentedMethod) || {}
-
-				if (!jsDocTags) {
-					return
-				}
-
-				const [firesTags] = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
-				if (firesTags) {
-					const eventName = firesTags.content as string
-					const eventDescriptor = documentation.getEventDescriptor(eventName)
-					let currentBlock: DocBlockTags | null = {}
-					let foundEventDesciptor: DocBlockTags | undefined
-					let commentIndex = 1
-					while (currentBlock && !foundEventDesciptor) {
-						currentBlock = getCommentBlockAndTags(commentedMethod, { commentIndex: ++commentIndex })
-						if (
-							currentBlock &&
-							currentBlock.tags &&
-							currentBlock.tags.some(
-								(tag: Tag) => tag.title === 'event' && tag.content === eventName
-							)
-						) {
-							foundEventDesciptor = currentBlock
-						}
-					}
-
-					if (foundEventDesciptor) {
-						setEventDescriptor(eventDescriptor, foundEventDesciptor)
-					}
-				}
-			})
-		}
+		eventHandlerMethods(documentation, path)
+		eventHandlerEmits(documentation, path)
 	}
+
+	// browse the entirety of the code inside the component to look for this.$emit
 	visit(path.node, {
 		visitCallExpression(pathExpression) {
 			if (
@@ -150,6 +108,109 @@ export default function eventHandler(
 		}
 	})
 	return Promise.resolve()
+}
+
+/**
+ * Extracts events information from an
+ * object-style VueJs component `emits` option
+ *
+ * @param documentation
+ * @param path
+ */
+export function eventHandlerEmits(documentation: Documentation, path: NodePath) {
+	const emitsPath = path
+		.get('properties')
+		.filter(
+			(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('emits')(p)
+		) as NodePath<bt.ObjectProperty>[]
+
+	// if no emits member return
+	if (!emitsPath.length) {
+		return
+	}
+	const emitsObject = emitsPath[0].get('value')
+	if (bt.isArrayExpression(emitsObject.node)) {
+		emitsObject.get('elements').value.forEach((event: bt.Node, i: number) => {
+			if (bt.isStringLiteral(event)) {
+				const eventDescriptor = documentation.getEventDescriptor(event.value)
+				const eventPath = emitsObject.get('elements', i)
+				const docblock = getDocblock(eventPath)
+				const doclets = getDoclets(docblock || '')
+				setEventDescriptor(eventDescriptor, doclets)
+			}
+		})
+	} else if (bt.isObjectExpression(emitsObject.node)) {
+		emitsObject.get('properties').value.forEach((event: bt.ObjectProperty, i: number) => {
+			const eventName = bt.isStringLiteral(event.key)
+				? event.key.value
+				: bt.isIdentifier(event.key)
+				? event.key.name
+				: undefined
+
+			if (eventName) {
+				const eventDescriptor = documentation.getEventDescriptor(eventName)
+				const eventPath = emitsObject.get('properties', i)
+				const docblock = getDocblock(eventPath)
+				const doclets = getDoclets(docblock || '')
+				setEventDescriptor(eventDescriptor, doclets)
+			}
+		})
+	}
+}
+
+/**
+ * Extracts events information from an
+ * object-style VueJs component `methods` option
+ *
+ * @param documentation
+ * @param path
+ */
+export function eventHandlerMethods(documentation: Documentation, path: NodePath) {
+	const methodsPath = path
+		.get('properties')
+		.filter(
+			(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
+		) as NodePath<bt.ObjectProperty>[]
+
+	// if no method return
+	if (!methodsPath.length) {
+		return
+	}
+
+	const methodsObject = methodsPath[0].get('value')
+	if (bt.isObjectExpression(methodsObject.node)) {
+		methodsObject.get('properties').each((p: NodePath) => {
+			const commentedMethod = bt.isObjectMethod(p.node) ? p : p.parentPath
+			const { tags: jsDocTags } = getCommentBlockAndTags(commentedMethod) || {}
+
+			if (!jsDocTags) {
+				return
+			}
+
+			const [firesTags] = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
+			if (firesTags) {
+				const eventName = firesTags.content as string
+				const eventDescriptor = documentation.getEventDescriptor(eventName)
+				let currentBlock: DocBlockTags | null = {}
+				let foundEventDesciptor: DocBlockTags | undefined
+				let commentIndex = 1
+				while (currentBlock && !foundEventDesciptor) {
+					currentBlock = getCommentBlockAndTags(commentedMethod, { commentIndex: ++commentIndex })
+					if (
+						currentBlock &&
+						currentBlock.tags &&
+						currentBlock.tags.some((tag: Tag) => tag.title === 'event' && tag.content === eventName)
+					) {
+						foundEventDesciptor = currentBlock
+					}
+				}
+
+				if (foundEventDesciptor) {
+					setEventDescriptor(eventDescriptor, foundEventDesciptor)
+				}
+			}
+		})
+	}
 }
 
 /**
