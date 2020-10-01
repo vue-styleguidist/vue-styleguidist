@@ -249,4 +249,88 @@ describe('eventHandler', () => {
 			]
 		})
 	})
+	describe('vue 3 event descriptors', () => {
+		it('should detect events as an array', () => {
+			const src = `
+	export default {
+		emits: ['in-focus', 'submit']
+	}
+			`
+			const def = parse(src)
+			if (def.component) {
+				eventHandler(documentation, def.component, def.ast)
+			}
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('in-focus')
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('submit')
+		})
+
+		it('should detect event descriptors as an object', () => {
+			const src = `
+	export default {
+		emits: {
+			'in-focus':undefined, 
+			'submit':undefined
+		}
+	}
+			`
+			const def = parse(src)
+			if (def.component) {
+				eventHandler(documentation, def.component, def.ast)
+			}
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('in-focus')
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('submit')
+		})
+
+		it('should extract desciptions (array)', () => {
+			const src = `
+	export default {
+		emits: [
+			/**
+			 * The button has gathered focus
+			 */
+			'in-focus', 
+			/**
+			 * The form is being submitted
+			 */
+			'submit'
+		]
+	}
+			`
+			const def = parse(src)
+			if (def.component) {
+				eventHandler(documentation, def.component, def.ast)
+			}
+			const eventComp: EventDescriptor = {
+				name: 'submit',
+				description: 'The form is being submitted'
+			}
+			expect(mockEventDescriptor).toMatchObject(eventComp)
+		})
+
+		it('should extract desciptions (object)', () => {
+			const src = `
+	export default {
+		emits: {
+			/**
+			 * The button has gathered focus
+			 */
+			'in-focus':undefined, 
+			/**
+			 * The form is being submitted
+			 */
+			'submit':undefined
+		}
+	}
+			`
+			const def = parse(src)
+			if (def.component) {
+				eventHandler(documentation, def.component, def.ast)
+			}
+			const eventComp: EventDescriptor = {
+				name: 'submit',
+				description: 'The form is being submitted'
+			}
+			expect(mockEventDescriptor).toMatchObject(eventComp)
+		})
+	})
 })
