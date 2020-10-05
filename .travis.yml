@@ -53,7 +53,7 @@ jobs:
 
         # Build all examples
         - cd examples
-        - for D in *; do node ../test/styleguidist.js build "${D}" --ci; done || exit 1
+        - for D in *; do pnpm build "${D}" -- --ci; done || exit 1
 
         # Move them to the docs
         - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
