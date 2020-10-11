@@ -47,7 +47,6 @@
 		"vue-docgen-cli": "^3.20.0",
 		"vue-loader": "^15.2.4",
 		"vue-styleguidist": "^4.0.0",
-		"vuepress": "^1.0.3",
 		"webpack": "^4.44.1",
 		"webpack-bundle-analyzer": "3.3.2"
 	}

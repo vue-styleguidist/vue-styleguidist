@@ -43,7 +43,7 @@
 		"vue-docgen-api": "^4.31.1",
 		"vue-docgen-cli": "^4.31.1",
 		"vue-loader": "^15.2.4",
-		"vuepress": "^1.5.3",
+		"vuepress": "^1.6.0",
 		"vuepress-plugin-live": "^1.6.0",
 		"webpack": "^4.44.1",
 		"webpack-bundle-analyzer": "3.3.2"
