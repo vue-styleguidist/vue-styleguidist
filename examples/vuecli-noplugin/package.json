@@ -4,8 +4,8 @@
   "description": "What happens if you try to use the Vue CLI 3, install styleguidist, and omit to use the plugin",
   "private": true,
   "scripts": {
-    "styleguide": "styleguidist serve",
-    "styleguide:build": "styleguidist build"
+    "styleguide": "vue-styleguidist serve",
+    "styleguide:build": "vue-styleguidist build"
   },
   "dependencies": {
     "vue": "^2.5.16"

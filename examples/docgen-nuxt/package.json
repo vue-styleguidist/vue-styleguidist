@@ -1,0 +1,40 @@
+{
+	"name": "vue-styleguidist-example-docgen-nuxt",
+	"version": "4.0.0",
+	"description": "Use vue-docgen-cli to integrate with vuepress sites",
+	"keywords": [
+		"nuxt",
+		"@nuxt/content",
+		"docgen",
+		"cli",
+		"vue-live",
+		"markdown"
+	],
+	"private": true,
+	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/styleguidist/vue-styleguidist.git"
+	},
+	"license": "MIT",
+	"scripts": {
+		"styleguide": "concurrently \"vue-docgen --watch\" \"nuxt dev\"",
+		"styleguide:build": "vue-docgen && nuxt generate"
+	},
+	"dependencies": {
+		"@nuxt/content-theme-docs": "^0.3.1",
+		"concurrently": "^5.3.0",
+		"minimatch": "^3.0.4",
+		"null-loader": "^4.0.1",
+		"nuxt": "^2.14.6",
+		"remark-plugin-vue-live": "^1.0.5",
+		"vue-docgen-api": "^4.32.4",
+		"vue-docgen-cli": "^4.31.1",
+		"vue-inbrowser-compiler-utils": "^4.32.1",
+		"vue-live": "^1.14.1",
+		"vue-simple-docgen-loader": "workspace:^4.32.4"
+	},
+	"engines": {
+		"node": ">=4"
+	}
+}

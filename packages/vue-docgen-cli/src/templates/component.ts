@@ -21,7 +21,7 @@ export default (
 		frontMatter.push(`title: ${displayName}`)
 	}
 
-	if (isSubComponent || hasSubComponents) {
+	if (hasSubComponents) {
 		// show more than one level on subcomponents
 		frontMatter.push('sidebarDepth: 2')
 	}

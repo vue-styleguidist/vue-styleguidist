@@ -14,7 +14,7 @@ function ignore(): boolean {
 /**
  * List of all keys that could contain documentation
  */
-const VUE_COMPONENTS_KEYS = ['data', 'props', 'methods', 'computed']
+const VUE_COMPONENTS_KEYS = ['data', 'props', 'methods', 'computed', 'emits']
 
 function isObjectExpressionComponentDefinition(node: bt.ObjectExpression): boolean {
 	return (

@@ -68,6 +68,13 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
+	let vue$:string;
+	try{
+		vue$ = require.resolve('vue/dist/vue.esm.js')
+	}catch(e){
+		vue$ = require.resolve('vue/dist/vue.esm-browser.js')
+	}
+
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
 		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
@@ -75,7 +82,7 @@ export default function (
 			alias: {
 				// allows to use the compiler
 				// without this, cli will overload the alias and use runtime esm
-				vue$: require.resolve('vue/dist/vue.esm.js')
+				vue$
 			}
 		},
 		plugins: [
