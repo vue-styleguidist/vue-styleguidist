@@ -12,6 +12,9 @@ export default theme({
 			remarkPlugins: ['remark-plugin-vue-live']
 		}
 	},
+	router: {
+		base: '/docgen-nuxt/'
+	},
 	build: {
 		extend(config) {
 			// make template coiler available at runtime
