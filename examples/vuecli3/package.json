@@ -11,7 +11,7 @@
     "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "dependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "@vue/babel-preset-app": "^4.5.4",
@@ -19,7 +19,7 @@
     "@vue/cli-plugin-eslint": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
     "vue-cli-plugin-styleguidist": "^4.0.0",
-    "vue-template-compiler": "^2.5.16",
+    "vue-template-compiler": "^2.6.12",
     "webpack-bundle-analyzer": "^3.3.2"
   },
   "eslintConfig": {

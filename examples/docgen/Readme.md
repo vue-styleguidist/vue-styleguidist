@@ -6,7 +6,7 @@ How to start locally:
 git clone https://github.com/vue-styleguidist/vue-styleguidist.git
 cd vue-styleguidist/examples/docgen
 yarn install
-yarn docs
+yarn styleguide
 ```
 
 **NOTE** does not work with npm only with yarn because of hoisting issues

@@ -19,7 +19,7 @@
 		"styleguide:build": "vue-cli-service styleguidist:build"
 	},
 	"dependencies": {
-		"vue": "^2.5.16"
+		"vue": "^2.6.12"
 	},
 	"devDependencies": {
 		"@vue/babel-preset-app": "^4.5.4",
@@ -33,7 +33,7 @@
 		"prop-types": "^15.6.2",
 		"react": "^16.4.1",
 		"vue-cli-plugin-styleguidist": "^4.0.0",
-		"vue-template-compiler": "^2.5.16"
+		"vue-template-compiler": "^2.6.12"
 	},
 	"eslintConfig": {
 		"root": true,
