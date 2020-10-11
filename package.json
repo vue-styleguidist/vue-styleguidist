@@ -125,7 +125,7 @@
 		"vue-scrollactive": "^0.9.3",
 		"vue-styleguidist": "workspace:^4.32.4",
 		"vue-template-compiler": "^2.6.12",
-		"vuepress": "^1.2.0",
+		"vuepress": "^1.6.0",
 		"vuex": "^3.5.1",
 		"yorkie": "^2.0.0"
 	},
