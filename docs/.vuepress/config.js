@@ -22,14 +22,7 @@ module.exports = () => {
 			['meta', { prefix: ogprefix, property: 'twitter:title', content: titleShare }],
 			['meta', { prefix: ogprefix, property: 'og:type', content: 'website' }],
 			['meta', { prefix: ogprefix, property: 'og:description', content: description }],
-			[
-				'meta',
-				{
-					prefix: ogprefix,
-					property: 'og:image',
-					content: '/assets/logo.png'
-				}
-			]
+			['meta', { prefix: ogprefix, property: 'og:image', content: '/assets/logo.png' }]
 		],
 		plugins: [
 			[
