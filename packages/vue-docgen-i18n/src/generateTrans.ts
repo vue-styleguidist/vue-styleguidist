@@ -47,8 +47,8 @@ export function generateTranslation(originalDocs: ComponentDoc[]): string {
 	const ast = toAst(trans)
 	// Add leading coments (original description) before
 	// each description member
-	walk(ast as any, {
-		enter: node => {
+	walk(ast, {
+		enter: (node:any) => {
 			if (
 				node.type === 'Property' &&
 				isLiteral(node.key) &&
@@ -64,6 +64,6 @@ export function generateTranslation(originalDocs: ComponentDoc[]): string {
 
 export default function genFile(originalDocs: ComponentDoc[], fileName: string) {
 	writeFile(fileName, format(generateTranslation(originalDocs), { parser: 'babel' }), err => {
-		if (err) throw err
+		if (err) {throw err}
 	})
 }

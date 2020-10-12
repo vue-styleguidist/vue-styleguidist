@@ -1,5 +1,3 @@
-export { cleanName, getDefaultExample } from 'vue-inbrowser-compiler-utils'
-
 import Documentation, {
 	ComponentDoc,
 	PropDescriptor,
@@ -15,10 +13,12 @@ import Documentation, {
 import { DocGenOptions as DCOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
 import * as ScriptHandlers from './script-handlers'
 import * as TemplateHandlers from './template-handlers'
+import mergeTranslations from './mergeTranslations'
 
 export { ScriptHandlers }
 export { TemplateHandlers }
-import mergeTranslations from './mergeTranslations'
+
+export { cleanName, getDefaultExample } from 'vue-inbrowser-compiler-utils'
 
 export interface DocGenOptions extends DCOptions {
 	translation?: string
