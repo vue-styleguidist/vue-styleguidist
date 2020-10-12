@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.33.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.4...v4.33.0) (2020-10-12)
+
+
+### Features
+
+* **docgen:** parse emits option from vue 3 ([0469224](https://github.com/vue-styleguidist/vue-styleguidist/commit/0469224f92355dfa867a528f8123d7ef181a387c)), closes [#965](https://github.com/vue-styleguidist/vue-styleguidist/issues/965)
+
+
+
+
+
 ## [4.32.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.3...v4.32.4) (2020-09-24)
 
 
