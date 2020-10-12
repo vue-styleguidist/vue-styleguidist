@@ -15,6 +15,10 @@ export default theme({
 	router: {
 		base: '/docgen-nuxt/'
 	},
+	// force generate to create a index.html
+	generate: {
+		routes: ['/']
+	},
 	build: {
 		extend(config) {
 			// make template coiler available at runtime
