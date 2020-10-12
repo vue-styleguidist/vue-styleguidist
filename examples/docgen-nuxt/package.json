@@ -31,8 +31,8 @@
 		"vue-docgen-api": "^4.32.4",
 		"vue-docgen-cli": "^4.31.1",
 		"vue-inbrowser-compiler-utils": "^4.32.1",
-		"vue-live": "^1.14.1",
-		"vue-simple-docgen-loader": "workspace:^4.32.4"
+		"vue-live": "^1.14.2",
+		"vue-simple-docgen-loader": "^4.32.4"
 	},
 	"engines": {
 		"node": ">=4"
