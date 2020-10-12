@@ -12,7 +12,12 @@ esac
 cd examples/$exampleName
 if [ $1 = "build" ]; 
 then
-    npm run styleguide:build -- $extra
+    if [[ $exampleName =~ vuecli3 ]] 
+    then
+        pnpm styleguide:build -- $extra
+    else
+        npm run styleguide:build -- $extra
+    fi
 else
     npm run styleguide -- $extra
 fi
