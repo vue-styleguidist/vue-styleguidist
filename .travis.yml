@@ -52,8 +52,7 @@ jobs:
         - pnpm docs:build
 
         # Build all examples
-        - cd examples
-        - for D in *; do pnpm build "${D}" -- --ci; done || exit 1
+        - cd examples; for D in *; do cd ..; pnpm build "${D}" -- --ci; cd examples; done || exit 1
 
         # Move them to the docs
         - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
