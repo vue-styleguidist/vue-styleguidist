@@ -55,7 +55,7 @@ jobs:
         - cd examples; for D in *; do cd ..; pnpm build "${D}" -- --ci; cd examples; done || exit 1
 
         # Move them to the docs
-        - for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
+        - for D in *; do if [ D != "docgen-nuxt" ] mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
 
       deploy:
         provider: pages
@@ -67,6 +67,13 @@ jobs:
         keep-history: true
         on:
           branch: delivery
+      
+      # deploy nuxt-content separately because of routing conflicts
+      deploy:
+        skip_cleanup: true
+        provider: surge
+        project: ./examples/docgen-nuxt/dist/
+        domain: nuxt-content-styleguidist.surge.sh
 
     - stage: release
       script:
