@@ -64,7 +64,7 @@ Adjust the `distDir` config according to your [styledguideDir](/Configuration.md
 1.  Upload (commit) in the `yourgithubid.github.io` repository the contents of your `styleguide` folder.
 1.  Go to the URL and see the styleguide live.
 
-## Automate deployment on travisCI
+## Automate deployment on Travis-CI
 
 Zeit and Netlify simplify your website deployment automation. If you are going with GitHub pages though, because it is free for instance, you might want to build automation yourself.
 
@@ -84,3 +84,25 @@ deploy:
 ```
 
 [Read More](https://docs.travis-ci.com/user/deployment/pages/)
+
+## Deploy on surge.sh
+
+1. Install surge CLI
+
+```sh
+npm install --global surge
+```
+
+2. Build your styleguide
+
+```sh
+npm run styleguide:build
+```
+
+3. Deploy it on surge
+
+```sh
+surge styleguide my-styleguide-on-surge.surge.sh
+```
+
+4. Follow the instructions
