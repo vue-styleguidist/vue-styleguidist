@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist-example-docgen-nuxt",
 	"version": "4.0.0",
-	"description": "Use vue-docgen-cli to integrate with vuepress sites",
+	"description": "Use vue-docgen-cli to integrate with a nuxt-content site",
 	"keywords": [
 		"nuxt",
 		"@nuxt/content",

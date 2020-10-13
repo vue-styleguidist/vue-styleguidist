@@ -52,13 +52,16 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: pnpm install
+
       # remake the pnpm link to vue-cli-plugin
-      - run: npm run build vuecli3 -- --ci
-      - run: npm run build vuecli-noplugin -- --ci
-      - run: npm run build vuecli3-vuetify-ie -- --ci
-      - run: npm run test:browser vuecli3
-      - run: npm run test:browser vuecli-noplugin
-      - run: npm run test:browser vuecli3-vuetify-ie
+      - run: pnpm build vuecli3 -- --ci
+      - run: pnpm test:browser vuecli3
+      - run: pnpm build vuecli-noplugin -- --ci
+      - run: pnpm test:browser vuecli-noplugin
+      - run: pnpm build vuecli3-vuetify-ie -- --ci
+      - run: pnpm test:browser vuecli3-vuetify-ie
 
   examples-other:
     <<: *defaults

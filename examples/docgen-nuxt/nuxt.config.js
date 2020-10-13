@@ -12,14 +12,8 @@ export default theme({
 			remarkPlugins: ['remark-plugin-vue-live']
 		}
 	},
-	router: {
-		base: '/docgen-nuxt/'
-	},
-	// force generate to create a index.html
-	generate: {
-		routes: ['/']
-	},
 	build: {
+		extractCSS: true,
 		extend(config) {
 			// make template coiler available at runtime
 			config.resolve.alias['vue$'] = 'vue/dist/vue.esm.js'
