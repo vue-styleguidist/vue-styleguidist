@@ -49,6 +49,7 @@ jobs:
     # Build & Deploy the documentation website
     - stage: documentation
       script:
+        - pnpm predocs
         - pnpm docs:build
 
         # Build all examples
