@@ -13,6 +13,7 @@ export default theme({
 		}
 	},
 	build: {
+		extractCSS: true,
 		extend(config) {
 			// make template coiler available at runtime
 			config.resolve.alias['vue$'] = 'vue/dist/vue.esm.js'
