@@ -175,7 +175,7 @@ describe('eventHandler', () => {
 		expect(mockEventDescriptor).toMatchObject(eventComp)
 	})
 
-	it('should find events whose names are only spcified in the JSDoc', () => {
+	it('should find events whose names are only specified in the JSDoc', () => {
 		const src = `
     export default {
       methods: {
