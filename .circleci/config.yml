@@ -69,25 +69,16 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
-
-      # Build all examples
-      - run: pnpm run build nuxtjs -- --ci
-      - run: pnpm run build docgen-nuxt -- --ci
-
-      # Check that examples really works: no JS errors on load
-      - run: pnpm run test:browser nuxtjs
-      - run: pnpm run test:browser docgen-nuxt
-
       # Build all examples
       - run: npm run build jsx -- --ci
       - run: npm run build jsx-examples -- --ci
+      - run: npm run build nuxtjs -- --ci
       - run: npm run build vuetify -- --ci
 
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser jsx
       - run: npm run test:browser jsx-examples
+      - run: npm run test:browser nuxtjs
       - run: npm run test:browser vuetify
 
   cypress:
