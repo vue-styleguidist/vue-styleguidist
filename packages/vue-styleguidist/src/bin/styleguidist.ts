@@ -40,15 +40,20 @@ process.on('uncaughtException', (err: any) => {
 const vueVersion = require('vue/package.json').version as string
 
 let correctVueVersion = false
-if(vueVersion){
-	const [ majorVue ] = vueVersion.split('.')
+if (vueVersion) {
+	const [majorVue] = vueVersion.split('.')
 	correctVueVersion = parseInt(majorVue, 10) === 2
 }
 
-if(!correctVueVersion){
-	throw new Error("This version of vue-styleguidist is only compatible with Vue 2.\n"
-	+ " Please install vue-styleguidist next with the following command\n" 
-	+ " npm iinstall --save-dev vue-styleguidist@next")
+if (!correctVueVersion) {
+	throw new Error(
+		'This version of vue-styleguidist is only compatible with Vue 2.\n' +
+			'We are actively working on an updated version\n' +
+			'Join us on Github if you want to lend a hand.\n' +
+			'https://github.com/vue-styleguidist/vue-styleguidist/'
+	)
+	// + " Please install vue-styleguidist next with the following command\n"
+	// + " npm iinstall --save-dev vue-styleguidist@next")
 }
 
 // Make sure user has webpack installed
