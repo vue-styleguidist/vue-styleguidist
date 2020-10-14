@@ -34,7 +34,7 @@
 		"rollup": "^2.26.3",
 		"rollup-plugin-typescript2": "^0.27.2",
 		"typescript": "^3.9.7",
-		"vue": "^2.6.10"
+		"vue": "^3.0.0"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",
 	"license": "MIT"
