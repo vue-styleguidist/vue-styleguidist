@@ -409,7 +409,10 @@ export function describeDefault(
 		// otherwise the rest should return whatever there is
 		if (defaultValueIsProp) {
 			// in this case, just return the rawValue
-			const defaultPath = defaultArray[0].get('value')
+			let defaultPath = defaultArray[0].get('value')
+			if (bt.isTSAsExpression(defaultPath.value)) {
+				defaultPath = defaultPath.get('expression')
+			}
 			const rawValue = print(defaultPath).code
 			propDescriptor.defaultValue = {
 				func: bt.isFunction(defaultPath.node),

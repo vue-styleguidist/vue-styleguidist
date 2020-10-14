@@ -609,6 +609,23 @@ describe('propHandler', () => {
 				}
 			})
 		})
+
+		it('should understand "as const" in prop default values', () => {
+			const src = `
+	export default Vue.extend({
+		props: {
+			backgroundSize: {
+				default: "cover" as const,
+				type: String as PropType<"contain" | "cover">,
+			},
+		}
+	});`
+			expect(parserTest(src, ['typescript'])).toMatchObject({
+				defaultValue: {
+					value: '"cover"'
+				}
+			})
+		})
 	})
 
 	describe('@type', () => {
