@@ -68,7 +68,7 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	const vue$ = 'vue/dist/vue.esm.js'
+	const vue$ = 'vue/dist/vue.esm-browser.js'
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
