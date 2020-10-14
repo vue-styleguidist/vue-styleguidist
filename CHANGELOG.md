@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.0...v4.33.1) (2020-10-14)
+
+
+### Bug Fixes
+
+* **docgen:** allow `as const` in default ([d3f070d](https://github.com/vue-styleguidist/vue-styleguidist/commit/d3f070dd08677a6614498ff8de8c91ea287c75bf))
+* hint user when wrong version of vue installed ([b1af242](https://github.com/vue-styleguidist/vue-styleguidist/commit/b1af242ac66a721fb39859b189f9f39f597e1876))
+
+
+
+
+
 # [4.33.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.4...v4.33.0) (2020-10-12)
 
 
