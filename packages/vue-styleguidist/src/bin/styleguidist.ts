@@ -37,6 +37,21 @@ process.on('uncaughtException', (err: any) => {
 })
 
 // Make sure user has webpack installed
+const vueVersion = require('vue/package.json').version as string
+
+let correctVueVersion = false
+if(vueVersion){
+	const [ majorVue ] = vueVersion.split('.')
+	correctVueVersion = parseInt(majorVue, 10) === 2
+}
+
+if(!correctVueVersion){
+	throw new Error("This version of vue-styleguidist is only compatible with Vue 2.\n"
+	+ " Please install vue-styleguidist next with the following command\n" 
+	+ " npm iinstall --save-dev vue-styleguidist@next")
+}
+
+// Make sure user has webpack installed
 require('react-styleguidist/lib/scripts/utils/ensureWebpack')
 
 // Set environment before loading style guide config because user’s webpack config may use it
