@@ -68,12 +68,7 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	let vue$:string;
-	try{
-		vue$ = require.resolve('vue/dist/vue.esm.js')
-	}catch(e){
-		vue$ = require.resolve('vue/dist/vue.esm-browser.js')
-	}
+	const vue$ = 'vue/dist/vue.esm.js'
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
