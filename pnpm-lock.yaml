@@ -20,7 +20,8 @@ importers:
       '@types/node': 13.11.1
       '@typescript-eslint/eslint-plugin': 2.34.0_2e4469632c799ff14f45b2ba5b89a853
       '@typescript-eslint/parser': 2.34.0_eslint@7.7.0+typescript@3.9.7
-      '@vue/cli-service': 4.5.4_2452456d08bb187e2c6e5c27ac0dc972
+      '@vue/cli-service': 4.5.4_f6eb43894d5096fbe9cd0ca165c22949
+      '@vue/compiler-sfc': 3.0.0_vue@2.6.12
       '@vue/eslint-config-prettier': 5.1.0_91d3a64bae7c432b3688b141f68e2f45
       '@vue/eslint-config-typescript': 4.0.0_eslint@7.7.0+typescript@3.9.7
       babel-eslint: 9.0.0
@@ -86,7 +87,6 @@ importers:
       vue-router: 3.4.6
       vue-scrollactive: 0.9.3
       vue-styleguidist: 'link:packages/vue-styleguidist'
-      vue-template-compiler: 2.6.12
       vuepress: 1.6.0
       vuex: 3.5.1_vue@2.6.12
       webpack-dev-server: 3.11.0
@@ -112,6 +112,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^2.11.0
       '@typescript-eslint/parser': ^2.11.0
       '@vue/cli-service': ^4.5.4
+      '@vue/compiler-sfc': ^3.0.0
       '@vue/eslint-config-prettier': ^5.0.0
       '@vue/eslint-config-typescript': ^4.0.0
       babel-eslint: ^9.0.0
@@ -177,7 +178,6 @@ importers:
       vue-router: ^3.4.5
       vue-scrollactive: ^0.9.3
       vue-styleguidist: ^4.0.0
-      vue-template-compiler: ^2.6.12
       vuepress: ^1.6.0
       vuex: ^3.5.1
       webpack-dev-server: X.X.X
@@ -6607,7 +6607,7 @@ packages:
       integrity: sha512-TkLdn0ZYo3zgn78Rk8doPlR+4UkGjGW2R1eGEaZEkue/mw2VhUWtTk9cKLZaYrw0eY8Ro/j+OV6mD+scyrairg==
   /@vue/cli-plugin-router/4.5.4_@vue+cli-service@4.5.4:
     dependencies:
-      '@vue/cli-service': 4.5.4_2452456d08bb187e2c6e5c27ac0dc972
+      '@vue/cli-service': 4.5.4_f6eb43894d5096fbe9cd0ca165c22949
       '@vue/cli-shared-utils': 4.5.4
     dev: true
     peerDependencies:
@@ -6644,7 +6644,7 @@ packages:
       integrity: sha512-Ho0YzUivn8BLPqFoFypntR8CMTEXYYHVr0GdnZW99XL+DbGw75f+tJfnrV9UFHDTfvZt7uewKiXDMlrzQ0l3Ug==
   /@vue/cli-plugin-vuex/4.5.4_@vue+cli-service@4.5.4:
     dependencies:
-      '@vue/cli-service': 4.5.4_2452456d08bb187e2c6e5c27ac0dc972
+      '@vue/cli-service': 4.5.4_f6eb43894d5096fbe9cd0ca165c22949
     dev: true
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
@@ -6981,7 +6981,7 @@ packages:
         optional: true
     resolution:
       integrity: sha512-k5OFGh2NnvRymCyq9DfBiNJvECUuun3pl5KMm3557IZyA5E5csv+RHoSW3dX8HHe0zXq18g52VswP1llvR9POw==
-  /@vue/cli-service/4.5.4_2452456d08bb187e2c6e5c27ac0dc972:
+  /@vue/cli-service/4.5.4_f6eb43894d5096fbe9cd0ca165c22949:
     dependencies:
       '@intervolga/optimize-cssnano-plugin': 1.0.6_webpack@4.44.1
       '@soda/friendly-errors-webpack-plugin': 1.7.1_webpack@4.44.1
@@ -6993,6 +6993,7 @@ packages:
       '@vue/cli-plugin-router': 4.5.4_@vue+cli-service@4.5.4
       '@vue/cli-plugin-vuex': 4.5.4_@vue+cli-service@4.5.4
       '@vue/cli-shared-utils': 4.5.4
+      '@vue/compiler-sfc': 3.0.0_vue@2.6.12
       '@vue/component-compiler-utils': 3.2.0
       '@vue/preload-webpack-plugin': 1.1.2_5ff516492094d25eb46611af254fac10
       '@vue/web-component-wrapper': 1.2.0
@@ -7031,9 +7032,8 @@ packages:
       terser-webpack-plugin: 2.3.8_webpack@4.44.1
       thread-loader: 2.1.3_webpack@4.44.1
       url-loader: 2.3.0_file-loader@4.3.0+webpack@4.44.1
-      vue-loader: 15.9.3_b61fd53126d8a76b25cc5244d186282f
+      vue-loader: 15.9.3_a2d6ddd675f3eaa9d1a5d052dddbbb23
       vue-style-loader: 4.1.2
-      vue-template-compiler: 2.6.12
       webpack: 4.44.1_webpack@4.44.1
       webpack-bundle-analyzer: 3.8.0
       webpack-chain: 6.5.1
@@ -7259,6 +7259,37 @@ packages:
       vue: 3.0.0-rc.6
     resolution:
       integrity: sha512-ebzFDNhnQYsmZFh0t+TF/ro8LinyHebdNQEfCZ2sYLJZC0fn4NyvryxflLXwpFtPMl+5s3dWk37wQMDL8NbYHw==
+  /@vue/compiler-sfc/3.0.0_vue@2.6.12:
+    dependencies:
+      '@babel/parser': 7.11.5
+      '@babel/types': 7.11.5
+      '@vue/compiler-core': 3.0.0
+      '@vue/compiler-dom': 3.0.0
+      '@vue/compiler-ssr': 3.0.0
+      '@vue/shared': 3.0.0
+      consolidate: 0.16.0
+      estree-walker: 2.0.1
+      hash-sum: 2.0.0
+      lru-cache: 5.1.1
+      magic-string: 0.25.7
+      merge-source-map: 1.1.0
+      postcss: 7.0.35
+      postcss-modules: 3.2.2
+      postcss-selector-parser: 6.0.4
+      source-map: 0.6.1
+      vue: 2.6.12
+    dev: true
+    peerDependencies:
+      vue: 3.0.0
+    resolution:
+      integrity: sha512-1Bn4L5jNRm6tlb79YwqYUGGe+Yc9PRoRSJi67NJX6icdhf84+tRMtESbx1zCLL9QixQXu2+7aLkXHxvh4RpqAA==
+  /@vue/compiler-ssr/3.0.0:
+    dependencies:
+      '@vue/compiler-dom': 3.0.0
+      '@vue/shared': 3.0.0
+    dev: true
+    resolution:
+      integrity: sha512-Er41F9ZFyKB3YnNbE6JSTIGCVWve3NAQimgDOk4uP42OnckxBYKGBTutDeFNeqUZBMu/9vRHYrxlGFC9Z5jBVQ==
   /@vue/compiler-ssr/3.0.0-rc.6:
     dependencies:
       '@vue/compiler-dom': 3.0.0-rc.6
@@ -10735,6 +10766,14 @@ packages:
       node: '>= 0.10.0'
     resolution:
       integrity: sha512-DW46nrsMJgy9kqAbPt5rKaCr7uFtpo4mSUvLHIUbJEjm0vo+aY5QLwBUq3FK4tRnJr/X0Psc0C4jf/h+HtXSMw==
+  /consolidate/0.16.0:
+    dependencies:
+      bluebird: 3.7.2
+    dev: true
+    engines:
+      node: '>= 0.10.0'
+    resolution:
+      integrity: sha512-Nhl1wzCslqXYTJVDyJCu3ODohy9OfBMB5uD2BiBTzd7w+QY0lBzafkR8y8755yMYHAaMD4NuzbAw03/xzfw+eQ==
   /constant-case/3.0.3:
     dependencies:
       no-case: 3.0.3
@@ -14061,7 +14100,6 @@ packages:
   /generic-names/2.0.1:
     dependencies:
       loader-utils: 1.4.0
-    dev: false
     resolution:
       integrity: sha512-kPCHWa1m9wGG/OwQpeweTwM/PYiQLrUIxXbt/P4Nic3LbGjCP0YwrALHW1uNLKZ0LIMg+RF+XRlj2ekT9ZlZAQ==
   /gensync/1.0.0-beta.1:
@@ -17583,7 +17621,6 @@ packages:
     resolution:
       integrity: sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
   /lodash.camelcase/4.3.0:
-    dev: false
     resolution:
       integrity: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
   /lodash.clonedeep/4.5.0:
@@ -20368,7 +20405,7 @@ packages:
       integrity: sha512-D5S1iViljXBj9kflQo4YutWnJmwm8VvIsU1GeXJGiG9j8CIg9zs4voPMdQDUmIxetUOh60VilsNzCiAFTOqu3g==
   /postcss-modules-extract-imports/2.0.0:
     dependencies:
-      postcss: 7.0.32
+      postcss: 7.0.35
     engines:
       node: '>= 6'
     resolution:
@@ -20394,8 +20431,8 @@ packages:
       integrity: sha512-e3xDq+LotiGesympRlKNgaJ0PCzoUIdpH0dj47iWAui/kyTgh3CiAr1qP54uodmJhl6p9rN6BoNcdEDVJx9RDw==
   /postcss-modules-scope/2.2.0:
     dependencies:
-      postcss: 7.0.32
-      postcss-selector-parser: 6.0.2
+      postcss: 7.0.35
+      postcss-selector-parser: 6.0.4
     engines:
       node: '>= 6'
     resolution:
@@ -20409,7 +20446,7 @@ packages:
   /postcss-modules-values/3.0.0:
     dependencies:
       icss-utils: 4.1.1
-      postcss: 7.0.32
+      postcss: 7.0.35
     resolution:
       integrity: sha512-1//E5jCBrZ9DmRX+zCtmQtRSV6PV42Ix7Bzj9GbwJceduuf7IqP8MgeTXuRDHOWj2m0VzZD5+roFWDuU8RQjcg==
   /postcss-modules/3.2.0:
@@ -20426,6 +20463,20 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ceodlVbBypGD3R7EI1xM7gz28J0syaXq0VKd7rJVXVlOSkxUIRBRJQjBgpoKnKVFNAcCjtLVgZqBA3mUNntWPA==
+  /postcss-modules/3.2.2:
+    dependencies:
+      generic-names: 2.0.1
+      icss-replace-symbols: 1.1.0
+      lodash.camelcase: 4.3.0
+      postcss: 7.0.35
+      postcss-modules-extract-imports: 2.0.0
+      postcss-modules-local-by-default: 3.0.3
+      postcss-modules-scope: 2.2.0
+      postcss-modules-values: 3.0.0
+      string-hash: 1.1.3
+    dev: true
+    resolution:
+      integrity: sha512-JQ8IAqHELxC0N6tyCg2UF40pACY5oiL6UpiqqcIFRWqgDYO8B0jnxzoQ0EOpPrWXvcpu6BSbQU/3vSiq7w8Nhw==
   /postcss-nested/4.2.3:
     dependencies:
       postcss: 7.0.32
@@ -20683,6 +20734,16 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-36P2QR59jDTOAiIkqEprfJDsoNrvwFei3eCqKd1Y0tUsBimsq39BLp7RD+JWny3WgB1zGhJX8XVePwm9k4wdBg==
+  /postcss-selector-parser/6.0.4:
+    dependencies:
+      cssesc: 3.0.0
+      indexes-of: 1.0.1
+      uniq: 1.0.1
+      util-deprecate: 1.0.2
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-gjMeXBempyInaBqpp8gODmwZ52WaYsVOsfr4L4lDQ7n3ncD6mEyySiDtgzCT+NYC0mmeOLvtsF8iaEf0YT6dBw==
   /postcss-svgo/4.0.2:
     dependencies:
       is-svg: 3.0.0
@@ -20749,6 +20810,15 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-03eXong5NLnNCD05xscnGKGDZ98CyzoqPSMjOe6SuoQY7Z2hIj0Ld1g/O/UQRuOle2aRtiIRDg9tDcTGAkLfKw==
+  /postcss/7.0.35:
+    dependencies:
+      chalk: 2.4.2
+      source-map: 0.6.1
+      supports-color: 6.1.0
+    engines:
+      node: '>=6.0.0'
+    resolution:
+      integrity: sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg==
   /prelude-ls/1.1.2:
     engines:
       node: '>= 0.8.0'
@@ -23522,7 +23592,6 @@ packages:
     resolution:
       integrity: sha1-2sMECGkMIfPDYwo/86BYd73L1zY=
   /string-hash/1.1.3:
-    dev: false
     resolution:
       integrity: sha1-6Kr8CsGFW0Zmkp7X3RJ1311sgRs=
   /string-length/4.0.1:

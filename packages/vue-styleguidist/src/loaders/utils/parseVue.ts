@@ -1,5 +1,5 @@
 import hash from 'hash-sum'
-import * as compiler from 'vue-template-compiler'
+import * as compiler from '@vue/compiler-sfc'
 import LRUCache from 'lru-cache'
 
 const cache = new LRUCache(100)
@@ -11,7 +11,7 @@ export default function parseVue(source: string, filename: string): compiler.SFC
 	if (output) {
 		return output
 	}
-	output = compiler.parseComponent(source)
+	output = compiler.parse(source).descriptor
 	cache.set(cacheKey, output)
 	return output
 }
