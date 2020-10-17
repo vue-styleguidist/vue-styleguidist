@@ -2,10 +2,7 @@ import { transform, TransformOptions } from 'buble'
 import walkes from 'walkes'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
-import normalizeSfcComponent, {
-	parseScriptCode,
-	getRenderFunctionStart,
-} from './normalizeSfcComponent'
+import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
 import getAst from './getAst'
 import getTargetFromBrowser from './getTargetFromBrowser'
 
@@ -79,8 +76,7 @@ function prepareVueCodeForEvalFunction(code: string, config: { jsx: boolean }): 
 					node.expression.arguments && node.expression.arguments.length
 						? node.expression.arguments[0]
 						: undefined
-				const renderIndex = getRenderFunctionStart(optionsNode)
-				let endIndex = optionsNode.end
+				const endIndex = optionsNode.end
 				const after = optionsNode ? code.slice(optionsNode.start + offset, endIndex + offset) : ''
 				code = before + ';return ' + after
 			}

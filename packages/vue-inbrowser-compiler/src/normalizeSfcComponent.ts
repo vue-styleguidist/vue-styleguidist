@@ -59,23 +59,18 @@ export function parseScriptCode(
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
-	let renderFunctionStart = -1
 	walkes(getAst(code), {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
 			endIndex = node.declaration.declarations[0].init.end + offset
-			if (node.declarations) {
-				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
-			}
 		},
 		//export default {}
 		ExportDefaultDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
-			renderFunctionStart = getRenderFunctionStart(node.declaration)
 		},
 		//module.exports = {}
 		AssignmentExpression(node: any) {
