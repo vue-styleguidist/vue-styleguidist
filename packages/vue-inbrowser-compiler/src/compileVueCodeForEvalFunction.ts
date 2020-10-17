@@ -5,8 +5,6 @@ import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
 	getRenderFunctionStart,
-	insertCreateElementFunction,
-	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
 import getAst from './getAst'
 import getTargetFromBrowser from './getTargetFromBrowser'
@@ -36,7 +34,7 @@ export default function compileVueCodeForEvalFunction(
 	}
 }
 
-function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
+function prepareVueCodeForEvalFunction(code: string, config: { jsx: boolean }): EvaluableComponent {
 	let style
 	let vsgMode = false
 	let template
@@ -83,13 +81,6 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 						: undefined
 				const renderIndex = getRenderFunctionStart(optionsNode)
 				let endIndex = optionsNode.end
-				if (renderIndex > 0) {
-					code = insertCreateElementFunction(
-						code.slice(0, renderIndex + 1),
-						code.slice(renderIndex + 1)
-					)
-					endIndex += JSX_ADDON_LENGTH
-				}
 				const after = optionsNode ? code.slice(optionsNode.start + offset, endIndex + offset) : ''
 				code = before + ';return ' + after
 			}

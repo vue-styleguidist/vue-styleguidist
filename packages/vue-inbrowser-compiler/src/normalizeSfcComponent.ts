@@ -100,14 +100,6 @@ export function parseScriptCode(
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	if (renderFunctionStart > 0) {
-		renderFunctionStart += offset
-		code = insertCreateElementFunction(
-			code.slice(0, renderFunctionStart + 1),
-			code.slice(renderFunctionStart + 1)
-		)
-		endIndex += JSX_ADDON_LENGTH
-	}
 	const component = code.slice(startIndex + 1, endIndex - 1)
 	return {
 		preprocessing,
@@ -115,8 +107,6 @@ export function parseScriptCode(
 		postprocessing: code.slice(endIndex)
 	}
 }
-
-export const JSX_ADDON_LENGTH = 31
 
 export function getRenderFunctionStart(objectExpression: any): number {
 	if (objectExpression && objectExpression.properties) {
@@ -129,10 +119,6 @@ export function getRenderFunctionStart(objectExpression: any): number {
 		}
 	}
 	return -1
-}
-
-export function insertCreateElementFunction(before: string, after: string): string {
-	return `${before};const h = this.$createElement;${after}`
 }
 
 /**
