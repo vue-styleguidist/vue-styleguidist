@@ -1,12 +1,10 @@
 import React from 'react'
-import * as Rsg from 'react-styleguidist'
 import PropTypes from 'prop-types'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 import Argument from 'rsg-components/Argument'
 import Heading from 'rsg-components/Heading'
-import { ArgumentProps } from '../Argument/ArgumentRenderer'
 
-export const styles = ({ space }: Rsg.Theme) => ({
+export const styles = ({ space }) => ({
 	root: {
 		marginBottom: space[2],
 		fontSize: 'inherit'
@@ -16,12 +14,8 @@ export const styles = ({ space }: Rsg.Theme) => ({
 	}
 })
 
-interface ArgumentsProps extends JssInjectedProps {
-	heading?: boolean
-	args: ArgumentProps[]
-}
 
-export const ArgumentsRenderer: React.FunctionComponent<ArgumentsProps> = ({
+export const ArgumentsRenderer = ({
 	classes,
 	args,
 	heading
@@ -56,4 +50,4 @@ ArgumentsRenderer.propTypes = {
 	heading: PropTypes.bool
 }
 
-export default Styled<ArgumentsProps>(styles)(ArgumentsRenderer)
+export default Styled(styles)(ArgumentsRenderer)

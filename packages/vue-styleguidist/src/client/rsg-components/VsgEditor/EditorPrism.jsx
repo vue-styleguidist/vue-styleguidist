@@ -17,7 +17,7 @@ import { useStyleGuideContext } from 'rsg-components/Context'
 import getScript from '../../../loaders/utils/getScript'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
-const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
+const highlight = (lang, jsxInExamples) => {
 	if (lang === 'vsg') {
 		return code => {
 			if (!code) {
@@ -41,7 +41,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 	}
 }
 
-const styles = ({ fontFamily, fontSize, color, borderRadius }: Rsg.Theme) => ({
+const styles = ({ fontFamily, fontSize, color, borderRadius }) => ({
 	root: {
 		fontFamily: fontFamily.monospace,
 		fontSize: fontSize.small,
@@ -66,16 +66,8 @@ const styles = ({ fontFamily, fontSize, color, borderRadius }: Rsg.Theme) => ({
 	}
 })
 
-export interface UnconfiguredEditorProps extends JssInjectedProps {
-	code: string
-	jssThemedEditor: boolean
-	jsxInExamples: boolean
-	onChange: (val: string) => void
-	editorPadding?: number
-}
-
-export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
-	public static propTypes = {
+export class UnconfiguredEditor extends Component {
+ static propTypes = {
 		classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
 		code: PropTypes.string.isRequired,
 		jssThemedEditor: PropTypes.bool.isRequired,
@@ -84,11 +76,11 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		editorPadding: PropTypes.number
 	}
 
-	public state = { code: this.props.code, prevCode: this.props.code }
+	 state = { code: this.props.code, prevCode: this.props.code }
 
-	public static getDerivedStateFromProps(
-		nextProps: UnconfiguredEditorProps,
-		prevState: { code: string; prevCode: string }
+	 static getDerivedStateFromProps(
+		nextProps,
+		prevState
 	) {
 		const { code } = nextProps
 		if (prevState.prevCode !== code) {
@@ -100,19 +92,19 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		return null
 	}
 
-	public shouldComponentUpdate(
-		nextProps: UnconfiguredEditorProps,
-		nextState: { code: string; prevCode: string }
+	 shouldComponentUpdate(
+		nextProps,
+		nextState
 	) {
 		return nextState.code !== this.state.code
 	}
 
-	public handleChange = (code: string) => {
+	 handleChange = (code) => {
 		this.setState({ code })
 		this.props.onChange(code)
 	}
 
-	public render() {
+	 render() {
 		const { root, jssEditor } = this.props.classes
 		const isVueSFC = isCodeVueSfc(this.state.code)
 		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props
@@ -135,13 +127,11 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 
 const PEditor = polyfill(UnconfiguredEditor)
 
-type EditorProps = Omit<UnconfiguredEditorProps, 'jssThemedEditor' | 'jsxInExamples'>
-
-function Editor(props: EditorProps) {
+function Editor(props) {
 	const {
 		config: { jssThemedEditor, jsxInExamples }
-	} = (useStyleGuideContext() as any) as { config: SanitizedStyleguidistConfig }
+	} = useStyleGuideContext()
 	return <PEditor {...props} jssThemedEditor={jssThemedEditor} jsxInExamples={jsxInExamples} />
 }
 
-export default Styled<EditorProps>(styles as any)(Editor)
+export default Styled(styles)(Editor)

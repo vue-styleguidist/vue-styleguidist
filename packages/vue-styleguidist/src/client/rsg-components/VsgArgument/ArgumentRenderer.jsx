@@ -1,30 +1,18 @@
 import React from 'react'
-import * as Rsg from 'react-styleguidist'
 import PropTypes from 'prop-types'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
 import Type from 'rsg-components/Type'
 import Group from 'react-group'
 
-export const styles = ({ space }: Rsg.Theme) => ({
+export const styles = ({ space }) => ({
 	block: {
 		marginBottom: space[2]
 	}
 })
 
-export interface ArgumentProps {
-	name: string
-	type?: any
-	default?: string
-	description?: string
-	returns?: boolean
-	block?: boolean
-}
-
-type ArgumentPropsWithClasses = ArgumentProps & JssInjectedProps
-
-export const ArgumentRenderer: React.FunctionComponent<ArgumentPropsWithClasses> = ({
+export const ArgumentRenderer = ({
 	classes,
 	name,
 	type,
@@ -76,4 +64,4 @@ ArgumentRenderer.propTypes = {
 	block: PropTypes.bool
 }
 
-export default Styled<ArgumentPropsWithClasses>(styles)(ArgumentRenderer)
+export default Styled(styles)(ArgumentRenderer)

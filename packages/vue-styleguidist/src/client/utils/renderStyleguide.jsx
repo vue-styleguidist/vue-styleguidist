@@ -4,12 +4,11 @@ import StyleGuide from 'rsg-components/StyleGuide'
 import hashSum from 'hash-sum'
 import getRouteData from 'react-styleguidist/lib/client/utils/getRouteData'
 import getPageTitle from 'react-styleguidist/lib/client/utils/getPageTitle'
-import { StyleGuideObject } from '../../types/StyleGuide'
 import getComponentsFromSections from './getComponentsFromSections'
 import globalizeComponent from './globalizeComponent'
 import processSections from './processSections'
 
-export const RenderJsxContext = React.createContext<React.ReactNode>(<div />)
+export const RenderJsxContext = React.createContext(<div />)
 export const VueComponentMapContext = React.createContext({})
 
 /**
@@ -21,13 +20,13 @@ export const VueComponentMapContext = React.createContext({})
  * @return {React.ReactElement}
  */
 export default function renderStyleguide(
-	styleguide: StyleGuideObject,
-	codeRevision: number,
+	styleguide,
+	codeRevision,
 	loc = window.location,
 	doc = document,
 	hist = window.history
 ) {
-	const exampleFileNames: string[] = []
+	const exampleFileNames = []
 	const allSections = processSections(
 		{ sections: styleguide.sections, exampleFileNames },
 		{
@@ -43,7 +42,7 @@ export default function renderStyleguide(
 	}
 
 	const { title, pagePerSection, theme, styles } = styleguide.config
-	const { sections, displayMode } = getRouteData(allSections as any, loc.hash, pagePerSection)
+	const { sections, displayMode } = getRouteData(allSections, loc.hash, pagePerSection)
 
 	// Update page title
 	doc.title = getPageTitle(sections, title || '', displayMode)
@@ -62,12 +61,12 @@ export default function renderStyleguide(
 				// only caclulate css revisions in dev when hot is on to avoid
 				// stringifying the styles in production
 				cssRevision={hashSum({ theme, styles })}
-				config={styleguide.config as any}
-				slots={slots(styleguide.config as any)}
+				config={styleguide.config}
+				slots={slots(styleguide.config)}
 				welcomeScreen={styleguide.welcomeScreen}
 				patterns={styleguide.patterns}
 				sections={sections}
-				allSections={allSections as any}
+				allSections={allSections}
 				displayMode={displayMode}
 				pagePerSection={pagePerSection}
 			/>

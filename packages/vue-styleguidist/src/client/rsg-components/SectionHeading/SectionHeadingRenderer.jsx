@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as Rsg from 'react-styleguidist'
 import cx from 'clsx'
 import Heading from 'rsg-components/Heading'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 
-const styles = ({ color, space, fontSize }: Rsg.Theme) => ({
+const styles = ({ color, space, fontSize }) => ({
 	wrapper: {
 		display: 'flex',
 		flexDirection: 'row',
@@ -48,9 +47,7 @@ const localPropTypes = {
 	parentHref: PropTypes.string
 }
 
-type SectionHeadingRendererProps = PropTypes.InferProps<typeof localPropTypes> & JssInjectedProps
-
-const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProps> = ({
+const SectionHeadingRenderer = ({
 	classes,
 	children,
 	toolbar,
@@ -88,4 +85,4 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 }
 
 SectionHeadingRenderer.propTypes = localPropTypes
-export default Styled<SectionHeadingRendererProps>(styles as any)(SectionHeadingRenderer)
+export default Styled(styles)(SectionHeadingRenderer)

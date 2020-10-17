@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import * as Rsg from 'react-styleguidist'
 import Link from 'rsg-components/Link'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 
-export interface SubComponentsProps {
-	subComponents: { name: string; url: string }[]
-}
-
-const styles = ({ space, fontFamily }: Rsg.Theme) => ({
+const styles = ({ space, fontFamily }) => ({
 	root: {
 		isolate: false,
 		fontFamily: fontFamily.base,
@@ -41,7 +36,7 @@ const styles = ({ space, fontFamily }: Rsg.Theme) => ({
 	}
 })
 
-export const SubComponents: React.FC<SubComponentsProps & JssInjectedProps> = ({
+export const SubComponents = ({
 	classes,
 	...props
 }) => {
@@ -76,4 +71,4 @@ SubComponents.propTypes = {
 	).isRequired
 }
 
-export default Styled<SubComponentsProps & JssInjectedProps>(styles as any)(SubComponents)
+export default Styled(styles)(SubComponents)

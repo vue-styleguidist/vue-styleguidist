@@ -1,22 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import TabButton from 'rsg-components/TabButton'
 import isEmpty from 'lodash/isEmpty'
-import { PropDescriptor, MethodDescriptor, EventDescriptor, SlotDescriptor } from 'vue-docgen-api'
 
-export interface UsageTabButtonProps {
-	name: string
-	onClick: (e: React.MouseEvent) => void
-	active?: boolean
-	props: {
-		props?: PropDescriptor[]
-		methods?: MethodDescriptor[]
-		events?: EventDescriptor[]
-		slots?: SlotDescriptor[]
-	}
-}
-
-const UsageTabButton = (props: UsageTabButtonProps) => {
+const UsageTabButton = (props) => {
 	const component = props.props
 	const words = []
 	if (!isEmpty(component.props)) {

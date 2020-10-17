@@ -1,26 +1,15 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as Rsg from 'react-styleguidist'
 import map from 'lodash/map'
 import capitalize from 'lodash/capitalize'
-import { Param } from 'vue-docgen-api'
 import Markdown from 'rsg-components/Markdown'
 import Argument from 'rsg-components/Argument'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 import SubComponents from 'rsg-components/SubComponents'
 
-export interface TagProps {
-	deprecated?: Param[]
-	see?: Param[]
-	link?: Param[]
-	author?: Param[]
-	version?: Param[]
-	since?: Param[]
-	throws?: Param[]
-	subComponents?: { name: string; url: string }[]
-}
 
-const styles = ({ space, color }: Rsg.Theme) => ({
+const styles = ({ space, color }) => ({
 	wrapper: {
 		color: color.base,
 		fontSize: 'inherit',
@@ -31,33 +20,27 @@ const styles = ({ space, color }: Rsg.Theme) => ({
 	}
 })
 
-const list = (array: Param[]) => array.map(item => item.description).join(', ')
-const paragraphs = (array: Param[]) => array.map(item => item.description).join('\n\n')
+const list = (array) => array.map(item => item.description).join(', ')
+const paragraphs = (array) => array.map(item => item.description).join('\n\n')
 
-const fields: Record<keyof Omit<TagProps, 'throws' | 'subComponents'>, (v: Param[]) => string> = {
-	deprecated: (value: Param[]) =>
+const fields = {
+	deprecated: (value) =>
 		typeof value[0].description === 'string' ? `${value[0].description}` : '',
-	see: (value: Param[]) => paragraphs(value),
-	link: (value: Param[]) => paragraphs(value),
-	author: (value: Param[]) => `${list(value)}`,
-	version: (value: Param[]) => `${value[0].description}`,
-	since: (value: Param[]) => `${value[0].description}`
+	see: (value) => paragraphs(value),
+	link: (value) => paragraphs(value),
+	author: (value) => `${list(value)}`,
+	version: (value) => `${value[0].description}`,
+	since: (value) => `${value[0].description}`
 }
 
-interface JsDocRendererProps {
-	classes: Record<string, string>
-	field: string
-	children: React.ReactNode
-}
-
-const JsDocRenderer = ({ classes, field, children }: JsDocRendererProps) => (
+const JsDocRenderer = ({ classes, field, children }) => (
 	<div className={`vsg-jsdoc-tag ${classes.wrapper}`} key={field}>
 		<span className={`vsg-tag-name ${classes.name}`}>{capitalize(field)}</span>
 		<span className={`vsg-tag-value ${classes.value}`}>{children}</span>
 	</div>
 )
 
-export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props }) => {
+export const JsDoc = ({ classes, ...props }) => {
 	return (
 		<>
 			{props.subComponents && <SubComponents subComponents={props.subComponents} />}
@@ -75,7 +58,7 @@ export const JsDoc: React.FC<TagProps & JssInjectedProps> = ({ classes, ...props
 						/>
 					</JsDocRenderer>
 				))}
-			{map(fields, (format: (v: Param[]) => string, field: keyof TagProps) => {
+			{map(fields, ({format, field}) => {
 				const value = props[field]
 				if (!value || !Array.isArray(value)) {
 					return null
@@ -102,4 +85,4 @@ JsDoc.propTypes = {
 	throws: PropTypes.array
 }
 
-export default Styled<TagProps & JssInjectedProps>(styles)(JsDoc)
+export default Styled(styles)(JsDoc)

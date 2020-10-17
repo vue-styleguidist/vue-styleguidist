@@ -20,9 +20,8 @@ const localPropTypes = {
 	pagePerSection: PropTypes.bool
 }
 
-type SectionHeadingProps = PropTypes.InferProps<typeof localPropTypes>
 
-const SectionHeading: React.FunctionComponent<SectionHeadingProps> = ({
+const SectionHeading = ({
 	slotName,
 	slotProps,
 	children,

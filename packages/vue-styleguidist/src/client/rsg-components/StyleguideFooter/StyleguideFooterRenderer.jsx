@@ -1,10 +1,9 @@
 import React from 'react'
-import * as Rsg from 'react-styleguidist'
 import PropTypes from 'prop-types'
 import Markdown from 'rsg-components/Markdown'
 import Styled from 'rsg-components/Styled'
 
-const styles = ({ fontFamily, fontSize, color }: Rsg.Theme) => ({
+const styles = ({ fontFamily, fontSize, color }) => ({
 	root: {
 		display: 'block',
 		color: color.light,
@@ -13,12 +12,7 @@ const styles = ({ fontFamily, fontSize, color }: Rsg.Theme) => ({
 	}
 })
 
-interface StyleguideFooterRendererProps {
-	classes: Record<string, string>
-	homepageUrl: string
-}
-
-export const StyleguideFooterRenderer: React.FC<StyleguideFooterRendererProps> = ({
+export const StyleguideFooterRenderer= ({
 	classes,
 	homepageUrl
 }) => {
@@ -34,4 +28,4 @@ StyleguideFooterRenderer.propTypes = {
 	homepageUrl: PropTypes.string.isRequired
 }
 
-export default Styled<StyleguideFooterRendererProps>(styles)(StyleguideFooterRenderer)
+export default Styled(styles)(StyleguideFooterRenderer)

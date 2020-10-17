@@ -1,11 +1,6 @@
 import React from 'react'
 
-export interface OriginInfo {
-	name: string
-	path: string
-}
-
-function renderOrigin(prop: { extends?: OriginInfo; mixin?: OriginInfo }) {
+function renderOrigin(prop) {
 	const { extends: ext, mixin } = prop
 	return ext ? (
 		<span title={`extends: ${ext.path}`}>E: {ext.name}</span>
@@ -14,7 +9,7 @@ function renderOrigin(prop: { extends?: OriginInfo; mixin?: OriginInfo }) {
 	)
 }
 
-export default function getOriginColumn(props: { extends?: OriginInfo; mixin?: OriginInfo }[]) {
+export default function getOriginColumn(props) {
 	return props && props.some(p => p.mixin || p.extends)
 		? [
 				{
