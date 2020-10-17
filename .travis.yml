@@ -25,8 +25,10 @@ branches:
     - dev
 
 stages:
-  - test
-  - coverage
+  - name: test
+    if: branch != next
+  - name: coverage
+    if: branch != next
   - name: docgen-nuxt
     if: type != pull_request AND branch = delivery
   - name: documentation
