@@ -229,7 +229,6 @@ importers:
       '@vue/babel-plugin-jsx': 1.0.0-rc.3_@babel+core@7.11.1
       babel-core: 7.0.0-bridge.0_@babel+core@7.11.1
       babel-loader: 8.1.0_7e7526731d462686de4308c8ba1cfd85
-      babel-plugin-transform-vue-jsx: 4.0.1
       concurrently: 4.1.2
       css-loader: 3.6.0_webpack@4.44.1
       lodash: 4.17.19
@@ -252,7 +251,6 @@ importers:
       '@vue/babel-plugin-jsx': ^1.0.0-rc.3
       babel-core: ^7.0.0-bridge.0
       babel-loader: ^8.0.5
-      babel-plugin-transform-vue-jsx: 4.0.1
       concurrently: ^4.1.1
       css-loader: ^3.6.0
       dog-names: ^1.0.2
@@ -6681,14 +6679,6 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-B/hVMRv8Nh1sQ1a3EY8I0n4Y1Wty3NrR5ebOyVT302op+DOAau+xNEImGMsUWOC3++ZlMooCytKz+NgN8aKGbA==
-  /babel-plugin-transform-vue-jsx/4.0.1:
-    dependencies:
-      esutils: 2.0.3
-    dev: true
-    peerDependencies:
-      babel-helper-vue-jsx-merge-props: ^2.0.0
-    resolution:
-      integrity: sha512-wbOz7ITB5cloLSjKUU1hWn8zhR+Dwah/RZiTiJY/CQliCwhowmzu6m7NEF+y5EJX/blDzGjRtZvC10Vdb3Q7vw==
   /babel-polyfill/6.26.0:
     dependencies:
       babel-runtime: 6.26.0
