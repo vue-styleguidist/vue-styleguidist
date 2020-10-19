@@ -11,7 +11,7 @@ module.exports = {
 		{
 			// For vue components process jsx with the vue style
 			include: ['**/src/components/**/*.jsx'],
-			plugins: ['transform-vue-jsx']
+			plugins: ['@vue/babel-plugin-jsx']
 		}
 	]
 }

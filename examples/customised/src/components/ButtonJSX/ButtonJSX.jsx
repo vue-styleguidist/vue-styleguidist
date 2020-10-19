@@ -29,7 +29,7 @@ export default {
 		return (
 			<div class="Button">
 				<button class="button" on-click={this.onClick} style={{ color: this.color }}>
-					{this.$slots.default}
+					{this.$slots.default()}
 				</button>
 			</div>
 		)
