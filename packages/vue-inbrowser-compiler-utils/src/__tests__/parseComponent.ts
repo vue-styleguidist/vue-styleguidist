@@ -25,10 +25,10 @@ describe('parseComponent', () => {
         export default {}
         </script>`)
 		expect(comp.script).toMatchInlineSnapshot(`
-										"
-										        export default {}
-										        "
-					`)
+		"
+		        export default {}
+		        "
+	`)
 	})
 
 	it('should detect one style', () => {
@@ -100,5 +100,38 @@ describe('parseComponent', () => {
         </template>
 	</div>`)
 		expect(comp.template).toBeUndefined()
+	})
+
+	it('should allow for templates inside of script strings', () => {
+		const comp = parseComponent(`
+<template>
+	<MyComponent/>
+</template>
+
+<script>
+const MyComponent = \`
+	<div>
+		<template v-if="true">
+		FOO
+		</template>
+	</div>
+	\`
+
+export default {};
+</script>`)
+		expect(comp.template).toMatch(/<MyComponent/)
+		expect(comp.script).toMatchInlineSnapshot(`
+		"
+		const MyComponent = \`
+			<div>
+				<template v-if=\\"true\\">
+				FOO
+				</template>
+			</div>
+			\`
+
+		export default {};
+		"
+	`)
 	})
 })
