@@ -1,5 +1,4 @@
 /* eslint-disable no-new-func */
-import Vue from 'vue'
 import { transform } from 'buble'
 import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'
 import { shallowMount, mount } from '@vue/test-utils'
@@ -291,38 +290,6 @@ describe('integration', () => {
 			// expect(calls).toEqual([1, 2])
 			wrapper.vnode.data.on.click()
 			expect(calls).toEqual([1, 2, 3, 4])
-		})
-
-		test('Custom directives', () => {
-			const directive = {
-				inserted() {}
-			}
-			Vue.directive('test', directive)
-			Vue.directive('other', directive)
-
-			const wrapper: any = shallowMount(
-				getComponent(
-					`{
-				render(h) {
-					return <div v-test={123} vOther={234} />
-				}
-			}`
-				)
-			)
-
-			expect(wrapper.vnode.data.directives.length).toBe(2)
-			expect(wrapper.vnode.data.directives[0]).toEqual({
-				def: directive,
-				modifiers: {},
-				name: 'test',
-				value: 123
-			})
-			expect(wrapper.vnode.data.directives[1]).toEqual({
-				def: directive,
-				modifiers: {},
-				name: 'other',
-				value: 234
-			})
 		})
 
 		test('xlink:href', () => {

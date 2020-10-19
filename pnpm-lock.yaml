@@ -187,7 +187,6 @@ importers:
       '@znck/prop-types': 0.6.3
       dog-names: 1.0.2
       lodash: 4.17.19
-      vue-types: 1.7.0_vue@3.0.2
     devDependencies:
       '@babel/core': 7.11.1
       '@babel/plugin-transform-runtime': 7.11.0_@babel+core@7.11.1
@@ -216,8 +215,7 @@ importers:
       style-loader: ^0.19.0
       vue: 3.X.X
       vue-loader: ^16.0.0-beta.8
-      vue-styleguidist: ^X.X.X
-      vue-types: ^1.5.0
+      vue-styleguidist: ^4.33.2
       webpack: ^4.44.1
       webpack-bundle-analyzer: 3.3.2
   examples/customised:
@@ -241,7 +239,7 @@ importers:
       style-loader: 0.19.1
       url-loader: 1.1.2_webpack@4.44.1
       vue-docgen-cli: 3.26.0
-      vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
+      vue-loader: 16.0.0-beta.8
       vue-styleguidist: 'link:../../packages/vue-styleguidist'
       webpack: 4.44.1
       webpack-bundle-analyzer: 3.3.2
@@ -264,8 +262,8 @@ importers:
       style-loader: ^0.19.0
       url-loader: ^1.1.2
       vue-docgen-cli: ^3.20.0
-      vue-loader: ^15.2.4
-      vue-styleguidist: ^4.0.0
+      vue-loader: ^16.0.0-beta.8
+      vue-styleguidist: ^4.33.2
       webpack: ^4.44.1
       webpack-bundle-analyzer: 3.3.2
   packages/docgen-tests:
@@ -13062,14 +13060,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
-  /is-plain-object/3.0.0:
-    dependencies:
-      isobject: 4.0.0
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha512-tZIpofR+P05k8Aocp7UI/2UTa9lTJSebCXpFFoR9aibpokDj/uXBsJ8luUu0tTVYKkMU6URDUuOfJZ7koewXvg==
   /is-plain-object/4.1.1:
     dev: true
     engines:
@@ -13256,12 +13246,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
-  /isobject/4.0.0:
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==
   /isstream/0.1.2:
     dev: true
     resolution:
@@ -21840,29 +21824,6 @@ packages:
     resolution:
       integrity: sha512-oeMOs2b5o5gRqkxfds10bCx6JeXYTwivRgbb8hzOrcThD2z1+GqEKE3EX9A2SGbsYDf4rXwRg6D5n1w0jO5SwA==
       tarball: vue-loader/-/vue-loader-15.9.3.tgz
-  /vue-loader/15.9.3_css-loader@3.6.0+webpack@4.44.1:
-    dependencies:
-      '@vue/component-compiler-utils': 3.2.0
-      css-loader: 3.6.0_webpack@4.44.1
-      hash-sum: 1.0.2
-      loader-utils: 1.4.0
-      vue-hot-reload-api: 2.3.4
-      vue-style-loader: 4.1.2
-      webpack: 4.44.1
-    dev: true
-    peerDependencies:
-      cache-loader: '*'
-      css-loader: '*'
-      vue-template-compiler: '*'
-      webpack: ^3.0.0 || ^4.1.0 || ^5.0.0-0
-    peerDependenciesMeta:
-      cache-loader:
-        optional: true
-      vue-template-compiler:
-        optional: true
-    resolution:
-      integrity: sha512-oeMOs2b5o5gRqkxfds10bCx6JeXYTwivRgbb8hzOrcThD2z1+GqEKE3EX9A2SGbsYDf4rXwRg6D5n1w0jO5SwA==
-      tarball: vue-loader/-/vue-loader-15.9.3.tgz
   /vue-loader/16.0.0-beta.8:
     dependencies:
       chalk: 4.1.0
@@ -21950,17 +21911,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
-  /vue-types/1.7.0_vue@3.0.2:
-    dependencies:
-      is-plain-object: 3.0.0
-      vue: 3.0.2
-    dev: false
-    engines:
-      node: '>=10.15.0'
-    peerDependencies:
-      vue: '*'
-    resolution:
-      integrity: sha512-MbhuWukmcBJHdfXAdLerbP29i3j2HAJoKwEv7No2Jh/YNl9dOKsNBfvMOkf0SS8VCuWd1/JBX4NnGaGUojbkUA==
   /vue/2.6.11:
     resolution:
       integrity: sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==

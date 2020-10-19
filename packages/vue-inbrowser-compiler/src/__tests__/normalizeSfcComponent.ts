@@ -51,25 +51,4 @@ module.exports = {
 </script>`)
 		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
 	})
-
-	it('should add const h = this.createElement at the beginning of a render function', () => {
-		const sut = normalizeSfcComponent(`
-<script>
-export default {
-render() {
-	return h(Button)
-},
-data(){
-	return {
-		test:1
-	}
-},
-computed:{
-	propsSides(){
-		return hello();
-	}
-}}
-</script>`)
-		expect(evalFunction(sut).render.toString()).toMatch(/const h = this\.\$createElement/)
-	})
 })

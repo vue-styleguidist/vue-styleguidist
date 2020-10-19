@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import VueTypes from 'vue-types'
 import PropTypes from '@znck/prop-types'
 import { logger, myProps } from '../../mixins/loggerMixin'
 
@@ -63,11 +62,6 @@ export default {
 			color: PropTypes.string,
 			fontSize: PropTypes.number
 		}),
-		/**
-		 * The size of the button
-		 * @values small, normal, large
-		 */
-		size: VueTypes.string.def('normal'),
 		/**
 		 * Gets called when the user clicks on the button
 		 * @ignore

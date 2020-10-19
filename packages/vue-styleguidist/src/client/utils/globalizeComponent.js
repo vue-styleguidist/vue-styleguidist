@@ -1,5 +1,5 @@
-import Vue from 'vue'
 import { cleanName } from 'vue-inbrowser-compiler-utils'
+import { globalComponents } from './vueApp'
 
 const isEs6Export = module => !!module.default
 
@@ -19,7 +19,7 @@ export default function globalizeComponent(component) {
 		: component.module
 
 	if (configComponent) {
-		Vue.component(cleanName(displayName), configComponent)
+		globalComponents.push({ key: cleanName(displayName), comp: configComponent })
 	}
 
 	if (component.subComponents) {

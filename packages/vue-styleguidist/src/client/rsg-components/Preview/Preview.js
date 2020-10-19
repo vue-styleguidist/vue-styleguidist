@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { createApp, h } from 'vue'
 import PropTypes from 'prop-types'
-import Vue from 'vue'
 import { compile } from 'vue-inbrowser-compiler'
 import { cleanName, addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
+import createExample from '../../utils/vueApp'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
 
@@ -56,11 +57,7 @@ class Preview extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
-			el = new Vue({
-				el,
-				data: {},
-				template: '<div></div> '
-			})
+			el = createApp({})
 		}
 	}
 
@@ -153,13 +150,13 @@ class Preview extends Component {
 		// then we just have to render the setup previewComponent in the prepared slot
 		const rootComponent = renderRootJsx
 			? renderRootJsx.default(previewComponent)
-			: { render: createElement => createElement(previewComponent) }
+			: { render: () => h(previewComponent) }
 		try {
 			this.destroyVueInstance()
-			this.vueInstance = new Vue({
+			this.vueInstance = createExample({
 				...extendsComponent,
 				...rootComponent
-			}).$mount(el)
+			}).mount(el)
 		} catch (err) {
 			this.handleError(err)
 		}
