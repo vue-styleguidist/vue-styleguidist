@@ -1,26 +1,25 @@
 <template>
 	<div>
 		<input
+			ref="input"
+			v-model="val"
 			@input="updateValue($event.target.value)"
 			@change="emitChange"
-			v-model="val"
-			ref="input"
 		/>
-		<button @click="fireEvent()">Fire example event!</button>
+		<button @click="fireEvent()">
+			Fire example event!
+		</button>
 	</div>
 </template>
 
 <script>
 export default {
-	mounted() {
-		this.updateValue(this.value)
-	},
 	name: 'Input',
 	props: {
 		/**
 		 * @model
 		 */
-		value: {
+		modelValue: {
 			required: true,
 			type: [Number, String]
 		},
@@ -44,9 +43,19 @@ export default {
 			val: ''
 		}
 	},
+	watch: {
+		// watch value prop
+		value(val) {
+			this.updateValue(val)
+		}
+	},
+	mounted() {
+		this.updateValue(this.value)
+	},
 	methods: {
 		// format the value of input
 		formatValue(val) {
+			if (!val) return val
 			const formattedValue = val.toString().replace(this.regExp, this.replacement)
 
 			return formattedValue
@@ -65,7 +74,7 @@ export default {
 			 * @event input
 			 * @type {number|string}
 			 */
-			this.$emit('input', val)
+			this.$emit('update:modelValue', val)
 		},
 
 		// emit change event
@@ -83,12 +92,6 @@ export default {
 			 * @type {string}
 			 */
 			this.$emit('fire', 'hello fire!!')
-		}
-	},
-	watch: {
-		// watch value prop
-		value(val) {
-			this.updateValue(val)
 		}
 	}
 }

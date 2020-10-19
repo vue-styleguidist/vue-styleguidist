@@ -116,7 +116,6 @@ class PreviewAsync extends Component {
 				// it can be:
 				// - a script setting up variables => we set up the data function of previewComponent
 				// - a `new Vue()` script that will return a full config object
-				console.log(example.script)
 				previewComponent = this.props.evalInContext(example.script)() || {}
 			}
 			if (example.template) {
