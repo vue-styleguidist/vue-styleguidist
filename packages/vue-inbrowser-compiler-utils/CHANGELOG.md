@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.1...v4.33.2) (2020-10-19)
+
+
+### Bug Fixes
+
+* when there is a template in the script ([35ac16d](https://github.com/vue-styleguidist/vue-styleguidist/commit/35ac16d9f3be4c172df556fe6655cc7c640cf8ae)), closes [#1000](https://github.com/vue-styleguidist/vue-styleguidist/issues/1000)
+
+
+
+
+
 # [4.33.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.32.4...v4.33.0) (2020-10-12)
 
 **Note:** Version bump only for package vue-inbrowser-compiler-utils
