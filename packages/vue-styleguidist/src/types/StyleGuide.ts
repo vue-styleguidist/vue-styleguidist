@@ -63,7 +63,7 @@ export interface BaseStyleguidistConfig {
 	 * Defines the initial state of the props and methods tab
 	 * @default "collapse"
 	 */
-	exampleMode: string
+	exampleMode: 'expand' | 'collapse' | 'hide'
 	getComponentPathLine: (componentPath: string) => string
 	getExampleFilename: (componentPath: string) => string
 	/**
@@ -206,7 +206,7 @@ export interface BaseStyleguidistConfig {
 	 * Defines the initial state of the props and methods tab
 	 * @default "collapse"
 	 */
-	usageMode: string
+	usageMode: 'expand' | 'collapse' | 'hide'
 	/**
 	 * If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases
 	 * @default "expand"
@@ -241,7 +241,8 @@ export interface SanitizedStyleguidistConfig extends BaseStyleguidistConfig {
  * note that teh default example can be both a string and a boolean but ends
  * up only being a string after sanitizing
  */
-export interface StyleguidistConfig {
+export interface StyleguidistConfig
+	extends Partial<Omit<BaseStyleguidistConfig, 'defaultExample'>> {
 	defaultExample?: string | boolean
 }
 
