@@ -979,7 +979,7 @@ importers:
       '@vue/cli-test-utils': ^4.4.6
       null-loader: ^0.1.1
       typescript: ^3.6.0
-      vue-docgen-cli: ^4.33.0
+      vue-docgen-cli: ^4.33.1
       webpack-merge: ^4.2.1
   packages/vue-cli-plugin-styleguidist:
     dependencies:
@@ -991,7 +991,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.4.6
       '@vue/cli-test-utils': ^4.4.6
-      vue-styleguidist: ^4.33.0
+      vue-styleguidist: ^4.33.1
       webpack-merge: ^4.2.1
   packages/vue-docgen-api:
     dependencies:
@@ -1060,7 +1060,7 @@ importers:
       minimist: ^1.2.0
       mkdirp: ^0.5.1
       prettier: ^1.18.2
-      vue-docgen-api: ^4.33.0
+      vue-docgen-api: ^4.33.1
   packages/vue-inbrowser-compiler:
     dependencies:
       acorn: 6.4.1
@@ -1119,7 +1119,7 @@ importers:
     specifiers:
       escodegen: ^1.14.1
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.33.0
+      vue-docgen-api: ^4.33.1
   packages/vue-styleguidist:
     dependencies:
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -1274,7 +1274,7 @@ importers:
       style-loader: ^1.0.0
       terser-webpack-plugin: ^2.2.2
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.33.0
+      vue-docgen-api: ^4.33.1
       vue-inbrowser-compiler: ^4.33.0
       vue-inbrowser-compiler-utils: ^4.33.0
       webpack: ^4.44.1
@@ -16829,10 +16829,10 @@ packages:
     dependencies:
       '@babel/core': 7.11.1
       '@babel/parser': 7.11.2
-      '@babel/plugin-proposal-class-properties': 7.10.4
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.10.4
-      '@babel/plugin-proposal-optional-chaining': 7.11.0
-      '@babel/plugin-transform-modules-commonjs': 7.10.4
+      '@babel/plugin-proposal-class-properties': 7.10.4_@babel+core@7.11.1
+      '@babel/plugin-proposal-nullish-coalescing-operator': 7.10.4_@babel+core@7.11.1
+      '@babel/plugin-proposal-optional-chaining': 7.11.0_@babel+core@7.11.1
+      '@babel/plugin-transform-modules-commonjs': 7.10.4_@babel+core@7.11.1
       '@babel/preset-env': 7.11.0
       '@babel/preset-flow': 7.10.4_@babel+core@7.11.1
       '@babel/preset-typescript': 7.10.4_@babel+core@7.11.1

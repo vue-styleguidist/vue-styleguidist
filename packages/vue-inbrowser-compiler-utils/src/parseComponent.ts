@@ -7,7 +7,8 @@ export interface VsgSFCDescriptor extends VsgSFCDescriptorSimple {
 	styles?: string[]
 }
 
-const PARTS: (keyof VsgSFCDescriptorSimple)[] = ['template', 'script']
+// highest priority first
+const PARTS: (keyof VsgSFCDescriptorSimple)[] = ['script', 'template']
 
 export default function parseComponent(code: string): VsgSFCDescriptor {
 	// reinintialize regexp after each tour
@@ -22,31 +23,28 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 	const descriptor: VsgSFCDescriptor = {}
 	const partsWithWrapper: VsgSFCDescriptorSimple = {}
 
+	let codeCleaned = code
+
 	// extract all parts
 	PARTS.forEach(part => {
-		const res = partsRE[part].exec(code)
+		const res = partsRE[part].exec(codeCleaned)
 		if (res) {
-			partsWithWrapper[part] = res[0]
+			const partFound = res[0] as string
+			partsWithWrapper[part] = partFound
 			descriptor[part] = res[1]
+
+			// once we have extracted one part,
+			// remove it from the analyzed blob
+			codeCleaned = codeCleaned.replace(partFound, '')
 		}
 	})
-
-	// make sure they are the only components of the code
-	let check = code
-	let i = PARTS.length
-	while (i-- && check.length) {
-		const withWrapper = partsWithWrapper[PARTS[i]]
-		if (withWrapper) {
-			check = check.replace(withWrapper, '').trim()
-		}
-	}
 
 	// we assume that
 	const styleRE = /(<style[^>]*>)([^<]+)(<.......)/g
 	const styleFollowUpRE = /()([^<]+)(<.......)/g
 	let styleAnalyzed = ''
 	const stylesWithWrapper: string[] = []
-	let stylePart: RegExpExecArray | undefined | null = styleRE.exec(check)
+	let stylePart: RegExpExecArray | undefined | null = styleRE.exec(codeCleaned)
 	let styleHeader: string = stylePart ? stylePart[1] : ''
 	let styles: string[] | undefined
 	while (stylePart) {
@@ -62,20 +60,20 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 			styleHeader = ''
 
 			// if we just started to analyze a new style tag
-			stylePart = styleRE.exec(check)
+			stylePart = styleRE.exec(codeCleaned)
 			styleHeader = stylePart ? stylePart[1] : ''
 		} else {
 			styleAnalyzed += stylePart[3]
 			styleFollowUpRE.lastIndex = styleRE.lastIndex
-			stylePart = styleFollowUpRE.exec(check)
+			stylePart = styleFollowUpRE.exec(codeCleaned)
 		}
 	}
 	if (styles) {
 		descriptor.styles = styles
 		let j = styles.length
 		while (j--) {
-			check = check.replace(stylesWithWrapper[j], '').trim()
+			codeCleaned = codeCleaned.replace(stylesWithWrapper[j], '').trim()
 		}
 	}
-	return check.length ? {} : descriptor
+	return codeCleaned.trim().length ? {} : descriptor
 }
