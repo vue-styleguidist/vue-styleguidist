@@ -35,16 +35,10 @@ jobs:
       # Build all examples
       - run: npm run build basic -- --ci
       - run: npm run build customised -- --ci
-      - run: npm run build sections -- --ci
-      - run: npm run build vuex -- --ci
-      - run: npm run build functional-flag -- --ci
 
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser basic
       - run: npm run test:browser customised
-      - run: npm run test:browser sections
-      - run: npm run test:browser vuex
-      - run: npm run test:browser functional-flag
 
   examples-vuecli:
     <<: *defaults
@@ -103,14 +97,5 @@ workflows:
     jobs:
       - install
       - examples-basic:
-          requires:
-            - install
-      - examples-vuecli:
-          requires:
-            - install
-      - examples-other:
-          requires:
-            - install
-      - cypress:
           requires:
             - install
