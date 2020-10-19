@@ -1,15 +1,14 @@
-import Vue, { VueConstructor } from 'vue'
+import Vue from 'vue'
 import { cleanName } from 'vue-inbrowser-compiler-utils'
-import { Component } from '../../types/Component'
 
-const isEs6Export = (module: any): module is { default: VueConstructor } => !!module.default
+const isEs6Export = module => !!module.default
 
 /**
  * Expose component as global variables.
  *
  * @param {Object} component
  */
-export default function globalizeComponent(component: Component) {
+export default function globalizeComponent(component) {
 	const displayName = component.props.displayName || ''
 	if (!component.name) {
 		return

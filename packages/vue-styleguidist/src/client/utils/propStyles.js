@@ -1,6 +1,4 @@
-import * as Rsg from 'react-styleguidist'
-
-const methodStyles = ({ space }: Rsg.Theme) => ({
+const methodStyles = ({ space }) => ({
 	name: {
 		'& code': {
 			isolate: false,

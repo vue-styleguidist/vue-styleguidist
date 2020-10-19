@@ -3,11 +3,6 @@ import { ProcessedSection } from '../../types/Section'
 import processComponents, { HrefOptions } from './processComponents'
 import compileExamples from './compileExamples'
 
-interface SectionAndFiles {
-	exampleFileNames: string[]
-	sections: ProcessedSection[]
-}
-
 /**
  * Recursively process each component in all sections.
  *
@@ -15,9 +10,9 @@ interface SectionAndFiles {
  * @return {Array}
  */
 export default function processSections(
-	{ sections, exampleFileNames }: SectionAndFiles,
-	{ useRouterLinks, useHashId = false, hashPath = [] }: HrefOptions
-): ProcessedSection[] {
+	{ sections, exampleFileNames },
+	{ useRouterLinks, useHashId = false, hashPath = [] }
+) {
 	return sections.map(section => {
 		const options = {
 			useRouterLinks,

@@ -1,4 +1,3 @@
-import * as Rsg from 'react-styleguidist'
 import Editor from 'rsg-components/Editor'
 import Usage from 'rsg-components/Usage'
 import IsolateButton from 'rsg-components/slots/IsolateButton'
@@ -11,7 +10,7 @@ export const DOCS_TAB_USAGE = 'rsg-usage'
 const toolbar = [IsolateButton]
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default (config?: Rsg.ProcessedStyleguidistConfig) => {
+export default () => {
 	return {
 		sectionToolbar: toolbar,
 		componentToolbar: toolbar,

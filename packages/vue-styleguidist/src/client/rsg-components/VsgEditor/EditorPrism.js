@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import * as Rsg from 'react-styleguidist'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import { polyfill } from 'react-lifecycles-compat'
 import SimpleEditor from 'react-simple-code-editor'
@@ -12,10 +11,9 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 import { useStyleGuideContext } from 'rsg-components/Context'
 import getScript from '../../../loaders/utils/getScript'
-import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
 const highlight = (lang, jsxInExamples) => {
 	if (lang === 'vsg') {
@@ -67,7 +65,7 @@ const styles = ({ fontFamily, fontSize, color, borderRadius }) => ({
 })
 
 export class UnconfiguredEditor extends Component {
- static propTypes = {
+	static propTypes = {
 		classes: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
 		code: PropTypes.string.isRequired,
 		jssThemedEditor: PropTypes.bool.isRequired,
@@ -76,12 +74,9 @@ export class UnconfiguredEditor extends Component {
 		editorPadding: PropTypes.number
 	}
 
-	 state = { code: this.props.code, prevCode: this.props.code }
+	state = { code: this.props.code, prevCode: this.props.code }
 
-	 static getDerivedStateFromProps(
-		nextProps,
-		prevState
-	) {
+	static getDerivedStateFromProps(nextProps, prevState) {
 		const { code } = nextProps
 		if (prevState.prevCode !== code) {
 			return {
@@ -92,19 +87,16 @@ export class UnconfiguredEditor extends Component {
 		return null
 	}
 
-	 shouldComponentUpdate(
-		nextProps,
-		nextState
-	) {
+	shouldComponentUpdate(nextProps, nextState) {
 		return nextState.code !== this.state.code
 	}
 
-	 handleChange = (code) => {
+	handleChange = code => {
 		this.setState({ code })
 		this.props.onChange(code)
 	}
 
-	 render() {
+	render() {
 		const { root, jssEditor } = this.props.classes
 		const isVueSFC = isCodeVueSfc(this.state.code)
 		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props

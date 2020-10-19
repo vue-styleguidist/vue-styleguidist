@@ -43,11 +43,9 @@ const render = () => {
 window.addEventListener('hashchange', render)
 window.addEventListener('hashchange', scrollToOrigin)
 
-const mod = module as any
-
 /* istanbul ignore if */
-if (mod.hot) {
-	mod.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
+if (module.hot) {
+	module.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
 		codeRevision += 1
 		render()
 	})

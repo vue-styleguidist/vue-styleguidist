@@ -1,7 +1,6 @@
 import React from 'react'
-import * as Rsg from 'react-styleguidist'
 import PropTypes from 'prop-types'
-import Styled, { JssInjectedProps } from 'rsg-components/Styled'
+import Styled from 'rsg-components/Styled'
 import Markdown from 'rsg-components/Markdown'
 import Name from 'rsg-components/Name'
 import Type from 'rsg-components/Type'

@@ -98,7 +98,6 @@
 	},
 	"devDependencies": {
 		"@babel/types": "^7.5.5",
-		"@testing-library/react": "^9.4.0",
 		"@types/buble": "^0.19.2",
 		"@types/classnames": "^2.2.10",
 		"@types/cli-progress": "^1.8.1",
@@ -108,9 +107,7 @@
 		"@types/lodash": "^4.14.136",
 		"@types/prismjs": "^1.16.0",
 		"@types/pug": "^2.0.4",
-		"@types/react-dev-utils": "^9.0.1",
-		"@types/react-dom": "^16.8.5",
-		"@types/react-lifecycles-compat": "^3.0.1",
+		"@types/react-dev-utils": "^9.0.4",
 		"@types/terser-webpack-plugin": "^1.2.1",
 		"@types/webpack": "^4.32.1",
 		"@types/webpack-dev-server": "^3.1.7",

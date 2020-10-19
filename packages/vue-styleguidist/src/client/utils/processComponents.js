@@ -3,17 +3,6 @@ import flatten from 'lodash/flatten'
 import { Component } from '../../types/Component'
 import compileExamples from './compileExamples'
 
-interface ComponentsAndFiles {
-	exampleFileNames: string[]
-	components: Component[]
-}
-
-export interface HrefOptions {
-	hashPath?: string[]
-	useRouterLinks: boolean
-	useHashId?: boolean
-}
-
 /**
  * Do things that are hard or impossible to do in a loader: we don’t have access to component name
  * and props in the styleguide-loader because we’re using `require` to load the component module.
@@ -22,12 +11,12 @@ export interface HrefOptions {
  * @return {Array}
  */
 export default function processComponents(
-	{ exampleFileNames, components }: ComponentsAndFiles,
-	{ useRouterLinks, useHashId, hashPath }: HrefOptions
-): Component[] {
+	{ exampleFileNames, components },
+	{ useRouterLinks, useHashId, hashPath }
+) {
 	return components.map(component => {
 		const { props } = component
-		const newComponent: Component = {
+		const newComponent = {
 			...component,
 
 			// Add .name shortcuts for names instead of .props.displayName.

@@ -11,7 +11,7 @@ import getOriginColumn from 'rsg-components/OriginColumn'
 import methodStyles from '../../utils/propStyles'
 import renderTypeString from '../../utils/renderTypeString'
 
-const getRowKey = (row) => row.name
+const getRowKey = row => row.name
 
 function renderMethodName({ name, tags = {} }) {
 	return <Name deprecated={!!tags.deprecated}>{`${name}()`}</Name>
