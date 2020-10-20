@@ -1,6 +1,6 @@
 {
 	"name": "vue-docgen-cli",
-	"version": "4.33.2",
+	"version": "4.33.3",
 	"scripts": {
 		"compile": "tsc -p ./tsconfig.build.json",
 		"compile:watch": "yarn compile --watch"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.2...v4.33.3) (2020-10-20)
+
+
+### Bug Fixes
+
+* only display the existing API titles ([653cc18](https://github.com/vue-styleguidist/vue-styleguidist/commit/653cc181b99830c15859327ed93369eb4dfb3166))
+
+
+
+
+
 ## [4.33.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.1...v4.33.2) (2020-10-19)
 
 
