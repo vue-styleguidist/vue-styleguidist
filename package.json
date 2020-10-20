@@ -159,5 +159,13 @@
 	"gitHooks": {
 		"pre-commit": "lint-staged",
 		"commit-msg": "commitlint -E GIT_PARAMS"
-	}
+	},
+	"browserslist": [
+		"last 2 Chrome versions",
+		"last 2 Opera versions",
+		"last 2 Firefox versions",
+		"last 2 Edge versions",
+		"last 1 Safari version",
+		"IE >= 11"
+	]
 }
