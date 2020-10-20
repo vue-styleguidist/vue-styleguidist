@@ -11,7 +11,7 @@ Object {
         name="Pizza"
         type="button"
       >
-        Props, methods, events & slots
+        props
       </button>
     </div>
   </body>,
@@ -22,7 +22,7 @@ Object {
       name="Pizza"
       type="button"
     >
-      Props, methods, events & slots
+      props
     </button>
   </div>,
   "debug": [Function],

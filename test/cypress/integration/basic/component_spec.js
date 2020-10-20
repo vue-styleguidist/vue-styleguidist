@@ -7,7 +7,7 @@ describe('Single component', () => {
 
 	describe('props, methods, events & slots section', () => {
 		beforeEach(() => {
-			cy.get('button').contains('Props, methods, events & slots').as('propsBtn')
+			cy.get('button').contains('props & slots').as('propsBtn')
 
 			cy.get('@propsBtn').closest('[class^=rsg--tabs]').as('container')
 		})
