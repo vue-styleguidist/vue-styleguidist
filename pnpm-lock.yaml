@@ -979,7 +979,7 @@ importers:
       '@vue/cli-test-utils': ^4.4.6
       null-loader: ^0.1.1
       typescript: ^3.6.0
-      vue-docgen-cli: ^4.33.1
+      vue-docgen-cli: ^4.33.2
       webpack-merge: ^4.2.1
   packages/vue-cli-plugin-styleguidist:
     dependencies:
@@ -991,7 +991,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.4.6
       '@vue/cli-test-utils': ^4.4.6
-      vue-styleguidist: ^4.33.1
+      vue-styleguidist: ^4.33.2
       webpack-merge: ^4.2.1
   packages/vue-docgen-api:
     dependencies:
@@ -1032,7 +1032,7 @@ importers:
       vue: ^2.6.10
       vue-class-component: ^7.0.2
       vue-clickaway: ^2.2.2
-      vue-inbrowser-compiler-utils: ^4.33.0
+      vue-inbrowser-compiler-utils: ^4.33.2
       vue-property-decorator: ^7.3.0
       vuetify: ^2.2.3
   packages/vue-docgen-cli:
@@ -1060,7 +1060,7 @@ importers:
       minimist: ^1.2.0
       mkdirp: ^0.5.1
       prettier: ^1.18.2
-      vue-docgen-api: ^4.33.1
+      vue-docgen-api: ^4.33.2
   packages/vue-inbrowser-compiler:
     dependencies:
       acorn: 6.4.1
@@ -1091,7 +1091,7 @@ importers:
       rollup-plugin-typescript2: ^0.27.2
       typescript: ^3.9.7
       vue: ^2.6.10
-      vue-inbrowser-compiler-utils: ^4.33.0
+      vue-inbrowser-compiler-utils: ^4.33.2
       walkes: ^0.2.1
   packages/vue-inbrowser-compiler-utils:
     dependencies:
@@ -1119,7 +1119,7 @@ importers:
     specifiers:
       escodegen: ^1.14.1
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.33.1
+      vue-docgen-api: ^4.33.2
   packages/vue-styleguidist:
     dependencies:
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -1274,9 +1274,9 @@ importers:
       style-loader: ^1.0.0
       terser-webpack-plugin: ^2.2.2
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.33.1
-      vue-inbrowser-compiler: ^4.33.0
-      vue-inbrowser-compiler-utils: ^4.33.0
+      vue-docgen-api: ^4.33.2
+      vue-inbrowser-compiler: ^4.33.2
+      vue-inbrowser-compiler-utils: ^4.33.2
       webpack: ^4.44.1
       webpack-dev-server: ^3.11.0
       webpack-merge: ^4.0.0
