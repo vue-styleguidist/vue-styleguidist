@@ -107,8 +107,9 @@ jobs:
         - git checkout -b delivery
         - pnpm i
         - git add pnpm-lock.yaml
-        - git commit -m "merge - update lock file after release"
+        - git commit --allow-empty -m "merge - update lock file after release"
         - git remote add github "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        
         # push delivery
         - git fetch github delivery
         - git branch --set-upstream-to github/delivery
