@@ -10,15 +10,13 @@ describe('parseComponent', () => {
             hello world
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
-		Object {
-		  "code": "
+		"
+
 		            <template>
 		                <div>hello</div>
 		            </template>
 		            hello world
-		        ",
-		  "padding": 2,
-		}
+		        "
 	`)
 	})
 
@@ -28,12 +26,10 @@ describe('parseComponent', () => {
         export default {}
         </script>`)
 		expect(comp.script).toMatchInlineSnapshot(`
-		Object {
-		  "code": "
+		"
+
 		        export default {}
-		        ",
-		  "padding": 2,
-		}
+		        "
 	`)
 	})
 
@@ -47,14 +43,12 @@ describe('parseComponent', () => {
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
 		Array [
-		  Object {
-		    "code": "
+		  "
+
 		        .class3{
 		            color: red;
 		        }
 				",
-		    "padding": 3,
-		  },
 		]
 	`)
 	})
@@ -79,8 +73,8 @@ describe('parseComponent', () => {
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
 		Array [
-		  Object {
-		    "code": "
+		  "
+
 		.class2{
 			color: blue;
 		}
@@ -90,10 +84,18 @@ describe('parseComponent', () => {
 			}
 		}
 		",
-		    "padding": 3,
-		  },
-		  Object {
-		    "code": "
+		  "
+
+
+
+
+
+
+
+
+
+
+
 		.class2{
 			color: blue;
 		}
@@ -107,8 +109,6 @@ describe('parseComponent', () => {
 			color: red;
 		}
 		",
-		    "padding": 13,
-		  },
 		]
 	`)
 	})
@@ -145,8 +145,12 @@ export default {};
 </script>`)
 		expect(comp.template).toMatch(/<MyComponent/)
 		expect(comp.script).toMatchInlineSnapshot(`
-		Object {
-		  "code": "
+		"
+
+
+
+
+
 		const MyComponent = \`
 			<div>
 				<template v-if=\\"true\\">
@@ -156,9 +160,7 @@ export default {};
 			\`
 
 		export default {};
-		",
-		  "padding": 6,
-		}
+		"
 	`)
 	})
 })

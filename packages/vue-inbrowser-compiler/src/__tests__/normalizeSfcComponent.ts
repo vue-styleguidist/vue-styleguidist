@@ -20,7 +20,7 @@ export default {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
 	})
 
 	it('bake template into a new Vue (named exports)', () => {
@@ -35,7 +35,7 @@ export const compo = {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
 	})
 
 	it('bake template into a new Vue (es5 exports)', () => {
@@ -49,7 +49,7 @@ module.exports = {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
 	})
 
 	it('should add const h = this.createElement at the beginning of a render function', () => {
