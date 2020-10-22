@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.3...v4.33.4) (2020-10-22)
+
+
+### Bug Fixes
+
+* **compiler:** error location reporting ([34121b5](https://github.com/vue-styleguidist/vue-styleguidist/commit/34121b50a0da31d92b5d47fcd94e2b23634bffce))
+
+
+
+
+
 ## [4.33.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.1...v4.33.2) (2020-10-19)
 
 
