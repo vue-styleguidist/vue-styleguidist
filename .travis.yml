@@ -104,7 +104,17 @@ jobs:
       script:
         - git config --global user.name "Vue Styleguidist Bot"
         - git config --global user.email "${BOT_EMAIL}"
+        - git checkout -b ddelivery
+        - pnpm i
+        - git add pnpm-lock.yaml
+        - git commit -m "merge - update lock file after release"
         - git remote add github "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+        # push delivery
+        - git fetch github delivery
+        - git branch --set-upstream-to github/delivery
+        - git push
+
+        # push dev
         - git fetch github dev
         - git checkout github/dev
         - git checkout -b dev

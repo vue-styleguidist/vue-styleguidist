@@ -199,8 +199,9 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue: 2.6.11
-      vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
+      vue-loader: 15.9.3_730d5f8f6bf5f57655729c7ada2ad730
       vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-template-compiler: 2.6.12
       webpack: 4.44.1_webpack@4.44.1
       webpack-bundle-analyzer: 3.3.2
     specifiers:
@@ -219,6 +220,7 @@ importers:
       vue: 2.X.X
       vue-loader: ^15.2.4
       vue-styleguidist: ^4.0.0
+      vue-template-compiler: 2.X.X
       vue-types: ^1.5.0
       webpack: ^4.44.1
       webpack-bundle-analyzer: 3.3.2
@@ -979,7 +981,7 @@ importers:
       '@vue/cli-test-utils': ^4.4.6
       null-loader: ^0.1.1
       typescript: ^3.6.0
-      vue-docgen-cli: ^4.33.2
+      vue-docgen-cli: ^4.33.3
       webpack-merge: ^4.2.1
   packages/vue-cli-plugin-styleguidist:
     dependencies:
@@ -991,7 +993,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.4.6
       '@vue/cli-test-utils': ^4.4.6
-      vue-styleguidist: ^4.33.2
+      vue-styleguidist: ^4.33.3
       webpack-merge: ^4.2.1
   packages/vue-docgen-api:
     dependencies:
@@ -5862,7 +5864,6 @@ packages:
     resolution:
       integrity: sha512-7+2BITlgjgDhH0vvwZU/HZJVyk+2XUlvxXe8dFMedNX/aMkaOq++rMAFXc0tM7ij15QaWlbdQASBR9dihi+bDQ==
   /@types/json-schema/7.0.6:
-    dev: false
     resolution:
       integrity: sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
   /@types/json5/0.0.29:
@@ -22773,9 +22774,9 @@ packages:
       integrity: sha512-0ilKFI6QQF5nxDZLFn2dMjvc4hjg/Wkg7rHd3jK6/A4a1Hl9VFdQWvgB1UMGoU94pad1P/8N7fMcEnLnSiju8A==
   /schema-utils/2.7.1:
     dependencies:
-      '@types/json-schema': 7.0.5
-      ajv: 6.12.4
-      ajv-keywords: 3.5.2_ajv@6.12.4
+      '@types/json-schema': 7.0.6
+      ajv: 6.12.6
+      ajv-keywords: 3.5.2_ajv@6.12.6
     engines:
       node: '>= 8.9.0'
     resolution:
@@ -25643,6 +25644,29 @@ packages:
       vue-style-loader: 4.1.2
       webpack: 4.44.2_webpack@4.44.2
     dev: false
+    peerDependencies:
+      cache-loader: '*'
+      css-loader: '*'
+      vue-template-compiler: '*'
+      webpack: ^3.0.0 || ^4.1.0 || ^5.0.0-0
+    peerDependenciesMeta:
+      cache-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
+    resolution:
+      integrity: sha512-Y67VnGGgVLH5Voostx8JBZgPQTlDQeOVBLOEsjc2cXbCYBKexSKEpOA56x0YZofoDOTszrLnIShyOX1p9uCEHA==
+  /vue-loader/15.9.3_730d5f8f6bf5f57655729c7ada2ad730:
+    dependencies:
+      '@vue/component-compiler-utils': 3.2.0
+      css-loader: 3.6.0_webpack@4.44.1
+      hash-sum: 1.0.2
+      loader-utils: 1.4.0
+      vue-hot-reload-api: 2.3.4
+      vue-style-loader: 4.1.2
+      vue-template-compiler: 2.6.12
+      webpack: 4.44.1_webpack@4.44.1
+    dev: true
     peerDependencies:
       cache-loader: '*'
       css-loader: '*'

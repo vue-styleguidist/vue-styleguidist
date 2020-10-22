@@ -11,6 +11,7 @@ describe('parseComponent', () => {
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
 		"
+
 		            <template>
 		                <div>hello</div>
 		            </template>
@@ -26,6 +27,7 @@ describe('parseComponent', () => {
         </script>`)
 		expect(comp.script).toMatchInlineSnapshot(`
 		"
+
 		        export default {}
 		        "
 	`)
@@ -40,14 +42,15 @@ describe('parseComponent', () => {
 		</style>`)
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
-				Array [
-				  "
-				        .class3{
-				            color: red;
-				        }
-						",
-				]
-		`)
+		Array [
+		  "
+
+		        .class3{
+		            color: red;
+		        }
+				",
+		]
+	`)
 	})
 
 	it('should detect styles', () => {
@@ -71,6 +74,7 @@ describe('parseComponent', () => {
 		expect(comp.styles).toMatchInlineSnapshot(`
 		Array [
 		  "
+
 		.class2{
 			color: blue;
 		}
@@ -81,6 +85,26 @@ describe('parseComponent', () => {
 		}
 		",
 		  "
+
+
+
+
+
+
+
+
+
+
+
+		.class2{
+			color: blue;
+		}
+		@media screen and (width < 900px) {
+			.class2{
+				color: green;
+			}
+		}
+
 		.class3{
 			color: red;
 		}
@@ -122,6 +146,11 @@ export default {};
 		expect(comp.template).toMatch(/<MyComponent/)
 		expect(comp.script).toMatchInlineSnapshot(`
 		"
+
+
+
+
+
 		const MyComponent = \`
 			<div>
 				<template v-if=\\"true\\">
