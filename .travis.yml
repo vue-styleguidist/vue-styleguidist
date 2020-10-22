@@ -104,7 +104,7 @@ jobs:
       script:
         - git config --global user.name "Vue Styleguidist Bot"
         - git config --global user.email "${BOT_EMAIL}"
-        - git checkout -b ddelivery
+        - git checkout -b delivery
         - pnpm i
         - git add pnpm-lock.yaml
         - git commit -m "merge - update lock file after release"
