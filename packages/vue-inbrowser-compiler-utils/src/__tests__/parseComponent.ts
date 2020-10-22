@@ -143,7 +143,7 @@ const MyComponent = \`
 
 export default {};
 </script>`)
-		expect(comp.template?.code).toMatch(/<MyComponent/)
+		expect(comp.template).toMatch(/<MyComponent/)
 		expect(comp.script).toMatchInlineSnapshot(`
 		Object {
 		  "code": "
