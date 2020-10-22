@@ -21,7 +21,6 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 	)
 
 	const descriptor: VsgSFCDescriptor = {}
-	const partsWithWrapper: VsgSFCDescriptorSimple = {}
 
 	let codeCleaned = code
 
@@ -30,44 +29,42 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 		const res = partsRE[part].exec(codeCleaned)
 		if (res) {
 			const partFound = res[0] as string
-			partsWithWrapper[part] = partFound
-			descriptor[part] = res[1]
+
+			const linesBeforePart = code.split(partFound)[0]
+			const paddingLinesNumber = linesBeforePart.split('\n').length
+			descriptor[part] = Array(paddingLinesNumber).join('\n') + res[1]
 
 			// once we have extracted one part,
 			// remove it from the analyzed blob
-			codeCleaned = codeCleaned.replace(partFound, '')
+			const linesOfPart = partFound.split('\n').length
+			codeCleaned = codeCleaned.replace(partFound, Array(linesOfPart).join('\n'))
 		}
 	})
 
 	// we assume that
-	const styleRE = /(<style[^>]*>)([^<]+)(<.......)/g
-	const styleFollowUpRE = /()([^<]+)(<.......)/g
+	const styleRE = /<style[^>]*>((.|\n|\r)*?)<\/style>/g
 	let styleAnalyzed = ''
 	const stylesWithWrapper: string[] = []
 	let stylePart: RegExpExecArray | undefined | null = styleRE.exec(codeCleaned)
-	let styleHeader: string = stylePart ? stylePart[1] : ''
 	let styles: string[] | undefined
 	while (stylePart) {
-		styleAnalyzed += stylePart[2]
+		styleAnalyzed += stylePart[1]
 
-		if (stylePart[3] === '</style>') {
-			if (!styles) {
-				styles = []
-			}
-			styles.push(styleAnalyzed)
-			stylesWithWrapper.push(`${styleHeader}${styleAnalyzed}</style>`)
-			styleAnalyzed = ''
-			styleHeader = ''
-
-			// if we just started to analyze a new style tag
-			stylePart = styleRE.exec(codeCleaned)
-			styleHeader = stylePart ? stylePart[1] : ''
-		} else {
-			styleAnalyzed += stylePart[3]
-			styleFollowUpRE.lastIndex = styleRE.lastIndex
-			stylePart = styleFollowUpRE.exec(codeCleaned)
+		if (!styles) {
+			styles = []
 		}
+
+		const styleWithWrapper = stylePart[0]
+		stylesWithWrapper.push(styleWithWrapper)
+
+		const linesBeforePart = code.split(styleWithWrapper)[0]
+		const paddingLinesNumber = linesBeforePart.split('\n').length
+
+		styles.push(Array(paddingLinesNumber).join('\n') + styleAnalyzed)
+
+		stylePart = styleRE.exec(codeCleaned)
 	}
+
 	if (styles) {
 		descriptor.styles = styles
 		let j = styles.length
@@ -75,5 +72,6 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 			codeCleaned = codeCleaned.replace(stylesWithWrapper[j], '').trim()
 		}
 	}
+
 	return codeCleaned.trim().length ? {} : descriptor
 }

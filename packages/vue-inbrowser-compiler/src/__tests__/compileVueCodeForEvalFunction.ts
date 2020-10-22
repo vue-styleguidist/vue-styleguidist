@@ -116,4 +116,24 @@ new Vue({
 		}"
 	`)
 	})
+
+	it('shoud fail if the sfc script has a parsing issue', () => {
+		expect(() =>
+			compileVueCodeForEvalFunction(`
+		<template>
+			<div>
+				<button> {{param}} </button>
+			</div>
+		</template>
+		<script>
+		let param% = 'BazBaz';
+		export default {
+			data(){
+				return {param: param%}
+			}
+		}
+		</script>
+		`)
+		).toThrowErrorMatchingInlineSnapshot(`"Unexpected token (8:11)"`)
+	})
 })

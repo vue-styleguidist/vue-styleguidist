@@ -10,12 +10,15 @@ describe('parseComponent', () => {
             hello world
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
-		"
+		Object {
+		  "code": "
 		            <template>
 		                <div>hello</div>
 		            </template>
 		            hello world
-		        "
+		        ",
+		  "padding": 2,
+		}
 	`)
 	})
 
@@ -25,9 +28,12 @@ describe('parseComponent', () => {
         export default {}
         </script>`)
 		expect(comp.script).toMatchInlineSnapshot(`
-		"
+		Object {
+		  "code": "
 		        export default {}
-		        "
+		        ",
+		  "padding": 2,
+		}
 	`)
 	})
 
@@ -40,14 +46,17 @@ describe('parseComponent', () => {
 		</style>`)
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
-				Array [
-				  "
-				        .class3{
-				            color: red;
-				        }
-						",
-				]
-		`)
+		Array [
+		  Object {
+		    "code": "
+		        .class3{
+		            color: red;
+		        }
+				",
+		    "padding": 3,
+		  },
+		]
+	`)
 	})
 
 	it('should detect styles', () => {
@@ -70,7 +79,8 @@ describe('parseComponent', () => {
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
 		Array [
-		  "
+		  Object {
+		    "code": "
 		.class2{
 			color: blue;
 		}
@@ -80,11 +90,25 @@ describe('parseComponent', () => {
 			}
 		}
 		",
-		  "
+		    "padding": 3,
+		  },
+		  Object {
+		    "code": "
+		.class2{
+			color: blue;
+		}
+		@media screen and (width < 900px) {
+			.class2{
+				color: green;
+			}
+		}
+
 		.class3{
 			color: red;
 		}
 		",
+		    "padding": 13,
+		  },
 		]
 	`)
 	})
@@ -119,9 +143,10 @@ const MyComponent = \`
 
 export default {};
 </script>`)
-		expect(comp.template).toMatch(/<MyComponent/)
+		expect(comp.template?.code).toMatch(/<MyComponent/)
 		expect(comp.script).toMatchInlineSnapshot(`
-		"
+		Object {
+		  "code": "
 		const MyComponent = \`
 			<div>
 				<template v-if=\\"true\\">
@@ -131,7 +156,9 @@ export default {};
 			\`
 
 		export default {};
-		"
+		",
+		  "padding": 6,
+		}
 	`)
 	})
 })
