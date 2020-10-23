@@ -18,7 +18,11 @@ const examples = isNetlify ?
 examples.forEach(function(ex) { 
     const pkg = require(ex);
     const exampleName = path.basename(path.dirname(ex))
-    const exampleUrl = exampleName === "docgen-nuxt"
+    const nuxtExample = exampleName === "docgen-nuxt"
+    if(nuxtExample){
+        console.log('create nuxt-content-styleguidist')
+    }
+    const exampleUrl = nuxtExample
         ? "https://nuxt-content-styleguidist.surge.sh/"
         : (process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io') + "/" + exampleName
 
