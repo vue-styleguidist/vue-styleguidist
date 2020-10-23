@@ -54,7 +54,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		if (config.jsx) {
 			const { preprocessing, component, postprocessing } = parseScriptCode(code)
 			return {
-				script: `${preprocessing};\nreturn {${component}};\n${postprocessing}`
+				script: `${preprocessing};return {${component}};${postprocessing}`
 			}
 		}
 
