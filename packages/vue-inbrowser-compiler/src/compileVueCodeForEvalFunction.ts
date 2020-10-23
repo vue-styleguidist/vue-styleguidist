@@ -1,4 +1,4 @@
-import { transform } from 'buble'
+import { transform, TransformOptions } from 'buble'
 import walkes from 'walkes'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
@@ -25,7 +25,7 @@ interface EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: any = {}
+	config: TransformOptions = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	return {
