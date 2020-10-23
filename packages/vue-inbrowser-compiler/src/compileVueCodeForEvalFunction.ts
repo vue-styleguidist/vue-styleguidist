@@ -9,6 +9,7 @@ import normalizeSfcComponent, {
 	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
 import getAst from './getAst'
+import getTargetFromBrowser from './getTargetFromBrowser'
 
 interface EvaluableComponent {
 	script: string
@@ -28,9 +29,10 @@ export default function compileVueCodeForEvalFunction(
 	config: TransformOptions = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
+	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
 	return {
 		...nonCompiledComponent,
-		script: transform(nonCompiledComponent.script, config).code
+		script: transform(nonCompiledComponent.script, { target, ...config }).code
 	}
 }
 
