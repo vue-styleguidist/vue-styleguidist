@@ -1069,6 +1069,7 @@ importers:
       acorn-jsx: 5.2.0_acorn@6.4.1
       buble: 0.19.8
       camelcase: 5.3.1
+      detect-browser: 5.2.0
       vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
       walkes: 0.2.1
     devDependencies:
@@ -1089,6 +1090,7 @@ importers:
       acorn-jsx: ^5.0.1
       buble: ^0.19.7
       camelcase: ^5.3.1
+      detect-browser: ^5.2.0
       rollup: ^2.26.3
       rollup-plugin-typescript2: ^0.27.2
       typescript: ^3.9.7
@@ -1282,7 +1284,7 @@ importers:
       webpack: ^4.44.1
       webpack-dev-server: ^3.11.0
       webpack-merge: ^4.0.0
-lockfileVersion: 5.1
+lockfileVersion: 5.2
 packages:
   /@akryum/winattr/3.0.0:
     dependencies:
@@ -11844,6 +11846,10 @@ packages:
       repeat-string: 1.6.1
     resolution:
       integrity: sha512-Up8P0clUVwq0FnFjDclzZsy9PadzRn5FFxrr47tQQvMHqyiFYVbpH8oXDzWtF0Q7pYy3l+RPmtBl+BsFF6wH0A==
+  /detect-browser/5.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-tr7XntDAu50BVENgQfajMLzacmSe34D+qZc4zjnniz0ZVuw/TZcLcyxHQjYpJTM36sGEkZZlYLnIM1hH7alTMA==
   /detect-indent/5.0.0:
     dev: false
     engines:
