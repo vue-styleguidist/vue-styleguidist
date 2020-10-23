@@ -100,11 +100,9 @@ new Vue({
 
 		expect(sut.script).toMatchInlineSnapshot(`
 		"
-		var vue$0 = require('vue');
-		var Vue = vue$0.default || vue$0;
-		var dog_names$44 = require('../RandomButton/dog-names');
-		var three = dog_names$44.default || dog_names$44;
-		
+		var vue$0 = require('vue');var Vue = vue$0.default || vue$0;
+		var dog_names$43 = require('../RandomButton/dog-names');var three = dog_names$43.default || dog_names$43;
+
 		;return {
 			data: function data() {
 				var i = 0
@@ -135,5 +133,36 @@ new Vue({
 		</script>
 		`)
 		).toThrowErrorMatchingInlineSnapshot(`"Unexpected token (8:11)"`)
+	})
+
+	it('shoud try to run the with the same lines', () => {
+		expect(
+			compileVueCodeForEvalFunction(`<template>
+			<div/>
+		</template>
+		<script>
+		export default {
+			data(){
+				return {
+					param: 'BazBaz'
+				}
+			}
+		}
+		</script>
+		`).script
+		).toMatchInlineSnapshot(`
+		"
+
+
+
+				;return {template: \\"\\\\n\\\\t\\\\t\\\\t<div/>\\\\n\\\\t\\\\t\\", 
+					data: function data(){
+						return {
+							param: 'BazBaz'
+						}
+					}
+				};
+				"
+	`)
 	})
 })

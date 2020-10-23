@@ -9,7 +9,7 @@ describe('transformOneImport', () => {
 			test
 		)
 		expect(requiredImport.code).toBe(
-			["const foo$0 = require('./foo');", 'const bar = foo$0.default || foo$0;'].join('\n')
+			"const foo$0 = require('./foo');const bar = foo$0.default || foo$0;"
 		)
 	})
 
@@ -19,9 +19,7 @@ describe('transformOneImport', () => {
 			'import { bar } from "./foo"',
 			test
 		)
-		expect(requiredImport.code).toBe(
-			["const foo$0 = require('./foo');", 'const bar = foo$0.bar;'].join('\n')
-		)
+		expect(requiredImport.code).toBe("const foo$0 = require('./foo');const bar = foo$0.bar;")
 	})
 
 	it('should convert re-named imports', () => {
@@ -30,9 +28,7 @@ describe('transformOneImport', () => {
 			'import { foo as bar } from "./foo"',
 			test
 		)
-		expect(requiredImport.code).toBe(
-			["const foo$0 = require('./foo');", 'const bar = foo$0.foo;'].join('\n')
-		)
+		expect(requiredImport.code).toBe("const foo$0 = require('./foo');const bar = foo$0.foo;")
 	})
 
 	it('should convert mixed imports', () => {
@@ -42,11 +38,7 @@ describe('transformOneImport', () => {
 			test
 		)
 		expect(requiredImport.code).toBe(
-			[
-				"const bar$0 = require('./bar');",
-				'const baz = bar$0.default || bar$0;',
-				'const bar = bar$0.foo;'
-			].join('\n')
+			"const bar$0 = require('./bar');const baz = bar$0.default || bar$0;const bar = bar$0.foo;"
 		)
 	})
 
@@ -57,7 +49,7 @@ describe('transformOneImport', () => {
 			test
 		)
 		expect(requiredImport.code).toBe(
-			["const foo$0 = require('./foo');", 'const bar = foo$0.default || foo$0;'].join('\n')
+			"const foo$0 = require('./foo');const bar = foo$0.default || foo$0;"
 		)
 	})
 })

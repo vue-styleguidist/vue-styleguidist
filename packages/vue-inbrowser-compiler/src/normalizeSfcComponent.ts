@@ -36,14 +36,14 @@ function injectTemplateAndParseExport(
 	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
 
 	if (!parts.script) {
-		return { component: `{\ntemplate: \`${templateString}\` }` }
+		return { component: `{template: \`${templateString}\` }` }
 	}
 
 	const comp = parseScriptCode(parts.script)
 	if (templateString) {
-		comp.component = `{\n  template: \`${templateString}\`,\n  ${comp.component}}`
+		comp.component = `{template: \`${templateString}\`, ${comp.component}}`
 	} else {
-		comp.component = `{\n  ${comp.component}}`
+		comp.component = `{${comp.component}}`
 	}
 	return comp
 }
@@ -132,8 +132,7 @@ export function getRenderFunctionStart(objectExpression: any): number {
 }
 
 export function insertCreateElementFunction(before: string, after: string): string {
-	return `${before}
-const h = this.$createElement;${after}`
+	return `${before};const h = this.$createElement;${after}`
 }
 
 /**
@@ -147,9 +146,9 @@ export default function normalizeSfcComponent(code: string): { script: string; s
 	return {
 		script: [
 			extractedComponent.preprocessing,
-			`;return ${extractedComponent.component}`,
+			`return ${extractedComponent.component}`,
 			extractedComponent.postprocessing
-		].join('\n'),
+		].join(';'),
 		style: buildStyles(parts.styles)
 	}
 }
