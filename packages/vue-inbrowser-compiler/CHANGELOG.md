@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.4...v4.33.5) (2020-10-23)
+
+
+### Bug Fixes
+
+* **compiler:** only allow max version of each bro ([a062a54](https://github.com/vue-styleguidist/vue-styleguidist/commit/a062a5405b9793e46bf33ec49a6f3d6511fb7e28))
+* **compiler:** types of buble transform ([6134866](https://github.com/vue-styleguidist/vue-styleguidist/commit/613486628511b2113fcda5e7377207ce70e00f23))
+
+
+
+
+
 ## [4.33.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.3...v4.33.4) (2020-10-22)
 
 
