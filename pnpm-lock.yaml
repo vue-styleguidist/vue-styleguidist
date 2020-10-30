@@ -23,6 +23,7 @@ importers:
       '@vue/cli-service': 4.5.4_b6fdb6e36986375cba690f420ae0219d
       '@vue/eslint-config-prettier': 5.1.0_91d3a64bae7c432b3688b141f68e2f45
       '@vue/eslint-config-typescript': 4.0.0_eslint@7.7.0+typescript@3.9.7
+      '@vuepress/plugin-google-analytics': 1.7.1
       babel-eslint: 9.0.0
       babel-jest: 25.5.1_@babel+core@7.11.1
       babel-loader: 8.1.0_@babel+core@7.11.1
@@ -114,6 +115,7 @@ importers:
       '@vue/cli-service': ^4.5.4
       '@vue/eslint-config-prettier': ^5.0.0
       '@vue/eslint-config-typescript': ^4.0.0
+      '@vuepress/plugin-google-analytics': ^1.7.1
       babel-eslint: ^9.0.0
       babel-jest: ^25.2.6
       babel-loader: ^8.0.5
@@ -5937,13 +5939,6 @@ packages:
   /@types/mime/2.0.3:
     resolution:
       integrity: sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
-  /@types/mini-css-extract-plugin/0.9.1:
-    dependencies:
-      '@types/webpack': 4.41.22
-    dev: true
-    optional: true
-    resolution:
-      integrity: sha512-+mN04Oszdz9tGjUP/c1ReVwJXxSniLd7lF++sv+8dkABxVNthg6uccei+4ssKxRHGoMmPxdn7uBdJWONSJGTGQ==
   /@types/minimatch/3.0.3:
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
@@ -7043,7 +7038,7 @@ packages:
       node: '>=8'
     hasBin: true
     optionalDependencies:
-      vue-loader-v16: /vue-loader/16.0.0-beta.5
+      vue-loader-v16: /vue-loader/16.0.0-beta.9
     peerDependencies:
       '@vue/compiler-sfc': ^3.0.0-beta.14
       less-loader: '*'
@@ -7432,6 +7427,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-AsbUptcwtBJtlvrcDyiW2HZAHz/tLoYXrGopJVPtWUZ9LzNIcXuSFVIRzKd1Jc+86VPUYLeDhLBIWe0rfsphAQ==
+  /@vuepress/plugin-google-analytics/1.7.1:
+    dev: true
+    resolution:
+      integrity: sha512-27fQzRMsqGYpMf+ruyhsdfLv/n6z6b6LutFLE/pH66Itlh6ox9ew31x0pqYBbWIC/a4lBfXYUwFvi+DEvlb1EQ==
   /@vuepress/plugin-last-updated/1.6.0:
     dependencies:
       cross-spawn: 6.0.5
@@ -8034,6 +8033,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-9VGjrMsG1vePxcSweQsN20KY/c4zN0h9fLjqAbwbPfahM3t+NL+M9HC8xeXG2I8pX5NoamTGNuomEUFI7fcUjA==
+  /ansi-styles/4.3.0:
+    dependencies:
+      color-convert: 2.0.1
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==
   /ansi-wrap/0.1.0:
     dev: true
     engines:
@@ -9984,8 +9990,8 @@ packages:
       integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
   /chalk/4.1.0:
     dependencies:
-      ansi-styles: 4.2.1
-      supports-color: 7.1.0
+      ansi-styles: 4.3.0
+      supports-color: 7.2.0
     engines:
       node: '>=10'
     resolution:
@@ -23931,6 +23937,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-oRSIpR8pxT1Wr2FquTNnGet79b3BWljqOuoW/h4oBhxJ/HUbX5nX6JSruTkvXDCFMwDPvsaTTbvMLKZWSy0R5g==
+  /supports-color/7.2.0:
+    dependencies:
+      has-flag: 4.0.0
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   /supports-hyperlinks/1.0.1:
     dependencies:
       has-flag: 2.0.0
@@ -25789,18 +25802,15 @@ packages:
         optional: true
     resolution:
       integrity: sha512-Y67VnGGgVLH5Voostx8JBZgPQTlDQeOVBLOEsjc2cXbCYBKexSKEpOA56x0YZofoDOTszrLnIShyOX1p9uCEHA==
-  /vue-loader/16.0.0-beta.5:
+  /vue-loader/16.0.0-beta.9:
     dependencies:
-      '@types/mini-css-extract-plugin': 0.9.1
-      chalk: 3.0.0
+      chalk: 4.1.0
       hash-sum: 2.0.0
-      loader-utils: 1.4.0
-      merge-source-map: 1.1.0
-      source-map: 0.6.1
+      loader-utils: 2.0.0
     dev: true
     optional: true
     resolution:
-      integrity: sha512-ciWfzNefqWlmzKznCWY9hl+fPP4KlQ0A9MtHbJ/8DpyY+dAM8gDrjufIdxwTgC4szE4EZC3A6ip/BbrqM84GqA==
+      integrity: sha512-mu9pg6554GbXDSO8LlxkQM6qUJzUkb/A0FJc9LgRqnU9MCnhzEXwCt1Zx5NObvFpzs2mH2dH/uUCDwL8Qaz9sA==
   /vue-meta/2.4.0:
     dependencies:
       deepmerge: 4.2.2
