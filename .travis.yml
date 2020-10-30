@@ -27,6 +27,8 @@ branches:
 stages:
   - test
   - coverage
+  - name: nuxt-docs
+    if: type != pull_request AND branch = delivery
   - name: documentation
     if: type != pull_request AND branch = delivery
   - name: release-beta
@@ -45,6 +47,19 @@ jobs:
         - pnpm test:jest -- --runInBand --coverage
         # Upload coverage report to Codecov
         - curl -s https://codecov.io/bash | bash
+
+    - stage: nuxt-docs
+      script:
+        - pnpm build nuxt-docgen
+
+      # deploy nuxt-content separately because of routing conflicts
+      deploy:
+        provider: surge
+        skip_cleanup: true
+        project: ./examples/docgen-nuxt/dist/
+        domain: nuxt-content-styleguidist.surge.sh
+        on:
+          branch: delivery
 
     # Build & Deploy the documentation website
     - stage: documentation
@@ -68,13 +83,6 @@ jobs:
         keep-history: true
         on:
           branch: delivery
-      
-      # deploy nuxt-content separately because of routing conflicts
-      deploy:
-        skip_cleanup: true
-        provider: surge
-        project: ./examples/docgen-nuxt/dist/
-        domain: nuxt-content-styleguidist.surge.sh
 
     - stage: release
       script:
