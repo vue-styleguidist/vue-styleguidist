@@ -23,7 +23,6 @@ importers:
       '@vue/cli-service': 4.5.4_b6fdb6e36986375cba690f420ae0219d
       '@vue/eslint-config-prettier': 5.1.0_91d3a64bae7c432b3688b141f68e2f45
       '@vue/eslint-config-typescript': 4.0.0_eslint@7.7.0+typescript@3.9.7
-      '@vuepress/plugin-google-analytics': 1.7.1
       babel-eslint: 9.0.0
       babel-jest: 25.5.1_@babel+core@7.11.1
       babel-loader: 8.1.0_@babel+core@7.11.1
@@ -115,7 +114,6 @@ importers:
       '@vue/cli-service': ^4.5.4
       '@vue/eslint-config-prettier': ^5.0.0
       '@vue/eslint-config-typescript': ^4.0.0
-      '@vuepress/plugin-google-analytics': ^1.7.1
       babel-eslint: ^9.0.0
       babel-jest: ^25.2.6
       babel-loader: ^8.0.5
@@ -7427,10 +7425,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-AsbUptcwtBJtlvrcDyiW2HZAHz/tLoYXrGopJVPtWUZ9LzNIcXuSFVIRzKd1Jc+86VPUYLeDhLBIWe0rfsphAQ==
-  /@vuepress/plugin-google-analytics/1.7.1:
-    dev: true
-    resolution:
-      integrity: sha512-27fQzRMsqGYpMf+ruyhsdfLv/n6z6b6LutFLE/pH66Itlh6ox9ew31x0pqYBbWIC/a4lBfXYUwFvi+DEvlb1EQ==
   /@vuepress/plugin-last-updated/1.6.0:
     dependencies:
       cross-spawn: 6.0.5

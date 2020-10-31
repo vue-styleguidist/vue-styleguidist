@@ -62,7 +62,6 @@
 		"@vue/cli-service": "^4.5.4",
 		"@vue/eslint-config-prettier": "^5.0.0",
 		"@vue/eslint-config-typescript": "^4.0.0",
-		"@vuepress/plugin-google-analytics": "^1.7.1",
 		"babel-eslint": "^9.0.0",
 		"babel-jest": "^25.2.6",
 		"babel-loader": "^8.0.5",
