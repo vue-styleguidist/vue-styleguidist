@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const camelCase = require('camelcase')
+import camelCase from 'camelcase'
 
 export type CreateElementFunction = (
 	component: string | object,
