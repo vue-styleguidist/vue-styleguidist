@@ -1,6 +1,10 @@
 const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+	entry: {
+		app: './src/index.js'
+	},
 	module: {
 		rules: [
 			{
@@ -20,8 +24,19 @@ module.exports = {
 			{
 				test: /\.(css?|scss)(\?.*)?$/,
 				loader: 'style-loader!css-loader!sass-loader'
+			},
+			{
+				resourceQuery: /blockType=docs/,
+				loader: 'raw-loader'
 			}
 		]
 	},
-	plugins: [new VueLoaderPlugin()]
+	plugins: [
+		new VueLoaderPlugin(),
+		new HtmlWebpackPlugin({
+			filename: 'index.html',
+			template: 'index.html',
+			inject: true
+		})
+	]
 }
