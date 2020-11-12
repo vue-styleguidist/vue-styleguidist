@@ -37,7 +37,7 @@ it('should return script part if SFC is detected and it has a template', () => {
 		false
 	)
 
-	expect(result).toEqual(code)
+	expect(result.trim()).toEqual(code)
 })
 
 it('should return script part if weird pseudo-jsx format', () => {
