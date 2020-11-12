@@ -368,7 +368,6 @@ importers:
     dependencies:
       acorn: 6.4.1
       acorn-jsx: 5.2.0_acorn@6.4.1
-      buble: 0.19.8
       camelcase: 5.3.1
       detect-browser: 5.2.0
       vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
@@ -389,7 +388,6 @@ importers:
       '@vue/test-utils': ^1.1.0
       acorn: ^6.1.1
       acorn-jsx: ^5.0.1
-      buble: ^0.19.7
       camelcase: ^5.3.1
       detect-browser: ^5.2.0
       rollup: ^2.26.3
@@ -5343,6 +5341,7 @@ packages:
   /acorn-dynamic-import/4.0.0_acorn@6.4.2:
     dependencies:
       acorn: 6.4.2
+    dev: true
     peerDependencies:
       acorn: ^6.0.0
     resolution:
@@ -5379,6 +5378,7 @@ packages:
   /acorn-jsx/5.3.1_acorn@6.4.2:
     dependencies:
       acorn: 6.4.2
+    dev: true
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     resolution:
@@ -5416,6 +5416,7 @@ packages:
     resolution:
       integrity: sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
   /acorn/6.4.2:
+    dev: true
     engines:
       node: '>=0.4.0'
     hasBin: true
@@ -7106,6 +7107,7 @@ packages:
       minimist: 1.2.5
       os-homedir: 2.0.0
       regexpu-core: 4.7.1
+    dev: true
     hasBin: true
     resolution:
       integrity: sha512-IoGZzrUTY5fKXVkgGHw3QeXFMUNBFv+9l8a4QJKG1JhG3nCMHTdEX1DCOg8568E2Q9qvAQIiSokv6Jsgx8p2cA==
@@ -16303,6 +16305,7 @@ packages:
       integrity: sha1-/7xJiDNuDoM94MFox+8VISGqf7M=
   /os-homedir/2.0.0:
     deprecated: This is not needed anymore. Use `require('os').homedir()` instead.
+    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -18589,6 +18592,7 @@ packages:
       regjsparser: 0.6.4
       unicode-match-property-ecmascript: 1.0.4
       unicode-match-property-value-ecmascript: 1.2.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
