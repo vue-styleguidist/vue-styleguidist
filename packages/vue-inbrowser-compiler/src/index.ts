@@ -4,4 +4,4 @@ export {
 	concatenate,
 	isCodeVueSfc
 } from 'vue-inbrowser-compiler-utils'
-export { compile, compileJSX } from './compileVueCodeForEvalFunction'
+export { default as compile } from './compileVueCodeForEvalFunction'

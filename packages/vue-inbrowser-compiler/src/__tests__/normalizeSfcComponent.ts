@@ -20,7 +20,8 @@ export default {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ param: 'Foo' })
+		expect(sut.template?.trim()).toBe('<div/>')
 	})
 
 	it('bake template into a new Vue (named exports)', () => {
@@ -35,7 +36,8 @@ export const compo = {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ param: 'Foo' })
+		expect(sut.template?.trim()).toBe('<div/>')
 	})
 
 	it('bake template into a new Vue (es5 exports)', () => {
@@ -49,6 +51,7 @@ module.exports = {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ param: 'Foo' })
+		expect(sut.template?.trim()).toBe('<div/>')
 	})
 })

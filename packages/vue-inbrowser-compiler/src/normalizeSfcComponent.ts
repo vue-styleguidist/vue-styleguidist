@@ -2,6 +2,7 @@ import walkes from 'walkes'
 import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
+import JSXTransform from './jsxTransform'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
@@ -26,25 +27,22 @@ function getSingleFileComponentParts(code: string) {
 	return parts
 }
 
-function injectTemplateAndParseExport(
-	parts: VsgSFCDescriptor
+function parseExport(
+	parts: VsgSFCDescriptor,
+	transform: (code?: string) => string | undefined = c => c
 ): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
 } {
-	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
-
-	if (!parts.script) {
-		return { component: `{template: \`${templateString}\` }` }
+	const script = transform(parts.script)
+	if (!script) {
+		return { component: `{}` }
 	}
 
-	const comp = parseScriptCode(parts.script)
-	if (templateString) {
-		comp.component = `{template: \`${templateString}\`, ${comp.component}}`
-	} else {
-		comp.component = `{${comp.component}}`
-	}
+	const comp = parseScriptCode(script)
+
+	comp.component = `{${comp.component}}`
 	return comp
 }
 
@@ -59,7 +57,8 @@ export function parseScriptCode(
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
-	walkes(getAst(code), {
+	const ast = getAst(code)
+	walkes(ast, {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
@@ -95,7 +94,7 @@ export function parseScriptCode(
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	const component = code.slice(startIndex + 1, endIndex - 1)
+	const component = JSXTransform(code.slice(startIndex + 1, endIndex - 1), ast, startIndex).code
 	return {
 		preprocessing,
 		component,
@@ -121,13 +120,17 @@ export function getRenderFunctionStart(objectExpression: any): number {
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
+export default function normalizeSfcComponent(
+	code: string,
+	transform: (code?: string) => string | undefined = c => c
+): { template?: string; script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const extractedComponent = injectTemplateAndParseExport(parts)
+	const extractedComponent = parseExport(parts, transform)
 	return {
+		template: parts.template,
 		script: [
 			extractedComponent.preprocessing,
-			`return ${extractedComponent.component}`,
+			`;return ${extractedComponent.component}`,
 			extractedComponent.postprocessing
 		].join(';'),
 		style: buildStyles(parts.styles)

@@ -1,7 +1,5 @@
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
-import JSXTransform from './jsxTransform'
-import getAst from './getAst'
 import transformScript from './transformScript'
 
 interface EvaluableComponent {
@@ -18,59 +16,24 @@ interface EvaluableComponent {
  * @param config buble config to be used when transforming
  *
  */
-export function compile(
+export default function compile(
 	code: string,
-	transform?: (input: string, ast: acorn.Node, offset: number) => { code: string; offset: number },
-	jsx?: boolean
+	jsx?: boolean,
+	transform: (code: string) => string = c => c
 ): EvaluableComponent {
-	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, jsx)
-	const transformScriptComplete = (codeJSX: string, ast: acorn.Node, offset: number) => {
-		const codeTransformed = transform
-			? transform(codeJSX, ast, offset)
-			: { code: codeJSX, offset: 1 }
-		return transformScript(
-			codeTransformed.code,
-			ast,
-			codeTransformed.offset,
-			nonCompiledComponent.vsgMode || false
-		)
-	}
-	const unCompiledScript = `()=>{${nonCompiledComponent.script}}`
-	return {
-		...nonCompiledComponent,
-		script: transformScriptComplete(nonCompiledComponent.script, getAst(unCompiledScript), -4).code
-	}
-}
-
-export function compileJSX(
-	code: string,
-	transform?: (input: string, ast: acorn.Node, offset: number) => { code: string; offset: number }
-) {
-	const transformJSX = (codeJSX: string, ast: acorn.Node, offset: number) => {
-		const codeTransformed = transform
-			? transform(codeJSX, ast, offset)
-			: { code: codeJSX, offset: 1 }
-		return JSXTransform(codeTransformed.code, ast, codeTransformed.offset)
-	}
-	return compile(code, transformJSX, true)
-}
-
-function prepareVueCodeForEvalFunction(code: string, jsx?: boolean): EvaluableComponent {
-	let style
-
 	// if the component is written as a Vue sfc,
 	// transform it in to a "return"
 	// even if jsx is used in an sfc we still use this use case
 	if (isCodeVueSfc(code)) {
-		return normalizeSfcComponent(code)
+		return normalizeSfcComponent(code, transform)
 	}
 
-	// if it's not a new Vue, it must be a simple template or a vsg format
+	// if it's not an SFC, it must be a simple template or a vsg format
 	// lets separate the template from the script
-	// this for jsx examples without the SFC shell
+	// if jsx examples without the SFC shell
 	// export default {render: (h) => <Button>}
 	if (jsx) {
-		const { preprocessing, component, postprocessing } = parseScriptCode(code)
+		const { preprocessing, component, postprocessing } = parseScriptCode(transform(code) || '')
 		return {
 			script: `${preprocessing};return {${component}};${postprocessing}`
 		}
@@ -85,8 +48,7 @@ function prepareVueCodeForEvalFunction(code: string, jsx?: boolean): EvaluableCo
 	code = limitScript > -1 ? code.slice(0, limitScript) : code
 
 	return {
-		script: code,
-		style,
+		script: transformScript(code, transform),
 		template,
 		vsgMode: true
 	}
