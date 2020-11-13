@@ -90,6 +90,7 @@
 		"eslint-plugin-react": "^7.20.6",
 		"eslint-plugin-vue": "^6.2.2",
 		"fibers": "^4.0.2",
+		"file-loader": "^6.2.0",
 		"get-folder-size": "^2.0.1",
 		"globby": "^9.2.0",
 		"gzip-size": "^5.1.0",

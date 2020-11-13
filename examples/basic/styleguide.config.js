@@ -92,5 +92,6 @@ module.exports = {
 	},
 	styleguideDir: 'dist',
 	displayOrigins: true,
-	codeSplit: false
+	codeSplit: false,
+	simpleEditor: false
 }

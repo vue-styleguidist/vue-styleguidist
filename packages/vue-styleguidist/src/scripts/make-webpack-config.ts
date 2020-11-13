@@ -3,6 +3,7 @@ import webpack, { Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 import MiniHtmlWebpackPlugin from 'mini-html-webpack-plugin'
 import MiniHtmlWebpackTemplate from '@vxna/mini-html-webpack-template'
 import merge from 'webpack-merge'
@@ -43,17 +44,17 @@ export default function (
 		},
 		resolve: {
 			extensions: ['.vue', '.js', '.jsx', '.json'],
-			alias: {
-				'rsg-codemirror-theme.css': `codemirror/theme/${
-					config.editorConfig.theme.split(' ')[0]
-				}.css`
-			}
+			alias: {}
 		},
 		module: {
 			rules: [
 				{
 					resourceQuery: /blockType=docs/,
 					loader: require.resolve('../loaders/docs-loader.js')
+				},
+				{
+					test: /node_modules\/monaco-editor\/.+\.ttf$/,
+					loader: require.resolve('file-loader')
 				}
 			]
 		},
@@ -230,6 +231,12 @@ export default function (
 	}
 
 	buildEditorComponentChain(customComponents)
+
+	webpackConfig.plugins?.push(
+		new MonacoWebpackPlugin({
+			languages: ['javascript', 'html']
+		})
+	)
 
 	Object.keys(customComponents).forEach(function (key) {
 		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(sourceSrc, customComponents[key])
