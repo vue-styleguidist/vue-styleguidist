@@ -2,7 +2,7 @@ import getAst from '../getAst'
 import JSXTransform from '../jsxTransform'
 
 const JSXTransformCode = (a: string) => {
-	return JSXTransform(a, getAst(a), 1).code
+	return JSXTransform(a, getAst(a), 'h', 'Fragment', 1).code
 }
 
 test('basic transform', () => {
@@ -37,7 +37,7 @@ test('transform spread attributes', () => {
 
 test('transform fragment with Vue.fragment', () => {
 	expect(JSXTransformCode(`() => { return <><Comp/><Comp/></> }`)).toMatchInlineSnapshot(
-		`"() => { return h(_Fragment,[h(Comp),h(Comp)]) }"`
+		`"() => { return h(Fragment,[h(Comp),h(Comp)]) }"`
 	)
 })
 
@@ -59,7 +59,7 @@ test('transform mukltiple JSX sources', () => {
 			function render1(){
 				return h(Sans,[\\"froid\\"])
 			}
-			return h(_Fragment,[h(Comp),h(Comp)])}"
+			return h(Fragment,[h(Comp),h(Comp)])}"
 	`)
 })
 

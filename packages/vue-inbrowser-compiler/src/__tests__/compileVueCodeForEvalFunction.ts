@@ -71,7 +71,7 @@ export default {
 			true
 		)
 		const dummySet = sut.script
-		expect(dummySet).toContain('h(HelloWorld')
+		expect(dummySet).toContain('__h__(HelloWorld')
 	})
 
 	it('shoud fail if the sfc script has a parsing issue', () => {

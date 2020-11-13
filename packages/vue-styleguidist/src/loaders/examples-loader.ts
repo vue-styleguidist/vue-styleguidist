@@ -23,7 +23,6 @@ import getParser from './utils/getParser'
 
 const REQUIRE_IN_RUNTIME_PATH = absolutize('requireInRuntime')
 const EVAL_IN_CONTEXT_PATH = absolutize('evalInContext')
-const JSX_COMPILER_UTILS_PATH = require.resolve('vue-inbrowser-compiler-utils')
 
 function isVueFile(filepath: string) {
 	return /.vue$/.test(filepath)
@@ -191,21 +190,15 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 if (module.hot) {
 	module.hot.accept([])
 }
+var Vue = require('vue');
+var __h__ = Vue.h;
+var __Fragment__ = Vue.Fragment;
 var requireMap = ${generate(toAst(allModulesCode))};
 var requireInRuntimeBase = require(${JSON.stringify(REQUIRE_IN_RUNTIME_PATH)});
 var requireInRuntime = requireInRuntimeBase.bind(null, requireMap);
-var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
-		config.jsxInExamples
-			? `
-
-var compilerUtils = require(${JSON.stringify(JSX_COMPILER_UTILS_PATH)});
-var evalInContext = evalInContextBase.bind(null, 
-	${JSON.stringify(generate(requireContextCode))}, 
-	compilerUtils.adaptCreateElement, compilerUtils.concatenate);`
-			: `
-var evalInContext = evalInContextBase.bind(null, 
-	${JSON.stringify(generate(requireContextCode))}, 
-	null, null)`
-	}
+var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});
+var evalInContext = evalInContextBase.bind(null, ${JSON.stringify(
+		generate(requireContextCode)
+	)}, __h__, __Fragment__);
 module.exports = ${generate(toAst(examplesWithEval))}`
 }

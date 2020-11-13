@@ -94,7 +94,13 @@ export function parseScriptCode(
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	const component = JSXTransform(code.slice(startIndex + 1, endIndex - 1), ast, startIndex).code
+	const component = JSXTransform(
+		code.slice(startIndex + 1, endIndex - 1),
+		ast,
+		'__h__',
+		'__Fragment__',
+		startIndex
+	).code
 	return {
 		preprocessing,
 		component,

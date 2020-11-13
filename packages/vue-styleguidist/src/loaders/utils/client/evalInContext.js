@@ -17,11 +17,11 @@
  * @param {string} code
  * @return {Function}
  */
-module.exports = function evalInContext(header, __pragma__, __concatenate__, require, code) {
-	var func = new Function('require', '__pragma__', '__concatenate__', header + code) // eslint-disable-line no-new-func
+module.exports = function evalInContext(header, __h__, __Fragment__, require, code) {
+	var func = new Function('require', '__h__', '__Fragment__', header + code) // eslint-disable-line no-new-func
 
 	var requireScoped = require
 
 	// Bind the `require` function, other context arguments will be passed from the frontend
-	return func.bind(null, requireScoped, __pragma__, __concatenate__)
+	return func.bind(null, requireScoped, __h__, __Fragment__)
 }
