@@ -174,10 +174,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 				if (process.env.NODE_ENV === 'production') {
 					// if we are not in prod, we want to avoid running examples through
 					// buble all at the same time. We then tell it to calculate on the fly
-					const compiledExample = compile(example.content, {
-						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
-					})
+					const compiledExample = compile(example.content, config.jsxInExamples)
 					compiled = {
 						...compiledExample
 					}

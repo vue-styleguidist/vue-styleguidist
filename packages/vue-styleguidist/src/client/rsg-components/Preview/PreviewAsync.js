@@ -92,12 +92,7 @@ class PreviewAsync extends Component {
 
 		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(({ compile }) => {
 			try {
-				const example = compile(newCode, {
-					...this.context.config.compilerConfig,
-					...(this.context.config.jsxInExamples
-						? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
-						: {})
-				})
+				const example = compile(newCode, this.context.config.jsxInExamples)
 				this.setCompiledPreview(example)
 			} catch (err) {
 				this.handleError(err)
