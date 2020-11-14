@@ -31,7 +31,6 @@
 		"docs": "vuepress dev docs",
 		"docs:build": "node ./docs/.vuepress/preprocess.js && vuepress build docs",
 		"maketypes": "babel packages/vue-styleguidist/src/scripts/schemas/config.ts --out-file packages/vue-styleguidist/lib/scripts/schemas/config.js && node packages/vue-styleguidist/maketypes.js",
-		"preinstall": "npx only-allow pnpm && ./createbins.sh",
 		"postinstall": "pnpm compile"
 	},
 	"license": "MIT",
