@@ -65,7 +65,7 @@ function getMixinsVariableNames(compDef: NodePath): string[] {
 		compDef.node.superClass &&
 		bt.isCallExpression(compDef.node.superClass) &&
 		bt.isIdentifier(compDef.node.superClass.callee) &&
-		compDef.node.superClass.callee.name === 'mixins'
+		compDef.node.superClass.callee.name.toLowerCase() === 'mixins'
 	) {
 		return compDef.node.superClass.arguments.reduce((acc: string[], a) => {
 			if (bt.isIdentifier(a)) {
