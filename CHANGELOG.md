@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.6...v4.33.7) (2020-11-15)
+
+
+### Bug Fixes
+
+* **docgen:** allow Mixins from vue-p-decorator ([314686a](https://github.com/vue-styleguidist/vue-styleguidist/commit/314686a1f91dec4ef246b809d217d8ee0dc5466a))
+
+
+
+
+
 ## [4.33.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.5...v4.33.6) (2020-11-05)
 
 **Note:** Version bump only for package vue-styleguidist

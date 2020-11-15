@@ -1,6 +1,6 @@
 {
 	"name": "vue-docgen-cli",
-	"version": "4.33.6",
+	"version": "4.33.7",
 	"scripts": {
 		"compile": "tsc -p ./tsconfig.build.json",
 		"compile:watch": "yarn compile --watch"
@@ -16,7 +16,7 @@
 		"minimist": "^1.2.0",
 		"mkdirp": "^0.5.1",
 		"prettier": "^1.18.2",
-		"vue-docgen-api": "^4.33.6"
+		"vue-docgen-api": "^4.33.7"
 	},
 	"devDependencies": {
 		"@types/lodash.memoize": "^4.1.6",
