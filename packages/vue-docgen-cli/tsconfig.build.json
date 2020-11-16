@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"outDir": "lib",
 		"declaration": true,
-		"sourceMap": false
+		"sourceMap": true
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/__tests__/**/*.ts"]

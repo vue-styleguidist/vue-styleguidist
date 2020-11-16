@@ -41,3 +41,4 @@ var _a = minimist_1.default(process.argv.slice(2), {
 }), pathArray = _a._, configFile = _a.configFile, watch = _a.watch, cwd = _a.cwd;
 var conf = extractConfig_1.default(cwd || process.cwd(), watch, configFile, pathArray);
 run(conf);
+//# sourceMappingURL=bin.js.map
