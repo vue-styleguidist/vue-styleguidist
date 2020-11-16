@@ -67,8 +67,8 @@ jobs:
         - pnpm predocs
         - pnpm docs:build
 
-        # Build all examples
-        - cd examples; for D in *; do cd ..; pnpm build "${D}" -- --ci; cd examples; done || exit 1
+        # Build all examples (except for docgen-nuxt which needs to be sent to surge)
+        - cd examples; for D in *; do if [ $D != "docgen-nuxt" ]; then cd ..; pnpm build "${D}" -- --ci; cd examples; fi; done || exit 1
 
         # Move them to the docs (except for docgen-nuxt which needs to be sent to surge)
         - for D in *; do if [ $D != "docgen-nuxt" ]; then mv "${D}"/dist ../docs/dist/"${D}"; fi; done || exit 1
