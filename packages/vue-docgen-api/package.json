@@ -7,7 +7,7 @@
 	"types": "dist/main.d.ts",
 	"scripts": {
 		"compile": "tsc -p ./tsconfig.build.json",
-		"compile:watch": "yarn compile --watch"
+		"compile:watch": "pnpm run compile --watch"
 	},
 	"files": [
 		"dist"
