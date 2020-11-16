@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
+
+
+### Bug Fixes
+
+* **cli:** simplify bin for docgen ([73a5c58](https://github.com/vue-styleguidist/vue-styleguidist/commit/73a5c58229dd7ce9eb75895ad106132c8c2f186f))
+
+
+
+
+
 ## [4.33.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.7...v4.33.8) (2020-11-16)
 
 **Note:** Version bump only for package vue-styleguidist
