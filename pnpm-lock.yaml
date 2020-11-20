@@ -1004,7 +1004,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.4.6
       '@vue/cli-test-utils': ^4.4.6
-      vue-styleguidist: ^4.33.9
+      vue-styleguidist: ^4.33.10
       webpack-merge: ^4.2.1
   packages/vue-docgen-api:
     dependencies:
