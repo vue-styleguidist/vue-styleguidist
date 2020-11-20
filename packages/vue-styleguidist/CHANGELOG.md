@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.33.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.9...v4.33.10) (2020-11-20)
+
+
+### Bug Fixes
+
+* repair HMR in styleguidist ([1c3e14d](https://github.com/vue-styleguidist/vue-styleguidist/commit/1c3e14d5a0966a42ba2af619558aa54836743b6c))
+
+
+
+
+
 ## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
 
 **Note:** Version bump only for package vue-styleguidist
