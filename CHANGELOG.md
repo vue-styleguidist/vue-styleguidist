@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.34.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.10...v4.34.0) (2020-11-25)
+
+
+### Bug Fixes
+
+* **docgen:** allow TypeScript to export a constant ([353601e](https://github.com/vue-styleguidist/vue-styleguidist/commit/353601ea21da33b237c52bf0ba376d6c3f32d9aa)), closes [#997](https://github.com/vue-styleguidist/vue-styleguidist/issues/997)
+
+
+### Features
+
+* **cli:** render props and bindings properly ([5e4c027](https://github.com/vue-styleguidist/vue-styleguidist/commit/5e4c0272e1f5b12a7223ad52055f68871525e27f)), closes [#1013](https://github.com/vue-styleguidist/vue-styleguidist/issues/1013)
+
+
+
+
+
 ## [4.33.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.9...v4.33.10) (2020-11-20)
 
 

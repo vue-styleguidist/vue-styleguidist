@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.34.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.10...v4.34.0) (2020-11-25)
+
+
+### Bug Fixes
+
+* **docgen:** allow TypeScript to export a constant ([353601e](https://github.com/vue-styleguidist/vue-styleguidist/commit/353601ea21da33b237c52bf0ba376d6c3f32d9aa)), closes [#997](https://github.com/vue-styleguidist/vue-styleguidist/issues/997)
+
+
+
+
+
 ## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
 
 **Note:** Version bump only for package vue-docgen-api
