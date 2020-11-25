@@ -27,7 +27,11 @@ export default function propHandler(documentation: Documentation, path: NodePath
 	let componentCommentedPath = path.parentPath
 	// in case of Vue.extend() structure
 	if (bt.isCallExpression(componentCommentedPath.node)) {
-		componentCommentedPath = componentCommentedPath.parentPath.parentPath
+		// look for leading comments in the parent structures
+		let i = 5
+		while (i-- && !componentCommentedPath.get('leadingComments').value) {
+			componentCommentedPath = componentCommentedPath.parentPath
+		}
 	} else if (bt.isVariableDeclarator(componentCommentedPath.node)) {
 		componentCommentedPath = componentCommentedPath.parentPath.parentPath
 		if (componentCommentedPath.parentPath.node.type !== 'Program') {
