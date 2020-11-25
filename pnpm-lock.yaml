@@ -992,7 +992,7 @@ importers:
       '@vue/cli-test-utils': ^4.4.6
       null-loader: ^0.1.1
       typescript: ^3.6.0
-      vue-docgen-cli: ^4.33.9
+      vue-docgen-cli: ^4.34.0
       webpack-merge: ^4.2.1
   packages/vue-cli-plugin-styleguidist:
     dependencies:
@@ -1004,7 +1004,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.4.6
       '@vue/cli-test-utils': ^4.4.6
-      vue-styleguidist: ^4.33.10
+      vue-styleguidist: ^4.34.0
       webpack-merge: ^4.2.1
   packages/vue-docgen-api:
     dependencies:
@@ -1073,7 +1073,7 @@ importers:
       minimist: ^1.2.0
       mkdirp: ^0.5.1
       prettier: ^1.18.2
-      vue-docgen-api: ^4.33.9
+      vue-docgen-api: ^4.34.0
   packages/vue-inbrowser-compiler:
     dependencies:
       acorn: 6.4.1
@@ -1134,7 +1134,7 @@ importers:
     specifiers:
       escodegen: ^1.14.1
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.33.9
+      vue-docgen-api: ^4.34.0
   packages/vue-styleguidist:
     dependencies:
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -1289,7 +1289,7 @@ importers:
       style-loader: ^1.0.0
       terser-webpack-plugin: ^2.2.2
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.33.9
+      vue-docgen-api: ^4.34.0
       vue-inbrowser-compiler: ^4.33.6
       vue-inbrowser-compiler-utils: ^4.33.6
       webpack: ^4.44.1
