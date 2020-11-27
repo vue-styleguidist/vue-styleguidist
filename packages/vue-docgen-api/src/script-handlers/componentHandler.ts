@@ -29,7 +29,11 @@ export default function propHandler(documentation: Documentation, path: NodePath
 	if (bt.isCallExpression(componentCommentedPath.node)) {
 		// look for leading comments in the parent structures
 		let i = 5
-		while (i-- && !componentCommentedPath.get('leadingComments').value) {
+		while (
+			i-- &&
+			!componentCommentedPath.get('leadingComments').value &&
+			componentCommentedPath.parentPath.node.type !== 'Program'
+		) {
 			componentCommentedPath = componentCommentedPath.parentPath
 		}
 	} else if (bt.isVariableDeclarator(componentCommentedPath.node)) {

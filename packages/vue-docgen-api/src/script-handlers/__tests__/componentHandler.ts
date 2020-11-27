@@ -165,4 +165,31 @@ describe('componentHandler', () => {
 		}
 		expect(documentation.set).toHaveBeenCalledWith('description', 'Best Button Ever')
 	})
+
+	it('should extract all info when Vue.extends is assigned to a const and exported later', () => {
+		const src = `
+	/**
+	 * @displayName Best Button Ever
+	 */
+    const button = Vue.extends({
+	})
+
+	export default button
+    `
+		const def = parse(src).get('default')
+		if (def) {
+			componentHandler(documentation, def)
+		}
+		expect(documentation.set).toHaveBeenCalledWith('displayName', 'Best Button Ever')
+	})
+
+	it('should not fail when no comments are on a Vue.extends', () => {
+		const src = `export default Vue.extends({})`
+		const def = parse(src).get('default')
+		expect(() => {
+			if (def) {
+				componentHandler(documentation, def)
+			}
+		}).not.toThrow()
+	})
 })
