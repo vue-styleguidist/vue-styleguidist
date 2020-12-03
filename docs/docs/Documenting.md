@@ -810,4 +810,4 @@ Text typed here will be entirely ignored. You can use it to describe the example
 
 > **Note** No need to specify the language as it will be inferred from the name of the file
 
-> **Note** All flags described [here](#usage-examples-and-readme-files) cn still be used
+> **Note** All flags described [here](#usage-examples-and-readme-files) can still be used
