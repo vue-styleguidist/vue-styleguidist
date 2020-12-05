@@ -60,7 +60,7 @@ export default async function parseSFC(
 		? parts.script.content
 		: undefined
 	opt.lang =
-		(parts.script && parts.script.attrs && parts.script.attrs.lang === 'ts') ||
+		(parts.script && parts.script.attrs && /^tsx?$/.test(parts.script.attrs.lang as string)) ||
 		/\.tsx?$/i.test(extSrc)
 			? 'ts'
 			: 'js'
