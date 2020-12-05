@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
+
+
+### Bug Fixes
+
+* **docgen:** SFC with lang='tsx' support ([bd21931](https://github.com/vue-styleguidist/vue-styleguidist/commit/bd2193199988b786aae79a2e35aa552c1e5f8f54))
+
+
+
+
+
 ## [4.34.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.0...v4.34.1) (2020-11-27)
 
 
