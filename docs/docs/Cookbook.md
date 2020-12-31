@@ -647,6 +647,5 @@ export default {
 ````
 
 </docs>
-```
 
 > :warning: The search menu won't be able to find `AcAlert` anymore, as it searches through the page names, thus `Alert`.
