@@ -139,7 +139,7 @@ const styles = ({ color, fontFamily, fontSize }: Rsg.Theme) => ({
 })
 ```
 
-To make the heading color brown, we update the style `heading2` used. To do so we will add the following to our config file.
+To make the heading color green, we update the style `heading2` used. To do so we will add the following to our config file.
 
 ```js
 // styleguide.config.js
