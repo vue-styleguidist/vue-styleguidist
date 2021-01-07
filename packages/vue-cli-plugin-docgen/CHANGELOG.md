@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.34.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.2...v4.34.3) (2021-01-07)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
 ## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
 
 **Note:** Version bump only for package vue-cli-plugin-docgen

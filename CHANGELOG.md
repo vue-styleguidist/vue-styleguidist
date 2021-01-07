@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.34.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.2...v4.34.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* **cli:** make achors calsulations work on win ([170205d](https://github.com/vue-styleguidist/vue-styleguidist/commit/170205d34dde1e95f111b2fab63e68f635a43b43))
+
+
+
+
+
 ## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
 
 
