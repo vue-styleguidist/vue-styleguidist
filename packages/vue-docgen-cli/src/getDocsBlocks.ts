@@ -1,4 +1,4 @@
-import { dirname, join, relative } from 'path'
+import { dirname, join, relative, sep } from 'path'
 import { readFile as rf } from 'fs'
 import { promisify } from 'util'
 import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
@@ -39,7 +39,7 @@ export default async function getDocsBlocks(
 			getRepoEditUrl
 				? `
 <a href="${getRepoEditUrl(
-						relative(rootPath, docFilePath)
+						relativeUrl(rootPath, docFilePath)
 				  )}" class="docgen-edit-link">${editLinkLabel}</a>
 `
 				: ''
@@ -58,7 +58,7 @@ ${await readFile(docFilePath, 'utf8')}`)
 					docsBlocks.push(`${
 						getRepoEditUrl
 							? `
-<a href="${getRepoEditUrl(relative(rootPath, ep))}" class="docgen-edit-link">${editLinkLabel}</a>
+<a href="${getRepoEditUrl(relativeUrl(rootPath, ep))}" class="docgen-edit-link">${editLinkLabel}</a>
 `
 							: ''
 					}
@@ -69,6 +69,10 @@ ${await readFile(ep, 'utf8')}`)
 	}
 
 	return docsBlocks
+}
+
+function relativeUrl(rootPath: string, docFilePath: string): string {
+	return relative(rootPath, docFilePath).replace(sep, '/')
 }
 
 export function isParamTag(tag: ParamTag | Tag): tag is ParamTag {
