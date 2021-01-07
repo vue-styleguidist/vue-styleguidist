@@ -992,7 +992,7 @@ importers:
       '@vue/cli-test-utils': ^4.4.6
       null-loader: ^0.1.1
       typescript: ^3.6.0
-      vue-docgen-cli: ^4.34.2
+      vue-docgen-cli: ^4.34.3
       webpack-merge: ^4.2.1
   packages/vue-cli-plugin-styleguidist:
     dependencies:
