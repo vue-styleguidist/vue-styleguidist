@@ -71,8 +71,10 @@ ${await readFile(ep, 'utf8')}`)
 	return docsBlocks
 }
 
+const separatorRE = new RegExp(`\\${sep}`, 'g')
+
 function relativeUrl(rootPath: string, docFilePath: string): string {
-	return relative(rootPath, docFilePath).replace(sep, '/')
+	return relative(rootPath, docFilePath).replace(separatorRE, '/')
 }
 
 export function isParamTag(tag: ParamTag | Tag): tag is ParamTag {
