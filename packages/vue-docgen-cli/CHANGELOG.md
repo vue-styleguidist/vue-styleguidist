@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.34.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.3...v4.34.4) (2021-01-09)
+
+
+### Bug Fixes
+
+* **cli:** replace all instances of sep on windows ([7a76b92](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a76b920219ac1fb650738459c177c19cf04dfa6))
+
+
+
+
+
 ## [4.34.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.2...v4.34.3) (2021-01-07)
 
 
