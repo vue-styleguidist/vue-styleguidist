@@ -24,7 +24,16 @@ export default async function parseSFC(
 
 	// get slots and props from template
 	if (parts.template) {
-		const extTemplSrc = parts?.template?.attrs?.src
+		let extTemplSrc = parts?.template?.attrs?.src
+
+		// resolve aliases (does not support context and module resolution as in webpack,
+		// which would require the enhanced-resolve package)
+		if (opt.alias && Object.keys(opt.alias).length && typeof extTemplSrc === 'string') {
+			extTemplSrc = Object.entries(opt.alias).reduce(
+				(resolvedPath, [alias, aliasMapping]) => resolvedPath.replace(alias, aliasMapping),
+				extTemplSrc
+			)
+		}
 
 		const extTemplSource =
 			extTemplSrc && typeof extTemplSrc === 'string' && extTemplSrc.length
