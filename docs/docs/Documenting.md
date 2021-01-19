@@ -800,8 +800,6 @@ const mockData = require('./mocks');
 
 ## Importing examples
 
-> **NOTE** This option does not work out of the box with vue-docgen-cli. Since the rendering engine is only copying the contents of the markdown without parsing it, the CLI can't know what content to replace.
-
 To make autocomplete and syntax highlighting practical, one can as well import examples from external files. In the following example `./myExample.vue` will be used as an example.
 
 ````markdown
@@ -809,6 +807,8 @@ To make autocomplete and syntax highlighting practical, one can as well import e
 Text typed here will be entirely ignored. You can use it to describe the example imported for maintenance purposes
 ```
 ````
+
+> **Note** This option DOES NOT replace automatically examples code with `vue-docgen-cli`. Since the rendering engine is only copying the contents of the markdown without parsing it, the CLI can't know what content to replace.
 
 > **Note** No need to specify the language as it will be inferred from the name of the file
 
