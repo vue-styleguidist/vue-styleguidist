@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { VueLive } from 'vue-live'
-import 'vue-live/dist/vue-live.esm.css'
+import 'vue-live/lib/vue-live.esm.css'
 import VueLiveLayout from '../docs/VueLiveLayout.vue'
 
 Vue.component('VueLive', {
