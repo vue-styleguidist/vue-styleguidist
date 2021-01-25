@@ -78,14 +78,14 @@ importers:
       tslib: 2.0.0
       typescript: 3.9.7
       vue: 2.6.12
-      vue-cli-plugin-styleguidist: 'link:packages/vue-cli-plugin-styleguidist'
+      vue-cli-plugin-styleguidist: link:packages/vue-cli-plugin-styleguidist
       vue-client-only: 2.0.0
       vue-i18n: 8.22.0
       vue-meta: 2.4.0
       vue-no-ssr: 1.1.1
       vue-router: 3.4.6
       vue-scrollactive: 0.9.3
-      vue-styleguidist: 'link:packages/vue-styleguidist'
+      vue-styleguidist: link:packages/vue-styleguidist
       vue-template-compiler: 2.6.12
       vuepress: 1.6.0
       vuex: 3.5.1_vue@2.6.12
@@ -200,7 +200,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.11
       vue-loader: 15.9.3_730d5f8f6bf5f57655729c7ada2ad730
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       vue-template-compiler: 2.6.12
       webpack: 4.44.1
       webpack-bundle-analyzer: 3.3.2
@@ -246,7 +246,7 @@ importers:
       url-loader: 1.1.2_webpack@4.44.1
       vue-docgen-cli: 3.26.0
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
       webpack-bundle-analyzer: 3.3.2
     specifiers:
@@ -288,7 +288,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -325,8 +325,8 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       url-loader: 1.1.2_webpack@4.44.1
-      vue-docgen-api: 'link:../../packages/vue-docgen-api'
-      vue-docgen-cli: 'link:../../packages/vue-docgen-cli'
+      vue-docgen-api: link:../../packages/vue-docgen-api
+      vue-docgen-cli: link:../../packages/vue-docgen-cli
       vue-loader: 15.9.3_730d5f8f6bf5f57655729c7ada2ad730
       vue-template-compiler: 2.6.12
       vuepress: 1.6.0_webpack-cli@4.2.0
@@ -370,12 +370,12 @@ importers:
       minimatch: 3.0.4
       null-loader: 4.0.1
       nuxt: 2.14.6
-      remark-plugin-vue-live: 1.0.5_vue-live@1.14.2
-      vue-docgen-api: 'link:../../packages/vue-docgen-api'
-      vue-docgen-cli: 'link:../../packages/vue-docgen-cli'
-      vue-inbrowser-compiler-utils: 'link:../../packages/vue-inbrowser-compiler-utils'
-      vue-live: 1.14.2
-      vue-simple-docgen-loader: 'link:../../packages/vue-simple-docgen-loader'
+      remark-plugin-vue-live: 1.0.5_vue-live@1.16.0
+      vue-docgen-api: link:../../packages/vue-docgen-api
+      vue-docgen-cli: link:../../packages/vue-docgen-cli
+      vue-inbrowser-compiler-utils: link:../../packages/vue-inbrowser-compiler-utils
+      vue-live: 1.16.0
+      vue-simple-docgen-loader: link:../../packages/vue-simple-docgen-loader
     specifiers:
       '@nuxt/content-theme-docs': ^0.3.1
       concurrently: ^5.3.0
@@ -386,7 +386,7 @@ importers:
       vue-docgen-api: ^4.32.4
       vue-docgen-cli: ^4.31.1
       vue-inbrowser-compiler-utils: ^4.32.1
-      vue-live: ^1.14.2
+      vue-live: ^1.16.0
       vue-simple-docgen-loader: ^4.32.4
   examples/functional-flag:
     dependencies:
@@ -411,7 +411,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.11
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
       webpack-bundle-analyzer: 3.3.2
     specifiers:
@@ -455,7 +455,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -490,7 +490,7 @@ importers:
       node-sass: 4.14.1
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
       webpack-bundle-analyzer: 3.3.2
     specifiers:
@@ -527,7 +527,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
       vue-style-loader: 4.1.2
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -562,7 +562,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -594,7 +594,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -619,7 +619,7 @@ importers:
       '@vue/cli-plugin-eslint': 4.4.6_@vue+cli-service@4.4.6
       '@vue/cli-service': 4.4.6_vue-template-compiler@2.6.12
       autoprefixer: 9.8.6
-      vue-cli-plugin-styleguidist: 'link:../../packages/vue-cli-plugin-styleguidist'
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-svg-loader: 0.16.0_vue-template-compiler@2.6.12
       vue-template-compiler: 2.6.12
       webpack-bundle-analyzer: 3.9.0
@@ -639,7 +639,7 @@ importers:
       vue: 2.6.11
     devDependencies:
       '@vue/cli-service': 4.4.6
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
     specifiers:
       '@vue/cli-service': ^4.0.5
       vue: ^2.5.16
@@ -652,7 +652,7 @@ importers:
       '@vue/cli-plugin-babel': 4.4.6_@vue+cli-service@4.4.6
       '@vue/cli-plugin-eslint': 4.4.6_@vue+cli-service@4.4.6
       '@vue/cli-service': 4.4.6_vue-template-compiler@2.6.12
-      vue-cli-plugin-styleguidist: 'link:../../packages/vue-cli-plugin-styleguidist'
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.6.12
       webpack-bundle-analyzer: 3.8.0
     specifiers:
@@ -691,7 +691,7 @@ importers:
       typescript: 3.9.7
       vue-class-component: 7.2.5_vue@2.6.12
       vue-cli-plugin-pug: 1.0.7
-      vue-cli-plugin-styleguidist: 'link:../../packages/vue-cli-plugin-styleguidist'
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.6.12
     specifiers:
       '@vue/babel-preset-app': ^4.5.4
@@ -734,7 +734,7 @@ importers:
       eslint-plugin-react: 7.20.6
       prop-types: 15.7.2
       react: 16.13.1
-      vue-cli-plugin-styleguidist: 'link:../../packages/vue-cli-plugin-styleguidist'
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.6.12
     specifiers:
       '@babel/preset-env': ^7.4.4
@@ -763,7 +763,7 @@ importers:
       babel-polyfill: 6.26.0
       sass: 1.26.10
       sass-loader: 8.0.2_sass@1.26.10
-      vue-cli-plugin-styleguidist: 'link:../../packages/vue-cli-plugin-styleguidist'
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-cli-plugin-vuetify: 0.6.3
       vue-template-compiler: 2.6.12
       vuetify-loader: 1.6.0_eb8d01aff473df128e5735e83bcf2d11
@@ -807,7 +807,7 @@ importers:
       typescript: 3.9.7
       vue: 2.6.11
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
       webpack-bundle-analyzer: 3.3.2
     specifiers:
@@ -857,7 +857,7 @@ importers:
       sass-loader: 8.0.2_53a7fd493caaac4a0603fd142e4f050d
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -895,7 +895,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -927,7 +927,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -959,7 +959,7 @@ importers:
       sass-loader: 8.0.2_node-sass@4.14.1+webpack@4.44.1
       style-loader: 0.19.1
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.44.1
-      vue-styleguidist: 'link:../../packages/vue-styleguidist'
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.44.1
     specifiers:
       '@babel/core': ^7.2.2
@@ -982,7 +982,7 @@ importers:
     dependencies:
       null-loader: 0.1.1
       typescript: 3.9.7
-      vue-docgen-cli: 'link:../vue-docgen-cli'
+      vue-docgen-cli: link:../vue-docgen-cli
       webpack-merge: 4.2.2
     devDependencies:
       '@vue/cli': 4.4.6
@@ -996,7 +996,7 @@ importers:
       webpack-merge: ^4.2.1
   packages/vue-cli-plugin-styleguidist:
     dependencies:
-      vue-styleguidist: 'link:../vue-styleguidist'
+      vue-styleguidist: link:../vue-styleguidist
       webpack-merge: 4.2.2
     devDependencies:
       '@vue/cli': 4.4.6
@@ -1018,9 +1018,9 @@ importers:
       pug: 3.0.0
       recast: 0.19.1
       ts-map: 1.0.3
-      vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
+      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
     devDependencies:
-      '@test-vue-docgen/mixins': 'link:../docgen-tests'
+      '@test-vue-docgen/mixins': link:../docgen-tests
       '@types/pug': 2.0.4
       globby: 10.0.2
       vue: 2.6.11
@@ -1056,7 +1056,7 @@ importers:
       minimist: 1.2.5
       mkdirp: 0.5.5
       prettier: 1.19.1
-      vue-docgen-api: 'link:../vue-docgen-api'
+      vue-docgen-api: link:../vue-docgen-api
     devDependencies:
       '@types/lodash.memoize': 4.1.6
       '@types/minimist': 1.2.0
@@ -1081,7 +1081,7 @@ importers:
       buble: 0.19.8
       camelcase: 5.3.1
       detect-browser: 5.2.0
-      vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
+      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       walkes: 0.2.1
     devDependencies:
       '@rollup/plugin-commonjs': 15.0.0_rollup@2.26.4
@@ -1130,7 +1130,7 @@ importers:
     dependencies:
       escodegen: 1.14.3
       to-ast: 1.0.0
-      vue-docgen-api: 'link:../vue-docgen-api'
+      vue-docgen-api: link:../vue-docgen-api
     specifiers:
       escodegen: ^1.14.1
       to-ast: ^1.0.0
@@ -1185,9 +1185,9 @@ importers:
       style-loader: 1.2.1_webpack@4.44.1
       terser-webpack-plugin: 2.3.7_webpack@4.44.1
       to-ast: 1.0.0
-      vue-docgen-api: 'link:../vue-docgen-api'
-      vue-inbrowser-compiler: 'link:../vue-inbrowser-compiler'
-      vue-inbrowser-compiler-utils: 'link:../vue-inbrowser-compiler-utils'
+      vue-docgen-api: link:../vue-docgen-api
+      vue-inbrowser-compiler: link:../vue-inbrowser-compiler
+      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       webpack-dev-server: 3.11.0_webpack@4.44.1
       webpack-merge: 4.2.2
     devDependencies:
@@ -4219,7 +4219,7 @@ packages:
       '@hapi/bourne': 1.3.2
       '@hapi/hoek': 8.5.1
       '@hapi/topo': 3.1.6
-    deprecated: 'joi is leaving the @hapi organization and moving back to ''joi'' (https://github.com/sideway/joi/issues/2411)'
+    deprecated: joi is leaving the @hapi organization and moving back to 'joi' (https://github.com/sideway/joi/issues/2411)
     dev: true
     resolution:
       integrity: sha512-entf8ZMOK8sc+8YfeOlM8pCfg3b5+WZIKBfUaaJT8UsjAAPjartzxIYm3TIbjvA4u+u++KbcXD38k682nVHDAQ==
@@ -4230,7 +4230,7 @@ packages:
       '@hapi/hoek': 9.0.4
       '@hapi/pinpoint': 2.0.0
       '@hapi/topo': 5.0.0
-    deprecated: 'joi is leaving the @hapi organization and moving back to ''joi'' (https://github.com/sideway/joi/issues/2411)'
+    deprecated: joi is leaving the @hapi organization and moving back to 'joi' (https://github.com/sideway/joi/issues/2411)
     dev: true
     resolution:
       integrity: sha512-p4DKeZAoeZW4g3u7ZeRo+vCDuSDgSvtsB/NpfjXEHTUjSeINAi/RrVOWiVQ1isaoLzMvFEhe8n5065mQq1AdQg==
@@ -6033,7 +6033,7 @@ packages:
   /@types/testing-library__dom/7.5.0:
     dependencies:
       '@testing-library/dom': 6.16.0
-    deprecated: 'This is a stub types definition. testing-library__dom provides its own type definitions, so you do not need this installed.'
+    deprecated: This is a stub types definition. testing-library__dom provides its own type definitions, so you do not need this installed.
     dev: true
     resolution:
       integrity: sha512-mj1aH4cj3XUpMEgVpognma5kHVtbm6U6cHZmEFzCRiXPvKkuHrFr3+yXdGLXvfFRBaQIVshPGHI+hGTOJlhS/g==
@@ -10911,7 +10911,7 @@ packages:
     resolution:
       integrity: sha512-lacdXOimsiD0QyNf9BC/mxivNJ/ybBGJXQFKzRekp1WTHoVUWsUHEn+2T8GJAzzIhyOuXA+gOxCVN3l+5PLPUA==
   /core-js/2.6.11:
-    deprecated: 'core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.'
+    deprecated: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
     requiresBuild: true
     resolution:
       integrity: sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
@@ -17163,7 +17163,7 @@ packages:
     resolution:
       integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
   /kleur/2.0.2:
-    deprecated: 'Please upgrade to kleur@3 or migrate to ''ansi-colors'' if you prefer the old syntax. Visit <https://github.com/lukeed/kleur/releases/tag/v3.0.0\> for migration path(s).'
+    deprecated: Please upgrade to kleur@3 or migrate to 'ansi-colors' if you prefer the old syntax. Visit <https://github.com/lukeed/kleur/releases/tag/v3.0.0\> for migration path(s).
     dev: false
     engines:
       node: '>=6'
@@ -22138,12 +22138,12 @@ packages:
       xtend: 4.0.2
     resolution:
       integrity: sha512-E1K9+QLGgggHxCQtLt++uXltxEprmWzNfg+MxpfHsZlrddKzZ/hZyWHDbK3/Ap8HJQqYJRXP+jHczdL6q6i85Q==
-  /remark-plugin-vue-live/1.0.5_vue-live@1.14.2:
+  /remark-plugin-vue-live/1.0.5_vue-live@1.16.0:
     dependencies:
       acorn: 6.4.2
       unist-util-visit: 2.0.3
       vue-inbrowser-compiler-utils: 4.32.1
-      vue-live: 1.14.2
+      vue-live: 1.16.0
       vue-template-compiler: 2.6.12
       walkes: 0.2.1
     dev: false
@@ -22256,7 +22256,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
+    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
     dev: true
     engines:
       node: '>=0.12.0'
@@ -22286,7 +22286,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
+    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
     engines:
       node: '>= 6'
     resolution:
@@ -22354,7 +22354,7 @@ packages:
     resolution:
       integrity: sha512-zFa12V4OLtT5XUX/Q4VLvTfBf+Ok0SPc1FNGM/z9ctUdiU618qwKpWnd0CHs3+RqROfyEg/DhuHbMWYqcgljEw==
   /resolve-url/0.2.1:
-    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
+    deprecated: https://github.com/lydell/resolve-url#deprecated
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
   /resolve/1.17.0:
@@ -25110,7 +25110,7 @@ packages:
     resolution:
       integrity: sha512-B0yRTzYdUCCn9n+F4+Gh4yIDtMQcaJsmYBDsTSG8g/OejKBodLQ2IHfN3bM7jUsRXndopT7OIXWdYqc1fjmV6g==
   /urix/0.1.0:
-    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
+    deprecated: Please see https://github.com/lydell/urix#deprecated
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
   /url-loader/1.1.2_webpack@4.44.1:
@@ -25541,17 +25541,24 @@ packages:
     dev: false
     resolution:
       integrity: sha512-IL8rBV3lCyHErqD8sBdQhWz3zJ/wLzG6JfoSzZ3K6HShS5QqIQfJN0GESvzIos6EGvmtByEf4TTJnjm12b51VQ==
-  /vue-inbrowser-compiler/4.32.1:
+  /vue-inbrowser-compiler-utils/4.33.6:
+    dependencies:
+      camelcase: 5.3.1
+    dev: false
+    resolution:
+      integrity: sha512-g9ErL/xuTtRAdT6+VmzR4Lqxlw4hpH7ObEBGk8VGQgNqdcs9Pza8AMzlns160IGzQw4sI8gvvbYEPeZ54Z5OfA==
+  /vue-inbrowser-compiler/4.33.6:
     dependencies:
       acorn: 6.4.2
       acorn-jsx: 5.3.1_acorn@6.4.2
       buble: 0.19.8
       camelcase: 5.3.1
-      vue-inbrowser-compiler-utils: 4.32.1
+      detect-browser: 5.2.0
+      vue-inbrowser-compiler-utils: 4.33.6
       walkes: 0.2.1
     dev: false
     resolution:
-      integrity: sha512-eHNJ6fenrTISxS2t540eB6K7O4AcZX7x73ZHHkK78sGAFeRDaxB17gEqtPPY2mgSi124gEy1I0MzFo+cHEJNSA==
+      integrity: sha512-V4jELDbvIwt3eKQXfXc1bvFOgKZLRkuxmhJGihRNa1rpNBziKFJABUypC6FsZo7jz4qQdQCTpaL9OTYqz8LVTw==
   /vue-jscodeshift-adapter/2.1.0:
     dependencies:
       cheerio: 1.0.0-rc.3
@@ -25573,7 +25580,7 @@ packages:
       hash-sum: 2.0.0
       prismjs: 1.22.0
       recast: 0.19.1
-      vue-inbrowser-compiler: 4.32.1
+      vue-inbrowser-compiler: 4.33.6
       vue-prism-editor: 1.2.2
       vue-template-compiler: 2.6.12
     dev: false
@@ -25581,6 +25588,25 @@ packages:
       vue: '>= 2.6.0'
     resolution:
       integrity: sha512-YFQxXC+EjtilE0hkSbAiXNu0YcL2Iw+tHiSBBZ8Y7Edxd9mJk+cmVtrYNLhzsDC3eu73zoiS/JAMP2sRYURzhQ==
+  /vue-live/1.16.0:
+    dependencies:
+      '@babel/runtime': 7.11.2
+      '@vue/compiler-core': 3.0.0
+      '@vue/compiler-dom': 3.0.0
+      acorn: 7.4.1
+      core-js: 3.6.5
+      debounce: 1.2.0
+      hash-sum: 2.0.0
+      prismjs: 1.22.0
+      recast: 0.19.1
+      vue-inbrowser-compiler: 4.33.6
+      vue-prism-editor: 1.2.2
+      vue-template-compiler: 2.6.12
+    dev: false
+    peerDependencies:
+      vue: '>= 2.6.0'
+    resolution:
+      integrity: sha512-Kn3G2AscFyliLbb8ImsiC6Rw1CmOM3IYQ0kfEDTRsAdyCVAAGdjHc8z5ozLiGVKU+UFIGWdScjYt+g2WpVFMTQ==
   /vue-loader/15.9.3_2caee5c6214e69e94882edccc4bf5105:
     dependencies:
       '@vue/component-compiler-utils': 3.2.0

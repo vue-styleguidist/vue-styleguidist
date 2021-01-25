@@ -808,6 +808,8 @@ Text typed here will be entirely ignored. You can use it to describe the example
 ```
 ````
 
+> **Note** This option DOES NOT replace automatically examples code with `vue-docgen-cli`. Since the rendering engine is only copying the contents of the markdown without parsing it, the CLI can't know what content to replace.
+
 > **Note** No need to specify the language as it will be inferred from the name of the file
 
 > **Note** All flags described [here](#usage-examples-and-readme-files) can still be used
