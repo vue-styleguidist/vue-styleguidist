@@ -9,6 +9,7 @@ import Documentation from './Documentation'
 import { ParseOptions } from './parse'
 import parseScript from './parse-script'
 import defaultScriptHandlers, { preHandlers } from './script-handlers'
+import makePathResolver from './utils/makePathResolver'
 
 const read = promisify(readFile)
 
@@ -19,32 +20,30 @@ export default async function parseSFC(
 ): Promise<Documentation[]> {
 	let documentation = initialDoc
 
+	// create a custom path resolver to resolve webpack aliases
+	const pathResolver = makePathResolver(path.dirname(opt.filePath), opt.alias, opt.modules)
+
 	// use padding so that errors are displayed at the correct line
 	const { descriptor: parts } = cacher(() => parseComponent(source, { pad: 'line' }), source)
 
 	// get slots and props from template
 	if (parts.template) {
-		let extTemplSrc = parts?.template?.attrs?.src
+		const extTemplSrc = parts?.template?.attrs?.src
 
-		// resolve aliases (does not support context and module resolution as in webpack,
-		// which would require the enhanced-resolve package)
-		if (opt.alias && Object.keys(opt.alias).length && typeof extTemplSrc === 'string') {
-			extTemplSrc = Object.entries(opt.alias).reduce(
-				(resolvedPath, [alias, aliasMapping]) => resolvedPath.replace(alias, aliasMapping),
-				extTemplSrc
-			)
-		}
+		if (extTemplSrc && typeof extTemplSrc === 'string') {
+			const extTemplSrcAbs = pathResolver(extTemplSrc)
 
-		const extTemplSource =
-			extTemplSrc && typeof extTemplSrc === 'string' && extTemplSrc.length
-				? await read(path.resolve(path.dirname(opt.filePath), extTemplSrc), {
+			const extTemplSource = extTemplSrcAbs
+				? await read(extTemplSrcAbs, {
 						encoding: 'utf-8'
 				  })
-				: // if we don't have a content to the binding, use empty string
-				  ''
+				: // if we don't have a content to bind
+				  // leave the template alone
+				  false
 
-		if (extTemplSource.length) {
-			parts.template.content = extTemplSource
+			if (extTemplSource) {
+				parts.template.content = extTemplSource
+			}
 		}
 		const addTemplateHandlers: TemplateHandler[] = opt.addTemplateHandlers || []
 
@@ -53,24 +52,31 @@ export default async function parseSFC(
 		parseTemplate(parts.template, documentation, [...templateHandlers, ...addTemplateHandlers], opt)
 	}
 
-	const extSrc = (parts && parts.script && parts.script.attrs
-		? parts.script.attrs.src
-		: '') as string
-	const extSource =
-		extSrc && extSrc.length
-			? await read(path.resolve(path.dirname(opt.filePath), extSrc), {
+	let scriptSource = parts.script ? parts.script.content : undefined
+
+	const extSrc = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : false
+
+	if (extSrc && typeof extSrc === 'string') {
+		const extSrcAbs = pathResolver(extSrc)
+
+		const extSource = extSrcAbs
+			? await read(extSrcAbs, {
 					encoding: 'utf-8'
 			  })
 			: ''
+		if (extSource.length) {
+			scriptSource = extSource
+			opt.lang =
+				(parts.script && parts.script.attrs && /^tsx?$/.test(parts.script.attrs.lang as string)) ||
+				/\.tsx?$/i.test(extSrc)
+					? 'ts'
+					: 'js'
+		}
+	}
 
-	const scriptSource = extSource.length
-		? extSource
-		: parts.script
-		? parts.script.content
-		: undefined
 	opt.lang =
 		(parts.script && parts.script.attrs && /^tsx?$/.test(parts.script.attrs.lang as string)) ||
-		/\.tsx?$/i.test(extSrc)
+		(typeof extSrc === 'string' && /\.tsx?$/i.test(extSrc))
 			? 'ts'
 			: 'js'
 
