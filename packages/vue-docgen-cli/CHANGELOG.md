@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
+
+
+### Features
+
+* **cli:** render tags in a props description ([72af302](https://github.com/vue-styleguidist/vue-styleguidist/commit/72af30256b4b069c7d7d5120b6f600f970313d84)), closes [#1045](https://github.com/vue-styleguidist/vue-styleguidist/issues/1045)
+
+
+
+
+
 ## [4.34.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.3...v4.34.4) (2021-01-09)
 
 

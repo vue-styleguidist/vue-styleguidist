@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
+
+
+### Bug Fixes
+
+* **docgen:** use the pathResolver from utils ([3b77a82](https://github.com/vue-styleguidist/vue-styleguidist/commit/3b77a8240fe16451d660b57584d4178b018fc6c7))
+* resolve [#1042](https://github.com/vue-styleguidist/vue-styleguidist/issues/1042) add basic support for aliases in external src ([6d8b5c5](https://github.com/vue-styleguidist/vue-styleguidist/commit/6d8b5c554f0cc98a3d9920292c4ace46a4cf24d8))
+* resolve [#1042](https://github.com/vue-styleguidist/vue-styleguidist/issues/1042) add basic support for aliases in external src ([f4ff297](https://github.com/vue-styleguidist/vue-styleguidist/commit/f4ff2976d5cc25b8c0b7479e3028daecdd3e7cce))
+
+
+### Features
+
+* **cli:** render tags in a props description ([72af302](https://github.com/vue-styleguidist/vue-styleguidist/commit/72af30256b4b069c7d7d5120b6f600f970313d84)), closes [#1045](https://github.com/vue-styleguidist/vue-styleguidist/issues/1045)
+
+
+
+
+
 ## [4.34.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.3...v4.34.4) (2021-01-09)
 
 
