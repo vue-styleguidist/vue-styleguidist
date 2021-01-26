@@ -113,7 +113,9 @@ parseMulti(filePath: string, options: DocGenOptions): Promise<ComponentDoc[]>;
 
 #### `alias`
 
-This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here..
+This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here.
+
+Keep in mind aliases are not resolved adopting the same implementation as webpack, but as simple path replacement. Aliases are resolved as soon as they match in the file path, bailing out of further tests. This means the order in which aliases are defined matters. E.g. an alias `@templates` mapped to `styleguide/templates/` should be defined earlier than the alias `@` (mapped to `src` ) to avoid `@templates/component` being resolved as `srctemplates/component` instead of `styleguide/templates/component`.
 
 #### `modules`
 
