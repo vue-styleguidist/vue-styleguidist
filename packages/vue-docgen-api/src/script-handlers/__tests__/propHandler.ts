@@ -525,7 +525,7 @@ describe('propHandler', () => {
 			type: String,
 			validator(va){
 				return ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
-			} 
+			}
         }
     }
   }
@@ -539,8 +539,25 @@ describe('propHandler', () => {
     props: {
         color: {
 			type: String,
-			validator: (va) => 
+			validator: (va) =>
 				['dark', 'light', 'red', 'blue'].indexOf(va) > -1
+        }
+    }
+  }
+  `
+			expect(parserTest(src).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
+
+		it('should check the validator method for identifiers', () => {
+			const src = `
+	const array = ['dark', 'light', 'red', 'blue']
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator(va){
+				return array.indexOf(va) > -1
+			}
         }
     }
   }
