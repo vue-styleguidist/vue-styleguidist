@@ -13,8 +13,20 @@ function isMinusOne(node: bt.Expression): boolean {
 	)
 }
 
+/**
+ * Resolves a variable value from its identifier (name)
+ * @param identifierName
+ */
+function resolveValueFromIdentifier(identifierName: string): undefined {
+	// ...
+
+	return undefined
+}
+
 function extractStringArray(valuesObjectNode: bt.Expression): string[] | undefined {
-	return bt.isArrayExpression(valuesObjectNode)
+	return bt.isIdentifier(valuesObjectNode)
+		? resolveValueFromIdentifier(valuesObjectNode.name)
+		: bt.isArrayExpression(valuesObjectNode)
 		? valuesObjectNode.elements.map((e: bt.StringLiteral) => e.value).filter(e => e)
 		: undefined
 }
