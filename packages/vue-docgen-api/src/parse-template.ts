@@ -27,8 +27,8 @@ export default function parseTemplate(
 		const source =
 			tpl.attrs && tpl.attrs.lang === 'pug'
 				? pug.render(tpl.content.trim(), {
-						...pugOptions,
 						doctype: 'html',
+						...pugOptions,
 						filename: filePath
 					})
 				: tpl.content
