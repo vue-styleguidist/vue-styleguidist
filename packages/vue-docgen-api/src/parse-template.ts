@@ -26,7 +26,11 @@ export default function parseTemplate(
 	if (tpl && tpl.content) {
 		const source =
 			tpl.attrs && tpl.attrs.lang === 'pug'
-				? pug.render(tpl.content.trim(), { ...pugOptions, filename: filePath })
+				? pug.render(tpl.content.trim(), {
+						doctype: 'html',
+						...pugOptions,
+						filename: filePath
+					})
 				: tpl.content
 
 		const ast: RootNode = cacher(() => parse(source, { comments: true }), source)
