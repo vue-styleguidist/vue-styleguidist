@@ -46,8 +46,6 @@ export default function propHandler(documentation: Documentation, path: NodePath
 			return Promise.resolve()
 		}
 
-		const modelPropertyName = getModelPropName(path)
-
 		const propsValuePath = propsPath[0].get('value')
 
 		if (bt.isObjectExpression(propsValuePath.node)) {
@@ -75,11 +73,8 @@ export default function propHandler(documentation: Documentation, path: NodePath
 				if (!propertyName) {
 					return
 				}
-				const isPropertyModel =
-					jsDocTags.some(t => t.title === 'model') || propertyName === modelPropertyName
-				const propName = isPropertyModel ? 'v-model' : propertyName
 
-				const propDescriptor = documentation.getPropDescriptor(propName)
+				const propDescriptor = documentation.getPropDescriptor(propertyName)
 
 				const propValuePath = prop.get('value')
 
@@ -473,34 +468,4 @@ export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 
 		delete propDescriptor.tags.values
 	}
-}
-
-/**
- * extract the property model.prop from the component object
- * @param path component NodePath
- * @returns name of the model prop, null if none
- */
-function getModelPropName(path: NodePath): string | null {
-	const modelPath = path
-		.get('properties')
-		.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('model')(p))
-
-	if (!modelPath.length) {
-		return null
-	}
-
-	const modelPropertyNamePath =
-		modelPath.length &&
-		modelPath[0]
-			.get('value')
-			.get('properties')
-			.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('prop')(p))
-
-	if (!modelPropertyNamePath.length) {
-		return null
-	}
-
-	const valuePath = modelPropertyNamePath[0].get('value')
-
-	return bt.isStringLiteral(valuePath.node) ? valuePath.node.value : null
 }

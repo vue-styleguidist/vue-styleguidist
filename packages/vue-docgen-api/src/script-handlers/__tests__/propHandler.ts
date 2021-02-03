@@ -395,7 +395,7 @@ describe('propHandler', () => {
 	})
 
 	describe('v-model', () => {
-		it('should set the @model property as v-model instead of test', () => {
+		it('should set the @model property as test instead of v-model', () => {
 			const src = `
         export default {
           props: {
@@ -406,15 +406,15 @@ describe('propHandler', () => {
             test: String
           }
         }
-        `
+			`
 			expect(parserTest(src)).toMatchObject({
 				description: 'test description'
 			})
-			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('test')
-			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test')
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
 		})
 
-		it('should set the @model property as v-model instead of value even with a type', () => {
+		it('should set the @model property as value instead of value even with a type', () => {
 			const src = `
         export default {
           props: {
@@ -423,41 +423,41 @@ describe('propHandler', () => {
              * @model
              */
             value: {
-        required: true,
-        type: undefined
-      }
+              required: true,
+              type: undefined
+            }
           }
         }
-        `
+			`
 			expect(parserTest(src)).toMatchObject({
 				description: 'Binding from v-model'
 			})
-			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
-			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('value')
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
 		})
 
-		it('should set the v-model instead of value with model property', () => {
+		it('should set the value with model property instead of v-model', () => {
 			const src = `
         export default {
-      model:{
-      prop: 'value'
-      },
+          model: {
+            prop: 'value'
+          },
           props: {
             /**
              * Value of the field
              */
             value: {
-        required: true,
-        type: undefined
-      }
+              required: true,
+              type: undefined
+            }
           }
         }
-        `
+			`
 			expect(parserTest(src)).toMatchObject({
 				description: 'Value of the field'
 			})
-			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
-			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('value')
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
 		})
 
 		it('should not set the v-model instead of value if model property has only event', () => {
@@ -525,7 +525,7 @@ describe('propHandler', () => {
 			type: String,
 			validator(va){
 				return ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
-			} 
+			}
         }
     }
   }
@@ -539,7 +539,7 @@ describe('propHandler', () => {
     props: {
         color: {
 			type: String,
-			validator: (va) => 
+			validator: (va) =>
 				['dark', 'light', 'red', 'blue'].indexOf(va) > -1
         }
     }

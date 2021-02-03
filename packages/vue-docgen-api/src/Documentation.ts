@@ -71,12 +71,9 @@ export default class Documentation {
 	}
 
 	public getPropDescriptor(propName: string): PropDescriptor {
-		const vModelDescriptor = this.propsMap.get('v-model')
-		return vModelDescriptor && vModelDescriptor.name === propName
-			? vModelDescriptor
-			: this.getDescriptor(propName, this.propsMap, () => ({
-					name: propName
-			  }))
+		return this.getDescriptor(propName, this.propsMap, () => ({
+			name: propName
+		}))
 	}
 
 	public getMethodDescriptor(methodName: string): MethodDescriptor {
