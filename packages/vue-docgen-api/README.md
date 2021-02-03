@@ -457,7 +457,7 @@ const componentDoc = {
           }
         ]
       },
-      name: 'v-model',
+      name: 'value',
       type: {
         name: 'string'
       }
