@@ -10,20 +10,23 @@ export interface TypedParamTag extends ParamTag {
 }
 
 /**
- * Extract slots information form the render function of an object-style VueJs component
+ * Extract slots information from the render or setup function of an object-style VueJs component
  * @param documentation
  * @param path
  */
 export default function slotHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const renderPath = getProperties(path, 'render')
+		const setupPath = getProperties(path, 'setup')
 
-		if (!renderPath.length) {
+		if (!renderPath.length && !setupPath.length) {
 			return Promise.resolve()
 		}
 
+		const functionPath =  renderPath.length ? renderPath : setupPath;
+
 		let i = 0
-		let docBlock = getDocblock(renderPath[0], { commentIndex: i })
+		let docBlock = getDocblock(functionPath[0], { commentIndex: i })
 		while (docBlock) {
 			// if no doc block return
 			if (!docBlock || !docBlock.length) {
@@ -43,7 +46,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					}
 				}
 			}
-			docBlock = getDocblock(renderPath[0], { commentIndex: ++i })
+			docBlock = getDocblock(functionPath[0], { commentIndex: ++i })
 		}
 	}
 	return Promise.resolve()
