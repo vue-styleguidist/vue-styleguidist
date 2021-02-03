@@ -170,18 +170,18 @@ describe('tests button', () => {
 			expect(getTestDescriptor(docButton.props, 'example').description).toBe('The example props')
 		})
 
-		it('should v-model to be string', () => {
-			expect(getTestDescriptor(docButton.props, 'v-model').type).toEqual({ name: 'string' })
+		it('should example2 to be string', () => {
+			expect(getTestDescriptor(docButton.props, 'example2').type).toEqual({ name: 'string' })
 		})
 
-		it('should value default v-model to be example model', () => {
-			expect(getTestDescriptor(docButton.props, 'v-model').defaultValue).toMatchObject({
+		it('should value default example2 to be example model', () => {
+			expect(getTestDescriptor(docButton.props, 'example2').defaultValue).toMatchObject({
 				value: `'example model'`
 			})
 		})
 
-		it('should value default v-model props description to be Model example2', () => {
-			expect(getTestDescriptor(docButton.props, 'v-model').description).toBe('Model example2')
+		it('should value default example2 props description to be Model example2', () => {
+			expect(getTestDescriptor(docButton.props, 'example2').description).toBe('Model example2')
 		})
 
 		it('should propE to be string', () => {

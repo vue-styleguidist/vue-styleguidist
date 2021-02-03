@@ -31,7 +31,7 @@ describe('tests components with multiple exports', () => {
 		Array [
 		  "color",
 		  "id",
-		  "v-model",
+		  "inputValue",
 		  "falseValue",
 		  "trueValue",
 		  "multiple",

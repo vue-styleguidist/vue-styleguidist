@@ -26,7 +26,7 @@ describe('tests button with pure javascript', () => {
 		Array [
 		  "color",
 		  "id",
-		  "v-model",
+		  "inputValue",
 		  "falseValue",
 		  "trueValue",
 		  "multiple",

@@ -8,6 +8,8 @@ let docButton: ComponentDoc
 describe('tests button functional', () => {
 	beforeEach(async () => {
 		docButton = await parse(button)
+		// make sure all props are always in the same order
+		docButton.props = docButton.props?.sort((p1, p2) => (p1.name < p2.name ? 1 : -1))
 	})
 
 	it('should extract props from template if functional', () => {
@@ -15,15 +17,11 @@ describe('tests button functional', () => {
 			expect.objectContaining({ name: 'error', type: { name: 'boolean' } })
 		)
 		expect(docButton.props).toContainEqual(
-			expect.objectContaining({ name: 'v-model', type: { name: 'string' } })
+			expect.objectContaining({ name: 'value', type: { name: 'string' } })
 		)
 		expect(docButton.props).toContainEqual(
 			expect.objectContaining({ name: 'label', type: { name: 'string' } })
 		)
-	})
-
-	it('should not return the value props as it is v-model', () => {
-		expect(docButton.props).not.toMatchObject([{ name: 'value', type: { name: 'string' } }])
 	})
 
 	it('should match the snapshot', () => {
