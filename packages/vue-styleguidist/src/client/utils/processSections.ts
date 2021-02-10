@@ -20,7 +20,7 @@ export default function processSections(
 ): ProcessedSection[] {
 	return sections.map(section => {
 		const options = {
-			useRouterLinks,
+			useRouterLinks: Boolean(useRouterLinks && section.name),
 			useHashId: section.sectionDepth === 0,
 			hashPath: [...hashPath, section.name ? section.name : '-']
 		}
