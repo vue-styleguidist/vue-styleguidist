@@ -3,6 +3,7 @@ const vueLoader = require('vue-loader')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+/** @type import("vue-styleguidist").Config */
 module.exports = {
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
