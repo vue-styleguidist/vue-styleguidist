@@ -12,6 +12,7 @@ Thumbs.db
 *.log
 .nuxt/
 /cypress/
+/build/
 test/cypress/screenshots/
 test/cypress/videos/
 
