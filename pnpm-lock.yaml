@@ -1081,6 +1081,7 @@ importers:
       buble: 0.19.8
       camelcase: 5.3.1
       detect-browser: 5.2.0
+      esbuild-wasm: 0.8.50
       vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       walkes: 0.2.1
     devDependencies:
@@ -1102,6 +1103,7 @@ importers:
       buble: ^0.19.7
       camelcase: ^5.3.1
       detect-browser: ^5.2.0
+      esbuild-wasm: ^0.8.50
       rollup: ^2.26.3
       rollup-plugin-typescript2: ^0.27.2
       typescript: ^3.9.7
@@ -12446,6 +12448,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-UQnWLz5W6pZ8S2NQWu8IKRyKUgM=
+  /esbuild-wasm/0.8.50:
+    dev: false
+    engines:
+      node: '>=8'
+    hasBin: true
+    resolution:
+      integrity: sha512-jutCMpyII3gt/gvFpSTn7trb4q6Yo+jp58Tx21CJ167eHhrQU2sFqk4fWdKDNKCqXIz2vq8PMsEZ7HzN1ESFbQ==
   /escalade/3.0.2:
     engines:
       node: '>=6'

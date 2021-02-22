@@ -1,7 +1,9 @@
 import walkes from 'walkes'
-import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
+import { ModuleKind, transpileModule } from 'typescript'
+import { parseComponent } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
+import { VsgSFCDescriptorLanguage } from '../../vue-inbrowser-compiler-utils/src/parseComponent'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
@@ -18,16 +20,19 @@ const buildStyles = function (styles: string[] | undefined): string | undefined 
 	return undefined
 }
 
-function getSingleFileComponentParts(code: string) {
+function getSingleFileComponentParts(code: string): VsgSFCDescriptorLanguage {
 	const parts = parseComponent(code)
 	if (parts.script) {
 		parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
 	}
-	return parts
+	return {
+		scriptLanguage: code.includes('lang="ts"') ? 'typescript' : 'javascript',
+		...parts
+	}
 }
 
 function injectTemplateAndParseExport(
-	parts: VsgSFCDescriptor
+	parts: VsgSFCDescriptorLanguage
 ): {
 	preprocessing?: string
 	component: string
@@ -38,7 +43,11 @@ function injectTemplateAndParseExport(
 	if (!parts.script) {
 		return { component: `{template: \`${templateString}\` }` }
 	}
-
+	if (parts.scriptLanguage === 'typescript') {
+		parts.script = transpileModule(parts.script, {
+			compilerOptions: { module: ModuleKind.ES2015 }
+		}).outputText
+	}
 	const comp = parseScriptCode(parts.script)
 	if (templateString) {
 		comp.component = `{template: \`${templateString}\`, ${comp.component}}`
@@ -60,6 +69,7 @@ export function parseScriptCode(
 	let endIndex = -1
 	let offset = 0
 	let renderFunctionStart = -1
+
 	walkes(getAst(code), {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
@@ -108,7 +118,12 @@ export function parseScriptCode(
 		)
 		endIndex += JSX_ADDON_LENGTH
 	}
-	const component = code.slice(startIndex + 1, endIndex - 1)
+	if (code.includes('Vue.extend({')) {
+		startIndex = startIndex + 12
+	}
+
+	const component = code.slice(startIndex + 1, endIndex - (code.includes('Vue.extend') ? 2 : 1))
+	console.log(component)
 	return {
 		preprocessing,
 		component,

@@ -24,8 +24,9 @@
 		"camelcase": "^5.3.1",
 		"detect-browser": "^5.2.0",
 		"vue-inbrowser-compiler-utils": "^4.33.6",
-		"walkes": "^0.2.1"
-	},
+		"walkes": "^0.2.1",
+    "typescript": "^3.9.7"
+  },
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^15.0.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
@@ -33,7 +34,6 @@
 		"@vue/test-utils": "^1.1.0",
 		"rollup": "^2.26.3",
 		"rollup-plugin-typescript2": "^0.27.2",
-		"typescript": "^3.9.7",
 		"vue": "^2.6.10"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",

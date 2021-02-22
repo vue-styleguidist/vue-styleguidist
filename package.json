@@ -17,7 +17,7 @@
 		"posttest": "pnpm format",
 		"format": "prettier --write docs packages/**/*.{js,md,vue,ts,tsx} examples/**/*.{js,md,vue,ts}",
 		"test:coverage": "jest --coverage",
-		"start": "./start.sh server",
+		"start": "sh start.sh server",
 		"build": "./start.sh build",
 		"lint": "eslint . --cache --fix --ext .ts,.tsx,.js --cache-location node_modules/.eslint_cache/",
 		"compile": "pnpm recursive run compile",

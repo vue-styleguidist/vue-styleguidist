@@ -7,6 +7,10 @@ export interface VsgSFCDescriptor extends VsgSFCDescriptorSimple {
 	styles?: string[]
 }
 
+export interface VsgSFCDescriptorLanguage extends VsgSFCDescriptor {
+	scriptLanguage: 'typescript' | 'javascript'
+}
+
 // highest priority first
 const PARTS: (keyof VsgSFCDescriptorSimple)[] = ['script', 'template']
 
