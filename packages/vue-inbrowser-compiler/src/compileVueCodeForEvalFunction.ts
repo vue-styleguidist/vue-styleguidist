@@ -1,6 +1,23 @@
-import { transform, TransformOptions } from 'buble'
-import walkes from 'walkes'
+/* eslint-disable no-case-declarations */
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
+import {
+	transpileModule,
+	TranspileOptions,
+	forEachChild,
+	Node,
+	isNewExpression,
+	isExpressionStatement,
+	isImportDeclaration,
+	isFunctionDeclaration,
+	isIdentifier,
+	isVariableStatement,
+	isVariableDeclaration,
+	isObjectBindingPattern,
+	isBindingElement,
+	isNamedImports,
+	isObjectLiteralExpression,
+	JsxEmit
+} from 'typescript'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -26,13 +43,25 @@ interface EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: TransformOptions = {}
+	config: TranspileOptions & { jsx?: string } = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
-	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
+	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : undefined
+	if (config.jsx && !config.compilerOptions?.jsxFactory) {
+		config.compilerOptions = config.compilerOptions || {}
+		config.compilerOptions.jsxFactory = config.jsx
+		config.compilerOptions.jsx = JsxEmit.React
+		delete config.jsx
+	}
+
+	const result = transpileModule(nonCompiledComponent.script, {
+		compilerOptions: { target, ...config.compilerOptions },
+		...config
+	})
+
 	return {
 		...nonCompiledComponent,
-		script: transform(nonCompiledComponent.script, { target, ...config }).code
+		script: result.outputText
 	}
 }
 
@@ -69,62 +98,76 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		code = limitScript > -1 ? code.slice(0, limitScript) : code
 		vsgMode = true
 	}
+
 	const ast = getAst(code)
 	let offset = 0
 	const varNames: string[] = []
-	walkes(ast, {
-		// replace `new Vue({data})` by `return {data}`
-		ExpressionStatement(node: any) {
-			if (node.expression.type === 'NewExpression' && node.expression.callee.name === 'Vue') {
-				const before = code.slice(0, node.expression.start + offset)
-				const optionsNode =
-					node.expression.arguments && node.expression.arguments.length
-						? node.expression.arguments[0]
-						: undefined
-				const renderIndex = getRenderFunctionStart(optionsNode)
-				let endIndex = optionsNode.end
-				if (renderIndex > 0) {
-					code = insertCreateElementFunction(
-						code.slice(0, renderIndex + 1),
-						code.slice(renderIndex + 1)
-					)
-					endIndex += JSX_ADDON_LENGTH
-				}
-				const after = optionsNode ? code.slice(optionsNode.start + offset, endIndex + offset) : ''
-				code = before + ';return ' + after
+	walkesNode(ast)
+
+	function walkesNode(node: Node) {
+		if (
+			isExpressionStatement(node) &&
+			isNewExpression(node.expression) &&
+			isIdentifier(node.expression.expression) &&
+			node.expression.expression.text === 'Vue'
+		) {
+			// replace `new Vue({data})` by `return {data}`
+			const before = code.slice(0, node.expression.pos + offset)
+			const optionsNode = node.expression?.arguments?.[0]
+			if (!optionsNode || !isObjectLiteralExpression(optionsNode)) {
+				return
 			}
-		},
-		// transform all imports into require function calls
-		ImportDeclaration(node: any) {
+			const renderIndex = getRenderFunctionStart(optionsNode)
+
+			let endIndex = optionsNode?.end || 0
+			if (renderIndex > 0) {
+				code = insertCreateElementFunction(
+					code.slice(0, renderIndex + 1),
+					code.slice(renderIndex + 1)
+				)
+				endIndex += JSX_ADDON_LENGTH
+			}
+			const after = optionsNode ? code.slice(optionsNode.pos + offset, endIndex + offset) : ''
+			code = before + ';return ' + after
+
+			return
+		} else if (isImportDeclaration(node)) {
 			const ret = transformOneImport(node, code, offset)
 			offset = ret.offset
 			code = ret.code
-			if (vsgMode && node.specifiers) {
-				node.specifiers.forEach((s: any) => varNames.push(s.local.name))
+			const bindings = node.importClause?.namedBindings
+			if (vsgMode && bindings && isNamedImports(bindings)) {
+				bindings.elements.forEach(elt => {
+					const internalVarName = elt.propertyName ?? elt.name
+					varNames.push(internalVarName.text)
+				})
 			}
-		},
-		...(vsgMode
-			? {
-					VariableDeclaration(node: any) {
-						node.declarations.forEach((declaration: any) => {
-							if (declaration.id.name) {
-								// simple variable declaration
-								varNames.push(declaration.id.name)
-							} else if (declaration.id.properties) {
-								// spread variable declaration
-								// const { all:names } = {all: 'foo'}
-								declaration.id.properties.forEach((p: any) => {
-									varNames.push(p.value.name)
-								})
-							}
-						})
-					},
-					FunctionDeclaration(node: any) {
-						varNames.push(node.id.name)
-					}
-			  }
-			: {})
-	})
+			return
+		} else if (vsgMode && isVariableStatement(node)) {
+			node.declarationList.declarations.forEach(declaration => {
+				if (isVariableDeclaration(declaration) && isIdentifier(declaration.name)) {
+					// simple variable declaration
+					varNames.push(declaration.name.text)
+				} else if (isVariableDeclaration(declaration) && isObjectBindingPattern(declaration.name)) {
+					// spread variable declaration
+					// const { all:names } = {all: 'foo'}
+					declaration.name.elements.forEach(e => {
+						if (isBindingElement(e) && isIdentifier(e.name)) {
+							varNames.push(e.name.text)
+						}
+					})
+				}
+			})
+			return
+		} else if (vsgMode && isFunctionDeclaration(node)) {
+			if (node.name && isIdentifier(node.name)) {
+				varNames.push(node.name.text)
+			}
+			return
+		}
+		forEachChild(node, walkesNode)
+	}
+
 	if (vsgMode) {
 		code += `;return {data:function(){return {${
 			// add local vars in data
@@ -134,6 +177,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 			varNames.map(varName => `${varName}:${varName}`).join(',')
 		}};}}`
 	}
+
 	return {
 		script: code,
 		style,

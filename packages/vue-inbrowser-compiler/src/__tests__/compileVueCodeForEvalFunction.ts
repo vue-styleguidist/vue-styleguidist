@@ -17,7 +17,7 @@ export default {
 		expect(dummySet).toMatchObject({ param: 'Foo' })
 	})
 
-	it('shoud be fine with using the `new Vue` structure', () => {
+	it('shoud be fine with using the "new Vue" structure', () => {
 		const sut = compileVueCodeForEvalFunction(`
 let param = 'Bar';
 new Vue({
@@ -79,7 +79,7 @@ export default {
 			{ jsx: 'pragma' }
 		)
 		const dummySet = sut.script
-		expect(dummySet).toContain('pragma( HelloWorld')
+		expect(dummySet).toContain('pragma(HelloWorld')
 	})
 
 	it('should combine import and new vue', () => {
@@ -99,40 +99,22 @@ new Vue({
 		`)
 
 		expect(sut.script).toMatchInlineSnapshot(`
+		"var vue$0 = require('vue');
+		var Vue = vue$0.default || vue$0;
+		var dog_names$43 = require('../RandomButton/dog-names');
+		var three = dog_names$43.default || dog_names$43;
+		;
+		return {
+		    data: function () {
+		        var i = 0;
+		        return {
+		            opt: three.map(function (a) { return ({ text: a, value: i++ }); })
+		        };
+		    },
+		    template: '<Radio :options=\\"opt\\" />'
+		};
 		"
-		var vue$0 = require('vue');var Vue = vue$0.default || vue$0;
-		var dog_names$43 = require('../RandomButton/dog-names');var three = dog_names$43.default || dog_names$43;
-
-		;return {
-			data: function data() {
-				var i = 0
-				return {
-					opt: three.map(function (a) { return ({ text: a, value: i++ }); })
-				}
-			},
-			template: '<Radio :options=\\"opt\\" />'
-		}"
 	`)
-	})
-
-	it('shoud fail if the sfc script has a parsing issue', () => {
-		expect(() =>
-			compileVueCodeForEvalFunction(`
-		<template>
-			<div>
-				<button> {{param}} </button>
-			</div>
-		</template>
-		<script>
-		let param% = 'BazBaz';
-		export default {
-			data(){
-				return {param: param%}
-			}
-		}
-		</script>
-		`)
-		).toThrowErrorMatchingInlineSnapshot(`"Unexpected token (8:11)"`)
 	})
 
 	it('shoud try to run the with the same lines', () => {
@@ -151,18 +133,14 @@ new Vue({
 		</script>
 		`).script
 		).toMatchInlineSnapshot(`
+		";
+		return { template: \\"\\\\n\\\\t\\\\t\\\\t<div/>\\\\n\\\\t\\\\t\\", data: function () {
+		        return {
+		            param: 'BazBaz'
+		        };
+		    }
+		};
 		"
-
-
-
-				;return {template: \\"\\\\n\\\\t\\\\t\\\\t<div/>\\\\n\\\\t\\\\t\\", 
-					data: function data(){
-						return {
-							param: 'BazBaz'
-						}
-					}
-				};
-				"
 	`)
 	})
 })

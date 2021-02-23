@@ -1076,18 +1076,13 @@ importers:
       vue-docgen-api: ^4.35.0
   packages/vue-inbrowser-compiler:
     dependencies:
-      acorn: 6.4.1
-      acorn-jsx: 5.2.0_acorn@6.4.1
-      buble: 0.19.8
       camelcase: 5.3.1
       detect-browser: 5.2.0
       typescript: 3.9.7
       vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
-      walkes: 0.2.1
     devDependencies:
       '@rollup/plugin-commonjs': 15.0.0_rollup@2.26.4
       '@rollup/plugin-node-resolve': 9.0.0_rollup@2.26.4
-      '@types/buble': 0.19.2
       '@vue/test-utils': 1.1.0_vue@2.6.11
       rollup: 2.26.4
       rollup-plugin-typescript2: 0.27.2_rollup@2.26.4+typescript@3.9.7
@@ -1095,11 +1090,7 @@ importers:
     specifiers:
       '@rollup/plugin-commonjs': ^15.0.0
       '@rollup/plugin-node-resolve': ^9.0.0
-      '@types/buble': ^0.19.2
       '@vue/test-utils': ^1.1.0
-      acorn: ^6.1.1
-      acorn-jsx: ^5.0.1
-      buble: ^0.19.7
       camelcase: ^5.3.1
       detect-browser: ^5.2.0
       rollup: ^2.26.3
@@ -1107,7 +1098,6 @@ importers:
       typescript: ^3.9.7
       vue: ^2.6.10
       vue-inbrowser-compiler-utils: ^4.33.6
-      walkes: ^0.2.1
   packages/vue-inbrowser-compiler-utils:
     dependencies:
       camelcase: 5.3.1
