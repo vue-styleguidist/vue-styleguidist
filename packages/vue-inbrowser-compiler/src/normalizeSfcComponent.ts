@@ -1,5 +1,23 @@
-import walkes from 'walkes'
-import { ModuleKind, transpileModule } from 'typescript'
+/* eslint-disable no-case-declarations */
+import {
+	SyntaxKind,
+	transpileModule,
+	forEachChild,
+	Node,
+	ModuleKind,
+	SourceFile,
+	isExportAssignment,
+	isVariableStatement,
+	isExpressionStatement,
+	isBinaryExpression,
+	isPropertyAccessExpression,
+	isIdentifier,
+	isImportDeclaration,
+	isObjectLiteralExpression,
+	isMethodDeclaration,
+	ObjectLiteralExpression,
+	MethodDeclaration
+} from 'typescript'
 import { parseComponent } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
@@ -70,43 +88,61 @@ export function parseScriptCode(
 	let offset = 0
 	let renderFunctionStart = -1
 
-	walkes(getAst(code), {
-		//export const MyComponent = {}
-		ExportNamedDeclaration(node: any) {
-			preprocessing = code.slice(0, node.start + offset)
-			startIndex = node.declaration.declarations[0].init.start + offset
-			endIndex = node.declaration.declarations[0].init.end + offset
-			if (node.declarations) {
-				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
-			}
-		},
-		//export default {}
-		ExportDefaultDeclaration(node: any) {
-			preprocessing = code.slice(0, node.start + offset)
-			startIndex = node.declaration.start + offset
-			endIndex = node.declaration.end + offset
-			renderFunctionStart = getRenderFunctionStart(node.declaration)
-		},
-		//module.exports = {}
-		AssignmentExpression(node: any) {
-			if (
-				/exports/.test(node.left.name) ||
-				(node.left.object &&
-					/module/.test(node.left.object.name) &&
-					/exports/.test(node.left.property.name))
+	function walkes(sourceFile: SourceFile) {
+		walkesNode(sourceFile)
+
+		function walkesNode(node: Node) {
+			if (isImportDeclaration(node)) {
+				// transform import statements into require
+				const ret = transformOneImport(node, code, offset)
+				offset = ret.offset
+				code = ret.code
+			} else if (isExportAssignment(node) && isObjectLiteralExpression(node.expression)) {
+				// export default {}
+				preprocessing = code.slice(0, node.pos + offset)
+				startIndex = node.expression.properties.pos + offset
+				endIndex = node.expression.end + offset
+				renderFunctionStart = getRenderFunctionStart(node.expression)
+
+				return
+			} else if (
+				node.modifiers &&
+				node.modifiers.some(mod => mod.kind === SyntaxKind.ExportKeyword) &&
+				isVariableStatement(node)
 			) {
-				preprocessing = code.slice(0, node.start + offset)
-				startIndex = node.right.start + offset
-				endIndex = node.right.end + offset
+				// export const MyComponent = {}
+				preprocessing = code.slice(0, node.pos + offset)
+				const initializer = node.declarationList.declarations[0].initializer
+				if (initializer && isObjectLiteralExpression(initializer)) {
+					startIndex = initializer.properties.pos + offset
+					endIndex = initializer.end + offset
+					renderFunctionStart = getRenderFunctionStart(initializer)
+				}
+				return
+			} else if (isExpressionStatement(node) && isBinaryExpression(node.expression)) {
+				if (
+					(isPropertyAccessExpression(node.expression.left) &&
+						isIdentifier(node.expression.left.expression) &&
+						node.expression.left.expression.escapedText === 'module' &&
+						isIdentifier(node.expression.left.name) &&
+						node.expression.left.name.escapedText === 'exports') ||
+					(isIdentifier(node.expression.left) && node.expression.left.escapedText === 'exports')
+				) {
+					// module.exports = {}
+					if (isObjectLiteralExpression(node.expression.right)) {
+						preprocessing = code.slice(0, node.expression.pos + offset)
+						startIndex = node.expression.right.properties.pos + offset
+						endIndex = node.expression.right.end + offset
+					}
+					return
+				}
 			}
-		},
-		// and transform import statements into require
-		ImportDeclaration(node: any) {
-			const ret = transformOneImport(node, code, offset)
-			offset = ret.offset
-			code = ret.code
+			forEachChild(node, walkesNode)
 		}
-	})
+	}
+
+	walkes(getAst(code))
+
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
@@ -133,14 +169,14 @@ export function parseScriptCode(
 
 export const JSX_ADDON_LENGTH = 31
 
-export function getRenderFunctionStart(objectExpression: any): number {
+export function getRenderFunctionStart(objectExpression: ObjectLiteralExpression): number {
 	if (objectExpression && objectExpression.properties) {
-		const nodeProperties: any[] = objectExpression.properties
+		const nodeProperties = objectExpression.properties
 		const renderFunctionObj = nodeProperties.find(
-			(p: any) => p.key && p.key.type === 'Identifier' && p.key.name === 'render'
-		)
-		if (renderFunctionObj && renderFunctionObj.value.body) {
-			return renderFunctionObj.value.body.start
+			p => isMethodDeclaration(p) && isIdentifier(p.name) && p.name.escapedText === 'render'
+		) as MethodDeclaration | undefined
+		if (renderFunctionObj && renderFunctionObj.body) {
+			return renderFunctionObj.body.statements.pos
 		}
 	}
 	return -1
