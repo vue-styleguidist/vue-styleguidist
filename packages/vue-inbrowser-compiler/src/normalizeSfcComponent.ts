@@ -17,10 +17,9 @@ import {
 	ObjectLiteralExpression,
 	MethodDeclaration
 } from 'typescript'
-import { parseComponent } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, VsgSFCDescriptorLanguage } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
-import { VsgSFCDescriptorLanguage } from '../../vue-inbrowser-compiler-utils/src/parseComponent'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
