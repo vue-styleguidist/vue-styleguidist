@@ -49,7 +49,7 @@ export default function compileVueCodeForEvalFunction(
 	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : undefined
 	if (config.jsx && !config.compilerOptions?.jsxFactory) {
 		config.compilerOptions = config.compilerOptions || {}
-		config.compilerOptions.jsx = JsxEmit.ReactNative
+		config.compilerOptions.jsx = JsxEmit.React
 		config.compilerOptions.jsxFactory = config.jsx
 		delete config.jsx
 	}

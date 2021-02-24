@@ -1,7 +1,7 @@
 /* eslint-disable no-new-func */
 import Vue from 'vue'
 import { JsxEmit, transpileModule } from 'typescript'
-import { adaptCreateElement } from 'vue-inbrowser-compiler-utils'
+import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'
 import { shallowMount, mount } from '@vue/test-utils'
 
 describe('integration', () => {
@@ -16,7 +16,8 @@ describe('integration', () => {
 				{
 					compilerOptions: {
 						jsxFactory: '__adaptedPragma__',
-						jsx: JsxEmit.React
+						jsx: JsxEmit.React,
+						noEmitHelpers: true
 					}
 				}
 			).outputText
@@ -24,6 +25,7 @@ describe('integration', () => {
 			const [param1, param2, param3, param4] = Object.keys(params)
 			const getValue = new Function(
 				'__pragma__',
+				'__assign',
 				param1,
 				param2,
 				param3,
@@ -32,6 +34,7 @@ describe('integration', () => {
 			)
 			return getValue(
 				adaptCreateElement,
+				concatenate,
 				params[param1],
 				params[param2],
 				params[param3],
