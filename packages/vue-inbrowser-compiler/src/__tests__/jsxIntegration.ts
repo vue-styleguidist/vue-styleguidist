@@ -1,7 +1,7 @@
 /* eslint-disable no-new-func */
 import Vue from 'vue'
-import { transform } from 'buble'
-import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'
+import { JsxEmit, transpileModule } from 'typescript'
+import { adaptCreateElement } from 'vue-inbrowser-compiler-utils'
 import { shallowMount, mount } from '@vue/test-utils'
 
 describe('integration', () => {
@@ -10,14 +10,20 @@ describe('integration', () => {
 			code: string,
 			params: { [key: string]: any } = {}
 		): { [key: string]: any } => {
-			const compiledCode = transform('const ___ = ' + code, {
-				jsx: '__pragma__(h)',
-				objectAssign: 'concatenate'
-			}).code
+			const compiledCode = transpileModule(
+				'const ___ = ' +
+					code.replace('render(h) {', 'render(h) {\nconst __adaptedPragma__ = __pragma__(h);\n'),
+				{
+					compilerOptions: {
+						jsxFactory: '__adaptedPragma__',
+						jsx: JsxEmit.React
+					}
+				}
+			).outputText
+
 			const [param1, param2, param3, param4] = Object.keys(params)
 			const getValue = new Function(
 				'__pragma__',
-				'concatenate',
 				param1,
 				param2,
 				param3,
@@ -26,7 +32,6 @@ describe('integration', () => {
 			)
 			return getValue(
 				adaptCreateElement,
-				concatenate,
 				params[param1],
 				params[param2],
 				params[param3],

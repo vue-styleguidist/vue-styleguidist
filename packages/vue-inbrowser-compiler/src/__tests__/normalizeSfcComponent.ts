@@ -70,6 +70,6 @@ computed:{
 	}
 }}
 </script>`)
-		expect(evalFunction(sut).render.toString()).toMatch(/const h = this\.\$createElement/)
+		expect(evalFunction(sut).render.toString()).toMatch(/this\.\$createElement/)
 	})
 })
