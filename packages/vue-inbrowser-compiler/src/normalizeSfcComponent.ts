@@ -161,7 +161,7 @@ export function parseScriptCode(
 	}
 }
 
-export const JSX_ADDON_LENGTH = 31
+export const JSX_ADDON_LENGTH = 57
 
 export function getRenderFunctionStart(objectExpression: ObjectLiteralExpression): number {
 	if (objectExpression && objectExpression.properties) {
@@ -177,7 +177,7 @@ export function getRenderFunctionStart(objectExpression: ObjectLiteralExpression
 }
 
 export function insertCreateElementFunction(before: string, after: string): string {
-	return `${before};const h = this.$createElement;${after}`
+	return `${before};var __adaptedPragma__ = __pragma__(this.$createElement);${after}`
 }
 
 /**

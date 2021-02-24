@@ -38,9 +38,7 @@ export default {
 	compilerConfig: {
 		tstype: 'TransformOptions',
 		type: 'object',
-		default: {
-			objectAssign: 'Object.assign'
-		}
+		default: {}
 	},
 	// `components` is a shortcut for { sections: [{ components }] },
 	// see `sections` below

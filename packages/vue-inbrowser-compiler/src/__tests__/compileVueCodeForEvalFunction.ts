@@ -76,10 +76,10 @@ export default {
 		)
 	}
 }`,
-			{ jsx: 'pragma' }
+			{ jsx: '__pragma__' }
 		)
 		const dummySet = sut.script
-		expect(dummySet).toContain('pragma(HelloWorld')
+		expect(dummySet).toContain('__pragma__(HelloWorld')
 	})
 
 	it('should combine import and new vue', () => {

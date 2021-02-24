@@ -176,7 +176,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 					// buble all at the same time. We then tell it to calculate on the fly
 					const compiledExample = compile(example.content, {
 						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsx: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+						...(config.jsxInExamples ? { jsx: '__adaptedPragma__' } : {})
 					})
 					compiled = {
 						...compiledExample
@@ -204,11 +204,11 @@ var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
 var compilerUtils = require(${JSON.stringify(JSX_COMPILER_UTILS_PATH)});
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
-	compilerUtils.adaptCreateElement, compilerUtils.concatenate);`
+	compilerUtils.adaptCreateElement);`
 			: `
 var evalInContext = evalInContextBase.bind(null, 
 	${JSON.stringify(generate(requireContextCode))}, 
-	null, null)`
+	null)`
 	}
 module.exports = ${generate(toAst(examplesWithEval))}`
 }

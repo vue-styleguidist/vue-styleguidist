@@ -49,15 +49,19 @@ export default function compileVueCodeForEvalFunction(
 	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : undefined
 	if (config.jsx && !config.compilerOptions?.jsxFactory) {
 		config.compilerOptions = config.compilerOptions || {}
-		config.compilerOptions.jsxFactory = config.jsx
 		config.compilerOptions.jsx = JsxEmit.React
+		config.compilerOptions.jsxFactory = config.jsx
 		delete config.jsx
 	}
 
-	const result = transpileModule(nonCompiledComponent.script, {
+	const options = {
 		compilerOptions: { target, ...config.compilerOptions },
 		...config
-	})
+	}
+
+	console.log('options', options)
+
+	const result = transpileModule(nonCompiledComponent.script, options)
 
 	return {
 		...nonCompiledComponent,

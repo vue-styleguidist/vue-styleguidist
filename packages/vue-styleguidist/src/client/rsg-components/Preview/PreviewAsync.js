@@ -97,9 +97,7 @@ class PreviewAsync extends Component {
 			try {
 				const example = compile(newCode, {
 					...this.context.config.compilerConfig,
-					...(this.context.config.jsxInExamples
-						? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
-						: {})
+					...(this.context.config.jsxInExamples ? { jsx: '__adaptedPragma__' } : {})
 				})
 				this.setCompiledPreview(example)
 			} catch (err) {
@@ -119,6 +117,7 @@ class PreviewAsync extends Component {
 				// it can be:
 				// - a script setting up variables => we set up the data function of previewComponent
 				// - a `new Vue()` script that will return a full config object
+				console.log('async example.script', example.script)
 				previewComponent = this.props.evalInContext(example.script)() || {}
 			}
 			if (example.template) {
