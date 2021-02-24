@@ -1127,6 +1127,7 @@ importers:
       vue-docgen-api: ^4.35.0
   packages/vue-styleguidist:
     dependencies:
+      '@monaco-editor/react': 4.0.10_react-dom@16.13.1+react@16.13.1
       '@vxna/mini-html-webpack-template': 1.0.0
       ast-types: 0.13.3
       classnames: 2.2.6
@@ -1208,6 +1209,7 @@ importers:
       webpack: 4.44.1
     specifiers:
       '@babel/types': ^7.5.5
+      '@monaco-editor/react': ^4.0.10
       '@testing-library/react': ^9.4.0
       '@types/buble': ^0.19.2
       '@types/classnames': ^2.2.10
@@ -4529,6 +4531,28 @@ packages:
     dev: true
     resolution:
       integrity: sha1-GViWWHTyS8Ub5Ih1/rUNZC/EH3s=
+  /@monaco-editor/loader/1.0.0:
+    dependencies:
+      state-local: 1.0.7
+    dev: false
+    peerDependencies:
+      monaco-editor: ^0.21.2
+    resolution:
+      integrity: sha512-CA35bf5Y7wFWfeJZfkLslOxiatln3oTBKkfbdo+TF5H+UdPP96qHvhOUjjd1DeQ2NWsRkVPSnoSYek7NE5B26w==
+  /@monaco-editor/react/4.0.10_react-dom@16.13.1+react@16.13.1:
+    dependencies:
+      '@monaco-editor/loader': 1.0.0
+      prop-types: 15.7.2
+      react: 16.13.1
+      react-dom: 16.13.1_react@16.13.1
+      state-local: 1.0.7
+    dev: false
+    peerDependencies:
+      monaco-editor: ^0.21.2
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    resolution:
+      integrity: sha512-qORktN6jrypnLrgzCuuKynNNVeHY98q7waSxP+XVXot7KZp3B+x7qokZa4KqI47CohhyamF2u1jqH0tQuX2kIA==
   /@mrmlnc/readdir-enhanced/2.2.1:
     dependencies:
       call-me-maybe: 1.0.1
@@ -23387,6 +23411,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-rk1zS5WQvdbc8slE5hPtzfji1dFSnBAfm+vSjToZNrBvozHJvuAG80xE5u8N4tQjg3Ej1Crjc19J++r28HGJgg==
+  /state-local/1.0.7:
+    dev: false
+    resolution:
+      integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
   /state-toggle/1.0.3:
     resolution:
       integrity: sha512-d/5Z4/2iiCnHw6Xzghyhb+GcmF89bxwgXG60wjIiZaxnymbyOmI8Hk4VqHXiVVp6u2ysaskFfXg3ekCj4WNftQ==
@@ -26210,7 +26238,7 @@ packages:
       mime: 2.4.6
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.44.1_webpack-cli@4.2.0
+      webpack: 4.44.1
       webpack-log: 2.0.0
     engines:
       node: '>= 6'

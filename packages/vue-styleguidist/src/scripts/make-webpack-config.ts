@@ -206,7 +206,6 @@ export default function (
 
 	const buildEditorComponentChain = (cc: { [originalPath: string]: string }) => {
 		let key = 'Editor'
-
 		// avoid codesplitting tiny prism only spli heavy codemirror
 		if (config.codeSplit && !config.simpleEditor) {
 			cc[key] = 'EditorAsync'
@@ -215,7 +214,7 @@ export default function (
 
 		// adapt compiled/raw format neede for precompiled preview
 		if (config.codeSplit) {
-			cc[key] = 'EditorPrecompiled'
+			cc[key] = 'EditorMonaco'
 			key = 'EditorString'
 		}
 
@@ -226,7 +225,7 @@ export default function (
 		}
 
 		// if the user chose prism, load the prism editor instead of codemirror
-		cc[key] = path.join('VsgEditor', config.simpleEditor ? 'EditorPrism' : 'Editor')
+		cc[key] = path.join('VsgEditor', config.simpleEditor ? 'EditorPrism' : 'EditorMonaco')
 	}
 
 	buildEditorComponentChain(customComponents)

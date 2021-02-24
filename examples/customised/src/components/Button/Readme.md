@@ -31,6 +31,7 @@ You can also use the Single File Component Format
   </div>
 </template>
 <script lang="ts">
+import Vue from 'vue'
 const dogNames = require('dog-names').all
 
 // You can also use 'exports.default = {}' style module exports.

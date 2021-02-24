@@ -58,9 +58,6 @@ export default function compileVueCodeForEvalFunction(
 		compilerOptions: { target, ...config.compilerOptions },
 		...config
 	}
-
-	console.log('options', options)
-
 	const result = transpileModule(nonCompiledComponent.script, options)
 
 	return {

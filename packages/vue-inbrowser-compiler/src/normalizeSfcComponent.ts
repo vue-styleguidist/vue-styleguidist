@@ -86,6 +86,13 @@ export function parseScriptCode(
 	let offset = 0
 	let renderFunctionStart = -1
 
+	//Not sure if we can avoid this? without this the startIndex ends up been -1? guessing that Vue.extend() isn't valid typescript?
+	if (code.includes('Vue.extend(')) {
+		code = code.replace("import Vue from 'vue'", '')
+		code = code.replace('Vue.extend(', '')
+		const pos = code.lastIndexOf(')')
+		code = code.substring(0, pos) + code.substring(pos + 1)
+	}
 	walkesNode(getAst(code))
 
 	function walkesNode(node: Node) {
