@@ -24,7 +24,10 @@ export default function (ast: bt.File, variableFilter: string[]): ImportedVariab
 			const specifiers = astPath.get('specifiers')
 			specifiers.each((s: NodePath<bt.ImportSpecifier | bt.ImportDefaultSpecifier>) => {
 				const varName = s.node.local.name
-				const exportName = bt.isImportSpecifier(s.node) ? s.node.imported.name : 'default'
+				const exportName =
+					bt.isImportSpecifier(s.node) && bt.isIdentifier(s.node.imported)
+						? s.node.imported.name
+						: 'default'
 				importedVariablePaths[varName] = { filePath: [filePath], exportName }
 			})
 			return false
@@ -41,19 +44,23 @@ export default function (ast: bt.File, variableFilter: string[]): ImportedVariab
 				}
 
 				specifiers.each((s: NodePath<bt.ExportSpecifier>) => {
-					const varName = s.node.exported.name
-					const exportName = s.node.local ? s.node.local.name : varName
-					if (variableFilter.indexOf(varName) > -1) {
-						variables[varName] = { filePath: [filePath], exportName }
+					if (bt.isIdentifier(s.node.exported)) {
+						const varName = s.node.exported.name
+						const exportName = s.node.local ? s.node.local.name : varName
+						if (variableFilter.indexOf(varName) > -1) {
+							variables[varName] = { filePath: [filePath], exportName }
+						}
 					}
 				})
 			} else {
 				specifiers.each((s: NodePath<bt.ExportSpecifier>) => {
-					const varName = s.node.exported.name
-					const middleName = s.node.local.name
-					const importedVar = importedVariablePaths[middleName]
-					if (importedVar && variableFilter.indexOf(varName) > -1) {
-						variables[varName] = importedVar
+					if (bt.isIdentifier(s.node.exported)) {
+						const varName = s.node.exported.name
+						const middleName = s.node.local.name
+						const importedVar = importedVariablePaths[middleName]
+						if (importedVar && variableFilter.indexOf(varName) > -1) {
+							variables[varName] = importedVar
+						}
 					}
 				})
 			}

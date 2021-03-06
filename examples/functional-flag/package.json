@@ -1,50 +1,50 @@
 {
-  "name": "vue-styleguidist-functional-flag",
-  "version": "4.0.0",
-  "description": "Example of vue-styleguidist with functional tag",
-  "keywords": [
-    "functional",
-    "customized"
-  ],
-  "private": true,
-  "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/styleguidist/vue-styleguidist.git"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">=4"
-  },
-  "dependencies": {
-    "@znck/prop-types": "^0.6.1",
-    "dog-names": "^1.0.2",
-    "lodash": "^4.17.15",
-    "vue-types": "^1.5.0"
-  },
-  "scripts": {
-    "styleguide": "vue-styleguidist server",
-    "styleguide:build": "vue-styleguidist build"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.0",
-    "@babel/plugin-transform-react-jsx": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^8.0.5",
-    "clsx": "^1.1.1",
-    "css-loader": "^3.6.0",
-    "node-sass": "^4.13.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "sass-loader": "^8.0.0",
-    "style-loader": "^0.19.0",
-    "vue": "2.X.X",
-    "vue-loader": "^15.2.4",
-    "vue-styleguidist": "^4.0.0",
-    "webpack": "^4.44.1",
-    "webpack-bundle-analyzer": "3.3.2"
-  }
+	"name": "vue-styleguidist-functional-flag",
+	"version": "4.0.0",
+	"description": "Example of vue-styleguidist with functional tag",
+	"keywords": [
+		"functional",
+		"customized"
+	],
+	"private": true,
+	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/styleguidist/vue-styleguidist.git"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=4"
+	},
+	"dependencies": {
+		"@znck/prop-types": "^0.6.1",
+		"dog-names": "^1.0.2",
+		"lodash": "^4.17.15",
+		"vue-types": "^1.5.0"
+	},
+	"scripts": {
+		"styleguide": "vue-styleguidist server",
+		"styleguide:build": "vue-styleguidist build"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.2.2",
+		"@babel/plugin-proposal-class-properties": "^7.2.0",
+		"@babel/plugin-transform-react-jsx": "^7.2.0",
+		"@babel/plugin-transform-runtime": "^7.2.0",
+		"@babel/preset-env": "^7.3.1",
+		"babel-core": "^7.0.0-bridge.0",
+		"babel-loader": "^8.0.5",
+		"clsx": "^1.1.1",
+		"css-loader": "^3.6.0",
+		"node-sass": "^4.13.0",
+		"prop-types": "^15.6.2",
+		"react": "^17.0.1",
+		"sass-loader": "^8.0.0",
+		"style-loader": "^0.19.0",
+		"vue": "2.X.X",
+		"vue-loader": "^15.2.4",
+		"vue-styleguidist": "^4.0.0",
+		"webpack": "^4.44.1",
+		"webpack-bundle-analyzer": "3.3.2"
+	}
 }

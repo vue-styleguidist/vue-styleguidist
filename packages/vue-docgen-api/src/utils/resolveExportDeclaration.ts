@@ -31,9 +31,11 @@ export default function resolveExportDeclaration(path: NodePath): Map<string, No
 function getDefinitionsFromPathSpecifiers(path: NodePath, defs: Map<string, NodePath>) {
 	const specifiersPath = path.get('specifiers')
 	specifiersPath.each((specifier: NodePath<bt.ExportSpecifier | bt.ExportNamespaceSpecifier>) => {
-		defs.set(
-			specifier.node.exported.name,
-			bt.isExportSpecifier(specifier.node) ? specifier.get('local') : specifier.get('exported')
-		)
+		if (bt.isIdentifier(specifier.node.exported)) {
+			defs.set(
+				specifier.node.exported.name,
+				bt.isExportSpecifier(specifier.node) ? specifier.get('local') : specifier.get('exported')
+			)
+		}
 	})
 }
