@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* updrade react-stypeguidist ([4823bd2](https://github.com/vue-styleguidist/vue-styleguidist/commit/4823bd2be1d1f2fa1e39d7142da7cb15ab16b43c))
+* **docgen:** ensure pug renders template using html doctype ([2f3512b](https://github.com/vue-styleguidist/vue-styleguidist/commit/2f3512b7951889c8fa72856655725b62bd4e81fb))
+* **docgen:** html doctype as a default rather than a force ([01c921f](https://github.com/vue-styleguidist/vue-styleguidist/commit/01c921f8054607b9e0d99c0f87a4820fe8dedc2d))
+
+
+### Features
+
+* **docgen:** allow slots to be defined by composition API render functions ([63f2f35](https://github.com/vue-styleguidist/vue-styleguidist/commit/63f2f352435f95fc55e3598c877c33383909e933))
+
+
+
+
+
 # [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
 
 

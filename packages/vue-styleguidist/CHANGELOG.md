@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* pagePerSection when only top section exists ([70cbb59](https://github.com/vue-styleguidist/vue-styleguidist/commit/70cbb593cbbb6f94f300c5c1ddad69c4d38e81e7)), closes [#1054](https://github.com/vue-styleguidist/vue-styleguidist/issues/1054)
+* updrade react-stypeguidist ([4823bd2](https://github.com/vue-styleguidist/vue-styleguidist/commit/4823bd2be1d1f2fa1e39d7142da7cb15ab16b43c))
+
+
+
+
+
 # [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
 
 **Note:** Version bump only for package vue-styleguidist
