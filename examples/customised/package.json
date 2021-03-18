@@ -40,7 +40,7 @@
 		"lodash": "^4.17.15",
 		"node-sass": "^4.13.0",
 		"prop-types": "^15.7.2",
-		"react": "^16.13.1",
+		"react": "^17.0.1",
 		"sass-loader": "^8.0.0",
 		"style-loader": "^0.19.0",
 		"url-loader": "^1.1.2",

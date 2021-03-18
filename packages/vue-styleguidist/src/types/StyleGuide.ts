@@ -70,7 +70,7 @@ export interface BaseStyleguidistConfig
 	 * Defines the initial state of the props and methods tab
 	 * @default "collapse"
 	 */
-	exampleMode: Rsg.EXPAND_MODE
+	exampleMode: Rsg.ExpandMode
 	getComponentPathLine: (componentPath: string) => string
 	getExampleFilename: (componentPath: string) => string
 	/**
@@ -216,12 +216,12 @@ export interface BaseStyleguidistConfig
 	 * Defines the initial state of the props and methods tab
 	 * @default "collapse"
 	 */
-	usageMode: Rsg.EXPAND_MODE
+	usageMode: Rsg.ExpandMode
 	/**
 	 * If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases
 	 * @default "expand"
 	 */
-	tocMode: Rsg.EXPAND_MODE
+	tocMode: Rsg.ExpandMode
 	/**
 	 * Should the passed filepath be parsed by docgen if mentionned extends
 	 */
