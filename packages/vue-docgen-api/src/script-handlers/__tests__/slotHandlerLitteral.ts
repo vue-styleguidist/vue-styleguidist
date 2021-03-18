@@ -11,7 +11,7 @@ function parse(src: string): NodePath | undefined {
 	return resolveExportedComponent(ast)[0].get('default')
 }
 
-describe('render function slotHandler', () => {
+describe('render and setup function slotHandler', () => {
 	let documentation: Documentation
 	let mockSlotDescriptor: SlotDescriptor
 
@@ -22,8 +22,9 @@ describe('render function slotHandler', () => {
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 
-	it('should provide an escape hatch for unexpected slots', async () => {
-		const src = `
+	describe('render functions', () => {
+		it('should provide an escape hatch for unexpected slots', async () => {
+			const src = `
 export default {
   /**
    * @slot icon
@@ -33,15 +34,15 @@ export default {
   }
 }
 `
-		const def = parse(src)
-		if (def) {
-			await slotHandlerLitteral(documentation, def)
-		}
-		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('icon')
-	})
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('icon')
+		})
 
-	it('should allow for multiple slots', async () => {
-		const src = `
+		it('should allow for multiple slots', async () => {
+			const src = `
 export default {
   /**
    * @slot one
@@ -54,16 +55,16 @@ export default {
   }
 }
 `
-		const def = parse(src)
-		if (def) {
-			await slotHandlerLitteral(documentation, def)
-		}
-		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('one')
-		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('two')
-	})
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('one')
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('two')
+		})
 
-	it('should use default is no name is provided', async () => {
-		const src = `
+		it('should use default is no name is provided', async () => {
+			const src = `
 export default {
   /**
    * @slot
@@ -73,15 +74,15 @@ export default {
   }
 }
 `
-		const def = parse(src)
-		if (def) {
-			await slotHandlerLitteral(documentation, def)
-		}
-		expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
-	})
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
+		})
 
-	it('should describe slot using the description', async () => {
-		const src = `
+		it('should describe slot using the description', async () => {
+			const src = `
 export default {
   /**
    * @slot
@@ -92,15 +93,15 @@ export default {
   }
 }
 `
-		const def = parse(src)
-		if (def) {
-			await slotHandlerLitteral(documentation, def)
-		}
-		expect(mockSlotDescriptor.description).toBe('describe the default slot')
-	})
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(mockSlotDescriptor.description).toBe('describe the default slot')
+		})
 
-	it('should allow binding description', async () => {
-		const src = `
+		it('should allow binding description', async () => {
+			const src = `
 export default {
   /**
    * @slot
@@ -112,10 +113,112 @@ export default {
   }
 }
 `
-		const def = parse(src)
-		if (def) {
-			await slotHandlerLitteral(documentation, def)
-		}
-		expect(mockSlotDescriptor.bindings).toMatchObject([{ name: 'index' }, { name: 'content' }])
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(mockSlotDescriptor.bindings).toMatchObject([{ name: 'index' }, { name: 'content' }])
+		})
+	})
+
+	describe('setup functions', () => {
+		it('should provide an escape hatch for unexpected slots', async () => {
+			const src = `
+export default {
+  /**
+   * @slot icon
+   */
+  setup() {
+	  // anything in here I don't care
+  }
+}
+`
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('icon')
+		})
+
+		it('should allow for multiple slots', async () => {
+			const src = `
+export default {
+  /**
+   * @slot one
+   */
+  /**
+   * @slot two
+   */
+  setup: function () {
+	  // anything in here I don't care
+  }
+}
+`
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('one')
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('two')
+		})
+
+		it('should use default is no name is provided', async () => {
+			const src = `
+export default {
+  /**
+   * @slot
+   */
+  setup: function () {
+	  // anything in here I don't care
+  }
+}
+`
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(documentation.getSlotDescriptor).toHaveBeenCalledWith('default')
+		})
+
+		it('should describe slot using the description', async () => {
+			const src = `
+export default {
+  /**
+   * @slot
+   * describe the default slot
+   */
+  setup: function () {
+	  // anything in here I don't care
+  }
+}
+`
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(mockSlotDescriptor.description).toBe('describe the default slot')
+		})
+
+		it('should allow binding description', async () => {
+			const src = `
+export default {
+  /**
+   * @slot
+   * @binding {number} index the index in the list
+   * @binding {string} content text of the item
+   */
+  setup: function () {
+	  // anything in here I don't care
+  }
+}
+`
+			const def = parse(src)
+			if (def) {
+				await slotHandlerLitteral(documentation, def)
+			}
+			expect(mockSlotDescriptor.bindings).toMatchObject([{ name: 'index' }, { name: 'content' }])
+		})
 	})
 })
+
+

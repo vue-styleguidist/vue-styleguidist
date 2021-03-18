@@ -2,6 +2,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+/** @type import("vue-styleguidist").Config */
 module.exports = {
 	jsxInExamples: true,
 	simpleEditor: true,

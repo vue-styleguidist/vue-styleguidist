@@ -157,7 +157,13 @@ export default function (
 					publicPath: config.styleguidePublicPath
 				},
 				devServer: {
-					publicPath: config.styleguidePublicPath
+					publicPath: config.styleguidePublicPath,
+					// Use 'ws' instead of 'sockjs-node' on server since we're using native
+					// websockets in `webpackHotDevClient`.
+					transportMode: 'ws',
+					// Prevent a WS client from getting injected as we're already including
+					// `webpackHotDevClient`.
+					injectClient: false
 				},
 				plugins: [new webpack.HotModuleReplacementPlugin()],
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]

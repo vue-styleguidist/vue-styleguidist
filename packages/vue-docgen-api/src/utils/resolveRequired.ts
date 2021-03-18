@@ -36,7 +36,9 @@ export default function resolveRequired(
 
 					const exportName = bt.isImportDefaultSpecifier(nodeSpecifier)
 						? 'default'
-						: nodeSpecifier.imported.name
+						: bt.isIdentifier(nodeSpecifier.imported)
+						? nodeSpecifier.imported.name
+						: 'default'
 
 					if (!varNameFilter || varNameFilter.indexOf(localVariableName) > -1) {
 						const nodeSource = (astPath.get('source') as NodePath<bt.Literal>).node

@@ -1,6 +1,7 @@
 const path = require('path')
 const templates = require('./docs/templates')
 
+/** @type import("vue-docgen-cli").DocgenCLIConfig */
 module.exports = {
 	docsRepo: 'vue-styleguidist/vue-styleguidist',
 	docsBranch: 'dev',

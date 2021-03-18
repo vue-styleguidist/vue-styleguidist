@@ -1,5 +1,6 @@
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+/** @type import("vue-styleguidist").Config */
 module.exports = {
 	// set your styleguidist configuration here
 	title: 'Default Style Guide',
