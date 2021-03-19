@@ -207,12 +207,14 @@ export default function resolveExportedComponent(
 }
 
 function normalizeComponentPath(path: NodePath): NodePath {
+	if (bt.isVariableDeclarator(path.node)) {
+		path = path.get('init')
+	}
+
 	if (bt.isObjectExpression(path.node)) {
 		return path
 	} else if (bt.isCallExpression(path.node)) {
 		return path.get('arguments', 0)
-	} else if (bt.isVariableDeclarator(path.node)) {
-		return path.get('init')
 	}
 	return path
 }
