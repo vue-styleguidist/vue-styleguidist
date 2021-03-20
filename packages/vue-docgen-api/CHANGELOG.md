@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.36.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.0...v4.36.1) (2021-03-20)
+
+
+### Bug Fixes
+
+* load export const name = Vue.extends all good ([2e760c9](https://github.com/vue-styleguidist/vue-styleguidist/commit/2e760c9691a9b7c927341afd4407dfa2b11f055c)), closes [#1069](https://github.com/vue-styleguidist/vue-styleguidist/issues/1069)
+
+
+
+
+
 # [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
 
 
