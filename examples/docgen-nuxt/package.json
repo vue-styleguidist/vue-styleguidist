@@ -28,6 +28,7 @@
 		"null-loader": "^4.0.1",
 		"nuxt": "^2.14.6",
 		"remark-plugin-vue-live": "^1.0.5",
+		"vue": "^2.6.12",
 		"vue-docgen-api": "^4.32.4",
 		"vue-docgen-cli": "^4.31.1",
 		"vue-inbrowser-compiler-utils": "^4.32.1",
