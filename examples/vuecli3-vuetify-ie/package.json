@@ -18,6 +18,7 @@
 		"styleguide:build": "vue-cli-service styleguidist:build"
 	},
 	"dependencies": {
+		"dog-names": "^1.0.2",
 		"vue": "^2.6.12",
 		"vue-i18n": "^8.21.0",
 		"vuetify": "^2.0.0"
