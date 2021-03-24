@@ -21,12 +21,12 @@
 		"camelcase": "^5.3.1"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^15.0.0",
+		"@rollup/plugin-commonjs": "^15.1.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@types/domhandler": "^2.4.1",
-		"rollup": "^2.26.3",
-		"rollup-plugin-typescript2": "^0.27.2",
-		"vue": "^2.6.10"
+		"rollup": "^2.42.3",
+		"rollup-plugin-typescript2": "^0.27.3",
+		"vue": "^2.6.12"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",
 	"license": "MIT"

@@ -3,12 +3,12 @@
 basic
 customised
 dashed-component
-jsx-examples
 functional-flag
+jsx
+jsx-examples
+router
 sections
 svg-loader
-jsx
-router
 vueds
 vuetify
 vuex
