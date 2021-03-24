@@ -19,6 +19,7 @@
 		"node": ">=4"
 	},
 	"dependencies": {
+		"@babel/runtime": "^7.13.10",
 		"dog-names": "^1.0.2"
 	},
 	"scripts": {
@@ -28,26 +29,26 @@
 		"docs:build": "vue-docgen && vuepress build docs"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.2.2",
-		"@babel/plugin-transform-react-jsx": "^7.3.0",
-		"@babel/plugin-transform-runtime": "^7.2.0",
-		"@babel/preset-env": "^7.3.1",
-		"babel-core": "^7.0.0-bridge.0",
-		"babel-loader": "^8.0.5",
+		"@babel/core": "^7.13.10",
+		"@babel/plugin-transform-react-jsx": "^7.13.12",
+		"@babel/plugin-transform-runtime": "^7.13.10",
+		"@babel/preset-env": "^7.13.12",
+		"babel-loader": "^8.2.2",
 		"babel-plugin-transform-vue-jsx": "4.0.1",
-		"concurrently": "^4.1.1",
+		"concurrently": "^4.1.2",
 		"css-loader": "^3.6.0",
-		"lodash": "^4.17.15",
-		"node-sass": "^4.13.0",
+		"lodash": "^4.17.21",
+		"node-sass": "^4.14.1",
 		"prop-types": "^15.7.2",
-		"react": "^17.0.1",
-		"sass-loader": "^8.0.0",
-		"style-loader": "^0.19.0",
+		"react": "^17.0.2",
+		"sass-loader": "^8.0.2",
+		"style-loader": "^0.19.1",
 		"url-loader": "^1.1.2",
-		"vue-docgen-cli": "^3.20.0",
-		"vue-loader": "^15.2.4",
-		"vue-styleguidist": "^4.0.0",
-		"webpack": "^4.44.1",
+		"vue": "2.6.12",
+		"vue-docgen-cli": "^3.26.0",
+		"vue-loader": "^15.9.6",
+		"vue-styleguidist": "workspace:^4.36.1",
+		"webpack": "^4.46.0",
 		"webpack-bundle-analyzer": "3.3.2"
 	}
 }

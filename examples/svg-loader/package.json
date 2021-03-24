@@ -14,15 +14,15 @@
 		"vue": "^2.6.12"
 	},
 	"devDependencies": {
-		"@vue/babel-preset-app": "^4.5.4",
-		"@vue/cli-plugin-babel": "^4.0.5",
-		"@vue/cli-plugin-eslint": "^4.0.5",
-		"@vue/cli-service": "^4.0.5",
+		"@vue/babel-preset-app": "^4.5.12",
+		"@vue/cli-plugin-babel": "^4.5.12",
+		"@vue/cli-plugin-eslint": "^4.5.12",
+		"@vue/cli-service": "^4.5.12",
 		"autoprefixer": "^9.8.6",
-		"vue-cli-plugin-styleguidist": "^4.0.0",
+		"vue-cli-plugin-styleguidist": "workspace:^4.36.1",
 		"vue-svg-loader": "^0.16.0",
 		"vue-template-compiler": "^2.6.12",
-		"webpack-bundle-analyzer": "^3.3.2"
+		"webpack-bundle-analyzer": "^3.9.0"
 	},
 	"eslintConfig": {
 		"root": true,

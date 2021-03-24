@@ -3,12 +3,13 @@
 basic
 customised
 dashed-component
-vueds
-jsx-examples
 functional-flag
-svg-loader
 jsx
+jsx-examples
 router
+sections
+svg-loader
+vueds
 vuetify
 vuex
 with-laravel-token
@@ -16,10 +17,10 @@ with-sass-loader
 
 # build examples with docgen and vuepress
 docgen
+docgen-nuxt
 
 # nuxtjs
 nuxtjs
-nuxtjs-ts-property-decorator
 
 # build cli examples to make sure they build
 vuecli-noplugin
