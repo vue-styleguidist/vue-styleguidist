@@ -23,10 +23,11 @@
 	},
 	"dependencies": {
 		"@nuxt/content-theme-docs": "^0.10.2",
+		"@nuxt/content": "^1.14.0",
 		"concurrently": "^5.3.0",
 		"minimatch": "^3.0.4",
 		"null-loader": "^4.0.1",
-		"nuxt": "^2.14.6",
+		"nuxt": "^2.15.3",
 		"remark-plugin-vue-live": "^1.0.5",
 		"vue": "^2.6.12",
 		"vue-docgen-api": "^4.32.4",

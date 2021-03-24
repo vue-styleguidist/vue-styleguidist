@@ -291,6 +291,7 @@ importers:
       webpack-dev-server: ^3.11.0
   examples/docgen-nuxt:
     dependencies:
+      '@nuxt/content': 1.14.0
       '@nuxt/content-theme-docs': 0.10.2
       concurrently: 5.3.0
       minimatch: 3.0.4
@@ -304,11 +305,12 @@ importers:
       vue-live: 1.16.0_vue@2.6.12
       vue-simple-docgen-loader: link:../../packages/vue-simple-docgen-loader
     specifiers:
+      '@nuxt/content': ^1.14.0
       '@nuxt/content-theme-docs': ^0.10.2
       concurrently: ^5.3.0
       minimatch: ^3.0.4
       null-loader: ^4.0.1
-      nuxt: ^2.14.6
+      nuxt: ^2.15.3
       remark-plugin-vue-live: ^1.0.5
       vue: ^2.6.12
       vue-docgen-api: ^4.32.4
