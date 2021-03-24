@@ -18,6 +18,7 @@
 		"node": ">=4"
 	},
 	"dependencies": {
+		"@babel/runtime": "^7.11.2",
 		"@znck/prop-types": "^0.6.1",
 		"dog-names": "^1.0.2",
 		"lodash": "^4.17.15",
