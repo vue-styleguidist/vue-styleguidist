@@ -11,6 +11,7 @@ const FILTERED_PLUGINS = [
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+/** @type import("vue-styleguidist").Config */
 module.exports = async () => {
 	// get the webpack config directly from nuxt
 	const nuxtWebpackConfig = await getWebpackConfig('client', {
