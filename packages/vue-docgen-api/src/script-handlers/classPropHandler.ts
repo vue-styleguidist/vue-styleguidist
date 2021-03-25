@@ -13,21 +13,24 @@ import propHandler, {
 	getValuesFromTypeAnnotation
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
+import { ParseOptions } from '../parse'
 
 /**
  * Extracts prop information from a class-style VueJs component
  * @param documentation
  * @param path
  */
-export default function classPropHandler(
+export default async function classPropHandler(
 	documentation: Documentation,
-	path: NodePath<bt.ClassDeclaration>
+	path: NodePath<bt.ClassDeclaration>,
+	ast: bt.File,
+	opt: ParseOptions
 ): Promise<void> {
 	if (bt.isClassDeclaration(path.node)) {
 		const config = getArgFromDecorator(path.get('decorators') as NodePath<bt.Decorator>)
 
 		if (config && bt.isObjectExpression(config.node)) {
-			propHandler(documentation, config)
+			await propHandler(documentation, config, ast, opt)
 		}
 
 		path
