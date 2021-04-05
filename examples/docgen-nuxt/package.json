@@ -38,8 +38,8 @@
 		"ufo": "^0.6.10",
 		"vue": "^2.6.12",
 		"vue-client-only": "^2.0.0",
-		"vue-docgen-api": "workspace:^4.36.1",
-		"vue-docgen-cli": "workspace:^4.36.1",
+		"vue-docgen-api": "^4.36.1",
+		"vue-docgen-cli": "^4.36.1",
 		"vue-i18n": "^8.24.2",
 		"vue-inbrowser-compiler-utils": "workspace:^4.33.6",
 		"vue-live": "^1.16.0",
@@ -47,7 +47,7 @@
 		"vue-no-ssr": "^1.1.1",
 		"vue-router": "^3.5.1",
 		"vue-scrollactive": "^0.9.3",
-		"vue-simple-docgen-loader": "workspace:^4.36.1",
+		"vue-simple-docgen-loader": "^4.36.1",
 		"vuex": "^3.6.2"
 	}
 }

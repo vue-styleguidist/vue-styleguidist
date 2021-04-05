@@ -19,7 +19,7 @@
 		"@vue/cli-plugin-eslint": "^4.5.12",
 		"@vue/cli-service": "^4.5.12",
 		"autoprefixer": "^9.8.6",
-		"vue-cli-plugin-styleguidist": "workspace:^4.36.1",
+		"vue-cli-plugin-styleguidist": "^4.36.1",
 		"vue-svg-loader": "^0.16.0",
 		"vue-template-compiler": "^2.6.12",
 		"webpack-bundle-analyzer": "^3.9.0"

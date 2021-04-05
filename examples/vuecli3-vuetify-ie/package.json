@@ -31,7 +31,7 @@
 		"babel-polyfill": "^6.26.0",
 		"sass": "^1.32.8",
 		"sass-loader": "^8.0.2",
-		"vue-cli-plugin-styleguidist": "workspace:^4.36.1",
+		"vue-cli-plugin-styleguidist": "^4.36.1",
 		"vue-cli-plugin-vuetify": "^0.6.3",
 		"vue-template-compiler": "^2.6.12",
 		"vuetify-loader": "^1.7.2"

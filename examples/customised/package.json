@@ -47,7 +47,7 @@
 		"vue": "2.6.12",
 		"vue-docgen-cli": "^3.26.0",
 		"vue-loader": "^15.9.6",
-		"vue-styleguidist": "workspace:^4.36.1",
+		"vue-styleguidist": "^4.36.1",
 		"webpack": "^4.46.0",
 		"webpack-bundle-analyzer": "3.3.2"
 	}

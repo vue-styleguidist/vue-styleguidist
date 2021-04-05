@@ -38,7 +38,7 @@
 		"style-loader": "^0.19.1",
 		"vue": "^2.6.12",
 		"vue-loader": "^15.9.6",
-		"vue-styleguidist": "workspace:^4.36.1",
+		"vue-styleguidist": "^4.36.1",
 		"vue-template-compiler": "^2.6.12",
 		"webpack": "^4.46.0",
 		"webpack-bundle-analyzer": "3.3.2"

@@ -1,17 +1,17 @@
 {
-  "name": "vue-styleguidist-example-vuecli-noplugin",
-  "version": "4.0.0",
-  "description": "What happens if you try to use the Vue CLI 3, install styleguidist, and omit to use the plugin",
-  "private": true,
-  "scripts": {
-    "styleguide": "vue-styleguidist serve",
-    "styleguide:build": "vue-styleguidist build"
-  },
-  "dependencies": {
-    "vue": "^2.6.12"
-  },
-  "devDependencies": {
-    "@vue/cli-service": "^4.5.12",
-    "vue-styleguidist": "workspace:^4.36.1"
-  }
+	"name": "vue-styleguidist-example-vuecli-noplugin",
+	"version": "4.0.0",
+	"description": "What happens if you try to use the Vue CLI 3, install styleguidist, and omit to use the plugin",
+	"private": true,
+	"scripts": {
+		"styleguide": "vue-styleguidist serve",
+		"styleguide:build": "vue-styleguidist build"
+	},
+	"dependencies": {
+		"vue": "^2.6.12"
+	},
+	"devDependencies": {
+		"@vue/cli-service": "^4.5.12",
+		"vue-styleguidist": "^4.36.1"
+	}
 }

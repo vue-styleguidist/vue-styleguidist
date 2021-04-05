@@ -39,7 +39,7 @@
 		"node-sass": "^4.14.1",
 		"sass-loader": "^8.0.2",
 		"style-loader": "^0.19.1",
-		"vue-styleguidist": "workspace:^4.36.1",
+		"vue-styleguidist": "^4.36.1",
 		"webpack": "^4.46.0",
 		"webpack-bundle-analyzer": "3.3.2"
 	}

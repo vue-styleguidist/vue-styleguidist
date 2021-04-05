@@ -40,7 +40,7 @@
 		"sass-loader": "^8.0.2",
 		"vue-loader": "15.9.3",
 		"vue-style-loader": "^4.1.3",
-		"vue-styleguidist": "workspace:^4.36.1",
+		"vue-styleguidist": "^4.36.1",
 		"webpack": "^4.46.0"
 	}
 }
