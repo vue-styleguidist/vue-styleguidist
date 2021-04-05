@@ -92,7 +92,7 @@ jobs:
         - git checkout delivery
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - npx lerna version --yes --github-release
+        - npx lerna version --yes --create-release=github
         - npx lerna publish from-git --yes
 
     - stage: release-beta
@@ -103,7 +103,7 @@ jobs:
         - git checkout next
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - npx lerna version -- --yes --github-release --conventional-prerelease --preid beta
+        - npx lerna version -- --yes --create-release=github --conventional-prerelease --preid beta
         - npx lerna publish from-git -- --yes --dist-tag next
 
     # then merge the whole thing back to dev
