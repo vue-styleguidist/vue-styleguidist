@@ -344,7 +344,7 @@ importers:
       vue-docgen-api: ^4.36.1
       vue-docgen-cli: ^4.36.1
       vue-i18n: ^8.24.2
-      vue-inbrowser-compiler-utils: workspace:^4.33.6
+      vue-inbrowser-compiler-utils: ^4.33.6
       vue-live: ^1.16.0
       vue-meta: ^2.4.0
       vue-no-ssr: ^1.1.1
@@ -1003,7 +1003,7 @@ importers:
     specifiers:
       '@babel/parser': ^7.13.12
       '@babel/types': ^7.13.12
-      '@test-vue-docgen/mixins': workspace:3.15.4
+      '@test-vue-docgen/mixins': 3.15.4
       '@types/pug': ^2.0.4
       '@vue/compiler-dom': ^3.0.7
       '@vue/compiler-sfc': ^3.0.7
@@ -1017,7 +1017,7 @@ importers:
       vue: ^2.6.12
       vue-class-component: ^7.2.6
       vue-clickaway: ^2.2.2
-      vue-inbrowser-compiler-utils: workspace:^4.33.6
+      vue-inbrowser-compiler-utils: ^4.33.6
       vue-property-decorator: ^7.3.0
       vuetify: ^2.4.8
   packages/vue-docgen-cli:
@@ -1078,7 +1078,7 @@ importers:
       rollup-plugin-typescript2: ^0.27.3
       typescript: ^4.2.3
       vue: ^2.6.12
-      vue-inbrowser-compiler-utils: workspace:^4.33.6
+      vue-inbrowser-compiler-utils: ^4.33.6
       walkes: ^0.2.1
   packages/vue-inbrowser-compiler-utils:
     dependencies:
@@ -1289,8 +1289,8 @@ importers:
       to-ast: ^1.0.0
       vue: 2.6.12
       vue-docgen-api: ^4.36.1
-      vue-inbrowser-compiler: workspace:^4.33.6
-      vue-inbrowser-compiler-utils: workspace:^4.33.6
+      vue-inbrowser-compiler: ^4.33.6
+      vue-inbrowser-compiler-utils: ^4.33.6
       vue-template-compiler: 2.6.12
       webpack: ^4.46.0
       webpack-dev-server: ^3.11.2

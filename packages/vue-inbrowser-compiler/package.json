@@ -23,7 +23,7 @@
 		"buble": "^0.19.8",
 		"camelcase": "^5.3.1",
 		"detect-browser": "^5.2.0",
-		"vue-inbrowser-compiler-utils": "workspace:^4.33.6",
+		"vue-inbrowser-compiler-utils": "^4.33.6",
 		"walkes": "^0.2.1"
 	},
 	"devDependencies": {

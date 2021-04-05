@@ -41,7 +41,7 @@
 		"vue-docgen-api": "^4.36.1",
 		"vue-docgen-cli": "^4.36.1",
 		"vue-i18n": "^8.24.2",
-		"vue-inbrowser-compiler-utils": "workspace:^4.33.6",
+		"vue-inbrowser-compiler-utils": "^4.33.6",
 		"vue-live": "^1.16.0",
 		"vue-meta": "^2.4.0",
 		"vue-no-ssr": "^1.1.1",

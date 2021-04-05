@@ -38,10 +38,10 @@
 		"pug": "^3.0.2",
 		"recast": "0.19.1",
 		"ts-map": "^1.0.3",
-		"vue-inbrowser-compiler-utils": "workspace:^4.33.6"
+		"vue-inbrowser-compiler-utils": "^4.33.6"
 	},
 	"devDependencies": {
-		"@test-vue-docgen/mixins": "workspace:3.15.4",
+		"@test-vue-docgen/mixins": "3.15.4",
 		"@types/pug": "^2.0.4",
 		"globby": "^10.0.2",
 		"vue": "^2.6.12",
