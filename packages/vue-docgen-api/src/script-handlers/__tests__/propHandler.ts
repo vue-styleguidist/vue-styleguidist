@@ -24,10 +24,10 @@ describe('propHandler', () => {
 	let documentation: Documentation
 	let mockPropDescriptor: PropDescriptor
 
-	let ast: bt.File
+	let defaultAST: bt.File
 	const options = { filePath: '', validExtends: () => true }
 	beforeAll(() => {
-		ast = babylon({ plugins: ['typescript'] }).parse('const a  = 1')
+		defaultAST = babylon({ plugins: ['typescript'] }).parse('const a  = 1')
 	})
 
 	beforeEach(() => {
@@ -42,7 +42,11 @@ describe('propHandler', () => {
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 
-	async function parserTest(src: string, plugins?: ParserPlugin[]): Promise<PropDescriptor> {
+	async function parserTest(
+		src: string,
+		plugins?: ParserPlugin[],
+		ast = defaultAST
+	): Promise<PropDescriptor> {
 		const def = parse(src, plugins)
 		if (def) {
 			await propHandler(documentation, def, ast, options)
@@ -58,7 +62,7 @@ describe('propHandler', () => {
         }`
 			const def = parse(src)
 			if (def) {
-				await propHandler(documentation, def, ast, options)
+				await propHandler(documentation, def, defaultAST, options)
 			}
 			expect(mockPropDescriptor.required).toBeFalsy()
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testArray')
@@ -136,7 +140,7 @@ describe('propHandler', () => {
         `
 			const def = parse(src)
 			if (def) {
-				propHandler(documentation, def, ast, options)
+				propHandler(documentation, def, defaultAST, options)
 			}
 			expect(mockPropDescriptor.required).toBeUndefined()
 		})
@@ -540,7 +544,7 @@ describe('propHandler', () => {
 			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
 		})
 
-		it('should check the validator arrow function for super standard values', async () => {
+		it('should check the validator arrow function for inline values', async () => {
 			const src = `
   export default {
     props: {
@@ -557,7 +561,7 @@ describe('propHandler', () => {
 
 		it('should check the validator method for identifiers', async () => {
 			const src = `
-	const array = ['dark', 'light', 'red', 'blue']
+  const array = ['dark', 'light', 'red', 'blue']
   export default {
     props: {
         color: {
@@ -569,7 +573,12 @@ describe('propHandler', () => {
     }
   }
   `
-			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+			expect((await parserTest(src, undefined, babylon().parse(src))).values).toMatchObject([
+				'dark',
+				'light',
+				'red',
+				'blue'
+			])
 		})
 	})
 
