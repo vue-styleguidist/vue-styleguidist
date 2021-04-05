@@ -261,7 +261,7 @@ importers:
       vue-docgen-cli: link:../../packages/vue-docgen-cli
       vue-loader: 15.9.6_f8bf3b1096e2fb3a391e79c9b1b9ec67
       vue-template-compiler: 2.6.12
-      vuepress: 1.8.2
+      vuepress: 1.8.2_webpack-cli@4.5.0
       vuepress-plugin-live: 1.6.2_vue@2.6.12
       webpack: 4.46.0_webpack-cli@4.5.0
       webpack-bundle-analyzer: 3.3.2
@@ -964,7 +964,7 @@ importers:
       '@vue/cli-test-utils': ^4.5.12
       null-loader: ^0.1.1
       typescript: ^3.9.9
-      vue-docgen-cli: ^4.36.1
+      vue-docgen-cli: ^4.37.0
       webpack-merge: ^4.2.2
   packages/vue-cli-plugin-styleguidist:
     dependencies:
@@ -976,7 +976,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.5.12
       '@vue/cli-test-utils': ^4.5.12
-      vue-styleguidist: ^4.36.1
+      vue-styleguidist: ^4.37.0
       webpack-merge: ^4.2.2
   packages/vue-docgen-api:
     dependencies:
@@ -1017,7 +1017,7 @@ importers:
       vue: ^2.6.12
       vue-class-component: ^7.2.6
       vue-clickaway: ^2.2.2
-      vue-inbrowser-compiler-utils: ^4.33.6
+      vue-inbrowser-compiler-utils: ^4.37.0
       vue-property-decorator: ^7.3.0
       vuetify: ^2.4.8
   packages/vue-docgen-cli:
@@ -1045,7 +1045,7 @@ importers:
       minimist: ^1.2.5
       mkdirp: ^0.5.5
       prettier: ^1.19.1
-      vue-docgen-api: ^4.36.1
+      vue-docgen-api: ^4.37.0
   packages/vue-inbrowser-compiler:
     dependencies:
       acorn: 6.4.2
@@ -1078,7 +1078,7 @@ importers:
       rollup-plugin-typescript2: ^0.27.3
       typescript: ^4.2.3
       vue: ^2.6.12
-      vue-inbrowser-compiler-utils: ^4.33.6
+      vue-inbrowser-compiler-utils: ^4.37.0
       walkes: ^0.2.1
   packages/vue-inbrowser-compiler-utils:
     dependencies:
@@ -1106,7 +1106,7 @@ importers:
     specifiers:
       escodegen: ^1.14.3
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.36.1
+      vue-docgen-api: ^4.37.0
   packages/vue-styleguidist:
     dependencies:
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -1288,9 +1288,9 @@ importers:
       terser-webpack-plugin: ^2.3.8
       to-ast: ^1.0.0
       vue: 2.6.12
-      vue-docgen-api: ^4.36.1
-      vue-inbrowser-compiler: ^4.33.6
-      vue-inbrowser-compiler-utils: ^4.33.6
+      vue-docgen-api: ^4.37.0
+      vue-inbrowser-compiler: ^4.37.0
+      vue-inbrowser-compiler-utils: ^4.37.0
       vue-template-compiler: 2.6.12
       webpack: ^4.46.0
       webpack-dev-server: ^3.11.2
@@ -5331,6 +5331,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-13w1VhaghN+G1rYjkBPgN/GFRoHd9uI2fwK9cSKvLutdmZ22L9iicFEvt69by40DP2I6uNcClaGTyPY6nYhIgQ==
+  /@types/webpack-dev-server/3.11.2_debug@4.3.1:
+    dependencies:
+      '@types/connect-history-api-fallback': 1.3.4
+      '@types/express': 4.17.11
+      '@types/serve-static': 1.13.9
+      '@types/webpack': 4.41.26
+      http-proxy-middleware: 1.0.6_debug@4.3.1
+    dev: true
+    peerDependencies:
+      debug: '*'
+    resolution:
+      integrity: sha512-13w1VhaghN+G1rYjkBPgN/GFRoHd9uI2fwK9cSKvLutdmZ22L9iicFEvt69by40DP2I6uNcClaGTyPY6nYhIgQ==
   /@types/webpack-env/1.16.0:
     dev: true
     resolution:
@@ -5760,7 +5772,7 @@ packages:
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.1
       '@types/webpack': 4.41.26
-      '@types/webpack-dev-server': 3.11.2
+      '@types/webpack-dev-server': 3.11.2_debug@4.3.1
       '@vue/cli-overlay': 4.5.12
       '@vue/cli-plugin-router': 4.5.12_@vue+cli-service@4.5.12
       '@vue/cli-plugin-vuex': 4.5.12_@vue+cli-service@4.5.12
@@ -5848,7 +5860,7 @@ packages:
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.1
       '@types/webpack': 4.41.26
-      '@types/webpack-dev-server': 3.11.2
+      '@types/webpack-dev-server': 3.11.2_debug@4.3.1
       '@vue/cli-overlay': 4.5.12
       '@vue/cli-plugin-router': 4.5.12_@vue+cli-service@4.5.12
       '@vue/cli-plugin-vuex': 4.5.12_@vue+cli-service@4.5.12
@@ -5938,7 +5950,7 @@ packages:
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.1
       '@types/webpack': 4.41.26
-      '@types/webpack-dev-server': 3.11.2
+      '@types/webpack-dev-server': 3.11.2_debug@4.3.1
       '@vue/cli-overlay': 4.5.12
       '@vue/cli-plugin-router': 4.5.12_@vue+cli-service@4.5.12
       '@vue/cli-plugin-vuex': 4.5.12_@vue+cli-service@4.5.12
@@ -6030,7 +6042,7 @@ packages:
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.1
       '@types/webpack': 4.41.26
-      '@types/webpack-dev-server': 3.11.2
+      '@types/webpack-dev-server': 3.11.2_debug@4.3.1
       '@vue/cli-overlay': 4.5.12
       '@vue/cli-plugin-router': 4.5.12_@vue+cli-service@4.5.12
       '@vue/cli-plugin-vuex': 4.5.12_@vue+cli-service@4.5.12
@@ -6404,8 +6416,56 @@ packages:
       webpack-dev-server: 3.11.2_webpack@4.46.0
       webpack-merge: 4.2.2
       webpackbar: 3.2.0_webpack@4.46.0
+    dev: true
     engines:
       node: '>=8.6'
+    resolution:
+      integrity: sha512-lh9BLC06k9s0wxTuWtCkiNj49fkbW87enp0XSrFZHEoyDGSGndQjZmMMErcHc5Hx7nrW1nzc33sPH1NNtJl0hw==
+  /@vuepress/core/1.8.2_webpack-cli@4.5.0:
+    dependencies:
+      '@babel/core': 7.13.10
+      '@vue/babel-preset-app': 4.5.12_vue@2.6.12
+      '@vuepress/markdown': 1.8.2
+      '@vuepress/markdown-loader': 1.8.2
+      '@vuepress/plugin-last-updated': 1.8.2
+      '@vuepress/plugin-register-components': 1.8.2
+      '@vuepress/shared-utils': 1.8.2
+      autoprefixer: 9.8.6
+      babel-loader: 8.2.2_c68979f8893c692eeb1a0b70960ae2d4
+      cache-loader: 3.0.1_webpack@4.46.0
+      chokidar: 2.1.8
+      connect-history-api-fallback: 1.6.0
+      copy-webpack-plugin: 5.1.2_webpack@4.46.0
+      core-js: 3.9.1
+      cross-spawn: 6.0.5
+      css-loader: 2.1.1_webpack@4.46.0
+      file-loader: 3.0.1_webpack@4.46.0
+      js-yaml: 3.14.1
+      lru-cache: 5.1.1
+      mini-css-extract-plugin: 0.6.0_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.4_webpack@4.46.0
+      portfinder: 1.0.28
+      postcss-loader: 3.0.0
+      postcss-safe-parser: 4.0.2
+      toml: 3.0.0
+      url-loader: 1.1.2_webpack@4.46.0
+      vue: 2.6.12
+      vue-loader: 15.9.6_cdfaccc535dd293eec52a3fbf989b5e0
+      vue-router: 3.5.1
+      vue-server-renderer: 2.6.12
+      vue-template-compiler: 2.6.12
+      vuepress-html-webpack-plugin: 3.2.0_webpack@4.46.0
+      vuepress-plugin-container: 2.1.5
+      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack-chain: 6.5.1
+      webpack-dev-server: 3.11.2_webpack-cli@4.5.0+webpack@4.46.0
+      webpack-merge: 4.2.2
+      webpackbar: 3.2.0_webpack@4.46.0
+    dev: false
+    engines:
+      node: '>=8.6'
+    peerDependencies:
+      webpack-cli: '*'
     resolution:
       integrity: sha512-lh9BLC06k9s0wxTuWtCkiNj49fkbW87enp0XSrFZHEoyDGSGndQjZmMMErcHc5Hx7nrW1nzc33sPH1NNtJl0hw==
   /@vuepress/markdown-loader/1.8.2:
@@ -13741,6 +13801,20 @@ packages:
       micromatch: 4.0.2
     engines:
       node: '>=8.0.0'
+    resolution:
+      integrity: sha512-NyL6ZB6cVni7pl+/IT2W0ni5ME00xR0sN27AQZZrpKn1b+qRh+mLbBxIq9Cq1oGfmTc7BUq4HB77mxwCaxAYNg==
+  /http-proxy-middleware/1.0.6_debug@4.3.1:
+    dependencies:
+      '@types/http-proxy': 1.17.5
+      http-proxy: 1.18.1_debug@4.3.1
+      is-glob: 4.0.1
+      lodash: 4.17.21
+      micromatch: 4.0.2
+    dev: true
+    engines:
+      node: '>=8.0.0'
+    peerDependencies:
+      debug: '*'
     resolution:
       integrity: sha512-NyL6ZB6cVni7pl+/IT2W0ni5ME00xR0sN27AQZZrpKn1b+qRh+mLbBxIq9Cq1oGfmTc7BUq4HB77mxwCaxAYNg==
   /http-proxy/1.18.1:
@@ -24285,9 +24359,27 @@ packages:
       envinfo: 7.7.4
       opencollective-postinstall: 2.0.3
       update-notifier: 4.1.3
+    dev: true
     engines:
       node: '>=8.6'
     hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-BU1lUDwsA3ghf7a9ga4dsf0iTc++Z/l7BR1kUagHWVBHw7HNRgRDfAZBDDQXhllMILVToIxaTifpne9mSi94OA==
+  /vuepress/1.8.2_webpack-cli@4.5.0:
+    dependencies:
+      '@vuepress/core': 1.8.2_webpack-cli@4.5.0
+      '@vuepress/theme-default': 1.8.2
+      cac: 6.7.2
+      envinfo: 7.7.4
+      opencollective-postinstall: 2.0.3
+      update-notifier: 4.1.3
+    dev: false
+    engines:
+      node: '>=8.6'
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
     requiresBuild: true
     resolution:
       integrity: sha512-BU1lUDwsA3ghf7a9ga4dsf0iTc++Z/l7BR1kUagHWVBHw7HNRgRDfAZBDDQXhllMILVToIxaTifpne9mSi94OA==
@@ -24551,7 +24643,7 @@ packages:
       mime: 2.5.2
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
       webpack-log: 2.0.0
     engines:
       node: '>= 6'
