@@ -1,12 +1,12 @@
 {
 	"name": "vue-simple-docgen-loader",
-	"version": "4.36.1",
+	"version": "4.37.0",
 	"description": "a webpack loader to get vue components docs from a simple require",
 	"main": "index.js",
 	"dependencies": {
 		"escodegen": "^1.14.3",
 		"to-ast": "^1.0.0",
-		"vue-docgen-api": "^4.36.1"
+		"vue-docgen-api": "^4.37.0"
 	},
 	"repository": {
 		"type": "git",

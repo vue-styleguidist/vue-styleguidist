@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.37.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.1...v4.37.0) (2021-04-05)
+
+
+### Features
+
+* **docgen:** add support for Identifier when parsing validators ([#1076](https://github.com/vue-styleguidist/vue-styleguidist/issues/1076)) ([5f0d089](https://github.com/vue-styleguidist/vue-styleguidist/commit/5f0d089bd4159f5098148df67db5339e473da6d9))
+
+
+
+
+
 ## [4.36.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.0...v4.36.1) (2021-03-20)
 
 

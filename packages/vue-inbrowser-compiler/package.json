@@ -1,6 +1,6 @@
 {
 	"name": "vue-inbrowser-compiler",
-	"version": "4.33.6",
+	"version": "4.37.0",
 	"description": "compile vue single file components right in your browser",
 	"module": "lib/vue-inbrowser-compiler.esm.js",
 	"main": "lib/vue-inbrowser-compiler.cjs.js",
@@ -23,7 +23,7 @@
 		"buble": "^0.19.8",
 		"camelcase": "^5.3.1",
 		"detect-browser": "^5.2.0",
-		"vue-inbrowser-compiler-utils": "^4.33.6",
+		"vue-inbrowser-compiler-utils": "^4.37.0",
 		"walkes": "^0.2.1"
 	},
 	"devDependencies": {
