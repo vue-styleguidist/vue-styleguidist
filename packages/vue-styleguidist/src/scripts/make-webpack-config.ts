@@ -1,4 +1,5 @@
 import * as path from 'path'
+import * as fs from 'fs'
 import webpack, { Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
@@ -179,15 +180,13 @@ export default function (
 
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
-	require('fs')
-		.readdirSync(sourceSrc)
-		.forEach((component: string) => {
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
-			// plus in order to avoid cirular references, add an extra ref to the defaults
-			// so that custom components can reference their defaults
-			webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-				webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`]
-		})
+	fs.readdirSync(sourceSrc).forEach((component: string) => {
+		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
+		// plus in order to avoid cirular references, add an extra ref to the defaults
+		// so that custom components can reference their defaults
+		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+	})
 
 	// For some components, the alias model is a little more complicated,
 	// because we only override a part of the directory

@@ -18,22 +18,23 @@
 		"styleguide:build": "vue-cli-service styleguidist:build"
 	},
 	"dependencies": {
+		"dog-names": "^1.0.2",
 		"vue": "^2.6.12",
-		"vue-i18n": "^8.21.0",
-		"vuetify": "^2.0.0"
+		"vue-i18n": "^8.24.2",
+		"vuetify": "^2.4.8"
 	},
 	"devDependencies": {
-		"@babel/preset-env": "^7.4.4",
-		"@vue/cli-plugin-babel": "^4.0.5",
-		"@vue/cli-plugin-eslint": "^4.0.5",
-		"@vue/cli-service": "^4.0.5",
+		"@babel/preset-env": "^7.13.12",
+		"@vue/cli-plugin-babel": "^4.5.12",
+		"@vue/cli-plugin-eslint": "^4.5.12",
+		"@vue/cli-service": "^4.5.12",
 		"babel-polyfill": "^6.26.0",
-		"sass": "^1.17.4",
-		"sass-loader": "^8.0.0",
-		"vue-cli-plugin-styleguidist": "^4.0.0",
-		"vue-cli-plugin-vuetify": "^0.6.1",
+		"sass": "^1.32.8",
+		"sass-loader": "^8.0.2",
+		"vue-cli-plugin-styleguidist": "workspace:^4.36.1",
+		"vue-cli-plugin-vuetify": "^0.6.3",
 		"vue-template-compiler": "^2.6.12",
-		"vuetify-loader": "^1.2.2"
+		"vuetify-loader": "^1.7.2"
 	},
 	"eslintConfig": {
 		"root": true,
