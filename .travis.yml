@@ -125,6 +125,7 @@ jobs:
 
         # push dev
         - git fetch github dev
+        - git reset --hard
         - git checkout github/dev
         - git checkout -b dev
         - git status -v
