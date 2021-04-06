@@ -65,7 +65,7 @@ describe('Single component', () => {
 			// Wait for CodeMirror to update
 			cy.wait(1000)
 
-			cy.get('@preview').find('button').contains('Push Me Harder').should('exist')
+			cy.get('@preview').find('button').should('contain', 'Push Me Harder')
 		})
 	})
 })
