@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:5.6.0
+    - image: cypress/included:7.0.1
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -91,11 +91,11 @@ jobs:
       - run: CY_EXAMPLE_FOLDER=basic npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
-          destination: cy-screenshots
+          destination: cy-screenshots-basic
       - run: CY_EXAMPLE_FOLDER=jsx-examples npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
-          destination: cy-screenshots
+          destination: cy-screenshots-jsx
 
 workflows:
   version: 2
