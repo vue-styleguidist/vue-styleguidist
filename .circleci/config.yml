@@ -96,10 +96,6 @@ jobs:
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-jsx
-      - run: CY_EXAMPLE_FOLDER=vuecli3 npm run cy
-      - store_artifacts:
-          path: /root/vue-styleguidist/test/cypress/screenshots
-          destination: cy-screenshots-cli
 
 workflows:
   version: 2
