@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.37.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.1...v4.37.2) (2021-04-09)
+
+
+### Bug Fixes
+
+* **plugin:** make cli plugin ok with production builds ([429ed55](https://github.com/vue-styleguidist/vue-styleguidist/commit/429ed555a4b5e9707a2caf9e12a99e5a02ebcf00))
+
+
+
+
+
 ## [4.37.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.0...v4.37.1) (2021-04-05)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
