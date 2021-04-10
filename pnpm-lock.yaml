@@ -985,7 +985,7 @@ importers:
       '@vue/cli-test-utils': ^4.5.12
       null-loader: ^0.1.1
       typescript: ^3.9.9
-      vue-docgen-cli: ^4.37.0
+      vue-docgen-cli: ^4.38.0
       webpack-merge: ^4.2.2
     dependencies:
       null-loader: 0.1.1
@@ -1000,7 +1000,7 @@ importers:
     specifiers:
       '@vue/cli': ^4.5.12
       '@vue/cli-test-utils': ^4.5.12
-      vue-styleguidist: ^4.37.1
+      vue-styleguidist: ^4.38.0
       webpack-merge: ^4.2.2
     dependencies:
       vue-styleguidist: link:../vue-styleguidist
@@ -1064,7 +1064,7 @@ importers:
       minimist: ^1.2.5
       mkdirp: ^0.5.5
       prettier: ^1.19.1
-      vue-docgen-api: ^4.37.0
+      vue-docgen-api: ^4.38.0
     dependencies:
       chokidar: 3.5.1
       globby: 10.0.2
@@ -1137,7 +1137,7 @@ importers:
     specifiers:
       escodegen: ^1.14.3
       to-ast: ^1.0.0
-      vue-docgen-api: ^4.37.0
+      vue-docgen-api: ^4.38.0
     dependencies:
       escodegen: 1.14.3
       to-ast: 1.0.0
@@ -1230,7 +1230,7 @@ importers:
       terser-webpack-plugin: ^2.3.8
       to-ast: ^1.0.0
       vue: 2.6.12
-      vue-docgen-api: ^4.37.0
+      vue-docgen-api: ^4.38.0
       vue-inbrowser-compiler: ^4.37.0
       vue-inbrowser-compiler-utils: ^4.37.0
       vue-template-compiler: 2.6.12
