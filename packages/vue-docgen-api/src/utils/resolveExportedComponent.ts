@@ -122,6 +122,11 @@ export default function resolveExportedComponent(
 					filePath: [sourcePath]
 				}
 			} else {
+				// if we look at a TS "as" expression the variable is "contained"
+				// in its expression member. In this case, resolve the expression member
+				if (bt.isTSAsExpression(definition.node)) {
+					definition = definition.get('expression')
+				}
 				const realDef = resolveIdentifier(ast, definition)
 				if (realDef) {
 					if (isComponentDefinition(realDef)) {
