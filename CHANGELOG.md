@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
+
+
+### Features
+
+* **docgen:** allow typescript as in exports ([0514a86](https://github.com/vue-styleguidist/vue-styleguidist/commit/0514a86ead9cc4ddb9b17b5a0857c8185d70af7a)), closes [#1066](https://github.com/vue-styleguidist/vue-styleguidist/issues/1066)
+
+
+
+
+
 ## [4.37.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.1...v4.37.2) (2021-04-09)
 
 
