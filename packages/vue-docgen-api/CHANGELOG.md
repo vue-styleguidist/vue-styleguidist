@@ -3,6 +3,137 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
+
+
+### Features
+
+* **docgen:** allow typescript as in exports ([0514a86](https://github.com/vue-styleguidist/vue-styleguidist/commit/0514a86ead9cc4ddb9b17b5a0857c8185d70af7a)), closes [#1066](https://github.com/vue-styleguidist/vue-styleguidist/issues/1066)
+
+
+
+
+
+# [4.37.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.1...v4.37.0) (2021-04-05)
+
+
+### Features
+
+* **docgen:** add support for Identifier when parsing validators ([#1076](https://github.com/vue-styleguidist/vue-styleguidist/issues/1076)) ([5f0d089](https://github.com/vue-styleguidist/vue-styleguidist/commit/5f0d089bd4159f5098148df67db5339e473da6d9))
+
+
+
+
+
+## [4.36.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.0...v4.36.1) (2021-03-20)
+
+
+### Bug Fixes
+
+* load export const name = Vue.extends all good ([2e760c9](https://github.com/vue-styleguidist/vue-styleguidist/commit/2e760c9691a9b7c927341afd4407dfa2b11f055c)), closes [#1069](https://github.com/vue-styleguidist/vue-styleguidist/issues/1069)
+
+
+
+
+
+# [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* updrade react-stypeguidist ([4823bd2](https://github.com/vue-styleguidist/vue-styleguidist/commit/4823bd2be1d1f2fa1e39d7142da7cb15ab16b43c))
+* **docgen:** ensure pug renders template using html doctype ([2f3512b](https://github.com/vue-styleguidist/vue-styleguidist/commit/2f3512b7951889c8fa72856655725b62bd4e81fb))
+* **docgen:** html doctype as a default rather than a force ([01c921f](https://github.com/vue-styleguidist/vue-styleguidist/commit/01c921f8054607b9e0d99c0f87a4820fe8dedc2d))
+
+
+### Features
+
+* **docgen:** allow slots to be defined by composition API render functions ([63f2f35](https://github.com/vue-styleguidist/vue-styleguidist/commit/63f2f352435f95fc55e3598c877c33383909e933))
+
+
+
+
+
+# [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
+
+
+### Bug Fixes
+
+* **docgen:** use the pathResolver from utils ([3b77a82](https://github.com/vue-styleguidist/vue-styleguidist/commit/3b77a8240fe16451d660b57584d4178b018fc6c7))
+* resolve [#1042](https://github.com/vue-styleguidist/vue-styleguidist/issues/1042) add basic support for aliases in external src ([6d8b5c5](https://github.com/vue-styleguidist/vue-styleguidist/commit/6d8b5c554f0cc98a3d9920292c4ace46a4cf24d8))
+
+
+
+
+
+## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
+
+
+### Bug Fixes
+
+* **docgen:** SFC with lang='tsx' support ([bd21931](https://github.com/vue-styleguidist/vue-styleguidist/commit/bd2193199988b786aae79a2e35aa552c1e5f8f54))
+
+
+
+
+
+## [4.34.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.0...v4.34.1) (2020-11-27)
+
+
+### Bug Fixes
+
+* **docgen:** Vue.extends without comments ([bf42ccc](https://github.com/vue-styleguidist/vue-styleguidist/commit/bf42ccc05c8790a074d979af9f78bc50f898dccd)), closes [#1027](https://github.com/vue-styleguidist/vue-styleguidist/issues/1027)
+
+
+
+
+
+# [4.34.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.10...v4.34.0) (2020-11-25)
+
+
+### Bug Fixes
+
+* **docgen:** allow TypeScript to export a constant ([353601e](https://github.com/vue-styleguidist/vue-styleguidist/commit/353601ea21da33b237c52bf0ba376d6c3f32d9aa)), closes [#997](https://github.com/vue-styleguidist/vue-styleguidist/issues/997)
+
+
+
+
+
+## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## [4.33.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.6...v4.33.7) (2020-11-15)
+
+
+### Bug Fixes
+
+* **docgen:** allow Mixins from vue-p-decorator ([314686a](https://github.com/vue-styleguidist/vue-styleguidist/commit/314686a1f91dec4ef246b809d217d8ee0dc5466a))
+
+
+
+
+
+## [4.33.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.5...v4.33.6) (2020-11-05)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## [4.33.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.3...v4.33.4) (2020-10-22)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
 ## [4.33.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.1...v4.33.2) (2020-10-19)
 
 **Note:** Version bump only for package vue-docgen-api

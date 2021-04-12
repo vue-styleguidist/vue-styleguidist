@@ -13,6 +13,7 @@ module.exports = () => {
 		description,
 		// prettier-ignore
 		head: [
+			
 			['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/favicons/apple-touch-icon.png' }],
 			['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/favicons/favicon-32x32.png' }],
 			['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/favicons/favicon-16x16.png' }],
@@ -22,15 +23,8 @@ module.exports = () => {
 			['meta', { prefix: ogprefix, property: 'twitter:title', content: titleShare }],
 			['meta', { prefix: ogprefix, property: 'og:type', content: 'website' }],
 			['meta', { prefix: ogprefix, property: 'og:description', content: description }],
-			['meta', { prefix: ogprefix, property: 'og:image', content: '/assets/logo.png' }]
-		],
-		plugins: [
-			[
-				'@vuepress/google-analytics',
-				{
-					ga: 'UA-142169574-1'
-				}
-			]
+			['meta', { prefix: ogprefix, property: 'og:image', content: '/assets/logo.png' }],
+			["script", { src: "https://unpkg.com/thesemetrics@latest", async: "" }],
 		],
 		themeConfig: {
 			repo: 'vue-styleguidist/vue-styleguidist',

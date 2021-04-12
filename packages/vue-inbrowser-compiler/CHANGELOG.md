@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.37.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.1...v4.37.0) (2021-04-05)
+
+**Note:** Version bump only for package vue-inbrowser-compiler
+
+
+
+
+
+## [4.33.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.5...v4.33.6) (2020-11-05)
+
+**Note:** Version bump only for package vue-inbrowser-compiler
+
+
+
+
+
+## [4.33.5](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.4...v4.33.5) (2020-10-23)
+
+
+### Bug Fixes
+
+* **compiler:** only allow max version of each bro ([a062a54](https://github.com/vue-styleguidist/vue-styleguidist/commit/a062a5405b9793e46bf33ec49a6f3d6511fb7e28))
+* **compiler:** types of buble transform ([6134866](https://github.com/vue-styleguidist/vue-styleguidist/commit/613486628511b2113fcda5e7377207ce70e00f23))
+
+
+
+
+
+## [4.33.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.3...v4.33.4) (2020-10-22)
+
+
+### Bug Fixes
+
+* **compiler:** error location reporting ([34121b5](https://github.com/vue-styleguidist/vue-styleguidist/commit/34121b50a0da31d92b5d47fcd94e2b23634bffce))
+
+
+
+
+
 ## [4.33.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.1...v4.33.2) (2020-10-19)
 
 **Note:** Version bump only for package vue-inbrowser-compiler

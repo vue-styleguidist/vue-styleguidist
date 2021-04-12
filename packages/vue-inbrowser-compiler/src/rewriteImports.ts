@@ -23,12 +23,12 @@ function generate(keys: string[], dep: string, base?: string, fn?: string, offse
 	let out = `const ${name} = ${dep};`
 
 	if (base) {
-		out += `\nconst ${base} = ${tmp}.default || ${tmp};`
+		out += `const ${base} = ${tmp}.default || ${tmp};`
 	}
 
 	keys.forEach(key => {
 		obj = alias(key)
-		out += `\nconst ${obj.name} = ${tmp}.${obj.key};`
+		out += `const ${obj.name} = ${tmp}.${obj.key};`
 	})
 
 	return out

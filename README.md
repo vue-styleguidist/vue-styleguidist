@@ -31,12 +31,11 @@ alt="Chat on Discord">
 </a>
 </div>
 
+## Sponsors
 
-## Sponsor(s)
+A big thank you to our sponsors. Their contributions pay for the Netlify build minutes.
 
-A big thank you to our first two sponsors. Their contributions pay for the Netlify build minutes.
-
-[Marcello Bachechi](https://github.com/pilotkid) & [Walter Tommasi](https://github.com/jtommy)
+[Marcello Bachechi](https://github.com/pilotkid), [Walter Tommasi](https://github.com/jtommy), [Luca Ban](https://github.com/mesqueeb) and [Ben Hong](https://github.com/bencodezen)
 
 ## Packages
 

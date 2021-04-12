@@ -1,4 +1,5 @@
 import * as bt from '@babel/types'
+import { parse } from 'recast'
 import parseValidatorForValues from '../parseValidator'
 import buildParser from '../../../babel-parser'
 
@@ -10,48 +11,70 @@ function getValidator(src: string): any {
 }
 
 describe('parseValidatorForValues', () => {
-	it('should allow indexOf > -1', () => {
+	let ast: bt.File
+	beforeAll(() => {
+		ast = parse('const a  = 1')
+	})
+	it('should allow indexOf > -1', async () => {
 		const validator = getValidator(`validator: a => ['sm', 'md', 'lg'].indexOf(a) > -1`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should allow -1 < indexOf', () => {
+	it('should allow -1 < indexOf', async () => {
 		const validator = getValidator(`validator: a => -1 < ['sm', 'md', 'lg'].indexOf(a)`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should allow indexOf !== -1', () => {
+	it('should allow indexOf !== -1', async () => {
 		const validator = getValidator(`validator: a => ['sm', 'md', 'lg'].indexOf(a) !== -1`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should allow -1 !== indexOf', () => {
+	it('should allow -1 !== indexOf', async () => {
 		const validator = getValidator(`validator: a => -1 !== ['sm', 'md', 'lg'].indexOf(a)`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should allow indexOf != -1', () => {
+	it('should allow indexOf != -1', async () => {
 		const validator = getValidator(`validator: a => ['sm', 'md', 'lg'].indexOf(a) != -1`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should allow -1 != indexOf', () => {
+	it('should allow -1 != indexOf', async () => {
 		const validator = getValidator(`validator: a => -1 != ['sm', 'md', 'lg'].indexOf(a)`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should allow use of includes', () => {
+	it('should allow use of includes', async () => {
 		const validator = getValidator(`validator: a => ['sm', 'md', 'lg'].includes(a)`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'md', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'md', 'lg'])
 	})
 
-	it('should not fail if a member of the array is an object', () => {
+	it('should not fail if a member of the array is an object', async () => {
 		const validator = getValidator(`validator: a => ['sm', {foo:'bar'}, 'lg'].includes(a)`)
-		expect(parseValidatorForValues(validator)).toEqual(['sm', 'lg'])
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toEqual(['sm', 'lg'])
 	})
 
-	it('should simply ignore references to functions', () => {
+	it('should simply ignore references to functions', async () => {
 		const validator = getValidator(`validator: isItAnEvenNumber`)
-		expect(parseValidatorForValues(validator)).toBeUndefined()
+		expect(
+			await parseValidatorForValues(validator, ast, { filePath: '', validExtends: () => true })
+		).toBeUndefined()
 	})
 })

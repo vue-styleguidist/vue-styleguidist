@@ -124,6 +124,13 @@ function getConfig(api) {
 		})
 	}
 
+	if (conf.optimization.minimizer('terser')) {
+		conf.optimization.minimizer('terser').tap(args => {
+			args[0].terserOptions.mangle.keep_fnames = true
+			return args
+		})
+	}
+
 	// because we are dealing with hot replacement in vsg
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')

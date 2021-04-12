@@ -3,6 +3,149 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.37.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.1...v4.37.0) (2021-04-05)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.36.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.0...v4.36.1) (2021-03-20)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
+
+
+### Features
+
+* **cli:** render tags in a props description ([72af302](https://github.com/vue-styleguidist/vue-styleguidist/commit/72af30256b4b069c7d7d5120b6f600f970313d84)), closes [#1045](https://github.com/vue-styleguidist/vue-styleguidist/issues/1045)
+
+
+
+
+
+## [4.34.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.3...v4.34.4) (2021-01-09)
+
+
+### Bug Fixes
+
+* **cli:** replace all instances of sep on windows ([7a76b92](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a76b920219ac1fb650738459c177c19cf04dfa6))
+
+
+
+
+
+## [4.34.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.2...v4.34.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* **cli:** make achors calsulations work on win ([170205d](https://github.com/vue-styleguidist/vue-styleguidist/commit/170205d34dde1e95f111b2fab63e68f635a43b43))
+
+
+
+
+
+## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.34.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.0...v4.34.1) (2020-11-27)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+# [4.34.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.10...v4.34.0) (2020-11-25)
+
+
+### Features
+
+* **cli:** render props and bindings properly ([5e4c027](https://github.com/vue-styleguidist/vue-styleguidist/commit/5e4c0272e1f5b12a7223ad52055f68871525e27f)), closes [#1013](https://github.com/vue-styleguidist/vue-styleguidist/issues/1013)
+
+
+
+
+
+## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
+
+
+### Bug Fixes
+
+* **cli:** simplify bin for docgen ([73a5c58](https://github.com/vue-styleguidist/vue-styleguidist/commit/73a5c58229dd7ce9eb75895ad106132c8c2f186f))
+
+
+
+
+
+## [4.33.8](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.7...v4.33.8) (2020-11-16)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.33.7](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.6...v4.33.7) (2020-11-15)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.33.6](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.5...v4.33.6) (2020-11-05)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.33.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.3...v4.33.4) (2020-10-22)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
+## [4.33.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.2...v4.33.3) (2020-10-20)
+
+**Note:** Version bump only for package vue-docgen-cli
+
+
+
+
+
 ## [4.33.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.1...v4.33.2) (2020-10-19)
 
 **Note:** Version bump only for package vue-docgen-cli

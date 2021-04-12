@@ -1,4 +1,4 @@
-import { transform } from 'buble'
+import { transform, TransformOptions } from 'buble'
 import walkes from 'walkes'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
@@ -9,6 +9,7 @@ import normalizeSfcComponent, {
 	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
 import getAst from './getAst'
+import getTargetFromBrowser from './getTargetFromBrowser'
 
 interface EvaluableComponent {
 	script: string
@@ -25,12 +26,13 @@ interface EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: any = {}
+	config: TransformOptions = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
+	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
 	return {
 		...nonCompiledComponent,
-		script: transform(nonCompiledComponent.script, config).code
+		script: transform(nonCompiledComponent.script, { target, ...config }).code
 	}
 }
 
@@ -54,7 +56,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		if (config.jsx) {
 			const { preprocessing, component, postprocessing } = parseScriptCode(code)
 			return {
-				script: `${preprocessing};\nreturn {${component}};\n${postprocessing}`
+				script: `${preprocessing};return {${component}};${postprocessing}`
 			}
 		}
 

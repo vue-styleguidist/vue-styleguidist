@@ -18,12 +18,27 @@ export interface UsageTabButtonProps {
 
 const UsageTabButton = (props: UsageTabButtonProps) => {
 	const component = props.props
-	const showButton =
-		!isEmpty(component.props) ||
-		!isEmpty(component.methods) ||
-		!isEmpty(component.events) ||
-		!isEmpty(component.slots)
-	return showButton ? <TabButton {...props}>Props, methods, events & slots</TabButton> : null
+	const words = []
+	if (!isEmpty(component.props)) {
+		words.push('props')
+	}
+	if (!isEmpty(component.events)) {
+		words.push('events')
+	}
+	if (!isEmpty(component.slots)) {
+		words.push('slots')
+	}
+	if (!isEmpty(component.methods)) {
+		words.push('methods')
+	}
+	const showButton = words.length > 0
+	return showButton ? (
+		<TabButton {...props}>
+			{words.length === 1
+				? words[0]
+				: `${words.slice(0, -1).join(', ')} & ${words[words.length - 1]}`}
+		</TabButton>
+	) : null
 }
 
 UsageTabButton.propTypes = {

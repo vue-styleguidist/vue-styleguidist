@@ -7,7 +7,7 @@ describe('Single component', () => {
 
 	describe('props, methods, events & slots section', () => {
 		beforeEach(() => {
-			cy.get('button').contains('Props, methods, events & slots').as('propsBtn')
+			cy.get('button').contains('props & slots').as('propsBtn')
 
 			cy.get('@propsBtn').closest('[class^=rsg--tabs]').as('container')
 		})
@@ -65,7 +65,7 @@ describe('Single component', () => {
 			// Wait for CodeMirror to update
 			cy.wait(1000)
 
-			cy.get('@preview').find('button').contains('Push Me Harder').should('exist')
+			cy.get('@preview').find('button').should('contain', 'Push Me Harder')
 		})
 	})
 })
