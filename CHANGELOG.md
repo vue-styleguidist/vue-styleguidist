@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.38.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.0...v4.38.1) (2021-04-13)
+
+
+### Bug Fixes
+
+* allow function expression validators ([7ece101](https://github.com/vue-styleguidist/vue-styleguidist/commit/7ece101eabcfdfe4003b18587a21e05825d316eb)), closes [#1083](https://github.com/vue-styleguidist/vue-styleguidist/issues/1083)
+
+
+
+
+
 # [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
 
 
