@@ -544,6 +544,38 @@ describe('propHandler', () => {
 			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
 		})
 
+		it('should check the validator method for super standard values with the diff signs', async () => {
+			const src = `
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator(va){
+				return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
+			}
+        }
+    }
+  }
+  `
+			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
+
+		it('should check the validator function for super standard values with the diff signs', async () => {
+			const src = `
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator: function(va){
+				return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
+			}
+        }
+    }
+  }
+  `
+			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
+
 		it('should check the validator arrow function for inline values', async () => {
 			const src = `
   export default {

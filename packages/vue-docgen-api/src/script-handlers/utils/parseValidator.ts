@@ -78,7 +78,7 @@ export default async function parseValidatorForValues(
 	}
 
 	const returnedExpression =
-		bt.isMethod(validatorNode) &&
+		(bt.isMethod(validatorNode) || bt.isFunctionExpression(validatorNode)) &&
 		validatorNode.body.body.length === 1 &&
 		bt.isReturnStatement(validatorNode.body.body[0])
 			? validatorNode.body.body[0].argument
