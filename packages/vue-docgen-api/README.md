@@ -36,7 +36,7 @@ async function parseMyComponent(filePath: string) {
   var componentInfoConfigured = await parse(filePath, {
     alias: { '@assets': path.resolve(__dirname, 'src/assets') },
     modules: [path.resolve(__dirname, 'src')],
-    addScriptHandler: [
+    addScriptHandlers: [
       function(
         documentation: Documentation,
         componentDefinition: NodePath,
@@ -46,7 +46,7 @@ async function parseMyComponent(filePath: string) {
         // handle custom code in script
       }
     ],
-    addTemplateHandler: [
+    addTemplateHandlers: [
       function(
         documentation: Documentation,
         templateAst: ASTElement,
@@ -121,7 +121,7 @@ Keep in mind aliases are not resolved adopting the same implementation as webpac
 
 `modules` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolvemodules) too. If you have it in webpack or use `baseDir` in your tsconfig.json, you should probably see how this one works.
 
-#### `addScriptHandler` and `addTemplateHandler`
+#### `addScriptHandlers` and `addTemplateHandlers`
 
 The custom additional handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
 
