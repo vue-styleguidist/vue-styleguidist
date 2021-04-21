@@ -231,7 +231,7 @@ The comment block containing the documentation needs to contain one line with `@
 ```html
 <div>
   <!--
-    trigered on click
+    triggered on click
     @event click
     @property {object} demo - example
     @property {number} called - test called
