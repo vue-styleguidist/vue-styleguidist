@@ -79,11 +79,15 @@ exports[`MethodsRenderer should render a table 1`] = `
         <td
           class="rsg--cell-12 rsg--description-3"
         >
-          <p
-            class="rsg--para-15"
+          <div
+            class="rsg--descriptionWrapper-2"
           >
-            Public
-          </p>
+            <p
+              class="rsg--para-15"
+            >
+              Public
+            </p>
+          </div>
         </td>
         <td
           class="rsg--cell-12"
@@ -149,11 +153,13 @@ exports[`MethodsRenderer should render parameters 1`] = `
         </code>
       </div>
       <div>
-        <p
-          class="rsg--para-15"
-        >
-          Public
-        </p>
+        <div>
+          <p
+            class="rsg--para-15"
+          >
+            Public
+          </p>
+        </div>
       </div>
       <div>
         <div
@@ -204,11 +210,13 @@ exports[`MethodsRenderer should render public method 1`] = `
         </code>
       </div>
       <div>
-        <p
-          class="rsg--para-15"
-        >
-          Public
-        </p>
+        <div>
+          <p
+            class="rsg--para-15"
+          >
+            Public
+          </p>
+        </div>
       </div>
       <div />
     </li>

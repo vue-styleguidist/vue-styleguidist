@@ -10,14 +10,21 @@ const methodStyles = ({ space }: Rsg.Theme) => ({
 	},
 	type: {
 		isolate: false,
-		margin: [[space[1], 0, 0, space[1]]],
-		opacity: 0.5
+		marginLeft: space[1],
+		opacity: 0.5,
+		'& pre': {
+			margin: 0
+		}
 	},
 	descriptionWrapper: {
 		// remove bottom margin from description
 		'& p': {
 			margin: 0,
 			minWidth: 350
+		},
+		// add space before any next sibling
+		'& + *': {
+			marginTop: space[1]
 		}
 	},
 	description: {
