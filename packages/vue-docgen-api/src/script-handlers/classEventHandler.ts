@@ -58,7 +58,7 @@ export default function classEventHandler(
 					setEventDescriptor(evtDescriptor, doclets)
 					return false
 				}
-				return undefined
+				this.traverse(nodePath)
 			}
 		})
 	}
