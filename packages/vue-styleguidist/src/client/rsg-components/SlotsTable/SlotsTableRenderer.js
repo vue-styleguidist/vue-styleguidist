@@ -10,9 +10,15 @@ import Arguments from 'rsg-components/Arguments'
 import getOriginColumn from 'rsg-components/OriginColumn'
 import propStyles from '../../utils/propStyles'
 
-function renderDescription(prop) {
-	const { description } = prop
-	return <div>{description ? <Markdown text={description} /> : '-'}</div>
+function renderDescription(myClasses) {
+	return function renderDesc(prop) {
+		const { description } = prop
+		return (
+			<div className={myClasses.descriptionWrapper}>
+				{description ? <Markdown text={description} /> : '-'}
+			</div>
+		)
+	}
 }
 
 function renderName(prop) {
@@ -44,7 +50,7 @@ export const columns = (slots, classes) => [
 	},
 	{
 		caption: 'Description',
-		render: renderDescription,
+		render: renderDescription(classes),
 		className: classes.description
 	},
 	// only add the bindings column if there is any bindings

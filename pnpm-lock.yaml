@@ -57,7 +57,7 @@ importers:
       ts-jest: ^26.5.4
       tslib: ^2.1.0
       typescript: ^4.2.3
-      vue-styleguidist: ^4.36.1
+      vue-styleguidist: ^4.38.1
       vuepress: ^1.8.2
       webpack-dev-server: ^3.11.2
       yorkie: ^2.0.0
