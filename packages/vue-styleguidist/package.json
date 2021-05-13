@@ -32,7 +32,7 @@
 	"dependencies": {
 		"@vxna/mini-html-webpack-template": "^1.0.0",
 		"ast-types": "^0.13.4",
-		"classnames": "^2.2.6",
+		"classnames": "^2.3.1",
 		"clean-webpack-plugin": "^3.0.0",
 		"cli-progress": "^3.9.0",
 		"clipboard-copy": "^3.2.0",
@@ -110,7 +110,6 @@
 		"@babel/types": "7.14.2",
 		"@testing-library/react": "11.2.6",
 		"@types/buble": "0.19.2",
-		"@types/classnames": "2.3.0",
 		"@types/cli-progress": "1.8.1",
 		"@types/copy-webpack-plugin": "4.4.4",
 		"@types/doctrine": "0.0.3",
