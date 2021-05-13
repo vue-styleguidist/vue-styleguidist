@@ -22,7 +22,7 @@
 		"@vue/cli-service": ">= 3"
 	},
 	"devDependencies": {
-		"@vue/cli": "^4.5.12",
-		"@vue/cli-test-utils": "^4.5.12"
+		"@vue/cli": "4.5.13",
+		"@vue/cli-test-utils": "4.5.13"
 	}
 }
