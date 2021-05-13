@@ -13,6 +13,10 @@ Object {
         ],
       },
     },
+    Object {
+      "name": "fail",
+      "type": undefined,
+    },
   ],
   "exportName": "default",
   "methods": Array [

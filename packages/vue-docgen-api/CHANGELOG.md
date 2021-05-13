@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.38.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.1...v4.38.2) (2021-05-11)
+
+
+### Bug Fixes
+
+* allow for @Emit to be parsed ([b1c7285](https://github.com/vue-styleguidist/vue-styleguidist/commit/b1c7285943de709a5aa4c518c7570bf185324aa9))
+
+
+
+
+
 ## [4.38.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.0...v4.38.1) (2021-04-13)
 
 

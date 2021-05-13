@@ -22,9 +22,11 @@ function renderDescription(classes) {
 
 		return (
 			<div>
-				<div className={classes.descriptionWrapper}>
-					{description && <Markdown text={description} />}
-				</div>
+				{description && (
+					<div className={classes.descriptionWrapper}>
+						<Markdown text={description} />
+					</div>
+				)}
 				<JsDoc {...tags} />
 				{args.length > 0 && <Arguments args={args} heading />}
 				{returnDocumentation && <Argument {...returnDocumentation} returns />}
