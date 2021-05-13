@@ -42,12 +42,12 @@
 	},
 	"devDependencies": {
 		"@test-vue-docgen/mixins": "3.15.4",
-		"@types/pug": "^2.0.4",
-		"globby": "^10.0.2",
-		"vue": "^2.6.12",
-		"vue-class-component": "^7.2.6",
-		"vue-clickaway": "^2.2.2",
-		"vue-property-decorator": "^7.3.0",
-		"vuetify": "^2.4.8"
+		"@types/pug": "2.0.4",
+		"globby": "10.0.2",
+		"vue": "2.6.12",
+		"vue-class-component": "7.2.6",
+		"vue-clickaway": "2.2.2",
+		"vue-property-decorator": "7.3.0",
+		"vuetify": "2.5.0"
 	}
 }

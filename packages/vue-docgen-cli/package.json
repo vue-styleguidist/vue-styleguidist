@@ -23,9 +23,9 @@
 		"vue-docgen-api": "^4.38.2"
 	},
 	"devDependencies": {
-		"@types/lodash.memoize": "^4.1.6",
-		"@types/minimist": "^1.2.1",
-		"@types/mkdirp": "^0.5.2",
-		"@types/prettier": "^1.19.1"
+		"@types/lodash.memoize": "4.1.6",
+		"@types/minimist": "1.2.1",
+		"@types/mkdirp": "0.5.2",
+		"@types/prettier": "1.19.1"
 	}
 }
