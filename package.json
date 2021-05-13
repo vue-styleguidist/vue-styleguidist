@@ -50,7 +50,7 @@
 		"@commitlint/cli": "7.6.1",
 		"@commitlint/config-conventional": "7.6.0",
 		"@types/jest": "23.3.14",
-		"@types/node": "13.11.1",
+		"@types/node": "13.13.52",
 		"babel-jest": "25.5.1",
 		"clipboard": "2.0.8",
 		"core-js": "3.12.1",
