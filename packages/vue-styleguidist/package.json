@@ -5,8 +5,8 @@
 	"homepage": "https://vue-styleguidist.github.io",
 	"scripts": {
 		"compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
-		"postcompile": "pnpm run typings",
-		"compile:watch": "concurrently \"pnpm run compile -- --watch\" \"pnpm run typings -- --watch\"",
+		"postcompile": "pnpm typings",
+		"compile:watch": "concurrently \"pnpm compile -- --watch\" \"pnpm typings -- --watch\"",
 		"typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
 	},
 	"repository": {
@@ -31,7 +31,7 @@
 	},
 	"dependencies": {
 		"@vxna/mini-html-webpack-template": "^1.0.0",
-		"ast-types": "^0.14.0",
+		"ast-types": "0.13.4",
 		"classnames": "^2.3.1",
 		"clean-webpack-plugin": "^3.0.0",
 		"cli-progress": "^3.9.0",
@@ -130,7 +130,7 @@
 		"concurrently": "4.1.2",
 		"ejs": "2.7.4",
 		"pug": "3.0.2",
-		"source-map": "0.7.3",
+		"source-map": "0.6.1",
 		"strip-shebang": "1.0.2",
 		"vue": "2.6.12",
 		"vue-template-compiler": "2.6.12",
