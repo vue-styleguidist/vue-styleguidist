@@ -81,7 +81,7 @@
 		"markdown-toc": "1.2.0",
 		"node-fetch": "2.6.1",
 		"prettier": "2.3.0",
-		"property-information": "5.6.0",
+		"property-information": "6.0.1",
 		"puppeteer": "1.20.0",
 		"raf": "3.4.1",
 		"react-test-renderer": "16.14.0",

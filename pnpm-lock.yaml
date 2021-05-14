@@ -46,7 +46,7 @@ importers:
       markdown-toc: 1.2.0
       node-fetch: 2.6.1
       prettier: 2.3.0
-      property-information: 5.6.0
+      property-information: 6.0.1
       puppeteer: 1.20.0
       raf: 3.4.1
       react-test-renderer: 16.14.0
@@ -104,7 +104,7 @@ importers:
       markdown-toc: 1.2.0
       node-fetch: 2.6.1
       prettier: 2.3.0
-      property-information: 5.6.0
+      property-information: 6.0.1
       puppeteer: 1.20.0
       raf: 3.4.1
       react-test-renderer: 16.14.0
@@ -20810,6 +20810,11 @@ packages:
     resolution: {integrity: sha512-YUHSPk+A30YPv+0Qf8i9Mbfe/C0hdPXk1s1jPVToV8pk8BQtpw10ct89Eo7OWkutrwqvT0eicAxlOg3dOAu8JA==}
     dependencies:
       xtend: 4.0.2
+    dev: false
+
+  /property-information/6.0.1:
+    resolution: {integrity: sha512-F4WUUAF7fMeF4/JUFHNBWDaKDXi2jbvqBW/y6o5wsf3j19wTZ7S60TmtB5HoBhtgw7NKQRMWuz5vk2PR0CygUg==}
+    dev: true
 
   /proto-list/1.2.4:
     resolution: {integrity: sha1-IS1b/hMYMGpCD2QCuOJv85ZHqEk=}
