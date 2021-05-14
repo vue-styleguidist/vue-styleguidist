@@ -77,7 +77,7 @@
 		"jest": "26.6.3",
 		"jest-serializer-html": "7.0.0",
 		"jss": "10.6.0",
-		"lint-staged": "7.3.0",
+		"lint-staged": "11.0.0",
 		"markdown-toc": "1.2.0",
 		"node-fetch": "2.6.1",
 		"prettier": "2.3.0",
