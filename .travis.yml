@@ -25,7 +25,6 @@ branches:
   only:
     - delivery
     - next
-    - dev
 
 stages:
   - test
