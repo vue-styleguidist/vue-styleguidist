@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "15.1.0",
-		"@rollup/plugin-node-resolve": "9.0.0",
+		"@rollup/plugin-node-resolve": "13.0.0",
 		"@types/domhandler": "2.4.1",
 		"rollup": "2.47.0",
 		"rollup-plugin-typescript2": "0.27.3",
