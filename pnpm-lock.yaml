@@ -50,7 +50,7 @@ importers:
       puppeteer: 1.20.0
       raf: 3.4.1
       react-test-renderer: 16.14.0
-      rimraf: 2.7.1
+      rimraf: 3.0.2
       semver: 5.7.1
       start-server-and-test: 1.12.1
       strip-shebang: 1.0.2
@@ -108,7 +108,7 @@ importers:
       puppeteer: 1.20.0
       raf: 3.4.1
       react-test-renderer: 16.14.0
-      rimraf: 2.7.1
+      rimraf: 3.0.2
       semver: 5.7.1
       start-server-and-test: 1.12.1
       strip-shebang: 1.0.2
