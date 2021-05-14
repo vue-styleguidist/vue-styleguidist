@@ -108,7 +108,7 @@
 		"@babel/preset-typescript": "7.13.0",
 		"@babel/runtime": "7.14.0",
 		"@babel/types": "7.14.2",
-		"@testing-library/react": "11.2.6",
+		"@testing-library/react": "11.2.7",
 		"@types/buble": "0.19.2",
 		"@types/cli-progress": "1.8.1",
 		"@types/copy-webpack-plugin": "4.4.4",
