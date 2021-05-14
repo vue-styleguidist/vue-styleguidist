@@ -14,7 +14,7 @@ importers:
       '@babel/runtime': 7.14.0
       '@commitlint/cli': 12.1.4
       '@commitlint/config-conventional': 12.1.4
-      '@types/jest': 23.3.14
+      '@types/jest': 26.0.23
       '@types/node': 13.13.52
       babel-jest: 25.5.1
       clipboard: 2.0.8
@@ -72,7 +72,7 @@ importers:
       '@babel/runtime': 7.14.0
       '@commitlint/cli': 12.1.4
       '@commitlint/config-conventional': 12.1.4
-      '@types/jest': 23.3.14
+      '@types/jest': 26.0.23
       '@types/node': 13.13.52
       babel-jest: 25.5.1
       clipboard: 2.0.8
@@ -6853,8 +6853,11 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/23.3.14:
-    resolution: {integrity: sha512-Q5hTcfdudEL2yOmluA1zaSyPbzWPmJ3XfSWeP3RyoYvS9hnje1ZyagrZOuQ6+1nQC1Gw+7gap3pLNL3xL6UBug==}
+  /@types/jest/26.0.23:
+    resolution: {integrity: sha512-ZHLmWMJ9jJ9PTiT58juykZpL7KjwJywFN3Rr2pTSkyQfydf/rk22yS7W8p5DaVUMQ2BQC7oYiU3FjbTM/mYrOA==}
+    dependencies:
+      jest-diff: 26.6.2
+      pretty-format: 26.6.2
     dev: true
 
   /@types/js-yaml/4.0.0:
