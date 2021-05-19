@@ -1,7 +1,7 @@
 {
 	"name": "vue-styleguidist-example-vuetify",
 	"version": "4.0.0",
-	"description": "No need to create your very own librry to show it off with styleguidist. Use all common libraries. If they are compatible with vue, they should be compatible with styleguidist.",
+	"description": "No need to create your very own library to show it off with styleguidist. Use all common libraries. If they are compatible with vue, they should be compatible with styleguidist.",
 	"private": true,
 	"homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
 	"repository": {
