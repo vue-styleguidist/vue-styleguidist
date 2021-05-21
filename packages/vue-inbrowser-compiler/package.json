@@ -18,17 +18,17 @@
 		"acorn"
 	],
 	"dependencies": {
-		"acorn": "^6.4.2",
+		"acorn": "^8.0.0",
 		"acorn-jsx": "^5.3.1",
 		"buble": "^0.20.0",
-		"camelcase": "^5.3.1",
+		"camelcase": "^6.0.0",
 		"detect-browser": "^5.2.0",
 		"vue-inbrowser-compiler-utils": "^4.37.0",
 		"walkes": "^0.2.1"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "15.1.0",
-		"@rollup/plugin-node-resolve": "9.0.0",
+		"@rollup/plugin-commonjs": "19.0.0",
+		"@rollup/plugin-node-resolve": "13.0.0",
 		"@types/buble": "0.20.0",
 		"@vue/test-utils": "1.2.0",
 		"rollup": "2.47.0",

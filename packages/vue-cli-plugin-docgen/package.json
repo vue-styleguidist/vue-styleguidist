@@ -15,10 +15,10 @@
 	"license": "MIT",
 	"private": false,
 	"dependencies": {
-		"null-loader": "^0.1.1",
-		"typescript": "^3.9.9",
+		"null-loader": "^4.0.0",
+		"typescript": "^4.0.0",
 		"vue-docgen-cli": "^4.38.2",
-		"webpack-merge": "^4.2.2"
+		"webpack-merge": "^5.0.0"
 	},
 	"peerDependencies": {
 		"@vue/cli-service": ">= 3"

@@ -15,17 +15,17 @@
 	"main": "lib/docgen.js",
 	"dependencies": {
 		"chokidar": "^3.5.1",
-		"globby": "^10.0.2",
+		"globby": "^11.0.0",
 		"lodash.memoize": "4.1.2",
 		"minimist": "^1.2.5",
-		"mkdirp": "^0.5.5",
-		"prettier": "^1.19.1",
+		"mkdirp": "^1.0.0",
+		"prettier": "^2.0.0",
 		"vue-docgen-api": "^4.38.2"
 	},
 	"devDependencies": {
 		"@types/lodash.memoize": "4.1.6",
 		"@types/minimist": "1.2.1",
-		"@types/mkdirp": "0.5.2",
-		"@types/prettier": "1.19.1"
+		"@types/mkdirp": "1.0.1",
+		"@types/prettier": "2.2.3"
 	}
 }
