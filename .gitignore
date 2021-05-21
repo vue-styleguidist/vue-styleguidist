@@ -6,7 +6,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
+.vscode/settings.json
 *.sublime-project
 *.sublime-workspace
 *.log
