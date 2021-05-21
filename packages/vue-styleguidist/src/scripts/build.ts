@@ -4,9 +4,9 @@ import makeWebpackConfig from './make-webpack-config'
 
 export default function build(
 	config: SanitizedStyleguidistConfig,
-	handler: webpack.Compiler.Handler
+	handler: Parameters<typeof webpack>[1]
 ) {
 	return webpack(makeWebpackConfig(config, 'production'), (err, stats) => {
-		handler(err, stats)
+		handler && handler(err, stats)
 	})
 }

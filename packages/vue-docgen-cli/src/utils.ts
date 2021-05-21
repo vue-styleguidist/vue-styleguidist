@@ -1,10 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import { promisify } from 'util'
-import mkdirpNative from 'mkdirp'
+import mkdirp from 'mkdirp'
 import prettier from 'prettier'
-
-const mkdirp = promisify(mkdirpNative)
 
 /**
  * Prettify then save a markdown content

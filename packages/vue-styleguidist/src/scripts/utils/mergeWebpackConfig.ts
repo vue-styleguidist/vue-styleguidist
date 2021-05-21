@@ -1,4 +1,4 @@
-import { Configuration, Plugin } from 'webpack'
+import { Configuration } from 'webpack'
 import isFunction from 'lodash/isFunction'
 import omit from 'lodash/omit'
 import mergeBase from 'webpack-merge'
@@ -27,7 +27,7 @@ const merge = mergeBase({
 	customizeArray: mergeBase.unique(
 		'plugins',
 		IGNORE_PLUGINS,
-		(plugin: Plugin) => plugin.constructor && plugin.constructor.name
+		plugin => plugin.constructor && plugin.constructor.name
 	)
 })
 

@@ -4,7 +4,7 @@ import webpack, { Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import MiniHtmlWebpackPlugin from 'mini-html-webpack-plugin'
+import { MiniHtmlWebpackPlugin } from 'mini-html-webpack-plugin'
 import MiniHtmlWebpackTemplate from '@vxna/mini-html-webpack-template'
 import merge from 'webpack-merge'
 import forEach from 'lodash/forEach'
@@ -104,13 +104,11 @@ export default function (
 					minimizer: [
 						new TerserPlugin({
 							parallel: true,
-							cache: true,
 							terserOptions: {
 								ie8: false,
 								ecma: 5,
 								compress: {
 									keep_fnames: true,
-									warnings: false,
 									/**
 									 * Disable reduce_funcs to keep Terser from inlining
 									 * Preact's VNode. If enabled, the 'new VNode()' is replaced
@@ -141,11 +139,9 @@ export default function (
 				// only add plugin if assetsDir is specified
 				...(config.assetsDir
 					? [
-							new CopyWebpackPlugin([
-								{
-									from: config.assetsDir
-								}
-							])
+							new CopyWebpackPlugin({
+								patterns: [config.assetsDir]
+							})
 					  ]
 					: [])
 			],
@@ -154,9 +150,6 @@ export default function (
 	} else {
 		webpackConfig = merge(
 			{
-				output: {
-					publicPath: config.styleguidePublicPath
-				},
 				devServer: {
 					publicPath: config.styleguidePublicPath,
 					// Use 'ws' instead of 'sockjs-node' on server since we're using native
@@ -165,7 +158,13 @@ export default function (
 					// Prevent a WS client from getting injected as we're already including
 					// `webpackHotDevClient`.
 					injectClient: false
+				}
+			} as any,
+			{
+				output: {
+					publicPath: config.styleguidePublicPath
 				},
+
 				plugins: [new webpack.HotModuleReplacementPlugin()],
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},
@@ -176,7 +175,12 @@ export default function (
 	const RSG_COMPONENTS_ALIAS = 'rsg-components'
 	const RSG_COMPONENTS_ALIAS_DEFAULT = `${RSG_COMPONENTS_ALIAS}-default`
 
-	const webpackAlias = (webpackConfig.resolve && webpackConfig.resolve.alias) || {}
+	const webpackAlias: { [index: string]: string | false | string[] } =
+		webpackConfig.resolve &&
+		webpackConfig.resolve.alias &&
+		!Array.isArray(webpackConfig.resolve.alias)
+			? webpackConfig.resolve.alias
+			: {}
 
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
@@ -256,7 +260,7 @@ export default function (
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	const resolve = makeWebpackConfig(config as any, env).resolve
-	if (resolve && resolve.alias) {
+	if (resolve && resolve.alias && !Array.isArray(resolve.alias)) {
 		webpackAlias[RSG_COMPONENTS_ALIAS] = resolve.alias[RSG_COMPONENTS_ALIAS]
 	}
 

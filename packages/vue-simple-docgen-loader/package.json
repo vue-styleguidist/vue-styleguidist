@@ -4,7 +4,7 @@
 	"description": "a webpack loader to get vue components docs from a simple require",
 	"main": "index.js",
 	"dependencies": {
-		"escodegen": "^1.14.3",
+		"escodegen": "^2.0.0",
 		"to-ast": "^1.0.0",
 		"vue-docgen-api": "^4.38.2"
 	},

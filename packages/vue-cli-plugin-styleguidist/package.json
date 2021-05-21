@@ -16,7 +16,7 @@
 	"private": false,
 	"dependencies": {
 		"vue-styleguidist": "^4.38.2",
-		"webpack-merge": "^4.2.2"
+		"webpack-merge": "^5.0.0"
 	},
 	"peerDependencies": {
 		"@vue/cli-service": ">= 3"

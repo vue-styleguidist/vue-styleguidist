@@ -11,13 +11,13 @@ import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
 import { Styles } from 'jss'
-import { Configuration, loader } from 'webpack'
+import { Configuration, LoaderContext } from 'webpack'
 import * as Rsg from 'react-styleguidist'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
 import { ProcessedSection } from './Section'
 import { LoaderComponentProps } from './Component'
 
-export interface StyleguidistContext extends loader.LoaderContext {
+export interface StyleguidistContext extends LoaderContext<any> {
 	_styleguidist: SanitizedStyleguidistConfig
 }
 
