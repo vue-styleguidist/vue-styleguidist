@@ -10,6 +10,14 @@ describe('tests button', () => {
 	})
 
 	it('should contain two components', () => {
-		expect(docTest.length).toBe(2)
+		expect(docTest).toHaveLength(2)
+	})
+
+	it('should have one prop on the first', () => {
+		expect(docTest[0].props).toHaveLength(1)
+	})
+
+	it('should have one prop on the second', () => {
+		expect(docTest[1].props).toHaveLength(1)
 	})
 })

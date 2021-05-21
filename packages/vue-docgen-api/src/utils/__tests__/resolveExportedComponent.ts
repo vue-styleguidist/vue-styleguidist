@@ -101,7 +101,7 @@ describe('resolveExportedComponent', () => {
 			expect(components.size).toBe(2)
 		})
 
-		it('should return exported class style components', () => {
+		it('should return default exported class style components', () => {
 			const ast = babylon().parse(
 				[
 					'@Component()', //
@@ -110,6 +110,19 @@ describe('resolveExportedComponent', () => {
 			)
 			const [components] = resolveExportedComponent(ast)
 			expect(components.size).toBe(1)
+		})
+
+		it('should return name exported class style components', () => {
+			const ast = babylon().parse(
+				[
+					'@Component()',
+					'export class Compo1 extends testComponent {}',
+					'@Component()',
+					'export class Compo2 extends testComponent {}'
+				].join('\n')
+			)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(2)
 		})
 	})
 
