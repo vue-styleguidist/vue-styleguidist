@@ -113,7 +113,8 @@ export default function resolveExportedComponent(
 	function exportDeclaration(path: NodePath) {
 		const definitions = resolveExportDeclaration(path)
 
-		const sourcePath: string = path.get('source').value?.value
+		// if it is a pure export { compo } from "./compo" load the source here
+		const sourcePath: string | undefined = path.get('source').value?.value
 
 		definitions.forEach((definition: NodePath, name: string) => {
 			if (sourcePath) {

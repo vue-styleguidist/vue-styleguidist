@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:7.0.1
+    - image: cypress/included:7.3.0
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
           keys:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm config set store-dir ~/.pnpm-store
+      #- run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install
       - save_cache:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}

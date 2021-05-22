@@ -1,0 +1,10 @@
+{
+	"extends": ["config:base", ":semanticCommits"],
+	"groupName": "all",
+	"packageRules": [
+		{
+			"matchPackageNames": ["ast-types", "source-map"],
+			"groupName": "rsg-deps"
+		}
+	]
+}

@@ -32,22 +32,22 @@
 		"@babel/types": "^7.13.12",
 		"@vue/compiler-dom": "^3.0.7",
 		"@vue/compiler-sfc": "^3.0.7",
-		"ast-types": "0.13.3",
+		"ast-types": "0.14.2",
 		"hash-sum": "^1.0.2",
 		"lru-cache": "^4.1.5",
 		"pug": "^3.0.2",
-		"recast": "0.19.1",
+		"recast": "0.20.4",
 		"ts-map": "^1.0.3",
 		"vue-inbrowser-compiler-utils": "^4.37.0"
 	},
 	"devDependencies": {
 		"@test-vue-docgen/mixins": "3.15.4",
-		"@types/pug": "^2.0.4",
-		"globby": "^10.0.2",
-		"vue": "^2.6.12",
-		"vue-class-component": "^7.2.6",
-		"vue-clickaway": "^2.2.2",
-		"vue-property-decorator": "^7.3.0",
-		"vuetify": "^2.4.8"
+		"@types/pug": "2.0.4",
+		"globby": "10.0.2",
+		"vue": "2.6.12",
+		"vue-class-component": "7.2.6",
+		"vue-clickaway": "2.2.2",
+		"vue-property-decorator": "7.3.0",
+		"vuetify": "2.5.0"
 	}
 }
