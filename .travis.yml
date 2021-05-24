@@ -1,7 +1,5 @@
 language: node_js
-python:
-  - "3.8"
-  
+
 # never build when commited by the bot
 # + prevent double build on dev -> delivery Pull Request
 if: sender != "vue-styleguidist-bot" AND sender != "Vue Styleguidist Bot" AND (type = pull_request OR branch = delivery OR branch = next)
@@ -12,7 +10,7 @@ cache:
     - '~/.pnpm-store'
 
 before_install:
-before_install:
+  - apt-get install -y node-gyp
   - curl -L https://unpkg.com/@pnpm/self-installer | node
   - pnpm config set store-dir ~/.pnpm-store
 
