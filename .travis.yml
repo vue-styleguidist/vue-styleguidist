@@ -22,12 +22,12 @@ install:
 # only build on pushes on delivery and on pushes on pull requests
 branches:
   only:
+    - dev
     - delivery
     - next
 
 stages:
   - test
-  - coverage
   - name: docgen-nuxt
     if: type != pull_request AND branch = delivery
   - name: documentation

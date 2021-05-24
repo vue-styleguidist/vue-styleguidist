@@ -11,7 +11,10 @@ import getProperties from './utils/getProperties'
  * @param documentation
  * @param path
  */
-export default function propHandler(documentation: Documentation, path: NodePath): Promise<void> {
+export default function componentHandler(
+	documentation: Documentation,
+	path: NodePath
+): Promise<void> {
 	// deal with functional flag
 	if (bt.isObjectExpression(path.node)) {
 		const functionalPath = getProperties(path, 'functional')

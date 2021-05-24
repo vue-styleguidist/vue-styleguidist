@@ -29,7 +29,6 @@ module.exports = {
 				[
 					'@babel/env',
 					{
-						loose: true,
 						modules: 'commonjs',
 						useBuiltIns: 'usage',
 						corejs: 3,
