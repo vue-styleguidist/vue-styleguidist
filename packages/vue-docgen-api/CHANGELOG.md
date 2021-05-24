@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.39.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.3...v4.39.0) (2021-05-24)
+
+
+### Features
+
+* allow extension of component in a local file ([1663977](https://github.com/vue-styleguidist/vue-styleguidist/commit/166397793959e268d1ac7050c9aa49255de2c0a3))
+* resolve local global variable for mixins ([58305f3](https://github.com/vue-styleguidist/vue-styleguidist/commit/58305f3df5722dee20a06da534f02d481283f505))
+
+
+
+
+
 ## [4.38.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.2...v4.38.3) (2021-05-24)
 
 
