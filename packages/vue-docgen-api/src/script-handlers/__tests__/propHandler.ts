@@ -337,6 +337,22 @@ describe('propHandler', () => {
 			})
 		})
 
+		it('should not have parenthesis', async () => {
+			const src = `
+			export default {
+			  props: {
+				test: {
+				  type: Object,
+				  default: () => ({ a: 1 })
+				}
+			  }
+			}
+			`
+			const testParsed = await parserTest(src)
+			const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+			expect(defaultValue).toMatchObject({ value: '{a:1}' })
+		})
+
 		// type, format of default input, result of parsing
 		test.each([
 			['Object', 'default: () => ({ a: 1 })', '{a:1}', ''],
