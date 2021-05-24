@@ -1,6 +1,4 @@
 language: node_js
-python:
-  - "3.8"
 
 # never build when commited by the bot
 # + prevent double build on dev -> delivery Pull Request
