@@ -12,7 +12,6 @@ cache:
     - '~/.pnpm-store'
 
 before_install:
-  - npm install -g node-gyp
   - curl -L https://unpkg.com/@pnpm/self-installer | node
   - pnpm config set store-dir ~/.pnpm-store
 
