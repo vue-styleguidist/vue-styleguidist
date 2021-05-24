@@ -88,7 +88,7 @@
 		"react-test-renderer": "17.0.2",
 		"rimraf": "2.7.1",
 		"semver": "5.7.1",
-		"start-server-and-test": "1.12.2",
+		"start-server-and-test": "1.12.3",
 		"strip-shebang": "1.0.2",
 		"ts-jest": "26.5.6",
 		"tslib": "2.2.0",

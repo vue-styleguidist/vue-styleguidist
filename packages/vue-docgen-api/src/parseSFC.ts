@@ -8,7 +8,6 @@ import parseTemplate, { Handler as TemplateHandler } from './parse-template'
 import Documentation from './Documentation'
 import { ParseOptions } from './parse'
 import parseScript from './parse-script'
-import defaultScriptHandlers, { preHandlers } from './script-handlers'
 import makePathResolver from './utils/makePathResolver'
 
 const read = promisify(readFile)
@@ -92,20 +91,8 @@ export default async function parseSFC(
 		}
 	}
 
-	const scriptHandlers = opt.scriptHandlers || [
-		...defaultScriptHandlers,
-		...(opt.addScriptHandlers || [])
-	]
-
 	const docs: Documentation[] = scriptSource
-		? (await parseScript(
-				scriptSource,
-				opt.scriptPreHandlers || preHandlers,
-				scriptHandlers,
-				opt,
-				documentation,
-				initialDoc !== undefined
-		  )) || []
+		? (await parseScript(scriptSource, opt, documentation, initialDoc !== undefined)) || []
 		: // if there is only a template return the template's doc
 		documentation
 		? [documentation]
