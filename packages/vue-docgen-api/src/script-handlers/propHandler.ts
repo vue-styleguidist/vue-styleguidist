@@ -261,9 +261,10 @@ function describeTypeAndValuesFromPath(
 	return propDescriptor.type.name
 }
 
-function getTypeFromTypePath(
-	typePath: NodePath<bt.TSAsExpression | bt.Identifier>
-): { name: string; func?: boolean } {
+function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression | bt.Identifier>): {
+	name: string
+	func?: boolean
+} {
 	const typeNode = typePath.node
 	const { typeAnnotation } = typeNode
 
@@ -381,9 +382,13 @@ export function describeDefault(
 						bt.isArrayExpression(arrowFunctionBody.node) ||
 						bt.isObjectExpression(arrowFunctionBody.node)
 					) {
+						const rawCode = print(arrowFunctionBody.node).code
+						const value = arrowFunctionBody.node.extra?.parenthesized
+							? rawCode.slice(1, rawCode.length - 1)
+							: rawCode
 						propDescriptor.defaultValue = {
 							func: false,
-							value: print(arrowFunctionBody.node).code
+							value
 						}
 						return
 					}
@@ -403,9 +408,8 @@ export function describeDefault(
 				? defaultArray[0].get('body')
 				: defaultArray[0].get('value').get('body')
 			const defaultBlockStatementNode: bt.BlockStatement = defaultBlockStatement.node
-			const rawValueParsed = getRawValueParsedFromFunctionsBlockStatementNode(
-				defaultBlockStatementNode
-			)
+			const rawValueParsed =
+				getRawValueParsedFromFunctionsBlockStatementNode(defaultBlockStatementNode)
 			if (rawValueParsed) {
 				propDescriptor.defaultValue = {
 					func: false,
@@ -473,7 +477,7 @@ async function describeValues(
 export function extractValuesFromTags(propDescriptor: PropDescriptor) {
 	if (propDescriptor.tags && propDescriptor.tags.values) {
 		const values = propDescriptor.tags.values.map(tag => {
-			const description = ((tag as any) as ParamTag).description
+			const description = (tag as any as ParamTag).description
 			const choices = typeof description === 'string' ? description.split(',') : undefined
 			if (choices) {
 				return choices.map((v: string) => v.trim())

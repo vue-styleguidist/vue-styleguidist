@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.38.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.2...v4.38.3) (2021-05-24)
+
+
+### Bug Fixes
+
+* **docgen:** multiple class component in same file ([cb0e986](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb0e986ac2f43fa6e6b1f651ddee908e0f4f4aaa)), closes [#1130](https://github.com/vue-styleguidist/vue-styleguidist/issues/1130)
+
+
+
+
+
 ## [4.38.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.1...v4.38.2) (2021-05-11)
 
 
