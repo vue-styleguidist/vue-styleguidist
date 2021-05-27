@@ -1,5 +1,0 @@
-# since components docs will be generated ignore them
-docs/en/*.md
-# except index.md
-!docs/en/index.md
-static/sw.js
