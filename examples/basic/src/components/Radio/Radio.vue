@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<docs>
+<docs lang="md">
 ### or import it from the docs block
 
 Example can be their own file. Use the following syntax.
@@ -32,8 +32,7 @@ this text is going to be ignored
 this text is going to be ignored
 ```
 
-They can be imported from anywhere from your source. 
-To keep your code tidy and the navigation easy, keep then in the same directory as your component.
+They can be imported from anywhere from your source. To keep your code tidy and the navigation easy, keep then in the same directory as your component.
 
 ````markdown
 ```[import](./examples/_example.js)

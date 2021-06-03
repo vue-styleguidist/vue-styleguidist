@@ -168,7 +168,7 @@ export default {
 }
 </style>
 
-<docs>
+<docs lang="md">
 ```jsx
 <RemoteGrid :data="[]" :columns='["employee_name", "employee_salary"]'/>
 ```

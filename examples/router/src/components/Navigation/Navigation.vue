@@ -50,7 +50,7 @@ export default {
 }
 </style>
 
-<docs>
+<docs lang="md">
 Here is an example of what the routing could look like
 
 ```jsx

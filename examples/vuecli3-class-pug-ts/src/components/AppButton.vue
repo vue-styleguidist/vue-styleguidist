@@ -56,7 +56,7 @@ export default class AppButton extends mixins(sizeMixin) {
 }
 </script>
 
-<docs>
+<docs lang="md">
 This button is amazing, use it responsibly.
 
 ## Examples

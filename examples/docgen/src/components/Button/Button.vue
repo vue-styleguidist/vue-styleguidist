@@ -81,7 +81,7 @@ export default {
 	background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
 }
 </style>
-<docs>
+<docs lang="md">
 Use vue live right here too
 
 ````markdown
@@ -97,7 +97,6 @@ Use vue live right here too
 To render an example as highlighted source code remove the live modifier
 
 ```html
-<Button>I’m transparent!</Button>
+<button>I’m transparent!</button>
 ```
-
 </docs>
