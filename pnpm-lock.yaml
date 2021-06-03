@@ -55,7 +55,7 @@ importers:
       semver: 5.7.1
       start-server-and-test: 1.12.3
       strip-shebang: 1.0.2
-      ts-jest: 26.5.6
+      ts-jest: ^27.0.2
       tslib: 2.2.0
       typescript: 4.3.2
       vue-styleguidist: 4.38.2
@@ -114,7 +114,7 @@ importers:
       semver: 5.7.1
       start-server-and-test: 1.12.3
       strip-shebang: 1.0.2
-      ts-jest: 26.5.6_jest@27.0.4+typescript@4.3.2
+      ts-jest: 27.0.2_jest@27.0.4+typescript@4.3.2
       tslib: 2.2.0
       typescript: 4.3.2
       vue-styleguidist: 4.38.2
@@ -9860,7 +9860,7 @@ packages:
       mkdirp: 0.5.5
       neo-async: 2.6.2
       schema-utils: 1.0.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
 
   /cache-loader/4.1.0_webpack@4.46.0:
     resolution: {integrity: sha512-ftOayxve0PwKzBF/GLsZNC9fJBXl8lkZE3TOsjkboHfVHVkL39iUEs1FO07A33mizmci5Dudt38UZrrYXDtbhw==}
@@ -13237,7 +13237,7 @@ packages:
     dependencies:
       loader-utils: 1.4.0
       schema-utils: 1.0.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
 
   /file-loader/4.3.0_webpack@4.46.0:
     resolution: {integrity: sha512-aKrYPYjF1yG3oX0kWRrqrSMfgftm7oJW5M+m4owoldH5C51C0RkIwB++JbRvEW3IU6/ZG5n8UvEcdgwOt2UOWA==}
@@ -15994,18 +15994,6 @@ packages:
       - supports-color
     dev: true
 
-  /jest-util/26.6.2:
-    resolution: {integrity: sha512-MDW0fKfsn0OI7MS7Euz6h8HNDXVQ0gaM9uW6RjfDmd1DAFcaxX9OqIakHIqhbnmF08Cf2DLDG+ulq8YQQ0Lp0Q==}
-    engines: {node: '>= 10.14.2'}
-    dependencies:
-      '@jest/types': 26.6.2
-      '@types/node': 14.14.35
-      chalk: 4.1.0
-      graceful-fs: 4.2.6
-      is-ci: 2.0.0
-      micromatch: 4.0.2
-    dev: true
-
   /jest-util/27.0.2:
     resolution: {integrity: sha512-1d9uH3a00OFGGWSibpNYr+jojZ6AckOMCXV2Z4K3YXDnzpkAaXQyIpY14FOJPiUmil7CD+A6Qs+lnnh6ctRbIA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -17502,7 +17490,7 @@ packages:
       loader-utils: 1.4.0
       normalize-url: 2.0.1
       schema-utils: 1.0.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
       webpack-sources: 1.4.3
 
   /mini-css-extract-plugin/0.9.0_webpack@4.46.0:
@@ -18258,7 +18246,7 @@ packages:
     dependencies:
       cssnano: 4.1.11
       last-call-webpack-plugin: 3.0.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
 
   /optionator/0.8.3:
     resolution: {integrity: sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==}
@@ -22747,19 +22735,19 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /ts-jest/26.5.6_jest@27.0.4+typescript@4.3.2:
-    resolution: {integrity: sha512-rua+rCP8DxpA8b4DQD/6X2HQS8Zy/xzViVYfEs2OQu68tkCuKLV0Md8pmX55+W24uRIyAsf/BajRfxOs+R2MKA==}
-    engines: {node: '>= 10'}
+  /ts-jest/27.0.2_jest@27.0.4+typescript@4.3.2:
+    resolution: {integrity: sha512-pozjHOOfm+sbv9kXCvTFVyDntWvuJztzkNFql/akD75hSMZ2jsbidVauOhBRImAopXohqcLtPK/NTTIS8Y49Ug==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
     peerDependencies:
-      jest: '>=26 <27'
+      jest: ^27.0.0
       typescript: '>=3.8 <5.0'
     dependencies:
       bs-logger: 0.2.6
       buffer-from: 1.1.1
       fast-json-stable-stringify: 2.1.0
       jest: 27.0.4
-      jest-util: 26.6.2
+      jest-util: 27.0.2
       json5: 2.2.0
       lodash: 4.17.21
       make-error: 1.3.6
@@ -23711,7 +23699,7 @@ packages:
       vue-hot-reload-api: 2.3.4
       vue-style-loader: 4.1.3
       vue-template-compiler: 2.6.12
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
 
   /vue-loader/15.9.6_css-loader@3.6.0+webpack@4.46.0:
     resolution: {integrity: sha512-j0cqiLzwbeImIC6nVIby2o/ABAWhlppyL/m5oJ67R5MloP0hj/DtFgb0Zmq3J9CG7AJ+AXIvHVnJAPBvrLyuDg==}
@@ -23960,7 +23948,7 @@ packages:
       tapable: 1.1.3
       toposort: 1.0.7
       util.promisify: 1.0.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
 
   /vuepress-plugin-container/2.1.5:
     resolution: {integrity: sha512-TQrDX/v+WHOihj3jpilVnjXu9RcTm6m8tzljNJwYhxnJUW0WWQ0hFLcDTqTBwgKIFdEiSxVOmYE+bJX/sq46MA==}
@@ -24570,7 +24558,7 @@ packages:
       pretty-time: 1.1.0
       std-env: 2.3.0
       text-table: 0.2.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
       wrap-ansi: 5.1.0
 
   /webpackbar/4.0.0_webpack@4.46.0:
