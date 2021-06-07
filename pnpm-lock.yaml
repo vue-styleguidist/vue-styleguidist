@@ -55,7 +55,7 @@ importers:
       semver: 5.7.1
       start-server-and-test: 1.12.5
       strip-shebang: 1.0.2
-      ts-jest: ^27.0.2
+      ts-jest: 27.0.3
       tslib: 2.2.0
       typescript: 4.3.2
       vue-styleguidist: 4.38.2
@@ -114,7 +114,7 @@ importers:
       semver: 5.7.1
       start-server-and-test: 1.12.5
       strip-shebang: 1.0.2
-      ts-jest: 27.0.2_jest@27.0.4+typescript@4.3.2
+      ts-jest: 27.0.3_jest@27.0.4+typescript@4.3.2
       tslib: 2.2.0
       typescript: 4.3.2
       vue-styleguidist: 4.38.2
@@ -22750,8 +22750,8 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /ts-jest/27.0.2_jest@27.0.4+typescript@4.3.2:
-    resolution: {integrity: sha512-pozjHOOfm+sbv9kXCvTFVyDntWvuJztzkNFql/akD75hSMZ2jsbidVauOhBRImAopXohqcLtPK/NTTIS8Y49Ug==}
+  /ts-jest/27.0.3_jest@27.0.4+typescript@4.3.2:
+    resolution: {integrity: sha512-U5rdMjnYam9Ucw+h0QvtNDbc5+88nxt7tbIvqaZUhFrfG4+SkWhMXjejCLVGcpILTPuV+H3W/GZDZrnZFpPeXw==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
     peerDependencies:
