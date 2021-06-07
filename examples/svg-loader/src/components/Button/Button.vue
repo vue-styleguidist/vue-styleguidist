@@ -60,17 +60,17 @@ span.left-icon {
 }
 </style>
 
-<docs>
+<docs lang="md">
 Icon on the right Side
 
 ```vue
 <template>
-  <Button>
-    <template v-slot:leftIcon>
-      <test-icon></test-icon>
-    </template>
-    Push Me
-  </Button>
+	<Button>
+		<template v-slot:leftIcon>
+			<test-icon></test-icon>
+		</template>
+		Push Me
+	</Button>
 </template>
 
 <script>

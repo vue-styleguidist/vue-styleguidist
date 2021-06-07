@@ -31,10 +31,10 @@
 		"@rollup/plugin-node-resolve": "9.0.0",
 		"@types/buble": "0.20.0",
 		"@vue/test-utils": "1.2.0",
-		"rollup": "2.49.0",
+		"rollup": "2.51.0",
 		"rollup-plugin-typescript2": "0.30.0",
-		"typescript": "4.2.4",
-		"vue": "2.6.12"
+		"typescript": "4.3.2",
+		"vue": "2.6.14"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",
 	"license": "MIT"

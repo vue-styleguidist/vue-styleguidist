@@ -5,11 +5,7 @@ Object {
   "description": "Wrapper for input elements",
   "displayName": "InputWrapper",
   "docsBlocks": Array [
-    "\`\` \`jsx
-  <input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\">
-    …
-  </input-wrapper>
-  \`\` \`",
+    "\`\` \`jsx <input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\"> … </input-wrapper>  \`\` \`",
   ],
   "events": undefined,
   "exportName": "default",

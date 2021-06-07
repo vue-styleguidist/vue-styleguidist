@@ -24,9 +24,9 @@
 		"@rollup/plugin-commonjs": "15.1.0",
 		"@rollup/plugin-node-resolve": "9.0.0",
 		"@types/domhandler": "2.4.1",
-		"rollup": "2.49.0",
+		"rollup": "2.51.0",
 		"rollup-plugin-typescript2": "0.30.0",
-		"vue": "2.6.12"
+		"vue": "2.6.14"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",
 	"license": "MIT"

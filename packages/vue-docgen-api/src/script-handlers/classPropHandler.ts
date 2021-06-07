@@ -10,6 +10,7 @@ import propHandler, {
 	describeRequired,
 	describeType,
 	extractValuesFromTags,
+	getTypeFromTypePath,
 	getValuesFromTypeAnnotation
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
@@ -89,17 +90,25 @@ export default async function classPropHandler(
 				if (bt.isCallExpression(propDecoratorPath.node)) {
 					const propDecoratorArg = propDecoratorPath.get('arguments', 0)
 
-					if (propDecoratorArg && bt.isObjectExpression(propDecoratorArg.node)) {
-						const propsPath = propDecoratorArg
-							.get('properties')
-							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as NodePath<bt.ObjectProperty>[]
+					if (propDecoratorArg) {
+						if (bt.isObjectExpression(propDecoratorArg.node)) {
+							const propsPath = propDecoratorArg
+								.get('properties')
+								.filter((p: NodePath) =>
+									bt.isObjectProperty(p.node)
+								) as NodePath<bt.ObjectProperty>[]
 
-						// if there is no type annotation, get it from the decorators arguments
-						if (!propPath.node.typeAnnotation) {
-							litteralType = describeType(propsPath, propDescriptor)
+							// if there is no type annotation, get it from the decorators arguments
+							if (!propPath.node.typeAnnotation) {
+								litteralType = describeType(propsPath, propDescriptor)
+							}
+							describeDefault(propsPath, propDescriptor, litteralType || '')
+							describeRequired(propsPath, propDescriptor)
+							// this compares the node to its supposed args
+							// if it finds no args it will return itself
+						} else if (propDecoratorArg.node !== propDecoratorPath.node) {
+							propDescriptor.type = getTypeFromTypePath(propDecoratorArg)
 						}
-						describeDefault(propsPath, propDescriptor, litteralType || '')
-						describeRequired(propsPath, propDescriptor)
 					}
 				}
 				return undefined
