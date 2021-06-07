@@ -14,29 +14,3 @@ features:
     details: See how components behave to different props and data right in the browser
 footer: MIT Licensed
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
