@@ -31,7 +31,7 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.13.10",
-		"vue": "^2.6.12",
+		"vue": "^2.6.14",
 		"vuex": "^3.6.2"
 	}
 }
