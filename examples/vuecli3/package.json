@@ -11,7 +11,7 @@
 		"styleguide:build": "cross-env NODE_ENV=production vue-cli-service styleguidist:build"
 	},
 	"dependencies": {
-		"vue": "^2.6.12"
+		"vue": "^2.6.14"
 	},
 	"devDependencies": {
 		"@vue/babel-preset-app": "^4.5.12",
@@ -19,7 +19,7 @@
 		"@vue/cli-plugin-eslint": "^4.5.12",
 		"@vue/cli-service": "^4.5.12",
 		"vue-cli-plugin-styleguidist": "^4.36.1",
-		"vue-template-compiler": "^2.6.12",
+		"vue-template-compiler": "^2.6.14",
 		"webpack-bundle-analyzer": "^3.9.0",
 		"cross-env": "^7.0.3"
 	},
