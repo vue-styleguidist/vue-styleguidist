@@ -37,7 +37,7 @@
 		"sass-loader": "^8.0.2",
 		"style-loader": "^0.19.1",
 		"vue": "^2.6.14",
-		"vue-loader": "^15.9.6",
+		"vue-loader": "^15.9.7",
 		"vue-styleguidist": "^4.36.1",
 		"vue-template-compiler": "^2.6.14",
 		"webpack": "^4.46.0",
