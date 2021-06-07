@@ -104,7 +104,9 @@ export default async function classPropHandler(
 							}
 							describeDefault(propsPath, propDescriptor, litteralType || '')
 							describeRequired(propsPath, propDescriptor)
-						} else {
+							// this compares the node to its supposed args
+							// if it finds no args it will return itself
+						} else if (propDecoratorArg.node !== propDecoratorPath.node) {
 							propDescriptor.type = getTypeFromTypePath(propDecoratorArg)
 						}
 					}
