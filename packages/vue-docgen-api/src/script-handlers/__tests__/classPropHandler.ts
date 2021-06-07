@@ -168,6 +168,19 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped')
 		})
 
+		it('should extract type from decorator itself', async () => {
+			const src = `
+        @Component
+        export default class MyTest {
+		  @Prop(String)
+          testTyped;
+        }`
+			await tester(src, {
+				type: { name: 'string' }
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testTyped')
+		})
+
 		it('should document props as decorator argument', async () => {
 			const src = `
         @Component({

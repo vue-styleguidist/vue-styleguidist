@@ -261,7 +261,7 @@ function describeTypeAndValuesFromPath(
 	return propDescriptor.type.name
 }
 
-function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression | bt.Identifier>): {
+export function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression | bt.Identifier>): {
 	name: string
 	func?: boolean
 } {
