@@ -39,6 +39,7 @@
 		"npm": ">=5"
 	},
 	"devDependencies": {
+		"@babel/core": "7.14.3",
 		"@babel/plugin-proposal-class-properties": "7.13.0",
 		"@babel/plugin-proposal-object-rest-spread": "7.14.4",
 		"@babel/plugin-syntax-dynamic-import": "7.8.3",
@@ -62,7 +63,6 @@
 		"deepfreeze": "2.0.0",
 		"ejs": "2.7.4",
 		"enzyme": "3.11.0",
-		"enzyme-adapter-react-16": "1.15.6",
 		"enzyme-to-json": "3.6.2",
 		"eslint": "7.28.0",
 		"eslint-config-tamia": "7.2.6",
