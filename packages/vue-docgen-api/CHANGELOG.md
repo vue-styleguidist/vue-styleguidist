@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.40.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.39.0...v4.40.0) (2021-06-07)
+
+
+### Features
+
+* allow to use the single type as Prop argument ([8e2a12d](https://github.com/vue-styleguidist/vue-styleguidist/commit/8e2a12d37a36a067b578833e76834b44c4a7029e)), closes [#1034](https://github.com/vue-styleguidist/vue-styleguidist/issues/1034)
+
+
+
+
+
 # [4.39.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.3...v4.39.0) (2021-05-24)
 
 
