@@ -337,6 +337,22 @@ describe('propHandler', () => {
 			})
 		})
 
+		it('should not have parenthesis', async () => {
+			const src = `
+			export default {
+			  props: {
+				test: {
+				  type: Object,
+				  default: () => ({ a: 1 })
+				}
+			  }
+			}
+			`
+			const testParsed = await parserTest(src)
+			const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
+			expect(defaultValue).toMatchObject({ value: '{a:1}' })
+		})
+
 		// type, format of default input, result of parsing
 		test.each([
 			['Object', 'default: () => ({ a: 1 })', '{a:1}', ''],
@@ -536,6 +552,38 @@ describe('propHandler', () => {
 			type: String,
 			validator(va){
 				return ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
+			}
+        }
+    }
+  }
+  `
+			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
+
+		it('should check the validator method for super standard values with the diff signs', async () => {
+			const src = `
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator(va){
+				return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
+			}
+        }
+    }
+  }
+  `
+			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
+		})
+
+		it('should check the validator function for super standard values with the diff signs', async () => {
+			const src = `
+  export default {
+    props: {
+        color: {
+			type: String,
+			validator: function(va){
+				return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
 			}
         }
     }

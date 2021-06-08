@@ -6,7 +6,6 @@ import Documentation, { Descriptor } from './Documentation'
 import parseScript, { Handler as ScriptHandler } from './parse-script'
 import { Handler as TemplateHandler } from './parse-template'
 
-import defaultScriptHandlers, { preHandlers } from './script-handlers'
 import parseSFC from './parseSFC'
 
 const read = promisify(readFile)
@@ -125,21 +124,9 @@ export async function parseSource(
 	if (singleFileComponent) {
 		docs = await parseSFC(documentation, source, opt)
 	} else {
-		const scriptHandlers = opt.scriptHandlers || [
-			...defaultScriptHandlers,
-			...(opt.addScriptHandlers || [])
-		]
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
-		docs =
-			(await parseScript(
-				source,
-				opt.scriptPreHandlers || preHandlers,
-				scriptHandlers,
-				opt,
-				documentation,
-				documentation !== undefined
-			)) || []
+		docs = (await parseScript(source, opt, documentation, documentation !== undefined)) || []
 
 		if (docs.length === 1 && !docs[0].get('displayName')) {
 			// give a component a display name if we can

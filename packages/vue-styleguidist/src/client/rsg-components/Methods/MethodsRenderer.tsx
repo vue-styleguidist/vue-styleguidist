@@ -18,24 +18,30 @@ function renderMethodName({ name, tags = {} }: MethodDescriptor) {
 	return <Name deprecated={!!tags.deprecated}>{`${name}()`}</Name>
 }
 
-function renderDescription({ description, returns, tags = {} }: MethodDescriptor) {
-	return (
-		<>
-			{description && <Markdown text={description} />}
-			{returns && (
-				<div>
-					Returns:{' '}
-					<Argument
-						name=""
-						{...returns}
-						type={returns.type ? { name: renderTypeString(returns.type) } : undefined}
-						description={returns.description as string}
-					/>
-				</div>
-			)}
-			<JsDoc {...tags} />
-		</>
-	)
+function renderDescription(myClasses: Record<string, string>) {
+	return function renderDesc({ description, returns, tags = {} }: MethodDescriptor) {
+		return (
+			<>
+				{description && (
+					<div className={myClasses.descriptionWrapper}>
+						<Markdown text={description} />
+					</div>
+				)}
+				{returns && (
+					<div>
+						Returns:{' '}
+						<Argument
+							name=""
+							{...returns}
+							type={returns.type ? { name: renderTypeString(returns.type) } : undefined}
+							description={returns.description as string}
+						/>
+					</div>
+				)}
+				<JsDoc {...tags} />
+			</>
+		)
+	}
 }
 
 function renderParameters({ params = [] }: MethodDescriptor) {
@@ -60,7 +66,7 @@ export const columns = (methods: MethodDescriptor[], classes: Record<string, str
 	},
 	{
 		caption: 'Description',
-		render: renderDescription,
+		render: renderDescription(classes),
 		className: classes.description
 	},
 	{

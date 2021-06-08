@@ -49,24 +49,22 @@ export default async function documentRequiredComponents(
 	}
 
 	const docsArray = await Promise.all(
-		files.keys().map(
-			async (fullFilePath): Promise<Documentation[]> => {
-				const vars = files.get(fullFilePath) || []
-				const temporaryDocs = await parseFile(
-					{
-						...opt,
-						filePath: fullFilePath,
-						nameFilter: vars.map(v => v.exportName)
-					},
-					documentation
-				)
-				// update varnames with the original iev names
-				temporaryDocs.forEach(d =>
-					d.set('exportName', (vars.find(v => v.exportName === d.get('exportName')) || {}).varName)
-				)
-				return temporaryDocs
-			}
-		)
+		files.keys().map(async (fullFilePath): Promise<Documentation[]> => {
+			const vars = files.get(fullFilePath) || []
+			const temporaryDocs = await parseFile(
+				{
+					...opt,
+					filePath: fullFilePath,
+					nameFilter: vars.map(v => v.exportName)
+				},
+				documentation
+			)
+			// update varnames with the original iev names
+			temporaryDocs.forEach(d =>
+				d.set('exportName', (vars.find(v => v.exportName === d.get('exportName')) || {}).varName)
+			)
+			return temporaryDocs
+		})
 	)
 
 	// flatten array of docs

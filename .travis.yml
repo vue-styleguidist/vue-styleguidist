@@ -1,6 +1,6 @@
 language: node_js
 python:
-  - "3.6"
+  - '3.8'
 
 # never build when commited by the bot
 # + prevent double build on dev -> delivery Pull Request
@@ -12,7 +12,6 @@ cache:
     - '~/.pnpm-store'
 
 before_install:
-before_install:
   - curl -L https://unpkg.com/@pnpm/self-installer | node
   - pnpm config set store-dir ~/.pnpm-store
 
@@ -23,15 +22,12 @@ install:
 # only build on pushes on delivery and on pushes on pull requests
 branches:
   only:
+    - dev
     - delivery
     - next
-    - dev
 
 stages:
   - test
-  - coverage
-  - name: docgen-nuxt
-    if: type != pull_request AND branch = delivery
   - name: documentation
     if: type != pull_request AND branch = delivery
   - name: release-beta
@@ -50,19 +46,6 @@ jobs:
         - pnpm test:jest -- --runInBand --coverage
         # Upload coverage report to Codecov
         - curl -s https://codecov.io/bash | bash
-
-    - stage: docgen-nuxt
-      script:
-        - pnpm build docgen-nuxt
-
-      # deploy nuxt-content separately because of routing conflicts
-      deploy:
-        provider: surge
-        skip_cleanup: true
-        project: ./examples/docgen-nuxt/dist/
-        domain: nuxt-content-styleguidist.surge.sh
-        on:
-          branch: delivery
 
     # Build & Deploy the documentation website
     - stage: documentation

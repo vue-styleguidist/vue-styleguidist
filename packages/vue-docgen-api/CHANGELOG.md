@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.39.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.3...v4.39.0) (2021-05-24)
+
+
+### Features
+
+* allow extension of component in a local file ([1663977](https://github.com/vue-styleguidist/vue-styleguidist/commit/166397793959e268d1ac7050c9aa49255de2c0a3))
+* resolve local global variable for mixins ([58305f3](https://github.com/vue-styleguidist/vue-styleguidist/commit/58305f3df5722dee20a06da534f02d481283f505))
+
+
+
+
+
+## [4.38.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.2...v4.38.3) (2021-05-24)
+
+
+### Bug Fixes
+
+* **docgen:** multiple class component in same file ([cb0e986](https://github.com/vue-styleguidist/vue-styleguidist/commit/cb0e986ac2f43fa6e6b1f651ddee908e0f4f4aaa)), closes [#1130](https://github.com/vue-styleguidist/vue-styleguidist/issues/1130)
+
+
+
+
+
+## [4.38.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.1...v4.38.2) (2021-05-11)
+
+
+### Bug Fixes
+
+* allow for @Emit to be parsed ([b1c7285](https://github.com/vue-styleguidist/vue-styleguidist/commit/b1c7285943de709a5aa4c518c7570bf185324aa9))
+
+
+
+
+
+## [4.38.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.0...v4.38.1) (2021-04-13)
+
+
+### Bug Fixes
+
+* allow function expression validators ([7ece101](https://github.com/vue-styleguidist/vue-styleguidist/commit/7ece101eabcfdfe4003b18587a21e05825d316eb)), closes [#1083](https://github.com/vue-styleguidist/vue-styleguidist/issues/1083)
+
+
+
+
+
 # [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
 
 

@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.39.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.3...v4.39.0) (2021-05-24)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.38.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.2...v4.38.3) (2021-05-24)
+
+
+### Bug Fixes
+
+* lock dependencies as they are locked in rsg ([f418e07](https://github.com/vue-styleguidist/vue-styleguidist/commit/f418e07278a49d9717906aaf7665362effd76530))
+
+
+
+
+
+## [4.38.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.1...v4.38.2) (2021-05-11)
+
+
+### Bug Fixes
+
+* make usage table font sizes and spacing consistent ([7fc22fe](https://github.com/vue-styleguidist/vue-styleguidist/commit/7fc22fe1d78a4f8c0c02cfdefe60feca1565254b))
+
+
+
+
+
+## [4.38.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.0...v4.38.1) (2021-04-13)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
 # [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
 
 **Note:** Version bump only for package vue-styleguidist

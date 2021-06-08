@@ -17,14 +17,14 @@ describe('mixinsHandler', () => {
 	let mockParse: jest.Mock
 	const doc = new Documentation('dummy/path')
 	beforeEach(() => {
-		resolveRequiredMock = (resolveRequired as unknown) as jest.Mock<
+		resolveRequiredMock = resolveRequired as unknown as jest.Mock<
 			(ast: bt.File, varNameFilter?: string[]) => { [key: string]: string }
 		>
 		resolveRequiredMock.mockReturnValue({
 			testComponent: { filePath: ['componentPath'], exportName: 'default' }
 		})
 
-		mockResolvePathFrom = (resolvePathFrom as unknown) as jest.Mock<
+		mockResolvePathFrom = resolvePathFrom as unknown as jest.Mock<
 			(path: string, from: string) => string
 		>
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
