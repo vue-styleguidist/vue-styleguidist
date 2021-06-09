@@ -6,14 +6,11 @@
  * Config Data: packages/vue-styleguidist/src/scripts/schemas/config.ts
  */
 
-import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
 import { Styles } from 'jss'
 import { Configuration, loader } from 'webpack'
-import * as Rsg from 'react-styleguidist'
-import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
 import { ProcessedSection } from './Section'
 import { LoaderComponentProps } from './Component'
 
@@ -21,11 +18,7 @@ export interface StyleguidistContext extends loader.LoaderContext {
 	_styleguidist: SanitizedStyleguidistConfig
 }
 
-export interface BaseStyleguidistConfig
-	extends Omit<
-		Rsg.SanitizedStyleguidistConfig,
-		'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
-	> {
+export interface BaseStyleguidistConfig {
 	/**
 	 * Your application static assets folder, will be accessible as / in the style guide dev server.
 	 */
@@ -70,7 +63,7 @@ export interface BaseStyleguidistConfig
 	 * Defines the initial state of the props and methods tab
 	 * @default "collapse"
 	 */
-	exampleMode: Rsg.ExpandMode
+	exampleMode: 'expand' | 'collapse' | 'hide'
 	getComponentPathLine: (componentPath: string) => string
 	getExampleFilename: (componentPath: string) => string
 	/**
@@ -207,21 +200,18 @@ export interface BaseStyleguidistConfig
 	 */
 	title: string
 	updateDocs: (doc: LoaderComponentProps, file: string) => LoaderComponentProps
-	updateExample: (
-		props: Pick<Rsg.CodeExample, 'content' | 'lang' | 'settings'>,
-		ressourcePath: string
-	) => Rsg.CodeExample
+	updateExample: (props: any, ressourcePath: string) => any
 	updateWebpackConfig: any
 	/**
 	 * Defines the initial state of the props and methods tab
 	 * @default "collapse"
 	 */
-	usageMode: Rsg.ExpandMode
+	usageMode: 'expand' | 'collapse' | 'hide'
 	/**
 	 * If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases
 	 * @default "expand"
 	 */
-	tocMode: Rsg.ExpandMode
+	tocMode: string
 	/**
 	 * Should the passed filepath be parsed by docgen if mentionned extends
 	 */
@@ -243,7 +233,7 @@ export interface BaseStyleguidistConfig
 }
 
 export interface SanitizedStyleguidistConfig extends BaseStyleguidistConfig {
-	sections: Rsg.ConfigSection[]
+	sections: any[]
 }
 
 /**
@@ -252,14 +242,14 @@ export interface SanitizedStyleguidistConfig extends BaseStyleguidistConfig {
  * up only being a string after sanitizing
  */
 export interface StyleguidistConfig
-	extends RecursivePartial<Omit<SanitizedStyleguidistConfig, 'defaultExample'>> {
+	extends Partial<Omit<BaseStyleguidistConfig, 'defaultExample'>> {
 	defaultExample?: string | boolean
 }
 
 export interface StyleGuideObject {
 	sections: ProcessedSection[]
 	config: StyleguidistConfig
-	renderRootJsx: React.ReactNode
+	renderRootJsx: any
 	welcomeScreen: any
 	patterns: string[]
 }

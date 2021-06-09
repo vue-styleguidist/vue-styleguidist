@@ -8,7 +8,7 @@ export default function (this: loader.LoaderContext, source: string | Buffer, ma
 		cb(
 			null,
 			`export default function (Component) {
-		Component.options.__docs = ${JSON.stringify(source)}
+		Component.__docs = ${JSON.stringify(source)}
 	  }`,
 			map
 		)
