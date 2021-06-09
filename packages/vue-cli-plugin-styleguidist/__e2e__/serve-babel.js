@@ -31,7 +31,7 @@ async function createAndInstall(name) {
 		extends: ['plugin:vue/essential', 'eslint:recommended'],
 		rules: {},
 		parserOptions: {
-			parser: 'babel-eslint'
+			parser: '@babel/eslint'
 		}
 	}
 	pkg['browserslist'] = ['> 1%', 'last 2 versions', 'not ie <= 8']
