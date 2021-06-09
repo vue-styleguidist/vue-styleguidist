@@ -3,6 +3,134 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.39.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.3...v4.39.0) (2021-05-24)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.38.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.2...v4.38.3) (2021-05-24)
+
+
+### Bug Fixes
+
+* lock dependencies as they are locked in rsg ([f418e07](https://github.com/vue-styleguidist/vue-styleguidist/commit/f418e07278a49d9717906aaf7665362effd76530))
+
+
+
+
+
+## [4.38.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.1...v4.38.2) (2021-05-11)
+
+
+### Bug Fixes
+
+* make usage table font sizes and spacing consistent ([7fc22fe](https://github.com/vue-styleguidist/vue-styleguidist/commit/7fc22fe1d78a4f8c0c02cfdefe60feca1565254b))
+
+
+
+
+
+## [4.38.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.0...v4.38.1) (2021-04-13)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.37.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.0...v4.37.1) (2021-04-05)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.37.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.1...v4.37.0) (2021-04-05)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.36.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.0...v4.36.1) (2021-03-20)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* pagePerSection when only top section exists ([70cbb59](https://github.com/vue-styleguidist/vue-styleguidist/commit/70cbb593cbbb6f94f300c5c1ddad69c4d38e81e7)), closes [#1054](https://github.com/vue-styleguidist/vue-styleguidist/issues/1054)
+* updrade react-stypeguidist ([4823bd2](https://github.com/vue-styleguidist/vue-styleguidist/commit/4823bd2be1d1f2fa1e39d7142da7cb15ab16b43c))
+
+
+
+
+
+# [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.34.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.0...v4.34.1) (2020-11-27)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+# [4.34.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.10...v4.34.0) (2020-11-25)
+
+
+### Features
+
+* **cli:** render props and bindings properly ([5e4c027](https://github.com/vue-styleguidist/vue-styleguidist/commit/5e4c0272e1f5b12a7223ad52055f68871525e27f)), closes [#1013](https://github.com/vue-styleguidist/vue-styleguidist/issues/1013)
+
+
+
+
+
+## [4.33.10](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.9...v4.33.10) (2020-11-20)
+
+
+### Bug Fixes
+
+* repair HMR in styleguidist ([1c3e14d](https://github.com/vue-styleguidist/vue-styleguidist/commit/1c3e14d5a0966a42ba2af619558aa54836743b6c))
+
+
+
+
+
 ## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
 
 **Note:** Version bump only for package vue-styleguidist

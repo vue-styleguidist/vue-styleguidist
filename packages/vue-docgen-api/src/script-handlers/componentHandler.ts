@@ -11,7 +11,10 @@ import getProperties from './utils/getProperties'
  * @param documentation
  * @param path
  */
-export default function propHandler(documentation: Documentation, path: NodePath): Promise<void> {
+export default function componentHandler(
+	documentation: Documentation,
+	path: NodePath
+): Promise<void> {
 	// deal with functional flag
 	if (bt.isObjectExpression(path.node)) {
 		const functionalPath = getProperties(path, 'functional')
@@ -27,7 +30,15 @@ export default function propHandler(documentation: Documentation, path: NodePath
 	let componentCommentedPath = path.parentPath
 	// in case of Vue.extend() structure
 	if (bt.isCallExpression(componentCommentedPath.node)) {
-		componentCommentedPath = componentCommentedPath.parentPath.parentPath
+		// look for leading comments in the parent structures
+		let i = 5
+		while (
+			i-- &&
+			!componentCommentedPath.get('leadingComments').value &&
+			componentCommentedPath.parentPath.node.type !== 'Program'
+		) {
+			componentCommentedPath = componentCommentedPath.parentPath
+		}
 	} else if (bt.isVariableDeclarator(componentCommentedPath.node)) {
 		componentCommentedPath = componentCommentedPath.parentPath.parentPath
 		if (componentCommentedPath.parentPath.node.type !== 'Program') {

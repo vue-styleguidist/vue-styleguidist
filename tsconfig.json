@@ -16,7 +16,8 @@
 			]
 		},
 		"strictFunctionTypes": false,
-		"jsx": "react"
+		"jsx": "react",
+		"resolveJsonModule": true
 	},
 	"include": [
 		"@types/**/*",

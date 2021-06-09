@@ -32,7 +32,7 @@ const scrollToOrigin = () => {
 }
 
 const render = () => {
-	// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-unresolved
+	// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-unresolved,import/extensions
 	const styleguide = require('!!../loaders/styleguide-loader!./index.js')
 	ReactDOM.render(
 		renderStyleguide(styleguide, codeRevision),
@@ -43,7 +43,6 @@ const render = () => {
 window.addEventListener('hashchange', render)
 window.addEventListener('hashchange', scrollToOrigin)
 
-/* istanbul ignore if */
 if (module.hot) {
 	module.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
 		codeRevision += 1

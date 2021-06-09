@@ -59,7 +59,7 @@ export const columns = (methods, classes) => [
 	},
 	{
 		caption: 'Description',
-		render: renderDescription,
+		render: renderDescription(classes),
 		className: classes.description
 	},
 	{

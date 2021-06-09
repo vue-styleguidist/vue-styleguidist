@@ -17,6 +17,11 @@ export default function resolveExportDeclaration(path: NodePath): Map<string, No
 					definitions.set(nodeId.name, declarator)
 				}
 			})
+		} else if (declaration && bt.isClassDeclaration(declaration.node)) {
+			const nodeId = declaration.node.id
+			if (bt.isIdentifier(nodeId)) {
+				definitions.set(nodeId.name, declaration)
+			}
 		} else {
 			// const example = {}
 			// export { example }

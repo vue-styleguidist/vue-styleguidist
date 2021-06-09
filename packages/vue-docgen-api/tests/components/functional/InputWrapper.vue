@@ -116,10 +116,6 @@ export default {
 /* Removed styles as they are irrelevant */
 </style>
 
-<docs>
-  `` `jsx
-  <input-wrapper label="Label" value="–" id="sdf">
-    …
-  </input-wrapper>
-  `` `
+<docs lang="md">
+`` `jsx <input-wrapper label="Label" value="–" id="sdf"> … </input-wrapper>  `` `
 </docs>

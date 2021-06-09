@@ -4,6 +4,8 @@ import Documentation from '../Documentation'
 import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
+import resolveLocal from '../utils/resolveLocal'
+import { addDefaultAndExecuteHandlers } from '../parse-script'
 
 /**
  * Returns documentation of the component referenced in the extends property of the component
@@ -24,10 +26,25 @@ export default async function extendsHandler(
 		return
 	}
 
-	// get all require / import statements
-	const extendsFilePath = resolveRequired(astPath, [extendsVariableName])
+	const variablesResolvedToCurrentFile = resolveLocal(astPath, [extendsVariableName])
 
-	await documentRequiredComponents(documentation, extendsFilePath, 'extends', opt)
+	if (variablesResolvedToCurrentFile.get(extendsVariableName)) {
+		await addDefaultAndExecuteHandlers(
+			variablesResolvedToCurrentFile,
+			astPath,
+			{
+				...opt,
+				nameFilter: [extendsVariableName]
+			},
+			documentation
+		)
+	} else {
+		// get all require / import statements
+		const extendsFilePath = resolveRequired(astPath, [extendsVariableName])
+
+		// get each doc for each mixin using parse
+		await documentRequiredComponents(documentation, extendsFilePath, 'extends', opt)
+	}
 }
 
 function getExtendsVariableName(compDef: NodePath): string | undefined {

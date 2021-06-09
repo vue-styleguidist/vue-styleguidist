@@ -1,4 +1,6 @@
 language: node_js
+python:
+  - '3.8'
 
 # never build when commited by the bot
 # + prevent double build on dev -> delivery Pull Request
@@ -20,17 +22,12 @@ install:
 # only build on pushes on delivery and on pushes on pull requests
 branches:
   only:
+    - dev
     - delivery
     - next
-    - dev
 
 stages:
-  - name: test
-    if: branch != next
-  - name: coverage
-    if: branch != next
-  - name: docgen-nuxt
-    if: type != pull_request AND branch = delivery
+  - test
   - name: documentation
     if: type != pull_request AND branch = delivery
   - name: release-beta
@@ -49,19 +46,6 @@ jobs:
         - pnpm test:jest -- --runInBand --coverage
         # Upload coverage report to Codecov
         - curl -s https://codecov.io/bash | bash
-
-    - stage: docgen-nuxt
-      script:
-        - pnpm build docgen-nuxt
-
-      # deploy nuxt-content separately because of routing conflicts
-      deploy:
-        provider: surge
-        skip_cleanup: true
-        project: ./examples/docgen-nuxt/dist/
-        domain: nuxt-content-styleguidist.surge.sh
-        on:
-          branch: delivery
 
     # Build & Deploy the documentation website
     - stage: documentation
@@ -94,7 +78,7 @@ jobs:
         - git checkout delivery
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - npx lerna version --yes --github-release
+        - npx lerna version --yes --create-release=github
         - npx lerna publish from-git --yes
 
     - stage: release-beta
@@ -105,7 +89,7 @@ jobs:
         - git checkout next
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-        - npx lerna version -- --yes --github-release --conventional-prerelease --preid beta
+        - npx lerna version -- --yes --create-release=github --conventional-prerelease --preid beta
         - npx lerna publish from-git -- --yes --dist-tag next
 
     # then merge the whole thing back to dev
@@ -127,6 +111,7 @@ jobs:
 
         # push dev
         - git fetch github dev
+        - git reset --hard
         - git checkout github/dev
         - git checkout -b dev
         - git status -v

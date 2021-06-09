@@ -101,7 +101,7 @@ describe('resolveExportedComponent', () => {
 			expect(components.size).toBe(2)
 		})
 
-		it('should return exported class style components', () => {
+		it('should return default exported class style components', () => {
 			const ast = babylon().parse(
 				[
 					'@Component()', //
@@ -110,6 +110,19 @@ describe('resolveExportedComponent', () => {
 			)
 			const [components] = resolveExportedComponent(ast)
 			expect(components.size).toBe(1)
+		})
+
+		it('should return name exported class style components', () => {
+			const ast = babylon().parse(
+				[
+					'@Component()',
+					'export class Compo1 extends testComponent {}',
+					'@Component()',
+					'export class Compo2 extends testComponent {}'
+				].join('\n')
+			)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(2)
 		})
 	})
 
@@ -132,7 +145,24 @@ describe('resolveExportedComponent', () => {
 
 		it('should return exported typescript extend custom VueConstructor', () => {
 			const ast = babylon({ plugins: ['typescript'] }).parse(
-				['export default (Vue as VueConstructor<Vue & SomeInterface>).extend({})'].join('\n')
+				'export default (Vue as VueConstructor<Vue & SomeInterface>).extend({})'
+			)
+			const [components] = resolveExportedComponent(ast)
+			expect(components.size).toBe(1)
+		})
+
+		it('should detect as operators for ', () => {
+			const ast = babylon({ plugins: ['typescript'] }).parse(
+				[
+					'import { defineComponent } from "@vue/composition-api"',
+					'const CeHeader = {}',
+					'',
+					'const CeHeaderTheme = defineComponent({',
+					'	extends: CeHeader',
+					'})',
+					'',
+					'export default CeHeaderTheme as typeof CeHeader'
+				].join('\n')
 			)
 			const [components] = resolveExportedComponent(ast)
 			expect(components.size).toBe(1)
@@ -216,7 +246,7 @@ describe('resolveExportedComponent', () => {
 		it('should resolve a component if the body returns an object', () => {
 			const ast = babylon().parse(`export default function (cmp){
 				return {
-					props:{
+					props: {
 						test:String
 					}
 				}
@@ -253,7 +283,7 @@ describe('resolveExportedComponent', () => {
 	describe('arrow functions', () => {
 		it('should resolve a component if the body is a pure object', () => {
 			const ast = babylon().parse(`export default (cmp) => ({
-				props:{
+				props: {
 					test: String
 				}
 			});`)
@@ -264,8 +294,8 @@ describe('resolveExportedComponent', () => {
 		it('should resolve a component if the body returns an object', () => {
 			const ast = babylon().parse(`export default (cmp) => {
 				return {
-					props:{
-						test:String
+					props: {
+						test: String
 					}
 				}
 			};`)

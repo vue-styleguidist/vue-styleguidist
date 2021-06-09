@@ -36,7 +36,7 @@ async function parseMyComponent(filePath: string) {
   var componentInfoConfigured = await parse(filePath, {
     alias: { '@assets': path.resolve(__dirname, 'src/assets') },
     modules: [path.resolve(__dirname, 'src')],
-    addScriptHandler: [
+    addScriptHandlers: [
       function(
         documentation: Documentation,
         componentDefinition: NodePath,
@@ -46,7 +46,7 @@ async function parseMyComponent(filePath: string) {
         // handle custom code in script
       }
     ],
-    addTemplateHandler: [
+    addTemplateHandlers: [
       function(
         documentation: Documentation,
         templateAst: ASTElement,
@@ -113,13 +113,15 @@ parseMulti(filePath: string, options: DocGenOptions): Promise<ComponentDoc[]>;
 
 #### `alias`
 
-This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here..
+This is a mirror to the [wepbpack alias](https://webpack.js.org/configuration/resolve/#resolvealias) options. If you are using [alias in Webpack](https://webpack.js.org/configuration/resolve/#resolvealias) or paths in TypeScript, you should reflect this here.
+
+Keep in mind aliases are not resolved adopting the same implementation as webpack, but as simple path replacement. Aliases are resolved as soon as they match in the file path, bailing out of further tests. This means the order in which aliases are defined matters. E.g. an alias `@templates` mapped to `styleguide/templates/` should be defined earlier than the alias `@` (mapped to `src` ) to avoid `@templates/component` being resolved as `srctemplates/component` instead of `styleguide/templates/component`.
 
 #### `modules`
 
 `modules` mirrors the [webpack option](https://webpack.js.org/configuration/resolve/#resolvemodules) too. If you have it in webpack or use `baseDir` in your tsconfig.json, you should probably see how this one works.
 
-#### `addScriptHandler` and `addTemplateHandler`
+#### `addScriptHandlers` and `addTemplateHandlers`
 
 The custom additional handlers allow you to add custom handlers to the parser. A handler can navigate and see custom objects that the standard parser would ignore.
 

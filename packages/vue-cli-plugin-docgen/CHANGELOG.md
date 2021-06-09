@@ -3,6 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.39.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.3...v4.39.0) (2021-05-24)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.38.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.2...v4.38.3) (2021-05-24)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.38.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.1...v4.38.2) (2021-05-11)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.38.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.38.0...v4.38.1) (2021-04-13)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+# [4.38.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.37.2...v4.38.0) (2021-04-10)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+# [4.37.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.1...v4.37.0) (2021-04-05)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.36.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.36.0...v4.36.1) (2021-03-20)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+# [4.36.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.35.0...v4.36.0) (2021-03-18)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+# [4.35.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.4...v4.35.0) (2021-01-26)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.34.4](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.3...v4.34.4) (2021-01-09)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.34.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.2...v4.34.3) (2021-01-07)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.34.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.1...v4.34.2) (2020-12-05)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+## [4.34.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.34.0...v4.34.1) (2020-11-27)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
+# [4.34.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.10...v4.34.0) (2020-11-25)
+
+**Note:** Version bump only for package vue-cli-plugin-docgen
+
+
+
+
+
 ## [4.33.9](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.33.8...v4.33.9) (2020-11-16)
 
 **Note:** Version bump only for package vue-cli-plugin-docgen

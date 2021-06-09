@@ -231,7 +231,7 @@ The comment block containing the documentation needs to contain one line with `@
 ```html
 <div>
   <!--
-    trigered on click
+    triggered on click
     @event click
     @property {object} demo - example
     @property {number} called - test called
@@ -465,7 +465,7 @@ If you want to ignore the readme file for one component, use the `@example [none
 
 > **Note:** You can configure examples file name with the [getExampleFilename](/Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Radio/Radio.vue#L20)
 
 ### External examples using doclet tags
 
@@ -808,6 +808,8 @@ Text typed here will be entirely ignored. You can use it to describe the example
 ```
 ````
 
+> **Note** This option DOES NOT replace automatically examples code with `vue-docgen-cli`. Since the rendering engine is only copying the contents of the markdown without parsing it, the CLI can't know what content to replace.
+
 > **Note** No need to specify the language as it will be inferred from the name of the file
 
-> **Note** All flags described [here](#usage-examples-and-readme-files) cn still be used
+> **Note** All flags described [here](#usage-examples-and-readme-files) can still be used

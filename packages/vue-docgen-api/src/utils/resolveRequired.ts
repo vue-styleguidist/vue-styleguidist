@@ -10,7 +10,7 @@ interface ImportedVariable {
 }
 
 export interface ImportedVariableSet {
-	[key: string]: ImportedVariable
+	[varname: string]: ImportedVariable
 }
 
 /**

@@ -1,4 +1,5 @@
 module.exports = {
+	testEnvironment: 'jsdom',
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest'
@@ -24,14 +25,5 @@ module.exports = {
 		'!packages/vue-cli-plugin-styleguidist/**/*.*'
 	],
 	testPathIgnorePatterns: ['<rootDir>/packages/*/lib/', '<rootDir>/packages/*/dist/'],
-	snapshotSerializers: [
-		'deabsdeep/serializer',
-		'enzyme-to-json/serializer',
-		'jest-serializer-html'
-	],
-	globals: {
-		'ts-jest': {
-			packageJson: 'package.json'
-		}
-	}
+	snapshotSerializers: ['deabsdeep/serializer', 'enzyme-to-json/serializer', 'jest-serializer-html']
 }
