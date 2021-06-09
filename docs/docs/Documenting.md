@@ -771,14 +771,12 @@ const mockData = require('./mocks');
 
 > **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
 >
-> ````md
-> ```js
-> import { myExample as Button } from './myExample'
-> ;<div>
+> ```jsx
+> import { myExample as Button } from './myExample';
+> <div>
 >   <Button />
 > </div>
 > ```
-> ````
 
 > **Note** If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in your `styleguide.config.js`. Using this option will force you to use proper Vue format for your examples. No more pseudo-JSX code.
 >
