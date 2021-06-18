@@ -57,6 +57,7 @@
 		"clipboard": "2.0.8",
 		"core-js": "3.14.0",
 		"cross-env": "5.2.1",
+		"cypress": "^7.5.0",
 		"danger": "10.6.4",
 		"deabsdeep": "2.0.1",
 		"deepcopy": "2.1.0",
@@ -93,8 +94,8 @@
 		"ts-jest": "27.0.3",
 		"tslib": "2.3.0",
 		"typescript": "4.3.2",
-		"vuepress": "1.8.2",
 		"vue-styleguidist": "4.39.0",
+		"vuepress": "1.8.2",
 		"webpack-dev-server": "3.11.2",
 		"yorkie": "2.0.0"
 	},
