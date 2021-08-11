@@ -7,7 +7,7 @@ export default function makePathResolver(
 	modules?: string[]
 ): (filePath: string, originalDirNameOverride?: string) => string | null {
 	return (filePath: string, originalDirNameOverride?: string) =>
-		resolvePathFrom(resolveAliases(filePath, aliases || {}), [
+		resolvePathFrom(resolveAliases(filePath, aliases || {}, refDirName), [
 			originalDirNameOverride || refDirName,
 			...(modules || [])
 		])

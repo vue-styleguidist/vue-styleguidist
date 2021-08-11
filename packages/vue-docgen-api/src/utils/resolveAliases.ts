@@ -1,21 +1,37 @@
 import * as path from 'path'
+import * as fs from 'fs'
 
 export default function resolveAliases(
 	filePath: string,
-	aliases: { [alias: string]: string }
+	aliases: { [alias: string]: string | string[] },
+	refDirName: string = '',
 ): string {
 	const aliasKeys = Object.keys(aliases)
-	let i = aliasKeys.length
-	let aliasFound = false
+	let aliasResolved = null
 	if (!aliasKeys.length) {
 		return filePath
 	}
-	while (!aliasFound && i--) {
-		const aliasValueWithSlash = aliasKeys[i] + '/'
-		aliasFound = filePath.substring(0, aliasValueWithSlash.length) === aliasValueWithSlash
+	for(const aliasKey of aliasKeys) {
+		const aliasValueWithSlash = aliasKey + '/'
+		const aliasMatch = filePath.substring(0, aliasValueWithSlash.length) === aliasValueWithSlash
+		const aliasValue = aliases[aliasKey]
+		if(!aliasMatch) {
+			continue
+		}
+		if(!Array.isArray(aliasValue)) {
+			aliasResolved = path.join(aliasValue, filePath.substring(aliasKey.length + 1))
+			continue
+		}
+		for (const alias of aliasValue) {
+			const absolutePath = path.resolve(refDirName, alias, filePath.substring(aliasKey.length + 1))
+
+			if(fs.existsSync(absolutePath)) {
+				aliasResolved = absolutePath
+				break;
+			}
+		}
 	}
-	if (!aliasFound) {
-		return filePath
-	}
-	return path.join(aliases[aliasKeys[i]], filePath.substring(aliasKeys[i].length + 1))
+	return aliasResolved === null ?
+		filePath :
+		aliasResolved
 }
