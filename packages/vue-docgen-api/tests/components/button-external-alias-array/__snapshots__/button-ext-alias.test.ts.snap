@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests button should match the snapshot 1`] = `
+Object {
+  "description": "This is an example of creating a reusable button component and using it with external data.",
+  "displayName": "MyComponent",
+  "events": Array [
+    Object {
+      "description": "Success event when we click",
+      "name": "success",
+      "type": Object {
+        "names": Array [
+          "undefined",
+        ],
+      },
+    },
+  ],
+  "exportName": "default",
+  "methods": Array [
+    Object {
+      "description": "method testing",
+      "name": "onClick",
+      "params": Array [
+        Object {
+          "name": "a",
+          "type": Object {
+            "name": "string",
+          },
+        },
+      ],
+      "tags": Object {
+        "access": Array [
+          Object {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+  ],
+  "props": Array [
+    Object {
+      "description": "An example of a property typed through the decorators arguments",
+      "name": "propNoType",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "An example of a property typed through the init value (number)",
+      "name": "propAnum",
+      "tags": Object {},
+      "type": Object {
+        "name": "number",
+      },
+    },
+    Object {
+      "description": "An example of a property typed through the init value (string)",
+      "name": "propAstr",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "An example of a property typed through the init value (interpolation)",
+      "name": "propAinter",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "defaultValue": Object {
+        "func": false,
+        "value": "'default value'",
+      },
+      "description": "A prop with a default value",
+      "name": "propB",
+      "tags": Object {},
+      "type": Object {
+        "name": "string",
+      },
+    },
+    Object {
+      "description": "A prop with a hybrid type",
+      "name": "propC",
+      "tags": Object {},
+      "type": Object {
+        "elements": Array [
+          Object {
+            "name": "string",
+          },
+          Object {
+            "name": "boolean",
+          },
+        ],
+        "name": "union",
+      },
+    },
+  ],
+  "slots": Array [
+    Object {
+      "description": "Use this slot default",
+      "name": "default",
+    },
+    Object {
+      "description": "Use this slot for not button",
+      "name": "empty",
+    },
+  ],
+  "tags": Object {
+    "author": Array [
+      Object {
+        "description": "[Rafael](https://github.com/rafaesc92)",
+        "title": "author",
+      },
+    ],
+    "version": Array [
+      Object {
+        "description": "1.0.5",
+        "title": "version",
+      },
+    ],
+  },
+}
+`;
