@@ -24,7 +24,7 @@
 	},
 	"devDependencies": {
 		"@types/lodash.memoize": "4.1.6",
-		"@types/minimist": "1.2.1",
+		"@types/minimist": "1.2.2",
 		"@types/mkdirp": "0.5.2",
 		"@types/prettier": "1.19.1"
 	}

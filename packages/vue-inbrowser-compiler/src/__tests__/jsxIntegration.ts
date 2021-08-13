@@ -74,7 +74,7 @@ describe('integration', () => {
 			)
 
 			expect(wrapper.element.id).toBe('hi')
-			expect(wrapper.element.dir).toBe('ltr')
+			expect(wrapper.element.getAttribute('dir')).toBe('ltr')
 		})
 
 		test('Binds attrs', () => {
