@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.41.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.40.0...v4.41.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update all ([78807c3](https://github.com/vue-styleguidist/vue-styleguidist/commit/78807c34893be6746b4f18e0d3d1d706a4e816af))
+
+
+
+
+
 # [4.40.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.39.0...v4.40.0) (2021-06-07)
 
 **Note:** Version bump only for package vue-inbrowser-compiler-utils

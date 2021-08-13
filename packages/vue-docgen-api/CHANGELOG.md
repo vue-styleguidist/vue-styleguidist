@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.41.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.40.0...v4.41.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update all ([78807c3](https://github.com/vue-styleguidist/vue-styleguidist/commit/78807c34893be6746b4f18e0d3d1d706a4e816af))
+* **docgen:** fix strict alias type to support arrays ([47c6f7b](https://github.com/vue-styleguidist/vue-styleguidist/commit/47c6f7b022aa919324e3b21ac760d155eb47cfc1))
+
+
+### Features
+
+* **docgen:** add support for arrays in aliases ([df76397](https://github.com/vue-styleguidist/vue-styleguidist/commit/df763973b03d7d8977f25d6eafae1a6faa0507b4))
+
+
+
+
+
 # [4.40.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.39.0...v4.40.0) (2021-06-07)
 
 
