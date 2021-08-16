@@ -12,7 +12,7 @@ importers:
       '@babel/preset-env': 7.15.0
       '@babel/preset-react': 7.14.5
       '@babel/preset-typescript': 7.15.0
-      '@babel/runtime': 7.14.8
+      '@babel/runtime': 7.15.3
       '@commitlint/cli': 13.1.0
       '@commitlint/config-conventional': 13.1.0
       '@types/jest': 26.0.24
@@ -72,7 +72,7 @@ importers:
       '@babel/preset-env': 7.15.0_@babel+core@7.15.0
       '@babel/preset-react': 7.14.5_@babel+core@7.15.0
       '@babel/preset-typescript': 7.15.0_@babel+core@7.15.0
-      '@babel/runtime': 7.14.8
+      '@babel/runtime': 7.15.3
       '@commitlint/cli': 13.1.0
       '@commitlint/config-conventional': 13.1.0
       '@types/jest': 26.0.24
@@ -1100,7 +1100,7 @@ importers:
       '@babel/preset-env': 7.15.0
       '@babel/preset-react': 7.14.5
       '@babel/preset-typescript': 7.15.0
-      '@babel/runtime': 7.14.8
+      '@babel/runtime': 7.15.3
       '@babel/types': 7.15.0
       '@testing-library/react': 11.2.7
       '@types/buble': 0.20.1
@@ -1247,7 +1247,7 @@ importers:
       '@babel/preset-env': 7.15.0_@babel+core@7.15.0
       '@babel/preset-react': 7.14.5_@babel+core@7.15.0
       '@babel/preset-typescript': 7.15.0_@babel+core@7.15.0
-      '@babel/runtime': 7.14.8
+      '@babel/runtime': 7.15.3
       '@babel/types': 7.15.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
       '@types/buble': 0.20.1
@@ -5030,6 +5030,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.7
+
+  /@babel/runtime/7.15.3:
+    resolution: {integrity: sha512-OvwMLqNXkCXSz1kSm58sEsNuhqOx/fKpnUnKnFB5v8uDda5bLNEHNgKPvhDN6IU0LDcnHQ90LlJ0Q6jnyBSIBA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.7
+    dev: true
 
   /@babel/template/7.12.13:
     resolution: {integrity: sha512-/7xxiGA57xMo/P2GVvdEumr8ONhFOhfgq2ihK3h1e6THqzTAkHbkXgB0xI9yeTfIUoH3+oAeHhqm/I43OTbbjA==}
