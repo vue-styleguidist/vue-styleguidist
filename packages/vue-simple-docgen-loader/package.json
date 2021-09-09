@@ -10,7 +10,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
+		"url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+		"directory": "packages/vue-simple-docgen-loader"
 	},
 	"keywords": [
 		"webpack",

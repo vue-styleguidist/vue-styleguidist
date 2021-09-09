@@ -27,5 +27,11 @@
 		"@types/minimist": "1.2.2",
 		"@types/mkdirp": "0.5.2",
 		"@types/prettier": "1.19.1"
+	},
+	"homepage": "https://vue-styleguidist.github.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+		"directory": "packages/vue-docgen-cli"
 	}
 }
