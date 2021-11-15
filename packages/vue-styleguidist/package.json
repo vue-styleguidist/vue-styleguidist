@@ -108,7 +108,7 @@
 		"@babel/preset-env": "7.16.0",
 		"@babel/preset-react": "7.16.0",
 		"@babel/preset-typescript": "7.16.0",
-		"@babel/runtime": "7.16.0",
+		"@babel/runtime": "7.16.3",
 		"@babel/types": "7.16.0",
 		"@testing-library/react": "11.2.7",
 		"@types/buble": "0.20.1",
