@@ -1,6 +1,6 @@
 {
 	"name": "vue-cli-plugin-docgen",
-	"version": "4.41.2",
+	"version": "4.41.3",
 	"description": "vue cli plugin for vue-docgen-cli",
 	"homepage": "https://vue-styleguidist.github.io",
 	"main": "index.js",
@@ -18,15 +18,15 @@
 	"dependencies": {
 		"null-loader": "^0.1.1",
 		"typescript": "^3.9.9",
-		"vue-docgen-cli": "^4.41.2",
+		"vue-docgen-cli": "^4.41.3",
 		"webpack-merge": "^4.2.2"
 	},
 	"peerDependencies": {
 		"@vue/cli-service": ">= 3"
 	},
 	"devDependencies": {
-		"@vue/cli": "4.5.13",
-		"@vue/cli-test-utils": "4.5.13",
+		"@vue/cli": "4.5.15",
+		"@vue/cli-test-utils": "4.5.15",
 		"typescript": "4.4.3"
 	}
 }
