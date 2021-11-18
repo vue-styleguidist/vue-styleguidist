@@ -33,7 +33,7 @@
 		"@vue/test-utils": "1.2.2",
 		"rollup": "2.56.3",
 		"rollup-plugin-typescript2": "0.30.0",
-		"typescript": "4.3.5",
+		"typescript": "4.4.3",
 		"vue": "2.6.14"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",

@@ -75,9 +75,9 @@ function postTreatConfig(
 	try {
 		return sanitizeConfig(config as StyleguidistConfig, schema as any, configDir) as any
 	} catch (exception) {
-		/* eslint-disable */
-		console.log(exception instanceof StyleguidistError, exception.constructor.name)
-		throw exception.message
+		const err = exception as Error
+		console.log(exception instanceof StyleguidistError, err.constructor.name)
+		throw err.message
 	}
 }
 

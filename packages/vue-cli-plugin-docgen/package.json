@@ -27,6 +27,6 @@
 	"devDependencies": {
 		"@vue/cli": "4.5.15",
 		"@vue/cli-test-utils": "4.5.15",
-		"typescript": "4.3.5"
+		"typescript": "4.4.3"
 	}
 }

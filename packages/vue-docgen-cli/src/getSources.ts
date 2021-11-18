@@ -66,7 +66,8 @@ async function getRequiredComponents(
 			return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
 		}
 	} catch (e) {
-		throw new Error(`Error parsing ${absoluteComponentPath} for @requires tags: ${e.message}`)
+		const err = e as Error
+		throw new Error(`Error parsing ${absoluteComponentPath} for @requires tags: ${err.message}`)
 	}
 	return []
 }
