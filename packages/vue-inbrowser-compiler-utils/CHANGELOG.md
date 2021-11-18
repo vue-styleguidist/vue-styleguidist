@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.42.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.41.3...v4.42.0) (2021-11-18)
+
+
+### Features
+
+* **utils:** add the ability to remove the added scoped style ([51baa00](https://github.com/vue-styleguidist/vue-styleguidist/commit/51baa00b0cb0425e51f61bd413ff5868313e8614))
+
+
+
+
+
 ## [4.41.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.41.1...v4.41.2) (2021-09-09)
 
 **Note:** Version bump only for package vue-inbrowser-compiler-utils

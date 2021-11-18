@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.42.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.41.3...v4.42.0) (2021-11-18)
+
+
+### Bug Fixes
+
+* error typing errors (so meta) ([4e4333f](https://github.com/vue-styleguidist/vue-styleguidist/commit/4e4333f5d7bb93c8bdfa73835d757bc3fe3b80dc))
+
+
+### Features
+
+* **utils:** add the ability to remove the added scoped style ([51baa00](https://github.com/vue-styleguidist/vue-styleguidist/commit/51baa00b0cb0425e51f61bd413ff5868313e8614))
+
+
+
+
+
 ## [4.41.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.41.2...v4.41.3) (2021-11-08)
 
 
