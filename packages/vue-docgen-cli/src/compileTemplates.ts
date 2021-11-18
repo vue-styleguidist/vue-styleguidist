@@ -110,6 +110,7 @@ export default async function compileTemplates(
 			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
 		}
 	} catch (e) {
-		throw new Error(`Error parsing file ${absolutePath}:` + e.message)
+		const err = e as Error
+		throw new Error(`Error parsing file ${absolutePath}:` + err.message)
 	}
 }

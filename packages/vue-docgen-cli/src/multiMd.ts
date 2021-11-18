@@ -74,7 +74,8 @@ export async function compile(
 			})
 			writeDownMdFile(content, file)
 		} catch (e) {
-			throw new Error(`Error compiling file ${file}: ${e.message}`)
+			const err = e as Error
+			throw new Error(`Error compiling file ${file}: ${err.message}`)
 		}
 	}
 }
