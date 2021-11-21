@@ -45,11 +45,18 @@ function getDeclaredConstantValue(prog: NodePath<bt.Program>, nameConstId: strin
 	const globalVariableDeclarations = body.filter((node: bt.Node) =>
 		bt.isVariableDeclaration(node)
 	) as bt.VariableDeclaration[]
-	const declarators = globalVariableDeclarations.reduce(
-		(a: bt.VariableDeclarator[], declPath) => a.concat(declPath.declarations),
-		[]
-	)
-	const nodeDeclaratorArray = declarators.filter(
+
+	const globalVariableExports = body
+		.filter(
+			(node: bt.Node) =>
+				bt.isExportNamedDeclaration(node) && bt.isVariableDeclaration(node.declaration)
+		)
+		.map((node: bt.ExportNamedDeclaration) => node.declaration) as bt.VariableDeclaration[]
+
+	const declarations = globalVariableDeclarations
+		.concat(globalVariableExports)
+		.reduce((a: bt.VariableDeclarator[], declPath) => a.concat(declPath.declarations), [])
+	const nodeDeclaratorArray = declarations.filter(
 		d => bt.isIdentifier(d.id) && d.id.name === nameConstId
 	)
 	const nodeDeclarator = nodeDeclaratorArray.length ? nodeDeclaratorArray[0] : undefined
