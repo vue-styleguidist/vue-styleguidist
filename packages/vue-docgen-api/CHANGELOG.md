@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.43.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.42.0...v4.43.0) (2021-11-21)
+
+
+### Bug Fixes
+
+* **docgen:** resolve exported displayname ([d414c4a](https://github.com/vue-styleguidist/vue-styleguidist/commit/d414c4a137f012160fdcdb585f46908bb942dd8a)), closes [#1220](https://github.com/vue-styleguidist/vue-styleguidist/issues/1220)
+
+
+
+
+
 # [4.42.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.41.3...v4.42.0) (2021-11-18)
 
 **Note:** Version bump only for package vue-docgen-api
