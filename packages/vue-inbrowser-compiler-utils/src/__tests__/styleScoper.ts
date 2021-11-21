@@ -7,8 +7,8 @@ describe('styleScoper', () => {
 	})
 
 	it('should scope css pseudo selectors', () => {
-		const scopedCSS = scoper(`.bonjour:before{color:blue;}`, '[test]')
-		expect(scopedCSS).toBe('.bonjour[test]:before {color:blue;}')
+		const scopedCSS = scoper(`.bonjour:before, .hello:hover::after{color:blue;}`, '[test]')
+		expect(scopedCSS).toBe('.bonjour[test]:before ,.hello[test]:hover:after {color:blue;}')
 	})
 
 	it('should scope multiple css selectors', () => {
@@ -27,7 +27,12 @@ describe('styleScoper', () => {
 			'[test]'
 		)
 		expect(scopedCSS).toBe(
-			'.bonjour[test] .hello[test]  .deepClass,.salut[test] .goodbye[test]  .deepClass{color:blue;}'
+			'.bonjour[test] .hello[test] .deepClass,.salut[test] .goodbye[test] .deepClass{color:blue;}'
 		)
+	})
+
+	it('should scope css with selector combinators', () => {
+		const scopedCSS = scoper(`.bonjour > .hello + .salut ~ .goodbye {color:blue;}`, '[test]')
+		expect(scopedCSS).toBe('.bonjour[test] > .hello[test] + .salut[test] ~ .goodbye[test] {color:blue;}')
 	})
 })
