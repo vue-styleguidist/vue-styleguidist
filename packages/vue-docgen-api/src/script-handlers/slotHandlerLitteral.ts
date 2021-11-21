@@ -1,12 +1,12 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation, { ParamTag, ParamType, Tag } from '../Documentation'
+import Documentation, { ParamTag, TypeOfProp, Tag } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 import getProperties from './utils/getProperties'
 import getDocblock from '../utils/getDocblock'
 
 export interface TypedParamTag extends ParamTag {
-	type: ParamType
+	type: TypeOfProp
 }
 
 /**
@@ -23,7 +23,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			return Promise.resolve()
 		}
 
-		const functionPath =  renderPath.length ? renderPath : setupPath;
+		const functionPath = renderPath.length ? renderPath : setupPath
 
 		let i = 0
 		let docBlock = getDocblock(functionPath[0], { commentIndex: i })

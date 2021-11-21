@@ -29,22 +29,20 @@ describe('tests wrapper with root slot', () => {
 
 		it('should match the reference for the footer slot', () => {
 			expect(getTestDescriptor(docWrapper.slots, 'footer')).toMatchInlineSnapshot(`
-			Object {
-			  "bindings": Array [
-			    Object {
-			      "description": "an item passed to the footer",
-			      "name": "item",
-			      "title": "binding",
-			      "type": Object {
-			        "name": "mixed",
-			      },
-			    },
-			  ],
-			  "description": "Modal footer",
-			  "name": "footer",
-			  "scoped": true,
-			}
-		`)
+Object {
+  "bindings": Array [
+    Object {
+      "description": "an item passed to the footer",
+      "name": "item",
+      "title": "binding",
+      "type": undefined,
+    },
+  ],
+  "description": "Modal footer",
+  "name": "footer",
+  "scoped": true,
+}
+`)
 		})
 	})
 

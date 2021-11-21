@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation, { BlockTag, DocBlockTags, ParamType } from '../Documentation'
+import Documentation, { BlockTag, DocBlockTags, TypeOfProp } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
@@ -80,7 +80,9 @@ export default async function classPropHandler(
 						litteralType = 'string'
 					} else {
 						// type
-						propDescriptor.type = getTypeFromAnnotation(propPath.node.typeAnnotation)
+						propDescriptor.type = getTypeFromAnnotation(
+							propPath.get('typeAnnotation', 'typeAnnotation')
+						)
 					}
 				} else if (propPath.node.value) {
 					propDescriptor.type = getTypeFromInitValue(propPath.node.value)
@@ -117,7 +119,7 @@ export default async function classPropHandler(
 	return Promise.resolve()
 }
 
-function getTypeFromInitValue(node: any): ParamType | undefined {
+function getTypeFromInitValue(node: any): TypeOfProp | undefined {
 	if (bt.isNumericLiteral(node)) {
 		return { name: 'number' }
 	}

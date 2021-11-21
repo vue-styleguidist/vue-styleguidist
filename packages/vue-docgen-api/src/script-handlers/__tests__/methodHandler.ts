@@ -7,11 +7,6 @@ import methodHandler from '../methodHandler'
 jest.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
-	const ast = babylon({ plugins: ['flow'] }).parse(src)
-	return resolveExportedComponent(ast)[0].get('default')
-}
-
-function parseTS(src: string): NodePath | undefined {
 	const ast = babylon({ plugins: ['typescript'] }).parse(src)
 	return resolveExportedComponent(ast)[0].get('default')
 }
@@ -315,61 +310,6 @@ describe('methodHandler', () => {
 		})
 	})
 
-	describe('flow', () => {
-		it('should deduce the type of params from the param type', () => {
-			const src = [
-				'/* @flow */',
-				'export default {',
-				'  methods:{',
-				'    /**',
-				'     * @public',
-				'     */',
-				'    publicMethod(param: string, paramObscure: ObscureInterface) {',
-				'      console.log("test", paramObscure)',
-				'    }',
-				'  }',
-				'}'
-			].join('\n')
-
-			const def = parse(src)
-			if (def) {
-				methodHandler(documentation, def)
-			}
-			expect(mockMethodDescriptor).toMatchObject({
-				name: 'publicMethod',
-				params: [
-					{ name: 'param', type: { name: 'string' } },
-					{ name: 'paramObscure', type: { name: 'ObscureInterface' } }
-				]
-			})
-		})
-
-		it('should deduce the return type from method', () => {
-			const src = [
-				'/* @flow */',
-				'export default {',
-				'  methods:{',
-				'    /**',
-				'     * @public',
-				'     */',
-				'    publicMethod(): string {',
-				'      console.log("test")',
-				'    }',
-				'  }',
-				'}'
-			].join('\n')
-
-			const def = parse(src)
-			if (def) {
-				methodHandler(documentation, def)
-			}
-			expect(mockMethodDescriptor).toMatchObject({
-				name: 'publicMethod',
-				returns: { type: { name: 'string' } }
-			})
-		})
-	})
-
 	describe('typescript', () => {
 		it('should deduce the type of params from the param type', () => {
 			const src = `
@@ -393,7 +333,7 @@ describe('methodHandler', () => {
 				name: 'publicMethod',
 				params: [
 					{ name: 'param', type: { name: 'string' } },
-					{ name: 'paramObscure', type: { name: 'ObscureInterface' } }
+					{ name: 'paramObscure', type: { name: 'code', code: 'ObscureInterface' } }
 				]
 			})
 		})
@@ -412,7 +352,7 @@ describe('methodHandler', () => {
       };
       `
 
-			const def = parseTS(src)
+			const def = parse(src)
 			if (def) {
 				methodHandler(documentation, def)
 			}

@@ -17,12 +17,8 @@ function getDefaultArray(): string {
 	return '[1, 2, 3]'
 }
 
-function getDefaultFunction(): string {
-	return '() => void'
-}
-
 function getDefaultDate(): string {
-	return 'new Date(\'2012-12-12\')'
+	return "new Date('2012-12-12')"
 }
 
 function getDefaultObject(): string {
@@ -44,8 +40,6 @@ function getDefault(prop: PropDescriptor): string {
 		return getDefaultObject()
 	} else if (prop.type.name === 'array') {
 		return getDefaultArray()
-	} else if (prop.type.name === 'func') {
-		return getDefaultFunction()
 	} else if (prop.type.name === 'date') {
 		return getDefaultDate()
 	}

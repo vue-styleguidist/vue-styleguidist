@@ -105,14 +105,15 @@ function describeParams(
 	}
 
 	const params: Param[] = []
-	fExp.params.forEach((par: bt.Identifier | bt.AssignmentPattern, i) => {
+	let paramIndex = 0
+	methodPath.get('params').each((paramPath: NodePath) => {
 		let name: string
-		if (bt.isIdentifier(par)) {
+		if (bt.isIdentifier(paramPath.node)) {
 			// simple params
-			name = par.name
-		} else if (bt.isIdentifier(par.left)) {
+			name = paramPath.node.name
+		} else if (bt.isIdentifier(paramPath.node.left)) {
 			// es6 default params
-			name = par.left.name
+			name = paramPath.node.left.name
 		} else {
 			// unrecognized pattern
 			return
@@ -123,8 +124,9 @@ function describeParams(
 
 		// if tag is not namely described try finding it by its order
 		if (!jsDocTag) {
-			if (jsDocParamTags[i] && !jsDocParamTags[i].name) {
-				jsDocTag = jsDocParamTags[i]
+			const paramTagByIndex = jsDocParamTags[paramIndex]
+			if (paramTagByIndex && !paramTagByIndex.name) {
+				jsDocTag = paramTagByIndex
 			}
 		}
 
@@ -138,14 +140,15 @@ function describeParams(
 			}
 		}
 
-		if (!param.type && par.typeAnnotation) {
-			const type = getTypeFromAnnotation(par.typeAnnotation)
+		if (!param.type && paramPath.get('typeAnnotation').value) {
+			const type = getTypeFromAnnotation(paramPath.get('typeAnnotation', 'typeAnnotation'))
 			if (type) {
 				param.type = type
 			}
 		}
 
 		params.push(param)
+		paramIndex++
 	})
 
 	// in case the arguments are abstracted (using the arguments keyword)
@@ -176,10 +179,9 @@ function describeReturns(
 	if (!methodDescriptor.returns || !methodDescriptor.returns.type) {
 		const methodNode = methodPath.node
 		if (methodNode.returnType) {
-			const type = getTypeFromAnnotation(methodNode.returnType)
+			const type = getTypeFromAnnotation(methodPath.get('returnType', 'typeAnnotation'))
 			if (type) {
-				methodDescriptor.returns = methodDescriptor.returns || {}
-				methodDescriptor.returns.type = type
+				methodDescriptor.returns = { type }
 			}
 		}
 	}

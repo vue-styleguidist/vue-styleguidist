@@ -34,12 +34,6 @@ export default {
 			}
 		},
 		/**
-		 * prop function
-		 */
-		propFunc: {
-			default: function () {}
-		},
-		/**
 		 * get columns list
 		 */
 		columns: [Array],

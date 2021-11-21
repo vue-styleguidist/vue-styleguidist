@@ -70,9 +70,8 @@ function getPropsFromExpression(
 				bt.isIdentifier(propName)
 			) {
 				const pName = propName.name
-				const p = documentation.getPropDescriptor(pName)
+				documentation.getPropDescriptor(pName)
 				propsFound.push(pName)
-				p.type = { name: 'undefined' }
 			}
 			return false
 		}

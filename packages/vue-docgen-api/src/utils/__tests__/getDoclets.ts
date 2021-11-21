@@ -63,7 +63,27 @@ describe('getDoclets', () => {
 	it('should extract param type with braces', () => {
 		const src = `@param {{name: string, id: number}} user`
 		expect(getDocLets(src).tags).toEqual([
-			{ name: 'user', title: 'param', type: { name: '{name: string, id: number}' } }
+			{
+				name: 'user',
+				title: 'param',
+				type: {
+					name: 'signature',
+					properties: [
+						{
+							name: 'name',
+							type: {
+								name: 'string'
+							}
+						},
+						{
+							name: 'id',
+							type: {
+								name: 'number'
+							}
+						}
+					]
+				}
+			}
 		])
 	})
 

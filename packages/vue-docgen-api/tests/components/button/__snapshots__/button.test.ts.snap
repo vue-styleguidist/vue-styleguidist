@@ -196,9 +196,6 @@ a factory function",
           },
         ],
       },
-      "type": Object {
-        "name": "func",
-      },
     },
     Object {
       "description": "Prop from second mixin",

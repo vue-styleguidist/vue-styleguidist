@@ -243,7 +243,7 @@ describe('eventHandler', () => {
 				{
 					name: 'prop1',
 					type: {
-						names: [' String ']
+						names: ['string']
 					}
 				}
 			]

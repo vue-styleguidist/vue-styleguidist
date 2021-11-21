@@ -961,8 +961,8 @@ importers:
       '@babel/types': ^7.13.12
       '@test-vue-docgen/mixins': 3.15.4
       '@types/pug': 2.0.5
-      '@vue/compiler-dom': ^3.2.0
-      '@vue/compiler-sfc': ^3.2.0
+      '@vue/compiler-dom': ^3.2.20
+      '@vue/compiler-sfc': ^3.2.20
       ast-types: 0.14.2
       globby: 10.0.2
       hash-sum: ^1.0.2

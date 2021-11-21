@@ -97,7 +97,8 @@ Object {
         Object {
           "name": "param",
           "type": Object {
-            "name": "ForParam",
+            "code": "ForParam",
+            "name": "code",
           },
         },
       ],
@@ -172,17 +173,6 @@ Object {
       "name": "images",
       "type": Object {
         "name": "array",
-      },
-    },
-    Object {
-      "defaultValue": Object {
-        "func": true,
-        "value": "function () {}",
-      },
-      "description": "prop function",
-      "name": "propFunc",
-      "type": Object {
-        "name": "func",
       },
     },
     Object {

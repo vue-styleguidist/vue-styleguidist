@@ -9,6 +9,7 @@ import Documentation from './Documentation'
 import { ParseOptions } from './parse'
 import parseScript from './parse-script'
 import makePathResolver from './utils/makePathResolver'
+import { setupHandlers } from './script-handlers'
 
 const read = promisify(readFile)
 
@@ -66,7 +67,14 @@ export default async function parseSFC(
 	let docs: Documentation[] = documentation ? [documentation] : []
 
 	if (parts.scriptSetup) {
-		// WIP
+		docs = await parseScriptTag(
+			parts.scriptSetup,
+			pathResolver,
+			opt,
+			documentation,
+			initialDoc !== undefined,
+			true
+		)
 	} else if (parts.script) {
 		docs = await parseScriptTag(
 			parts.script,
@@ -93,7 +101,8 @@ async function parseScriptTag(
 	pathResolver: (filePath: string, overrideRoot?: string) => string | null,
 	opt: ParseOptions,
 	documentation: Documentation | undefined,
-	forceSingleExport: boolean
+	forceSingleExport: boolean,
+	isSetupScript: boolean = false
 ): Promise<Documentation[]> {
 	let scriptSource = scriptTag ? scriptTag.content : undefined
 
@@ -123,8 +132,10 @@ async function parseScriptTag(
 			? 'ts'
 			: 'js'
 
+	opt = isSetupScript ? { ...opt, scriptPreHandlers: [], scriptHandlers: setupHandlers } : opt
+
 	const docs: Documentation[] = scriptSource
-		? (await parseScript(scriptSource, opt, documentation, forceSingleExport)) || []
+		? (await parseScript(scriptSource, opt, documentation, forceSingleExport, isSetupScript)) || []
 		: // if there is only a template return the template's doc
 		documentation
 		? [documentation]

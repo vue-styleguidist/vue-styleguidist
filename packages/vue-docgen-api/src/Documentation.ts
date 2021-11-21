@@ -5,6 +5,7 @@ import {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
+	ExposedDescriptor,
 	ComponentDoc,
 	DocBlockTags,
 	BlockTag,
@@ -12,7 +13,7 @@ import {
 	UnnamedParam,
 	Tag,
 	ParamTag,
-	ParamType
+	TypeOfProp
 } from 'vue-inbrowser-compiler-utils'
 
 export {
@@ -21,6 +22,7 @@ export {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
+	ExposedDescriptor,
 	ComponentDoc,
 	DocBlockTags,
 	BlockTag,
@@ -28,14 +30,15 @@ export {
 	UnnamedParam,
 	Tag,
 	ParamTag,
-	ParamType
+	TypeOfProp
 }
 
 export default class Documentation {
 	private propsMap: Map<string, PropDescriptor>
-	private methodsMap: Map<string, MethodDescriptor>
-	private slotsMap: Map<string, SlotDescriptor>
 	private eventsMap: Map<string, any>
+	private slotsMap: Map<string, SlotDescriptor>
+	private methodsMap: Map<string, MethodDescriptor>
+	private exposedMap: Map<string, ExposedDescriptor>
 	private dataMap: Map<string, any>
 	private docsBlocks: string[] | undefined
 	private originExtendsMixin: Descriptor
@@ -44,9 +47,10 @@ export default class Documentation {
 	public constructor(fullFilePath: string) {
 		this.componentFullfilePath = fullFilePath
 		this.propsMap = new Map()
-		this.methodsMap = new Map()
-		this.slotsMap = new Map()
 		this.eventsMap = new Map()
+		this.slotsMap = new Map()
+		this.methodsMap = new Map()
+		this.exposedMap = new Map()
 		this.originExtendsMixin = {}
 
 		this.dataMap = new Map()
@@ -79,12 +83,6 @@ export default class Documentation {
 			  }))
 	}
 
-	public getMethodDescriptor(methodName: string): MethodDescriptor {
-		return this.getDescriptor(methodName, this.methodsMap, () => ({
-			name: methodName
-		}))
-	}
-
 	public getEventDescriptor(eventName: string): EventDescriptor {
 		return this.getDescriptor(eventName, this.eventsMap, () => ({
 			name: eventName
@@ -94,6 +92,18 @@ export default class Documentation {
 	public getSlotDescriptor(slotName: string): SlotDescriptor {
 		return this.getDescriptor(slotName, this.slotsMap, () => ({
 			name: slotName
+		}))
+	}
+
+	public getMethodDescriptor(methodName: string): MethodDescriptor {
+		return this.getDescriptor(methodName, this.methodsMap, () => ({
+			name: methodName
+		}))
+	}
+
+	public getExposedDescriptor(exposedName: string): ExposedDescriptor {
+		return this.getDescriptor(exposedName, this.exposedMap, () => ({
+			name: exposedName
 		}))
 	}
 
@@ -154,3 +164,5 @@ export default class Documentation {
 		}
 	}
 }
+
+export { Documentation }

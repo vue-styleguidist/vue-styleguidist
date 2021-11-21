@@ -1,4 +1,5 @@
-import { TSTypeAnnotation } from '@babel/types'
+import type { NodePath } from 'ast-types/lib/node-path'
+import { visit } from 'recast'
 import getTypeFromAnnotation from '../getTypeFromAnnotation'
 import babylon from '../../babel-parser'
 
@@ -6,9 +7,16 @@ function parse(src: string): any {
 	return babylon({ plugins: ['typescript'] }).parse(src)
 }
 
-function getAnnotation(code: string): TSTypeAnnotation {
-	const ast = parse(`const a:${code};`)
-	return ast.program.body[0].declarations[0].id.typeAnnotation
+function getAnnotation(code: string): NodePath {
+	const ast = parse(`let a:${code};`)
+	let ta: NodePath | undefined = undefined
+	visit(ast, {
+		visitTSTypeAnnotation(nodePath) {
+			ta = nodePath.get('typeAnnotation')
+			return false
+		}
+	})
+	return ta as any
 }
 
 describe('getTypeFromAnnotation', () => {
@@ -28,7 +36,7 @@ describe('getTypeFromAnnotation', () => {
 		      "name": "string",
 		    },
 		  ],
-		  "name": "Array",
+		  "name": "array",
 		}
 	`)
 	})
@@ -36,7 +44,8 @@ describe('getTypeFromAnnotation', () => {
 	it('should extract identified type', () => {
 		expect(getTypeFromAnnotation(getAnnotation('MetaType'))).toMatchInlineSnapshot(`
 		Object {
-		  "name": "MetaType",
+		  "code": "MetaType",
+		  "name": "code",
 		}
 	`)
 	})
@@ -44,12 +53,8 @@ describe('getTypeFromAnnotation', () => {
 	it('should extract composed type', () => {
 		expect(getTypeFromAnnotation(getAnnotation('MetaType<string>'))).toMatchInlineSnapshot(`
 		Object {
-		  "elements": Array [
-		    Object {
-		      "name": "string",
-		    },
-		  ],
-		  "name": "MetaType",
+		  "code": "MetaType<string>",
+		  "name": "code",
 		}
 	`)
 	})
@@ -59,10 +64,11 @@ describe('getTypeFromAnnotation', () => {
 		Object {
 		  "elements": Array [
 		    Object {
-		      "name": "Book",
+		      "code": "Book",
+		      "name": "code",
 		    },
 		  ],
-		  "name": "Array",
+		  "name": "array",
 		}
 	`)
 	})
@@ -76,13 +82,16 @@ describe('getTypeFromAnnotation', () => {
 		Object {
 		  "elements": Array [
 		    Object {
-		      "name": "\\"string literal\\"",
+		      "name": "literal",
+		      "value": "string literal",
 		    },
 		    Object {
-		      "name": "3",
+		      "name": "literal",
+		      "value": 3,
 		    },
 		    Object {
-		      "name": "Book",
+		      "code": "Book",
+		      "name": "code",
 		    },
 		    Object {
 		      "elements": Array [
@@ -90,7 +99,7 @@ describe('getTypeFromAnnotation', () => {
 		          "name": "string",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		    Object {
 		      "elements": Array [
@@ -98,23 +107,25 @@ describe('getTypeFromAnnotation', () => {
 		          "name": "number",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		    Object {
 		      "elements": Array [
 		        Object {
-		          "name": "Book",
+		          "code": "Book",
+		          "name": "code",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		    Object {
 		      "elements": Array [
 		        Object {
-		          "name": "Book",
+		          "code": "Book",
+		          "name": "code",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		  ],
 		  "name": "union",
@@ -131,13 +142,16 @@ describe('getTypeFromAnnotation', () => {
 		Object {
 		  "elements": Array [
 		    Object {
-		      "name": "\\"string literal\\"",
+		      "name": "literal",
+		      "value": "string literal",
 		    },
 		    Object {
-		      "name": "3",
+		      "name": "literal",
+		      "value": 3,
 		    },
 		    Object {
-		      "name": "Book",
+		      "code": "Book",
+		      "name": "code",
 		    },
 		    Object {
 		      "elements": Array [
@@ -145,7 +159,7 @@ describe('getTypeFromAnnotation', () => {
 		          "name": "string",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		    Object {
 		      "elements": Array [
@@ -153,26 +167,36 @@ describe('getTypeFromAnnotation', () => {
 		          "name": "number",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		    Object {
 		      "elements": Array [
 		        Object {
-		          "name": "Book",
+		          "code": "Book",
+		          "name": "code",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		    Object {
 		      "elements": Array [
 		        Object {
-		          "name": "Book",
+		          "code": "Book",
+		          "name": "code",
 		        },
 		      ],
-		      "name": "Array",
+		      "name": "array",
 		    },
 		  ],
 		  "name": "intersection",
+		}
+	`)
+	})
+
+	it('should extract capitalized types', () => {
+		expect(getTypeFromAnnotation(getAnnotation('String'))).toMatchInlineSnapshot(`
+		Object {
+		  "name": "string",
 		}
 	`)
 	})

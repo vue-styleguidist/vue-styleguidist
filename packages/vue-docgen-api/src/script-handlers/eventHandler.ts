@@ -6,7 +6,7 @@ import Documentation, {
 	DocBlockTags,
 	EventDescriptor,
 	ParamTag,
-	ParamType,
+	TypeOfProp,
 	Tag
 } from '../Documentation'
 import getDocblock from '../utils/getDocblock'
@@ -15,7 +15,7 @@ import resolveIdentifier from '../utils/resolveIdentifier'
 import getMemberFilter from '../utils/getPropsFilter'
 
 export interface TypedParamTag extends ParamTag {
-	type: ParamType
+	type: TypeOfProp
 }
 
 function getCommentBlockAndTags(
@@ -240,7 +240,7 @@ export function setEventDescriptor(
 		})
 	}
 
-	// remove the property an type tags from the tag array
+	// remove the "property", "event" and "type" tags from the tag array
 	const tags = nonNullTags.filter(
 		(tg: BlockTag) => tg.title !== 'type' && tg.title !== 'property' && tg.title !== 'event'
 	)

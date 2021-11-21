@@ -44,13 +44,6 @@ describe('getDefaultExample', () => {
 					},
 					{ name: 'date', required: true, type: { name: 'date' }, tags: {}, description: '' },
 					{
-						name: 'function',
-						required: true,
-						type: { name: 'func' },
-						tags: {},
-						description: ''
-					},
-					{
 						name: 'symbol',
 						required: true,
 						type: { name: 'symbol' },
@@ -66,7 +59,6 @@ describe('getDefaultExample', () => {
 		              :array="[1, 2, 3]"
 		              :object="{}"
 		              :date="new Date('2012-12-12')"
-		              :function="() => void"
 		              :symbol="Default Example Usage"
 		>
 		</my-component>

@@ -13,13 +13,8 @@ export interface Descriptor {
 	mixin?: Module
 }
 
-export interface ParamType {
-	name: string
-	elements?: ParamType[]
-}
-
 export interface UnnamedParam {
-	type?: ParamType
+	type?: TypeOfProp
 	description?: string | boolean
 }
 
@@ -58,8 +53,77 @@ export interface EventDescriptor extends DocBlockTags, Descriptor {
 	properties?: EventProperty[]
 }
 
+export const PrimitiveTypes = [
+	'boolean',
+	'number',
+	'string',
+	'object',
+	'date',
+	'symbol',
+	'null',
+	'undefined',
+	'any',
+	'unknown',
+	'never',
+	'void'
+] as const
+
+export const TS_PRIMITIVE_MAP: { [name: string]: typeof PrimitiveTypes[number] } = {
+	TSNumberKeyword: 'number',
+	TSObjectKeyword: 'object',
+	TSBooleanKeyword: 'boolean',
+	TSStringKeyword: 'string',
+	TSSymbolKeyword: 'symbol',
+	TSAnyKeyword: 'any',
+	TSUnknownKeyword: 'unknown',
+	TSVoidKeyword: 'void',
+	TSNeverKeyword: 'never',
+	TSUndefinedKeyword: 'undefined',
+	TSNullKeyword: 'null'
+}
+
+export interface TypeOfPropPrimitive {
+	name: typeof PrimitiveTypes[number]
+}
+
+export interface TypeOfPropLiteral {
+	name: 'literal'
+	value: string | number | boolean
+}
+
+export interface TypeOfPropArray {
+	name: 'array'
+	elements?: TypeOfProp[]
+}
+
+export interface TypeOfPropUnion {
+	name: 'union' | 'intersection'
+	elements: TypeOfProp[]
+}
+
+/**
+ * When no other type fits, display the code as it is in the original file
+ */
+export interface TypeOfPropCode {
+	name: 'code'
+	code: string
+}
+
+export interface TypeOfPropSignature {
+	name: 'signature'
+	properties?: PropDescriptor[]
+}
+
+export type TypeOfProp =
+	| TypeOfPropPrimitive
+	| TypeOfPropLiteral
+	| TypeOfPropArray
+	| TypeOfPropUnion
+	| TypeOfPropCode
+	| TypeOfPropSignature
+
 export interface PropDescriptor extends Descriptor {
-	type?: { name: string; func?: boolean }
+	type?: TypeOfProp
 	description?: string
 	required?: boolean
 	defaultValue?: { value: string; func?: boolean }
@@ -84,6 +148,12 @@ export interface SlotDescriptor extends Descriptor {
 	description?: string
 	bindings?: ParamTag[]
 	scoped?: boolean
+	tags?: { [key: string]: BlockTag[] }
+}
+
+export interface ExposedDescriptor extends Descriptor {
+	name: string
+	description?: string
 	tags?: { [key: string]: BlockTag[] }
 }
 

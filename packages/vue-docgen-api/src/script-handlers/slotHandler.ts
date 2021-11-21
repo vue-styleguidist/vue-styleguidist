@@ -1,14 +1,14 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
-import Documentation, { ParamTag, ParamType, Tag, SlotDescriptor } from '../Documentation'
+import Documentation, { ParamTag, TypeOfProp, Tag, SlotDescriptor } from '../Documentation'
 import getDoclets from '../utils/getDoclets'
 import { parseDocblock } from '../utils/getDocblock'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getProperties from './utils/getProperties'
 
 export interface TypedParamTag extends ParamTag {
-	type: ParamType
+	type: TypeOfProp
 }
 
 /**

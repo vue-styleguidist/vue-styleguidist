@@ -199,7 +199,7 @@ describe('propHandler', () => {
 			].join('\n')
 			expect(await parserTest(src)).toMatchObject({
 				type: {
-					func: true
+					name: 'code'
 				}
 			})
 		})
@@ -214,7 +214,7 @@ describe('propHandler', () => {
 			].join('\n')
 			expect(await parserTest(src)).toMatchObject({
 				type: {
-					func: true
+					name: 'code'
 				}
 			})
 		})
@@ -725,7 +725,21 @@ describe('propHandler', () => {
       };`
 			expect(await parserTest(src)).toMatchObject({
 				type: {
-					name: '{ bar: number, foo: string }'
+					name: 'signature',
+					properties: [
+						{
+							name: 'bar',
+							type: {
+								name: 'number'
+							}
+						},
+						{
+							name: 'foo',
+							type: {
+								name: 'string'
+							}
+						}
+					]
 				}
 			})
 		})
@@ -735,7 +749,7 @@ describe('propHandler', () => {
       export default {
         props: {
         /**
-         * @type { "bar + boo" | "foo & baz" }}
+         * @type { "bar + boo" | "foo & baz" }
          */
         blockData: {
           type: String,
@@ -746,7 +760,7 @@ describe('propHandler', () => {
 			expect(await parserTest(src)).toMatchObject({
 				values: ['bar + boo', 'foo & baz'],
 				type: {
-					name: 'string'
+					name: 'union'
 				}
 			})
 		})

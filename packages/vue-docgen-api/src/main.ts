@@ -8,7 +8,7 @@ import Documentation, {
 	Param,
 	Tag,
 	ParamTag,
-	ParamType
+	TypeOfProp
 } from './Documentation'
 import { DocGenOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
 import * as ScriptHandlers from './script-handlers'
@@ -32,7 +32,7 @@ export {
 	Param,
 	Tag,
 	ParamTag,
-	ParamType
+	TypeOfProp
 }
 export { cleanName, getDefaultExample } from 'vue-inbrowser-compiler-utils'
 

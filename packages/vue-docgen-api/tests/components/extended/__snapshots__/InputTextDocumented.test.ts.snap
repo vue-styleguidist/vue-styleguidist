@@ -10,9 +10,6 @@ Object {
   "props": Array [
     Object {
       "name": "question",
-      "type": Object {
-        "name": "undefined",
-      },
     },
     Object {
       "mixin": Object {

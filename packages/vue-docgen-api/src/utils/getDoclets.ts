@@ -1,5 +1,11 @@
-import { BlockTag, DocBlockTags, Param, ParamType } from '../Documentation'
+import { visit, parse } from 'recast'
+import * as bt from '@babel/types'
+import type { NodePath } from 'ast-types/lib/node-path'
+import { PrimitiveTypes } from 'vue-inbrowser-compiler-utils'
+import { BlockTag, DocBlockTags, Param, TypeOfProp } from '../Documentation'
+import buildParser from '../babel-parser'
 import matchRecursiveRegExp from './matchRecursiveRegexp'
+import getTypeFromAnnotation from './getTypeFromAnnotation'
 
 const DOCLET_PATTERN = /^(?:\s+)?@(\w+)(?:$|\s((?:[^](?!^(?:\s+)?@\w))*))/gim
 
@@ -31,17 +37,38 @@ function getParamInfo(content: string, hasName: boolean) {
 	return param
 }
 
-function getTypeObjectFromTypeString(typeSlice: string): ParamType {
-	if (typeSlice === '' || typeSlice === '*') {
-		return { name: 'mixed' }
+function getTypeObjectFromTypeString(typeSlice: string): TypeOfProp | undefined {
+	if (PrimitiveTypes.includes(typeSlice as any)) {
+		return {
+			name: typeSlice
+		} as TypeOfProp
 	} else if (/\w+\|\w+/.test(typeSlice)) {
 		return {
 			name: 'union',
-			elements: typeSlice.split('|').map(type => getTypeObjectFromTypeString(type))
+			elements: typeSlice
+				.split('|')
+				.map(type => getTypeObjectFromTypeString(type))
+				.filter(type => type) as TypeOfProp[]
 		}
 	} else {
-		return {
-			name: typeSlice
+		try {
+			const astFile = parse(`let __docgen_param__: ${typeSlice}`, {
+				parser: buildParser({ plugins: ['typescript'] })
+			})
+			let typeAnnotation: NodePath | undefined = undefined
+			visit(astFile, {
+				visitVariableDeclarator(nodePath) {
+					if (bt.isIdentifier(nodePath.value.id) && nodePath.value.id.name === `__docgen_param__`) {
+						typeAnnotation = nodePath.get('id', 'typeAnnotation', 'typeAnnotation')
+					}
+					return false
+				}
+			})
+			if (typeAnnotation) {
+				return getTypeFromAnnotation(typeAnnotation)
+			}
+		} catch {
+			// eat that error
 		}
 	}
 }

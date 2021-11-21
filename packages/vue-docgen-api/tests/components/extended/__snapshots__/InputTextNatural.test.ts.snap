@@ -10,15 +10,9 @@ Object {
   "props": Array [
     Object {
       "name": "question",
-      "type": Object {
-        "name": "undefined",
-      },
     },
     Object {
       "name": "placeholder",
-      "type": Object {
-        "name": "undefined",
-      },
     },
   ],
   "slots": undefined,

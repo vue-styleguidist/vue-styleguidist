@@ -49,7 +49,7 @@ describe('tests grid jsx', () => {
 
 	describe('props', () => {
 		it('should the component has four props', () => {
-			expect((docGrid.props || []).length).toEqual(6)
+			expect((docGrid.props || []).length).toEqual(5)
 		})
 
 		it('grid component should have a msg prop as string|number type', () => {
@@ -60,10 +60,6 @@ describe('tests grid jsx', () => {
 
 		it('grid component should have a filterKey prop as string type', () => {
 			expect(getTestDescriptor(docGrid.props, 'filterKey').type).toMatchObject({ name: 'string' })
-		})
-
-		it('grid component should have a propFunc prop as func type', () => {
-			expect(getTestDescriptor(docGrid.props, 'propFunc').type).toMatchObject({ name: 'func' })
 		})
 
 		it('grid component should have a images prop as Array type', () => {

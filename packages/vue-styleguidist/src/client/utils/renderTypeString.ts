@@ -1,6 +1,6 @@
-import { ParamType } from 'vue-docgen-api'
+import { TypeOfProp } from 'vue-docgen-api'
 
-export default function renderTypeString(type: ParamType): string {
+export default function renderTypeString(type: TypeOfProp): string {
 	if (!type) {
 		return 'unknown'
 	}

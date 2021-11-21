@@ -58,9 +58,6 @@ Object {
     },
     Object {
       "name": "value",
-      "type": Object {
-        "name": "undefined",
-      },
     },
     Object {
       "defaultValue": Object {

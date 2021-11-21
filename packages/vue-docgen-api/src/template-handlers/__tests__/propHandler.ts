@@ -54,7 +54,7 @@ describe('slotHandler', () => {
 				functional: true
 			})
 			expect(doc.toObject().props).toMatchObject([
-				{ name: 'name', type: { name: 'mixed' }, description: 'Your Name' },
+				{ name: 'name', description: 'Your Name' },
 				{ name: 'adress', type: { name: 'string' }, description: 'Your Adress' }
 			])
 		} else {
@@ -116,7 +116,7 @@ describe('slotHandler', () => {
 			traverse(ast.children[0], doc, [propHandler], ast.children, {
 				functional: true
 			})
-			expect(doc.toObject().props).toMatchObject([{ name: 'error', type: {} }])
+			expect(doc.toObject().props).toMatchObject([{ name: 'error' }])
 		} else {
 			throw Error('fail')
 		}
