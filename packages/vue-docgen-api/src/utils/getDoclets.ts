@@ -12,7 +12,7 @@ function getParamInfo(content: string, hasName: boolean) {
 	content = content.replace(`{${typeSlice}}`, '')
 
 	if (hasName) {
-		const nameSliceArray = /^ *(\w+)?/.exec(content)
+		const nameSliceArray = /^ *(\w[\w-]+)?/.exec(content)
 		if (nameSliceArray) {
 			param.name = nameSliceArray[1]
 		}
