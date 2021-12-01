@@ -50,7 +50,7 @@
 		"@babel/runtime": "7.16.3",
 		"@commitlint/cli": "15.0.0",
 		"@commitlint/config-conventional": "15.0.0",
-		"@types/jest": "26.0.24",
+		"@types/jest": "27.0.3",
 		"@types/node": "13.13.52",
 		"@types/webpack-dev-server": "3.11.6",
 		"babel-jest": "27.3.1",
