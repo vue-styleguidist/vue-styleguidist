@@ -1031,7 +1031,7 @@ importers:
       '@rollup/plugin-node-resolve': 9.0.0
       '@rollup/plugin-typescript': 8.3.0
       '@types/buble': 0.20.1
-      '@vue/test-utils': 1.2.2
+      '@vue/test-utils': 1.3.0
       acorn: ^6.4.2
       acorn-jsx: ^5.3.1
       buble: ^0.20.0
@@ -1055,7 +1055,7 @@ importers:
       '@rollup/plugin-node-resolve': 9.0.0_rollup@2.60.1
       '@rollup/plugin-typescript': 8.3.0_b13ef2726f6c50b174fe2dc72f675942
       '@types/buble': 0.20.1
-      '@vue/test-utils': 1.2.2_vue@2.6.14
+      '@vue/test-utils': 1.3.0_vue@2.6.14
       rollup: 2.60.1
       typescript: 4.5.2
       vue: 2.6.14
@@ -8725,8 +8725,8 @@ packages:
       vue-template-compiler: 2.6.14
     dev: true
 
-  /@vue/test-utils/1.2.2_vue@2.6.14:
-    resolution: {integrity: sha512-P+yiAsszoy8z1TqXiVUnAZaJj0WGGz5fCxm4bOSI6Cpwy1+PNYwYxDv0ROAA/SUtOPppV+aD8tp/QWwxf8ROJw==}
+  /@vue/test-utils/1.3.0_vue@2.6.14:
+    resolution: {integrity: sha512-Xk2Xiyj2k5dFb8eYUKkcN9PzqZSppTlx7LaQWBbdA8tqh3jHr/KHX2/YLhNFc/xwDrgeLybqd+4ZCPJSGPIqeA==}
     peerDependencies:
       vue: 2.x
       vue-template-compiler: ^2.x
