@@ -58,16 +58,45 @@ describe('tests wrapper with root slot', () => {
 		})
 
 		it('should have a text slot', () => {
-			expect(getTestDescriptor(docApp.slots, 'text').description).toBe('text slot here')
+			expect(getTestDescriptor(docApp.slots, 'day').description).toBe(
+				'for customizing individual days.'
+			)
 		})
 
 		it('should match the reference for the text slot', () => {
-			expect(getTestDescriptor(docApp.slots, 'text')).toMatchInlineSnapshot(`
-									Object {
-									  "description": "text slot here",
-									  "name": "text",
-									}
-						`)
+			expect(getTestDescriptor(docApp.slots, 'day')).toMatchInlineSnapshot(`
+			Object {
+			  "bindings": Array [
+			    Object {
+			      "description": "The date instance of the day",
+			      "name": "date",
+			      "title": "binding",
+			      "type": Object {
+			        "name": "date",
+			      },
+			    },
+			    Object {
+			      "description": "The day number (e.g 21)",
+			      "name": "day",
+			      "title": "binding",
+			      "type": Object {
+			        "name": "number",
+			      },
+			    },
+			    Object {
+			      "description": "aria-label for the day",
+			      "name": "aria-label",
+			      "title": "binding",
+			      "type": Object {
+			        "name": "string",
+			      },
+			    },
+			  ],
+			  "description": "for customizing individual days.",
+			  "name": "day",
+			  "scoped": true,
+			}
+		`)
 		})
 	})
 })

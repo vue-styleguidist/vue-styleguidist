@@ -26,14 +26,14 @@ function getSingleFileComponentParts(code: string) {
 	return parts
 }
 
-function injectTemplateAndParseExport(
-	parts: VsgSFCDescriptor
-): {
+function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
 } {
-	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
+	const templateString = parts.template
+		? parts.template.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
+		: undefined
 
 	if (!parts.script) {
 		return { component: `{template: \`${templateString}\` }` }
@@ -48,9 +48,7 @@ function injectTemplateAndParseExport(
 	return comp
 }
 
-export function parseScriptCode(
-	code: string
-): {
+export function parseScriptCode(code: string): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string

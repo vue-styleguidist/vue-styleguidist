@@ -20,6 +20,20 @@ describe('getDoclets', () => {
 		])
 	})
 
+  it('should extract param name if it contains a - or numbers', () => {
+		const src = `@param {string} h2llo-wo_rld the param itself`
+		expect(getDocLets(src).tags).toMatchObject([
+			{ 
+        title: 'param', 
+        name: 'h2llo-wo_rld', 
+        type: { 
+          name: 'string' 
+        }, 
+        description: 'the param itself' 
+      }
+		])
+	})
+
 	it('should extract params types only when alone', () => {
 		const src = `@param {string}`
 		expect(getDocLets(src).tags).toEqual([{ title: 'param', type: { name: 'string' } }])
@@ -39,7 +53,7 @@ describe('getDoclets', () => {
 		])
 	})
 
-	it('should extract param description without the dash', () => {
+	it('should extract param description and remove the dash', () => {
 		const src = `@param {string} - the compiled object`
 		expect(getDocLets(src).tags).toMatchObject([
 			{ title: 'param', description: 'the compiled object' }

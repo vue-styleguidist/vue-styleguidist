@@ -1,4 +1,4 @@
-import { parse as parseComponent } from '@vue/compiler-sfc'
+import { parse as parseComponent, SFCScriptBlock } from '@vue/compiler-sfc'
 import * as path from 'path'
 import { readFile } from 'fs'
 import { promisify } from 'util'
@@ -51,34 +51,6 @@ export default async function parseSFC(
 		parseTemplate(parts.template, documentation, [...templateHandlers, ...addTemplateHandlers], opt)
 	}
 
-	let scriptSource = parts.script ? parts.script.content : undefined
-
-	const extSrc = parts && parts.script && parts.script.attrs ? parts.script.attrs.src : false
-
-	if (extSrc && typeof extSrc === 'string') {
-		const extSrcAbs = pathResolver(extSrc)
-
-		const extSource = extSrcAbs
-			? await read(extSrcAbs, {
-					encoding: 'utf-8'
-			  })
-			: ''
-		if (extSource.length) {
-			scriptSource = extSource
-			opt.lang =
-				(parts.script && parts.script.attrs && /^tsx?$/.test(parts.script.attrs.lang as string)) ||
-				/\.tsx?$/i.test(extSrc)
-					? 'ts'
-					: 'js'
-		}
-	}
-
-	opt.lang =
-		(parts.script && parts.script.attrs && /^tsx?$/.test(parts.script.attrs.lang as string)) ||
-		(typeof extSrc === 'string' && /\.tsx?$/i.test(extSrc))
-			? 'ts'
-			: 'js'
-
 	if (parts.customBlocks) {
 		documentation = documentation || new Documentation(opt.filePath)
 
@@ -91,12 +63,19 @@ export default async function parseSFC(
 		}
 	}
 
-	const docs: Documentation[] = scriptSource
-		? (await parseScript(scriptSource, opt, documentation, initialDoc !== undefined)) || []
-		: // if there is only a template return the template's doc
-		documentation
-		? [documentation]
-		: []
+	let docs: Documentation[] = documentation ? [documentation] : []
+
+	if (parts.scriptSetup) {
+		// WIP
+	} else if (parts.script) {
+		docs = await parseScriptTag(
+			parts.script,
+			pathResolver,
+			opt,
+			documentation,
+			initialDoc !== undefined
+		)
+	}
 
 	if (documentation && !documentation.get('displayName')) {
 		// a component should always have a display name
@@ -105,6 +84,51 @@ export default async function parseSFC(
 		const dirName = path.basename(path.dirname(opt.filePath))
 		documentation.set('displayName', displayName.toLowerCase() === 'index' ? dirName : displayName)
 	}
+
+	return docs
+}
+
+async function parseScriptTag(
+	scriptTag: SFCScriptBlock,
+	pathResolver: (filePath: string, overrideRoot?: string) => string | null,
+	opt: ParseOptions,
+	documentation: Documentation | undefined,
+	forceSingleExport: boolean
+): Promise<Documentation[]> {
+	let scriptSource = scriptTag ? scriptTag.content : undefined
+
+	const extSrc = scriptTag && scriptTag.attrs ? scriptTag.attrs.src : false
+
+	if (extSrc && typeof extSrc === 'string') {
+		const extSrcAbs = pathResolver(extSrc)
+
+		const extSource = extSrcAbs
+			? await read(extSrcAbs, {
+					encoding: 'utf-8'
+			  })
+			: ''
+		if (extSource.length) {
+			scriptSource = extSource
+			opt.lang =
+				(scriptTag && scriptTag.attrs && /^tsx?$/.test(scriptTag.attrs.lang as string)) ||
+				/\.tsx?$/i.test(extSrc)
+					? 'ts'
+					: 'js'
+		}
+	}
+
+	opt.lang =
+		(scriptTag && scriptTag.attrs && /^tsx?$/.test(scriptTag.attrs.lang as string)) ||
+		(typeof extSrc === 'string' && /\.tsx?$/i.test(extSrc))
+			? 'ts'
+			: 'js'
+
+	const docs: Documentation[] = scriptSource
+		? (await parseScript(scriptSource, opt, documentation, forceSingleExport)) || []
+		: // if there is only a template return the template's doc
+		documentation
+		? [documentation]
+		: []
 
 	return docs
 }

@@ -1,7 +1,14 @@
 <template>
-	<div slot-scope="row" class="list-item1">
-		{{ row.item.text }}
-		<!-- @slot text slot here -->
-		<slot name="text" />
-	</div>
+	<!--
+  @slot for customizing individual days.
+    @binding {date} date The date instance of the day
+    @binding {number} day The day number (e.g 21)
+    @binding {string} aria-label aria-label for the day
+-->
+<slot
+  name="day"
+  :date="date"
+  :day="day"
+  :aria-label="ariaLabel"
+></slot>
 </template>
