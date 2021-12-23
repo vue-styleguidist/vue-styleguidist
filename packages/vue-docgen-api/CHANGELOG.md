@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.43.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.0...v4.43.1) (2021-12-23)
+
+
+### Bug Fixes
+
+* **docgen:** parse bindings with a dash in jsdoc ([b7b0d30](https://github.com/vue-styleguidist/vue-styleguidist/commit/b7b0d30fa8803505873f176ffda6b63ba473c417)), closes [#1229](https://github.com/vue-styleguidist/vue-styleguidist/issues/1229)
+* have both script & setup in a SFC ignores ([3593171](https://github.com/vue-styleguidist/vue-styleguidist/commit/3593171a2ead792d7e40bb39922e8eb05d6e6192))
+
+
+
+
+
 # [4.43.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.42.0...v4.43.0) (2021-11-21)
 
 
