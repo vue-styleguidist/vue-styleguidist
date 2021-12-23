@@ -43,7 +43,7 @@ new Vue({
 		const Vue = require('vue').default;
 		const MyButton = require('./MyButton.vue').default;
 		Vue.component('MyButton', MyButton);
-		
+
 		let param = 'BazFoo';
 		<div>
 			<MyButton> {{param}} </MyButton>
@@ -164,5 +164,22 @@ new Vue({
 				};
 				"
 	`)
+	})
+
+	it('should escape template correctly', () => {
+		let sut = compileVueCodeForEvalFunction(`
+<template>
+	<div>{{ \`\${value}\` }}</div>
+</template>
+<script>
+export default {
+	data () {
+		return {
+			value: 1
+		}
+	}
+}
+</script>`)
+		expect(() => new Function(sut.script)()).not.toThrow()
 	})
 })
