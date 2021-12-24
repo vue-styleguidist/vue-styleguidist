@@ -1,5 +1,0 @@
-# ignore build file
-/lib/**/*.js
-# keep the bin file to allow install on windows
-!/lib/bin.js
-/lib/**/*.d.ts
