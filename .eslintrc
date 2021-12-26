@@ -5,7 +5,7 @@
 		"browser": true,
 		"node": true
 	},
-	"plugins": ["compat", "import"],
+	"plugins": ["import"],
 	"settings": {
 		"import/resolver": {
 			"node": {
@@ -19,7 +19,6 @@
 	},
 	"rules": {
 		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
-		"compat/compat": "error",
 		"import/no-unresolved": [
 			"error",
 			{
@@ -81,7 +80,6 @@
 				"ecmaVersion": 2018,
 				"sourceType": "module"
 			},
-			"extends": ["tamia/typescript-react"],
 			"plugins": ["@typescript-eslint"],
 			"settings": {
 				"import/resolver": {

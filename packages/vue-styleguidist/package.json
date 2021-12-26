@@ -5,9 +5,8 @@
 	"homepage": "https://vue-styleguidist.github.io",
   "scripts": {
     "dev": "vite",
-    "compile": "vue-tsc --noEmit && vite build",
-    "compile:watch": "vite build --watch",
-    "preview": "vite preview --port 5050",
+    "compile": "tsc -p ./tsconfig.build.json",
+    "compile:watch": "pnpm compile --watch",
     "test:unit": "cypress open-ct",
     "test:unit:ci": "cypress run-ct --quiet --reporter spec",
     "test:e2e": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress open'",
