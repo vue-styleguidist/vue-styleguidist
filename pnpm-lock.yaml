@@ -20,7 +20,7 @@ importers:
       '@types/webpack-dev-server': 3.11.6
       babel-jest: 27.4.5
       clipboard: 2.0.8
-      core-js: 3.20.0
+      core-js: 3.20.1
       cross-env: 5.2.1
       cypress: 7.7.0
       danger: 10.7.1
@@ -38,7 +38,7 @@ importers:
       eslint-plugin-import: 2.25.3
       eslint-plugin-jest: 23.20.0
       eslint-plugin-prettier: 3.4.1
-      eslint-plugin-react: 7.27.1
+      eslint-plugin-react: 7.28.0
       eslint-plugin-vue: 7.20.0
       globby: 9.2.0
       jest: 27.4.5
@@ -80,7 +80,7 @@ importers:
       '@types/webpack-dev-server': 3.11.6
       babel-jest: 27.4.5_@babel+core@7.16.5
       clipboard: 2.0.8
-      core-js: 3.20.0
+      core-js: 3.20.1
       cross-env: 5.2.1
       cypress: 7.7.0
       danger: 10.7.1
@@ -98,7 +98,7 @@ importers:
       eslint-plugin-import: 2.25.3_eslint@7.32.0
       eslint-plugin-jest: 23.20.0_eslint@7.32.0+typescript@4.5.4
       eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.5.1
-      eslint-plugin-react: 7.27.1_eslint@7.32.0
+      eslint-plugin-react: 7.28.0_eslint@7.32.0
       eslint-plugin-vue: 7.20.0_eslint@7.32.0
       globby: 9.2.0
       jest: 27.4.5
@@ -960,7 +960,7 @@ importers:
       '@babel/parser': ^7.13.12
       '@babel/types': ^7.13.12
       '@test-vue-docgen/mixins': 3.15.4
-      '@types/pug': 2.0.5
+      '@types/pug': 2.0.6
       '@vue/compiler-dom': ^3.2.0
       '@vue/compiler-sfc': ^3.2.0
       ast-types: 0.14.2
@@ -990,7 +990,7 @@ importers:
       vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
     devDependencies:
       '@test-vue-docgen/mixins': link:../docgen-tests
-      '@types/pug': 2.0.5
+      '@types/pug': 2.0.6
       globby: 10.0.2
       vue: 2.6.14
       vue-class-component: 7.2.6_vue@2.6.14
@@ -1037,7 +1037,7 @@ importers:
       buble: ^0.20.0
       camelcase: ^5.3.1
       detect-browser: ^5.2.0
-      rollup: 2.61.1
+      rollup: 2.62.0
       typescript: 4.5.4
       vue: 2.6.14
       vue-inbrowser-compiler-utils: ^4.43.1
@@ -1051,12 +1051,12 @@ importers:
       vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       walkes: 0.2.1
     devDependencies:
-      '@rollup/plugin-commonjs': 15.1.0_rollup@2.61.1
-      '@rollup/plugin-node-resolve': 9.0.0_rollup@2.61.1
-      '@rollup/plugin-typescript': 8.3.0_3bb347879280457c0420527ae9f527b5
+      '@rollup/plugin-commonjs': 15.1.0_rollup@2.62.0
+      '@rollup/plugin-node-resolve': 9.0.0_rollup@2.62.0
+      '@rollup/plugin-typescript': 8.3.0_7c5ff569c0887b4f0035eb7cb6988163
       '@types/buble': 0.20.1
       '@vue/test-utils': 1.3.0_vue@2.6.14
-      rollup: 2.61.1
+      rollup: 2.62.0
       typescript: 4.5.4
       vue: 2.6.14
 
@@ -1067,16 +1067,16 @@ importers:
       '@rollup/plugin-typescript': 8.3.0
       '@types/domhandler': 2.4.2
       camelcase: ^5.3.1
-      rollup: 2.61.1
+      rollup: 2.62.0
       vue: 2.6.14
     dependencies:
       camelcase: 5.3.1
     devDependencies:
-      '@rollup/plugin-commonjs': 15.1.0_rollup@2.61.1
-      '@rollup/plugin-node-resolve': 9.0.0_rollup@2.61.1
-      '@rollup/plugin-typescript': 8.3.0_3bb347879280457c0420527ae9f527b5
+      '@rollup/plugin-commonjs': 15.1.0_rollup@2.62.0
+      '@rollup/plugin-node-resolve': 9.0.0_rollup@2.62.0
+      '@rollup/plugin-typescript': 8.3.0_7c5ff569c0887b4f0035eb7cb6988163
       '@types/domhandler': 2.4.2
-      rollup: 2.61.1
+      rollup: 2.62.0
       vue: 2.6.14
 
   packages/vue-simple-docgen-loader:
@@ -1112,7 +1112,7 @@ importers:
       '@types/lodash': 4.14.178
       '@types/mini-html-webpack-plugin': 2.2.2
       '@types/prismjs': 1.16.6
-      '@types/pug': 2.0.5
+      '@types/pug': 2.0.6
       '@types/react-dev-utils': 9.0.9
       '@types/react-dom': 17.0.11
       '@types/react-lifecycles-compat': 3.0.1
@@ -1259,7 +1259,7 @@ importers:
       '@types/lodash': 4.14.178
       '@types/mini-html-webpack-plugin': 2.2.2
       '@types/prismjs': 1.16.6
-      '@types/pug': 2.0.5
+      '@types/pug': 2.0.6
       '@types/react-dev-utils': 9.0.9
       '@types/react-dom': 17.0.11
       '@types/react-lifecycles-compat': 3.0.1
@@ -6938,38 +6938,38 @@ packages:
     resolution: {integrity: sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=}
     dev: true
 
-  /@rollup/plugin-commonjs/15.1.0_rollup@2.61.1:
+  /@rollup/plugin-commonjs/15.1.0_rollup@2.62.0:
     resolution: {integrity: sha512-xCQqz4z/o0h2syQ7d9LskIMvBSH4PX5PjYdpSSvgS+pQik3WahkQVNWg3D8XJeYjZoVWnIUQYDghuEMRGrmQYQ==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
       rollup: ^2.22.0
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.61.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.62.0
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 7.1.6
       is-reference: 1.2.1
       magic-string: 0.25.7
       resolve: 1.20.0
-      rollup: 2.61.1
+      rollup: 2.62.0
     dev: true
 
-  /@rollup/plugin-node-resolve/9.0.0_rollup@2.61.1:
+  /@rollup/plugin-node-resolve/9.0.0_rollup@2.62.0:
     resolution: {integrity: sha512-gPz+utFHLRrd41WMP13Jq5mqqzHL3OXrfj3/MkSyB6UBIcuNt9j60GCbarzMzdf1VHFpOxfQh/ez7wyadLMqkg==}
     engines: {node: '>= 10.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.61.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.62.0
       '@types/resolve': 1.17.1
       builtin-modules: 3.2.0
       deepmerge: 4.2.2
       is-module: 1.0.0
       resolve: 1.20.0
-      rollup: 2.61.1
+      rollup: 2.62.0
     dev: true
 
-  /@rollup/plugin-typescript/8.3.0_3bb347879280457c0420527ae9f527b5:
+  /@rollup/plugin-typescript/8.3.0_7c5ff569c0887b4f0035eb7cb6988163:
     resolution: {integrity: sha512-I5FpSvLbtAdwJ+naznv+B4sjXZUcIvLLceYpITAn7wAP8W0wqc5noLdGIp9HGVntNhRWXctwPYrSSFQxtl0FPA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -6977,14 +6977,14 @@ packages:
       tslib: '*'
       typescript: '>=3.7.0'
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.61.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.62.0
       resolve: 1.20.0
-      rollup: 2.61.1
+      rollup: 2.62.0
       tslib: 2.3.1
       typescript: 4.5.4
     dev: true
 
-  /@rollup/pluginutils/3.1.0_rollup@2.61.1:
+  /@rollup/pluginutils/3.1.0_rollup@2.62.0:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
@@ -6993,7 +6993,7 @@ packages:
       '@types/estree': 0.0.39
       estree-walker: 1.0.1
       picomatch: 2.3.0
-      rollup: 2.61.1
+      rollup: 2.62.0
     dev: true
 
   /@samverschueren/stream-to-observable/0.3.1_rxjs@6.6.7:
@@ -7526,8 +7526,8 @@ packages:
     resolution: {integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==}
     dev: true
 
-  /@types/pug/2.0.5:
-    resolution: {integrity: sha512-LOnASQoeNZMkzexRuyqcBBDZ6rS+rQxUMkmj5A0PkhhiSZivLIuz6Hxyr1mkGoEZEkk66faROmpMi4fFkrKsBA==}
+  /@types/pug/2.0.6:
+    resolution: {integrity: sha512-SnHmG9wN1UVmagJOnyo/qkk0Z7gejYxOYYmaAwr5u2yFYfsupN3sg10kyzN8Hep/2zbHxCnsumxOoRIRMBwKCg==}
     dev: true
 
   /@types/puppeteer/1.20.7:
@@ -11930,8 +11930,8 @@ packages:
     resolution: {integrity: sha512-lyvajs+wd8N1hXfzob1LdOCCHFU4bGMbqqmLn1Q4QlCpDqWPpGf+p0nj+LNrvDDG33j0hZXw2nsvvVpHysxyNw==}
     requiresBuild: true
 
-  /core-js/3.20.0:
-    resolution: {integrity: sha512-KjbKU7UEfg4YPpskMtMXPhUKn7m/1OdTHTVjy09ScR2LVaoUXe8Jh0UdvN2EKUR6iKTJph52SJP95mAB0MnVLQ==}
+  /core-js/3.20.1:
+    resolution: {integrity: sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==}
     requiresBuild: true
     dev: true
 
@@ -13437,7 +13437,7 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      is-callable: 1.2.3
+      is-callable: 1.2.4
       is-date-object: 1.0.2
       is-symbol: 1.0.3
 
@@ -13606,7 +13606,7 @@ packages:
       ast-metadata-inferer: 0.7.0
       browserslist: 4.16.8
       caniuse-lite: 1.0.30001251
-      core-js: 3.20.0
+      core-js: 3.20.1
       eslint: 7.32.0
       find-up: 5.0.0
       lodash.memoize: 4.1.2
@@ -13726,8 +13726,8 @@ packages:
       string.prototype.matchall: 4.0.4
     dev: true
 
-  /eslint-plugin-react/7.27.1_eslint@7.32.0:
-    resolution: {integrity: sha512-meyunDjMMYeWr/4EBLTV1op3iSG3mjT/pz5gti38UzfM4OPpNc2m0t2xvKCOMU5D6FSdd34BIMFOvQbW+i8GAA==}
+  /eslint-plugin-react/7.28.0_eslint@7.32.0:
+    resolution: {integrity: sha512-IOlFIRHzWfEQQKcAD4iyYDndHwTQiCMcJVJjxempf203jnNLUnW34AXLrV33+nEXoifJE2ZEGmcjKPL8957eSw==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -16377,7 +16377,6 @@ packages:
   /is-callable/1.2.4:
     resolution: {integrity: sha512-nsuwtxZfMX67Oryl9LCQ+upnC0Z0BgpwntpS89m1H/TLF0zNfzfLMV/9Wa/6MZsj0acpEjAO0KF1xT6ZdLl95w==}
     engines: {node: '>= 0.4'}
-    dev: true
 
   /is-ci/1.2.1:
     resolution: {integrity: sha512-s6tfsaQaQi3JNciBH6shVqEDvhGut0SUXr31ag8Pd8BBbVVlcGfWhpPmEOoM6RJ5TFhbypvf5yyRw/VXW1IiWg==}
@@ -22349,7 +22348,7 @@ packages:
   /resolve/2.0.0-next.3:
     resolution: {integrity: sha512-W8LucSynKUIDu9ylraa7ueVZ7hc0uAgJBxVsQSKOXOyle8a93qXhcz+XAXZ8bIq2d6i4Ehddn6Evt+0/UwKk6Q==}
     dependencies:
-      is-core-module: 2.6.0
+      is-core-module: 2.8.0
       path-parse: 1.0.6
     dev: true
 
@@ -22427,8 +22426,8 @@ packages:
       hash-base: 3.1.0
       inherits: 2.0.4
 
-  /rollup/2.61.1:
-    resolution: {integrity: sha512-BbTXlEvB8d+XFbK/7E5doIcRtxWPRiqr0eb5vQ0+2paMM04Ye4PZY5nHOQef2ix24l/L0SpLd5hwcH15QHPdvA==}
+  /rollup/2.62.0:
+    resolution: {integrity: sha512-cJEQq2gwB0GWMD3rYImefQTSjrPYaC6s4J9pYqnstVLJ1CHa/aZNVkD4Epuvg4iLeMA4KRiq7UM7awKK6j7jcw==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -25354,7 +25353,7 @@ packages:
       codemirror: 5.60.0
       common-dir: 2.0.2
       copy-webpack-plugin: 5.1.2
-      core-js: 3.20.0
+      core-js: 3.20.1
       css-loader: 2.1.1
       es6-object-assign: 1.1.0
       es6-promise: 4.2.8
