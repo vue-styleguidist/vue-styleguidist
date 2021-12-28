@@ -48,22 +48,7 @@
 	},
 	"overrides": [
 		{
-			"files": ["packages/vue-styleguidist/src/client/**/*.*"],
-			"extends": ["plugin:react/recommended"],
-			"settings": {
-				"import/resolver": {
-					"node": {
-						"paths": [
-							"packages/vue-styleguidist/src/client",
-							"packages/vue-styleguidist/node_modules/react-styleguidist/lib/client"
-						],
-						"extensions": [".ts", ".tsx", ".js", ".d.ts"]
-					}
-				}
-			}
-		},
-		{
-			"files": ["packages/**/*.{ts,tsx}"],
+			"files": ["{packages,examples}/**/*.{ts,tsx}"],
 			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"sourceType": "module",
