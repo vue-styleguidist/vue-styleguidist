@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HelloWorldDoc from 'docgen?./components/HelloWorld.vue'
+import HelloWorldDoc from './components/HelloWorld.vue.docgen'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 

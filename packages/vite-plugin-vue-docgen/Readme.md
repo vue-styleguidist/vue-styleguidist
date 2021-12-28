@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-import HelloWorldDoc from 'docgen?./components/HelloWorld.vue'
+import HelloWorldDoc from './components/HelloWorld.vue.docgen'
 
 console.log(HelloWorldDoc)
 ```

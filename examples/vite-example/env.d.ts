@@ -7,8 +7,8 @@ declare module '*.vue' {
 	export default component
 }
 
-declare module '*?docgen' {
-	import type { ComponentDoc } from 'vite-plugin-vue-docgen'
+declare module '*.docgen' {
+	import type { ComponentDoc } from '@vue-styleguidist/vite-plugin-vue-docgen'
 
 	const componentDocs: ComponentDoc[]
 	export default componentDocs
