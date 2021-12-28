@@ -8,7 +8,7 @@ export interface VitePluginDocgenOptions {
 	docQuery?: string
 }
 
-const DOCGEN_QUERY = 'docgen'
+const DOCGEN_QUERY = 'vue-docgen-api'
 
 export default function PluginDocgen(options: VitePluginDocgenOptions = {}): Plugin {
 	const { docgenOptions, docQuery = DOCGEN_QUERY } = options

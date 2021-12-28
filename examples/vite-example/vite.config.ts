@@ -6,7 +6,13 @@ import Inspect from 'vite-plugin-inspect'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [Docgen(), vue(), Inspect()],
+	plugins: [
+		Docgen({
+			docQuery: 'docgen'
+		}),
+		vue(),
+		Inspect()
+	],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url))
