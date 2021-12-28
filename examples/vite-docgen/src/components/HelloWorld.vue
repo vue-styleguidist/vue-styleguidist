@@ -1,6 +1,9 @@
 <script lang="ts">
 export default {
   props: {
+    /**
+     * coco bon
+     */
     msg: {
       type: String,
       default: 'Hello World!'
