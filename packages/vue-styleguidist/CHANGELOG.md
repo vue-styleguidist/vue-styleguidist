@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.43.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.1...v4.43.2) (2022-01-03)
+
+
+### Bug Fixes
+
+* custom components have priority over vsg ([9c95acb](https://github.com/vue-styleguidist/vue-styleguidist/commit/9c95acb0a774414e774fd648c6a09816ffbdba18)), closes [#1244](https://github.com/vue-styleguidist/vue-styleguidist/issues/1244)
+
+
+
+
+
 ## [4.43.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.0...v4.43.1) (2021-12-23)
 
 **Note:** Version bump only for package vue-styleguidist
