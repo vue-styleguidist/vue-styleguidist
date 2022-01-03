@@ -20,7 +20,7 @@ importers:
       '@types/webpack-dev-server': 3.11.6
       babel-jest: 27.4.5
       clipboard: 2.0.8
-      core-js: 3.20.1
+      core-js: 3.20.2
       cross-env: 5.2.1
       cypress: 7.7.0
       danger: 10.7.1
@@ -35,7 +35,7 @@ importers:
       eslint-import-resolver-typescript: 2.5.0
       eslint-plugin-compat: 3.13.0
       eslint-plugin-es5: 1.5.0
-      eslint-plugin-import: 2.25.3
+      eslint-plugin-import: 2.25.4
       eslint-plugin-jest: 23.20.0
       eslint-plugin-prettier: 3.4.1
       eslint-plugin-react: 7.28.0
@@ -80,7 +80,7 @@ importers:
       '@types/webpack-dev-server': 3.11.6
       babel-jest: 27.4.5_@babel+core@7.16.5
       clipboard: 2.0.8
-      core-js: 3.20.1
+      core-js: 3.20.2
       cross-env: 5.2.1
       cypress: 7.7.0
       danger: 10.7.1
@@ -92,10 +92,10 @@ importers:
       enzyme-to-json: 3.6.2_enzyme@3.11.0
       eslint: 7.32.0
       eslint-config-tamia: 7.2.7_eslint@7.32.0
-      eslint-import-resolver-typescript: 2.5.0_a820dc868cc8cd66d8297be6779b9035
+      eslint-import-resolver-typescript: 2.5.0_157002f9dff1b62f2b20650d7e8bf1eb
       eslint-plugin-compat: 3.13.0_eslint@7.32.0
       eslint-plugin-es5: 1.5.0_eslint@7.32.0
-      eslint-plugin-import: 2.25.3_eslint@7.32.0
+      eslint-plugin-import: 2.25.4_eslint@7.32.0
       eslint-plugin-jest: 23.20.0_eslint@7.32.0+typescript@4.5.4
       eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.5.1
       eslint-plugin-react: 7.28.0_eslint@7.32.0
@@ -975,7 +975,7 @@ importers:
       vue-clickaway: 2.2.2
       vue-inbrowser-compiler-utils: ^4.43.1
       vue-property-decorator: 7.3.0
-      vuetify: 2.6.1
+      vuetify: 2.6.2
     dependencies:
       '@babel/parser': 7.13.12
       '@babel/types': 7.13.12
@@ -996,7 +996,7 @@ importers:
       vue-class-component: 7.2.6_vue@2.6.14
       vue-clickaway: 2.2.2_vue@2.6.14
       vue-property-decorator: 7.3.0
-      vuetify: 2.6.1_vue@2.6.14
+      vuetify: 2.6.2_vue@2.6.14
 
   packages/vue-docgen-cli:
     specifiers:
@@ -11197,7 +11197,7 @@ packages:
       glob-parent: 3.1.0
       inherits: 2.0.4
       is-binary-path: 1.0.1
-      is-glob: 4.0.1
+      is-glob: 4.0.3
       normalize-path: 3.0.0
       path-is-absolute: 1.0.1
       readdirp: 2.2.1
@@ -11973,8 +11973,8 @@ packages:
     resolution: {integrity: sha512-lyvajs+wd8N1hXfzob1LdOCCHFU4bGMbqqmLn1Q4QlCpDqWPpGf+p0nj+LNrvDDG33j0hZXw2nsvvVpHysxyNw==}
     requiresBuild: true
 
-  /core-js/3.20.1:
-    resolution: {integrity: sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==}
+  /core-js/3.20.2:
+    resolution: {integrity: sha512-nuqhq11DcOAbFBV4zCbKeGbKQsUDRqTX0oqx7AttUBuqe3h20ixsE039QHelbL6P4h+9kytVqyEtyZ6gsiwEYw==}
     requiresBuild: true
     dev: true
 
@@ -13596,7 +13596,7 @@ packages:
       resolve: 1.20.0
     dev: true
 
-  /eslint-import-resolver-typescript/2.5.0_a820dc868cc8cd66d8297be6779b9035:
+  /eslint-import-resolver-typescript/2.5.0_157002f9dff1b62f2b20650d7e8bf1eb:
     resolution: {integrity: sha512-qZ6e5CFr+I7K4VVhQu3M/9xGv9/YmwsEXrsm3nimw8vWaVHRDrQRp26BgCypTxBp3vUp4o5aVEJRiy0F2DFddQ==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -13605,7 +13605,7 @@ packages:
     dependencies:
       debug: 4.3.2
       eslint: 7.32.0
-      eslint-plugin-import: 2.25.3_eslint@7.32.0
+      eslint-plugin-import: 2.25.4_eslint@7.32.0
       glob: 7.1.7
       is-glob: 4.0.3
       resolve: 1.20.0
@@ -13646,13 +13646,12 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /eslint-module-utils/2.7.1:
-    resolution: {integrity: sha512-fjoetBXQZq2tSTWZ9yWVl2KuFrTZZH3V+9iD1V1RfpDgxzJR+mPd/KZmMiA8gbPqdBzpNiEHOuT7IYEWxrH0zQ==}
+  /eslint-module-utils/2.7.2:
+    resolution: {integrity: sha512-zquepFnWCY2ISMFwD/DqzaM++H+7PDzOpUvotJWm/y1BAFt5R4oeULgdrTejKqLkz7MA/tgstsUMNYc7wNdTrg==}
     engines: {node: '>=4'}
     dependencies:
       debug: 3.2.7
       find-up: 2.1.0
-      pkg-dir: 2.0.0
     dev: true
 
   /eslint-plugin-compat/3.13.0_eslint@7.32.0:
@@ -13665,7 +13664,7 @@ packages:
       ast-metadata-inferer: 0.7.0
       browserslist: 4.16.8
       caniuse-lite: 1.0.30001251
-      core-js: 3.20.1
+      core-js: 3.20.2
       eslint: 7.32.0
       find-up: 5.0.0
       lodash.memoize: 4.1.2
@@ -13680,8 +13679,8 @@ packages:
       eslint: 7.32.0
     dev: true
 
-  /eslint-plugin-import/2.25.3_eslint@7.32.0:
-    resolution: {integrity: sha512-RzAVbby+72IB3iOEL8clzPLzL3wpDrlwjsTBAQXgyp5SeTqqY+0bFubwuo+y/HLhNZcXV4XqTBO4LGsfyHIDXg==}
+  /eslint-plugin-import/2.25.4_eslint@7.32.0:
+    resolution: {integrity: sha512-/KJBASVFxpu0xg1kIBn9AUa8hQVnszpwgE7Ld0lKAlx7Ie87yzEzCgSkekt+le/YVhiaosO4Y14GDAOc41nfxA==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
@@ -13692,14 +13691,14 @@ packages:
       doctrine: 2.1.0
       eslint: 7.32.0
       eslint-import-resolver-node: 0.3.6
-      eslint-module-utils: 2.7.1
+      eslint-module-utils: 2.7.2
       has: 1.0.3
       is-core-module: 2.8.0
       is-glob: 4.0.3
       minimatch: 3.0.4
       object.values: 1.1.5
       resolve: 1.20.0
-      tsconfig-paths: 3.11.0
+      tsconfig-paths: 3.12.0
     dev: true
 
   /eslint-plugin-jest/23.20.0_eslint@7.32.0+typescript@4.5.4:
@@ -14438,7 +14437,7 @@ packages:
       '@mrmlnc/readdir-enhanced': 2.2.1
       '@nodelib/fs.stat': 1.1.3
       glob-parent: 3.1.0
-      is-glob: 4.0.1
+      is-glob: 4.0.3
       merge2: 1.4.1
       micromatch: 3.1.10
 
@@ -19578,7 +19577,6 @@ packages:
 
   /object-inspect/1.11.0:
     resolution: {integrity: sha512-jp7ikS6Sd3GxQfZJPyH3cjcbJF6GZPClgdV+EFygjFLQ5FmW/dRUnTd9PQ9k0JhoNDabWFbpF1yCdSWCC6gexg==}
-    dev: true
 
   /object-inspect/1.9.0:
     resolution: {integrity: sha512-i3Bp9iTqwhaLZBxGkRfo5ZbE07BQRT7MGu8+nNgwW9ItGp1TzCTw2DLEoWwjClxBjOFI/hWljTAmYGCEwmtnOw==}
@@ -20304,13 +20302,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       find-up: 1.1.2
-    dev: true
-
-  /pkg-dir/2.0.0:
-    resolution: {integrity: sha1-9tXREJ4Z1j7fQo4L1X4Sd3YVM0s=}
-    engines: {node: '>=4'}
-    dependencies:
-      find-up: 2.1.0
     dev: true
 
   /pkg-dir/3.0.0:
@@ -22955,7 +22946,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.1
-      object-inspect: 1.10.3
+      object-inspect: 1.11.0
 
   /sigmund/1.0.1:
     resolution: {integrity: sha1-P/IfGYytIXX587eBhT/ZTQ0ZtZA=}
@@ -24364,6 +24355,15 @@ packages:
       strip-bom: 3.0.0
     dev: true
 
+  /tsconfig-paths/3.12.0:
+    resolution: {integrity: sha512-e5adrnOYT6zqVnWqZu7i/BQ3BnhzvGbjEjejFXO20lKIKpwTaupkCPgEfv4GZK1IBciJUEhYs3J3p75FdaTFVg==}
+    dependencies:
+      '@types/json5': 0.0.29
+      json5: 1.0.1
+      minimist: 1.2.5
+      strip-bom: 3.0.0
+    dev: true
+
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
@@ -25426,7 +25426,7 @@ packages:
       codemirror: 5.60.0
       common-dir: 2.0.2
       copy-webpack-plugin: 5.1.2
-      core-js: 3.20.1
+      core-js: 3.20.2
       css-loader: 2.1.1
       es6-object-assign: 1.1.0
       es6-promise: 4.2.8
@@ -25614,8 +25614,8 @@ packages:
       vue: 2.6.14
     dev: false
 
-  /vuetify/2.6.1_vue@2.6.14:
-    resolution: {integrity: sha512-WtqarqEIJlhiwl1TShtkq58xtfbHpn4BjkuQtsL7mAs2eHCo7QjA3tUm7Dx/NmDc4wa2ghUUth36jTdG+CCWRg==}
+  /vuetify/2.6.2_vue@2.6.14:
+    resolution: {integrity: sha512-nx3uZkO8MZNMshUEh1xKaQ1hQYepNwWFn3FVxKt+XBVf7ZFscd0GS/a3KZo4B3baXQmziCQAZKNIQF5IWeaIUw==}
     peerDependencies:
       vue: ^2.6.4
     dependencies:
