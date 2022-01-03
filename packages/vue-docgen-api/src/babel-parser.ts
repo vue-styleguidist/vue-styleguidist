@@ -28,9 +28,9 @@ const babelParserOptions: ParserOptions = {
 	]
 }
 
-export default function buildParse(
-	options: ParserOptions = {}
-): { parse: (src: string) => bt.File } {
+export default function buildParse(options: ParserOptions = {}): {
+	parse: (src: string) => bt.File
+} {
 	options = {
 		...babelParserOptions,
 		...options,
@@ -38,7 +38,7 @@ export default function buildParse(
 	}
 	return {
 		parse(src: string): bt.File {
-			return parse(src, options)
+			return parse(src, options) as any
 		}
 	}
 }

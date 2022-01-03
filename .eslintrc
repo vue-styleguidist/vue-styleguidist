@@ -59,7 +59,7 @@
 			}
 		},
 		{
-			"files": ["packages/vue-styleguidist/**/*.{ts,tsx}"],
+			"files": ["packages/vue-styleguidist/**/*.{ts,tsx,vue}"],
 			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"ecmaVersion": 2018,
@@ -70,7 +70,7 @@
 				"import/resolver": {
 					"typescript": {},
 					"node": {
-						"extensions": [".ts", ".tsx", ".js", ".d.ts"]
+						"extensions": [".ts", ".tsx", ".js", ".d.ts", ".vue"]
 					}
 				}
 			},

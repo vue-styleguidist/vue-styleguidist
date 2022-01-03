@@ -5,7 +5,6 @@ import HelloWorldDoc from './components/HelloWorld.vue.docgen'
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
       <pre>{{ JSON.stringify( HelloWorldDoc, null, 2) }}</pre>
     </div>

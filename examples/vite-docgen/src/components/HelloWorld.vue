@@ -2,7 +2,7 @@
 export default {
   props: {
     /**
-     * coco bon
+     * coco jay
      */
     msg: {
       type: String,

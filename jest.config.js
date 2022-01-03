@@ -6,10 +6,9 @@ module.exports = {
 	},
 	moduleFileExtensions: ['ts', 'js', 'json', 'tsx'],
 	testMatch: [
-		'<rootDir>/packages/*/tests/**/*.test.(ts|js|tsx)',
+		'<rootDir>/packages/**/*.test.(ts|js|tsx)',
 		'<rootDir>/packages/**/__tests__/*.(ts|js|tsx)'
 	],
-	transformIgnorePatterns: ['/node_modules/(?!(\\.pnpm|react-styleguidist/lib/client/))'],
 	setupFiles: ['./test/raf-polyfill.js', './test/jestsetup.js'],
 	modulePaths: [
 		'./packages/vue-styleguidist/src/client',
@@ -25,5 +24,5 @@ module.exports = {
 		'!packages/vue-cli-plugin-styleguidist/**/*.*'
 	],
 	testPathIgnorePatterns: ['<rootDir>/packages/*/lib/', '<rootDir>/packages/*/dist/'],
-	snapshotSerializers: ['deabsdeep/serializer', 'enzyme-to-json/serializer', 'jest-serializer-html']
+	snapshotSerializers: ['deabsdeep/serializer', 'jest-serializer-html']
 }
