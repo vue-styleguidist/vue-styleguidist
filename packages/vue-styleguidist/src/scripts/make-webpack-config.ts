@@ -178,6 +178,16 @@ export default function (
 
 	const webpackAlias = (webpackConfig.resolve && webpackConfig.resolve.alias) || {}
 
+	// Custom style guide components have priority over vsg components
+	if (config.styleguideComponents) {
+		forEach(config.styleguideComponents, (filepath, name) => {
+			const fullName = name.match(RENDERER_REGEXP)
+				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
+				: name
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
+		})
+	}
+
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
 	fs.readdirSync(sourceSrc).forEach((component: string) => {
@@ -242,16 +252,6 @@ export default function (
 		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
 			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`]
 	})
-
-	// Custom style guide components
-	if (config.styleguideComponents) {
-		forEach(config.styleguideComponents, (filepath, name) => {
-			const fullName = name.match(RENDERER_REGEXP)
-				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
-				: name
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
-		})
-	}
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
