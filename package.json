@@ -58,7 +58,7 @@
 		"core-js": "3.20.2",
 		"cross-env": "5.2.1",
 		"cypress": "7.7.0",
-		"danger": "10.7.1",
+		"danger": "10.8.0",
 		"deabsdeep": "2.0.1",
 		"deepcopy": "2.1.0",
 		"deepfreeze": "2.0.0",
