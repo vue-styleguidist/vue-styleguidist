@@ -1,9 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./lib/",
-    "noEmit": false
-  },
   "includes": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "exclude": [
     "src/**/*.spec.ts", 

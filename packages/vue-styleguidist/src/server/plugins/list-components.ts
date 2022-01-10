@@ -1,4 +1,3 @@
-import { resolve } from 'path'
 import { Plugin } from 'vite'
 import ComponentStore from '../component-store'
 
@@ -6,12 +5,6 @@ export interface Section {
 	name: string
 	components: string[]
 	sections?: Section[]
-}
-
-export interface ResolvedSection {
-	name: string
-	components: VsgTreeItem[]
-	sections: ResolvedSection[]
 }
 
 export interface ComponentTreeOptions {
@@ -23,35 +16,40 @@ export interface ComponentTreeOptions {
 	sections?: Section[]
 }
 
-export interface VsgTreeItem {
-	routeName: string
-	filePath: string
-	label: string
-}
-
 export default function ComponentTreePlugin(options: ComponentTreeOptions = {}): Plugin {
-	const { componentRoot = 'src', components = [], sections = [] } = options
-	let root: string = ''
-
 	let componentStore: ComponentStore
 
 	return {
-		name: 'vite-plugin-component-tree',
+		name: 'vite-plugin-styleguidist-provider',
 		configResolved(config) {
-			root = resolve(config.root, componentRoot)
+			const { componentRoot = 'src', components = [], sections = [] } = options
+			componentStore = new ComponentStore({
+				projectRoot: config.root,
+				componentRoot,
+				components,
+				sections
+			})
 		},
 		resolveId(id) {
-			if (id === 'vsg:menu-tree' || id.startsWith('vsg:page-components:')) {
+			if (id === 'vsg:menu-tree' || id === 'vsg:routes' || id.startsWith('vsg:page-components:')) {
 				return id
 			}
 		},
 		async load(id) {
 			if (id === 'vsg:menu-tree') {
-				return `export default {}`
+				const menuTree = await componentStore.getMenuTree()
+				return `export default ${JSON.stringify(menuTree)}`
 			}
 
 			if (id.startsWith('vsg:page-components:')) {
-				return `export default []`
+				const compName = id.slice(20)
+				const comp = await componentStore.getComponentsFromRoute(compName)
+				return `export default ${JSON.stringify(comp)}`
+			}
+
+			if (id.startsWith('vsg:router')) {
+				const routes = componentStore.getRoutesList()
+				return `export default ${JSON.stringify(routes)}`
 			}
 		}
 	}

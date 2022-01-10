@@ -5,46 +5,8 @@
 		"browser": true,
 		"node": true
 	},
-	"plugins": ["import"],
-	"settings": {
-		"import/resolver": {
-			"node": {
-				"paths": [
-					"packages/vue-styleguidist/src/client",
-					"node_modules/react-styleguidist/lib/client"
-				],
-				"extensions": [".ts", ".tsx", ".js", ".d.ts"]
-			}
-		}
-	},
 	"rules": {
-		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
-		"import/no-unresolved": [
-			"error",
-			{
-				"commonjs": true,
-				"caseSensitive": true,
-				"ignore": ["vue-inbrowser-compiler"]
-			}
-		],
-		"import/export": "error",
-		"import/no-named-as-default-member": "error",
-		"import/no-mutable-exports": "error",
-		"import/no-amd": "error",
-		"import/first": ["error", "absolute-first"],
-		"import/no-duplicates": "error",
-		"import/extensions": [
-			"error",
-			"ignorePackages",
-			{
-				"js": "never",
-				"ts": "never",
-				"tsx": "never"
-			}
-		],
-		"import/newline-after-import": "error",
-		"import/prefer-default-export": "error",
-		"import/no-named-default": "error"
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"]
 	},
 	"overrides": [
 		{
@@ -65,24 +27,7 @@
 				"ecmaVersion": 2018,
 				"sourceType": "module"
 			},
-			"plugins": ["@typescript-eslint"],
-			"settings": {
-				"import/resolver": {
-					"typescript": {},
-					"node": {
-						"extensions": [".ts", ".tsx", ".js", ".d.ts", ".vue"]
-					}
-				}
-			},
-			"rules": {
-				"@typescript-eslint/no-use-before-define": "off",
-				"@typescript-eslint/naming-convention": "off",
-				"@typescript-eslint/no-unused-expressions": "off",
-				"no-unused-vars": "off",
-				"typescript/no-unused-vars": "off",
-				"import/no-unresolved": "error",
-				"import/no-extraneous-dependencies": "off"
-			}
+			"plugins": ["@typescript-eslint"]
 		},
 		{
 			"files": ["**/vue-docgen-api/**"],

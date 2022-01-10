@@ -11,10 +11,11 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noEmit": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "vsg-components/*": ["src/client/components/*"]
     },
+    "outDir": "./lib/",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true
   },
