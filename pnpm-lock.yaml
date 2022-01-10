@@ -13,7 +13,7 @@ importers:
       '@babel/preset-react': 7.16.7
       '@babel/preset-typescript': 7.16.7
       '@babel/runtime': 7.16.7
-      '@commitlint/cli': 16.0.1
+      '@commitlint/cli': 16.0.2
       '@commitlint/config-conventional': 16.0.0
       '@types/jest': 27.0.3
       '@types/node': 13.13.52
@@ -73,7 +73,7 @@ importers:
       '@babel/preset-react': 7.16.7_@babel+core@7.16.7
       '@babel/preset-typescript': 7.16.7_@babel+core@7.16.7
       '@babel/runtime': 7.16.7
-      '@commitlint/cli': 16.0.1_@types+node@13.13.52
+      '@commitlint/cli': 16.0.2_@types+node@13.13.52
       '@commitlint/config-conventional': 16.0.0
       '@types/jest': 27.0.3
       '@types/node': 13.13.52
@@ -6016,8 +6016,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@commitlint/cli/16.0.1_@types+node@13.13.52:
-    resolution: {integrity: sha512-61gGRy65WiVDRsqP0dAR2fAgE3qrTBW3fgz9MySv32y5Ib3ZXXDDq6bGyQqi2dSaPuDYzNCRwwlC7mmQM73T/g==}
+  /@commitlint/cli/16.0.2_@types+node@13.13.52:
+    resolution: {integrity: sha512-Jt7iaBjoLGC5Nq4dHPTvTYnqPGkElFPBtTXTvBpTgatZApczyjI2plE0oG4GYWPp1suHIS/VdVDOMpPZjGVusg==}
     engines: {node: '>=v12'}
     hasBin: true
     dependencies:
