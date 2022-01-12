@@ -636,8 +636,8 @@ describe('propHandler', () => {
         export default Vue.extend({
         props: {
           tsvalue: {
-          type: [String, Number] as Prop<SelectOption['value']>,
-          required: true
+            type: [String, Number] as Prop<SelectOption['value']>,
+            required: true
           }
         }
         });`
@@ -653,10 +653,26 @@ describe('propHandler', () => {
 		it('should parse values in TypeScript typings', async () => {
 			const src = `
         export default Vue.extend({
+          props: {
+            tsvalue: String as Prop<('foo' | 'bar')>,
+          }
+        });`
+			expect(await parserTest(src, ['typescript'])).toMatchObject({
+				values: ['foo', 'bar'],
+				type: {
+					name: 'string'
+				}
+			})
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
+		})
+
+		it('should parse values in TypeScript typings with complete object', async () => {
+			const src = `
+        export default Vue.extend({
         props: {
           tsvalue: {
           	type: String as Prop<('foo' | 'bar')>,
-        	required: true
+        	  required: true
           }
         }
         });`
@@ -670,14 +686,14 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('tsvalue')
 		})
 
-		it('should understand As anotations at the end of a prop definition', async () => {
+		it('should understand As annotations at the end of a prop definition', async () => {
 			const src = `
       export default Vue.extend({
         props: {
-        blockData: {
-          type: Array,
-          default: () => [],
-        } as PropOptions<SocialNetwork[]>,
+          blockData: {
+            type: Array,
+            default: () => [],
+          } as PropOptions<SocialNetwork[]>,
         }
       });`
 			expect(await parserTest(src, ['typescript'])).toMatchObject({
