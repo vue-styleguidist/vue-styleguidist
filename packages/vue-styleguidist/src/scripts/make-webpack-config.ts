@@ -210,9 +210,10 @@ export default function (
 			// unless the component is a user custom component
 			const compParts = comp.split('/')
 			if (
-				!config.styleguideComponents[comp] &&
-				!config.styleguideComponents[compParts[0]] &&
-				!config.styleguideComponents[compParts[1]]
+				compParts[0] === 'slots' ||
+				(!config.styleguideComponents[comp] &&
+					!config.styleguideComponents[compParts[0]] &&
+					!config.styleguideComponents[compParts[1]])
 			) {
 				// set the alias to the prefixed Vsg folder instead of the Rsg original folder
 				// This allows Vsg to use Rsg version of the component without conflicts but still
