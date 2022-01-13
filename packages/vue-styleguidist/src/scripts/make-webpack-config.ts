@@ -205,15 +205,16 @@ export default function (
 		'ReactComponent/ReactComponent',
 		'StyleGuide/StyleGuideRenderer'
 	]
+
+	const userCustomComponents = config.styleguideComponents || {}
 	const customComponents: { [originalPath: string]: string } = custComp.reduce(
 		(acc: { [originalPath: string]: string }, comp) => {
 			// unless the component is a user custom component
 			const compParts = comp.split('/')
 			if (
-				compParts[0] === 'slots' ||
-				(!config.styleguideComponents[comp] &&
-					!config.styleguideComponents[compParts[0]] &&
-					!config.styleguideComponents[compParts[1]])
+				!userCustomComponents[comp] &&
+				!userCustomComponents[compParts[0]] &&
+				!userCustomComponents[compParts[1]]
 			) {
 				// set the alias to the prefixed Vsg folder instead of the Rsg original folder
 				// This allows Vsg to use Rsg version of the component without conflicts but still
