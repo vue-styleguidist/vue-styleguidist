@@ -207,7 +207,19 @@ export default function (
 	]
 	const customComponents: { [originalPath: string]: string } = custComp.reduce(
 		(acc: { [originalPath: string]: string }, comp) => {
-			acc[comp] = `Vsg${comp}`
+			// unless the component is a user custom component
+			const compParts = comp.split('/')
+			if (
+				!config.styleguideComponents[comp] &&
+				!config.styleguideComponents[compParts[0]] &&
+				!config.styleguideComponents[compParts[1]]
+			) {
+				// set the alias to the prefixed Vsg folder instead of the Rsg original folder
+				// This allows Vsg to use Rsg version of the component without conflicts but still
+				// wrap it in a renderer specific to vue
+				// NOTE: it is only useful if we don't want to copy the component over and only customize the renderer
+				acc[comp] = `Vsg${comp}`
+			}
 			return acc
 		},
 		{}
