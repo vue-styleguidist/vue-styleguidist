@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.43.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.2...v4.43.3) (2022-01-13)
+
+
+### Bug Fixes
+
+* **docgen:** allow simple PropType ([486c1a4](https://github.com/vue-styleguidist/vue-styleguidist/commit/486c1a45f86ec23098fe2af30be6aca10dcda738)), closes [#1254](https://github.com/vue-styleguidist/vue-styleguidist/issues/1254)
+* make sure we can customize rederer only components ([46220d6](https://github.com/vue-styleguidist/vue-styleguidist/commit/46220d694d9ebf9c3ea767be5935854acf647979))
+
+
+
+
+
 ## [4.43.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.1...v4.43.2) (2022-01-03)
 
 
