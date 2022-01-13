@@ -114,34 +114,42 @@ export default async function propHandler(
 							) as NodePath<bt.ObjectProperty | bt.ObjectMethod>[]
 
 						// type
-						const litteralType = describeType(propPropertiesPath, propDescriptor)
+						const literalType = describeType(propPropertiesPath, propDescriptor)
 
 						// required
 						describeRequired(propPropertiesPath, propDescriptor)
 
 						// default
-						describeDefault(propPropertiesPath, propDescriptor, litteralType || '')
+						describeDefault(propPropertiesPath, propDescriptor, literalType || '')
 
 						// validator => values
 						await describeValues(propPropertiesPath, propDescriptor, ast, opt)
 					} else if (bt.isTSAsExpression(propValuePath.node)) {
-						// standard default + type + required with TS as annotation
-						const propPropertiesPath = propValuePath
-							.get('expression', 'properties')
-							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as NodePath<bt.ObjectProperty>[]
+						const propValuePathExpression = propValuePath.get('expression')
 
-						// type and values
-						describeTypeAndValuesFromPath(propValuePath, propDescriptor)
+						if (bt.isObjectExpression(propValuePathExpression.node)) {
+							// standard default + type + required with TS as annotation
+							const propPropertiesPath = propValuePathExpression
+								.get('properties')
+								.filter((p: NodePath) =>
+									bt.isObjectProperty(p.node)
+								) as NodePath<bt.ObjectProperty>[]
 
-						// required
-						describeRequired(propPropertiesPath, propDescriptor)
+							// type and values
+							describeTypeAndValuesFromPath(propValuePath, propDescriptor)
 
-						// default
-						describeDefault(
-							propPropertiesPath,
-							propDescriptor,
-							(propDescriptor.type && propDescriptor.type.name) || ''
-						)
+							// required
+							describeRequired(propPropertiesPath, propDescriptor)
+
+							// default
+							describeDefault(
+								propPropertiesPath,
+								propDescriptor,
+								(propDescriptor.type && propDescriptor.type.name) || ''
+							)
+						} else if (bt.isIdentifier(propValuePathExpression.node)) {
+							describeTypeAndValuesFromPath(propValuePath, propDescriptor)
+						}
 					} else {
 						// in any other case, just display the code for the typing
 						propDescriptor.type = {
