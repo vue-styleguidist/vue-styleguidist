@@ -1,39 +1,39 @@
 {
-	"name": "vue-inbrowser-compiler-utils",
-	"version": "4.43.1",
-	"description": "use this with vue-inbrowser-compiler to allow jsx compilation",
-	"module": "lib/vue-inbrowser-compiler-utils.esm.js",
-	"main": "lib/vue-inbrowser-compiler-utils.cjs.js",
-	"types": "lib/types/index.d.ts",
-	"scripts": {
-		"compile": "rollup -c",
-		"compile:watch": "rollup -c --watch"
-	},
-	"keywords": [
-		"vue",
-		"compile",
-		"live",
-		"browser",
-		"buble",
-		"acorn"
-	],
-	"dependencies": {
-		"camelcase": "^5.3.1"
-	},
-	"devDependencies": {
-		"@rollup/plugin-commonjs": "15.1.0",
-		"@rollup/plugin-node-resolve": "9.0.0",
-		"@rollup/plugin-typescript": "8.3.0",
-		"@types/domhandler": "2.4.2",
-		"rollup": "2.61.1",
-		"vue": "3.2.26"
-	},
-	"author": "Bart Ledoux <ledouxb@me.com>",
-	"license": "MIT",
-	"homepage": "https://vue-styleguidist.github.io",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
-		"directory": "packages/vue-inbrowser-compiler-utils"
-	}
+  "name": "vue-inbrowser-compiler-utils",
+  "version": "4.43.3",
+  "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
+  "module": "lib/vue-inbrowser-compiler-utils.esm.js",
+  "main": "lib/vue-inbrowser-compiler-utils.cjs.js",
+  "types": "lib/types/index.d.ts",
+  "scripts": {
+    "compile": "rollup -c",
+    "compile:watch": "rollup -c --watch"
+  },
+  "keywords": [
+    "vue",
+    "compile",
+    "live",
+    "browser",
+    "buble",
+    "acorn"
+  ],
+  "dependencies": {
+    "camelcase": "^5.3.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "15.1.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "@rollup/plugin-typescript": "8.3.0",
+    "@types/domhandler": "2.4.2",
+    "rollup": "2.61.1",
+    "vue": "3.2.26"
+  },
+  "author": "Bart Ledoux <ledouxb@me.com>",
+  "license": "MIT",
+  "homepage": "https://vue-styleguidist.github.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+    "directory": "packages/vue-inbrowser-compiler-utils"
+  }
 }
