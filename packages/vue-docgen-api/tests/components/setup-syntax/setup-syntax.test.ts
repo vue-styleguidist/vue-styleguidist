@@ -10,7 +10,7 @@ describe('setup syntactic sugar', () => {
 		doc = await parse(progressPath)
 	})
 
-	it('returns a doc object', () => {
-		expect(doc).toBeDefined()
+	it('should return a doc object containing props', () => {
+		expect(doc).toHaveProperty('props')
 	})
 })
