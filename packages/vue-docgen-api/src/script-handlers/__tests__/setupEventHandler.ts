@@ -144,5 +144,18 @@ describe('setupEventHandler', () => {
 				name: 'mockEvent'
 			})
 		})
+
+		it('should deduce the type of event from the first arg', async () => {
+			const src = `
+          const emit = defineEmits<{
+            (event: 'save', arg: number): void
+          }>()
+          `
+			const event = await parserTest(src)
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('save')
+			expect(event).toMatchObject({
+				type: { names: ['number'] }
+			})
+		})
 	})
 })

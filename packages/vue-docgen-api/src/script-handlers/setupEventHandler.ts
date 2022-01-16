@@ -5,6 +5,7 @@ import Documentation from '../Documentation'
 import { ParseOptions } from '../parse'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
+import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import { setEventDescriptor } from './eventHandler'
 import { getTypeDefinitionFromIdentifier } from './utils/tsUtils'
 
@@ -23,6 +24,15 @@ export default async function setupEventHandler(
 ) {
 	function buildEventDescriptor(eventName: string, eventPath: NodePath) {
 		const eventDescriptor = documentation.getEventDescriptor(eventName)
+
+		const typeParam = eventPath.get('parameters', 1, 'typeAnnotation')
+		if (bt.isTSTypeAnnotation(typeParam.node)) {
+			const type = getTypeFromAnnotation(typeParam.node)?.name
+			if (type) {
+				eventDescriptor.type = { names: [type] }
+			}
+		}
+
 		const docBlock = getDocblock(eventPath)
 		if (docBlock) {
 			const jsDoc = getDoclets(docBlock)
@@ -48,6 +58,7 @@ export default async function setupEventHandler(
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
 			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineEmits') {
+				// Array of string where no type is specified
 				if (bt.isArrayExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'elements').each((element: NodePath) => {
 						if (bt.isStringLiteral(element.node)) {
@@ -56,6 +67,7 @@ export default async function setupEventHandler(
 					})
 				}
 
+				// Object where the arguments are validated manually
 				if (bt.isObjectExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'properties').each((element: NodePath) => {
 						if (bt.isObjectProperty(element.node) && bt.isIdentifier(element.node.key)) {
@@ -64,6 +76,7 @@ export default async function setupEventHandler(
 					})
 				}
 
+				// typescript validation of arguments
 				if (bt.isTSTypeParameterInstantiation(nodePath.get('typeParameters').node)) {
 					nodePath.get('typeParameters', 'params').each((param: NodePath) => {
 						if (bt.isTSTypeLiteral(param.node)) {

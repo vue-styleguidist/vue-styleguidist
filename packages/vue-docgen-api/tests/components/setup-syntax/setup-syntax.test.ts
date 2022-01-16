@@ -59,7 +59,11 @@ describe('setup syntactic sugar', () => {
 			  Object {
 			    "description": "Save the world",
 			    "name": "save",
-			    "type": undefined,
+			    "type": Object {
+			      "names": Array [
+			        "number",
+			      ],
+			    },
 			  },
 			]
 		`)
