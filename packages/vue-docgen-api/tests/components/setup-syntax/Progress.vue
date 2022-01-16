@@ -2,7 +2,7 @@
   <svg
     :height="radius * 2"
     :width="radius * 2"
-    @click="convertTheThings"
+    @click="convertTheThings(); emit('save', circumference);"
   >
     <circle
       stroke="#EBEBEB"
@@ -37,10 +37,32 @@ function convertTheThings(value) {
 <script lang="ts" setup>
 import { computed } from 'vue'
 
+const emit = defineEmits<{
+  /**
+   * Cancels everything
+   */
+  (event: 'cancel'): void
+  /**
+   * Save the world
+   */
+  (event: 'save', arg: number): void
+}>()
+
+defineExposed(['strokeDashoffset'])
+
 const props = defineProps<{
-	radius: number
-	stroke: number
-	progress: number
+  /**
+   * The radius of the circle.
+   */
+  radius: number
+  /**
+   * The stroke width of the circle.
+   */
+  stroke: number
+  /**
+   * The percentage of the circle that is filled.
+   */
+  progress?: number
 }>()
 
 const normalizedRadius = props.radius - props.stroke * 2
@@ -55,8 +77,8 @@ export { convertTheThings }
 </script>
 
 <style scoped>
-svg{
-	transform: rotate(-90deg);
-	transform-origin: 50% 50%;
+svg {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
 }
 </style>

@@ -13,6 +13,9 @@ import slotHandler from './slotHandler'
 import slotHandlerFunctional from './slotHandlerFunctional'
 import slotHandlerLitteral from './slotHandlerLitteral'
 import { Handler } from '../parse-script'
+import setupEventHandler from './setupEventHandler'
+import setupPropHandler from './setupPropHandler'
+import setupExposedHandler from './setupExposedHandler'
 
 export {
 	classDisplayNameHandler,
@@ -45,6 +48,8 @@ const defaultHandlers: Handler[] = [
 	classPropHandler,
 	classEventHandler
 ]
+
+export const setupHandlers: Handler[] = [setupPropHandler, setupEventHandler, setupExposedHandler]
 
 export const preHandlers: Handler[] = [
 	// have to be first if they can be overridden
