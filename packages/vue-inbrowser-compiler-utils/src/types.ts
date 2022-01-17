@@ -58,6 +58,10 @@ export interface EventDescriptor extends DocBlockTags, Descriptor {
 	properties?: EventProperty[]
 }
 
+export interface ExposedDescriptor extends DocBlockTags, Descriptor {
+	name: string
+}
+
 export interface PropDescriptor extends Descriptor {
 	type?: { name: string; func?: boolean }
 	description?: string

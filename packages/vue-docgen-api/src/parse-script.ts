@@ -25,7 +25,8 @@ export default async function parseScript(
 	source: string,
 	options: ParseOptions,
 	documentation?: Documentation,
-	forceSingleExport = false
+	forceSingleExport = false,
+	noNeedForExport = false
 ): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {
@@ -38,6 +39,10 @@ export default async function parseScript(
 	}
 
 	const [componentDefinitions, ievSet] = resolveExportedComponent(ast)
+
+	if (componentDefinitions.size === 0 && noNeedForExport) {
+		componentDefinitions.set('default', ast.program.body[0])
+	}
 
 	if (componentDefinitions.size === 0) {
 		// if there is any immediately exported variable

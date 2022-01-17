@@ -231,7 +231,7 @@ export function setEventDescriptor(
 	const typeTags = nonNullTags.filter(tg => tg.title === 'type')
 	eventDescriptor.type = typeTags.length
 		? { names: typeTags.map((t: TypedParamTag) => t.type.name) }
-		: undefined
+		: eventDescriptor.type
 
 	const propertyTags = nonNullTags.filter(tg => PROPERTY_TAGS.includes(tg.title))
 	if (propertyTags.length) {
