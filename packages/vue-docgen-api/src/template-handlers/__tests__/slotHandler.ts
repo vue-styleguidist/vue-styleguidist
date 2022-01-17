@@ -13,14 +13,59 @@ describe('slotHandler', () => {
 		const ast = parse(
 			[
 				'<div>',
-				'  <h1>titleof the template</h1>',
-				'  <!-- @slot a default slot-->',
+				'  <h1>title of the template</h1>',
+				'  <!-- @slot a default slot -->',
 				'  <slot></slot>',
 				'</div>'
 			].join('\n')
 		)
 		traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
-		expect(doc.toObject().slots).toMatchObject([{ name: 'default', description: 'a default slot' }])
+		expect(doc.toObject().slots).toMatchObject([
+			{
+				name: 'default',
+				description: 'a default slot'
+			}
+		])
+	})
+
+	it('should detect slots in js comments', () => {
+		const ast = parse(
+			[
+				'<div>',
+				'  <h1>title of the template</h1>',
+				'  {{ // @slot a default slot }}',
+				'  <slot></slot>',
+				'</div>'
+			].join('\n')
+		)
+		traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+		expect(doc.toObject().slots).toMatchObject([
+			{
+				name: 'default',
+				description: 'a default slot'
+			}
+		])
+	})
+
+	it('detects slots also in js block comments', () => {
+		const ast = parse(
+			[
+				'<div>',
+				'  <h1>title of the template</h1>',
+				'  {{ /**',
+				'      * @slot a default slot ',
+				'      */ }}',
+				'  <slot></slot>',
+				'</div>'
+			].join('\n')
+		)
+		traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
+		expect(doc.toObject().slots).toMatchObject([
+			{
+				name: 'default',
+				description: 'a default slot'
+			}
+		])
 	})
 
 	it('should pick comments at the beginning of templates', () => {
@@ -29,7 +74,7 @@ describe('slotHandler', () => {
 				'<!-- @slot first slot found -->',
 				'<slot name="first">',
 				'  <div>',
-				'    <h1>titleof the template</h1>',
+				'    <h1>title of the template</h1>',
 				'  </div>',
 				'</slot>'
 			].join('\n')
@@ -45,17 +90,17 @@ describe('slotHandler', () => {
 		const ast = parse(
 			[
 				'<div>',
-				'  <h1>titleof the template</h1>',
-				'  <!-- @slot a slot named oeuf -->',
-				'  <slot name="oeuf"></slot>',
+				'  <h1>title of the template</h1>',
+				'  <!-- @slot a slot named woof -->',
+				'  <slot name="woof"></slot>',
 				'</div>'
 			].join('\n')
 		)
 		traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 		expect(doc.toObject().slots).toMatchObject([
 			{
-				name: 'oeuf',
-				description: 'a slot named oeuf'
+				name: 'woof',
+				description: 'a slot named woof'
 			}
 		])
 	})
@@ -65,17 +110,17 @@ describe('slotHandler', () => {
 			const ast = parse(
 				[
 					'<div title="a list of item with a scope" >',
-					'  <!-- @slot a slot named oeuf -->',
-					'  <slot name="oeuf" v-for="item in items" :item="itemValue"/>',
+					'  <!-- @slot a slot named woof -->',
+					'  <slot name="woof" v-for="item in items" :item="itemValue"/>',
 					'</div>'
 				].join('\n')
 			)
 			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 			expect(doc.toObject().slots).toMatchObject([
 				{
-					name: 'oeuf',
+					name: 'woof',
 					scoped: true,
-					description: 'a slot named oeuf',
+					description: 'a slot named woof',
 					bindings: [
 						{
 							name: 'item'

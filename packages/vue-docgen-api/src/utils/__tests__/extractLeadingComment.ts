@@ -8,9 +8,9 @@ function isBaseElementNode(a: any): a is BaseElementNode {
 function compileIt(src: string): { parent: BaseElementNode; child: BaseElementNode } | undefined {
 	const [ast] = parse(src).children
 	if (isBaseElementNode(ast)) {
-		const firstHeader = (ast.children.filter(
+		const firstHeader = ast.children.filter(
 			a => isBaseElementNode(a) && a.tag === 'h1'
-		) as unknown) as BaseElementNode[]
+		) as unknown as BaseElementNode[]
 		if (firstHeader.length) {
 			return { parent: ast, child: firstHeader[0] }
 		}
@@ -113,6 +113,40 @@ describe('extractLeadingComment', () => {
 			const comments = extractLeadingComment(elt.parent.children, elt.child)
 			expect(comments[0]).toEqual(['multi line comment', '   on 2 lines'].join('\n'))
 			expect(comments[1]).toEqual('single line comment')
+		} else {
+			throw Error('fail')
+		}
+	})
+
+	it('extract comment from js too', () => {
+		const elt = compileIt(
+			[
+				'<div>', //
+				'  {{ //single line comment }}',
+				'  <h1>title of the template</h1>',
+				'</div>'
+			].join('\n')
+		)
+		if (elt) {
+			const comments = extractLeadingComment(elt.parent.children, elt.child)
+			expect(comments[0]).toEqual('single line comment')
+		} else {
+			throw Error('fail')
+		}
+	})
+
+	it('extract comment from js comment blocks as well', () => {
+		const elt = compileIt(
+			[
+				'<div>', //
+				'  {{ /*block comment*/ }}',
+				'  <h1>title of the template</h1>',
+				'</div>'
+			].join('\n')
+		)
+		if (elt) {
+			const comments = extractLeadingComment(elt.parent.children, elt.child)
+			expect(comments[0]).toEqual('block comment')
 		} else {
 			throw Error('fail')
 		}
