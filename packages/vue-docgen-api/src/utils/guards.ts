@@ -11,12 +11,12 @@ import {
 	TextNode
 } from '@vue/compiler-dom'
 
-export function isTextNode(node: Node): node is TextNode {
-	return node.type === NodeTypes.TEXT
+export function isTextNode(node?: Node): node is TextNode {
+	return !!node && node.type === NodeTypes.TEXT
 }
 
-export function isCommentNode(node: Node): node is CommentNode {
-	return node.type === NodeTypes.COMMENT
+export function isCommentNode(node?: Node): node is CommentNode {
+	return !!node && node.type === NodeTypes.COMMENT
 }
 
 export function isBaseElementNode(node?: Node): node is BaseElementNode {
