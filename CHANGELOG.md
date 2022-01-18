@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.1...v4.44.2) (2022-01-18)
+
+
+### Bug Fixes
+
+* **docgen:** parse TypeScript types / setup syntax ([2346b64](https://github.com/vue-styleguidist/vue-styleguidist/commit/2346b64a8c53423ebe853e1f48cab3bb2aae4956))
+
+
+
+
+
 ## [4.44.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.0...v4.44.1) (2022-01-18)
 
 
