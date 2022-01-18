@@ -109,6 +109,19 @@ export const concatenate = (
 
 const groupAttr = (attrsIn: { [key: string]: any }): { [key: string]: any } | undefined => {
 	if (isVue3) {
+		Object.keys(attrsIn)
+			.filter(key => key.startsWith('vModel') || key.startsWith('v-model'))
+			.forEach(key => {
+				let valueRef = attrsIn[key]
+				const rootKey = key.startsWith('vModel:')
+					? key.slice(7)
+					: key.startsWith('v-model')
+					? key.slice(8)
+					: 'modelValue'
+				attrsIn[rootKey] = valueRef
+				attrsIn[`onUpdate:${rootKey}`] = ($event: any) => (valueRef = $event)
+				delete attrsIn[key]
+			})
 		return attrsIn
 	}
 
