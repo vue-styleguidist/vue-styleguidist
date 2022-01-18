@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import { visit } from 'recast'
+import { visit, print } from 'recast'
 import getTypeFromAnnotation, { decorateItem } from '../utils/getTypeFromAnnotation'
 import type { Documentation } from '../Documentation'
 import { ParseOptions } from '../parse'
@@ -23,11 +23,18 @@ export default async function setupPropHandler(
 	let propsDef: NodePath<any, any> | undefined
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
-			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineProps') {
-				propsDef = nodePath.get('arguments', 0)
+			const hasDefaults =
+				bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'withDefaults'
+			const normalizedNodePath = hasDefaults ? nodePath.get('arguments', 0) : nodePath
 
-				if ((nodePath.node as any).typeParameters) {
-					const typeParamsPath = nodePath.get('typeParameters', 'params', 0)
+			if (
+				bt.isIdentifier(normalizedNodePath.node.callee) &&
+				normalizedNodePath.node.callee.name === 'defineProps'
+			) {
+				propsDef = normalizedNodePath.get('arguments', 0)
+
+				if ((normalizedNodePath.node as any).typeParameters) {
+					const typeParamsPath = normalizedNodePath.get('typeParameters', 'params', 0)
 					if (bt.isTSTypeLiteral(typeParamsPath.node)) {
 						getPropsFromLiteralType(documentation, typeParamsPath.get('members'))
 					} else if (
@@ -42,6 +49,22 @@ export default async function setupPropHandler(
 						if (definitionPath) {
 							getPropsFromLiteralType(documentation, definitionPath)
 						}
+					}
+				}
+
+				// add defaults from withDefaults
+				if (hasDefaults) {
+					const defaults = nodePath.get('arguments', 1)
+					if (bt.isObjectExpression(defaults.node)) {
+						defaults.get('properties').each((propPath: NodePath) => {
+							const propName = propPath.get('key').node.name
+							const propValue = propPath.get('value')
+							const propDescriptor = documentation.getPropDescriptor(propName)
+							propDescriptor.defaultValue = {
+								func: false,
+								value: print(propValue).code
+							}
+						})
 					}
 				}
 			}

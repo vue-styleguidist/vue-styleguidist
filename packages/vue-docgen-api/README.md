@@ -129,7 +129,7 @@ The custom additional handlers allow you to add custom handlers to the parser. A
 
 Replaces all of the handlers by those specified. If each of those 3 `handlers` are set to [], the library will only parse the given component. It will not run any standard handlers anymore.
 
-> **NOTE** Standard handlers are available as namespaces. Import and use them this way:
+> **NOTE:** Standard handlers are available as namespaces. Import and use them this way:
 >
 > ```js
 > import {
@@ -146,11 +146,13 @@ Replaces all of the handlers by those specified. If each of those 3 `handlers` a
 
 #### `validExtend`
 
-Function - Returns if an extended component should be parsed by docgen.
+Function - Returns true if an extended component should be parsed by docgen.
 
-**NOTE** If docgen fails to parse the targetted component, it will log a warning. It is non-blocking but annoying.
+Example: `filePath => !/node_modules/.text(filePath)`
 
-**NOTE** If you allow all of `node_modules` to try to be parsed, you might kill performance. Use responsibly.
+> **NOTE1:** If docgen fails to parse the targeted component, it will log a warning. This warning does not make the documentation fail.
+
+> **NOTE2:** If you allow all of `node_modules` to try to be parsed, you might kill performance. Use responsibly.
 
 #### `jsx`
 

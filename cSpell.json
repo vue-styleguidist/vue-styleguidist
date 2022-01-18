@@ -1,5 +1,9 @@
-{ 
+{
   "words": [
-    "Doclets"
+    "docgen",
+    "doclet",
+    "Doclets",
+    "styleguide",
+    "styleguidist"
   ]
 }
