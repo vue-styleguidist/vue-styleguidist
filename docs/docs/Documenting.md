@@ -288,9 +288,14 @@ example of a real documented slot
 </div>
 ```
 
+To get a bit deeper, check out the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+
 > **Note:** The docblock must be part of the **same** comment block. Multiple individual comments do not get parsed together.
 
-Another example of how to document bindings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+> **Note 2:** From 4.44.0, you can use JS comments blocks if you choose to. The syntax is the same as in HTML. One constraint: the comment should be the only content of the interpolation:
+>
+> - Valid comment: `{{/* @slot Menu Item footer */}}`
+> - Invalid comment: `{{ /* @slot Menu Item footer */ testVariable + 3 }}`.
 
 ### In a render function
 
