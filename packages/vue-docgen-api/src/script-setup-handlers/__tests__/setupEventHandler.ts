@@ -157,5 +157,34 @@ describe('setupEventHandler', () => {
 				type: { names: ['number'] }
 			})
 		})
+
+		it('should accept types that are complex', async () => {
+			const src = `
+          interface Format{
+            email: string
+          }
+
+          const emit = defineEmits<{
+            /**
+             * Save the world
+             * @arg {{ email: string }} payload - The payload
+             */
+            (event: 'save', payload: Format): void
+          }>()
+          `
+			const event = await parserTest(src)
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('save')
+			expect(event).toMatchObject({
+				properties: [
+					{
+						description: 'The payload',
+						name: 'payload',
+						type: {
+							names: ['{ email: string }']
+						}
+					}
+				]
+			})
+		})
 	})
 })
