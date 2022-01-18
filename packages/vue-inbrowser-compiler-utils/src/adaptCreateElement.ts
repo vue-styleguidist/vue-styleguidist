@@ -1,4 +1,5 @@
 import camelCase from 'camelcase'
+import * as Vue from 'vue'
 
 export type CreateElementFunction = (
 	component: string | object,
@@ -6,19 +7,31 @@ export type CreateElementFunction = (
 	children?: any | any[]
 ) => any[] | any
 
+const isVue3 = !!(Vue as any).resolveComponent
+
 /**
- * Groups atributes passed to a React pragma to the VueJS fashion
+ * Reconcile Vue 2 and Vue 3 JSX attributes
+ * @param componentName
+ * @returns
+ */
+function resolveComponent(componentName: any): any {
+	return isVue3 ? (Vue as any).resolveComponent(componentName) : componentName
+}
+
+/**
+ * Groups attributes passed to a React pragma to the VueJS fashion
  * @param h the VueJS createElement function passed in render functions
  * @returns pragma usable in buble rendered JSX for VueJS
  */
 export default function adaptCreateElement(h: CreateElementFunction): CreateElementFunction {
 	return (comp, attr, ...children: any[]) => {
+		const resolvedComponent = resolveComponent(comp)
 		if (attr === undefined) {
-			return h(comp)
+			return h(resolvedComponent)
 		} else if (!children.length) {
-			return h(comp, groupAttr(attr))
+			return h(resolvedComponent, groupAttr(attr))
 		}
-		return h(comp, groupAttr(attr), children)
+		return h(resolvedComponent, groupAttr(attr), children)
 	}
 }
 
@@ -50,7 +63,7 @@ const makeArray = (a: any): any[] => {
 }
 
 /**
- * create a functoin out of two other
+ * Create a function out of two other
  * @param fn1
  * @param fn2
  */
@@ -64,7 +77,7 @@ const mergeFn = (
 	}
 
 /**
- * merge two members of the spread
+ * Merge two members of the spread
  * @param a
  * @param b
  */
@@ -95,9 +108,14 @@ export const concatenate = (
 }
 
 const groupAttr = (attrsIn: { [key: string]: any }): { [key: string]: any } | undefined => {
+	if (isVue3) {
+		return attrsIn
+	}
+
 	if (!attrsIn) {
 		return undefined
 	}
+
 	const attrsOut: { [key: string]: any } = {}
 	Object.keys(attrsIn).forEach(name => {
 		const value = attrsIn[name]
@@ -125,7 +143,7 @@ const groupAttr = (attrsIn: { [key: string]: any }): { [key: string]: any } | un
 						attrsOut[prefix] = {}
 					}
 					if (camelCasedName.length) {
-						// if it is a litteral prefixed attribute
+						// if it is a literal prefixed attribute
 						attrsOut[prefix][camelCasedName] = merge(attrsOut[prefix][camelCasedName], value)
 					} else {
 						// if it is a spread
