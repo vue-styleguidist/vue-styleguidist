@@ -114,6 +114,32 @@ describe('setupPropHandler', () => {
 			}
 		`)
 		})
+
+		it('matches defineProps inside of withDefaults', async () => {
+			const src = `
+      withDefaults(defineProps({
+					/**
+					 * Should the prop be required?
+					 */
+					testProps: {
+						type: Boolean,
+						required: true
+					}
+				}), {})
+				`
+			const prop = await parserTest(src)
+			expect(prop).toMatchInlineSnapshot(`
+			Object {
+			  "description": "Should the prop be required?",
+			  "name": "mockProp",
+			  "required": true,
+			  "tags": Object {},
+			  "type": Object {
+			    "name": "boolean",
+			  },
+			}
+		`)
+		})
 	})
 
 	describe('TypeScript', () => {
@@ -224,6 +250,21 @@ describe('setupPropHandler', () => {
 				expect(prop.required).toBe(true)
 				expect(prop.description).toBe('describe the local prop')
 			})
+		})
+
+		it('extracts defaults from withDefaults', async () => {
+			const src = `
+      withDefaults(defineProps<{
+					/**
+					 * Should the prop be required?
+					 */
+					testProp?: { myValue: boolean }
+				}>(), {
+          testProp: { myValue: true }
+        })
+				`
+			const prop = await parserTest(src)
+			expect(prop.defaultValue && prop.defaultValue.value).toContain(`myValue: true`)
 		})
 	})
 })

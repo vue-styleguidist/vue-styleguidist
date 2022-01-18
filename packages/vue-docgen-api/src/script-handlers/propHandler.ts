@@ -18,7 +18,7 @@ import { ParseOptions } from '../parse'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 
-function getRawValueParsedFromFunctionsBlockStatementNode(
+export function getRawValueParsedFromFunctionsBlockStatementNode(
 	blockStatementNode: bt.BlockStatement
 ): string | null {
 	const { body } = blockStatementNode
@@ -352,7 +352,7 @@ export function describeDefault(
 		// objects and arrays should try to extract the body from functions
 		if (propType === 'object' || propType === 'array') {
 			if (defaultValueIsProp) {
-				/* todo: add correct type info here ↓ */
+				/* TODO: add correct type info here ↓ */
 				const defaultFunction = defaultArray[0].get('value')
 				const isArrowFunction = bt.isArrowFunctionExpression(defaultFunction.node)
 				const isOldSchoolFunction = bt.isFunctionExpression(defaultFunction.node)
