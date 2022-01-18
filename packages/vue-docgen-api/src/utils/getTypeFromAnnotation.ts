@@ -44,6 +44,12 @@ function printType(t?: bt.TSType): ParamType {
 		return { name: JSON.stringify(t.literal.value) }
 	}
 
+	if (bt.isTSTypeLiteral(t)) {
+		return {
+			name: 'object'
+		}
+	}
+
 	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
 		const out: ParamType = { name: t.typeName.name }
 		if (t.typeParameters?.params) {
