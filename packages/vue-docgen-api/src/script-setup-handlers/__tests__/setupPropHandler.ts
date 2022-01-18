@@ -154,15 +154,9 @@ describe('setupPropHandler', () => {
 				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testProps')
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('anotherTestProps')
-				expect(prop).toMatchInlineSnapshot(`
-			Object {
-			  "description": "",
-			  "name": "mockProp",
-			  "required": true,
-			  "tags": Object {},
-			  "type": undefined,
-			}
-		`)
+				expect(prop.type).toMatchObject({
+					name: 'boolean'
+				})
 			})
 
 			it('should resolve comments in defineProps', async () => {
@@ -209,7 +203,16 @@ describe('setupPropHandler', () => {
 					`
 				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('arrays')
-				expect(prop.type).toMatchInlineSnapshot(`undefined`)
+				expect(prop.type).toMatchInlineSnapshot(`
+			Object {
+			  "elements": Array [
+			    Object {
+			      "name": "number",
+			    },
+			  ],
+			  "name": "Array",
+			}
+		`)
 			})
 
 			it('returns complex types', async () => {
@@ -229,7 +232,9 @@ describe('setupPropHandler', () => {
 					`
 				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('complex')
-				expect(prop.type).toMatchInlineSnapshot(`undefined`)
+				expect(prop.type).toMatchObject({
+					name: 'object'
+				})
 			})
 		})
 
