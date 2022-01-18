@@ -25,15 +25,13 @@ Vue styleguidist generates documentation for your components based on the commen
 
 ## Code comments
 
-Vue styleguidist will display the contents of your components’ JSDoc comment blocks.
+Vue styleguidist will display the contents of your components' JSDoc comment blocks.
 
 > **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library. You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
 ```html
 <template>
-  <div class="Button">
-    /* ... */
-  </div>
+  <div class="Button">/* ... */</div>
 </template>
 
 <script>
@@ -291,7 +289,7 @@ example of a real documented slot
 
 > **Note:** The docblock must be part of the **same** comment block. Multiple individual comments do not get parsed together.
 
-Another example of how to document bondings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+Another example of how to document bindings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
 
 ### In a render function
 
@@ -368,7 +366,7 @@ If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](htt
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component's folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
 
 If you want to ignore the readme file for one component, use the `@example [none]` doclet. Use this when multiple components in the same folder share a `ReadMe` file. This will prevent the examples from being rendered multiple times.
 
@@ -657,9 +655,11 @@ than with a prop
 />
 ```
 
-Here is how Vue Styleguidist helps document this pattern: Please add `@requires` doclets to the main component.
+Here is how Vue Styleguidist helps document this pattern: Add a `@requires` doclet to the main component to signify what components documentation to include in the same page. In every example, the extra component will be automatically registered the same way the main component already is.
 
-In the previous example we have a `DropDown` component that requires a `Choice` component to render properly. Here is how DropDown should look like.
+### Example
+
+In the previous example we have a `DropDown` component that requires a `Choice` component to render properly. Here is what the component `DropDown.vue` should look like.
 
 ```vue
 <template>
@@ -667,6 +667,7 @@ In the previous example we have a `DropDown` component that requires a `Choice` 
     <slot />
   </select>
 </template>
+
 <script>
 /**
  * @requires ./Choice.vue
@@ -677,7 +678,7 @@ export default {
 </script>
 ```
 
-> **NOTE** Now `Choice` will be documented **only** as a part of `DropDown`. It will not have its own page or its own examples. Its props will be displayed with `DropDown`s, and it will be made available in `DropDown`s examples.
+> **NOTE:** Now `Choice` will be documented **only** as a part of `DropDown`. It will not have its own page or its own examples. Its props will be displayed with `DropDown`s, and it will be made available in `DropDown`s examples.
 
 ## TypeScript, Flow and Class-style Components
 
@@ -747,6 +748,45 @@ export default {
 }
 ```
 
+## Setup syntax
+
+In vue 3, VueJs introduced the [setup syntax](https://v3.vuejs.org/api/sfc-script-setup.html). This greatly helps readability of components. It also makes a much more performant TypeScript type checking.
+
+From version 4.44.0, Vue Styleguidist allows to document the props & events defined with this syntax.
+
+### Props
+
+In JavaScript, add a comment above the property in the object passed to `defineProps()`. In this comment, use the same principle as regular syntax Props.
+
+```js
+defineProps({
+  /**
+   * Should the prop be required?
+   * @link https://v3.vuejs.org/
+   */
+  testProp: {
+    type: Boolean,
+    required: true
+  }
+})
+```
+
+The same goes for TypeScript components:
+
+```ts
+defineProps<{
+  /**
+   * A very nice prop, now accepting numbers
+   */
+  testProp: number
+  /**
+   * An old prop
+   * @deprecated prefer using the other prop
+   */
+  anotherTestProps?: boolean
+}>()
+```
+
 ## Writing code examples
 
 Code examples in Markdown use the ES6 syntax. They can access all the components of your style guide using global variables:
@@ -772,8 +812,8 @@ const mockData = require('./mocks');
 > **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
 >
 > ```jsx
-> import { myExample as Button } from './myExample';
-> <div>
+> import { myExample as Button } from './myExample'
+> ;<div>
 >   <Button />
 > </div>
 > ```
