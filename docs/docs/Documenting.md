@@ -18,6 +18,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Composable Components](#composable-components)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
+- [Setup syntax](#setup-syntax)
 - [Writing code examples](#writing-code-examples)
 - [Importing examples](#importing-examples)
 
@@ -787,6 +788,50 @@ defineProps<{
 }>()
 ```
 
+### Events
+
+Events are all defined using the `defineEmits()` function. Document them in comments before your events entries.
+
+```js
+const emit = defineEmits({
+  /**
+   * Document your event here
+   * @arg {string} payload - The first argument
+   */
+  submit: payload => {
+    if (payload.email && payload.password) {
+      return true
+    } else {
+      console.warn('Invalid submit event payload!')
+      return false
+    }
+  }
+})
+```
+
+and in TypeScript
+
+```ts
+interface Format {
+  email: string
+  password: string
+}
+
+const emit = defineEmits<{
+  /**
+   * Cancels everything
+   */
+  (event: 'cancel'): void
+  /**
+   * Save the world
+   * @arg {{ email: string, password: string }} payload - The payload
+   */
+  (event: 'save', payload: Format): void
+}>()
+```
+
+> **NOTE:** Remember to document complex argument types in the comment above the event. Docgen does not parse types and will only display their names.
+
 ## Writing code examples
 
 Code examples in Markdown use the ES6 syntax. They can access all the components of your style guide using global variables:
@@ -794,7 +839,7 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 ```jsx
 <Panel>
   <p>
-    Using the Button component in the example of the Panel component:
+    Using the Button component in the example of the Panel component:
   </p>
   <Button>Push Me</Button>
 </Panel>
@@ -809,7 +854,7 @@ const mockData = require('./mocks');
 <Message :content="mockData.hello" />
 ```
 
-> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
+> **Note:** If you need a more complex demo, define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
 >
 > ```jsx
 > import { myExample as Button } from './myExample'
