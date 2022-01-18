@@ -1,7 +1,10 @@
 import walkes from 'walkes'
+import * as Vue from 'vue'
 import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
+
+const isVue3 = !!(Vue as any).h
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
@@ -98,7 +101,7 @@ export function parseScriptCode(code: string): {
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	if (renderFunctionStart > 0) {
+	if (renderFunctionStart > 0 && !isVue3) {
 		renderFunctionStart += offset
 		code = insertCreateElementFunction(
 			code.slice(0, renderFunctionStart + 1),
