@@ -119,6 +119,24 @@ Object {
       },
     },
     Object {
+      "name": "shape",
+      "tags": Object {
+        "ignore": Array [
+          Object {
+            "description": true,
+            "title": "ignore",
+          },
+        ],
+      },
+      "type": Object {
+        "func": true,
+        "name": "PropTypes.shape({
+  color: PropTypes.string,
+  fontSize: PropTypes.number
+})",
+      },
+    },
+    Object {
       "description": "Another mixin",
       "mixin": Object {
         "name": "genericMixin",
@@ -215,7 +233,7 @@ a factory function",
       "defaultValue": Object {
         "func": true,
         "value": "() => {
-    return 'foo'
+  return 'foo'
 }",
       },
       "description": "Function default",

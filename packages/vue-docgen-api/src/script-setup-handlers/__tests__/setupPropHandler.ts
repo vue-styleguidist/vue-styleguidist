@@ -233,7 +233,10 @@ describe('setupPropHandler', () => {
 				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('complex')
 				expect(prop.type).toMatchObject({
-					name: 'object'
+					name: `{
+    foo: number,
+    bar: boolean
+}`
 				})
 			})
 		})
@@ -254,6 +257,22 @@ describe('setupPropHandler', () => {
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('inInterface')
 				expect(prop.required).toBe(true)
 				expect(prop.description).toBe('describe the local prop')
+			})
+
+			it('show prop type names when they are defined elsewhere', async () => {
+				const src = `
+					interface LocalType {
+            /**
+             * describe the local prop
+             */
+						inInterface: boolean
+					}
+
+					defineProps<{param:LocalType}>()
+					`
+				const prop = await parserTest(src)
+				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('param')
+				expect(prop.type).toMatchObject({ name: 'LocalType' })
 			})
 		})
 

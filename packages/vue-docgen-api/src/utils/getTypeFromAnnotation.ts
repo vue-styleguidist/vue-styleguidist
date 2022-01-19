@@ -1,5 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
+import { print } from 'recast'
 import { BlockTag, DocBlockTags, ParamType } from '../Documentation'
 import getDocblock from './getDocblock'
 import getDoclets from './getDoclets'
@@ -46,7 +47,7 @@ function printType(t?: bt.TSType): ParamType {
 
 	if (bt.isTSTypeLiteral(t)) {
 		return {
-			name: 'object'
+			name: print(t).code
 		}
 	}
 
