@@ -31,4 +31,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Deploying docs to gh-pages..."
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: master # The branch the action should deploy to.
+          folder: docs/dist # The folder the action should deploy.
+          repository-name: vue-styleguidist/vue-styleguidist.github.io # The repository name.
