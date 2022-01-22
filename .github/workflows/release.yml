@@ -7,14 +7,15 @@ on:
 concurrency: ci-${{ github.ref }}
 
 jobs:
-  call-build:
+  test:
     # to be changed to branch delivery when final merge is done
-    uses: vue-styleguidist/vue-styleguidist/.github/workflows/build.yml@build/gh-actions
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@build/gh-actions
 
   release:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/build
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
