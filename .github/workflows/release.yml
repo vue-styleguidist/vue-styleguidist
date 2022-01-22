@@ -12,24 +12,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-
-      - name: Install Pnpm and run install 
-        uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6
-          run_install: true
-
+      - uses: .github/actions/build
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
         env:

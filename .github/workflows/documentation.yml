@@ -1,19 +1,12 @@
 name: Documentation
 on: push
 jobs:
-  call-build:
-    # to be changed to branch delivery when final merge is done
-    uses: vue-styleguidist/vue-styleguidist/.github/workflows/build.yml@build/gh-actions
-
   build-docs:
     needs: call-build
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-
+      - uses: .github/actions/build
       - name: Pre-compile TOC
         run: pnpm predocs
 

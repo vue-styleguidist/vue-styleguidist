@@ -1,14 +1,11 @@
 name: Lint & Test
 on: push
 jobs:
-  call-build:
-    # to be changed to branch delivery when final merge is done
-    uses: vue-styleguidist/vue-styleguidist/.github/workflows/build.yml@build/gh-actions
   test:
-    needs: call-build
     runs-on: ubuntu-latest
 
     steps:
+      - uses: .github/actions/build
       - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v2
