@@ -4,9 +4,13 @@ on:
     branches:
       - deliver
 jobs:
+  call-build:
+    # to be changed to branch delivery when final merge is done
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/build.yml@build/gh-actions
+
   release:
-    runs-on: ubuntu-latest
     needs: test
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 

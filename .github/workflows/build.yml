@@ -1,11 +1,9 @@
-name: Lint & Test
-on: push
+name: Build
+
+on: workflow_call
+
 jobs:
-  call-build:
-    # to be changed to branch delivery when final merge is done
-    uses: vue-styleguidist/vue-styleguidist/.github/workflows/build.yml@build/gh-actions
-  test:
-    needs: call-build
+  main:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +24,3 @@ jobs:
         with:
           version: 6
           run_install: true
-
-      - name: Run lint
-        run: pnpm lint
-      
-
-      - name: Run unit tests
-        run: pnpm test:jest
