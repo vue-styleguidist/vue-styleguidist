@@ -1,8 +1,5 @@
 name: Test Vue-Styleguidist
-on:
-  push:
-    branches:
-      - *
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
