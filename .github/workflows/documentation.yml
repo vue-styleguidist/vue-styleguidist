@@ -1,5 +1,8 @@
 name: Documentation
 on: push
+
+concurrency: ci-${{ github.ref }}
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest

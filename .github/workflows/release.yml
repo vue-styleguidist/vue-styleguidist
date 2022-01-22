@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - deliver
+
+concurrency: ci-${{ github.ref }}
+
 jobs:
   call-build:
     # to be changed to branch delivery when final merge is done

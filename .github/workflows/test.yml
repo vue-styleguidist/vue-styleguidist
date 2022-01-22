@@ -1,5 +1,8 @@
 name: Lint & Test
 on: push
+
+concurrency: ci-${{ github.ref }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
