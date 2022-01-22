@@ -14,8 +14,10 @@ if [ $1 = "build" ];
 then
     if [ $exampleName = *_vuecli3_* ] 
     then
+        echo "build $exampleName with pnpm"
         pnpm styleguide:build -- $extra
     else
+        echo "build $exampleName with npm"
         npm run styleguide:build -- $extra
     fi
 else
