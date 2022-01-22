@@ -1,9 +1,8 @@
-name: Test and Deliver a release
+name: Test Vue-Styleguidist
 on:
   push:
     branches:
-      - deliver
-      - build/gh-actions
+      - *
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -32,4 +31,4 @@ jobs:
       
 
       - name: Run unit tests
-        run: pnpm test
+        run: pnpm test:jest
