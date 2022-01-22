@@ -1,7 +1,9 @@
 name: Documentation
 on: push
 
-concurrency: ci-${{ github.ref }}
+concurrency: 
+  group: doc-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-docs:

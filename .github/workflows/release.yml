@@ -4,7 +4,9 @@ on:
     branches:
       - deliver
 
-concurrency: ci-${{ github.ref }}
+concurrency: 
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:

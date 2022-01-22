@@ -1,7 +1,9 @@
 name: Lint & Test
 on: push
 
-concurrency: ci-${{ github.ref }}
+concurrency: 
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
