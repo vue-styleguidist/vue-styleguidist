@@ -12,7 +12,7 @@ esac
 cd examples/$exampleName
 if [ $1 = "build" ]; 
 then
-    if [ $exampleName == *_vuecli3_* ] 
+    if [ $exampleName = *_vuecli3_* ] 
     then
         pnpm styleguide:build -- $extra
     else
