@@ -12,7 +12,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: .github/actions/build
+      - uses: ./.github/actions/build
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
         env:

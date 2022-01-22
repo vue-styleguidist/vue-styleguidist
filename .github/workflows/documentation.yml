@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: .github/actions/build
+      - uses: ./.github/actions/build
       - name: Pre-compile TOC
         run: pnpm predocs
 
