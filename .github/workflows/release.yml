@@ -1,4 +1,4 @@
-name: Deliver a release
+name: Deliver
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   test:
-    # to be changed to branch delivery when final merge is done
+    # to be changed to branch "delivery" when final merge is done
     uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@build/gh-actions
 
   release:
