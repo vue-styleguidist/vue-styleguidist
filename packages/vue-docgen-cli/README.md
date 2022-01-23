@@ -117,7 +117,7 @@ module.exports = {
 
 The folder where CLI will start searching for components. Since the folder structure will be kept from source to destination, it avoids having uselessly deep scaffoldings.
 
-```txt
+```
    src
     └───components
         ├───Button.vue
@@ -128,7 +128,7 @@ The folder where CLI will start searching for components. Since the folder struc
 
 If you simply use `src/components/**/[A-Z]*.vue` as source glob and `docs` as outDir, you will get this.
 
-```txt
+```
    src
     └───components
         ├───Button.vue
