@@ -138,7 +138,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       vue-template-compiler: ^2.6.14
       vue-types: ^1.7.0
@@ -159,7 +159,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.6.14
-      vue-loader: 15.9.7_e15c8784917900cf55a453471769391c
+      vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
       vue-styleguidist: link:../../packages/vue-styleguidist
       vue-template-compiler: 2.6.14
       webpack: 4.46.0
@@ -186,7 +186,7 @@ importers:
       url-loader: ^1.1.2
       vue: 2.6.14
       vue-docgen-cli: ^3.26.0
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       webpack: ^4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -211,7 +211,7 @@ importers:
       url-loader: 1.1.2_webpack@4.46.0
       vue: 2.6.14
       vue-docgen-cli: 3.26.0
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -229,7 +229,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       webpack: ^4.46.0
     dependencies:
@@ -245,7 +245,7 @@ importers:
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -270,7 +270,7 @@ importers:
       vue: ^2.6.14
       vue-docgen-api: ^4.36.1
       vue-docgen-cli: ^4.36.1
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-template-compiler: ^2.6.14
       vuepress: ^1.9.7
       vuepress-plugin-live: ^1.6.2
@@ -298,7 +298,7 @@ importers:
       vue: 2.6.14
       vue-docgen-api: link:../../packages/vue-docgen-api
       vue-docgen-cli: link:../../packages/vue-docgen-cli
-      vue-loader: 15.9.7_e15c8784917900cf55a453471769391c
+      vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
       vue-template-compiler: 2.6.14
       vuepress: 1.9.7_webpack-cli@4.5.0
       vuepress-plugin-live: 1.6.2_vue@2.6.14
@@ -327,7 +327,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       vue-types: ^1.7.0
       webpack: ^4.46.0
@@ -353,7 +353,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.6.14
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -372,7 +372,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       vue-types: ^1.7.0
       webpack: ^4.46.0
@@ -391,7 +391,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.6.14
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -494,7 +494,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       webpack: ^4.46.0
     dependencies:
@@ -510,7 +510,7 @@ importers:
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -526,7 +526,7 @@ importers:
       sass: ^1.34.0
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       webpack: ^4.46.0
     dependencies:
@@ -541,7 +541,7 @@ importers:
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -760,7 +760,7 @@ importers:
       ts-loader: ^6.2.2
       typescript: ^4.2.3
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       vue-types: ^1.7.0
       webfontloader: ^1.6.28
@@ -789,7 +789,7 @@ importers:
       ts-loader: 6.2.2_typescript@4.2.3
       typescript: 4.2.3
       vue: 2.6.14
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -809,7 +809,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-i18n: ^7.8.1
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-style-loader: ^4.1.3
       vue-styleguidist: ^4.36.1
       vuetify: ^2.6.2
@@ -831,7 +831,7 @@ importers:
       material-design-icons-iconfont: 5.0.1
       sass-loader: 8.0.2_sass@1.32.8+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -847,7 +847,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       vuex: ^3.6.2
       webpack: ^4.46.0
@@ -864,7 +864,7 @@ importers:
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -880,7 +880,7 @@ importers:
       sass: ^1.34.0
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       webpack: ^4.46.0
     dependencies:
@@ -895,7 +895,7 @@ importers:
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -911,7 +911,7 @@ importers:
       sass: ^1.34.0
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
-      vue-loader: ^15.9.7
+      vue-loader: ^15.9.8
       vue-styleguidist: ^4.36.1
       webpack: ^4.46.0
     dependencies:
@@ -926,7 +926,7 @@ importers:
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
-      vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
@@ -25387,8 +25387,8 @@ packages:
       vue-template-compiler: 2.6.14
       webpack: 4.46.0
 
-  /vue-loader/15.9.7_css-loader@3.6.0+webpack@4.46.0:
-    resolution: {integrity: sha512-qzlsbLV1HKEMf19IqCJqdNvFJRCI58WNbS6XbPqK13MrLz65es75w392MSQ5TsARAfIjUw+ATm3vlCXUJSOH9Q==}
+  /vue-loader/15.9.8_css-loader@3.6.0+webpack@4.46.0:
+    resolution: {integrity: sha512-GwSkxPrihfLR69/dSV3+5CdMQ0D+jXg8Ma1S4nQXKJAznYFX14vHdc/NetQc34Dw+rBbIJyP7JOuVb9Fhprvog==}
     peerDependencies:
       cache-loader: '*'
       css-loader: '*'
@@ -25409,8 +25409,8 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /vue-loader/15.9.7_e15c8784917900cf55a453471769391c:
-    resolution: {integrity: sha512-qzlsbLV1HKEMf19IqCJqdNvFJRCI58WNbS6XbPqK13MrLz65es75w392MSQ5TsARAfIjUw+ATm3vlCXUJSOH9Q==}
+  /vue-loader/15.9.8_e15c8784917900cf55a453471769391c:
+    resolution: {integrity: sha512-GwSkxPrihfLR69/dSV3+5CdMQ0D+jXg8Ma1S4nQXKJAznYFX14vHdc/NetQc34Dw+rBbIJyP7JOuVb9Fhprvog==}
     peerDependencies:
       cache-loader: '*'
       css-loader: '*'
