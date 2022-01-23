@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Init & Build
         uses: ./.github/actions/build
+
       - name: Pre-compile TOC
         run: pnpm predocs
 
@@ -27,15 +29,27 @@ jobs:
       # Move them to the docs (except for docgen-nuxt which needs to be sent to surge)
       - name: Move examples to docs
         run: cd examples; for D in *; do if [ $D != "docgen-nuxt" ]; then mv "${D}"/dist ../docs/dist/"${D}"; fi; done || exit 1
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs-build-output
+          path: docs/dist
+          retention-days: 1
   
   deploy: 
     needs: build-docs
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download results of docs build
+        uses: actions/download-artifact@v2
+        with:
+          name: docs-build-output
+          path: ~/docs
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: master # The branch the action should deploy to.
-          folder: docs/dist # The folder the action should deploy.
+          folder: docs # The folder the action should deploy.
           repository-name: vue-styleguidist/vue-styleguidist.github.io # The repository name.
