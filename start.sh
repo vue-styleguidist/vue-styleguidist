@@ -10,7 +10,6 @@ case "$exampleName" in
 esac
 
 cd examples/$exampleName
-echo "$isVueCLI"
 if [ $1 = "build" ] 
 then
     if [ -z "${exampleName##*vuecli3*}" ] 
