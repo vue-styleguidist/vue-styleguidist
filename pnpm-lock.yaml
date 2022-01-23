@@ -623,6 +623,7 @@ importers:
       eslint-plugin-vue: ^5.2.3
       lint-staged: ^8.2.1
       prettier: ^1.19.1
+      pug: 3.0.2
       pug-plain-loader: 1.0.0
       sass: ^1.34.0
       sass-loader: ^8.0.2
@@ -657,7 +658,8 @@ importers:
       eslint-plugin-vue: 5.2.3_eslint@5.16.0
       lint-staged: 8.2.1
       prettier: 1.19.1
-      pug-plain-loader: 1.0.0
+      pug: 3.0.2
+      pug-plain-loader: 1.0.0_pug@3.0.2
       sass: 1.34.0
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       typescript: 4.2.3
@@ -800,7 +802,6 @@ importers:
       babel-loader: ^8.2.2
       css-loader: ^3.6.0
       dog-names: ^1.0.2
-      fibers: ^4.0.3
       file-loader: ^6.2.0
       material-design-icons-iconfont: ^5.0.1
       sass: ^1.32.8
@@ -815,7 +816,6 @@ importers:
       webpack: ^4.46.0
     dependencies:
       dog-names: 1.0.2
-      fibers: 4.0.3
       sass: 1.32.8
       vue: 2.6.14
       vue-i18n: 7.8.1
@@ -829,7 +829,7 @@ importers:
       css-loader: 3.6.0_webpack@4.46.0
       file-loader: 6.2.0_webpack@4.46.0
       material-design-icons-iconfont: 5.0.1
-      sass-loader: 8.0.2_a7b0a3e84371d62a92e0181bacdec889
+      sass-loader: 8.0.2_sass@1.32.8+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.7_css-loader@3.6.0+webpack@4.46.0
       vue-styleguidist: link:../../packages/vue-styleguidist
@@ -8391,7 +8391,7 @@ packages:
       pnp-webpack-plugin: 1.6.4_typescript@4.2.3
       portfinder: 1.0.28
       postcss-loader: 3.0.0
-      pug-plain-loader: 1.0.0
+      pug-plain-loader: 1.0.0_pug@3.0.2
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       ssri: 7.1.0
       terser-webpack-plugin: 2.3.8_webpack@4.46.0
@@ -10391,7 +10391,7 @@ packages:
     resolution: {integrity: sha512-GAwkz0AihzY5bkwIY5QDR+LvsRQgB/B+1foMPvi0FZPMl5fjD7ICiznUiBdLYMH1QYe6vqu4gWYytZOccLouFw==}
     engines: {node: '>= 10.0.0'}
     dependencies:
-      '@babel/types': 7.13.12
+      '@babel/types': 7.16.8
 
   /babylon/6.18.0:
     resolution: {integrity: sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==}
@@ -11168,7 +11168,7 @@ packages:
   /character-parser/2.2.0:
     resolution: {integrity: sha1-x84o821LzZdE5f/CxfzeHHMmH8A=}
     dependencies:
-      is-regex: 1.1.2
+      is-regex: 1.1.4
 
   /character-reference-invalid/1.1.4:
     resolution: {integrity: sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==}
@@ -11779,8 +11779,8 @@ packages:
   /constantinople/4.0.1:
     resolution: {integrity: sha512-vCrqcSIq4//Gx74TXXCGnHpulY1dskqLTFGDmhrGxzeXL8lF8kvXv6mpNWlJj1uD4DW23D4ljAqbY4RRaaUZIw==}
     dependencies:
-      '@babel/parser': 7.16.0
-      '@babel/types': 7.13.12
+      '@babel/parser': 7.16.8
+      '@babel/types': 7.16.8
 
   /constants-browserify/1.0.0:
     resolution: {integrity: sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=}
@@ -12958,12 +12958,6 @@ packages:
   /detect-indent/5.0.0:
     resolution: {integrity: sha1-OHHMCmoALow+Wzz38zYmRnXwa50=}
     engines: {node: '>=4'}
-
-  /detect-libc/1.0.3:
-    resolution: {integrity: sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=}
-    engines: {node: '>=0.10'}
-    hasBin: true
-    dev: false
 
   /detect-newline/3.1.0:
     resolution: {integrity: sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==}
@@ -14641,14 +14635,6 @@ packages:
     dependencies:
       pend: 1.2.0
     dev: true
-
-  /fibers/4.0.3:
-    resolution: {integrity: sha512-MW5VrDtTOLpKK7lzw4qD7Z9tXaAhdOmOED5RHzg3+HjUk+ibkjVW0Py2ERtdqgTXaerLkVkBy2AEmJiT6RMyzg==}
-    engines: {node: '>=10.0.0'}
-    requiresBuild: true
-    dependencies:
-      detect-libc: 1.0.3
-    dev: false
 
   /figgy-pudding/3.5.2:
     resolution: {integrity: sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw==}
@@ -16917,6 +16903,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       has-symbols: 1.0.2
+    dev: true
 
   /is-regex/1.1.4:
     resolution: {integrity: sha512-kvRdxDsxZjhzUX07ZnLydzS1TU/TJlTUHHY4YLL87e37oUA49DfkLqgy+VjFocowy29cKvcSiu+kIv728jTTVg==}
@@ -21474,14 +21461,6 @@ packages:
       pug-error: 2.0.0
       token-stream: 1.0.0
 
-  /pug-plain-loader/1.0.0:
-    resolution: {integrity: sha512-mDfq/qvJJ0xdug38mZ1ObW0BQTx9kAHnKqotXC+C00XQkKmsWaMe90JUg/kN4lS6MU7tpVsMZ+rmcnBSPfDtHA==}
-    peerDependencies:
-      pug: ^2.0.0
-    dependencies:
-      loader-utils: 1.4.0
-    dev: true
-
   /pug-plain-loader/1.0.0_pug@2.0.4:
     resolution: {integrity: sha512-mDfq/qvJJ0xdug38mZ1ObW0BQTx9kAHnKqotXC+C00XQkKmsWaMe90JUg/kN4lS6MU7tpVsMZ+rmcnBSPfDtHA==}
     peerDependencies:
@@ -21489,6 +21468,15 @@ packages:
     dependencies:
       loader-utils: 1.4.0
       pug: 2.0.4
+    dev: true
+
+  /pug-plain-loader/1.0.0_pug@3.0.2:
+    resolution: {integrity: sha512-mDfq/qvJJ0xdug38mZ1ObW0BQTx9kAHnKqotXC+C00XQkKmsWaMe90JUg/kN4lS6MU7tpVsMZ+rmcnBSPfDtHA==}
+    peerDependencies:
+      pug: ^2.0.0
+    dependencies:
+      loader-utils: 1.4.0
+      pug: 3.0.2
     dev: true
 
   /pug-runtime/2.0.5:
@@ -22658,32 +22646,6 @@ packages:
 
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-
-  /sass-loader/8.0.2_a7b0a3e84371d62a92e0181bacdec889:
-    resolution: {integrity: sha512-7o4dbSK8/Ol2KflEmSco4jTjQoV988bM82P9CZdmo9hR3RLnvNc0ufMNdMrB0caq38JQ/FgF4/7RcbcfKzxoFQ==}
-    engines: {node: '>= 8.9.0'}
-    peerDependencies:
-      fibers: '>= 3.1.0'
-      node-sass: ^4.0.0
-      sass: ^1.3.0
-      webpack: ^4.36.0 || ^5.0.0
-    peerDependenciesMeta:
-      fibers:
-        optional: true
-      node-sass:
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      clone-deep: 4.0.1
-      fibers: 4.0.3
-      loader-utils: 1.4.0
-      neo-async: 2.6.2
-      sass: 1.32.8
-      schema-utils: 2.7.1
-      semver: 6.3.0
-      webpack: 4.46.0
-    dev: true
 
   /sass-loader/8.0.2_sass@1.32.8+webpack@4.46.0:
     resolution: {integrity: sha512-7o4dbSK8/Ol2KflEmSco4jTjQoV988bM82P9CZdmo9hR3RLnvNc0ufMNdMrB0caq38JQ/FgF4/7RcbcfKzxoFQ==}
@@ -26530,8 +26492,8 @@ packages:
     resolution: {integrity: sha512-RNGKj82nUPg3g5ygxkQl0R937xLyho1J24ItRCBTr/m1YnZkzJy1hUiHUJrc/VlsDQzsCnInEGSg3bci0Lmd4w==}
     engines: {node: '>= 10.0.0'}
     dependencies:
-      '@babel/parser': 7.16.0
-      '@babel/types': 7.13.12
+      '@babel/parser': 7.16.8
+      '@babel/types': 7.16.8
       assert-never: 1.2.1
       babel-walk: 3.0.0-canary-5
 
