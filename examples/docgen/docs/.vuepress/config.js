@@ -25,13 +25,13 @@ module.exports = async () => {
 			sidebar
 		},
 		plugins: [
-			['live', { noSsr: true }],
-			[
-				'@vuepress/register-components',
-				{
-					components
-				}
-			]
+			// ['live', { noSsr: true }],
+			// [
+			// 	'@vuepress/register-components',
+			// 	{
+			// 		components
+			// 	}
+			// ]
 		]
 	}
 }

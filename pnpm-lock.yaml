@@ -2491,6 +2491,7 @@ packages:
     resolution: {integrity: sha512-TEHWXf0xxpi9wKVyBCmRcSSDjbJ/cl6LUdlbYUHEaNQUJGhreJbZrXT6sR4+fZLxVUJqNRB4KyOvjuy/D9009A==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dev: false
 
   /@babel/parser/7.16.7:
     resolution: {integrity: sha512-sR4eaSrnM7BV7QPzGfEX5paG/6wrZM3I0HDzfIAK06ESvo9oy3xBuVBxE3MbQaKNhvg8g/ixjMWo2CGpzpHsDA==}
@@ -8651,11 +8652,12 @@ packages:
       '@vue/shared': 3.0.7
       estree-walker: 2.0.2
       source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-core/3.2.20:
     resolution: {integrity: sha512-vcEXlKXoPwBXFP5aUTHN9GTZaDfwCofa9Yu9bbW2C5O/QSa9Esdt7OG4+0RRd3EHEMxUvEdj4RZrd/KpQeiJbA==}
     dependencies:
-      '@babel/parser': 7.16.0
+      '@babel/parser': 7.16.8
       '@babel/types': 7.15.6
       '@vue/shared': 3.2.20
       estree-walker: 2.0.2
@@ -8666,6 +8668,7 @@ packages:
     dependencies:
       '@vue/compiler-core': 3.0.7
       '@vue/shared': 3.0.7
+    dev: true
 
   /@vue/compiler-dom/3.2.20:
     resolution: {integrity: sha512-QnI77ec/JtV7R0YBbcVayYTDCRcI9OCbxiUQK6izVyqQO0658n0zQuoNwe+bYgtqnvGAIqTR3FShTd5y4oOjdg==}
@@ -8793,6 +8796,7 @@ packages:
 
   /@vue/shared/3.0.7:
     resolution: {integrity: sha512-dn5FyfSc4ky424jH4FntiHno7Ss5yLkqKNmM/NXwANRnlkmqu74pnGetexDFVG5phMk9/FhwovUZCWGxsotVKg==}
+    dev: true
 
   /@vue/shared/3.2.20:
     resolution: {integrity: sha512-FbpX+hD5BvXCQerEYO7jtAGHlhAkhTQ4KIV73kmLWNlawWhTiVuQxizgVb0BOkX5oG9cIRZ42EG++d/k/Efp0w==}
@@ -25156,7 +25160,7 @@ packages:
       pug: 3.0.2
       recast: 0.20.4
       ts-map: 1.0.3
-      vue-inbrowser-compiler-utils: 4.40.0
+      vue-inbrowser-compiler-utils: 4.44.0
     transitivePeerDependencies:
       - vue
     dev: true
@@ -25236,38 +25240,38 @@ packages:
     resolution: {integrity: sha512-+TkAPBQw4Cp2bQrSPtPNkhET7XcWYjjDt1UjWYQs+xbT41q5OAl1I3IZyhg0drjn1nlC1K0f8sLVB/nshUcF1Q==}
     dev: false
 
-  /vue-inbrowser-compiler-utils/4.40.0:
-    resolution: {integrity: sha512-uJVt2fGpfs3g1x4zQWzbv7eFmI7PnoYTagZdWEOQIbqbKXJEJW3S22NIvImfW5DYVwjpGFPUpakK1R0TE3IE3A==}
+  /vue-inbrowser-compiler-utils/4.44.0:
+    resolution: {integrity: sha512-JSX7b/hiUUhGLKK1umzMhVT0Vm3msAo0Za07sP6hl7t4bNP0exgDtPqRfkSVHNURCW+rODDt6fTa5uBHVfVAyw==}
     dependencies:
       camelcase: 5.3.1
 
-  /vue-inbrowser-compiler/4.40.0:
-    resolution: {integrity: sha512-HwVXQEEkyUfWiUXfV48ds8QMcwktapmW1S5Jon63BdB26qX80fv2J+DoSeQ9W/z+/comLvPUWN/Uf6NVm+/TUw==}
+  /vue-inbrowser-compiler/4.44.0:
+    resolution: {integrity: sha512-BedmU7YqW11pw72EzF2uOJ/oVXxihODyUu9NT9m80TaLd7sAA1vOYAY8S2mH87nNcv8fSWMgRcTQ78SxUEqVMg==}
     dependencies:
       acorn: 6.4.2
       acorn-jsx: 5.3.1_acorn@6.4.2
       buble: 0.20.0
       camelcase: 5.3.1
       detect-browser: 5.2.0
-      vue-inbrowser-compiler-utils: 4.40.0
+      vue-inbrowser-compiler-utils: 4.44.0
       walkes: 0.2.1
 
-  /vue-live/1.16.0_vue@2.6.14:
-    resolution: {integrity: sha512-Kn3G2AscFyliLbb8ImsiC6Rw1CmOM3IYQ0kfEDTRsAdyCVAAGdjHc8z5ozLiGVKU+UFIGWdScjYt+g2WpVFMTQ==}
+  /vue-live/1.17.2_vue@2.6.14:
+    resolution: {integrity: sha512-sy3fxQy57UQ5/p8bDGuGA82zHFO8UOJDESYBggWsjVwW9Yt1gixOO2KJrhJ0E0B4OznsXCY4P180Vm+o04mX1Q==}
     peerDependencies:
       vue: '>= 2.6.0'
     dependencies:
-      '@babel/runtime': 7.13.10
-      '@vue/compiler-core': 3.0.7
-      '@vue/compiler-dom': 3.0.7
+      '@babel/runtime': 7.16.7
+      '@vue/compiler-core': 3.2.20
+      '@vue/compiler-dom': 3.2.20
       acorn: 7.4.1
-      core-js: 3.9.1
+      core-js: 3.20.3
       debounce: 1.2.1
       hash-sum: 2.0.0
       prismjs: 1.23.0
       recast: 0.19.1
       vue: 2.6.14
-      vue-inbrowser-compiler: 4.40.0
+      vue-inbrowser-compiler: 4.44.0
       vue-prism-editor: 1.2.2_vue@2.6.14
       vue-template-compiler: 2.6.14
     dev: false
@@ -25549,8 +25553,8 @@ packages:
       terser-webpack-plugin: 2.3.8
       to-ast: 1.0.0
       vue-docgen-api: 4.40.0
-      vue-inbrowser-compiler: 4.40.0
-      vue-inbrowser-compiler-utils: 4.40.0
+      vue-inbrowser-compiler: 4.44.0
+      vue-inbrowser-compiler-utils: 4.44.0
       webpack-dev-server: 3.11.3
       webpack-merge: 4.2.2
     transitivePeerDependencies:
@@ -25619,7 +25623,7 @@ packages:
     resolution: {integrity: sha512-f8PYDOC6pYJi/fWg5LQuLbufV2m2CvBNRYH+Sn6r4u0Yn269Xujg3+tWrdJnaWcFn0Pe9Mw09ut3Ve9h2/ZWug==}
     dependencies:
       acorn: 6.4.2
-      vue-live: 1.16.0_vue@2.6.14
+      vue-live: 1.17.2_vue@2.6.14
       vue-no-ssr: 1.1.1
       walkes: 0.2.1
     transitivePeerDependencies:
