@@ -47,6 +47,9 @@ jobs:
         with:
           name: docs-build-output
           path: docs
+      
+      - name: Init git...
+        run: git init
           
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
