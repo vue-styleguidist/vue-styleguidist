@@ -1,5 +1,8 @@
 name: Documentation
-on: push
+on:
+  push:
+    branches:
+      - delivery
 
 concurrency: 
   group: doc-${{ github.ref }}
