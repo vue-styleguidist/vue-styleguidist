@@ -1,7 +1,10 @@
 name: Cut a release
-
-on: 
-  workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      puppy:
+        description: 'A kind of puppy.'
+        required: true
 
 jobs:
   say_hello:
