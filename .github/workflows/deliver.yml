@@ -1,6 +1,7 @@
 name: Cut a release
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch
 
 jobs:
   say_hello:
