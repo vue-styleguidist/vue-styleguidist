@@ -36,5 +36,6 @@ jobs:
           branch: master # The branch the action should deploy to.
           folder: docs/dist # The folder the action should deploy.
           repository-name: vue-styleguidist/vue-styleguidist.github.io # The repository name.
+          token: ${{ secrets.WEBSITE_TOKEN }} # The GitHub token.
           
       
