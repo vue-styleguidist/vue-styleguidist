@@ -25,10 +25,12 @@ jobs:
       # Build all examples (except for docgen-nuxt which needs to be sent to surge)
       - name: Build examples
         run: cd examples; for D in *; do if [ $D != "docgen-nuxt" ]; then cd ..; pnpm build "${D}" -- --ci; cd examples; fi; done; cd .. || exit 1
+        if: false
 
       # Move them to the docs (except for docgen-nuxt which needs to be sent to surge)
       - name: Move examples to docs
         run: cd examples; for D in *; do if [ $D != "docgen-nuxt" ]; then mv "${D}"/dist ../docs/dist/"${D}"; fi; done || exit 1
+        if: false
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
@@ -36,6 +38,9 @@ jobs:
           branch: master # The branch the action should deploy to.
           folder: docs/dist # The folder the action should deploy.
           repository-name: vue-styleguidist/vue-styleguidist.github.io # The repository name.
+          git-config-name: "Vue Styleguidist Bot" # The name of the user.
+          git-config-email: ${{ secrets.BOT_EMAIL }} # The email address to use for the git config.
           token: ${{ secrets.WEBSITE_TOKEN }} # The GitHub token.
+          dry-run: true # Whether to run the action in dry-run mode.
           
       
