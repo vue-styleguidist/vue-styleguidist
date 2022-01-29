@@ -1,10 +1,10 @@
-name: Deliver
+name: Release
 on:
   push:
     branches:
       - delivery
 
-concurrency: 
+concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: true
 
