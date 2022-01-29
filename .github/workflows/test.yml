@@ -1,11 +1,11 @@
 name: Lint & Test
-on: [push, workflow_call]
+on: 
   push:
     branches:
       - '*'
       - '!delivery'
+  workflow_call:
   
-
 concurrency:
   group: test-${{ github.ref }}
   cancel-in-progress: true
