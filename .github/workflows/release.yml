@@ -23,10 +23,15 @@ jobs:
         uses: ./.github/actions/build
 
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          git config --global user.name "Vue Styleguidist Bot"
+          git config --global user.email "${BOT_EMAIL}"
+          git remote set-url origin "https://${GH_TOKEN}@github.com/vue-styleguidist/vue-styleguidist.git" > /dev/null 2>&1
+          git checkout delivery
+          git reset --hard
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+          npx lerna version --yes --create-release=github
+          npx lerna publish from-git --yes
 
       - name: Merge back
         run: |
