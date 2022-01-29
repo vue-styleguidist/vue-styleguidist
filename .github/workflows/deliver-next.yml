@@ -23,7 +23,10 @@ jobs:
         uses: ./.github/actions/build
 
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          git config --global user.name "Vue Styleguidist Bot"
+          git config --global user.email "${BOT_EMAIL}"
+
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+          npx lerna version --yes --create-release=github --conventional-prerelease --preid beta
+          npx lerna publish from-git --yes
