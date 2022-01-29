@@ -14,9 +14,9 @@ if [ $1 = "build" ]
 then
     if [ -z "${exampleName##*vuecli3*}" ] 
     then
-        npm run styleguide:build -- $extra
-    else
         pnpm styleguide:build -- $extra
+    else
+        npm run styleguide:build -- $extra
     fi
 else
     npm run styleguide -- $extra
