@@ -4,7 +4,7 @@ on:
     branches:
       - next
 
-concurrency: 
+concurrency:
   group: release-next-${{ github.ref }}
   cancel-in-progress: true
 
@@ -12,7 +12,7 @@ jobs:
   test:
     uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@next
 
-    release-beta:
+  release-beta:
     needs: test
     runs-on: ubuntu-latest
     steps:
