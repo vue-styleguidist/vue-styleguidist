@@ -1,6 +1,6 @@
 <template>
 	<div class="Button">
-		<button class="button" @click.prevent="onClick" :style="{ color: color, fontSize: fontSize }">
+		<button class="button" :style="{ color: color, fontSize: fontSize }" @click.prevent="onClick">
 			<!-- @slot Content of button -->
 			<slot></slot>
 		</button>
@@ -86,17 +86,17 @@ Use vue live right here too
 
 ````markdown
 ```jsx live
-<Button>I’m transparent!</Button>
+<Button>I'm transparent!</Button>
 ```
 ````
 
 ```jsx live
-<Button>I’m transparent!</Button>
+<Button>I'm transparent!</Button>
 ```
 
 To render an example as highlighted source code remove the live modifier
 
 ```html
-<button>I’m transparent!</button>
+<button>I'm transparent!</button>
 ```
 </docs>
