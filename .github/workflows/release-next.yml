@@ -1,4 +1,4 @@
-name: Deliver Next
+name: Release Next
 on:
   push:
     branches:
@@ -22,11 +22,13 @@ jobs:
       - name: Init & Build
         uses: ./.github/actions/build
 
-      - name: Semantic Release
+      - name: Setup GitHub User
         run: |
           git config --global user.name "Vue Styleguidist Bot"
-          git config --global user.email "${BOT_EMAIL}"
+          git config --global user.email "${secrets.BOT_EMAIL}"
 
-          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-          npx lerna version --yes --create-release=github --conventional-prerelease --preid beta
-          npx lerna publish from-git --yes
+      - name: Setup NPM User
+        run: echo "//registry.npmjs.org/:_authToken=\${secrets.NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+
+      - run: npx lerna version --yes --create-release=github --conventional-prerelease --preid beta
+      - run: npx lerna publish from-git --yes
