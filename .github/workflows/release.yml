@@ -19,6 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: "Use NodeJS 14"
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       - name: Init & Build
         uses: ./.github/actions/build
 
@@ -27,9 +32,9 @@ jobs:
           git config --global user.name "Vue Styleguidist Bot"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
 
-      - run: npx --yes --package=lerna -- lerna version --create-release=github
+      - run: npx lerna version --create-release=github
 
-      - run: npx --yes --package=lerna -- lerna publish from-git --yes
+      - run: npx lerna publish from-git --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
