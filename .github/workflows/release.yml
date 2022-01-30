@@ -27,8 +27,9 @@ jobs:
           git config --global user.name "Vue Styleguidist Bot"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
 
-      - run: npx lerna version --yes --create-release=github
-      - run: npx lerna publish from-git --yes
+      - run: npx --yes --package=lerna -- lerna version --create-release=github --verbose
+
+      - run: npx --yes --package=lerna -- lerna publish from-git --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
