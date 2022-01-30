@@ -9,11 +9,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
+  # test:
+  #   uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
 
   release:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
