@@ -44,7 +44,7 @@ jobs:
           pnpm i --frozen-lockfile=false --ignore-scripts
       - run: git add pnpm-lock.yaml
       - run: |
-          git diff-index --quiet HEAD || eho "About to commit pnpm-lock.yaml"
+          git diff-index --quiet HEAD || echo "About to commit pnpm-lock.yaml"
           git diff-index --quiet HEAD || git commit -m "chore: update lock file after release [ci skip]"
       - run: if [[ $(git rev-list FETCH_HEAD..HEAD --count) != 0 ]]; then; git push; fi
 
