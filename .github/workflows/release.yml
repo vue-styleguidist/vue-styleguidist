@@ -29,7 +29,7 @@ jobs:
           git config --global user.name "Vue Styleguidist Bot"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
 
-      - run: npx --yes -- lerna version --yes
+      - run: npx --yes -- lerna version --conventional-commits --yes
 
       - run: npx --yes -- lerna publish from-git --yes
         env:
