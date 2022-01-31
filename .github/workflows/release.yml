@@ -42,9 +42,7 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "chore: update lock file after release [ci skip]" && git push
 
       - name: Checkout dev branch
-        run: |
-          git remote add origin http://github.com/MyName/MyProjectName -f
-          git checkout origin/dev
+        run: git checkout origin/dev
 
       - name: Check for merge conflict
         id: check-conflict
