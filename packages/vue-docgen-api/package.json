@@ -1,6 +1,6 @@
 {
 	"name": "vue-docgen-api",
-	"version": "4.44.6",
+	"version": "4.44.7",
 	"description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
 	"homepage": "https://vue-styleguidist.github.io",
 	"main": "dist/main.js",
@@ -39,10 +39,10 @@
 		"pug": "^3.0.2",
 		"recast": "0.20.5",
 		"ts-map": "^1.0.3",
-		"vue-inbrowser-compiler-utils": "^4.44.6"
+		"vue-inbrowser-compiler-utils": "^4.44.7"
 	},
 	"devDependencies": {
-		"@test-vue-docgen/mixins": "^4.44.6",
+		"@test-vue-docgen/mixins": "^4.44.7",
 		"@types/pug": "2.0.6",
 		"globby": "10.0.2",
 		"vue": "2.6.14",
