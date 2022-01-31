@@ -21,11 +21,6 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: "Use NodeJS 14"
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
       - name: Init & Build
         uses: ./.github/actions/build
 
@@ -45,7 +40,7 @@ jobs:
         run: |
           pnpm i --frozen-lockfile=false
           git add pnpm-lock.yaml
-          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release"
+          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release" && git push
 
       - name: Checkout dev branch
         run: git checkout dev
