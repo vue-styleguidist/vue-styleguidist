@@ -32,7 +32,7 @@ jobs:
 
       - name: Fetch git log
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-        
+
       - run: npx --yes -- lerna version --conventional-commits --yes
 
       - run: npx --yes -- lerna publish from-git --yes
@@ -43,7 +43,8 @@ jobs:
         run: |
           pnpm i --frozen-lockfile=false --ignore-scripts
           git add pnpm-lock.yaml
-          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release [ci skip]" && git push
+          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release [ci skip]"
+          git rev-list FETCH_HEAD..HEAD --quiet || git push
 
       - name: Checkout dev branch
         run: git checkout origin/dev
