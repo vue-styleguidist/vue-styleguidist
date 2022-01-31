@@ -39,10 +39,12 @@ jobs:
         run: |
           pnpm i --frozen-lockfile=false --ignore-scripts
           git add pnpm-lock.yaml
-          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release" && git push
+          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release [ci skip]" && git push
 
       - name: Checkout dev branch
-        run: git checkout dev
+        run: |
+          git remote add origin http://github.com/MyName/MyProjectName -f
+          git checkout origin/dev
 
       - name: Check for merge conflict
         id: check-conflict
