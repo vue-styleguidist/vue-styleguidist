@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.44.5 (2022-01-31)
+
+**Note:** Version bump only for package vue-simple-docgen-loader
+
+
+
+
+
 ## 4.44.4 (2022-01-31)
 
 **Note:** Version bump only for package vue-simple-docgen-loader
