@@ -33,6 +33,8 @@ jobs:
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
 
       - run: npx --yes -- lerna version --yes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - run: npx --yes -- lerna publish from-git --yes
         env:
