@@ -29,7 +29,6 @@ jobs:
         run: |
           git config --global user.name "Vue Styleguidist Bot"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
-          git branch --set-upstream-to=origin/delivery
 
       - name: Fetch git log
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -46,6 +45,9 @@ jobs:
           git add pnpm-lock.yaml
           git diff --staged --quiet || (git commit -m "chore: update lock file after release [ci skip]" && git push)
 
+      - name: Start tracking
+        run: git branch --set-upstream-to=origin/delivery
+        
       - name: Checkout dev branch
         run: git switch dev
 
