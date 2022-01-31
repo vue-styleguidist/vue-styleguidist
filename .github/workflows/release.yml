@@ -31,15 +31,17 @@ jobs:
 
       - run: npx --yes -- lerna version --yes
 
-      - run: npx --yes -- lerna publish from-git --yes
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Merge back
+      - name: Update pnpm-lock.yaml
         run: |
           pnpm i --frozen-lockfile=false
           git add pnpm-lock.yaml
           git diff-index --quiet HEAD || git commit -m "chore: update lock file after release" && git push
+
+      - run: npx --yes -- lerna publish from-git --yes
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      
 
       - name: Checkout dev branch
         run: git checkout dev
