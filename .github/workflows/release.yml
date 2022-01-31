@@ -38,7 +38,7 @@ jobs:
 
       - run: npm whoami
       - run: npx --yes -- lerna publish from-git --yes
-      - env:
+        env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Merge back
