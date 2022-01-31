@@ -51,8 +51,6 @@ jobs:
       - name: Checkout dev branch
         run: git switch dev
 
-      - run: cat .git/config
-      
       - name: Check for merge conflict
         id: check-conflict
         run: echo "::set-output name=merge_conflict::$(git merge-tree $(git merge-base HEAD delivery) delivery HEAD | egrep '<<<<<<<')"
@@ -60,7 +58,9 @@ jobs:
       - name: Merge delivery into dev
         id: merge-delivery
         run: |
-          git merge origin/delivery
+          git fetch origin dev
+          git fetch origin delivery
+          git merge delivery
           git push
         if: ${{ !steps.check-conflict.outputs.merge_conflict }}
 
