@@ -58,8 +58,7 @@ jobs:
       - name: Merge delivery into dev
         id: merge-delivery
         run: |
-          git fetch origin dev
-          git fetch origin delivery
+          git fetch
           git merge delivery
           git push
         if: ${{ !steps.check-conflict.outputs.merge_conflict }}
