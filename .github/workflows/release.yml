@@ -39,6 +39,8 @@ jobs:
       - run: npx --yes -- lerna publish from-git --yes
         env:
           npm_config__auth: ${{ secrets.NPM_TOKEN }}
+          npm_config_email: ${{ secrets.NPM_EMAIL }}
+          npm_config_always-auth: true
 
       - name: Merge back
         run: |
