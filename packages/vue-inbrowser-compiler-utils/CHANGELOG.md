@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.44.4 (2022-01-31)
+
+**Note:** Version bump only for package vue-inbrowser-compiler-utils
+
+
+
+
+
 # [4.44.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.3...v4.44.0) (2022-01-17)
 
 
