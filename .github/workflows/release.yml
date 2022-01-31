@@ -41,6 +41,8 @@ jobs:
           echo _auth=${{ secrets.NPM_TOKEN }} >> .npmrc
           echo email=${{ secrets.NPM_EMAIL }} >> .npmrc
           echo always-auth=true >> .npmrc
+
+      - run: npm whoami
       - run: npx --yes -- lerna publish from-git --yes
 
       - name: Merge back
