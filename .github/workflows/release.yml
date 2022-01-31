@@ -9,11 +9,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # test:
-  #   uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
+  test:
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
 
   release:
-    # needs: test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,6 +29,7 @@ jobs:
         run: |
           git config --global user.name "Vue Styleguidist Bot"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
+          git branch --set-upstream-to=origin/delivery
 
       - name: Fetch git log
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -55,7 +56,7 @@ jobs:
       - name: Merge delivery into dev
         id: merge-delivery
         run: |
-          git merge delivery
+          git merge origin/delivery
           git push
         if: ${{ !steps.check-conflict.outputs.merge_conflict }}
 
@@ -63,7 +64,7 @@ jobs:
         run: echo "::set-output name=merge_conflict::'failed merge'"
         if: ${{ steps.merge-delivery.outcome != 'success' }}
       - name: Checkout delivery
-        run: git checkout delivery
+        run: git switch delivery
         if: ${{ steps.check-conflict.outputs.merge_conflict }}
       - name: Determine name of new branch
         id: gen-names
