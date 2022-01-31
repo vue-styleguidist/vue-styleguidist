@@ -44,7 +44,7 @@ jobs:
           pnpm i --frozen-lockfile=false --ignore-scripts
           git add pnpm-lock.yaml
           git diff-index --quiet HEAD || git commit -m "chore: update lock file after release [ci skip]"
-          if [[ $(git rev-list FETCH_HEAD..HEAD) > 0 ]]; then; git push; fi
+          if [[ $(git rev-list FETCH_HEAD..HEAD --count) != 0 ]]; then; git push; fi
 
       - name: Checkout dev branch
         run: git checkout origin/dev
