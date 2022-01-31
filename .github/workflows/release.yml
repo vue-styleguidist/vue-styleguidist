@@ -45,7 +45,7 @@ jobs:
         run: |
           pnpm i --frozen-lockfile=false
           git add pnpm-lock.yaml
-          git diff-index --quiet HEAD || git commit -m "merge - update lock file after release"
+          git diff-index --quiet HEAD || git commit -m "chore: update lock file after release"
 
       - name: Checkout dev branch
         run: git checkout dev
