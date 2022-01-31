@@ -27,7 +27,18 @@ jobs:
           git config --global user.name "Vue Styleguidist Bot"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
 
-      - run: npx --yes --package=lerna -- lerna version --yes --create-release=github --conventional-prerelease --preid beta
-      - run: npx --yes --package=lerna -- lerna publish from-git --yes
+      - name: Fetch git log
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - run: npx --yes -- lerna version --conventional-prerelease --preid beta --yes
+
+      - run: npx --yes -- lerna publish from-git --yes
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Update pnpm-lock.yaml
+        run: |
+          pnpm i --frozen-lockfile=false --ignore-scripts
+          git add pnpm-lock.yaml
+          git diff --staged --quiet || (git commit -m "chore: update lock file after release [ci skip]" && git push)
+          
