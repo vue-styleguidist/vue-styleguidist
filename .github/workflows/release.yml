@@ -36,10 +36,6 @@ jobs:
 
       - run: npx --yes -- lerna version --yes
 
-      - name: Create the .npmrc
-        run: |
-          echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} >> .npmrc
-
       - run: npm whoami
       - run: npx --yes -- lerna publish from-git --yes
       - env:
