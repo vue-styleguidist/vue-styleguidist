@@ -46,7 +46,7 @@ jobs:
           git diff --staged --quiet || (git commit -m "chore: update lock file after release [ci skip]" && git push)
 
       - name: Checkout dev branch
-        run: git checkout origin/dev
+        run: git switch dev
 
       - name: Check for merge conflict
         id: check-conflict
