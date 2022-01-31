@@ -38,12 +38,12 @@ jobs:
 
       - name: Create the .npmrc
         run: |
-          echo _auth=${{ secrets.NPM_TOKEN }} >> .npmrc
-          echo email=${{ secrets.NPM_EMAIL }} >> .npmrc
-          echo always-auth=true >> .npmrc
+          echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} >> .npmrc
 
       - run: npm whoami
       - run: npx --yes -- lerna publish from-git --yes
+      - env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Merge back
         run: |
