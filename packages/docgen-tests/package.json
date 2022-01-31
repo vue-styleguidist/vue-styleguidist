@@ -1,6 +1,6 @@
 {
   "name": "@test-vue-docgen/mixins",
-  "version": "4.44.5",
+  "version": "4.44.6",
   "module": "src/index.js",
   "license": "MIT",
   "private": true
