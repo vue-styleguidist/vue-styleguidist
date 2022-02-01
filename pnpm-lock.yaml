@@ -13,7 +13,7 @@ importers:
       '@babel/preset-react': 7.16.7
       '@babel/preset-typescript': 7.16.7
       '@babel/runtime': 7.16.7
-      '@commitlint/cli': 16.0.2
+      '@commitlint/cli': 16.1.0
       '@commitlint/config-conventional': 16.0.0
       '@types/jest': 27.4.0
       '@types/node': 13.13.52
@@ -73,7 +73,7 @@ importers:
       '@babel/preset-react': 7.16.7_@babel+core@7.16.12
       '@babel/preset-typescript': 7.16.7_@babel+core@7.16.12
       '@babel/runtime': 7.16.7
-      '@commitlint/cli': 16.0.2_@types+node@13.13.52
+      '@commitlint/cli': 16.1.0_@types+node@13.13.52
       '@commitlint/config-conventional': 16.0.0
       '@types/jest': 27.4.0
       '@types/node': 13.13.52
@@ -160,7 +160,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_6afc378a9271a24b43861ee84513ed7d
       vue-template-compiler: 2.6.14
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -212,7 +212,7 @@ importers:
       vue: 2.6.14
       vue-docgen-cli: 3.26.0
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -246,7 +246,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
 
   examples/docgen:
@@ -296,7 +296,7 @@ importers:
       style-loader: 0.19.1
       url-loader: 1.1.2_webpack@4.46.0
       vue: 2.6.14
-      vue-docgen-api: link:../../packages/vue-docgen-api
+      vue-docgen-api: 4.44.15
       vue-docgen-cli: 4.44.15
       vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
       vue-template-compiler: 2.6.14
@@ -354,7 +354,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -392,7 +392,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
 
   examples/jsx-examples:
@@ -430,7 +430,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.6.14
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_vue@2.6.14+webpack@4.46.0
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -478,7 +478,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.46.0
       vue-style-loader: 4.1.3
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_27af0dd1480a5a558f43ec0bf27a843f
       webpack: 4.46.0
 
   examples/router:
@@ -511,7 +511,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
 
   examples/sections:
@@ -542,7 +542,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_vue-loader@15.9.8+webpack@4.46.0
       webpack: 4.46.0
 
   examples/svg-loader:
@@ -579,7 +579,7 @@ importers:
       vue: 2.6.14
     devDependencies:
       '@vue/cli-service': 4.5.12_typescript@4.5.5
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_vue@2.6.14
 
   examples/vuecli3:
     specifiers:
@@ -790,7 +790,7 @@ importers:
       typescript: 4.2.3
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -832,7 +832,7 @@ importers:
       sass-loader: 8.0.2_sass@1.32.8+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
 
   examples/vuex:
@@ -865,7 +865,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
       webpack: 4.46.0
 
   examples/with-laravel-token:
@@ -896,7 +896,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_vue-loader@15.9.8+webpack@4.46.0
       webpack: 4.46.0
 
   examples/with-sass-loader:
@@ -927,7 +927,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: link:../../packages/vue-styleguidist
+      vue-styleguidist: 4.44.15_vue-loader@15.9.8+webpack@4.46.0
       webpack: 4.46.0
 
   packages/docgen-tests:
@@ -995,7 +995,7 @@ importers:
       pug: 3.0.2
       recast: 0.20.5
       ts-map: 1.0.3
-      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
+      vue-inbrowser-compiler-utils: 4.44.15
     devDependencies:
       '@test-vue-docgen/mixins': link:../docgen-tests
       '@types/pug': 2.0.6
@@ -1026,7 +1026,7 @@ importers:
       minimist: 1.2.5
       mkdirp: 0.5.5
       prettier: 1.19.1
-      vue-docgen-api: link:../vue-docgen-api
+      vue-docgen-api: 4.44.15
     devDependencies:
       '@types/lodash.memoize': 4.1.6
       '@types/minimist': 1.2.2
@@ -1057,7 +1057,7 @@ importers:
       buble: 0.20.0
       camelcase: 5.3.1
       detect-browser: 5.2.0
-      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
+      vue-inbrowser-compiler-utils: 4.44.15
       walkes: 0.2.1
     devDependencies:
       '@rollup/plugin-commonjs': 15.1.0_rollup@2.66.1
@@ -1097,7 +1097,7 @@ importers:
     dependencies:
       escodegen: 1.14.3
       to-ast: 1.0.0
-      vue-docgen-api: link:../vue-docgen-api
+      vue-docgen-api: 4.44.15
 
   packages/vue-styleguidist:
     specifiers:
@@ -1242,9 +1242,9 @@ importers:
       style-loader: 1.3.0_webpack@4.46.0
       terser-webpack-plugin: 2.3.8_webpack@4.46.0
       to-ast: 1.0.0
-      vue-docgen-api: link:../vue-docgen-api
-      vue-inbrowser-compiler: link:../vue-inbrowser-compiler
-      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
       webpack-dev-server: 3.11.2_webpack@4.46.0
       webpack-merge: 4.2.2
     devDependencies:
@@ -5800,14 +5800,14 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@commitlint/cli/16.0.2_@types+node@13.13.52:
-    resolution: {integrity: sha512-Jt7iaBjoLGC5Nq4dHPTvTYnqPGkElFPBtTXTvBpTgatZApczyjI2plE0oG4GYWPp1suHIS/VdVDOMpPZjGVusg==}
+  /@commitlint/cli/16.1.0_@types+node@13.13.52:
+    resolution: {integrity: sha512-x5L1knvA3isRWBRVQx+Q6D45pA9139a2aZQYpxkljMG0dj4UHZkCnsYWpnGalxPxASI7nrI0KedKfS2YeQ55cQ==}
     engines: {node: '>=v12'}
     hasBin: true
     dependencies:
       '@commitlint/format': 16.0.0
       '@commitlint/lint': 16.0.0
-      '@commitlint/load': 16.0.0_@types+node@13.13.52
+      '@commitlint/load': 16.1.0_@types+node@13.13.52
       '@commitlint/read': 16.0.0
       '@commitlint/types': 16.0.0
       lodash: 4.17.21
@@ -5827,8 +5827,8 @@ packages:
       conventional-changelog-conventionalcommits: 4.6.0
     dev: true
 
-  /@commitlint/config-validator/16.0.0:
-    resolution: {integrity: sha512-i80DGlo1FeC5jZpuoNV9NIjQN/m2dDV3jYGWg+1Wr+KldptkUHXj+6GY1Akll66lJ3D8s6aUGi3comPLHPtWHg==}
+  /@commitlint/config-validator/16.1.0:
+    resolution: {integrity: sha512-2cHeZPNTuf1JWbMqyA46MkExor5HMSgv8JrdmzEakUbJHUreh35/wN00FJf57qGs134exQW2thiSQ1IJUsVx2Q==}
     engines: {node: '>=v12'}
     dependencies:
       '@commitlint/types': 16.0.0
@@ -5874,13 +5874,13 @@ packages:
       '@commitlint/types': 16.0.0
     dev: true
 
-  /@commitlint/load/16.0.0_@types+node@13.13.52:
-    resolution: {integrity: sha512-7WhrGCkP6K/XfjBBguLkkI2XUdiiIyMGlNsSoSqgRNiD352EiffhFEApMy1/XOU+viwBBm/On0n5p0NC7e9/4A==}
+  /@commitlint/load/16.1.0_@types+node@13.13.52:
+    resolution: {integrity: sha512-MtlEhKjP8jAF85jjX4mw8DUUwCxKsCgAc865hhpnwxjrfBcmGP7Up2AFE/M3ZMGDmSl1X1TMybQk/zohj8Cqdg==}
     engines: {node: '>=v12'}
     dependencies:
-      '@commitlint/config-validator': 16.0.0
+      '@commitlint/config-validator': 16.1.0
       '@commitlint/execute-rule': 16.0.0
-      '@commitlint/resolve-extends': 16.0.0
+      '@commitlint/resolve-extends': 16.1.0
       '@commitlint/types': 16.0.0
       chalk: 4.1.1
       cosmiconfig: 7.0.0
@@ -5918,11 +5918,11 @@ packages:
       git-raw-commits: 2.0.10
     dev: true
 
-  /@commitlint/resolve-extends/16.0.0:
-    resolution: {integrity: sha512-Z/w9MAQUcxeawpCLtjmkVNXAXOmB2nhW+LYmHEZcx9O6UTauF/1+uuZ2/r0MtzTe1qw2JD+1QHVhEWYHVPlkdA==}
+  /@commitlint/resolve-extends/16.1.0:
+    resolution: {integrity: sha512-8182s6AFoUFX6+FT1PgQDt15nO2ogdR/EN8SYVAdhNXw1rLz8kT5saB/ICw567GuRAUgFTUMGCXy3ctMOXPEDg==}
     engines: {node: '>=v12'}
     dependencies:
-      '@commitlint/config-validator': 16.0.0
+      '@commitlint/config-validator': 16.1.0
       '@commitlint/types': 16.0.0
       import-fresh: 3.3.0
       lodash: 4.17.21
@@ -25662,6 +25662,82 @@ packages:
       - webpack-cli
     dev: false
 
+  /vue-styleguidist/4.44.15_27af0dd1480a5a558f43ec0bf27a843f:
+    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
+    engines: {node: '>=6', npm: '>=3'}
+    hasBin: true
+    peerDependencies:
+      pug: '>=3.0.0'
+      vue: '>=2.0.0'
+      vue-loader: '>=14.0.0'
+      vue-template-compiler: '>=2.0.0'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      pug:
+        optional: true
+    dependencies:
+      '@vxna/mini-html-webpack-template': 1.0.0
+      ast-types: 0.13.4
+      classnames: 2.3.1
+      clean-webpack-plugin: 3.0.0_webpack@4.46.0
+      cli-progress: 3.9.0
+      clipboard-copy: 3.2.0
+      clsx: 1.1.1
+      codemirror: 5.60.0
+      common-dir: 2.0.2
+      copy-webpack-plugin: 5.1.2_webpack@4.46.0
+      core-js: 3.20.3
+      css-loader: 2.1.1_webpack@4.46.0
+      es6-object-assign: 1.1.0
+      es6-promise: 4.2.8
+      escodegen: 1.14.3
+      findup: 0.1.5
+      function.name-polyfill: 1.0.6
+      github-slugger: 1.3.0
+      glob: 7.1.7
+      glogg: 1.0.2
+      hash-sum: 1.0.2
+      is-directory: 0.3.1
+      javascript-stringify: 1.6.0
+      jss: 10.9.0
+      kleur: 2.0.2
+      leven: 2.1.0
+      loader-utils: 1.4.0
+      lodash: 4.17.21
+      lru-cache: 4.1.5
+      mini-html-webpack-plugin: 2.2.1
+      minimist: 1.2.5
+      prismjs: 1.23.0
+      prop-types: 15.7.2
+      q-i: 2.0.1
+      qss: 2.0.3
+      react: 17.0.2
+      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
+      react-dev-utils: 11.0.4
+      react-dom: 17.0.2_react@17.0.2
+      react-group: 3.0.2_react@17.0.2
+      react-icons: 3.11.0_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
+      rewrite-imports: 2.0.3
+      source-map: 0.6.1
+      style-loader: 1.3.0_webpack@4.46.0
+      terser-webpack-plugin: 2.3.8_webpack@4.46.0
+      to-ast: 1.0.0
+      vue: 2.6.14
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
+      vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.46.0
+      webpack: 4.46.0
+      webpack-dev-server: 3.11.3_webpack@4.46.0
+      webpack-merge: 4.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+    dev: true
+
   /vue-styleguidist/4.44.15_2d7aa3bf6fe879a94c740fcbc2090ad6:
     resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
     engines: {node: '>=6', npm: '>=3'}
@@ -25730,6 +25806,83 @@ packages:
       vue-docgen-api: 4.44.15
       vue-inbrowser-compiler: 4.44.15
       vue-inbrowser-compiler-utils: 4.44.15
+      vue-template-compiler: 2.6.14
+      webpack: 4.46.0
+      webpack-dev-server: 3.11.3_webpack@4.46.0
+      webpack-merge: 4.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+    dev: true
+
+  /vue-styleguidist/4.44.15_6afc378a9271a24b43861ee84513ed7d:
+    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
+    engines: {node: '>=6', npm: '>=3'}
+    hasBin: true
+    peerDependencies:
+      pug: '>=3.0.0'
+      vue: '>=2.0.0'
+      vue-loader: '>=14.0.0'
+      vue-template-compiler: '>=2.0.0'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      pug:
+        optional: true
+    dependencies:
+      '@vxna/mini-html-webpack-template': 1.0.0
+      ast-types: 0.13.4
+      classnames: 2.3.1
+      clean-webpack-plugin: 3.0.0_webpack@4.46.0
+      cli-progress: 3.9.0
+      clipboard-copy: 3.2.0
+      clsx: 1.1.1
+      codemirror: 5.60.0
+      common-dir: 2.0.2
+      copy-webpack-plugin: 5.1.2_webpack@4.46.0
+      core-js: 3.20.3
+      css-loader: 2.1.1_webpack@4.46.0
+      es6-object-assign: 1.1.0
+      es6-promise: 4.2.8
+      escodegen: 1.14.3
+      findup: 0.1.5
+      function.name-polyfill: 1.0.6
+      github-slugger: 1.3.0
+      glob: 7.1.7
+      glogg: 1.0.2
+      hash-sum: 1.0.2
+      is-directory: 0.3.1
+      javascript-stringify: 1.6.0
+      jss: 10.9.0
+      kleur: 2.0.2
+      leven: 2.1.0
+      loader-utils: 1.4.0
+      lodash: 4.17.21
+      lru-cache: 4.1.5
+      mini-html-webpack-plugin: 2.2.1
+      minimist: 1.2.5
+      prismjs: 1.23.0
+      prop-types: 15.7.2
+      q-i: 2.0.1
+      qss: 2.0.3
+      react: 17.0.2
+      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
+      react-dev-utils: 11.0.4
+      react-dom: 17.0.2_react@17.0.2
+      react-group: 3.0.2_react@17.0.2
+      react-icons: 3.11.0_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
+      rewrite-imports: 2.0.3
+      source-map: 0.6.1
+      style-loader: 1.3.0_webpack@4.46.0
+      terser-webpack-plugin: 2.3.8_webpack@4.46.0
+      to-ast: 1.0.0
+      vue: 2.6.14
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
+      vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
       vue-template-compiler: 2.6.14
       webpack: 4.46.0
       webpack-dev-server: 3.11.3_webpack@4.46.0
@@ -25882,6 +26035,306 @@ packages:
       vue-inbrowser-compiler: 4.44.15
       vue-inbrowser-compiler-utils: 4.44.15
       vue-template-compiler: 2.6.14
+      webpack: 4.46.0
+      webpack-dev-server: 3.11.3_webpack@4.46.0
+      webpack-merge: 4.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+    dev: true
+
+  /vue-styleguidist/4.44.15_da14390b11f865bba438203843a58aa2:
+    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
+    engines: {node: '>=6', npm: '>=3'}
+    hasBin: true
+    peerDependencies:
+      pug: '>=3.0.0'
+      vue: '>=2.0.0'
+      vue-loader: '>=14.0.0'
+      vue-template-compiler: '>=2.0.0'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      pug:
+        optional: true
+    dependencies:
+      '@vxna/mini-html-webpack-template': 1.0.0
+      ast-types: 0.13.4
+      classnames: 2.3.1
+      clean-webpack-plugin: 3.0.0_webpack@4.46.0
+      cli-progress: 3.9.0
+      clipboard-copy: 3.2.0
+      clsx: 1.1.1
+      codemirror: 5.60.0
+      common-dir: 2.0.2
+      copy-webpack-plugin: 5.1.2_webpack@4.46.0
+      core-js: 3.20.3
+      css-loader: 2.1.1_webpack@4.46.0
+      es6-object-assign: 1.1.0
+      es6-promise: 4.2.8
+      escodegen: 1.14.3
+      findup: 0.1.5
+      function.name-polyfill: 1.0.6
+      github-slugger: 1.3.0
+      glob: 7.1.7
+      glogg: 1.0.2
+      hash-sum: 1.0.2
+      is-directory: 0.3.1
+      javascript-stringify: 1.6.0
+      jss: 10.9.0
+      kleur: 2.0.2
+      leven: 2.1.0
+      loader-utils: 1.4.0
+      lodash: 4.17.21
+      lru-cache: 4.1.5
+      mini-html-webpack-plugin: 2.2.1
+      minimist: 1.2.5
+      prismjs: 1.23.0
+      prop-types: 15.7.2
+      q-i: 2.0.1
+      qss: 2.0.3
+      react: 17.0.2
+      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
+      react-dev-utils: 11.0.4
+      react-dom: 17.0.2_react@17.0.2
+      react-group: 3.0.2_react@17.0.2
+      react-icons: 3.11.0_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
+      rewrite-imports: 2.0.3
+      source-map: 0.6.1
+      style-loader: 1.3.0_webpack@4.46.0
+      terser-webpack-plugin: 2.3.8_webpack@4.46.0
+      to-ast: 1.0.0
+      vue: 2.6.14
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
+      webpack: 4.46.0
+      webpack-dev-server: 3.11.3_webpack@4.46.0
+      webpack-merge: 4.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+    dev: true
+
+  /vue-styleguidist/4.44.15_vue-loader@15.9.8+webpack@4.46.0:
+    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
+    engines: {node: '>=6', npm: '>=3'}
+    hasBin: true
+    peerDependencies:
+      pug: '>=3.0.0'
+      vue: '>=2.0.0'
+      vue-loader: '>=14.0.0'
+      vue-template-compiler: '>=2.0.0'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      pug:
+        optional: true
+    dependencies:
+      '@vxna/mini-html-webpack-template': 1.0.0
+      ast-types: 0.13.4
+      classnames: 2.3.1
+      clean-webpack-plugin: 3.0.0_webpack@4.46.0
+      cli-progress: 3.9.0
+      clipboard-copy: 3.2.0
+      clsx: 1.1.1
+      codemirror: 5.60.0
+      common-dir: 2.0.2
+      copy-webpack-plugin: 5.1.2_webpack@4.46.0
+      core-js: 3.20.3
+      css-loader: 2.1.1_webpack@4.46.0
+      es6-object-assign: 1.1.0
+      es6-promise: 4.2.8
+      escodegen: 1.14.3
+      findup: 0.1.5
+      function.name-polyfill: 1.0.6
+      github-slugger: 1.3.0
+      glob: 7.1.7
+      glogg: 1.0.2
+      hash-sum: 1.0.2
+      is-directory: 0.3.1
+      javascript-stringify: 1.6.0
+      jss: 10.9.0
+      kleur: 2.0.2
+      leven: 2.1.0
+      loader-utils: 1.4.0
+      lodash: 4.17.21
+      lru-cache: 4.1.5
+      mini-html-webpack-plugin: 2.2.1
+      minimist: 1.2.5
+      prismjs: 1.23.0
+      prop-types: 15.7.2
+      q-i: 2.0.1
+      qss: 2.0.3
+      react: 17.0.2
+      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
+      react-dev-utils: 11.0.4
+      react-dom: 17.0.2_react@17.0.2
+      react-group: 3.0.2_react@17.0.2
+      react-icons: 3.11.0_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
+      rewrite-imports: 2.0.3
+      source-map: 0.6.1
+      style-loader: 1.3.0_webpack@4.46.0
+      terser-webpack-plugin: 2.3.8_webpack@4.46.0
+      to-ast: 1.0.0
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
+      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
+      webpack: 4.46.0
+      webpack-dev-server: 3.11.3_webpack@4.46.0
+      webpack-merge: 4.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+    dev: true
+
+  /vue-styleguidist/4.44.15_vue@2.6.14:
+    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
+    engines: {node: '>=6', npm: '>=3'}
+    hasBin: true
+    peerDependencies:
+      pug: '>=3.0.0'
+      vue: '>=2.0.0'
+      vue-loader: '>=14.0.0'
+      vue-template-compiler: '>=2.0.0'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      pug:
+        optional: true
+    dependencies:
+      '@vxna/mini-html-webpack-template': 1.0.0
+      ast-types: 0.13.4
+      classnames: 2.3.1
+      clean-webpack-plugin: 3.0.0
+      cli-progress: 3.9.0
+      clipboard-copy: 3.2.0
+      clsx: 1.1.1
+      codemirror: 5.60.0
+      common-dir: 2.0.2
+      copy-webpack-plugin: 5.1.2
+      core-js: 3.20.3
+      css-loader: 2.1.1
+      es6-object-assign: 1.1.0
+      es6-promise: 4.2.8
+      escodegen: 1.14.3
+      findup: 0.1.5
+      function.name-polyfill: 1.0.6
+      github-slugger: 1.3.0
+      glob: 7.1.7
+      glogg: 1.0.2
+      hash-sum: 1.0.2
+      is-directory: 0.3.1
+      javascript-stringify: 1.6.0
+      jss: 10.9.0
+      kleur: 2.0.2
+      leven: 2.1.0
+      loader-utils: 1.4.0
+      lodash: 4.17.21
+      lru-cache: 4.1.5
+      mini-html-webpack-plugin: 2.2.1
+      minimist: 1.2.5
+      prismjs: 1.23.0
+      prop-types: 15.7.2
+      q-i: 2.0.1
+      qss: 2.0.3
+      react: 17.0.2
+      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
+      react-dev-utils: 11.0.4
+      react-dom: 17.0.2_react@17.0.2
+      react-group: 3.0.2_react@17.0.2
+      react-icons: 3.11.0_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      react-styleguidist: 11.1.6_react-dom@17.0.2+react@17.0.2
+      rewrite-imports: 2.0.3
+      source-map: 0.6.1
+      style-loader: 1.3.0
+      terser-webpack-plugin: 2.3.8
+      to-ast: 1.0.0
+      vue: 2.6.14
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
+      webpack-dev-server: 3.11.3
+      webpack-merge: 4.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+    dev: true
+
+  /vue-styleguidist/4.44.15_vue@2.6.14+webpack@4.46.0:
+    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
+    engines: {node: '>=6', npm: '>=3'}
+    hasBin: true
+    peerDependencies:
+      pug: '>=3.0.0'
+      vue: '>=2.0.0'
+      vue-loader: '>=14.0.0'
+      vue-template-compiler: '>=2.0.0'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      pug:
+        optional: true
+    dependencies:
+      '@vxna/mini-html-webpack-template': 1.0.0
+      ast-types: 0.13.4
+      classnames: 2.3.1
+      clean-webpack-plugin: 3.0.0_webpack@4.46.0
+      cli-progress: 3.9.0
+      clipboard-copy: 3.2.0
+      clsx: 1.1.1
+      codemirror: 5.60.0
+      common-dir: 2.0.2
+      copy-webpack-plugin: 5.1.2_webpack@4.46.0
+      core-js: 3.20.3
+      css-loader: 2.1.1_webpack@4.46.0
+      es6-object-assign: 1.1.0
+      es6-promise: 4.2.8
+      escodegen: 1.14.3
+      findup: 0.1.5
+      function.name-polyfill: 1.0.6
+      github-slugger: 1.3.0
+      glob: 7.1.7
+      glogg: 1.0.2
+      hash-sum: 1.0.2
+      is-directory: 0.3.1
+      javascript-stringify: 1.6.0
+      jss: 10.9.0
+      kleur: 2.0.2
+      leven: 2.1.0
+      loader-utils: 1.4.0
+      lodash: 4.17.21
+      lru-cache: 4.1.5
+      mini-html-webpack-plugin: 2.2.1
+      minimist: 1.2.5
+      prismjs: 1.23.0
+      prop-types: 15.7.2
+      q-i: 2.0.1
+      qss: 2.0.3
+      react: 17.0.2
+      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
+      react-dev-utils: 11.0.4
+      react-dom: 17.0.2_react@17.0.2
+      react-group: 3.0.2_react@17.0.2
+      react-icons: 3.11.0_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
+      rewrite-imports: 2.0.3
+      source-map: 0.6.1
+      style-loader: 1.3.0_webpack@4.46.0
+      terser-webpack-plugin: 2.3.8_webpack@4.46.0
+      to-ast: 1.0.0
+      vue: 2.6.14
+      vue-docgen-api: 4.44.15
+      vue-inbrowser-compiler: 4.44.15
+      vue-inbrowser-compiler-utils: 4.44.15
       webpack: 4.46.0
       webpack-dev-server: 3.11.3_webpack@4.46.0
       webpack-merge: 4.2.2
