@@ -119,7 +119,7 @@
 		"@types/loader-utils": "1.1.6",
 		"@types/lodash": "4.14.178",
 		"@types/mini-html-webpack-plugin": "2.2.2",
-		"@types/prismjs": "1.16.6",
+		"@types/prismjs": "1.26.0",
 		"@types/pug": "2.0.6",
 		"@types/react-dev-utils": "9.0.10",
 		"@types/react-dom": "17.0.11",
