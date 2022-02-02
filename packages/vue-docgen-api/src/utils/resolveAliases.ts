@@ -4,7 +4,7 @@ import * as fs from 'fs'
 export default function resolveAliases(
 	filePath: string,
 	aliases: { [alias: string]: string | string[] },
-	refDirName: string = '',
+	refDirName = '',
 ): string {
 	const aliasKeys = Object.keys(aliases)
 	let aliasResolved = null

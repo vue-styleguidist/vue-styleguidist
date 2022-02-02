@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.1...v4.44.2) (2022-01-18)
+
+
+### Bug Fixes
+
+* **docgen:** parse TypeScript types / setup syntax ([2346b64](https://github.com/vue-styleguidist/vue-styleguidist/commit/2346b64a8c53423ebe853e1f48cab3bb2aae4956))
+
+
+
+
+
+## [4.44.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.0...v4.44.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* **docgen:** parse withDefaults() for defaults ([3ac0759](https://github.com/vue-styleguidist/vue-styleguidist/commit/3ac0759ef095d5645bb4fe633b1e9dd4acdfbbfc))
+
+
+
+
+
+# [4.44.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.3...v4.44.0) (2022-01-17)
+
+
+### Bug Fixes
+
+* **docgen:** typings for tests ([bf59f31](https://github.com/vue-styleguidist/vue-styleguidist/commit/bf59f319f26ed04132a2e1dba55352298cc1a504))
+
+
+### Features
+
+* **docgen:** add setup syntax api support ([127f288](https://github.com/vue-styleguidist/vue-styleguidist/commit/127f288bc2ed26f71629918d2494120c198d73bc))
+* **docgen:** allow template comments in js ([f2811f7](https://github.com/vue-styleguidist/vue-styleguidist/commit/f2811f7ec196506e0056e0ecaf2124b73acb3ae4))
+
+
+
+
+
 ## [4.43.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.2...v4.43.3) (2022-01-13)
 
 

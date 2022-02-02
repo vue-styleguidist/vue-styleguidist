@@ -112,8 +112,8 @@ describe('tests button', () => {
 			})
 		})
 
-		it('should the component has seventeen props', () => {
-			expect(docButton.props?.length).toBe(18)
+		it('gives the component 19 props', () => {
+			expect(docButton.props?.length).toBe(19)
 		})
 
 		it('should the component has propsAnother prop default equal "blue"', () => {
@@ -188,7 +188,7 @@ describe('tests button', () => {
 			expect(getTestDescriptor(docButton.props, 'propE').type).toEqual({ name: 'object' })
 		})
 
-		it('should value default propE to be a funtion', () => {
+		it('should value default propE to be a function', () => {
 			const dv = getTestDescriptor(docButton.props, 'propE').defaultValue
 			const functionNoSpaceNoReturn = dv ? dv.value.replace(/[ \n\r]/g, '') : ''
 			expect(functionNoSpaceNoReturn).toEqual(`{message:'hello'}`)
@@ -239,6 +239,16 @@ describe('tests button', () => {
 						title: 'asdf'
 					}
 				]
+			})
+		})
+
+		it('parses shapes', () => {
+			expect(getTestDescriptor(docButton.props, 'shape').type).toMatchObject({
+				name: `PropTypes.shape({
+  color: PropTypes.string,
+  fontSize: PropTypes.number
+})`,
+				func: true
 			})
 		})
 	})

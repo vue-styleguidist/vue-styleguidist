@@ -38,7 +38,7 @@ export default function buildParse(options: ParserOptions = {}): {
 	}
 	return {
 		parse(src: string): bt.File {
-			return parse(src, options) as any
+			return parse(src, options) as bt.File
 		}
 	}
 }

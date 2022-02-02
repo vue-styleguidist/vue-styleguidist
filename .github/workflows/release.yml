@@ -1,0 +1,99 @@
+name: Deliver
+on:
+  push:
+    branches:
+      - delivery
+
+concurrency: 
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Merge back
+        run: |
+          git checkout delivery
+          git config --local user.email "${{ secrets.BOT_EMAIL }}"
+          git config --local user.name "Vue Styleguidist Bot"
+          pnpm i --frozen-lockfile=false
+          git add pnpm-lock.yaml
+          git diff-index --quiet HEAD || git commit -m "merge - update lock file after release"
+
+      - name: Checkout dev branch
+        run: git checkout dev
+
+      - name: Check for merge conflict
+        id: check-conflict
+        run: echo "::set-output name=merge_conflict::$(git merge-tree $(git merge-base HEAD delivery) delivery HEAD | egrep '<<<<<<<')"
+
+      - name: Merge delivery into dev
+        id: merge-delivery
+        run: |
+          git merge delivery
+          git push
+        if: ${{ !steps.check-conflict.outputs.merge_conflict }}
+
+      - name: Failed merge, set merged status as failed
+        run: echo "::set-output name=merge_conflict::'failed merge'"
+        if: ${{ steps.merge-delivery.outcome != 'success' }}
+      - name: Checkout delivery
+        run: git checkout delivery
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Determine name of new branch
+        id: gen-names
+        run: |
+          echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+          echo "::set-output name=branch_name::$(git rev-parse --short HEAD)-delivery-into-dev"
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Create a copy of delivery on a new branch
+        run: git checkout -b ${{ steps.gen-names.outputs.branch_name }} delivery
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Push branch to remote
+        run: git push origin ${{ steps.gen-names.outputs.branch_name }}
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Create Pull Request
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const pull = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              base: 'dev',
+              head: '${{ steps.gen-names.outputs.branch_name }}',
+              title: 'chore: merge delivery (${{ steps.gen-names.outputs.sha }}) into dev',
+              body: `There was a merge conflict when trying to automatically merge delivery into dev. Please resolve the conflict and complete the merge.
+              DO NOT SQUASH AND MERGE
+              @${context.actor}`,
+              maintainer_can_modify: true,
+            })
+            await github.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pull.data.number,
+              reviewers: [context.actor],
+            })
+            await github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pull.data.number,
+              labels: ['auto-merge'],
+            })
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}

@@ -37,7 +37,7 @@ export default function scoper(css: string, suffix: string) {
 
 			// deal with other pseudo selectors
 			const [main, ...rest] = part.split(/:{1,2}/)
-			let pseudo = rest.map(piece => `:${piece}`).join('')
+			const pseudo = rest.map(piece => `:${piece}`).join('')
 			return main + suffix + pseudo
 		}).join(' ')
 

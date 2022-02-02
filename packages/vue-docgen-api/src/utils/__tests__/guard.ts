@@ -5,12 +5,14 @@ import {
 	isAttributeNode,
 	isSimpleExpressionNode,
 	isCompoundExpressionNode,
-	isInterpolationNode
+	isInterpolationNode,
+	isTextNode
 } from '../guards'
 
 describe('guards', () => {
 	it('should return false when null', () => {
-		expect(isCommentNode({})).toBeFalsy()
+		expect(isTextNode()).toBeFalsy()
+		expect(isCommentNode()).toBeFalsy()
 		expect(isBaseElementNode()).toBeFalsy()
 		expect(isDirectiveNode()).toBeFalsy()
 		expect(isAttributeNode()).toBeFalsy()

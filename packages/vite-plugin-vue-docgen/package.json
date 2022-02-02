@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "vite": "2.7.7",
-    "tsup": "^5.11.9"
+    "tsup": "5.11.12"
   },
   "repository": {
     "type": "git",

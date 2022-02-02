@@ -23,7 +23,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			return Promise.resolve()
 		}
 
-		const functionPath =  renderPath.length ? renderPath : setupPath;
+		const functionPath = renderPath.length ? renderPath : setupPath
 
 		let i = 0
 		let docBlock = getDocblock(functionPath[0], { commentIndex: i })

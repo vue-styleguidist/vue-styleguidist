@@ -167,7 +167,7 @@ new Vue({
 	})
 
 	it('should escape template correctly', () => {
-		let sut = compileVueCodeForEvalFunction(`
+		const sut = compileVueCodeForEvalFunction(`
 <template>
 	<div>{{ \`\${value}\` }}</div>
 </template>

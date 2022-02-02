@@ -7,11 +7,16 @@ import {
 	CompoundExpressionNode,
 	InterpolationNode,
 	CommentNode,
-	AttributeNode
+	AttributeNode,
+	TextNode
 } from '@vue/compiler-dom'
 
-export function isCommentNode(node: any): node is CommentNode {
-	return node.type === NodeTypes.COMMENT
+export function isTextNode(node?: Node): node is TextNode {
+	return !!node && node.type === NodeTypes.TEXT
+}
+
+export function isCommentNode(node?: Node): node is CommentNode {
+	return !!node && node.type === NodeTypes.COMMENT
 }
 
 export function isBaseElementNode(node?: Node): node is BaseElementNode {
