@@ -1,7 +1,13 @@
 name: Lint & Test
-on: push
+on:
+  push:
+    branches:
+      - '*'
+      - '!delivery'
+      - '!next'
+  workflow_call:
 
-concurrency: 
+concurrency:
   group: test-${{ github.ref }}
   cancel-in-progress: true
 
@@ -12,13 +18,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: Init & Build
         uses: ./.github/actions/build
 
       - name: Run lint
         run: pnpm lint
-      
 
       - name: Run unit tests
         run: pnpm test:jest

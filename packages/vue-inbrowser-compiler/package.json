@@ -1,6 +1,6 @@
 {
 	"name": "vue-inbrowser-compiler",
-	"version": "4.44.0",
+	"version": "4.44.15",
 	"description": "compile vue single file components right in your browser",
 	"module": "lib/vue-inbrowser-compiler.esm.js",
 	"main": "lib/vue-inbrowser-compiler.cjs.js",
@@ -23,7 +23,7 @@
 		"buble": "^0.20.0",
 		"camelcase": "^5.3.1",
 		"detect-browser": "^5.2.0",
-		"vue-inbrowser-compiler-utils": "^4.44.0",
+		"vue-inbrowser-compiler-utils": "^4.44.15",
 		"walkes": "^0.2.1"
 	},
 	"devDependencies": {
@@ -35,7 +35,7 @@
 		"rollup": "2.66.1",
 		"typescript": "4.5.5",
 		"vue": "2.6.14",
-    "vue-template-compiler": "2.6.14"
+		"vue-template-compiler": "2.6.14"
 	},
 	"author": "Bart Ledoux <ledouxb@me.com>",
 	"license": "MIT",

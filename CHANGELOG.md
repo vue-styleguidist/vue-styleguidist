@@ -3,6 +3,120 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.44.15 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.14 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.13 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.12 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.11 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.10 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.9 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.8 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.7 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.6 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.5 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## 4.44.4 (2022-01-31)
+
+**Note:** Version bump only for package vue-styleguidist
+
+
+
+
+
+## [4.44.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.2...v4.44.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* building circle solution in cypress ([9a94fdf](https://github.com/vue-styleguidist/vue-styleguidist/commit/9a94fdfc5b9575e493ec76b75d4bbf5e1dfed384))
+* delivery should not run test on their own ([e1fe33d](https://github.com/vue-styleguidist/vue-styleguidist/commit/e1fe33dddc35862923dd13462005b5c4c26f11ff))
+* display richer complex types in setup ([2254598](https://github.com/vue-styleguidist/vue-styleguidist/commit/22545980067bbc3db69d80420edb0657864ed61e))
+
+
+### Reverts
+
+* Revert "build: remove package to install" ([51c056f](https://github.com/vue-styleguidist/vue-styleguidist/commit/51c056f81782569538085b6880d643051069220b))
+
+
+
+
+
 ## [4.44.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.1...v4.44.2) (2022-01-18)
 
 
