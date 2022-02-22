@@ -160,7 +160,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
-      vue-styleguidist: 4.44.15_6afc378a9271a24b43861ee84513ed7d
+      vue-styleguidist: link:../../packages/vue-styleguidist
       vue-template-compiler: 2.6.14
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -212,7 +212,7 @@ importers:
       vue: 2.6.14
       vue-docgen-cli: 3.26.0
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -246,7 +246,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/docgen:
@@ -296,8 +296,8 @@ importers:
       style-loader: 0.19.1
       url-loader: 1.1.2_webpack@4.46.0
       vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-docgen-cli: 4.44.15
+      vue-docgen-api: link:../../packages/vue-docgen-api
+      vue-docgen-cli: link:../../packages/vue-docgen-cli
       vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
       vue-template-compiler: 2.6.14
       vuepress: 1.9.7_webpack-cli@4.5.0
@@ -354,7 +354,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -392,7 +392,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/jsx-examples:
@@ -430,7 +430,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.6.14
-      vue-styleguidist: 4.44.15_vue@2.6.14+webpack@4.46.0
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -478,7 +478,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.46.0
       vue-style-loader: 4.1.3
-      vue-styleguidist: 4.44.15_27af0dd1480a5a558f43ec0bf27a843f
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/router:
@@ -511,7 +511,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/sections:
@@ -544,7 +544,7 @@ importers:
       style-loader: 0.19.1
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/svg-loader:
@@ -567,7 +567,7 @@ importers:
       '@vue/cli-plugin-eslint': 4.5.12_9db647718d2403950c009bbb9e76737b
       '@vue/cli-service': 4.5.12_b5a51c319fc86e3ddd07c500910d97f3
       autoprefixer: 9.8.6
-      vue-cli-plugin-styleguidist: 4.44.15_9a025ce0f5980eabeaa7f2bb1418b132
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-svg-loader: 0.16.0_vue-template-compiler@2.6.14
       vue-template-compiler: 2.6.14
       webpack-bundle-analyzer: 3.9.0
@@ -581,7 +581,7 @@ importers:
       vue: 2.6.14
     devDependencies:
       '@vue/cli-service': 4.5.12_typescript@4.5.5
-      vue-styleguidist: 4.44.15_vue@2.6.14
+      vue-styleguidist: link:../../packages/vue-styleguidist
 
   examples/vuecli3:
     specifiers:
@@ -602,7 +602,7 @@ importers:
       '@vue/cli-plugin-eslint': 4.5.12_9db647718d2403950c009bbb9e76737b
       '@vue/cli-service': 4.5.12_b5a51c319fc86e3ddd07c500910d97f3
       cross-env: 7.0.3
-      vue-cli-plugin-styleguidist: 4.44.15_9a025ce0f5980eabeaa7f2bb1418b132
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.6.14
       webpack-bundle-analyzer: 3.9.0
 
@@ -667,7 +667,7 @@ importers:
       typescript: 4.2.3
       vue-class-component: 7.2.6_vue@2.6.14
       vue-cli-plugin-pug: 1.0.7
-      vue-cli-plugin-styleguidist: 4.44.15_0c377e0d9d5b010bc8ba6c5426e25f52
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.6.14
       webpack: 4.46.0
 
@@ -701,7 +701,7 @@ importers:
       eslint-plugin-react: 7.23.0_eslint@7.32.0
       prop-types: 15.7.2
       react: 17.0.2
-      vue-cli-plugin-styleguidist: 4.44.15_9a025ce0f5980eabeaa7f2bb1418b132
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.6.14
 
   examples/vuecli3-vuetify-ie:
@@ -734,7 +734,7 @@ importers:
       babel-polyfill: 6.26.0
       sass: 1.32.8
       sass-loader: 8.0.2_sass@1.32.8+webpack@4.46.0
-      vue-cli-plugin-styleguidist: 4.44.15_80245f707aa644d1cb385bbaae880b78
+      vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-cli-plugin-vuetify: 2.4.5_f48ffed9459088efe8cbdcebf6883b08
       vue-template-compiler: 2.6.14
       vuetify: 2.6.2_vue@2.6.14
@@ -792,7 +792,7 @@ importers:
       typescript: 4.2.3
       vue: 2.6.14
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
       webpack-bundle-analyzer: 3.3.2
 
@@ -834,7 +834,7 @@ importers:
       sass-loader: 8.0.2_sass@1.32.8+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/vuex:
@@ -867,7 +867,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_da14390b11f865bba438203843a58aa2
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/with-laravel-token:
@@ -898,7 +898,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_vue-loader@15.9.8+webpack@4.46.0
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   examples/with-sass-loader:
@@ -929,7 +929,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      vue-styleguidist: 4.44.15_vue-loader@15.9.8+webpack@4.46.0
+      vue-styleguidist: link:../../packages/vue-styleguidist
       webpack: 4.46.0
 
   packages/docgen-tests:
@@ -946,7 +946,7 @@ importers:
     dependencies:
       null-loader: 0.1.1
       typescript: 3.9.9
-      vue-docgen-cli: 4.44.15
+      vue-docgen-cli: link:../vue-docgen-cli
       webpack-merge: 4.2.2
     devDependencies:
       '@vue/cli': 4.5.15
@@ -959,7 +959,7 @@ importers:
       vue-styleguidist: ^4.44.15
       webpack-merge: ^4.2.2
     dependencies:
-      vue-styleguidist: 4.44.15
+      vue-styleguidist: link:../vue-styleguidist
       webpack-merge: 4.2.2
     devDependencies:
       '@vue/cli': 4.5.15
@@ -997,7 +997,7 @@ importers:
       pug: 3.0.2
       recast: 0.20.5
       ts-map: 1.0.3
-      vue-inbrowser-compiler-utils: 4.44.15
+      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
     devDependencies:
       '@test-vue-docgen/mixins': link:../docgen-tests
       '@types/pug': 2.0.6
@@ -1028,7 +1028,7 @@ importers:
       minimist: 1.2.5
       mkdirp: 0.5.5
       prettier: 1.19.1
-      vue-docgen-api: 4.44.15
+      vue-docgen-api: link:../vue-docgen-api
     devDependencies:
       '@types/lodash.memoize': 4.1.6
       '@types/minimist': 1.2.2
@@ -1059,7 +1059,7 @@ importers:
       buble: 0.20.0
       camelcase: 5.3.1
       detect-browser: 5.2.0
-      vue-inbrowser-compiler-utils: 4.44.15
+      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       walkes: 0.2.1
     devDependencies:
       '@rollup/plugin-commonjs': 15.1.0_rollup@2.66.1
@@ -1099,7 +1099,7 @@ importers:
     dependencies:
       escodegen: 1.14.3
       to-ast: 1.0.0
-      vue-docgen-api: 4.44.15
+      vue-docgen-api: link:../vue-docgen-api
 
   packages/vue-styleguidist:
     specifiers:
@@ -1123,7 +1123,7 @@ importers:
       '@types/loader-utils': 1.1.6
       '@types/lodash': 4.14.178
       '@types/mini-html-webpack-plugin': 2.2.2
-      '@types/prismjs': 1.26.0
+      '@types/prismjs': 1.16.6
       '@types/pug': 2.0.6
       '@types/react-dev-utils': 9.0.10
       '@types/react-dom': 17.0.11
@@ -1173,7 +1173,7 @@ importers:
       qss: ^2.0.3
       react: ^17.0.2
       react-codemirror2: ^7.2.1
-      react-dev-utils: ^12.0.0
+      react-dev-utils: ^11.0.4
       react-dom: ^17.0.2
       react-group: ^3.0.2
       react-icons: ^3.11.0
@@ -1232,7 +1232,7 @@ importers:
       qss: 2.0.3
       react: 17.0.2
       react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 12.0.0_6704379d0f871aa53c51745f685ed342
+      react-dev-utils: 11.0.4
       react-dom: 17.0.2_react@17.0.2
       react-group: 3.0.2_react@17.0.2
       react-icons: 3.11.0_react@17.0.2
@@ -1244,9 +1244,9 @@ importers:
       style-loader: 1.3.0_webpack@4.46.0
       terser-webpack-plugin: 2.3.8_webpack@4.46.0
       to-ast: 1.0.0
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
+      vue-docgen-api: link:../vue-docgen-api
+      vue-inbrowser-compiler: link:../vue-inbrowser-compiler
+      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       webpack-dev-server: 3.11.2_webpack@4.46.0
       webpack-merge: 4.2.2
     devDependencies:
@@ -1270,7 +1270,7 @@ importers:
       '@types/loader-utils': 1.1.6
       '@types/lodash': 4.14.178
       '@types/mini-html-webpack-plugin': 2.2.2
-      '@types/prismjs': 1.26.0
+      '@types/prismjs': 1.16.6
       '@types/pug': 2.0.6
       '@types/react-dev-utils': 9.0.10
       '@types/react-dom': 17.0.11
@@ -7457,6 +7457,7 @@ packages:
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
+    dev: true
 
   /@types/prettier/1.19.1:
     resolution: {integrity: sha512-5qOlnZscTn4xxM5MeGXAMOsIOIKIbh9e85zJWfBRVPlRMEVawzoPhINYbRGkBZCI8LxvBe7tJCdWiarA99OZfQ==}
@@ -7466,8 +7467,8 @@ packages:
     resolution: {integrity: sha512-PijRCG/K3s3w1We6ynUKdxEc5AcuuH3NBmMDP8uvKVp6X43UY7NQlTzczakXP3DJR0F4dfNQIGjU2cUeRYs2AA==}
     dev: true
 
-  /@types/prismjs/1.26.0:
-    resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
+  /@types/prismjs/1.16.6:
+    resolution: {integrity: sha512-dTvnamRITNqNkqhlBd235kZl3KfVJQQoT5jkXeiWSBK7i4/TLKBNLV0S1wOt8gy4E2TY722KLtdmv2xc6+Wevg==}
     dev: true
 
   /@types/prop-types/15.7.3:
@@ -8670,6 +8671,7 @@ packages:
       '@vue/shared': 3.2.29
       estree-walker: 2.0.2
       source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-dom/3.2.20:
     resolution: {integrity: sha512-QnI77ec/JtV7R0YBbcVayYTDCRcI9OCbxiUQK6izVyqQO0658n0zQuoNwe+bYgtqnvGAIqTR3FShTd5y4oOjdg==}
@@ -8682,6 +8684,7 @@ packages:
     dependencies:
       '@vue/compiler-core': 3.2.29
       '@vue/shared': 3.2.29
+    dev: true
 
   /@vue/compiler-sfc/3.2.20:
     resolution: {integrity: sha512-03aZo+6tQKiFLfunHKSPZvdK4Jsn/ftRCyaro8AQIWkuxJbvSosbKK6HTTn+D2c3nPScG155akJoxKENw7rftQ==}
@@ -8711,6 +8714,7 @@ packages:
       magic-string: 0.25.7
       postcss: 8.4.5
       source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-ssr/3.2.20:
     resolution: {integrity: sha512-rzzVVYivm+EjbfiGQvNeyiYZWzr6Hkej97RZLZvcumacQlnKv9176Xo9rRyeWwFbBlxmtNdrVMslRXtipMXk2w==}
@@ -8724,6 +8728,7 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.29
       '@vue/shared': 3.2.29
+    dev: true
 
   /@vue/component-compiler-utils/3.2.0:
     resolution: {integrity: sha512-lejBLa7xAMsfiZfNp7Kv51zOzifnb29FwdnMLa96z26kXErPFioSf9BMcePVIQ6/Gc6/mC0UrPpxAWIHyae0vw==}
@@ -8789,6 +8794,7 @@ packages:
       '@vue/shared': 3.2.29
       estree-walker: 2.0.2
       magic-string: 0.25.7
+    dev: true
 
   /@vue/ref-transform/3.2.20:
     resolution: {integrity: sha512-Y42d3PGlYZ1lXcF3dbd3+qU/C/a3wYEZ949fyOI5ptzkjDWlkfU6vn74fmOjsLjEcjs10BXK2qO99FqQIK2r1Q==}
@@ -8805,6 +8811,7 @@ packages:
 
   /@vue/shared/3.2.29:
     resolution: {integrity: sha512-BjNpU8OK6Z0LVzGUppEk0CMYm/hKDnZfYdjSmPOs0N+TR1cLKJAkDwW8ASZUvaaSLEi6d3hVM7jnWnX+6yWnHw==}
+    dev: true
 
   /@vue/test-utils/1.1.3_9065e7474e033a8e4b95615fc8e6c36c:
     resolution: {integrity: sha512-BAY1Cwe9JpkJseimC295EW3YlAmgIJI9OPkg2FSP62+PHZooB0B+wceDi9TYyU57oqzL0yLbcP73JKFpKiLc9A==}
@@ -11015,6 +11022,7 @@ packages:
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+    dev: true
 
   /camel-case/3.0.0:
     resolution: {integrity: sha1-yjw2iKTpzzpM2nd9xNy8cTJJz3M=}
@@ -11163,6 +11171,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
 
   /char-regex/1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
@@ -11253,6 +11262,7 @@ packages:
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
+    requiresBuild: true
     dependencies:
       anymatch: 3.1.2
       braces: 3.0.2
@@ -11263,6 +11273,7 @@ packages:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.2
+    optional: true
 
   /chownr/1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
@@ -11327,6 +11338,7 @@ packages:
     dependencies:
       '@types/webpack': 4.41.32
       del: 4.1.1
+    dev: true
 
   /clean-webpack-plugin/3.0.0_webpack@4.46.0:
     resolution: {integrity: sha512-MciirUH5r+cYLGCOL5JX/ZLzOZbVr1ot3Fw+KcvbhUb6PM+yycqd9ZhIlcigQ5gl+XhppNmw3bEFuaaMNyLj3A==}
@@ -11337,6 +11349,7 @@ packages:
       '@types/webpack': 4.41.32
       del: 4.1.1
       webpack: 4.46.0
+    dev: false
 
   /cli-boxes/2.2.1:
     resolution: {integrity: sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==}
@@ -11893,6 +11906,7 @@ packages:
       schema-utils: 1.0.0
       serialize-javascript: 4.0.0
       webpack-log: 2.0.0
+    dev: true
 
   /copy-webpack-plugin/5.1.2_webpack@4.46.0:
     resolution: {integrity: sha512-Uh7crJAco3AjBvgAy9Z75CjK8IG+gxaErro71THQ+vv/bl4HaQcpkexAY8KVW/T6D2W2IRr+couF/knIRkZMIQ==}
@@ -11931,6 +11945,7 @@ packages:
       schema-utils: 3.0.0
       serialize-javascript: 5.0.1
       webpack-sources: 1.4.3
+    dev: true
 
   /copy-webpack-plugin/6.4.1_webpack@4.46.0:
     resolution: {integrity: sha512-MXyPCjdPVx5iiWyl40Va3JGh27bKzOTNY3NjUTrosD2q7dR/cLD0013uqJ3BpFbUjyONINjb6qI7nDIJujrMbA==}
@@ -11950,6 +11965,7 @@ packages:
       serialize-javascript: 5.0.1
       webpack: 4.46.0
       webpack-sources: 1.4.3
+    dev: false
 
   /core-js-compat/3.16.0:
     resolution: {integrity: sha512-5D9sPHCdewoUK7pSUPfTF7ZhLh8k9/CoJXWUEo+F1dZT5Z1DVgcuRqUKhjeKW+YLb8f21rTFgWwQJiNw1hoZ5Q==}
@@ -12050,6 +12066,8 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.2
+    dev: true
+    optional: true
 
   /cosmiconfig/7.0.0:
     resolution: {integrity: sha512-pondGvTuVYDk++upghXJabWzL6Kxu6f26ljFw64Swq9v6sQPUL3EUlVDV56diOjpCayKihL6hVe8exIACU4XcA==}
@@ -12207,6 +12225,7 @@ packages:
       postcss-modules-values: 2.0.0
       postcss-value-parser: 3.3.1
       schema-utils: 1.0.0
+    dev: true
 
   /css-loader/2.1.1_webpack@4.46.0:
     resolution: {integrity: sha512-OcKJU/lt232vl1P9EEDamhoO9iKY3tIjY5GU+XDLblAykTdgs6Ux9P1hTHve8nFKy5KPpOXOsVI/hIwi3841+w==}
@@ -12871,11 +12890,6 @@ packages:
 
   /defer-to-connect/1.1.3:
     resolution: {integrity: sha512-0ISdNousHvZT2EiFlZeZAHBUvSxmKswVCEf8hW7KWgG4a8MVEu/3Vb6uWYozkjylyCxe0JBIiRB1jV45S70WVQ==}
-
-  /define-lazy-prop/2.0.0:
-    resolution: {integrity: sha512-Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og==}
-    engines: {node: '>=8'}
-    dev: false
 
   /define-properties/1.1.3:
     resolution: {integrity: sha512-3MqfYKj2lLzdMSf8ZIZE/V+Zuy+BgD6f164e8K2w7dgnpKArBDerGYpM46IYYcjnkdPNMjPk9A6VFB8+3SKlXQ==}
@@ -13698,6 +13712,7 @@ packages:
   /escape-string-regexp/4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+    dev: true
 
   /escodegen/1.14.3:
     resolution: {integrity: sha512-qFcX0XJkdg+PB3xjZZG/wKSuT1PnQWx57+TVSjIMmILd2yC/6ByYElPwJnslDsuWuSAp4AwJGumarAAmJch5Kw==}
@@ -14794,11 +14809,6 @@ packages:
     resolution: {integrity: sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg==}
     engines: {node: '>= 0.4.0'}
 
-  /filesize/8.0.7:
-    resolution: {integrity: sha512-pjmC+bkIF8XI7fWaH8KxHcZL3DPybs1roSKP4rKDvy20tAWwIObE4+JIseG2byfGKhud5ZnM4YSGKBz7Sh0ndQ==}
-    engines: {node: '>= 0.4.0'}
-    dev: false
-
   /fill-range/2.2.4:
     resolution: {integrity: sha512-cnrcCbj01+j2gTG921VZPnHbjmdAf8oQV/iGeV2kZxGSyfYjjTyY79ErsK1WJWMpw6DaApEX72binqJE+/d+5Q==}
     engines: {node: '>=0.10.0'}
@@ -14903,6 +14913,7 @@ packages:
     dependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
+    dev: true
 
   /findup/0.1.5:
     resolution: {integrity: sha1-itkpozk7rGJ5V6fl3kYjsGsOLOs=}
@@ -15064,39 +15075,6 @@ packages:
       tapable: 1.1.3
     dev: true
     optional: true
-
-  /fork-ts-checker-webpack-plugin/6.5.0_6704379d0f871aa53c51745f685ed342:
-    resolution: {integrity: sha512-cS178Y+xxtIjEUorcHddKS7yCMlrDPV31mt47blKKRfMd70Kxu5xruAFE2o9sDY6wVC5deuob/u/alD04YYHnw==}
-    engines: {node: '>=10', yarn: '>=1.0.0'}
-    peerDependencies:
-      eslint: '>= 6'
-      typescript: '>= 2.7'
-      vue-template-compiler: '*'
-      webpack: '>= 4'
-    peerDependenciesMeta:
-      eslint:
-        optional: true
-      vue-template-compiler:
-        optional: true
-    dependencies:
-      '@babel/code-frame': 7.16.7
-      '@types/json-schema': 7.0.7
-      chalk: 4.1.2
-      chokidar: 3.5.3
-      cosmiconfig: 6.0.0
-      deepmerge: 4.2.2
-      eslint: 7.32.0
-      fs-extra: 9.1.0
-      glob: 7.1.7
-      memfs: 3.2.2
-      minimatch: 3.0.4
-      schema-utils: 2.7.0
-      semver: 7.3.5
-      tapable: 1.1.3
-      typescript: 4.5.5
-      vue-template-compiler: 2.6.14
-      webpack: 4.46.0
-    dev: false
 
   /form-data/2.3.3:
     resolution: {integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==}
@@ -16377,10 +16355,6 @@ packages:
   /immer/8.0.1:
     resolution: {integrity: sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==}
 
-  /immer/9.0.12:
-    resolution: {integrity: sha512-lk7UNmSbAukB5B6dh9fnh5D0bJTOFKxVg2cyJWTYrWRfhLrLMBquONcUs3aFq507hNoIZEDDh8lb8UtOizSMhA==}
-    dev: false
-
   /import-cwd/2.1.0:
     resolution: {integrity: sha1-qmzzbnInYShcs3HsZRn1PiQ1sKk=}
     engines: {node: '>=4'}
@@ -16400,6 +16374,7 @@ packages:
     dependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
+    dev: true
 
   /import-from/2.1.0:
     resolution: {integrity: sha1-M1238qev/VOqpHHUuAId7ja387E=}
@@ -17876,6 +17851,7 @@ packages:
 
   /json-parse-even-better-errors/2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
+    dev: true
 
   /json-parse-helpfulerror/1.0.3:
     resolution: {integrity: sha1-E/FM4C7tTpgSl7ZOueO5MuLdE9w=}
@@ -18071,6 +18047,7 @@ packages:
       csstype: 3.0.7
       is-in-browser: 1.1.3
       tiny-warning: 1.0.3
+    dev: true
 
   /jstransformer/1.0.0:
     resolution: {integrity: sha1-7Yvwkh4vPx7U1cGkT2hwntJHIsM=}
@@ -18238,6 +18215,7 @@ packages:
 
   /lines-and-columns/1.1.6:
     resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=}
+    dev: true
 
   /linkify-it/2.2.0:
     resolution: {integrity: sha512-GnAl/knGn+i1U/wjBz3akz2stz+HrHLsxMwHQGofCDfPvlf+gDKN58UtfmUquTY4/MXeE2x7k19KQmeoZi94Iw==}
@@ -18440,11 +18418,6 @@ packages:
       emojis-list: 3.0.0
       json5: 2.2.0
 
-  /loader-utils/3.2.0:
-    resolution: {integrity: sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ==}
-    engines: {node: '>= 12.13.0'}
-    dev: false
-
   /locate-path/2.0.0:
     resolution: {integrity: sha1-K1aLJl7slExtnA3pw9u7ygNUzY4=}
     engines: {node: '>=4'}
@@ -18471,6 +18444,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
+    dev: true
 
   /lodash-id/0.14.0:
     resolution: {integrity: sha1-uvSJNOVDobXWNG+MhGmLGoyAOJY=}
@@ -19199,6 +19173,7 @@ packages:
       webpack: '>=4'
     dependencies:
       webpack-sources: 2.2.0
+    dev: true
 
   /mini-html-webpack-plugin/3.1.3_webpack@4.46.0:
     resolution: {integrity: sha512-WhnO8ZvOILCCkk4yNTBdoiZNwyY4ktrQ+wOOGdMAtyeK/qi4Viaidwjlf0itG5AjN7sWsOI6ww8f/8V5JfDQkA==}
@@ -19208,6 +19183,7 @@ packages:
     dependencies:
       webpack: 4.46.0
       webpack-sources: 2.2.0
+    dev: false
 
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
@@ -19391,6 +19367,7 @@ packages:
     resolution: {integrity: sha512-fmsZYa9lpn69Ad5eDn7FMcnnSR+8R34W9qJEijxYhTbfOWzr22n1QxCMzXLK+ODyW2973V3Fux959iQoUxzUIA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+    dev: true
 
   /nanomatch/1.2.13:
     resolution: {integrity: sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA==}
@@ -19961,15 +19938,6 @@ packages:
       is-docker: 2.1.1
       is-wsl: 2.2.0
 
-  /open/8.4.0:
-    resolution: {integrity: sha512-XgFPPM+B28FtCCgSb9I+s9szOC1vZRSwgWsRUA5ylIxRTgKozqjOCrVOqGsYABPYK5qnfqClxZTFBa8PKt2v6Q==}
-    engines: {node: '>=12'}
-    dependencies:
-      define-lazy-prop: 2.0.0
-      is-docker: 2.1.1
-      is-wsl: 2.2.0
-    dev: false
-
   /opencollective-postinstall/2.0.3:
     resolution: {integrity: sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==}
     hasBin: true
@@ -20158,6 +20126,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-limit: 3.1.0
+    dev: true
 
   /p-map/1.2.0:
     resolution: {integrity: sha512-r6zKACMNhjPJMTl8KcFH4li//gkrXWfbD6feV8l6doRHlzljFWGJ2AP6iKaCJXyZmAUMOPtvbW7EXkbWO/pLEA==}
@@ -20237,6 +20206,7 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       callsites: 3.1.0
+    dev: true
 
   /parse-asn1/5.1.6:
     resolution: {integrity: sha512-RnZRo1EPU6JBnra2vGHj0yhp6ebyjBZpmUCLHWiFhxlzvBCCpAuZ7elsBp1PVAbQN0/04VD/19rfzlBSwLstMw==}
@@ -20306,6 +20276,7 @@ packages:
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.1.6
+    dev: true
 
   /parse-link-header/2.0.0:
     resolution: {integrity: sha512-xjU87V0VyHZybn2RrCX5TIFGxTVZE6zqqZWMPlIKiSKuWh/X5WZdt+w1Ki1nXB+8L/KtL+nZ4iq+sfI6MrhhMw==}
@@ -21200,6 +21171,7 @@ packages:
       nanoid: 3.2.0
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
 
   /prelude-ls/1.1.2:
     resolution: {integrity: sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=}
@@ -21345,14 +21317,6 @@ packages:
     dependencies:
       kleur: 3.0.3
       sisteransi: 1.0.5
-
-  /prompts/2.4.2:
-    resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
-    engines: {node: '>= 6'}
-    dependencies:
-      kleur: 3.0.3
-      sisteransi: 1.0.5
-    dev: false
 
   /prop-types/15.7.2:
     resolution: {integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==}
@@ -21883,41 +21847,6 @@ packages:
       strip-ansi: 6.0.0
       text-table: 0.2.0
 
-  /react-dev-utils/12.0.0_6704379d0f871aa53c51745f685ed342:
-    resolution: {integrity: sha512-xBQkitdxozPxt1YZ9O1097EJiVpwHr9FoAuEVURCKV0Av8NBERovJauzP7bo1ThvuhZ4shsQ1AJiu4vQpoT1AQ==}
-    engines: {node: '>=14'}
-    dependencies:
-      '@babel/code-frame': 7.16.7
-      address: 1.1.2
-      browserslist: 4.19.1
-      chalk: 4.1.2
-      cross-spawn: 7.0.3
-      detect-port-alt: 1.1.6
-      escape-string-regexp: 4.0.0
-      filesize: 8.0.7
-      find-up: 5.0.0
-      fork-ts-checker-webpack-plugin: 6.5.0_6704379d0f871aa53c51745f685ed342
-      global-modules: 2.0.0
-      globby: 11.1.0
-      gzip-size: 6.0.0
-      immer: 9.0.12
-      is-root: 2.1.0
-      loader-utils: 3.2.0
-      open: 8.4.0
-      pkg-up: 3.1.0
-      prompts: 2.4.2
-      react-error-overlay: 6.0.10
-      recursive-readdir: 2.2.2
-      shell-quote: 1.7.3
-      strip-ansi: 6.0.1
-      text-table: 0.2.0
-    transitivePeerDependencies:
-      - eslint
-      - typescript
-      - vue-template-compiler
-      - webpack
-    dev: false
-
   /react-docgen-annotation-resolver/2.0.0:
     resolution: {integrity: sha512-0rNR0SZAjd4eHTYP3Iq/pi0zTznHtXSLAKOXbK6tGjwd9bTaXUaKQK7hihRvGvqxNjUy0WGTcFgX+lT64vIXBg==}
     engines: {node: '>=8.10.0'}
@@ -22091,6 +22020,7 @@ packages:
       - supports-color
       - webpack
       - webpack-cli
+    dev: false
 
   /react-styleguidist/11.1.6_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-ZO4tS8/cPwpabz5S3kZ6hRFcvdgsJwWnus6MC23BiNXCpTvoiRlnF8C90gry63acgVqeaZZb35+P/MZ4AVRdUg==}
@@ -22169,6 +22099,7 @@ packages:
       - supports-color
       - webpack
       - webpack-cli
+    dev: true
 
   /react-test-renderer/17.0.2:
     resolution: {integrity: sha512-yaQ9cB89c17PUb0x6UfWRs7kQCorVdHlutU1boVPEsB8IDZH6n9tHxMacc3y0JoXOJUsZb/t/Mb8FUWMKaM7iQ==}
@@ -22275,6 +22206,7 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+    optional: true
 
   /readline-sync/1.4.10:
     resolution: {integrity: sha512-gNva8/6UAe8QYepIQH/jQ2qn91Qj0B9sYjMBBs3QOB8F2CXcKgLxQaJRP76sWVRQt+QU+8fAkCbCvjjMFu7Ycw==}
@@ -22592,6 +22524,7 @@ packages:
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
+    dev: true
 
   /resolve-from/5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
@@ -22868,6 +22801,8 @@ packages:
       '@types/json-schema': 7.0.7
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
+    dev: true
+    optional: true
 
   /schema-utils/2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
@@ -23104,10 +23039,6 @@ packages:
   /shell-quote/1.7.2:
     resolution: {integrity: sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==}
 
-  /shell-quote/1.7.3:
-    resolution: {integrity: sha512-Vpfqwm4EnqGdlsBFNmHhxhElJYrdfcxPThu+ryKS5J8L/fhAwLazFZtq+S+TWZ9ANj2piSQLGj6NQg+lKPmxrw==}
-    dev: false
-
   /shelljs/0.8.5:
     resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
     engines: {node: '>=4'}
@@ -23282,6 +23213,7 @@ packages:
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /source-map-resolve/0.5.3:
     resolution: {integrity: sha512-Htz+RnsXWk5+P2slx5Jh3Q66vhQj1Cllm0zvnaY98+NFx+Dv2CF/f5O/t8x+KaNdrdIAsruNzoh/KpialbqAnw==}
@@ -23787,6 +23719,7 @@ packages:
     dependencies:
       loader-utils: 2.0.0
       schema-utils: 2.7.1
+    dev: true
 
   /style-loader/1.3.0_webpack@4.46.0:
     resolution: {integrity: sha512-V7TCORko8rs9rIqkSrlMfkqA63DfoGBBJmK1kKGCcSi+BWb4cqz0SRsnp4l6rU5iwOEd0/2ePv68SV22VXon4Q==}
@@ -23797,6 +23730,7 @@ packages:
       loader-utils: 2.0.0
       schema-utils: 2.7.1
       webpack: 4.46.0
+    dev: false
 
   /style-resources-loader/1.4.1_webpack@4.46.0:
     resolution: {integrity: sha512-UaAoQXq20relw6B633z4QZDxDyW7gevTt1e0y3MZtzdZfnvB90UL658czAgNc609Y7Kn5ErdthK9bSVhnykBUA==}
@@ -24073,6 +24007,7 @@ packages:
       source-map: 0.6.1
       terser: 4.8.0
       webpack-sources: 1.4.3
+    dev: true
 
   /terser-webpack-plugin/2.3.8_webpack@4.46.0:
     resolution: {integrity: sha512-/fKw3R+hWyHfYx7Bv6oPqmk4HGQcrWLtV3X6ggvPuwPNHSnzvVV51z6OaaCOus4YLjutYGOz3pEpbhe6Up2s1w==}
@@ -24106,6 +24041,7 @@ packages:
       source-map: 0.6.1
       terser: 5.6.1
       webpack-sources: 1.4.3
+    dev: true
 
   /terser-webpack-plugin/4.2.3_webpack@4.46.0:
     resolution: {integrity: sha512-jTgXh40RnvOrLQNgIkwEKnQ8rmHjHK4u+6UBEi+W+FPmvb+uo+chJXntKe7/3lW5mNysgSWD60KyesnhW8D6MQ==}
@@ -25195,60 +25131,6 @@ packages:
       raw-loader: 0.5.1
     dev: true
 
-  /vue-cli-plugin-styleguidist/4.44.15_0c377e0d9d5b010bc8ba6c5426e25f52:
-    resolution: {integrity: sha512-fQcTE0ULrDqSImedpWnK8hKNu5tu3E03N/aNFkBHwJJlTKppoXQlApTIbpKA3Stt5gMCQMj9CNvvVKiHBoxqVw==}
-    peerDependencies:
-      '@vue/cli-service': '>= 3'
-    dependencies:
-      '@vue/cli-service': 4.5.12_c7ed5e23a5b434f031e29e0178f815a2
-      vue-styleguidist: 4.44.15_2d7aa3bf6fe879a94c740fcbc2090ad6
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - pug
-      - supports-color
-      - vue
-      - vue-loader
-      - vue-template-compiler
-      - webpack
-      - webpack-cli
-    dev: true
-
-  /vue-cli-plugin-styleguidist/4.44.15_80245f707aa644d1cb385bbaae880b78:
-    resolution: {integrity: sha512-fQcTE0ULrDqSImedpWnK8hKNu5tu3E03N/aNFkBHwJJlTKppoXQlApTIbpKA3Stt5gMCQMj9CNvvVKiHBoxqVw==}
-    peerDependencies:
-      '@vue/cli-service': '>= 3'
-    dependencies:
-      '@vue/cli-service': 4.5.12_70d18ae91174f2ab66d643d41220f508
-      vue-styleguidist: 4.44.15_a42bb692177b843b90339e5542ad3f12
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - pug
-      - supports-color
-      - vue
-      - vue-loader
-      - vue-template-compiler
-      - webpack
-      - webpack-cli
-    dev: true
-
-  /vue-cli-plugin-styleguidist/4.44.15_9a025ce0f5980eabeaa7f2bb1418b132:
-    resolution: {integrity: sha512-fQcTE0ULrDqSImedpWnK8hKNu5tu3E03N/aNFkBHwJJlTKppoXQlApTIbpKA3Stt5gMCQMj9CNvvVKiHBoxqVw==}
-    peerDependencies:
-      '@vue/cli-service': '>= 3'
-    dependencies:
-      '@vue/cli-service': 4.5.12_b5a51c319fc86e3ddd07c500910d97f3
-      vue-styleguidist: 4.44.15_9065e7474e033a8e4b95615fc8e6c36c
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - pug
-      - supports-color
-      - vue
-      - vue-loader
-      - vue-template-compiler
-      - webpack
-      - webpack-cli
-    dev: true
-
   /vue-cli-plugin-vuetify/2.4.5_f48ffed9459088efe8cbdcebf6883b08:
     resolution: {integrity: sha512-CnCVzG6iZAsMMqTkijZ0gRkPB6s4zHPWyFX1VpBBKVyxZESayQhUoMCZRZUOZNjvvZpq1LPgviq+8zcliSu73g==}
     peerDependencies:
@@ -25332,6 +25214,7 @@ packages:
       recast: 0.20.5
       ts-map: 1.0.3
       vue-inbrowser-compiler-utils: 4.44.15
+    dev: true
 
   /vue-docgen-cli/3.26.0:
     resolution: {integrity: sha512-93nEWRADZr+wURQM761gX56cdVlxlMrQWlDnAS7AKUO+YBINkxJ4b5zPVp94Vz+dNcr+jy7lBrsAutuP+9Pksw==}
@@ -25344,19 +25227,6 @@ packages:
       prettier: 1.19.1
       vue-docgen-api: 3.26.0
     dev: true
-
-  /vue-docgen-cli/4.44.15:
-    resolution: {integrity: sha512-Xz6Z6IX6aVaIXoXIzkrfXxWcXBWLmdvAnMZrXgi15byeezJX6zoncTuphy9GlI1qy2tf99r440k2d1kin7bycQ==}
-    hasBin: true
-    dependencies:
-      chokidar: 3.5.3
-      globby: 10.0.2
-      lodash.memoize: 4.1.2
-      minimist: 1.2.5
-      mkdirp: 0.5.5
-      prettier: 1.19.1
-      vue-docgen-api: 4.44.15
-    dev: false
 
   /vue-eslint-parser/5.0.0_eslint@5.16.0:
     resolution: {integrity: sha512-JlHVZwBBTNVvzmifwjpZYn0oPWH2SgWv5dojlZBsrhablDu95VFD+hriB1rQGwbD+bms6g+rAFhQHk6+NyiS6g==}
@@ -25743,760 +25613,6 @@ packages:
       - webpack-cli
     dev: true
 
-  /vue-styleguidist/4.44.15:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2
-      core-js: 3.20.3
-      css-loader: 2.1.1
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_react-dom@17.0.2+react@17.0.2
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0
-      terser-webpack-plugin: 2.3.8
-      to-ast: 1.0.0
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      webpack-dev-server: 3.11.3
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: false
-
-  /vue-styleguidist/4.44.15_27af0dd1480a5a558f43ec0bf27a843f:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-loader: 15.9.3_css-loader@3.6.0+webpack@4.46.0
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_2d7aa3bf6fe879a94c740fcbc2090ad6:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      pug: 3.0.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-template-compiler: 2.6.14
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_6afc378a9271a24b43861ee84513ed7d:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-loader: 15.9.8_e15c8784917900cf55a453471769391c
-      vue-template-compiler: 2.6.14
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_9065e7474e033a8e4b95615fc8e6c36c:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2
-      core-js: 3.20.3
-      css-loader: 2.1.1
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_react-dom@17.0.2+react@17.0.2
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0
-      terser-webpack-plugin: 2.3.8
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-template-compiler: 2.6.14
-      webpack-dev-server: 3.11.3
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_a42bb692177b843b90339e5542ad3f12:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-template-compiler: 2.6.14
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_da14390b11f865bba438203843a58aa2:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_vue-loader@15.9.8+webpack@4.46.0:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      vue-loader: 15.9.8_css-loader@3.6.0+webpack@4.46.0
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_vue@2.6.14:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2
-      core-js: 3.20.3
-      css-loader: 2.1.1
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_react-dom@17.0.2+react@17.0.2
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0
-      terser-webpack-plugin: 2.3.8
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      webpack-dev-server: 3.11.3
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
-  /vue-styleguidist/4.44.15_vue@2.6.14+webpack@4.46.0:
-    resolution: {integrity: sha512-EPUQJZjG70ASwe+Q4gXfS7L9eIGB10vcZtABnTquC7h5D8GcnGajWxfdjpycOhAvR2HXZpp5zikVg5tsXixs+Q==}
-    engines: {node: '>=6', npm: '>=3'}
-    hasBin: true
-    peerDependencies:
-      pug: '>=3.0.0'
-      vue: '>=2.0.0'
-      vue-loader: '>=14.0.0'
-      vue-template-compiler: '>=2.0.0'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      pug:
-        optional: true
-    dependencies:
-      '@vxna/mini-html-webpack-template': 1.0.0
-      ast-types: 0.13.4
-      classnames: 2.3.1
-      clean-webpack-plugin: 3.0.0_webpack@4.46.0
-      cli-progress: 3.9.0
-      clipboard-copy: 3.2.0
-      clsx: 1.1.1
-      codemirror: 5.60.0
-      common-dir: 2.0.2
-      copy-webpack-plugin: 5.1.2_webpack@4.46.0
-      core-js: 3.20.3
-      css-loader: 2.1.1_webpack@4.46.0
-      es6-object-assign: 1.1.0
-      es6-promise: 4.2.8
-      escodegen: 1.14.3
-      findup: 0.1.5
-      function.name-polyfill: 1.0.6
-      github-slugger: 1.3.0
-      glob: 7.1.7
-      glogg: 1.0.2
-      hash-sum: 1.0.2
-      is-directory: 0.3.1
-      javascript-stringify: 1.6.0
-      jss: 10.9.0
-      kleur: 2.0.2
-      leven: 2.1.0
-      loader-utils: 1.4.0
-      lodash: 4.17.21
-      lru-cache: 4.1.5
-      mini-html-webpack-plugin: 2.2.1
-      minimist: 1.2.5
-      prismjs: 1.23.0
-      prop-types: 15.7.2
-      q-i: 2.0.1
-      qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_codemirror@5.60.0+react@17.0.2
-      react-dev-utils: 11.0.4
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-styleguidist: 11.1.6_f3c37f5acf65e366191f2ac67d197f5d
-      rewrite-imports: 2.0.3
-      source-map: 0.6.1
-      style-loader: 1.3.0_webpack@4.46.0
-      terser-webpack-plugin: 2.3.8_webpack@4.46.0
-      to-ast: 1.0.0
-      vue: 2.6.14
-      vue-docgen-api: 4.44.15
-      vue-inbrowser-compiler: 4.44.15
-      vue-inbrowser-compiler-utils: 4.44.15
-      webpack: 4.46.0
-      webpack-dev-server: 3.11.3_webpack@4.46.0
-      webpack-merge: 4.2.2
-    transitivePeerDependencies:
-      - supports-color
-      - webpack-cli
-    dev: true
-
   /vue-svg-loader/0.16.0_vue-template-compiler@2.6.14:
     resolution: {integrity: sha512-2RtFXlTCYWm8YAEO2qAOZ2SuIF2NvLutB5muc3KDYoZq5ZeCHf8ggzSan3ksbbca7CJ/Aw57ZnDF4B7W/AkGtw==}
     peerDependencies:
@@ -26868,6 +25984,7 @@ packages:
       mkdirp: 0.5.5
       range-parser: 1.2.1
       webpack-log: 2.0.0
+    dev: true
 
   /webpack-dev-middleware/3.7.3_webpack@4.46.0:
     resolution: {integrity: sha512-djelc/zGiz9nZj/U7PTBi2ViorGJXEWo/3ltkPbDyxCXhhEXkW0ce99falaok4TPj+AsxLiXJR0EBOb0zh9fKQ==}
@@ -26940,6 +26057,7 @@ packages:
       webpack-log: 2.0.0
       ws: 6.2.1
       yargs: 13.3.2
+    dev: true
 
   /webpack-dev-server/3.11.2_webpack-cli@4.5.0+webpack@4.46.0:
     resolution: {integrity: sha512-A80BkuHRQfCiNtGBS1EMf2ChTUs0x+B3wGDFmOeT4rmJOHhHTCH2naNxIHhmkr0/UillP4U3yeIyv1pNp+QDLQ==}
@@ -27079,6 +26197,7 @@ packages:
       webpack-log: 2.0.0
       ws: 6.2.1
       yargs: 13.3.2
+    dev: true
 
   /webpack-dev-server/3.11.3_webpack-cli@4.5.0+webpack@4.46.0:
     resolution: {integrity: sha512-3x31rjbEQWKMNzacUZRE6wXvUFuGpH7vr0lIEbYpMAG9BOxi0928QU1BBswOAP3kg3H1O4hiS+sq4YyAn6ANnA==}
@@ -27643,6 +26762,7 @@ packages:
   /yaml/1.10.2:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
+    dev: true
 
   /yargs-parser/11.1.1:
     resolution: {integrity: sha512-C6kB/WJDiaxONLJQnF8ccx9SEeoTTLek8RVbaOIsrAUS8VrBEXfmeSnCZxygc+XC2sNMBIwOOnfcxiynjHsVSQ==}
