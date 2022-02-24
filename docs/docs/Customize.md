@@ -167,7 +167,7 @@ If changing the styles is not enough and we want to add content or change the HT
 
 We have located the component we want to override. Since we have access to the source of the original component, we will copy and paste the files in your code base.
 
-Do not bother copying the test files if any (they end with .spec.js,ts or tsx). They would make the process unnecessarily more complicated. You would have to setup jest with babel and typesctipt in your own codebase to run those tests properly.
+Do not bother copying the test files if any (they end with .spec.js,ts or tsx). They would make the process unnecessarily more complicated. You would have to setup jest with babel and typescript in your own codebase to run those tests properly.
 
 ## Register Components
 
