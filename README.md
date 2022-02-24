@@ -4,9 +4,9 @@
 **Isolated Vue component development environment with a living style guide**
 
 <div>
-<a href="https://travis-ci.com/github/vue-styleguidist/vue-styleguidist">
-    <img src="https://travis-ci.com/vue-styleguidist/vue-styleguidist.svg?branch=dev" alt="Travis CI (unit & lint)">
-</a>
+
+[![Lint & Test](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/test.yml/badge.svg)](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/test.yml)
+
 <a href="https://circleci.com/gh/vue-styleguidist/vue-styleguidist">
     <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=shield" alt="Circle CI (integration)">
 </a>
