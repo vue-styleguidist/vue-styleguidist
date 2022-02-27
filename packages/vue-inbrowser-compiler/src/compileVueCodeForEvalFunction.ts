@@ -1,4 +1,5 @@
 import { transform, TransformOptions } from 'buble'
+import * as Vue from 'vue'
 import walkes from 'walkes'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
@@ -10,6 +11,8 @@ import normalizeSfcComponent, {
 } from './normalizeSfcComponent'
 import getAst from './getAst'
 import getTargetFromBrowser from './getTargetFromBrowser'
+
+const isVue3 = !!(Vue as any).h
 
 interface EvaluableComponent {
 	script: string
@@ -83,7 +86,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 						: undefined
 				const renderIndex = getRenderFunctionStart(optionsNode)
 				let endIndex = optionsNode.end
-				if (renderIndex > 0) {
+				if (renderIndex > 0 && !isVue3) {
 					code = insertCreateElementFunction(
 						code.slice(0, renderIndex + 1),
 						code.slice(renderIndex + 1)
