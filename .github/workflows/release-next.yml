@@ -1,0 +1,44 @@
+name: Release Next
+on:
+  push:
+    branches:
+      - next
+
+concurrency:
+  group: release-next-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@next
+
+  release-beta:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+
+      - name: Setup GitHub User
+        run: |
+          git config --global user.name "Vue Styleguidist Bot"
+          git config --global user.email "${{ secrets.BOT_EMAIL }}"
+
+      - name: Fetch git log
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - run: npx --yes -- lerna version --conventional-prerelease --preid beta --yes
+
+      - run: npx --yes -- lerna publish from-git --yes
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Update pnpm-lock.yaml
+        run: |
+          pnpm i --frozen-lockfile=false --ignore-scripts
+          git add pnpm-lock.yaml
+          git diff --staged --quiet || (git commit -m "chore: update lock file after release [ci skip]" && git push)
+          

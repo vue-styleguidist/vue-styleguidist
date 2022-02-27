@@ -1,16 +1,28 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:base", ":semanticCommits"],
-	"groupName": "all",
-	"schedule": ["before 3am on Monday"],
-	"packageRules": [
-		{
-			"matchPackageNames": ["ast-types", "source-map"],
-			"groupName": "rsg-deps",
-			"schedule": ["every 12 months on the first day of the month"]
-		}
-	],
-	"major": {
-		"schedule": ["before 3am on the first day of the month"]
-	}
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":semanticCommits"
+  ],
+  "groupName": "all",
+  "schedule": [
+    "before 3am on the first day of the month"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "ast-types",
+        "source-map"
+      ],
+      "groupName": "rsg-deps",
+      "schedule": [
+        "every 12 months on the first day of the month"
+      ]
+    }
+  ],
+  "major": {
+    "schedule": [
+      "every 3 months before 3am on the first day of the month"
+    ]
+  }
 }

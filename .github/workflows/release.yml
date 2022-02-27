@@ -1,0 +1,111 @@
+name: Release
+on:
+  push:
+    branches:
+      - delivery
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 0
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+
+      - name: Setup GitHub User
+        run: |
+          git config --global user.name "Vue Styleguidist Bot"
+          git config --global user.email "${{ secrets.BOT_EMAIL }}"
+
+      - name: Fetch git log
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - run: npx --yes -- lerna version --conventional-commits --yes
+
+      - run: npx --yes -- lerna publish from-git --yes
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Update pnpm-lock.yaml
+        run: |
+          pnpm i --frozen-lockfile=false --ignore-scripts
+          git add pnpm-lock.yaml
+          git diff --staged --quiet || (git commit -m "chore: update lock file after release [ci skip]" && git push)
+
+      - name: Start tracking
+        run: git branch --set-upstream-to=origin/delivery
+        
+      - name: Checkout dev branch
+        run: git switch dev
+
+      - name: Check for merge conflict
+        id: check-conflict
+        run: echo "::set-output name=merge_conflict::$(git merge-tree $(git merge-base HEAD delivery) delivery HEAD | egrep '<<<<<<<')"
+
+      - name: Merge delivery into dev
+        id: merge-delivery
+        run: |
+          git fetch
+          git merge delivery
+          git push
+        if: ${{ !steps.check-conflict.outputs.merge_conflict }}
+
+      - name: Failed merge, set merged status as failed
+        run: echo "::set-output name=merge_conflict::'failed merge'"
+        if: ${{ steps.merge-delivery.outcome != 'success' }}
+      - name: Checkout delivery
+        run: git switch delivery
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Determine name of new branch
+        id: gen-names
+        run: |
+          echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+          echo "::set-output name=branch_name::$(git rev-parse --short HEAD)-delivery-into-dev"
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Create a copy of delivery on a new branch
+        run: git checkout -b ${{ steps.gen-names.outputs.branch_name }} delivery
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Push branch to remote
+        run: git push origin ${{ steps.gen-names.outputs.branch_name }}
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}
+      - name: Create Pull Request
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const pull = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              base: 'dev',
+              head: '${{ steps.gen-names.outputs.branch_name }}',
+              title: 'chore: merge delivery (${{ steps.gen-names.outputs.sha }}) into dev',
+              body: `There was a merge conflict when trying to automatically merge delivery into dev. Please resolve the conflict and complete the merge.
+              DO NOT SQUASH AND MERGE
+              @${context.actor}`,
+              maintainer_can_modify: true,
+            })
+            await github.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pull.data.number,
+              reviewers: [context.actor],
+            })
+            await github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pull.data.number,
+              labels: ['auto-merge'],
+            })
+        if: ${{ steps.check-conflict.outputs.merge_conflict }}

@@ -3,6 +3,150 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.15...v4.44.16) (2022-02-22)
+
+
+### Bug Fixes
+
+* display richer complex types in setup ([2254598](https://github.com/vue-styleguidist/vue-styleguidist/commit/22545980067bbc3db69d80420edb0657864ed61e))
+
+
+
+## 4.44.2 (2022-01-18)
+
+
+
+
+
+## 4.44.15 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.14 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.13 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.12 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.11 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.10 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.9 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.8 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.7 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.6 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.5 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## 4.44.4 (2022-01-31)
+
+**Note:** Version bump only for package vue-docgen-api
+
+
+
+
+
+## [4.44.3](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.2...v4.44.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* display richer complex types in setup ([2254598](https://github.com/vue-styleguidist/vue-styleguidist/commit/22545980067bbc3db69d80420edb0657864ed61e))
+
+
+
+
+
+## [4.44.2](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.1...v4.44.2) (2022-01-18)
+
+
+### Bug Fixes
+
+* **docgen:** parse TypeScript types / setup syntax ([2346b64](https://github.com/vue-styleguidist/vue-styleguidist/commit/2346b64a8c53423ebe853e1f48cab3bb2aae4956))
+
+
+
+
+
+## [4.44.1](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.0...v4.44.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* **docgen:** parse withDefaults() for defaults ([3ac0759](https://github.com/vue-styleguidist/vue-styleguidist/commit/3ac0759ef095d5645bb4fe633b1e9dd4acdfbbfc))
+
+
+
+
+
 # [4.44.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.43.3...v4.44.0) (2022-01-17)
 
 

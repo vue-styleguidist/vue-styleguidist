@@ -90,7 +90,7 @@ export function getPropsFromLiteralType(
 
 			propDescriptor.required = !prop.node.optional
 
-			propDescriptor.type = getTypeFromAnnotation(prop.get('typeAnnotation', 'typeAnnotation'))
+			propDescriptor.type = getTypeFromAnnotation(prop.get('typeAnnotation').value)
 		}
 	})
 }

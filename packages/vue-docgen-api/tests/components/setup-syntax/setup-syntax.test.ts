@@ -26,19 +26,25 @@ describe('setup syntactic sugar', () => {
 			    "description": "The radius of the circle.",
 			    "name": "radius",
 			    "required": true,
-			    "type": undefined,
+			    "type": Object {
+			      "name": "number",
+			    },
 			  },
 			  Object {
 			    "description": "The stroke width of the circle.",
 			    "name": "stroke",
 			    "required": true,
-			    "type": undefined,
+			    "type": Object {
+			      "name": "number",
+			    },
 			  },
 			  Object {
 			    "description": "The percentage of the circle that is filled.",
 			    "name": "progress",
 			    "required": false,
-			    "type": undefined,
+			    "type": Object {
+			      "name": "number",
+			    },
 			  },
 			]
 		`)
