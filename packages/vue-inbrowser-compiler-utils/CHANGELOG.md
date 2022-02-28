@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.16...v4.44.17) (2022-02-28)
+
+
+### Bug Fixes
+
+* adapt compiler utils to Vue3 jsx format ([9e1f315](https://github.com/vue-styleguidist/vue-styleguidist/commit/9e1f315634ebaafe9fd681640166416cb1f04210))
+
+
+
+# 4.44.0 (2022-01-17)
+
+
+
+
+
 ## [4.44.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.15...v4.44.16) (2022-02-22)
 
 

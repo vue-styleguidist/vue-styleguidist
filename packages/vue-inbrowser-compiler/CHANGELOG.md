@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.16...v4.44.17) (2022-02-28)
+
+
+### Bug Fixes
+
+* avoid adding h to pragmas in vue3 ([bb265cb](https://github.com/vue-styleguidist/vue-styleguidist/commit/bb265cbef713177dd4772dda7cb582208a95f376))
+* remove h from vue3 in inbrowser compiler ([cf7305a](https://github.com/vue-styleguidist/vue-styleguidist/commit/cf7305a7896eaced7dbadc89144ab6a1e4cf5e48))
+
+
+
+# 4.44.0 (2022-01-17)
+
+
+
+
+
 ## [4.44.16](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.15...v4.44.16) (2022-02-22)
 
 
