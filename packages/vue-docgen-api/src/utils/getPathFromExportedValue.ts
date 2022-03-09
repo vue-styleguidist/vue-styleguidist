@@ -11,6 +11,8 @@ import { ParseOptions } from '../parse'
 
 const read = promisify(readFile)
 
+const tsExtensions = /.tsx?$/
+
 export default async function getPathOfExportedValue(
 	pathResolver: (path: string, originalDirNameOverride?: string) => string | null,
 	exportName: string,
@@ -28,10 +30,17 @@ export default async function getPathOfExportedValue(
 		if (!currentFilePath) {
 			return undefined
 		}
+
+		let filePlugins = plugins
+        // Fixes SFCs written in JS having their imported modules being assumed to also be JS
+		if (tsExtensions.test(currentFilePath)) {
+			filePlugins = filePlugins.map(plugin => plugin === 'flow' ? 'typescript' : plugin)
+		}
+
 		const source = await read(currentFilePath, {
 			encoding: 'utf-8'
 		})
-		const ast = cacher(() => parse(source, { parser: buildParser({ plugins }) }), source)
+		const ast = cacher(() => parse(source, { parser: buildParser({ plugins: filePlugins }) }), source)
 
 		visit(ast, {
 			visitExportNamedDeclaration(p) {
