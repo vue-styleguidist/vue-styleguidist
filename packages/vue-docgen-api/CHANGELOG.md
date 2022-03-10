@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.18](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.17...v4.44.18) (2022-03-10)
+
+
+### Bug Fixes
+
+* 🐛 Allow imported TS in JS SFCs ([ccc06ce](https://github.com/vue-styleguidist/vue-styleguidist/commit/ccc06ce6e256ab351f048f3e71182c84038a4e35))
+* Indentation ([da0d6d9](https://github.com/vue-styleguidist/vue-styleguidist/commit/da0d6d91667b9fc56f39ea060891ed4b1ccbd04a))
+
+
+
+
+
 ## [4.44.17](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.16...v4.44.17) (2022-02-28)
 
 **Note:** Version bump only for package vue-docgen-api
