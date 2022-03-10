@@ -79,7 +79,7 @@ module.exports = {
   },
   docsRepo: 'profile/repo',
   docsBranch: 'master',
-  docsFolder: ''
+  docsFolder: '',
   editLinkLabel: 'Edit on github'
 }
 ```

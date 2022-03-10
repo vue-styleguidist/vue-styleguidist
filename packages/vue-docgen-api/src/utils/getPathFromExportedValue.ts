@@ -28,10 +28,17 @@ export default async function getPathOfExportedValue(
 		if (!currentFilePath) {
 			return undefined
 		}
+
+		let filePlugins = plugins
+		// Fixes SFCs written in JS having their imported modules being assumed to also be JS
+		if (/.tsx?$/.test(currentFilePath)) {
+			filePlugins = filePlugins.map(plugin => plugin === 'flow' ? 'typescript' : plugin)
+		}
+
 		const source = await read(currentFilePath, {
 			encoding: 'utf-8'
 		})
-		const ast = cacher(() => parse(source, { parser: buildParser({ plugins }) }), source)
+		const ast = cacher(() => parse(source, { parser: buildParser({ plugins: filePlugins }) }), source)
 
 		visit(ast, {
 			visitExportNamedDeclaration(p) {
