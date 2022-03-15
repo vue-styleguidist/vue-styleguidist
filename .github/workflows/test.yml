@@ -6,9 +6,6 @@ on:
       - '!delivery'
       - '!next'
   workflow_call:
-  pull_request:
-    branches: 
-      - dev
 
 concurrency:
   group: test-${{ github.ref }}
