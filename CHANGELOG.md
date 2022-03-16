@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.19](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.18...v4.44.19) (2022-03-16)
+
+
+### Bug Fixes
+
+* update esm import of html plugin ([42bfc53](https://github.com/vue-styleguidist/vue-styleguidist/commit/42bfc53f6f08b09ac792243ace3a3abfb162cc7a))
+
+
+
+
+
 ## [4.44.18](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.17...v4.44.18) (2022-03-10)
 
 
