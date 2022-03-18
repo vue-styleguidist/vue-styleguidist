@@ -1,6 +1,14 @@
-const pkg = require('vue/package.json')
 const path = require('path')
 const fs = require('fs')
+
+function getVuePackageVersion() {
+	try {
+		const pkg = require('vue/package.json')
+		return pkg.version
+	} catch {
+		return 'unknown'
+	}
+}
 
 function updateIndexForVue3() {
 	// commonjs
@@ -30,6 +38,8 @@ function updateIndexForVue3() {
 		}
 	})
 }
+
+const pkg = getVuePackageVersion()
 
 if (pkg.version.startsWith('3.')) {
 	updateIndexForVue3()
