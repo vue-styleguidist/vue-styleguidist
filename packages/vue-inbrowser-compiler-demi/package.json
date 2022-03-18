@@ -21,7 +21,8 @@
   "files": [
     "index.cjs.js",
     "index.esm.js",
-    "index.d.ts"
+    "index.d.ts",
+    "postinstall.js"
   ],
   "author": "Bart Ledoux <ledouxb@me.com>",
   "license": "MIT",
