@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.21](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.20...v4.44.21) (2022-03-18)
+
+
+### Bug Fixes
+
+* publish proper postinstall ([5ad78fc](https://github.com/vue-styleguidist/vue-styleguidist/commit/5ad78fcfd645aa0375035656b2050bf61a733e09))
+
+
+
+
+
 ## [4.44.20](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.19...v4.44.20) (2022-03-18)
 
 
