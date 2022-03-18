@@ -18,7 +18,8 @@
     "acorn"
   ],
   "dependencies": {
-    "camelcase": "^5.3.1"
+    "camelcase": "^5.3.1",
+    "vue-inbrowser-compiler-demi": "^4.44.17"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "15.1.0",
