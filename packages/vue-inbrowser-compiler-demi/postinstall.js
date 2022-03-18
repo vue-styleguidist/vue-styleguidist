@@ -3,7 +3,7 @@ const fs = require('fs')
 
 function getVuePackageVersion() {
 	try {
-		const pkg = require('vue/package.json')
+		const pkg = require('vue')
 		return pkg.version
 	} catch {
 		return 'unknown'
@@ -39,8 +39,8 @@ function updateIndexForVue3() {
 	})
 }
 
-const pkg = getVuePackageVersion()
+const version = getVuePackageVersion()
 
-if (pkg.version.startsWith('3.')) {
+if (version.startsWith('3.')) {
 	updateIndexForVue3()
 }
