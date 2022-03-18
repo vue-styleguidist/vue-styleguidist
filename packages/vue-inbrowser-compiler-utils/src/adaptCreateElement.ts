@@ -1,22 +1,11 @@
 import camelCase from 'camelcase'
-import * as Vue from 'vue'
+import { isVue3, resolveComponent } from 'vue-inbrowser-compiler-demi'
 
 export type CreateElementFunction = (
 	component: string | object,
 	attributes?: { [k: string]: any },
 	children?: any | any[]
 ) => any[] | any
-
-const isVue3 = !!(Vue as any).resolveComponent
-
-/**
- * Reconcile Vue 2 and Vue 3 JSX attributes
- * @param componentName
- * @returns
- */
-function resolveComponent(componentName: any): any {
-	return isVue3 ? (Vue as any).resolveComponent(componentName) : componentName
-}
 
 /**
  * Groups attributes passed to a React pragma to the VueJS fashion
