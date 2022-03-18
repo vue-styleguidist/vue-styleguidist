@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.22](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.21...v4.44.22) (2022-03-18)
+
+
+### Bug Fixes
+
+* catch error if vue is not found ([b2f9a5c](https://github.com/vue-styleguidist/vue-styleguidist/commit/b2f9a5ccb34768730e5a4ca423904de3457bec62)), closes [#1295](https://github.com/vue-styleguidist/vue-styleguidist/issues/1295)
+* require version instead of pkg ([da0f721](https://github.com/vue-styleguidist/vue-styleguidist/commit/da0f7218f097e45e6857974234d1a61d68b144a2))
+
+
+
+
+
 ## [4.44.21](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.20...v4.44.21) (2022-03-18)
 
 
