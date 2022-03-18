@@ -1,10 +1,7 @@
 import walkes from 'walkes'
-import * as Vue from 'vue'
-import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, VsgSFCDescriptor, isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
-
-const isVue3 = !!(Vue as any).h
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''

@@ -1,7 +1,6 @@
 import { transform, TransformOptions } from 'buble'
-import * as Vue from 'vue'
 import walkes from 'walkes'
-import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
+import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -11,8 +10,6 @@ import normalizeSfcComponent, {
 } from './normalizeSfcComponent'
 import getAst from './getAst'
 import getTargetFromBrowser from './getTargetFromBrowser'
-
-const isVue3 = !!(Vue as any).h
 
 interface EvaluableComponent {
 	script: string
