@@ -135,6 +135,10 @@ function getConfig(api) {
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
 
+	// styleguidist provides its own html plugin that outputs index.html
+	// this avoid conflicts with the html-webpack-plugin on webpack 5
+	conf.plugins.delete('html')
+
 	// remove the double compiled successfully message
 	conf.plugins.delete('friendly-errors')
 	return api.resolveWebpackConfig(conf)
