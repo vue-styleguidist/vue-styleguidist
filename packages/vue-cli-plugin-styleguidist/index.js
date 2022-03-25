@@ -144,18 +144,8 @@ function getConfig(api) {
 
 	// styleguidist provides its own html plugin that outputs index.html
 	// this avoid conflicts with the html-webpack-plugin on webpack 5
-	conf.plugins.delete('html')
-
-	// resolve HTML file(s)
-	try {
-		const HTMLPlugin = require('html-webpack-plugin')
-		conf.plugin('html').use(HTMLPlugin, [
-			{
-				filename: 'app.html'
-			}
-		])
-	} catch (e) {
-		// ignore
+	if (require('webpack').version.startsWith('5.')) {
+		conf.plugins.delete('html')
 	}
 
 	// remove the double compiled successfully message
