@@ -1,29 +1,32 @@
 {
-	"name": "vue-cli-plugin-styleguidist",
-	"version": "4.44.24",
-	"description": "vue cli 3.0 plugin for vue-styleguidist",
-	"homepage": "https://vue-styleguidist.github.io",
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
-		"directory": "packages/vue-cli-plugin-styleguidist"
-	},
-	"bugs": {
-		"url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
-	},
-	"author": "Bart Ledoux <ledouxb@me.com>",
-	"license": "MIT",
-	"private": false,
-	"dependencies": {
-		"vue-styleguidist": "^4.44.23",
-		"webpack-merge": "^4.2.2"
-	},
-	"peerDependencies": {
-		"@vue/cli-service": ">= 3"
-	},
-	"devDependencies": {
-		"@vue/cli": "4.5.15",
-		"@vue/cli-test-utils": "4.5.15"
-	}
+  "name": "vue-cli-plugin-styleguidist",
+  "version": "4.44.24",
+  "description": "vue cli 3.0 plugin for vue-styleguidist",
+  "homepage": "https://vue-styleguidist.github.io",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+    "directory": "packages/vue-cli-plugin-styleguidist"
+  },
+  "bugs": {
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
+  },
+  "author": "Bart Ledoux <ledouxb@me.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "vue-styleguidist": "^4.44.23",
+    "webpack-merge": "^4.2.2"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": ">= 3",
+    "html-webpack-plugin": "*"
+  },
+  "devDependencies": {
+    "@vue/cli": "4.5.15",
+    "@vue/cli-service": "4.5.15",
+    "@vue/cli-test-utils": "4.5.15",
+    "html-webpack-plugin": "^3.2.0"
+  }
 }

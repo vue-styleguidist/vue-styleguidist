@@ -101,9 +101,7 @@ function getStyleguidist(args, api, options) {
 
 	const userWebpackConfig = sgConf.webpackConfig
 	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
-	// avoid preload and prefetch errors as
-	// styleguidist provides its own html plugin that outputs index.html
-	// this avoid conflicts with the html-webpack-plugin on webpack 5
+	// avoid preload and prefetch errors
 	options.indexHtml = 'app.html'
 	const cliWebpackConfig = getConfig(api)
 	return styleguidist(
@@ -143,6 +141,22 @@ function getConfig(api) {
 	// because we are dealing with hot replacement in vsg
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
+
+	// styleguidist provides its own html plugin that outputs index.html
+	// this avoid conflicts with the html-webpack-plugin on webpack 5
+	conf.plugins.delete('html')
+
+	// resolve HTML file(s)
+	try {
+		const HTMLPlugin = require('html-webpack-plugin')
+		conf.plugin('html').use(HTMLPlugin, [
+			{
+				filename: 'app.html'
+			}
+		])
+	} catch (e) {
+		// ignore
+	}
 
 	// remove the double compiled successfully message
 	conf.plugins.delete('friendly-errors')
