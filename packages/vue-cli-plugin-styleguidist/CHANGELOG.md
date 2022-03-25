@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.24](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.23...v4.44.24) (2022-03-25)
+
+
+### Bug Fixes
+
+* filter html plugin in vue cli plugin ([a2183d2](https://github.com/vue-styleguidist/vue-styleguidist/commit/a2183d296ff9d5d1a22a43b43f4638ff3af710ee))
+
+
+
+
+
 ## [4.44.23](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.22...v4.44.23) (2022-03-25)
 
 **Note:** Version bump only for package vue-cli-plugin-styleguidist
