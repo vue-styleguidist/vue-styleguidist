@@ -192,7 +192,7 @@ export function describeType(
 	if (propDescriptor.tags && propDescriptor.tags.type) {
 		const [{ type: typeDesc }] = propDescriptor.tags.type as UnnamedParam[]
 		if (typeDesc) {
-			const typedAST = getTemplateExpressionAST(`const a:${typeDesc.name}`)
+			const typedAST = getTemplateExpressionAST(`let a:${typeDesc.name}`)
 			let typeValues: string[] | undefined
 			visit(typedAST.program, {
 				visitVariableDeclaration(path) {

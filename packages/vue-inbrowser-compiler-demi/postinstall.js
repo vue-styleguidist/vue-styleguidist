@@ -5,7 +5,7 @@ function getVuePackageVersion() {
 	try {
 		const pkg = require('vue')
 		return pkg.version
-	} catch {
+	} catch (error) {
 		return 'unknown'
 	}
 }
