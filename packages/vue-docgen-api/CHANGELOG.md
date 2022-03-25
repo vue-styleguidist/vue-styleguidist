@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.23](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.22...v4.44.23) (2022-03-25)
+
+
+### Bug Fixes
+
+* last babel cheks for const initialization ([8587549](https://github.com/vue-styleguidist/vue-styleguidist/commit/85875493a550f0f9f6f61262d91ba1013b88e796)), closes [#1299](https://github.com/vue-styleguidist/vue-styleguidist/issues/1299)
+
+
+
+
+
 ## [4.44.22](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.21...v4.44.22) (2022-03-18)
 
 **Note:** Version bump only for package vue-docgen-api
