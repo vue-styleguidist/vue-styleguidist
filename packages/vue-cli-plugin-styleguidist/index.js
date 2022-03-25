@@ -75,8 +75,13 @@ module.exports = (api, options) => {
 }
 
 function getStyleguidist(args, api, options) {
-	const conf = api.resolve(args.config || './styleguide.config.js')
-	const sgConf = conf && conf.length ? require(conf) : {}
+	const confFilePath = api.resolve(args.config || './styleguide.config.js')
+	let sgConf = {}
+	try {
+		sgConf = confFilePath && confFilePath.length ? require(confFilePath) : {}
+	} catch (e) {
+		// eat any error if config file is absent
+	}
 
 	// reset the default component expression
 	sgConf.components = sgConf.components || 'src/components/**/[A-Z]*.vue'
@@ -96,6 +101,10 @@ function getStyleguidist(args, api, options) {
 
 	const userWebpackConfig = sgConf.webpackConfig
 	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
+	// avoid preload and prefetch errors as
+	// styleguidist provides its own html plugin that outputs index.html
+	// this avoid conflicts with the html-webpack-plugin on webpack 5
+	options.indexHtml = 'app.html'
 	const cliWebpackConfig = getConfig(api)
 	return styleguidist(
 		sgConf,
@@ -134,10 +143,6 @@ function getConfig(api) {
 	// because we are dealing with hot replacement in vsg
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
-
-	// styleguidist provides its own html plugin that outputs index.html
-	// this avoid conflicts with the html-webpack-plugin on webpack 5
-	conf.plugins.delete('html')
 
 	// remove the double compiled successfully message
 	conf.plugins.delete('friendly-errors')

@@ -27,7 +27,7 @@ export default function (
 
 	const template = isFunction(config.template) ? config.template : MiniHtmlWebpackTemplate
 	const templateContext = isFunction(config.template) ? {} : config.template
-	const htmlPluginOptions = {
+	const htmlPluginOptions: ConstructorParameters<typeof MiniHtmlWebpackPlugin>[0] = {
 		context: Object.assign({}, templateContext, {
 			title: config.title,
 			container: config.mountPointId,
