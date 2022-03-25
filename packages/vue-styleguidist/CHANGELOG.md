@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.25](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.24...v4.44.25) (2022-03-25)
+
+
+### Bug Fixes
+
+* make cli plugin work with wp 5 ([47dce60](https://github.com/vue-styleguidist/vue-styleguidist/commit/47dce605552cefa1d1c0739cc34b38aa5231510e))
+
+
+
+
+
 ## [4.44.23](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.22...v4.44.23) (2022-03-25)
 
 **Note:** Version bump only for package vue-styleguidist
