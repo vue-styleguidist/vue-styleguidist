@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.26](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.25...v4.44.26) (2022-03-25)
+
+
+### Bug Fixes
+
+* add missing dependency back ([f6a8944](https://github.com/vue-styleguidist/vue-styleguidist/commit/f6a8944356cacd699db7793a5433f2c6b8849ae8))
+* **plugin:** use webpack version to only remove when necessary ([cdd8c84](https://github.com/vue-styleguidist/vue-styleguidist/commit/cdd8c841d2ec69439cf2488e673b863bb2ec20ae))
+
+
+
+
+
 ## [4.44.25](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.24...v4.44.25) (2022-03-25)
 
 
