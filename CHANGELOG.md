@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.27](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.25...v4.44.27) (2022-03-26)
+
+
+### Bug Fixes
+
+* add missing dependency back ([f6a8944](https://github.com/vue-styleguidist/vue-styleguidist/commit/f6a8944356cacd699db7793a5433f2c6b8849ae8))
+* check if the current release is already deployed ([4d3164e](https://github.com/vue-styleguidist/vue-styleguidist/commit/4d3164ead0f1750ebea416253f2ad93d09ef1369))
+* make sure the proper tag is created ([acc88e6](https://github.com/vue-styleguidist/vue-styleguidist/commit/acc88e6c8571c27f9e2a70632055e4a3d5d8bfc0))
+* **plugin:** use webpack version to only remove when necessary ([cdd8c84](https://github.com/vue-styleguidist/vue-styleguidist/commit/cdd8c841d2ec69439cf2488e673b863bb2ec20ae))
+* try creating a release using lerna version ([db9de67](https://github.com/vue-styleguidist/vue-styleguidist/commit/db9de67c14ab6d33f4f109be65a5e453ae265a8f))
+* use continue-on-error ([5884599](https://github.com/vue-styleguidist/vue-styleguidist/commit/5884599a51cc3143cb6bc1b7bedb0f10596c37a3))
+
+
+
+
+
 ## [4.44.26](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.25...v4.44.26) (2022-03-25)
 
 
