@@ -33,9 +33,12 @@ jobs:
       - name: Fetch git log
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
-      - run: npx --yes -- lerna version --conventional-commits --yes
+      - name: Create versions
+        id: create-versions
+        run: npx --yes -- lerna version --conventional-commits --create-release github --yes
 
-      - run: npx --yes -- lerna publish from-git --yes
+      - name: Publish packages
+        run: npx --yes -- lerna publish from-git --yes
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -47,7 +50,7 @@ jobs:
 
       - name: Start tracking
         run: git branch --set-upstream-to=origin/delivery
-        
+
       - name: Checkout dev branch
         run: git switch dev
 
