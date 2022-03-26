@@ -50,19 +50,16 @@ jobs:
 
       - name: Get Release by Tag
         id: get_release_by_tag
-        uses: jonfriesen/get-release-by-tag@v1.0.0
+        continue-on-error: true
+        uses: cardinalby/git-get-release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-
-      - name: Display Found Release
-        id: display_found_release
-        run: echo "found release ${{ steps.get_release_by_tag.outputs.release.id }}"
+          tag: ${{ github.ref }}
 
       - name: Create release
         id: create_release
-        if: ${{ steps.get_release_by_tag.outputs.release.id }}
+        if: ${{ failure() }}
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
