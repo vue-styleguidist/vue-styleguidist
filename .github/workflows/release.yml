@@ -55,7 +55,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag: ${{ github.ref }}
+          tag: ${{ steps.release-number.outputs.lastCreatedTag }}
 
       - name: Create release
         id: create_release
