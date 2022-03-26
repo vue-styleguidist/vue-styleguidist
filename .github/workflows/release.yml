@@ -59,7 +59,7 @@ jobs:
 
       - name: Create release
         id: create_release
-        if: ${{ failure() }}
+        if: ${{ steps.get_release_by_tag.outcome == 'failure' }}
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
