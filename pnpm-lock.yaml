@@ -956,7 +956,7 @@ importers:
     specifiers:
       '@vue/cli': 4.5.15
       '@vue/cli-test-utils': 4.5.15
-      vue-styleguidist: ^4.44.26
+      vue-styleguidist: ^4.44.27
       webpack: 4.46.0
       webpack-merge: ^4.2.2
     dependencies:
