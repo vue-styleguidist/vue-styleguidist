@@ -46,7 +46,7 @@ jobs:
         id: release-number
         run: |
           lastCreatedTag=$(git describe --tags --abbrev=0)
-          echo '::set-output name=lastCreatedTag::$lastCreatedTag'
+          echo "::set-output name=lastCreatedTag::$lastCreatedTag"
 
       - name: Create release
         id: create_release
