@@ -35,12 +35,32 @@ jobs:
 
       - name: Create versions
         id: create-versions
-        run: npx --yes -- lerna version --conventional-commits --create-release github --yes
+        run: npx --yes -- lerna version --conventional-commits --yes
 
       - name: Publish packages
         run: npx --yes -- lerna publish from-git --yes
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Get Release Number
+        id: release-number
+        run: |
+          lastCreatedTag=$(git describe --tags --abbrev=0)
+          echo '::set-output name=lastCreatedTag::$lastCreatedTag'
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.release-number.outputs.lastCreatedTag }}
+          release_name: Release ${{ steps.release-number.outputs.lastCreatedTag }}
+          body: |
+            Check the changelog of the published packages.
+
+          draft: false
+          prerelease: false
 
       - name: Update pnpm-lock.yaml
         run: |
