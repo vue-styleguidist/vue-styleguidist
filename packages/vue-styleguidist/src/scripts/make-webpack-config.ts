@@ -166,7 +166,14 @@ export default function (
 					// `webpackHotDevClient`.
 					injectClient: false
 				},
-				plugins: [new webpack.HotModuleReplacementPlugin()],
+				plugins: [
+					new webpack.HotModuleReplacementPlugin(),
+					new webpack.ProvidePlugin({
+						// Webpack 5 does no longer include a polyfill for this Node.js variable.
+						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
+						process: 'process/browser'
+					})
+				],
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},
 			webpackConfig
