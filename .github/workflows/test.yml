@@ -2,9 +2,9 @@ name: Lint & Test
 on:
   push:
     branches:
-      - '*'
-      - '!delivery'
-      - '!next'
+      - 'dev'
+  pull_request:
+    types: [opened]
   workflow_call:
 
 concurrency:
