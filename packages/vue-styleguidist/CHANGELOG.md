@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.44.28](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.27...v4.44.28) (2022-04-11)
+
+
+### Bug Fixes
+
+* 🐛 webpack5 serve undefined process ([54c7e1a](https://github.com/vue-styleguidist/vue-styleguidist/commit/54c7e1a4983a7b1253000f9ca55fd2f9ef6a64c3)), closes [#1074](https://github.com/vue-styleguidist/vue-styleguidist/issues/1074)
+
+
+
+
+
 ## [4.44.27](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.25...v4.44.27) (2022-03-26)
 
 
