@@ -4,7 +4,8 @@ on:
     branches:
       - 'dev'
   pull_request:
-    types: [opened]
+    types: [opened,synchronize]
+    branches: dev 
   workflow_call:
 
 concurrency:
