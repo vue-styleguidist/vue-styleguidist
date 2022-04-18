@@ -941,7 +941,7 @@ importers:
       '@vue/cli-test-utils': 4.5.15
       null-loader: ^0.1.1
       typescript: ^3.9.9
-      vue-docgen-cli: ^4.44.23
+      vue-docgen-cli: ^4.44.29
       webpack-merge: ^4.2.2
     dependencies:
       null-loader: 0.1.1
