@@ -36,7 +36,7 @@ Should vue-docgen watch for modifications of your components and update generate
 yarn vue-docgen -w
 ```
 
-#### `-c` or `--config`
+#### `-c` or `--configFile`
 
 Specify the path of your configuration file. By default, `docgen` will look for `docgen.config.js` in the current folder.
 
