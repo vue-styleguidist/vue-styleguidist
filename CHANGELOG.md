@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.45.0](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.29...v4.45.0) (2022-04-29)
+
+
+### Features
+
+* allow use of multiline examples and types ([a95a306](https://github.com/vue-styleguidist/vue-styleguidist/commit/a95a306a67fbf2bbdf0e7f6bddba143192ffcfa1)), closes [#1166](https://github.com/vue-styleguidist/vue-styleguidist/issues/1166)
+
+
+
+
+
 ## [4.44.29](https://github.com/vue-styleguidist/vue-styleguidist/compare/v4.44.28...v4.44.29) (2022-04-18)
 
 **Note:** Version bump only for package vue-styleguidist
