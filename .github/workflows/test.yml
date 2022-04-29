@@ -1,8 +1,5 @@
 name: Lint & Test
 on:
-  push:
-    branches:
-      - 'dev'
   pull_request:
     types: [opened,synchronize]
     branches: dev 
