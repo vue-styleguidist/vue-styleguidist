@@ -101,6 +101,7 @@ export default function getDocblockTags(str: string): DocBlockTags {
       tags.push({ title, ...getParamInfo(tagContents, !UNNAMED_TAG_TITLES.includes(title)) })
     } else if (ACCESS_TAG_TITLES.indexOf(title) > -1) {
       tags.push({ title: 'access', content: title })
+      return
     } else if (PREFIX_TAG_TITLES.indexOf(title) > -1) {
       tags.push({ title, content: tagContents ?? true })
       return
