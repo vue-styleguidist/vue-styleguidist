@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
           fetch-depth: 0
@@ -33,6 +33,14 @@ jobs:
       - name: Fetch git log
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+      - name: Configure .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Create versions
         id: create-versions
         run: npx --yes -- lerna version --conventional-commits --yes
@@ -41,6 +49,9 @@ jobs:
         run: npx --yes -- lerna publish from-git --yes
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Remove .npmrc
+        run: rm -f .npmrc
 
       - name: Get Release Number
         id: release-number
