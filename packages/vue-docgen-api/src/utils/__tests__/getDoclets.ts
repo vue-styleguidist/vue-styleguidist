@@ -1,3 +1,4 @@
+import dedent from 'dedent'
 import getDocLets from '../getDoclets'
 
 describe('getDoclets', () => {
@@ -36,7 +37,12 @@ describe('getDoclets', () => {
 
 	it('should extract params types only when alone', () => {
 		const src = `@param {string}`
-		expect(getDocLets(src).tags).toEqual([{ title: 'param', type: { name: 'string' } }])
+		expect(getDocLets(src).tags).toEqual([{ 
+      title: 'param', 
+      type: { 
+        name: 'string' 
+      } 
+    }])
 	})
 
 	it('should extract params description if no dash', () => {
@@ -68,12 +74,41 @@ describe('getDoclets', () => {
 	})
 
 	it('should extract description', () => {
-		const src = ['awesome method', ' ', '@version 1.2.3'].join('\n')
+		const src = dedent`
+        awesome method
+      
+        @version 1.2.3
+      `
 		expect(getDocLets(src).description).toEqual('awesome method')
 	})
 
 	it('should extract access tag', () => {
-		const src = ['awesome method', ' ', '@public'].join('\n')
-		expect(getDocLets(src).tags).toEqual([{ content: 'public', title: 'access' }])
+		const src = dedent`
+        awesome method
+      
+        @public
+      `
+		expect(getDocLets(src).tags).toEqual([{ 
+      content: 'public', 
+      title: 'access'
+    }])
+	})
+
+  it('should extract multiline examples into one example', () => {
+		const src = dedent`
+        a prop with examples
+      
+        @example
+        \`\`\`js
+        console.log('hello')
+        \`\`\`
+      `
+		expect(getDocLets(src).tags).toEqual([{ 
+      title: 'example', 
+      content: dedent`
+        \`\`\`js
+        console.log('hello')
+        \`\`\`
+      ` }])
 	})
 })

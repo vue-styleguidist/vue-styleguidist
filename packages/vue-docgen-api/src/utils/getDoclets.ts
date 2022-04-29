@@ -1,8 +1,6 @@
 import { BlockTag, DocBlockTags, Param, ParamType } from '../Documentation'
 import matchRecursiveRegExp from './matchRecursiveRegexp'
 
-const DOCLET_PATTERN = /^(?:\s+)?@(\w+)(?:$|\s((?:[^](?!^(?:\s+)?@\w))*))/gim
-
 function getParamInfo(content: string, hasName: boolean) {
 	content = content || ''
 	const typeSlice = matchRecursiveRegExp(content, '{', '}')[0] || ''
@@ -46,8 +44,14 @@ function getTypeObjectFromTypeString(typeSlice: string): ParamType {
 	}
 }
 
+/**
+ * This is used to ignore the name tag if it does not make sense
+ */
 const UNNAMED_TAG_TITLES = ['returns', 'throws', 'type']
 
+/**
+ * For those arguments we will try and parse type of the content
+ */
 const TYPED_TAG_TITLES = [
 	'param',
 	'arg',
@@ -60,7 +64,18 @@ const TYPED_TAG_TITLES = [
 	'binding',
 	'type'
 ]
+
+/**
+ * These tags don't have content and we push them as 'access'
+ */
 const ACCESS_TAG_TITLES = ['private', 'public']
+
+/**
+ * If one of these tags is placed above content
+ * the content is still taken as the description
+ * they are usually placed at the top of the docblock
+ */
+const PREFIX_TAG_TITLES = ['slot', 'ignore']
 
 /**
  * Given a string, this functions returns an object with
@@ -69,21 +84,40 @@ const ACCESS_TAG_TITLES = ['private', 'public']
  * - `description` whatever is left once the tags are removed
  */
 export default function getDocblockTags(str: string): DocBlockTags {
+  const DOCLET_PATTERN = /^(?:\s+)?@(\w+) ?(.+)?/
 	const tags: BlockTag[] = []
-	let match = DOCLET_PATTERN.exec(str)
+  const lines = str.split('\n').reverse()
+  let accNonTagLines = ''
+  lines.forEach(line => {
+    let [, title, tagContents] = DOCLET_PATTERN.exec(line) || []
 
-	for (; match; match = DOCLET_PATTERN.exec(str)) {
-		const title = match[1]
-		if (TYPED_TAG_TITLES.indexOf(title) > -1) {
-			tags.push({ title, ...getParamInfo(match[2], UNNAMED_TAG_TITLES.indexOf(title) < 0) })
-		} else if (ACCESS_TAG_TITLES.indexOf(title) > -1) {
-			tags.push({ title: 'access', content: title })
-		} else {
-			tags.push({ title, content: match[2] || true })
-		}
-	}
 
-	const description = str.replace(DOCLET_PATTERN, '').trim()
+    if(!title) {
+      accNonTagLines = line + '\n' + accNonTagLines
+      return
+    }
 
-	return { description, tags }
+    if (TYPED_TAG_TITLES.includes(title)) {
+      tags.push({ title, ...getParamInfo(tagContents, !UNNAMED_TAG_TITLES.includes(title)) })
+    } else if (ACCESS_TAG_TITLES.indexOf(title) > -1) {
+      tags.push({ title: 'access', content: title })
+      return
+    } else if (PREFIX_TAG_TITLES.indexOf(title) > -1) {
+      tags.push({ title, content: tagContents ?? true })
+      return
+    } else {
+      const content = tagContents 
+        ? (tagContents + '\n' + accNonTagLines).trim()
+        : accNonTagLines 
+          ? accNonTagLines.trim()
+          : true
+      tags.push({ title, content })
+    }
+
+    accNonTagLines = ''
+  })
+
+	const description = accNonTagLines.trim().length ? accNonTagLines.trim() : undefined 
+
+	return { description, tags: tags.reverse() }
 }
