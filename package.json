@@ -38,7 +38,7 @@
     "node": ">=9",
     "npm": ">=5"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "7.17.9",
     "@babel/plugin-proposal-class-properties": "7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "7.17.3",
@@ -48,6 +48,8 @@
     "@babel/preset-react": "7.16.7",
     "@babel/preset-typescript": "7.16.7",
     "@babel/runtime": "7.17.9",
+    "@changesets/changelog-github": "^0.4.4",
+    "@changesets/cli": "^2.22.0",
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@types/jest": "27.4.1",
