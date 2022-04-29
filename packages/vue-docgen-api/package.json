@@ -43,7 +43,9 @@
 	},
 	"devDependencies": {
 		"@test-vue-docgen/mixins": "^4.44.15",
-		"@types/pug": "2.0.6",
+		"@types/dedent": "0.7.0",
+    "@types/pug": "2.0.6",
+    "dedent": "0.7.0",
 		"globby": "10.0.2",
 		"vue": "2.6.14",
 		"vue-class-component": "7.2.6",

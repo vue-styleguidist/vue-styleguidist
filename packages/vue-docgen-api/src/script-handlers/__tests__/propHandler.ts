@@ -1,6 +1,7 @@
 import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
+import dedent from 'dedent'
 import babylon from '../../babel-parser'
 import Documentation, { PropDescriptor } from '../../Documentation'
 import resolveExportedComponent from '../../utils/resolveExportedComponent'
@@ -56,7 +57,7 @@ describe('propHandler', () => {
 
 	describe('base', () => {
 		it('should accept an array of string as props', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: ['testArray']
         }`
@@ -71,7 +72,7 @@ describe('propHandler', () => {
 
 	describe('type', () => {
 		it('should return the right props type', async () => {
-			const src = `
+			const src = dedent`
         export default {
           name: 'name-123',
           components: {
@@ -90,7 +91,7 @@ describe('propHandler', () => {
 		})
 
 		it('should return the right props type for lit Array', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             columns: [Array]
@@ -103,7 +104,7 @@ describe('propHandler', () => {
 		})
 
 		it('should return the right props composite type', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test: {
@@ -118,7 +119,7 @@ describe('propHandler', () => {
 		})
 
 		it('should return the right props type for Array', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test: Array
@@ -131,7 +132,7 @@ describe('propHandler', () => {
 		})
 
 		it('should not return required if prop only Type', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test: String
@@ -146,7 +147,7 @@ describe('propHandler', () => {
 		})
 
 		it('should return the right props type string', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test: String
@@ -159,7 +160,7 @@ describe('propHandler', () => {
 		})
 
 		it('should return the right props composite string|number', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test: [String, Number]
@@ -172,7 +173,7 @@ describe('propHandler', () => {
 		})
 
 		it('should deduce the prop type from the default value', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test:{
@@ -187,16 +188,16 @@ describe('propHandler', () => {
 		})
 
 		it('should still return props with vue-types', async () => {
-			const src = [
-				'export default {',
-				'  props:{',
-				'    test: VueTypes.shape({',
-				'       line1: String,',
-				'       line2: String,',
-				'    })',
-				'  }',
-				'}'
-			].join('\n')
+			const src = dedent`
+        export default {
+          props: {
+            test: VueTypes.shape({
+              line1: String,
+              line2: String,
+            })
+          }
+        }
+      `
 			expect(await parserTest(src)).toMatchObject({
 				type: {
 					func: true
@@ -205,13 +206,12 @@ describe('propHandler', () => {
 		})
 
 		it('should still return props with prop-types', async () => {
-			const src = [
-				'export default {',
-				'  props:{',
-				"    test: PropTypes.oneOf(['News', 'Photos'])",
-				'  }',
-				'}'
-			].join('\n')
+			const src = dedent`
+				  export default {
+            props: {
+				      test: PropTypes.oneOf(['News', 'Photos']),
+				    }
+          }`
 			expect(await parserTest(src)).toMatchObject({
 				type: {
 					func: true
@@ -229,7 +229,7 @@ describe('propHandler', () => {
 
 	describe('required', () => {
 		it('should return the right required props', async () => {
-			const src = `
+			const src = dedent`
         export default {
           name: 'name-123',
           components: {
@@ -250,7 +250,7 @@ describe('propHandler', () => {
 
 	describe('defaultValue', () => {
 		it('should be ok with just the default', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             test: {
@@ -265,18 +265,17 @@ describe('propHandler', () => {
 		})
 
 		it('should be ok with the default as a method', async () => {
-			const src = [
-				'export default {',
-				'  props: {',
-				'    test: {',
-				'      default() {',
-				'        return ["normal"]',
-				'      }',
-				'    }',
-				'  }',
-				'}'
-			].join('\n')
-
+			const src = dedent`
+				export default {
+				  props: {
+				    test: {
+				      default() {
+				        return ["normal"]
+				      }
+				    }
+				  }
+				}
+      `
 			expect((await parserTest(src)).defaultValue).toMatchInlineSnapshot(`
       Object {
         "func": true,
@@ -287,8 +286,8 @@ describe('propHandler', () => {
     `)
 		})
 
-		it('should deal properly with multilple returns', async () => {
-			const src = `
+		it('should deal properly with multiple returns', async () => {
+			const src = dedent`
         export default {
           props: {
             test: {
@@ -312,8 +311,8 @@ describe('propHandler', () => {
 			})
 		})
 
-		it('should deal properly with multilple returns in arrow functions', async () => {
-			const src = `
+		it('should deal properly with multiple returns in arrow functions', async () => {
+			const src = dedent`
         export default {
           props: {
             test: {
@@ -338,16 +337,15 @@ describe('propHandler', () => {
 		})
 
 		it('should not have parenthesis', async () => {
-			const src = `
-			export default {
-			  props: {
-				test: {
-				  type: Object,
-				  default: () => ({ a: 1 })
-				}
-			  }
-			}
-			`
+			const src = dedent`
+        export default {
+          props: {
+            test: {
+              type: Object,
+              default: () => ({ a: 1 })
+            }
+          }
+        }`
 			const testParsed = await parserTest(src)
 			const defaultValue = removeWhitespaceForTest(testParsed.defaultValue)
 			expect(defaultValue).toMatchObject({ value: '{a:1}' })
@@ -381,7 +379,7 @@ describe('propHandler', () => {
 		])(
 			'if prop is of type %p,\n\t given %p as default,\n\t should parse as %p,\n\t comment types are %p',
 			async (propType, input, output, commentsBlockType) => {
-				const src = `
+				const src = dedent`
                 export default {
                   props: {
                     /**
@@ -403,7 +401,7 @@ describe('propHandler', () => {
 
 	describe('description', () => {
 		it('should return the right description', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             /**
@@ -423,7 +421,7 @@ describe('propHandler', () => {
 
 	describe('v-model', () => {
 		it('should set the @model property as v-model instead of test', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             /**
@@ -442,7 +440,7 @@ describe('propHandler', () => {
 		})
 
 		it('should set the @model property as v-model instead of value even with a type', async () => {
-			const src = `
+			const src = dedent`
         export default {
           props: {
             /**
@@ -450,9 +448,9 @@ describe('propHandler', () => {
              * @model
              */
             value: {
-        required: true,
-        type: undefined
-      }
+              required: true,
+              type: undefined
+            }
           }
         }
         `
@@ -464,19 +462,19 @@ describe('propHandler', () => {
 		})
 
 		it('should set the v-model instead of value with model property', async () => {
-			const src = `
+			const src = dedent`
         export default {
-      model:{
-      prop: 'value'
-      },
+          model:{
+            prop: 'value'
+          },
           props: {
             /**
              * Value of the field
              */
             value: {
-        required: true,
-        type: undefined
-      }
+              required: true,
+              type: undefined
+            }
           }
         }
         `
@@ -488,19 +486,19 @@ describe('propHandler', () => {
 		})
 
 		it('should not set the v-model instead of value if model property has only event', async () => {
-			const src = `
+			const src = dedent`
         export default {
-      model:{
-      event: 'change'
-      },
+          model:{
+            event: 'change'
+          },
           props: {
             /**
              * Value of the field
              */
             value: {
-        required: true,
-        type: undefined
-      }
+              required: true,
+              type: undefined
+            }
           }
         }
         `
@@ -514,21 +512,21 @@ describe('propHandler', () => {
 
 	describe('@values tag parsing', () => {
 		it('should parse the @values tag as its own', async () => {
-			const src = `
-  export default {
-    props: {
-        /**
-         * color of the component
-         * @values dark, light
-         * @values red, blue
-         * @author me
-         */
-        color: {
-            type: String
-        }
-    }
-  }
-  `
+			const src = dedent`
+          export default {
+            props: {
+                /**
+                 * color of the component
+                 * @values dark, light
+                 * @values red, blue
+                 * @author me
+                 */
+                color: {
+                    type: String
+                }
+            }
+          }
+          `
 			expect(await parserTest(src)).toMatchObject({
 				description: 'color of the component',
 				values: ['dark', 'light', 'red', 'blue'],
@@ -545,82 +543,82 @@ describe('propHandler', () => {
 		})
 
 		it('should check the validator method for super standard values', async () => {
-			const src = `
-  export default {
-    props: {
-        color: {
-			type: String,
-			validator(va){
-				return ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
-			}
+			const src = dedent`
+        export default {
+          props: {
+            color: {
+              type: String,
+              validator(va){
+                return ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
+              }
+            }
+          }
         }
-    }
-  }
-  `
+        `
 			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
 		})
 
 		it('should check the validator method for super standard values with the diff signs', async () => {
-			const src = `
-  export default {
-    props: {
-        color: {
-			type: String,
-			validator(va){
-				return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
-			}
+			const src = dedent`
+        export default {
+          props: {
+            color: {
+            type: String,
+              validator(va){
+                return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
+              }
+            }
+          }
         }
-    }
-  }
-  `
+      `
 			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
 		})
 
 		it('should check the validator function for super standard values with the diff signs', async () => {
-			const src = `
-  export default {
-    props: {
-        color: {
-			type: String,
-			validator: function(va){
-				return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
-			}
+			const src = dedent`
+        export default {
+          props: {
+              color: {
+                type: String,
+                validator: function(va){
+                  return ['dark', 'light', 'red', 'blue'].indexOf(va) !== -1
+                }
+              }
+          }
         }
-    }
-  }
-  `
+        `
 			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
 		})
 
 		it('should check the validator arrow function for inline values', async () => {
-			const src = `
-  export default {
-    props: {
-        color: {
-			type: String,
-			validator: (va) =>
-				['dark', 'light', 'red', 'blue'].indexOf(va) > -1
-        }
-    }
-  }
-  `
+			const src = dedent`
+          export default {
+            props: {
+              color: {
+                type: String,
+                validator: (va) =>
+                  ['dark', 'light', 'red', 'blue'].indexOf(va) > -1
+                }
+              }
+            }
+          `
 			expect((await parserTest(src)).values).toMatchObject(['dark', 'light', 'red', 'blue'])
 		})
 
 		it('should check the validator method for identifiers', async () => {
-			const src = `
-  const array = ['dark', 'light', 'red', 'blue']
-  export default {
-    props: {
-        color: {
-			type: String,
-			validator(va){
-				return array.indexOf(va) > -1
-			}
-        }
-    }
-  }
-  `
+			const src = dedent`
+          const array = ['dark', 'light', 'red', 'blue']
+          export default {
+            props: {
+              color: {
+                type: String,
+                validator(va){
+                  return array.indexOf(va) > -1
+                }
+              }
+            }
+          }
+          `
 			expect((await parserTest(src, undefined, babylon().parse(src))).values).toMatchObject([
 				'dark',
 				'light',
@@ -632,7 +630,7 @@ describe('propHandler', () => {
 
 	describe('typescript Vue.extends', () => {
 		it('should be ok with Prop', async () => {
-			const src = `
+			const src = dedent`
         export default Vue.extend({
         props: {
           tsvalue: {
@@ -651,7 +649,7 @@ describe('propHandler', () => {
 		})
 
 		it('should parse values in TypeScript typings', async () => {
-			const src = `
+			const src = dedent`
         export default Vue.extend({
           props: {
             tsvalue: String as Prop<('foo' | 'bar')>,
@@ -667,7 +665,7 @@ describe('propHandler', () => {
 		})
 
 		it('should parse values in TypeScript typings with complete object', async () => {
-			const src = `
+			const src = dedent`
         export default Vue.extend({
         props: {
           tsvalue: {
@@ -687,15 +685,15 @@ describe('propHandler', () => {
 		})
 
 		it('should understand As annotations at the end of a prop definition', async () => {
-			const src = `
-      export default Vue.extend({
-        props: {
-          blockData: {
-            type: Array,
-            default: () => [],
-          } as PropOptions<SocialNetwork[]>,
-        }
-      });`
+			const src = dedent`
+        export default Vue.extend({
+          props: {
+            blockData: {
+              type: Array,
+              default: () => [],
+            } as PropOptions<SocialNetwork[]>,
+          }
+        });`
 			expect(await parserTest(src, ['typescript'])).toMatchObject({
 				type: {
 					name: 'SocialNetwork[]'
@@ -708,15 +706,15 @@ describe('propHandler', () => {
 		})
 
 		it('should understand "as const" in prop default values', async () => {
-			const src = `
-	export default Vue.extend({
-		props: {
-			backgroundSize: {
-				default: "cover" as const,
-				type: String as PropType<"contain" | "cover">,
-			},
-		}
-	});`
+			const src = dedent`
+        export default Vue.extend({
+          props: {
+            backgroundSize: {
+              default: "cover" as const,
+              type: String as PropType<"contain" | "cover">,
+            },
+          }
+        });`
 			expect(await parserTest(src, ['typescript'])).toMatchObject({
 				defaultValue: {
 					value: '"cover"'
@@ -727,18 +725,18 @@ describe('propHandler', () => {
 
 	describe('@type', () => {
 		it('should use @type typings', async () => {
-			const src = `
-      export default {
-        props: {
-        /**
-         * @type {{ bar: number, foo: string }}
-         */
-        blockData: {
-          type: Object,
-          default: () => {},
-        },
-        }
-      };`
+			const src = dedent`
+        export default {
+          props: {
+            /**
+             * @type {{ bar: number, foo: string }}
+             */
+            blockData: {
+              type: Object,
+              default: () => {},
+            },
+          }
+        };`
 			expect(await parserTest(src)).toMatchObject({
 				type: {
 					name: '{ bar: number, foo: string }'
@@ -747,18 +745,18 @@ describe('propHandler', () => {
 		})
 
 		it('should extract values from @type typings', async () => {
-			const src = `
-      export default {
-        props: {
-        /**
-         * @type { "bar + boo" | "foo & baz" }}
-         */
-        blockData: {
-          type: String,
-          default: () => {},
-        },
-        }
-      };`
+			const src = dedent`
+        export default {
+          props: {
+            /**
+             * @type { "bar + boo" | "foo & baz" }}
+             */
+            blockData: {
+              type: String,
+              default: () => {},
+            },
+          }
+        };`
 			expect(await parserTest(src)).toMatchObject({
 				values: ['bar + boo', 'foo & baz'],
 				type: {
