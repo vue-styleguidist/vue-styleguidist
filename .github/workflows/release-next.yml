@@ -30,11 +30,23 @@ jobs:
       - name: Fetch git log
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
-      - run: npx --yes -- lerna version --conventional-prerelease --preid beta --yes
-
-      - run: npx --yes -- lerna publish from-git --yes
+      - name: Create release Pull Request or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: yarn release
+          commit: "ci(changesets): version packages"
+          title: "ci(changesets): version packages"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release to @next tag
+        if: steps.changesets.outputs.published != 'true'
+        run: |
+          pnpm exec changeset version --snapshot next
+          pnpm exec changeset publish --tag next
+          git push --follow-tags
 
       - name: Update pnpm-lock.yaml
         run: |
