@@ -14,10 +14,10 @@
 		"vue": "^2.6.14"
 	},
 	"devDependencies": {
-		"@vue/babel-preset-app": "^5.0.4",
-		"@vue/cli-plugin-babel": "^5.0.4",
-		"@vue/cli-plugin-eslint": "^5.0.4",
-		"@vue/cli-service": "^5.0.4",
+		"@vue/babel-preset-app": "4.5.12",
+		"@vue/cli-plugin-babel": "4.5.12",
+		"@vue/cli-plugin-eslint": "4.5.12",
+		"@vue/cli-service": "4.5.17",
 		"vue-cli-plugin-styleguidist": "^4",
 		"vue-template-compiler": "^2.6.14",
 		"webpack-bundle-analyzer": "^3.9.0",
