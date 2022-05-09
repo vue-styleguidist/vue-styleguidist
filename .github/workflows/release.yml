@@ -22,6 +22,15 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           fetch-depth: 0
 
+      - name: Cache multiple paths
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ hashFiles('./pnpm-lock.yaml') }}
+      
+      - name: Set dependency cache directory
+        run: pnpm config set store-dir ~/.pnpm-store
+
       - name: Init & Build
         uses: ./.github/actions/build
 
