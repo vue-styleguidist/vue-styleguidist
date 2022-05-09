@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   test:
-    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@delivery
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@dev
 
   release:
     needs: test
