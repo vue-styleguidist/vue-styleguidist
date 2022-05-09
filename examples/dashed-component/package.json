@@ -40,6 +40,6 @@
 		"style-loader": "^0.19.1",
 		"vue-loader": "^15.9.8",
 		"vue-styleguidist": "^4.36.1",
-		"webpack": "^4.46.0"
+		"webpack": "^5.72.0"
 	}
 }
