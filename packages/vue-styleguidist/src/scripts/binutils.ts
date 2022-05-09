@@ -156,6 +156,15 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 		printAllErrorsAndWarnings(messages, stats.compilation)
 	})
 
+  // kill ghosted threads on exit
+  ;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
+    process.on(signal, () => {
+      app.close(() => {
+        process.exit(0)
+      })
+    })
+  })
+
 	// in order to have the caller be able to interact
 	// with the app when it's hot
 	return { app, compiler }
