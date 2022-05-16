@@ -243,7 +243,6 @@ describe('eventHandler', () => {
 			eventHandler(documentation, def.component, def.ast)
 		}
 		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('updating')
-		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('removing')
 		expect(mockEventDescriptor).toMatchObject({
 			name: 'success',
 			description: 'Define an event just before the function block',
@@ -256,6 +255,8 @@ describe('eventHandler', () => {
 				}
 			]
 		})
+
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('removing')
 		expect(mockEventDescriptor).toMatchObject({
 			name: 'success',
 			description: 'Define another event just before the function block',
