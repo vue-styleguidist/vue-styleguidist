@@ -187,9 +187,9 @@ export function eventHandlerMethods(documentation: Documentation, path: NodePath
 				return
 			}
 
-			const [firesTags] = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
-			if (firesTags) {
-				const eventName = firesTags.content as string
+			const firesTags = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
+            for (var firesTag of firesTags) {
+				const eventName = firesTag.content as string
 				const eventDescriptor = documentation.getEventDescriptor(eventName)
 				let currentBlock: DocBlockTags | null = {}
 				let foundEventDesciptor: DocBlockTags | undefined

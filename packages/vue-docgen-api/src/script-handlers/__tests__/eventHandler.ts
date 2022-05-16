@@ -209,19 +209,26 @@ describe('eventHandler', () => {
 		expect(() => eventHandler(documentation, def.component as any, def.ast)).not.toThrow()
 	})
 
-	it('should allow forced events', () => {
+	it('should allow multiple forced events', () => {
 		const src = `
 	export default {
 		methods: {
 			/** 
-			 * Define the event just before the function block
+			 * Define an event just before the function block
 			 *
 			 * @event updating
-			 * @property { String } prop1 - first prop given by the event
+			 * @property { String } prop - some prop given by the event
+			 */
+			/** 
+			 * Define another event just before the function block
+			 *
+			 * @event removing
+			 * @property { Object } prop - also a prop given by the event
 			 */
 			/** 
 			 * Some comment for the function
 			 * @fires updating
+             * @fires removing
 			 * @arg { String } name updated property name
 			 * @arg newValue new value that we want to update
 			 */
@@ -236,14 +243,27 @@ describe('eventHandler', () => {
 			eventHandler(documentation, def.component, def.ast)
 		}
 		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('updating')
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('removing')
 		expect(mockEventDescriptor).toMatchObject({
 			name: 'success',
-			description: 'Define the event just before the function block',
+			description: 'Define an event just before the function block',
 			properties: [
 				{
-					name: 'prop1',
+					name: 'prop',
 					type: {
 						names: [' String ']
+					}
+				}
+			]
+		})
+		expect(mockEventDescriptor).toMatchObject({
+			name: 'success',
+			description: 'Define another event just before the function block',
+			properties: [
+				{
+					name: 'prop',
+					type: {
+						names: [' Object ']
 					}
 				}
 			]
