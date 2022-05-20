@@ -1,10 +1,10 @@
 import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import babylon from '../../babel-parser'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import Documentation, { EventDescriptor } from '../../Documentation'
-import setupEventHandler from '../setupEventHandler'
+import babylon from '../babel-parser'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import Documentation, { EventDescriptor } from '../Documentation'
+import setupEventHandler from './setupEventHandler'
 
 jest.mock('../../Documentation')
 

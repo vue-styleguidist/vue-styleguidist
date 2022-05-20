@@ -1,11 +1,11 @@
 import * as bt from '@babel/types'
-import babelParser from '../../babel-parser'
-import Documentation from '../../Documentation'
-import { parseFile } from '../../parse'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import resolvePathFrom from '../../utils/resolvePathFrom'
-import resolveRequired from '../../utils/resolveRequired'
-import mixinsHandler from '../mixinsHandler'
+import babelParser from '../babel-parser'
+import Documentation from '../Documentation'
+import { parseFile } from '../parse'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import resolvePathFrom from '../utils/resolvePathFrom'
+import resolveRequired from '../utils/resolveRequired'
+import mixinsHandler from './mixinsHandler'
 
 jest.mock('../../utils/resolveRequired')
 jest.mock('../../utils/resolvePathFrom')

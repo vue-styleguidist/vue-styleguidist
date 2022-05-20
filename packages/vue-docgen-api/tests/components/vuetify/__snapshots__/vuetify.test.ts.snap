@@ -1,4 +1,216 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
+
+exports[`test a vuetify component > should match the snapshot 1`] = `
+{
+  "description": "",
+  "displayName": "v-text-field",
+  "events": [
+    {
+      "name": "input",
+      "type": {
+        "names": [
+          "undefined",
+        ],
+      },
+    },
+    {
+      "name": "change",
+      "type": {
+        "names": [
+          "undefined",
+        ],
+      },
+    },
+    {
+      "name": "blur",
+      "type": {
+        "names": [
+          "undefined",
+        ],
+      },
+    },
+    {
+      "name": "focus",
+      "type": {
+        "names": [
+          "undefined",
+        ],
+      },
+    },
+    {
+      "name": "keydown",
+      "type": {
+        "names": [
+          "undefined",
+        ],
+      },
+    },
+  ],
+  "exportName": "default",
+  "methods": [
+    {
+      "name": "focus",
+      "tags": {
+        "access": [
+          {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+    {
+      "name": "blur",
+      "tags": {
+        "access": [
+          {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+      },
+    },
+  ],
+  "props": [
+    {
+      "name": "appendOuterIcon",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "name": "autofocus",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "clearable",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "'$clear'",
+      },
+      "name": "clearIcon",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "name": "counter",
+      "type": {
+        "name": "boolean|number|string",
+      },
+    },
+    {
+      "name": "filled",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "flat",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "fullWidth",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "label",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "name": "outlined",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "placeholder",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "name": "prefix",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "name": "prependInnerIcon",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "name": "reverse",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "rounded",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "shaped",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "singleLine",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "solo",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "soloInverted",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "suffix",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "'text'",
+      },
+      "name": "type",
+      "type": {
+        "name": "string",
+      },
+    },
+  ],
+  "slots": undefined,
+  "tags": {},
+}
+`;
 
 exports[`test a vuetify component should match the snapshot 1`] = `
 Object {

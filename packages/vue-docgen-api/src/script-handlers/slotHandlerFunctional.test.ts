@@ -1,8 +1,8 @@
 import { NodePath } from 'ast-types/lib/node-path'
-import buildParser from '../../babel-parser'
-import Documentation, { SlotDescriptor } from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import slotHandlerFunctional from '../slotHandlerFunctional'
+import buildParser from '../babel-parser'
+import Documentation, { SlotDescriptor } from '../Documentation'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import slotHandlerFunctional from './slotHandlerFunctional'
 
 jest.mock('../../Documentation')
 

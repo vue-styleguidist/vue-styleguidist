@@ -1,10 +1,10 @@
 import { NodePath } from 'ast-types/lib/node-path'
 import Map from 'ts-map'
 import * as bt from '@babel/types'
-import babylon from '../../babel-parser'
-import Documentation, { PropDescriptor } from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import classPropHandler from '../classPropHandler'
+import babylon from '../babel-parser'
+import Documentation, { PropDescriptor } from '../Documentation'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import classPropHandler from './classPropHandler'
 
 jest.mock('../../Documentation')
 

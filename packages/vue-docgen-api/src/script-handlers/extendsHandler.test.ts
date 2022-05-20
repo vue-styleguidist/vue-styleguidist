@@ -1,11 +1,11 @@
 import * as bt from '@babel/types'
-import babylon from '../../babel-parser'
-import Documentation from '../../Documentation'
-import { parseFile } from '../../parse'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import resolvePathFrom from '../../utils/resolvePathFrom'
-import resolveRequired from '../../utils/resolveRequired'
-import extendsHandler from '../extendsHandler'
+import babylon from '../babel-parser'
+import Documentation from '../Documentation'
+import { parseFile } from '../parse'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import resolvePathFrom from '../utils/resolvePathFrom'
+import resolveRequired from '../utils/resolveRequired'
+import extendsHandler from './extendsHandler'
 
 jest.mock('../../utils/resolveRequired')
 jest.mock('../../utils/resolvePathFrom')

@@ -1,9 +1,10 @@
-import babylon from '../../babel-parser'
-import Documentation from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import classDisplayNameHandler from '../classDisplayNameHandler'
+import { vi } from 'vitest'
+import babylon from '../babel-parser'
+import Documentation from '../Documentation'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import classDisplayNameHandler from './classDisplayNameHandler'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string) {
 	const ast = babylon().parse(src)

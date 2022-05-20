@@ -2,10 +2,10 @@ import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import dedent from 'dedent'
-import babylon from '../../babel-parser'
-import Documentation, { PropDescriptor } from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import propHandler from '../propHandler'
+import babylon from '../babel-parser'
+import Documentation, { PropDescriptor } from '../Documentation'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import propHandler from './propHandler'
 
 jest.mock('../../Documentation')
 

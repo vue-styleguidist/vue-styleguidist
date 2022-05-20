@@ -1,7 +1,7 @@
 import * as bt from '@babel/types'
 import { parse } from 'recast'
-import parseValidatorForValues from '../parseValidator'
-import buildParser from '../../../babel-parser'
+import parseValidatorForValues from './parseValidator'
+import buildParser from '../../babel-parser'
 
 const parser: { parse: (src: string) => bt.File } = buildParser({ plugins: ['jsx'] })
 

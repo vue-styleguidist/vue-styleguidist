@@ -1,7 +1,7 @@
 import { parse } from '@vue/compiler-dom'
-import Documentation from '../../Documentation'
-import { traverse } from '../../parse-template'
-import propHandler from '../propHandler'
+import Documentation from '../Documentation'
+import { traverse } from '../parse-template'
+import propHandler from './propHandler'
 
 describe('slotHandler', () => {
 	let doc: Documentation

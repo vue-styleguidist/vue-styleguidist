@@ -1,5 +1,5 @@
 import * as bt from '@babel/types'
-import babelParser from '../babel-parser'
+import babelParser from './babel-parser'
 
 describe('babel-parser', () => {
 	let parser: { parse: (src: string) => bt.File }

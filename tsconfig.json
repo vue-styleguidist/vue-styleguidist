@@ -17,7 +17,8 @@
 		},
 		"strictFunctionTypes": false,
 		"jsx": "react",
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+    "types": ["vitest/globals"]
 	},
 	"include": [
 		"@types/**/*",

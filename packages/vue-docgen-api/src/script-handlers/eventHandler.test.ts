@@ -1,9 +1,9 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import babylon from '../../babel-parser'
-import Documentation, { EventDescriptor } from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import eventHandler, { eventHandlerEmits } from '../eventHandler'
+import babylon from '../babel-parser'
+import Documentation, { EventDescriptor } from '../Documentation'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import eventHandler, { eventHandlerEmits } from './eventHandler'
 
 jest.mock('../../Documentation')
 

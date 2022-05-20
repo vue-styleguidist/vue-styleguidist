@@ -1,5 +1,5 @@
-import parseTemplate from '../parse-template'
-import Documentation from '../Documentation'
+import parseTemplate from './parse-template'
+import Documentation from './Documentation'
 
 describe('parse-template', () => {
 	let content = ''

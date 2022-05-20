@@ -1,5 +1,5 @@
-import { getTypeDefinitionFromIdentifier } from '../tsUtils'
-import buildParser from '../../../babel-parser'
+import { getTypeDefinitionFromIdentifier } from './tsUtils'
+import buildParser from '../../babel-parser'
 
 describe('getTypeDefinitionFromIdentifier', () => {
 	it('resolves an interface in the global scope', () => {

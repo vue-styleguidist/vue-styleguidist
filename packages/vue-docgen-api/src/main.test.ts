@@ -1,4 +1,4 @@
-import { parse } from '../main'
+import { parse } from './main'
 
 describe('main', () => {
 	it('should return an object', () => {

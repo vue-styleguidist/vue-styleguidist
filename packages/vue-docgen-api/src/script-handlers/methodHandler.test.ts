@@ -1,8 +1,8 @@
 import { NodePath } from 'ast-types/lib/node-path'
-import babylon from '../../babel-parser'
-import Documentation, { MethodDescriptor } from '../../Documentation'
-import resolveExportedComponent from '../../utils/resolveExportedComponent'
-import methodHandler from '../methodHandler'
+import babylon from '../babel-parser'
+import Documentation, { MethodDescriptor } from '../Documentation'
+import resolveExportedComponent from '../utils/resolveExportedComponent'
+import methodHandler from './methodHandler'
 
 jest.mock('../../Documentation')
 

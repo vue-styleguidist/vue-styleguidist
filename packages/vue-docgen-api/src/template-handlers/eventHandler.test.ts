@@ -1,7 +1,7 @@
 import { parse } from '@vue/compiler-dom'
-import Documentation from '../../Documentation'
-import { traverse } from '../../parse-template'
-import eventHandler from '../eventHandler'
+import Documentation from '../Documentation'
+import { traverse } from '../parse-template'
+import eventHandler from './eventHandler'
 
 describe('eventHandler', () => {
 	let doc: Documentation

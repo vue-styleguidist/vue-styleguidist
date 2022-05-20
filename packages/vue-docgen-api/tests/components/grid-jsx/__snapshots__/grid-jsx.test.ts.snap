@@ -1,4 +1,226 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
+
+exports[`tests grid jsx > should match the snapshot 1`] = `
+{
+  "description": "This is an example of creating a reusable grid component and using it with external data.",
+  "displayName": "grid",
+  "events": [
+    {
+      "description": "Success event.",
+      "name": "success",
+      "type": {
+        "names": [
+          "object",
+        ],
+      },
+    },
+    {
+      "description": "Error event.",
+      "name": "error",
+      "type": {
+        "names": [
+          "object",
+        ],
+      },
+    },
+  ],
+  "exportName": "default",
+  "methods": [
+    {
+      "description": "Sets the order",
+      "name": "sortBy",
+      "params": [
+        {
+          "description": "Key to order",
+          "name": "key",
+          "type": {
+            "name": "string",
+          },
+        },
+      ],
+      "returns": {
+        "description": "Test",
+        "title": "returns",
+        "type": {
+          "name": "string",
+        },
+      },
+      "tags": {
+        "access": [
+          {
+            "description": "public",
+            "title": "access",
+          },
+        ],
+        "params": [
+          {
+            "description": "Key to order",
+            "name": "key",
+            "title": "param",
+            "type": {
+              "name": "string",
+            },
+          },
+        ],
+        "returns": [
+          {
+            "description": "Test",
+            "title": "returns",
+            "type": {
+              "name": "string",
+            },
+          },
+        ],
+        "since": [
+          {
+            "description": "Version 1.0.1",
+            "title": "since",
+          },
+        ],
+        "version": [
+          {
+            "description": "1.0.5",
+            "title": "version",
+          },
+        ],
+      },
+    },
+  ],
+  "props": [
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "text",
+      },
+      "description": "object/array defaults should be returned from a factory function",
+      "name": "msg",
+      "tags": {
+        "link": [
+          {
+            "description": "See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names) for a list of color names",
+            "title": "link",
+          },
+        ],
+        "see": [
+          {
+            "description": "See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names) for a list of color names",
+            "title": "see",
+          },
+        ],
+        "since": [
+          {
+            "description": "Version 1.0.1",
+            "title": "since",
+          },
+        ],
+        "version": [
+          {
+            "description": "1.0.5",
+            "title": "version",
+          },
+        ],
+      },
+      "type": {
+        "name": "string|number",
+      },
+    },
+    {
+      "description": "describe data",
+      "name": "data",
+      "tags": {
+        "version": [
+          {
+            "description": "1.0.5",
+            "title": "version",
+          },
+        ],
+      },
+      "type": {
+        "name": "array",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "[{}]",
+      },
+      "name": "images",
+      "type": {
+        "name": "array",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": true,
+        "value": "function () {}",
+      },
+      "description": "prop function",
+      "name": "propFunc",
+      "type": {
+        "name": "func",
+      },
+    },
+    {
+      "description": "get columns list",
+      "name": "columns",
+      "type": {
+        "name": "array",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "'example'",
+      },
+      "description": "filter key",
+      "name": "filterKey",
+      "tags": {
+        "ignore": [
+          {
+            "description": true,
+            "title": "ignore",
+          },
+        ],
+      },
+      "type": {
+        "name": "string",
+      },
+    },
+  ],
+  "slots": [
+    {
+      "bindings": [
+        {
+          "name": "name",
+          "title": "binding",
+        },
+      ],
+      "description": "Use this slot header",
+      "name": "header",
+    },
+  ],
+  "tags": {
+    "author": [
+      {
+        "description": "[Rafael](https://github.com/rafaesc92)",
+        "title": "author",
+      },
+    ],
+    "since": [
+      {
+        "description": "Version 1.0.1",
+        "title": "since",
+      },
+    ],
+    "version": [
+      {
+        "description": "1.0.5",
+        "title": "version",
+      },
+    ],
+  },
+}
+`;
 
 exports[`tests grid jsx should match the snapshot 1`] = `
 Object {
