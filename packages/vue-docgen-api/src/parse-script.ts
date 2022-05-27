@@ -49,7 +49,7 @@ export default async function parseScript(
 		// resolve their documentations
 		const docs = await documentRequiredComponents(documentation, ievSet, undefined, options)
 
-		// if we do not find any compoents throw
+		// if we do not find any components, throw
 		if (!docs.length) {
 			throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 		} else {
