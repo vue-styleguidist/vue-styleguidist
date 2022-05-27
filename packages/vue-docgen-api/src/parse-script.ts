@@ -73,8 +73,8 @@ export function addDefaultAndExecuteHandlers(
 	documentation?: Documentation,
 	forceSingleExport = false
 ): Promise<Documentation[] | undefined> {
-	const handlers = options.scriptHandlers || [
-		...defaultScriptHandlers,
+	const handlers = [
+		...(options.scriptHandlers || defaultScriptHandlers),
 		...(options.addScriptHandlers || [])
 	]
 
