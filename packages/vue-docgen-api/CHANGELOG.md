@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.47.0
+
+### Minor Changes
+
+- [#1328](https://github.com/vue-styleguidist/vue-styleguidist/pull/1328) [`c2a1c793`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c2a1c793548658436c4bce4458508e31ffd8f9cc) Thanks [@elevatebart](https://github.com/elevatebart)! - Allow multiple fire tags on the same method
+
 ## 4.46.1
 
 ### Patch Changes
