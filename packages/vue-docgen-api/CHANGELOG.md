@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.46.1
+
+### Patch Changes
+
+- [`e8c154eb`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8c154eb947dbd9c83a20a1357aad27758cf12cf) Thanks [@elevatebart](https://github.com/elevatebart)! - fix #1326 allow scriptHandler and addScriptHandler to be specified at the same time
+
 ## 4.46.0
 
 ### Minor Changes
