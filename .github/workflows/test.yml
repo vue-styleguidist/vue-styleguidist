@@ -26,3 +26,6 @@ jobs:
 
       - name: Run unit tests
         run: pnpm test:jest
+
+      - name: Run plugin tests
+        run: pnpm test:plugin

@@ -219,12 +219,16 @@ describe('eventHandler', () => {
 			 * @event updating
 			 * @property { String } prop1 - first prop given by the event
 			 */
+      /** 
+       * Define each event in its own block
+       *
+       * @event sending
+       * @property { String } sendingProp - first prop given by the event
+       */
 			/** 
-			 * Some comment for the function
 			 * @fires updating
-			 * @arg { String } name updated property name
-			 * @arg newValue new value that we want to update
-			 */
+       * @fires sending
+       */
 			onUpdate (name, newValue) {
 				// some external method, for example from a method
 				// (bind to the Vue instance) provided by a standard js class
@@ -236,18 +240,7 @@ describe('eventHandler', () => {
 			eventHandler(documentation, def.component, def.ast)
 		}
 		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('updating')
-		expect(mockEventDescriptor).toMatchObject({
-			name: 'success',
-			description: 'Define the event just before the function block',
-			properties: [
-				{
-					name: 'prop1',
-					type: {
-						names: [' String ']
-					}
-				}
-			]
-		})
+		expect(documentation.getEventDescriptor).toHaveBeenCalledWith('sending')
 	})
 
 	describe('vue 3 event descriptors', () => {
