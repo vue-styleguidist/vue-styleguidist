@@ -10,7 +10,7 @@
   },
   "scripts": {
     "pretest": "pnpm lint",
-    "test": "pnpm test:jest -- --maxWorkers=2 && pnpm test:plugin",
+    "test": "pnpm test:jest --maxWorkers=2 && pnpm test:plugin",
     "test:jest": "jest",
     "test:perf": "node ./packages/vue-docgen-api/tests/perf-test.js",
     "test:plugin": "rimraf ./test/cli-packages/* && jest --config=./jest.config.plugin.js --runInBand",
