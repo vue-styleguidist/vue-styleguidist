@@ -1,8 +1,9 @@
 name: Lint & Test
 on:
   pull_request:
-    types: [opened,synchronize]
-    branches: dev 
+    branches: [ dev ] 
+  push:
+    branches: [ dev ]
   workflow_call:
 
 concurrency:
