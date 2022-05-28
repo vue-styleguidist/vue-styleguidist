@@ -62,7 +62,7 @@ importers:
       ts-jest: 27.1.3
       tslib: 2.3.1
       typescript: 4.5.5
-      vue: 2.6.11
+      vue: 2.6.14
       vue-cli-plugin-styleguidist: '*'
       vue-property-decorator: 9.1.2
       vue-styleguidist: '*'
@@ -128,9 +128,9 @@ importers:
       ts-jest: 27.1.3_awhy2jvcexwz7eojc3kthm244m
       tslib: 2.3.1
       typescript: 4.5.5
-      vue: 2.6.11
+      vue: 2.6.14
       vue-cli-plugin-styleguidist: link:packages/vue-cli-plugin-styleguidist
-      vue-property-decorator: 9.1.2_vue@2.6.11
+      vue-property-decorator: 9.1.2_vue@2.6.14
       vue-styleguidist: link:packages/vue-styleguidist
       vuepress: 1.9.7_ejs@3.1.7
       webpack-dev-server: 3.11.3
@@ -30742,13 +30742,13 @@ packages:
       vue-class-component: 6.3.2
     dev: true
 
-  /vue-property-decorator/9.1.2_vue@2.6.11:
+  /vue-property-decorator/9.1.2_vue@2.6.14:
     resolution: {integrity: sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==}
     peerDependencies:
       vue: '*'
       vue-class-component: '*'
     dependencies:
-      vue: 2.6.11
+      vue: 2.6.14
     dev: false
 
   /vue-router/3.5.1:
@@ -30800,10 +30800,6 @@ packages:
     dependencies:
       is-plain-object: 3.0.0
       vue: 2.6.14
-    dev: false
-
-  /vue/2.6.11:
-    resolution: {integrity: sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==}
     dev: false
 
   /vue/2.6.12:
