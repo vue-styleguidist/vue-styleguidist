@@ -58,7 +58,7 @@ describe('utils', () => {
 	})
 
 	describe('writeDownMdFile', () => {
-		it.only('should prettify before saving', async () => {
+		it('should prettify before saving', async () => {
 			await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
 			expect(mockPrettierFormat).toHaveBeenCalledWith(UGLY_MD, { parser: 'markdown' })
 		})
@@ -95,13 +95,13 @@ describe('utils', () => {
 				docMap[k.replace(/\\/g, '/')] = rawPath
 			})
 			expect(docMap).toMatchInlineSnapshot(`
-		Object {
-		  "src/components/Button/Readme.md": "src/components/Button/Button.vue",
-		  "src/components/CounterButton/Readme.md": "src/components/CounterButton/CounterButton.vue",
-		  "src/components/Input/Readme.md": "src/components/Input/Input.vue",
-		  "src/components/PushButton/Readme.md": "src/components/PushButton/PushButton.vue",
-		}
-	`)
+				{
+				  "src/components/Button/Readme.md": "src/components/Button/Button.vue",
+				  "src/components/CounterButton/Readme.md": "src/components/CounterButton/CounterButton.vue",
+				  "src/components/Input/Readme.md": "src/components/Input/Input.vue",
+				  "src/components/PushButton/Readme.md": "src/components/PushButton/PushButton.vue",
+				}
+			`)
 		})
 	})
 })
