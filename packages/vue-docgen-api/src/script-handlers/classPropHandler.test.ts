@@ -5,7 +5,6 @@ import babylon from '../babel-parser'
 import Documentation, { PropDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import classPropHandler from './classPropHandler'
-import { SpyInstance } from 'vitest'
 
 vi.mock('../../Documentation')
 

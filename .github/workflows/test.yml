@@ -23,7 +23,7 @@ jobs:
         run: pnpm lint
 
       - name: Run unit tests
-        run: pnpm test:jest
+        run: pnpm test:vitest
 
       - name: Run plugin tests
         run: pnpm test:plugin

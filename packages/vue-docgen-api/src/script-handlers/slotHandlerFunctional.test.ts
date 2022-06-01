@@ -1,5 +1,4 @@
 import { NodePath } from 'ast-types/lib/node-path'
-import { SpyInstance } from 'vitest'
 import buildParser from '../babel-parser'
 import Documentation, { SlotDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
