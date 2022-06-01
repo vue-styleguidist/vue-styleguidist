@@ -26,6 +26,4 @@ jobs:
         run: pnpm test:vitest
 
       - name: Run plugin tests
-        run: pnpm test:plugin
-        env:
-          VITEST_MAX_THREADS: 1
+        run: pnpm test:plugin --threads=false
