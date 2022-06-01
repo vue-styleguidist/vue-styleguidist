@@ -187,15 +187,15 @@ describe('resolveExportedComponent', () => {
 			)
 			const [, iev] = resolveExportedComponent(ast)
 			expect(iev).toMatchInlineSnapshot(`
-			Object {
-			  "foo": Object {
-			    "exportName": "baz",
-			    "filePath": Array [
-			      "file/path",
-			    ],
-			  },
-			}
-		`)
+				{
+				  "foo": {
+				    "exportName": "baz",
+				    "filePath": [
+				      "file/path",
+				    ],
+				  },
+				}
+			`)
 		})
 
 		it('should extract IEV and return them', () => {
@@ -207,15 +207,15 @@ describe('resolveExportedComponent', () => {
 			)
 			const [comps, iev] = resolveExportedComponent(ast)
 			expect(iev).toMatchInlineSnapshot(`
-			Object {
-			  "foo": Object {
-			    "exportName": "default",
-			    "filePath": Array [
-			      "file/path/foo",
-			    ],
-			  },
-			}
-		`)
+				{
+				  "foo": {
+				    "exportName": "default",
+				    "filePath": [
+				      "file/path/foo",
+				    ],
+				  },
+				}
+			`)
 			expect(comps.size).toBe(0)
 		})
 
@@ -229,15 +229,15 @@ describe('resolveExportedComponent', () => {
 			)
 			const [comps, iev] = resolveExportedComponent(ast)
 			expect(iev).toMatchInlineSnapshot(`
-			Object {
-			  "foo": Object {
-			    "exportName": "default",
-			    "filePath": Array [
-			      "file/path/blah",
-			    ],
-			  },
-			}
-		`)
+				{
+				  "foo": {
+				    "exportName": "default",
+				    "filePath": [
+				      "file/path/blah",
+				    ],
+				  },
+				}
+			`)
 			expect(comps.size).toBe(1)
 		})
 	})

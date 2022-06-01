@@ -18,12 +18,12 @@ describe('findOrigins', () => {
 		} as ComponentDoc)
 
 		expect(result).toMatchInlineSnapshot(`
-		Array [
-		  "path/to/extends/prop",
-		  "path/to/extends",
-		  "path/to/mixin",
-		  "path/to/extends/method",
-		]
-	`)
+			[
+			  "path/to/extends/prop",
+			  "path/to/extends",
+			  "path/to/mixin",
+			  "path/to/extends/method",
+			]
+		`)
 	})
 })

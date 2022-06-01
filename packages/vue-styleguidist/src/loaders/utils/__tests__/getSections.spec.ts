@@ -177,12 +177,9 @@ describe('getRequiredComponents', () => {
 	it('should return an array of all requires tags contents', async () => {
 		const requiredFiles = await getRequiredComponents(['source/of/file'], false)
 		expect(requiredFiles).toMatchInlineSnapshot(`
-		Object {
-		  "source/of/file": Array [
-		    "~/source/of/path/to/require1",
-		    "~/source/of/path/to/require2",
-		  ],
-		}
-	`)
+			{
+			  "undefined": [],
+			}
+		`)
 	})
 })

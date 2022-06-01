@@ -19,29 +19,3 @@ exports[`tests InputText as a JS file > should match the snapshot 1`] = `
   "tags": {},
 }
 `;
-
-exports[`tests InputText as a JS file should match the snapshot 1`] = `
-Object {
-  "description": "Description InputText",
-  "displayName": "InputText",
-  "events": undefined,
-  "exportName": "default",
-  "methods": undefined,
-  "props": Array [
-    Object {
-      "name": "question",
-      "type": Object {
-        "name": "undefined",
-      },
-    },
-    Object {
-      "name": "placeholder",
-      "type": Object {
-        "name": "undefined",
-      },
-    },
-  ],
-  "slots": undefined,
-  "tags": Object {},
-}
-`;

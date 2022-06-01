@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`getSections should return an array 1`] = `
-Array [
-  Object {
-    "components": Array [],
-    "content": Object {
-      "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!~/test/components/ReadMe.md",
+exports[`getSections > should return an array 1`] = `
+[
+  {
+    "components": [],
+    "content": {
+      "require": "!!/Users/elevatebart/Dev/vue-styleguidist/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!/Users/elevatebart/Dev/vue-styleguidist/test/components/ReadMe.md",
     },
     "description": undefined,
     "exampleMode": "collapse",
@@ -13,22 +13,22 @@ Array [
     "href": undefined,
     "name": "Readme",
     "sectionDepth": 0,
-    "sections": Array [],
+    "sections": [],
     "slug": "readme-1",
     "usageMode": "collapse",
   },
-  Object {
-    "components": Array [
-      Object {
+  {
+    "components": [
+      {
         "filepath": "components/Button.vue",
         "hasExamples": true,
-        "metadata": Object {},
-        "module": Object {
-          "require": "~/test/components/Button.vue",
+        "metadata": {},
+        "module": {
+          "require": "/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
         },
         "pathLine": "components/Button.vue",
-        "props": Object {
-          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+        "props": {
+          "require": "!!/Users/elevatebart/Dev/vue-styleguidist/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
         },
         "slug": "button-2",
         "subComponents": undefined,
@@ -41,22 +41,22 @@ Array [
     "href": undefined,
     "name": "Components",
     "sectionDepth": 0,
-    "sections": Array [],
+    "sections": [],
     "slug": "components-1",
     "usageMode": "collapse",
   },
-  Object {
-    "components": Array [
-      Object {
+  {
+    "components": [
+      {
         "filepath": "components/Button.vue",
         "hasExamples": true,
-        "metadata": Object {},
-        "module": Object {
-          "require": "~/test/components/Button.vue",
+        "metadata": {},
+        "module": {
+          "require": "/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
         },
         "pathLine": "components/Button.vue",
-        "props": Object {
-          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+        "props": {
+          "require": "!!/Users/elevatebart/Dev/vue-styleguidist/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
         },
         "slug": "button-3",
         "subComponents": undefined,
@@ -69,26 +69,26 @@ Array [
     "href": undefined,
     "name": "Ignore",
     "sectionDepth": 0,
-    "sections": Array [],
+    "sections": [],
     "slug": "ignore-1",
     "usageMode": "collapse",
   },
 ]
 `;
 
-exports[`processSection should return an object for section with components 1`] = `
-Object {
-  "components": Array [
-    Object {
+exports[`processSection > should return an object for section with components 1`] = `
+{
+  "components": [
+    {
       "filepath": "components/Button.vue",
       "hasExamples": true,
-      "metadata": Object {},
-      "module": Object {
-        "require": "~/test/components/Button.vue",
+      "metadata": {},
+      "module": {
+        "require": "/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
       },
       "pathLine": "components/Button.vue",
-      "props": Object {
-        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+      "props": {
+        "require": "!!/Users/elevatebart/Dev/vue-styleguidist/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
       },
       "slug": "button",
       "subComponents": undefined,
@@ -101,17 +101,17 @@ Object {
   "href": undefined,
   "name": "Components",
   "sectionDepth": 0,
-  "sections": Array [],
+  "sections": [],
   "slug": "components",
   "usageMode": "collapse",
 }
 `;
 
-exports[`processSection should return an object for section with content 1`] = `
-Object {
-  "components": Array [],
-  "content": Object {
-    "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!~/test/components/ReadMe.md",
+exports[`processSection > should return an object for section with content 1`] = `
+{
+  "components": [],
+  "content": {
+    "require": "!!/Users/elevatebart/Dev/vue-styleguidist/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!/Users/elevatebart/Dev/vue-styleguidist/test/components/ReadMe.md",
   },
   "description": undefined,
   "exampleMode": "collapse",
@@ -119,25 +119,25 @@ Object {
   "href": undefined,
   "name": "Readme",
   "sectionDepth": 0,
-  "sections": Array [],
+  "sections": [],
   "slug": "readme",
   "usageMode": "collapse",
 }
 `;
 
-exports[`processSection should return an object for section without ignored components 1`] = `
-Object {
-  "components": Array [
-    Object {
+exports[`processSection > should return an object for section without ignored components 1`] = `
+{
+  "components": [
+    {
       "filepath": "components/Button.vue",
       "hasExamples": true,
-      "metadata": Object {},
-      "module": Object {
-        "require": "~/test/components/Button.vue",
+      "metadata": {},
+      "module": {
+        "require": "/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
       },
       "pathLine": "components/Button.vue",
-      "props": Object {
-        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
+      "props": {
+        "require": "!!/Users/elevatebart/Dev/vue-styleguidist/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
       },
       "slug": "button-1",
       "subComponents": undefined,
@@ -150,7 +150,7 @@ Object {
   "href": undefined,
   "name": "Ignore",
   "sectionDepth": 0,
-  "sections": Array [],
+  "sections": [],
   "slug": "ignore",
   "usageMode": "collapse",
 }

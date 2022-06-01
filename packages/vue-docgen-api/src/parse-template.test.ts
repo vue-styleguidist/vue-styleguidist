@@ -13,16 +13,16 @@ describe('parse-template', () => {
 		content = '<div></div><!-- comment -->'
 		parseTemplate({ content, attrs: {} }, doc, [], { filePath: path, validExtends: () => true })
 		expect(doc.toObject()).toMatchInlineSnapshot(`
-		Object {
-		  "description": "",
-		  "displayName": undefined,
-		  "events": undefined,
-		  "exportName": undefined,
-		  "methods": undefined,
-		  "props": undefined,
-		  "slots": undefined,
-		  "tags": Object {},
-		}
-	`)
+			{
+			  "description": "",
+			  "displayName": undefined,
+			  "events": undefined,
+			  "exportName": undefined,
+			  "methods": undefined,
+			  "props": undefined,
+			  "slots": undefined,
+			  "tags": {},
+			}
+		`)
 	})
 })
