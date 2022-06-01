@@ -52,7 +52,7 @@
     "@changesets/cli": "2.22.0",
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
-    "@types/jest": "27.4.1",
+    "@types/jest": "27.5.1",
     "@types/node": "13.13.52",
     "@types/webpack-dev-server": "3.11.6",
     "@vue/cli": "4.5.17",
