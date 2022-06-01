@@ -63,7 +63,7 @@ describe('utils', () => {
 			expect(mockPrettierFormat).toHaveBeenCalledWith(UGLY_MD, { parser: 'markdown' })
 		})
 
-		it('should then save the pretified markdown', async () => {
+		it('should then save the prettified markdown', async () => {
 			await writeDownMdFile(UGLY_MD, MD_FILE_PATH)
 			expect(cwsWrite).toHaveBeenCalledWith(PRETTY_MD)
 		})
