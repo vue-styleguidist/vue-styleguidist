@@ -19,7 +19,7 @@ describe('render and setup function slotHandler', () => {
 	beforeEach(() => {
 		mockSlotDescriptor = { name: 'default', description: '' }
 		documentation = new Documentation('dummy/path')
-		const mockGetSlotDescriptor = documentation.getSlotDescriptor as any as SpyInstance
+		const mockGetSlotDescriptor = vi.spyOn(documentation, 'getSlotDescriptor') as any as SpyInstance
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 

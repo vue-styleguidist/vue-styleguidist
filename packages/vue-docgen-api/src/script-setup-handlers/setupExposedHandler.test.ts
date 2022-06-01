@@ -1,13 +1,10 @@
 import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation, { ExposedDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import setupExposedHandler from './setupExposedHandler'
-
-vi.mock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -29,9 +26,8 @@ describe('setupExposedHandler', () => {
 			description: '',
 			name: 'mockExposed'
 		}
-		const MockDocumentation = require('../../Documentation').default
-		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getExposedDescriptor as any as SpyInstance
+		documentation = new Documentation('test/path')
+		const mockGetPropDescriptor = vi.spyOn(documentation, 'getExposedDescriptor')
 		mockGetPropDescriptor.mockReturnValue(mockExposedDescriptor)
 	})
 
@@ -65,11 +61,11 @@ describe('setupExposedHandler', () => {
         `
 		const prop = await parserTest(src)
 		expect(prop).toMatchInlineSnapshot(`
-		Object {
-		  "description": "Exposed test props",
-		  "name": "mockExposed",
-		}
-	`)
+			{
+			  "description": "Exposed test props",
+			  "name": "mockExposed",
+			}
+		`)
 	})
 
 	it('should resolve Exposed items pushed by strings', async () => {
@@ -84,10 +80,10 @@ describe('setupExposedHandler', () => {
         `
 		const prop = await parserTest(src)
 		expect(prop).toMatchInlineSnapshot(`
-		Object {
-		  "description": "Exposed test props",
-		  "name": "mockExposed",
-		}
-	`)
+			{
+			  "description": "Exposed test props",
+			  "name": "mockExposed",
+			}
+		`)
 	})
 })

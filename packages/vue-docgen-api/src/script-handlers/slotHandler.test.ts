@@ -1,5 +1,4 @@
 import { NodePath } from 'ast-types/lib/node-path'
-import { SpyInstance } from 'vitest'
 import buildParser from '../babel-parser'
 import Documentation, { SlotDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
@@ -19,7 +18,7 @@ describe('render function slotHandler', () => {
 	beforeEach(() => {
 		mockSlotDescriptor = { name: 'mySlot', description: '' }
 		documentation = new Documentation('dummy/path')
-		const mockGetSlotDescriptor = documentation.getSlotDescriptor as any as SpyInstance
+		const mockGetSlotDescriptor = vi.spyOn(documentation, 'getSlotDescriptor')
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 
@@ -284,23 +283,23 @@ describe('render function slotHandler', () => {
 			await slotHandler(documentation, def)
 		}
 		expect(mockSlotDescriptor).toMatchInlineSnapshot(`
-		Object {
-		  "bindings": Array [
-		    Object {
-		      "description": "contains true while compiling",
-		      "name": "compiling",
-		      "title": "binding",
-		    },
-		    Object {
-		      "description": "will render the compiled item",
-		      "name": "compile",
-		      "title": "binding",
-		    },
-		  ],
-		  "description": "Use this slot carefully",
-		  "name": "mySlot",
-		}
-	`)
+			{
+			  "bindings": [
+			    {
+			      "description": "contains true while compiling",
+			      "name": "compiling",
+			      "title": "binding",
+			    },
+			    {
+			      "description": "will render the compiled item",
+			      "name": "compile",
+			      "title": "binding",
+			    },
+			  ],
+			  "description": "Use this slot carefully",
+			  "name": "mySlot",
+			}
+		`)
 	})
 
 	it('should allow describing scoped slots in render', async () => {
@@ -380,15 +379,15 @@ export default {
 			}
 			expect(mockSlotDescriptor.tags).not.toBeUndefined()
 			expect(mockSlotDescriptor.tags).toMatchInlineSnapshot(`
-			Object {
-			  "ignore": Array [
-			    Object {
-			      "description": true,
-			      "title": "ignore",
-			    },
-			  ],
-			}
-		`)
+				{
+				  "ignore": [
+				    {
+				      "description": true,
+				      "title": "ignore",
+				    },
+				  ],
+				}
+			`)
 		})
 	})
 

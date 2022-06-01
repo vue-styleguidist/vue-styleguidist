@@ -25,7 +25,7 @@ describe('methodHandler', () => {
 		mockMethodDescriptor = { name: '', description: '', modifiers: [] }
 		const MockDocumentation = Documentation
 		documentation = new MockDocumentation('test/path')
-		const mockGetMethodDescriptor = documentation.getMethodDescriptor as any as SpyInstance
+		const mockGetMethodDescriptor = vi.spyOn(documentation, 'getMethodDescriptor')
 		mockGetMethodDescriptor.mockImplementation((name: string) => {
 			mockMethodDescriptor.name = name
 			return mockMethodDescriptor

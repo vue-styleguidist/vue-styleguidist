@@ -5,9 +5,6 @@ import babylon from '../babel-parser'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import Documentation, { EventDescriptor } from '../Documentation'
 import setupEventHandler from './setupEventHandler'
-import { SpyInstance } from 'vitest'
-
-vi.mock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -29,9 +26,8 @@ describe('setupEventHandler', () => {
 			description: '',
 			name: 'mockEvent'
 		}
-		const MockDocumentation = require('../../Documentation').default
-		documentation = new MockDocumentation('test/path')
-		const mockGetEventDescriptor = documentation.getEventDescriptor as any as SpyInstance
+		documentation = new Documentation('test/path')
+		const mockGetEventDescriptor = vi.spyOn(documentation, 'getEventDescriptor')
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})
 

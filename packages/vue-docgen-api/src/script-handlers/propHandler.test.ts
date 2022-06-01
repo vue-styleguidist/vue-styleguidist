@@ -2,13 +2,12 @@ import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import dedent from 'dedent'
-import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation, { PropDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import propHandler from './propHandler'
 
-vi.mock('../../Documentation')
+// vi.mock('../Documentation')
 
 function removeWhitespaceForTest(defaultValue: PropDescriptor['defaultValue'] = { value: '' }) {
 	return {
@@ -38,9 +37,8 @@ describe('propHandler', () => {
 			tags: {},
 			name: ''
 		}
-		const MockDocumentation = require('../../Documentation').default
-		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getPropDescriptor as any as SpyInstance
+		documentation = new Documentation('test/path')
+		const mockGetPropDescriptor = vi.spyOn(documentation, 'getPropDescriptor')
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 
@@ -278,13 +276,13 @@ describe('propHandler', () => {
 				}
       `
 			expect((await parserTest(src)).defaultValue).toMatchInlineSnapshot(`
-      Object {
-        "func": true,
-        "value": "function() {
-          return [\\"normal\\"];
-      }",
-      }
-    `)
+				{
+				  "func": true,
+				  "value": "function() {
+				    return [\\"normal\\"];
+				}",
+				}
+			`)
 		})
 
 		it('should deal properly with multiple returns', async () => {

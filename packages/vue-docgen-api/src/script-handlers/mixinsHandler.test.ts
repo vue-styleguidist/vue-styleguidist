@@ -2,15 +2,14 @@ import * as bt from '@babel/types'
 import { SpyInstance } from 'vitest'
 import babelParser from '../babel-parser'
 import Documentation from '../Documentation'
-import { parseFile } from '../parse'
+import * as parse from '../parse'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
 import mixinsHandler from './mixinsHandler'
 
-vi.mock('../../utils/resolveRequired')
-vi.mock('../../utils/resolvePathFrom')
-vi.mock('../../parse')
+vi.mock('../utils/resolveRequired')
+vi.mock('../utils/resolvePathFrom')
 
 describe('mixinsHandler', () => {
 	let resolveRequiredMock: SpyInstance<
@@ -32,7 +31,7 @@ describe('mixinsHandler', () => {
 		mockResolvePathFrom = resolvePathFrom as any
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
-		mockParse = parseFile as any as SpyInstance
+		mockParse = vi.spyOn(parse, 'parseFile')
 		mockParse.mockReset()
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})
