@@ -1,43 +1,45 @@
 import extractConfig from './extractConfig'
 import docgen, { DocgenCLIConfig } from './docgen'
 import { SpyInstance } from 'vitest'
+import * as getSources from './getSources'
+import * as singleMd from './singleMd'
+import * as multiMd from './multiMd'
 
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 const DOC_MAP = {
 	'src/comps/button/Readme.md': 'src/comps/button/button.vue'
 }
 
-let mockGetSources: SpyInstance
-let mockWatcher: unknown
-vi.mock('../getSources', () => {
-	mockWatcher = { on: vi.fn(), close: vi.fn() }
-	mockGetSources = vi.fn(() =>
-		Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP })
-	)
-	return mockGetSources
-})
+vi.mock('./getSources')
 
-let mockSingle: SpyInstance
-vi.mock('../singleMd', () => {
-	mockSingle = vi.fn()
-	return mockSingle
-})
+vi.mock('./singleMd')
 
-let mockMulti: SpyInstance
-vi.mock('../multiMd', () => {
-	mockMulti = vi.fn()
-	return mockMulti
-})
+vi.mock('./multiMd')
 
 describe('docgen', () => {
 	const CWD = 'here'
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: DocgenCLIConfig
+	let mockGetSources: SpyInstance
+	let mockWatcher: unknown
+	let mockSingle: SpyInstance
+	let mockMulti: SpyInstance
 
 	beforeEach(() => {
 		conf = extractConfig(CWD)
 		conf.components = '**/*.vue'
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
+
+		mockWatcher = { on: vi.fn(), close: vi.fn() }
+		mockGetSources = vi.spyOn(getSources, 'default')
+		mockGetSources.mockResolvedValue({
+			componentFiles: FILES,
+			watcher: mockWatcher,
+			docMap: DOC_MAP
+		})
+
+		mockSingle = vi.spyOn(singleMd, 'default')
+		mockMulti = vi.spyOn(multiMd, 'default')
 	})
 
 	it('should call multi by default', async () => {

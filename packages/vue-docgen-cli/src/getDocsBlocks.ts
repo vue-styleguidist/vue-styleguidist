@@ -1,10 +1,7 @@
 import { dirname, join, relative, sep } from 'path'
-import { readFile as rf } from 'fs'
-import { promisify } from 'util'
+import { promises as fs } from 'fs'
 import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
 import { findFileCaseInsensitive } from './utils'
-
-const readFile = promisify(rf)
 
 export function getExamplesFilePaths(
 	tags: { [key: string]: (Tag | ParamTag)[] },
@@ -44,7 +41,7 @@ export default async function getDocsBlocks(
 `
 				: ''
 		}
-${await readFile(docFilePath, 'utf8')}`)
+${await fs.readFile(docFilePath, 'utf8')}`)
 	}
 
 	// load @examples tags into the docsBlocks
@@ -62,7 +59,7 @@ ${await readFile(docFilePath, 'utf8')}`)
 `
 							: ''
 					}
-${await readFile(ep, 'utf8')}`)
+${await fs.readFile(ep, 'utf8')}`)
 				}
 			})
 		)

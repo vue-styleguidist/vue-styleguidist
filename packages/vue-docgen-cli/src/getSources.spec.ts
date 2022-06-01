@@ -1,27 +1,10 @@
 import { SpyInstance } from 'vitest'
+import chokidar from 'chokidar'
+import * as globby from 'globby'
 import getSources from './getSources'
 
-let mockWatch: SpyInstance
-let mockAddWatch: SpyInstance
-let fakeOn: SpyInstance
-let mockGlobby: SpyInstance
-let fakeWatcher: any
-vi.mock('chokidar', () => {
-	mockAddWatch = vi.fn()
-	fakeOn = vi.fn((item, cb) => {
-		if (item === 'ready') {
-			cb()
-		}
-	})
-	fakeWatcher = {
-		add: mockAddWatch,
-		on: fakeOn
-	}
-	mockWatch = vi.fn(() => fakeWatcher)
-	return {
-		watch: mockWatch
-	}
-})
+vi.mock('chokidar')
+vi.mock('globby')
 
 vi.mock('vue-docgen-api', () => ({
 	parse: vi.fn(() => ({})),
@@ -29,11 +12,6 @@ vi.mock('vue-docgen-api', () => ({
 		componentHandler: vi.fn()
 	}
 }))
-
-vi.mock('globby', () => {
-	mockGlobby = vi.fn(() => FILES)
-	return mockGlobby
-})
 
 const FILES = [
 	'src/components/Button/Button.vue',
@@ -47,28 +25,50 @@ const COMPONENTS_GLOB = 'components/**/*.vue'
 const getDocFileName = (componentPath: string) => `path/to/Readme.md+${componentPath}`
 
 describe('getSources', () => {
+	let mockWatch: SpyInstance
+	let mockAddWatch: SpyInstance
+	let fakeOn: SpyInstance
+	let mockGlobby: SpyInstance
+	let fakeWatcher: any
+	beforeEach(() => {
+		fakeOn = vi.fn((item, cb) => {
+			if (item === 'ready') {
+				cb()
+			}
+		})
+		mockAddWatch = vi.fn()
+		fakeWatcher = {
+			add: mockAddWatch,
+			on: fakeOn
+		}
+		mockWatch = vi.spyOn(chokidar, 'watch')
+		mockWatch.mockImplementation(() => fakeWatcher)
+		mockGlobby = vi.spyOn(globby, 'default')
+		mockGlobby.mockImplementation(() => Promise.resolve(FILES))
+	})
+
 	it('should return component files from chokidar', async () => {
 		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(componentFiles).toMatchInlineSnapshot(`
-		Array [
-		  "src/components/Button/Button.vue",
-		  "src/components/Input/Input.vue",
-		  "src/components/CounterButton/CounterButton.vue",
-		  "src/components/PushButton/PushButton.vue",
-		]
-	`)
+			[
+			  "src/components/Button/Button.vue",
+			  "src/components/Input/Input.vue",
+			  "src/components/CounterButton/CounterButton.vue",
+			  "src/components/PushButton/PushButton.vue",
+			]
+		`)
 	})
 
 	it('should return a docMap using the getDocFileName', async () => {
 		const { docMap } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName)
 		expect(docMap).toMatchInlineSnapshot(`
-		Object {
-		  "../path/to/Readme.md+here/src/components/Button/Button.vue": "src/components/Button/Button.vue",
-		  "../path/to/Readme.md+here/src/components/CounterButton/CounterButton.vue": "src/components/CounterButton/CounterButton.vue",
-		  "../path/to/Readme.md+here/src/components/Input/Input.vue": "src/components/Input/Input.vue",
-		  "../path/to/Readme.md+here/src/components/PushButton/PushButton.vue": "src/components/PushButton/PushButton.vue",
-		}
-	`)
+			{
+			  "../path/to/Readme.md+here/src/components/Button/Button.vue": "src/components/Button/Button.vue",
+			  "../path/to/Readme.md+here/src/components/CounterButton/CounterButton.vue": "src/components/CounterButton/CounterButton.vue",
+			  "../path/to/Readme.md+here/src/components/Input/Input.vue": "src/components/Input/Input.vue",
+			  "../path/to/Readme.md+here/src/components/PushButton/PushButton.vue": "src/components/PushButton/PushButton.vue",
+			}
+		`)
 	})
 
 	it('should return the watcher so it can be enriched', async () => {

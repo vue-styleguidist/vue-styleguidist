@@ -4,22 +4,22 @@ import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import { SpyInstance } from 'vitest'
+import * as utils from './utils'
+import * as compileTemplates from './compileTemplates'
 
 const FAKE_MD_CONTENT = '## fake markdonw Content'
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 
-let mockWriteDownMdFile: SpyInstance
-vi.mock('../utils', () => {
-	mockWriteDownMdFile = vi.fn(() => Promise.resolve())
+vi.mock('./utils', () => {
 	return {
-		writeDownMdFile: mockWriteDownMdFile
+		writeDownMdFile: vi.fn(() => Promise.resolve())
 	}
 })
 
-let mockCompileMarkdown: SpyInstance
-vi.mock('../compileTemplates', () => {
-	mockCompileMarkdown = vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
-	return mockCompileMarkdown
+vi.mock('./compileTemplates', () => {
+	return {
+		default: vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
+	}
 })
 
 describe('multiMd', () => {
@@ -32,12 +32,16 @@ describe('multiMd', () => {
 	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
+	let mockWriteDownMdFile: SpyInstance
+	let mockCompileMarkdown: SpyInstance
 
 	beforeEach(() => {
 		conf = extractConfig(CWD) as DocgenCLIConfigWithComponents
 		conf.components = '**/*.vue'
 		conf.getDocFileName = vi.fn(() => FAKE_COMPONENT_FULL_PATH)
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
+		mockWriteDownMdFile = vi.spyOn(utils, 'writeDownMdFile')
+		mockCompileMarkdown = vi.spyOn(compileTemplates, 'default')
 	})
 
 	describe('compile', () => {
@@ -49,7 +53,7 @@ describe('multiMd', () => {
 
 	describe('default', () => {
 		it('should build one md from each file passed', async () => {
-			jest.spyOn(multiMd, 'compile').mockImplementation(() => Promise.resolve())
+			vi.spyOn(multiMd, 'compile').mockImplementation(() => Promise.resolve())
 			await multiMd.default(FILES, w, conf, {}, multiMd.compile)
 			expect(multiMd.compile).toHaveBeenCalledTimes(FILES.length)
 		})

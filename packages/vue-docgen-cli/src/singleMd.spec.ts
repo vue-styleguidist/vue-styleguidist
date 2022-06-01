@@ -3,22 +3,22 @@ import * as singleMd from './singleMd'
 import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'
 import { SpyInstance } from 'vitest'
+import * as utils from './utils'
+import * as compileTemplates from './compileTemplates'
 
-const FAKE_MD_CONTENT = '## fake markdonw Content'
+const FAKE_MD_CONTENT = '## fake markdown Content'
 const FILES = ['src/comps/button/button.vue']
 
-let mockWriteDownMdFile: SpyInstance
-vi.mock('../utils', () => {
-	mockWriteDownMdFile = vi.fn(() => Promise.resolve())
+vi.mock('./utils', () => {
 	return {
-		writeDownMdFile: mockWriteDownMdFile
+		writeDownMdFile: vi.fn(() => Promise.resolve())
 	}
 })
 
-let mockCompileMarkdown: SpyInstance
-vi.mock('../compileTemplates', () => {
-	mockCompileMarkdown = vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
-	return mockCompileMarkdown
+vi.mock('./compileTemplates', () => {
+	return {
+		default: vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
+	}
 })
 
 describe('compile', () => {
@@ -30,12 +30,16 @@ describe('compile', () => {
 	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
+	let mockWriteDownMdFile: SpyInstance
+	let mockCompileMarkdown: SpyInstance
 
 	beforeEach(() => {
 		conf = extractConfig(CWD) as singleMd.DocgenCLIConfigWithOutFile
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
+		mockWriteDownMdFile = vi.spyOn(utils, 'writeDownMdFile')
+		mockCompileMarkdown = vi.spyOn(compileTemplates, 'default')
 	})
 
 	describe('compile', () => {
@@ -47,7 +51,7 @@ describe('compile', () => {
 
 	describe('default', () => {
 		it('should build one md from merging contents', async () => {
-			jest.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
+			vi.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
 			await singleMd.default(FILES, w, conf, {}, singleMd.compile)
 			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, w)
 		})
