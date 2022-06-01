@@ -1,6 +1,6 @@
 import path from 'path'
 import identity from 'lodash/identity'
-import getComponents from '../getComponents'
+import getComponents from './getComponents'
 
 describe('getComponents', () => {
 	it('should return an object for components', () => {

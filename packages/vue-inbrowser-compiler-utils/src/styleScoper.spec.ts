@@ -1,4 +1,4 @@
-import scoper from '../styleScoper'
+import scoper from './styleScoper'
 
 describe('styleScoper', () => {
 	it('should scope css selectors', () => {
@@ -33,6 +33,8 @@ describe('styleScoper', () => {
 
 	it('should scope css with selector combinators', () => {
 		const scopedCSS = scoper(`.bonjour > .hello + .salut ~ .goodbye {color:blue;}`, '[test]')
-		expect(scopedCSS).toBe('.bonjour[test] > .hello[test] + .salut[test] ~ .goodbye[test] {color:blue;}')
+		expect(scopedCSS).toBe(
+			'.bonjour[test] > .hello[test] + .salut[test] ~ .goodbye[test] {color:blue;}'
+		)
 	})
 })

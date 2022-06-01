@@ -1,6 +1,6 @@
+import { SpyInstance } from 'vitest'
 import extractConfig from './extractConfig'
 import docgen, { DocgenCLIConfig } from './docgen'
-import { SpyInstance } from 'vitest'
 import * as getSources from './getSources'
 import * as singleMd from './singleMd'
 import * as multiMd from './multiMd'

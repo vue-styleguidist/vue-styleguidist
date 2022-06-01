@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { ComponentDoc } from 'vue-docgen-api'
-import findOrigins from '../findOrigins'
+import findOrigins from './findOrigins'
 
 describe('findOrigins', () => {
 	it('findOrigins() should return all filePaths in extends and mixins', () => {

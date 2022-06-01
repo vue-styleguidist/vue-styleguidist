@@ -1,4 +1,4 @@
-import cleanName from '../cleanName'
+import cleanName from './cleanName'
 
 describe('cleanName', () => {
 	it('should eliminate all non alphanumeric characters', () => {

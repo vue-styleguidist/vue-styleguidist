@@ -1,5 +1,5 @@
 import { encode } from 'qss'
-import examplesLoader from '../examples-loader'
+import examplesLoader from './examples-loader'
 
 /* eslint-disable no-new-func */
 

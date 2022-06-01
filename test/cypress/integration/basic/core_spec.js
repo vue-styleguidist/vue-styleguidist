@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 describe('Styleguidist core', () => {
 	beforeEach(() => cy.visit('/'))
 

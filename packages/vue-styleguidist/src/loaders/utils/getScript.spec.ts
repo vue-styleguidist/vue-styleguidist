@@ -1,4 +1,4 @@
-import getScript from '../getScript'
+import getScript from './getScript'
 
 it('should return given code if code can be parsed properly', () => {
 	const code = `export default {

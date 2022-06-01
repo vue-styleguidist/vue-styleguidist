@@ -1,5 +1,5 @@
 /* eslint-disable no-new-func */
-import compileVueCodeForEvalFunction from '../compileVueCodeForEvalFunction'
+import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {

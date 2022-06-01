@@ -1,9 +1,9 @@
+import { SpyInstance } from 'vitest'
 import { NodePath } from 'ast-types/lib/node-path'
 import buildParser from '../babel-parser'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import slotHandlerLiteral from './slotHandlerLiteral'
 import Documentation, { SlotDescriptor } from '../Documentation'
-import { SpyInstance } from 'vitest'
 
 vi.mock('../../Documentation')
 

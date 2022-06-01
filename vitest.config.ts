@@ -3,7 +3,8 @@ import { typescriptPaths } from 'rollup-plugin-typescript-paths'
 
 export default defineConfig({
 	test: {
-		globals: true
+		globals: true,
+		exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**']
 	},
 	plugins: [
 		typescriptPaths({

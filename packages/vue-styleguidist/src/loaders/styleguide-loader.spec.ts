@@ -1,6 +1,6 @@
 import vm from 'vm'
 import path from 'path'
-import * as styleguideLoader from '../styleguide-loader'
+import * as styleguideLoader from './styleguide-loader'
 
 vi.mock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
 	'foo',

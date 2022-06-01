@@ -1,4 +1,4 @@
-import parseComponent from '../parseComponent'
+import parseComponent from './parseComponent'
 
 describe('parseComponent', () => {
 	it('should detect templates', () => {

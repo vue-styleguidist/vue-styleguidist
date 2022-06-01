@@ -1,15 +1,15 @@
 import { SpyInstance } from 'vitest'
-import adaptCreateElement, { CreateElementFunction } from '../adaptCreateElement'
+import adaptCreateElement, { CreateElementFunction } from './adaptCreateElement'
 
 describe('adaptCreateElement', () => {
 	let h: SpyInstance<Parameters<CreateElementFunction>, ReturnType<CreateElementFunction>>
 	let pragma: CreateElementFunction
 	beforeEach(() => {
 		h = vi.fn()
-    const impl = h.getMockImplementation()
-    if(impl){
-      pragma = adaptCreateElement(impl)
-    }
+		const impl = h.getMockImplementation()
+		if (impl) {
+			pragma = adaptCreateElement(impl)
+		}
 	})
 
 	describe('group attributes', () => {

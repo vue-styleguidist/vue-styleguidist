@@ -1,5 +1,5 @@
 import path from 'path'
-import processComponent from '../processComponent'
+import processComponent from './processComponent'
 
 const config = {
 	configDir: __dirname,

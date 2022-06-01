@@ -1,6 +1,6 @@
-import { SpyInstance } from 'vitest'
-import getParser from '../getParser'
 import * as docgen from 'vue-docgen-api'
+import { SpyInstance } from 'vitest'
+import getParser from './getParser'
 
 vi.mock('vue-docgen-api', () => {
 	return {

@@ -1,4 +1,4 @@
-import transformOneImport from '../transformOneImport'
+import transformOneImport from './transformOneImport'
 
 describe('transformOneImport', () => {
 	const test = 0
