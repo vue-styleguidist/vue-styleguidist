@@ -5,9 +5,7 @@ import babylon from '../babel-parser'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import Documentation, { PropDescriptor } from '../Documentation'
 import setupPropHandler from './setupPropHandler'
-import { SpyInstance } from 'vitest'
 
-vi.mock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -30,9 +28,8 @@ describe('setupPropHandler', () => {
 			tags: {},
 			name: 'mockProp'
 		}
-		const MockDocumentation = require('../../Documentation').default
-		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getPropDescriptor as any as SpyInstance
+		documentation = new Documentation('test/path')
+		const mockGetPropDescriptor = vi.spyOn(documentation, 'getPropDescriptor')
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 
@@ -57,15 +54,15 @@ describe('setupPropHandler', () => {
 			const prop = await parserTest(src)
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testProps')
 			expect(prop).toMatchInlineSnapshot(`
-			Object {
-			  "description": "",
-			  "name": "mockProp",
-			  "tags": Object {},
-			  "type": Object {
-			    "name": "boolean",
-			  },
-			}
-		`)
+				{
+				  "description": "",
+				  "name": "mockProp",
+				  "tags": {},
+				  "type": {
+				    "name": "boolean",
+				  },
+				}
+			`)
 		})
 
 		it('should resolve props comments in defineProps', async () => {
@@ -79,15 +76,15 @@ describe('setupPropHandler', () => {
 				`
 			const prop = await parserTest(src)
 			expect(prop).toMatchInlineSnapshot(`
-			Object {
-			  "description": "Should the prop be tested?",
-			  "name": "mockProp",
-			  "tags": Object {},
-			  "type": Object {
-			    "name": "boolean",
-			  },
-			}
-		`)
+				{
+				  "description": "Should the prop be tested?",
+				  "name": "mockProp",
+				  "tags": {},
+				  "type": {
+				    "name": "boolean",
+				  },
+				}
+			`)
 		})
 
 		it('should resolve advanced props in defineProps', async () => {
@@ -104,16 +101,16 @@ describe('setupPropHandler', () => {
 				`
 			const prop = await parserTest(src)
 			expect(prop).toMatchInlineSnapshot(`
-			Object {
-			  "description": "Should the prop be required?",
-			  "name": "mockProp",
-			  "required": true,
-			  "tags": Object {},
-			  "type": Object {
-			    "name": "boolean",
-			  },
-			}
-		`)
+				{
+				  "description": "Should the prop be required?",
+				  "name": "mockProp",
+				  "required": true,
+				  "tags": {},
+				  "type": {
+				    "name": "boolean",
+				  },
+				}
+			`)
 		})
 
 		it('matches defineProps inside of withDefaults', async () => {
@@ -130,16 +127,16 @@ describe('setupPropHandler', () => {
 				`
 			const prop = await parserTest(src)
 			expect(prop).toMatchInlineSnapshot(`
-			Object {
-			  "description": "Should the prop be required?",
-			  "name": "mockProp",
-			  "required": true,
-			  "tags": Object {},
-			  "type": Object {
-			    "name": "boolean",
-			  },
-			}
-		`)
+				{
+				  "description": "Should the prop be required?",
+				  "name": "mockProp",
+				  "required": true,
+				  "tags": {},
+				  "type": {
+				    "name": "boolean",
+				  },
+				}
+			`)
 		})
 	})
 
@@ -205,15 +202,15 @@ describe('setupPropHandler', () => {
 				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('arrays')
 				expect(prop.type).toMatchInlineSnapshot(`
-			Object {
-			  "elements": Array [
-			    Object {
-			      "name": "number",
-			    },
-			  ],
-			  "name": "Array",
-			}
-		`)
+					{
+					  "elements": [
+					    {
+					      "name": "number",
+					    },
+					  ],
+					  "name": "Array",
+					}
+				`)
 			})
 
 			it('returns complex types', async () => {
