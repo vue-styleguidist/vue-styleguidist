@@ -1,0 +1,134 @@
+// Vitest Snapshot v1
+
+exports[`tests button functional > should match the snapshot 1`] = `
+{
+  "description": "Wrapper for input elements",
+  "displayName": "InputWrapper",
+  "docsBlocks": [
+    "\`\` \`jsx <input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\"> … </input-wrapper>  \`\` \`",
+  ],
+  "events": undefined,
+  "exportName": "default",
+  "functional": true,
+  "methods": undefined,
+  "props": [
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should display error?",
+      "name": "error",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should the input be focused?",
+      "name": "focused",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "''",
+      },
+      "description": "Prefix icon for input field",
+      "name": "icon",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "false",
+      },
+      "description": "Should the input be disabled?",
+      "name": "disabled",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "name": "value",
+      "type": {
+        "name": "undefined",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "false",
+      },
+      "description": "True if input label should always be \\"up there\\"",
+      "name": "labelAlwaysFloating",
+      "type": {
+        "name": "boolean",
+      },
+    },
+    {
+      "description": "Prefix string for input field",
+      "name": "prefix",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "description": "Input ID",
+      "name": "id",
+      "required": true,
+      "type": {
+        "name": "string|number",
+      },
+    },
+    {
+      "description": "String for label text",
+      "name": "label",
+      "required": true,
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "defaultValue": {
+        "func": false,
+        "value": "''",
+      },
+      "description": "String with relevant error message",
+      "name": "errorMessage",
+      "type": {
+        "name": "string",
+      },
+    },
+    {
+      "description": "Input value",
+      "name": "v-model",
+      "required": true,
+      "tags": {
+        "model": [
+          {
+            "description": true,
+            "title": "model",
+          },
+        ],
+      },
+      "type": {
+        "name": "string",
+      },
+    },
+  ],
+  "slots": [
+    {
+      "name": "default",
+    },
+  ],
+  "tags": {},
+}
+`;

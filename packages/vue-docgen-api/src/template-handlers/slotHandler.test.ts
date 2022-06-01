@@ -237,15 +237,15 @@ describe('slotHandler', () => {
 			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 			const slots = doc.toObject().slots || []
 			expect(slots[0].tags).toMatchInlineSnapshot(`
-			Object {
-			  "ignore": Array [
-			    Object {
-			      "description": true,
-			      "title": "ignore",
-			    },
-			  ],
-			}
-		`)
+				{
+				  "ignore": [
+				    {
+				      "description": true,
+				      "title": "ignore",
+				    },
+				  ],
+				}
+			`)
 		})
 	})
 })

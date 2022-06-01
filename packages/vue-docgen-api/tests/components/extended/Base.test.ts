@@ -28,9 +28,9 @@ describe('tests Base', () => {
 
 	it('should return two props in the documentation', () => {
 		expect(docBase.props && docBase.props.map(p => p.name)).toMatchInlineSnapshot(`
-		Array [
-		  "question",
-		]
-	`)
+			[
+			  "question",
+			]
+		`)
 	})
 })

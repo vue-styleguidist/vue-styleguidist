@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`tests typescript grid > should match the snapshot 1`] = `
+exports[`tests grid > should match the snapshot 1`] = `
 {
   "description": "This is an example of creating a reusable grid component and using it with external data.",
   "displayName": "grid",
@@ -81,31 +81,6 @@ exports[`tests typescript grid > should match the snapshot 1`] = `
           {
             "description": "1.0.5",
             "title": "version",
-          },
-        ],
-      },
-    },
-    {
-      "name": "publicMethod",
-      "params": [
-        {
-          "name": "test",
-          "type": {
-            "name": "number",
-          },
-        },
-        {
-          "name": "param",
-          "type": {
-            "name": "ForParam",
-          },
-        },
-      ],
-      "tags": {
-        "access": [
-          {
-            "description": "public",
-            "title": "access",
           },
         ],
       },

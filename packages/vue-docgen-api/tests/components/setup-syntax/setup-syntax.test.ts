@@ -21,33 +21,33 @@ describe('setup syntactic sugar', () => {
 
 		it('should match the snapshot', () => {
 			expect(doc.props).toMatchInlineSnapshot(`
-			Array [
-			  Object {
-			    "description": "The radius of the circle.",
-			    "name": "radius",
-			    "required": true,
-			    "type": Object {
-			      "name": "number",
-			    },
-			  },
-			  Object {
-			    "description": "The stroke width of the circle.",
-			    "name": "stroke",
-			    "required": true,
-			    "type": Object {
-			      "name": "number",
-			    },
-			  },
-			  Object {
-			    "description": "The percentage of the circle that is filled.",
-			    "name": "progress",
-			    "required": false,
-			    "type": Object {
-			      "name": "number",
-			    },
-			  },
-			]
-		`)
+				[
+				  {
+				    "description": "The radius of the circle.",
+				    "name": "radius",
+				    "required": true,
+				    "type": {
+				      "name": "number",
+				    },
+				  },
+				  {
+				    "description": "The stroke width of the circle.",
+				    "name": "stroke",
+				    "required": true,
+				    "type": {
+				      "name": "number",
+				    },
+				  },
+				  {
+				    "description": "The percentage of the circle that is filled.",
+				    "name": "progress",
+				    "required": false,
+				    "type": {
+				      "name": "number",
+				    },
+				  },
+				]
+			`)
 		})
 		describe('events', () => {
 			it('should return a doc object containing events', () => {
@@ -56,23 +56,23 @@ describe('setup syntactic sugar', () => {
 
 			it('should match the snapshot', () => {
 				expect(doc.events).toMatchInlineSnapshot(`
-			Array [
-			  Object {
-			    "description": "Cancels everything",
-			    "name": "cancel",
-			    "type": undefined,
-			  },
-			  Object {
-			    "description": "Save the world",
-			    "name": "save",
-			    "type": Object {
-			      "names": Array [
-			        "number",
-			      ],
-			    },
-			  },
-			]
-		`)
+					[
+					  {
+					    "description": "Cancels everything",
+					    "name": "cancel",
+					    "type": undefined,
+					  },
+					  {
+					    "description": "Save the world",
+					    "name": "save",
+					    "type": {
+					      "names": [
+					        "number",
+					      ],
+					    },
+					  },
+					]
+				`)
 			})
 		})
 	})

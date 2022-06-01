@@ -38,24 +38,24 @@ describe('tests button', () => {
 
 		it('should the component has authors', () => {
 			expect(docButton.tags?.author).toMatchInlineSnapshot(`
-									Array [
-									  Object {
-									    "description": "[Rafael](https://github.com/rafaesc92)",
-									    "title": "author",
-									  },
-									]
-						`)
+				[
+				  {
+				    "description": "[Rafael](https://github.com/rafaesc92)",
+				    "title": "author",
+				  },
+				]
+			`)
 		})
 
 		it('should the component has version', () => {
 			expect(docButton.tags?.version).toMatchInlineSnapshot(`
-									Array [
-									  Object {
-									    "description": "1.0.5",
-									    "title": "version",
-									  },
-									]
-						`)
+				[
+				  {
+				    "description": "1.0.5",
+				    "title": "version",
+				  },
+				]
+			`)
 		})
 	})
 
@@ -85,11 +85,11 @@ describe('tests button', () => {
 		it('should have a prop "p1" from the mixin "namedMixin"', () => {
 			expect(getTestDescriptor(docButton.props, 'p1').mixin).not.toBeUndefined()
 			expect(getTestDescriptor(docButton.props, 'p1').mixin).toMatchInlineSnapshot(`
-			Object {
-			  "name": "namedMixin",
-			  "path": "namedMixin.js",
-			}
-		`)
+				{
+				  "name": "namedMixin",
+				  "path": "namedMixin.js",
+				}
+			`)
 		})
 
 		it('should give the size prop 3 valid values', () => {
@@ -260,36 +260,36 @@ describe('tests button', () => {
 
 		it('should the component has event, it called success', () => {
 			expect(getTestDescriptor(docButton.events, 'success').properties).toMatchInlineSnapshot(`
-						Array [
-						  Object {
-						    "description": "example",
-						    "name": "demo",
-						    "type": Object {
-						      "names": Array [
-						        "object",
-						      ],
-						    },
-						  },
-						  Object {
-						    "description": "test called",
-						    "name": "called",
-						    "type": Object {
-						      "names": Array [
-						        "number",
-						      ],
-						    },
-						  },
-						  Object {
-						    "description": "Indicates whether the snowball is tightly packed.",
-						    "name": "isPacked",
-						    "type": Object {
-						      "names": Array [
-						        "boolean",
-						      ],
-						    },
-						  },
-						]
-				`)
+				[
+				  {
+				    "description": "example",
+				    "name": "demo",
+				    "type": {
+				      "names": [
+				        "object",
+				      ],
+				    },
+				  },
+				  {
+				    "description": "test called",
+				    "name": "called",
+				    "type": {
+				      "names": [
+				        "number",
+				      ],
+				    },
+				  },
+				  {
+				    "description": "Indicates whether the snowball is tightly packed.",
+				    "name": "isPacked",
+				    "type": {
+				      "names": [
+				        "boolean",
+				      ],
+				    },
+				  },
+				]
+			`)
 		})
 
 		it('should the description of success event is Success event.', () => {

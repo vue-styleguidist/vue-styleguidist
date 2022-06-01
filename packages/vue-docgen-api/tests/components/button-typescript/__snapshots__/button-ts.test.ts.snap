@@ -1,36 +1,36 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests button should match the snapshot 1`] = `
-Object {
+exports[`tests button > should match the snapshot 1`] = `
+{
   "description": "This is an example of creating a reusable button component and using it with external data.",
   "displayName": "ClassButton",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "description": "Success event when we click",
       "name": "success",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
   ],
   "exportName": "default",
-  "methods": Array [
-    Object {
+  "methods": [
+    {
       "description": "method testing",
       "name": "onClick",
-      "params": Array [
-        Object {
+      "params": [
+        {
           "name": "a",
-          "type": Object {
+          "type": {
             "name": "string",
           },
         },
       ],
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
@@ -38,45 +38,45 @@ Object {
       },
     },
   ],
-  "props": Array [
-    Object {
+  "props": [
+    {
       "description": "An example of a property typed through the decorators arguments",
       "name": "propNoType",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "description": "An example of a property typed through the annotation",
       "name": "propA",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "number",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'default value'",
       },
       "description": "A prop with a default value",
       "name": "propB",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "description": "A prop with a hybrid type",
       "name": "propC",
-      "tags": Object {},
-      "type": Object {
-        "elements": Array [
-          Object {
+      "tags": {},
+      "type": {
+        "elements": [
+          {
             "name": "string",
           },
-          Object {
+          {
             "name": "boolean",
           },
         ],
@@ -84,21 +84,21 @@ Object {
       },
     },
   ],
-  "slots": Array [
-    Object {
+  "slots": [
+    {
       "description": "Use this slot default",
       "name": "default",
     },
   ],
-  "tags": Object {
-    "author": Array [
-      Object {
+  "tags": {
+    "author": [
+      {
         "description": "[Rafael](https://github.com/rafaesc92)",
         "title": "author",
       },
     ],
-    "version": Array [
-      Object {
+    "version": [
+      {
         "description": "1.0.5",
         "title": "version",
       },
