@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.47.0
+
+### Minor Changes
+
+- [#1328](https://github.com/vue-styleguidist/vue-styleguidist/pull/1328) [`c2a1c793`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c2a1c793548658436c4bce4458508e31ffd8f9cc) Thanks [@elevatebart](https://github.com/elevatebart)! - Allow multiple fire tags on the same method
+
+## 4.46.1
+
+### Patch Changes
+
+- [`e8c154eb`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8c154eb947dbd9c83a20a1357aad27758cf12cf) Thanks [@elevatebart](https://github.com/elevatebart)! - fix #1326 allow scriptHandler and addScriptHandler to be specified at the same time
+
 ## 4.46.0
 
 ### Minor Changes

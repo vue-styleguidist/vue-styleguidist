@@ -187,28 +187,28 @@ export function eventHandlerMethods(documentation: Documentation, path: NodePath
 				return
 			}
 
-			const [firesTags] = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
-			if (firesTags) {
-				const eventName = firesTags.content as string
+			const firesTags = jsDocTags.filter(tag => tag.title === 'fires') as Tag[]
+			firesTags.forEach(tag => {
+				const eventName = tag.content as string
 				const eventDescriptor = documentation.getEventDescriptor(eventName)
-				let currentBlock: DocBlockTags | null = {}
-				let foundEventDesciptor: DocBlockTags | undefined
+				let currentBlock: DocBlockTags | null
+				let foundEventDescriptor: DocBlockTags | undefined
 				let commentIndex = 1
-				while (currentBlock && !foundEventDesciptor) {
+				do  {
 					currentBlock = getCommentBlockAndTags(commentedMethod, { commentIndex: ++commentIndex })
 					if (
 						currentBlock &&
 						currentBlock.tags &&
 						currentBlock.tags.some((tag: Tag) => tag.title === 'event' && tag.content === eventName)
 					) {
-						foundEventDesciptor = currentBlock
+						foundEventDescriptor = currentBlock
 					}
-				}
+				} while (currentBlock && !foundEventDescriptor)
 
-				if (foundEventDesciptor) {
-					setEventDescriptor(eventDescriptor, foundEventDesciptor)
+				if (foundEventDescriptor) {
+					setEventDescriptor(eventDescriptor, foundEventDescriptor)
 				}
-			}
+			})
 		})
 	}
 }

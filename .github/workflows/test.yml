@@ -1,8 +1,7 @@
 name: Lint & Test
 on:
   pull_request:
-    types: [opened,synchronize]
-    branches: dev 
+    branches: [ dev ] 
   workflow_call:
 
 concurrency:
@@ -25,3 +24,6 @@ jobs:
 
       - name: Run unit tests
         run: pnpm test:jest
+
+      - name: Run plugin tests
+        run: pnpm test:plugin

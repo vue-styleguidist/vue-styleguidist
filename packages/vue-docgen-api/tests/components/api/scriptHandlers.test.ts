@@ -18,17 +18,12 @@ describe('extending handlers', () => {
 	})
 
 	it('should execute a custom template handler', async () => {
-		let hasRun = false
+    const mockHandler = vi.fn().mockReturnValue(Promise.resolve())
 
 		await parse(path.resolve(__dirname, 'mock.vue'), {
-			addTemplateHandlers: [
-				function handler() {
-					hasRun = true
-					return Promise.resolve()
-				}
-			]
+			addTemplateHandlers: [mockHandler]
 		})
 
-		expect(hasRun).toBe(true)
+		expect(mockHandler).toHaveBeenCalled()
 	})
 })
