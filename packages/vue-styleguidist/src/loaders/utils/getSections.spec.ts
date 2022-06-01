@@ -3,7 +3,7 @@ import * as Rsg from 'react-styleguidist'
 import getSections, { processSection, getRequiredComponents } from './getSections'
 import { SanitizedStyleguidistConfig } from '../../types/StyleGuide'
 
-const configDir = path.resolve(__dirname, '../../../../../../test')
+const configDir = path.resolve(__dirname, '../../../../../test')
 const config = {
 	configDir,
 	exampleMode: 'collapse',

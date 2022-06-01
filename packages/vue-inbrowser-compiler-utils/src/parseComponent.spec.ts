@@ -42,15 +42,15 @@ describe('parseComponent', () => {
 		</style>`)
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
-		Array [
-		  "
+			[
+			  "
 
-		        .class3{
-		            color: red;
-		        }
-				",
-		]
-	`)
+			        .class3{
+			            color: red;
+			        }
+					",
+			]
+		`)
 	})
 
 	it('should detect styles', () => {
@@ -72,19 +72,19 @@ describe('parseComponent', () => {
 </style>`)
 		expect(comp.styles).not.toBeUndefined()
 		expect(comp.styles).toMatchInlineSnapshot(`
-		Array [
-		  "
+			[
+			  "
 
-		.class2{
-			color: blue;
-		}
-		@media screen and (width < 900px) {
 			.class2{
-				color: green;
+				color: blue;
 			}
-		}
-		",
-		  "
+			@media screen and (width < 900px) {
+				.class2{
+					color: green;
+				}
+			}
+			",
+			  "
 
 
 
@@ -96,21 +96,21 @@ describe('parseComponent', () => {
 
 
 
-		.class2{
-			color: blue;
-		}
-		@media screen and (width < 900px) {
 			.class2{
-				color: green;
+				color: blue;
 			}
-		}
+			@media screen and (width < 900px) {
+				.class2{
+					color: green;
+				}
+			}
 
-		.class3{
-			color: red;
-		}
-		",
-		]
-	`)
+			.class3{
+				color: red;
+			}
+			",
+			]
+		`)
 	})
 
 	it('should not see internal templates', () => {

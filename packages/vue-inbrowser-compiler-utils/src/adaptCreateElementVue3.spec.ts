@@ -13,10 +13,7 @@ describe('adaptCreateElement', () => {
 	let pragma: CreateElementFunction
 	beforeEach(() => {
 		h = vi.fn()
-		const impl = h.getMockImplementation()
-		if (impl) {
-			pragma = adaptCreateElement(impl)
-		}
+		pragma = adaptCreateElement(h as any)
 	})
 
 	describe('group attributes', () => {

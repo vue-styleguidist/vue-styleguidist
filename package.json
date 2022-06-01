@@ -69,6 +69,7 @@
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-vue": "7.20.0",
     "globby": "9.2.0",
+    "happy-dom": "5.0.0",
     "jss": "10.9.0",
     "lint-staged": "7.3.0",
     "markdown-toc": "1.2.0",

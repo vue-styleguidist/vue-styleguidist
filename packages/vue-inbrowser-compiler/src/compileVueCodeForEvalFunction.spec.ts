@@ -27,7 +27,7 @@ new Vue({
 		expect(dummySet).toMatchObject({ param: 'Bar' })
 	})
 
-	it('shoud work with the vsg way', () => {
+	it('should work with the vsg way', () => {
 		const sut = compileVueCodeForEvalFunction(`
 		let param = 'BazBaz';
 		<div>
@@ -62,7 +62,7 @@ const bar = "foo"
 export default {}
 </script>`)
 		const dummySet = sut.script
-		expect(dummySet).toContain('var bar')
+		expect(dummySet).toContain('const bar')
 		expect(dummySet).not.toContain('export default')
 	})
 
@@ -99,23 +99,23 @@ new Vue({
 		`)
 
 		expect(sut.script).toMatchInlineSnapshot(`
-		"
-		var vue$0 = require('vue');var Vue = vue$0.default || vue$0;
-		var dog_names$43 = require('../RandomButton/dog-names');var three = dog_names$43.default || dog_names$43;
+			"
+			const vue$0 = require('vue');const Vue = vue$0.default || vue$0;
+			const dog_names$43 = require('../RandomButton/dog-names');const three = dog_names$43.default || dog_names$43;
 
-		;return {
-			data: function data() {
-				var i = 0
-				return {
-					opt: three.map(function (a) { return ({ text: a, value: i++ }); })
-				}
-			},
-			template: '<Radio :options=\\"opt\\" />'
-		}"
-	`)
+			;return {
+				data() {
+					let i = 0
+					return {
+						opt: three.map(a => ({ text: a, value: i++ }))
+					}
+				},
+				template: '<Radio :options=\\"opt\\" />'
+			}"
+		`)
 	})
 
-	it('shoud fail if the sfc script has a parsing issue', () => {
+	it('should fail if the sfc script has a parsing issue', () => {
 		expect(() =>
 			compileVueCodeForEvalFunction(`
 		<template>
@@ -135,7 +135,7 @@ new Vue({
 		).toThrowErrorMatchingInlineSnapshot(`"Unexpected token (8:11)"`)
 	})
 
-	it('shoud try to run the with the same lines', () => {
+	it('should try to run the with the same lines', () => {
 		expect(
 			compileVueCodeForEvalFunction(`<template>
 			<div/>
@@ -151,19 +151,21 @@ new Vue({
 		</script>
 		`).script
 		).toMatchInlineSnapshot(`
-		"
+			"
 
 
 
-				;return {template: \\"\\\\n\\\\t\\\\t\\\\t<div/>\\\\n\\\\t\\\\t\\", 
-					data: function data(){
-						return {
-							param: 'BazBaz'
+					;return {template: \`
+						<div/>
+					\`, 
+						data(){
+							return {
+								param: 'BazBaz'
+							}
 						}
-					}
-				};
-				"
-	`)
+					};
+					"
+		`)
 	})
 
 	it('should escape template correctly', () => {
