@@ -2,9 +2,6 @@ import { FSWatcher } from 'chokidar'
 import * as singleMd from './singleMd'
 import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'
-import { SpyInstance } from 'vitest'
-import * as utils from './utils'
-import * as compileTemplates from './compileTemplates'
 
 const FAKE_MD_CONTENT = '## fake markdown Content'
 const FILES = ['src/comps/button/button.vue']
@@ -30,16 +27,12 @@ describe('compile', () => {
 	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
-	let mockWriteDownMdFile: SpyInstance
-	let mockCompileMarkdown: SpyInstance
 
 	beforeEach(() => {
 		conf = extractConfig(CWD) as singleMd.DocgenCLIConfigWithOutFile
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
-		mockWriteDownMdFile = vi.spyOn(utils, 'writeDownMdFile')
-		mockCompileMarkdown = vi.spyOn(compileTemplates, 'default')
 	})
 
 	describe('compile', () => {

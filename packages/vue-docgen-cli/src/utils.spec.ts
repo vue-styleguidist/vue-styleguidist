@@ -1,8 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import prettier from 'prettier'
-import * as mkdirp from 'mkdirp'
-import * as compileTemplates from './compileTemplates'
 import { SpyInstance } from 'vitest'
 import { writeDownMdFile, getDocMap } from './utils'
 
@@ -35,8 +33,6 @@ vi.mock('./compileTemplates')
 
 let mockPrettierFormat: SpyInstance
 let mockResolveConfig: SpyInstance
-let mockMkdirp: SpyInstance
-let mockCompileTemplates: SpyInstance
 let cwsWrite: SpyInstance
 
 describe('utils', () => {
@@ -53,8 +49,6 @@ describe('utils', () => {
 		mockPrettierFormat.mockImplementation(() => PRETTY_MD)
 		mockResolveConfig = vi.spyOn(prettier, 'resolveConfig')
 		mockResolveConfig.mockResolvedValue(null)
-		mockMkdirp = vi.spyOn(mkdirp, 'default')
-		mockCompileTemplates = vi.spyOn(compileTemplates, 'default')
 	})
 
 	describe('writeDownMdFile', () => {

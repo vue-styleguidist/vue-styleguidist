@@ -3,9 +3,6 @@ import * as multiMd from './multiMd'
 import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
-import { SpyInstance } from 'vitest'
-import * as utils from './utils'
-import * as compileTemplates from './compileTemplates'
 
 const FAKE_MD_CONTENT = '## fake markdonw Content'
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
@@ -32,16 +29,12 @@ describe('multiMd', () => {
 	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
-	let mockWriteDownMdFile: SpyInstance
-	let mockCompileMarkdown: SpyInstance
 
 	beforeEach(() => {
 		conf = extractConfig(CWD) as DocgenCLIConfigWithComponents
 		conf.components = '**/*.vue'
 		conf.getDocFileName = vi.fn(() => FAKE_COMPONENT_FULL_PATH)
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
-		mockWriteDownMdFile = vi.spyOn(utils, 'writeDownMdFile')
-		mockCompileMarkdown = vi.spyOn(compileTemplates, 'default')
 	})
 
 	describe('compile', () => {
