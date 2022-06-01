@@ -2,7 +2,7 @@ import * as bt from '@babel/types'
 import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation from '../Documentation'
-import { parseFile } from '../parse'
+import * as parse from '../parse'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
@@ -10,7 +10,6 @@ import extendsHandler from './extendsHandler'
 
 vi.mock('../utils/resolveRequired')
 vi.mock('../utils/resolvePathFrom')
-vi.mock('../parse')
 
 describe('extendsHandler', () => {
 	let resolveRequiredMock: SpyInstance<
@@ -32,7 +31,7 @@ describe('extendsHandler', () => {
 		mockResolvePathFrom = (resolvePathFrom as any)
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
-		mockParse = parseFile as any
+		mockParse = vi.spyOn(parse, 'parseFile')
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})
 
@@ -47,7 +46,7 @@ describe('extendsHandler', () => {
 		}
 	}
 
-	it.only('should resolve extended modules variables in import default', async () => {
+	it('should resolve extended modules variables in import default', async () => {
 		const src = [
 			'import testComponent from "./testComponent"',
 			'export default {',
@@ -55,7 +54,7 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		await parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(
+		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
@@ -67,12 +66,12 @@ describe('extendsHandler', () => {
 	it('should resolve extended modules variables in require', async () => {
 		const src = [
 			'const testComponent = require("./testComponent");',
-			'export default {',
+			'module.exports = {',
 			'  extends:testComponent',
 			'}'
 		].join('\n')
 		await parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(
+		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
@@ -89,7 +88,7 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		await parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(
+		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']
@@ -106,7 +105,7 @@ describe('extendsHandler', () => {
 			'}'
 		].join('\n')
 		await parseItExtends(src)
-		expect(parseFile).toHaveBeenCalledWith(
+		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
 				filePath: './component/full/path',
 				nameFilter: ['default']

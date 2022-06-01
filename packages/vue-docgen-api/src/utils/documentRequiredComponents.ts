@@ -99,8 +99,6 @@ async function enrichDocumentation(
 							}
 						}
 
-            console.log(parseFile)
-
 						await parseFile(
 							{
 								...opt,
