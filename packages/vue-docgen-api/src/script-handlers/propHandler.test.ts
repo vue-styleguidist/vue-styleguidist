@@ -376,7 +376,7 @@ describe('propHandler', () => {
 				''
 			]
 		])(
-			'if prop is of type %p,\n\t given %p as default,\n\t should parse as %p,\n\t comment types are %p',
+			'if prop is of type %s, given %s as default, should parse as %s, comment types are %s',
 			async (propType, input, output, commentsBlockType) => {
 				const src = dedent`
                 export default {
