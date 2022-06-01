@@ -6,7 +6,7 @@ import Documentation from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import componentHandler from './componentHandler'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string, plugins: ParserPlugin[] = []): Map<string, NodePath> {
 	const ast = babylon({ plugins }).parse(src)

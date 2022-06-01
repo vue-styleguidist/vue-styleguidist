@@ -1,10 +1,11 @@
 import { NodePath } from 'ast-types/lib/node-path'
+import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation, { MethodDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import methodHandler from './methodHandler'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = babylon({ plugins: ['flow'] }).parse(src)
@@ -24,7 +25,7 @@ describe('methodHandler', () => {
 		mockMethodDescriptor = { name: '', description: '', modifiers: [] }
 		const MockDocumentation = Documentation
 		documentation = new MockDocumentation('test/path')
-		const mockGetMethodDescriptor = documentation.getMethodDescriptor as jest.Mock
+		const mockGetMethodDescriptor = documentation.getMethodDescriptor as any as SpyInstance
 		mockGetMethodDescriptor.mockImplementation((name: string) => {
 			mockMethodDescriptor.name = name
 			return mockMethodDescriptor

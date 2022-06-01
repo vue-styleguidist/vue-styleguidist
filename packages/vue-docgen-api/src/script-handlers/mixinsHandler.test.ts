@@ -1,4 +1,5 @@
 import * as bt from '@babel/types'
+import { SpyInstance } from 'vitest'
 import babelParser from '../babel-parser'
 import Documentation from '../Documentation'
 import { parseFile } from '../parse'
@@ -7,29 +8,31 @@ import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
 import mixinsHandler from './mixinsHandler'
 
-jest.mock('../../utils/resolveRequired')
-jest.mock('../../utils/resolvePathFrom')
-jest.mock('../../parse')
+vi.doMock('../../utils/resolveRequired')
+vi.doMock('../../utils/resolvePathFrom')
+vi.doMock('../../parse')
 
 describe('mixinsHandler', () => {
-	let resolveRequiredMock: jest.Mock
-	let mockResolvePathFrom: jest.Mock
-	let mockParse: jest.Mock
+	let resolveRequiredMock: SpyInstance<
+    [ast: bt.File, varNameFilter?: string[]],
+    { [key: string]: { filePath: string[], exportName: string } }
+  >
+	let mockResolvePathFrom: SpyInstance<
+    [path: string, from: string],
+     string
+  >
+	let mockParse: SpyInstance
 	const doc = new Documentation('dummy/path')
 	beforeEach(() => {
-		resolveRequiredMock = resolveRequired as unknown as jest.Mock<
-			(ast: bt.File, varNameFilter?: string[]) => { [key: string]: string }
-		>
+		resolveRequiredMock = resolveRequired as any
 		resolveRequiredMock.mockReturnValue({
 			testComponent: { filePath: ['componentPath'], exportName: 'default' }
 		})
 
-		mockResolvePathFrom = resolvePathFrom as unknown as jest.Mock<
-			(path: string, from: string) => string
-		>
+		mockResolvePathFrom = resolvePathFrom as any
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
-		mockParse = parseFile as jest.Mock
+		mockParse = parseFile as any as SpyInstance
 		mockParse.mockReset()
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})

@@ -1,10 +1,11 @@
 import { NodePath } from 'ast-types/lib/node-path'
+import { SpyInstance } from 'vitest'
 import buildParser from '../babel-parser'
 import Documentation, { SlotDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import slotHandlerFunctional from './slotHandlerFunctional'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = buildParser({ plugins: ['jsx'] }).parse(src)
@@ -18,7 +19,7 @@ describe('functional render function slotHandler', () => {
 	beforeEach(() => {
 		mockSlotDescriptor = { name: 'default', description: '' }
 		documentation = new Documentation('dummy/path')
-		const mockGetSlotDescriptor = documentation.getSlotDescriptor as jest.Mock
+		const mockGetSlotDescriptor = documentation.getSlotDescriptor as any as SpyInstance
 		mockGetSlotDescriptor.mockReturnValue(mockSlotDescriptor)
 	})
 

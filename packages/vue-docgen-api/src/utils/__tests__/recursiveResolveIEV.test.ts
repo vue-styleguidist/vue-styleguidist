@@ -1,7 +1,7 @@
 import recursiveResolveIEV from '../recursiveResolveIEV'
 import { ImportedVariableSet } from '../resolveRequired'
 
-jest.mock('../resolveImmediatelyExported')
+vi.doMock('../resolveImmediatelyExported')
 
 describe('recursiveResolveIEV', () => {
 	let set: ImportedVariableSet

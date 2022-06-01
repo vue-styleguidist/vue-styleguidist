@@ -5,8 +5,9 @@ import babylon from '../babel-parser'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import Documentation, { PropDescriptor } from '../Documentation'
 import setupPropHandler from './setupPropHandler'
+import { SpyInstance } from 'vitest'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -31,7 +32,7 @@ describe('setupPropHandler', () => {
 		}
 		const MockDocumentation = require('../../Documentation').default
 		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock
+		const mockGetPropDescriptor = documentation.getPropDescriptor as any as SpyInstance
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 

@@ -1,6 +1,6 @@
 import adaptCreateElement, { CreateElementFunction } from '../adaptCreateElement'
 
-jest.mock('vue-inbrowser-compiler-demi', () => {
+vi.doMock('vue-inbrowser-compiler-demi', () => {
 	return {
 		resolveComponent: (comp: string) => comp,
 		isVue3: true

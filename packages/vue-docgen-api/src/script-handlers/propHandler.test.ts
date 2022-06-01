@@ -2,12 +2,13 @@ import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import dedent from 'dedent'
+import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation, { PropDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import propHandler from './propHandler'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function removeWhitespaceForTest(defaultValue: PropDescriptor['defaultValue'] = { value: '' }) {
 	return {
@@ -39,7 +40,7 @@ describe('propHandler', () => {
 		}
 		const MockDocumentation = require('../../Documentation').default
 		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getPropDescriptor as jest.Mock
+		const mockGetPropDescriptor = documentation.getPropDescriptor as any as SpyInstance
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 

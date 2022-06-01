@@ -4,7 +4,7 @@ import Documentation from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import displayNameHandler from './displayNameHandler'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = babylon().parse(src)

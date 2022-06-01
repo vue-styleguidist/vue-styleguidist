@@ -22,7 +22,7 @@ let cws: {
 	close: jest.Mock
 }
 
-jest.mock('fs', () => {
+vi.doMock('fs', () => {
 	cws = {
 		write: jest.fn(),
 		close: jest.fn()
@@ -38,7 +38,7 @@ jest.mock('fs', () => {
 
 let mockPrettierFormat: jest.Mock
 let mockResolveConfig: jest.Mock
-jest.mock('prettier', () => {
+vi.doMock('prettier', () => {
 	mockPrettierFormat = jest.fn(() => PRETTY_MD)
 	mockResolveConfig = jest.fn(() => null)
 	return {
@@ -48,13 +48,13 @@ jest.mock('prettier', () => {
 })
 
 let mockMkdirp: jest.Mock
-jest.mock('mkdirp', () => {
+vi.doMock('mkdirp', () => {
 	mockMkdirp = jest.fn((p, c) => c())
 	return mockMkdirp
 })
 
 let mockCompileTemplates: jest.Mock
-jest.mock('../compileTemplates', () => {
+vi.doMock('../compileTemplates', () => {
 	mockCompileTemplates = jest.fn()
 	return mockCompileTemplates
 })

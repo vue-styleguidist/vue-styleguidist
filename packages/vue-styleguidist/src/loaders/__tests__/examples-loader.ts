@@ -3,13 +3,13 @@ import examplesLoader from '../examples-loader'
 
 /* eslint-disable no-new-func */
 
-jest.mock('vue-inbrowser-compiler-utils', () => {
+vi.doMock('vue-inbrowser-compiler-utils', () => {
 	return {
 		isCodeVueSfc: (code: string) => /<script/.test(code)
 	}
 })
 
-jest.mock('vue-docgen-api', () => {
+vi.doMock('vue-docgen-api', () => {
 	return {
 		parse: (file: string) => ({ displayName: file }),
 		getDefaultExample: () => 'default example',
@@ -17,7 +17,7 @@ jest.mock('vue-docgen-api', () => {
 	}
 })
 
-jest.mock('../utils/absolutize', () => (p: string) => p)
+vi.doMock('../utils/absolutize', () => (p: string) => p)
 
 const query = {
 	file: 'foo.vue',
@@ -221,7 +221,7 @@ it('should works for any Markdown file, without a current component', () => {
 })
 
 it('should import external dependency in a vue component example', () => {
-	jest.mock('vue-inbrowser-compiler-utils', () => {
+	vi.doMock('vue-inbrowser-compiler-utils', () => {
 		return {
 			isCodeVueSfc: () => true
 		}

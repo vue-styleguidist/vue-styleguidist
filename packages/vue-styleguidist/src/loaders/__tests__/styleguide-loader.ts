@@ -2,12 +2,12 @@ import vm from 'vm'
 import path from 'path'
 import * as styleguideLoader from '../styleguide-loader'
 
-jest.mock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
+vi.doMock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
 	'foo',
 	'bar'
 ])
 
-jest.mock('../utils/getSections', () => () => [])
+vi.doMock('../utils/getSections', () => () => [])
 
 describe('styleguide-loader', () => {
 	const file = path.resolve(__dirname, '../../../../../test/components/Button.vue')

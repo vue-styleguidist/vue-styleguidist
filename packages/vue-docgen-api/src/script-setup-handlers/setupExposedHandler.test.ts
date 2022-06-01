@@ -1,12 +1,13 @@
 import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
+import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation, { ExposedDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import setupExposedHandler from './setupExposedHandler'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -30,7 +31,7 @@ describe('setupExposedHandler', () => {
 		}
 		const MockDocumentation = require('../../Documentation').default
 		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getExposedDescriptor as jest.Mock
+		const mockGetPropDescriptor = documentation.getExposedDescriptor as any as SpyInstance
 		mockGetPropDescriptor.mockReturnValue(mockExposedDescriptor)
 	})
 

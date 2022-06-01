@@ -1,7 +1,7 @@
 import * as path from 'path'
 import resolveAliases from '../resolveAliases'
 
-jest.mock('fs', () => {
+vi.doMock('fs', () => {
 	return {
 		existsSync: jest.fn((path: string) =>
 			path === '/replacementPath/src/mixins/somethingNice/mixinFile.js'

@@ -158,7 +158,7 @@ describe('getSections', () => {
 	})
 })
 
-jest.mock('vue-docgen-api', () => ({
+vi.doMock('vue-docgen-api', () => ({
 	parseMulti: () =>
 		Promise.resolve([
 			{

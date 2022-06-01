@@ -5,7 +5,7 @@ let mockAddWatch: jest.Mock
 let fakeOn: jest.Mock
 let mockGlobby: jest.Mock
 let fakeWatcher: any
-jest.mock('chokidar', () => {
+vi.doMock('chokidar', () => {
 	mockAddWatch = jest.fn()
 	fakeOn = jest.fn((item, cb) => {
 		if (item === 'ready') {
@@ -22,14 +22,14 @@ jest.mock('chokidar', () => {
 	}
 })
 
-jest.mock('vue-docgen-api', () => ({
+vi.doMock('vue-docgen-api', () => ({
 	parse: jest.fn(() => ({})),
 	ScriptHandlers: {
 		componentHandler: jest.fn()
 	}
 }))
 
-jest.mock('globby', () => {
+vi.doMock('globby', () => {
 	mockGlobby = jest.fn(() => FILES)
 	return mockGlobby
 })

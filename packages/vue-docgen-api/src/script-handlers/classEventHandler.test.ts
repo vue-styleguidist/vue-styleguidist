@@ -1,11 +1,12 @@
 import * as bt from '@babel/types'
+import { SpyInstance } from 'vitest'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import classEventHandler from './classEventHandler'
 import Documentation, { EventDescriptor } from '../Documentation'
 
-jest.mock('../../Documentation')
+vi.doMock('../../Documentation')
 
 function parse(src: string): { component: NodePath | undefined; ast: bt.File } {
 	const ast = babylon({ plugins: ['typescript'] }).parse(src)
@@ -19,7 +20,7 @@ describe('classEventHandler', () => {
 	beforeEach(() => {
 		mockEventDescriptor = { name: 'success' }
 		documentation = new Documentation('dummy/path')
-		const mockGetEventDescriptor = documentation.getEventDescriptor as jest.Mock
+		const mockGetEventDescriptor = documentation.getEventDescriptor as any as SpyInstance
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})
 

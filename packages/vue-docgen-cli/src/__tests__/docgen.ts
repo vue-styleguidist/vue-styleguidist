@@ -8,7 +8,7 @@ const DOC_MAP = {
 
 let mockGetSources: jest.Mock
 let mockWatcher: unknown
-jest.mock('../getSources', () => {
+vi.doMock('../getSources', () => {
 	mockWatcher = { on: jest.fn(), close: jest.fn() }
 	mockGetSources = jest.fn(() =>
 		Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP })
@@ -17,13 +17,13 @@ jest.mock('../getSources', () => {
 })
 
 let mockSingle: jest.Mock
-jest.mock('../singleMd', () => {
+vi.doMock('../singleMd', () => {
 	mockSingle = jest.fn()
 	return mockSingle
 })
 
 let mockMulti: jest.Mock
-jest.mock('../multiMd', () => {
+vi.doMock('../multiMd', () => {
 	mockMulti = jest.fn()
 	return mockMulti
 })
