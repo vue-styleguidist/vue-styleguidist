@@ -8,9 +8,9 @@ import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
 import mixinsHandler from './mixinsHandler'
 
-vi.doMock('../../utils/resolveRequired')
-vi.doMock('../../utils/resolvePathFrom')
-vi.doMock('../../parse')
+vi.mock('../../utils/resolveRequired')
+vi.mock('../../utils/resolvePathFrom')
+vi.mock('../../parse')
 
 describe('mixinsHandler', () => {
 	let resolveRequiredMock: SpyInstance<

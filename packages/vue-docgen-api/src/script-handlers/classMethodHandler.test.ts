@@ -1,12 +1,11 @@
 import { NodePath } from 'ast-types/lib/node-path'
 import Map from 'ts-map'
-import { SpyInstance } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation, { MethodDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import classMethodHandler from './classMethodHandler'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parseTS(src: string): Map<string, NodePath> {
 	const ast = babylon({ plugins: ['typescript'] }).parse(src)
@@ -21,7 +20,7 @@ describe('classPropHandler', () => {
 		mockMethodDescriptor = { name: '', description: '', modifiers: [] }
 		const MockDocumentation = Documentation
 		documentation = new MockDocumentation('test/path')
-		const mockGetMethodDescriptor = documentation.getMethodDescriptor as any as SpyInstance
+		const mockGetMethodDescriptor = vi.spyOn(documentation, 'getMethodDescriptor')
 		mockGetMethodDescriptor.mockImplementation((name: string) => {
 			mockMethodDescriptor.name = name
 			return mockMethodDescriptor

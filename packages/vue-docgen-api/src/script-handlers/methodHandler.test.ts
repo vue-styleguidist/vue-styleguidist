@@ -5,7 +5,7 @@ import Documentation, { MethodDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import methodHandler from './methodHandler'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = babylon({ plugins: ['flow'] }).parse(src)

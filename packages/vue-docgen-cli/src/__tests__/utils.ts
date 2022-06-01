@@ -1,4 +1,5 @@
 import * as path from 'path'
+import { SpyInstance } from 'vitest'
 import { writeDownMdFile, getDocMap } from '../utils'
 
 const UGLY_MD = 'ugly'
@@ -6,56 +7,56 @@ const PRETTY_MD = 'pretty'
 const MD_FILE_PATH = 'test/file'
 
 let mockFs: {
-	readFile: jest.Mock
-	writeFile: jest.Mock
-	existsSync: jest.Mock
+	readFile: SpyInstance
+	writeFile: SpyInstance
+	existsSync: SpyInstance
 	createWriteStream: (
 		a: string
 	) => {
-		write: jest.Mock
-		close: jest.Mock
+		write: SpyInstance
+		close: SpyInstance
 	}
 }
 
 let cws: {
-	write: jest.Mock
-	close: jest.Mock
+	write: SpyInstance
+	close: SpyInstance
 }
 
-vi.doMock('fs', () => {
+vi.mock('fs', () => {
 	cws = {
-		write: jest.fn(),
-		close: jest.fn()
+		write: vi.fn(),
+		close: vi.fn()
 	}
 	mockFs = {
-		readFile: jest.fn((a, b, c) => c()),
-		writeFile: jest.fn((a, b, c) => c()),
+		readFile: vi.fn((a, b, c) => c()),
+		writeFile: vi.fn((a, b, c) => c()),
 		createWriteStream: () => cws,
-		existsSync: jest.fn(() => false)
+		existsSync: vi.fn(() => false)
 	}
 	return mockFs
 })
 
-let mockPrettierFormat: jest.Mock
-let mockResolveConfig: jest.Mock
-vi.doMock('prettier', () => {
-	mockPrettierFormat = jest.fn(() => PRETTY_MD)
-	mockResolveConfig = jest.fn(() => null)
+let mockPrettierFormat: SpyInstance
+let mockResolveConfig: SpyInstance
+vi.mock('prettier', () => {
+	mockPrettierFormat = vi.fn(() => PRETTY_MD)
+	mockResolveConfig = vi.fn(() => null)
 	return {
 		format: mockPrettierFormat,
 		resolveConfig: mockResolveConfig
 	}
 })
 
-let mockMkdirp: jest.Mock
-vi.doMock('mkdirp', () => {
-	mockMkdirp = jest.fn((p, c) => c())
+let mockMkdirp: SpyInstance
+vi.mock('mkdirp', () => {
+	mockMkdirp = vi.fn((p, c) => c())
 	return mockMkdirp
 })
 
-let mockCompileTemplates: jest.Mock
-vi.doMock('../compileTemplates', () => {
-	mockCompileTemplates = jest.fn()
+let mockCompileTemplates: SpyInstance
+vi.mock('../compileTemplates', () => {
+	mockCompileTemplates = vi.fn()
 	return mockCompileTemplates
 })
 

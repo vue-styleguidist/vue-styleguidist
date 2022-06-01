@@ -50,7 +50,7 @@ new Vue({
 		</div>
 		`)
 		const dummySet = new Function('require', sut.script)(() => ({
-			default: { component: jest.fn() }
+			default: { component: vi.fn() }
 		}))
 		expect(dummySet.data()).toMatchObject({ param: 'BazFoo' })
 	})

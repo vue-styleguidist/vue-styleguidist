@@ -1,6 +1,7 @@
+import { SpyInstance } from 'vitest'
 import adaptCreateElement, { CreateElementFunction } from '../adaptCreateElement'
 
-vi.doMock('vue-inbrowser-compiler-demi', () => {
+vi.mock('vue-inbrowser-compiler-demi', () => {
 	return {
 		resolveComponent: (comp: string) => comp,
 		isVue3: true
@@ -8,11 +9,14 @@ vi.doMock('vue-inbrowser-compiler-demi', () => {
 })
 
 describe('adaptCreateElement', () => {
-	let h: jest.Mock<CreateElementFunction>
+  let h: SpyInstance<Parameters<CreateElementFunction>, ReturnType<CreateElementFunction>>
 	let pragma: CreateElementFunction
 	beforeEach(() => {
-		h = jest.fn()
-		pragma = adaptCreateElement(h)
+		h = vi.fn()
+    const impl = h.getMockImplementation()
+    if(impl){
+      pragma = adaptCreateElement(impl)
+    }
 	})
 
 	describe('group attributes', () => {

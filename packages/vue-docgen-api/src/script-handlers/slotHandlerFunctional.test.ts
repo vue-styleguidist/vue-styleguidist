@@ -5,7 +5,7 @@ import Documentation, { SlotDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import slotHandlerFunctional from './slotHandlerFunctional'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = buildParser({ plugins: ['jsx'] }).parse(src)

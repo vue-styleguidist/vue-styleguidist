@@ -3,13 +3,13 @@ import examplesLoader from '../examples-loader'
 
 /* eslint-disable no-new-func */
 
-vi.doMock('vue-inbrowser-compiler-utils', () => {
+vi.mock('vue-inbrowser-compiler-utils', () => {
 	return {
 		isCodeVueSfc: (code: string) => /<script/.test(code)
 	}
 })
 
-vi.doMock('vue-docgen-api', () => {
+vi.mock('vue-docgen-api', () => {
 	return {
 		parse: (file: string) => ({ displayName: file }),
 		getDefaultExample: () => 'default example',
@@ -17,7 +17,7 @@ vi.doMock('vue-docgen-api', () => {
 	}
 })
 
-vi.doMock('../utils/absolutize', () => (p: string) => p)
+vi.mock('../utils/absolutize', () => (p: string) => p)
 
 const query = {
 	file: 'foo.vue',
@@ -91,7 +91,7 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 			request: 'Readme.md',
 			query: getQuery({ shouldShowDefaultExample: true }),
 			_styleguidist: {},
-			addDependency: jest.fn()
+			addDependency: vi.fn()
 		} as any,
 		exampleMarkdown
 	)
@@ -103,7 +103,7 @@ it('should pass updateExample function from config to chunkify', () => {
 <h1>Hello world!</h2>
 \`\`\`
 	`
-	const updateExample = jest.fn(props => props)
+	const updateExample = vi.fn(props => props)
 	const callback = () => {
 		expect(updateExample).toHaveBeenCalledWith(
 			{
@@ -221,7 +221,7 @@ it('should works for any Markdown file, without a current component', () => {
 })
 
 it('should import external dependency in a vue component example', () => {
-	vi.doMock('vue-inbrowser-compiler-utils', () => {
+	vi.mock('vue-inbrowser-compiler-utils', () => {
 		return {
 			isCodeVueSfc: () => true
 		}

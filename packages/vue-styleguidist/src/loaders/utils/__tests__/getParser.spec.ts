@@ -1,8 +1,9 @@
+import { SpyInstance } from 'vitest'
 import getParser from '../getParser'
 
-let parseMock: jest.Mock
-vi.doMock('vue-docgen-api', () => {
-	parseMock = jest.fn()
+let parseMock: SpyInstance
+vi.mock('vue-docgen-api', () => {
+	parseMock = vi.fn()
 	return {
 		parse: parseMock
 	}

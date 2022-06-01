@@ -4,7 +4,7 @@ import Documentation from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import displayNameHandler from './displayNameHandler'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string): NodePath | undefined {
 	const ast = babylon().parse(src)
@@ -16,6 +16,7 @@ describe('displayNameHandler', () => {
 
 	beforeEach(() => {
 		documentation = new Documentation('dummy/path')
+    vi.spyOn(documentation, 'set')
 	})
 
 	it('should return the right component name', () => {

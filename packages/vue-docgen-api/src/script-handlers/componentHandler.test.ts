@@ -6,7 +6,7 @@ import Documentation from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import componentHandler from './componentHandler'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string, plugins: ParserPlugin[] = []): Map<string, NodePath> {
 	const ast = babylon({ plugins }).parse(src)
@@ -18,6 +18,7 @@ describe('componentHandler', () => {
 
 	beforeEach(() => {
 		documentation = new Documentation('dummy/path')
+    vi.spyOn(documentation, 'set')
 	})
 
 	it('should return the right component name', () => {

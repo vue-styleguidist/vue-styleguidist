@@ -7,7 +7,7 @@ import Documentation, { PropDescriptor } from '../Documentation'
 import setupPropHandler from './setupPropHandler'
 import { SpyInstance } from 'vitest'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)

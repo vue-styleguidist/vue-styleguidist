@@ -8,9 +8,9 @@ import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
 import extendsHandler from './extendsHandler'
 
-vi.doMock('../../utils/resolveRequired')
-vi.doMock('../../utils/resolvePathFrom')
-vi.doMock('../../parse')
+vi.mock('../utils/resolveRequired')
+vi.mock('../utils/resolvePathFrom')
+vi.mock('../parse')
 
 describe('extendsHandler', () => {
 	let resolveRequiredMock: SpyInstance<
@@ -32,7 +32,7 @@ describe('extendsHandler', () => {
 		mockResolvePathFrom = (resolvePathFrom as any)
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
-		mockParse = parseFile as any as SpyInstance
+		mockParse = parseFile as any
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})
 
@@ -47,7 +47,7 @@ describe('extendsHandler', () => {
 		}
 	}
 
-	it('should resolve extended modules variables in import default', async () => {
+	it.only('should resolve extended modules variables in import default', async () => {
 		const src = [
 			'import testComponent from "./testComponent"',
 			'export default {',

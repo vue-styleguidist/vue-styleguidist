@@ -2,21 +2,22 @@ import { FSWatcher } from 'chokidar'
 import * as singleMd from '../singleMd'
 import extractConfig from '../extractConfig'
 import { writeDownMdFile } from '../utils'
+import { SpyInstance } from 'vitest'
 
 const FAKE_MD_CONTENT = '## fake markdonw Content'
 const FILES = ['src/comps/button/button.vue']
 
-let mockWriteDownMdFile: jest.Mock
-vi.doMock('../utils', () => {
-	mockWriteDownMdFile = jest.fn(() => Promise.resolve())
+let mockWriteDownMdFile: SpyInstance
+vi.mock('../utils', () => {
+	mockWriteDownMdFile = vi.fn(() => Promise.resolve())
 	return {
 		writeDownMdFile: mockWriteDownMdFile
 	}
 })
 
-let mockCompileMarkdown: jest.Mock
-vi.doMock('../compileTemplates', () => {
-	mockCompileMarkdown = jest.fn(() =>
+let mockCompileMarkdown: SpyInstance
+vi.mock('../compileTemplates', () => {
+	mockCompileMarkdown = vi.fn(() =>
 		Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] })
 	)
 	return mockCompileMarkdown
@@ -27,7 +28,7 @@ describe('compile', () => {
 	const FAKE_COMPONENT_PATH = 'here'
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: singleMd.DocgenCLIConfigWithOutFile
-	const fakeOn = jest.fn()
+	const fakeOn = vi.fn()
 	const w = ({
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
 	} as unknown) as FSWatcher
@@ -36,7 +37,7 @@ describe('compile', () => {
 		conf = extractConfig(CWD) as singleMd.DocgenCLIConfigWithOutFile
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
-		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
+		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
 	})
 
 	describe('compile', () => {

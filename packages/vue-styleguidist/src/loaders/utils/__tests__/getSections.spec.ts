@@ -158,7 +158,7 @@ describe('getSections', () => {
 	})
 })
 
-vi.doMock('vue-docgen-api', () => ({
+vi.mock('vue-docgen-api', () => ({
 	parseMulti: () =>
 		Promise.resolve([
 			{
@@ -178,7 +178,10 @@ describe('getRequiredComponents', () => {
 		const requiredFiles = await getRequiredComponents(['source/of/file'], false)
 		expect(requiredFiles).toMatchInlineSnapshot(`
 			{
-			  "undefined": [],
+			  "source/of/file": [
+			    "/Users/elevatebart/Dev/vue-styleguidist/source/of/path/to/require1",
+			    "/Users/elevatebart/Dev/vue-styleguidist/source/of/path/to/require2",
+			  ],
 			}
 		`)
 	})

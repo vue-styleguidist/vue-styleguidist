@@ -1,13 +1,14 @@
+import { SpyInstance } from 'vitest'
 import getSources from '../getSources'
 
-let mockWatch: jest.Mock
-let mockAddWatch: jest.Mock
-let fakeOn: jest.Mock
-let mockGlobby: jest.Mock
+let mockWatch: SpyInstance
+let mockAddWatch: SpyInstance
+let fakeOn: SpyInstance
+let mockGlobby: SpyInstance
 let fakeWatcher: any
-vi.doMock('chokidar', () => {
-	mockAddWatch = jest.fn()
-	fakeOn = jest.fn((item, cb) => {
+vi.mock('chokidar', () => {
+	mockAddWatch = vi.fn()
+	fakeOn = vi.fn((item, cb) => {
 		if (item === 'ready') {
 			cb()
 		}
@@ -16,21 +17,21 @@ vi.doMock('chokidar', () => {
 		add: mockAddWatch,
 		on: fakeOn
 	}
-	mockWatch = jest.fn(() => fakeWatcher)
+	mockWatch = vi.fn(() => fakeWatcher)
 	return {
 		watch: mockWatch
 	}
 })
 
-vi.doMock('vue-docgen-api', () => ({
-	parse: jest.fn(() => ({})),
+vi.mock('vue-docgen-api', () => ({
+	parse: vi.fn(() => ({})),
 	ScriptHandlers: {
-		componentHandler: jest.fn()
+		componentHandler: vi.fn()
 	}
 }))
 
-vi.doMock('globby', () => {
-	mockGlobby = jest.fn(() => FILES)
+vi.mock('globby', () => {
+	mockGlobby = vi.fn(() => FILES)
 	return mockGlobby
 })
 

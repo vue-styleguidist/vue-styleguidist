@@ -7,7 +7,7 @@ import resolveExportedComponent from '../utils/resolveExportedComponent'
 import classPropHandler from './classPropHandler'
 import { SpyInstance } from 'vitest'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string): Map<string, NodePath> {
 	const ast = babylon({ plugins: ['typescript'] }).parse(src)
@@ -32,7 +32,7 @@ describe('propHandler', () => {
 		}
 		const MockDocumentation = Documentation
 		documentation = new MockDocumentation('test/path')
-		const mockGetPropDescriptor = documentation.getPropDescriptor as any as SpyInstance
+		const mockGetPropDescriptor = vi.spyOn(documentation, 'getPropDescriptor')
 		mockGetPropDescriptor.mockReturnValue(mockPropDescriptor)
 	})
 
@@ -212,18 +212,18 @@ describe('propHandler', () => {
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('id')
 			expect(mockPropDescriptor.type).toMatchInlineSnapshot(`
-			Object {
-			  "elements": Array [
-			    Object {
-			      "name": "string",
-			    },
-			    Object {
-			      "name": "number",
-			    },
-			  ],
-			  "name": "union",
-			}
-		`)
+				{
+				  "elements": [
+				    {
+				      "name": "string",
+				    },
+				    {
+				      "name": "number",
+				    },
+				  ],
+				  "name": "union",
+				}
+			`)
 		})
 	})
 })

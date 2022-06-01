@@ -1,30 +1,31 @@
 import extractConfig from '../extractConfig'
 import docgen, { DocgenCLIConfig } from '../docgen'
+import { SpyInstance } from 'vitest'
 
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']
 const DOC_MAP = {
 	'src/comps/button/Readme.md': 'src/comps/button/button.vue'
 }
 
-let mockGetSources: jest.Mock
+let mockGetSources: SpyInstance
 let mockWatcher: unknown
-vi.doMock('../getSources', () => {
-	mockWatcher = { on: jest.fn(), close: jest.fn() }
-	mockGetSources = jest.fn(() =>
+vi.mock('../getSources', () => {
+	mockWatcher = { on: vi.fn(), close: vi.fn() }
+	mockGetSources = vi.fn(() =>
 		Promise.resolve({ componentFiles: FILES, watcher: mockWatcher, docMap: DOC_MAP })
 	)
 	return mockGetSources
 })
 
-let mockSingle: jest.Mock
-vi.doMock('../singleMd', () => {
-	mockSingle = jest.fn()
+let mockSingle: SpyInstance
+vi.mock('../singleMd', () => {
+	mockSingle = vi.fn()
 	return mockSingle
 })
 
-let mockMulti: jest.Mock
-vi.doMock('../multiMd', () => {
-	mockMulti = jest.fn()
+let mockMulti: SpyInstance
+vi.mock('../multiMd', () => {
+	mockMulti = vi.fn()
 	return mockMulti
 })
 
@@ -36,7 +37,7 @@ describe('docgen', () => {
 	beforeEach(() => {
 		conf = extractConfig(CWD)
 		conf.components = '**/*.vue'
-		conf.getDestFile = jest.fn(() => MD_FILE_PATH)
+		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
 	})
 
 	it('should call multi by default', async () => {

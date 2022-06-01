@@ -6,7 +6,7 @@ import resolveExportedComponent from '../utils/resolveExportedComponent'
 import classEventHandler from './classEventHandler'
 import Documentation, { EventDescriptor } from '../Documentation'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string): { component: NodePath | undefined; ast: bt.File } {
 	const ast = babylon({ plugins: ['typescript'] }).parse(src)
@@ -20,7 +20,7 @@ describe('classEventHandler', () => {
 	beforeEach(() => {
 		mockEventDescriptor = { name: 'success' }
 		documentation = new Documentation('dummy/path')
-		const mockGetEventDescriptor = documentation.getEventDescriptor as any as SpyInstance
+		const mockGetEventDescriptor = vi.spyOn(documentation, 'getEventDescriptor')
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})
 

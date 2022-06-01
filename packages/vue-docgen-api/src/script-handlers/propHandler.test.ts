@@ -8,7 +8,7 @@ import Documentation, { PropDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import propHandler from './propHandler'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function removeWhitespaceForTest(defaultValue: PropDescriptor['defaultValue'] = { value: '' }) {
 	return {

@@ -7,7 +7,7 @@ import Documentation, { ExposedDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import setupExposedHandler from './setupExposedHandler'
 
-vi.doMock('../../Documentation')
+vi.mock('../../Documentation')
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)

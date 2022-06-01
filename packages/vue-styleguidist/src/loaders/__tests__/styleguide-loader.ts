@@ -2,12 +2,12 @@ import vm from 'vm'
 import path from 'path'
 import * as styleguideLoader from '../styleguide-loader'
 
-vi.doMock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
+vi.mock('react-styleguidist/lib/loaders/utils/getComponentFilesFromSections', () => () => [
 	'foo',
 	'bar'
 ])
 
-vi.doMock('../utils/getSections', () => () => [])
+vi.mock('../utils/getSections', () => () => [])
 
 describe('styleguide-loader', () => {
 	const file = path.resolve(__dirname, '../../../../../test/components/Button.vue')
@@ -43,7 +43,7 @@ describe('styleguide-loader', () => {
 		}
 
 		const contextDependencies = ['foo', 'bar']
-		const addContextDependency = jest.fn()
+		const addContextDependency = vi.fn()
 		styleguideLoader.pitch.call({
 			async: () => callback,
 			request: file,
