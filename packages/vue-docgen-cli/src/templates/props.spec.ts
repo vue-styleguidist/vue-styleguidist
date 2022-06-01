@@ -1,4 +1,4 @@
-import { renderTags } from '../props'
+import { renderTags } from './props'
 
 describe('renderTags', () => {
 	it('should render tags', () => {

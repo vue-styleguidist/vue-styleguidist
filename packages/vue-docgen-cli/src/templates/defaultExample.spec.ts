@@ -1,4 +1,4 @@
-import defaultExample from '../defaultExample'
+import defaultExample from './defaultExample'
 
 describe('defaultExample', () => {
 	it('should match each prop type with its default', () => {

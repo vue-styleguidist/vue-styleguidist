@@ -1,5 +1,5 @@
-import extractConfig from '../extractConfig'
-import docgen, { DocgenCLIConfig } from '../docgen'
+import extractConfig from './extractConfig'
+import docgen, { DocgenCLIConfig } from './docgen'
 import { SpyInstance } from 'vitest'
 
 const FILES = ['src/comps/button/button.vue', 'src/comps/checkbox/checkbox.vue']

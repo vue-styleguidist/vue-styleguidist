@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { SpyInstance } from 'vitest'
-import { writeDownMdFile, getDocMap } from '../utils'
+import { writeDownMdFile, getDocMap } from './utils'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'

@@ -1,5 +1,5 @@
 import { SpyInstance } from 'vitest'
-import getSources from '../getSources'
+import getSources from './getSources'
 
 let mockWatch: SpyInstance
 let mockAddWatch: SpyInstance

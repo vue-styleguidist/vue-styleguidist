@@ -1,7 +1,7 @@
 import { FSWatcher } from 'chokidar'
-import * as singleMd from '../singleMd'
-import extractConfig from '../extractConfig'
-import { writeDownMdFile } from '../utils'
+import * as singleMd from './singleMd'
+import extractConfig from './extractConfig'
+import { writeDownMdFile } from './utils'
 import { SpyInstance } from 'vitest'
 
 const FAKE_MD_CONTENT = '## fake markdonw Content'
@@ -17,9 +17,7 @@ vi.mock('../utils', () => {
 
 let mockCompileMarkdown: SpyInstance
 vi.mock('../compileTemplates', () => {
-	mockCompileMarkdown = vi.fn(() =>
-		Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] })
-	)
+	mockCompileMarkdown = vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
 	return mockCompileMarkdown
 })
 

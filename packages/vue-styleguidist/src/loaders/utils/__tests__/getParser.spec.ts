@@ -1,16 +1,17 @@
 import { SpyInstance } from 'vitest'
 import getParser from '../getParser'
+import * as docgen from 'vue-docgen-api'
 
-let parseMock: SpyInstance
 vi.mock('vue-docgen-api', () => {
-	parseMock = vi.fn()
 	return {
-		parse: parseMock
+		parse: vi.fn()
 	}
 })
 
 describe('getParser', () => {
+	let parseMock: SpyInstance
 	beforeEach(() => {
+		parseMock = vi.spyOn(docgen, 'parse')
 		parseMock.mockReset()
 	})
 
