@@ -5,6 +5,8 @@ export default defineConfig({
 		globals: true,
 		include: ['**/__e2e__/**/*.js'],
 		exclude: ['**/node_modules/**'],
-		testTimeout: 80000
+		testTimeout: 80000,
+		threads: false,
+		setupFiles: './test/setup.plugin.js'
 	}
 })

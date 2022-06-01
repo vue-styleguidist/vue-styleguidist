@@ -11,7 +11,7 @@
   "scripts": {
     "pretest": "pnpm lint",
     "test": "pnpm test:vitest -- --maxWorkers=2 && pnpm test:plugin",
-    "test:plugin": "vitest -c vitest.config.plugin.ts",
+    "test:plugin": "rimraf test/cli-packages/* && vitest -c vitest.config.plugin.ts",
     "test:vitest": "vitest",
     "test:perf": "node ./packages/vue-docgen-api/tests/perf-test.js",
     "posttest": "pnpm format",
