@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "es5",
+    "lib": ["es2021"],
 		"module": "commonjs",
 		"esModuleInterop": true,
 		"strict": true,
