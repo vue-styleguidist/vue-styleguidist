@@ -5,7 +5,7 @@ exports[`getSections > should return an array 1`] = `
   {
     "components": [],
     "content": {
-      "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!/Users/elevatebart/Dev/vue-styleguidist/test/components/ReadMe.md",
+      "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!~/test/components/ReadMe.md",
     },
     "description": undefined,
     "exampleMode": "collapse",
@@ -28,7 +28,7 @@ exports[`getSections > should return an array 1`] = `
         },
         "pathLine": "components/Button.vue",
         "props": {
-          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
+          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
         },
         "slug": "button-2",
         "subComponents": undefined,
@@ -56,7 +56,7 @@ exports[`getSections > should return an array 1`] = `
         },
         "pathLine": "components/Button.vue",
         "props": {
-          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
+          "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
         },
         "slug": "button-3",
         "subComponents": undefined,
@@ -88,7 +88,7 @@ exports[`processSection > should return an object for section with components 1`
       },
       "pathLine": "components/Button.vue",
       "props": {
-        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
+        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
       },
       "slug": "button",
       "subComponents": undefined,
@@ -111,7 +111,7 @@ exports[`processSection > should return an object for section with content 1`] =
 {
   "components": [],
   "content": {
-    "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!/Users/elevatebart/Dev/vue-styleguidist/test/components/ReadMe.md",
+    "require": "!!~/packages/vue-styleguidist/src/loaders/examples-loader.js?customLangs=vue|js|jsx!~/test/components/ReadMe.md",
   },
   "description": undefined,
   "exampleMode": "collapse",
@@ -137,7 +137,7 @@ exports[`processSection > should return an object for section without ignored co
       },
       "pathLine": "components/Button.vue",
       "props": {
-        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!/Users/elevatebart/Dev/vue-styleguidist/test/components/Button.vue",
+        "require": "!!~/packages/vue-styleguidist/src/loaders/vuedoc-loader.js!~/test/components/Button.vue",
       },
       "slug": "button-1",
       "subComponents": undefined,
