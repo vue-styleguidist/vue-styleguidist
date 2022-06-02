@@ -2,6 +2,7 @@ import path from 'path'
 import * as Rsg from 'react-styleguidist'
 import getSections, { processSection, getRequiredComponents } from './getSections'
 import { SanitizedStyleguidistConfig } from '../../types/StyleGuide'
+import cleanFilePathSnapshot from './cleanFilePathSnapshot'
 
 const configDir = path.resolve(__dirname, '../../../../../test')
 const config = {
@@ -86,19 +87,19 @@ describe('processSection', () => {
 	it('should return an object for section with content', async () => {
 		const result = await processSection(sections[0], { config, componentFiles: [] })
 
-		expect(result).toMatchSnapshot()
+		expect(cleanFilePathSnapshot(result as any)).toMatchSnapshot()
 	})
 
 	it('should return an object for section with components', async () => {
 		const result = await processSection(sections[1], { config, componentFiles: [] })
 
-		expect(result).toMatchSnapshot()
+		expect(cleanFilePathSnapshot(result as any)).toMatchSnapshot()
 	})
 
 	it('should return an object for section without ignored components', async () => {
 		const result = await processSection(sections[2], { config, componentFiles: [] })
 
-		expect(result).toMatchSnapshot()
+		expect(cleanFilePathSnapshot(result as any)).toMatchSnapshot()
 	})
 })
 
@@ -106,7 +107,7 @@ describe('getSections', () => {
 	it('should return an array', async () => {
 		const result = await getSections(sections, { config, componentFiles: [] })
 
-		expect(result).toMatchSnapshot()
+		expect(cleanFilePathSnapshot(result as any)).toMatchSnapshot()
 	})
 
 	it('should return an array of sectionsWithDepth with sectionDepth decreasing', async () => {
@@ -176,11 +177,11 @@ vi.mock('vue-docgen-api', () => ({
 describe('getRequiredComponents', () => {
 	it('should return an array of all requires tags contents', async () => {
 		const requiredFiles = await getRequiredComponents(['source/of/file'], false)
-		expect(requiredFiles).toMatchInlineSnapshot(`
+		expect(cleanFilePathSnapshot(requiredFiles)).toMatchInlineSnapshot(`
 			{
 			  "source/of/file": [
-			    "/Users/elevatebart/Dev/vue-styleguidist/source/of/path/to/require1",
-			    "/Users/elevatebart/Dev/vue-styleguidist/source/of/path/to/require2",
+			    "~/source/of/path/to/require1",
+			    "~/source/of/path/to/require2",
 			  ],
 			}
 		`)
