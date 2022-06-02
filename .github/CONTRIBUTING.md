@@ -18,18 +18,16 @@ If you run `pnpm test`, yarn will run eslint linting, then test vue-styleguidist
 The full test suite is rather slow, because it has a number of e2e tests that perform full webpack builds of actual projects. To narrow down the tests needed to run during development, you can pass the test script a regex to match test filenames:
 
 ```sh
-pnpm test:jest <filenameRegex>
+pnpm test:vitest <filenameRegex>
 ```
 
 Note the regex matches against full paths relative to the project root, so for example if you want to test all the docgen tests `packages/vue-docgen-api`, you can simply run:
 
 ```sh
-pnpm test:jest vue-docgen-api
+pnpm test:vitest vue-docgen-api
 ```
 
 You can also pass `--watch` to run tests in watch mode.
-
-Note that `jest --onlyChanged` isn't always accurate because some tests spawn child processes.
 
 To test the cli plugin, everything has to be run in sequence. vue-styleguidist always uses the same http port (8080) and one cannot have 2 instances running at the same time. To run test for the plugin just run this:
 

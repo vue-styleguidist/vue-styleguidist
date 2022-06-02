@@ -1,19 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests button with no script block should match the snapshot 1`] = `
-Object {
+exports[`tests button with no script block > should match the snapshot 1`] = `
+{
   "description": "",
   "displayName": "MyButton",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "description": "trigered on click",
       "name": "click",
-      "properties": Array [
-        Object {
+      "properties": [
+        {
           "description": "example",
           "name": "test",
-          "type": Object {
-            "names": Array [
+          "type": {
+            "names": [
               "object",
             ],
           },
@@ -25,12 +25,12 @@ Object {
   "exportName": undefined,
   "methods": undefined,
   "props": undefined,
-  "slots": Array [
-    Object {
+  "slots": [
+    {
       "description": "Use this slot default",
       "name": "default",
     },
   ],
-  "tags": Object {},
+  "tags": {},
 }
 `;

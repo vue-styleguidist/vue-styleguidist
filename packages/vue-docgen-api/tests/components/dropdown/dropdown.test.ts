@@ -20,18 +20,18 @@ describe('tests wrapper with root slot', () => {
 
 	it('should have tags matching the snapshot', () => {
 		expect(docDropDown.tags).toMatchInlineSnapshot(`
-		Object {
-		  "requires": Array [
-		    Object {
-		      "description": "./part.vue",
-		      "title": "requires",
-		    },
-		    Object {
-		      "description": "./part2.vue",
-		      "title": "requires",
-		    },
-		  ],
-		}
-	`)
+			{
+			  "requires": [
+			    {
+			      "description": "./part.vue",
+			      "title": "requires",
+			    },
+			    {
+			      "description": "./part2.vue",
+			      "title": "requires",
+			    },
+			  ],
+			}
+		`)
 	})
 })

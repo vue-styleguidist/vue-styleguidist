@@ -1,134 +1,134 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests button functional should match the snapshot 1`] = `
-Object {
+exports[`tests button functional > should match the snapshot 1`] = `
+{
   "description": "Wrapper for input elements",
   "displayName": "InputWrapper",
-  "docsBlocks": Array [
+  "docsBlocks": [
     "\`\` \`jsx <input-wrapper label=\\"Label\\" value=\\"–\\" id=\\"sdf\\"> … </input-wrapper>  \`\` \`",
   ],
   "events": undefined,
   "exportName": "default",
   "functional": true,
   "methods": undefined,
-  "props": Array [
-    Object {
-      "defaultValue": Object {
+  "props": [
+    {
+      "defaultValue": {
         "func": false,
         "value": "false",
       },
       "description": "Should display error?",
       "name": "error",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "false",
       },
       "description": "Should the input be focused?",
       "name": "focused",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "''",
       },
       "description": "Prefix icon for input field",
       "name": "icon",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "false",
       },
       "description": "Should the input be disabled?",
       "name": "disabled",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "value",
-      "type": Object {
+      "type": {
         "name": "undefined",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "false",
       },
       "description": "True if input label should always be \\"up there\\"",
       "name": "labelAlwaysFloating",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "description": "Prefix string for input field",
       "name": "prefix",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "description": "Input ID",
       "name": "id",
       "required": true,
-      "type": Object {
+      "type": {
         "name": "string|number",
       },
     },
-    Object {
+    {
       "description": "String for label text",
       "name": "label",
       "required": true,
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "''",
       },
       "description": "String with relevant error message",
       "name": "errorMessage",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "description": "Input value",
       "name": "v-model",
       "required": true,
-      "tags": Object {
-        "model": Array [
-          Object {
+      "tags": {
+        "model": [
+          {
             "description": true,
             "title": "model",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
   ],
-  "slots": Array [
-    Object {
+  "slots": [
+    {
       "name": "default",
     },
   ],
-  "tags": Object {},
+  "tags": {},
 }
 `;

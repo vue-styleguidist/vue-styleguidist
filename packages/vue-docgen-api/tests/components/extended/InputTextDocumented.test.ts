@@ -30,14 +30,14 @@ describe('tests InputTextDoc', () => {
 		it('should return props in the documentation', () => {
 			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name))
 				.toMatchInlineSnapshot(`
-			Array [
-			  "question",
-			  "importedProp",
-			  "otherMixinProp",
-			  "deep",
-			  "placeholder",
-			]
-		`)
+					[
+					  "question",
+					  "importedProp",
+					  "otherMixinProp",
+					  "deep",
+					  "placeholder",
+					]
+				`)
 		})
 
 		it('should give the component a placeholder prop of type string', () => {

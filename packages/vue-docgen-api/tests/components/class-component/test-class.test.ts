@@ -11,33 +11,33 @@ describe('tests button', () => {
 
 	it('should match the snapshot', () => {
 		expect(docTest).toMatchInlineSnapshot(`
-		Object {
-		  "description": "",
-		  "displayName": "MyButton",
-		  "events": undefined,
-		  "exportName": "default",
-		  "methods": undefined,
-		  "props": Array [
-		    Object {
-		      "defaultValue": Object {
-		        "func": false,
-		        "value": "''",
-		      },
-		      "description": "Some property which should be shown on a doc page",
-		      "mixin": Object {
-		        "name": "MyMixin",
-		        "path": "../../mixins/ts.ts",
-		      },
-		      "name": "someProp",
-		      "tags": Object {},
-		      "type": Object {
-		        "name": "string",
-		      },
-		    },
-		  ],
-		  "slots": undefined,
-		  "tags": Object {},
-		}
-	`)
+			{
+			  "description": "",
+			  "displayName": "MyButton",
+			  "events": undefined,
+			  "exportName": "default",
+			  "methods": undefined,
+			  "props": [
+			    {
+			      "defaultValue": {
+			        "func": false,
+			        "value": "''",
+			      },
+			      "description": "Some property which should be shown on a doc page",
+			      "mixin": {
+			        "name": "MyMixin",
+			        "path": "../../mixins/ts.ts",
+			      },
+			      "name": "someProp",
+			      "tags": {},
+			      "type": {
+			        "name": "string",
+			      },
+			    },
+			  ],
+			  "slots": undefined,
+			  "tags": {},
+			}
+		`)
 	})
 })

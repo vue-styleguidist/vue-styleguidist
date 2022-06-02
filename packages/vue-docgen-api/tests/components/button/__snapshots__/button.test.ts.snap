@@ -1,44 +1,44 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests button should match the snapshot 1`] = `
-Object {
+exports[`tests button > should match the snapshot 1`] = `
+{
   "description": "This is an example of creating a reusable button component and using it with external data.",
   "displayName": "Best Button",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "description": "Success event.",
       "name": "success",
-      "properties": Array [
-        Object {
+      "properties": [
+        {
           "description": "example",
           "name": "demo",
-          "type": Object {
-            "names": Array [
+          "type": {
+            "names": [
               "object",
             ],
           },
         },
-        Object {
+        {
           "description": "test called",
           "name": "called",
-          "type": Object {
-            "names": Array [
+          "type": {
+            "names": [
               "number",
             ],
           },
         },
-        Object {
+        {
           "description": "Indicates whether the snowball is tightly packed.",
           "name": "isPacked",
-          "type": Object {
-            "names": Array [
+          "type": {
+            "names": [
               "boolean",
             ],
           },
         },
       ],
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
@@ -46,89 +46,89 @@ Object {
   ],
   "exportName": "default",
   "methods": undefined,
-  "props": Array [
-    Object {
-      "defaultValue": Object {
+  "props": [
+    {
+      "defaultValue": {
         "func": false,
         "value": "'example model'",
       },
       "description": "Model example2",
       "name": "v-model",
-      "tags": Object {
-        "model": Array [
-          Object {
+      "tags": {
+        "model": [
+          {
             "description": true,
             "title": "model",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "description": "Sm breakpoint and above",
       "name": "spanSm",
-      "type": Object {
+      "type": {
         "name": "string|number",
       },
     },
-    Object {
+    {
       "description": "Md breakpoint and above",
       "name": "spanMd",
-      "type": Object {
+      "type": {
         "name": "string|number",
       },
     },
-    Object {
+    {
       "description": "Number of columns (1-12) the column should span.",
       "name": "span",
-      "type": Object {
+      "type": {
         "name": "string|number",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'normal'",
       },
       "description": "The size of the button",
-      "mixin": Object {
+      "mixin": {
         "name": "colorMixin",
         "path": "colorMixin.js",
       },
       "name": "size",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "string",
       },
-      "values": Array [
+      "values": [
         "small",
         "medium",
         "large",
       ],
     },
-    Object {
-      "mixin": Object {
+    {
+      "mixin": {
         "name": "multiMixin",
         "path": "../../mixins/multiMixin.js",
       },
       "name": "shouldBe",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "shape",
-      "tags": Object {
-        "ignore": Array [
-          Object {
+      "tags": {
+        "ignore": [
+          {
             "description": true,
             "title": "ignore",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "func": true,
         "name": "PropTypes.shape({
   color: PropTypes.string,
@@ -136,101 +136,101 @@ Object {
 })",
       },
     },
-    Object {
+    {
       "description": "Another mixin",
-      "mixin": Object {
+      "mixin": {
         "name": "genericMixin",
         "path": "genericMixin.js",
       },
       "name": "secret",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'blue'",
       },
       "description": "Example prop",
-      "mixin": Object {
+      "mixin": {
         "name": "another",
         "path": "../../mixins/another/index.js",
       },
       "name": "propsAnother",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "{ message: 'hello' }",
       },
       "description": "Object or array defaults must be returned from
 a factory function",
       "name": "propE",
-      "type": Object {
+      "type": {
         "name": "object",
       },
     },
-    Object {
+    {
       "name": "prop1",
-      "tags": Object {
-        "ignore": Array [
-          Object {
+      "tags": {
+        "ignore": [
+          {
             "description": true,
             "title": "ignore",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "description": "Prop from first mixin",
-      "mixin": Object {
+      "mixin": {
         "name": "namedMixin",
         "path": "namedMixin.js",
       },
       "name": "p1",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": true,
         "value": "() => () => null",
       },
       "description": "Add custom click actions.",
       "name": "onCustomClick",
-      "tags": Object {
-        "ignore": Array [
-          Object {
+      "tags": {
+        "ignore": [
+          {
             "description": true,
             "title": "ignore",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "func",
       },
     },
-    Object {
+    {
       "description": "Prop from second mixin",
-      "mixin": Object {
+      "mixin": {
         "name": "namedMixin",
         "path": "namedMixin.js",
       },
       "name": "hello2",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": true,
         "value": "() => {
   return 'foo'
@@ -238,77 +238,77 @@ a factory function",
       },
       "description": "Function default",
       "name": "funcDefault",
-      "type": Object {
+      "type": {
         "name": "func",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "16",
       },
       "description": "The example3 props",
       "name": "example3",
-      "type": Object {
+      "type": {
         "name": "number",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "false",
       },
       "description": "The example props",
       "name": "example",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "customTag",
-      "tags": Object {
-        "asdf": Array [
-          Object {
+      "tags": {
+        "asdf": [
+          {
             "description": "qwerty",
             "title": "asdf",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'#333'",
       },
       "description": "The color for the button example",
-      "mixin": Object {
+      "mixin": {
         "name": "colorMixin",
         "path": "colorMixin.js",
       },
       "name": "color",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
   ],
-  "slots": Array [
-    Object {
+  "slots": [
+    {
       "description": "Use this slot default",
       "name": "default",
     },
   ],
-  "tags": Object {
-    "author": Array [
-      Object {
+  "tags": {
+    "author": [
+      {
         "description": "[Rafael](https://github.com/rafaesc92)",
         "title": "author",
       },
     ],
-    "version": Array [
-      Object {
+    "version": [
+      {
         "description": "1.0.5",
         "title": "version",
       },

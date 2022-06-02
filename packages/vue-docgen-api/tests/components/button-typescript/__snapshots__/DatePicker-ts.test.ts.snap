@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests datePicker should match the snapshot 1`] = `
-Object {
+exports[`tests datePicker > should match the snapshot 1`] = `
+{
   "description": "",
   "displayName": "DatePicker",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "name": "update:date",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
@@ -16,53 +16,53 @@ Object {
   ],
   "exportName": "default",
   "methods": undefined,
-  "props": Array [
-    Object {
-      "defaultValue": Object {
+  "props": [
+    {
+      "defaultValue": {
         "func": false,
         "value": "''",
       },
       "name": "date",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "any",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "''",
       },
       "name": "format",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "any",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "''",
       },
       "name": "color",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "any",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "false",
       },
       "name": "disabled",
-      "tags": Object {},
-      "type": Object {
+      "tags": {},
+      "type": {
         "name": "any",
       },
     },
   ],
   "slots": undefined,
-  "tags": Object {},
+  "tags": {},
 }
 `;

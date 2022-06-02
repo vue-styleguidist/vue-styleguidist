@@ -1,5 +1,3 @@
-jest.setTimeout(80000)
-
 const invoke = require('@vue/cli/lib/invoke')
 const create = require('@vue/cli-test-utils/createTestProject')
 const path = require('path')

@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 describe('Single component', () => {
 	before(() => {
 		// Open simple button component in isolation

@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "vi": true,
+    "test": true,
+    "beforeAll": true,
+    "expect": true
+  }
+}

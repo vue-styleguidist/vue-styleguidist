@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 const IMG = '<img />'
 const BTN = '<button />'
 

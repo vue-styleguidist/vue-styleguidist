@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "es5",
+    "lib": ["es2021", "DOM"],
 		"module": "commonjs",
 		"esModuleInterop": true,
 		"strict": true,
@@ -17,7 +18,8 @@
 		},
 		"strictFunctionTypes": false,
 		"jsx": "react",
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+    "types": ["vitest/globals"]
 	},
 	"include": [
 		"@types/**/*",
