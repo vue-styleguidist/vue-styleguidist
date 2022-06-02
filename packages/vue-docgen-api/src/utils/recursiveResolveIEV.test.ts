@@ -9,7 +9,6 @@ vi.mock('./resolvePathFrom')
 
 describe('recursiveResolveIEV', () => {
 	let set: ImportedVariableSet
-  let mockResolvePathFrom: SpyInstance
 	let mockResolver: SpyInstance<
 		[filePath: string, originalDirNameOverride?: string | undefined],
 		string | null
@@ -20,7 +19,7 @@ describe('recursiveResolveIEV', () => {
 	beforeEach(() => {
 		set = { test: { filePath: ['my/path'], exportName: 'exportIt' } }
 		mockResolver = vi.spyOn(spies, 'pathResolver')
-    mockResolvePathFrom = vi.spyOn(resolvePathFrom, 'default').mockImplementation(() => 'absolute/my/path')
+    vi.spyOn(resolvePathFrom, 'default').mockImplementation(() => 'absolute/my/path')
 	})
 
 	it('should call the resolver', async () => {
