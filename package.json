@@ -90,6 +90,7 @@
     "vue": "2.6.14",
     "vue-property-decorator": "9.1.2",
     "vue-styleguidist": "*",
+    "vue-cli-plugin-docgen": "*",
     "vue-cli-plugin-styleguidist": "*",
     "vuepress": "1.9.7",
     "webpack-dev-server": "3.11.3",
