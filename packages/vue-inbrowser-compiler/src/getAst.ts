@@ -1,7 +1,6 @@
 import { Parser, Node } from 'acorn'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const jsx = require('acorn-jsx')
+// @ts-ignore this type is defined in react-styleguidist
+import jsx from 'acorn-jsx'
 
 const extendedParser = Parser.extend(jsx())
 

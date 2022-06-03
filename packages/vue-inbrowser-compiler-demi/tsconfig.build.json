@@ -7,5 +7,5 @@
 		"module": "es2015"
 	},
 	"include": ["src/**/*.ts", "../../@types/**/*"],
-	"exclude": ["node_modules", "src/**/__tests__/**/*.ts"]
+	"exclude": ["node_modules", "src/**/*.spec.ts"]
 }

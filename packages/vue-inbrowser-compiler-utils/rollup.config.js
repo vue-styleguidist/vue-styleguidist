@@ -23,7 +23,7 @@ export default {
 		// Compile TypeScript files
 		typescript({
 			tsconfig: './tsconfig.build.json',
-			cacheDir: '../../node_modules/.rpt2_cache',
+			cacheDir: '../../node_modules/.rpt4_cache',
 			declarationDir: 'types',
 			rootDir: 'src'
 		}),
