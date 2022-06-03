@@ -111,7 +111,7 @@
 			}
 		},
     {
-			"files": ["packages/**/*.{spec,test}.{ts,tsx}"],
+			"files": ["packages/**/*.{spec,test}.{ts,tsx,js}"],
 			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"sourceType": "module",
