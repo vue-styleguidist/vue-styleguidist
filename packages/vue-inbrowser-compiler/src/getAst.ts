@@ -1,12 +1,9 @@
-import { Parser, Node } from 'acorn'
-// @ts-ignore this type is defined in react-styleguidist
-import jsx from 'acorn-jsx'
+import { File } from '@babel/types'
+import buildParse from './babel-parser';
 
-const extendedParser = Parser.extend(jsx())
+let parse: ReturnType<typeof buildParse>['parse'];
 
-export default function getAst(code: string): Node {
-	return extendedParser.parse(code, {
-		ecmaVersion: 2019,
-		sourceType: 'module'
-	})
+export default function getAst(code: string): File {
+  parse = parse ?? buildParse().parse;
+	return parse(code)
 }

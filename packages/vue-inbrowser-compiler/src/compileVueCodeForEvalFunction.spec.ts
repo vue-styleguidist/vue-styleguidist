@@ -132,7 +132,7 @@ new Vue({
 		}
 		</script>
 		`)
-		).toThrowErrorMatchingInlineSnapshot(`"Unexpected token (8:11)"`)
+		).toThrowErrorMatchingInlineSnapshot('"Missing semicolon. (8:11)"')
 	})
 
 	it('should try to run the with the same lines', () => {

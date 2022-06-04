@@ -1,5 +1,5 @@
 declare module 'walkes' {
-	import { Node } from 'acorn'
+	import { Program } from '@babel/types'
 
-	export default function (ast: Node, visitors: any): void
+	export default function (ast: Program, visitors: any): void
 }

@@ -18,15 +18,16 @@
     "acorn"
   ],
   "dependencies": {
-    "acorn": "^6.4.2",
-    "acorn-jsx": "^5.3.1",
+    "@babel/parser": "^7.13.12",
     "buble": "^0.20.0",
     "camelcase": "^5.3.1",
     "detect-browser": "^5.2.0",
+    "sucrase": "3.21.0",
     "vue-inbrowser-compiler-utils": "^4.44.23",
     "walkes": "^0.2.1"
   },
   "devDependencies": {
+    "@babel/types": "^7.13.12",
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
     "@rollup/plugin-typescript": "8.3.0",

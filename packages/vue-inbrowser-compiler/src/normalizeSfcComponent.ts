@@ -58,7 +58,7 @@ export function parseScriptCode(code: string): {
 	let endIndex = -1
 	let offset = 0
 	let renderFunctionStart = -1
-	walkes(getAst(code), {
+	walkes(getAst(code).program, {
 		//export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
@@ -122,7 +122,7 @@ export function getRenderFunctionStart(objectExpression: any): number {
 		const renderFunctionObj = nodeProperties.find(
 			(p: any) => p.key && p.key.type === 'Identifier' && p.key.name === 'render'
 		)
-		if (renderFunctionObj && renderFunctionObj.value.body) {
+		if (renderFunctionObj?.value?.body) {
 			return renderFunctionObj.value.body.start
 		}
 	}
