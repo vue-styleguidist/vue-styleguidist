@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:9.5.0
+    - image: cypress/included:10.0.2
   working_directory: ~/vue-styleguidist
 
 jobs:

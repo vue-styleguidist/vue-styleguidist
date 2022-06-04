@@ -56,7 +56,7 @@
     "clipboard": "2.0.9",
     "core-js": "3.20.3",
     "cross-env": "5.2.1",
-    "cypress": "9.5.0",
+    "cypress": "10.0.2",
     "danger": "10.9.0",
     "ejs": "3.1.7",
     "eslint": "7.32.0",
