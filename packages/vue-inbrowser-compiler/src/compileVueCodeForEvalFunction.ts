@@ -1,4 +1,4 @@
-import { transform, TransformOptions } from 'buble'
+import { transform, Options as TransformOptions } from "sucrase";
 import walkes from 'walkes'
 import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
@@ -9,7 +9,6 @@ import normalizeSfcComponent, {
 	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
 import getAst from './getAst'
-import getTargetFromBrowser from './getTargetFromBrowser'
 
 interface EvaluableComponent {
 	script: string
@@ -26,17 +25,18 @@ interface EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: TransformOptions = {}
+	config: Omit<TransformOptions, 'transforms'> = {}
 ): EvaluableComponent {
-	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
-	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
+  const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
+  const configWithTransforms: TransformOptions = {...config, transforms: ['typescript', 'imports', 'jsx']}
+  const script = transform(nonCompiledComponent.script, configWithTransforms).code
 	return {
 		...nonCompiledComponent,
-		script: transform(nonCompiledComponent.script, { target, ...config }).code
+		script
 	}
 }
 
-function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
+function prepareVueCodeForEvalFunction(code: string, config: {jsxPragma?: string}): EvaluableComponent {
 	let style
 	let vsgMode = false
 	let template
@@ -53,7 +53,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	if (!/new Vue\(/.test(code)) {
 		// this for jsx examples without the SFC shell
 		// export default {render: (h) => <Button>}
-		if (config.jsx) {
+		if (config.jsxPragma) {
 			const { preprocessing, component, postprocessing } = parseScriptCode(code)
 			return {
 				script: `${preprocessing};return {${component}};${postprocessing}`
@@ -72,7 +72,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	const ast = getAst(code)
 	let offset = 0
 	const varNames: string[] = []
-	walkes(ast, {
+	walkes(ast.program, {
 		// replace `new Vue({data})` by `return {data}`
 		ExpressionStatement(node: any) {
 			if (node.expression.type === 'NewExpression' && node.expression.callee.name === 'Vue') {
@@ -92,15 +92,6 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 				}
 				const after = optionsNode ? code.slice(optionsNode.start + offset, endIndex + offset) : ''
 				code = before + ';return ' + after
-			}
-		},
-		// transform all imports into require function calls
-		ImportDeclaration(node: any) {
-			const ret = transformOneImport(node, code, offset)
-			offset = ret.offset
-			code = ret.code
-			if (vsgMode && node.specifiers) {
-				node.specifiers.forEach((s: any) => varNames.push(s.local.name))
 			}
 		},
 		...(vsgMode

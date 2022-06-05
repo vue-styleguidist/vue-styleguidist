@@ -122,8 +122,8 @@ export function getRenderFunctionStart(objectExpression: any): number {
 		const renderFunctionObj = nodeProperties.find(
 			(p: any) => p.key && p.key.type === 'Identifier' && p.key.name === 'render'
 		)
-		if (renderFunctionObj?.value?.body) {
-			return renderFunctionObj.value.body.start
+		if (renderFunctionObj?.body) {
+			return renderFunctionObj.body.start
 		}
 	}
 	return -1
@@ -140,12 +140,12 @@ export function insertCreateElementFunction(before: string, after: string): stri
  */
 export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const extractedComponent = injectTemplateAndParseExport(parts)
+	const {preprocessing, component, postprocessing} = injectTemplateAndParseExport(parts)
 	return {
 		script: [
-			extractedComponent.preprocessing,
-			`return ${extractedComponent.component}`,
-			extractedComponent.postprocessing
+			preprocessing,
+			`return ${component}`,
+			postprocessing
 		].join(';'),
 		style: buildStyles(parts.styles)
 	}

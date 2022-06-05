@@ -76,10 +76,10 @@ export default {
 		)
 	}
 }`,
-			{ jsx: 'pragma' }
+			{ jsxPragma: 'pragma' }
 		)
 		const dummySet = sut.script
-		expect(dummySet).toContain('pragma( HelloWorld')
+		expect(dummySet).toContain('pragma(HelloWorld')
 	})
 
 	it('should combine import and new vue', () => {
@@ -99,15 +99,15 @@ new Vue({
 		`)
 
 		expect(sut.script).toMatchInlineSnapshot(`
-			"
-			const vue$0 = require('vue');const Vue = vue$0.default || vue$0;
-			const dog_names$43 = require('../RandomButton/dog-names');const three = dog_names$43.default || dog_names$43;
+			"\\"use strict\\"; function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-			;return {
+			var _dognames = require('../RandomButton/dog-names'); var _dognames2 = _interopRequireDefault(_dognames);
+
+			return {
 				data() {
 					let i = 0
 					return {
-						opt: three.map(a => ({ text: a, value: i++ }))
+						opt: _dognames2.default.map(a => ({ text: a, value: i++ }))
 					}
 				},
 				template: '<Radio :options=\\"opt\\" />'
@@ -151,7 +151,7 @@ new Vue({
 		</script>
 		`).script
 		).toMatchInlineSnapshot(`
-			"
+			"\\"use strict\\";
 
 
 
