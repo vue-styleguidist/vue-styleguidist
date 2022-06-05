@@ -28,7 +28,6 @@ function getSingleFileComponentParts(code: string) {
 function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 	preprocessing?: string
 	component: string
-	postprocessing?: string
 } {
 	const templateString = parts.template
 		? parts.template.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
@@ -50,7 +49,6 @@ function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 export function parseScriptCode(code: string): {
 	preprocessing?: string
 	component: string
-	postprocessing?: string
 } {
 	let preprocessing = ''
 	let startIndex = -1
@@ -103,7 +101,6 @@ export function parseScriptCode(code: string): {
 	return {
 		preprocessing,
 		component,
-		postprocessing: code.slice(endIndex)
 	}
 }
 
@@ -133,12 +130,11 @@ export function insertCreateElementFunction(before: string, after: string): stri
  */
 export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const {preprocessing, component, postprocessing} = injectTemplateAndParseExport(parts)
+	const {preprocessing, component} = injectTemplateAndParseExport(parts)
 	return {
 		script: [
 			preprocessing,
 			`return ${component}`,
-			postprocessing
 		].join(';'),
 		style: buildStyles(parts.styles)
 	}

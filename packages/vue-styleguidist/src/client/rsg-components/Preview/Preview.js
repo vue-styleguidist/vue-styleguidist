@@ -92,7 +92,7 @@ class Preview extends Component {
 			const example = compile(code, {
 				...this.context.config.compilerConfig,
 				...(this.context.config.jsxInExamples
-					? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
+					? { jsxPragma: '__pragma__(h)' }
 					: {})
 			})
 			style = example.style

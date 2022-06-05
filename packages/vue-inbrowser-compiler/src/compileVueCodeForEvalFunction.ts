@@ -19,7 +19,7 @@ interface EvaluableComponent {
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
  * @param code
- * @param config buble config to be used when transforming
+ * @param config sucrase config to be used when transforming
  *
  */
 export default function compileVueCodeForEvalFunction(
@@ -28,12 +28,9 @@ export default function compileVueCodeForEvalFunction(
 ): EvaluableComponent {
   const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
   const configWithTransforms: TransformOptions = {...config, transforms: ['typescript', 'imports', 'jsx']}
-  console.log(nonCompiledComponent.script)
-  const script = transform(nonCompiledComponent.script, configWithTransforms).code
-  console.log('after')
 	return {
 		...nonCompiledComponent,
-		script
+		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 }
 
@@ -55,9 +52,9 @@ function prepareVueCodeForEvalFunction(code: string, config: {jsxPragma?: string
 		// this for jsx examples without the SFC shell
 		// export default {render: (h) => <Button>}
 		if (config.jsxPragma) {
-			const { preprocessing, component, postprocessing } = parseScriptCode(code)
+			const { preprocessing, component } = parseScriptCode(code)
 			return {
-				script: `${preprocessing};return {${component}};${postprocessing}`
+				script: `${preprocessing};return {${component}};}`
 			}
 		}
 

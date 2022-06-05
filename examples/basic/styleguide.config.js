@@ -88,9 +88,6 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	compilerConfig: {
-		target: { ie: 11 }
-	},
 	styleguideDir: 'dist',
 	displayOrigins: true,
 	codeSplit: false

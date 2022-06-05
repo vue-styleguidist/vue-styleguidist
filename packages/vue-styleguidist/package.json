@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
     "postcompile": "pnpm typings",
-    "compile:watch": "concurrently \"pnpm compile -- --watch\" \"pnpm typings -- --watch\"",
+    "compile:watch": "concurrently \"pnpm compile --watch\" \"pnpm typings --watch\"",
     "typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
   },
   "repository": {
