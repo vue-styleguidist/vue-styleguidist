@@ -4,7 +4,7 @@
 	"description": "Examples can contain jsx too",
 	"keywords": [
 		"jsx",
-		"buble",
+		"sucrase",
 		"compiler",
 		"vue examples",
 		"functional"

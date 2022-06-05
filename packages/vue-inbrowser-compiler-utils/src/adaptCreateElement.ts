@@ -10,7 +10,7 @@ export type CreateElementFunction = (
 /**
  * Groups attributes passed to a React pragma to the VueJS fashion
  * @param h the VueJS createElement function passed in render functions
- * @returns pragma usable in buble rendered JSX for VueJS
+ * @returns pragma usable in sucrase rendered JSX for VueJS
  */
 export default function adaptCreateElement(h: CreateElementFunction): CreateElementFunction {
 	return (comp, attr, ...children: any[]) => {

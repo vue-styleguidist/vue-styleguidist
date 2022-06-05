@@ -14,7 +14,6 @@
     "compile",
     "live",
     "browser",
-    "buble",
     "acorn"
   ],
   "dependencies": {

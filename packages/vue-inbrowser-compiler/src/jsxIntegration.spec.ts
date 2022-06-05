@@ -1,6 +1,6 @@
 /* eslint-disable no-new-func */
 import Vue from 'vue'
-import { transform } from 'buble'
+import { transform } from 'sucrase'
 import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'
 import { shallowMount, mount } from '@vue/test-utils'
 
@@ -11,8 +11,8 @@ describe('integration', () => {
 			params: { [key: string]: any } = {}
 		): { [key: string]: any } => {
 			const compiledCode = transform('const ___ = ' + code, {
-				jsx: '__pragma__(h)',
-				objectAssign: 'concatenate'
+        transforms: ['typescript', 'imports', 'jsx'],
+				jsxPragma: '__pragma__(h)'
 			}).code
 			const [param1, param2, param3, param4] = Object.keys(params)
 			const getValue = new Function(
