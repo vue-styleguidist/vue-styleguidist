@@ -1,7 +1,6 @@
 import walkes from 'walkes'
 import { parseComponent, VsgSFCDescriptor, isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
-import transformOneImport from './transformOneImport'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
@@ -88,12 +87,6 @@ export function parseScriptCode(code: string): {
 				endIndex = node.right.end + offset
 			}
 		},
-		// and transform import statements into require
-		ImportDeclaration(node: any) {
-			const ret = transformOneImport(node, code, offset)
-			offset = ret.offset
-			code = ret.code
-		}
 	})
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
