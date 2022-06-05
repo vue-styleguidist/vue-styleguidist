@@ -92,6 +92,12 @@ function prepareVueCodeForEvalFunction(code: string, config: {jsxPragma?: string
 				code = before + ';return ' + after
 			}
 		},
+    // transform all imports into require function calls
+		ImportDeclaration(node: any) {
+			if (vsgMode && node.specifiers) {
+				node.specifiers.forEach((s: any) => varNames.push(s.local.name))
+			}
+		},
 		...(vsgMode
 			? {
 					VariableDeclaration(node: any) {

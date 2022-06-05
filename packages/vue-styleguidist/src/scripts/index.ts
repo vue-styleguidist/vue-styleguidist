@@ -100,3 +100,7 @@ function exportBuildUtils(config: SanitizedStyleguidistConfig): StyleGuideUtils 
 		}
 	}
 }
+
+export function defineConfig(config: StyleguidistConfig){
+  return config
+}
