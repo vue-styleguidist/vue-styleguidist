@@ -3,7 +3,10 @@ import normalizeSfcComponent from './normalizeSfcComponent'
 
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func
-	const scriptTransformed = transform(sut.script, { transforms: ['imports'] }).code
+	const scriptTransformed = transform(sut.script, {
+		transforms: ['imports'],
+		production: true
+	}).code
 	return new Function('require', scriptTransformed)(() => ({
 		default: { component: vi.fn() }
 	}))

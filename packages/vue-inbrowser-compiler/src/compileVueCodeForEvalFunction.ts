@@ -28,6 +28,7 @@ export default function compileVueCodeForEvalFunction(
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const configWithTransforms: TransformOptions = {
+		production: true,
 		...config,
 		transforms: ['typescript', 'imports', 'jsx']
 	}
