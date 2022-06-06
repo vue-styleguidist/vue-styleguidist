@@ -1,4 +1,4 @@
-import { transform, Options as TransformOptions } from "sucrase";
+import { transform, Options as TransformOptions } from 'sucrase'
 import walkes from 'walkes'
 import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, {
@@ -26,15 +26,21 @@ export default function compileVueCodeForEvalFunction(
 	code: string,
 	config: Omit<TransformOptions, 'transforms'> = {}
 ): EvaluableComponent {
-  const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
-  const configWithTransforms: TransformOptions = {...config, transforms: ['typescript', 'imports', 'jsx']}
+	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
+	const configWithTransforms: TransformOptions = {
+		...config,
+		transforms: ['typescript', 'imports', 'jsx']
+	}
 	return {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 }
 
-function prepareVueCodeForEvalFunction(code: string, config: {jsxPragma?: string}): EvaluableComponent {
+function prepareVueCodeForEvalFunction(
+	code: string,
+	config: { jsxPragma?: string }
+): EvaluableComponent {
 	let style
 	let vsgMode = false
 	let template
@@ -54,7 +60,7 @@ function prepareVueCodeForEvalFunction(code: string, config: {jsxPragma?: string
 		if (config.jsxPragma) {
 			const { preprocessing, component } = parseScriptCode(code)
 			return {
-				script: `${preprocessing};return {${component}};}`
+				script: `${preprocessing};return {${component}};`
 			}
 		}
 
@@ -92,7 +98,7 @@ function prepareVueCodeForEvalFunction(code: string, config: {jsxPragma?: string
 				code = before + ';return ' + after
 			}
 		},
-    // transform all imports into require function calls
+		// transform all imports into require function calls
 		ImportDeclaration(node: any) {
 			if (vsgMode && node.specifiers) {
 				node.specifiers.forEach((s: any) => varNames.push(s.local.name))

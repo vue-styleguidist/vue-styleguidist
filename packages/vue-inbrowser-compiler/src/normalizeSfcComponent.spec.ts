@@ -1,8 +1,10 @@
+import { transform } from 'sucrase'
 import normalizeSfcComponent from './normalizeSfcComponent'
 
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func
-	return new Function('require', sut.script)(() => ({
+	const scriptTransformed = transform(sut.script, { transforms: ['imports'] }).code
+	return new Function('require', scriptTransformed)(() => ({
 		default: { component: vi.fn() }
 	}))
 }

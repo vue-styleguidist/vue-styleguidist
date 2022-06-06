@@ -163,8 +163,7 @@ new Vue({
 								param: 'BazBaz'
 							}
 						}
-					};
-					"
+					}"
 		`)
 	})
 
