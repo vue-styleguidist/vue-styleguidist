@@ -23,7 +23,7 @@ jobs:
         run: pnpm lint
 
       - name: Run unit tests
-        run: pnpm test:vitest --coverage
+        run: pnpm run test:vitest "--coverage"
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
