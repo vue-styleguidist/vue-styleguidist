@@ -8,7 +8,7 @@ export default defineConfig({
 		setupFiles: './test/setup.ts',
 		exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**'],
 		coverage: {
-			reporter: ['text', 'json'],
+			reporter: ['text', 'cobertura'],
 			exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**', '**/*.{test,spec}.{ts,js,tsx,jsx}']
 		}
 	},
