@@ -5,8 +5,11 @@ export default defineConfig({
 	test: {
 		environment: 'happy-dom',
 		globals: true,
-    setupFiles: './test/setup.ts',
-		exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**']
+		setupFiles: './test/setup.ts',
+		exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**'],
+		coverage: {
+			reporter: ['text', 'json']
+		}
 	},
 	plugins: [
 		typescriptPaths({
