@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.45.2
+
+### Patch Changes
+
+- [`818dc770`](https://github.com/vue-styleguidist/vue-styleguidist/commit/818dc77034cf1e1401227dadb746806daeb671ea) Thanks [@elevatebart](https://github.com/elevatebart)! - publish typings
+
 ## 4.45.1
 
 ### Patch Changes
