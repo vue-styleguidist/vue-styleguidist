@@ -1,9 +1,9 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { defineConfig } = require('vue-styleguidist')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
-/** @type import("vue-styleguidist").Config */
-module.exports = {
+module.exports = defineConfig({
 	// set your styleguidist configuration here
 	title: 'Default Style Guide',
 	defaultExample: true,
@@ -13,15 +13,10 @@ module.exports = {
 		url: `${docSiteUrl}/Examples.html`
 	},
 	styleguideDir: 'dist',
-	// sections: [
-	//   {
-	//     name: 'First Section',
-	//     components: 'src/components/**/[A-Z]*.vue'
-	//   }
-	// ],
 	webpackConfig: {
 		plugins: process.argv.includes('--analyze') ? [new BundleAnalyzerPlugin()] : []
 	},
 	codeSplit: true,
+	minimize: false,
 	skipComponentsWithoutExample: true
-}
+})
