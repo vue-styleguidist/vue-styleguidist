@@ -1,7 +1,8 @@
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+const { defineConfig } = require('vue-styleguidist')
 
 /** @type import("vue-styleguidist").Config */
-module.exports = {
+module.exports = defineConfig({
 	// set your styleguidist configuration here
 	title: 'Default Style Guide',
 	defaultExample: true,
@@ -10,7 +11,8 @@ module.exports = {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
 	},
-	styleguideDir: 'dist'
+	styleguideDir: 'dist',
+	minimize: false
 	// sections: [
 	//   {
 	//     name: 'First Section',
@@ -20,4 +22,4 @@ module.exports = {
 	// webpackConfig: {
 	//   // custom config goes here
 	// }
-}
+})
