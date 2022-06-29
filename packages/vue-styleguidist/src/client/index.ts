@@ -43,7 +43,9 @@ const render = () => {
 window.addEventListener('hashchange', render)
 window.addEventListener('hashchange', scrollToOrigin)
 
+// @ts-expect-error hot module replacement
 if (module.hot) {
+	// @ts-expect-error hot module replacement
 	module.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
 		codeRevision += 1
 		render()

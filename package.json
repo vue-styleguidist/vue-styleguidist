@@ -9,6 +9,7 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "scripts": {
+    "changeset": "changeset",
     "pretest": "pnpm lint",
     "test": "pnpm test:vitest -- --maxWorkers=2 && pnpm test:plugin",
     "test:plugin": "rimraf test/cli-packages/* && vitest -c vitest.config.plugin.ts",

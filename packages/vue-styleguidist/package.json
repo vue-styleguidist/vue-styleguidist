@@ -4,9 +4,9 @@
   "version": "4.45.1",
   "homepage": "https://vue-styleguidist.github.io",
   "scripts": {
-    "compile": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
-    "postcompile": "pnpm typings",
-    "compile:watch": "concurrently \"pnpm compile -- --watch\" \"pnpm typings -- --watch\"",
+    "compile": "pnpm run compile:babel && pnpm run typings",
+    "compile:babel": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
+    "compile:watch": "concurrently \"pnpm compile:babel -- --watch\" \"pnpm typings -- --watch\"",
     "typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "main": "lib/scripts/index.js",
+  "typings": "lib/scripts/index.d.ts",
   "bin": {
     "vue-styleguidist": "lib/bin.js"
   },
@@ -120,6 +121,7 @@
     "@types/loader-utils": "1.1.6",
     "@types/lodash": "4.14.178",
     "@types/mini-html-webpack-plugin": "2.2.2",
+    "@types/minimist": "1.2.2",
     "@types/prismjs": "1.16.6",
     "@types/pug": "2.0.6",
     "@types/prop-types": "15.7.2",

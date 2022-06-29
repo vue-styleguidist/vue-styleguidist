@@ -149,7 +149,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 
 	// Require context modules so they are available in an example
 
-	const requireContextCode = b.program(flatten(map(fullContext, resolveESModule)))
+	const requireContextCode = b.program(flatten(map(fullContext, resolveESModule)) as any)
 
 	// Stringify examples object except the evalInContext function
 	const examplesWithEval = examples.map(example => {

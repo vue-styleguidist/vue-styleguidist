@@ -10,7 +10,7 @@ export default function (this: loader.LoaderContext, source: string | Buffer, ma
 			`export default function (Component) {
 		Component.options.__docs = ${JSON.stringify(source)}
 	  }`,
-			map
+			String(map)
 		)
 	}
 }
