@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import webpack, { Configuration } from 'webpack'
+import webpack, { Configuration, Optim } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
@@ -99,18 +99,16 @@ export default function (
 	// the HMR has to be loaded after the html plugin.
 	// Hence this piece added last to the list of plugins.
 	if (isProd) {
-		const optimization = config.minimize
+		const optimization: Configuration['optimization'] = config.minimize
 			? {
 					minimizer: [
 						new TerserPlugin({
 							parallel: true,
-							cache: true,
 							terserOptions: {
 								ie8: false,
 								ecma: 5,
 								compress: {
 									keep_fnames: true,
-									warnings: false,
 									/**
 									 * Disable reduce_funcs to keep Terser from inlining
 									 * Preact's VNode. If enabled, the 'new VNode()' is replaced

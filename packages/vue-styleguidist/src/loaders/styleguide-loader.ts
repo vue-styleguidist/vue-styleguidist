@@ -46,10 +46,9 @@ export default function () {}
 
 export function pitch(this: StyleguidistContext) {
 	const callback = this.async()
-	const cb = callback ? callback : () => null
 	pitchAsync
 		.call(this)
-		.then(res => cb(undefined, res))
+		.then(res => callback(undefined, res))
 		.catch(e => {
 			throw e
 		})

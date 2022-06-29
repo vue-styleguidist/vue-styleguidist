@@ -3,7 +3,6 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import values from 'lodash/values'
 import flatten from 'lodash/flatten'
-import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import { builders as b } from 'ast-types'
@@ -35,8 +34,7 @@ function isImport(req: any): req is { importPath: string; path: string } {
 
 export default function (this: StyleguidistContext, source: string) {
 	const callback = this.async()
-	const cb = callback ? callback : () => null
-	examplesLoader.call(this, source).then(res => cb(undefined, res))
+	examplesLoader.call(this, source).then(res => callback(undefined, res))
 }
 
 export async function examplesLoader(this: StyleguidistContext, src: string): Promise<string> {
@@ -50,7 +48,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		source = getComponentVueDoc(src, filePath)
 	}
 	const config = this._styleguidist
-	const options = loaderUtils.getOptions(this) || {}
+	const options = this.getOptions() || {}
 	const { file, displayName, shouldShowDefaultExample, customLangs } = options
 
 	// Replace placeholders (__COMPONENT__) with the passed-in component name

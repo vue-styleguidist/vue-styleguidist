@@ -33,7 +33,7 @@ export interface DocGenOptions {
 	/**
 	 * What alias should be replaced in requires and imports
 	 */
-	alias?: { [alias: string]: string | string[] }
+	alias?: { [alias: string]: string | false | string[] }
 	/**
 	 * What directories should be searched when resolving modules
 	 */

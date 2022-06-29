@@ -76,7 +76,9 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 
 	// Custom error reporting
 	compiler.hooks.done.tap('vsrDoneBuilding', function (stats: Stats) {
+		// @ts-ignore
 		const messages = formatWebpackMessages(stats.toJson({}, true))
+		// @ts-ignore
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
 		if (bar) {
 			bar.stop()
@@ -147,23 +149,25 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 			clearLine(process.stdout, 0)
 		}
 
+		// @ts-ignore
 		const messages = formatWebpackMessages(stats.toJson({}, true))
 
 		if (!messages.errors.length && !messages.warnings.length) {
 			printStatus('Compiled successfully!', 'success')
 		}
 
+		// @ts-ignore
 		printAllErrorsAndWarnings(messages, stats.compilation)
 	})
 
-  // kill ghosted threads on exit
-  ;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
-    process.on(signal, () => {
-      app.close(() => {
-        process.exit(0)
-      })
-    })
-  })
+	// kill ghosted threads on exit
+	;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
+		process.on(signal, () => {
+			app.close(() => {
+				process.exit(0)
+			})
+		})
+	})
 
 	// in order to have the caller be able to interact
 	// with the app when it's hot

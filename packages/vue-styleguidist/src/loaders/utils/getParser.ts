@@ -17,7 +17,10 @@ export default function getParser(
 		process.env.NODE_ENV || 'production'
 	)
 
-	let alias: { [key: string]: string } | undefined
+	let alias:
+		| { [key: string]: string | false | string[] }
+		| { alias: string | false | string[]; name: string; onlyModule?: boolean | undefined }[]
+		| undefined
 	let modules: string[] | undefined
 
 	if (webpackConfig.resolve) {
@@ -29,9 +32,14 @@ export default function getParser(
 	if (webpackConfig.module && webpackConfig.module.rules) {
 		const { rules } = webpackConfig.module
 		const pugLoader: any =
-			rules.find(r => r.loader === 'pug-loader' || r.use === 'pug-loader') ||
+			rules.find(
+				r => typeof r === 'object' && (r.loader === 'pug-loader' || r.use === 'pug-loader')
+			) ||
 			rules
 				.reduce((acc: RuleSetUseItem[], r) => {
+					if (typeof r !== 'object') {
+						return acc
+					}
 					if (Array.isArray(r.use)) {
 						return acc.concat(r.use)
 					}
@@ -43,10 +51,13 @@ export default function getParser(
 			pugOptions = pugLoader.options as pug.Options
 		} else {
 			const pugLoaderUse = rules.find(
-				r => typeof r.use === 'object' && (r.use as any).loader === 'pug-loader'
+				r =>
+					typeof r === 'object' &&
+					typeof r.use === 'object' &&
+					(r.use as any).loader === 'pug-loader'
 			)
 			if (
-				pugLoaderUse &&
+				typeof pugLoaderUse === 'object' &&
 				pugLoaderUse.use &&
 				typeof pugLoaderUse.use === 'object' &&
 				!Array.isArray(pugLoaderUse.use)
@@ -56,13 +67,32 @@ export default function getParser(
 		}
 	}
 
+	const aliasNormalized = !alias
+		? undefined
+		: Array.isArray(alias)
+		? convertAliasFormat(alias)
+		: alias
+
 	const defaultParser = async (file: string) =>
 		await parse(file, {
-			alias,
+			alias: aliasNormalized,
 			modules,
 			jsx: config.jsxInComponents,
 			validExtends,
 			pugOptions
 		})
 	return propsParser || defaultParser
+}
+
+function convertAliasFormat(
+	input: {
+		alias: string | false | string[]
+		name: string
+		onlyModule?: boolean | undefined
+	}[]
+) {
+	return input.reduce((acc: { [key: string]: string | false | string[] }, cur) => {
+		acc[cur.name] = cur.alias
+		return acc
+	}, {})
 }

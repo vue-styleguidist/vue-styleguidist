@@ -1,7 +1,7 @@
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
+const { defineConfig } = require('vue-styleguidist')
 
-/** @type import("vue-styleguidist").Config */
-module.exports = {
+module.exports = defineConfig({
 	// set your styleguidist configuration here
 	title: 'Default Style Guide',
 	components: 'src/components/**/[A-Z]*.vue',
@@ -20,4 +20,4 @@ module.exports = {
 		url: `${docSiteUrl}/Examples.html`
 	},
 	styleguideDir: 'dist'
-}
+})

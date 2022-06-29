@@ -4,7 +4,6 @@ import { promisify } from 'util'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
-import loaderUtils from 'loader-utils'
 import { ComponentDoc, Tag } from 'vue-docgen-api'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
@@ -25,10 +24,9 @@ const examplesLoader = path.resolve(__dirname, './examples-loader.js')
 
 export default function (this: StyleguidistContext, source: string) {
 	const callback = this.async()
-	const cb = callback ? callback : () => null
 	vuedocLoader
 		.call(this, source)
-		.then(res => cb(undefined, res))
+		.then(res => callback(undefined, res))
 		.catch(e => {
 			throw e
 		})
@@ -48,7 +46,7 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 	const file = this.request.split('!').pop() as string
 	const config = this._styleguidist
 
-	const { noExample = false } = loaderUtils.getOptions(this) || {}
+	const { noExample = false } = this.getOptions() || {}
 
 	// Setup Webpack context dependencies to enable hot reload when adding new files or updating any of component dependencies
 	if (config.contextDependencies) {
