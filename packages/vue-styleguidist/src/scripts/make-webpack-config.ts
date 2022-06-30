@@ -18,6 +18,12 @@ const RENDERER_REGEXP = /Renderer$/
 
 const sourceDir = path.resolve(__dirname, '../client')
 
+console.log()
+console.log()
+console.log(webpack.version)
+console.log()
+console.log()
+
 export default function (
 	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
@@ -161,7 +167,18 @@ export default function (
 						process: 'process/browser'
 					})
 				],
-				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
+				entry: [require.resolve('react-dev-utils/webpackHotDevClient')],
+				devServer: {
+					devMiddleware: {
+						// webpack serve copies files into memory, but we need it on disk to serve from proxied phoenix 4001 server
+						writeToDisk: true,
+						stats: 'errors-only'
+					}
+				},
+				stats: 'errors-only',
+				infrastructureLogging: {
+					level: 'warn'
+				}
 			},
 			webpackConfig
 		)

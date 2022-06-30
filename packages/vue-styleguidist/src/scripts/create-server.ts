@@ -13,8 +13,7 @@ export default function createServer(
 	const { devServer: webpackDevServerConfig } = merge(
 		{
 			devServer: {
-				compress: true,
-				hot: true
+				compress: true
 			}
 		},
 		{
@@ -26,7 +25,7 @@ export default function createServer(
 	)
 
 	const compiler = webpack(webpackConfig)
-	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig ?? {})
+	const devServer = new WebpackDevServer(webpackDevServerConfig ?? {}, compiler)
 
 	// User defined customizations
 	if (config.configureServer) {
