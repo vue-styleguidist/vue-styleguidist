@@ -45,11 +45,16 @@ window.addEventListener('hashchange', scrollToOrigin)
 
 // @ts-expect-error hot module replacement
 if (module.hot) {
+	console.log('module.hot', { module })
+
 	// @ts-expect-error hot module replacement
 	module.hot.accept('!!../loaders/styleguide-loader!./index.js', () => {
+		console.log('module.revision')
 		codeRevision += 1
 		render()
 	})
+} else {
+	console.log('module.cold')
 }
 
 render()

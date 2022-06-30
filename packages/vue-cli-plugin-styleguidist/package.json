@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "vue-styleguidist": "^4.45.0",
+    "vue-styleguidist": "4",
     "webpack-merge": "^4.2.2"
   },
   "peerDependencies": {

@@ -86,7 +86,7 @@
     "vue-inbrowser-compiler": "^4.44.23",
     "vue-inbrowser-compiler-utils": "^4.44.23",
     "webpack-dev-server": "^4.9.3",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^4.2.2"
   },
   "peerDependencies": {
     "pug": ">=3.0.0",

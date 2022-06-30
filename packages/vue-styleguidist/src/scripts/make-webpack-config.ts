@@ -153,10 +153,6 @@ export default function (
 				output: {
 					publicPath: config.styleguidePublicPath
 				},
-				devServer: {
-					static: config.styleguidePublicPath,
-					hot: true
-				},
 				plugins: [
 					new webpack.HotModuleReplacementPlugin(),
 					new webpack.ProvidePlugin({
