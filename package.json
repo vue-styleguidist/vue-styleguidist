@@ -95,7 +95,7 @@
     "vue-property-decorator": "9.1.2",
     "vue-styleguidist": "*",
     "vuepress": "1.9.7",
-    "webpack-dev-server": "3.11.3",
+    "webpack-dev-server": "4.9.3",
     "yorkie": "2.0.0"
   },
   "keywords": [

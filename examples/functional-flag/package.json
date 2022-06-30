@@ -45,6 +45,6 @@
     "vue-loader": "^15.9.8",
     "vue-styleguidist": "^4.36.1",
     "webpack": "^5.73.0",
-    "webpack-bundle-analyzer": "3.3.2"
+    "webpack-bundle-analyzer": "4.5.0"
   }
 }
