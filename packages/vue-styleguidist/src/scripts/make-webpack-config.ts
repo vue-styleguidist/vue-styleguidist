@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import webpack, { Configuration, Optim } from 'webpack'
+import webpack, { Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
@@ -156,13 +156,8 @@ export default function (
 					publicPath: config.styleguidePublicPath
 				},
 				devServer: {
-					publicPath: config.styleguidePublicPath,
-					// Use 'ws' instead of 'sockjs-node' on server since we're using native
-					// websockets in `webpackHotDevClient`.
-					transportMode: 'ws',
-					// Prevent a WS client from getting injected as we're already including
-					// `webpackHotDevClient`.
-					injectClient: false
+					static: config.styleguidePublicPath,
+					hot: true
 				},
 				plugins: [
 					new webpack.HotModuleReplacementPlugin(),
@@ -181,7 +176,7 @@ export default function (
 	const RSG_COMPONENTS_ALIAS = 'rsg-components'
 	const RSG_COMPONENTS_ALIAS_DEFAULT = `${RSG_COMPONENTS_ALIAS}-default`
 
-	const webpackAlias = (webpackConfig.resolve && webpackConfig.resolve.alias) || {}
+	const vsgAliases: Record<string, string | false | string[]> = {}
 
 	// Custom style guide components have priority over vsg components
 	if (config.styleguideComponents) {
@@ -189,18 +184,18 @@ export default function (
 			const fullName = name.match(RENDERER_REGEXP)
 				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
 				: name
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
+			vsgAliases[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
 		})
 	}
 
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
 	fs.readdirSync(sourceSrc).forEach((component: string) => {
-		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
+		vsgAliases[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
 		// plus in order to avoid cirular references, add an extra ref to the defaults
 		// so that custom components can reference their defaults
-		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+		vsgAliases[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+			vsgAliases[`${RSG_COMPONENTS_ALIAS}/${component}`]
 	})
 
 	// For some components, the alias model is a little more complicated,
@@ -266,23 +261,43 @@ export default function (
 	buildEditorComponentChain(customComponents)
 
 	Object.keys(customComponents).forEach(function (key) {
-		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(sourceSrc, customComponents[key])
+		vsgAliases[`${RSG_COMPONENTS_ALIAS}/${key}`] = path.resolve(sourceSrc, customComponents[key])
 
-		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`]
+		vsgAliases[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${key}`] =
+			vsgAliases[`${RSG_COMPONENTS_ALIAS}/${key}`]
 	})
 
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	const resolve = makeWebpackConfig(config as any, env).resolve
 	if (resolve && resolve.alias) {
-		webpackAlias[RSG_COMPONENTS_ALIAS] = resolve.alias[RSG_COMPONENTS_ALIAS]
+		if (Array.isArray(resolve.alias)) {
+			vsgAliases[RSG_COMPONENTS_ALIAS] =
+				resolve.alias.find(alias => alias.name === RSG_COMPONENTS_ALIAS)?.alias ?? false
+		} else {
+			vsgAliases[RSG_COMPONENTS_ALIAS] = resolve.alias[RSG_COMPONENTS_ALIAS]
+		}
 	}
 
 	// To avoid circular rendering when overriding existing components,
 	// Create another alias, not overriden by users
 	if (config.styleguideComponents) {
-		webpackAlias[RSG_COMPONENTS_ALIAS_DEFAULT] = webpackAlias[RSG_COMPONENTS_ALIAS]
+		vsgAliases[RSG_COMPONENTS_ALIAS_DEFAULT] = vsgAliases[RSG_COMPONENTS_ALIAS]
+	}
+
+	const webpackAlias = webpackConfig.resolve && webpackConfig.resolve.alias
+
+	if (Array.isArray(webpackAlias)) {
+		Object.entries(vsgAliases).forEach(([name, alias]) => {
+			webpackAlias.push({
+				name,
+				alias
+			})
+		})
+	} else if (typeof webpackAlias === 'object') {
+		Object.entries(vsgAliases).forEach(([name, alias]) => {
+			webpackAlias[name] = alias
+		})
 	}
 
 	if (config.dangerouslyUpdateWebpackConfig) {
