@@ -4,7 +4,7 @@
 
 - [How to add third-party plugins to the style guide?](#how-to-add-third-party-plugins-to-the-style-guide)
 - [How to add vuex to the style guide?](#how-to-add-vuex-to-the-style-guide)
-- [How to add dummy data to the style guide?](#how-to-add-dummy-data-to-the-style-guide)
+- [How to add placeholder data to the style guide?](#how-to-add-placeholder-data-to-the-style-guide)
 - [How to exclude some components from the style guide?](#how-to-exclude-some-components-from-the-style-guide)
 - [How to hide some components in a style guide but make them available in examples?](#how-to-hide-some-components-in-a-style-guide-but-make-them-available-in-examples)
 - [How to add custom JavaScript and CSS or polyfills?](#how-to-add-custom-javascript-and-css-or-polyfills)
@@ -134,9 +134,9 @@ module.exports = {
 
 See an example of [style guide with vuex](https://github.com/vue-styleguidist/vue-styleguidist/tree/delivery/examples/vuex).
 
-## How to add dummy data to the style guide?
+## How to add placeholder data to the style guide?
 
-You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add dummy data:
+You can use [global mixins](https://vuejs.org/v2/guide/mixins.html#Global-Mixin) to add placeholder data:
 
 Use [require](/Configuration.md#require) option:
 
@@ -204,7 +204,7 @@ module.exports = {
 }
 ```
 
-If you started with a vue-cli install, or just installed styleguidist, `docs/install.components.js` the file metionned in the [require](/Configuration.md#require) option does not exist in your codebase.
+If you started with a vue-cli install, or installed styleguidist without any other modification, `docs/install.components.js` the file mentioned in the [require](/Configuration.md#require) option does not exist in your codebase.
 
 > **NOTE** `docs/install.components.js` above is a file name we chose. It matters not to styleguidist what name you choose so choose one that makes sense to you.
 
@@ -550,7 +550,7 @@ Trade-off: When you enter a folder, Github automatically displays the readme fil
 
 In the tags of a component, an `@example` doclet can be specified. It is usually used to tell styleguidist where to find more documentation.
 
-It can also be used with the special value `[none]`. It will then hide the example file that would normally be associated with the component.
+It can also be used with the value `[none]`. It will then hide the example file that would normally be associated with the component.
 
 If you hide with `@examples [none]` all non-main components, the only remaining readme displayed will the main one. We get our `readme` file back.
 

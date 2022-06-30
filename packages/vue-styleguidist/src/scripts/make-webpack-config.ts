@@ -139,11 +139,9 @@ export default function (
 				// only add plugin if assetsDir is specified
 				...(config.assetsDir
 					? [
-							new CopyWebpackPlugin([
-								{
-									from: config.assetsDir
-								}
-							])
+							new CopyWebpackPlugin({
+								patterns: [config.assetsDir]
+							})
 					  ]
 					: [])
 			],

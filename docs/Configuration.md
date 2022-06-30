@@ -214,14 +214,14 @@ If you want to use a theme defined in CSS, set this to false and require the CSS
 
 [prism themes repo](https://github.com/PrismJS/prism-themes/)
 
-> **Note:** There is [a bug in prism editor](https://github.com/satya164/react-simple-code-editor/issues/56) that prevents us from changing the editor's background and font-color easily. Workaround: If you get a theme with
+> **Note:** There is [a bug in prism editor](https://github.com/satya164/react-simple-code-editor/issues/56) that makes it more complicated to change the editor's background and font-color. Workaround: If you get a theme with a dark background.
 >
 > ```css
 > pre[class*='language-'] {
 >   padding: 1em;
 >   margin: 0.5em 0;
 >   overflow: auto;
->   background: #1e1e1e;
+>   background: #1e1e1e; /* this will be the background */
 > }
 > ```
 >
@@ -235,7 +235,7 @@ If you want to use a theme defined in CSS, set this to false and require the CSS
 > }
 >
 > div.prism-editor {
->   background: #1e1e1e;
+>   background: #1e1e1e; /* this will be the background as well */
 > }
 > ```
 >

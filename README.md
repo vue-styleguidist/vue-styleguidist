@@ -63,7 +63,7 @@ A big thank you to our sponsors. Their contributions pay for the Netlify build m
 
 ---
 
-[vue-docgen-cli](packages/vue-docgen-cli) is a command line interface generating documentation files automatically from [vue-docgen-api](packages/vue-docgen-api). Generate markdown by default but can be configured to generate whatever text format you desire.
+[vue-docgen-cli](packages/vue-docgen-cli) is a command line interface generating documentation files automatically from [vue-docgen-api](packages/vue-docgen-api). Generate markdown by default but can be configured to generate whatever text format you can think of.
 
 [![](https://img.shields.io/npm/v/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli) [![](https://img.shields.io/npm/dw/vue-docgen-cli.svg)](https://www.npmjs.com/package/vue-docgen-cli)
 

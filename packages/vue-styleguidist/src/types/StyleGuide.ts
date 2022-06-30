@@ -31,7 +31,7 @@ export interface StyleguidistContext
 export interface BaseStyleguidistConfig
 	extends Omit<
 		Rsg.SanitizedStyleguidistConfig,
-		'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
+		'sections' | 'propsParser' | 'sortProps' | 'updateDocs' | 'configureServer'
 	> {
 	/**
 	 * Your application static assets folder, will be accessible as / in the style guide dev server.
@@ -66,7 +66,7 @@ export interface BaseStyleguidistConfig
 	 */
 	defaultExample: string
 	/**
-	 * In the generated docs, this adda a column to the props table giving in which file it is defined. Useful when extending components or mixing mixins
+	 * In the generated docs, this adds a column to the props table giving in which file it is defined. Useful when extending components or mixing mixins
 	 * @default false
 	 */
 	displayOrigins: boolean
@@ -190,7 +190,7 @@ export interface BaseStyleguidistConfig
 	 */
 	simpleEditor: boolean
 	/**
-	 * Ignore components that don’t have an example file (as determined by getExampleFilename). These components won’t be accessible from other examples unless you manually require them.
+	 * Ignore components that don't have an example file (as determined by getExampleFilename). These components won’t be accessible from other examples unless you manually require them.
 	 * @default false
 	 */
 	skipComponentsWithoutExample: boolean

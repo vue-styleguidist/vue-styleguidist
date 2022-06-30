@@ -13,32 +13,20 @@ export default function createServer(
 	const { devServer: webpackDevServerConfig } = merge(
 		{
 			devServer: {
-				noInfo: true,
 				compress: true,
-				clientLogLevel: 'none',
-				hot: true,
-				quiet: true,
-				disableHostCheck: true,
-				injectClient: false,
-				watchOptions: {
-					ignored: /node_modules/
-				},
-				watchContentBase: config.assetsDir !== undefined,
-				stats: webpackConfig.stats || {}
+				hot: true
 			}
 		},
 		{
 			devServer: webpackConfig.devServer
 		},
 		{
-			devServer: {
-				contentBase: config.assetsDir
-			}
+			devServer: {}
 		}
 	)
 
 	const compiler = webpack(webpackConfig)
-	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig)
+	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig ?? {})
 
 	// User defined customizations
 	if (config.configureServer) {

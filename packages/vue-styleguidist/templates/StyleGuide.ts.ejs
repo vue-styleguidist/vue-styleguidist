@@ -24,7 +24,7 @@ export interface StyleguidistContext extends loader.LoaderContext {
 export interface BaseStyleguidistConfig 
     extends Omit<
         Rsg.SanitizedStyleguidistConfig,
-        'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
+        'sections' | 'propsParser' | 'sortProps' | 'updateDocs' | 'configureServer'
     > {<% 
     Object.keys(schema).forEach(key => {
         const opt = schema[key]

@@ -1,6 +1,6 @@
 // Make sure user has webpack installed
 import 'react-styleguidist/lib/scripts/utils/ensureWebpack'
-import { Stats, Configuration, Compiler } from 'webpack'
+import { Stats, Configuration, Compiler, Watching } from 'webpack'
 import { Theme } from 'react-styleguidist'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
@@ -24,7 +24,7 @@ export interface StyleGuideUtils {
 	 */
 	build: (
 		callback: (err: Error | undefined, config: SanitizedStyleguidistConfig, stats: Stats) => void
-	) => Compiler.Watching | Compiler
+	) => Watching | Compiler
 
 	/**
 	 * Start style guide dev server.

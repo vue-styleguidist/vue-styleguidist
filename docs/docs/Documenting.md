@@ -295,7 +295,7 @@ To get a bit deeper, check out the `ScopedSlot` component in the basic example. 
 > **Note 2:** From 4.44.0, you can use JS comments blocks if you choose to. The syntax is the same as in HTML. One constraint: the comment should be the only content of the interpolation:
 >
 > - Valid comment: `{{/* @slot Menu Item footer */}}`
-> - Invalid comment: `{{ /* @slot Menu Item footer */ testVariable + 3 }}`.
+> - Comment not used: `{{ /* @slot Menu Item footer */ testVariable + 3 }}`.
 
 ### In a render function
 
