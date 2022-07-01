@@ -18,12 +18,6 @@ const RENDERER_REGEXP = /Renderer$/
 
 const sourceDir = path.resolve(__dirname, '../client')
 
-console.log()
-console.log()
-console.log(webpack.version)
-console.log()
-console.log()
-
 export default function (
 	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
