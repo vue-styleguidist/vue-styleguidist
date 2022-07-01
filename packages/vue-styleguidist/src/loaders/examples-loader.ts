@@ -7,6 +7,7 @@ import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import { builders as b } from 'ast-types'
 import { compile } from 'vue-inbrowser-compiler'
+import loaderUtils from 'loader-utils'
 import * as Rsg from 'react-styleguidist'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
 import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
@@ -48,7 +49,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		source = getComponentVueDoc(src, filePath)
 	}
 	const config = this._styleguidist
-	const options = this.getOptions() || {}
+	const options = (this.getOptions ? this.getOptions() : loaderUtils.getOptions(this as any)) || {}
 	const { file, displayName, shouldShowDefaultExample, customLangs } = options
 
 	// Replace placeholders (__COMPONENT__) with the passed-in component name

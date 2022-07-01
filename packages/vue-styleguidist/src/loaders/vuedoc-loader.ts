@@ -5,6 +5,7 @@ import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import createLogger from 'glogg'
 import { ComponentDoc, Tag } from 'vue-docgen-api'
+import loaderUtils from 'loader-utils'
 import defaultSortProps from 'react-styleguidist/lib/loaders/utils/sortProps'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import { LoaderComponentProps } from '../types/Component'
@@ -46,7 +47,8 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 	const file = this.request.split('!').pop() as string
 	const config = this._styleguidist
 
-	const { noExample = false } = this.getOptions() || {}
+	const { noExample = false } =
+		(this.getOptions ? this.getOptions() : loaderUtils.getOptions(this as any)) || {}
 
 	// Setup Webpack context dependencies to enable hot reload when adding new files or updating any of component dependencies
 	if (config.contextDependencies) {

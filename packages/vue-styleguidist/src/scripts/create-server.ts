@@ -2,7 +2,7 @@ import webpack, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
-import makeWebpackConfig from './make-webpack5-config'
+import makeWebpackConfig from './make-webpack-config'
 import { verbose, ServerInfo } from './binutils'
 
 export default function createServer(
@@ -25,7 +25,7 @@ export default function createServer(
 
 	verbose('DevServer Config:', webpackDevServerConfig)
 
-	const devServer = new WebpackDevServer(webpackDevServerConfig ?? {}, compiler)
+	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig ?? {})
 
 	// User defined customizations
 	if (config.configureServer) {

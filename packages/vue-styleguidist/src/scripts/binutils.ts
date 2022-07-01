@@ -163,9 +163,15 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	// kill ghosted threads on exit
 	;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
 		process.on(signal, () => {
-			app.stopCallback(() => {
-				process.exit(0)
-			})
+			if (app.stopCallback) {
+				app.stopCallback(function () {
+					process.exit(0)
+				})
+			} else {
+				app.close(function () {
+					process.exit(0)
+				})
+			}
 		})
 	})
 
