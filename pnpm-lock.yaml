@@ -44,7 +44,7 @@ importers:
       property-information: 5.6.0
       puppeteer: 1.20.0
       raf: 3.4.1
-      react-test-renderer: 17.0.2
+      react-test-renderer: 18.2.0
       rimraf: 2.7.1
       rollup-plugin-typescript-paths: 1.3.1
       semver: 5.7.1
@@ -102,7 +102,7 @@ importers:
       property-information: 5.6.0
       puppeteer: 1.20.0
       raf: 3.4.1
-      react-test-renderer: 17.0.2_react@17.0.2
+      react-test-renderer: 18.2.0_react@18.2.0
       rimraf: 2.7.1
       rollup-plugin-typescript-paths: 1.3.1_typescript@4.6.4
       semver: 5.7.1
@@ -116,7 +116,7 @@ importers:
       vue-cli-plugin-styleguidist: link:packages/vue-cli-plugin-styleguidist
       vue-property-decorator: 9.1.2_zrnidtknow37s43kh2nsmp2h4u
       vue-styleguidist: link:packages/vue-styleguidist
-      vuepress: 1.9.7_ejs@3.1.7+react@17.0.2
+      vuepress: 1.9.7_ejs@3.1.7+react@18.2.0
       webpack-dev-server: 3.11.3_webpack@4.46.0
       yorkie: 2.0.0
 
@@ -1183,10 +1183,10 @@ importers:
       pug: 3.0.2
       q-i: 2.0.1
       qss: ^2.0.3
-      react: ^17.0.2
+      react: ^18.0.0
       react-codemirror2: ^7.2.1
       react-dev-utils: ^12.0.0-next.47
-      react-dom: ^17.0.2
+      react-dom: ^18.0.0
       react-group: ^3.0.2
       react-icons: ^3.11.0
       react-lifecycles-compat: ^3.0.4
@@ -1243,15 +1243,15 @@ importers:
       prop-types: 15.7.2
       q-i: 2.0.1
       qss: 2.0.3
-      react: 17.0.2
-      react-codemirror2: 7.2.1_5ju5o3wnfvpkeiboynh35a5wkm
+      react: 18.2.0
+      react-codemirror2: 7.2.1_562sckuk4no7rlxgnu7sdqhvga
       react-dev-utils: 12.0.0_arfqsyuamlki6wvfe36wmgumxq
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
+      react-dom: 18.2.0_react@18.2.0
+      react-group: 3.0.2_react@18.2.0
+      react-icons: 3.11.0_react@18.2.0
       react-lifecycles-compat: 3.0.4
-      react-simple-code-editor: 0.11.0_sfoxds7t5ydpegc3knd667wn6m
-      react-styleguidist: 11.1.6_7z27flopn535fmejgmm2peellu
+      react-simple-code-editor: 0.11.0_biqbaboplfbrettd7655fr4n2y
+      react-styleguidist: 11.1.6_ijjrode3jdh4fw33genzoxgwse
       rewrite-imports: 2.0.3
       source-map: 0.7.4
       style-loader: 1.3.0_webpack@4.46.0
@@ -1274,7 +1274,7 @@ importers:
       '@babel/preset-typescript': 7.17.12_@babel+core@7.18.2
       '@babel/runtime': 7.18.3
       '@babel/types': 7.18.4
-      '@testing-library/react': 11.2.7_sfoxds7t5ydpegc3knd667wn6m
+      '@testing-library/react': 11.2.7_biqbaboplfbrettd7655fr4n2y
       '@types/buble': 0.20.1
       '@types/cli-progress': 1.8.1
       '@types/copy-webpack-plugin': 4.4.4
@@ -6587,7 +6587,7 @@ packages:
       pretty-format: 26.6.2
     dev: true
 
-  /@testing-library/react/11.2.7_sfoxds7t5ydpegc3knd667wn6m:
+  /@testing-library/react/11.2.7_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-tzRNp7pzd5QmbtXNG/mhdcl7Awfu/Iz1RaVHY75zTdOkmHCuzMhRL83gWHSgOAcjS3CCbyfwUHMZgRJb4kAfpA==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -6596,18 +6596,18 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.3
       '@testing-library/dom': 7.30.0
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: true
 
-  /@tippyjs/react/4.1.0_sfoxds7t5ydpegc3knd667wn6m:
+  /@tippyjs/react/4.1.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-g6Dpm46edr9T9z+BYxd/eJZa6QMFc4T4z5xrztxVlkti7AhNYf7OaE6b3Nh+boUZZ9wn8xkNq9VrQM5K4huwnQ==}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
       tippy.js: 6.3.1
     dev: false
 
@@ -8903,10 +8903,10 @@ packages:
       - walrus
       - whiskers
 
-  /@vue/component-compiler-utils/3.2.0_ejs@3.1.7+react@17.0.2:
+  /@vue/component-compiler-utils/3.2.0_ejs@3.1.7+react@18.2.0:
     resolution: {integrity: sha512-lejBLa7xAMsfiZfNp7Kv51zOzifnb29FwdnMLa96z26kXErPFioSf9BMcePVIQ6/Gc6/mC0UrPpxAWIHyae0vw==}
     dependencies:
-      consolidate: 0.15.1_ejs@3.1.7+react@17.0.2
+      consolidate: 0.15.1_ejs@3.1.7+react@18.2.0
       hash-sum: 1.0.2
       lru-cache: 4.1.5
       merge-source-map: 1.1.0
@@ -9341,7 +9341,7 @@ packages:
     resolution: {integrity: sha512-Iu8Tbg3f+emIIMmI2ycSI8QcEuAUgPTgHwesDU1eKMLE4YC/c/sFbGc70QgMq31ijRftV0R7vCm9co6rldCeOA==}
     dev: true
 
-  /@vuepress/core/1.9.7_ejs@3.1.7+react@17.0.2:
+  /@vuepress/core/1.9.7_ejs@3.1.7+react@18.2.0:
     resolution: {integrity: sha512-u5eb1mfNLV8uG2UuxlvpB/FkrABxeMHqymTsixOnsOg2REziv9puEIbqaZ5BjLPvbCDvSj6rn+DwjENmBU+frQ==}
     engines: {node: '>=8.6'}
     dependencies:
@@ -9375,7 +9375,7 @@ packages:
       toml: 3.0.0
       url-loader: 1.1.2_webpack@4.46.0
       vue: 2.6.14
-      vue-loader: 15.9.8_t7e4dtfpjy5czb3ncfq5ynql3i
+      vue-loader: 15.9.8_utqiehz56wekjmp7nhrgj5srj4
       vue-router: 3.5.1
       vue-server-renderer: 2.6.14
       vue-template-compiler: 2.6.14
@@ -10664,7 +10664,7 @@ packages:
   /axios/0.21.1:
     resolution: {integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==}
     dependencies:
-      follow-redirects: 1.13.3
+      follow-redirects: 1.13.3_debug@4.3.1
     transitivePeerDependencies:
       - debug
     dev: false
@@ -11461,7 +11461,7 @@ packages:
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
       p-map: 3.0.0
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 7.1.0
       unique-filename: 1.1.1
@@ -11484,7 +11484,7 @@ packages:
       minipass-pipeline: 1.2.4
       mkdirp: 1.0.4
       p-map: 4.0.0
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 3.0.2
       ssri: 8.0.1
       tar: 6.1.0
@@ -12527,7 +12527,7 @@ packages:
     dependencies:
       bluebird: 3.7.2
 
-  /consolidate/0.15.1_ejs@3.1.7+react@17.0.2:
+  /consolidate/0.15.1_ejs@3.1.7+react@18.2.0:
     resolution: {integrity: sha512-DW46nrsMJgy9kqAbPt5rKaCr7uFtpo4mSUvLHIUbJEjm0vo+aY5QLwBUq3FK4tRnJr/X0Psc0C4jf/h+HtXSMw==}
     engines: {node: '>= 0.10.0'}
     peerDependencies:
@@ -12694,7 +12694,7 @@ packages:
     dependencies:
       bluebird: 3.7.2
       ejs: 3.1.7
-      react: 17.0.2
+      react: 18.2.0
     dev: false
 
   /consolidate/0.15.1_lodash@4.17.21:
@@ -16746,7 +16746,7 @@ packages:
       debug:
         optional: true
     dependencies:
-      debug: 4.3.1_supports-color@6.1.0
+      debug: 4.3.1
 
   /follow-redirects/1.13.3_debug@4.3.2:
     resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
@@ -20097,14 +20097,14 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /markdown-to-jsx/6.11.4_react@17.0.2:
+  /markdown-to-jsx/6.11.4_react@18.2.0:
     resolution: {integrity: sha512-3lRCD5Sh+tfA52iGgfs/XZiw33f7fFX9Bn55aNnVNUd2GzLDkOWyKYYD8Yju2B1Vn+feiEdgJs8T6Tg0xNokPw==}
     engines: {node: '>= 4'}
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
       prop-types: 15.7.2
-      react: 17.0.2
+      react: 18.2.0
       unquote: 1.1.1
     dev: false
 
@@ -22691,14 +22691,6 @@ packages:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
 
-  /promise-inflight/1.0.1:
-    resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-
   /promise-inflight/1.0.1_bluebird@3.7.2:
     resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
     peerDependencies:
@@ -23240,14 +23232,14 @@ packages:
       flat: 5.0.2
     dev: false
 
-  /react-codemirror2/7.2.1_5ju5o3wnfvpkeiboynh35a5wkm:
+  /react-codemirror2/7.2.1_562sckuk4no7rlxgnu7sdqhvga:
     resolution: {integrity: sha512-t7YFmz1AXdlImgHXA9Ja0T6AWuopilub24jRaQdPVbzUJVNKIYuy3uCFZYa7CE5S3UW6SrSa5nAqVQvtzRF9gw==}
     peerDependencies:
       codemirror: 5.x
       react: '>=15.5 <=16.x'
     dependencies:
       codemirror: 5.60.0
-      react: 17.0.2
+      react: 18.2.0
     dev: false
 
   /react-dev-utils/11.0.4_arfqsyuamlki6wvfe36wmgumxq:
@@ -23354,37 +23346,36 @@ packages:
       - supports-color
     dev: false
 
-  /react-dom/17.0.2_react@17.0.2:
-    resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
+  /react-dom/18.2.0_react@18.2.0:
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
-      react: 17.0.2
+      react: ^18.2.0
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react: 17.0.2
-      scheduler: 0.20.2
+      react: 18.2.0
+      scheduler: 0.23.0
 
   /react-error-overlay/6.0.10:
     resolution: {integrity: sha512-mKR90fX7Pm5seCOfz8q9F+66VCc1PGsWSBxKbITjfKVQHMNF2zudxHnMdJiB1fRCb+XsbQV9sO9DCkgsMQgBIA==}
     dev: false
 
-  /react-group/3.0.2_react@17.0.2:
+  /react-group/3.0.2_react@18.2.0:
     resolution: {integrity: sha512-0Jy99MD27jHSJ0PeynomUM0WArxywdcqQUKLttBWV6KYH+zlKWT/RhDwVxrODtMkRxf644BzuJFie1Hvfun7jA==}
     engines: {node: '>=6'}
     peerDependencies:
       react: '>=16.0.0'
     dependencies:
       prop-types: 15.7.2
-      react: 17.0.2
+      react: 18.2.0
     dev: false
 
-  /react-icons/3.11.0_react@17.0.2:
+  /react-icons/3.11.0_react@18.2.0:
     resolution: {integrity: sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==}
     peerDependencies:
       react: '*'
     dependencies:
       camelcase: 5.3.1
-      react: 17.0.2
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
@@ -23392,42 +23383,47 @@ packages:
 
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+    dev: true
+
+  /react-is/18.2.0:
+    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
 
   /react-lifecycles-compat/3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: false
 
-  /react-shallow-renderer/16.14.1_react@17.0.2:
-    resolution: {integrity: sha512-rkIMcQi01/+kxiTE9D3fdS959U1g7gs+/rborw++42m1O9FAQiNI/UNRZExVUoAOprn4umcXf+pFRou8i4zuBg==}
+  /react-shallow-renderer/16.15.0_react@18.2.0:
+    resolution: {integrity: sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA==}
     peerDependencies:
-      react: ^16.0.0 || ^17.0.0
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       object-assign: 4.1.1
-      react: 17.0.2
-      react-is: 17.0.2
+      react: 18.2.0
+      react-is: 18.2.0
     dev: false
 
-  /react-simple-code-editor/0.10.0_sfoxds7t5ydpegc3knd667wn6m:
+  /react-simple-code-editor/0.10.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==}
     peerDependencies:
       react: ^16.0.0
       react-dom: ^16.0.0
     dependencies:
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-simple-code-editor/0.11.0_sfoxds7t5ydpegc3knd667wn6m:
+  /react-simple-code-editor/0.11.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-xGfX7wAzspl113ocfKQAR8lWPhavGWHL3xSzNLeseDRHysT+jzRBi/ExdUqevSMos+7ZtdfeuBOXtgk9HTwsrw==}
     peerDependencies:
       react: ^16.0.0
       react-dom: ^16.0.0
     dependencies:
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-styleguidist/11.1.6_7z27flopn535fmejgmm2peellu:
+  /react-styleguidist/11.1.6_ijjrode3jdh4fw33genzoxgwse:
     resolution: {integrity: sha512-ZO4tS8/cPwpabz5S3kZ6hRFcvdgsJwWnus6MC23BiNXCpTvoiRlnF8C90gry63acgVqeaZZb35+P/MZ4AVRdUg==}
     engines: {node: '>=10'}
     hasBin: true
@@ -23435,7 +23431,7 @@ packages:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@tippyjs/react': 4.1.0_sfoxds7t5ydpegc3knd667wn6m
+      '@tippyjs/react': 4.1.0_biqbaboplfbrettd7655fr4n2y
       '@vxna/mini-html-webpack-template': 2.0.0
       acorn: 6.4.2
       acorn-jsx: 5.3.1_acorn@6.4.2
@@ -23474,7 +23470,7 @@ packages:
       loader-utils: 2.0.0
       lodash: 4.17.21
       lowercase-keys: 2.0.0
-      markdown-to-jsx: 6.11.4_react@17.0.2
+      markdown-to-jsx: 6.11.4_react@18.2.0
       mini-html-webpack-plugin: 3.1.3_webpack@4.46.0
       mri: 1.1.6
       ora: 4.1.1
@@ -23482,15 +23478,15 @@ packages:
       prop-types: 15.7.2
       q-i: 2.0.1
       qss: 2.0.3
-      react: 17.0.2
+      react: 18.2.0
       react-dev-utils: 11.0.4_arfqsyuamlki6wvfe36wmgumxq
       react-docgen: 5.3.1
       react-docgen-annotation-resolver: 2.0.0
       react-docgen-displayname-handler: 3.0.2_react-docgen@5.3.1
-      react-dom: 17.0.2_react@17.0.2
-      react-group: 3.0.2_react@17.0.2
-      react-icons: 3.11.0_react@17.0.2
-      react-simple-code-editor: 0.10.0_sfoxds7t5ydpegc3knd667wn6m
+      react-dom: 18.2.0_react@18.2.0
+      react-group: 3.0.2_react@18.2.0
+      react-icons: 3.11.0_react@18.2.0
+      react-simple-code-editor: 0.10.0_biqbaboplfbrettd7655fr4n2y
       recast: 0.18.10
       remark: 13.0.0
       strip-html-comments: 1.0.0
@@ -23512,16 +23508,15 @@ packages:
       - webpack-cli
     dev: false
 
-  /react-test-renderer/17.0.2_react@17.0.2:
-    resolution: {integrity: sha512-yaQ9cB89c17PUb0x6UfWRs7kQCorVdHlutU1boVPEsB8IDZH6n9tHxMacc3y0JoXOJUsZb/t/Mb8FUWMKaM7iQ==}
+  /react-test-renderer/18.2.0_react@18.2.0:
+    resolution: {integrity: sha512-JWD+aQ0lh2gvh4NM3bBM42Kx+XybOxCpgYK7F8ugAlpaTSnWsX+39Z4XkOykGZAHrjwwTZT3x3KxswVWxHPUqA==}
     peerDependencies:
-      react: 17.0.2
+      react: ^18.2.0
     dependencies:
-      object-assign: 4.1.1
-      react: 17.0.2
-      react-is: 17.0.2
-      react-shallow-renderer: 16.14.1_react@17.0.2
-      scheduler: 0.20.2
+      react: 18.2.0
+      react-is: 18.2.0
+      react-shallow-renderer: 16.15.0_react@18.2.0
+      scheduler: 0.23.0
     dev: false
 
   /react/17.0.2:
@@ -23530,6 +23525,13 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: true
+
+  /react/18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
 
   /read-cache/1.0.0:
     resolution: {integrity: sha1-5mTvMRYRZsl1HNvo28+GtftY93Q=}
@@ -24213,11 +24215,10 @@ packages:
   /sax/1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
 
-  /scheduler/0.20.2:
-    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
+  /scheduler/0.23.0:
+    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
 
   /schema-utils/0.3.0:
     resolution: {integrity: sha1-9YdyIs4+kx7a4DnxfrNxbnE3+M8=}
@@ -27701,87 +27702,6 @@ packages:
       - whiskers
     dev: true
 
-  /vue-loader/15.9.8_t7e4dtfpjy5czb3ncfq5ynql3i:
-    resolution: {integrity: sha512-GwSkxPrihfLR69/dSV3+5CdMQ0D+jXg8Ma1S4nQXKJAznYFX14vHdc/NetQc34Dw+rBbIJyP7JOuVb9Fhprvog==}
-    peerDependencies:
-      '@vue/compiler-sfc': ^3.0.8
-      cache-loader: '*'
-      css-loader: '*'
-      vue-template-compiler: '*'
-      webpack: ^3.0.0 || ^4.1.0 || ^5.0.0-0
-    peerDependenciesMeta:
-      '@vue/compiler-sfc':
-        optional: true
-      cache-loader:
-        optional: true
-      vue-template-compiler:
-        optional: true
-    dependencies:
-      '@vue/component-compiler-utils': 3.2.0_ejs@3.1.7+react@17.0.2
-      cache-loader: 3.0.1_webpack@4.46.0
-      css-loader: 2.1.1_webpack@4.46.0
-      hash-sum: 1.0.2
-      loader-utils: 1.4.0
-      vue-hot-reload-api: 2.3.4
-      vue-style-loader: 4.1.3
-      vue-template-compiler: 2.6.14
-      webpack: 4.46.0
-    transitivePeerDependencies:
-      - arc-templates
-      - atpl
-      - babel-core
-      - bracket-template
-      - coffee-script
-      - dot
-      - dust
-      - dustjs-helpers
-      - dustjs-linkedin
-      - eco
-      - ect
-      - ejs
-      - haml-coffee
-      - hamlet
-      - hamljs
-      - handlebars
-      - hogan.js
-      - htmling
-      - jade
-      - jazz
-      - jqtpl
-      - just
-      - liquid-node
-      - liquor
-      - lodash
-      - marko
-      - mote
-      - mustache
-      - nunjucks
-      - plates
-      - pug
-      - qejs
-      - ractive
-      - razor-tmpl
-      - react
-      - react-dom
-      - slm
-      - squirrelly
-      - swig
-      - swig-templates
-      - teacup
-      - templayed
-      - then-jade
-      - then-pug
-      - tinyliquid
-      - toffee
-      - twig
-      - twing
-      - underscore
-      - vash
-      - velocityjs
-      - walrus
-      - whiskers
-    dev: false
-
   /vue-loader/15.9.8_tsnewq6e663qhqkexpaua2pdzq:
     resolution: {integrity: sha512-GwSkxPrihfLR69/dSV3+5CdMQ0D+jXg8Ma1S4nQXKJAznYFX14vHdc/NetQc34Dw+rBbIJyP7JOuVb9Fhprvog==}
     peerDependencies:
@@ -27886,6 +27806,87 @@ packages:
       vue-style-loader: 4.1.3
       vue-template-compiler: 2.6.14
       webpack: 4.46.0_webpack-cli@4.5.0
+    transitivePeerDependencies:
+      - arc-templates
+      - atpl
+      - babel-core
+      - bracket-template
+      - coffee-script
+      - dot
+      - dust
+      - dustjs-helpers
+      - dustjs-linkedin
+      - eco
+      - ect
+      - ejs
+      - haml-coffee
+      - hamlet
+      - hamljs
+      - handlebars
+      - hogan.js
+      - htmling
+      - jade
+      - jazz
+      - jqtpl
+      - just
+      - liquid-node
+      - liquor
+      - lodash
+      - marko
+      - mote
+      - mustache
+      - nunjucks
+      - plates
+      - pug
+      - qejs
+      - ractive
+      - razor-tmpl
+      - react
+      - react-dom
+      - slm
+      - squirrelly
+      - swig
+      - swig-templates
+      - teacup
+      - templayed
+      - then-jade
+      - then-pug
+      - tinyliquid
+      - toffee
+      - twig
+      - twing
+      - underscore
+      - vash
+      - velocityjs
+      - walrus
+      - whiskers
+    dev: false
+
+  /vue-loader/15.9.8_utqiehz56wekjmp7nhrgj5srj4:
+    resolution: {integrity: sha512-GwSkxPrihfLR69/dSV3+5CdMQ0D+jXg8Ma1S4nQXKJAznYFX14vHdc/NetQc34Dw+rBbIJyP7JOuVb9Fhprvog==}
+    peerDependencies:
+      '@vue/compiler-sfc': ^3.0.8
+      cache-loader: '*'
+      css-loader: '*'
+      vue-template-compiler: '*'
+      webpack: ^3.0.0 || ^4.1.0 || ^5.0.0-0
+    peerDependenciesMeta:
+      '@vue/compiler-sfc':
+        optional: true
+      cache-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
+    dependencies:
+      '@vue/component-compiler-utils': 3.2.0_ejs@3.1.7+react@18.2.0
+      cache-loader: 3.0.1_webpack@4.46.0
+      css-loader: 2.1.1_webpack@4.46.0
+      hash-sum: 1.0.2
+      loader-utils: 1.4.0
+      vue-hot-reload-api: 2.3.4
+      vue-style-loader: 4.1.3
+      vue-template-compiler: 2.6.14
+      webpack: 4.46.0
     transitivePeerDependencies:
       - arc-templates
       - atpl
@@ -28092,13 +28093,13 @@ packages:
       smoothscroll-polyfill: 0.4.4
     dev: false
 
-  /vuepress/1.9.7_ejs@3.1.7+react@17.0.2:
+  /vuepress/1.9.7_ejs@3.1.7+react@18.2.0:
     resolution: {integrity: sha512-aSXpoJBGhgjaWUsT1Zs/ZO8JdDWWsxZRlVme/E7QYpn+ZB9iunSgPMozJQNFaHzcRq4kPx5A4k9UhzLRcvtdMg==}
     engines: {node: '>=8.6'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@vuepress/core': 1.9.7_ejs@3.1.7+react@17.0.2
+      '@vuepress/core': 1.9.7_ejs@3.1.7+react@18.2.0
       '@vuepress/theme-default': 1.9.7
       '@vuepress/types': 1.9.7
       cac: 6.7.2
@@ -28488,7 +28489,7 @@ packages:
       mime: 2.5.2
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
       webpack-log: 2.0.0
 
   /webpack-dev-middleware/4.1.0_webpack@4.46.0:
