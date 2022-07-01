@@ -2,8 +2,8 @@ import webpack, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
-import makeWebpackConfig from './make-webpack-config'
-import { ServerInfo } from './binutils'
+import makeWebpackConfig from './make-webpack5-config'
+import { verbose, ServerInfo } from './binutils'
 
 export default function createServer(
 	config: SanitizedStyleguidistConfig,
@@ -18,13 +18,13 @@ export default function createServer(
 		},
 		{
 			devServer: webpackConfig.devServer
-		},
-		{
-			devServer: {}
 		}
 	)
 
 	const compiler = webpack(webpackConfig)
+
+	verbose('DevServer Config:', webpackDevServerConfig)
+
 	const devServer = new WebpackDevServer(webpackDevServerConfig ?? {}, compiler)
 
 	// User defined customizations

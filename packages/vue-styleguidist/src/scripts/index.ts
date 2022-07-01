@@ -7,7 +7,7 @@ import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartia
 import { SanitizedStyleguidistConfig, StyleguidistConfig } from '../types/StyleGuide'
 import buildUtil from './build'
 import server from './server'
-import makeWebpackConfig from './make-webpack-config'
+import makeWebpackConfig from './make-webpack5-config'
 import getConfig from './config'
 import * as binutils from './binutils'
 import isPromise from './utils/isPromise'

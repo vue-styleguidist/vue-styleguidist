@@ -1,6 +1,6 @@
 import webpack, { Stats } from 'webpack'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
-import makeWebpackConfig from './make-webpack-config'
+import makeWebpackConfig from './make-webpack5-config'
 
 export default function build(
 	config: SanitizedStyleguidistConfig,
