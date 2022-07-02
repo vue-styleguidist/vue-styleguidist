@@ -51,7 +51,7 @@ module.exports = (api, options) => {
 			// in order to avoid ghosted threads at the end of tests
 			;['SIGINT', 'SIGTERM'].forEach(signal => {
 				process.on(signal, () => {
-					server.close(() => {
+					;(server.stopCallback ?? server.close)(() => {
 						process.exit(0)
 					})
 				})
@@ -64,7 +64,7 @@ module.exports = (api, options) => {
 					if (data.toString() === 'close') {
 						// eslint-disable-next-line no-console
 						console.log('got close signal!')
-						server.close(() => {
+						;(server.stopCallback ?? server.close)(() => {
 							process.exit(0)
 						})
 					}
