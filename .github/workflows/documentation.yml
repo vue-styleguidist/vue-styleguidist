@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - dev
-    tags
+    tags:
+     - *
 
 concurrency:
   group: doc-${{ github.ref }}
