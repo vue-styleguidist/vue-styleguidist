@@ -104,14 +104,14 @@ jobs:
           at: ~/
 
       - run: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
-    
+
       - run: yarn add -D webpack@4
-          working_directory: ~/cypress/integration/basic
+        working_directory: ~/cypress/integration/basic
 
       - run: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
 
       - run: yarn styleguide
-          working_directory: ~/cypress/integration/basic
+        working_directory: ~/cypress/integration/basic
 
       - run: yarn cypress run --spec \"test/cypress/integration/basic/*.cy.js
       - store_artifacts:
