@@ -75,7 +75,6 @@ jobs:
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser jsx
       - run: npm run test:browser jsx-examples
-      - run: npm run test:browser nuxtjs
       - run: npm run test:browser vuetify
 
   cypress:
@@ -100,17 +99,27 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
+      - run:
+          name: Copy basic example to its own folder
+          command: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
 
-      - run: yarn add -D webpack@4
-        working_directory: ~/cypress/integration/basic
+      - run:
+          name: Install Webpack 4
+          command: yarn add -D webpack@4
+          working_directory: ~/cypress/integration/basic
 
-      - run: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
+      - run:
+          name: Copy built version of styleguidist
+          command: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
 
-      - run: yarn styleguide
-        working_directory: ~/cypress/integration/basic
+      - run: pnpm add wait-on
 
-      - run: yarn cypress run --spec \"test/cypress/integration/basic/*.cy.js
+      - run:
+          name: Run styleguide
+          command: yarn styleguide &
+          working_directory: ~/cypress/integration/basic
+
+      - run: pnpm exec wait-on http://localhost:6060 && pnpm exec cypress run --spec "test/cypress/integration/basic/*.cy.js"
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-basic

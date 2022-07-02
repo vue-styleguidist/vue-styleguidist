@@ -1,10 +1,5 @@
 name: Cut a release
-on:
-  workflow_dispatch:
-    inputs:
-      puppy:
-        description: 'A kind of puppy.'
-        required: true
+on: workflow_dispatch
 
 jobs:
   deliver:
@@ -26,7 +21,7 @@ jobs:
       - name: Check for merge conflict
         id: check-conflict
         run: echo "::set-output name=merge_conflict::$(git merge-tree $(git merge-base HEAD delivery) delivery HEAD | egrep '<<<<<<<')"
-        
+
       - name: Failed merge, set merged status as failed
         run: echo "::set-output name=merge_conflict::'failed merge'"
         if: ${{ steps.merge-master.outcome != 'success' }}
@@ -35,8 +30,7 @@ jobs:
         id: merge-delivery
         run: git merge delivery
         if: ${{ !steps.check-conflict.outputs.merge_conflict }}
-        
+
       - name: Push
         run: git push
         if: ${{ !steps.check-conflict.outputs.merge_conflict }}
-      
