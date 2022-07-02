@@ -72,7 +72,6 @@ jobs:
       # Build all examples
       - run: npm run build jsx -- --ci
       - run: npm run build jsx-examples -- --ci
-      - run: npm run build nuxtjs -- --ci
       - run: npm run build vuetify -- --ci
 
       # Check that examples really works: no JS errors on load
