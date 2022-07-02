@@ -113,7 +113,7 @@ jobs:
       - run: yarn styleguide
           working_directory: ~/cypress/integration/basic
 
-      - run: pnpm run cy:run --spec \"test/cypress/integration/basic/*.cy.js
+      - run: yarn cypress run --spec \"test/cypress/integration/basic/*.cy.js
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-basic
