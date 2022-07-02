@@ -2,4 +2,4 @@
 'vue-styleguidist': minor
 ---
 
-use webpack 5 to test styleguidist
+refactor: use webpack 5 to build/test styleguidist

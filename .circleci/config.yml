@@ -97,6 +97,29 @@ jobs:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-jsx
 
+  cypress-webpack-4:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - name: Copy basic example
+        run: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
+
+      - run: yarn install webpack@4
+        working_directory: ~/cypress/integration/basic
+
+      - name: Copy vue-styleguidist lib
+        run: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
+
+      - run: yarn styleguide
+        working_directory: ~/cypress/integration/basic
+
+      - run: pnpm run cy:run --spec \"test/cypress/integration/basic/*.cy.js
+      - store_artifacts:
+        path: /root/vue-styleguidist/test/cypress/screenshots
+        destination: cy-screenshots-basic
+
 workflows:
   version: 2
   test:
@@ -112,5 +135,8 @@ workflows:
           requires:
             - install
       - cypress:
+          requires:
+            - install
+      - cypress-webpack-4:
           requires:
             - install
