@@ -103,14 +103,14 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - name: Copy basic example
-          run: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
+      - run: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
+          name: Copy basic example
 
       - run: yarn install webpack@4
           working_directory: ~/cypress/integration/basic
 
-      - name: Copy vue-styleguidist lib
-          run: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
+      - run: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
+          name: Copy vue-styleguidist lib
 
       - run: yarn styleguide
           working_directory: ~/cypress/integration/basic
