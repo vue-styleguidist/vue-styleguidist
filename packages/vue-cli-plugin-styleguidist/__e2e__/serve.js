@@ -21,6 +21,8 @@ async function createAndInstall(name) {
 }
 
 test('serve', async () => {
+	project.run('echo "smoke test"')
+	project.run('node -v')
 	const project = await createAndInstall(`serve`)
 	await serve(
 		() => project.run('vue-cli-service styleguidist'),
