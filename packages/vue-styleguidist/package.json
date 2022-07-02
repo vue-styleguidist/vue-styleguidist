@@ -5,7 +5,7 @@
   "homepage": "https://vue-styleguidist.github.io",
   "scripts": {
     "compile": "pnpm run compile:babel && pnpm run typings",
-    "compile:babel": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
+    "compile:babel": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx --source-maps=true",
     "compile:watch": "concurrently \"pnpm compile:babel -- --watch\" \"pnpm typings -- --watch\"",
     "typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
   },

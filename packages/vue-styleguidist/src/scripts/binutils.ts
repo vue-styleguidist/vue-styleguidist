@@ -72,6 +72,10 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 		}
 	}) as Compiler
 
+	if (!compiler) {
+		return compiler
+	}
+
 	verbose('Webpack config:', compiler.options)
 
 	// Custom error reporting
@@ -139,7 +143,9 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 		}
 	})
 
-	verbose('Webpack config:', compiler.options)
+	if (compiler?.options) {
+		verbose('Webpack config:', compiler.options)
+	}
 
 	// Custom error reporting
 	compiler.hooks.done.tap('vsgErrorDone', function (stats: Stats) {
