@@ -39,7 +39,13 @@ test('serve with moved config file', async () => {
 	await project.write(newFileName, config)
 	await project.rm('styleguide.config.js')
 	await serve(
-		() => project.run(`vue-cli-service styleguidist --config ${newFileName}`),
+		() => {
+			const proc = project.run(`vue-cli-service styleguidist --config ${newFileName}`)
+			proc.stdout.on('data', data => {
+				console.log('------', data.toString())
+			})
+			return proc
+		},
 		async ({ helpers }) => {
 			expect(await helpers.getText('h1[class^=rsg--logo]')).toMatch('Default Style Guide')
 		}
