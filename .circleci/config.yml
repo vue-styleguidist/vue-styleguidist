@@ -101,7 +101,7 @@ jobs:
 
       - run:
           name: Copy basic example to its own folder
-          command: cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
+          command: mkdir -p ~/cypress/integration/basic && cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
 
       - run:
           name: Install Webpack 4
