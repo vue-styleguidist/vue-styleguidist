@@ -532,7 +532,11 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 			logger.warn(
 				'No webpack config found. ' +
 					'You may need to specify "webpackConfig" option in your style guide config:\n' +
-					consts.DOCS_WEBPACK
+					consts.DOCS_WEBPACK +
+					'\n' +
+					'\n' +
+					'NOTE: If you use the Vue CLI, check-out the "vue-cli-plugin-styleguidist" plugin.\n' +
+					consts.DOCS_CLI
 			)
 
 			return undefined

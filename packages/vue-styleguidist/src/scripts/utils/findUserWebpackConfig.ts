@@ -1,8 +1,4 @@
-const USER_WEBPACK_CONFIG_NAMES = [
-	'./webpack.config.js',
-	'./webpackfile.js',
-	'@vue/cli-service/webpack.config.js'
-]
+const USER_WEBPACK_CONFIG_NAMES = ['./webpack.config.js', './webpackfile.js']
 
 /**
  * Find user’s Webpack config and return its path.

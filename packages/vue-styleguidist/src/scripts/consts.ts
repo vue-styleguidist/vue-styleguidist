@@ -8,5 +8,6 @@ export default {
 	DOCS_COMPONENTS: DOCS_HOMEPAGE + 'docs/Components',
 	DOCS_WEBPACK: DOCS_HOMEPAGE + 'docs/Webpack',
 	DOCS_DOCUMENTING: DOCS_HOMEPAGE + 'docs/Documenting',
-	DOCS_COOKBOOK: DOCS_HOMEPAGE + 'docs/Cookbook'
+	DOCS_COOKBOOK: DOCS_HOMEPAGE + 'docs/Cookbook',
+	DOCS_CLI: DOCS_HOMEPAGE + 'VueCLI3doc'
 }
