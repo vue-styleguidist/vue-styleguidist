@@ -99,6 +99,10 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run: 
+          name: Install Pnpm
+          command: curl -L https://unpkg.com/@pnpm/self-installer | node
+
       - run:
           name: Copy basic example to its own folder
           command: mkdir -p ~/cypress/integration/basic && cp -r ~/vue-styleguidist/examples/basic ~/cypress/integration/basic
