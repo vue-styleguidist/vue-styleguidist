@@ -112,7 +112,7 @@ jobs:
           name: Copy built version of styleguidist
           command: cp -r ~/vue-styleguidist/packages/vue-styleguidist ~/cypress/integration/basic/node_modules/vue-styleguidist
 
-      - run: pnpm add wait-on
+      # - run: pnpm add -w wait-on
 
       - run:
           name: Run styleguide

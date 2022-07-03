@@ -53,8 +53,8 @@
     "@changesets/cli": "2.22.0",
     "@types/node": "13.13.52",
     "@types/webpack-dev-server": "3.11.6",
-    "@vue/cli": "4.5.19",
     "@vue/babel-preset-app": "5.0.6",
+    "@vue/cli": "4.5.19",
     "c8": "7.11.3",
     "clipboard": "2.0.9",
     "core-js": "3.20.3",
@@ -96,6 +96,7 @@
     "vue-property-decorator": "9.1.2",
     "vue-styleguidist": "*",
     "vuepress": "1.9.7",
+    "wait-on": "6.0.1",
     "webpack-dev-server": "4.9.3",
     "yorkie": "2.0.0"
   },
