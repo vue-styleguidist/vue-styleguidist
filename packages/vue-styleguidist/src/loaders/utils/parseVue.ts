@@ -13,7 +13,7 @@ export default function parseVue(source: string): SFCDescriptor {
 	if (output) {
 		return output
 	}
-  const parse = Vue.version.split('.')[0] === '3' 
+  const parse = Vue?.version?.split('.')[0] === '3' 
     ? require('@vue/compiler-sfc').parse
     // eslint-disable-next-line import/no-unresolved
     : require('vue-template-compiler').parseComponent
