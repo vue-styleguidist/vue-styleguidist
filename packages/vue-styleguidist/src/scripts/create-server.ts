@@ -5,6 +5,8 @@ import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import makeWebpackConfig from './make-webpack-config'
 import { ServerInfo } from './binutils'
 
+const isWebpack4 = webpack.version?.startsWith('4.')
+
 export default function createServer(
 	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
@@ -12,7 +14,7 @@ export default function createServer(
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)
 	const { devServer: webpackDevServerConfig } = merge(
 		{
-			devServer: webpack.version?.startsWith('4.')
+			devServer: isWebpack4
 				? {
 						noInfo: true,
 						compress: true,
@@ -35,7 +37,7 @@ export default function createServer(
 		{
 			devServer: webpackConfig.devServer
 		},
-		webpack.version?.startsWith('4.')
+		isWebpack4
 			? {
 					devServer: {
 						contentBase: config.assetsDir
@@ -45,12 +47,19 @@ export default function createServer(
 					infrastructureLogging: {
 						level: 'warn'
 					},
-          stats: 'errors-only',
+					// @ts-ignore for webpack 5 compatibility
+					client: {
+						logging: 'warn'
+					},
+					stats: 'errors-only'
 			  }
 	)
 
 	const compiler = webpack(webpackConfig)
-	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig)
+	const devServer = isWebpack4
+		? new WebpackDevServer(compiler, webpackDevServerConfig)
+		: // @ts-ignore for webpack 5 compatibility
+		  new WebpackDevServer(webpackDevServerConfig, compiler)
 
 	// User defined customizations
 	if (config.configureServer) {
