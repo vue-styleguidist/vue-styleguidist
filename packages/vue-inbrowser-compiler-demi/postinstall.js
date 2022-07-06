@@ -17,6 +17,7 @@ function updateIndexForVue3() {
   const Vue = require('vue')
   
   module.exports.h = Vue.h
+  module.exports.createApp = Vue.createApp
   module.exports.resolveComponent = Vue.resolveComponent
   module.exports.isVue3 = true
   `
@@ -29,7 +30,7 @@ function updateIndexForVue3() {
 	// esm
 	const indexPathESM = path.join(__dirname, './index.esm.js')
 	const indexContentESM = `
-  export { h, resolveComponent } from 'vue'
+  export { h, resolveComponent, createApp } from 'vue'
   export const isVue3 = true
   `
 	fs.writeFile(indexPathESM, indexContentESM, err => {
