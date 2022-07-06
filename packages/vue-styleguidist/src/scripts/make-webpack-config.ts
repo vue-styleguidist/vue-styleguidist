@@ -6,12 +6,12 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { MiniHtmlWebpackPlugin } from 'mini-html-webpack-plugin'
 import MiniHtmlWebpackTemplate from '@vxna/mini-html-webpack-template'
-import Vue from 'vue'
 import merge from 'webpack-merge'
 import forEach from 'lodash/forEach'
 import isFunction from 'lodash/isFunction'
 import makeWebpackConfig from 'react-styleguidist/lib/scripts/make-webpack-config'
 import StyleguidistOptionsPlugin from 'react-styleguidist/lib/scripts/utils/StyleguidistOptionsPlugin'
+import { isVue3 } from 'vue-inbrowser-compiler-utils'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import mergeWebpackConfig from './utils/mergeWebpackConfig'
 
@@ -70,7 +70,7 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	const vue$ = Vue?.version?.startsWith('3.') ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
+	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point

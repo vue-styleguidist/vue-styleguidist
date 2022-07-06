@@ -20,6 +20,7 @@ function updateIndexForVue3() {
   module.exports.createApp = Vue.createApp
   module.exports.resolveComponent = Vue.resolveComponent
   module.exports.isVue3 = true
+  module.exports.Vue2 = function(){}
   `
 	fs.writeFile(indexPath, indexContent, err => {
 		if (err) {
@@ -32,7 +33,9 @@ function updateIndexForVue3() {
 	const indexContentESM = `
   export { h, resolveComponent, createApp } from 'vue'
   export const isVue3 = true
+  export const Vue2 = () => {}
   `
+
 	fs.writeFile(indexPathESM, indexContentESM, err => {
 		if (err) {
 			console.error(err)
