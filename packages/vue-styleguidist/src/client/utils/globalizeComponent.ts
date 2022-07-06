@@ -1,4 +1,4 @@
-import { ComponentOptions } from 'vue'
+import Vue, { ComponentOptions } from 'vue'
 import { cleanName } from 'vue-inbrowser-compiler-utils'
 import { Component } from '../../types/Component'
 import { addGlobalComponentToRegistration } from './globalComponents'
@@ -21,7 +21,12 @@ export default function globalizeComponent(component: Component) {
 		: component.module
 
 	if (configComponent) {
-		addGlobalComponentToRegistration(cleanName(displayName), configComponent)
+		if (typeof Vue.version === 'string' && Vue.version.split('.')[0] === '3') {
+			addGlobalComponentToRegistration(cleanName(displayName), configComponent)
+		} else {
+			// @ts-ignore this is to keep vue 2 compatibility
+			Vue.component(cleanName(displayName), configComponent)
+		}
 	}
 
 	if (component.subComponents) {

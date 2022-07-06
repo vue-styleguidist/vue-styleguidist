@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { createApp } from 'vue'
 import { addScopedStyle, cleanName } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
-import { registerGlobalComponents } from '../../utils/globalComponents'
+import { getVueApp } from './getVueApp'
 
 class PreviewAsync extends Component {
 	static propTypes = {
@@ -70,11 +69,10 @@ class PreviewAsync extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
-			el = createApp({
-				el,
+			el = getVueApp({
 				data: {},
 				template: '<div></div> '
-			})
+			}, el)
 		}
 	}
 
@@ -175,10 +173,10 @@ class PreviewAsync extends Component {
 			: { render: createElement => createElement(previewComponent) }
 		try {
 			this.destroyVueInstance()
-			this.vueInstance = registerGlobalComponents(createApp({
+			this.vueInstance = getVueApp({
 				...extendsComponent,
 				...rootComponent,
-			})).mount(el)
+			}, el)
 		} catch (err) {
 			this.handleError(err)
 		}
