@@ -4,7 +4,6 @@ import minimist from 'minimist'
 import kleur from 'kleur'
 import createLogger from 'glogg'
 import StyleguidistError from 'react-styleguidist/lib/scripts/utils/error'
-import { version as vueVersion } from 'vue/package.json'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import getConfig from '../scripts/config'
 import consts from '../scripts/consts'
@@ -35,23 +34,6 @@ process.on('uncaughtException', (err: any) => {
 	}
 	process.exit(1)
 })
-
-let correctVueVersion = false
-if (vueVersion) {
-	const [majorVue] = vueVersion.split('.')
-	correctVueVersion = parseInt(majorVue, 10) === 2
-}
-
-if (!correctVueVersion) {
-	throw new Error(
-		'This version of vue-styleguidist is only compatible with Vue 2.\n' +
-			'We are actively working on an updated version\n' +
-			'Join us on Github if you want to lend a hand.\n' +
-			'https://github.com/vue-styleguidist/vue-styleguidist/'
-	)
-	// + " Please install vue-styleguidist next with the following command\n"
-	// + " npm iinstall --save-dev vue-styleguidist@next")
-}
 
 // Make sure user has webpack installed
 require('react-styleguidist/lib/scripts/utils/ensureWebpack')
