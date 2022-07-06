@@ -6,6 +6,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { MiniHtmlWebpackPlugin } from 'mini-html-webpack-plugin'
 import MiniHtmlWebpackTemplate from '@vxna/mini-html-webpack-template'
+import Vue from 'vue'
 import merge from 'webpack-merge'
 import forEach from 'lodash/forEach'
 import isFunction from 'lodash/isFunction'
@@ -69,7 +70,7 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	const vue$ = 'vue/dist/vue.esm.js'
+	const vue$ = Vue?.version?.startsWith('3.') ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
@@ -157,7 +158,9 @@ export default function (
 				output: {
 					publicPath: config.styleguidePublicPath
 				},
-				devServer: {
+				devServer: webpack.version?.startsWith('5.') ? {
+          hot: true
+        } : {
 					publicPath: config.styleguidePublicPath,
 					// Use 'ws' instead of 'sockjs-node' on server since we're using native
 					// websockets in `webpackHotDevClient`.
@@ -167,12 +170,12 @@ export default function (
 					injectClient: false
 				},
 				plugins: [
-					new webpack.HotModuleReplacementPlugin(),
 					new webpack.ProvidePlugin({
 						// Webpack 5 does no longer include a polyfill for this Node.js variable.
 						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
 						process: 'process/browser'
-					})
+					}),
+          ...webpack.version?.startsWith('5.') ? [] : [new webpack.HotModuleReplacementPlugin()]
 				],
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},

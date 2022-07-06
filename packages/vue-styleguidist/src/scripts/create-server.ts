@@ -12,7 +12,7 @@ export default function createServer(
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)
 	const { devServer: webpackDevServerConfig } = merge(
 		{
-			devServer: {
+			devServer: webpack.version?.startsWith('4.') ? {
 				noInfo: true,
 				compress: true,
 				clientLogLevel: 'none',
@@ -25,15 +25,18 @@ export default function createServer(
 				},
 				watchContentBase: config.assetsDir !== undefined,
 				stats: webpackConfig.stats || {}
-			}
+			} : {
+        compress: true,
+        hot: true,
+      }
 		},
 		{
 			devServer: webpackConfig.devServer
 		},
 		{
-			devServer: {
+			devServer: webpack.version?.startsWith('4.') ? {
 				contentBase: config.assetsDir
-			}
+			} : {}
 		}
 	)
 

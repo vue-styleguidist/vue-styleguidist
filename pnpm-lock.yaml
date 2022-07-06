@@ -1176,7 +1176,7 @@ importers:
       is-directory: ^0.3.1
       javascript-stringify: ^1.6.0
       jss: ^10.6.0
-      kleur: ^2.0.2
+      kleur: ^4.1.5
       leven: ^2.1.0
       loader-utils: ^1.4.0
       lodash: ^4.17.21
@@ -1236,7 +1236,7 @@ importers:
       is-directory: 0.3.1
       javascript-stringify: 1.6.0
       jss: 10.6.0
-      kleur: 2.0.2
+      kleur: 4.1.5
       leven: 2.1.0
       loader-utils: 1.4.0
       lodash: 4.17.21
@@ -20619,14 +20619,13 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  /kleur/2.0.2:
-    resolution: {integrity: sha512-77XF9iTllATmG9lSlIv0qdQ2BQ/h9t0bJllHlbvsQ0zUWfU7Yi0S8L5JXzPZgkefIiajLmBJJ4BsMJmqcf7oxQ==}
-    engines: {node: '>=6'}
-    deprecated: Please upgrade to kleur@3 or migrate to 'ansi-colors' if you prefer the old syntax. Visit <https://github.com/lukeed/kleur/releases/tag/v3.0.0\> for migration path(s).
-    dev: false
-
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
+    engines: {node: '>=6'}
+    dev: false
+
+  /kleur/4.1.5:
+    resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
     dev: false
 
