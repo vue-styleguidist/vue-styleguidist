@@ -493,8 +493,7 @@ module.exports = {
       links: [
         {
           rel: 'stylesheet',
-          href:
-            'https://pro.fontawesome.com/releases/v5.8.2/css/all.css',
+          href: 'https://pro.fontawesome.com/releases/v5.8.2/css/all.css',
           integrity: 'your hash here',
           crossorigin: 'anonymous'
         }
@@ -645,6 +644,5 @@ export default {
   <Alert
 /></docs>
 ````
-
 
 > :warning: The search menu won't be able to find `AcAlert` anymore, as it searches through the page names, thus `Alert`.

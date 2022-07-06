@@ -71,7 +71,7 @@ Ugly button with pink font and blue background:
 
 ```jsx
 <app-button color="pink" background="blue">
-  Ugly button
+	Ugly button
 </app-button>
 ```
 
@@ -79,7 +79,7 @@ Button containing custom tags:
 
 ```jsx
 <app-button>
-  Text with <b>bold</b>
+	Text with <b>bold</b>
 </app-button>
 ```
 </docs>

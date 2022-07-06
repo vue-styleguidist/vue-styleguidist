@@ -140,7 +140,7 @@ type EditorProps = Omit<UnconfiguredEditorProps, 'jssThemedEditor' | 'jsxInExamp
 function Editor(props: EditorProps) {
 	const {
 		config: { jssThemedEditor, jsxInExamples }
-	} = (useStyleGuideContext() as any) as { config: SanitizedStyleguidistConfig }
+	} = useStyleGuideContext() as any as { config: SanitizedStyleguidistConfig }
 	return <PEditor {...props} jssThemedEditor={jssThemedEditor} jsxInExamples={jsxInExamples} />
 }
 

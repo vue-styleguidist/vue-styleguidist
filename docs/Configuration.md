@@ -770,6 +770,7 @@ Use it like this in your Markdown files:
 
 ````md
 ```js { "file": "./some/file.js" }
+
 ```
 ````
 

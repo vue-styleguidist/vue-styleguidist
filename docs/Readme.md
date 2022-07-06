@@ -8,6 +8,7 @@ features:
     details: >-
       Focus on one component at a time, see all its variants and work faster with hot reload
 
+
   - title: Style guide
     details: 'Share components with your team, including designers and developers'
   - title: Interactive playground
