@@ -12,32 +12,41 @@ export default function createServer(
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)
 	const { devServer: webpackDevServerConfig } = merge(
 		{
-			devServer: webpack.version?.startsWith('4.') ? {
-				noInfo: true,
-				compress: true,
-				clientLogLevel: 'none',
-				hot: true,
-				quiet: true,
-				disableHostCheck: true,
-				injectClient: false,
-				watchOptions: {
-					ignored: /node_modules/
-				},
-				watchContentBase: config.assetsDir !== undefined,
-				stats: webpackConfig.stats || {}
-			} : {
-        compress: true,
-        hot: true,
-      }
+			devServer: webpack.version?.startsWith('4.')
+				? {
+						noInfo: true,
+						compress: true,
+						clientLogLevel: 'none',
+						hot: true,
+						quiet: true,
+						disableHostCheck: true,
+						injectClient: false,
+						watchOptions: {
+							ignored: /node_modules/
+						},
+						watchContentBase: config.assetsDir !== undefined,
+						stats: webpackConfig.stats || {}
+				  }
+				: {
+						compress: true,
+						hot: true
+				  }
 		},
 		{
 			devServer: webpackConfig.devServer
 		},
-		{
-			devServer: webpack.version?.startsWith('4.') ? {
-				contentBase: config.assetsDir
-			} : {}
-		}
+		webpack.version?.startsWith('4.')
+			? {
+					devServer: {
+						contentBase: config.assetsDir
+					}
+			  }
+			: {
+					infrastructureLogging: {
+						level: 'warn'
+					},
+          stats: 'errors-only',
+			  }
 	)
 
 	const compiler = webpack(webpackConfig)
