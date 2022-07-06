@@ -44,7 +44,6 @@
 			}
 		],
 		"import/newline-after-import": "error",
-		"import/prefer-default-export": "error",
 		"import/no-named-default": "error"
 	},
 	"overrides": [
