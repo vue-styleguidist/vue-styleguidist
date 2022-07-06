@@ -7,14 +7,14 @@ const readSeparateScriptFile = (fileName: string) => {
 }
 
 export default function getComponentVueDoc(source: string, file: string): string | false {
-	const parts = parseVue(source, file)
+	const { descriptor } = parseVue(source, file)
 
-	if (parts.customBlocks) {
-		const docBlocks = parts.customBlocks.filter(block => block.type === 'docs')[0]
-		if (docBlocks && docBlocks.src) {
+	if (descriptor) {
+		const docBlocks = descriptor.customBlocks.filter(block => block.type === 'docs')[0]
+		if (docBlocks?.src) {
 			const jsFilePath = path.join(path.dirname(file), docBlocks.src)
 			return readSeparateScriptFile(jsFilePath)
-		} else if (docBlocks && docBlocks.content) {
+		} else if (docBlocks?.content) {
 			return docBlocks.content
 		}
 	}

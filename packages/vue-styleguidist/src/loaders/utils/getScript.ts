@@ -1,15 +1,15 @@
-import { parseComponent } from 'vue-template-compiler'
+import { parse } from '@vue/compiler-sfc'
 import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
 
 export default function (code: string, jsxInExamples: boolean): string {
 	// In case we are loading a vue component as an example, extract script tag
 	if (isCodeVueSfc(code)) {
-		const parts = parseComponent(code)
-		return parts && parts.script ? parts.script.content : ''
+		const {descriptor} = parse(code)
+		return descriptor && descriptor.script ? descriptor.script.content : ''
 	}
 
-	// if in JSX mode or litteral return examples code as is
-	if (jsxInExamples || /new Vue\(/.test(code)) {
+	// if in JSX mode return the code as is
+	if (jsxInExamples) {
 		return code
 	}
 

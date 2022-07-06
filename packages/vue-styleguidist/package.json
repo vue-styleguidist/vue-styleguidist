@@ -92,7 +92,6 @@
     "pug": ">=3.0.0",
     "vue": ">=2.0.0",
     "vue-loader": ">=14.0.0",
-    "vue-template-compiler": ">=2.0.0",
     "webpack": ">=4"
   },
   "peerDependenciesMeta": {
@@ -133,6 +132,7 @@
     "@types/webpack": "4.41.32",
     "@types/webpack-dev-server": "3.11.6",
     "@types/webpack-merge": "4.1.5",
+    "@vue/compiler-sfc": "3.2.37",
     "buble": "0.20.0",
     "concurrently": "4.1.2",
     "ejs": "3.1.7",

@@ -1,8 +1,9 @@
-import Vue, { VueConstructor } from 'vue'
+import { ComponentOptions } from 'vue'
 import { cleanName } from 'vue-inbrowser-compiler-utils'
 import { Component } from '../../types/Component'
+import { addGlobalComponentToRegistration } from './globalComponents'
 
-const isEs6Export = (module: any): module is { default: VueConstructor } => !!module.default
+const isEs6Export = (module: any): module is { default: ComponentOptions } => !!module.default
 
 /**
  * Expose component as global variables.
@@ -20,7 +21,7 @@ export default function globalizeComponent(component: Component) {
 		: component.module
 
 	if (configComponent) {
-		Vue.component(cleanName(displayName), configComponent)
+		addGlobalComponentToRegistration(cleanName(displayName), configComponent)
 	}
 
 	if (component.subComponents) {
