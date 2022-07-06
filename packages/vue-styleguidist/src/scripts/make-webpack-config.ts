@@ -38,6 +38,7 @@ export default function (
 	}
 
 	let webpackConfig: Configuration = {
+    mode: env,
 		output: {
 			path: config.styleguideDir,
 			filename: 'build/[name].bundle.js',
@@ -61,12 +62,13 @@ export default function (
 		},
 		performance: {
 			hints: false
-		}
+		},
+    plugins: []
 	}
 
-	webpackConfig.mode = env
-
 	if (config.webpackConfig) {
+    // since we will be adding our own, remove the OG HTML Plugin
+    config.webpackConfig.plugins = config.webpackConfig.plugins?.filter(p => p.constructor.name !== 'HtmlWebpackPlugin') || []
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 

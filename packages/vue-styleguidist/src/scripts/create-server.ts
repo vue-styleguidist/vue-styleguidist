@@ -12,12 +12,21 @@ export default function createServer(
 	env: 'development' | 'production' | 'none'
 ): ServerInfo {
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)
+
+	const serverWebpackConfig = isWebpack4
+		? webpackConfig
+		: merge(webpackConfig, {
+				infrastructureLogging: {
+					level: 'warn'
+				},
+				stats: 'errors-only'
+		  })
+
 	const { devServer: webpackDevServerConfig } = merge(
 		{
 			devServer: isWebpack4
 				? {
 						noInfo: true,
-						compress: true,
 						clientLogLevel: 'none',
 						hot: true,
 						quiet: true,
@@ -30,7 +39,6 @@ export default function createServer(
 						stats: webpackConfig.stats || {}
 				  }
 				: {
-						compress: true,
 						hot: true
 				  }
 		},
@@ -43,19 +51,10 @@ export default function createServer(
 						contentBase: config.assetsDir
 					}
 			  }
-			: {
-					infrastructureLogging: {
-						level: 'warn'
-					},
-					// @ts-ignore for webpack 5 compatibility
-					client: {
-						logging: 'warn'
-					},
-					stats: 'errors-only'
-			  }
+			: {}
 	)
 
-	const compiler = webpack(webpackConfig)
+	const compiler = webpack(serverWebpackConfig)
 	const devServer = isWebpack4
 		? new WebpackDevServer(compiler, webpackDevServerConfig)
 		: // @ts-ignore for webpack 5 compatibility

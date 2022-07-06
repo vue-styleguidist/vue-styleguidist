@@ -20,6 +20,9 @@ const DEFAULT_COMPONENTS_PATTERN = `src/{components,Components}/**/*.vue`
 const MODES = ['collapse', 'expand', 'hide'].map(m => ({ value: m, name: m }))
 
 export default {
+	handlers: {},
+	moduleAliases: {},
+	resolver: {},
 	assetsDir: {
 		uitype: 'string',
 		message: 'Assets Directory',
@@ -517,12 +520,12 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 	webpackConfig: {
 		tstype: 'Configuration',
 		type: ['object', 'function'],
-		process: (val?: Configuration) => {
+		process: (val: Configuration | undefined, config: StyleguidistConfig, rootdir: string) => {
 			if (val) {
 				return val
 			}
 
-			const file = findUserWebpackConfig()
+			const file = findUserWebpackConfig({ rootdir })
 			if (typeof file === 'string') {
 				logger.info(`Loading webpack config from:\n${file}`)
 				// eslint-disable-next-line import/no-dynamic-require
