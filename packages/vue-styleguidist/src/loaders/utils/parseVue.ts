@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import hash from 'hash-sum'
-import { SFCDescriptor } from '@vue/compiler-sfc'
+import { SFCDescriptor } from 'vue-template-compiler'
 import Vue from 'vue'
 import LRUCache from 'lru-cache'
 

@@ -1,10 +1,9 @@
-import { ComponentOptions } from 'vue'
-import Vue from 'vue/package.json'
-import { cleanName, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { VueConstructor } from 'vue'
+import { cleanName, isVue3, Vue2 } from 'vue-inbrowser-compiler-utils'
 import { Component } from '../../types/Component'
 import { addGlobalComponentToRegistration } from './globalComponents'
 
-const isEs6Export = (module: any): module is { default: ComponentOptions } => !!module.default
+const isEs6Export = (module: any): module is { default: VueConstructor } => !!module.default
 
 /**
  * Expose component as global variables.
@@ -26,7 +25,7 @@ export default function globalizeComponent(component: Component) {
 			addGlobalComponentToRegistration(cleanName(displayName), configComponent)
 		} else {
 			// @ts-ignore this is to keep vue 2 compatibility
-			Vue.component(cleanName(displayName), configComponent)
+			Vue2.component(cleanName(displayName), configComponent)
 		}
 	}
 
