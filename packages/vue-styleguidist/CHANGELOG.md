@@ -1,5 +1,20 @@
 # Change Log
 
+## 4.46.0
+
+### Minor Changes
+
+- [#1351](https://github.com/vue-styleguidist/vue-styleguidist/pull/1351) [`b7438069`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b74380691209c4929d4ddb9ba9b8867cf333a0a6) Thanks [@elevatebart](https://github.com/elevatebart)! - compatibility Vue 3
+
+* [`faf81dbb`](https://github.com/vue-styleguidist/vue-styleguidist/commit/faf81dbbffc2a6f1d7fa85c4798ec7df161b0ede) Thanks [@elevatebart](https://github.com/elevatebart)! - upgrade kleur from 2 to 4 (scurity issues)
+
+### Patch Changes
+
+- [`267efe04`](https://github.com/vue-styleguidist/vue-styleguidist/commit/267efe04a4e03e6d4032b808bef91f7c1c9ed6dd) Thanks [@elevatebart](https://github.com/elevatebart)! - fix webpack config detection issue
+
+- Updated dependencies [[`b7438069`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b74380691209c4929d4ddb9ba9b8867cf333a0a6)]:
+  - vue-inbrowser-compiler-utils@4.45.0
+
 ## 4.45.2
 
 ### Patch Changes
