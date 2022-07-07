@@ -39,7 +39,9 @@ export default function createServer(
 						stats: webpackConfig.stats || {}
 				  }
 				: {
-						hot: true
+						hot: true,
+            port: config.serverPort,
+            host: config.serverHost
 				  }
 		},
 		{
