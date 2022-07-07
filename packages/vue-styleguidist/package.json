@@ -89,6 +89,7 @@
     "webpack-merge": "^4.2.2"
   },
   "peerDependencies": {
+    "@vue/compiler-sfc": ">=3.0.0",
     "pug": ">=3.0.0",
     "vue": ">=2.0.0",
     "vue-loader": ">=14.0.0",
@@ -97,6 +98,12 @@
   },
   "peerDependenciesMeta": {
     "pug": {
+      "optional": true
+    },
+    "vue-template-compiler": {
+      "optional": true
+    },
+    "@vue/compiler-sfc": {
       "optional": true
     }
   },
