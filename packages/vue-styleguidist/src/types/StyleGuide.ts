@@ -24,7 +24,7 @@ export interface StyleguidistContext extends loader.LoaderContext {
 export interface BaseStyleguidistConfig
 	extends Omit<
 		Rsg.SanitizedStyleguidistConfig,
-		'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
+		'sections' | 'propsParser' | 'sortProps' | 'updateDocs' | 'compilerConfig'
 	> {
 	/**
 	 * Your application static assets folder, will be accessible as / in the style guide dev server.

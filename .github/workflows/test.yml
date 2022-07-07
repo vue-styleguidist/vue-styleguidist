@@ -23,7 +23,13 @@ jobs:
         run: pnpm lint
 
       - name: Run unit tests
-        run: pnpm test:vitest
+        run: pnpm test:vitest --coverage
+
+      - name: Clean tmp coverage directory
+        run: rm -rf ./coverage/tmp
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
 
       - name: Run plugin tests
         run: pnpm test:plugin

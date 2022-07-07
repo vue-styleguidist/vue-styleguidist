@@ -73,7 +73,7 @@ function postTreatConfig(
 	}
 
 	try {
-		return sanitizeConfig(config as StyleguidistConfig, schema as any, configDir) as any
+		return sanitizeConfig(config, schema, configDir) as any
 	} catch (exception) {
 		const err = exception as Error
 		console.log(exception instanceof StyleguidistError, err.constructor.name)

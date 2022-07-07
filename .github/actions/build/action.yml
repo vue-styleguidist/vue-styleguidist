@@ -14,8 +14,8 @@ runs:
         restore-keys: |
           ${{ runner.os }}-
 
-    - name: Install Pnpm and run install 
+    - name: Install Pnpm and run install
       uses: pnpm/action-setup@v2.0.1
       with:
-        version: 6
+        version: latest
         run_install: true

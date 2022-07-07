@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Vue from 'vue'
 import { compile } from 'vue-inbrowser-compiler'
-import { cleanName, addScopedStyle } from 'vue-inbrowser-compiler-utils'
+import { cleanName, addScopedStyle, h, isVue3 } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
+import { getVueApp } from './getVueApp'
 
 class Preview extends Component {
 	static propTypes = {
@@ -56,18 +56,19 @@ class Preview extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
-			el = new Vue({
-				el,
-				data: {},
-				template: '<div></div> '
-			})
+      this.vueInstance?.unmount?.()
+			el = getVueApp({
+				data: () => ({}),
+				template: '<div></div>'
+			}, el)
 		}
 	}
 
 	destroyVueInstance() {
 		if (this.vueInstance) {
 			try {
-				this.vueInstance.$destroy()
+        this.vueInstance.unmount?.()
+				this.vueInstance.$destroy?.()
 			} catch (err) {
 				// eat the error
 			}
@@ -95,6 +96,7 @@ class Preview extends Component {
 					? { jsxPragma: '__pragma__(h)' }
 					: {})
 			})
+
 			style = example.style
 			if (example.script) {
 				// compile and execute the script
@@ -153,13 +155,13 @@ class Preview extends Component {
 		// then we just have to render the setup previewComponent in the prepared slot
 		const rootComponent = renderRootJsx
 			? renderRootJsx.default(previewComponent)
-			: { render: createElement => createElement(previewComponent) }
+			: { render: createElement => (isVue3 ? h : createElement)(previewComponent) }
 		try {
 			this.destroyVueInstance()
-			this.vueInstance = new Vue({
-				...extendsComponent,
-				...rootComponent
-			}).$mount(el)
+			this.vueInstance = getVueApp({
+        ...extendsComponent,
+        ...rootComponent
+      }, el)
 		} catch (err) {
 			this.handleError(err)
 		}

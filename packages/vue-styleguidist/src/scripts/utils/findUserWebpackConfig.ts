@@ -11,11 +11,11 @@ const USER_WEBPACK_CONFIG_NAMES = [
  *
  * @return {string|boolean}
  */
-export default function findUserWebpackConfig(): string | boolean {
+export default function findUserWebpackConfig({ rootDir }: { rootDir: string }): string | boolean {
 	// Check in the root folder
 	for (const configFile of USER_WEBPACK_CONFIG_NAMES) {
 		try {
-			return require.resolve(configFile)
+			return require.resolve(configFile, {paths: [rootDir, process.cwd()]})
 		} catch (e) {
 			// if file not found, eat the error
 		}

@@ -101,6 +101,6 @@ function exportBuildUtils(config: SanitizedStyleguidistConfig): StyleGuideUtils 
 	}
 }
 
-export function defineConfig(config: StyleguidistConfig){
-  return config
+export function defineConfig(config: StyleguidistConfig): StyleguidistConfig {
+	return config
 }

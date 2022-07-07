@@ -5,7 +5,7 @@
 
 <div>
 
-[![Lint & Test](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/test.yml?query=branch%3Adev)
+[![Lint & Test](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/release.yml/badge.svg)](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/release.yml)
 
 <a href="https://circleci.com/gh/vue-styleguidist/vue-styleguidist">
     <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=shield" alt="Circle CI (integration)">

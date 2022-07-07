@@ -1,4 +1,4 @@
-/* eslint-disable es5/no-modules,es5/no-block-scoping */
+/* eslint-disable es5/no-block-scoping,es5/no-modules */
 import requireInRuntime from './requireInRuntime'
 
 const map = {
