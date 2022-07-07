@@ -41,6 +41,7 @@ const getProgressPlugin = (msg: string) => {
 		},
 		Presets.rect
 	)
+  
 	return {
 		plugin: new ProgressPlugin(percentage => {
 			bar.update(percentage)
@@ -103,10 +104,13 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 			p => p.constructor === ProgressPlugin
 		)
 	) {
+
 		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
 		bar = localBar
 		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
 	}
+
+
 	const { app, compiler } = server(config, (err: Error) => {
 		if (err) {
 			console.error(err)
@@ -162,9 +166,10 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
   ;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
     process.on(signal, () => {
       // @ts-ignore
-      const close = app.stopCallback ? app.stopCallback : app.close
+      const close = app.stopCallback ? 'stopCallback' : 'close'
 
-      close.bind(app, () => {
+      // @ts-ignore
+      app[close](() => {
         process.exit(0)
       })
     })
