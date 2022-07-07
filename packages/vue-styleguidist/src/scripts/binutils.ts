@@ -160,10 +160,10 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
   ;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
     process.on(signal, () => {
       // @ts-ignore
-      const close = app.stopCallback ? 'stopCallback' : 'close'
+      const closeFunctionName = app.stopCallback ? 'stopCallback' : 'close'
 
       // @ts-ignore
-      app[close](() => {
+      app[closeFunctionName](() => {
         process.exit(0)
       })
     })
