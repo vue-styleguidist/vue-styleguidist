@@ -24,7 +24,7 @@ process.on('uncaughtException', (err: any) => {
 			consts.DOCS_CONFIG
 		)
 	} else if (err instanceof StyleguidistError) {
-		console.error(kleur.bold.red(err.message))
+		console.error(kleur.bold().red(err.message))
 		if (err.stack) {
 			logger.debug(err.stack)
 		}
