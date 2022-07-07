@@ -156,7 +156,7 @@ Example: `filePath => !/node_modules/.text(filePath)`
 
 #### `jsx`
 
-Does your component contain JSX? By default, this is set to true. If you do not disable it, babel will fail with typescript syntax like `(<any>window).$`.
+Does your component contain JSX? By default, this is set to true.  If you do not disable it, babel will fail with typescript syntax like `(<any>window).$`.
 
 #### `nameFilter`
 
