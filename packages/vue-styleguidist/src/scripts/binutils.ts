@@ -104,8 +104,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 			p => p.constructor === ProgressPlugin
 		)
 	) {
-
-		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
+    const { plugin, bar: localBar } = getProgressPlugin('Compiling')
 		bar = localBar
 		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
 	}
