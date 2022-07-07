@@ -5,7 +5,11 @@ import examplesLoader from './examples-loader'
 
 vi.mock('vue-inbrowser-compiler-utils', () => {
 	return {
-		isCodeVueSfc: (code: string) => /<script/.test(code)
+		isCodeVueSfc: (code: string) => /<script/.test(code),
+    parseComponent: () => ({
+      script: `import _ from 'lodash';
+      import FooComponent from '../foo.js';`
+    })
 	}
 })
 
@@ -204,12 +208,7 @@ it('should works for any Markdown file, without a current component', () => {
 	)
 })
 
-it('should import external dependency in a vue component example', () => {
-	vi.mock('vue-inbrowser-compiler-utils', () => {
-		return {
-			isCodeVueSfc: () => true
-		}
-	})
+it.only('should import external dependency in a vue component example', () => {
 	const exampleMarkdown = `
 	One:
 	

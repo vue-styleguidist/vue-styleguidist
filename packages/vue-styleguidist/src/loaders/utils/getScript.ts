@@ -1,6 +1,7 @@
 import { isCodeVueSfc, parseComponent } from 'vue-inbrowser-compiler-utils'
 
 export default function (code: string, jsxInExamples: boolean): string {
+  console.log('getScript')
 	// In case we are loading a vue component as an example, extract script tag
 	if (isCodeVueSfc(code)) {
 		const descriptor = parseComponent(code)
