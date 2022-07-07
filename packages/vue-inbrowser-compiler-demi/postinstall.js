@@ -3,7 +3,7 @@ const fs = require('fs')
 
 function getVuePackageVersion() {
 	try {
-		const pkg = require('vue')
+		const pkg = require('vue/package.json')
 		return pkg.version
 	} catch (error) {
 		return 'unknown'
