@@ -66,6 +66,7 @@ export default function (
 	webpackConfig.mode = env
 
 	if (config.webpackConfig) {
+    config.webpackConfig.plugins = config.webpackConfig.plugins?.filter(p => p.constructor.name !== "HtmlWebpackPlugin") || []
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
@@ -89,7 +90,6 @@ export default function (
 			new MiniHtmlWebpackPlugin(htmlPluginOptions),
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-
 				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env)
 			})
 		]

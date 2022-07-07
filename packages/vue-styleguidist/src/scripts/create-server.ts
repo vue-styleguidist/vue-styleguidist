@@ -1,11 +1,12 @@
 import webpack, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
+import pkgWDS from 'webpack-dev-server/package.json'
 import merge from 'webpack-merge'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import makeWebpackConfig from './make-webpack-config'
 import { ServerInfo } from './binutils'
 
-const isWebpack4 = webpack.version?.startsWith('4.')
+const isWDS3 = pkgWDS.version?.startsWith('3.')
 
 export default function createServer(
 	config: SanitizedStyleguidistConfig,
@@ -13,7 +14,7 @@ export default function createServer(
 ): ServerInfo {
 	const webpackConfig: Configuration = makeWebpackConfig(config, env)
 
-	const serverWebpackConfig = isWebpack4
+	const serverWebpackConfig = isWDS3
 		? webpackConfig
 		: merge(webpackConfig, {
 				infrastructureLogging: {
@@ -22,10 +23,11 @@ export default function createServer(
 				stats: 'errors-only'
 		  })
 
-	const { devServer: webpackDevServerConfig } = merge(
+	const { devServer: webpackDevServerConfig = {} } = merge(
 		{
-			devServer: isWebpack4
+			devServer: isWDS3
 				? {
+            // @ts-ignore
 						noInfo: true,
 						clientLogLevel: 'none',
 						hot: true,
@@ -47,7 +49,7 @@ export default function createServer(
 		{
 			devServer: webpackConfig.devServer
 		},
-		isWebpack4
+		isWDS3
 			? {
 					devServer: {
 						contentBase: config.assetsDir
@@ -57,7 +59,7 @@ export default function createServer(
 	)
 
 	const compiler = webpack(serverWebpackConfig)
-	const devServer = isWebpack4
+	const devServer = isWDS3
 		? new WebpackDevServer(compiler, webpackDevServerConfig)
 		: // @ts-ignore for webpack 5 compatibility
 		  new WebpackDevServer(webpackDevServerConfig, compiler)
