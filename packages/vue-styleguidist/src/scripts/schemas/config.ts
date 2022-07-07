@@ -520,12 +520,12 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 	webpackConfig: {
 		tstype: 'Configuration',
 		type: ['object', 'function'],
-		process: (val: Configuration | undefined, config: StyleguidistConfig, rootdir: string) => {
+		process: (val: Configuration | undefined, config: StyleguidistConfig, rootDir: string) => {
 			if (val) {
 				return val
 			}
 
-			const file = findUserWebpackConfig({ rootdir })
+			const file = findUserWebpackConfig({ rootDir })
 			if (typeof file === 'string') {
 				logger.info(`Loading webpack config from:\n${file}`)
 				// eslint-disable-next-line import/no-dynamic-require
