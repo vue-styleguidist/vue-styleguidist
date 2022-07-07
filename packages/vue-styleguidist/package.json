@@ -56,7 +56,7 @@
     "is-directory": "^0.3.1",
     "javascript-stringify": "^1.6.0",
     "jss": "^10.6.0",
-    "kleur": "^4.1.5",
+    "kleur": "^2.0.2",
     "leven": "^2.1.0",
     "loader-utils": "^1.4.0",
     "lodash": "^4.17.21",
@@ -89,13 +89,21 @@
     "webpack-merge": "^4.2.2"
   },
   "peerDependencies": {
+    "@vue/compiler-sfc": ">=3.0.0",
     "pug": ">=3.0.0",
     "vue": ">=2.0.0",
     "vue-loader": ">=14.0.0",
+    "vue-template-compiler": ">=2.0.0",
     "webpack": ">=4"
   },
   "peerDependenciesMeta": {
     "pug": {
+      "optional": true
+    },
+    "vue-template-compiler": {
+      "optional": true
+    },
+    "@vue/compiler-sfc": {
       "optional": true
     }
   },
@@ -132,13 +140,13 @@
     "@types/webpack": "4.41.32",
     "@types/webpack-dev-server": "3.11.6",
     "@types/webpack-merge": "4.1.5",
-    "@vue/compiler-sfc": "3.2.37",
     "buble": "0.20.0",
     "concurrently": "4.1.2",
     "ejs": "3.1.7",
     "pug": "3.0.2",
     "strip-shebang": "1.0.2",
-    "vue": "3.2.37",
+    "vue": "2.6.14",
+    "vue-template-compiler": "2.6.14",
     "webpack": "4.46.0"
   },
   "resolutions": {

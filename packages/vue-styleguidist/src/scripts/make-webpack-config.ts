@@ -38,7 +38,6 @@ export default function (
 	}
 
 	let webpackConfig: Configuration = {
-    mode: env,
 		output: {
 			path: config.styleguideDir,
 			filename: 'build/[name].bundle.js',
@@ -62,14 +61,13 @@ export default function (
 		},
 		performance: {
 			hints: false
-		},
-    plugins: []
+		}
 	}
 
+  webpackConfig.mode = env
+
 	if (config.webpackConfig) {
-    // since we will be adding our own, remove the OG HTML Plugin
-    config.webpackConfig.plugins = config.webpackConfig.plugins?.filter(p => p.constructor.name !== 'HtmlWebpackPlugin') || []
-		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
+    webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
 	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
@@ -160,9 +158,7 @@ export default function (
 				output: {
 					publicPath: config.styleguidePublicPath
 				},
-				devServer: webpack.version?.startsWith('5.') ? {
-          hot: true
-        } : {
+				devServer: {
 					publicPath: config.styleguidePublicPath,
 					// Use 'ws' instead of 'sockjs-node' on server since we're using native
 					// websockets in `webpackHotDevClient`.
@@ -172,12 +168,12 @@ export default function (
 					injectClient: false
 				},
 				plugins: [
+          new webpack.HotModuleReplacementPlugin(),
 					new webpack.ProvidePlugin({
 						// Webpack 5 does no longer include a polyfill for this Node.js variable.
 						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
 						process: 'process/browser'
-					}),
-          ...webpack.version?.startsWith('5.') ? [] : [new webpack.HotModuleReplacementPlugin()]
+					})
 				],
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},

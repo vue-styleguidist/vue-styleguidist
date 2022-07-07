@@ -4,7 +4,7 @@ import { stringify } from 'q-i'
 import { moveCursor, clearLine } from 'readline'
 import WebpackDevServer from 'webpack-dev-server'
 import { Stats, Compiler, ProgressPlugin } from 'webpack'
-import * as kleur from 'kleur'
+import kleur from 'kleur'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import webpackDevServerUtils from 'react-dev-utils/WebpackDevServerUtils'
 import openBrowser from 'react-dev-utils/openBrowser'
@@ -41,7 +41,6 @@ const getProgressPlugin = (msg: string) => {
 		},
 		Presets.rect
 	)
-  
 	return {
 		plugin: new ProgressPlugin(percentage => {
 			bar.update(percentage)
@@ -54,7 +53,6 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
-    config.webpackConfig &&
 		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
 	) {
 		const { plugin, bar: localBar } = getProgressPlugin('Building style guide')
@@ -99,17 +97,14 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	let bar: ProgressBar | undefined
 	if (
 		config.progressBar !== false &&
-    config.webpackConfig &&
-		!((config.webpackConfig.plugins) || []).some(
+		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(
 			p => p.constructor === ProgressPlugin
 		)
 	) {
-    const { plugin, bar: localBar } = getProgressPlugin('Compiling')
+		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
 		bar = localBar
 		config.webpackConfig.plugins = [...(config.webpackConfig.plugins || []), plugin]
 	}
-
-
 	const { app, compiler } = server(config, (err: Error) => {
 		if (err) {
 			console.error(err)
@@ -164,11 +159,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
   // kill ghosted threads on exit
   ;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
     process.on(signal, () => {
-      // @ts-ignore
-      const close = app.stopCallback ? 'stopCallback' : 'close'
-
-      // @ts-ignore
-      app[close](() => {
+      app.close(() => {
         process.exit(0)
       })
     })
@@ -234,7 +225,7 @@ function printBuildInstructions(config: SanitizedStyleguidistConfig) {
  * @param {string} linkUrl
  */
 export function printErrorWithLink(message: string, linkTitle: string, linkUrl: string) {
-	console.error(`${kleur.bold().red(message)}\n\n${linkTitle}\n${kleur.underline(linkUrl)}\n`)
+	console.error(`${kleur.bold.red(message)}\n\n${linkTitle}\n${kleur.underline(linkUrl)}\n`)
 }
 
 /**
@@ -265,11 +256,11 @@ function printErrors(
  */
 function printStatus(text: string, type: MessageType) {
 	if (type === 'success') {
-		console.log(kleur.inverse().bold().green(' DONE ') + ' ' + text)
+		console.log(kleur.inverse.bold.green(' DONE ') + ' ' + text)
 	} else if (type === 'error') {
-		console.error(kleur.inverse().bold().red(' FAIL ') + ' ' + kleur.red(text))
+		console.error(kleur.inverse.bold.red(' FAIL ') + ' ' + kleur.red(text))
 	} else {
-		console.error(kleur.inverse().bold().yellow(' WARN ') + ' ' + kleur.yellow(text))
+		console.error(kleur.inverse.bold.yellow(' WARN ') + ' ' + kleur.yellow(text))
 	}
 }
 

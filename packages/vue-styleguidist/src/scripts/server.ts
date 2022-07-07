@@ -9,13 +9,7 @@ export default function server(
 	const env = 'development'
 	const serverInfo = createServer(config, env)
 
-	// @ts-ignore
-	if (serverInfo.app.startCallback) {
-		// @ts-ignore
-		serverInfo.app.startCallback(callback)
-	} else {
-		serverInfo.app.listen(config.serverPort, config.serverHost, callback)
-	}
+	serverInfo.app.listen(config.serverPort, config.serverHost, callback)
 
 	return serverInfo
 }

@@ -15,8 +15,8 @@ export default function parseVue(source: string): SFCDescriptor {
 	}
 
   const parse = Vue?.version?.split('.')[0] === '3' 
+  // eslint-disable-next-line import/no-unresolved
     ? require('@vue/compiler-sfc').parse
-    // eslint-disable-next-line import/no-unresolved
     : require('vue-template-compiler').parseComponent
 	const parsedSFC = parse(source)
   const descriptor = parsedSFC.descriptor ?? parsedSFC
