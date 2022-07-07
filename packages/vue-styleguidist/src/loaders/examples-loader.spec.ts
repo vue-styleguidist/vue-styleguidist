@@ -208,7 +208,7 @@ it('should works for any Markdown file, without a current component', () => {
 	)
 })
 
-it.only('should import external dependency in a vue component example', () => {
+it('should import external dependency in a vue component example', () => {
 	const exampleMarkdown = `
 	One:
 	
