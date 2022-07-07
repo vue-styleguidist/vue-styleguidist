@@ -56,7 +56,7 @@ class Preview extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
-      this.vueInstance.unmount?.()
+      this.vueInstance?.unmount?.()
 			el = getVueApp({
 				data: () => ({}),
 				template: '<div></div>'
