@@ -157,7 +157,9 @@ export default function (
 				output: {
 					publicPath: config.styleguidePublicPath
 				},
-				devServer: {
+				devServer: webpack.version?.startsWith('5.') ? {
+          hot: true
+        } : {
 					publicPath: config.styleguidePublicPath,
 					// Use 'ws' instead of 'sockjs-node' on server since we're using native
 					// websockets in `webpackHotDevClient`.
@@ -166,14 +168,14 @@ export default function (
 					// `webpackHotDevClient`.
 					injectClient: false
 				},
-				plugins: [
-					new webpack.HotModuleReplacementPlugin(),
-					new webpack.ProvidePlugin({
-						// Webpack 5 does no longer include a polyfill for this Node.js variable.
-						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
-						process: 'process/browser'
-					})
-				],
+				plugins: webpack.version?.startsWith('5.') ? [
+            new webpack.ProvidePlugin({
+              // Webpack 5 does no longer include a polyfill for this Node.js variable.
+              // https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
+              process: 'process/browser'
+            })
+          ] : [new webpack.HotModuleReplacementPlugin()]
+				,
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},
 			webpackConfig
