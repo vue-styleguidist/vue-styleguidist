@@ -91,7 +91,9 @@ export default function (
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env)
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
+        '__VUE_OPTIONS_API__': true,
+        '__VUE_PROD_DEVTOOLS__': true,
 			})
 		]
 	})

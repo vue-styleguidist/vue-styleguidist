@@ -69,9 +69,10 @@ class PreviewAsync extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
+      this.vueInstance.unmount?.()
 			el = getVueApp({
-				data: {},
-				template: '<div></div> '
+				data: () => ({}),
+				template: '<div></div>'
 			}, el)
 		}
 	}
@@ -79,7 +80,8 @@ class PreviewAsync extends Component {
 	destroyVueInstance() {
 		if (this.vueInstance) {
 			try {
-				this.vueInstance.$destroy()
+        this.vueInstance.unmount?.()
+				this.vueInstance.$destroy?.()
 			} catch (err) {
 				// eat the error
 			}
