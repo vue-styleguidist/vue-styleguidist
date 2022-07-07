@@ -6,7 +6,9 @@
 			@input="updateValue($event.target.value)"
 			@change="emitChange"
 		/>
-		<button @click="fireEvent()">Fire example event!</button>
+		<button @click="fireEvent()">
+			Fire example event!
+		</button>
 	</div>
 </template>
 
