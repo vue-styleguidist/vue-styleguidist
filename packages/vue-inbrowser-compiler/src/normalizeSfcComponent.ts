@@ -2,6 +2,7 @@ import walkes from 'walkes'
 import { parseComponent, VsgSFCDescriptor, isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
+import transformOneJSXSpread from './transformOneJSXSpread'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
@@ -52,14 +53,24 @@ export function parseScriptCode(code: string): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
+  isFunctional?: boolean
 } {
 	let preprocessing = ''
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
 	let renderFunctionStart = -1
-	walkes(getAst(code), {
-		//export const MyComponent = {}
+  const ast = getAst(code)
+
+  let isFunctional = false
+  const setFunctionalComponent = (node:any) => {
+    if(['ArrowFunctionExpression', 'FunctionDeclaration'].includes(node.type)) {
+      isFunctional = true
+    }
+  }
+
+	walkes(ast, {
+		// export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
@@ -67,13 +78,15 @@ export function parseScriptCode(code: string): {
 			if (node.declarations) {
 				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
 			}
+      setFunctionalComponent(node.declaration.declarations[0])
 		},
-		//export default {}
+		// export default {}
 		ExportDefaultDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
 			renderFunctionStart = getRenderFunctionStart(node.declaration)
+      setFunctionalComponent(node.declaration)
 		},
 		//module.exports = {}
 		AssignmentExpression(node: any) {
@@ -86,6 +99,7 @@ export function parseScriptCode(code: string): {
 				preprocessing = code.slice(0, node.start + offset)
 				startIndex = node.right.start + offset
 				endIndex = node.right.end + offset
+        setFunctionalComponent(node.right)
 			}
 		},
 		// and transform import statements into require
@@ -95,6 +109,21 @@ export function parseScriptCode(code: string): {
 			code = ret.code
 		}
 	})
+
+  walkes(ast, {
+    JSXOpeningElement(node: any) {
+      if(node.attributes.some((attrNode: any) => attrNode.type === 'JSXSpreadAttribute')) {
+        const ret = transformOneJSXSpread(node, code, offset)
+        if(node.start + offset < startIndex) {
+          offset += ret.offset
+        } else if (node.end + offset < endIndex) {
+          endIndex += ret.offset
+        }
+			  code = ret.code
+      }
+    }
+  })
+
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
@@ -106,11 +135,15 @@ export function parseScriptCode(code: string): {
 		)
 		endIndex += JSX_ADDON_LENGTH
 	}
-	const component = code.slice(startIndex + 1, endIndex - 1)
+
+	const component = isFunctional 
+    ? `render: ${code.slice(startIndex, endIndex)}`
+    : code.slice(startIndex + 1, endIndex - 1) 
+
 	return {
 		preprocessing,
 		component,
-		postprocessing: code.slice(endIndex)
+		postprocessing: code.slice(endIndex),
 	}
 }
 
