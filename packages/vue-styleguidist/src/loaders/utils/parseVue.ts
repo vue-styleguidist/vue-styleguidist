@@ -1,17 +1,25 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import hash from 'hash-sum'
-import * as compiler from 'vue-template-compiler'
+import { SFCDescriptor } from 'vue-template-compiler'
+import { isVue3 } from 'vue-inbrowser-compiler-utils'
 import LRUCache from 'lru-cache'
 
 const cache = new LRUCache(100)
 
-export default function parseVue(source: string, filename: string): compiler.SFCDescriptor {
-	const cacheKey = hash(filename + source)
-	// source-map cache busting for hot-reloadded modules
-	let output = cache.get(cacheKey)
+export default function parseVue(source: string): SFCDescriptor {
+	const cacheKey = hash(source)
+	// source-map cache busting for hot-reloaded modules
+	const output = cache.get(cacheKey)
 	if (output) {
 		return output
 	}
-	output = compiler.parseComponent(source)
-	cache.set(cacheKey, output)
-	return output
+
+  const parse = isVue3
+    // eslint-disable-next-line import/no-unresolved
+    ? require('@vue/compiler-sfc').parse
+    : require('vue-template-compiler').parseComponent
+	const parsedSFC = parse(source)
+  const descriptor = parsedSFC.descriptor ?? parsedSFC
+	cache.set(cacheKey, descriptor)
+	return descriptor
 }

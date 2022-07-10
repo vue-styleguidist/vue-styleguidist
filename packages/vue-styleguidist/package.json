@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "4.45.2",
+  "version": "4.46.1",
   "homepage": "https://vue-styleguidist.github.io",
   "scripts": {
     "compile": "pnpm run compile:babel && pnpm run typings",
@@ -56,7 +56,7 @@
     "is-directory": "^0.3.1",
     "javascript-stringify": "^1.6.0",
     "jss": "^10.6.0",
-    "kleur": "^2.0.2",
+    "kleur": "^4.1.5",
     "leven": "^2.1.0",
     "loader-utils": "^1.4.0",
     "lodash": "^4.17.21",
@@ -84,11 +84,12 @@
     "to-ast": "^1.0.0",
     "vue-docgen-api": "^4.45.0",
     "vue-inbrowser-compiler": "^4.44.23",
-    "vue-inbrowser-compiler-utils": "^4.44.23",
+    "vue-inbrowser-compiler-utils": "^4.45.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^4.2.2"
   },
   "peerDependencies": {
+    "@vue/compiler-sfc": ">=3.0.0",
     "pug": ">=3.0.0",
     "vue": ">=2.0.0",
     "vue-loader": ">=14.0.0",
@@ -97,6 +98,12 @@
   },
   "peerDependenciesMeta": {
     "pug": {
+      "optional": true
+    },
+    "vue-template-compiler": {
+      "optional": true
+    },
+    "@vue/compiler-sfc": {
       "optional": true
     }
   },

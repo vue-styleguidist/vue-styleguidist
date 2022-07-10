@@ -90,7 +90,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Load examples
 	const examples = source ? chunkify(source, updateExample, customLangs) : []
 
-	const getExampleLiveImports = (srci: string) => getImports(getScript(srci, config.jsxInExamples))
+	const getExampleLiveImports = (liveExampleScript: string) => getImports(getScript(liveExampleScript, config.jsxInExamples))
 
 	// Find all import statements and require() calls in examples to make them
 	// available in webpack context at runtime.

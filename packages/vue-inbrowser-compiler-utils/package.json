@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler-utils",
-  "version": "4.44.23",
+  "version": "4.45.0",
   "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
   "module": "lib/vue-inbrowser-compiler-utils.esm.js",
   "main": "lib/vue-inbrowser-compiler-utils.cjs.js",
@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "camelcase": "^5.3.1",
-    "vue-inbrowser-compiler-demi": "^4.44.23"
+    "vue-inbrowser-compiler-demi": "^4.45.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "15.1.0",

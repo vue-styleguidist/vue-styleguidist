@@ -11,6 +11,7 @@ import forEach from 'lodash/forEach'
 import isFunction from 'lodash/isFunction'
 import makeWebpackConfig from 'react-styleguidist/lib/scripts/make-webpack-config'
 import StyleguidistOptionsPlugin from 'react-styleguidist/lib/scripts/utils/StyleguidistOptionsPlugin'
+import { isVue3 } from 'vue-inbrowser-compiler-utils'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import mergeWebpackConfig from './utils/mergeWebpackConfig'
 
@@ -63,14 +64,14 @@ export default function (
 		}
 	}
 
-	webpackConfig.mode = env
+  webpackConfig.mode = env
 
 	if (config.webpackConfig) {
     config.webpackConfig.plugins = config.webpackConfig.plugins?.filter(p => p.constructor.name !== "HtmlWebpackPlugin") || []
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	const vue$ = 'vue/dist/vue.esm.js'
+	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
@@ -90,7 +91,9 @@ export default function (
 			new MiniHtmlWebpackPlugin(htmlPluginOptions),
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env)
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
+        '__VUE_OPTIONS_API__': true,
+        '__VUE_PROD_DEVTOOLS__': true,
 			})
 		]
 	})
