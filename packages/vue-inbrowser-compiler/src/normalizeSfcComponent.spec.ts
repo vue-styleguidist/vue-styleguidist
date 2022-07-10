@@ -125,7 +125,7 @@ describe('parseScriptCode', () => {
     expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: () => {
-            return <div {...__Concatenate__({class:undefined},{class: 'a', style:{color:'blue'}})} >Hello</div>
+            return <div {...Object.assign({class:\\"b\\"},{class: 'a', style:{color:'blue'}})} >Hello</div>
           }",
         "postprocessing": "",
         "preprocessing": "
@@ -143,7 +143,7 @@ describe('parseScriptCode', () => {
     expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: () => {
-            return <CouCou {...__Concatenate__({class:undefined},{class: 'a', style:{color:'blue'}})} />
+            return <CouCou {...Object.assign({class:\\"b\\"},{class: 'a', style:{color:'blue'}})} />
           }",
         "postprocessing": "",
         "preprocessing": "
@@ -161,7 +161,7 @@ describe('parseScriptCode', () => {
     expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: function (){
-            return <CouCou {...__Concatenate__({class:\\"b\\"},{style:{background:\\"gray\\"}},{class: 'a', style:{color:'blue'}})} />
+            return <CouCou {...Object.assign({class:\\"b\\"},{style:{background:\\"gray\\"}},{class: 'a', style:{color:'blue'}})} />
           }",
         "postprocessing": "",
         "preprocessing": "
