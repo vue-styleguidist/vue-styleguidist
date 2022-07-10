@@ -30,7 +30,7 @@ export default function compileVueCodeForEvalFunction(
 	const configWithTransforms: TransformOptions = {
 		production: true,
 		...config,
-		transforms: ['typescript', 'imports', 'jsx']
+		transforms: ['typescript', 'imports', ...(config.jsxPragma ? ['jsx'] as const : [])]
 	}
 	return {
 		...nonCompiledComponent,

@@ -4,7 +4,7 @@ import normalizeSfcComponent from './normalizeSfcComponent'
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func
 	const scriptTransformed = transform(sut.script, {
-		transforms: ['imports'],
+		transforms: ['imports', 'typescript'],
 		production: true
 	}).code
 	return new Function('require', scriptTransformed)(() => ({
@@ -77,4 +77,21 @@ computed:{
 </script>`)
 		expect(evalFunction(sut).render.toString()).toMatch(/const h = this\.\$createElement/)
 	})
+
+  it('should parse typescript components', () => {
+    const sut = normalizeSfcComponent(`
+<script lang="ts">
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  },
+  render(props: any) {
+    return h('div', this.msg)
+  }
+}
+</script>`)
+
+    expect(() => evalFunction(sut)).not.toThrow()
+  })
 })
