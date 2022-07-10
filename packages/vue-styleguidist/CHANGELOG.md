@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.46.1
+
+### Patch Changes
+
+- [`d299ba3f`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d299ba3f435ff13a3f7174c321a32982d92e078e) Thanks [@elevatebart](https://github.com/elevatebart)! - Fix when docs block and vue 3
+
 ## 4.46.0
 
 ### Minor Changes

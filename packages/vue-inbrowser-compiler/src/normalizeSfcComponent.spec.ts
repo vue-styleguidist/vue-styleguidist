@@ -1,5 +1,6 @@
 import { transform } from 'sucrase'
-import normalizeSfcComponent from './normalizeSfcComponent'
+import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
+
 
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func
@@ -93,5 +94,79 @@ export default {
 </script>`)
 
     expect(() => evalFunction(sut)).not.toThrow()
+  })
+})
+
+describe('parseScriptCode', () => {
+  it('should return component code', () => {
+    const ret = parseScriptCode(`
+    export default () => {
+      return <div>Hello</div>
+    }`)
+
+    expect(ret).toMatchInlineSnapshot(`
+      {
+        "component": "render: () => {
+            return <div>Hello</div>
+          }",
+        "postprocessing": "",
+        "preprocessing": "
+          ",
+      }
+    `)
+  })
+
+  it('should replace spreads by concatenate', () => {
+    const ret = parseScriptCode(`
+    export default () => {
+      return <div class='b' {...{class: 'a', style:{color:'blue'}}}>Hello</div>
+    }`)
+
+    expect(ret).toMatchInlineSnapshot(`
+      {
+        "component": "render: () => {
+            return <div {...concatenate({class:'b'},{class: 'a', style:{color:'blue'}})} >Hello</div>
+          }",
+        "postprocessing": "",
+        "preprocessing": "
+          ",
+      }
+    `)
+  })
+
+  it('should replace spreads by concatenate on self closing tags', () => {
+    const ret = parseScriptCode(`
+    export default () => {
+      return <CouCou class='b' {...{class: 'a', style:{color:'blue'}}} />
+    }`)
+
+    expect(ret).toMatchInlineSnapshot(`
+      {
+        "component": "render: () => {
+            return <CouCou {...concatenate({class:'b'},{class: 'a', style:{color:'blue'}})} />
+          }",
+        "postprocessing": "",
+        "preprocessing": "
+          ",
+      }
+    `)
+  })
+
+  it('should return a full function', () => {
+    const ret = parseScriptCode(`
+    export default function (){
+      return <CouCou class='b' {...{class: 'a', style:{color:'blue'}}} />
+    }`)
+
+    expect(ret).toMatchInlineSnapshot(`
+      {
+        "component": "render: function (){
+            return <CouCou {...concatenate({class:'b'},{class: 'a', style:{color:'blue'}})} />
+          }",
+        "postprocessing": "",
+        "preprocessing": "
+          ",
+      }
+    `)
   })
 })
