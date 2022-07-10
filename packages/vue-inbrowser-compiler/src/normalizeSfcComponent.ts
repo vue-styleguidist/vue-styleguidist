@@ -58,7 +58,7 @@ export function parseScriptCode(code: string): {
 	let endIndex = -1
 	let offset = 0
 	let renderFunctionStart = -1
-  const ast = getAst(code)
+  const ast = getAst(code).program
 
   let isFunctional = false
   const setFunctionalComponent = (node:any) => {
