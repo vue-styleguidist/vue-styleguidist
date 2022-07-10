@@ -24,7 +24,7 @@ interface EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: Omit<TransformOptions, 'transforms'> = {}
+	config: Omit<TransformOptions, 'transforms'> & {objectAssign?: string} = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const configWithTransforms: TransformOptions = {
@@ -40,7 +40,7 @@ export default function compileVueCodeForEvalFunction(
 
 function prepareVueCodeForEvalFunction(
 	code: string,
-	config: { jsxPragma?: string }
+	config: { jsxPragma?: string, objectAssign?: string }
 ): EvaluableComponent {
 	let style
 	let vsgMode = false
@@ -50,7 +50,7 @@ function prepareVueCodeForEvalFunction(
 	// transform it in to a "return"
 	// even if jsx is used in an sfc we still use this use case
 	if (isCodeVueSfc(code)) {
-		return normalizeSfcComponent(code)
+		return normalizeSfcComponent(code, config)
 	}
 
 	// if it's not a new Vue, it must be a simple template or a vsg format
@@ -59,7 +59,7 @@ function prepareVueCodeForEvalFunction(
 		// this for jsx examples without the SFC shell
 		// export default {render: (h) => <Button>}
 		if (config.jsxPragma) {
-			const { preprocessing, component } = parseScriptCode(code)
+			const { preprocessing, component } = parseScriptCode(code, config)
 			return {
 				script: `${preprocessing};return {${component}};`
 			}

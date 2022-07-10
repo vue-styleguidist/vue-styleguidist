@@ -26,7 +26,10 @@ function getSingleFileComponentParts(code: string) {
 	return parts
 }
 
-function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
+function injectTemplateAndParseExport(
+	parts: VsgSFCDescriptor,
+	config: { objectAssign?: string }
+): {
 	preprocessing?: string
 	component: string
 } {
@@ -38,7 +41,7 @@ function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 		return { component: `{template: \`${templateString}\` }` }
 	}
 
-	const comp = parseScriptCode(parts.script)
+	const comp = parseScriptCode(parts.script, config)
 	if (templateString) {
 		comp.component = `{template: \`${templateString}\`, ${comp.component}}`
 	} else {
@@ -47,25 +50,28 @@ function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 	return comp
 }
 
-export function parseScriptCode(code: string): {
+export function parseScriptCode(
+	code: string,
+	config: { objectAssign?: string } = {}
+): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
-  isFunctional?: boolean
+	isFunctional?: boolean
 } {
 	let preprocessing = ''
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
 	let renderFunctionStart = -1
-  const ast = getAst(code).program
+	const ast = getAst(code).program
 
-  let isFunctional = false
-  const setFunctionalComponent = (node:any) => {
-    if(['ArrowFunctionExpression', 'FunctionDeclaration'].includes(node.type)) {
-      isFunctional = true
-    }
-  }
+	let isFunctional = false
+	const setFunctionalComponent = (node: any) => {
+		if (['ArrowFunctionExpression', 'FunctionDeclaration'].includes(node.type)) {
+			isFunctional = true
+		}
+	}
 
 	walkes(ast, {
 		// export const MyComponent = {}
@@ -76,7 +82,7 @@ export function parseScriptCode(code: string): {
 			if (node.declarations) {
 				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
 			}
-      setFunctionalComponent(node.declaration.declarations[0])
+			setFunctionalComponent(node.declaration.declarations[0])
 		},
 		// export default {}
 		ExportDefaultDeclaration(node: any) {
@@ -84,7 +90,7 @@ export function parseScriptCode(code: string): {
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
 			renderFunctionStart = getRenderFunctionStart(node.declaration)
-      setFunctionalComponent(node.declaration)
+			setFunctionalComponent(node.declaration)
 		},
 		//module.exports = {}
 		AssignmentExpression(node: any) {
@@ -97,24 +103,24 @@ export function parseScriptCode(code: string): {
 				preprocessing = code.slice(0, node.start + offset)
 				startIndex = node.right.start + offset
 				endIndex = node.right.end + offset
-        setFunctionalComponent(node.right)
+				setFunctionalComponent(node.right)
 			}
-		},
+		}
 	})
 
-  walkes(ast, {
-    JSXOpeningElement(node: any) {
-      if(node.attributes.some((attrNode: any) => attrNode.type === 'JSXSpreadAttribute')) {
-        const ret = transformOneJSXSpread(node, code, offset)
-        if(node.start + offset < startIndex) {
-          offset += ret.offset
-        } else if (node.end + offset < endIndex) {
-          endIndex += ret.offset
-        }
-			  code = ret.code
-      }
-    }
-  })
+	walkes(ast, {
+		JSXOpeningElement(node: any) {
+			if (node.attributes.some((attrNode: any) => attrNode.type === 'JSXSpreadAttribute')) {
+				const ret = transformOneJSXSpread(node, code, offset, config)
+				if (node.start + offset < startIndex) {
+					offset += ret.offset
+				} else if (node.end + offset < endIndex) {
+					endIndex += ret.offset
+				}
+				code = ret.code
+			}
+		}
+	})
 
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
@@ -128,14 +134,14 @@ export function parseScriptCode(code: string): {
 		endIndex += JSX_ADDON_LENGTH
 	}
 
-	const component = isFunctional 
-    ? `render: ${code.slice(startIndex, endIndex)}`
-    : code.slice(startIndex + 1, endIndex - 1) 
+	const component = isFunctional
+		? `render: ${code.slice(startIndex, endIndex)}`
+		: code.slice(startIndex + 1, endIndex - 1)
 
 	return {
 		preprocessing,
 		component,
-		postprocessing: code.slice(endIndex),
+		postprocessing: code.slice(endIndex)
 	}
 }
 
@@ -163,14 +169,14 @@ export function insertCreateElementFunction(before: string, after: string): stri
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
+export default function normalizeSfcComponent(
+	code: string,
+	config: { objectAssign?: string } = {}
+): { script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const {preprocessing, component} = injectTemplateAndParseExport(parts)
+	const { preprocessing, component } = injectTemplateAndParseExport(parts, config)
 	return {
-		script: [
-			preprocessing,
-			`return ${component}`,
-		].join(';'),
+		script: [preprocessing, `return ${component}`].join(';'),
 		style: buildStyles(parts.styles)
 	}
 }

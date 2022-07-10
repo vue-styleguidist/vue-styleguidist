@@ -176,7 +176,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 					// sucrase all at the same time. We then tell it to calculate on the fly
 					const compiledExample = compile(example.content, {
 						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsxPragma: '__pragma__(h)' } : {})
+						...(config.jsxInExamples ? { jsxPragma: '__pragma__(h)', objectAssign: 'concatenate' } : {})
 					})
 					compiled = {
 						...compiledExample

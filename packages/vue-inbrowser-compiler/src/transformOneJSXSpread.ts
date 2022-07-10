@@ -1,9 +1,11 @@
-export default function transformOneJSXSpread(node: any, code: string, offset: number) {
+export default function transformOneJSXSpread(node: any, code: string, offset: number, config: { objectAssign?: string } ) {
 	const start = node.start + offset
 	const end = node.end + offset
 
+  const objectAssign = config.objectAssign || 'Object.assign'
+
 	const statement = code.substring(start, end)
-	const transpiledStatement = `<${node.name.name} {...__Concatenate__(${node.attributes
+	const transpiledStatement = `<${node.name.name} {...${objectAssign}(${node.attributes
 		.map((attrNode: any) => {
 			if (attrNode.type === 'JSXSpreadAttribute') {
 				return `${code.substring(attrNode.argument.start + offset, attrNode.argument.end + offset)}`
