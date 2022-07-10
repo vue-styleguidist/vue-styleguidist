@@ -155,13 +155,13 @@ describe('parseScriptCode', () => {
   it('should return a full function', () => {
     const ret = parseScriptCode(`
     export default function (){
-      return <CouCou class='b' {...{class: 'a', style:{color:'blue'}}} />
+      return <CouCou class='b' style={{background:"gray"}} {...{class: 'a', style:{color:'blue'}}} />
     }`)
 
     expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: function (){
-            return <CouCou {...__Concatenate__({class:undefined},{class: 'a', style:{color:'blue'}})} />
+            return <CouCou {...__Concatenate__({class:\\"b\\"},{style:{background:\\"gray\\"}},{class: 'a', style:{color:'blue'}})} />
           }",
         "postprocessing": "",
         "preprocessing": "
