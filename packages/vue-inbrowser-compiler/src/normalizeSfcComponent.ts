@@ -84,7 +84,7 @@ export function parseScriptCode(
 			}
 			setFunctionalComponent(node.declaration.declarations[0])
 		},
-		// export default {}
+		//export default {}
 		ExportDefaultDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
