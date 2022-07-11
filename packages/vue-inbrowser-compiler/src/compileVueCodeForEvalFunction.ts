@@ -24,13 +24,14 @@ interface EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: Omit<TransformOptions, 'transforms'> & {objectAssign?: string} = {}
+	config: Omit<TransformOptions, 'transforms'> & { objectAssign?: string } = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const configWithTransforms: TransformOptions = {
 		production: true,
-		...config,
-		transforms: ['typescript', 'imports', ...(config.jsxPragma ? ['jsx'] as const : [])]
+		jsxPragma: config.jsxPragma,
+		jsxFragmentPragma: config.jsxFragmentPragma,
+		transforms: ['typescript', 'imports', ...(config.jsxPragma ? (['jsx'] as const) : [])]
 	}
 	return {
 		...nonCompiledComponent,
@@ -40,7 +41,7 @@ export default function compileVueCodeForEvalFunction(
 
 function prepareVueCodeForEvalFunction(
 	code: string,
-	config: { jsxPragma?: string, objectAssign?: string }
+	config: { jsxPragma?: string; objectAssign?: string }
 ): EvaluableComponent {
 	let style
 	let vsgMode = false
