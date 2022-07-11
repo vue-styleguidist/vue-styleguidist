@@ -81,7 +81,7 @@
     "source-map": "0.7.4",
     "style-loader": "^1.3.0",
     "sucrase": "^3.21.0",
-    "terser-webpack-plugin": "^2.3.8",
+    "terser-webpack-plugin": "^4",
     "to-ast": "^1.0.0",
     "vue-docgen-api": "^4.45.0",
     "vue-inbrowser-compiler": "^4.44.24",
