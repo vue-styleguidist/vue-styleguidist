@@ -10,6 +10,7 @@ import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-markup'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-typescript'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
@@ -26,7 +27,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 			const scriptCode = getScript(code, jsxInExamples)
 			const scriptCodeHighlighted = prismHighlight(
 				scriptCode,
-				languages[jsxInExamples ? 'jsx' : 'js'],
+				languages[jsxInExamples ? 'tsx' : 'ts'],
 				lang
 			)
 			if (code.length === scriptCode.length) {
