@@ -1,7 +1,6 @@
-import { transform, TransformOptions } from 'buble'
+import { transform, Options as TransformOptions } from 'sucrase'
 import walkes from 'walkes'
 import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
-import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
 	getRenderFunctionStart,
@@ -9,7 +8,6 @@ import normalizeSfcComponent, {
 	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
 import getAst from './getAst'
-import getTargetFromBrowser from './getTargetFromBrowser'
 
 interface EvaluableComponent {
 	script: string
@@ -21,22 +19,30 @@ interface EvaluableComponent {
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
  * @param code
- * @param config buble config to be used when transforming
+ * @param config sucrase config to be used when transforming
  *
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: TransformOptions = {}
+	config: Omit<TransformOptions, 'transforms'> & { objectAssign?: string } = {}
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
-	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
+	const configWithTransforms: TransformOptions = {
+		production: true,
+		jsxPragma: config.jsxPragma,
+		jsxFragmentPragma: config.jsxFragmentPragma,
+		transforms: ['typescript', 'imports', ...(config.jsxPragma ? (['jsx'] as const) : [])]
+	}
 	return {
 		...nonCompiledComponent,
-		script: transform(nonCompiledComponent.script, { target, ...config }).code
+		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 }
 
-function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
+function prepareVueCodeForEvalFunction(
+	code: string,
+	config: { jsxPragma?: string; objectAssign?: string }
+): EvaluableComponent {
 	let style
 	let vsgMode = false
 	let template
@@ -45,7 +51,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	// transform it in to a "return"
 	// even if jsx is used in an sfc we still use this use case
 	if (isCodeVueSfc(code)) {
-		return normalizeSfcComponent(code)
+		return normalizeSfcComponent(code, config)
 	}
 
 	// if it's not a new Vue, it must be a simple template or a vsg format
@@ -53,10 +59,10 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	if (!/new Vue\(/.test(code)) {
 		// this for jsx examples without the SFC shell
 		// export default {render: (h) => <Button>}
-		if (config.jsx) {
-			const { preprocessing, component, postprocessing } = parseScriptCode(code)
+		if (config.jsxPragma) {
+			const { preprocessing, component } = parseScriptCode(code, config)
 			return {
-				script: `${preprocessing};return {${component}};${postprocessing}`
+				script: `${preprocessing};return {${component}};`
 			}
 		}
 
@@ -72,7 +78,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	const ast = getAst(code)
 	let offset = 0
 	const varNames: string[] = []
-	walkes(ast, {
+	walkes(ast.program, {
 		// replace `new Vue({data})` by `return {data}`
 		ExpressionStatement(node: any) {
 			if (node.expression.type === 'NewExpression' && node.expression.callee.name === 'Vue') {
@@ -96,9 +102,6 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		},
 		// transform all imports into require function calls
 		ImportDeclaration(node: any) {
-			const ret = transformOneImport(node, code, offset)
-			offset = ret.offset
-			code = ret.code
 			if (vsgMode && node.specifiers) {
 				node.specifiers.forEach((s: any) => varNames.push(s.local.name))
 			}

@@ -1,7 +1,7 @@
 import walkes from 'walkes'
 import { parseComponent, VsgSFCDescriptor, isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
-import transformOneImport from './transformOneImport'
+import transformOneJSXSpread from './transformOneJSXSpread'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''
@@ -26,10 +26,12 @@ function getSingleFileComponentParts(code: string) {
 	return parts
 }
 
-function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
+function injectTemplateAndParseExport(
+	parts: VsgSFCDescriptor,
+	config: { objectAssign?: string }
+): {
 	preprocessing?: string
 	component: string
-	postprocessing?: string
 } {
 	const templateString = parts.template
 		? parts.template.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
@@ -39,7 +41,7 @@ function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 		return { component: `{template: \`${templateString}\` }` }
 	}
 
-	const comp = parseScriptCode(parts.script)
+	const comp = parseScriptCode(parts.script, config)
 	if (templateString) {
 		comp.component = `{template: \`${templateString}\`, ${comp.component}}`
 	} else {
@@ -48,18 +50,31 @@ function injectTemplateAndParseExport(parts: VsgSFCDescriptor): {
 	return comp
 }
 
-export function parseScriptCode(code: string): {
+export function parseScriptCode(
+	code: string,
+	config: { objectAssign?: string } = {}
+): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
+	isFunctional?: boolean
 } {
 	let preprocessing = ''
 	let startIndex = -1
 	let endIndex = -1
 	let offset = 0
 	let renderFunctionStart = -1
-	walkes(getAst(code), {
-		//export const MyComponent = {}
+	const ast = getAst(code).program
+
+	let isFunctional = false
+	const setFunctionalComponent = (node: any) => {
+		if (['ArrowFunctionExpression', 'FunctionDeclaration'].includes(node.type)) {
+			isFunctional = true
+		}
+	}
+
+	walkes(ast, {
+		// export const MyComponent = {}
 		ExportNamedDeclaration(node: any) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
@@ -67,6 +82,7 @@ export function parseScriptCode(code: string): {
 			if (node.declarations) {
 				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
 			}
+			setFunctionalComponent(node.declaration.declarations[0])
 		},
 		//export default {}
 		ExportDefaultDeclaration(node: any) {
@@ -74,6 +90,7 @@ export function parseScriptCode(code: string): {
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
 			renderFunctionStart = getRenderFunctionStart(node.declaration)
+			setFunctionalComponent(node.declaration)
 		},
 		//module.exports = {}
 		AssignmentExpression(node: any) {
@@ -86,15 +103,25 @@ export function parseScriptCode(code: string): {
 				preprocessing = code.slice(0, node.start + offset)
 				startIndex = node.right.start + offset
 				endIndex = node.right.end + offset
+				setFunctionalComponent(node.right)
 			}
-		},
-		// and transform import statements into require
-		ImportDeclaration(node: any) {
-			const ret = transformOneImport(node, code, offset)
-			offset = ret.offset
-			code = ret.code
 		}
 	})
+
+	walkes(ast, {
+		JSXOpeningElement(node: any) {
+			if (node.attributes.some((attrNode: any) => attrNode.type === 'JSXSpreadAttribute')) {
+				const ret = transformOneJSXSpread(node, code, offset, config)
+				if (node.start + offset < startIndex) {
+					offset += ret.offset
+				} else if (node.end + offset < endIndex) {
+					endIndex += ret.offset
+				}
+				code = ret.code
+			}
+		}
+	})
+
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
@@ -106,7 +133,11 @@ export function parseScriptCode(code: string): {
 		)
 		endIndex += JSX_ADDON_LENGTH
 	}
-	const component = code.slice(startIndex + 1, endIndex - 1)
+
+	const component = isFunctional
+		? `render: ${code.slice(startIndex, endIndex)}`
+		: code.slice(startIndex + 1, endIndex - 1)
+
 	return {
 		preprocessing,
 		component,
@@ -122,8 +153,8 @@ export function getRenderFunctionStart(objectExpression: any): number {
 		const renderFunctionObj = nodeProperties.find(
 			(p: any) => p.key && p.key.type === 'Identifier' && p.key.name === 'render'
 		)
-		if (renderFunctionObj && renderFunctionObj.value.body) {
-			return renderFunctionObj.value.body.start
+		if (renderFunctionObj?.body) {
+			return renderFunctionObj.body.start
 		}
 	}
 	return -1
@@ -138,15 +169,14 @@ export function insertCreateElementFunction(before: string, after: string): stri
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
+export default function normalizeSfcComponent(
+	code: string,
+	config: { objectAssign?: string } = {}
+): { script: string; style?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const extractedComponent = injectTemplateAndParseExport(parts)
+	const { preprocessing, component } = injectTemplateAndParseExport(parts, config)
 	return {
-		script: [
-			extractedComponent.preprocessing,
-			`return ${extractedComponent.component}`,
-			extractedComponent.postprocessing
-		].join(';'),
+		script: [preprocessing, `return ${component}`].join(';'),
 		style: buildStyles(parts.styles)
 	}
 }

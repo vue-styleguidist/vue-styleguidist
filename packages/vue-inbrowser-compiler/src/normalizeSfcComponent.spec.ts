@@ -1,14 +1,8 @@
-import { transform } from 'sucrase'
-import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
-
+import normalizeSfcComponent from './normalizeSfcComponent'
 
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func
-	const scriptTransformed = transform(sut.script, {
-		transforms: ['imports', 'typescript'],
-		production: true
-	}).code
-	return new Function('require', scriptTransformed)(() => ({
+	return new Function('require', sut.script)(() => ({
 		default: { component: vi.fn() }
 	}))
 }
@@ -78,95 +72,4 @@ computed:{
 </script>`)
 		expect(evalFunction(sut).render.toString()).toMatch(/const h = this\.\$createElement/)
 	})
-
-  it('should parse typescript components', () => {
-    const sut = normalizeSfcComponent(`
-<script lang="ts">
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  render(props: any) {
-    return h('div', this.msg)
-  }
-}
-</script>`)
-
-    expect(() => evalFunction(sut)).not.toThrow()
-  })
-})
-
-describe('parseScriptCode', () => {
-  it('should return component code', () => {
-    const ret = parseScriptCode(`
-    export default () => {
-      return <div>Hello</div>
-    }`)
-
-    expect(ret).toMatchInlineSnapshot(`
-      {
-        "component": "render: () => {
-            return <div>Hello</div>
-          }",
-        "postprocessing": "",
-        "preprocessing": "
-          ",
-      }
-    `)
-  })
-
-  it('should replace spreads by concatenate', () => {
-    const ret = parseScriptCode(`
-    export default () => {
-      return <div class='b' {...{class: 'a', style:{color:'blue'}}}>Hello</div>
-    }`)
-
-    expect(ret).toMatchInlineSnapshot(`
-      {
-        "component": "render: () => {
-            return <div {...Object.assign({class:\\"b\\"},{class: 'a', style:{color:'blue'}})} >Hello</div>
-          }",
-        "postprocessing": "",
-        "preprocessing": "
-          ",
-      }
-    `)
-  })
-
-  it('should replace spreads by concatenate on self closing tags', () => {
-    const ret = parseScriptCode(`
-    export default () => {
-      return <CouCou class='b' {...{class: 'a', style:{color:'blue'}}} />
-    }`)
-
-    expect(ret).toMatchInlineSnapshot(`
-      {
-        "component": "render: () => {
-            return <CouCou {...Object.assign({class:\\"b\\"},{class: 'a', style:{color:'blue'}})} />
-          }",
-        "postprocessing": "",
-        "preprocessing": "
-          ",
-      }
-    `)
-  })
-
-  it('should return a full function', () => {
-    const ret = parseScriptCode(`
-    export default function (){
-      return <CouCou class='b' style={{background:"gray"}} {...{class: 'a', style:{color:'blue'}}} />
-    }`)
-
-    expect(ret).toMatchInlineSnapshot(`
-      {
-        "component": "render: function (){
-            return <CouCou {...Object.assign({class:\\"b\\"},{style:{background:\\"gray\\"}},{class: 'a', style:{color:'blue'}})} />
-          }",
-        "postprocessing": "",
-        "preprocessing": "
-          ",
-      }
-    `)
-  })
 })

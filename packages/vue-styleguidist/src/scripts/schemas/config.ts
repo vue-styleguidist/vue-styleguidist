@@ -38,6 +38,11 @@ export default {
 			'Should the styleguide try code splitting for better performance? NOte that you will need the proper transform in your babel config',
 		type: 'boolean'
 	},
+	compilerPackage: {
+		type: 'string',
+		description: 'Compiler to use for compiling examples in the browser',
+		example: 'vue-inbrowser-compiler-sucrase'
+	},
 	compilerConfig: {
 		tstype: 'TransformOptions',
 		type: 'object',
@@ -139,7 +144,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		}
 	},
 	exampleMode: {
-		tstype: 'Rsg.EXPAND_MODE',
+		tstype: 'Rsg.ExpandMode',
 		message: 'Example Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -475,7 +480,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
-		tstype: 'Rsg.EXPAND_MODE',
+		tstype: 'Rsg.ExpandMode',
 		message: 'Usage Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -486,7 +491,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: 'collapse'
 	},
 	tocMode: {
-		tstype: 'Rsg.EXPAND_MODE',
+		tstype: 'Rsg.ExpandMode',
 		message: 'Table Of Contents Collapsed mode',
 		description:
 			'If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases',

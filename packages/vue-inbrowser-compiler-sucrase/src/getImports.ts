@@ -1,5 +1,5 @@
-import { getAst } from 'vue-inbrowser-compiler'
 import walkes from 'walkes'
+import getAst from './getAst'
 
 export default function getImports(code: string): string[] {
 	const imports: string[] = []

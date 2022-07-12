@@ -10,11 +10,11 @@ import { builders as b } from 'ast-types'
 import { compile } from 'vue-inbrowser-compiler'
 import * as Rsg from 'react-styleguidist'
 import chunkify from 'react-styleguidist/lib/loaders/utils/chunkify'
+import getImports from 'react-styleguidist/lib/loaders/utils/getImports'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import resolveESModule from 'react-styleguidist/lib/loaders/utils/resolveESModule'
 import { StyleguidistContext } from '../types/StyleGuide'
 import expandDefaultComponent from './utils/expandDefaultComponent'
-import getImports from './utils/getImports'
 import getComponentVueDoc from './utils/getComponentVueDoc'
 import importCodeExampleFile from './utils/importCodeExampleFile'
 import absolutize from './utils/absolutize'
@@ -50,6 +50,10 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 		source = getComponentVueDoc(src, filePath)
 	}
 	const config = this._styleguidist
+
+	const compiler: { compile: typeof compile; getImports: typeof getImports } =
+		config.compilerPackage ? require(config.compilerPackage) : { compile, getImports }
+
 	const options = loaderUtils.getOptions(this) || {}
 	const { file, displayName, shouldShowDefaultExample, customLangs } = options
 
@@ -90,7 +94,8 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	// Load examples
 	const examples = source ? chunkify(source, updateExample, customLangs) : []
 
-	const getExampleLiveImports = (liveExampleScript: string) => getImports(getScript(liveExampleScript, config.jsxInExamples))
+	const getExampleLiveImports = (liveExampleScript: string) =>
+		compiler.getImports(getScript(liveExampleScript, config.jsxInExamples))
 
 	// Find all import statements and require() calls in examples to make them
 	// available in webpack context at runtime.
@@ -174,9 +179,11 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 				if (process.env.NODE_ENV === 'production') {
 					// if we are not in prod, we want to avoid running examples through
 					// sucrase all at the same time. We then tell it to calculate on the fly
-					const compiledExample = compile(example.content, {
+					const compiledExample = compiler.compile(example.content, {
 						...config.compilerConfig,
-						...(config.jsxInExamples ? { jsxPragma: '__pragma__(h)', objectAssign: 'concatenate' } : {})
+						...(config.jsxInExamples
+							? { jsxPragma: '__pragma__(h)', objectAssign: 'concatenate' }
+							: {})
 					})
 					compiled = {
 						...compiledExample
