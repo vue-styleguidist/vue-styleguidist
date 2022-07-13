@@ -18,6 +18,14 @@ By default vue-styleguidist will build one single bundle for all your javascript
 >
 > `SyntaxError: Support for the experimental syntax 'dynamicImport' isn't currently enabled`
 
+## `compilerPackage`
+
+Type: `String`, optional
+
+Path or name of a module that exports a `compile` and a `getImports` function. It will be used to compile your live examples. vue-styleguidist will do `require(config.compilerPackage)` to get the `compile` function. 
+- Checkout [examples-loader.ts](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/src/loaders/examples-loader.ts) to see the implementation on the node side. 
+- See [Preview.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/src/client/rsg-components/Preview/Preview.js) to see how it is used in the frontend.
+
 ## `compilerConfig`
 
 Type: `Object`, default: `{ objectAssign: 'Object.assign' }`
