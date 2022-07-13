@@ -55,6 +55,7 @@
     "@types/react-dom": "18.0.6",
     "@types/webpack-dev-server": "3.11.6",
     "@vue/cli": "4.5.19",
+    "acorn": "^6.4.2",
     "c8": "7.11.3",
     "clipboard": "2.0.9",
     "core-js": "3.20.3",
