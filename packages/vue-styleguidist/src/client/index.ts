@@ -1,7 +1,7 @@
 /* eslint-disable import/first */
 import 'react-styleguidist/lib/client/polyfills'
 import 'react-styleguidist/lib/client/styles'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { getParameterByName, hasInHash } from 'react-styleguidist/lib/client/utils/handleHash'
 import renderStyleguide from './utils/renderStyleguide'
 
@@ -34,10 +34,9 @@ const scrollToOrigin = () => {
 const render = () => {
 	// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-unresolved,import/extensions
 	const styleguide = require('!!../loaders/styleguide-loader!./index.js')
-	ReactDOM.render(
-		renderStyleguide(styleguide, codeRevision),
-		document.getElementById(styleguide.config.mountPointId)
-	)
+	const container = document.getElementById(styleguide.config.mountPointId)
+	const root = createRoot(container) // createRoot(container!) if you use TypeScript
+	root.render(renderStyleguide(styleguide, codeRevision))
 }
 
 window.addEventListener('hashchange', render)
