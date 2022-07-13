@@ -2,25 +2,21 @@ import { defineConfig } from 'cypress'
 import makeWebpackConfig from './packages/vue-styleguidist/src/scripts/make-webpack-config'
 import getConfig from './packages/vue-styleguidist/src/scripts/config'
 
-const webpackConfig = async () => {
-	const conf = await makeWebpackConfig(
-		await getConfig({
-			webpackConfig: {
-				module: {
-					rules: [
-						{
-							test: /\.{ts,js,tsx,jsx}$/,
-							loader: 'babel-loader'
-						}
-					]
-				}
+const webpackConfig = makeWebpackConfig(
+	getConfig({
+		webpackConfig: {
+			module: {
+				rules: [
+					{
+						test: /\.{ts,js,tsx,jsx}$/,
+						loader: 'babel-loader'
+					}
+				]
 			}
-		}),
-		'development'
-	)
-	console.log(conf?.module?.rules)
-	return conf
-}
+		}
+	}) as any,
+	'development'
+)
 
 export default defineConfig({
 	fixturesFolder: false,
@@ -36,8 +32,10 @@ export default defineConfig({
 
 	component: {
 		specPattern: 'packages/vue-styleguidist/src/client/**/*.cy.{js,jsx,ts,tsx}',
+		supportFile: 'test/cypress/support/component.ts',
+		indexHtmlFile: 'test/cypress/support/component-index.html',
 		devServer: {
-			framework: 'vue',
+			framework: 'react',
 			bundler: 'webpack',
 			webpackConfig
 		}
