@@ -138,9 +138,8 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-inbrowser-compiler-sucrase: ^4
       vue-loader: ^15.9.8
-      vue-styleguidist: 4.46.1
+      vue-styleguidist: ^4
       vue-template-compiler: ^2.6.14
       vue-types: ^1.7.0
       webpack: ^4.46.0
@@ -160,7 +159,6 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.6.14
-      vue-inbrowser-compiler-sucrase: link:../../packages/vue-inbrowser-compiler-sucrase
       vue-loader: 15.9.8_46seylz2pnrpjvxmspfh66tnva
       vue-styleguidist: link:../../packages/vue-styleguidist
       vue-template-compiler: 2.6.14
@@ -189,7 +187,7 @@ importers:
       vue: 2.6.14
       vue-docgen-cli: ^4.45.0
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       webpack: ^4.46.0
       webpack-bundle-analyzer: 3.3.2
     dependencies:
@@ -232,7 +230,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       webpack: ^4.46.0
     dependencies:
       dog-names: 1.0.2
@@ -330,7 +328,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vue-types: ^1.7.0
       webpack: ^4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -375,7 +373,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vue-types: ^1.7.0
       webpack: ^4.46.0
     dependencies:
@@ -412,7 +410,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.6.14
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vue-types: ^1.7.0
       webpack: ^4.46.0
       webpack-bundle-analyzer: 3.3.2
@@ -456,7 +454,7 @@ importers:
       vue: 2.6.14
       vue-loader: 15.9.3
       vue-style-loader: ^4.1.3
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vuex: 3.6.2
       webpack: ^4.46.0
     dependencies:
@@ -497,7 +495,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       webpack: ^4.46.0
     dependencies:
       dog-names: 1.0.2
@@ -530,7 +528,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       webpack: ^4.46.0
     dependencies:
       dog-names: 1.0.2
@@ -765,7 +763,7 @@ importers:
       typescript: ^4.2.3
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vue-types: ^1.7.0
       webfontloader: ^1.6.28
       webpack: ^4.46.0
@@ -815,7 +813,7 @@ importers:
       vue-i18n: ^7.8.1
       vue-loader: ^15.9.8
       vue-style-loader: ^4.1.3
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vuetify: ^2.6.2
       webpack: ^4.46.0
     dependencies:
@@ -852,7 +850,7 @@ importers:
       style-loader: ^0.19.1
       vue: ^2.6.14
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       vuex: ^3.6.2
       webpack: ^4.46.0
     dependencies:
@@ -885,7 +883,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       webpack: ^4.46.0
     dependencies:
       dog-names: 1.0.2
@@ -916,7 +914,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue-loader: ^15.9.8
-      vue-styleguidist: ^4.46.1
+      vue-styleguidist: ^4
       webpack: ^4.46.0
     dependencies:
       dog-names: 1.0.2
@@ -958,7 +956,7 @@ importers:
     specifiers:
       '@vue/cli': 4.5.19
       '@vue/cli-test-utils': 4.5.19
-      vue-styleguidist: ^4.45.0
+      vue-styleguidist: ^4
       webpack: 4.46.0
       webpack-merge: ^4.2.2
     dependencies:
@@ -12617,7 +12615,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.1
       unique-filename: 1.1.1
@@ -12641,7 +12639,7 @@ packages:
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
       p-map: 3.0.0
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 7.1.0
       unique-filename: 1.1.1
@@ -23080,7 +23078,7 @@ packages:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.2.0_typescript@4.2.3
+      ts-pnp: 1.2.0
     transitivePeerDependencies:
       - typescript
 
@@ -23088,7 +23086,7 @@ packages:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.2.0_typescript@4.2.3
+      ts-pnp: 1.2.0
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -23849,22 +23847,12 @@ packages:
     engines: {node: '>=0.4.0'}
 
   /promise-inflight/1.0.1:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
+    resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
     peerDependencies:
       bluebird: '*'
     peerDependenciesMeta:
       bluebird:
         optional: true
-
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
 
   /promise/7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
@@ -27070,7 +27058,7 @@ packages:
     resolution: {integrity: sha512-vDWbsl26LIcPGmDpoVzjEP6+hvHZkBkLW7JpvwbCv/5IYPJlsbzCVXY3wsCeAxAUeTclNOUZxnLdGh3VBD/J6w==}
     dev: false
 
-  /ts-pnp/1.2.0_typescript@4.2.3:
+  /ts-pnp/1.2.0:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
     engines: {node: '>=6'}
     peerDependencies:
@@ -27078,8 +27066,6 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
-    dependencies:
-      typescript: 4.2.3
 
   /tsconfig-paths/3.11.0:
     resolution: {integrity: sha512-7ecdYDnIdmv639mmDwslG6KQg1Z9STTz1j7Gcz0xa+nshh/gKDAHcPxRbWOsA3SPp0tXP2leTcY9Kw+NAkfZzA==}
@@ -27253,6 +27239,7 @@ packages:
     resolution: {integrity: sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /typescript/4.5.5:
     resolution: {integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==}
