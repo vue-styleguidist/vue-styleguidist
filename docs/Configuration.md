@@ -20,9 +20,9 @@ By default vue-styleguidist will build one single bundle for all your javascript
 
 ## `compilerConfig`
 
-Type: `Object`, default: `{}`
+Type: `Object`, default: `{ objectAssign: 'Object.assign' }`
 
-Styleguidist uses [Sucrase](https://sucrase.io) to bundle typescript modules code on the frontend. This config object will be added as the second argument for `sucrase.transform`.
+Styleguidist uses `vue-inbrowser-compiler` to bundle typescript/ES6 modules code on the frontend. These options are passed to the compile function.
 
 ## `components`
 
