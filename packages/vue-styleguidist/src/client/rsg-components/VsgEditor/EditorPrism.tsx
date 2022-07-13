@@ -17,6 +17,8 @@ import { useStyleGuideContext } from 'rsg-components/Context'
 import getScript from '../../../loaders/utils/getScript'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
+const VSimpleEditor = SimpleEditor as any
+
 const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
@@ -118,7 +120,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props
 		const langClass = isVueSFC ? 'language-html' : 'language-jsx'
 		return (
-			<SimpleEditor
+			<VSimpleEditor
 				className={cx(root, jssThemedEditor ? jssEditor : langClass, 'prism-editor')}
 				value={this.state.code}
 				onValueChange={this.handleChange}

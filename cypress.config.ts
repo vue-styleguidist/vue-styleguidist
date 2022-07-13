@@ -5,11 +5,30 @@ import getConfig from './packages/vue-styleguidist/src/scripts/config'
 const webpackConfig = makeWebpackConfig(
 	getConfig({
 		webpackConfig: {
+			resolve: {
+				extensions: ['.ts', '.tsx', '.js', '.jsx']
+			},
 			module: {
 				rules: [
 					{
-						test: /\.{ts,js,tsx,jsx}$/,
-						loader: 'babel-loader'
+						test: /\.(tsx|ts|js|jsx)$/,
+						exclude: /node_modules/,
+						use: {
+							loader: 'babel-loader',
+							options: {
+								presets: [
+									[
+										'@babel/env',
+										{
+											corejs: 3,
+											modules: 'commonjs'
+										}
+									],
+									'@babel/typescript',
+									'@babel/react'
+								]
+							}
+						}
 					}
 				]
 			}

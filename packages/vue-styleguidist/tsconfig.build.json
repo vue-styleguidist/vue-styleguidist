@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"declaration": true,
 		"lib": ["dom", "esnext"],
+		"skipLibCheck": true,
 		"outDir": "lib"
 	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"],
