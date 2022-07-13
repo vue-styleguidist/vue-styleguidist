@@ -4,6 +4,7 @@
   "description": "vue cli 3.0 plugin for vue-styleguidist",
   "homepage": "https://vue-styleguidist.github.io",
   "main": "index.js",
+  "typings": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
