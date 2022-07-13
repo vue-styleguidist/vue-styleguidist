@@ -18,7 +18,7 @@ function render(filename) {
 				path.resolve(__dirname, './src/types', filename.replace(/\.ejs$/, '')),
 				`
 /**
-* /!\ WARNING /!\
+* /!\\ WARNING /!\\
 * Do not edit manually.
 * This file is the compilation of 
 * Template: packages/vue-styleguidist/templates/StyleGuide.ts.ejs
