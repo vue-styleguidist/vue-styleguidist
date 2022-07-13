@@ -81,10 +81,10 @@ function getStyleguidist(args, api, options) {
 	let sgConf = {}
 	try {
 		sgConf = confFilePath && confFilePath.length ? require(confFilePath) : {}
-	} catch (e) {
+	} catch (err) {
 		// revert to defaults if config file is absent
 		if (err.code !== 'ENOENT') {
-			throw e
+			throw err
 		}
 	}
 
