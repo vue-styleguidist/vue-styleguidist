@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { addScopedStyle, cleanName } from 'vue-inbrowser-compiler-utils'
+import { cleanName, addScopedStyle, h, isVue3 } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
@@ -69,18 +69,21 @@ class PreviewAsync extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
-      this.vueInstance?.unmount?.()
-			el = getVueApp({
-				data: () => ({}),
-				template: '<div></div>'
-			}, el)
+			this.vueInstance?.unmount?.()
+			el = getVueApp(
+				{
+					data: () => ({}),
+					template: '<div></div>'
+				},
+				el
+			)
 		}
 	}
 
 	destroyVueInstance() {
 		if (this.vueInstance) {
 			try {
-        this.vueInstance.unmount?.()
+				this.vueInstance.unmount?.()
 				this.vueInstance.$destroy?.()
 			} catch (err) {
 				// eat the error
@@ -172,13 +175,16 @@ class PreviewAsync extends Component {
 		// then we just have to render the setup previewComponent in the prepared slot
 		const rootComponent = renderRootJsx
 			? renderRootJsx.default(previewComponent)
-			: { render: createElement => createElement(previewComponent) }
+			: { render: createElement => (isVue3 ? h : createElement)(previewComponent) }
 		try {
 			this.destroyVueInstance()
-			this.vueInstance = getVueApp({
-				...extendsComponent,
-				...rootComponent,
-			}, el)
+			this.vueInstance = getVueApp(
+				{
+					...extendsComponent,
+					...rootComponent
+				},
+				el
+			)
 		} catch (err) {
 			this.handleError(err)
 		}

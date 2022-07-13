@@ -72,6 +72,13 @@ export default function (
 
 	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
 
+	// check that the define variables are not set yet
+	const definePluginsVariables = webpackConfig.plugins
+		?.filter(plugin => plugin.constructor.name === 'DefinePlugin')
+		.reduce((acc: string[], plugin: any) => {
+			return acc.concat(Object.keys(plugin.definitions))
+		}, [])
+
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
 		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
@@ -92,8 +99,16 @@ export default function (
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 
 				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-				__VUE_OPTIONS_API__: true,
-				__VUE_PROD_DEVTOOLS__: true
+				...(definePluginsVariables?.includes('__VUE_OPTIONS_API__') || false
+					? {}
+					: {
+							__VUE_OPTIONS_API__: true
+					  }),
+				...(definePluginsVariables?.includes('__VUE_PROD_DEVTOOLS__')
+					? {}
+					: {
+							__VUE_PROD_DEVTOOLS__: true
+					  })
 			})
 		]
 	})
