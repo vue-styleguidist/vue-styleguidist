@@ -1,6 +1,7 @@
 
 /**
-* /! WARNING /!* Do not edit manually.
+* /!\ WARNING /!\
+* Do not edit manually.
 * This file is the compilation of 
 * Template: packages/vue-styleguidist/templates/StyleGuide.ts.ejs
 * Config Data: packages/vue-styleguidist/src/scripts/schemas/config.ts
