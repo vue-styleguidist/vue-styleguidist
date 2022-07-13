@@ -2,7 +2,9 @@ name: Documentation
 on:
   push:
     branches:
-      - delivery
+      - dev
+    tags:
+      - *
 
 concurrency:
   group: doc-${{ github.ref }}
