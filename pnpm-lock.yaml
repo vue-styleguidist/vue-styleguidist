@@ -960,7 +960,7 @@ importers:
     specifiers:
       '@vue/cli': 4.5.19
       '@vue/cli-test-utils': 4.5.19
-      vue-styleguidist: ^4
+      vue-styleguidist: ^4.47.0
       webpack: 4.46.0
       webpack-merge: ^4.2.2
     dependencies:
@@ -22513,7 +22513,7 @@ packages:
     dependencies:
       cssnano: 4.1.11
       last-call-webpack-plugin: 3.0.0
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
 
   /optionator/0.8.3:
     resolution: {integrity: sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==}
@@ -29659,7 +29659,7 @@ packages:
       mime: 2.5.2
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
       webpack-log: 2.0.0
 
   /webpack-dev-middleware/4.1.0_webpack@4.46.0:
