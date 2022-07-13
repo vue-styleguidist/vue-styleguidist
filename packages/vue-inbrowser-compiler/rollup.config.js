@@ -25,8 +25,7 @@ export default {
 			tsconfig: './tsconfig.build.json',
 			cacheDir: '../../node_modules/.rpt3_cache',
 			declarationDir: 'types',
-			rootDir: 'src',
-			include: ['**/*.ts', '../../../@types/**/*.ts']
+			rootDir: 'src'
 		}),
 		// Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs, `require()`)
 		commonjs()
