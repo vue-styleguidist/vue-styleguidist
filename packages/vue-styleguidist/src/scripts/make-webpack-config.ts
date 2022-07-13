@@ -64,10 +64,10 @@ export default function (
 		}
 	}
 
-  webpackConfig.mode = env
+	webpackConfig.mode = env
 
 	if (config.webpackConfig) {
-    webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
 	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
@@ -92,8 +92,8 @@ export default function (
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 
 				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-        '__VUE_OPTIONS_API__': true,
-        '__VUE_PROD_DEVTOOLS__': true,
+				__VUE_OPTIONS_API__: true,
+				__VUE_PROD_DEVTOOLS__: true
 			})
 		]
 	})
@@ -170,7 +170,7 @@ export default function (
 					injectClient: false
 				},
 				plugins: [
-          new webpack.HotModuleReplacementPlugin(),
+					new webpack.HotModuleReplacementPlugin(),
 					new webpack.ProvidePlugin({
 						// Webpack 5 does no longer include a polyfill for this Node.js variable.
 						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
@@ -288,6 +288,10 @@ export default function (
 	// Create another alias, not overriden by users
 	if (config.styleguideComponents) {
 		webpackAlias[RSG_COMPONENTS_ALIAS_DEFAULT] = webpackAlias[RSG_COMPONENTS_ALIAS]
+	}
+
+	if (config.compilerPackage) {
+		webpackAlias['vue-inbrowser-compiler$'] = config.compilerPackage
 	}
 
 	if (config.dangerouslyUpdateWebpackConfig) {
