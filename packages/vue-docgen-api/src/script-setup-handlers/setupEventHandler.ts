@@ -47,6 +47,7 @@ export default async function setupEventHandler(
 				if (
 					bt.isTSTypeAnnotation(firstParam) &&
 					bt.isTSLiteralType(firstParam.typeAnnotation) &&
+          !bt.isUnaryExpression(firstParam.typeAnnotation.literal) &&
 					typeof firstParam.typeAnnotation.literal.value === 'string'
 				) {
 					buildEventDescriptor(firstParam.typeAnnotation.literal.value, member)

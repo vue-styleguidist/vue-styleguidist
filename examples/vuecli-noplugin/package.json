@@ -12,6 +12,6 @@
 	},
 	"devDependencies": {
 		"@vue/cli-service": "^4.5.12",
-		"vue-styleguidist": "^4.36.1"
+		"vue-styleguidist": "^4.46.1"
 	}
 }
