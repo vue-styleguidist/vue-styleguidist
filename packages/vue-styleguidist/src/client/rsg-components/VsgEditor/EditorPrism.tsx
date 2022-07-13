@@ -38,7 +38,29 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 		}
 	} else {
 		const langScheme = languages[lang]
-		return code => prismHighlight(code, langScheme, lang)
+    
+		return code => {
+      const scripts: { replaceThis:string, replaceBy:string }[] = []
+      const xml = new DOMParser().parseFromString(code, 'text/xml')
+      Array.from(xml.getElementsByTagName('script')).forEach(script => {
+        const scriptCode = script.textContent || ''
+        const lg = script.getAttribute('lang') || 'ts'
+        const lgScheme = languages[lang]
+        script.innerHTML = prismHighlight(scriptCode, lgScheme, lg)
+        const replaceBy = script.outerHTML
+        script.textContent = ''
+        const replaceThis = script.outerHTML
+        scripts.push({
+          replaceThis,
+          replaceBy
+        })
+      })
+      let highlightedCode = prismHighlight(code, langScheme, lang);
+      scripts.forEach(({ replaceThis, replaceBy }) => {
+        highlightedCode = highlightedCode.replace(replaceThis, replaceBy)
+      })
+      return highlightedCode
+    }
 	}
 }
 
