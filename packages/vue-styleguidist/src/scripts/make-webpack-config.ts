@@ -64,13 +64,20 @@ export default function (
 		}
 	}
 
-  webpackConfig.mode = env
+	webpackConfig.mode = env
 
 	if (config.webpackConfig) {
-    webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
+		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
 	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
+
+	// check that the define variables are not set yet
+	const definePluginsVariables = webpackConfig.plugins
+		?.filter(plugin => plugin.constructor.name === 'DefinePlugin')
+		.reduce((acc: string[], plugin: any) => {
+			return acc.concat(Object.keys(plugin.definitions))
+		}, [])
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
@@ -92,8 +99,16 @@ export default function (
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 
 				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
-        '__VUE_OPTIONS_API__': true,
-        '__VUE_PROD_DEVTOOLS__': true,
+				...(definePluginsVariables?.includes('__VUE_OPTIONS_API__') || false
+					? {}
+					: {
+							__VUE_OPTIONS_API__: true
+					  }),
+				...(definePluginsVariables?.includes('__VUE_PROD_DEVTOOLS__')
+					? {}
+					: {
+							__VUE_PROD_DEVTOOLS__: true
+					  })
 			})
 		]
 	})
@@ -170,7 +185,7 @@ export default function (
 					injectClient: false
 				},
 				plugins: [
-          new webpack.HotModuleReplacementPlugin(),
+					new webpack.HotModuleReplacementPlugin(),
 					new webpack.ProvidePlugin({
 						// Webpack 5 does no longer include a polyfill for this Node.js variable.
 						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
