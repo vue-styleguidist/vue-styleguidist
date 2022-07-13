@@ -305,6 +305,10 @@ export default function (
 		webpackAlias[RSG_COMPONENTS_ALIAS_DEFAULT] = webpackAlias[RSG_COMPONENTS_ALIAS]
 	}
 
+	if (config.compilerPackage) {
+		webpackAlias['vue-inbrowser-compiler$'] = config.compilerPackage
+	}
+
 	if (config.dangerouslyUpdateWebpackConfig) {
 		webpackConfig = config.dangerouslyUpdateWebpackConfig(webpackConfig, env)
 	}

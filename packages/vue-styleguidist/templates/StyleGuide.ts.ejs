@@ -1,21 +1,15 @@
-/**
- * /!\ WARNING /!\
- * Do not edit manually.
- * This file is the compilation of 
- * Template: packages/vue-styleguidist/templates/StyleGuide.ts.ejs
- * Config Data: packages/vue-styleguidist/src/scripts/schemas/config.ts
- */
-
 import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
-import { TransformOptions } from 'buble'
+import { compile } from 'vue-inbrowser-compiler'
 import { Styles } from 'jss';
 import { Configuration, loader } from 'webpack'
 import * as Rsg from 'react-styleguidist'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
 import { ProcessedSection } from './Section'
 import { LoaderComponentProps } from './Component'
+
+type TransformOptions = Required<Parameters<typeof compile>>[1]
 
 export interface StyleguidistContext extends loader.LoaderContext {
     _styleguidist: SanitizedStyleguidistConfig

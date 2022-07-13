@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "pnpm run compile:babel && pnpm run typings",
     "compile:babel": "babel --delete-dir-on-start src/ --ignore **/__tests__,**/*.spec.* -d lib/ --extensions .js,.ts,.tsx,.jsx",
-    "compile:watch": "concurrently \"pnpm compile:babel -- --watch\" \"pnpm typings -- --watch\"",
+    "compile:watch": "concurrently \"pnpm compile:babel --watch\" \"pnpm typings --watch\"",
     "typings": "tsc --emitDeclarationOnly -p ./tsconfig.build.json"
   },
   "repository": {
@@ -80,10 +80,10 @@
     "rewrite-imports": "^2.0.3",
     "source-map": "0.7.4",
     "style-loader": "^1.3.0",
-    "terser-webpack-plugin": "^2.3.8",
+    "terser-webpack-plugin": "^4",
     "to-ast": "^1.0.0",
     "vue-docgen-api": "^4.45.0",
-    "vue-inbrowser-compiler": "^4.44.23",
+    "vue-inbrowser-compiler": "^4.44.24",
     "vue-inbrowser-compiler-utils": "^4.45.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^4.2.2"
@@ -118,9 +118,9 @@
     "@babel/preset-react": "7.18.6",
     "@babel/preset-typescript": "7.18.6",
     "@babel/runtime": "7.18.6",
-    "@babel/types": "7.18.7",
+    "@babel/types": "7.18.8",
     "@testing-library/react": "11.2.7",
-    "@types/buble": "0.20.1",
+    "@types/buble": "^0.20.1",
     "@types/cli-progress": "1.8.1",
     "@types/copy-webpack-plugin": "4.4.4",
     "@types/doctrine": "0.0.5",
@@ -140,7 +140,6 @@
     "@types/webpack": "4.41.32",
     "@types/webpack-dev-server": "3.11.6",
     "@types/webpack-merge": "4.1.5",
-    "buble": "0.20.0",
     "concurrently": "4.1.2",
     "ejs": "3.1.7",
     "pug": "3.0.2",
