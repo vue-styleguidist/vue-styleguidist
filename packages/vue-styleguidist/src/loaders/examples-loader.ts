@@ -182,7 +182,10 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 					const compiledExample = compiler.compile(example.content, {
 						...config.compilerConfig,
 						...(config.jsxInExamples
-							? { jsxPragma: '__pragma__(h)', objectAssign: 'concatenate' }
+							? {
+									jsx: '__pragma__(h)',
+									objectAssign: 'concatenate'
+							  }
 							: {})
 					})
 					compiled = {
