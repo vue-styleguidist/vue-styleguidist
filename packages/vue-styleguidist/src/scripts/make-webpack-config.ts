@@ -55,7 +55,7 @@ export default function (
 			rules: [
 				{
 					resourceQuery: /blockType=docs/,
-					loader: require.resolve('../loaders/docs-loader.js')
+					loader: require.resolve('../../lib/loaders/docs-loader.js')
 				}
 			]
 		},
