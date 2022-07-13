@@ -30,7 +30,7 @@ Path or name of a module that exports a `compile` and a `getImports` function. I
 
 Type: `Object`, default: `{ objectAssign: 'Object.assign' }`
 
-Styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend. This config object will be added as the second argument for `buble.transform`.
+Styleguidist uses `vue-inbrowser-compiler` to bundle typescript/ES6 modules code on the frontend. These options are passed to the compile function.
 
 ## `components`
 
