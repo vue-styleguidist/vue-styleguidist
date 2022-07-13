@@ -35,6 +35,9 @@ const render = () => {
 	// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-unresolved,import/extensions
 	const styleguide = require('!!../loaders/styleguide-loader!./index.js')
 	const container = document.getElementById(styleguide.config.mountPointId)
+	if (!container) {
+		throw new Error(`Could not find container with id "${styleguide.config.mountPointId}"`)
+	}
 	const root = createRoot(container) // createRoot(container!) if you use TypeScript
 	root.render(renderStyleguide(styleguide, codeRevision))
 }
