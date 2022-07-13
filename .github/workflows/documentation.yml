@@ -4,7 +4,7 @@ on:
     branches:
       - dev
     tags:
-      - *
+      - '*'
 
 concurrency:
   group: doc-${{ github.ref }}
