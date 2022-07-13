@@ -5,6 +5,8 @@ const configSchemaImport = require('vue-styleguidist/lib/scripts/schemas/config'
 const configSchema = configSchemaImport.default || configSchemaImport
 const styleguidist = vsg.default || vsg
 
+module.exports.defineConfig = vsg.defineConfig
+
 module.exports = (api, options) => {
 	api.chainWebpack(webpackConfig => {
 		// make sure that the docs blocks
@@ -80,7 +82,10 @@ function getStyleguidist(args, api, options) {
 	try {
 		sgConf = confFilePath && confFilePath.length ? require(confFilePath) : {}
 	} catch (e) {
-		// eat any error if config file is absent
+		// revert to defaults if config file is absent
+		if (err.code !== 'ENOENT') {
+			throw e
+		}
 	}
 
 	// reset the default component expression
