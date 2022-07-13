@@ -2,7 +2,25 @@ import { defineConfig } from 'cypress'
 import makeWebpackConfig from './packages/vue-styleguidist/src/scripts/make-webpack-config'
 import getConfig from './packages/vue-styleguidist/src/scripts/config'
 
-const webpackConfig = async () => await makeWebpackConfig(await getConfig({}), 'development')
+const webpackConfig = async () => {
+	const conf = await makeWebpackConfig(
+		await getConfig({
+			webpackConfig: {
+				module: {
+					rules: [
+						{
+							test: /\.{ts,js,tsx,jsx}$/,
+							loader: 'babel-loader'
+						}
+					]
+				}
+			}
+		}),
+		'development'
+	)
+	console.log(conf?.module?.rules)
+	return conf
+}
 
 export default defineConfig({
 	fixturesFolder: false,

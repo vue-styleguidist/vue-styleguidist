@@ -1,4 +1,4 @@
-import renderTypeString from '../renderTypeString'
+import renderTypeString from './renderTypeString'
 
 describe('renderTypeString', () => {
 	it('should render an Array', () => {
