@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.47.0
+
+### Minor Changes
+
+- [#1356](https://github.com/vue-styleguidist/vue-styleguidist/pull/1356) [`3b602067`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3b602067c71dfc619047690ccb17df2222ecb18c) Thanks [@elevatebart](https://github.com/elevatebart)! - add an option to set a custom compiler
+
+* [`db69abcf`](https://github.com/vue-styleguidist/vue-styleguidist/commit/db69abcf94f604baa2c32df9d7e14a5609cfb108) Thanks [@elevatebart](https://github.com/elevatebart)! - fix compat with react 18
+
+- [`03d2f2f9`](https://github.com/vue-styleguidist/vue-styleguidist/commit/03d2f2f91e0d9748aa9966369665d87dc249a1d1) Thanks [@elevatebart](https://github.com/elevatebart)! - fix webpack DefinePlugin and jsx issue in happy path
+
 ## 4.46.1
 
 ### Patch Changes

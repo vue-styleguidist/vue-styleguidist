@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.44.25
+
+### Patch Changes
+
+- [#1337](https://github.com/vue-styleguidist/vue-styleguidist/pull/1337) [`831bef6e`](https://github.com/vue-styleguidist/vue-styleguidist/commit/831bef6ef8f953ad67a0e4e22a428f260ddfb44a) Thanks [@elevatebart](https://github.com/elevatebart)! - create compiler sucrase package
+
 ## 4.44.24
 
 ### Patch Changes
