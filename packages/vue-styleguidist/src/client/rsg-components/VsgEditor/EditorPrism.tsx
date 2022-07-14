@@ -13,7 +13,7 @@ import 'prismjs/components/prism-jsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
-import { useStyleGuideContext } from 'rsg-components/Context'
+import { useStyleGuideContext } from 'rsg-components/Context/Context'
 import getScript from '../../../loaders/utils/getScript'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 

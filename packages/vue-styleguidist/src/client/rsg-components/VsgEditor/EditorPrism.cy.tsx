@@ -1,11 +1,26 @@
 import * as React from 'react'
 import { mount } from 'cypress/react'
 import EditorPrism from './EditorPrism'
+import Context from 'rsg-components/Context/Context'
+
+const Provider = ({ children }) => (
+	<Context.Provider
+		value={
+			{
+				config: {
+					jssThemedEditor: true,
+					jsxInExamples: true
+				}
+			} as any
+		}
+	>
+		{children}
+	</Context.Provider>
+)
 
 describe('EditorPrism', () => {
 	it('renders', () => {
-    const code = 
-    `
+		const code = `
 <BestButton size="large" color="deeppink">
   Click Me
 </BestButton>
@@ -14,10 +29,10 @@ describe('EditorPrism', () => {
   Second button
 </BestButton>
     `
-		mount(<EditorPrism code={code} onChange={() => {}} />, {
-      config:{
-        jssThemedEditor: {}, 
-        jsxInExamples: true
-      }})
+		mount(
+			<Provider>
+				<EditorPrism code={code} onChange={() => {}} />
+			</Provider>
+		)
 	})
 })
