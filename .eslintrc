@@ -129,7 +129,32 @@
         "beforeEach": false,
         "afterEach": false
       }
-		}
+		},
+    {
+			"files": [
+        "packages/**/*.cy.{ts,tsx,js}", 
+        "test/cypress/**/*.{ts,tsx,js}"
+      ],
+      "parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"sourceType": "module",
+				"ecmaVersion": 2015
+			},
+      "rules": {
+				"no-unused-vars": 0
+			},
+      "globals":{
+        "describe": false,
+        "cy": false,
+        "it": false,
+        "test": false,
+        "before": false,
+        "expect": false,
+        "beforeEach": false,
+        "afterEach": false,
+        "Cypress": false
+      }
+    }
 	],
 	"globals": {
 		"System": false,

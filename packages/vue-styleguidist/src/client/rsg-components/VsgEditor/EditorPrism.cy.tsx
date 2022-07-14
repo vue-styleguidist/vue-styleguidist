@@ -4,6 +4,20 @@ import EditorPrism from './EditorPrism'
 
 describe('EditorPrism', () => {
 	it('renders', () => {
-		mount(<EditorPrism code="const a = 1" onChange={() => {}} />)
+    const code = 
+    `
+<BestButton size="large" color="deeppink">
+  Click Me
+</BestButton>
+<br />
+<BestButton size="small" color="blue">
+  Second button
+</BestButton>
+    `
+		mount(<EditorPrism code={code} onChange={() => {}} />, {
+      config:{
+        jssThemedEditor: {}, 
+        jsxInExamples: true
+      }})
 	})
 })
