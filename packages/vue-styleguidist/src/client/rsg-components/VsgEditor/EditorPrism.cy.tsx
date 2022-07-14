@@ -3,13 +3,13 @@ import { mount } from 'cypress/react'
 import EditorPrism from './EditorPrism'
 import Context from 'rsg-components/Context/Context'
 
-const Provider = ({ children }) => (
+const Provider = ({ children, jssThemedEditor = true, jsxInExamples = false }) => (
 	<Context.Provider
 		value={
 			{
 				config: {
-					jssThemedEditor: true,
-					jsxInExamples: true
+					jssThemedEditor,
+					jsxInExamples
 				}
 			} as any
 		}
@@ -19,18 +19,31 @@ const Provider = ({ children }) => (
 )
 
 describe('EditorPrism', () => {
-	it('renders', () => {
+	it('renders typescript', () => {
 		const code = `
-<BestButton size="large" color="deeppink">
-  Click Me
-</BestButton>
-<br />
-<BestButton size="small" color="blue">
-  Second button
-</BestButton>
+function foo() :string {
+  return 'bar'
+}
+
+foo()
     `
 		mount(
 			<Provider>
+				<EditorPrism code={code} onChange={() => {}} />
+			</Provider>
+		)
+	})
+
+	it('renders tsx', () => {
+		const code = `
+function foo() :string {
+  return <div>bar</div>
+}
+
+foo()
+    `
+		mount(
+			<Provider jsxInExamples={true}>
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
