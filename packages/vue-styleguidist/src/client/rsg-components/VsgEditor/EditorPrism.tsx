@@ -21,7 +21,7 @@ import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
 const VSimpleEditor = SimpleEditor as any
 
-const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
+const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
 			if (!code) {
@@ -40,8 +40,32 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 			return scriptCodeHighlighted + prismHighlight(templateCode, languages.html, lang)
 		}
 	} else {
-		const langScheme = languages[lang]
-		return code => prismHighlight(code, langScheme, lang)
+		const langScheme = languages.html
+
+		return code => {
+			const parser = new DOMParser()
+			const SfcXMLDocument = parser.parseFromString(`<body>${code}</body>`, 'text/html')
+			const scriptNodes = SfcXMLDocument.querySelectorAll('script')
+			const scriptBlocks: { text: string; lg: string }[] = []
+			scriptNodes.forEach(scriptNode => {
+				const lg = scriptNode.getAttribute('lang')
+				const text = scriptNode.textContent
+				scriptBlocks.push({ text, lg })
+				scriptNode.textContent = ' '
+			})
+			const htmlHighlighted = prismHighlight(SfcXMLDocument.body.innerHTML, langScheme, 'html')
+			return htmlHighlighted.replace(/<span class="token language-javascript"> <\/span>/g, () => {
+				const scriptBlock = scriptBlocks.shift()
+				if (scriptBlock) {
+					return `<span class="token language-typescript">${prismHighlight(
+						scriptBlock.text,
+						languages[scriptBlock.lg],
+						scriptBlock.lg
+					)}</span>`
+				}
+				return ''
+			})
+		}
 	}
 }
 
@@ -126,7 +150,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 				className={cx(root, jssThemedEditor ? jssEditor : langClass, 'prism-editor')}
 				value={this.state.code}
 				onValueChange={this.handleChange}
-				highlight={highlight(isVueSFC ? 'html' : 'vsg', jsxInExamples)}
+				highlight={highlight(isVueSFC ? 'vue-sfc' : 'vsg', jsxInExamples)}
 				// Padding should be passed via a prop (not CSS) for a proper
 				// cursor position calculation
 				padding={editorPadding || space[2]}

@@ -48,4 +48,23 @@ foo()
 			</Provider>
 		)
 	})
+
+	it.only('renders vue SFC with Typescript', () => {
+		const code = `
+<template>
+  <div @click="foo()">bar</div>
+</template>
+<script lang="ts">
+import type { Vue } from 'vue'
+function foo(param: Vue) : { one: number, two: boolean } {
+  return 'bar'
+}
+</script>
+    `
+		mount(
+			<Provider jsxInExamples={true}>
+				<EditorPrism code={code} onChange={() => {}} />
+			</Provider>
+		)
+	})
 })

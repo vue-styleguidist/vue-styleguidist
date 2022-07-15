@@ -19,7 +19,6 @@ const webpackConfig = {
 							[
 								'@babel/env',
 								{
-									corejs: 3,
 									modules: 'commonjs'
 								}
 							],
@@ -30,7 +29,8 @@ const webpackConfig = {
 				}
 			}
 		]
-	}
+	},
+	devtool: 'source-map'
 }
 
 export default defineConfig({

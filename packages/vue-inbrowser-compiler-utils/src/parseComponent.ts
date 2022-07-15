@@ -11,7 +11,7 @@ export interface VsgSFCDescriptor extends VsgSFCDescriptorSimple {
 const PARTS: (keyof VsgSFCDescriptorSimple)[] = ['script', 'template']
 
 export default function parseComponent(code: string): VsgSFCDescriptor {
-	// reinintialize regexp after each tour
+	// reinitialize regexp after each tour
 	const partsRE: { [partName: string]: RegExp } = PARTS.reduce(
 		(ret: { [partName: string]: RegExp }, part: string) => {
 			ret[part] = new RegExp(`<${part}[^>]*>((.|\\n|\\r)+)</${part}>`, 'g')
