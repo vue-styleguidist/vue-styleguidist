@@ -1,10 +1,7 @@
 name: Documentation
 on:
-  push:
-    branches:
-      - dev
-    tags:
-      - *
+  release:
+    types: [created]
 
 concurrency:
   group: doc-${{ github.ref }}
