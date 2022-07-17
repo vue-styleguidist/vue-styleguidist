@@ -152,15 +152,7 @@
         "cypress/no-pause": "error"
 			},
       "globals":{
-        "describe": false,
-        "cy": false,
-        "it": false,
-        "test": false,
-        "before": false,
-        "expect": false,
-        "beforeEach": false,
-        "afterEach": false,
-        "Cypress": false
+        "cy": false
       }
     }
 	]
