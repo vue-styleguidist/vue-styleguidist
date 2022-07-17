@@ -1,7 +1,23 @@
 {
   "name": "@test-vue-docgen/mixins",
+  "private": true,
   "version": "4.44.15",
   "module": "src/index.js",
   "license": "MIT",
-  "private": true
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.37",
+    "vue-docgen-api": "^4",
+    "vue-prism-editor": "2.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0",
+    "vue-tsc": "^0.38.4"
+  }
 }
