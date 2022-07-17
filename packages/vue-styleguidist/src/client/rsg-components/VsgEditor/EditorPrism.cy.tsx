@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { mount } from 'cypress/react'
-import EditorPrism from './EditorPrism'
 import Context from 'rsg-components/Context/Context'
+import EditorPrism from './EditorPrism'
 
 const Provider = ({ children, jssThemedEditor = true, jsxInExamples = false }) => (
 	<Context.Provider
@@ -43,7 +43,7 @@ function foo() :string {
 foo()
     `
 		mount(
-			<Provider jsxInExamples={true}>
+			<Provider jsxInExamples>
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
@@ -62,7 +62,7 @@ function foo(param: Vue) : { one: number, two: boolean } {
 </script>
     `
 		mount(
-			<Provider jsxInExamples={true}>
+			<Provider jsxInExamples>
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
