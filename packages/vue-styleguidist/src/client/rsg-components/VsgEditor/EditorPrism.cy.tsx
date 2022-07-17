@@ -49,7 +49,7 @@ foo()
 		)
 	})
 
-	it.only('renders vue SFC with Typescript', () => {
+	it('renders vue SFC with Typescript', () => {
 		const code = `
 <template>
   <div @click="foo()">bar</div>
