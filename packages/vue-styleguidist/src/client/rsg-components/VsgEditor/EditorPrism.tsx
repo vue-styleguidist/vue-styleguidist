@@ -48,9 +48,11 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
 			const scriptNodes = SfcXMLDocument.querySelectorAll('script')
 			const scriptBlocks: { text: string; lg: string }[] = []
 			scriptNodes.forEach(scriptNode => {
-				const lg = scriptNode.getAttribute('lang')
+				const lg = scriptNode.getAttribute('lang') || 'js'
 				const text = scriptNode.textContent
-				scriptBlocks.push({ text, lg })
+        if (text) {
+          scriptBlocks.push({ text, lg })
+        }
 				scriptNode.textContent = ' '
 			})
 			const htmlHighlighted = prismHighlight(SfcXMLDocument.body.innerHTML, langScheme, 'html')
