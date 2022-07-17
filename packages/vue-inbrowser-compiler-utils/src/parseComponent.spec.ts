@@ -163,4 +163,32 @@ export default {};
 		"
 	`)
 	})
+
+	it('should parse simplest code properly', () => {
+		const comp = parseComponent(`
+<template>
+  <div @click="foo()">bar</div>
+</template>
+<script lang="ts">
+import type { Vue } from 'vue'
+
+function foo(param: Vue) : { one: number, two: boolean } {
+  return 'bar'
+}
+</script>`)
+		expect(comp.template).toMatch(/<div/)
+		expect(comp.script).toMatchInlineSnapshot(`
+			"
+
+
+
+
+			import type { Vue } from 'vue'
+
+			function foo(param: Vue) : { one: number, two: boolean } {
+			  return 'bar'
+			}
+			"
+		`)
+	})
 })

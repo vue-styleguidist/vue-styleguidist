@@ -129,14 +129,24 @@
         "beforeEach": false,
         "afterEach": false
       }
-		}
-	],
-	"globals": {
-		"System": false,
-		"classes": false,
-		"shallow": false,
-		"render": false,
-		"mount": false,
-		"cy": false
-	}
+		},
+    {
+			"files": [
+        "packages/**/*.cy.{ts,tsx,js}", 
+        "test/cypress/**/*.{ts,tsx,js}"
+      ],
+      "parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"sourceType": "module",
+				"ecmaVersion": 2015
+			},
+      "plugins": ["cypress", "mocha"],
+      "extends": [
+        "plugin:cypress/recommended"
+      ],
+      "rules": {
+        "mocha/no-exclusive-tests": "error"
+			}
+    }
+	]
 }

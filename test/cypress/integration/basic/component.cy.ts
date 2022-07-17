@@ -55,16 +55,16 @@ describe('Single component', () => {
 
 		it('changes the render after code change', () => {
 			const codeToSkip = '</BestButton>'
+      // Here the textarea is not completely visible, so we need to force 
+      // the typing to avoid cypress crashing.
+			// eslint-disable-next-line cypress/no-force
 			cy.get('@container')
 				.find('textarea')
 				.type(`${'{leftarrow}'.repeat(codeToSkip.length)} Harder`, {
 					force: true
 				})
 
-			// Wait for CodeMirror to update
-			cy.wait(1000)
-
-			cy.get('@preview').find('button').should('contain', 'Push Me Harder')
+			cy.get('@preview').contains('button', 'Push Me Harder').should('exist')
 		})
 	})
 })

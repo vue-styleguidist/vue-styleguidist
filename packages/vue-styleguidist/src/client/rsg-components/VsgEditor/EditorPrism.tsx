@@ -10,14 +10,18 @@ import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-markup'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-tsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
-import { useStyleGuideContext } from 'rsg-components/Context'
+import { useStyleGuideContext } from 'rsg-components/Context/Context'
 import getScript from '../../../loaders/utils/getScript'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
-const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
+const VSimpleEditor = SimpleEditor as any
+
+const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
 			if (!code) {
@@ -26,7 +30,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 			const scriptCode = getScript(code, jsxInExamples)
 			const scriptCodeHighlighted = prismHighlight(
 				scriptCode,
-				languages[jsxInExamples ? 'jsx' : 'js'],
+				languages[jsxInExamples ? 'tsx' : 'ts'],
 				lang
 			)
 			if (code.length === scriptCode.length) {
@@ -36,8 +40,34 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 			return scriptCodeHighlighted + prismHighlight(templateCode, languages.html, lang)
 		}
 	} else {
-		const langScheme = languages[lang]
-		return code => prismHighlight(code, langScheme, lang)
+		const langScheme = languages.html
+
+		return code => {
+			const parser = new DOMParser()
+			const SfcXMLDocument = parser.parseFromString(`<body>${code}</body>`, 'text/html')
+			const scriptNodes = SfcXMLDocument.querySelectorAll('script')
+			const scriptBlocks: { text: string; lg: string }[] = []
+			scriptNodes.forEach(scriptNode => {
+				const lg = scriptNode.getAttribute('lang') || 'js'
+				const text = scriptNode.textContent
+        if (text) {
+          scriptBlocks.push({ text, lg })
+        }
+				scriptNode.textContent = ' '
+			})
+			const htmlHighlighted = prismHighlight(SfcXMLDocument.body.innerHTML, langScheme, 'html')
+			return htmlHighlighted.replace(/<span class="token language-javascript"> <\/span>/g, () => {
+				const scriptBlock = scriptBlocks.shift()
+				if (scriptBlock) {
+					return `<span class="token language-typescript">${prismHighlight(
+						scriptBlock.text,
+						languages[scriptBlock.lg],
+						scriptBlock.lg
+					)}</span>`
+				}
+				return ''
+			})
+		}
 	}
 }
 
@@ -118,11 +148,11 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props
 		const langClass = isVueSFC ? 'language-html' : 'language-jsx'
 		return (
-			<SimpleEditor
+			<VSimpleEditor
 				className={cx(root, jssThemedEditor ? jssEditor : langClass, 'prism-editor')}
 				value={this.state.code}
 				onValueChange={this.handleChange}
-				highlight={highlight(isVueSFC ? 'html' : 'vsg', jsxInExamples)}
+				highlight={highlight(isVueSFC ? 'vue-sfc' : 'vsg', jsxInExamples)}
 				// Padding should be passed via a prop (not CSS) for a proper
 				// cursor position calculation
 				padding={editorPadding || space[2]}

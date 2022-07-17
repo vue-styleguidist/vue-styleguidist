@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:10.0.2
+    - image: cypress/included:10.3.0
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -86,8 +86,10 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      # run cypress component tests 
+      - run: npm run cy:ct
 
-      # run cypress tests
+      # run cypress e2e tests
       - run: CY_EXAMPLE_FOLDER=basic npm run cy
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
