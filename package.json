@@ -27,7 +27,7 @@
     "cy:open": "cypress open",
     "cy:ct": "cypress run --component",
     "cy:serve": "node test/run.server.js",
-    "cy:run": "cypress run --e2e --spec \"test/cypress/integration/$CY_EXAMPLE_FOLDER/*.cy.js\"",
+    "cy:run": "cypress run --e2e --spec \"test/cypress/integration/$CY_EXAMPLE_FOLDER/*.cy.ts\"",
     "cy": "start-server-and-test cy:serve http://localhost:6060 cy:run",
     "predocs": "node ./docs/.vuepress/preprocess.js",
     "docs": "vuepress dev docs",

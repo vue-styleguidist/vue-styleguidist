@@ -64,7 +64,7 @@ describe('Single component', () => {
 					force: true
 				})
 
-			cy.get('@preview').contain('button', 'Push Me Harder').should('exist')
+			cy.get('@preview').contains('button', 'Push Me Harder').should('exist')
 		})
 	})
 })

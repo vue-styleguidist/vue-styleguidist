@@ -1,3 +1,4 @@
+
 describe('Styleguidist core', () => {
 	beforeEach(() => cy.visit('/'))
 
