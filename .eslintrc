@@ -141,19 +141,12 @@
 				"ecmaVersion": 2015
 			},
       "plugins": ["cypress", "mocha"],
+      "extends": [
+        "plugin:cypress/recommended"
+      ],
       "rules": {
-				"no-unused-vars": 0,
-        "mocha/no-exclusive-tests": "error",
-        "cypress/no-assigning-return-values": "error",
-        "cypress/no-unnecessary-waiting": "error",
-        "cypress/assertion-before-screenshot": "warn",
-        "cypress/no-force": "warn",
-        "cypress/no-async-tests": "error",
-        "cypress/no-pause": "error"
-			},
-      "globals":{
-        "cy": false
-      }
+        "mocha/no-exclusive-tests": "error"
+			}
     }
 	]
 }
