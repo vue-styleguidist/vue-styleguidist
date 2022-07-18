@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.46.0
+
+### Minor Changes
+
+- [#1359](https://github.com/vue-styleguidist/vue-styleguidist/pull/1359) [`6c9e7d50`](https://github.com/vue-styleguidist/vue-styleguidist/commit/6c9e7d50b59887c19c5ea536a99d05211c14cf71) Thanks [@elevatebart](https://github.com/elevatebart)! - Allow PrismJs Editor to render typescript in JSX AND in SFC
+
 ## 4.45.0
 
 ### Minor Changes
