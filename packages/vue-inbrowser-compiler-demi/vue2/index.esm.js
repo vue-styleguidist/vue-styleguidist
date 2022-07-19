@@ -6,4 +6,4 @@ export const createApp = () => {}
 export const resolveComponent = name => name
 export const isVue3 = false
 export { Vue as Vue2 }
-export const compileTemplate = template => ({ code: compile(template).render })
+export const compileTemplate = template => compile(template).render
