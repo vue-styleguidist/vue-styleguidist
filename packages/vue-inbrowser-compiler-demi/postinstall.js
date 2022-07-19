@@ -27,7 +27,7 @@ async function updateIndexForVueVersion(version) {
 		'utf8'
 	)
 
-	fs.writeFile(path.join(__dirname, indexContentESM), indexContentESM, err => {
+	fs.writeFile(path.join(__dirname, indexPathESM), indexContentESM, err => {
 		if (err) {
 			console.error(err)
 		}
