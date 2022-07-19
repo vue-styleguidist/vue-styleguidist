@@ -40,9 +40,14 @@ export default function compileVueCodeForEvalFunction(
 	}
 
 	if (compiledComponent.template) {
+		const renderFunction = isVue3
+			? `(function () {${transform(compileTemplate(compiledComponent.template), {
+					transforms: ['imports']
+			  }).code.replace(/exports\.render =/, 'return')}})()`
+			: `function () {${compileTemplate(compiledComponent.template)}}`
 		compiledComponent.script = `
     const comp = (function() {${compiledComponent.script}})()
-    comp.render = function () {${compileTemplate(compiledComponent.template)}}
+    comp.render = ${renderFunction}
     return comp`
 		delete compiledComponent.template
 	}
