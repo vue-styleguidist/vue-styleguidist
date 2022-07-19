@@ -9,34 +9,25 @@ function getVuePackageVersion() {
 		return 'unknown'
 	}
 }
+const indexPath = 'index.cjs.js'
+const indexPathESM = 'index.esm.js'
 
-function updateIndexForVue3() {
+async function updateIndexForVueVersion(version) {
 	// commonjs
-	const indexPath = path.join(__dirname, './index.cjs.js')
-	const indexContent = `
-  const Vue = require('vue')
-  
-  module.exports.h = Vue.h
-  module.exports.createApp = Vue.createApp
-  module.exports.resolveComponent = Vue.resolveComponent
-  module.exports.isVue3 = true
-  module.exports.Vue2 = function(){}
-  `
-	fs.writeFile(indexPath, indexContent, err => {
+	const indexContent = await fs.promises.readFile(path.join(__dirname, version, indexPath), 'utf8')
+	fs.writeFile(path.join(__dirname, indexPath), indexContent, err => {
 		if (err) {
 			console.error(err)
 		}
 	})
 
 	// esm
-	const indexPathESM = path.join(__dirname, './index.esm.js')
-	const indexContentESM = `
-  export { h, resolveComponent, createApp } from 'vue'
-  export const isVue3 = true
-  export const Vue2 = () => {}
-  `
+	const indexContentESM = await fs.promises.readFile(
+		path.join(__dirname, version, indexPathESM),
+		'utf8'
+	)
 
-	fs.writeFile(indexPathESM, indexContentESM, err => {
+	fs.writeFile(path.join(__dirname, indexContentESM), indexContentESM, err => {
 		if (err) {
 			console.error(err)
 		}
@@ -46,5 +37,7 @@ function updateIndexForVue3() {
 const version = getVuePackageVersion()
 
 if (version.startsWith('3.')) {
-	updateIndexForVue3()
+	updateIndexForVueVersion('vue3')
+} else if (version.startsWith('2.')) {
+	updateIndexForVueVersion('vue2')
 }
