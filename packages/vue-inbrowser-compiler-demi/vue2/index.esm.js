@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import compile from 'vue-template-compiler'
+import { compile } from 'vue-template-compiler'
 
 export const h = () => {}
 export const createApp = () => {}
