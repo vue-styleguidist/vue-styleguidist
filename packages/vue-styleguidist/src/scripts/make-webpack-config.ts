@@ -11,7 +11,6 @@ import forEach from 'lodash/forEach'
 import isFunction from 'lodash/isFunction'
 import makeWebpackConfig from 'react-styleguidist/lib/scripts/make-webpack-config'
 import StyleguidistOptionsPlugin from 'react-styleguidist/lib/scripts/utils/StyleguidistOptionsPlugin'
-import { isVue3 } from 'vue-inbrowser-compiler-utils'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import mergeWebpackConfig from './utils/mergeWebpackConfig'
 
@@ -70,8 +69,6 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	const vue$ = isVue3 ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js'
-
 	// check that the define variables are not set yet
 	const definePluginsVariables = webpackConfig.plugins
 		?.filter(plugin => plugin.constructor.name === 'DefinePlugin')
@@ -82,13 +79,6 @@ export default function (
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
 		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
-		resolve: {
-			alias: {
-				// allows to use the compiler
-				// without this, cli will overload the alias and use runtime esm
-				vue$
-			}
-		},
 		plugins: [
 			// in order to avoid collision with the preload plugins
 			// that are loaded by the vue cli
