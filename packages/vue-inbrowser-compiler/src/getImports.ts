@@ -1,4 +1,5 @@
 import walkes from 'walkes'
+import { isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 
 export default function getImports(code: string): string[] {
@@ -15,8 +16,8 @@ export default function getImports(code: string): string[] {
 				}
 			}
 		})
-		return imports
+		return isVue3 ? ['vue', ...imports] : imports
 	} catch (e) {
-		return []
+		return isVue3 ? ['vue'] : []
 	}
 }
