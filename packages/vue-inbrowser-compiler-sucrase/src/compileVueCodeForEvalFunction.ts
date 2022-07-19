@@ -40,9 +40,10 @@ export default function compileVueCodeForEvalFunction(
 	}
 
 	if (compiledComponent.template) {
-		compiledComponent.script += `${compiledComponent.script}
+		compiledComponent.script = `
     const comp = (function() {${compiledComponent.script}})()
-    comp.render = function () { ${compileTemplate(compiledComponent.template)}}`
+    comp.render = function () {${compileTemplate(compiledComponent.template)}}
+    return comp`
 		delete compiledComponent.template
 	}
 	return compiledComponent

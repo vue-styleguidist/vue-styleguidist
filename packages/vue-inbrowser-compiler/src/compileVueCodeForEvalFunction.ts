@@ -1,6 +1,6 @@
 import { transform, TransformOptions } from 'buble'
 import walkes from 'walkes'
-import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { compileTemplate, isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -30,10 +30,20 @@ export default function compileVueCodeForEvalFunction(
 ): EvaluableComponent {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
-	return {
+
+	const compiledComponent = {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, { target, ...config }).code
 	}
+
+	if (compiledComponent.template) {
+		compiledComponent.script = `
+    const comp = (function() {${compiledComponent.script}})()
+    comp.render = function () {${compileTemplate(compiledComponent.template)}}
+    return comp`
+		delete compiledComponent.template
+	}
+	return compiledComponent
 }
 
 function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
