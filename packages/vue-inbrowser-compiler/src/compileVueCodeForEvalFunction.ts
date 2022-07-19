@@ -60,8 +60,8 @@ export function getEvaluableVue3RenderFunctionBody(code: string) {
 		}
 	})
 	return `
-  ${imports}
   var [${parameters}] = arguments
+  ${imports}
   ${body}`
 }
 
@@ -86,11 +86,13 @@ export default function compileVueCodeForEvalFunction(
 
 	if (compiledComponent.template) {
 		const renderFunction = isVue3
-			? getEvaluableVue3RenderFunctionBody(compileTemplate(compiledComponent.template))
-			: `function () {${compileTemplate(compiledComponent.template)}}`
+			? getEvaluableVue3RenderFunctionBody(
+					compileTemplate(`<div>${compiledComponent.template}</div>`)
+			  )
+			: compileTemplate(compiledComponent.template)
 		compiledComponent.script = `
     const comp = (function() {${compiledComponent.script}})()
-    comp.render = ${renderFunction}
+    comp.render = function() {${renderFunction}}
     return comp`
 		delete compiledComponent.template
 	}

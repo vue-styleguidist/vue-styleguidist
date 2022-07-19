@@ -44,7 +44,7 @@ export default function compileVueCodeForEvalFunction(
 			? `(function () {${transform(compileTemplate(compiledComponent.template), {
 					transforms: ['imports']
 			  }).code.replace(/exports\.render =/, 'return')}})()`
-			: `function () {${compileTemplate(compiledComponent.template)}}`
+			: `function () {${compileTemplate(`<div>${compiledComponent.template}</div>`)}}`
 		compiledComponent.script = `
     const comp = (function() {${compiledComponent.script}})()
     comp.render = ${renderFunction}
