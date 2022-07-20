@@ -15,6 +15,17 @@ interface EvaluableComponent {
 	style?: string
 }
 
+interface EvaluableComponentWithSource extends EvaluableComponent {
+	raw: {
+		script: string
+		template?: string
+	}
+}
+
+export function compileVue3Template(template: string, component: any): () => any {
+	return () => ({})
+}
+
 /**
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
@@ -25,7 +36,7 @@ interface EvaluableComponent {
 export default function compileVueCodeForEvalFunction(
 	code: string,
 	config: Omit<TransformOptions, 'transforms'> & { objectAssign?: string } = {}
-): EvaluableComponent {
+): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const configWithTransforms: TransformOptions = {
 		production: true,
@@ -39,19 +50,17 @@ export default function compileVueCodeForEvalFunction(
 		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 
-	if (compiledComponent.template) {
-		const renderFunction = isVue3
-			? `(function () {${transform(compileTemplate(compiledComponent.template), {
-					transforms: ['imports']
-			  }).code.replace(/exports\.render =/, 'return')}})()`
-			: `function () {${compileTemplate(`<div>${compiledComponent.template}</div>`)}}`
+	if (compiledComponent.template && !isVue3) {
 		compiledComponent.script = `
     const comp = (function() {${compiledComponent.script}})()
-    comp.render = ${renderFunction}
+    comp.render = function () {${compileTemplate(compiledComponent.template)}}
     return comp`
 		delete compiledComponent.template
 	}
-	return compiledComponent
+	return {
+		...compiledComponent,
+		raw: nonCompiledComponent
+	}
 }
 
 function prepareVueCodeForEvalFunction(
@@ -77,7 +86,7 @@ function prepareVueCodeForEvalFunction(
 		if (config.jsxPragma) {
 			const { preprocessing, component } = parseScriptCode(code, config)
 			return {
-				script: `${preprocessing};return {${component}};`
+				script: `${preprocessing};return ${component};`
 			}
 		}
 

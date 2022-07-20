@@ -1,6 +1,6 @@
-import { compileTemplate as compile } from '@vue/compiler-sfc'
+import { compile } from '@vue/compiler-dom'
 export { h, resolveComponent, createApp } from 'vue'
 export const isVue3 = true
 export const Vue2 = () => {}
-export const compileTemplate = template =>
-	compile({ source: template, filename: '<Example>.vue', id: '' }).code
+export const compileTemplate = (template, options) =>
+	compile(template, { ...options, prefixIdentifiers: true }).code

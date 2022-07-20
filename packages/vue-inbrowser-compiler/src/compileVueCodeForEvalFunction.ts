@@ -17,52 +17,15 @@ interface EvaluableComponent {
 	style?: string
 }
 
-/**
- * transform a component code like this
- * ```js
- * import { h as _h } from 'vue'
- *
- * export function render(_ctx, _cache, $props, $setup, $data, $options) {
- *  return _h('div', {}, [])
- * }
- * ```
- *
- * into a function body that can be evaluated
- * ```js
- * const { h } = require('vue')
- * var [_ctx, _cache, $props, $setup, $data, $options] = arguments
- * return render(_ctx, _cache, $props, $setup, $data, $options){
- *
- *  _h('div', {}, [])
- * }
- * ```
- * @param code
- * @returns function body
- */
-export function getEvaluableVue3RenderFunctionBody(code: string) {
-	const ast = getAst(code)
-	let imports: string = '',
-		parameters: string = '',
-		body: string = ''
-	walkes(ast, {
-		ImportDeclaration(node: any) {
-			if (node.source.value === 'vue') {
-				imports = `const { ${node.specifiers
-					.map((specifier: any) => `${specifier.imported.name}:${specifier.local.name}`)
-					.join(',')} } = require('vue')`
-			}
-		},
-		ExportNamedDeclaration(node: any) {
-			// get parameters string from exported function
-			parameters = node.declaration.params.map((param: any) => param.name).join(', ')
-			// get function body
-			body = code.substring(node.declaration.body.start + 1, node.declaration.body.end - 1)
-		}
-	})
-	return `
-  var [${parameters}] = arguments
-  ${imports}
-  ${body}`
+interface EvaluableComponentWithSource extends EvaluableComponent {
+	raw: {
+		script: string
+		template?: string
+	}
+}
+
+export function compileVue3Template(template: string, component: any): () => any {
+	return () => ({})
 }
 
 /**
@@ -75,7 +38,7 @@ export function getEvaluableVue3RenderFunctionBody(code: string) {
 export default function compileVueCodeForEvalFunction(
 	code: string,
 	config: TransformOptions = {}
-): EvaluableComponent {
+): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
 
@@ -84,19 +47,16 @@ export default function compileVueCodeForEvalFunction(
 		script: transform(nonCompiledComponent.script, { target, ...config }).code
 	}
 
-	if (compiledComponent.template) {
-		const renderFunction = isVue3
-			? getEvaluableVue3RenderFunctionBody(
-					compileTemplate(`<div>${compiledComponent.template}</div>`)
-			  )
-			: compileTemplate(compiledComponent.template)
-		compiledComponent.script = `
-    const comp = (function() {${compiledComponent.script}})()
-    comp.render = function() {${renderFunction}}
+	if (compiledComponent.template && !isVue3) {
+		compiledComponent.script = `const comp = (function() {${compiledComponent.script}})()
+    comp.render = function() {${compileTemplate(compiledComponent.template)}}
     return comp`
 		delete compiledComponent.template
 	}
-	return compiledComponent
+	return {
+		...compiledComponent,
+		raw: nonCompiledComponent
+	}
 }
 
 function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComponent {
