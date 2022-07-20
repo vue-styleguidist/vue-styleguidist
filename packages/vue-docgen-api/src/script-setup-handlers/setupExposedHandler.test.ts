@@ -43,7 +43,7 @@ describe('setupExposedHandler', () => {
 	it('should resolve Exposed in setup script', async () => {
 		const src = `
         const testProps = 0
-        defineExposed({ testProps })
+        defineExpose({ testProps })
         `
 		await parserTest(src)
 		expect(documentation.getExposedDescriptor).toHaveBeenCalledWith('testProps')
@@ -52,7 +52,7 @@ describe('setupExposedHandler', () => {
 	it('should resolve Exposed descriptions in setup script', async () => {
 		const src = `
         const testPropsInner = 0
-        defineExposed({
+        defineExpose({
           /**
            * Exposed test props
            */
@@ -71,7 +71,7 @@ describe('setupExposedHandler', () => {
 	it('should resolve Exposed items pushed by strings', async () => {
 		const src = `
         const testPropsInner = 0
-        defineExposed({
+        defineExpose({
           /**
            * Exposed test props
            */
