@@ -11,14 +11,13 @@ describe('parseComponent', () => {
         hello world
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
-		"
-
-		            <template>
-		                <div>hello</div>
-		            </template>
-		            hello world
-		        "
-	`)
+			"
+			<template>
+			  <div>hello</div>
+			</template>
+			hello world
+			"
+		`)
 	})
 
 	it('should detect scripts', () => {
