@@ -111,8 +111,8 @@ export function parseScriptCode(
 	}
 
 	const component = isFunctional
-		? `{render: ${code.slice(startIndex, endIndex)}}`
-		: code.slice(startIndex, endIndex)
+		? `render: ${code.slice(startIndex, endIndex)}`
+		: code.slice(startIndex + 1, endIndex - 1)
 
 	return {
 		preprocessing,
@@ -150,7 +150,7 @@ export default function normalizeSfcComponent(
 	config: { objectAssign?: string } = {}
 ): { script: string; style?: string; template?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const { preprocessing = '', component = '{}' } = parts.script
+	const { preprocessing = '', component = '' } = parts.script
 		? parseScriptCode(parts.script, config)
 		: {}
 	return {

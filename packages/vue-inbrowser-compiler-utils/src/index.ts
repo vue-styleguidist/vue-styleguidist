@@ -1,4 +1,12 @@
-export * from 'vue-inbrowser-compiler-demi'
+export {
+	Vue2,
+	isVue3,
+	compileScript,
+	createApp,
+	h,
+	compileTemplate,
+	resolveComponent
+} from 'vue-inbrowser-compiler-demi'
 export { default as addScopedStyle } from './addScopedStyle'
 export { default as adaptCreateElement, concatenate } from './adaptCreateElement'
 export { default as parseComponent, VsgSFCDescriptor } from './parseComponent'
