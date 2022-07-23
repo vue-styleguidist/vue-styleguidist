@@ -1,13 +1,14 @@
 import parseComponent from './parseComponent'
+import dedent from 'dedent'
 
 describe('parseComponent', () => {
 	it('should detect templates', () => {
-		const comp = parseComponent(`
+		const comp = parseComponent(dedent`
         <template>
-            <template>
-                <div>hello</div>
-            </template>
-            hello world
+        <template>
+          <div>hello</div>
+        </template>
+        hello world
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
 		"

@@ -1,6 +1,6 @@
 import { transform, Options as TransformOptions } from 'sucrase'
 import walkes from 'walkes'
-import { isCodeVueSfc, isVue3, compileTemplate } from 'vue-inbrowser-compiler-utils'
+import { isCodeVueSfc, isVue3, compileTemplateForEval } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, {
 	parseScriptCode,
 	getRenderFunctionStart,
@@ -50,13 +50,8 @@ export default function compileVueCodeForEvalFunction(
 		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 
-	if (compiledComponent.template && !isVue3) {
-		compiledComponent.script = `
-    const comp = (function() {${compiledComponent.script}})()
-    comp.render = function () {${compileTemplate(compiledComponent.template)}}
-    return comp`
-		delete compiledComponent.template
-	}
+	compileTemplateForEval(compiledComponent)
+
 	return {
 		...compiledComponent,
 		raw: nonCompiledComponent
