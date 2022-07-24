@@ -14,7 +14,9 @@ export function compileTemplateForEval(compiledComponent: EvaluableComponent) {
 				},
 				scriptSetup: null
 			},
-			{}
+			{
+				id: '-'
+			}
 		)
 		compiledComponent.script = `
 ${isVue3 ? 'const Vue = require("vue")' : ''}
@@ -23,7 +25,7 @@ comp.render = function() {${
 			compileTemplate({
 				source: compiledComponent.template,
 				filename: EXAMPLE_FILENAME,
-				id: '',
+				id: '-',
 				compilerOptions: {
 					bindingMetadata: bindings,
 					prefixIdentifiers: true,
