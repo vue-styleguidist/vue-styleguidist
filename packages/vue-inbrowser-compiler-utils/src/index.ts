@@ -4,8 +4,7 @@ export {
 	compileScript,
 	createApp,
 	h,
-	compileTemplate,
-	resolveComponent
+	compileTemplate
 } from 'vue-inbrowser-compiler-demi'
 export { default as addScopedStyle } from './addScopedStyle'
 export { default as adaptCreateElement, concatenate } from './adaptCreateElement'
