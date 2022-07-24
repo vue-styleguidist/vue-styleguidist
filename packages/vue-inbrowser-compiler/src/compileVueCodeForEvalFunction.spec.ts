@@ -155,18 +155,22 @@ new Vue({
 		).toMatchInlineSnapshot(`
 			"
 
+			const comp = (function() {
 
 
-					;return {template: \`
-						<div/>
-					\`, 
+
+					
+			return {
 						data(){
 							return {
 								param: 'BazBaz'
 							}
 						}
-					};
-					"
+					}
+
+					})()
+			comp.render = function() {with(this){return _c('div')}}
+			return comp"
 		`)
 	})
 

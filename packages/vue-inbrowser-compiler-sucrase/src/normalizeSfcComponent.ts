@@ -155,7 +155,7 @@ export default function normalizeSfcComponent(
 		: {}
 	return {
 		template: parts.template,
-		script: [preprocessing, `return ${component}`].join(';'),
+		script: [preprocessing, `return {${component}}`].join(';'),
 		style: buildStyles(parts.styles)
 	}
 }

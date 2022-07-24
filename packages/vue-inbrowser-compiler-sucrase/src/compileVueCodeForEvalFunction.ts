@@ -81,7 +81,7 @@ function prepareVueCodeForEvalFunction(
 		if (config.jsxPragma) {
 			const { preprocessing, component } = parseScriptCode(code, config)
 			return {
-				script: `${preprocessing};return ${component};`
+				script: `${preprocessing};return {${component}};`
 			}
 		}
 
