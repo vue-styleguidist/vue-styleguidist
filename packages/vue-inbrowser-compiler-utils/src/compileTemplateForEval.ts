@@ -31,6 +31,7 @@ comp.render = function() {${
 				}
 			}).code
 		}}
+${isVue3 ? `comp.render = comp.render()` : ``}
 return comp`
 		delete compiledComponent.template
 	}
