@@ -4,7 +4,7 @@ Vue-Styleguidist can generate a static website. To deploy it, follow this short 
 
 ## Pre-requisites
 
-First, specify the location where the styleguide site is going to be built using the [styledguideDir](/Configuration.md#styleguidedir) option. It will default to a `styleguide` folder beside your `styleguide.config.js`.
+First, specify the location where the styleguide site is going to be built using the [styleguideDir](/Configuration.md#styleguidedir) option. It will default to a `styleguide` folder beside your `styleguide.config.js`.
 
 Check out the results of running the following command
 
