@@ -14,7 +14,8 @@ jobs:
       - restore_cache:
           keys:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-      - run: PNPM_VERSION=7.5.2 curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: export PNPM_VERSION=7.5.2
+      - run: curl -fsSL https://get.pnpm.io/install.sh | sh -
       - run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install
       - save_cache:
