@@ -25,6 +25,8 @@
     "@rollup/plugin-node-resolve": "9.0.0",
     "@rollup/plugin-typescript": "8.3.0",
     "@types/domhandler": "2.4.2",
+    "tslib": "2.4.0",
+    "typescript": "4.7.4",
     "rollup": "2.66.1",
     "vue": "2.7.8"
   },
