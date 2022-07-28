@@ -17,5 +17,5 @@ runs:
     - name: Install Pnpm and run install
       uses: pnpm/action-setup@v2.0.1
       with:
-        version: latest
+        version: 7.5.0
         run_install: true

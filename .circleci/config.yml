@@ -14,7 +14,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: PNPM_VERSION=7.5.0 curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install
       - save_cache:
@@ -86,7 +86,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      # run cypress component tests 
+      # run cypress component tests
       - run: npm run cy:ct
 
       # run cypress e2e tests
