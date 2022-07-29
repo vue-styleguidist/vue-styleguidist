@@ -11,9 +11,9 @@
   "scripts": {
     "changeset": "changeset",
     "pretest": "pnpm lint",
-    "test": "pnpm test:vitest -- --maxWorkers=2 && pnpm test:plugin",
+    "test": "pnpm test:vitest && pnpm test:plugin",
     "test:plugin": "rimraf test/cli-packages/* && vitest -c vitest.config.plugin.ts",
-    "test:vitest": "vitest",
+    "test:vitest": "vitest run",
     "test:perf": "node ./packages/vue-docgen-api/tests/perf-test.js",
     "posttest": "pnpm format",
     "format": "prettier --write docs packages/**/*.{js,md,vue,ts,tsx} examples/**/*.{js,md,vue,ts}",

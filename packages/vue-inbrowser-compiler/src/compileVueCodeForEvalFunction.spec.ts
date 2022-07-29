@@ -170,6 +170,7 @@ new Vue({
 
 					})()
 			comp.render = function() {with(this){return _c('div')}}
+
 			return comp"
 		`)
 	})
