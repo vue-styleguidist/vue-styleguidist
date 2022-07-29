@@ -13,7 +13,7 @@
     "postinstall": "node ./postinstall.js"
   },
   "devDependencies": {
-    "vue": "2.6.14"
+    "vue": "2.7.8"
   },
   "peerDependencies": {
     "vue": ">=2"
