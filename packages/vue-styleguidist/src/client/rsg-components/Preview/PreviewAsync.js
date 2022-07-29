@@ -97,22 +97,24 @@ class PreviewAsync extends Component {
 			error: null
 		})
 
-		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(({ compile }) => {
-			try {
-				const example = compile(newCode, {
-					...this.context.config.compilerConfig,
-					...(this.context.config.jsxInExamples
-						? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
-						: {})
-				})
-				this.setCompiledPreview(example)
-			} catch (err) {
-				this.handleError(err)
+		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(
+			({ compile, addScopedStyle }) => {
+				try {
+					const example = compile(newCode, {
+						...this.context.config.compilerConfig,
+						...(this.context.config.jsxInExamples
+							? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
+							: {})
+					})
+					this.setCompiledPreview(example, addScopedStyle)
+				} catch (err) {
+					this.handleError(err)
+				}
 			}
-		})
+		)
 	}
 
-	setCompiledPreview(example) {
+	setCompiledPreview(example, addScopedStyle) {
 		const { vuex, component, renderRootJsx } = this.props
 		let el = this.mountNode.children[0]
 		if (!el) {
@@ -120,7 +122,8 @@ class PreviewAsync extends Component {
 			this.mountNode.appendChild(document.createElement('div'))
 			el = this.mountNode.children[0]
 		}
-		this.vueInstance = getCompiledExampleComponent({
+
+		const { app, style, moduleId } = getCompiledExampleComponent({
 			compiledExample: example,
 			evalInContext: this.props.evalInContext,
 			vuex,
@@ -133,6 +136,11 @@ class PreviewAsync extends Component {
 			el,
 			locallyRegisterComponents: this.context.config.locallyRegisterComponents
 		})
+
+		this.vueInstance = app
+		if (style) {
+			addScopedStyle(style, moduleId)
+		}
 	}
 
 	handleError = err => {

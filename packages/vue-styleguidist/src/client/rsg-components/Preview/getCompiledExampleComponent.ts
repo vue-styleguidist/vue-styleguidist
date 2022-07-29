@@ -1,5 +1,4 @@
 import {
-	addScopedStyle,
 	cleanName,
 	compileTemplateForEval,
 	EvaluableComponent,
@@ -49,7 +48,7 @@ export function getCompiledExampleComponent({
 							return originalRender.call(this, ...args)
 						} catch (e) {
 							handleError(e)
-							return
+							return undefined
 						}
 					}
 				}
@@ -109,24 +108,24 @@ export function getCompiledExampleComponent({
 	const rootComponent = renderRootJsx
 		? renderRootJsx.default(previewComponent)
 		: {
-				render: (createElement: (previewComponent: any) => any) =>
+				render: (createElement: (comp: any) => any) =>
 					(isVue3 ? h : createElement)(previewComponent)
 		  }
 	try {
 		destroyVueInstance()
-		return getVueApp(
-			{
-				...extendsComponent,
-				...rootComponent
-			},
-			el
-		)
+		return {
+			app: getVueApp(
+				{
+					...extendsComponent,
+					...rootComponent
+				},
+				el
+			),
+			style,
+			moduleId
+		}
 	} catch (err) {
 		handleError(err)
-	}
-
-	// Add the scoped style if there is any
-	if (style) {
-		addScopedStyle(style, moduleId)
+		return {}
 	}
 }

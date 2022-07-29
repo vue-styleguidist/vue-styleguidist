@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compile } from 'vue-inbrowser-compiler'
-import { getCompiledExampleComponent } from './getCompiledExampleComponent'
+import { addScopedStyle, compile } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
+import { getCompiledExampleComponent } from './getCompiledExampleComponent'
 import { getVueApp } from './getVueApp'
 
 class Preview extends Component {
@@ -108,7 +108,7 @@ class Preview extends Component {
 			el = this.mountNode.children[0]
 		}
 
-		this.vueInstance = getCompiledExampleComponent({
+		const { app, style, moduleId } = getCompiledExampleComponent({
 			compiledExample: example,
 			evalInContext: this.props.evalInContext,
 			vuex,
@@ -121,6 +121,11 @@ class Preview extends Component {
 			el,
 			locallyRegisterComponents: this.context.config.locallyRegisterComponents
 		})
+
+		this.vueInstance = app
+		if (style) {
+			addScopedStyle(style, moduleId)
+		}
 	}
 
 	handleError = err => {
