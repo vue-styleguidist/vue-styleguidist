@@ -12,7 +12,7 @@
     "changeset": "changeset",
     "pretest": "pnpm lint",
     "test": "pnpm test:vitest && pnpm test:plugin",
-    "test:plugin": "rimraf test/cli-packages/* && vitest -c vitest.config.plugin.ts",
+    "test:plugin": "rimraf test/cli-packages/* && vitest run -c vitest.config.plugin.ts",
     "test:vitest": "vitest run",
     "test:perf": "node ./packages/vue-docgen-api/tests/perf-test.js",
     "posttest": "pnpm format",
