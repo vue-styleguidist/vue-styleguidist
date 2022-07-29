@@ -6,6 +6,7 @@ exports[`tests InputTextDoc > should match the snapshot 1`] = `
   "displayName": "InputTextDocumented",
   "events": undefined,
   "exportName": "default",
+  "exposes": undefined,
   "methods": undefined,
   "props": [
     {
