@@ -16,7 +16,7 @@ describe('tests button', () => {
 			  "displayName": "MyButton",
 			  "events": undefined,
 			  "exportName": "default",
-			  "exposes": undefined,
+			  "expose": undefined,
 			  "methods": undefined,
 			  "props": [
 			    {

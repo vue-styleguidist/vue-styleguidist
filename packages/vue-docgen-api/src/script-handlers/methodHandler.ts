@@ -22,7 +22,8 @@ import getProperties from './utils/getProperties'
 export default function methodHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
 		const exposePath = getProperties(path, 'expose')
-		const exposeArray = exposePath[0].get('value', 'elements').map((el: NodePath) => el.value.value)
+		const exposeArray =
+			exposePath[0]?.get('value', 'elements').map((el: NodePath) => el.value.value) || []
 		const methodsPath = getProperties(path, 'methods')
 
 		// if no method return

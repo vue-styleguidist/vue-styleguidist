@@ -15,70 +15,7 @@ describe('test example vuex', () => {
 	})
 
 	it('The component should parse the quotes', () => {
-		expect(docQuoted.methods).toMatchInlineSnapshot(`
-			[
-			  {
-			    "description": "Sets the order",
-			    "name": "onSubmit",
-			    "params": [
-			      {
-			        "description": "Key to order",
-			        "name": "key",
-			        "title": "param",
-			        "type": {
-			          "name": "string",
-			        },
-			      },
-			    ],
-			    "returns": {
-			      "description": "Test",
-			      "title": "returns",
-			      "type": {
-			        "name": "string",
-			      },
-			    },
-			    "tags": {
-			      "access": [
-			        {
-			          "description": "public",
-			          "title": "access",
-			        },
-			      ],
-			      "params": [
-			        {
-			          "description": "Key to order",
-			          "name": "key",
-			          "title": "param",
-			          "type": {
-			            "name": "string",
-			          },
-			        },
-			      ],
-			      "returns": [
-			        {
-			          "description": "Test",
-			          "title": "returns",
-			          "type": {
-			            "name": "string",
-			          },
-			        },
-			      ],
-			      "since": [
-			        {
-			          "description": "Version 1.0.1",
-			          "title": "since",
-			        },
-			      ],
-			      "version": [
-			        {
-			          "description": "1.0.5",
-			          "title": "version",
-			        },
-			      ],
-			    },
-			  },
-			]
-		`)
+		expect(docQuoted.methods).toMatchInlineSnapshot('undefined')
 		expect(docQuoted.props).toMatchInlineSnapshot(`
 			[
 			  {

@@ -25,7 +25,7 @@ exports[`tests grid > should match the snapshot 1`] = `
     },
   ],
   "exportName": "default",
-  "exposes": undefined,
+  "expose": undefined,
   "methods": [
     {
       "description": "Sets the order",

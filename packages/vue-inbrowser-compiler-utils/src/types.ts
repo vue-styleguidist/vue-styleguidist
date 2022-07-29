@@ -105,7 +105,8 @@ export interface ComponentDoc {
 	methods?: MethodDescriptor[]
 	slots?: SlotDescriptor[]
 	events?: EventDescriptor[]
-	tags?: { [key: string]: BlockTag[] }
+	expose?: ExposedDescriptor[]
+	tags: { [key: string]: BlockTag[] }
 	docsBlocks?: string[]
 	[key: string]: any
 }

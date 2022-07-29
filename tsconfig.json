@@ -9,6 +9,7 @@
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
 		"sourceMap": true,
+		"noImplicitAny": true,
 		"baseUrl": ".",
 		"paths": {
 			"rsg-components/*": [
