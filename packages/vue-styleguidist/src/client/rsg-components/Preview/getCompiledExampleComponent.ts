@@ -1,6 +1,7 @@
 import {
 	addScopedStyle,
 	cleanName,
+	compileTemplateForEval,
 	EvaluableComponent,
 	h,
 	isVue3
@@ -32,23 +33,46 @@ export function getCompiledExampleComponent({
 }: InjectedParams) {
 	let style
 	let previewComponent: any = {}
-	try {
-		style = compiledExample.style
-		if (compiledExample.script) {
-			// compile and execute the script
-			// it can be:
-			// - a script setting up variables => we set up the data function of previewComponent
-			// - a `new Vue()` script that will return a full config object
-			previewComponent = evalInContext(compiledExample.script)() || {}
+	const calcOptions = () => {
+		try {
+			style = compiledExample.style
+			if (compiledExample.script) {
+				// compile and execute the script
+				// it can be:
+				// - a script setting up variables => we set up the data function of previewComponent
+				// - a `new Vue()` script that will return a full config object
+				previewComponent = evalInContext(compiledExample.script)() || {}
+				if (previewComponent.render) {
+					const originalRender = previewComponent.render
+					previewComponent.render = function (...args: any[]) {
+						try {
+							return originalRender.call(this, ...args)
+						} catch (e) {
+							handleError(e)
+							return
+						}
+					}
+				}
+			}
+			if (compiledExample.template) {
+				// if this is a pure template or if we are in hybrid vsg mode,
+				// we need to set the template up.
+				previewComponent.template = `<div>${compiledExample.template}</div>`
+			}
+		} catch (err) {
+			handleError(err)
+			previewComponent.template = '<div/>'
 		}
-		if (compiledExample.template) {
-			// if this is a pure template or if we are in hybrid vsg mode,
-			// we need to set the template up.
-			previewComponent.template = `<div>${compiledExample.template}</div>`
-		}
-	} catch (err) {
-		handleError(err)
-		previewComponent.template = '<div/>'
+	}
+	calcOptions()
+
+	// In case the template is inlined in the script,
+	// we need to compile it
+	if (previewComponent.template) {
+		compiledExample.template = previewComponent.template
+		compileTemplateForEval(compiledExample)
+		calcOptions()
+		delete previewComponent.template
 	}
 
 	let extendsComponent = {}
