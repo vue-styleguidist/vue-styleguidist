@@ -6,6 +6,7 @@ exports[`tests InputText as a JS file > should match the snapshot 1`] = `
   "displayName": "InputText",
   "events": undefined,
   "exportName": "default",
+  "exposes": undefined,
   "methods": undefined,
   "props": [
     {
