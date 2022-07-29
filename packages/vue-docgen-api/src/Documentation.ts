@@ -112,6 +112,7 @@ export default class Documentation {
 		const methods = this.getObjectFromDescriptor(this.methodsMap)
 		const events = this.getObjectFromDescriptor(this.eventsMap)
 		const slots = this.getObjectFromDescriptor(this.slotsMap)
+		const exposes = this.getObjectFromDescriptor(this.exposedMap)
 
 		const obj: { [key: string]: any } = {}
 		this.dataMap.forEach((value, key) => {
@@ -133,6 +134,7 @@ export default class Documentation {
 			// set all the static properties
 			exportName: obj.exportName,
 			displayName: obj.displayName,
+			exposes,
 			props,
 			events,
 			methods,
