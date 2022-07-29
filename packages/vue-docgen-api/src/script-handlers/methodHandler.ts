@@ -12,7 +12,7 @@ import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 import getTypeFromAnnotation from '../utils/getTypeFromAnnotation'
 import transformTagsIntoObject from '../utils/transformTagsIntoObject'
-import getMemberFilter from '../utils/getPropsFilter'
+import getProperties from './utils/getProperties'
 
 /**
  * Extracts methods information from an object-style VueJs component
@@ -21,11 +21,9 @@ import getMemberFilter from '../utils/getPropsFilter'
  */
 export default function methodHandler(documentation: Documentation, path: NodePath): Promise<void> {
 	if (bt.isObjectExpression(path.node)) {
-		const methodsPath = path
-			.get('properties')
-			.filter(
-				(p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('methods')(p)
-			) as NodePath<bt.ObjectProperty>[]
+		const exposePath = getProperties(path, 'expose')
+		const exposeArray = exposePath[0].get('value', 'elements').map((el: NodePath) => el.value.value)
+		const methodsPath = getProperties(path, 'methods')
 
 		// if no method return
 		if (!methodsPath.length) {
@@ -52,7 +50,10 @@ export default function methodHandler(documentation: Documentation, path: NodePa
 				const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
 				// ignore the method if there is no public tag
-				if (!jsDocTags.some((t: Tag) => t.title === 'access' && t.content === 'public')) {
+				if (
+					!jsDocTags.some((t: Tag) => t.title === 'access' && t.content === 'public') &&
+					!exposeArray.includes(methodName)
+				) {
 					return
 				}
 

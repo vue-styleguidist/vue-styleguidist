@@ -57,6 +57,23 @@ describe('methodHandler', () => {
 		})
 	})
 
+	it('should return every methods not tagged as @public but in the "expose" option', () => {
+		const src = `
+    export default {
+      expose: ['testExpose'],
+      name: 'name-123',
+      methods:{
+        testExpose(){
+          return 1;
+        }
+      }
+    }`
+		tester(src)
+		expect(mockMethodDescriptor).toMatchObject({
+			name: 'testExpose'
+		})
+	})
+
 	describe('formats', () => {
 		it('should return the method if it is an anonymous function', () => {
 			const src = `
