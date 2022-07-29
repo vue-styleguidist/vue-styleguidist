@@ -39,7 +39,7 @@ export default async function setupExposedHandler(
 
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
-			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineExposed') {
+			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineExpose') {
 				if (bt.isObjectExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'properties').each((prop: NodePath<bt.ObjectProperty>) => {
 						if (bt.isIdentifier(prop.node.key)) {

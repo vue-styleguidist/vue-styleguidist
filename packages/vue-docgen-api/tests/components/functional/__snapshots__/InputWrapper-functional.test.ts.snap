@@ -9,6 +9,7 @@ exports[`tests button functional > should match the snapshot 1`] = `
   ],
   "events": undefined,
   "exportName": "default",
+  "exposes": undefined,
   "functional": true,
   "methods": undefined,
   "props": [

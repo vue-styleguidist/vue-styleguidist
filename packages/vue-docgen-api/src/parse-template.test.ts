@@ -18,6 +18,7 @@ describe('parse-template', () => {
 			  "displayName": undefined,
 			  "events": undefined,
 			  "exportName": undefined,
+			  "exposes": undefined,
 			  "methods": undefined,
 			  "props": undefined,
 			  "slots": undefined,

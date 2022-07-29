@@ -45,6 +45,7 @@ exports[`tests button > should match the snapshot 1`] = `
     },
   ],
   "exportName": "default",
+  "exposes": undefined,
   "methods": undefined,
   "props": [
     {

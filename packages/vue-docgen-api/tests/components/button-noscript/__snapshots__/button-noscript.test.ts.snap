@@ -23,6 +23,7 @@ exports[`tests button with no script block > should match the snapshot 1`] = `
     },
   ],
   "exportName": undefined,
+  "exposes": undefined,
   "methods": undefined,
   "props": undefined,
   "slots": [
