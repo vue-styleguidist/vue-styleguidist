@@ -1,11 +1,11 @@
 const path = require('path')
 const fs = require('fs')
 
-function checkPeerDependency(package) {
+function checkPeerDependency(pkg) {
 	try {
-		require.resolve(package)
+		require.resolve(pkg)
 	} catch (error) {
-		throw new Error(`vue-inbrowser-compiler needs "${package}" as a peer dependency`)
+		throw new Error(`vue-inbrowser-compiler needs "${pkg}" as a peer dependency`)
 	}
 }
 

@@ -1,5 +1,5 @@
-import parseComponent from './parseComponent'
 import dedent from 'dedent'
+import parseComponent from './parseComponent'
 
 describe('parseComponent', () => {
 	it('should detect templates', () => {

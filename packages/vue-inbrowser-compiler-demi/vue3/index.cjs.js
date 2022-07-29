@@ -1,4 +1,5 @@
 const Vue = require('vue')
+// eslint-disable-next-line import/no-unresolved
 const { compileTemplate, compileScript } = require('@vue/compiler-sfc')
 
 module.exports.h = Vue.h
