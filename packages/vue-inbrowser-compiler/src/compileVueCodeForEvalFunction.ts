@@ -1,6 +1,11 @@
 import { transform, TransformOptions } from 'buble'
 import walkes from 'walkes'
-import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
+import {
+	EvaluableComponent,
+	isCodeVueSfc,
+	isVue3,
+	compileTemplateForEval
+} from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -11,15 +16,19 @@ import normalizeSfcComponent, {
 import getAst from './getAst'
 import getTargetFromBrowser from './getTargetFromBrowser'
 
-interface EvaluableComponent {
-	script: string
-	template?: string
-	style?: string
+interface EvaluableComponentWithSource extends EvaluableComponent {
+	raw: {
+		script: string
+		template?: string
+	}
 }
 
 /**
- * Reads the code in string and separates the javascript part and the html part
- * then sets the nameVarComponent variable with the value of the component parameters
+ * Reads the code as a string, separates the javascript part from the template & style parts,
+ * then replaces the imports with requires and returns the script code as the body of a function.
+ *
+ * - For Vue2 the function compiles the template into a render function and adds the new function to the evaluated code.
+ * - For Vue3 you have to use the compileVue3Template function yourself to compile the template into a function.
  * @param code
  * @param config buble config to be used when transforming
  *
@@ -27,12 +36,20 @@ interface EvaluableComponent {
 export default function compileVueCodeForEvalFunction(
 	code: string,
 	config: TransformOptions = {}
-): EvaluableComponent {
+): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
-	return {
+
+	const compiledComponent = {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, { target, ...config }).code
+	}
+
+	compileTemplateForEval(compiledComponent)
+
+	return {
+		...compiledComponent,
+		raw: nonCompiledComponent
 	}
 }
 

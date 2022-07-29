@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compile } from 'vue-inbrowser-compiler'
-import { cleanName, addScopedStyle, h, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { addScopedStyle, compile } from 'vue-inbrowser-compiler'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext } from '../../utils/renderStyleguide'
+import { getCompiledExampleComponent } from './getCompiledExampleComponent'
 import { getVueApp } from './getVueApp'
 
 class Preview extends Component {
@@ -56,18 +56,21 @@ class Preview extends Component {
 				this.mountNode.appendChild(document.createElement('div'))
 				el = this.mountNode.children[0]
 			}
-      this.vueInstance?.unmount?.()
-			el = getVueApp({
-				data: () => ({}),
-				template: '<div></div>'
-			}, el)
+			this.vueInstance?.unmount?.()
+			el = getVueApp(
+				{
+					data: () => ({}),
+					template: '<div></div>'
+				},
+				el
+			)
 		}
 	}
 
 	destroyVueInstance() {
 		if (this.vueInstance) {
 			try {
-        this.vueInstance.unmount?.()
+				this.vueInstance.unmount?.()
 				this.vueInstance.$destroy?.()
 			} catch (err) {
 				// eat the error
@@ -86,33 +89,16 @@ class Preview extends Component {
 			return
 		}
 
-		let style
-		let previewComponent = {}
-
+		let example
 		try {
-			const example = compile(code, {
+			example = compile(code, {
 				...this.context.config.compilerConfig,
 				...(this.context.config.jsxInExamples
 					? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
 					: {})
 			})
-
-			style = example.style
-			if (example.script) {
-				// compile and execute the script
-				// it can be:
-				// - a script setting up variables => we set up the data function of previewComponent
-				// - a `new Vue()` script that will return a full config object
-				previewComponent = this.props.evalInContext(example.script)() || {}
-			}
-			if (example.template) {
-				// if this is a pure template or if we are in hybrid vsg mode,
-				// we need to set the template up.
-				previewComponent.template = `<div>${example.template}</div>`
-			}
 		} catch (err) {
 			this.handleError(err)
-			previewComponent.template = '<div/>'
 		}
 
 		let el = this.mountNode.children[0]
@@ -122,51 +108,21 @@ class Preview extends Component {
 			el = this.mountNode.children[0]
 		}
 
-		let extendsComponent = {}
-		if (vuex) {
-			extendsComponent = { store: vuex.default }
-		}
-		const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
-		previewComponent._scopeId = 'data-' + moduleId
+		const { app, style, moduleId } = getCompiledExampleComponent({
+			compiledExample: example,
+			evalInContext: this.props.evalInContext,
+			vuex,
+			component,
+			renderRootJsx,
+			destroyVueInstance: () => this.destroyVueInstance(),
+			handleError: e => {
+				this.handleError(e)
+			},
+			el,
+			locallyRegisterComponents: this.context.config.locallyRegisterComponents
+		})
 
-		// if we are in local component registration, register current component
-		// NOTA: on independent md files, component.module is undefined
-		if (
-			component &&
-			component.module &&
-			this.context.config.locallyRegisterComponents &&
-			// NOTA: if the components member of the vue config object is
-			// already set it should not be changed
-			!previewComponent.components
-		) {
-			component.displayName = cleanName(component.name)
-			// register component locally
-			previewComponent.components = {
-				[component.displayName]: component.module.default || component.module
-			}
-			if (component.props.subComponents) {
-				component.props.subComponents.forEach(c => {
-					c.displayName = cleanName(c.name)
-					previewComponent.components[c.displayName] = c.module.default || c.module
-				})
-			}
-		}
-
-		// then we just have to render the setup previewComponent in the prepared slot
-		const rootComponent = renderRootJsx
-			? renderRootJsx.default(previewComponent)
-			: { render: createElement => (isVue3 ? h : createElement)(previewComponent) }
-		try {
-			this.destroyVueInstance()
-			this.vueInstance = getVueApp({
-        ...extendsComponent,
-        ...rootComponent
-      }, el)
-		} catch (err) {
-			this.handleError(err)
-		}
-
-		// Add the scoped style if there is any
+		this.vueInstance = app
 		if (style) {
 			addScopedStyle(style, moduleId)
 		}

@@ -151,19 +151,22 @@ new Vue({
 		</script>
 		`).script
 		).toMatchInlineSnapshot(`
-			"\\"use strict\\";
+			"
+
+			const comp = (function() {\\"use strict\\";
 
 
 
-					;return {template: \`
-						<div/>
-					\`, 
+					;return {
 						data(){
 							return {
 								param: 'BazBaz'
 							}
 						}
-					}"
+					}})()
+			comp.render = function() {with(this){return _c('div')}}
+
+			return comp"
 		`)
 	})
 

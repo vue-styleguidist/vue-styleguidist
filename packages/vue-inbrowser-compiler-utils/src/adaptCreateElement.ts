@@ -1,5 +1,5 @@
 import camelCase from 'camelcase'
-import { isVue3, resolveComponent } from 'vue-inbrowser-compiler-demi'
+import { isVue3 } from 'vue-inbrowser-compiler-demi'
 
 export type CreateElementFunction = (
 	component: string | object,
@@ -14,13 +14,12 @@ export type CreateElementFunction = (
  */
 export default function adaptCreateElement(h: CreateElementFunction): CreateElementFunction {
 	return (comp, attr, ...children: any[]) => {
-		const resolvedComponent = resolveComponent(comp)
 		if (attr === undefined) {
-			return h(resolvedComponent)
+			return h(comp)
 		} else if (!children.length) {
-			return h(resolvedComponent, groupAttr(attr))
+			return h(comp, groupAttr(attr))
 		}
-		return h(resolvedComponent, groupAttr(attr), children)
+		return h(comp, groupAttr(attr), children)
 	}
 }
 

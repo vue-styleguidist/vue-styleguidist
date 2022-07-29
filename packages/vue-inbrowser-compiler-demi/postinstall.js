@@ -1,6 +1,14 @@
 const path = require('path')
 const fs = require('fs')
 
+function checkPeerDependency(pkg) {
+	try {
+		require.resolve(pkg)
+	} catch (error) {
+		throw new Error(`vue-inbrowser-compiler needs "${pkg}" as a peer dependency`)
+	}
+}
+
 function getVuePackageVersion() {
 	try {
 		const pkg = require('vue/package.json')
@@ -9,42 +17,27 @@ function getVuePackageVersion() {
 		return 'unknown'
 	}
 }
+const indexPath = 'index.cjs.js'
+const indexPathESM = 'index.esm.js'
+const paths = [indexPath, indexPathESM]
 
-function updateIndexForVue3() {
-	// commonjs
-	const indexPath = path.join(__dirname, './index.cjs.js')
-	const indexContent = `
-  const Vue = require('vue')
-  
-  module.exports.h = Vue.h
-  module.exports.createApp = Vue.createApp
-  module.exports.resolveComponent = Vue.resolveComponent
-  module.exports.isVue3 = true
-  module.exports.Vue2 = function(){}
-  `
-	fs.writeFile(indexPath, indexContent, err => {
-		if (err) {
-			console.error(err)
-		}
-	})
-
-	// esm
-	const indexPathESM = path.join(__dirname, './index.esm.js')
-	const indexContentESM = `
-  export { h, resolveComponent, createApp } from 'vue'
-  export const isVue3 = true
-  export const Vue2 = () => {}
-  `
-
-	fs.writeFile(indexPathESM, indexContentESM, err => {
-		if (err) {
-			console.error(err)
-		}
+function updateIndexForVueVersion(version) {
+	paths.forEach(async filePath => {
+		const indexContent = await fs.promises.readFile(path.join(__dirname, version, filePath), 'utf8')
+		fs.writeFile(path.join(__dirname, filePath), indexContent, err => {
+			if (err) {
+				console.error(err)
+			}
+		})
 	})
 }
 
 const version = getVuePackageVersion()
 
 if (version.startsWith('3.')) {
-	updateIndexForVue3()
+	checkPeerDependency('@vue/compiler-sfc')
+	updateIndexForVueVersion('vue3')
+} else if (version.startsWith('2.')) {
+	checkPeerDependency('vue-template-compiler')
+	updateIndexForVueVersion('vue2')
 }

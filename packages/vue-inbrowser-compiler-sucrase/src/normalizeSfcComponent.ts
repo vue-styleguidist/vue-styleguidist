@@ -1,5 +1,5 @@
 import walkes from 'walkes'
-import { parseComponent, VsgSFCDescriptor, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneJSXSpread from './transformOneJSXSpread'
 
@@ -24,30 +24,6 @@ function getSingleFileComponentParts(code: string) {
 		parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
 	}
 	return parts
-}
-
-function injectTemplateAndParseExport(
-	parts: VsgSFCDescriptor,
-	config: { objectAssign?: string }
-): {
-	preprocessing?: string
-	component: string
-} {
-	const templateString = parts.template
-		? parts.template.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
-		: undefined
-
-	if (!parts.script) {
-		return { component: `{template: \`${templateString}\` }` }
-	}
-
-	const comp = parseScriptCode(parts.script, config)
-	if (templateString) {
-		comp.component = `{template: \`${templateString}\`, ${comp.component}}`
-	} else {
-		comp.component = `{${comp.component}}`
-	}
-	return comp
 }
 
 export function parseScriptCode(
@@ -172,11 +148,14 @@ export function insertCreateElementFunction(before: string, after: string): stri
 export default function normalizeSfcComponent(
 	code: string,
 	config: { objectAssign?: string } = {}
-): { script: string; style?: string } {
+): { script: string; style?: string; template?: string } {
 	const parts = getSingleFileComponentParts(code)
-	const { preprocessing, component } = injectTemplateAndParseExport(parts, config)
+	const { preprocessing = '', component = '' } = parts.script
+		? parseScriptCode(parts.script, config)
+		: {}
 	return {
-		script: [preprocessing, `return ${component}`].join(';'),
+		template: parts.template,
+		script: [preprocessing, `return {${component}}`].join(';'),
 		style: buildStyles(parts.styles)
 	}
 }

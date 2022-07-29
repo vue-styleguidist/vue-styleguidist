@@ -6,7 +6,7 @@ export default function getImports(code: string): string[] {
 	const imports: string[] = []
 	try {
 		const ast = getAst(code)
-		walkes(ast.program, {
+		walkes(ast, {
 			ImportDeclaration(node: any) {
 				imports.push(node.source.value)
 			},

@@ -5,6 +5,12 @@ export interface Module {
 	path: string
 }
 
+export interface EvaluableComponent {
+	script: string
+	template?: string
+	style?: string
+}
+
 /**
  * Universal model to display origin
  */

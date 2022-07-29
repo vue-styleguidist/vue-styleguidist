@@ -22,7 +22,7 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 
 	const descriptor: VsgSFCDescriptor = {}
 
-	let codeCleaned = code
+	let codeCleaned = `${code}`
 
 	// extract all parts
 	PARTS.forEach(part => {
@@ -35,7 +35,7 @@ export default function parseComponent(code: string): VsgSFCDescriptor {
 			descriptor[part] = Array(paddingLinesNumber).join('\n') + res[1]
 
 			// once we have extracted one part,
-			// remove it from the analyzed blob
+			// remove it from the analyzed string
 			const linesOfPart = partFound.split('\n').length
 			codeCleaned = codeCleaned.replace(partFound, Array(linesOfPart).join('\n'))
 		}

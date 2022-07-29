@@ -1,10 +1,9 @@
 import { transform } from 'sucrase'
 import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
 
-
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func
-	const scriptTransformed = transform(sut.script, {
+	const scriptTransformed = transform(`{${sut.script}}`, {
 		transforms: ['imports', 'typescript'],
 		production: true
 	}).code
@@ -26,7 +25,7 @@ export default {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ param: 'Foo' })
 	})
 
 	it('bake template into a new Vue (named exports)', () => {
@@ -41,7 +40,7 @@ export const compo = {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ param: 'Foo' })
 	})
 
 	it('bake template into a new Vue (es5 exports)', () => {
@@ -55,7 +54,7 @@ module.exports = {
 	param
 }
 </script>`)
-		expect(evalFunction(sut)).toMatchObject({ template: '\n\n<div/>\n', param: 'Foo' })
+		expect(evalFunction(sut)).toMatchObject({ param: 'Foo' })
 	})
 
 	it('should add const h = this.createElement at the beginning of a render function', () => {
@@ -79,8 +78,8 @@ computed:{
 		expect(evalFunction(sut).render.toString()).toMatch(/const h = this\.\$createElement/)
 	})
 
-  it('should parse typescript components', () => {
-    const sut = normalizeSfcComponent(`
+	it('should parse typescript components', () => {
+		const sut = normalizeSfcComponent(`
 <script lang="ts">
 export default {
   name: 'HelloWorld',
@@ -93,18 +92,18 @@ export default {
 }
 </script>`)
 
-    expect(() => evalFunction(sut)).not.toThrow()
-  })
+		expect(() => evalFunction(sut)).not.toThrow()
+	})
 })
 
 describe('parseScriptCode', () => {
-  it('should return component code', () => {
-    const ret = parseScriptCode(`
+	it('should return component code', () => {
+		const ret = parseScriptCode(`
     export default () => {
       return <div>Hello</div>
     }`)
 
-    expect(ret).toMatchInlineSnapshot(`
+		expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: () => {
             return <div>Hello</div>
@@ -114,15 +113,15 @@ describe('parseScriptCode', () => {
           ",
       }
     `)
-  })
+	})
 
-  it('should replace spreads by concatenate', () => {
-    const ret = parseScriptCode(`
+	it('should replace spreads by concatenate', () => {
+		const ret = parseScriptCode(`
     export default () => {
       return <div class='b' {...{class: 'a', style:{color:'blue'}}}>Hello</div>
     }`)
 
-    expect(ret).toMatchInlineSnapshot(`
+		expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: () => {
             return <div {...Object.assign({class:\\"b\\"},{class: 'a', style:{color:'blue'}})} >Hello</div>
@@ -132,15 +131,15 @@ describe('parseScriptCode', () => {
           ",
       }
     `)
-  })
+	})
 
-  it('should replace spreads by concatenate on self closing tags', () => {
-    const ret = parseScriptCode(`
+	it('should replace spreads by concatenate on self closing tags', () => {
+		const ret = parseScriptCode(`
     export default () => {
       return <CouCou class='b' {...{class: 'a', style:{color:'blue'}}} />
     }`)
 
-    expect(ret).toMatchInlineSnapshot(`
+		expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: () => {
             return <CouCou {...Object.assign({class:\\"b\\"},{class: 'a', style:{color:'blue'}})} />
@@ -150,15 +149,15 @@ describe('parseScriptCode', () => {
           ",
       }
     `)
-  })
+	})
 
-  it('should return a full function', () => {
-    const ret = parseScriptCode(`
+	it('should return a full function', () => {
+		const ret = parseScriptCode(`
     export default function (){
       return <CouCou class='b' style={{background:"gray"}} {...{class: 'a', style:{color:'blue'}}} />
     }`)
 
-    expect(ret).toMatchInlineSnapshot(`
+		expect(ret).toMatchInlineSnapshot(`
       {
         "component": "render: function (){
             return <CouCou {...Object.assign({class:\\"b\\"},{style:{background:\\"gray\\"}},{class: 'a', style:{color:'blue'}})} />
@@ -168,5 +167,5 @@ describe('parseScriptCode', () => {
           ",
       }
     `)
-  })
+	})
 })

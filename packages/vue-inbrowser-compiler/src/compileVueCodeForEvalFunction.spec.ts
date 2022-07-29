@@ -1,5 +1,7 @@
 /* eslint-disable no-new-func */
-import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
+import compileVueCodeForEvalFunction, {
+	getEvaluableVue3RenderFunctionBody
+} from './compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {
@@ -153,18 +155,23 @@ new Vue({
 		).toMatchInlineSnapshot(`
 			"
 
+			const comp = (function() {
 
 
-					;return {template: \`
-						<div/>
-					\`, 
+
+					
+			return {
 						data(){
 							return {
 								param: 'BazBaz'
 							}
 						}
-					};
-					"
+					}
+
+					})()
+			comp.render = function() {with(this){return _c('div')}}
+
+			return comp"
 		`)
 	})
 

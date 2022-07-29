@@ -1,23 +1,23 @@
+import dedent from 'dedent'
 import parseComponent from './parseComponent'
 
 describe('parseComponent', () => {
 	it('should detect templates', () => {
-		const comp = parseComponent(`
+		const comp = parseComponent(dedent`
         <template>
-            <template>
-                <div>hello</div>
-            </template>
-            hello world
+        <template>
+          <div>hello</div>
+        </template>
+        hello world
         </template>`)
 		expect(comp.template).toMatchInlineSnapshot(`
-		"
-
-		            <template>
-		                <div>hello</div>
-		            </template>
-		            hello world
-		        "
-	`)
+			"
+			<template>
+			  <div>hello</div>
+			</template>
+			hello world
+			"
+		`)
 	})
 
 	it('should detect scripts', () => {

@@ -1,6 +1,6 @@
 import { transform, Options as TransformOptions } from 'sucrase'
 import walkes from 'walkes'
-import { isCodeVueSfc, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { isCodeVueSfc, isVue3, compileTemplateForEval } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, {
 	parseScriptCode,
 	getRenderFunctionStart,
@@ -15,6 +15,17 @@ interface EvaluableComponent {
 	style?: string
 }
 
+interface EvaluableComponentWithSource extends EvaluableComponent {
+	raw: {
+		script: string
+		template?: string
+	}
+}
+
+export function compileVue3Template(template: string, component: any): () => any {
+	return () => ({})
+}
+
 /**
  * Reads the code in string and separates the javascript part and the html part
  * then sets the nameVarComponent variable with the value of the component parameters
@@ -25,7 +36,7 @@ interface EvaluableComponent {
 export default function compileVueCodeForEvalFunction(
 	code: string,
 	config: Omit<TransformOptions, 'transforms'> & { objectAssign?: string } = {}
-): EvaluableComponent {
+): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const configWithTransforms: TransformOptions = {
 		production: true,
@@ -33,9 +44,17 @@ export default function compileVueCodeForEvalFunction(
 		jsxFragmentPragma: config.jsxFragmentPragma,
 		transforms: ['typescript', 'imports', ...(config.jsxPragma ? (['jsx'] as const) : [])]
 	}
-	return {
+
+	const compiledComponent = {
 		...nonCompiledComponent,
 		script: transform(nonCompiledComponent.script, configWithTransforms).code
+	}
+
+	compileTemplateForEval(compiledComponent)
+
+	return {
+		...compiledComponent,
+		raw: nonCompiledComponent
 	}
 }
 
