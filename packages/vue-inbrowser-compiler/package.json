@@ -23,7 +23,7 @@
     "buble": "^0.20.0",
     "camelcase": "^5.3.1",
     "detect-browser": "^5.2.0",
-    "vue-inbrowser-compiler-utils": "^4.44.23",
+    "vue-inbrowser-compiler-utils": "^4.46.0",
     "walkes": "^0.2.1"
   },
   "devDependencies": {
@@ -33,8 +33,10 @@
     "@types/buble": "0.20.1",
     "@vue/test-utils": "1.3.0",
     "rollup": "2.66.1",
-    "typescript": "4.5.5",
-    "vue": "2.6.14"
+    "tslib": "2.4.0",
+    "typescript": "4.7.4",
+    "vue": "2.7.8",
+    "vue-template-compiler": "2.7.8"
   },
   "peerDependencies": {
     "vue": ">=2"

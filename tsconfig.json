@@ -29,9 +29,9 @@
 		"node_modules/react-styleguidist/lib/client/rsg-components/**/*.*"
 	],
 	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
-  "references": [
-    {
-      "path": "./tsconfig.cy.json"
-    }
-  ],
+	"references": [
+		{
+			"path": "./tsconfig.cy.json"
+		}
+	]
 }

@@ -1,51 +1,52 @@
 {
-	"name": "vue-styleguidist-example-svg-loader",
-	"version": "4.0.0",
-	"description": "Here is an example of what can be done using an extenal loader. Observe that the loader added to the cli is automatically added to styleguidist.",
-	"private": true,
-	"scripts": {
-		"serve": "vue-cli-service serve",
-		"build": "vue-cli-service build",
-		"lint": "vue-cli-service lint",
-		"styleguide": "vue-cli-service styleguidist",
-		"styleguide:build": "vue-cli-service styleguidist:build"
-	},
-	"dependencies": {
-		"vue": "^2.6.14"
-	},
-	"devDependencies": {
-		"@vue/babel-preset-app": "^4.5.12",
-		"@vue/cli-plugin-babel": "^4.5.12",
-		"@vue/cli-plugin-eslint": "^4.5.12",
-		"@vue/cli-service": "^4.5.12",
-		"autoprefixer": "^9.8.6",
-		"vue-cli-plugin-styleguidist": "^4.36.1",
-		"vue-svg-loader": "^0.16.0",
-		"vue-template-compiler": "^2.6.14",
-		"webpack-bundle-analyzer": "^3.9.0"
-	},
-	"eslintConfig": {
-		"root": true,
-		"env": {
-			"node": true
-		},
-		"extends": [
-			"plugin:vue/essential",
-			"eslint:recommended"
-		],
-		"rules": {},
-		"parserOptions": {
-			"parser": "babel-eslint"
-		}
-	},
-	"postcss": {
-		"plugins": {
-			"autoprefixer": {}
-		}
-	},
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not ie <= 8"
-	]
+  "name": "vue-styleguidist-example-svg-loader",
+  "version": "4.0.0",
+  "description": "Here is an example of what can be done using an extenal loader. Observe that the loader added to the cli is automatically added to styleguidist.",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "styleguide": "vue-cli-service styleguidist",
+    "styleguide:build": "vue-cli-service styleguidist:build"
+  },
+  "dependencies": {
+    "vue": "^2.7.8"
+  },
+  "devDependencies": {
+    "@vue/babel-preset-app": "^4.5.12",
+    "@vue/cli-plugin-babel": "^4.5.12",
+    "@vue/cli-plugin-eslint": "^4.5.12",
+    "@vue/cli-service": "^4.5.12",
+    "autoprefixer": "^9.8.6",
+    "eslint": "^6",
+    "vue-cli-plugin-styleguidist": "^4.36.1",
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.7.8",
+    "webpack-bundle-analyzer": "^3.9.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
