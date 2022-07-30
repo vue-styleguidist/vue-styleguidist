@@ -87,6 +87,7 @@
     "vue-inbrowser-compiler": "^4.44.24",
     "vue-inbrowser-compiler-utils": "^4.46.0",
     "webpack-dev-server": "^3.11.2",
+    "webpack-filter-warnings-plugin": "^1.2.1",
     "webpack-merge": "^4.2.2"
   },
   "peerDependencies": {

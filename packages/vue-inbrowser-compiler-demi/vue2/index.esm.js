@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// eslint-disable-next-line import/no-unresolved
 import { compile } from 'vue-template-compiler'
 
 export const h = () => {}

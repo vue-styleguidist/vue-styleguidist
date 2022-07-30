@@ -19,7 +19,7 @@
   "peerDependencies": {
     "vue": ">=2",
     "vue-template-compiler": ">=2",
-    "@vue/compiler-dom": ">=3"
+    "@vue/compiler-sfc": ">=3"
   },
   "peerDependenciesMeta": {
     "vue-template-compiler": {

@@ -5,6 +5,8 @@ import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { MiniHtmlWebpackPlugin } from 'mini-html-webpack-plugin'
+// @ts-ignore
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 import MiniHtmlWebpackTemplate from '@vxna/mini-html-webpack-template'
 import merge from 'webpack-merge'
 import forEach from 'lodash/forEach'
@@ -60,7 +62,12 @@ export default function (
 		},
 		performance: {
 			hints: false
-		}
+		},
+    plugins:[
+      new FilterWarningsPlugin({
+        exclude: /Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
+      })
+    ]
 	}
 
 	webpackConfig.mode = env

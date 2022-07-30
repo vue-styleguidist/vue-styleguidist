@@ -1,5 +1,3 @@
-import { VueConstructor } from 'vue'
-
 type BindingTypes = 'data' | 'props' | 'options'
 type BindingMetadata = Record<string, BindingTypes>
 
@@ -30,7 +28,7 @@ export interface SFCScriptBlock {
 export declare const h: () => void
 export declare const createApp: (rootComponent: any) => any
 export declare const isVue3: boolean
-export declare const Vue2: VueConstructor
+export declare const Vue2: any
 export declare const compileTemplate: (options?: {
 	source: string
 	filename: string

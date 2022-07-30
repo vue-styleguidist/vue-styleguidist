@@ -1293,6 +1293,7 @@ importers:
       vue-template-compiler: 2.7.8
       webpack: 4.46.0
       webpack-dev-server: ^3.11.2
+      webpack-filter-warnings-plugin: ^1.2.1
       webpack-merge: ^4.2.2
     dependencies:
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -1350,6 +1351,7 @@ importers:
       vue-inbrowser-compiler: link:../vue-inbrowser-compiler
       vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       webpack-dev-server: 3.11.2_webpack@4.46.0
+      webpack-filter-warnings-plugin: 1.2.1_webpack@4.46.0
       webpack-merge: 4.2.2
     devDependencies:
       '@babel/cli': 7.18.6_@babel+core@7.18.6
@@ -29434,6 +29436,15 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+
+  /webpack-filter-warnings-plugin/1.2.1_webpack@4.46.0:
+    resolution: {integrity: sha512-Ez6ytc9IseDMLPo0qCuNNYzgtUl8NovOqjIq4uAU8LTD4uoa1w1KpZyyzFtLTEMZpkkOkLfL9eN+KGYdk1Qtwg==}
+    engines: {node: '>= 4.3 < 5.0.0 || >= 5.10'}
+    peerDependencies:
+      webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
+    dependencies:
+      webpack: 4.46.0
+    dev: false
 
   /webpack-hot-middleware/2.25.0:
     resolution: {integrity: sha512-xs5dPOrGPCzuRXNi8F6rwhawWvQQkeli5Ro48PRuQh8pYPCPmNnltP9itiUPT4xI8oW+y0m59lyyeQk54s5VgA==}
