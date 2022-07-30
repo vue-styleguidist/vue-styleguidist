@@ -172,14 +172,14 @@ import { compile, adaptCreateElement } from 'vue-inbrowser-compiler'
  * render a JSX component
  */
 function getComponent(code) {
-  const conpiledCode = compile(
+  const compiledCode = compile(
     code,
     // in this config we set up the jsx pragma to a higher order function
     {
       jsx: '__pragma__(h)'
     }
   )
-  const func = new Function('__pragma__', conpiledCode.script)
+  const func = new Function('__pragma__', compiledCode.script)
   // now pass the higher order function to the function call
   return func(adaptCreateElement)
 }
