@@ -33,7 +33,9 @@
     "index.cjs.js",
     "index.esm.js",
     "index.d.ts",
-    "postinstall.js"
+    "postinstall.js",
+    "vue2",
+    "vue3"
   ],
   "author": "Bart Ledoux <ledouxb@me.com>",
   "license": "MIT",
