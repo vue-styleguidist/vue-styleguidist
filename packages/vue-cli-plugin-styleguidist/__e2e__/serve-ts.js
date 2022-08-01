@@ -19,7 +19,14 @@ async function createAndInstall(name, isClass) {
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*'
 	pkg.devDependencies['@vue/cli-plugin-typescript'] = '*'
 	await project.write('package.json', JSON.stringify(pkg, null, 2))
+	const setupCode = await fs.promises.readFile(
+		path.resolve(__dirname, '../__samples__/setupEnv.js'),
+		'utf8'
+	)
 	await invoke('typescript', { classComponent: isClass }, project.dir)
+	await project.write('setupEnv.js', setupCode)
+	const styleguideConfig = await project.read('styleguide.config.js')
+	await project.write('styleguide.config.js', `require('./setupEnv')\n${styleguideConfig}`)
 	return project
 }
 
