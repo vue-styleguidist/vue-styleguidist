@@ -14,10 +14,10 @@
     "vue": "^2.7.8"
   },
   "devDependencies": {
-    "@vue/babel-preset-app": "^4.5.12",
-    "@vue/cli-plugin-babel": "^4.5.12",
-    "@vue/cli-plugin-eslint": "^4.5.12",
-    "@vue/cli-service": "^4.5.12",
+    "@vue/babel-preset-app": "^5.0.8",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "autoprefixer": "^9.8.6",
     "eslint": "^6",
     "vue-cli-plugin-styleguidist": "^4.36.1",

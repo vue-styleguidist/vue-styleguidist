@@ -2,6 +2,11 @@ const path = require('path')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+const cliPath = require.resolve('@vue/cli-service')
+console.log(path.dirname(cliPath))
+const webpackPath = require.resolve('webpack', { paths: [path.dirname(cliPath)] })
+process.env.VSG_WEBPACK_PATH = webpackPath
+
 /** @type import("vue-styleguidist").Config */
 module.exports = {
 	title: 'IE - Vuetlfy Styleguide',

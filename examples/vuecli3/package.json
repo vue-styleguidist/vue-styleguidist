@@ -14,29 +14,13 @@
     "vue": "^2.7.8"
   },
   "devDependencies": {
-    "@vue/babel-preset-app": "4.5.12",
-    "@vue/cli-plugin-babel": "4.5.12",
-    "@vue/cli-plugin-eslint": "4.5.12",
-    "@vue/cli-service": "4.5.17",
-    "eslint": "^6",
+    "@vue/babel-preset-app": "5.0.8",
+    "@vue/cli-plugin-babel": "5.0.8",
+    "@vue/cli-service": "5.0.8",
     "vue-cli-plugin-styleguidist": "^4",
     "vue-template-compiler": "^2.7.8",
     "webpack-bundle-analyzer": "^3.9.0",
     "cross-env": "^7.0.3"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {

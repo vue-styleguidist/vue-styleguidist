@@ -1,10 +1,10 @@
 {
   "name": "vue-inbrowser-compiler-utils",
-  "version": "4.46.0",
+  "version": "4.47.0",
   "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
   "module": "lib/vue-inbrowser-compiler-utils.esm.js",
   "main": "lib/vue-inbrowser-compiler-utils.cjs.js",
-  "types": "lib/types/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "compile": "rollup -c",
     "compile:watch": "rollup -c --watch"
@@ -18,18 +18,18 @@
   ],
   "dependencies": {
     "camelcase": "^5.3.1",
-    "vue-inbrowser-compiler-demi": "^4.45.0"
+    "vue-inbrowser-compiler-demi": "^4.46.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
-    "@rollup/plugin-typescript": "8.3.0",
+    "@rollup/plugin-typescript": "8.3.4",
     "@types/dedent": "^0.7.0",
     "@types/domhandler": "2.4.2",
     "dedent": "^0.7.0",
     "tslib": "2.4.0",
     "typescript": "4.7.4",
-    "rollup": "2.66.1",
+    "rollup": "2.77.2",
     "vue": "2.7.8"
   },
   "peerDependencies": {
