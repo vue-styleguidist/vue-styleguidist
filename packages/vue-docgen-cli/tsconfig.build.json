@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"outDir": "lib",
 		"declaration": true,
-		"sourceMap": true
+		"sourceMap": true,
+		"skipLibCheck": true
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/*.spec.ts"]
