@@ -622,10 +622,8 @@ importers:
     specifiers:
       '@vue/babel-preset-app': 5.0.8
       '@vue/cli-plugin-babel': 5.0.8
-      '@vue/cli-plugin-eslint': 5.0.8
       '@vue/cli-service': 5.0.8
       cross-env: ^7.0.3
-      eslint: ^8
       vue: ^2.7.8
       vue-cli-plugin-styleguidist: ^4
       vue-template-compiler: ^2.7.8
@@ -635,10 +633,8 @@ importers:
     devDependencies:
       '@vue/babel-preset-app': 5.0.8_vue@2.7.8
       '@vue/cli-plugin-babel': 5.0.8_wl7d2hpiuow3ut5bj7tv5qa5re
-      '@vue/cli-plugin-eslint': 5.0.8_obo5wgvmaf3einxr22mhv6ms3q
       '@vue/cli-service': 5.0.8_umybpmuleabyh4tggr5kqjha64
       cross-env: 7.0.3
-      eslint: 8.20.0
       vue-cli-plugin-styleguidist: link:../../packages/vue-cli-plugin-styleguidist
       vue-template-compiler: 2.7.8
       webpack-bundle-analyzer: 3.9.0
@@ -7319,7 +7315,7 @@ packages:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
       eslint: '>=7.5.0'
     dependencies:
-      '@vue/cli-service': 5.0.8_umybpmuleabyh4tggr5kqjha64
+      '@vue/cli-service': 5.0.8_p3jjriazuyyook2ajgnnlyhzrm
       '@vue/cli-shared-utils': 5.0.8
       eslint: 8.20.0
       eslint-webpack-plugin: 3.2.0_6lrbhmgrkfstab745tfy2eb3xq
@@ -7339,7 +7335,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8_umybpmuleabyh4tggr5kqjha64
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
@@ -7387,7 +7383,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8_umybpmuleabyh4tggr5kqjha64
+      '@vue/cli-service': 5.0.8
     dev: true
 
   /@vue/cli-service/5.0.8:
