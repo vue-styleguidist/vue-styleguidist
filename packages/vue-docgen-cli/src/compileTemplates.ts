@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { parse as Parse, ComponentDoc, ParamTag } from 'vue-docgen-api'
+import { ComponentDoc, ParamTag } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import slots from './templates/slots'
@@ -49,12 +49,11 @@ export default async function compileTemplates(
 	absolutePath: string,
 	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
-  parse: typeof Parse,
 	subComponent = false
 ): Promise<ContentAndDependencies> {
 	const { apiOptions: options, templates, cwd } = config
 	try {
-		const doc = await parse(absolutePath, options)
+		const [doc] = await config.propsParser(absolutePath, options)
 		const { props: p, events: e, methods: m, slots: s } = doc
 		const isSubComponent = subComponent
 		const hasSubComponents = !!doc.tags?.requires
@@ -93,7 +92,6 @@ export default async function compileTemplates(
 							path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
 							config,
 							path.join(componentRelativeDirectoryPath, requireTag.description as string),
-              parse,
 							true
 						)
 					)

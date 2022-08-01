@@ -35,7 +35,8 @@ export default async (config: SafeDocgenCLIConfig) => {
 		config.components,
 		config.componentsRoot,
 		config.getDocFileName,
-		config.apiOptions
+    config.propsParser,
+		config.apiOptions,
 	)
 
 	if (config.outFile) {
