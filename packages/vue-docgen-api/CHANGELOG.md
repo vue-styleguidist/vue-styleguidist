@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.50.0
+
+### Patch Changes
+
+- [`6308307b`](https://github.com/vue-styleguidist/vue-styleguidist/commit/6308307bc91cc215090dd9e33a3faf0af26427dc) Thanks [@elevatebart](https://github.com/elevatebart)! - - fix `defineExposed` into `defineExpose`
+  - add the exposed member to the documentation
+- Updated dependencies [[`6308307b`](https://github.com/vue-styleguidist/vue-styleguidist/commit/6308307bc91cc215090dd9e33a3faf0af26427dc)]:
+  - vue-inbrowser-compiler-utils@4.50.0
+
 ## 4.47.1
 
 ### Patch Changes
