@@ -1,4 +1,4 @@
-import { default as webpackNormal, Configuration } from 'webpack'
+import webpackNormal, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'

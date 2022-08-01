@@ -43,7 +43,8 @@ const getProgressPlugin = (msg: string) => {
 	)
 
 	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
-		? require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		? // eslint-disable-next-line @typescript-eslint/no-var-requires
+		  require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
 		: ProgressPluginNormal
 
 	return {
@@ -58,7 +59,8 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 	let bar: ProgressBar | undefined
 
 	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
-		? require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		? // eslint-disable-next-line @typescript-eslint/no-var-requires
+		  require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
 		: ProgressPluginNormal
 
 	if (
@@ -107,7 +109,8 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	let bar: ProgressBar | undefined
 
 	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
-		? require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		? // eslint-disable-next-line @typescript-eslint/no-var-requires
+		  require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
 		: ProgressPluginNormal
 
 	if (

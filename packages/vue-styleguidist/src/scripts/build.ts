@@ -1,4 +1,4 @@
-import { default as webpackNormal } from 'webpack'
+import webpackNormal from 'webpack'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
 import makeWebpackConfig from './make-webpack-config'
 
