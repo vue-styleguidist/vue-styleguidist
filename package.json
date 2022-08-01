@@ -67,6 +67,7 @@
     "babel-loader": "^8.2.5",
     "c8": "7.11.3",
     "clipboard": "2.0.9",
+    "cmd-shim": "5.0.0",
     "core-js": "3.20.3",
     "cross-env": "5.2.1",
     "cypress": "10.3.0",
