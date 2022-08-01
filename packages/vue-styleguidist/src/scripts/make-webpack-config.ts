@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import { default as webpackNormal, Configuration } from 'webpack'
+import webpackNormal, { Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
