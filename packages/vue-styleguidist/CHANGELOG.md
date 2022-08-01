@@ -1,5 +1,18 @@
 # Change Log
 
+## 4.49.0
+
+### Minor Changes
+
+- [#1366](https://github.com/vue-styleguidist/vue-styleguidist/pull/1366) [`bbc09354`](https://github.com/vue-styleguidist/vue-styleguidist/commit/bbc09354ee9d23a368a449260d923dc7c034650c) Thanks [@elevatebart](https://github.com/elevatebart)! - remove the need for using a template compiling alias of vue
+
+### Patch Changes
+
+- Updated dependencies [[`368df13f`](https://github.com/vue-styleguidist/vue-styleguidist/commit/368df13f8f6fcf727a69226a4311ea1a2a1d98c6), [`bbc09354`](https://github.com/vue-styleguidist/vue-styleguidist/commit/bbc09354ee9d23a368a449260d923dc7c034650c)]:
+  - vue-docgen-api@4.47.1
+  - vue-inbrowser-compiler@4.45.0
+  - vue-inbrowser-compiler-utils@4.47.0
+
 ## 4.48.0
 
 ### Minor Changes
