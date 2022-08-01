@@ -1,4 +1,5 @@
 const Vue = require('vue')
+// eslint-disable-next-line import/no-unresolved
 const VueTemplateCompiler = require('vue-template-compiler')
 
 module.exports.h = () => {}
