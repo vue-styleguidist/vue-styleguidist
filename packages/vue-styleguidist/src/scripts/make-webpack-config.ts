@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import webpack, { Configuration } from 'webpack'
+import { default as webpackNormal, Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
@@ -24,6 +24,15 @@ export default function (
 	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
 ): Configuration {
+	/** this should be useful to test out webpack 5 when needed */
+	const webpack: typeof webpackNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH)
+		: webpackNormal
+
+	if (process.env.VSG_WEBPACK_PATH) {
+		console.log(`Using webpack from ${process.env.VSG_WEBPACK_PATH}`)
+	}
+
 	process.env.NODE_ENV = process.env.NODE_ENV || env
 	const isProd = env === 'production'
 
@@ -55,6 +64,7 @@ export default function (
 		module: {
 			rules: [
 				{
+					type: 'javascript/auto',
 					resourceQuery: /blockType=docs/,
 					loader: require.resolve('../../lib/loaders/docs-loader.js')
 				}
@@ -63,11 +73,24 @@ export default function (
 		performance: {
 			hints: false
 		},
-    plugins:[
-      new FilterWarningsPlugin({
-        exclude: /Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
-      })
-    ]
+		...(webpack.version?.startsWith('4.')
+			? {
+					plugins: [
+						new FilterWarningsPlugin({
+							exclude:
+								/Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
+						})
+					]
+			  }
+			: {
+					ignoreWarnings: [
+						{
+							module: /@vue\/compiler-sfc/,
+							message:
+								/Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
+						}
+					]
+			  })
 	}
 
 	webpackConfig.mode = env

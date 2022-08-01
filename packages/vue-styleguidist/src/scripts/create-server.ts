@@ -1,4 +1,4 @@
-import webpack, { Configuration } from 'webpack'
+import { default as webpackNormal, Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
@@ -35,6 +35,10 @@ export default function createServer(
 			}
 		}
 	)
+
+	const webpack: typeof webpackNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH)
+		: webpackNormal
 
 	const compiler = webpack(webpackConfig)
 	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig)

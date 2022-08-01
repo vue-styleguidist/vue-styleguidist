@@ -3,7 +3,7 @@
 import { stringify } from 'q-i'
 import { moveCursor, clearLine } from 'readline'
 import WebpackDevServer from 'webpack-dev-server'
-import { Stats, Compiler, ProgressPlugin } from 'webpack'
+import { Stats, Compiler, ProgressPlugin as ProgressPluginNormal } from 'webpack'
 import * as kleur from 'kleur'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import webpackDevServerUtils from 'react-dev-utils/WebpackDevServerUtils'
@@ -41,6 +41,11 @@ const getProgressPlugin = (msg: string) => {
 		},
 		Presets.rect
 	)
+
+	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		: ProgressPluginNormal
+
 	return {
 		plugin: new ProgressPlugin(percentage => {
 			bar.update(percentage)
@@ -51,6 +56,11 @@ const getProgressPlugin = (msg: string) => {
 
 export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 	let bar: ProgressBar | undefined
+
+	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		: ProgressPluginNormal
+
 	if (
 		config.progressBar !== false &&
 		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
@@ -95,6 +105,11 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 
 export function commandServer(config: SanitizedStyleguidistConfig, open?: boolean): ServerInfo {
 	let bar: ProgressBar | undefined
+
+	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		: ProgressPluginNormal
+
 	if (
 		config.progressBar !== false &&
 		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(
@@ -156,14 +171,14 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 		printAllErrorsAndWarnings(messages, stats.compilation)
 	})
 
-  // kill ghosted threads on exit
-  ;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
-    process.on(signal, () => {
-      app.close(() => {
-        process.exit(0)
-      })
-    })
-  })
+	// kill ghosted threads on exit
+	;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
+		process.on(signal, () => {
+			app.close(() => {
+				process.exit(0)
+			})
+		})
+	})
 
 	// in order to have the caller be able to interact
 	// with the app when it's hot

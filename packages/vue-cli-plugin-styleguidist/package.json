@@ -25,8 +25,8 @@
     "webpack": "*"
   },
   "devDependencies": {
-    "@vue/cli": "4.5.19",
-    "@vue/cli-test-utils": "4.5.19",
+    "@vue/cli": "5.0.8",
+    "@vue/cli-test-utils": "5.0.8",
     "webpack": "4.46.0"
   }
 }
