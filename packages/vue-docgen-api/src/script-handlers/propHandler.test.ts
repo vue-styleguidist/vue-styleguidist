@@ -259,7 +259,7 @@ describe('propHandler', () => {
         }
         `
 			expect(await parserTest(src)).toMatchObject({
-				defaultValue: { value: `"normal"` }
+				defaultValue: { value: `'normal'` }
 			})
 		})
 
@@ -640,7 +640,7 @@ describe('propHandler', () => {
         });`
 			expect(await parserTest(src, ['typescript'])).toMatchObject({
 				type: {
-					name: 'SelectOption["value"]'
+					name: "SelectOption['value']"
 				},
 				required: true
 			})
