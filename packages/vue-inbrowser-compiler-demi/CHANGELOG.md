@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.50.0
+
+### Minor Changes
+
+- [`6308307b`](https://github.com/vue-styleguidist/vue-styleguidist/commit/6308307bc91cc215090dd9e33a3faf0af26427dc) Thanks [@elevatebart](https://github.com/elevatebart)! - remove the need for using a template compiling alias of vue
+
 ## 4.46.0
 
 ### Minor Changes
