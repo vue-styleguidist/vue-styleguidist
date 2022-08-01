@@ -6,7 +6,7 @@
   ],
   "commit": false,
   "fixed": [],
-  "linked": [],
+  "linked": [["*"]],
   "access": "public",
   "baseBranch": "dev",
   "updateInternalDependencies": "patch",
