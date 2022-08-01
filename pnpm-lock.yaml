@@ -1012,7 +1012,7 @@ importers:
       vue: 2.7.8
       vue-class-component: 7.2.6
       vue-clickaway: 2.2.2
-      vue-inbrowser-compiler-utils: ^4.47.0
+      vue-inbrowser-compiler-utils: ^4.50.0
       vue-property-decorator: 7.3.0
       vuetify: 2.6.8
     dependencies:
@@ -1082,7 +1082,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-utils: ^4.47.0
+      vue-inbrowser-compiler-utils: ^4.50.0
       vue-template-compiler: 2.7.8
       walkes: ^0.2.1
     dependencies:
@@ -1128,7 +1128,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-utils: ^4.47.0
+      vue-inbrowser-compiler-utils: ^4.50.0
       vue-template-compiler: 2.7.8
       walkes: ^0.2.1
     dependencies:
@@ -1163,7 +1163,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-demi: ^4.46.0
+      vue-inbrowser-compiler-demi: ^4.50.0
     dependencies:
       camelcase: 5.3.1
       vue-inbrowser-compiler-demi: link:../vue-inbrowser-compiler-demi
@@ -1267,9 +1267,9 @@ importers:
       to-ast: ^1.0.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-docgen-api: ^4.47.1
-      vue-inbrowser-compiler: ^4.45.0
-      vue-inbrowser-compiler-utils: ^4.47.0
+      vue-docgen-api: ^4.50.0
+      vue-inbrowser-compiler: ^4.50.0
+      vue-inbrowser-compiler-utils: ^4.50.0
       vue-template-compiler: 2.7.8
       webpack: 4.46.0
       webpack-dev-server: ^3.11.2
@@ -12274,7 +12274,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.1
       unique-filename: 1.1.1
@@ -24026,6 +24026,16 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
+
+  /promise-inflight/1.0.1_bluebird@3.7.2:
+    resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
 
   /promise/7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
