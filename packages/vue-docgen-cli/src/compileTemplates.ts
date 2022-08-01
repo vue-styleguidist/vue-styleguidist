@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { parse, ComponentDoc, ParamTag } from 'vue-docgen-api'
+import { parse as Parse, ComponentDoc, ParamTag } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import slots from './templates/slots'
@@ -49,6 +49,7 @@ export default async function compileTemplates(
 	absolutePath: string,
 	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
+  parse: typeof Parse,
 	subComponent = false
 ): Promise<ContentAndDependencies> {
 	const { apiOptions: options, templates, cwd } = config
@@ -92,6 +93,7 @@ export default async function compileTemplates(
 							path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
 							config,
 							path.join(componentRelativeDirectoryPath, requireTag.description as string),
+              parse,
 							true
 						)
 					)
