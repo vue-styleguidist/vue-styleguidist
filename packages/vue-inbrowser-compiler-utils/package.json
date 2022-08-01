@@ -4,7 +4,7 @@
   "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
   "module": "lib/vue-inbrowser-compiler-utils.esm.js",
   "main": "lib/vue-inbrowser-compiler-utils.cjs.js",
-  "types": "lib/types/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "compile": "rollup -c",
     "compile:watch": "rollup -c --watch"
