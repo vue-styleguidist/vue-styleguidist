@@ -51,3 +51,7 @@ export default async (config: SafeDocgenCLIConfig) => {
 		watcher.close()
 	}
 }
+
+export function defineConfig(config: SafeDocgenCLIConfig) {
+  return config
+}
