@@ -4,7 +4,7 @@
   "description": "compile vue single file components right in your browser",
   "module": "lib/vue-inbrowser-compiler.esm.js",
   "main": "lib/vue-inbrowser-compiler.cjs.js",
-  "types": "lib/types/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "compile": "rollup -c",
     "compile:watch": "rollup -c --watch"
