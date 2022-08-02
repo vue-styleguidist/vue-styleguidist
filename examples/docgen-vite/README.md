@@ -1,25 +1,24 @@
-# vue-docgen-example-vite
+# vue-example-docgen-vite
 
-This template should help get you started developing with Vue 3 in Vite.
+This template should help get you started developing with docgen and VitePress.
 
-## Recommended IDE Setup
+It contains an example of a light integration with vue-live in [docs/.vitepress/theme](./docs/.vitepress/theme).
+Using a [markdown-it plugin](./docs/.vitepress/vue-live-md-it.mjs), we will render each example with the suffix `live` into a vue-live component.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+It also uses `vue-component-meta` instead of `vue-docgen-api` to parse vue components for props and events.
+The integration is done here: [docgen.config.js](./docgen.config.js)
 
-## Type Support for `.vue` Imports in TS
+### Run both vitepress & docgen at the same time
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+```sh
+yarn styleguide
+```
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### chain the steps
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+```sh
+yarn styleguide:build
+```
 
 ## Project Setup
 
@@ -37,4 +36,16 @@ yarn dev
 
 ```sh
 yarn build
+```
+
+### Generate the documentation pages for each component
+
+```sh
+yarn vue-docgen
+```
+
+### Open vitepress in the browser
+
+```sh
+yarn vitepress open
 ```
