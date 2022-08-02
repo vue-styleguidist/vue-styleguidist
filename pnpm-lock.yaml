@@ -306,6 +306,7 @@ importers:
       vue-docgen-api: ^4.36.1
       vue-docgen-cli: ^4.36.1
       vue-loader: ^15.9.8
+      vue-server-renderer: ^2.7.8
       vue-template-compiler: ^2.7.8
       vuepress: ^1.9.7
       vuepress-plugin-live: ^1.6.2
@@ -334,6 +335,7 @@ importers:
       vue-docgen-api: link:../../packages/vue-docgen-api
       vue-docgen-cli: link:../../packages/vue-docgen-cli
       vue-loader: 15.9.8_zgtlk6gfegidjqi5evtes6yxuq
+      vue-server-renderer: 2.7.8
       vue-template-compiler: 2.7.8
       vuepress: 1.9.7_webpack-cli@4.5.0
       vuepress-plugin-live: 1.6.2_vue@2.7.8
@@ -10640,7 +10642,7 @@ packages:
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
       vue-loader: 15.9.8_pf2nacutanypibfndeigfabsry
       vue-router: 3.5.1
-      vue-server-renderer: 2.6.14
+      vue-server-renderer: 2.7.8
       vue-template-compiler: 2.7.8
       vuepress-html-webpack-plugin: 3.2.0_webpack@4.46.0
       vuepress-plugin-container: 2.1.5
@@ -12762,7 +12764,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.1
       unique-filename: 1.1.1
@@ -24542,6 +24544,16 @@ packages:
       bluebird:
         optional: true
 
+  /promise-inflight/1.0.1_bluebird@3.7.2:
+    resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
+
   /promise/7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
     dependencies:
@@ -25703,7 +25715,7 @@ packages:
     resolution: {integrity: sha512-ADsDEH2bvbjltXEP+hTIAmeFekTFK0V2BTxMkok6qILyAJEXV0AFfoWcAq4yfll5VdIMd/RVXq0lR+wQi5ZU3Q==}
     engines: {node: '>= 0.10'}
     dependencies:
-      resolve: 1.20.0
+      resolve: 1.22.1
 
   /recursive-readdir/2.2.2:
     resolution: {integrity: sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==}
@@ -26474,12 +26486,6 @@ packages:
       - supports-color
     dev: false
 
-  /serialize-javascript/3.1.0:
-    resolution: {integrity: sha512-JIJT1DGiWmIKhzRsG91aS6Ze4sFUrYbltlkg2onR5OrnNM02Kl/hnY/T4FN2omvyeBbQmMJv+K4cPOpGzOTFBg==}
-    dependencies:
-      randombytes: 2.1.0
-    dev: false
-
   /serialize-javascript/4.0.0:
     resolution: {integrity: sha512-GaNA54380uFefWghODBWEGisLZFj00nS5ACs6yHa9nLqlLpVLO8ChDGeKRjZnV4Nh4n0Qi7nhYZD/9fCPzEqkw==}
     dependencies:
@@ -26924,11 +26930,6 @@ packages:
   /source-map/0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
-
-  /source-map/0.7.3:
-    resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==}
-    engines: {node: '>= 8'}
-    dev: false
 
   /source-map/0.7.4:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
@@ -27469,7 +27470,7 @@ packages:
       safer-buffer: 2.1.2
       sax: 1.2.4
       semver: 6.3.0
-      source-map: 0.7.3
+      source-map: 0.7.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -28585,7 +28586,7 @@ packages:
       loader-utils: 1.4.0
       mime: 2.5.2
       schema-utils: 1.0.0
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
 
   /url-loader/4.1.1_lit45vopotvaqup7lrvlnvtxwy:
     resolution: {integrity: sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==}
@@ -30230,19 +30231,6 @@ packages:
   /vue-router/3.5.1:
     resolution: {integrity: sha512-RRQNLT8Mzr8z7eL4p7BtKvRaTSGdCbTy2+Mm5HTJvLGYSSeG9gDzNasJPP/yOYKLy+/cLG/ftrqq5fvkFwBJEw==}
 
-  /vue-server-renderer/2.6.14:
-    resolution: {integrity: sha512-HifYRa/LW7cKywg9gd4ZtvtRuBlstQBao5ZCWlg40fyB4OPoGfEXAzxb0emSLv4pBDOHYx0UjpqvxpiQFEuoLA==}
-    dependencies:
-      chalk: 1.1.3
-      hash-sum: 1.0.2
-      he: 1.2.0
-      lodash.template: 4.5.0
-      lodash.uniq: 4.5.0
-      resolve: 1.20.0
-      serialize-javascript: 3.1.0
-      source-map: 0.5.6
-    dev: false
-
   /vue-server-renderer/2.7.8:
     resolution: {integrity: sha512-d7nf5uRk4BrZLKptAbAcAvmCM4/3VD1xBThjXgLfcAarwta1ngTdXxnVkUHPlYLTUaOFf563EoH2tgxfLY9fcg==}
     dependencies:
@@ -30251,7 +30239,7 @@ packages:
       he: 1.2.0
       lodash.template: 4.5.0
       lodash.uniq: 4.5.0
-      resolve: 1.22.0
+      resolve: 1.22.1
       serialize-javascript: 6.0.0
       source-map: 0.5.6
 
