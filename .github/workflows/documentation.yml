@@ -2,6 +2,7 @@ name: Documentation
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 concurrency:
   group: doc-${{ github.ref }}
