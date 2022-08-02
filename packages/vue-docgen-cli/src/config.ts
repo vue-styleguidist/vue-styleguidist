@@ -4,7 +4,8 @@ import {
 	SlotDescriptor,
 	MethodDescriptor,
 	EventDescriptor,
-	ComponentDoc
+	ComponentDoc,
+  parseMulti,
 } from 'vue-docgen-api'
 import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
@@ -86,9 +87,13 @@ export interface SafeDocgenCLIConfig {
 	 */
 	getRepoEditUrl?: (relativePath: string) => string
 	/**
-	 *
+	 * Label to give to the edit button at the bottom of each page
 	 */
 	editLinkLabel: string
+  /**
+   * Parser used to extract props, slots and events from each component
+   */ 
+  propsParser: typeof parseMulti
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {

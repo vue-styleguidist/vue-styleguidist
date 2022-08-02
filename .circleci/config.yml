@@ -74,12 +74,14 @@ jobs:
       - run: npm run build jsx-examples -- --ci
       - run: npm run build nuxtjs -- --ci
       - run: npm run build vuetify -- --ci
+      - run: npm run build docgen-vite
 
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser jsx
       - run: npm run test:browser jsx-examples
       - run: npm run test:browser nuxtjs
       - run: npm run test:browser vuetify
+      - run: npm run test:browser docgen-vite
 
   cypress:
     <<: *defaults

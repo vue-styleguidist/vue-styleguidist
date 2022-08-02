@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { parse, ComponentDoc, ParamTag } from 'vue-docgen-api'
+import { ComponentDoc, ParamTag } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import slots from './templates/slots'
@@ -53,64 +53,71 @@ export default async function compileTemplates(
 ): Promise<ContentAndDependencies> {
 	const { apiOptions: options, templates, cwd } = config
 	try {
-		const doc = await parse(absolutePath, options)
-		const { props: p, events: e, methods: m, slots: s } = doc
-		const isSubComponent = subComponent
-		const hasSubComponents = !!doc.tags?.requires
-		const subComponentOptions = { isSubComponent, hasSubComponents }
+		const docs = await config.propsParser(absolutePath, options)
+    const components = await Promise.all(docs.map(async (doc) => {
+      const { props: p, events: e, methods: m, slots: s } = doc
+      const isSubComponent = subComponent
+      const hasSubComponents = !!doc.tags?.requires
+      const subComponentOptions = { isSubComponent, hasSubComponents }
 
-		const renderedUsage = {
-			props: p ? templates.props(p, subComponentOptions) : '',
-			slots: s ? templates.slots(s, subComponentOptions) : '',
-			methods: m ? templates.methods(m, subComponentOptions) : '',
-			events: e ? templates.events(e, subComponentOptions) : '',
-			functionalTag: templates.functionalTag
-		}
+      const renderedUsage = {
+        props: p ? templates.props(p, subComponentOptions) : '',
+        slots: s ? templates.slots(s, subComponentOptions) : '',
+        methods: m ? templates.methods(m, subComponentOptions) : '',
+        events: e ? templates.events(e, subComponentOptions) : '',
+        functionalTag: templates.functionalTag
+      }
 
-		if (!subComponent) {
-			doc.docsBlocks = await getDocsBlocks(
-				absolutePath,
-				doc,
-				config.getDocFileName,
-				cwd,
-				config.editLinkLabel,
-				config.getRepoEditUrl
-			)
+      if (!subComponent) {
+        doc.docsBlocks = await getDocsBlocks(
+          absolutePath,
+          doc,
+          config.getDocFileName,
+          cwd,
+          config.editLinkLabel,
+          config.getRepoEditUrl
+        )
 
-			if (!doc.docsBlocks?.length && config.defaultExamples) {
-				doc.docsBlocks = [templates.defaultExample(doc)]
-			}
-		}
+        if (!doc.docsBlocks?.length && config.defaultExamples) {
+          doc.docsBlocks = [templates.defaultExample(doc)]
+        }
+      }
 
-		const componentRelativeDirectoryPath = path.dirname(componentRelativePath)
-		const componentAbsoluteDirectoryPath = path.dirname(absolutePath)
+      const componentRelativeDirectoryPath = path.dirname(componentRelativePath)
+      const componentAbsoluteDirectoryPath = path.dirname(absolutePath)
 
-		const requiresMd = doc.tags?.requires
-			? await Promise.all(
-					doc.tags.requires.map((requireTag: ParamTag) =>
-						compileTemplates(
-							path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
-							config,
-							path.join(componentRelativeDirectoryPath, requireTag.description as string),
-							true
-						)
-					)
-			  )
-			: []
+      const requiresMd = doc.tags?.requires
+        ? await Promise.all(
+            doc.tags.requires.map((requireTag: ParamTag) =>
+              compileTemplates(
+                path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
+                config,
+                path.join(componentRelativeDirectoryPath, requireTag.description as string),
+                true
+              )
+            )
+          )
+        : []
 
-		return {
-			content: templates.component(
-				renderedUsage,
-				doc,
-				config,
-				componentRelativePath,
-				requiresMd,
-				subComponentOptions
-			),
-			dependencies: getDependencies(doc, componentRelativeDirectoryPath)
-		}
-	} catch (e) {
-		const err = e as Error
+      return {
+        content: templates.component(
+          renderedUsage,
+          doc,
+          config,
+          componentRelativePath,
+          requiresMd,
+          subComponentOptions
+        ),
+        dependencies: getDependencies(doc, componentRelativeDirectoryPath)
+      }
+    }))
+
+    return {
+      content: components.map((c) => c.content).join('\n\n'),
+      dependencies: components.map((c) => c.dependencies).reduce((acc, curr) => acc.concat(curr), [])
+    }
+  } catch (e) {
+    const err = e as Error
 		throw new Error(`Error parsing file ${absolutePath}:` + err.message)
-	}
+  }
 }

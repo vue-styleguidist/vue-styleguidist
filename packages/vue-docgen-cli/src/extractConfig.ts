@@ -1,5 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
+import { parseMulti } from 'vue-docgen-api'
 import {
 	component,
 	events,
@@ -26,6 +27,7 @@ export default (
 	const config: Partial<DocgenCLIConfig> = {
 		cwd,
 		watch,
+    propsParser: parseMulti,
 		componentsRoot: path.dirname(configFilePath),
 		components: componentsFromCmd || 'src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}',
 		outDir: outDirFromCmd,

@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { SafeDocgenCLIConfig, Templates, RenderedUsage } from './config'
+import { SafeDocgenCLIConfig, Templates, RenderedUsage, DocgenCLIConfig } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
 import extractConfig from './extractConfig'
@@ -35,7 +35,8 @@ export default async (config: SafeDocgenCLIConfig) => {
 		config.components,
 		config.componentsRoot,
 		config.getDocFileName,
-		config.apiOptions
+    config.propsParser,
+		config.apiOptions,
 	)
 
 	if (config.outFile) {
@@ -49,4 +50,8 @@ export default async (config: SafeDocgenCLIConfig) => {
 	if (!config.watch) {
 		watcher.close()
 	}
+}
+
+export function defineConfig(config: Partial<DocgenCLIConfig>) {
+  return config
 }

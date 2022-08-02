@@ -26,11 +26,11 @@ jobs:
 
       # Build all examples (except for docgen-nuxt which needs to be sent to surge)
       - name: Build examples
-        run: cd examples; for D in *; do if [ $D != "docgen-nuxt" ]; then cd ..; pnpm build "${D}" -- --ci; cd examples; fi; done; cd .. || exit 1
+        run: cd examples; for D in *; do cd ..; pnpm build "${D}" -- --ci; cd examples; done; cd .. || exit 1
 
       # Move them to the docs (except for docgen-nuxt which needs to be sent to surge)
       - name: Move examples to docs
-        run: cd examples; for D in *; do if [ $D != "docgen-nuxt" ]; then mv "${D}"/dist ../docs/dist/"${D}"; fi; done || exit 1
+        run: cd examples; for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.0
