@@ -11,7 +11,8 @@
     "docs": "vitepress dev docs"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "prismjs": "^1.28.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.45",

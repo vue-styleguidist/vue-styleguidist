@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import { VueLive } from 'vue-live'
+import VueLive from './components/vue-live-with-layout'
 
 export default {
   ...DefaultTheme,
