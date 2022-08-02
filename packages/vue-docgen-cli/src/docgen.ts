@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { SafeDocgenCLIConfig, Templates, RenderedUsage } from './config'
+import { SafeDocgenCLIConfig, Templates, RenderedUsage, DocgenCLIConfig } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
 import extractConfig from './extractConfig'
@@ -52,6 +52,6 @@ export default async (config: SafeDocgenCLIConfig) => {
 	}
 }
 
-export function defineConfig(config: SafeDocgenCLIConfig) {
+export function defineConfig(config: Partial<DocgenCLIConfig>) {
   return config
 }

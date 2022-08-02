@@ -1,7 +1,7 @@
 import * as path from 'path'
 import glob from 'globby'
 import chokidar, { FSWatcher } from 'chokidar'
-import { parseMulti, ParamTag, ScriptHandlers, DocGenOptions, BlockTag } from 'vue-docgen-api'
+import { parseMulti, ParamTag, ScriptHandlers, DocGenOptions } from 'vue-docgen-api'
 import { getDocMap } from './utils'
 
 /**
@@ -64,7 +64,7 @@ async function getRequiredComponents(
 			...optionsApi,
 			scriptHandlers: [ScriptHandlers.componentHandler]
 		})
-    const requires = docs.reduce((acc, {tags}) => acc.concat(tags?.requires), [] as BlockTag[])
+    const requires = docs.reduce((acc, { tags }) => tags?.requires ? acc.concat(tags.requires) : acc, [] as ParamTag[])
 		if (requires.length) {
 			return requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
 		}

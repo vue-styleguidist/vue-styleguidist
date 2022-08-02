@@ -15,15 +15,29 @@ module.exports = defineConfig({
 	docsBranch: 'dev',
 	docsFolder: 'examples/docgen',
 	componentsRoot: 'src/components',
-	components: '**/[A-Z]*.vue',
+	components: './[A-Z]*.vue',
 	outDir: './docs/components',
 	defaultExamples: true,
   propsParser(componentPath) {
     const exportNames = checker.getExportNames(componentPath);
     return Promise.resolve(exportNames.map(exportName => {
       const meta = checker.getComponentMeta(componentPath, exportName)
-      const props = meta.props.map(p => ({...p, type: {name: p.type }))
-      return {...meta, props, displayName: componentPath.split('/').pop()?.replace(/\.(ts|js|vue)/, '') || 'noname', exportName, tags: []}
+      const props = meta.props.map(p => ({
+        ...p, 
+        type: {
+          name: p.type 
+        },
+        tags: p.tags.reduce((acc, t) => {
+          acc[t.name] = t.text
+          return acc
+        }, {})
+      }))
+      return {
+        props, 
+        displayName: componentPath.split('/').pop()?.replace(/\.(ts|js|vue)/, '') || 'noname', 
+        exportName, 
+        tags: {}
+      }
     }))
   }
 })
