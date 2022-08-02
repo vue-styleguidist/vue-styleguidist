@@ -22,6 +22,8 @@ module.exports = defineConfig({
     const exportNames = checker.getExportNames(componentPath);
     return Promise.resolve(exportNames.map(exportName => {
       const meta = checker.getComponentMeta(componentPath, exportName)
+
+      // massage the output of meta to match the docgen format
       const props = meta.props.map(p => ({
         ...p, 
         type: {

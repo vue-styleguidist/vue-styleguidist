@@ -3,6 +3,7 @@
     "docgen",
     "doclet",
     "Doclets",
+    "globby",
     "styleguide",
     "styleguidist"
   ]
