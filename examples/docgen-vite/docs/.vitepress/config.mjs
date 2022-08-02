@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 const sidebarComponents = globbySync('components/**/*.md', { cwd: path.resolve(__dirname, '../')})
 
 export default defineConfig({
+  outDir: path.resolve(__dirname, '../../dist'),
   themeConfig: {
     sidebar: [
       {
