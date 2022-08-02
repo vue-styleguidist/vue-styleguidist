@@ -12,6 +12,7 @@ const sidebarComponents = globbySync('components/**/*.md', { cwd: path.resolve(_
 
 export default defineConfig({
   outDir: path.resolve(__dirname, '../../dist'),
+  base: '/docgen-vite/',
   themeConfig: {
     sidebar: [
       {
