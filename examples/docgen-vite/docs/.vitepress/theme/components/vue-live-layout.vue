@@ -39,6 +39,7 @@ defineProps({
   box-sizing: border-box;
   height: 100%;
   border-radius: 0;
+  white-space: pre-wrap;
 }
 .preview-code .preview {
   background-color: rgb(249, 245, 245);

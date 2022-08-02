@@ -24,7 +24,7 @@ module.exports = defineConfig({
       const meta = checker.getComponentMeta(componentPath, exportName)
 
       // massage the output of meta to match the docgen format
-      const props = meta.props.map(p => ({
+      const props = meta.props.length ? meta.props.map(p => ({
         ...p, 
         type: {
           name: p.type 
@@ -33,9 +33,18 @@ module.exports = defineConfig({
           acc[t.name] = t.text
           return acc
         }, {})
-      }))
+      })) : undefined
+      const slots = meta.slots.length ? meta.slots.map(s => ({
+        name: s.name,
+      })) : undefined
+
+      const events = meta.events.length ? meta.events.map(s => ({
+        name: s.name,
+      })) : undefined
       return {
         props, 
+        slots,
+        events,
         displayName: componentPath.split('/').pop()?.replace(/\.(ts|js|vue)/, '') || 'noname', 
         exportName, 
         tags: {}
