@@ -5,7 +5,7 @@ const VueTemplateCompiler = require('vue-template-compiler')
 module.exports.h = () => {}
 module.exports.createApp = () => {}
 module.exports.isVue3 = false
-module.exports.Vue2 = Vue
+module.exports.Vue2 = Vue.default ? Vue.default : Vue
 module.exports.compileTemplate = ({ source: template }) => ({
 	code: VueTemplateCompiler.compile(template).render
 })

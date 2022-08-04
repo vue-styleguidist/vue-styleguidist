@@ -18,7 +18,7 @@ function getVuePackageVersion() {
 	}
 }
 const indexPath = 'index.cjs.js'
-const indexPathESM = 'index.esm.js'
+const indexPathESM = 'index.esm.mjs'
 const paths = [indexPath, indexPathESM]
 
 function updateIndexForVueVersion(version) {
