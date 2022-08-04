@@ -361,7 +361,7 @@ importers:
       vue: ^3.2.37
       vue-component-meta: ^0.39.4
       vue-docgen-cli: ^4
-      vue-inbrowser-compiler: ^4
+      vue-inbrowser-compiler-independent-utils: ^4
       vue-live: ^2
       vue-tsc: ^0.38.8
     dependencies:
@@ -381,7 +381,7 @@ importers:
       vitepress: 1.0.0-alpha.4
       vue-component-meta: 0.39.4_typescript@4.7.4
       vue-docgen-cli: link:../../packages/vue-docgen-cli
-      vue-inbrowser-compiler: link:../../packages/vue-inbrowser-compiler
+      vue-inbrowser-compiler-independent-utils: link:../../packages/vue-inbrowser-compiler-independent-utils
       vue-live: 2.1.0_vue@3.2.37
       vue-tsc: 0.38.9_typescript@4.7.4
 
@@ -18326,17 +18326,6 @@ packages:
       debug: 4.3.2
     dev: false
 
-  /follow-redirects/1.13.3_debug@4.3.4:
-    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.4
-
   /for-in/1.0.2:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
     engines: {node: '>=0.10.0'}
@@ -19667,7 +19656,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3_debug@4.3.4
+      follow-redirects: 1.13.3
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug

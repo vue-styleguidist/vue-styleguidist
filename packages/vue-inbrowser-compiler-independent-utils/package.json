@@ -2,12 +2,12 @@
   "name": "vue-inbrowser-compiler-independent-utils",
   "version": "4.50.0",
   "description": "the part of vue-inbrowser-compiler-utils that contains no vue dependency",
-  "module": "lib/vue-inbrowser-compiler-independent-utils.esm.js",
+  "module": "lib/vue-inbrowser-compiler-independent-utils.esm.mjs",
   "main": "lib/vue-inbrowser-compiler-independent-utils.cjs.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/vue-inbrowser-compiler-independent-utils.esm.js",
+      "import": "./lib/vue-inbrowser-compiler-independent-utils.esm.mjs",
       "require": "./lib/vue-inbrowser-compiler-independent-utils.cjs.js",
       "types": "./lib/index.d.ts"
     }
