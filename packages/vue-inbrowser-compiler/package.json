@@ -5,6 +5,13 @@
   "module": "lib/vue-inbrowser-compiler.esm.js",
   "main": "lib/vue-inbrowser-compiler.cjs.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/vue-inbrowser-compiler.esm.js",
+      "require": "./lib/vue-inbrowser-compiler.cjs.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "scripts": {
     "compile": "rollup -c",
     "compile:watch": "rollup -c --watch"
