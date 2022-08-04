@@ -1,5 +1,5 @@
 import { compileScript, compileTemplate, isVue3 } from 'vue-inbrowser-compiler-demi'
-import { EvaluableComponent } from './types'
+import { EvaluableComponent } from 'vue-inbrowser-compiler-independent-utils'
 
 const EXAMPLE_FILENAME = 'example.vue'
 

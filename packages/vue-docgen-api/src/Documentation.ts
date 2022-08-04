@@ -14,7 +14,7 @@ import {
 	Tag,
 	ParamTag,
 	ParamType
-} from 'vue-inbrowser-compiler-utils'
+} from 'vue-inbrowser-compiler-independent-utils'
 
 export {
 	Descriptor,

@@ -1,9 +1,9 @@
 {
-  "name": "vue-inbrowser-compiler-utils",
+  "name": "vue-inbrowser-compiler-independent-utils",
   "version": "4.50.0",
-  "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
-  "module": "lib/vue-inbrowser-compiler-utils.esm.js",
-  "main": "lib/vue-inbrowser-compiler-utils.cjs.js",
+  "description": "the part of vue-inbrowser-compiler-utils that contains no vue dependency",
+  "module": "lib/vue-inbrowser-compiler-independent-utils.esm.js",
+  "main": "lib/vue-inbrowser-compiler-independent-utils.cjs.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "compile": "rollup -c",
@@ -16,11 +16,6 @@
     "browser",
     "acorn"
   ],
-  "dependencies": {
-    "camelcase": "^5.3.1",
-    "vue-inbrowser-compiler-demi": "^4.50.0",
-    "vue-inbrowser-compiler-independent-utils": "^4.50.0"
-  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
