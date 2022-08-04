@@ -10,7 +10,8 @@ export default {
 	output: [
 		{
 			file: pkg.main,
-			format: 'cjs'
+			format: 'umd',
+      name: 'VueInbrowserCompilerIndependentUtils',
 		},
 		{
 			file: pkg.module,

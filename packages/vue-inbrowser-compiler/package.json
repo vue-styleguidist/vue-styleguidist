@@ -3,12 +3,12 @@
   "version": "4.50.0",
   "description": "compile vue single file components right in your browser",
   "module": "lib/vue-inbrowser-compiler.esm.mjs",
-  "main": "lib/vue-inbrowser-compiler.cjs.js",
+  "main": "lib/vue-inbrowser-compiler.umd.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/vue-inbrowser-compiler.esm.mjs",
-      "require": "./lib/vue-inbrowser-compiler.cjs.js",
+      "require": "./lib/vue-inbrowser-compiler.umd.js",
       "types": "./lib/index.d.ts"
     }
   },

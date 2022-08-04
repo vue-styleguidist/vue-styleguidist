@@ -6,6 +6,13 @@ export {
 	h,
 	compileTemplate
 } from 'vue-inbrowser-compiler-demi'
-export * from 'vue-inbrowser-compiler-independent-utils'
+export {
+  cleanName,
+  addScopedStyle,
+  parseComponent,
+  isCodeVueSfc,
+  getDefaultExample,
+  EvaluableComponent,
+} from 'vue-inbrowser-compiler-independent-utils'
 export { default as adaptCreateElement, concatenate } from './adaptCreateElement'
 export * from './compileTemplateForEval'

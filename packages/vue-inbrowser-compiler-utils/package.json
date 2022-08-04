@@ -3,12 +3,12 @@
   "version": "4.50.0",
   "description": "use this with vue-inbrowser-compiler to allow jsx compilation",
   "module": "lib/vue-inbrowser-compiler-utils.esm.mjs",
-  "main": "lib/vue-inbrowser-compiler-utils.cjs.js",
+  "main": "lib/vue-inbrowser-compiler-utils.umd.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/vue-inbrowser-compiler-utils.esm.mjs",
-      "require": "./lib/vue-inbrowser-compiler-utils.cjs.js",
+      "require": "./lib/vue-inbrowser-compiler-utils.umd.js",
       "types": "./lib/index.d.ts"
     }
   },

@@ -1,10 +1,11 @@
 /// @ts-check
 const path = require('path')
+const { defineConfig } = require('vue-styleguidist')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
-/** @type import("vue-styleguidist").Config */
-module.exports = {
+
+module.exports = defineConfig({
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	template: {
@@ -30,5 +31,5 @@ module.exports = {
 	ribbon: {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
-	}
-}
+	},
+})
