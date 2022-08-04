@@ -66,8 +66,12 @@ export default function (
 				{
 					type: 'javascript/auto',
 					resourceQuery: /blockType=docs/,
-					loader: require.resolve('../../lib/loaders/docs-loader.js')
-				}
+					loader: require.resolve('../../lib/loaders/docs-loader.js'),
+				},
+        {
+          type: 'javascript/auto',
+          test: /vue-inbrowser-compiler.*\.esm\.mjs$/,
+        }
 			]
 		},
 		performance: {
