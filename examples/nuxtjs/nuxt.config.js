@@ -1,5 +1,5 @@
 module.exports = {
-	srcDir: 'src/',
+	srcDir: './src/',
 	/*
 	 ** Headers of the page
 	 */
@@ -14,7 +14,8 @@ module.exports = {
 	},
 	build: {
 		babel: {
-			babelrc: true
+			babelrc: true,
+      exclude: /(node_modules|packages)/,
 		}
 	},
 	/*
