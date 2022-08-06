@@ -9,6 +9,10 @@ const webpackConfig = {
 	},
 	module: {
 		rules: [
+      {
+        test: /\.mjs$/,
+        type: 'javascript/auto',
+      },
 			{
 				test: /\.(tsx|ts|js|jsx)$/,
 				exclude: /node_modules/,
