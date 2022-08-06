@@ -1127,7 +1127,6 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-independent-utils: ^4.50.0
       vue-inbrowser-compiler-utils: ^4.50.0
       vue-template-compiler: 2.7.8
       walkes: ^0.2.1
@@ -1137,7 +1136,6 @@ importers:
       buble: 0.20.0
       camelcase: 5.3.1
       detect-browser: 5.2.0
-      vue-inbrowser-compiler-independent-utils: link:../vue-inbrowser-compiler-independent-utils
       vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
       walkes: 0.2.1
     devDependencies:
