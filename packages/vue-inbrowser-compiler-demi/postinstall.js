@@ -1,5 +1,5 @@
 const path = require('path')
-const fs = require('fs')
+const {promises:fs} = require('fs')
 
 function checkPeerDependency(pkg) {
 	try {
@@ -17,19 +17,16 @@ function getVuePackageVersion() {
 		return 'unknown'
 	}
 }
-const indexPath = 'index.cjs.js'
-const indexPathESM = 'index.esm.mjs'
-const paths = [indexPath, indexPathESM]
 
-function updateIndexForVueVersion(version) {
-	paths.forEach(async filePath => {
-		const indexContent = await fs.promises.readFile(path.join(__dirname, version, filePath), 'utf8')
-		fs.writeFile(path.join(__dirname, filePath), indexContent, err => {
-			if (err) {
-				console.error(err)
-			}
-		})
-	})
+async function updateIndexForVueVersion(version) {
+  const dirpath = path.join(__dirname, version)
+  const paths = await fs.readdir(dirpath)
+	// eslint-disable-next-line compat/compat, no-undef
+	await Promise.all(paths.map(async fileName => {
+		const indexContent = await fs.readFile(path.join(dirpath, fileName), 'utf8')
+		await fs.writeFile(path.join(__dirname, fileName), indexContent)
+	}))
+  console.log(`[vue-inbrowser-compiler-demi] set up using ${version}`)
 }
 
 const version = getVuePackageVersion()

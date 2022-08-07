@@ -2,16 +2,9 @@
   "name": "vue-inbrowser-compiler-demi",
   "version": "4.50.0",
   "description": "use this with vue-inbrowser-compiler to compile for vue2 or vue3",
-  "module": "index.esm.mjs",
+  "module": "index.esm.js",
   "main": "index.cjs.js",
   "types": "index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.esm.mjs",
-      "require": "./index.cjs.js",
-      "types": "./index.d.ts"
-    }
-  },
   "keywords": [
     "vue",
     "compile"

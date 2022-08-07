@@ -2,16 +2,9 @@
   "name": "vue-inbrowser-compiler",
   "version": "4.50.0",
   "description": "compile vue single file components right in your browser",
-  "module": "lib/vue-inbrowser-compiler.esm.mjs",
-  "main": "lib/vue-inbrowser-compiler.umd.js",
+  "module": "lib/vue-inbrowser-compiler.esm.js",
+  "main": "lib/vue-inbrowser-compiler.cjs.js",
   "types": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/vue-inbrowser-compiler.esm.mjs",
-      "require": "./lib/vue-inbrowser-compiler.umd.js",
-      "types": "./lib/index.d.ts"
-    }
-  },
   "scripts": {
     "compile": "rollup -c",
     "compile:watch": "rollup -c --watch"
