@@ -1057,7 +1057,7 @@ importers:
       vue: 2.7.8
       vue-class-component: 7.2.6
       vue-clickaway: 2.2.2
-      vue-inbrowser-compiler-independent-utils: ^4.50.0
+      vue-inbrowser-compiler-independent-utils: ^4.52.0
       vue-property-decorator: 7.3.0
       vuetify: 2.6.8
     dependencies:
@@ -1233,7 +1233,7 @@ importers:
       typescript: 4.7.4
       vue: 2.7.8
       vue-inbrowser-compiler-demi: ^4.50.0
-      vue-inbrowser-compiler-independent-utils: ^4.50.0
+      vue-inbrowser-compiler-independent-utils: ^4.52.0
     dependencies:
       camelcase: 5.3.1
       vue-inbrowser-compiler-demi: link:../vue-inbrowser-compiler-demi
