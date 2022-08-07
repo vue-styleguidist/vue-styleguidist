@@ -361,7 +361,7 @@ importers:
       vue: ^3.2.37
       vue-component-meta: ^0.39.4
       vue-docgen-cli: ^4
-      vue-inbrowser-compiler: ^4
+      vue-inbrowser-compiler-independent-utils: ^4
       vue-live: ^2
       vue-tsc: ^0.38.8
     dependencies:
@@ -381,7 +381,7 @@ importers:
       vitepress: 1.0.0-alpha.4
       vue-component-meta: 0.39.4_typescript@4.7.4
       vue-docgen-cli: link:../../packages/vue-docgen-cli
-      vue-inbrowser-compiler: link:../../packages/vue-inbrowser-compiler
+      vue-inbrowser-compiler-independent-utils: link:../../packages/vue-inbrowser-compiler-independent-utils
       vue-live: 2.1.0_vue@3.2.37
       vue-tsc: 0.38.9_typescript@4.7.4
 
@@ -1057,7 +1057,7 @@ importers:
       vue: 2.7.8
       vue-class-component: 7.2.6
       vue-clickaway: 2.2.2
-      vue-inbrowser-compiler-utils: ^4.50.0
+      vue-inbrowser-compiler-independent-utils: ^4.50.0
       vue-property-decorator: 7.3.0
       vuetify: 2.6.8
     dependencies:
@@ -1071,7 +1071,7 @@ importers:
       pug: 3.0.2
       recast: 0.21.1
       ts-map: 1.0.3
-      vue-inbrowser-compiler-utils: link:../vue-inbrowser-compiler-utils
+      vue-inbrowser-compiler-independent-utils: link:../vue-inbrowser-compiler-independent-utils
     devDependencies:
       '@test-vue-docgen/mixins': link:../docgen-tests
       '@types/dedent': 0.7.0
@@ -1158,6 +1158,30 @@ importers:
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
       vue-template-compiler: 2.7.8
 
+  packages/vue-inbrowser-compiler-independent-utils:
+    specifiers:
+      '@rollup/plugin-commonjs': 15.1.0
+      '@rollup/plugin-node-resolve': 9.0.0
+      '@rollup/plugin-typescript': 8.3.4
+      '@types/dedent': ^0.7.0
+      '@types/domhandler': 2.4.2
+      dedent: ^0.7.0
+      rollup: 2.77.2
+      tslib: 2.4.0
+      typescript: 4.7.4
+      vue: 2.7.8
+    devDependencies:
+      '@rollup/plugin-commonjs': 15.1.0_rollup@2.77.2
+      '@rollup/plugin-node-resolve': 9.0.0_rollup@2.77.2
+      '@rollup/plugin-typescript': 8.3.4_mad6iryzja5sfcvlsiy3osqulq
+      '@types/dedent': 0.7.0
+      '@types/domhandler': 2.4.2
+      dedent: 0.7.0
+      rollup: 2.77.2
+      tslib: 2.4.0
+      typescript: 4.7.4
+      vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
+
   packages/vue-inbrowser-compiler-sucrase:
     specifiers:
       '@babel/parser': ^7.13.12
@@ -1209,9 +1233,11 @@ importers:
       typescript: 4.7.4
       vue: 2.7.8
       vue-inbrowser-compiler-demi: ^4.50.0
+      vue-inbrowser-compiler-independent-utils: ^4.50.0
     dependencies:
       camelcase: 5.3.1
       vue-inbrowser-compiler-demi: link:../vue-inbrowser-compiler-demi
+      vue-inbrowser-compiler-independent-utils: link:../vue-inbrowser-compiler-independent-utils
     devDependencies:
       '@rollup/plugin-commonjs': 15.1.0_rollup@2.77.2
       '@rollup/plugin-node-resolve': 9.0.0_rollup@2.77.2
@@ -12051,7 +12077,7 @@ packages:
       loader-utils: 1.4.0
       make-dir: 3.1.0
       schema-utils: 2.7.1
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
 
   /babel-loader/8.2.5_@babel+core@7.18.9:
     resolution: {integrity: sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ==}
@@ -15150,7 +15176,7 @@ packages:
       postcss-value-parser: 4.1.0
       schema-utils: 2.7.1
       semver: 6.3.0
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
 
   /css-loader/4.3.0_webpack@4.46.0:
     resolution: {integrity: sha512-rdezjCjScIrsL8BSYszgT4s476IcNKt6yX69t0pHjJVnPUTDpn4WfIpDQTN3wCJvUvfsz/mFjuGOekf3PY3NUg==}
@@ -18300,17 +18326,6 @@ packages:
       debug: 4.3.2
     dev: false
 
-  /follow-redirects/1.13.3_debug@4.3.4:
-    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.4
-
   /for-in/1.0.2:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
     engines: {node: '>=0.10.0'}
@@ -19641,7 +19656,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3_debug@4.3.4
+      follow-redirects: 1.13.3
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -21706,7 +21721,7 @@ packages:
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
-      prop-types: 15.8.1
+      prop-types: 15.7.2
       unquote: 1.1.1
     dev: false
 
@@ -26370,7 +26385,7 @@ packages:
       sass: 1.34.0
       schema-utils: 2.7.1
       semver: 6.3.0
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
 
   /sass/1.32.8:
     resolution: {integrity: sha512-Sl6mIeGpzjIUZqvKnKETfMf0iDAswD9TNlv13A7aAF3XZlRPMq4VvJWBC2N2DXbp94MQVdNSFG6LfF/iOXrPHQ==}
@@ -28702,7 +28717,7 @@ packages:
       loader-utils: 1.4.0
       mime: 2.5.2
       schema-utils: 1.0.0
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
 
   /url-loader/4.1.1_lit45vopotvaqup7lrvlnvtxwy:
     resolution: {integrity: sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==}
@@ -30871,7 +30886,7 @@ packages:
       mime: 2.5.2
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@4.5.0
       webpack-log: 2.0.0
 
   /webpack-dev-middleware/4.1.0_webpack@4.46.0:

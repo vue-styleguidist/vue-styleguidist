@@ -1,6 +1,6 @@
 /// @ts-check
 import { parse } from "@vue/compiler-sfc"
-import { isCodeVueSfc } from "vue-inbrowser-compiler"
+import { isCodeVueSfc } from "vue-inbrowser-compiler-independent-utils"
 
 function addVueLive(md, opts) {
   const fence = md.renderer.rules.fence;
