@@ -73,7 +73,7 @@ Docs are available at https://vue-styleguidist.github.io/ - we are still working
 
 ## Contributing
 
-Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/.github/CONTRIBUTING.md).
+Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/.github/CONTRIBUTING.md).
 
 Note that the current monorepo relies on `yarn` workspaces. Don't forget to install yarn, `npm i --global yarn`, before cloning.
 
