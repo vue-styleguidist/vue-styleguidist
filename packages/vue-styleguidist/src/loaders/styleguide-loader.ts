@@ -84,7 +84,7 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined
 	const renderRootJsx = config.renderRootJsx ? requireIt(config.renderRootJsx) : undefined
-	const enhancePreviewApp = config.enhancePreviewApp ? requireIt(config.enhancePreviewApp) : undefined
+	const enhancePreviewApp = config.enhancePreviewApp ? requireIt(config.enhancePreviewApp) : `function () {}`
 
 	logger.debug('Loading components:\n' + allComponentFiles.join('\n'))
 

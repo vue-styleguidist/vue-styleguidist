@@ -13,7 +13,7 @@ interface InjectedParams {
 	vuex: any
 	component: any
 	renderRootJsx: any
-  enhancePreviewApp?: (app:any) => void 
+  enhancePreviewApp: (app: any) => void 
 	handleError: (e: any) => void
 	destroyVueInstance: () => void
 	el: HTMLElement
@@ -122,7 +122,7 @@ export function getCompiledExampleComponent({
 					...rootComponent
 				},
 				el,
-        enhancePreviewApp ?? (() => {})
+        enhancePreviewApp
 			),
 			style,
 			moduleId
