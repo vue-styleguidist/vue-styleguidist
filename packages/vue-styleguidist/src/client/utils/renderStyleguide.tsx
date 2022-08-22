@@ -10,6 +10,7 @@ import globalizeComponent from './globalizeComponent'
 import processSections from './processSections'
 
 export const RenderJsxContext = React.createContext<React.ReactNode>(<div />)
+export const EnhanceAppContext = React.createContext<(app: any)=> void>(() => {})
 export const VueComponentMapContext = React.createContext({})
 
 /**
@@ -56,21 +57,23 @@ export default function renderStyleguide(
 	}
 
 	return (
-		<RenderJsxContext.Provider value={styleguide.renderRootJsx}>
-			<StyleGuide
-				codeRevision={codeRevision}
-				// only caclulate css revisions in dev when hot is on to avoid
-				// stringifying the styles in production
-				cssRevision={hashSum({ theme, styles })}
-				config={styleguide.config as any}
-				slots={slots(styleguide.config as any)}
-				welcomeScreen={styleguide.welcomeScreen}
-				patterns={styleguide.patterns}
-				sections={sections}
-				allSections={allSections as any}
-				displayMode={displayMode}
-				pagePerSection={pagePerSection}
-			/>
-		</RenderJsxContext.Provider>
+		<EnhanceAppContext.Provider value={styleguide.enhancePreviewApp}>
+      <RenderJsxContext.Provider value={styleguide.renderRootJsx}>
+        <StyleGuide
+          codeRevision={codeRevision}
+          // only calculate css revisions in dev when hot is on to avoid
+          // stringifying the styles in production
+          cssRevision={hashSum({ theme, styles })}
+          config={styleguide.config as any}
+          slots={slots(styleguide.config as any)}
+          welcomeScreen={styleguide.welcomeScreen}
+          patterns={styleguide.patterns}
+          sections={sections}
+          allSections={allSections as any}
+          displayMode={displayMode}
+          pagePerSection={pagePerSection}
+        />
+      </RenderJsxContext.Provider>
+    </EnhanceAppContext.Provider>
 	)
 }

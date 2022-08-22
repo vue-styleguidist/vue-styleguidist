@@ -76,6 +76,10 @@ export interface BaseStyleguidistConfig
 		theme: string
 	};
     /**
+     * Allow to declare global directives and plugins in vue 3 examples 
+     */
+    enhancePreviewApp: string;
+    /**
      * Defines the initial state of the props and methods tab 
      * @default "collapse" 
      */
@@ -269,6 +273,7 @@ export interface StyleGuideObject {
     sections: ProcessedSection[]
     config: StyleguidistConfig
     renderRootJsx: React.ReactNode
+    enhancePreviewApp: (app: any) => void
     welcomeScreen: any
     patterns: string[]
 }

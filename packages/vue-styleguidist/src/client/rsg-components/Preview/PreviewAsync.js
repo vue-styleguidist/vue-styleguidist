@@ -76,7 +76,8 @@ class PreviewAsync extends Component {
 					data: () => ({}),
 					template: '<div></div>'
 				},
-				el
+				el,
+        (() => {})
 			)
 		}
 	}

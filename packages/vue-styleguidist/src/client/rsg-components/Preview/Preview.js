@@ -63,7 +63,8 @@ class Preview extends Component {
 					data: () => ({}),
 					template: '<div></div>'
 				},
-				el
+				el,
+        (() => {})
 			)
 		}
 	}
@@ -85,7 +86,7 @@ class Preview extends Component {
 			error: null
 		})
 
-		const { code, vuex, component, renderRootJsx } = this.props
+		const { code, vuex, component, renderRootJsx, enhancePreviewApp } = this.props
 		if (!code) {
 			return
 		}
@@ -115,6 +116,7 @@ class Preview extends Component {
 			vuex,
 			component,
 			renderRootJsx,
+      enhancePreviewApp,
 			destroyVueInstance: () => this.destroyVueInstance(),
 			handleError: e => {
 				this.handleError(e)

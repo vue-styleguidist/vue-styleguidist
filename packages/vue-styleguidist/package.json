@@ -110,7 +110,7 @@
     }
   },
   "devDependencies": {
-    "@babel/cli": "7.18.9",
+    "@babel/cli": "7.18.10",
     "@babel/core": "7.18.9",
     "@testing-library/react": "11.2.7",
     "@types/buble": "^0.20.1",

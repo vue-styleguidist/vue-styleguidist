@@ -9,6 +9,7 @@ importers:
 
   .:
     specifiers:
+      '@babel/cli': 7.18.10
       '@babel/core': 7.18.9
       '@babel/plugin-proposal-class-properties': 7.18.6
       '@babel/plugin-proposal-object-rest-spread': 7.18.9
@@ -83,6 +84,7 @@ importers:
       webpack-dev-server: 3.11.3
       yorkie: 2.0.0
     dependencies:
+      '@babel/cli': 7.18.10_@babel+core@7.18.9
       '@babel/core': 7.18.9
       '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.18.9
       '@babel/plugin-proposal-object-rest-spread': 7.18.9_@babel+core@7.18.9
@@ -1262,7 +1264,7 @@ importers:
 
   packages/vue-styleguidist:
     specifiers:
-      '@babel/cli': 7.18.9
+      '@babel/cli': 7.18.10
       '@babel/core': 7.18.9
       '@testing-library/react': 11.2.7
       '@types/buble': ^0.20.1
@@ -1405,7 +1407,7 @@ importers:
       webpack-filter-warnings-plugin: 1.2.1_webpack@4.46.0
       webpack-merge: 4.2.2
     devDependencies:
-      '@babel/cli': 7.18.9_@babel+core@7.18.9
+      '@babel/cli': 7.18.10_@babel+core@7.18.9
       '@babel/core': 7.18.9
       '@testing-library/react': 11.2.7_biqbaboplfbrettd7655fr4n2y
       '@types/buble': 0.20.1
@@ -1661,8 +1663,8 @@ packages:
     dependencies:
       xss: 1.0.8
 
-  /@babel/cli/7.18.9_@babel+core@7.18.9:
-    resolution: {integrity: sha512-e7TOtHVrAXBJGNgoROVxqx0mathd01oJGXIDekRfxdrISnRqfM795APwkDtse9GdyPYivjg3iXiko3sF3W7f5Q==}
+  /@babel/cli/7.18.10_@babel+core@7.18.9:
+    resolution: {integrity: sha512-dLvWH+ZDFAkd2jPBSghrsFBuXrREvFwjpDycXbmUoeochqKYe4zNSLEJYErpLg8dvxvZYe79/MkN461XCwpnGw==}
     engines: {node: '>=6.9.0'}
     hasBin: true
     peerDependencies:
@@ -1673,13 +1675,12 @@ packages:
       commander: 4.1.1
       convert-source-map: 1.7.0
       fs-readdir-recursive: 1.1.0
-      glob: 7.1.7
+      glob: 7.2.3
       make-dir: 2.1.0
       slash: 2.0.0
     optionalDependencies:
       '@nicolo-ribaudo/chokidar-2': 2.1.8-no-fsevents.3
       chokidar: 3.5.3
-    dev: true
 
   /@babel/code-frame/7.10.4:
     resolution: {integrity: sha512-vG6SvB6oYEhvgisZNFRmRCUkLz11c7rp+tbNTynGqc6mS1d5ATd/sGyV6W0KZZnXRKMTzZDRgQT3Ou9jhpAfUg==}
@@ -2609,7 +2610,7 @@ packages:
     resolution: {integrity: sha512-iNpIgTgyAvDQpDj76POqg+YEt8fPxx3yaNBg3S30dxNKm2SWfYhD0TGrK/Eu9wHpUW63VQU894TsTg+GLbUa1g==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.18.8
+      '@babel/types': 7.18.9
 
   /@babel/helper-skip-transparent-expression-wrappers/7.12.1:
     resolution: {integrity: sha512-Mf5AUuhG1/OCChOJ/HcADmvcHM42WJockombn8ATJG3OnyiSxBK/Mm5x78BQWvmtXZKHgbjdGL2kin/HOLlZGA==}
@@ -6852,7 +6853,6 @@ packages:
   /@nicolo-ribaudo/chokidar-2/2.1.8-no-fsevents.3:
     resolution: {integrity: sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /@node-ipc/js-queue/2.0.3:
@@ -12827,7 +12827,7 @@ packages:
       bluebird: 3.7.2
       chownr: 1.1.4
       figgy-pudding: 3.5.2
-      glob: 7.1.7
+      glob: 7.2.3
       graceful-fs: 4.2.9
       infer-owner: 1.0.4
       lru-cache: 5.1.1
@@ -12847,7 +12847,7 @@ packages:
       '@npmcli/move-file': 1.1.2
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      glob: 7.1.7
+      glob: 7.2.3
       infer-owner: 1.0.4
       lru-cache: 6.0.0
       minipass: 3.1.3
@@ -18314,6 +18314,17 @@ packages:
       debug:
         optional: true
 
+  /follow-redirects/1.13.3_debug@4.3.1:
+    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.1_supports-color@6.1.0
+
   /follow-redirects/1.13.3_debug@4.3.2:
     resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
     engines: {node: '>=4.0'}
@@ -18325,6 +18336,17 @@ packages:
     dependencies:
       debug: 4.3.2
     dev: false
+
+  /follow-redirects/1.13.3_debug@4.3.4:
+    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.4
 
   /for-in/1.0.2:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
@@ -18568,7 +18590,6 @@ packages:
 
   /fs-readdir-recursive/1.1.0:
     resolution: {integrity: sha512-GNanXlVr2pf02+sPN40XN8HG+ePaNcvM0q5mZBd668Obwb0yD5GiUbZOFgwn8kGMY6I3mdyDJzieUy3PTYyTRA==}
-    dev: true
 
   /fs-write-stream-atomic/1.0.10:
     resolution: {integrity: sha1-tH31NJPvkR33VzHnCp3tAYnbQMk=}
@@ -18975,7 +18996,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       array-union: 1.0.2
-      glob: 7.1.7
+      glob: 7.2.3
       object-assign: 4.1.1
       pify: 2.3.0
       pinkie-promise: 2.0.1
@@ -18986,7 +19007,7 @@ packages:
     dependencies:
       array-union: 1.0.2
       dir-glob: 2.2.2
-      glob: 7.1.7
+      glob: 7.2.3
       ignore: 3.3.10
       pify: 3.0.0
       slash: 1.0.0
@@ -19646,7 +19667,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3
+      follow-redirects: 1.13.3_debug@4.3.1
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -19656,7 +19677,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3
+      follow-redirects: 1.13.3_debug@4.3.4
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -25580,7 +25601,7 @@ packages:
       clsx: 1.1.1
       common-dir: 3.0.1
       copy-webpack-plugin: 6.4.1
-      core-js: 3.24.1
+      core-js: 3.14.0
       doctrine: 3.0.0
       es6-object-assign: 1.1.0
       es6-promise: 4.2.8
@@ -25595,7 +25616,7 @@ packages:
       hash-sum: 2.0.0
       is-directory: 0.3.1
       javascript-stringify: 2.0.1
-      jss: 10.9.2
+      jss: 10.6.0
       jss-plugin-camel-case: 10.6.0
       jss-plugin-compose: 10.6.0
       jss-plugin-default-unit: 10.6.0
