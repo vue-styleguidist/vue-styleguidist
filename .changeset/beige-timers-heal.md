@@ -1,5 +1,5 @@
 ---
-"vue-styleguidist": patch
+"vue-styleguidist": minor
 ---
 
-feat: add enhancePreviewApp option
+add enhancePreviewApp option to allow global directives amd plugins on vue 3
