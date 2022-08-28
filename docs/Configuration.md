@@ -198,7 +198,7 @@ module.exports = {
 
 Type `String`, optional
 
-Allows in vue 3 styleguides to register plugins and global directives in the examples preview.
+Allows in vue 3 styleguides to register **global plugins** and **global directives** in the examples preview.
 
 For example:
 
