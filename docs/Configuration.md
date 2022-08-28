@@ -220,7 +220,7 @@ import focusDirective from '../src/directives/v-focus';
 
 // The export here MUST be default or module.export
 // this is what is imported by the styleguide
-export default (app)=> {
+export default (app) => {
   app.directive('focus', focusDirective)
 }
 ```

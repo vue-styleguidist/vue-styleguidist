@@ -42,6 +42,17 @@ const CLIENT_CONFIG_OPTIONS = [
 	'locallyRegisterComponents'
 ]
 
+// const emptyFunctionAst = {}
+
+// Object.defineProperty(emptyFunctionAst, 'toAST', {
+//   enumerable: false,
+
+//   value() {
+//     return builders.arrowFunctionExpression([], builders.arrowFunctionExpression([], b.blockStatement([])));
+//   }
+
+// });
+
 export default function () {}
 
 export function pitch(this: StyleguidistContext) {
@@ -84,7 +95,7 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined
 	const renderRootJsx = config.renderRootJsx ? requireIt(config.renderRootJsx) : undefined
-	const enhancePreviewApp = config.enhancePreviewApp ? requireIt(config.enhancePreviewApp) : `function () {}`
+	const enhancePreviewApp = config.enhancePreviewApp ? requireIt(config.enhancePreviewApp) : () => () => {}
 
 	logger.debug('Loading components:\n' + allComponentFiles.join('\n'))
 

@@ -57,7 +57,7 @@ export default function renderStyleguide(
 	}
 
 	return (
-		<EnhanceAppContext.Provider value={styleguide.enhancePreviewApp}>
+		<EnhanceAppContext.Provider value={(styleguide.enhancePreviewApp as any).default || styleguide.enhancePreviewApp}>
       <RenderJsxContext.Provider value={styleguide.renderRootJsx}>
         <StyleGuide
           codeRevision={codeRevision}

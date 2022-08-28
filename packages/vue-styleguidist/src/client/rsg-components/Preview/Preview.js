@@ -5,7 +5,7 @@ import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
-import { RenderJsxContext } from '../../utils/renderStyleguide'
+import { RenderJsxContext, EnhanceAppContext } from '../../utils/renderStyleguide'
 import { getCompiledExampleComponent } from './getCompiledExampleComponent'
 import { getVueApp } from './getVueApp'
 
@@ -64,7 +64,7 @@ class Preview extends Component {
 					template: '<div></div>'
 				},
 				el,
-        (() => {})
+				() => {}
 			)
 		}
 	}
@@ -116,7 +116,7 @@ class Preview extends Component {
 			vuex,
 			component,
 			renderRootJsx,
-      enhancePreviewApp,
+			enhancePreviewApp,
 			destroyVueInstance: () => this.destroyVueInstance(),
 			handleError: e => {
 				this.handleError(e)
@@ -156,12 +156,23 @@ class Preview extends Component {
 
 export default function PreviewWithComponent(props) {
 	return (
-		<RenderJsxContext.Consumer>
-			{renderRootJsx => (
-				<DocumentedComponentContext.Consumer>
-					{component => <Preview {...props} component={component} renderRootJsx={renderRootJsx} />}
-				</DocumentedComponentContext.Consumer>
+		<EnhanceAppContext.Consumer>
+			{enhancePreviewApp => (
+				<RenderJsxContext.Consumer>
+					{renderRootJsx => (
+						<DocumentedComponentContext.Consumer>
+							{component => (
+								<Preview
+									{...props}
+									component={component}
+									renderRootJsx={renderRootJsx}
+									enhancePreviewApp={enhancePreviewApp}
+								/>
+							)}
+						</DocumentedComponentContext.Consumer>
+					)}
+				</RenderJsxContext.Consumer>
 			)}
-		</RenderJsxContext.Consumer>
+		</EnhanceAppContext.Consumer>
 	)
 }

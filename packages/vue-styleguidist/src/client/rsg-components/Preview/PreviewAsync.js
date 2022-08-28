@@ -4,7 +4,7 @@ import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
-import { RenderJsxContext } from '../../utils/renderStyleguide'
+import { RenderJsxContext, EnhanceAppContext } from '../../utils/renderStyleguide'
 import { getCompiledExampleComponent } from './getCompiledExampleComponent'
 import { getVueApp } from './getVueApp'
 
@@ -77,7 +77,7 @@ class PreviewAsync extends Component {
 					template: '<div></div>'
 				},
 				el,
-        (() => {})
+				() => {}
 			)
 		}
 	}
@@ -95,9 +95,9 @@ class PreviewAsync extends Component {
 	}
 
 	executeCode(newCode) {
-		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler').then(
-			(opts) => {
-        const { compile } = opts
+		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler')
+			.then(opts => {
+				const { compile } = opts
 				try {
 					const example = compile(newCode, {
 						...this.context.config.compilerConfig,
@@ -109,16 +109,16 @@ class PreviewAsync extends Component {
 				} catch (err) {
 					this.handleError(err)
 				}
-			}
-		).then(() => {
-      this.setState({
-        error: null
-      })
-    })
+			})
+			.then(() => {
+				this.setState({
+					error: null
+				})
+			})
 	}
 
 	setCompiledPreview(example) {
-		const { vuex, component, renderRootJsx } = this.props
+		const { vuex, component, renderRootJsx,enhancePreviewApp  } = this.props
 		let el = this.mountNode.children[0]
 		if (!el) {
 			this.mountNode.innerHTML = ' '
@@ -132,6 +132,7 @@ class PreviewAsync extends Component {
 			vuex,
 			component,
 			renderRootJsx,
+			enhancePreviewApp,
 			destroyVueInstance: () => this.destroyVueInstance(),
 			handleError: e => {
 				this.handleError(e)
@@ -171,14 +172,23 @@ class PreviewAsync extends Component {
 
 export default function PreviewWithComponent(props) {
 	return (
-		<RenderJsxContext.Consumer>
-			{renderRootJsx => (
-        <DocumentedComponentContext.Consumer>
-					{component => (
-						<PreviewAsync {...props} component={component} renderRootJsx={renderRootJsx} />
+		<EnhanceAppContext.Consumer>
+			{enhancePreviewApp => (
+				<RenderJsxContext.Consumer>
+					{renderRootJsx => (
+						<DocumentedComponentContext.Consumer>
+							{component => (
+								<PreviewAsync
+									{...props}
+									component={component}
+									renderRootJsx={renderRootJsx}
+									enhancePreviewApp={enhancePreviewApp}
+								/>
+							)}
+						</DocumentedComponentContext.Consumer>
 					)}
-				</DocumentedComponentContext.Consumer>
+				</RenderJsxContext.Consumer>
 			)}
-		</RenderJsxContext.Consumer>
+		</EnhanceAppContext.Consumer>
 	)
 }
