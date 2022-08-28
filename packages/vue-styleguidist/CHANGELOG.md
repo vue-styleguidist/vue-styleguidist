@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.53.0
+
+### Minor Changes
+
+- [#1382](https://github.com/vue-styleguidist/vue-styleguidist/pull/1382) [`c03d8459`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c03d84598a3ce834e58ae9bab9d92868c7ec8754) Thanks [@elevatebart](https://github.com/elevatebart)! - add enhancePreviewApp option to allow global directives amd plugins on vue 3
+
 ## 4.50.0
 
 ### Minor Changes
