@@ -19,11 +19,11 @@ function getVuePackageVersion() {
 }
 
 async function updateIndexForVueVersion(version) {
-  const dirpath = path.join(__dirname, version)
-  const paths = await fs.readdir(dirpath)
+  const dirPath = path.join(__dirname, version)
+  const paths = await fs.readdir(dirPath)
 	// eslint-disable-next-line compat/compat, no-undef
 	await Promise.all(paths.map(async fileName => {
-		const indexContent = await fs.readFile(path.join(dirpath, fileName), 'utf8')
+		const indexContent = await fs.readFile(path.join(dirPath, fileName), 'utf8')
 		await fs.writeFile(path.join(__dirname, fileName), indexContent)
 	}))
   console.log(`[vue-inbrowser-compiler-demi] set up using ${version}`)

@@ -216,13 +216,14 @@ Then update your app in it with whatever you want.
 
 ```js
 // styleguide/preview.js
+import { defineEnhancePreviewApp } from 'vue-styleguidist'
 import focusDirective from '../src/directives/v-focus';
 
 // The export here MUST be default or module.export
 // this is what is imported by the styleguide
-export default (app) => {
+export default defineEnhancePreviewApp((app) => {
   app.directive('focus', focusDirective)
-}
+})
 ```
 
 > NOTE: If you use TypeScript, this file can be TypeScript as well

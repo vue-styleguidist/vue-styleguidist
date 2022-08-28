@@ -4,6 +4,7 @@ import { Stats, Configuration, Compiler } from 'webpack'
 import { Theme } from 'react-styleguidist'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
+import type { App } from 'vue-inbrowser-compiler-utils'
 import { SanitizedStyleguidistConfig, StyleguidistConfig } from '../types/StyleGuide'
 import buildUtil from './build'
 import server from './server'
@@ -103,4 +104,8 @@ function exportBuildUtils(config: SanitizedStyleguidistConfig): StyleGuideUtils 
 
 export function defineConfig(config: StyleguidistConfig): StyleguidistConfig {
 	return config
+}
+
+export function defineEnhancePreviewApp(enhance: (app: App) => void): (app: App) => void {
+	return enhance
 }
