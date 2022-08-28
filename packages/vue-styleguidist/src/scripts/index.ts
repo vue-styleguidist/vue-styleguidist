@@ -102,10 +102,20 @@ function exportBuildUtils(config: SanitizedStyleguidistConfig): StyleGuideUtils 
 	}
 }
 
+/**
+ * Helper function to create type safe configs in JavaScript
+ * @param config passed config
+ * @returns the config passed without any changes
+ */
 export function defineConfig(config: StyleguidistConfig): StyleguidistConfig {
 	return config
 }
 
-export function defineEnhancePreviewApp(enhance: (app: App) => void): (app: App) => void {
-	return enhance
+/**
+ * Helper function for typing the contents of the `enhancePreviewApp` function
+ * @param enhance the enhancer function 
+ * @returns the function passed without any changes
+ */
+export function defineEnhanceApp(enhance: (app: App) => void): (app: App) => void {
+	return enhance 
 }
