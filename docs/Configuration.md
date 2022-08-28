@@ -367,13 +367,13 @@ export default {
 
 ## `minimize`
 
-Type: `boolean`, defaults: `true`
+Type: `boolean`, default: `true`
 
 If you wish to remove minimization from the build process to help with debugging or to accelate netlify build time on PR, turn this one off.
 
 ## `mountPointId`
 
-Type: `string`, defaults: `rsg-root`
+Type: `string`, default: `rsg-root`
 
 The ID of a DOM element where Styleguidist mounts.
 
