@@ -194,9 +194,42 @@ module.exports = {
 }
 ```
 
+## `enhancePreviewApp`
+
+Type `String`, optional
+
+Allows in vue 3 styleguides to register plugins and global directives in the examples preview.
+
+For example:
+
+Reference the preview file path in the `styleguide.config.js`
+
+```js
+// styleguide.config.js
+export default {
+  // ...
+  enhancePreviewApp: path.resolve(__dirname, 'styleguide/preview.js')
+}
+```
+
+Then update your app in it with whatever you want.
+
+```js
+// styleguide/preview.js
+import focusDirective from '../src/directives/v-focus';
+
+// The export here MUST be default or module.export
+// this is what is imported by the styleguide
+export default (app) => {
+  app.directive('focus', focusDirective)
+}
+```
+
+> NOTE: If you use TypeScript, this file can be TypeScript as well
+
 ## `exampleMode`
 
-Type: `String`, default: `collapse`
+Type: `'collapse' | 'hide' | 'expand'`, default: `collapse`
 
 Defines the initial state of the example code tab:
 
@@ -334,13 +367,13 @@ export default {
 
 ## `minimize`
 
-Type: `boolean`, defaults: `true`
+Type: `boolean`, default: `true`
 
 If you wish to remove minimization from the build process to help with debugging or to accelate netlify build time on PR, turn this one off.
 
 ## `mountPointId`
 
-Type: `string`, defaults: `rsg-root`
+Type: `string`, default: `rsg-root`
 
 The ID of a DOM element where Styleguidist mounts.
 
@@ -797,7 +830,7 @@ module.exports = {
 
 ## `usageMode`
 
-Type: `String`, default: `collapse`
+Type: `'collapse' | 'hide' | 'expand'`, default: `collapse`
 
 Defines the initial state of the props and methods tab:
 

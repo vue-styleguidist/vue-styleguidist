@@ -5,7 +5,7 @@ import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import PlaygroundError from 'rsg-components/PlaygroundError'
 import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
-import { RenderJsxContext } from '../../utils/renderStyleguide'
+import { RenderJsxContext, EnhanceAppContext } from '../../utils/renderStyleguide'
 import { getCompiledExampleComponent } from './getCompiledExampleComponent'
 import { getVueApp } from './getVueApp'
 
@@ -15,7 +15,8 @@ class Preview extends Component {
 		evalInContext: PropTypes.func.isRequired,
 		vuex: PropTypes.object,
 		component: PropTypes.object,
-		renderRootJsx: PropTypes.object
+		renderRootJsx: PropTypes.object,
+    enhancePreviewApp: PropTypes.func.isRequired
 	}
 	static contextType = Context
 
@@ -63,7 +64,8 @@ class Preview extends Component {
 					data: () => ({}),
 					template: '<div></div>'
 				},
-				el
+				el,
+				() => {}
 			)
 		}
 	}
@@ -85,7 +87,7 @@ class Preview extends Component {
 			error: null
 		})
 
-		const { code, vuex, component, renderRootJsx } = this.props
+		const { code, vuex, component, renderRootJsx, enhancePreviewApp } = this.props
 		if (!code) {
 			return
 		}
@@ -115,6 +117,7 @@ class Preview extends Component {
 			vuex,
 			component,
 			renderRootJsx,
+			enhancePreviewApp,
 			destroyVueInstance: () => this.destroyVueInstance(),
 			handleError: e => {
 				this.handleError(e)
@@ -154,12 +157,23 @@ class Preview extends Component {
 
 export default function PreviewWithComponent(props) {
 	return (
-		<RenderJsxContext.Consumer>
-			{renderRootJsx => (
-				<DocumentedComponentContext.Consumer>
-					{component => <Preview {...props} component={component} renderRootJsx={renderRootJsx} />}
-				</DocumentedComponentContext.Consumer>
+		<EnhanceAppContext.Consumer>
+			{enhancePreviewApp => (
+				<RenderJsxContext.Consumer>
+					{renderRootJsx => (
+						<DocumentedComponentContext.Consumer>
+							{component => (
+								<Preview
+									{...props}
+									component={component}
+									renderRootJsx={renderRootJsx}
+									enhancePreviewApp={enhancePreviewApp}
+								/>
+							)}
+						</DocumentedComponentContext.Consumer>
+					)}
+				</RenderJsxContext.Consumer>
 			)}
-		</RenderJsxContext.Consumer>
+		</EnhanceAppContext.Consumer>
 	)
 }

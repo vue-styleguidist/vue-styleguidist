@@ -145,6 +145,12 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 			)
 		}
 	},
+  enhancePreviewApp: {
+    tstype: 'string',
+    message: 'Enhance Preview App File Path',
+    description: 'Allow to declare global directives and plugins in vue 3 examples',
+		type: 'directory path'
+  },
 	exampleMode: {
 		tstype: 'Rsg.ExpandMode',
 		message: 'Example Mode',
