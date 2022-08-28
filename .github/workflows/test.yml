@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  test-github-actions:
     runs-on: ubuntu-latest
 
     steps:
