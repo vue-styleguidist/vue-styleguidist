@@ -24,7 +24,8 @@ class PreviewAsync extends Component {
 		evalInContext: PropTypes.func.isRequired,
 		vuex: PropTypes.object,
 		component: PropTypes.object,
-		renderRootJsx: PropTypes.object
+		renderRootJsx: PropTypes.object,
+    enhancePreviewApp: PropTypes.func.isRequired
 	}
 	static contextType = Context
 
