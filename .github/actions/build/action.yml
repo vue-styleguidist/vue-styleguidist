@@ -35,3 +35,5 @@ runs:
 
     - name: Install dependencies
       run: pnpm install
+      with:
+        shell: fsh
