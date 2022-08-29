@@ -1129,7 +1129,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-utils: ^4.50.0
+      vue-inbrowser-compiler-utils: ^4.53.1
       vue-template-compiler: 2.7.8
       walkes: ^0.2.1
     dependencies:
@@ -1234,7 +1234,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-demi: ^4.50.0
+      vue-inbrowser-compiler-demi: ^4.53.1
       vue-inbrowser-compiler-independent-utils: ^4.52.0
     dependencies:
       camelcase: 5.3.1
@@ -1341,8 +1341,8 @@ importers:
       typescript: 4.7.4
       vue: 2.7.8
       vue-docgen-api: ^4.50.0
-      vue-inbrowser-compiler: ^4.50.0
-      vue-inbrowser-compiler-utils: ^4.50.0
+      vue-inbrowser-compiler: ^4.53.1
+      vue-inbrowser-compiler-utils: ^4.53.1
       vue-template-compiler: 2.7.8
       webpack: 4.46.0
       webpack-dev-server: ^3.11.2

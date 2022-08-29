@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.53.1
+
+### Patch Changes
+
+- [#1387](https://github.com/vue-styleguidist/vue-styleguidist/pull/1387) [`3f213efe`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3f213efeca69dd0f6d2cf4e7983cdf7ee8318c03) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: add helper function for enhancePreviewApp file option
+
+- Updated dependencies [[`3f213efe`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3f213efeca69dd0f6d2cf4e7983cdf7ee8318c03)]:
+  - vue-inbrowser-compiler-utils@4.53.1
+
 ## 4.50.0
 
 ### Minor Changes
