@@ -9,12 +9,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-github-actions:
+  test-unit-github-actions:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Init & Build
         uses: ./.github/actions/build
@@ -31,5 +31,15 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
 
+  test-plugin-github-actions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+        
       - name: Run plugin tests
         run: pnpm test:plugin
