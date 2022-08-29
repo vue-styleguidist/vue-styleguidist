@@ -1154,9 +1154,11 @@ importers:
 
   packages/vue-inbrowser-compiler-demi:
     specifiers:
+      '@vue/compiler-sfc': '3'
       vue: 2.7.8
       vue-template-compiler: 2.7.8
     devDependencies:
+      '@vue/compiler-sfc': 3.2.37
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
       vue-template-compiler: 2.7.8
 
