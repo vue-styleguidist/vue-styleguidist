@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.54.0
+
+### Minor Changes
+
+- [#1390](https://github.com/vue-styleguidist/vue-styleguidist/pull/1390) [`d2d75ce3`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d2d75ce39c9993668418193002670be999b674be) Thanks [@elevatebart](https://github.com/elevatebart)! - publish the vue3 version by default to help stackblitz
+
 ## 4.53.1
 
 ### Patch Changes
