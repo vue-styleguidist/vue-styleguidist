@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Init & Build
         uses: ./.github/actions/build
@@ -29,7 +29,7 @@ jobs:
         run: rm -rf ./coverage/tmp
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
 
       - name: Run plugin tests
         run: pnpm test:plugin
