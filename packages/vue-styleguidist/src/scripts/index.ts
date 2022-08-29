@@ -4,6 +4,7 @@ import { Stats, Configuration, Compiler } from 'webpack'
 import { Theme } from 'react-styleguidist'
 import setupLogger from 'react-styleguidist/lib/scripts/logger'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
+import type { App } from 'vue-inbrowser-compiler-utils'
 import { SanitizedStyleguidistConfig, StyleguidistConfig } from '../types/StyleGuide'
 import buildUtil from './build'
 import server from './server'
@@ -101,6 +102,20 @@ function exportBuildUtils(config: SanitizedStyleguidistConfig): StyleGuideUtils 
 	}
 }
 
+/**
+ * Helper function to create type safe configs in JavaScript
+ * @param config passed config
+ * @returns the config passed without any changes
+ */
 export function defineConfig(config: StyleguidistConfig): StyleguidistConfig {
 	return config
+}
+
+/**
+ * Helper function for typing the contents of the `enhancePreviewApp` function
+ * @param enhance the enhancer function 
+ * @returns the function passed without any changes
+ */
+export function defineEnhanceApp(enhance: (app: App) => void): (app: App) => void {
+	return enhance 
 }

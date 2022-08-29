@@ -198,7 +198,7 @@ module.exports = {
 
 Type `String`, optional
 
-Allows in vue 3 styleguides to register plugins and global directives in the examples preview.
+Allows in vue 3 styleguides to register **global plugins** and **global directives** in the examples preview.
 
 For example:
 
@@ -216,13 +216,14 @@ Then update your app in it with whatever you want.
 
 ```js
 // styleguide/preview.js
+import { defineEnhanceApp } from 'vue-styleguidist'
 import focusDirective from '../src/directives/v-focus';
 
 // The export here MUST be default or module.export
 // this is what is imported by the styleguide
-export default (app) => {
+export default defineEnhanceApp((app) => {
   app.directive('focus', focusDirective)
-}
+})
 ```
 
 > NOTE: If you use TypeScript, this file can be TypeScript as well

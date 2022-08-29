@@ -4,7 +4,8 @@ export {
 	compileScript,
 	createApp,
 	h,
-	compileTemplate
+	compileTemplate,
+  App
 } from 'vue-inbrowser-compiler-demi'
 export {
   cleanName,
