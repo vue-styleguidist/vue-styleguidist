@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.53.1
+
+### Patch Changes
+
+- [#1389](https://github.com/vue-styleguidist/vue-styleguidist/pull/1389) [`5513be86`](https://github.com/vue-styleguidist/vue-styleguidist/commit/5513be86303fbdc44a2ac31ee0ec887b714c60f5) Thanks [@elevatebart](https://github.com/elevatebart)! - Avoid having a long webpack log at successful build
+
+* [#1387](https://github.com/vue-styleguidist/vue-styleguidist/pull/1387) [`3f213efe`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3f213efeca69dd0f6d2cf4e7983cdf7ee8318c03) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: add helper function for enhancePreviewApp file option
+
+* Updated dependencies [[`3f213efe`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3f213efeca69dd0f6d2cf4e7983cdf7ee8318c03)]:
+  - vue-inbrowser-compiler-utils@4.53.1
+  - vue-inbrowser-compiler@4.53.1
+
 ## 4.53.0
 
 ### Minor Changes
