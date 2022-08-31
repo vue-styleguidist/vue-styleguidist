@@ -32,12 +32,14 @@ foo()
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
+
+    cy.contains('.token.function', 'foo').should('be.visible')
 	})
 
 	it('renders tsx', () => {
 		const code = `
 function foo() :string {
-  return <div>bar</div>
+  return <Foo>bar</Foo>
 }
 
 foo()
@@ -47,12 +49,14 @@ foo()
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
+
+    cy.contains('.token.tag', 'Foo').should('be.visible')
 	})
 
 	it('renders vue SFC with Typescript', () => {
 		const code = `
 <template>
-  <div @click="foo()">bar</div>
+  <Accordion @click="foo()">bar</Accordion>
 </template>
 <script lang="ts">
 import type { Vue } from 'vue'
@@ -66,6 +70,8 @@ function foo(param: Vue) : { one: number, two: boolean } {
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
+
+    cy.contains('.token.tag', 'Accordion').should('be.visible')
 	})
 
   it('renders vue SFC with Self-closing tag', () => {
