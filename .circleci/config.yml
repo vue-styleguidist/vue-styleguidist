@@ -89,14 +89,14 @@ jobs:
       - attach_workspace:
           at: ~/
       # run cypress component tests
-      - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY npm run cy:ct -- --record
+      - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY yarn start-server-and-test cy:serve http://localhost:6060 "cypress run --record --component"
 
       # run cypress e2e tests
-      - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY CY_EXAMPLE_FOLDER=basic npm run cy -- --record --group main
+      - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY CY_EXAMPLE_FOLDER=basic yarn start-server-and-test cy:serve http://localhost:6060 "cypress run --record --component --group main"
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-basic
-      - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY CY_EXAMPLE_FOLDER=jsx-examples npm run cy -- --group jsx
+      - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY CY_EXAMPLE_FOLDER=jsx-examples yarn start-server-and-test cy:serve http://localhost:6060 "cypress run --record --component --group jsx"
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-jsx
