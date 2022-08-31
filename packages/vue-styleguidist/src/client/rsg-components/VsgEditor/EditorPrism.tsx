@@ -44,7 +44,7 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
 
 		return code => {
 			const parser = new DOMParser()
-			const SfcXMLDocument = parser.parseFromString(`<body>${code}</body>`, 'text/html')
+			const SfcXMLDocument = parser.parseFromString(`<body>${code}</body>`, 'text/xml')
 			const scriptNodes = SfcXMLDocument.querySelectorAll('script')
 			const scriptBlocks: { text: string; lg: string }[] = []
 			scriptNodes.forEach(scriptNode => {
@@ -55,7 +55,7 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
         }
 				scriptNode.textContent = ' '
 			})
-			const htmlHighlighted = prismHighlight(SfcXMLDocument.body.innerHTML, langScheme, 'html')
+			const htmlHighlighted = prismHighlight(SfcXMLDocument.documentElement.innerHTML, langScheme, 'html')
 			return htmlHighlighted.replace(/<span class="token language-javascript"> <\/span>/g, () => {
 				const scriptBlock = scriptBlocks.shift()
 				if (scriptBlock) {

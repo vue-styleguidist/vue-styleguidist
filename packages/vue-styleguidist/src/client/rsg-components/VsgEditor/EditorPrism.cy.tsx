@@ -67,4 +67,46 @@ function foo(param: Vue) : { one: number, two: boolean } {
 			</Provider>
 		)
 	})
+
+  it('renders vue SFC with Self-closing tag', () => {
+		const code = `
+<template>
+  <Checkbox />
+</template>
+<script lang="ts">
+import type { Vue } from 'vue'
+
+function foo(param: Vue) : { one: number, two: boolean } {
+  return 'bar'
+}
+</script>
+    `
+		mount(
+			<Provider jsxInExamples>
+				<EditorPrism code={code} onChange={() => {}} />
+			</Provider>
+		)
+
+    cy.contains('.token.tag', 'Checkbox').should('be.visible')
+	})
+
+  it('renders vue SFC with style scoped tag', () => {
+		const code = `
+<template>
+  <Checkbox />
+</template>
+<style scoped>
+  .checkbox {
+    color: red;
+  }
+</script>
+    `
+		mount(
+			<Provider jsxInExamples>
+				<EditorPrism code={code} onChange={() => {}} />
+			</Provider>
+		)
+
+    cy.contains('.token.tag', 'Checkbox').should('be.visible')
+	})
 })
