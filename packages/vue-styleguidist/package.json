@@ -32,6 +32,7 @@
     "npm": ">=3"
   },
   "dependencies": {
+    "@babel/runtime": "7.18.9",
     "@vxna/mini-html-webpack-template": "^1.0.0",
     "ast-types": "0.14.2",
     "classnames": "^2.3.1",
@@ -140,5 +141,6 @@
   },
   "resolutions": {
     "**/http-proxy": "1.18.1"
-  }
+  },
+  "author": "Bart Ledoux <ledouxb@me.com>"
 }
