@@ -38,6 +38,8 @@ const webpackConfig = {
 }
 
 export default defineConfig({
+  projectId: "583saw",
+  
 	fixturesFolder: false,
 	screenshotsFolder: 'test/cypress/screenshots',
 	videosFolder: 'test/cypress/videos',
