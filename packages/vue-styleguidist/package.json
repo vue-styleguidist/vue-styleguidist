@@ -141,5 +141,6 @@
   },
   "resolutions": {
     "**/http-proxy": "1.18.1"
-  }
+  },
+  "author": "Bart Ledoux <ledouxb@me.com>"
 }
