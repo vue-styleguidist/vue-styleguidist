@@ -67,7 +67,12 @@ function printType(t?: bt.TSType): ParamType {
 }
 
 function getTypeObjectFromTSType(type: bt.TSType): ParamType {
-	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
+	return bt.isTSUnionType(type)
+		? {
+				name: type.types.map(t => getTypeObjectFromTSType(t).name).join(' | '),
+				elements: type.types.map(getTypeObjectFromTSType)
+		  }
+		: bt.isTSIntersectionType(type)
 		? { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
 		: bt.isTSArrayType(type)
 		? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }

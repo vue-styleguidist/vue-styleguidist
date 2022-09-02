@@ -6,7 +6,6 @@ import resolveExportedComponent from '../utils/resolveExportedComponent'
 import Documentation, { PropDescriptor } from '../Documentation'
 import setupPropHandler from './setupPropHandler'
 
-
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
 }
@@ -154,6 +153,19 @@ describe('setupPropHandler', () => {
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('anotherTestProps')
 				expect(prop.type).toMatchObject({
 					name: 'boolean'
+				})
+			})
+
+			it('should resolve props in defineProps union type arguments', async () => {
+				const src = `
+					defineProps<{
+						testProps: string | number
+					}>()
+					`
+				const prop = await parserTest(src)
+				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testProps')
+				expect(prop.type).toMatchObject({
+					name: 'string | number'
 				})
 			})
 
