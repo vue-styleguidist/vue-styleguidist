@@ -117,7 +117,7 @@ describe('getTypeFromAnnotation', () => {
 			      "name": "Array",
 			    },
 			  ],
-			  "name": "union",
+			  "name": "\\"string literal\\" | 3 | Book | Array | Array | Array | Array",
 			}
 		`)
 	})

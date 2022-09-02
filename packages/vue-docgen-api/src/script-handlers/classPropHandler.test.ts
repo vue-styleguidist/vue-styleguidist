@@ -73,7 +73,7 @@ describe('propHandler', () => {
           test: string | null;
         }`
 			await tester(src, {
-				type: { name: 'union', elements: [{ name: 'string' }, { name: 'null' }] }
+				type: { name: 'string | null', elements: [{ name: 'string' }, { name: 'null' }] }
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('test')
 		})
@@ -207,7 +207,7 @@ describe('propHandler', () => {
 			  // [… more props here]
 			}`
 			await tester(src, {
-				type: { name: 'union' }
+				type: { name: 'string | number' }
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('id')
 			expect(mockPropDescriptor.type).toMatchInlineSnapshot(`
@@ -220,7 +220,7 @@ describe('propHandler', () => {
 				      "name": "number",
 				    },
 				  ],
-				  "name": "union",
+				  "name": "string | number",
 				}
 			`)
 		})
