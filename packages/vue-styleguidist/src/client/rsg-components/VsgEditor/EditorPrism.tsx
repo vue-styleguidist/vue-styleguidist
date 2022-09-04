@@ -8,6 +8,7 @@ import SimpleEditor from 'react-simple-code-editor'
 import { highlight as prismHighlight, languages } from 'prismjs'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-typescript'
@@ -46,7 +47,7 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
 			const comp = parseComponent(code)
 
 			const newCode = comp.script ? code.slice(0, comp.script.start) + ' ' + code.slice(comp.script.end) : code
-
+debugger
 			const htmlHighlighted = prismHighlight(newCode, langScheme, 'html')
 
 			return comp.script ? htmlHighlighted.replace(
