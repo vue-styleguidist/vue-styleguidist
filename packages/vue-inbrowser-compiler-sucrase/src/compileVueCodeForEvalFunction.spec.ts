@@ -132,7 +132,7 @@ new Vue({
 		}
 		</script>
 		`)
-		).toThrowErrorMatchingInlineSnapshot('"Missing semicolon. (8:11)"')
+		).toThrowErrorMatchingInlineSnapshot('"Missing semicolon. (2:11)"')
 	})
 
 	it('should try to run the with the same lines', () => {
@@ -154,9 +154,6 @@ new Vue({
 			"
 
 			const comp = (function() {\\"use strict\\";
-
-
-
 					;return {
 						data(){
 							return {
