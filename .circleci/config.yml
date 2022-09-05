@@ -90,6 +90,8 @@ jobs:
           at: ~/
       # run cypress component tests
       - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY yarn start-server-and-test cy:serve http://localhost:6060 "cypress run --record --component"
+        with: 
+          cwd: packages/vue-styleguidist
 
       # run cypress e2e tests
       - run: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY CY_EXAMPLE_FOLDER=basic yarn start-server-and-test cy:serve http://localhost:6060 "cypress run --record --component --group main"
