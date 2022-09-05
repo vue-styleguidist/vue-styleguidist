@@ -9,4 +9,5 @@ module.exports.Vue2 = Vue
 module.exports.compileTemplate = ({ source: template }) => ({
 	code: VueTemplateCompiler.compile(template).render
 })
+module.exports.parseComponent = VueTemplateCompiler.parseComponent
 module.exports.compileScript = () => ({ type: 'script' })

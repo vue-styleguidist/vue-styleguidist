@@ -105,7 +105,7 @@ function foo(param: Vue) : { one: number, two: boolean } {
   .checkbox {
     color: red;
   }
-</script>
+</style>
     `
 		mount(
 			<Provider jsxInExamples>

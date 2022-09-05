@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import * as Rsg from 'react-styleguidist'
-import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
+import { isCodeVueSfc, parseComponent } from 'vue-inbrowser-compiler-utils'
 import { polyfill } from 'react-lifecycles-compat'
 import SimpleEditor from 'react-simple-code-editor'
 import { highlight as prismHighlight, languages } from 'prismjs'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-typescript'
@@ -43,30 +44,20 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
 		const langScheme = languages.html
 
 		return code => {
-			const parser = new DOMParser()
-			const SfcXMLDocument = parser.parseFromString(`<body>${code}</body>`, 'text/html')
-			const scriptNodes = SfcXMLDocument.querySelectorAll('script')
-			const scriptBlocks: { text: string; lg: string }[] = []
-			scriptNodes.forEach(scriptNode => {
-				const lg = scriptNode.getAttribute('lang') || 'js'
-				const text = scriptNode.textContent
-        if (text) {
-          scriptBlocks.push({ text, lg })
-        }
-				scriptNode.textContent = ' '
-			})
-			const htmlHighlighted = prismHighlight(SfcXMLDocument.body.innerHTML, langScheme, 'html')
-			return htmlHighlighted.replace(/<span class="token language-javascript"> <\/span>/g, () => {
-				const scriptBlock = scriptBlocks.shift()
-				if (scriptBlock) {
-					return `<span class="token language-typescript">${prismHighlight(
-						scriptBlock.text,
-						languages[scriptBlock.lg],
-						scriptBlock.lg
-					)}</span>`
-				}
-				return ''
-			})
+			const comp = parseComponent(code)
+
+			const newCode = comp.script ? code.slice(0, comp.script.start) + ' ' + code.slice(comp.script.end) : code
+      
+			const htmlHighlighted = prismHighlight(newCode, langScheme, 'html')
+
+			return comp.script ? htmlHighlighted.replace(
+				/<span class="token language-javascript"> <\/span>/g,
+				`<span class="token language-typescript">${prismHighlight(
+					comp.script.content,
+					languages[comp.script.lang || 'ts'],
+					comp.script.lang || 'ts'
+				)}</span>`) : htmlHighlighted
+			
 		}
 	}
 }

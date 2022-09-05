@@ -1,3 +1,5 @@
+import { parseComponent } from 'vue-template-compiler'
+
 type BindingTypes = 'data' | 'props' | 'options'
 type BindingMetadata = Record<string, BindingTypes>
 
@@ -40,6 +42,8 @@ export declare const compileTemplate: (options?: {
 		prefixIdentifiers?: boolean
 	}
 }) => { code: string }
+
+export { parseComponent }
 
 export declare const compileScript: (
 	sfc: {

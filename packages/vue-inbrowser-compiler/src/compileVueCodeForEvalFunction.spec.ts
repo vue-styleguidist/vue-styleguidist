@@ -134,7 +134,7 @@ new Vue({
 		}
 		</script>
 		`)
-		).toThrowErrorMatchingInlineSnapshot(`"Unexpected token (8:11)"`)
+		).toThrowErrorMatchingInlineSnapshot('"Unexpected token (2:11)"')
 	})
 
 	it('should try to run the with the same lines', () => {
@@ -156,9 +156,6 @@ new Vue({
 			"
 
 			const comp = (function() {
-
-
-
 					
 			return {
 						data(){

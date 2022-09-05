@@ -7,8 +7,10 @@ vi.mock('vue-inbrowser-compiler-utils', () => {
 	return {
 		isCodeVueSfc: (code: string) => /<script/.test(code),
     parseComponent: () => ({
-      script: `import _ from 'lodash';
+      script: {
+        content: `import _ from 'lodash';
       import FooComponent from '../foo.js';`
+      }
     })
 	}
 })
