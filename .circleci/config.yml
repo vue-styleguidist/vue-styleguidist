@@ -100,7 +100,7 @@ jobs:
 
       # run cypress e2e tests
       - run: 
-          command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --record --group main"
+          command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --specs \"test/cypress/basic/integration/*.*\" --record --group main"
           environment:
             CY_EXAMPLE_FOLDER: basic
             CYPRESS_RECORD_KEY: $MAIN_RECORD_KEY
@@ -108,7 +108,7 @@ jobs:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-basic
       - run:
-          command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --record --group jsx"
+          command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --specs \"test/cypress/basic/jsx-examples/*.*\"  --e2e --record --group jsx"
           environment:
             CY_EXAMPLE_FOLDER: jsx-examples
             CYPRESS_RECORD_KEY: $MAIN_RECORD_KEY
