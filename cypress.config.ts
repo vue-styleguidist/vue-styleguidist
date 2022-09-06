@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
-  projectId: "583saw",
+  projectId: "3pjqam",
 
 	fixturesFolder: false,
 	screenshotsFolder: 'test/cypress/screenshots',
