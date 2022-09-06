@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.54.1
+
+### Patch Changes
+
+- [#1397](https://github.com/vue-styleguidist/vue-styleguidist/pull/1397) [`c9cf522d`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c9cf522d4a1ea574feeb751477ba4edbd247b20d) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: editor sfc issues
+
+- Updated dependencies [[`c9cf522d`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c9cf522d4a1ea574feeb751477ba4edbd247b20d)]:
+  - vue-inbrowser-compiler-utils@4.54.1
+
 ## 4.53.1
 
 ### Patch Changes

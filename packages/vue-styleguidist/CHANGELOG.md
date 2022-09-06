@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.54.1
+
+### Patch Changes
+
+- [#1392](https://github.com/vue-styleguidist/vue-styleguidist/pull/1392) [`064f3348`](https://github.com/vue-styleguidist/vue-styleguidist/commit/064f33489a1e5d57971d35f480c9bceba1ff04b6) Thanks [@elevatebart](https://github.com/elevatebart)! - fix editor highlight on sfc components
+
+* [#1397](https://github.com/vue-styleguidist/vue-styleguidist/pull/1397) [`c9cf522d`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c9cf522d4a1ea574feeb751477ba4edbd247b20d) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: editor sfc issues
+
+* Updated dependencies [[`c9cf522d`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c9cf522d4a1ea574feeb751477ba4edbd247b20d)]:
+  - vue-inbrowser-compiler-utils@4.54.1
+  - vue-inbrowser-compiler@4.54.1
+
 ## 4.53.1
 
 ### Patch Changes

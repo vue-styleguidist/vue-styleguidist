@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
-  projectId: "583saw",
+	projectId: '3pjqam',
 
 	fixturesFolder: false,
 	screenshotsFolder: 'test/cypress/screenshots',
@@ -12,4 +12,19 @@ export default defineConfig({
 		specPattern: 'test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
 		supportFile: false
 	},
+
+	component: {
+		supportFile: false,
+		devServer: () => {
+			if (process.cwd()) {
+				throw new Error(
+					'Use the project `packages/vue-styleguidist/cypress.config.ts` instead of the top one for Component Testing'
+				)
+			}
+			return {
+				port: 0,
+				close: () => {}
+			}
+		}
+	}
 })

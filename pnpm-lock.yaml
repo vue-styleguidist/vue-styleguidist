@@ -1129,7 +1129,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-utils: ^4.53.1
+      vue-inbrowser-compiler-utils: ^4.54.1
       vue-template-compiler: 2.7.8
       walkes: ^0.2.1
     dependencies:
@@ -1201,7 +1201,7 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-utils: ^4.50.0
+      vue-inbrowser-compiler-utils: ^4.54.1
       vue-template-compiler: 2.7.8
       walkes: ^0.2.1
     dependencies:
@@ -1236,8 +1236,8 @@ importers:
       tslib: 2.4.0
       typescript: 4.7.4
       vue: 2.7.8
-      vue-inbrowser-compiler-demi: ^4.53.1
-      vue-inbrowser-compiler-independent-utils: ^4.52.0
+      vue-inbrowser-compiler-demi: ^4.54.1
+      vue-inbrowser-compiler-independent-utils: ^4.54.1
     dependencies:
       camelcase: 5.3.1
       vue-inbrowser-compiler-demi: link:../vue-inbrowser-compiler-demi
@@ -1344,8 +1344,8 @@ importers:
       typescript: 4.7.4
       vue: 2.7.8
       vue-docgen-api: ^4.50.0
-      vue-inbrowser-compiler: ^4.53.1
-      vue-inbrowser-compiler-utils: ^4.53.1
+      vue-inbrowser-compiler: ^4.54.1
+      vue-inbrowser-compiler-utils: ^4.54.1
       vue-template-compiler: 2.7.8
       webpack: 4.46.0
       webpack-dev-server: ^3.11.2
@@ -9188,6 +9188,7 @@ packages:
   /@vue/babel-preset-app/5.0.8_vue@2.7.8:
     resolution: {integrity: sha512-yl+5qhpjd8e1G4cMXfORkkBlvtPCIgmRf3IYCWYDKIQ7m+PPa5iTm4feiNmCMD6yGqQWMhhK/7M3oWGL9boKwg==}
     peerDependencies:
+      '@babel/core': '*'
       vue: ^2 || ^3.2.13
     peerDependenciesMeta:
       core-js:
@@ -9213,13 +9214,13 @@ packages:
       semver: 7.3.7
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
     transitivePeerDependencies:
-      - '@babel/core'
       - supports-color
     dev: true
 
   /@vue/babel-preset-app/5.0.8_ynrhgj55kyne6m5uwka27bfe7u:
     resolution: {integrity: sha512-yl+5qhpjd8e1G4cMXfORkkBlvtPCIgmRf3IYCWYDKIQ7m+PPa5iTm4feiNmCMD6yGqQWMhhK/7M3oWGL9boKwg==}
     peerDependencies:
+      '@babel/core': '*'
       vue: ^2 || ^3.2.13
     peerDependenciesMeta:
       core-js:
@@ -9227,6 +9228,7 @@ packages:
       vue:
         optional: true
     dependencies:
+      '@babel/core': 7.18.6
       '@babel/helper-compilation-targets': 7.18.6_@babel+core@7.18.6
       '@babel/helper-module-imports': 7.18.6
       '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.18.6
@@ -9244,7 +9246,6 @@ packages:
       semver: 7.3.7
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
     transitivePeerDependencies:
-      - '@babel/core'
       - supports-color
     dev: true
 
@@ -18977,17 +18978,6 @@ packages:
       debug:
         optional: true
 
-  /follow-redirects/1.13.3_debug@4.3.1:
-    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.1_supports-color@6.1.0
-
   /follow-redirects/1.13.3_debug@4.3.2:
     resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
     engines: {node: '>=4.0'}
@@ -20302,7 +20292,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3_debug@4.3.1
+      follow-redirects: 1.13.3
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
