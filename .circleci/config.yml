@@ -93,7 +93,7 @@ jobs:
 
       # run cypress component tests
       - run: 
-          command: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY pnpm exec cypress run --component --record
+          command: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY pnpm exec cypress run --component --record --group ct
           working_directory: packages/vue-styleguidist
 
       # run cypress e2e tests
