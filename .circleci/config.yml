@@ -98,7 +98,7 @@ jobs:
 
       # run cypress e2e tests
       - run: 
-          command: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/basic/integration/*.*\" --record --group main"
+          command: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/integration/basic/*.*\" --record --group main"
           environment:
             CY_EXAMPLE_FOLDER: basic
       - store_artifacts:
@@ -106,7 +106,7 @@ jobs:
           destination: cy-screenshots-basic
 
       - run:
-          command: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --spec \"test/cypress/basic/jsx-examples/*.*\"  --e2e --record --group jsx"
+          command: CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --spec \"test/cypress/integration/jsx-examples/*.*\"  --e2e --record --group jsx"
           environment:
             CY_EXAMPLE_FOLDER: jsx-examples
       - store_artifacts:
