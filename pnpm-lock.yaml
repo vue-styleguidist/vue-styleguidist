@@ -173,6 +173,7 @@ importers:
       sass-loader: ^8.0.2
       style-loader: ^0.19.1
       vue: ^2.7.8
+      vue-inbrowser-compiler-sucrase: ^4
       vue-loader: ^15.9.8
       vue-styleguidist: ^4
       vue-template-compiler: ^2.7.8
@@ -194,6 +195,7 @@ importers:
       sass-loader: 8.0.2_sass@1.34.0+webpack@4.46.0
       style-loader: 0.19.1
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
+      vue-inbrowser-compiler-sucrase: link:../../packages/vue-inbrowser-compiler-sucrase
       vue-loader: 15.9.8_dztykhlqfgym45lp2gcqm6laju
       vue-styleguidist: link:../../packages/vue-styleguidist
       vue-template-compiler: 2.7.8
@@ -16704,17 +16706,6 @@ packages:
       debug:
         optional: true
 
-  /follow-redirects/1.13.3_debug@4.3.1:
-    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.1_supports-color@6.1.0
-
   /follow-redirects/1.13.3_debug@4.3.2:
     resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
     engines: {node: '>=4.0'}
@@ -18029,7 +18020,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3_debug@4.3.1
+      follow-redirects: 1.13.3
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
