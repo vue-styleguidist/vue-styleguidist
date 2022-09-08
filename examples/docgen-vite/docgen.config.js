@@ -1,14 +1,10 @@
-/* eslint-disable compat/compat */
 /// @ts-check
 const { defineConfig } = require('vue-docgen-cli');
 const path = require('path');
 const { createComponentMetaChecker } = require('vue-component-meta')
 
 const tsconfigPath = path.resolve(__dirname, './tsconfig.json');
-	const checker = createComponentMetaChecker(tsconfigPath, {
-		forceUseTs: true,
-		printer: { newLine: 1 },
-	});
+const checker = createComponentMetaChecker(tsconfigPath);
 
 module.exports = defineConfig({
 	docsRepo: 'vue-styleguidist/vue-styleguidist',
@@ -23,8 +19,10 @@ module.exports = defineConfig({
     return Promise.resolve(exportNames.map(exportName => {
       const meta = checker.getComponentMeta(componentPath, exportName)
 
+      const nonGlobalProps = meta.props.filter(prop => !prop.global)
+
       // massage the output of meta to match the docgen format
-      const props = meta.props.length ? meta.props.map(p => ({
+      const props = nonGlobalProps.length ? nonGlobalProps.map(p => ({
         ...p, 
         type: {
           name: p.type 
@@ -34,6 +32,7 @@ module.exports = defineConfig({
           return acc
         }, {})
       })) : undefined
+
       const slots = meta.slots.length ? meta.slots.map(s => ({
         name: s.name,
       })) : undefined
@@ -45,7 +44,7 @@ module.exports = defineConfig({
         props, 
         slots,
         events,
-        displayName: componentPath.split('/').pop()?.replace(/\.(ts|js|vue)/, '') || 'noname', 
+        displayName: componentPath.split('/').pop()?.replace(/\.(ts|js|vue)/, '') || 'unknown', 
         exportName, 
         tags: {}
       }
