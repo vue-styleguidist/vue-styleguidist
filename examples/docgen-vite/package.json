@@ -29,7 +29,6 @@
     "vitepress": "^1.0.0-alpha.13",
     "vue-component-meta": "^0.40.13",
     "vue-docgen-cli": "^4",
-    "vue-inbrowser-compiler-independent-utils": "^4",
     "vue-live": "^2",
     "vue-tsc": "^0.38.8"
   }

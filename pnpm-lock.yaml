@@ -365,7 +365,6 @@ importers:
       vue: ^3.2.37
       vue-component-meta: ^0.40.13
       vue-docgen-cli: ^4
-      vue-inbrowser-compiler-independent-utils: ^4
       vue-live: ^2
       vue-tsc: ^0.38.8
     dependencies:
@@ -385,7 +384,6 @@ importers:
       vitepress: 1.0.0-alpha.13
       vue-component-meta: 0.40.13_typescript@4.7.4
       vue-docgen-cli: link:../../packages/vue-docgen-cli
-      vue-inbrowser-compiler-independent-utils: link:../../packages/vue-inbrowser-compiler-independent-utils
       vue-live: 2.1.0_vue@3.2.37
       vue-tsc: 0.38.9_typescript@4.7.4
 
