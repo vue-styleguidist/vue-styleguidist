@@ -10,6 +10,7 @@
 		"no-console": 0,
 		"vue/max-attributes-per-line": 0,
 		"vue/html-self-closing": 0,
-		"vue/html-indent": ["warn", "tab"]
+		"vue/html-indent": ["warn", "tab"],
+    "compat/compat": 0
 	}
 }

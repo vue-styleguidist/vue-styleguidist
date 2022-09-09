@@ -18,14 +18,6 @@ const buildStyles = function (styles: string[] | undefined): string | undefined 
 	return undefined
 }
 
-function getSingleFileComponentParts(code: string) {
-	const parts = parseComponent(code)
-	if (parts.script) {
-		parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
-	}
-	return parts
-}
-
 export function parseScriptCode(code: string): {
 	preprocessing?: string
 	component: string
@@ -125,15 +117,15 @@ export default function normalizeSfcComponent(code: string): {
 	style?: string
 	template?: string
 } {
-	const parts = getSingleFileComponentParts(code)
+	const parts = parseComponent(code)
 	const {
 		preprocessing = '',
 		component = '',
 		postprocessing = ''
-	} = parts.script ? parseScriptCode(parts.script) : {}
+	} = parts.script ? parseScriptCode(parts.script.content) : {}
 	return {
-		template: parts.template,
+		template: parts.template?.content,
 		script: [preprocessing, `return {${component}}`, postprocessing].join('\n'),
-		style: buildStyles(parts.styles)
+		style: buildStyles(parts.styles.map(styleBlock => styleBlock.content))
 	}
 }

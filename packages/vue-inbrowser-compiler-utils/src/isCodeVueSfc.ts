@@ -1,4 +1,4 @@
-import parseComponent from './parseComponent'
+import { parseComponent } from 'vue-inbrowser-compiler-demi'
 
 /**
  * Determines if the given code is a VueSfc file
