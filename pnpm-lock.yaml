@@ -1061,7 +1061,7 @@ importers:
       vue-clickaway: 2.2.2
       vue-inbrowser-compiler-independent-utils: ^4.52.0
       vue-property-decorator: 7.3.0
-      vuetify: 2.6.8
+      vuetify: 2.6.10
     dependencies:
       '@babel/parser': 7.13.12
       '@babel/types': 7.18.8
@@ -1084,7 +1084,7 @@ importers:
       vue-class-component: 7.2.6_vue@2.7.8
       vue-clickaway: 2.2.2_vue@2.7.8
       vue-property-decorator: 7.3.0
-      vuetify: 2.6.8_vue@2.7.8
+      vuetify: 2.6.10_vue@2.7.8
 
   packages/vue-docgen-cli:
     specifiers:
@@ -29535,20 +29535,20 @@ packages:
       webpack: 4.46.0
     dev: true
 
+  /vuetify/2.6.10_vue@2.7.8:
+    resolution: {integrity: sha512-fgUeRDDCwYkwu6WGEEKGe7IdfzOsXJCZGrqkn1pcS2ycuoDL8mR2/dejH5iFNnBY6MnsT365PAGn0J+9otjfQg==}
+    peerDependencies:
+      vue: ^2.6.4
+    dependencies:
+      vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
+    dev: true
+
   /vuetify/2.6.2_vue@2.7.8:
     resolution: {integrity: sha512-nx3uZkO8MZNMshUEh1xKaQ1hQYepNwWFn3FVxKt+XBVf7ZFscd0GS/a3KZo4B3baXQmziCQAZKNIQF5IWeaIUw==}
     peerDependencies:
       vue: ^2.6.4
     dependencies:
       vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
-
-  /vuetify/2.6.8_vue@2.7.8:
-    resolution: {integrity: sha512-CbJsIGfye++an5/I5ypmYgf74vxt5j0NJ/7UUIDXRYXZsM9YuEpnqo97Ob4LD6QEli1gJa6WXWS8pXLWk0ArPQ==}
-    peerDependencies:
-      vue: ^2.6.4
-    dependencies:
-      vue: 2.7.8_26fyyf7iv7yfd4w3hhy5cm2p24
-    dev: true
 
   /vuex/3.6.2_vue@2.7.8:
     resolution: {integrity: sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==}
