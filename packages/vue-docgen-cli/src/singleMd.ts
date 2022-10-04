@@ -30,7 +30,7 @@ export default async function (
 	// `key`: filePath of source component
 	// `content`: markdown compiled for it
 	const fileCache = {}
-	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap, watcher)
+	const compileSingleDocWithConfig = _compile.bind<null, any, void>(null, config, files, fileCache, docMap, watcher)
 
 	await compileSingleDocWithConfig()
 
