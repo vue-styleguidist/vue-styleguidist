@@ -1,4 +1,5 @@
 import { ParserPlugin } from '@babel/parser'
+import { expect, test } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import dedent from 'dedent'
@@ -259,7 +260,7 @@ describe('propHandler', () => {
         }
         `
 			expect(await parserTest(src)).toMatchObject({
-				defaultValue: { value: `'normal'` }
+				defaultValue: { value: `"normal"` }
 			})
 		})
 
@@ -640,7 +641,7 @@ describe('propHandler', () => {
         });`
 			expect(await parserTest(src, ['typescript'])).toMatchObject({
 				type: {
-					name: "SelectOption['value']"
+					name: 'SelectOption["value"]'
 				},
 				required: true
 			})
