@@ -189,6 +189,13 @@ export function parseSlotDocBlock(str: string, descriptor: SlotDescriptor) {
 		const description = typeof tagContent === 'string' ? tagContent : undefined
 		if (description && (!descriptor.description || !descriptor.description.length)) {
 			descriptor.description = description
+
+			const fixedNameMatch = description.match(/^(\S+) - (.*)$/)
+
+			if (fixedNameMatch) {
+				descriptor.name = fixedNameMatch[1]
+				descriptor.description = fixedNameMatch[2]
+			}
 		}
 		const tags = jsDoc.tags.filter(t => t.title !== 'slot' && t.title !== 'binding')
 		if (tags.length) {

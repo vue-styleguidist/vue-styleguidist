@@ -86,6 +86,46 @@ describe('slotHandler', () => {
 		expect(doc.toObject().slots).toMatchObject([{ name: 'first', description: 'first slot found' }])
 	})
 
+	it('should parse dynamic slot names', () => {
+		const ast = parse(
+			[
+				'<!-- @slot first slot found -->',
+				'<slot :name="`dynamicName`">',
+				'  <div>',
+				'    <h1>title of the template</h1>',
+				'  </div>',
+				'</slot>'
+			].join('\n')
+		)
+
+		traverse(ast.children[1], doc, [slotHandler], ast.children, {
+			functional: false
+		})
+		expect(doc.toObject().slots).toMatchObject([
+			{ name: '`dynamicName`', description: 'first slot found' }
+		])
+	})
+
+	it('should parse dynamic slot names but prefer a fixed name', () => {
+		const ast = parse(
+			[
+				'<!-- @slot theFixedName - first slot found -->',
+				'<slot :name="`dynamicName`">',
+				'  <div>',
+				'    <h1>title of the template</h1>',
+				'  </div>',
+				'</slot>'
+			].join('\n')
+		)
+
+		traverse(ast.children[1], doc, [slotHandler], ast.children, {
+			functional: false
+		})
+		expect(doc.toObject().slots).toMatchObject([
+			{ name: 'theFixedName', description: 'first slot found' }
+		])
+	})
+
 	it('should pick up the name of a slot', () => {
 		const ast = parse(
 			[
