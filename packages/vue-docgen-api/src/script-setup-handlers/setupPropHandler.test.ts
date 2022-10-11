@@ -1,4 +1,5 @@
 import { ParserPlugin } from '@babel/parser'
+import { expect } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'
@@ -244,7 +245,7 @@ describe('setupPropHandler', () => {
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('complex')
 				expect(prop.type).toMatchObject({
 					name: `{
-    foo: number,
+    foo: number
     bar: boolean
 }`
 				})

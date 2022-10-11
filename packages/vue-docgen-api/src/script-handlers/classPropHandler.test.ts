@@ -1,4 +1,5 @@
 import { NodePath } from 'ast-types/lib/node-path'
+import { expect } from 'vitest'
 import Map from 'ts-map'
 import * as bt from '@babel/types'
 import babylon from '../babel-parser'
@@ -88,7 +89,7 @@ describe('propHandler', () => {
 			await tester(src, {
 				type: { name: 'string' },
 				defaultValue: {
-					value: `'hello'`
+          value: '"hello"'
 				}
 			})
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testDefault')
