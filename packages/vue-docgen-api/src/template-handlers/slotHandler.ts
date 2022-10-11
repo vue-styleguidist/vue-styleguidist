@@ -22,8 +22,19 @@ export default function slotHandler(
 ) {
 	if (isBaseElementNode(templateAst) && templateAst.tag === 'slot') {
 		const nameProp = templateAst.props.filter(isAttributeNode).find(b => b.name === 'name')
-		const slotName =
-			nameProp && nameProp.value && nameProp.value.content ? nameProp.value.content : 'default'
+		let slotName = nameProp && nameProp.value ? nameProp.value.content : undefined
+
+		if (!slotName) {
+			const dynExpr = templateAst.props
+				.filter(isDirectiveNode)
+				.find(b => b.name === 'bind' && isSimpleExpressionNode(b.arg) && b.arg.content === 'name')
+
+			if (dynExpr && isSimpleExpressionNode(dynExpr.exp) && dynExpr.exp) {
+				slotName = dynExpr.exp.content
+			} else {
+				slotName = 'default'
+			}
+		}
 
 		const bindings = templateAst.props.filter(
 			// only keep simple binds and static attributes
