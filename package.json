@@ -155,7 +155,7 @@
   ],
   "pnpm": {
     "patchedDependencies": {
-      "vue@2.7.8": "patches/vue@2.7.8.patch"
+      "vue@2.7.11": "patches/vue@2.7.11.patch"
     }
   }
 }
