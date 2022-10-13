@@ -17,7 +17,7 @@
     "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "dependencies": {
-    "vue": "^2.7.8",
+    "vue": "^2.7.11",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
@@ -38,7 +38,7 @@
     "vue-class-component": "^7.2.6",
     "vue-cli-plugin-pug": "^1.0.7",
     "vue-cli-plugin-styleguidist": "^4.36.1",
-    "vue-template-compiler": "^2.7.8",
+    "vue-template-compiler": "^2.7.11",
     "webpack": "^4.46.0"
   },
   "gitHooks": {

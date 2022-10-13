@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue": "^2.7.8"
+    "vue": "^2.7.11"
   },
   "devDependencies": {
     "@babel/core": "7.18.6",
