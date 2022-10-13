@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.54.2
+
+### Patch Changes
+
+- [#1408](https://github.com/vue-styleguidist/vue-styleguidist/pull/1408) [`f016a0f9`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f016a0f9f880902434299c9c101db169ae6232db) Thanks [@sawmurai](https://github.com/sawmurai)! - fix: Dynamic slot name fix #1285
+
 ## 4.52.0
 
 ### Minor Changes
