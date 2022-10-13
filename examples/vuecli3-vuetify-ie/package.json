@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue": "^2.7.8",
+    "vue": "^2.7.11",
     "vue-i18n": "^8.24.2"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-styleguidist": "^4.36.1",
     "vue-cli-plugin-vuetify": "^2.4.5",
-    "vue-template-compiler": "^2.7.8",
+    "vue-template-compiler": "^2.7.11",
     "vuetify": "^2.6.2",
     "vuetify-loader": "^1.7.2",
     "webpack": "^4.46.0"
