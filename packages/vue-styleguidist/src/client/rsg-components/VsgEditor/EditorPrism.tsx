@@ -44,6 +44,8 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
 		const langScheme = languages.html
 
 		return code => {
+      console.log('-- parseComponent --')
+      console.log({ parseComponent })
 			const comp = parseComponent(code)
 
 			const newCode = comp.script ? code.slice(0, comp.script.start) + ' ' + code.slice(comp.script.end) : code
