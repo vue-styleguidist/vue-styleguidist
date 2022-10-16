@@ -1121,6 +1121,7 @@ importers:
 
   packages/vue-docgen-i18n:
     specifiers:
+      '@types/escodegen': ^0.0.7
       '@types/minimist': ^1.2.0
       '@types/mkdirp': ^0.5.2
       '@types/prettier': ^1.18.1
@@ -1146,6 +1147,7 @@ importers:
       traverse: 0.6.7
       vue-docgen-api: link:../vue-docgen-api
     devDependencies:
+      '@types/escodegen': 0.0.7
       '@types/minimist': 1.2.2
       '@types/mkdirp': 0.5.2
       '@types/prettier': 1.19.1

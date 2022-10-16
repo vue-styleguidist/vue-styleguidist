@@ -1,4 +1,4 @@
-import { mergeTranslationsAsObject } from '../mergeTranslations'
+import { mergeTranslationsAsObject } from './mergeTranslations'
 import { expect } from 'vitest'
 
 const trad = [

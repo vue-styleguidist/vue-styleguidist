@@ -22,6 +22,7 @@
         "vue-docgen-api": "^4.0.1"
     },
     "devDependencies": {
+        "@types/escodegen": "^0.0.7",
         "@types/minimist": "^1.2.0",
         "@types/mkdirp": "^0.5.2",
         "@types/prettier": "^1.18.1",
