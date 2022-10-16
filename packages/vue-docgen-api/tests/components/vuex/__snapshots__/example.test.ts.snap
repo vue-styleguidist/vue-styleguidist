@@ -1,66 +1,67 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`test example vuex should match the snapshot 1`] = `
-Object {
+exports[`test example vuex > should match the snapshot 1`] = `
+{
   "description": "Partial mapping, object spread operator example",
   "displayName": "example",
   "events": undefined,
   "exportName": "default",
-  "methods": Array [
-    Object {
+  "expose": undefined,
+  "methods": [
+    {
       "description": "Sets the order",
       "name": "onSubmit",
-      "params": Array [
-        Object {
+      "params": [
+        {
           "description": "Key to order",
           "name": "key",
           "title": "param",
-          "type": Object {
+          "type": {
             "name": "string",
           },
         },
       ],
-      "returns": Object {
+      "returns": {
         "description": "Test",
         "title": "returns",
-        "type": Object {
+        "type": {
           "name": "string",
         },
       },
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
         ],
-        "params": Array [
-          Object {
+        "params": [
+          {
             "description": "Key to order",
             "name": "key",
             "title": "param",
-            "type": Object {
+            "type": {
               "name": "string",
             },
           },
         ],
-        "returns": Array [
-          Object {
+        "returns": [
+          {
             "description": "Test",
             "title": "returns",
-            "type": Object {
+            "type": {
               "name": "string",
             },
           },
         ],
-        "since": Array [
-          Object {
+        "since": [
+          {
             "description": "Version 1.0.1",
             "title": "since",
           },
         ],
-        "version": Array [
-          Object {
+        "version": [
+          {
             "description": "1.0.5",
             "title": "version",
           },
@@ -70,6 +71,6 @@ Object {
   ],
   "props": undefined,
   "slots": undefined,
-  "tags": Object {},
+  "tags": {},
 }
 `;

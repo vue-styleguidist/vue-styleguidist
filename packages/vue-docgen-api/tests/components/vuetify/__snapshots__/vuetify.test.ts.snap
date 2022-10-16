@@ -1,69 +1,70 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`test a vuetify component should match the snapshot 1`] = `
-Object {
+exports[`test a vuetify component > should match the snapshot 1`] = `
+{
   "description": "",
   "displayName": "v-text-field",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "name": "input",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
-    Object {
+    {
       "name": "change",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
-    Object {
+    {
       "name": "blur",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
-    Object {
+    {
       "name": "focus",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
-    Object {
+    {
       "name": "keydown",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
   ],
   "exportName": "default",
-  "methods": Array [
-    Object {
+  "expose": undefined,
+  "methods": [
+    {
       "name": "focus",
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
         ],
       },
     },
-    Object {
+    {
       "name": "blur",
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
@@ -71,143 +72,143 @@ Object {
       },
     },
   ],
-  "props": Array [
-    Object {
+  "props": [
+    {
       "name": "appendOuterIcon",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "autofocus",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "clearable",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'$clear'",
       },
       "name": "clearIcon",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "counter",
-      "type": Object {
+      "type": {
         "name": "boolean|number|string",
       },
     },
-    Object {
+    {
       "name": "filled",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "flat",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "fullWidth",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "label",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "outlined",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "placeholder",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "prefix",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "prependInnerIcon",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "reverse",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "rounded",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "shaped",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "singleLine",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "solo",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "soloInverted",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "suffix",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'text'",
       },
       "name": "type",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
   ],
   "slots": undefined,
-  "tags": Object {},
+  "tags": {},
 }
 `;

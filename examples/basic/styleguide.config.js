@@ -2,6 +2,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const vueLoader = require('vue-loader')
 const path = require('path')
 
+const { defineConfig } = require('vue-styleguidist')
+
 const transpileDependencies = [
 	'regexpu-core',
 	'strip-ansi',
@@ -17,7 +19,8 @@ const transpileDependencies = [
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
-module.exports = {
+/** @type import("vue-styleguidist").Config */
+module.exports = defineConfig({
 	title: 'Vue Styleguidist basic',
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
@@ -34,6 +37,7 @@ module.exports = {
 		return `import ${name} from '${componentPath.replace(/^src\//, 'my-library/dist/')}'`
 	},
 	version: '1.1.1',
+	compilerPackage: 'vue-inbrowser-compiler-sucrase',
 	webpackConfig: {
 		resolve: {
 			alias: {
@@ -87,10 +91,7 @@ module.exports = {
 	},
 	usageMode: 'expand',
 	exampleMode: 'expand',
-	compilerConfig: {
-		target: { ie: 11 }
-	},
 	styleguideDir: 'dist',
 	displayOrigins: true,
 	codeSplit: false
-}
+})

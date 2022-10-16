@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es6",
+		"lib": ["es2021", "DOM"],
 		"module": "commonjs",
 		"esModuleInterop": true,
 		"strict": true,
@@ -8,6 +9,7 @@
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
 		"sourceMap": true,
+		"noImplicitAny": true,
 		"baseUrl": ".",
 		"paths": {
 			"rsg-components/*": [
@@ -16,7 +18,9 @@
 			]
 		},
 		"strictFunctionTypes": false,
-		"jsx": "react"
+		"jsx": "react",
+		"resolveJsonModule": true,
+		"types": ["vitest/globals"]
 	},
 	"include": [
 		"@types/**/*",
@@ -25,5 +29,10 @@
 		"test/**/*.ts",
 		"node_modules/react-styleguidist/lib/client/rsg-components/**/*.*"
 	],
-	"exclude": ["test/**/*.d.ts"]
+	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
+	"references": [
+		{
+			"path": "./tsconfig.cy.json"
+		}
+	]
 }

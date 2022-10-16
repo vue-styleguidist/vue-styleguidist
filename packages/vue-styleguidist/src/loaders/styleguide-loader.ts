@@ -42,6 +42,17 @@ const CLIENT_CONFIG_OPTIONS = [
 	'locallyRegisterComponents'
 ]
 
+// const emptyFunctionAst = {}
+
+// Object.defineProperty(emptyFunctionAst, 'toAST', {
+//   enumerable: false,
+
+//   value() {
+//     return builders.arrowFunctionExpression([], builders.arrowFunctionExpression([], b.blockStatement([])));
+//   }
+
+// });
+
 export default function () {}
 
 export function pitch(this: StyleguidistContext) {
@@ -84,6 +95,7 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined
 	const renderRootJsx = config.renderRootJsx ? requireIt(config.renderRootJsx) : undefined
+	const enhancePreviewApp = config.enhancePreviewApp ? requireIt(config.enhancePreviewApp) : () => () => {}
 
 	logger.debug('Loading components:\n' + allComponentFiles.join('\n'))
 
@@ -107,7 +119,7 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 			// then create a variable to contain the value of the theme/style
 			styleContext.push(resolveESModule(configMember, varName))
 
-			// Finally assign the calculted value to the member of the clone
+			// Finally assign the calculated value to the member of the clone
 			// NOTE: if we are mutating the config object without cloning it,
 			// it changes the value for all hmr iteration
 			// until the process is stopped.
@@ -133,7 +145,8 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 		welcomeScreen,
 		patterns,
 		sections,
-		renderRootJsx
+		renderRootJsx,
+    enhancePreviewApp,
 	}
 
 	return `${generate(b.program(flatten(styleContext)))}
@@ -142,5 +155,5 @@ if (module.hot) {
 }
 
 module.exports = ${generate(toAst(styleguide))}
-	`
+`
 }

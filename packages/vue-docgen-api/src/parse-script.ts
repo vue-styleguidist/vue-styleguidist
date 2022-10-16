@@ -10,6 +10,8 @@ import cacher from './utils/cacher'
 import resolveExportedComponent from './utils/resolveExportedComponent'
 import documentRequiredComponents from './utils/documentRequiredComponents'
 
+import defaultScriptHandlers, { preHandlers } from './script-handlers'
+
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found'
 
 export type Handler = (
@@ -21,11 +23,10 @@ export type Handler = (
 
 export default async function parseScript(
 	source: string,
-	preHandlers: Handler[],
-	handlers: Handler[],
 	options: ParseOptions,
 	documentation?: Documentation,
-	forceSingleExport = false
+	forceSingleExport = false,
+	noNeedForExport = false
 ): Promise<Documentation[] | undefined> {
 	const plugins: ParserPlugin[] = options.lang === 'ts' ? ['typescript'] : ['flow']
 	if (options.jsx) {
@@ -39,12 +40,16 @@ export default async function parseScript(
 
 	const [componentDefinitions, ievSet] = resolveExportedComponent(ast)
 
+	if (componentDefinitions.size === 0 && noNeedForExport) {
+		componentDefinitions.set('default', ast.program.body[0])
+	}
+
 	if (componentDefinitions.size === 0) {
 		// if there is any immediately exported variable
 		// resolve their documentations
 		const docs = await documentRequiredComponents(documentation, ievSet, undefined, options)
 
-		// if we do not find any compoents throw
+		// if we do not find any components, throw
 		if (!docs.length) {
 			throw new Error(`${ERROR_MISSING_DEFINITION} on "${options.filePath}"`)
 		} else {
@@ -52,14 +57,35 @@ export default async function parseScript(
 		}
 	}
 
-	return executeHandlers(
-		preHandlers,
-		handlers,
+	return addDefaultAndExecuteHandlers(
 		componentDefinitions,
-		documentation,
 		ast,
 		options,
+		documentation,
 		forceSingleExport
+	)
+}
+
+export function addDefaultAndExecuteHandlers(
+	componentDefinitions: Map<string, NodePath>,
+	ast: bt.File,
+	options: ParseOptions,
+	documentation?: Documentation,
+	forceSingleExport = false
+): Promise<Documentation[] | undefined> {
+	const handlers = [
+		...(options.scriptHandlers || defaultScriptHandlers),
+		...(options.addScriptHandlers || [])
+	]
+
+	return executeHandlers(
+		options.scriptPreHandlers || preHandlers,
+		handlers,
+		componentDefinitions,
+		ast,
+		options,
+		forceSingleExport,
+		documentation
 	)
 }
 
@@ -67,10 +93,10 @@ async function executeHandlers(
 	preHandlers: Handler[],
 	localHandlers: Handler[],
 	componentDefinitions: Map<string, NodePath>,
-	documentation: Documentation | undefined,
 	ast: bt.File,
 	opt: ParseOptions,
-	forceSingleExport: boolean
+	forceSingleExport: boolean,
+	documentation?: Documentation
 ): Promise<Documentation[] | undefined> {
 	const compDefs = componentDefinitions
 		.keys()
@@ -95,7 +121,9 @@ async function executeHandlers(
 			// execute all prehandlers in order
 			await preHandlers.reduce(async (_, handler) => {
 				await _
-				return await handler(doc, compDef, ast, opt)
+				if (typeof handler === 'function') {
+					return await handler(doc, compDef, ast, opt)
+				}
 			}, Promise.resolve())
 			await Promise.all(localHandlers.map(async handler => await handler(doc, compDef, ast, opt)))
 			// end with setting of exportname

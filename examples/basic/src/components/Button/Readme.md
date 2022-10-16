@@ -32,20 +32,26 @@ You can also use the Single File Component Format
         <BestButton @click.native="pushButton">Push Me</BestButton>
         <hr />
         <p class="text-name">Next Dog Name: {{ dogName }}</p>
+        <button @click="testTypescript('Medor')">Set <b>medor</b> tag name</button>
     </div>
 </template>
-<script>
-const dogNames = require('dog-names').all
+<script lang="ts">
+import { all as dogNames } from 'dog-names'
 
 // You can also use 'exports.default = {}' style module exports.
 export default {
   data() {
-    return { numClicks: 0, dogName: dogNames[0] }
+    return { 
+      numClicks: 0, 
+      dogName: dogNames[0] }
   },
   methods: {
     pushButton() {
       this.numClicks += 1
       this.dogName = dogNames[this.numClicks]
+    },
+    testTypescript(param: string) {
+      this.dogName = param
     }
   }
 }

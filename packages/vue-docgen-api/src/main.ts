@@ -18,8 +18,6 @@ import mergeTranslations from './mergeTranslations'
 export { ScriptHandlers }
 export { TemplateHandlers }
 
-export { cleanName, getDefaultExample } from 'vue-inbrowser-compiler-utils'
-
 export interface DocGenOptions extends DCOptions {
 	translation?: string
 }
@@ -40,7 +38,7 @@ export {
 	ParamTag,
 	ParamType
 }
-
+export { cleanName, getDefaultExample } from 'vue-inbrowser-compiler-independent-utils'
 
 /**
  * Parse the component at filePath and return props, public methods, events and slots

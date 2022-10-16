@@ -1,4 +1,5 @@
 import { mergeTranslationsAsObject } from '../mergeTranslations'
+import { expect } from 'vitest'
 
 const trad = [
 	{
@@ -20,6 +21,7 @@ const trad = [
 const orig = {
 	exportName: 'default',
 	displayName: 'origin',
+  tags: {},
 	description:
 		'This is an example of creating a reusable button component and using it with external data.',
 	props: [

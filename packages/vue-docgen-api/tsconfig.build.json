@@ -3,8 +3,9 @@
 	"compilerOptions": {
 		"outDir": "dist",
 		"declaration": true,
-		"sourceMap": false
+		"sourceMap": false,
+		"skipLibCheck": true
 	},
 	"include": ["src/**/*.ts", "../../@types/**/*"],
-	"exclude": ["src/**/__tests__/**/*.ts"]
+	"exclude": ["src/**/*.spec.ts"]
 }

@@ -20,5 +20,3 @@ footer: MIT Licensed
 
 
 
-
-

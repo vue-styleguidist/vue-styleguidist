@@ -1,9 +1,12 @@
 import * as path from 'path'
-import webpack, { Configuration } from 'webpack'
+import * as fs from 'fs'
+import webpackNormal, { Configuration } from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import MiniHtmlWebpackPlugin from 'mini-html-webpack-plugin'
+import { MiniHtmlWebpackPlugin } from 'mini-html-webpack-plugin'
+// @ts-ignore
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 import MiniHtmlWebpackTemplate from '@vxna/mini-html-webpack-template'
 import merge from 'webpack-merge'
 import forEach from 'lodash/forEach'
@@ -21,12 +24,21 @@ export default function (
 	config: SanitizedStyleguidistConfig,
 	env: 'development' | 'production' | 'none'
 ): Configuration {
+	/** this should be useful to test out webpack 5 when needed */
+	const webpack: typeof webpackNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH)
+		: webpackNormal
+
+	if (process.env.VSG_WEBPACK_PATH) {
+		console.log(`Using webpack from ${process.env.VSG_WEBPACK_PATH}`)
+	}
+
 	process.env.NODE_ENV = process.env.NODE_ENV || env
 	const isProd = env === 'production'
 
 	const template = isFunction(config.template) ? config.template : MiniHtmlWebpackTemplate
 	const templateContext = isFunction(config.template) ? {} : config.template
-	const htmlPluginOptions = {
+	const htmlPluginOptions: ConstructorParameters<typeof MiniHtmlWebpackPlugin>[0] = {
 		context: Object.assign({}, templateContext, {
 			title: config.title,
 			container: config.mountPointId,
@@ -52,14 +64,33 @@ export default function (
 		module: {
 			rules: [
 				{
+					type: 'javascript/auto',
 					resourceQuery: /blockType=docs/,
-					loader: require.resolve('../loaders/docs-loader.js')
+					loader: require.resolve('../../lib/loaders/docs-loader.js')
 				}
 			]
 		},
 		performance: {
 			hints: false
-		}
+		},
+		...(webpack.version?.startsWith('4.')
+			? {
+					plugins: [
+						new FilterWarningsPlugin({
+							exclude:
+								/Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
+						})
+					]
+			  }
+			: {
+					ignoreWarnings: [
+						{
+							module: /@vue\/compiler-sfc/,
+							message:
+								/Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
+						}
+					]
+			  })
 	}
 
 	webpackConfig.mode = env
@@ -68,23 +99,16 @@ export default function (
 		webpackConfig = mergeWebpackConfig(webpackConfig, config.webpackConfig, env)
 	}
 
-	let vue$:string;
-	try{
-		vue$ = require.resolve('vue/dist/vue.esm.js')
-	}catch(e){
-		vue$ = require.resolve('vue/dist/vue.esm-browser.js')
-	}
+	// check that the define variables are not set yet
+	const definePluginsVariables = webpackConfig.plugins
+		?.filter(plugin => plugin.constructor.name === 'DefinePlugin')
+		.reduce((acc: string[], plugin: any) => {
+			return acc.concat(Object.keys(plugin.definitions))
+		}, [])
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
 		entry: config.require.concat([path.resolve(sourceDir, 'index')]),
-		resolve: {
-			alias: {
-				// allows to use the compiler
-				// without this, cli will overload the alias and use runtime esm
-				vue$
-			}
-		},
 		plugins: [
 			// in order to avoid collision with the preload plugins
 			// that are loaded by the vue cli
@@ -94,7 +118,17 @@ export default function (
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 
-				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env)
+				'process.env.STYLEGUIDIST_ENV': JSON.stringify(env),
+				...(definePluginsVariables?.includes('__VUE_OPTIONS_API__') || false
+					? {}
+					: {
+							__VUE_OPTIONS_API__: true
+					  }),
+				...(definePluginsVariables?.includes('__VUE_PROD_DEVTOOLS__')
+					? {}
+					: {
+							__VUE_PROD_DEVTOOLS__: true
+					  })
 			})
 		]
 	})
@@ -162,9 +196,22 @@ export default function (
 					publicPath: config.styleguidePublicPath
 				},
 				devServer: {
-					publicPath: config.styleguidePublicPath
+					publicPath: config.styleguidePublicPath,
+					// Use 'ws' instead of 'sockjs-node' on server since we're using native
+					// websockets in `webpackHotDevClient`.
+					transportMode: 'ws',
+					// Prevent a WS client from getting injected as we're already including
+					// `webpackHotDevClient`.
+					injectClient: false
 				},
-				plugins: [new webpack.HotModuleReplacementPlugin()],
+				plugins: [
+					new webpack.HotModuleReplacementPlugin(),
+					new webpack.ProvidePlugin({
+						// Webpack 5 does no longer include a polyfill for this Node.js variable.
+						// https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
+						process: 'process/browser'
+					})
+				],
 				entry: [require.resolve('react-dev-utils/webpackHotDevClient')]
 			},
 			webpackConfig
@@ -176,17 +223,25 @@ export default function (
 
 	const webpackAlias = (webpackConfig.resolve && webpackConfig.resolve.alias) || {}
 
+	// Custom style guide components have priority over vsg components
+	if (config.styleguideComponents) {
+		forEach(config.styleguideComponents, (filepath, name) => {
+			const fullName = name.match(RENDERER_REGEXP)
+				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
+				: name
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
+		})
+	}
+
 	// vue-styleguidist overridden components
 	const sourceSrc = path.resolve(sourceDir, RSG_COMPONENTS_ALIAS)
-	require('fs')
-		.readdirSync(sourceSrc)
-		.forEach((component: string) => {
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
-			// plus in order to avoid cirular references, add an extra ref to the defaults
-			// so that custom components can reference their defaults
-			webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
-				webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`]
-		})
+	fs.readdirSync(sourceSrc).forEach((component: string) => {
+		webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`] = path.resolve(sourceSrc, component)
+		// plus in order to avoid cirular references, add an extra ref to the defaults
+		// so that custom components can reference their defaults
+		webpackAlias[`${RSG_COMPONENTS_ALIAS_DEFAULT}/${component}`] =
+			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${component}`]
+	})
 
 	// For some components, the alias model is a little more complicated,
 	// because we only override a part of the directory
@@ -195,9 +250,23 @@ export default function (
 		'ReactComponent/ReactComponent',
 		'StyleGuide/StyleGuideRenderer'
 	]
+
+	const userCustomComponents = config.styleguideComponents || {}
 	const customComponents: { [originalPath: string]: string } = custComp.reduce(
 		(acc: { [originalPath: string]: string }, comp) => {
-			acc[comp] = `Vsg${comp}`
+			// unless the component is a user custom component
+			const compParts = comp.split('/')
+			if (
+				!userCustomComponents[comp] &&
+				!userCustomComponents[compParts[0]] &&
+				!userCustomComponents[compParts[1]]
+			) {
+				// set the alias to the prefixed Vsg folder instead of the Rsg original folder
+				// This allows Vsg to use Rsg version of the component without conflicts but still
+				// wrap it in a renderer specific to vue
+				// NOTE: it is only useful if we don't want to copy the component over and only customize the renderer
+				acc[comp] = `Vsg${comp}`
+			}
 			return acc
 		},
 		{}
@@ -243,16 +312,6 @@ export default function (
 			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${key}`]
 	})
 
-	// Custom style guide components
-	if (config.styleguideComponents) {
-		forEach(config.styleguideComponents, (filepath, name) => {
-			const fullName = name.match(RENDERER_REGEXP)
-				? `${name.replace(RENDERER_REGEXP, '')}/${name}`
-				: name
-			webpackAlias[`${RSG_COMPONENTS_ALIAS}/${fullName}`] = filepath
-		})
-	}
-
 	// Add components folder alias at the end so users can override our components to customize the style guide
 	// (their aliases should be before this one)
 	const resolve = makeWebpackConfig(config as any, env).resolve
@@ -264,6 +323,10 @@ export default function (
 	// Create another alias, not overriden by users
 	if (config.styleguideComponents) {
 		webpackAlias[RSG_COMPONENTS_ALIAS_DEFAULT] = webpackAlias[RSG_COMPONENTS_ALIAS]
+	}
+
+	if (config.compilerPackage) {
+		webpackAlias['vue-inbrowser-compiler$'] = config.compilerPackage
 	}
 
 	if (config.dangerouslyUpdateWebpackConfig) {

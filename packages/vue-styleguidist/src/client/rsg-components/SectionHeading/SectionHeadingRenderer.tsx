@@ -71,10 +71,10 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 			<Heading level={headingLevel} id={id}>
 				{href ? (
 					<a href={href} className={sectionNameClasses}>
-						{children}
+						{children as React.ReactNode}
 					</a>
 				) : (
-					<span className={sectionNameClasses}>{children}</span>
+					<span className={sectionNameClasses}>{children as React.ReactNode}</span>
 				)}
 				{parentName && parentHref && (
 					<a href={parentHref} className={classes.parentName}>
@@ -82,7 +82,7 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 					</a>
 				)}
 			</Heading>
-			<div className={classes.toolbar}>{toolbar}</div>
+			<div className={classes.toolbar}>{toolbar as React.ReactNode}</div>
 		</div>
 	)
 }

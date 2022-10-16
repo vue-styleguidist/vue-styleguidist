@@ -1,5 +1,3 @@
-jest.setTimeout(80000)
-
 const create = require('@vue/cli-test-utils/createTestProject')
 const path = require('path')
 
@@ -40,6 +38,13 @@ async function createAndInstall(name) {
 		'babel.config.js',
 		['module.exports = {', "	presets: ['@vue/app']", '}'].join('\n')
 	)
+	const setupCode = await fs.promises.readFile(
+		path.resolve(__dirname, '../__samples__/setupEnv.js'),
+		'utf8'
+	)
+	await project.write('setupEnv.js', setupCode)
+	const styleguideConfig = await project.read('styleguide.config.js')
+	await project.write('styleguide.config.js', `require('./setupEnv')\n${styleguideConfig}`)
 	return project
 }
 

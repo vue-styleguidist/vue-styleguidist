@@ -5,6 +5,8 @@ const configSchemaImport = require('vue-styleguidist/lib/scripts/schemas/config'
 const configSchema = configSchemaImport.default || configSchemaImport
 const styleguidist = vsg.default || vsg
 
+module.exports.defineConfig = vsg.defineConfig
+
 module.exports = (api, options) => {
 	api.chainWebpack(webpackConfig => {
 		// make sure that the docs blocks
@@ -75,8 +77,16 @@ module.exports = (api, options) => {
 }
 
 function getStyleguidist(args, api, options) {
-	const conf = api.resolve(args.config || './styleguide.config.js')
-	const sgConf = conf && conf.length ? require(conf) : {}
+	const confFilePath = api.resolve(args.config || './styleguide.config.js')
+	let sgConf = {}
+	try {
+		sgConf = confFilePath && confFilePath.length ? require(confFilePath) : {}
+	} catch (err) {
+		// revert to defaults if config file is absent
+		if (err.code !== 'ENOENT') {
+			throw err
+		}
+	}
 
 	// reset the default component expression
 	sgConf.components = sgConf.components || 'src/components/**/[A-Z]*.vue'
@@ -96,6 +106,8 @@ function getStyleguidist(args, api, options) {
 
 	const userWebpackConfig = sgConf.webpackConfig
 	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
+	// avoid preload and prefetch errors
+	options.indexHtml = 'app.html'
 	const cliWebpackConfig = getConfig(api)
 	return styleguidist(
 		sgConf,
@@ -124,9 +136,22 @@ function getConfig(api) {
 		})
 	}
 
+	if (conf.optimization.minimizer('terser')) {
+		conf.optimization.minimizer('terser').tap(args => {
+			args[0].terserOptions.mangle.keep_fnames = true
+			return args
+		})
+	}
+
 	// because we are dealing with hot replacement in vsg
 	// remove duplicate hot module reload plugin
 	conf.plugins.delete('hmr')
+
+	// styleguidist provides its own html plugin that outputs index.html
+	// this avoid conflicts with the html-webpack-plugin on webpack 5
+	if (require('webpack').version.startsWith('5.')) {
+		conf.plugins.delete('html')
+	}
 
 	// remove the double compiled successfully message
 	conf.plugins.delete('friendly-errors')

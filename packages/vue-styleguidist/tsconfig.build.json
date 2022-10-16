@@ -3,8 +3,9 @@
 	"compilerOptions": {
 		"declaration": true,
 		"lib": ["dom", "esnext"],
+		"skipLibCheck": true,
 		"outDir": "lib"
 	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"],
-	"exclude": ["**/__tests__/*.ts", "**/__tests__/*.tsx"]
+	"exclude": ["**/*.spec.*", "**/*.cy.*", "**/node_modules/**"]
 }

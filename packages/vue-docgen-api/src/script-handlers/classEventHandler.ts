@@ -12,7 +12,6 @@ import resolveIdentifier from '../utils/resolveIdentifier'
  * @param documentation
  * @param path
  * @param astPath
- * @deprecated use eventHandler instead
  */
 export default function classEventHandler(
 	documentation: Documentation,
@@ -59,7 +58,7 @@ export default function classEventHandler(
 					setEventDescriptor(evtDescriptor, doclets)
 					return false
 				}
-				return undefined
+				this.traverse(nodePath)
 			}
 		})
 	}

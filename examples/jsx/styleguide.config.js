@@ -2,6 +2,7 @@ const vueLoader = require('vue-loader')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+/** @type import("vue-styleguidist").Config */
 module.exports = {
 	title: 'Vue Styleguidist jsx',
 	components: 'src/components/**/[A-Z]*.jsx',
@@ -20,7 +21,7 @@ module.exports = {
 				},
 				{
 					test: /\.(jsx|js)$/,
-					exclude: /node_modules/,
+					exclude: /(node_modules|packages)/,
 					use: {
 						loader: 'babel-loader',
 						options: {

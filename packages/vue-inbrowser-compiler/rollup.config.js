@@ -1,6 +1,6 @@
 import * as path from 'path'
 import nodeResolve from '@rollup/plugin-node-resolve'
-import typescript from 'rollup-plugin-typescript2'
+import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import pkg from './package.json'
 
@@ -22,13 +22,14 @@ export default {
 		nodeResolve(),
 		// Compile TypeScript files
 		typescript({
-			check: false,
-			useTsconfigDeclarationDir: true,
 			tsconfig: './tsconfig.build.json',
-			cacheRoot: '../../node_modules/.rpt2_cache'
+			cacheDir: '../../node_modules/.rpt3_cache',
+			declarationDir: 'types',
+			rootDir: 'src',
+			include: ['**/*.ts', '../../../@types/**/*.ts']
 		}),
 		// Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs, `require()`)
 		commonjs()
 	],
-	external: Object.keys(pkg.dependencies)
+	external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)]
 }

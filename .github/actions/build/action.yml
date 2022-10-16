@@ -1,0 +1,39 @@
+name: Initialize Dependencies
+description: Install project dependencies and build
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v2
+
+    - name: Cache pnpm modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-
+
+    - name: Install Pnpm
+      uses: pnpm/action-setup@v2.2.2
+      with:
+        version: latest
+        run_install: false
+
+    - name: Get pnpm store directory
+      shell: bash
+      id: pnpm-cache
+      run: |
+        echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+    
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install

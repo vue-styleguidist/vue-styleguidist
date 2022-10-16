@@ -6,6 +6,8 @@ import Context from 'rsg-components/Context'
 import RsgReactComponent from 'react-styleguidist/lib/client/rsg-components/ReactComponent/ReactComponent'
 import getUrl from 'react-styleguidist/lib/client/utils/getUrl'
 
+const FinalRsgReactComponent = RsgReactComponent as any
+
 interface ReactComponentProps extends JssInjectedProps {
 	component: Rsg.Component & {
 		subComponents?: (Rsg.Component & {
@@ -38,7 +40,7 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 	public render() {
 		const {
 			config: { pagePerSection }
-		} = this.context
+		} = this.context as any
 
 		const { component, classes } = this.props
 
@@ -60,7 +62,7 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 		return (
 			<>
 				<DocumentedComponentContext.Provider value={component}>
-					<RsgReactComponent {...this.props} />
+					<FinalRsgReactComponent {...this.props} />
 				</DocumentedComponentContext.Provider>
 				{component.subComponents ? (
 					<div className={classes.subComponents}>
@@ -74,7 +76,11 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 									key={(c.props && c.props.displayName) || i}
 									value={c}
 								>
-									<RsgReactComponent {...this.props} component={c} depth={this.props.depth + 1} />
+									<FinalRsgReactComponent
+										{...this.props}
+										component={c}
+										depth={this.props.depth + 1}
+									/>
 								</DocumentedComponentContext.Provider>
 							)
 						})}

@@ -1,28 +1,29 @@
 {
-  "name": "vue-simple-docgen-loader",
-  "version": "4.33.0",
-  "description": "a webpack loader to get vue components docs from a simple require",
-  "main": "index.js",
-  "dependencies": {
-    "escodegen": "^1.14.1",
-    "to-ast": "^1.0.0",
-    "vue-docgen-api": "^4.33.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
-  },
-  "keywords": [
-    "webpack",
-    "loader",
-    "vue",
-    "docgen",
-    "documentation"
-  ],
-  "author": "elevatebart",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
-  },
-  "homepage": "https://vue-styleguidist.github.io"
+	"name": "vue-simple-docgen-loader",
+	"version": "4.45.0",
+	"description": "a webpack loader to get vue components docs from a simple require",
+	"main": "index.js",
+	"dependencies": {
+		"escodegen": "^1.14.3",
+		"to-ast": "^1.0.0",
+		"vue-docgen-api": "^4.45.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+		"directory": "packages/vue-simple-docgen-loader"
+	},
+	"keywords": [
+		"webpack",
+		"loader",
+		"vue",
+		"docgen",
+		"documentation"
+	],
+	"author": "elevatebart",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
+	},
+	"homepage": "https://vue-styleguidist.github.io"
 }

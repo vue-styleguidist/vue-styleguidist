@@ -58,7 +58,7 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 	const propsParser = getParser(config)
 
 	const getVsgDocs = async (internalFile: string): Promise<LoaderComponentProps> => {
-		let docs: ComponentDoc = { displayName: '', exportName: '' }
+		let docs: ComponentDoc = { displayName: '', exportName: '', tags: {} }
 		try {
 			docs = await propsParser(internalFile)
 		} catch (e) {
@@ -88,7 +88,7 @@ export async function vuedocLoader(this: StyleguidistContext, source: string): P
 		if (docs.props) {
 			const filteredProps = docs.props.filter(prop => !prop.tags || !prop.tags.ignore)
 			const sortProps = config.sortProps || defaultSortProps
-			inSideVsgDocs.props = filteredProps ? sortProps(filteredProps) : undefined
+			inSideVsgDocs.props = filteredProps ? (sortProps(filteredProps as any[]) as any[]) : undefined
 		}
 
 		return inSideVsgDocs

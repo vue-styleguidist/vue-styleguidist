@@ -8,6 +8,7 @@
 <script lang="ts">
 import myMixin from './mixin'
 import Component, { mixins } from 'vue-class-component'
+import { Emit } from 'vue-property-decorator'
 
 /**
  * This is an example of creating a reusable button component and using it with external data.
@@ -26,6 +27,11 @@ export default class MyComponent extends mixins(myMixin) {
 	 */
 	onClick(a: string) {
 		this.$emit('success', a)
+	}
+
+	@Emit()
+	fail() {
+		return 1
 	}
 }
 </script>

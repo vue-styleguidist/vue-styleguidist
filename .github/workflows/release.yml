@@ -1,0 +1,56 @@
+name: Release
+on:
+  push:
+    branches:
+      - dev
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: vue-styleguidist/vue-styleguidist/.github/workflows/test.yml@dev
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 0
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+
+      - name: Setup GitHub User
+        run: |
+          git config --global user.name "Vue Styleguidist Bot"
+          git config --global user.email "${{ secrets.BOT_EMAIL }}"
+
+      - name: Fetch git log
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Configure .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create release Pull Request or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm exec changeset publish
+          commit: "ci(changesets): version packages"
+          title: "ci(changesets): version packages"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Remove .npmrc
+        run: rm -f .npmrc

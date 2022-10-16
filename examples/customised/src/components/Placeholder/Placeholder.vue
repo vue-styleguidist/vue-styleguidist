@@ -56,10 +56,8 @@ export default {
 	background: #ccc;
 }
 </style>
-<docs>
-
+<docs lang="md">
 Another example with custom blocks inside `*.vue` files.
 
     <Placeholder type="animal"/>
-
 </docs>

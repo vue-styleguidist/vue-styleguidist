@@ -18,11 +18,19 @@ By default vue-styleguidist will build one single bundle for all your javascript
 >
 > `SyntaxError: Support for the experimental syntax 'dynamicImport' isn't currently enabled`
 
+## `compilerPackage`
+
+Type: `String`, optional
+
+Path or name of a module that exports a `compile` and a `getImports` function. It will be used to compile your live examples. vue-styleguidist will do `require(config.compilerPackage)` to get the `compile` function. 
+- Checkout [examples-loader.ts](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/src/loaders/examples-loader.ts) to see the implementation on the node side. 
+- See [Preview.js](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/packages/vue-styleguidist/src/client/rsg-components/Preview/Preview.js) to see how it is used in the frontend.
+
 ## `compilerConfig`
 
 Type: `Object`, default: `{ objectAssign: 'Object.assign' }`
 
-Styleguidist uses [Bublé](https://buble.surge.sh/guide/) to run ES6 code on the frontend. This config object will be added as the second argument for `buble.transform`.
+Styleguidist uses `vue-inbrowser-compiler` to bundle typescript/ES6 modules code on the frontend. These options are passed to the compile function.
 
 ## `components`
 
@@ -186,9 +194,43 @@ module.exports = {
 }
 ```
 
+## `enhancePreviewApp`
+
+Type `String`, optional
+
+Allows in vue 3 styleguides to register **global plugins** and **global directives** in the examples preview.
+
+For example:
+
+Reference the preview file path in the `styleguide.config.js`
+
+```js
+// styleguide.config.js
+export default {
+  // ...
+  enhancePreviewApp: path.resolve(__dirname, 'styleguide/preview.js')
+}
+```
+
+Then update your app in it with whatever you want.
+
+```js
+// styleguide/preview.js
+import { defineEnhanceApp } from 'vue-styleguidist'
+import focusDirective from '../src/directives/v-focus';
+
+// The export here MUST be default or module.export
+// this is what is imported by the styleguide
+export default defineEnhanceApp((app) => {
+  app.directive('focus', focusDirective)
+})
+```
+
+> NOTE: If you use TypeScript, this file can be TypeScript as well
+
 ## `exampleMode`
 
-Type: `String`, default: `collapse`
+Type: `'collapse' | 'hide' | 'expand'`, default: `collapse`
 
 Defines the initial state of the example code tab:
 
@@ -326,13 +368,13 @@ export default {
 
 ## `minimize`
 
-Type: `boolean`, defaults: `true`
+Type: `boolean`, default: `true`
 
 If you wish to remove minimization from the build process to help with debugging or to accelate netlify build time on PR, turn this one off.
 
 ## `mountPointId`
 
-Type: `string`, defaults: `rsg-root`
+Type: `string`, default: `rsg-root`
 
 The ID of a DOM element where Styleguidist mounts.
 
@@ -789,7 +831,7 @@ module.exports = {
 
 ## `usageMode`
 
-Type: `String`, default: `collapse`
+Type: `'collapse' | 'hide' | 'expand'`, default: `collapse`
 
 Defines the initial state of the props and methods tab:
 

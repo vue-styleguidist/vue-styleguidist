@@ -4,9 +4,9 @@
 **Isolated Vue component development environment with a living style guide**
 
 <div>
-<a href="https://travis-ci.com/vue-styleguidist/vue-styleguidist">
-    <img src="https://travis-ci.com/vue-styleguidist/vue-styleguidist.svg?branch=dev" alt="Travis CI (unit & lint)">
-</a>
+
+[![Lint & Test](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/release.yml/badge.svg)](https://github.com/vue-styleguidist/vue-styleguidist/actions/workflows/release.yml)
+
 <a href="https://circleci.com/gh/vue-styleguidist/vue-styleguidist">
     <img src="https://circleci.com/gh/vue-styleguidist/vue-styleguidist.svg?style=shield" alt="Circle CI (integration)">
 </a>
@@ -31,12 +31,11 @@ alt="Chat on Discord">
 </a>
 </div>
 
+## Sponsors
 
-## Sponsor(s)
+A big thank you to our sponsors. Their contributions pay for the Netlify build minutes.
 
-A big thank you to our first two sponsors. Their contributions pay for the Netlify build minutes.
-
-[Marcello Bachechi](https://github.com/pilotkid) & [Walter Tommasi](https://github.com/jtommy)
+[Marcello Bachechi](https://github.com/pilotkid), [Walter Tommasi](https://github.com/jtommy), [Luca Ban](https://github.com/mesqueeb) and [Ben Hong](https://github.com/bencodezen)
 
 ## Packages
 
@@ -74,7 +73,7 @@ Docs are available at https://vue-styleguidist.github.io/ - we are still working
 
 ## Contributing
 
-Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/.github/CONTRIBUTING.md).
+Please see [contributing guide](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/.github/CONTRIBUTING.md).
 
 Note that the current monorepo relies on `yarn` workspaces. Don't forget to install yarn, `npm i --global yarn`, before cloning.
 

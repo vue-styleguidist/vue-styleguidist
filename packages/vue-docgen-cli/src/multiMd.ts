@@ -1,12 +1,9 @@
-import * as fs from 'fs'
+import { promises as fs } from 'fs'
 import * as path from 'path'
 import { FSWatcher } from 'chokidar'
-import { promisify } from 'util'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import compileTemplates from './compileTemplates'
-
-const unlink = promisify(fs.unlink)
 
 /**
  * Build one md file per given compnent and save it respecting original scaffolding
@@ -15,7 +12,7 @@ const unlink = promisify(fs.unlink)
  * @param files
  * @param config
  */
-export default async function (
+export default async function(
 	files: string[],
 	watcher: FSWatcher,
 	config: DocgenCLIConfigWithComponents,
@@ -34,7 +31,7 @@ export default async function (
 			// on file delete, delete corresponding md file
 			.on('unlink', (relPath: string) => {
 				if (files.includes(relPath)) {
-					unlink(config.getDestFile(relPath, config))
+					fs.unlink(config.getDestFile(relPath, config))
 				} else {
 					// if it's not a main file recompile the file connected to it
 					compileWithConfig(docMap[relPath])
@@ -74,7 +71,8 @@ export async function compile(
 			})
 			writeDownMdFile(content, file)
 		} catch (e) {
-			throw new Error(`Error compiling file ${file}: ${e.message}`)
+			const err = e as Error
+			throw new Error(`Error compiling file ${file}: ${err.message}`)
 		}
 	}
 }

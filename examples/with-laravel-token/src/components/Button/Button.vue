@@ -84,14 +84,12 @@ export default {
 }
 </style>
 
-<docs>
+<docs lang="md">
 It is even possible to use outside provided tokens.
 
 ```jsx
 <Button>OK</Button>
 ```
 
-To do this, you need to create a mock file containing the correct tokens. 
-Then reference it in the [require options](https://vue-styleguidist.github.io/Configuration.html#require) in your styleguide.config.js file.<template></template>
-
+To do this, you need to create a mock file containing the correct tokens. Then reference it in the [require options](https://vue-styleguidist.github.io/Configuration.html#require) in your styleguide.config.js file.<template></template>
 </docs>

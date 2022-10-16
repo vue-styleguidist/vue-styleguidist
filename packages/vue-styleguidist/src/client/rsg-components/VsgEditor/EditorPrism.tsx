@@ -2,22 +2,27 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import * as Rsg from 'react-styleguidist'
-import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
+import { isCodeVueSfc, parseComponent } from 'vue-inbrowser-compiler-utils'
 import { polyfill } from 'react-lifecycles-compat'
 import SimpleEditor from 'react-simple-code-editor'
 import { highlight as prismHighlight, languages } from 'prismjs'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-tsx'
 import { space } from 'react-styleguidist/lib/client/styles/theme'
 import prismTheme from 'react-styleguidist/lib/client/styles/prismTheme'
 import Styled, { JssInjectedProps } from 'rsg-components/Styled'
-import { useStyleGuideContext } from 'rsg-components/Context'
+import { useStyleGuideContext } from 'rsg-components/Context/Context'
 import getScript from '../../../loaders/utils/getScript'
 import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
-const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string) => string) => {
+const VSimpleEditor = SimpleEditor as any
+
+const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: string) => string) => {
 	if (lang === 'vsg') {
 		return code => {
 			if (!code) {
@@ -26,7 +31,7 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 			const scriptCode = getScript(code, jsxInExamples)
 			const scriptCodeHighlighted = prismHighlight(
 				scriptCode,
-				languages[jsxInExamples ? 'jsx' : 'js'],
+				languages[jsxInExamples ? 'tsx' : 'ts'],
 				lang
 			)
 			if (code.length === scriptCode.length) {
@@ -36,8 +41,26 @@ const highlight = (lang: 'vsg' | 'html', jsxInExamples: boolean): ((code: string
 			return scriptCodeHighlighted + prismHighlight(templateCode, languages.html, lang)
 		}
 	} else {
-		const langScheme = languages[lang]
-		return code => prismHighlight(code, langScheme, lang)
+		const langScheme = languages.html
+
+		return code => {
+      console.log('-- parseComponent --')
+      console.log({ parseComponent })
+			const comp = parseComponent(code)
+
+			const newCode = comp.script ? code.slice(0, comp.script.start) + ' ' + code.slice(comp.script.end) : code
+      
+			const htmlHighlighted = prismHighlight(newCode, langScheme, 'html')
+
+			return comp.script ? htmlHighlighted.replace(
+				/<span class="token language-javascript"> <\/span>/g,
+				`<span class="token language-typescript">${prismHighlight(
+					comp.script.content,
+					languages[comp.script.lang || 'ts'],
+					comp.script.lang || 'ts'
+				)}</span>`) : htmlHighlighted
+			
+		}
 	}
 }
 
@@ -118,11 +141,11 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 		const { jssThemedEditor, jsxInExamples, editorPadding } = this.props
 		const langClass = isVueSFC ? 'language-html' : 'language-jsx'
 		return (
-			<SimpleEditor
+			<VSimpleEditor
 				className={cx(root, jssThemedEditor ? jssEditor : langClass, 'prism-editor')}
 				value={this.state.code}
 				onValueChange={this.handleChange}
-				highlight={highlight(isVueSFC ? 'html' : 'vsg', jsxInExamples)}
+				highlight={highlight(isVueSFC ? 'vue-sfc' : 'vsg', jsxInExamples)}
 				// Padding should be passed via a prop (not CSS) for a proper
 				// cursor position calculation
 				padding={editorPadding || space[2]}
@@ -140,7 +163,7 @@ type EditorProps = Omit<UnconfiguredEditorProps, 'jssThemedEditor' | 'jsxInExamp
 function Editor(props: EditorProps) {
 	const {
 		config: { jssThemedEditor, jsxInExamples }
-	} = (useStyleGuideContext() as any) as { config: SanitizedStyleguidistConfig }
+	} = useStyleGuideContext() as any as { config: SanitizedStyleguidistConfig }
 	return <PEditor {...props} jssThemedEditor={jssThemedEditor} jsxInExamples={jsxInExamples} />
 }
 

@@ -20,6 +20,9 @@ const DEFAULT_COMPONENTS_PATTERN = `src/{components,Components}/**/*.vue`
 const MODES = ['collapse', 'expand', 'hide'].map(m => ({ value: m, name: m }))
 
 export default {
+	handlers: {},
+	moduleAliases: {},
+	resolver: {},
 	assetsDir: {
 		uitype: 'string',
 		message: 'Assets Directory',
@@ -34,6 +37,11 @@ export default {
 		description:
 			'Should the styleguide try code splitting for better performance? NOte that you will need the proper transform in your babel config',
 		type: 'boolean'
+	},
+	compilerPackage: {
+		type: 'string',
+		description: 'Compiler to use for compiling examples in the browser',
+		example: 'vue-inbrowser-compiler-sucrase'
 	},
 	compilerConfig: {
 		tstype: 'TransformOptions',
@@ -137,8 +145,14 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 			)
 		}
 	},
+  enhancePreviewApp: {
+    tstype: 'string',
+    message: 'Enhance Preview App File Path',
+    description: 'Allow to declare global directives and plugins in vue 3 examples',
+		type: 'directory path'
+  },
 	exampleMode: {
-		tstype: 'Rsg.EXPAND_MODE',
+		tstype: 'Rsg.ExpandMode',
 		message: 'Example Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -474,7 +488,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
-		tstype: 'Rsg.EXPAND_MODE',
+		tstype: 'Rsg.ExpandMode',
 		message: 'Usage Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -485,7 +499,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: 'collapse'
 	},
 	tocMode: {
-		tstype: 'Rsg.EXPAND_MODE',
+		tstype: 'Rsg.ExpandMode',
 		message: 'Table Of Contents Collapsed mode',
 		description:
 			'If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases',
@@ -517,12 +531,12 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 	webpackConfig: {
 		tstype: 'Configuration',
 		type: ['object', 'function'],
-		process: (val?: Configuration) => {
+		process: (val: Configuration | undefined, config: StyleguidistConfig, rootDir: string) => {
 			if (val) {
 				return val
 			}
 
-			const file = findUserWebpackConfig()
+			const file = findUserWebpackConfig({ rootDir })
 			if (typeof file === 'string') {
 				logger.info(`Loading webpack config from:\n${file}`)
 				// eslint-disable-next-line import/no-dynamic-require

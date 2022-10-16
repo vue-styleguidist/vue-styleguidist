@@ -16,7 +16,15 @@ function render(filename) {
 			}
 			fs.writeFile(
 				path.resolve(__dirname, './src/types', filename.replace(/\.ejs$/, '')),
-				str,
+				`
+/**
+* /!\\ WARNING /!\\
+* Do not edit manually.
+* This file is the compilation of 
+* Template: packages/vue-styleguidist/templates/StyleGuide.ts.ejs
+* Config Data: packages/vue-styleguidist/src/scripts/schemas/config.ts
+*/
+${str}`,
 				'utf8',
 				function (err) {
 					if (err) {

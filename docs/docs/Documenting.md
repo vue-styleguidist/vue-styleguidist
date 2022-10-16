@@ -18,6 +18,7 @@ Vue styleguidist generates documentation for your components based on the commen
 - [Composable Components](#composable-components)
 - [TypeScript, Flow and Class-style Components](#typescript-flow-and-class-style-components)
 - [JSX](#jsx)
+- [Setup syntax](#setup-syntax)
 - [Writing code examples](#writing-code-examples)
 - [Importing examples](#importing-examples)
 
@@ -25,15 +26,13 @@ Vue styleguidist generates documentation for your components based on the commen
 
 ## Code comments
 
-Vue styleguidist will display the contents of your components’ JSDoc comment blocks.
+Vue styleguidist will display the contents of your components' JSDoc comment blocks.
 
 > **Note:** Components and documentation comments are parsed by default by the [vue-docgen-api](Docgen.md) library. You can change this behavior using [propsParser](/Configuration.md#propsparser) options.
 
 ```html
 <template>
-  <div class="Button">
-    /* ... */
-  </div>
+  <div class="Button">/* ... */</div>
 </template>
 
 <script>
@@ -231,7 +230,7 @@ The comment block containing the documentation needs to contain one line with `@
 ```html
 <div>
   <!--
-    trigered on click
+    triggered on click
     @event click
     @property {object} demo - example
     @property {number} called - test called
@@ -289,9 +288,14 @@ example of a real documented slot
 </div>
 ```
 
+To get a bit deeper, check out the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+
 > **Note:** The docblock must be part of the **same** comment block. Multiple individual comments do not get parsed together.
 
-Another example of how to document bondings is in the `ScopedSlot` component in the basic example. Read the [code](https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/basic/src/components/ScopedSlot/ScopedSlot.vue) and see how it is rendered in the [live example](https://vue-styleguidist.github.io/basic/#scopedslot)
+> **Note 2:** From 4.44.0, you can use JS comments blocks if you choose to. The syntax is the same as in HTML. One constraint: the comment should be the only content of the interpolation:
+>
+> - Valid comment: `{{/* @slot Menu Item footer */}}`
+> - Invalid comment: `{{ /* @slot Menu Item footer */ testVariable + 3 }}`.
 
 ### In a render function
 
@@ -368,7 +372,7 @@ If you import a [mixin](https://vuejs.org/v2/guide/mixins.html) or [extends](htt
 
 ## Usage examples and Readme files
 
-Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component’s folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
+Vue styleguidist will look for any `Readme.md` or `ComponentName.md` files in the component's folder and display them. Any code block with a language tag of `vue`, `js`, `jsx`, `javascript` or `html` will be rendered as a Vue component with an interactive playground.
 
 If you want to ignore the readme file for one component, use the `@example [none]` doclet. Use this when multiple components in the same folder share a `ReadMe` file. This will prevent the examples from being rendered multiple times.
 
@@ -465,7 +469,7 @@ If you want to ignore the readme file for one component, use the `@example [none
 
 > **Note:** You can configure examples file name with the [getExampleFilename](/Configuration.md#getexamplefilename) option.
 
-You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Button/Button.vue#L85)
+You can also add the [custom block](https://vue-loader.vuejs.org/en/configurations/custom-blocks.html) `<docs></docs>` inside `*.vue` files, so that vue styleguidist builds the readme. You can review the following [example](https://github.com/vue-styleguidist/vue-styleguidist/blob/delivery/examples/basic/src/components/Radio/Radio.vue#L20)
 
 ### External examples using doclet tags
 
@@ -657,9 +661,11 @@ than with a prop
 />
 ```
 
-Here is how Vue Styleguidist helps document this pattern: Please add `@requires` doclets to the main component.
+Here is how Vue Styleguidist helps document this pattern: Add a `@requires` doclet to the main component to signify what components documentation to include in the same page. In every example, the extra component will be automatically registered the same way the main component already is.
 
-In the previous example we have a `DropDown` component that requires a `Choice` component to render properly. Here is how DropDown should look like.
+### Example
+
+In the previous example we have a `DropDown` component that requires a `Choice` component to render properly. Here is what the component `DropDown.vue` should look like.
 
 ```vue
 <template>
@@ -667,6 +673,7 @@ In the previous example we have a `DropDown` component that requires a `Choice` 
     <slot />
   </select>
 </template>
+
 <script>
 /**
  * @requires ./Choice.vue
@@ -677,7 +684,7 @@ export default {
 </script>
 ```
 
-> **NOTE** Now `Choice` will be documented **only** as a part of `DropDown`. It will not have its own page or its own examples. Its props will be displayed with `DropDown`s, and it will be made available in `DropDown`s examples.
+> **NOTE:** Now `Choice` will be documented **only** as a part of `DropDown`. It will not have its own page or its own examples. Its props will be displayed with `DropDown`s, and it will be made available in `DropDown`s examples.
 
 ## TypeScript, Flow and Class-style Components
 
@@ -747,6 +754,89 @@ export default {
 }
 ```
 
+## Setup syntax
+
+In vue 3, VueJs introduced the [setup syntax](https://v3.vuejs.org/api/sfc-script-setup.html). This greatly helps readability of components. It also makes a much more performant TypeScript type checking.
+
+From version 4.44.0, Vue Styleguidist allows to document the props & events defined with this syntax.
+
+### Props
+
+In JavaScript, add a comment above the property in the object passed to `defineProps()`. In this comment, use the same principle as regular syntax Props.
+
+```js
+defineProps({
+  /**
+   * Should the prop be required?
+   * @link https://v3.vuejs.org/
+   */
+  testProp: {
+    type: Boolean,
+    required: true
+  }
+})
+```
+
+The same goes for TypeScript components:
+
+```ts
+defineProps<{
+  /**
+   * A very nice prop, now accepting numbers
+   */
+  testProp: number
+  /**
+   * An old prop
+   * @deprecated prefer using the other prop
+   */
+  anotherTestProps?: boolean
+}>()
+```
+
+### Events
+
+Events are all defined using the `defineEmits()` function. Document them in comments before your events entries.
+
+```js
+const emit = defineEmits({
+  /**
+   * Document your event here
+   * @arg {string} payload - The first argument
+   */
+  submit: payload => {
+    if (payload.email && payload.password) {
+      return true
+    } else {
+      console.warn('Invalid submit event payload!')
+      return false
+    }
+  }
+})
+```
+
+and in TypeScript
+
+```ts
+interface Format {
+  email: string
+  password: string
+}
+
+const emit = defineEmits<{
+  /**
+   * Cancels everything
+   */
+  (event: 'cancel'): void
+  /**
+   * Save the world
+   * @arg {{ email: string, password: string }} payload - The payload
+   */
+  (event: 'save', payload: Format): void
+}>()
+```
+
+> **NOTE:** Remember to document complex argument types in the comment above the event. Docgen does not parse types and will only display their names.
+
 ## Writing code examples
 
 Code examples in Markdown use the ES6 syntax. They can access all the components of your style guide using global variables:
@@ -754,7 +844,7 @@ Code examples in Markdown use the ES6 syntax. They can access all the components
 ```jsx
 <Panel>
   <p>
-    Using the Button component in the example of the Panel component:
+    Using the Button component in the example of the Panel component:
   </p>
   <Button>Push Me</Button>
 </Panel>
@@ -769,16 +859,14 @@ const mockData = require('./mocks');
 <Message :content="mockData.hello" />
 ```
 
-> **Note:** If you need a more complex demo it’s often a good idea to define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
+> **Note:** If you need a more complex demo, define it in a separate JavaScript file and `import` it in Markdown. If the component file is in the same folder as the markdown, write `import { myExample as exam } from './myExample';` You can then use this imported setup object in your examples. Note that the code for the setup will not appear in the documentation.
 >
-> ````md
-> ```js
+> ```jsx
 > import { myExample as Button } from './myExample'
 > ;<div>
 >   <Button />
 > </div>
 > ```
-> ````
 
 > **Note** If you prefer to use JSX in your examples, use the [jsxInExample](/Configuration.md#jsxInExamples) option in your `styleguide.config.js`. Using this option will force you to use proper Vue format for your examples. No more pseudo-JSX code.
 >
@@ -808,6 +896,8 @@ Text typed here will be entirely ignored. You can use it to describe the example
 ```
 ````
 
+> **Note** This option DOES NOT replace automatically examples code with `vue-docgen-cli`. Since the rendering engine is only copying the contents of the markdown without parsing it, the CLI can't know what content to replace.
+
 > **Note** No need to specify the language as it will be inferred from the name of the file
 
-> **Note** All flags described [here](#usage-examples-and-readme-files) cn still be used
+> **Note** All flags described [here](#usage-examples-and-readme-files) can still be used

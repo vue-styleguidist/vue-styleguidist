@@ -1,109 +1,110 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests typescript grid should match the snapshot 1`] = `
-Object {
+exports[`tests typescript grid > should match the snapshot 1`] = `
+{
   "description": "This is an example of creating a reusable grid component and using it with external data.",
   "displayName": "grid",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "description": "Success event.",
       "name": "success",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "object",
         ],
       },
     },
-    Object {
+    {
       "description": "Error event.",
       "name": "error",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "object",
         ],
       },
     },
   ],
   "exportName": "default",
-  "methods": Array [
-    Object {
+  "expose": undefined,
+  "methods": [
+    {
       "description": "Sets the order",
       "name": "sortBy",
-      "params": Array [
-        Object {
+      "params": [
+        {
           "description": "Key to order",
           "name": "key",
-          "type": Object {
+          "type": {
             "name": "string",
           },
         },
       ],
-      "returns": Object {
+      "returns": {
         "description": "Test",
         "title": "returns",
-        "type": Object {
+        "type": {
           "name": "string",
         },
       },
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
         ],
-        "params": Array [
-          Object {
+        "params": [
+          {
             "description": "Key to order",
             "name": "key",
             "title": "param",
-            "type": Object {
+            "type": {
               "name": "string",
             },
           },
         ],
-        "returns": Array [
-          Object {
+        "returns": [
+          {
             "description": "Test",
             "title": "returns",
-            "type": Object {
+            "type": {
               "name": "string",
             },
           },
         ],
-        "since": Array [
-          Object {
+        "since": [
+          {
             "description": "Version 1.0.1",
             "title": "since",
           },
         ],
-        "version": Array [
-          Object {
+        "version": [
+          {
             "description": "1.0.5",
             "title": "version",
           },
         ],
       },
     },
-    Object {
+    {
       "name": "publicMethod",
-      "params": Array [
-        Object {
+      "params": [
+        {
           "name": "test",
-          "type": Object {
+          "type": {
             "name": "number",
           },
         },
-        Object {
+        {
           "name": "param",
-          "type": Object {
+          "type": {
             "name": "ForParam",
           },
         },
       ],
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
@@ -111,132 +112,132 @@ Object {
       },
     },
   ],
-  "props": Array [
-    Object {
-      "defaultValue": Object {
+  "props": [
+    {
+      "defaultValue": {
         "func": false,
         "value": "text",
       },
       "description": "object/array defaults should be returned from a factory function",
       "name": "msg",
-      "tags": Object {
-        "link": Array [
-          Object {
+      "tags": {
+        "link": [
+          {
             "description": "See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names) for a list of color names",
             "title": "link",
           },
         ],
-        "see": Array [
-          Object {
+        "see": [
+          {
             "description": "See [Wikipedia](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names) for a list of color names",
             "title": "see",
           },
         ],
-        "since": Array [
-          Object {
+        "since": [
+          {
             "description": "Version 1.0.1",
             "title": "since",
           },
         ],
-        "version": Array [
-          Object {
+        "version": [
+          {
             "description": "1.0.5",
             "title": "version",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "string|number",
       },
     },
-    Object {
+    {
       "description": "describe data",
       "name": "data",
-      "tags": Object {
-        "version": Array [
-          Object {
+      "tags": {
+        "version": [
+          {
             "description": "1.0.5",
             "title": "version",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "array",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "[{}]",
       },
       "name": "images",
-      "type": Object {
+      "type": {
         "name": "array",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": true,
         "value": "function () {}",
       },
       "description": "prop function",
       "name": "propFunc",
-      "type": Object {
+      "type": {
         "name": "func",
       },
     },
-    Object {
+    {
       "description": "get columns list",
       "name": "columns",
-      "type": Object {
+      "type": {
         "name": "array",
       },
     },
-    Object {
-      "defaultValue": Object {
+    {
+      "defaultValue": {
         "func": false,
         "value": "'example'",
       },
       "description": "filter key",
       "name": "filterKey",
-      "tags": Object {
-        "ignore": Array [
-          Object {
+      "tags": {
+        "ignore": [
+          {
             "description": true,
             "title": "ignore",
           },
         ],
       },
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
   ],
-  "slots": Array [
-    Object {
+  "slots": [
+    {
       "description": "Use this slot header",
       "name": "header",
     },
-    Object {
+    {
       "description": "Use this slot footer",
       "name": "footer",
     },
   ],
-  "tags": Object {
-    "author": Array [
-      Object {
+  "tags": {
+    "author": [
+      {
         "description": "[Rafael](https://github.com/rafaesc92)",
         "title": "author",
       },
     ],
-    "since": Array [
-      Object {
+    "since": [
+      {
         "description": "Version 1.0.1",
         "title": "since",
       },
     ],
-    "version": Array [
-      Object {
+    "version": [
+      {
         "description": "1.0.5",
         "title": "version",
       },

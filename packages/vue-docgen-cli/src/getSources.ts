@@ -1,7 +1,7 @@
 import * as path from 'path'
 import glob from 'globby'
 import chokidar, { FSWatcher } from 'chokidar'
-import { parse, ParamTag, ScriptHandlers, DocGenOptions } from 'vue-docgen-api'
+import { parseMulti, ParamTag, ScriptHandlers, DocGenOptions } from 'vue-docgen-api'
 import { getDocMap } from './utils'
 
 /**
@@ -14,6 +14,7 @@ export default async function getSources(
 	components: string | string[],
 	cwd: string,
 	getDocFileName: (componentPath: string) => string | false,
+  propsParser: typeof parseMulti,
 	optionsApi: DocGenOptions = {}
 ): Promise<{
 	watcher: FSWatcher
@@ -28,7 +29,7 @@ export default async function getSources(
 	// and @example/examples to add them to the watcher.
 	const requiredComponents = (
 		await Promise.all(
-			allComponentFiles.map(compPath => getRequiredComponents(compPath, optionsApi, cwd))
+			allComponentFiles.map(compPath => getRequiredComponents(compPath, optionsApi, propsParser, cwd))
 		)
 	).reduce((acc, comps) => acc.concat(comps), [])
 
@@ -51,22 +52,25 @@ export default async function getSources(
 async function getRequiredComponents(
 	compPath: string,
 	optionsApi: DocGenOptions,
+  propsParser: typeof parseMulti,
 	cwd: string
 ): Promise<string[]> {
 	const compDirName = path.dirname(compPath)
 	const absoluteComponentPath = path.join(cwd, compPath)
 	try {
-		const { tags } = await parse(absoluteComponentPath, {
+		const docs = await propsParser(absoluteComponentPath, {
 			// make sure that this is recognized as an option bag
 			jsx: false,
 			...optionsApi,
 			scriptHandlers: [ScriptHandlers.componentHandler]
 		})
-		if (tags?.requires?.length) {
-			return tags.requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
+    const requires = docs.reduce((acc, { tags }) => tags?.requires ? acc.concat(tags.requires) : acc, [] as ParamTag[])
+		if (requires.length) {
+			return requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
 		}
 	} catch (e) {
-		throw new Error(`Error parsing ${absoluteComponentPath} for @requires tags: ${e.message}`)
+		const err = e as Error
+		throw new Error(`Error parsing ${absoluteComponentPath} for @requires tags: ${err.message}`)
 	}
 	return []
 }

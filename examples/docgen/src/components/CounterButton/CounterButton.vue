@@ -1,6 +1,8 @@
 <template>
 	<div class="CounterButton">
-		<button class="button" @click.prevent="increment">{{ count }}</button>
+		<button class="button" @click.prevent="increment">
+			{{ count }}
+		</button>
 	</div>
 </template>
 
@@ -29,10 +31,11 @@ export default {
 	}
 }
 </script>
-<docs>
+
+<docs lang="md">
 Don't forget that you can debug it with [vue-devtools](https://github.com/vuejs/vue-devtools)
 
 ```vue live
-<CounterButton/>
+<CounterButton />
 ```
 </docs>

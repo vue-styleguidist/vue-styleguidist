@@ -1,5 +1,5 @@
 import walkes from 'walkes'
-import { parseComponent, VsgSFCDescriptor } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, isVue3 } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneImport from './transformOneImport'
 
@@ -18,39 +18,7 @@ const buildStyles = function (styles: string[] | undefined): string | undefined 
 	return undefined
 }
 
-function getSingleFileComponentParts(code: string) {
-	const parts = parseComponent(code)
-	if (parts.script) {
-		parts.script = parts.script.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1')
-	}
-	return parts
-}
-
-function injectTemplateAndParseExport(
-	parts: VsgSFCDescriptor
-): {
-	preprocessing?: string
-	component: string
-	postprocessing?: string
-} {
-	const templateString = parts.template ? parts.template.replace(/`/g, '\\`') : undefined
-
-	if (!parts.script) {
-		return { component: `{\ntemplate: \`${templateString}\` }` }
-	}
-
-	const comp = parseScriptCode(parts.script)
-	if (templateString) {
-		comp.component = `{\n  template: \`${templateString}\`,\n  ${comp.component}}`
-	} else {
-		comp.component = `{\n  ${comp.component}}`
-	}
-	return comp
-}
-
-export function parseScriptCode(
-	code: string
-): {
+export function parseScriptCode(code: string): {
 	preprocessing?: string
 	component: string
 	postprocessing?: string
@@ -62,23 +30,25 @@ export function parseScriptCode(
 	let renderFunctionStart = -1
 	walkes(getAst(code), {
 		//export const MyComponent = {}
-		ExportNamedDeclaration(node: any) {
+		ExportNamedDeclaration(node: any, recurse: () => void, stop: () => void) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.declarations[0].init.start + offset
 			endIndex = node.declaration.declarations[0].init.end + offset
 			if (node.declarations) {
 				renderFunctionStart = getRenderFunctionStart(node.declarations[0])
 			}
+			recurse()
 		},
 		//export default {}
-		ExportDefaultDeclaration(node: any) {
+		ExportDefaultDeclaration(node: any, recurse: () => void, stop: () => void) {
 			preprocessing = code.slice(0, node.start + offset)
 			startIndex = node.declaration.start + offset
 			endIndex = node.declaration.end + offset
 			renderFunctionStart = getRenderFunctionStart(node.declaration)
+			recurse()
 		},
 		//module.exports = {}
-		AssignmentExpression(node: any) {
+		AssignmentExpression(node: any, recurse: () => void, stop: () => void) {
 			if (
 				/exports/.test(node.left.name) ||
 				(node.left.object &&
@@ -89,7 +59,9 @@ export function parseScriptCode(
 				startIndex = node.right.start + offset
 				endIndex = node.right.end + offset
 			}
+			recurse()
 		},
+
 		// and transform import statements into require
 		ImportDeclaration(node: any) {
 			const ret = transformOneImport(node, code, offset)
@@ -100,7 +72,7 @@ export function parseScriptCode(
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	if (renderFunctionStart > 0) {
+	if (renderFunctionStart > 0 && !isVue3) {
 		renderFunctionStart += offset
 		code = insertCreateElementFunction(
 			code.slice(0, renderFunctionStart + 1),
@@ -132,8 +104,7 @@ export function getRenderFunctionStart(objectExpression: any): number {
 }
 
 export function insertCreateElementFunction(before: string, after: string): string {
-	return `${before}
-const h = this.$createElement;${after}`
+	return `${before};const h = this.$createElement;${after}`
 }
 
 /**
@@ -141,15 +112,20 @@ const h = this.$createElement;${after}`
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code: string): { script: string; style?: string } {
-	const parts = getSingleFileComponentParts(code)
-	const extractedComponent = injectTemplateAndParseExport(parts)
+export default function normalizeSfcComponent(code: string): {
+	script: string
+	style?: string
+	template?: string
+} {
+	const parts = parseComponent(code)
+	const {
+		preprocessing = '',
+		component = '',
+		postprocessing = ''
+	} = parts.script ? parseScriptCode(parts.script.content) : {}
 	return {
-		script: [
-			extractedComponent.preprocessing,
-			`;return ${extractedComponent.component}`,
-			extractedComponent.postprocessing
-		].join('\n'),
-		style: buildStyles(parts.styles)
+		template: parts.template?.content,
+		script: [preprocessing, `return {${component}}`, postprocessing].join('\n'),
+		style: buildStyles(parts.styles.map(styleBlock => styleBlock.content))
 	}
 }

@@ -5,6 +5,7 @@ import {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
+	ExposedDescriptor,
 	ComponentDoc,
 	DocBlockTags,
 	BlockTag,
@@ -13,7 +14,7 @@ import {
 	Tag,
 	ParamTag,
 	ParamType
-} from 'vue-inbrowser-compiler-utils'
+} from 'vue-inbrowser-compiler-independent-utils'
 
 export {
 	Descriptor,
@@ -21,6 +22,7 @@ export {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
+	ExposedDescriptor,
 	ComponentDoc,
 	DocBlockTags,
 	BlockTag,
@@ -33,9 +35,10 @@ export {
 
 export default class Documentation {
 	private propsMap: Map<string, PropDescriptor>
-	private methodsMap: Map<string, MethodDescriptor>
-	private slotsMap: Map<string, SlotDescriptor>
 	private eventsMap: Map<string, any>
+	private slotsMap: Map<string, SlotDescriptor>
+	private methodsMap: Map<string, MethodDescriptor>
+	private exposedMap: Map<string, ExposedDescriptor>
 	private dataMap: Map<string, any>
 	private docsBlocks: string[] | undefined
 	private originExtendsMixin: Descriptor
@@ -44,9 +47,10 @@ export default class Documentation {
 	public constructor(fullFilePath: string) {
 		this.componentFullfilePath = fullFilePath
 		this.propsMap = new Map()
-		this.methodsMap = new Map()
-		this.slotsMap = new Map()
 		this.eventsMap = new Map()
+		this.slotsMap = new Map()
+		this.methodsMap = new Map()
+		this.exposedMap = new Map()
 		this.originExtendsMixin = {}
 
 		this.dataMap = new Map()
@@ -79,12 +83,6 @@ export default class Documentation {
 			  }))
 	}
 
-	public getMethodDescriptor(methodName: string): MethodDescriptor {
-		return this.getDescriptor(methodName, this.methodsMap, () => ({
-			name: methodName
-		}))
-	}
-
 	public getEventDescriptor(eventName: string): EventDescriptor {
 		return this.getDescriptor(eventName, this.eventsMap, () => ({
 			name: eventName
@@ -97,11 +95,24 @@ export default class Documentation {
 		}))
 	}
 
+	public getMethodDescriptor(methodName: string): MethodDescriptor {
+		return this.getDescriptor(methodName, this.methodsMap, () => ({
+			name: methodName
+		}))
+	}
+
+	public getExposedDescriptor(exposedName: string): ExposedDescriptor {
+		return this.getDescriptor(exposedName, this.exposedMap, () => ({
+			name: exposedName
+		}))
+	}
+
 	public toObject(): ComponentDoc {
 		const props = this.getObjectFromDescriptor(this.propsMap)
 		const methods = this.getObjectFromDescriptor(this.methodsMap)
 		const events = this.getObjectFromDescriptor(this.eventsMap)
 		const slots = this.getObjectFromDescriptor(this.slotsMap)
+		const expose = this.getObjectFromDescriptor(this.exposedMap)
 
 		const obj: { [key: string]: any } = {}
 		this.dataMap.forEach((value, key) => {
@@ -123,6 +134,7 @@ export default class Documentation {
 			// set all the static properties
 			exportName: obj.exportName,
 			displayName: obj.displayName,
+			expose,
 			props,
 			events,
 			methods,
@@ -154,3 +166,5 @@ export default class Documentation {
 		}
 	}
 }
+
+export { Documentation }

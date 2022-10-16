@@ -1,40 +1,52 @@
 {
-	"name": "vue-inbrowser-compiler",
-	"version": "4.33.0",
-	"description": "compile vue single file components right in your browser",
-	"module": "lib/vue-inbrowser-compiler.esm.js",
-	"main": "lib/vue-inbrowser-compiler.cjs.js",
-	"types": "lib/index.d.ts",
-	"scripts": {
-		"compile": "tsc --emitDeclarationOnly -p ./tsconfig.build.json && rollup -c",
-		"compile:watch": "rollup -c --watch && tsc --emitDeclarationOnly -p ./tsconfig.build.json --watch"
-	},
-	"keywords": [
-		"vue",
-		"compile",
-		"live",
-		"browser",
-		"buble",
-		"acorn"
-	],
-	"dependencies": {
-		"acorn": "^6.1.1",
-		"acorn-jsx": "^5.0.1",
-		"buble": "^0.19.7",
-		"camelcase": "^5.3.1",
-		"vue-inbrowser-compiler-utils": "^4.33.0",
-		"walkes": "^0.2.1"
-	},
-	"devDependencies": {
-		"@rollup/plugin-commonjs": "^15.0.0",
-		"@rollup/plugin-node-resolve": "^9.0.0",
-		"@types/buble": "^0.19.2",
-		"@vue/test-utils": "^1.1.0",
-		"rollup": "^2.26.3",
-		"rollup-plugin-typescript2": "^0.27.2",
-		"typescript": "^3.9.7",
-		"vue": "^2.6.10"
-	},
-	"author": "Bart Ledoux <ledouxb@me.com>",
-	"license": "MIT"
+  "name": "vue-inbrowser-compiler",
+  "version": "4.54.1",
+  "description": "compile vue single file components right in your browser",
+  "module": "lib/vue-inbrowser-compiler.esm.js",
+  "main": "lib/vue-inbrowser-compiler.cjs.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "compile": "rollup -c",
+    "compile:watch": "rollup -c --watch"
+  },
+  "keywords": [
+    "vue",
+    "compile",
+    "live",
+    "browser",
+    "buble",
+    "acorn"
+  ],
+  "dependencies": {
+    "acorn": "^6.4.2",
+    "acorn-jsx": "^5.3.1",
+    "buble": "^0.20.0",
+    "camelcase": "^5.3.1",
+    "detect-browser": "^5.2.0",
+    "vue-inbrowser-compiler-utils": "^4.54.1",
+    "walkes": "^0.2.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "15.1.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "@rollup/plugin-typescript": "8.5.0",
+    "@types/buble": "0.20.1",
+    "@vue/test-utils": "1.3.0",
+    "rollup": "2.79.1",
+    "tslib": "2.4.0",
+    "typescript": "4.8.4",
+    "vue": "2.7.11",
+    "vue-template-compiler": "2.7.11"
+  },
+  "peerDependencies": {
+    "vue": ">=2"
+  },
+  "author": "Bart Ledoux <ledouxb@me.com>",
+  "license": "MIT",
+  "homepage": "https://vue-styleguidist.github.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+    "directory": "packages/vue-inbrowser-compiler"
+  }
 }

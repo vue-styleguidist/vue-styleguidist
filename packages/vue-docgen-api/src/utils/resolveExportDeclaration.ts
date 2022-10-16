@@ -17,6 +17,11 @@ export default function resolveExportDeclaration(path: NodePath): Map<string, No
 					definitions.set(nodeId.name, declarator)
 				}
 			})
+		} else if (declaration && bt.isClassDeclaration(declaration.node)) {
+			const nodeId = declaration.node.id
+			if (bt.isIdentifier(nodeId)) {
+				definitions.set(nodeId.name, declaration)
+			}
 		} else {
 			// const example = {}
 			// export { example }
@@ -31,9 +36,11 @@ export default function resolveExportDeclaration(path: NodePath): Map<string, No
 function getDefinitionsFromPathSpecifiers(path: NodePath, defs: Map<string, NodePath>) {
 	const specifiersPath = path.get('specifiers')
 	specifiersPath.each((specifier: NodePath<bt.ExportSpecifier | bt.ExportNamespaceSpecifier>) => {
-		defs.set(
-			specifier.node.exported.name,
-			bt.isExportSpecifier(specifier.node) ? specifier.get('local') : specifier.get('exported')
-		)
+		if (bt.isIdentifier(specifier.node.exported)) {
+			defs.set(
+				specifier.node.exported.name,
+				bt.isExportSpecifier(specifier.node) ? specifier.get('local') : specifier.get('exported')
+			)
+		}
 	})
 }

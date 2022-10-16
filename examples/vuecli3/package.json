@@ -8,33 +8,19 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build"
+    "styleguide:build": "cross-env NODE_ENV=production vue-cli-service styleguidist:build"
   },
   "dependencies": {
-    "vue": "^2.6.12"
+    "vue": "^2.7.11"
   },
   "devDependencies": {
-    "@vue/babel-preset-app": "^4.5.4",
-    "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-service": "^4.0.5",
-    "vue-cli-plugin-styleguidist": "^4.0.0",
-    "vue-template-compiler": "^2.6.12",
-    "webpack-bundle-analyzer": "^3.3.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
+    "@vue/babel-preset-app": "5.0.8",
+    "@vue/cli-plugin-babel": "5.0.8",
+    "@vue/cli-service": "5.0.8",
+    "vue-cli-plugin-styleguidist": "^4",
+    "vue-template-compiler": "^2.7.11",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "cross-env": "^7.0.3"
   },
   "postcss": {
     "plugins": {

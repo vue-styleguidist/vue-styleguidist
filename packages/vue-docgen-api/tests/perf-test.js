@@ -12,7 +12,10 @@ async function testPerformanceOfParse(componentFiles) {
 					jsx: /jsx/.test(compFile),
 					alias: {
 						'@mixins': path.resolve(__dirname, './mixins'),
-						'@utils': path.resolve(__dirname, './utils')
+						'@utils': path.resolve(__dirname, './utils'),
+            '@src': [
+              path.join(__dirname, 'components', 'button-external-alias-array')
+            ]
 					}
 				})
 			} catch (e) {

@@ -1,4 +1,3 @@
-import { parseComponent } from 'vue-template-compiler'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as Rsg from 'react-styleguidist'
@@ -6,6 +5,7 @@ import getNameFromFilePath from 'react-styleguidist/lib/loaders/utils/getNameFro
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import slugger from 'react-styleguidist/lib/loaders/utils/slugger'
 import { SanitizedStyleguidistConfig } from '../../types/StyleGuide'
+import parseVue from './parseVue'
 
 const vueDocLoader = path.resolve(__dirname, '../vuedoc-loader.js')
 
@@ -41,8 +41,8 @@ export default function processComponent(
 	const hasExamplesFile = examplesFile && fs.existsSync(examplesFile)
 	let hasInternalExamples = false
 	if (!hasExamplesFile && fs.existsSync(filepath)) {
-		const customBlocks = parseComponent(fs.readFileSync(filepath, 'utf8')).customBlocks
-		hasInternalExamples = !!customBlocks && customBlocks.findIndex(p => p.type === 'docs') >= 0
+		const { customBlocks } = parseVue(fs.readFileSync(filepath, 'utf8'))
+		hasInternalExamples = customBlocks?.findIndex(p => p.type === 'docs') >= 0
 	}
 	const hasExamples = hasExamplesFile || hasInternalExamples
 	const subComponents: Rsg.LoaderComponent[] | undefined =

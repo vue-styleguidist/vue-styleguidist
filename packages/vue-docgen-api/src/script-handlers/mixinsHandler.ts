@@ -5,6 +5,8 @@ import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 import getProperties from './utils/getProperties'
+import resolveLocal from '../utils/resolveLocal'
+import { addDefaultAndExecuteHandlers } from '../parse-script'
 
 /**
  * Look in the mixin section of a component.
@@ -29,11 +31,33 @@ export default async function mixinsHandler(
 		return
 	}
 
+	const variablesResolvedToCurrentFile = resolveLocal(astPath, mixinVariableNames)
+
 	// get require / import statements for mixins
 	const mixinVarToFilePath = resolveRequired(astPath, mixinVariableNames)
 
-	// get each doc for each mixin using parse
-	await documentRequiredComponents(documentation, mixinVarToFilePath, 'mixin', opt)
+	await mixinVariableNames.reduce(async (_, varName) => {
+		await _
+		if (variablesResolvedToCurrentFile.get(varName)) {
+			await addDefaultAndExecuteHandlers(
+				variablesResolvedToCurrentFile,
+				astPath,
+				{
+					...opt,
+					nameFilter: [varName]
+				},
+				documentation
+			)
+		} else {
+			// get each doc for each mixin using parse
+			await documentRequiredComponents(documentation, mixinVarToFilePath, 'mixin', {
+				...opt,
+				nameFilter: [varName]
+			})
+		}
+
+		return
+	}, Promise.resolve())
 }
 
 function getMixinsVariableNames(compDef: NodePath): string[] {
@@ -65,7 +89,7 @@ function getMixinsVariableNames(compDef: NodePath): string[] {
 		compDef.node.superClass &&
 		bt.isCallExpression(compDef.node.superClass) &&
 		bt.isIdentifier(compDef.node.superClass.callee) &&
-		compDef.node.superClass.callee.name === 'mixins'
+		compDef.node.superClass.callee.name.toLowerCase() === 'mixins'
 	) {
 		return compDef.node.superClass.arguments.reduce((acc: string[], a) => {
 			if (bt.isIdentifier(a)) {

@@ -3,8 +3,8 @@
 import { stringify } from 'q-i'
 import { moveCursor, clearLine } from 'readline'
 import WebpackDevServer from 'webpack-dev-server'
-import { Stats, Compiler, ProgressPlugin } from 'webpack'
-import kleur from 'kleur'
+import { Stats, Compiler, ProgressPlugin as ProgressPluginNormal } from 'webpack'
+import * as kleur from 'kleur'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import webpackDevServerUtils from 'react-dev-utils/WebpackDevServerUtils'
 import openBrowser from 'react-dev-utils/openBrowser'
@@ -41,6 +41,12 @@ const getProgressPlugin = (msg: string) => {
 		},
 		Presets.rect
 	)
+
+	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
+		? // eslint-disable-next-line @typescript-eslint/no-var-requires
+		  require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		: ProgressPluginNormal
+
 	return {
 		plugin: new ProgressPlugin(percentage => {
 			bar.update(percentage)
@@ -51,6 +57,12 @@ const getProgressPlugin = (msg: string) => {
 
 export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 	let bar: ProgressBar | undefined
+
+	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
+		? // eslint-disable-next-line @typescript-eslint/no-var-requires
+		  require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		: ProgressPluginNormal
+
 	if (
 		config.progressBar !== false &&
 		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
@@ -95,6 +107,12 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 
 export function commandServer(config: SanitizedStyleguidistConfig, open?: boolean): ServerInfo {
 	let bar: ProgressBar | undefined
+
+	const ProgressPlugin: typeof ProgressPluginNormal = process.env.VSG_WEBPACK_PATH
+		? // eslint-disable-next-line @typescript-eslint/no-var-requires
+		  require(process.env.VSG_WEBPACK_PATH).ProgressPlugin
+		: ProgressPluginNormal
+
 	if (
 		config.progressBar !== false &&
 		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(
@@ -154,6 +172,15 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 		}
 
 		printAllErrorsAndWarnings(messages, stats.compilation)
+	})
+
+	// kill ghosted threads on exit
+	;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
+		process.on(signal, () => {
+			app.close(() => {
+				process.exit(0)
+			})
+		})
 	})
 
 	// in order to have the caller be able to interact
@@ -216,7 +243,7 @@ function printBuildInstructions(config: SanitizedStyleguidistConfig) {
  * @param {string} linkUrl
  */
 export function printErrorWithLink(message: string, linkTitle: string, linkUrl: string) {
-	console.error(`${kleur.bold.red(message)}\n\n${linkTitle}\n${kleur.underline(linkUrl)}\n`)
+	console.error(`${kleur.bold().red(message)}\n\n${linkTitle}\n${kleur.underline(linkUrl)}\n`)
 }
 
 /**
@@ -247,11 +274,11 @@ function printErrors(
  */
 function printStatus(text: string, type: MessageType) {
 	if (type === 'success') {
-		console.log(kleur.inverse.bold.green(' DONE ') + ' ' + text)
+		console.log(kleur.inverse().bold().green(' DONE ') + ' ' + text)
 	} else if (type === 'error') {
-		console.error(kleur.inverse.bold.red(' FAIL ') + ' ' + kleur.red(text))
+		console.error(kleur.inverse().bold().red(' FAIL ') + ' ' + kleur.red(text))
 	} else {
-		console.error(kleur.inverse.bold.yellow(' WARN ') + ' ' + kleur.yellow(text))
+		console.error(kleur.inverse().bold().yellow(' WARN ') + ' ' + kleur.yellow(text))
 	}
 }
 

@@ -30,7 +30,7 @@ export default async function (
 	// `key`: filePath of source component
 	// `content`: markdown compiled for it
 	const fileCache = {}
-	const compileSingleDocWithConfig = _compile.bind(null, config, files, fileCache, docMap, watcher)
+	const compileSingleDocWithConfig = _compile.bind<null, any, void>(null, config, files, fileCache, docMap, watcher)
 
 	await compileSingleDocWithConfig()
 
@@ -80,8 +80,9 @@ export async function compile(
 			// is passed as an argument. We only affect the changed file and avoid re-parsing the rest
 			await cacheMarkDownContent(changedFilePath)
 		} catch (e) {
+			const err = e as Error
 			throw new Error(
-				`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${e.message}`
+				`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${err.message}`
 			)
 		}
 	} else {
@@ -89,7 +90,8 @@ export async function compile(
 			// if we are initializing the current file, parse all components
 			await Promise.all(files.map(cacheMarkDownContent))
 		} catch (e) {
-			throw new Error(`Error compiling file ${config.outFile}: ${e.message}`)
+			const err = e as Error
+			throw new Error(`Error compiling file ${config.outFile}: ${err.message}`)
 		}
 	}
 	// and finally save all concatenated values to the markdown file

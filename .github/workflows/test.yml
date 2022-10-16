@@ -1,0 +1,45 @@
+name: Lint & Test
+on:
+  pull_request:
+    branches: [dev]
+  workflow_call:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-unit-github-actions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+
+      - name: Run lint
+        run: pnpm lint
+
+      - name: Run unit tests
+        run: pnpm test:vitest --coverage
+
+      - name: Clean tmp coverage directory
+        run: rm -rf ./coverage/tmp
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+
+  test-plugin-github-actions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Init & Build
+        uses: ./.github/actions/build
+        
+      - name: Run plugin tests
+        run: pnpm test:plugin

@@ -1,4 +1,4 @@
-import webpack, { Configuration } from 'webpack'
+import webpackNormal, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import merge from 'webpack-merge'
 import { SanitizedStyleguidistConfig } from '../types/StyleGuide'
@@ -17,14 +17,13 @@ export default function createServer(
 				compress: true,
 				clientLogLevel: 'none',
 				hot: true,
-				quiet: true,
 				disableHostCheck: true,
 				injectClient: false,
 				watchOptions: {
 					ignored: /node_modules/
 				},
 				watchContentBase: config.assetsDir !== undefined,
-				stats: webpackConfig.stats || {}
+				stats: webpackConfig.stats || false
 			}
 		},
 		{
@@ -36,6 +35,10 @@ export default function createServer(
 			}
 		}
 	)
+
+	const webpack: typeof webpackNormal = process.env.VSG_WEBPACK_PATH
+		? require(process.env.VSG_WEBPACK_PATH)
+		: webpackNormal
 
 	const compiler = webpack(webpackConfig)
 	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig)

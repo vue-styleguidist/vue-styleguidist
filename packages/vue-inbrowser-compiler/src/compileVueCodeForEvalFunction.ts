@@ -1,6 +1,11 @@
-import { transform } from 'buble'
+import { transform, TransformOptions } from 'buble'
 import walkes from 'walkes'
-import { isCodeVueSfc } from 'vue-inbrowser-compiler-utils'
+import {
+	EvaluableComponent,
+	isCodeVueSfc,
+	isVue3,
+	compileTemplateForEval
+} from 'vue-inbrowser-compiler-utils'
 import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -9,28 +14,42 @@ import normalizeSfcComponent, {
 	JSX_ADDON_LENGTH
 } from './normalizeSfcComponent'
 import getAst from './getAst'
+import getTargetFromBrowser from './getTargetFromBrowser'
 
-interface EvaluableComponent {
-	script: string
-	template?: string
-	style?: string
+interface EvaluableComponentWithSource extends EvaluableComponent {
+	raw: {
+		script: string
+		template?: string
+	}
 }
 
 /**
- * Reads the code in string and separates the javascript part and the html part
- * then sets the nameVarComponent variable with the value of the component parameters
+ * Reads the code as a string, separates the javascript part from the template & style parts,
+ * then replaces the imports with requires and returns the script code as the body of a function.
+ *
+ * - For Vue2 the function compiles the template into a render function and adds the new function to the evaluated code.
+ * - For Vue3 you have to use the compileVue3Template function yourself to compile the template into a function.
  * @param code
  * @param config buble config to be used when transforming
  *
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: any = {}
-): EvaluableComponent {
+	config: TransformOptions = {}
+): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
-	return {
+	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
+
+	const compiledComponent = {
 		...nonCompiledComponent,
-		script: transform(nonCompiledComponent.script, config).code
+		script: transform(nonCompiledComponent.script, { target, ...config }).code
+	}
+
+	compileTemplateForEval(compiledComponent)
+
+	return {
+		...compiledComponent,
+		raw: nonCompiledComponent
 	}
 }
 
@@ -54,7 +73,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		if (config.jsx) {
 			const { preprocessing, component, postprocessing } = parseScriptCode(code)
 			return {
-				script: `${preprocessing};\nreturn {${component}};\n${postprocessing}`
+				script: `${preprocessing};return {${component}};${postprocessing}`
 			}
 		}
 
@@ -81,7 +100,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 						: undefined
 				const renderIndex = getRenderFunctionStart(optionsNode)
 				let endIndex = optionsNode.end
-				if (renderIndex > 0) {
+				if (renderIndex > 0 && !isVue3) {
 					code = insertCreateElementFunction(
 						code.slice(0, renderIndex + 1),
 						code.slice(renderIndex + 1)

@@ -1,8 +1,11 @@
+/// @ts-check
 const path = require('path')
+const { defineConfig } = require('vue-styleguidist')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
-module.exports = {
+
+module.exports = defineConfig({
 	components: 'src/components/**/[A-Z]*.vue',
 	defaultExample: true,
 	template: {
@@ -24,8 +27,9 @@ module.exports = {
 	usageMode: 'collapse',
 	exampleMode: 'expand',
 	styleguideDir: 'dist',
+	webpackConfig: require('./webpack.config'),
 	ribbon: {
 		text: 'Back to examples',
 		url: `${docSiteUrl}/Examples.html`
-	}
-}
+	},
+})

@@ -1,10 +1,7 @@
-import { dirname, join, relative } from 'path'
-import { readFile as rf } from 'fs'
-import { promisify } from 'util'
+import { dirname, join, relative, sep } from 'path'
+import { promises as fs } from 'fs'
 import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
 import { findFileCaseInsensitive } from './utils'
-
-const readFile = promisify(rf)
 
 export function getExamplesFilePaths(
 	tags: { [key: string]: (Tag | ParamTag)[] },
@@ -39,12 +36,12 @@ export default async function getDocsBlocks(
 			getRepoEditUrl
 				? `
 <a href="${getRepoEditUrl(
-						relative(rootPath, docFilePath)
+						relativeUrl(rootPath, docFilePath)
 				  )}" class="docgen-edit-link">${editLinkLabel}</a>
 `
 				: ''
 		}
-${await readFile(docFilePath, 'utf8')}`)
+${await fs.readFile(docFilePath, 'utf8')}`)
 	}
 
 	// load @examples tags into the docsBlocks
@@ -58,17 +55,23 @@ ${await readFile(docFilePath, 'utf8')}`)
 					docsBlocks.push(`${
 						getRepoEditUrl
 							? `
-<a href="${getRepoEditUrl(relative(rootPath, ep))}" class="docgen-edit-link">${editLinkLabel}</a>
+<a href="${getRepoEditUrl(relativeUrl(rootPath, ep))}" class="docgen-edit-link">${editLinkLabel}</a>
 `
 							: ''
 					}
-${await readFile(ep, 'utf8')}`)
+${await fs.readFile(ep, 'utf8')}`)
 				}
 			})
 		)
 	}
 
 	return docsBlocks
+}
+
+const separatorRE = new RegExp(`\\${sep}`, 'g')
+
+function relativeUrl(rootPath: string, docFilePath: string): string {
+	return relative(rootPath, docFilePath).replace(separatorRE, '/')
 }
 
 export function isParamTag(tag: ParamTag | Tag): tag is ParamTag {

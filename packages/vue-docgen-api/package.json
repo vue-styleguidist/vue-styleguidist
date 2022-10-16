@@ -1,20 +1,21 @@
 {
   "name": "vue-docgen-api",
-  "version": "4.33.0",
+  "version": "4.54.2",
   "description": "Toolbox to extract information from Vue component files for documentation generation purposes.",
   "homepage": "https://vue-styleguidist.github.io",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
     "compile": "tsc -p ./tsconfig.build.json",
-    "compile:watch": "yarn compile --watch"
+    "compile:watch": "pnpm run compile --watch"
   },
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vue-styleguidist/vue-styleguidist.git"
+    "url": "https://github.com/vue-styleguidist/vue-styleguidist.git",
+    "directory": "packages/vue-docgen-api"
   },
   "bugs": {
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
@@ -28,29 +29,30 @@
   "author": "elevatebart",
   "license": "MIT",
   "dependencies": {
-    "@babel/parser": "^7.6.0",
-    "@babel/types": "^7.6.0",
-    "@vue/compiler-dom": "^3.0.0-rc.6",
-	"@vue/compiler-sfc": "^3.0.0-rc.6",
-	"ast-types": "0.13.3",
+    "@babel/parser": "^7.13.12",
+    "@babel/types": "^7.18.8",
+    "@vue/compiler-dom": "^3.2.0",
+    "@vue/compiler-sfc": "^3.2.0",
+    "ast-types": "0.14.2",
     "hash-sum": "^1.0.2",
-    "lodash": "4.17.15",
     "lru-cache": "^4.1.5",
-    "pug": "^3.0.0",
-	"recast": "0.19.1",
+    "pug": "^3.0.2",
+    "recast": "0.21.5",
     "traverse": "^0.6.6",
     "ts-map": "^1.0.3",
-	"vue-template-compiler": "^2.0.0",
-	"vue-inbrowser-compiler-utils": "^4.33.0"
+    "vue-inbrowser-compiler-independent-utils": "^4.52.0"
   },
   "devDependencies": {
-	"@test-vue-docgen/mixins": "3.15.4",
-	"@types/pug": "^2.0.4",
-    "globby": "^10.0.1",
-    "vue": "^2.6.10",
-    "vue-class-component": "^7.0.2",
-    "vue-clickaway": "^2.2.2",
-    "vue-property-decorator": "^7.3.0",
-    "vuetify": "^2.2.3"
+    "@test-vue-docgen/mixins": "^4.44.15",
+    "@types/dedent": "0.7.0",
+    "@types/pug": "2.0.6",
+    "@types/traverse": "^0.6.32",
+    "dedent": "0.7.0",
+    "globby": "10.0.2",
+    "vue": "2.7.11",
+    "vue-class-component": "7.2.6",
+    "vue-clickaway": "2.2.2",
+    "vue-property-decorator": "7.3.0",
+    "vuetify": "2.6.10"
   }
 }

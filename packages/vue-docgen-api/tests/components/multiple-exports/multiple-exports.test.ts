@@ -28,22 +28,22 @@ describe('tests components with multiple exports', () => {
 
 	it('should export mixins prop', () => {
 		expect(buttonDoc.props && buttonDoc.props.map(p => p.name)).toMatchInlineSnapshot(`
-		Array [
-		  "color",
-		  "id",
-		  "v-model",
-		  "falseValue",
-		  "trueValue",
-		  "multiple",
-		  "label",
-		  "as",
-		  "type",
-		  "variant",
-		  "variantColor",
-		  "size",
-		  "isDisabled",
-		]
-	`)
+			[
+			  "color",
+			  "id",
+			  "v-model",
+			  "falseValue",
+			  "trueValue",
+			  "multiple",
+			  "label",
+			  "as",
+			  "type",
+			  "variant",
+			  "variantColor",
+			  "size",
+			  "isDisabled",
+			]
+		`)
 	})
 
 	it('should have contain the input definition', () => {
@@ -54,12 +54,12 @@ describe('tests components with multiple exports', () => {
 
 	it('should match inline snapshot', () => {
 		expect(docButton.map(c => c.exportName)).toMatchInlineSnapshot(`
-		Array [
-		  "default",
-		  "Button",
-		  "Input",
-		]
-	`)
+			[
+			  "default",
+			  "Button",
+			  "Input",
+			]
+		`)
 	})
 })
 

@@ -19,7 +19,9 @@ const CONFIG_FILENAME = 'styleguide.config.js'
  */
 export default function getConfig(
 	configParam: string | StyleguidistConfig | { serverPort?: string | number },
-	update?: (conf: SanitizedStyleguidistConfig | {}) => SanitizedStyleguidistConfig
+	update?: (
+		conf: SanitizedStyleguidistConfig | { serverPort?: string | number }
+	) => SanitizedStyleguidistConfig
 ): Promise<SanitizedStyleguidistConfig> | SanitizedStyleguidistConfig {
 	let configFilepath
 	let config:
@@ -58,7 +60,9 @@ export default function getConfig(
 function postTreatConfig(
 	configDir: string,
 	config: StyleguidistConfig | { serverPort?: string | number },
-	update?: (conf: SanitizedStyleguidistConfig | {}) => SanitizedStyleguidistConfig
+	update?: (
+		conf: SanitizedStyleguidistConfig | { serverPort?: string | number }
+	) => SanitizedStyleguidistConfig
 ): SanitizedStyleguidistConfig {
 	if (update) {
 		config = update(config)
@@ -69,11 +73,11 @@ function postTreatConfig(
 	}
 
 	try {
-		return sanitizeConfig(config as StyleguidistConfig, schema as any, configDir) as any
+		return sanitizeConfig(config, schema, configDir) as any
 	} catch (exception) {
-		/* eslint-disable */
-		console.log(exception instanceof StyleguidistError, exception.constructor.name)
-		throw exception.message
+		const err = exception as Error
+		console.log(exception instanceof StyleguidistError, err.constructor.name)
+		throw err.message
 	}
 }
 

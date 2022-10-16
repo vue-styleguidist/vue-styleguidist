@@ -1,27 +1,28 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests InputText as a JS file should match the snapshot 1`] = `
-Object {
+exports[`tests InputText as a JS file > should match the snapshot 1`] = `
+{
   "description": "Description InputText",
   "displayName": "InputText",
   "events": undefined,
   "exportName": "default",
+  "expose": undefined,
   "methods": undefined,
-  "props": Array [
-    Object {
+  "props": [
+    {
       "name": "question",
-      "type": Object {
+      "type": {
         "name": "undefined",
       },
     },
-    Object {
+    {
       "name": "placeholder",
-      "type": Object {
+      "type": {
         "name": "undefined",
       },
     },
   ],
   "slots": undefined,
-  "tags": Object {},
+  "tags": {},
 }
 `;

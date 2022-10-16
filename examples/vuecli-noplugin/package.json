@@ -8,10 +8,10 @@
     "styleguide:build": "vue-styleguidist build"
   },
   "dependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.7.11"
   },
   "devDependencies": {
-    "@vue/cli-service": "^4.0.5",
-    "vue-styleguidist": "^4.0.0"
+    "@vue/cli-service": "^5.0.8",
+    "vue-styleguidist": "^4.46.1"
   }
 }

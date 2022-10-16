@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<docs>
+<docs lang="md">
 This button is amazing, use it responsibly.
 
 ## Examples
@@ -72,7 +72,7 @@ Ugly button with pink font and blue background:
 
 ```jsx
 <app-button color="pink" background="blue">
-  Ugly button
+	Ugly button
 </app-button>
 ```
 
@@ -80,9 +80,9 @@ with extra styling
 
 ```vue
 <template>
-  <div class="LoadingPickle-wrap">
-    <app-button>Loading...</app-button>
-  </div>
+	<div class="LoadingPickle-wrap">
+		<app-button>Loading...</app-button>
+	</div>
 </template>
 
 <script>
@@ -101,7 +101,7 @@ Button containing custom tags:
 
 ```jsx
 <app-button>
-  Text with <b>bold</b>
+	Text with <b>bold</b>
 </app-button>
 ```
 </docs>

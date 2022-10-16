@@ -1,5 +1,10 @@
 import * as bt from '@babel/types'
-import { ParamType } from '../Documentation'
+import { NodePath } from 'ast-types/lib/node-path'
+import { print } from 'recast'
+import { BlockTag, DocBlockTags, ParamType } from '../Documentation'
+import getDocblock from './getDocblock'
+import getDoclets from './getDoclets'
+import transformTagsIntoObject from './transformTagsIntoObject'
 
 export default function getTypeFromAnnotation(
 	typeNode: bt.TypeAnnotation | bt.TSTypeAnnotation | bt.Noop | null
@@ -36,8 +41,14 @@ function printType(t?: bt.TSType): ParamType {
 		return { name: '' }
 	}
 
-	if (bt.isTSLiteralType(t)) {
+	if (bt.isTSLiteralType(t) && !bt.isUnaryExpression(t.literal)) {
 		return { name: JSON.stringify(t.literal.value) }
+	}
+
+	if (bt.isTSTypeLiteral(t)) {
+		return {
+			name: print(t).code
+		}
 	}
 
 	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
@@ -84,4 +95,21 @@ function getTypeObjectFromFlowType(type: bt.FlowType): ParamType {
 		? type.id.name
 		: type.type
 	return { name }
+}
+
+export function decorateItem(
+	item: NodePath,
+	propDescriptor: { description?: string; tags?: Record<string, BlockTag[]> }
+) {
+	const docBlock = getDocblock(item)
+	const jsDoc: DocBlockTags = docBlock ? getDoclets(docBlock) : { description: '', tags: [] }
+	const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
+
+	if (jsDoc.description) {
+		propDescriptor.description = jsDoc.description
+	}
+
+	if (jsDocTags.length) {
+		propDescriptor.tags = transformTagsIntoObject(jsDocTags)
+	}
 }

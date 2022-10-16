@@ -1,34 +1,39 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests button should match the snapshot 1`] = `
-Object {
+exports[`tests button > should match the snapshot 1`] = `
+{
   "description": "This is an example of creating a reusable button component and using it with external data.",
   "displayName": "ClassComponent",
-  "events": Array [
-    Object {
+  "events": [
+    {
       "name": "success",
-      "type": Object {
-        "names": Array [
+      "type": {
+        "names": [
           "undefined",
         ],
       },
     },
+    {
+      "name": "fail",
+      "type": undefined,
+    },
   ],
   "exportName": "default",
-  "methods": Array [
-    Object {
+  "expose": undefined,
+  "methods": [
+    {
       "name": "onClick",
-      "params": Array [
-        Object {
+      "params": [
+        {
           "name": "a",
-          "type": Object {
+          "type": {
             "name": "string",
           },
         },
       ],
-      "tags": Object {
-        "access": Array [
-          Object {
+      "tags": {
+        "access": [
+          {
             "description": "public",
             "title": "access",
           },
@@ -36,40 +41,40 @@ Object {
       },
     },
   ],
-  "props": Array [
-    Object {
+  "props": [
+    {
       "description": "color of the button",
-      "mixin": Object {
+      "mixin": {
         "name": "mixin",
         "path": "mixin.ts",
       },
       "name": "color",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
+    {
       "name": "bundleHash",
-      "type": Object {
+      "type": {
         "name": "number",
       },
     },
   ],
-  "slots": Array [
-    Object {
+  "slots": [
+    {
       "description": "Use this slot default",
       "name": "default",
     },
   ],
-  "tags": Object {
-    "author": Array [
-      Object {
+  "tags": {
+    "author": [
+      {
         "description": "[Rafael](https://github.com/rafaesc92)",
         "title": "author",
       },
     ],
-    "version": Array [
-      Object {
+    "version": [
+      {
         "description": "1.0.5",
         "title": "version",
       },

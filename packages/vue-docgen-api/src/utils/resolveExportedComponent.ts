@@ -113,7 +113,8 @@ export default function resolveExportedComponent(
 	function exportDeclaration(path: NodePath) {
 		const definitions = resolveExportDeclaration(path)
 
-		const sourcePath: string = path.get('source').value?.value
+		// if it is a pure export { compo } from "./compo" load the source here
+		const sourcePath: string | undefined = path.get('source').value?.value
 
 		definitions.forEach((definition: NodePath, name: string) => {
 			if (sourcePath) {
@@ -122,6 +123,11 @@ export default function resolveExportedComponent(
 					filePath: [sourcePath]
 				}
 			} else {
+				// if we look at a TS "as" expression the variable is "contained"
+				// in its expression member. In this case, resolve the expression member
+				if (bt.isTSAsExpression(definition.node)) {
+					definition = definition.get('expression')
+				}
 				const realDef = resolveIdentifier(ast, definition)
 				if (realDef) {
 					if (isComponentDefinition(realDef)) {
@@ -207,12 +213,14 @@ export default function resolveExportedComponent(
 }
 
 function normalizeComponentPath(path: NodePath): NodePath {
+	if (bt.isVariableDeclarator(path.node)) {
+		path = path.get('init')
+	}
+
 	if (bt.isObjectExpression(path.node)) {
 		return path
 	} else if (bt.isCallExpression(path.node)) {
 		return path.get('arguments', 0)
-	} else if (bt.isVariableDeclarator(path.node)) {
-		return path.get('init')
 	}
 	return path
 }

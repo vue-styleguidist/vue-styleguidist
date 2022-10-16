@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const camelCase = require('camelcase')
+import camelCase from 'camelcase'
+import { isVue3 } from 'vue-inbrowser-compiler-demi'
 
 export type CreateElementFunction = (
 	component: string | object,
@@ -8,7 +8,7 @@ export type CreateElementFunction = (
 ) => any[] | any
 
 /**
- * Groups atributes passed to a React pragma to the VueJS fashion
+ * Groups attributes passed to a React pragma to the VueJS fashion
  * @param h the VueJS createElement function passed in render functions
  * @returns pragma usable in buble rendered JSX for VueJS
  */
@@ -51,7 +51,7 @@ const makeArray = (a: any): any[] => {
 }
 
 /**
- * create a functoin out of two other
+ * Create a function out of two other
  * @param fn1
  * @param fn2
  */
@@ -65,7 +65,7 @@ const mergeFn = (
 	}
 
 /**
- * merge two members of the spread
+ * Merge two members of the spread
  * @param a
  * @param b
  */
@@ -96,9 +96,27 @@ export const concatenate = (
 }
 
 const groupAttr = (attrsIn: { [key: string]: any }): { [key: string]: any } | undefined => {
+	if (isVue3) {
+		Object.keys(attrsIn)
+			.filter(key => key.startsWith('vModel') || key.startsWith('v-model'))
+			.forEach(key => {
+				let valueRef = attrsIn[key]
+				const rootKey = key.startsWith('vModel:')
+					? key.slice(7)
+					: key.startsWith('v-model')
+					? key.slice(8)
+					: 'modelValue'
+				attrsIn[rootKey] = valueRef
+				attrsIn[`onUpdate:${rootKey}`] = ($event: any) => (valueRef = $event)
+				delete attrsIn[key]
+			})
+		return attrsIn
+	}
+
 	if (!attrsIn) {
 		return undefined
 	}
+
 	const attrsOut: { [key: string]: any } = {}
 	Object.keys(attrsIn).forEach(name => {
 		const value = attrsIn[name]
@@ -126,7 +144,7 @@ const groupAttr = (attrsIn: { [key: string]: any }): { [key: string]: any } | un
 						attrsOut[prefix] = {}
 					}
 					if (camelCasedName.length) {
-						// if it is a litteral prefixed attribute
+						// if it is a literal prefixed attribute
 						attrsOut[prefix][camelCasedName] = merge(attrsOut[prefix][camelCasedName], value)
 					} else {
 						// if it is a spread

@@ -2,6 +2,7 @@ const path = require('path')
 
 const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.github.io'
 
+/** @type import("vue-styleguidist").Config */
 module.exports = {
 	title: 'Vue Design System',
 	components: 'src/components/**/[A-Z]*.vue',

@@ -1,57 +1,58 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`tests InputTextDoc should match the snapshot 1`] = `
-Object {
+exports[`tests InputTextDoc > should match the snapshot 1`] = `
+{
   "description": "Description InputTextDocumented",
   "displayName": "InputTextDocumented",
   "events": undefined,
   "exportName": "default",
+  "expose": undefined,
   "methods": undefined,
-  "props": Array [
-    Object {
+  "props": [
+    {
       "name": "question",
-      "type": Object {
+      "type": {
         "name": "undefined",
       },
     },
-    Object {
-      "mixin": Object {
+    {
+      "mixin": {
         "name": "multiNamed",
         "path": "../../mixins/multiNamed.js",
       },
       "name": "importedProp",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
-    Object {
-      "mixin": Object {
+    {
+      "mixin": {
         "name": "otherNamed",
         "path": "../../mixins/otherNamed.js",
       },
       "name": "otherMixinProp",
-      "type": Object {
+      "type": {
         "name": "number",
       },
     },
-    Object {
-      "mixin": Object {
+    {
+      "mixin": {
         "name": "deep",
         "path": "../../mixins/another/deep.js",
       },
       "name": "deep",
-      "type": Object {
+      "type": {
         "name": "boolean",
       },
     },
-    Object {
+    {
       "name": "placeholder",
-      "type": Object {
+      "type": {
         "name": "string",
       },
     },
   ],
   "slots": undefined,
-  "tags": Object {},
+  "tags": {},
 }
 `;

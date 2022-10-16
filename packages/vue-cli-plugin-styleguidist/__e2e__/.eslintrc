@@ -1,5 +1,11 @@
 {
   "rules": {
     "vue-libs/no-async-functions": 0
+  },
+  "globals": {
+    "vi": true,
+    "test": true,
+    "beforeAll": true,
+    "expect": true
   }
 }

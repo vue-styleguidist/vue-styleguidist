@@ -84,7 +84,7 @@ export default {
 }
 </style>
 
-<docs>
+<docs lang="md">
 ```jsx
 <logo></logo>
 ```
