@@ -8,7 +8,7 @@ let docButton: ComponentDoc
 
 describe('tests button', () => {
 	let sizeProp: PropDescriptor = { name: '<default>' }
-	beforeAll(async done => {
+	beforeAll(async () => {
 		docButton = await parse(button, {
 			alias: {
 				'@mixins': path.resolve(__dirname, '../../mixins'),
@@ -16,7 +16,6 @@ describe('tests button', () => {
 			},
 			translation: 'FR'
 		})
-		done()
 
 		sizeProp = (docButton.props && docButton.props.find(p => p.name === 'size')) || sizeProp
 	})

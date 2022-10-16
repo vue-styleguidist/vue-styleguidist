@@ -1,4 +1,5 @@
-import translate from '../translate'
+import {expect} from 'vitest'
+import translate from './translate'
 
 describe('translate', () => {
 	it('translate all description', () => {
@@ -6,6 +7,7 @@ describe('translate', () => {
 			{
 				displayName: 'bar',
 				exportName: 'default',
+        tags: { },
 				props: [{ name: 'foo', description: 'EN-1' }, { name: 'bar', description: 'EN-2' }]
 			},
 			{ props: [{ name: 'foo', description: 'FR-1' }] }

@@ -1,5 +1,6 @@
 import traverse from 'traverse'
-import setAtPath from '../setAtPath'
+import {expect} from 'vitest'
+import setAtPath from './setAtPath'
 
 describe('getOrCreateObjectAtPath', () => {
 	it('should create values', () => {

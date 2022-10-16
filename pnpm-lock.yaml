@@ -77,6 +77,7 @@ importers:
       vue: 2.7.11
       vue-cli-plugin-docgen: '*'
       vue-cli-plugin-styleguidist: '*'
+      vue-docgen-i18n: '*'
       vue-inbrowser-compiler-sucrase: '*'
       vue-property-decorator: 9.1.2
       vue-server-renderer: 2.7.11
@@ -153,6 +154,7 @@ importers:
       vue: 2.7.11_26fyyf7iv7yfd4w3hhy5cm2p24
       vue-cli-plugin-docgen: link:packages/vue-cli-plugin-docgen
       vue-cli-plugin-styleguidist: link:packages/vue-cli-plugin-styleguidist
+      vue-docgen-i18n: link:packages/vue-docgen-i18n
       vue-inbrowser-compiler-sucrase: link:packages/vue-inbrowser-compiler-sucrase
       vue-property-decorator: 9.1.2_vue@2.7.11
       vue-server-renderer: 2.7.11

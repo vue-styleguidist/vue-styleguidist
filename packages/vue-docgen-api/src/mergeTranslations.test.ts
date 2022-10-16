@@ -1,5 +1,5 @@
-import { mergeTranslationsAsObject } from './mergeTranslations'
 import { expect } from 'vitest'
+import { mergeTranslationsAsObject } from './mergeTranslations'
 
 const trad = [
 	{
@@ -43,25 +43,26 @@ const orig = {
 describe('mergeTranslationsAsObject', () => {
 	it('should match the object', () => {
 		expect(mergeTranslationsAsObject(orig, trad)).toMatchInlineSnapshot(`
-		Object {
-		  "description": "un example de traduction d'un composant",
-		  "displayName": "origin",
-		  "exportName": "default",
-		  "props": Array [
-		    Object {
-		      "description": "nombre de colomnes",
-		      "name": "span",
-		    },
-		    Object {
-		      "description": "Sm breakpoint and above",
-		      "name": "spanSm",
-		    },
-		    Object {
-		      "description": "taille du bouton",
-		      "name": "size",
-		    },
-		  ],
-		}
-	`)
+			{
+			  "description": "un example de traduction d'un composant",
+			  "displayName": "origin",
+			  "exportName": "default",
+			  "props": [
+			    {
+			      "description": "nombre de colomnes",
+			      "name": "span",
+			    },
+			    {
+			      "description": "Sm breakpoint and above",
+			      "name": "spanSm",
+			    },
+			    {
+			      "description": "taille du bouton",
+			      "name": "size",
+			    },
+			  ],
+			  "tags": {},
+			}
+		`)
 	})
 })

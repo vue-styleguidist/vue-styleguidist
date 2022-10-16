@@ -1,11 +1,12 @@
+
+import { expect } from 'vitest'
 import * as fs from 'fs'
 import * as path from 'path'
 import execa from 'execa'
 
 describe('Simple', () => {
-	beforeAll(async done => {
+	beforeAll(async () => {
 		await execa('vue-docgen-i18n', ['./__mocks__/Button.vue', '--lang', 'FR'], { cwd: __dirname })
-		done()
 	})
 
 	it('should generate a translation file', () => {
