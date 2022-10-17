@@ -8,7 +8,7 @@ const cliBinPath = require.resolve('vue-docgen-i18n/lib/bin')
 
 describe('Simple', () => {
 	beforeAll(async () => {
-		await execa(cliBinPath, ['./tests/__mocks__/Button.vue', '--lang', 'FR'], { cwd: __dirname, stdio: 'inherit' })
+		await execa(cliBinPath, ['./__mocks__/Button.vue', '--lang', 'FR'], { cwd: __dirname, stdio: 'inherit' })
 	})
 
 	it('should generate a translation file', () => {
