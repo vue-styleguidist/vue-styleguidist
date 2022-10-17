@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import execa from 'execa'
 
+// in CI, the simlink tend to fail with execa
 const cliBinPath = require.resolve('vue-docgen-i18n/lib/bin')
 
 describe('Simple', () => {
