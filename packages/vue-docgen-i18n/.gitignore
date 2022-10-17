@@ -1,2 +1,3 @@
 /lib
-/__e2e__/__mocks__/Button.FR.js
+# keep the bin file to allow install on windows
+!/lib/bin.js
