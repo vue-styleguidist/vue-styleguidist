@@ -6,7 +6,7 @@ import execa from 'execa'
 
 describe('Simple', () => {
 	beforeAll(async () => {
-		await execa('vue-docgen-i18n', ['./__mocks__/Button.vue', '--lang', 'FR'], { cwd: __dirname })
+		await execa('vue-docgen-i18n', ['./tests/__mocks__/Button.vue', '--lang', 'FR'], { cwd: __dirname })
 	})
 
 	it('should generate a translation file', () => {
