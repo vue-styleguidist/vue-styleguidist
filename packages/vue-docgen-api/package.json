@@ -38,6 +38,7 @@
     "lru-cache": "^4.1.5",
     "pug": "^3.0.2",
     "recast": "0.21.5",
+    "traverse": "^0.6.6",
     "ts-map": "^1.0.3",
     "vue-inbrowser-compiler-independent-utils": "^4.52.0"
   },
@@ -45,6 +46,7 @@
     "@test-vue-docgen/mixins": "^4.44.15",
     "@types/dedent": "0.7.0",
     "@types/pug": "2.0.6",
+    "@types/traverse": "^0.6.32",
     "dedent": "0.7.0",
     "globby": "10.0.2",
     "vue": "2.7.11",

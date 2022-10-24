@@ -10,18 +10,22 @@ import Documentation, {
 	ParamTag,
 	ParamType
 } from './Documentation'
-import { DocGenOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
+import { DocGenOptions as DCOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
 import * as ScriptHandlers from './script-handlers'
 import * as TemplateHandlers from './template-handlers'
+import mergeTranslations from './mergeTranslations'
 
 export { ScriptHandlers }
 export { TemplateHandlers }
+
+export interface DocGenOptions extends DCOptions {
+	translation?: string
+}
 
 export { TemplateParserOptions } from './parse-template'
 export { ScriptHandler, TemplateHandler } from './parse'
 export {
 	ComponentDoc,
-	DocGenOptions,
 	ParseOptions,
 	Documentation,
 	BlockTag,
@@ -77,8 +81,9 @@ export async function parseSource(
 function isOptionsObject(opts: any): opts is DocGenOptions {
 	return (
 		!!opts &&
-		(!!opts.alias ||
-			opts.jsx !== undefined ||
+		(opts.jsx !== undefined ||
+			!!opts.alias ||
+			!!opts.validExtends ||
 			!!opts.addScriptHandlers ||
 			!!opts.addTemplateHandlers)
 	)
@@ -101,5 +106,7 @@ async function parsePrimitive(
 				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
 		  }
 	const docs = await createDocs(options)
-	return docs.map(d => d.toObject())
+	return docs
+		.map(d => d.toObject())
+		.map(d => (opts && opts.translation ? mergeTranslations(d, filePath, opts.translation) : d))
 }

@@ -109,6 +109,7 @@
     "vue": "2.7.11",
     "vue-cli-plugin-docgen": "*",
     "vue-cli-plugin-styleguidist": "*",
+    "vue-docgen-i18n": "*",
     "vue-inbrowser-compiler-sucrase": "*",
     "vue-property-decorator": "9.1.2",
     "vue-server-renderer": "2.7.11",

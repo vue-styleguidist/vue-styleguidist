@@ -180,7 +180,7 @@ describe('slotHandler', () => {
 			)
 			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 			const slots = doc.toObject().slots || []
-			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+			expect(slots.filter((s: any) => s.name === 'bound')[0].bindings).toMatchObject([
 				{
 					name: 'v-bind'
 				}
@@ -198,7 +198,7 @@ describe('slotHandler', () => {
 			)
 			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 			const slots = doc.toObject().slots || []
-			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+			expect(slots.filter((s: any) => s.name === 'bound')[0].bindings).toMatchObject([
 				{
 					name: 'item'
 				},
@@ -223,7 +223,7 @@ describe('slotHandler', () => {
 			)
 			traverse(ast.children[0], doc, [slotHandler], ast.children, { functional: false })
 			const slots = doc.toObject().slots || []
-			expect(slots.filter(s => s.name === 'bound')[0].bindings).toMatchObject([
+			expect(slots.filter((s: any) => s.name === 'bound')[0].bindings).toMatchObject([
 				{
 					name: 'item',
 					description: 'menu item'
