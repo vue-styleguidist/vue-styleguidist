@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.54.3
+
+### Patch Changes
+
+- [#1411](https://github.com/vue-styleguidist/vue-styleguidist/pull/1411) [`725ebf90`](https://github.com/vue-styleguidist/vue-styleguidist/commit/725ebf90a7c227b8915d35a5f0c42d5b8f732572) Thanks [@elevatebart](https://github.com/elevatebart)! - Issue #1410: avoid re-creating the root every update
+
 ## 4.54.1
 
 ### Patch Changes
