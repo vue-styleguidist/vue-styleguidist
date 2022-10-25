@@ -1,0 +1,10 @@
+{
+  "pipeline": {
+    "compile": {
+      "outputs": ["lib/**", "dist/**"]
+    },
+    "lint": {
+      "outputs": []
+    }
+  }
+}
