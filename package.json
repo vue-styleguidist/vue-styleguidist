@@ -21,7 +21,7 @@
     "start": "./start.sh server",
     "build": "./start.sh build",
     "lint": "eslint . --cache --fix --ext .ts,.tsx,.js --cache-location node_modules/.eslint_cache/",
-    "compile": "pnpm turbo compile",
+    "compile": "turbo run compile",
     "test:browser": "node test/browser.js",
     "precommit": "lint-staged",
     "cy:open": "cypress open",
