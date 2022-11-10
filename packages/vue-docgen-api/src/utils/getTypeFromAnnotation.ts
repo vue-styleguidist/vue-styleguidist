@@ -42,6 +42,7 @@ function printType(t?: bt.TSType): ParamType {
 	}
 
 	if (bt.isTSLiteralType(t) && !bt.isUnaryExpression(t.literal)) {
+		// @ts-ignore
 		return { name: JSON.stringify(t.literal.value) }
 	}
 

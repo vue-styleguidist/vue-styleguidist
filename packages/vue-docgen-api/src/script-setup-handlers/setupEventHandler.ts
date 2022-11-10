@@ -47,9 +47,11 @@ export default async function setupEventHandler(
 				if (
 					bt.isTSTypeAnnotation(firstParam) &&
 					bt.isTSLiteralType(firstParam.typeAnnotation) &&
-          !bt.isUnaryExpression(firstParam.typeAnnotation.literal) &&
+					!bt.isUnaryExpression(firstParam.typeAnnotation.literal) &&
+					// @ts-ignore
 					typeof firstParam.typeAnnotation.literal.value === 'string'
 				) {
+					// @ts-ignore
 					buildEventDescriptor(firstParam.typeAnnotation.literal.value, member)
 				}
 			}
