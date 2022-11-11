@@ -36,11 +36,11 @@
     "sass": "^1.34.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^0.19.1",
-    "vue": "^2.7.11",
+    "vue": "^2.7.14",
     "vue-inbrowser-compiler-sucrase": "^4",
     "vue-loader": "^15.9.8",
     "vue-styleguidist": "^4",
-    "vue-template-compiler": "^2.7.11",
+    "vue-template-compiler": "^2.7.14",
     "webpack": "^4.46.0",
     "webpack-bundle-analyzer": "3.3.2"
   }
