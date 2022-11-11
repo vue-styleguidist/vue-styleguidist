@@ -31,7 +31,7 @@ export default async function getSpreadProperties(
 }
 
 function getFromPathsInFileByImportsOrExports(source: string, query?: string): string[] {
-	const regExp = /^(import|export)(?:.*?(as))?(?:.*?(as))?(?:.*?(from))*.*$/gm
+	const regExp = /(import|export)(?:["'\s]*([\w*{}\n, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
 	const imports = source.match(regExp) as string[]
 	const fromImportsOrExports = imports
 		.filter(item => (query ? item.includes(query) : true))
