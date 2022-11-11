@@ -149,9 +149,13 @@ function getConfig(api) {
 
 	// styleguidist provides its own html plugin that outputs index.html
 	// this avoid conflicts with the html-webpack-plugin on webpack 5
-	if (require('webpack').version.startsWith('5.')) {
+  const webpackVersion = require('webpack').version
+	if (webpackVersion.startsWith('5.')) {
 		conf.plugins.delete('html')
-	}
+	} else if (webpackVersion.startsWith('4.')){
+    conf.plugins.delete('preload')
+    conf.plugins.delete('prefetch')
+  }
 
 	// remove the double compiled successfully message
 	conf.plugins.delete('friendly-errors')
