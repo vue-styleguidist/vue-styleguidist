@@ -34,7 +34,7 @@ jobs:
         run: cd examples; for D in *; do mv "${D}"/dist ../docs/dist/"${D}"; done || exit 1
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.0
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: master # The branch the action should deploy to.
           folder: docs/dist # The folder the action should deploy.
