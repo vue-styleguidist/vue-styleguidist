@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.54.4
+
+### Patch Changes
+
+- [#1420](https://github.com/vue-styleguidist/vue-styleguidist/pull/1420) [`55c25017`](https://github.com/vue-styleguidist/vue-styleguidist/commit/55c2501788d36030b6b6c23797f0f2143160e7db) Thanks [@elevatebart](https://github.com/elevatebart)! - fix styleguidist plugin on 4.x
+
 ## 4.45.1
 
 ### Patch Changes
