@@ -1,4 +1,5 @@
 import normalizeSfcComponent from './normalizeSfcComponent'
+import { expect } from 'vitest'
 
 function evalFunction(sut: { script: string }): any {
 	// eslint-disable-next-line no-new-func

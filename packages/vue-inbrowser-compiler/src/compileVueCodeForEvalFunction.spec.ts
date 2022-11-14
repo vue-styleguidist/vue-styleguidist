@@ -1,7 +1,6 @@
 /* eslint-disable no-new-func */
-import compileVueCodeForEvalFunction, {
-	getEvaluableVue3RenderFunctionBody
-} from './compileVueCodeForEvalFunction'
+import { expect } from 'vitest'
+import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {
