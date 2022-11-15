@@ -1134,7 +1134,7 @@ importers:
       tslib: 2.4.1
       typescript: 4.8.4
       vue: 2.7.14
-      vue-inbrowser-compiler-utils: ^4.54.1
+      vue-inbrowser-compiler-utils: ^4.55.0
       vue-template-compiler: 2.7.14
       vue3: npm:vue@3
       walkes: ^0.2.1
@@ -1158,7 +1158,7 @@ importers:
       typescript: 4.8.4
       vue: 2.7.14_26fyyf7iv7yfd4w3hhy5cm2p24
       vue-template-compiler: 2.7.14
-      vue3: /vue/3.2.37
+      vue3: /vue/3.2.45
 
   packages/vue-inbrowser-compiler-demi:
     specifiers:
@@ -1210,7 +1210,7 @@ importers:
       tslib: 2.4.1
       typescript: 4.8.4
       vue: 2.7.14
-      vue-inbrowser-compiler-utils: ^4.54.1
+      vue-inbrowser-compiler-utils: ^4.55.0
       vue-template-compiler: 2.7.14
       walkes: ^0.2.1
     dependencies:
@@ -1246,8 +1246,8 @@ importers:
       tslib: 2.4.1
       typescript: 4.8.4
       vue: 2.7.14
-      vue-inbrowser-compiler-demi: ^4.54.1
-      vue-inbrowser-compiler-independent-utils: ^4.54.1
+      vue-inbrowser-compiler-demi: ^4.55.0
+      vue-inbrowser-compiler-independent-utils: ^4.55.0
     dependencies:
       camelcase: 5.3.1
       vue-inbrowser-compiler-demi: link:../vue-inbrowser-compiler-demi
@@ -6977,7 +6977,7 @@ packages:
       '@volar/source-map': 0.38.9
       '@volar/vue-code-gen': 0.38.9
       '@vue/compiler-sfc': 3.2.45
-      '@vue/reactivity': 3.2.37
+      '@vue/reactivity': 3.2.45
     dev: true
 
   /@vue/babel-helper-vue-jsx-merge-props/1.2.1:
@@ -8968,14 +8968,14 @@ packages:
       '@vue/shared': 3.2.37
       vue: 3.2.37
 
-  /@vue/server-renderer/3.2.45_vue@3.2.45:
+  /@vue/server-renderer/3.2.45_vue@2.7.14:
     resolution: {integrity: sha512-ebiMq7q24WBU1D6uhPK//2OTR1iRIyxjF5iVq/1a5I1SDMDyDu4Ts6fJaMnjrvD3MqnaiFkKQj+LKAgz5WIK3g==}
     peerDependencies:
       vue: 3.2.45
     dependencies:
       '@vue/compiler-ssr': 3.2.45
       '@vue/shared': 3.2.45
-      vue: 3.2.45
+      vue: 2.7.14_26fyyf7iv7yfd4w3hhy5cm2p24
     dev: true
 
   /@vue/shared/3.2.20:
@@ -27554,7 +27554,7 @@ packages:
       loader-utils: 1.4.0
       mime: 2.5.2
       schema-utils: 1.0.0
-      webpack: 4.46.0_webpack-cli@4.5.0
+      webpack: 4.46.0
 
   /url-loader/4.1.1_lit45vopotvaqup7lrvlnvtxwy:
     resolution: {integrity: sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==}
@@ -29349,7 +29349,7 @@ packages:
       '@vue/compiler-dom': 3.2.45
       '@vue/compiler-sfc': 3.2.45
       '@vue/runtime-dom': 3.2.45
-      '@vue/server-renderer': 3.2.45_vue@3.2.45
+      '@vue/server-renderer': 3.2.45_vue@2.7.14
       '@vue/shared': 3.2.45
     dev: true
 

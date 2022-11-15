@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.55.0
+
+### Minor Changes
+
+- [#1422](https://github.com/vue-styleguidist/vue-styleguidist/pull/1422) [`570e197e`](https://github.com/vue-styleguidist/vue-styleguidist/commit/570e197e68a459647858a4a95f42f0e48d9018aa) Thanks [@elevatebart](https://github.com/elevatebart)! - enable script setup in examples
+
 ## 4.54.1
 
 ### Patch Changes
