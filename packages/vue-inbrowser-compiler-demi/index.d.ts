@@ -1,4 +1,4 @@
-import { parseComponent } from 'vue-template-compiler'
+import { parseComponent as parse } from 'vue-template-compiler'
 
 type BindingTypes = 'data' | 'props' | 'options'
 type BindingMetadata = Record<string, BindingTypes>
@@ -43,13 +43,13 @@ export declare const compileTemplate: (options?: {
 	}
 }) => { code: string }
 
-export { parseComponent }
+export declare function parseComponent(...args:Parameters<typeof parse>): ReturnType<typeof parse> & {scriptSetup?:SFCScriptBlock}
 
-export declare const compileScript: (
+export declare function compileScript(
 	sfc: {
 		cssVars: string[]
 		script: SFCScriptBlock | null
 		scriptSetup: SFCScriptBlock | null
 	},
 	options?: any
-) => SFCScriptBlock
+): SFCScriptBlock
