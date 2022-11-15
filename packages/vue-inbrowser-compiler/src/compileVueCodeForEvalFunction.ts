@@ -4,9 +4,9 @@ import {
 	EvaluableComponent,
 	isCodeVueSfc,
 	isVue3,
-	compileTemplateForEval
+	compileTemplateForEval,
+  transformOneImport
 } from 'vue-inbrowser-compiler-utils'
-import transformOneImport from './transformOneImport'
 import normalizeSfcComponent, {
 	parseScriptCode,
 	getRenderFunctionStart,

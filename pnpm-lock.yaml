@@ -1201,6 +1201,7 @@ importers:
       '@rollup/plugin-commonjs': 15.1.0
       '@rollup/plugin-node-resolve': 9.0.0
       '@rollup/plugin-typescript': 8.5.0
+      '@vue/compiler-sfc': '3'
       '@vue/test-utils': 1.3.3
       camelcase: ^5.3.1
       detect-browser: ^5.2.0
@@ -1224,6 +1225,7 @@ importers:
       '@rollup/plugin-commonjs': 15.1.0_rollup@2.79.1
       '@rollup/plugin-node-resolve': 9.0.0_rollup@2.79.1
       '@rollup/plugin-typescript': 8.5.0_ee2lsxs7bbggrcawnn34dqpc4e
+      '@vue/compiler-sfc': 3.2.45
       '@vue/test-utils': 1.3.3_rhqkolmkwunxzlyyxxsuwaiuri
       rollup: 2.79.1
       tslib: 2.4.1
@@ -7211,7 +7213,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8_s72bufat24j4xi363kb5czieqe
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
@@ -7259,7 +7261,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8_s72bufat24j4xi363kb5czieqe
+      '@vue/cli-service': 5.0.8
     dev: true
 
   /@vue/cli-service/5.0.8:

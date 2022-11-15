@@ -1,3 +1,4 @@
+import { expect } from "vitest"
 import transformOneImport from './transformOneImport'
 
 describe('transformOneImport', () => {

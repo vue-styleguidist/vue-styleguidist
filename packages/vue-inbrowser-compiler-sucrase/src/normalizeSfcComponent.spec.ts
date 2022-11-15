@@ -1,4 +1,6 @@
+import { expect } from 'vitest'
 import { transform } from 'sucrase'
+import { parse } from '@vue/compiler-sfc'
 import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'
 
 function evalFunction(sut: { script: string }): any {
@@ -167,5 +169,37 @@ describe('parseScriptCode', () => {
           ",
       }
     `)
+	})
+
+  it.only('compiles script setup', () => {
+		const sut = normalizeSfcComponent(`
+<script setup>
+import { ref } from 'vue'
+
+defineProps({})
+defineEmits([])
+defineExpose([])
+const msg = ref('321')
+const STATUS_OK = 200
+</script>`, (( source: string, opts: any ) => {
+  const { descriptor } = parse(source, opts)
+  return descriptor
+}) as any)
+		expect(evalFunction(sut).setup.toString()).toMatchInlineSnapshot(`
+			"setup(){
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+
+			var _vue = require('vue');
+
+			defineProps({})
+			defineEmits([])
+			defineExpose([])
+			const msg = _vue.ref.call(void 0, '321')
+			const STATUS_OK = 200
+
+			return {msg,STATUS_OK}}"
+		`)
 	})
 })

@@ -1,7 +1,6 @@
 import walkes from 'walkes'
-import { parseComponent, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, isVue3, transformOneImport } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
-import transformOneImport from './transformOneImport'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
 	let _styles = ''

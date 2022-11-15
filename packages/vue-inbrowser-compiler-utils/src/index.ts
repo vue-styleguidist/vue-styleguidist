@@ -13,6 +13,7 @@ export {
   addScopedStyle,
   getDefaultExample,
   EvaluableComponent,
+  transformOneImport,
 } from 'vue-inbrowser-compiler-independent-utils'
 export { default as adaptCreateElement, concatenate } from './adaptCreateElement'
 export { default as isCodeVueSfc } from './isCodeVueSfc'
