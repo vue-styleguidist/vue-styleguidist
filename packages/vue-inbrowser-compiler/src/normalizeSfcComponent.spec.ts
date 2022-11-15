@@ -91,9 +91,6 @@ const STATUS_OK = 200
 }) as any)
 		expect(evalFunction(sut).setup.toString()).toMatchInlineSnapshot(`
 			"setup(){
-			function defineProps(){}
-			function defineEmits(){}
-			function defineExpose(){}
 
 			const vue$0 = require('vue');const ref = vue$0.ref;
 
@@ -103,7 +100,11 @@ const STATUS_OK = 200
 			const msg = ref('321')
 			const STATUS_OK = 200
 
-			return {msg,STATUS_OK}}"
+			return {msg,STATUS_OK}
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+			}"
 		`)
 	})
 })
