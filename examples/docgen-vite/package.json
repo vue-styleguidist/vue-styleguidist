@@ -29,7 +29,7 @@
     "vitepress": "1.0.0-alpha.28",
     "vue-component-meta": "^1.0.9",
     "vue-docgen-cli": "^4",
-    "vue-live": "^2",
+    "vue-live": "^2.3.2",
     "vue-tsc": "^0.38.8"
   }
 }
