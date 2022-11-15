@@ -84,6 +84,9 @@ defineProps({})
 defineEmits([])
 defineExpose([])
 const msg = ref('321')
+const { all:names } = {all: 'foo'}
+function hello() {
+}
 const STATUS_OK = 200
 </script>`, (( source: string, opts: any ) => {
   const { descriptor } = parse(source, opts)
@@ -98,9 +101,12 @@ const STATUS_OK = 200
 			defineEmits([])
 			defineExpose([])
 			const msg = ref('321')
+			const { all:names } = {all: 'foo'}
+			function hello() {
+			}
 			const STATUS_OK = 200
 
-			return {msg,STATUS_OK}
+			return {msg,names,hello,STATUS_OK}
 			function defineProps(){}
 			function defineEmits(){}
 			function defineExpose(){}
