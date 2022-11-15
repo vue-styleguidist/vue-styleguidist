@@ -1,3 +1,5 @@
+import { expect, vi } from 'vitest'
+import { parse } from '@vue/compiler-sfc'
 import normalizeSfcComponent from './normalizeSfcComponent'
 
 function evalFunction(sut: { script: string }): any {
@@ -71,5 +73,44 @@ computed:{
 }}
 </script>`)
 		expect(evalFunction(sut).render.toString()).toMatch(/const h = this\.\$createElement/)
+	})
+
+  it('compiles script setup', () => {
+		const sut = normalizeSfcComponent(`
+<script setup>
+import { ref } from 'vue'
+
+defineProps({})
+defineEmits([])
+defineExpose([])
+const msg = ref('321')
+const { all:names } = {all: 'foo'}
+function hello() {
+}
+const STATUS_OK = 200
+</script>`, (( source: string, opts: any ) => {
+  const { descriptor } = parse(source, opts)
+  return descriptor
+}) as any)
+		expect(evalFunction(sut).setup.toString()).toMatchInlineSnapshot(`
+			"setup(){
+
+			const vue$0 = require('vue');const ref = vue$0.ref;
+
+			defineProps({})
+			defineEmits([])
+			defineExpose([])
+			const msg = ref('321')
+			const { all:names } = {all: 'foo'}
+			function hello() {
+			}
+			const STATUS_OK = 200
+
+			return {msg,names,hello,STATUS_OK}
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+			}"
+		`)
 	})
 })
