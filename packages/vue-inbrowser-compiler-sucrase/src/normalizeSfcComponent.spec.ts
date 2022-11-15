@@ -171,7 +171,7 @@ describe('parseScriptCode', () => {
     `)
 	})
 
-  it.only('compiles script setup', () => {
+  it('compiles script setup', () => {
 		const sut = normalizeSfcComponent(`
 <script setup>
 import { ref } from 'vue'
