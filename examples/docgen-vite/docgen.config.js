@@ -17,7 +17,7 @@ module.exports = defineConfig({
   propsParser(componentPath) {
     const exportNames = checker.getExportNames(componentPath);
     return Promise.resolve(exportNames.map(exportName => {
-      const meta = checker.getComponentMeta(componentPath, exportName)
+      const meta = checker.getComponentMeta(componentPath)
 
       const nonGlobalProps = meta.props.filter(prop => !prop.global)
 
@@ -40,6 +40,7 @@ module.exports = defineConfig({
       const events = meta.events.length ? meta.events.map(s => ({
         name: s.name,
       })) : undefined
+
       return {
         props, 
         slots,
