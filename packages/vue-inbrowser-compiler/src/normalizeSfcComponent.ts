@@ -107,25 +107,70 @@ export function insertCreateElementFunction(before: string, after: string): stri
 	return `${before};const h = this.$createElement;${after}`
 }
 
+export function parseScriptSetupCode(code: string): string {
+  const varNames:string[] = []
+  let offset = 0
+	walkes(getAst(code), {
+    VariableDeclaration(node: any) {
+      node.declarations.forEach((declaration: any) => {
+        if (declaration.id.name) {
+          // simple variable declaration
+          varNames.push(declaration.id.name)
+        } else if (declaration.id.properties) {
+          // spread variable declaration
+          // const { all:names } = {all: 'foo'}
+          declaration.id.properties.forEach((p: any) => {
+            varNames.push(p.value.name)
+          })
+        }
+      })
+    },
+    FunctionDeclaration(node: any) {
+      varNames.push(node.id.name)
+    },
+    ImportDeclaration(node: any) {
+			const ret = transformOneImport(node, code, offset)
+			offset = ret.offset
+			code = ret.code
+		}
+  })
+
+	return `setup(){
+function defineProps(){}
+function defineEmits(){}
+function defineExpose(){}
+${code}
+return {${varNames.join(',')}}}`
+}
+
 /**
  * Coming out of this function all SFC should be in the `new Vue()` format
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code: string): {
+export default function normalizeSfcComponent(code: string, _parseComponent = parseComponent): {
 	script: string
 	style?: string
 	template?: string
 } {
-	const parts = parseComponent(code)
+	const { script, scriptSetup, template, styles } = _parseComponent(code)
+
 	const {
 		preprocessing = '',
 		component = '',
 		postprocessing = ''
-	} = parts.script ? parseScriptCode(parts.script.content) : {}
+	} = scriptSetup
+		? {
+      preprocessing: script, 
+      component: parseScriptSetupCode(scriptSetup.content)
+    }
+		: script
+		? parseScriptCode(script.content)
+		: {}
+
 	return {
-		template: parts.template?.content,
+		template: template?.content,
 		script: [preprocessing, `return {${component}}`, postprocessing].join('\n'),
-		style: buildStyles(parts.styles.map(styleBlock => styleBlock.content))
+		style: buildStyles(styles.map(styleBlock => styleBlock.content))
 	}
 }
