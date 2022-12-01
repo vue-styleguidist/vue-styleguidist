@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.56.0
+
+### Minor Changes
+
+- [#1430](https://github.com/vue-styleguidist/vue-styleguidist/pull/1430) [`65e0cfd6`](https://github.com/vue-styleguidist/vue-styleguidist/commit/65e0cfd662acf0b3c3f81ae073e7a92c5220ac88) Thanks [@sawmurai](https://github.com/sawmurai)! - feat(docgen): support import assertions
+
 ## 4.54.2
 
 ### Patch Changes
