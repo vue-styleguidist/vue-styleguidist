@@ -45,4 +45,10 @@ describe('babel-parser', () => {
 			parser.parse(src)
 		}).not.toThrow()
 	})
+	it('should parse imports with import assertions', () => {
+		const src = `import 'some-file.json' assert {type: 'json'}`
+		expect(() => {
+			parser.parse(src)
+		}).not.toThrow()
+	})
 })

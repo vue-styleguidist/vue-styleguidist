@@ -24,7 +24,8 @@ const babelParserOptions: ParserOptions = {
 		'bigInt',
 		'optionalCatchBinding',
 		'throwExpressions',
-		'nullishCoalescingOperator'
+		'nullishCoalescingOperator',
+		'importAssertions'
 	]
 }
 
