@@ -55,3 +55,8 @@ export default {
 }
 </style>
 ```
+
+## Documentation en francais
+
+
+Vue (/vjuː/ à prononcer comme en anglais: view) est un framework JavaScript qui se repose sur les standards HTML, CSS et JavaScript. Il propose une manière efficace de déclarer des composants pour la construction d'interfaces utilisateur, qu'elles soient simples ou complexes.
