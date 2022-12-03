@@ -3,6 +3,7 @@ import { FSWatcher } from 'chokidar'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import compileTemplates from './compileTemplates'
+import { ComponentDoc } from 'vue-docgen-api'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
 	outFile: string
@@ -17,7 +18,7 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param config
  * @param _compile
  */
-export default async function (
+export default async function(
 	files: string[],
 	watcher: FSWatcher,
 	config: DocgenCLIConfigWithOutFile,
@@ -30,7 +31,16 @@ export default async function (
 	// `key`: filePath of source component
 	// `content`: markdown compiled for it
 	const fileCache = {}
-	const compileSingleDocWithConfig = _compile.bind<null, any, void>(null, config, files, fileCache, docMap, watcher)
+	const docsCache = {}
+	const compileSingleDocWithConfig = _compile.bind<null, any, void>(
+		null,
+		config,
+		files,
+		fileCache,
+    docsCache,
+		docMap,
+		watcher
+	)
 
 	await compileSingleDocWithConfig()
 
@@ -44,7 +54,7 @@ export default async function (
  * markdown file and save it to the `config.outFile`
  * @param files the component files relative paths
  * @param config config passed to the current chunk
- * @param cachedContent in order to avoid reparsing unchanged components pass an object wher to store for future reference
+ * @param cachedContent in order to avoid re-parsing unchanged components pass an object where to store for future reference
  * @param docMap a map of each documentation file to the component they refer to
  * @param changedFilePath When in wtch mode, provide the relative path of the file that changes to only re-parse this file
  */
@@ -52,6 +62,7 @@ export async function compile(
 	config: DocgenCLIConfigWithOutFile,
 	files: string[],
 	cachedContent: { [filepath: string]: string },
+  cachedDocs: { [filepath: string]: ComponentDoc[] },
 	docMap: { [filepath: string]: string },
 	watcher: FSWatcher,
 	changedFilePath?: string
@@ -59,16 +70,19 @@ export async function compile(
 	// this local function will enrich the cachedContent with the
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
-		const { content, dependencies } = await compileTemplates(
+		const { content, dependencies, docs } = await compileTemplates(
 			path.join(config.componentsRoot, filePath),
 			config,
 			filePath
 		)
+
 		dependencies.forEach(d => {
 			watcher.add(d)
 			docMap[d] = filePath
 		})
+
 		cachedContent[filePath] = content
+    cachedDocs[filePath] = docs
 		return true
 	}
 
@@ -94,6 +108,17 @@ export async function compile(
 			throw new Error(`Error compiling file ${config.outFile}: ${err.message}`)
 		}
 	}
+
+	// first sort the updated cachedContent
+	const sortedMd = Object.entries(cachedContent)
+		.map(([filePath, mdValue]) => ({ filePath, mdValue, docs: cachedDocs[filePath] }))
+		.sort(config.sortComponents)
+
+  
+
 	// and finally save all concatenated values to the markdown file
-	writeDownMdFile(Object.values(cachedContent), config.outFile)
+	writeDownMdFile(
+		sortedMd.map(part => part.mdValue),
+		config.outFile
+	)
 }

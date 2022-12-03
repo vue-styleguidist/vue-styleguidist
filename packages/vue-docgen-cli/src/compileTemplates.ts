@@ -17,6 +17,7 @@ export { default as docgen } from './docgen'
 export interface ContentAndDependencies {
 	content: string
 	dependencies: string[]
+  docs: ComponentDoc[]
 }
 
 export interface SubTemplateOptions {
@@ -108,13 +109,15 @@ export default async function compileTemplates(
           requiresMd,
           subComponentOptions
         ),
-        dependencies: getDependencies(doc, componentRelativeDirectoryPath)
+        dependencies: getDependencies(doc, componentRelativeDirectoryPath),
+        docs
       }
     }))
 
     return {
       content: components.map((c) => c.content).join('\n\n'),
-      dependencies: components.map((c) => c.dependencies).reduce((acc, curr) => acc.concat(curr), [])
+      dependencies: components.map((c) => c.dependencies).reduce((acc, curr) => acc.concat(curr), []),
+      docs
     }
   } catch (e) {
     const err = e as Error
