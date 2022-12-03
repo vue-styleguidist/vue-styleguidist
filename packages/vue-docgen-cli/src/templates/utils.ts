@@ -3,7 +3,8 @@ import path from 'path'
 import memoize from 'lodash.memoize'
 
 /**
- * replaces returns and tubes to make the input compatible with markdown
+ * Replaces returns and tubes to make the input compatible with markdown
+ * also makes sure < and > are escaped so html tags are not rendered
  * @param input
  */
 export function mdclean(input: string): string {
