@@ -17,12 +17,13 @@ export default {
 	name: 'Button',
 	props: {
 		/**
-		 * The color for the button.
-		 */
-		color: {
-			type: String,
-			default: '#333'
-		},
+     * "Une couleur en hexadécimal"
+     * Trad: A color in hexadecimal
+     */
+     color: {
+      type: String,
+      default: '#333'
+    },
 		/**
 		 * The size of the button
 		 * @values small, normal, large
