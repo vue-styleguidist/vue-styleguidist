@@ -1,5 +1,13 @@
 # Change Log
 
+## 4.56.1
+
+### Patch Changes
+
+- [#1435](https://github.com/vue-styleguidist/vue-styleguidist/pull/1435) [`64114774`](https://github.com/vue-styleguidist/vue-styleguidist/commit/64114774794048a093b36b6d7278f2b2734f172c) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: add sortComponents function to vue-docgen-cli
+
+- [#1433](https://github.com/vue-styleguidist/vue-styleguidist/pull/1433) [`4bb24cf6`](https://github.com/vue-styleguidist/vue-styleguidist/commit/4bb24cf6723b3c90c8a090b61b4a7b2297d677dc) Thanks [@elevatebart](https://github.com/elevatebart)! - fix(CLI): escape < and > in types and tags to avoid conflict with Markdown
+
 ## 4.51.0
 
 ### Minor Changes
