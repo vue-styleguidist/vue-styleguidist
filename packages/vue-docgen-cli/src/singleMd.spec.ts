@@ -1,9 +1,11 @@
 import { FSWatcher } from 'chokidar'
+import { expect } from 'vitest'
 import * as singleMd from './singleMd'
 import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'
 
-const FAKE_MD_CONTENT = '## fake markdown Content'
+const FAKE_MD_CONTENT_1 = '## first fake markdown Content 1'
+const FAKE_MD_CONTENT_2 = '## second fake markdown Content 2'
 const FILES = ['src/comps/button/button.vue']
 
 vi.mock('./utils', () => {
@@ -14,13 +16,19 @@ vi.mock('./utils', () => {
 
 vi.mock('./compileTemplates', () => {
 	return {
-		default: vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
+		default: vi.fn(filePath => {
+			return filePath === 'here/two'
+				? Promise.resolve({ content: FAKE_MD_CONTENT_2, dependencies: [] })
+				: Promise.resolve({ content: FAKE_MD_CONTENT_1, dependencies: [] })
+    }
+		)
 	}
 })
 
 describe('compile', () => {
 	const CWD = 'here'
-	const FAKE_COMPONENT_PATH = 'here'
+	const FAKE_COMPONENT_PATH_1 = 'one'
+	const FAKE_COMPONENT_PATH_2 = 'two'
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: singleMd.DocgenCLIConfigWithOutFile
 	const fakeOn = vi.fn()
@@ -33,12 +41,19 @@ describe('compile', () => {
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
+		conf.sortComponents = vi.fn((a, b) => a.filePath.localeCompare(b.filePath) as any)
 	})
 
 	describe('compile', () => {
 		it('should get the current components doc', async () => {
-			await singleMd.compile(conf, [FAKE_COMPONENT_PATH], {}, {}, w)
-			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT], MD_FILE_PATH)
+			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w)
+			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT_1, FAKE_MD_CONTENT_2], MD_FILE_PATH)
+		})
+
+    it('should reverse the order if the sort is reversed', async () => {
+      conf.sortComponents = (a, b) => - (a.filePath.localeCompare(b.filePath)) as any
+			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w)
+			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT_2, FAKE_MD_CONTENT_1], MD_FILE_PATH)
 		})
 	})
 
@@ -46,7 +61,7 @@ describe('compile', () => {
 		it('should build one md from merging contents', async () => {
 			vi.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
 			await singleMd.default(FILES, w, conf, {}, singleMd.compile)
-			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, w)
+			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, {}, w)
 		})
 
 		it('should watch file changes if a watcher is passed', async () => {

@@ -5,7 +5,7 @@ import {
 	MethodDescriptor,
 	EventDescriptor,
 	ComponentDoc,
-  parseMulti,
+	parseMulti
 } from 'vue-docgen-api'
 import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
@@ -90,10 +90,14 @@ export interface SafeDocgenCLIConfig {
 	 * Label to give to the edit button at the bottom of each page
 	 */
 	editLinkLabel: string
-  /**
-   * Parser used to extract props, slots and events from each component
-   */ 
-  propsParser: typeof parseMulti
+	/**
+	 * Parser used to extract props, slots and events from each component
+	 */
+	propsParser: typeof parseMulti
+	/**
+	 * In a single md setup, this function will be called to determine the order of the components on the page
+	 */
+	sortComponents(a:{filePath: string, docs: ComponentDoc[]}, b:{filePath: string, docs: ComponentDoc[]}): 0 | 1 | -1
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
