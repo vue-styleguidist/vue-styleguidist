@@ -1,10 +1,10 @@
 <template>
-	<div class="Button">
-		<button class="button" :style="{ color: color, fontSize: fontSize }" @click.prevent="onClick">
-			<!-- @slot Content of button -->
-			<slot></slot>
-		</button>
-	</div>
+  <div class="Button">
+    <button class="button" :style="{ color: color, fontSize: fontSize }" @click.prevent="onClick">
+      <!-- @slot Content of button -->
+      <slot></slot>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -14,71 +14,83 @@
  * @example ./Second-ReadMe.md
  */
 export default {
-	name: 'Button',
-	props: {
-		/**
-		 * The color for the button.
-		 */
-		color: {
-			type: String,
-			default: '#333'
-		},
-		/**
-		 * The size of the button
-		 * @values small, normal, large
-		 */
-		size: {
-			type: String,
-			default: 'normal'
-		},
-		/**
-		 * Gets called when the user clicks on the button
-		 * @ignore
-		 */
-		onClick: {
-			type: Function,
-			default: event => {
-				console.log('You have clicked me!', event.target)
-			}
-		}
-	},
-	computed: {
-		fontSize() {
-			let size
-			switch (this.size) {
-				case 'small':
-					size = '10px'
-					break
-				case 'normal':
-					size = '14px'
-					break
-				case 'large':
-					size = '18px'
-					break
-			}
-			return size
-		}
-	}
+  name: 'Button',
+  props: {
+    /**
+     * The color for the button.
+     */
+    color: {
+      type: String,
+      default: '#333'
+    },
+    /**
+     * The size of the button
+     * @values small, normal, large
+     */
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    /**
+     * Array of options
+     *
+     * @type {Array<string | number | { [key: string | number]: any }>}
+     *
+     * @see https://vue-select.org/api/props.html#options
+     */
+    options: {
+      type: Array,
+      default: () => [],
+    },
+    /**
+     * Gets called when the user clicks on the button
+     * @ignore
+     */
+    onClick: {
+      type: Function,
+      default: event => {
+        console.log('You have clicked me!', event.target)
+      }
+    }
+  },
+  computed: {
+    fontSize() {
+      let size
+      switch (this.size) {
+        case 'small':
+          size = '10px'
+          break
+        case 'normal':
+          size = '14px'
+          break
+        case 'large':
+          size = '18px'
+          break
+      }
+      return size
+    }
+  }
 }
 </script>
 
 <style scope>
 .button {
-	padding: 0.5em 1.5em;
-	background-color: $primary;
-	border: 1px solid $secondary;
-	border-radius: 0.3em;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
+  padding: 0.5em 1.5em;
+  background-color: var(--primary);
+  border: 1px solid var(--secondary);
+  border-radius: 0.3em;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
 }
+
 .checks {
-	background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 25%),
-		linear-gradient(-45deg, #f5f5f5 25%, transparent 25%),
-		linear-gradient(45deg, transparent 75%, #f5f5f5 75%),
-		linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
-	background-size: 16px 16px;
-	background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 25%),
+    linear-gradient(-45deg, #f5f5f5 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f5f5f5 75%),
+    linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
 }
 </style>
 <docs lang="md">

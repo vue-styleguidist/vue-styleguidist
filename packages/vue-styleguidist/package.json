@@ -21,11 +21,12 @@
   "main": "lib/scripts/index.js",
   "typings": "lib/scripts/index.d.ts",
   "bin": {
-    "vue-styleguidist": "lib/bin.js"
+    "vue-styleguidist": "bin.js"
   },
   "files": [
     "lib",
-    "templates"
+    "templates",
+    "bin.js"
   ],
   "engines": {
     "node": ">=6",
