@@ -1,9 +1,9 @@
 import * as path from 'path'
 import { FSWatcher } from 'chokidar'
+import type { ComponentDoc } from 'vue-docgen-api'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import compileTemplates from './compileTemplates'
-import { ComponentDoc } from 'vue-docgen-api'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
 	outFile: string
