@@ -12,6 +12,7 @@ export const renderTags = (tags?: { [tag: string]: (Tag | ParamTag)[] }): string
 	}
 	return Object.entries(tags)
 		.map(([tag, values]) => {
+      if(tag === 'type') return ''
 			return values.map(v => `<br/>\`@${tag}\` ${isTag(v) ? v.content : v.description}`).join('')
 		})
 		.join('')

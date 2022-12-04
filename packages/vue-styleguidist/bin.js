@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 "use strict";
 
-require("./bin/styleguidist");
+require("./lib/bin/styleguidist");
