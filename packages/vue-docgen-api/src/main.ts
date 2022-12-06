@@ -1,3 +1,4 @@
+import path from 'path'
 import Documentation, {
 	ComponentDoc,
 	PropDescriptor,
@@ -89,6 +90,7 @@ async function parsePrimitive(
 	filePath: string,
 	opts?: DocGenOptions | { [alias: string]: string }
 ): Promise<ComponentDoc[]> {
+	filePath = path.resolve(filePath)
 	const options: ParseOptions = isOptionsObject(opts)
 		? {
 				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath),
