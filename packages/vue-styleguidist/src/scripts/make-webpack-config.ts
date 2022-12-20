@@ -108,7 +108,7 @@ export default function (
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
-		entry: config.require?.concat([path.resolve(sourceDir, 'index')]) ?? path.resolve(sourceDir, 'index'),
+		entry: config.require.concat([path.resolve(sourceDir, 'index')]) ?? path.resolve(sourceDir, 'index'),
 		plugins: [
 			// in order to avoid collision with the preload plugins
 			// that are loaded by the vue cli
