@@ -3,6 +3,7 @@ import React from 'react'
 const _require = () => React
 
 const evalInContext = (a: string) =>
+  // eslint-disable-next-line no-new-func
 	new Function('require', 'const React = require("react");' + a).bind(null, _require)
 
 export default {
