@@ -1,18 +1,26 @@
 import { defineConfig } from 'cypress'
+import makeWebpackConfig from './src/scripts/make-webpack-config'
+import webpackMerge from 'webpack-merge'
 
-const webpackConfig = {
+const { resolve } = makeWebpackConfig(
+	{
+    require: [],
+		simpleEditor: true
+	} as any,
+	'development'
+)
+
+const webpackConfig = webpackMerge({
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx'],
-		alias: {
-			'rsg-components': 'react-styleguidist/lib/client/rsg-components'
-		}
+		...resolve,
+		extensions: ['.ts', '.tsx', '.js', '.jsx']
 	},
 	module: {
 		rules: [
-      {
-        test: /\.mjs$/,
-        type: 'javascript/auto',
-      },
+			{
+				test: /\.mjs$/,
+				type: 'javascript/auto'
+			},
 			{
 				test: /\.(tsx|ts|js|jsx)$/,
 				exclude: /node_modules/,
@@ -35,10 +43,10 @@ const webpackConfig = {
 		]
 	},
 	devtool: 'source-map'
-}
+})
 
 export default defineConfig({
-  projectId: "3pjqam",
+	projectId: '3pjqam',
 
 	fixturesFolder: false,
 	screenshotsFolder: '../../test/cypress/screenshots',

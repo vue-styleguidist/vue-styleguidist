@@ -107,7 +107,7 @@ export function getCompiledExampleComponent({
 	}
 
 	// then we just have to render the setup previewComponent in the prepared slot
-	const rootComponent = renderRootJsx
+	const rootComponent = typeof renderRootJsx?.default === 'function'
 		? renderRootJsx.default(previewComponent)
 		: {
 				render: (createElement: (comp: any) => any) =>
