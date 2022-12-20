@@ -47,7 +47,7 @@ export default async function setupEventHandler(
 				if (
 					bt.isTSTypeAnnotation(firstParam) &&
 					bt.isTSLiteralType(firstParam.typeAnnotation) &&
-          !bt.isUnaryExpression(firstParam.typeAnnotation.literal) &&
+					!bt.isUnaryExpression(firstParam.typeAnnotation.literal) &&
 					typeof firstParam.typeAnnotation.literal.value === 'string'
 				) {
 					buildEventDescriptor(firstParam.typeAnnotation.literal.value, member)
@@ -71,8 +71,12 @@ export default async function setupEventHandler(
 				// Object where the arguments are validated manually
 				if (bt.isObjectExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'properties').each((element: NodePath) => {
-						if (bt.isObjectProperty(element.node) && bt.isIdentifier(element.node.key)) {
-							buildEventDescriptor(element.node.key.name, element)
+						if (bt.isObjectProperty(element.node)) {
+							if (bt.isIdentifier(element.node.key)) {
+								buildEventDescriptor(element.node.key.name, element)
+							} else if (bt.isStringLiteral(element.node.key)) {
+								buildEventDescriptor(element.node.key.value, element)
+							}
 						}
 					})
 				}
