@@ -1,4 +1,5 @@
 import { ParserPlugin } from '@babel/parser'
+import { expect } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'
@@ -182,6 +183,18 @@ describe('setupEventHandler', () => {
 					}
 				]
 			})
+		})
+
+    it('should handle event definitions wrapped in double quotes', async () => {
+			const src = `
+      const emit = defineEmits({
+        native: null, 
+        "double-quotes": null, 
+      });
+          `
+			await parserTest(src)
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('native')
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('double-quotes')
 		})
 	})
 })
