@@ -1,4 +1,5 @@
 import * as path from 'path'
+import { expect } from 'vitest'
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
 
@@ -39,6 +40,10 @@ describe('setup syntactic sugar', () => {
 				    },
 				  },
 				  {
+				    "defaultValue": {
+				      "func": false,
+				      "value": "0",
+				    },
 				    "description": "The percentage of the circle that is filled.",
 				    "name": "progress",
 				    "required": false,
@@ -49,6 +54,7 @@ describe('setup syntactic sugar', () => {
 				]
 			`)
 		})
+
 		describe('events', () => {
 			it('should return a doc object containing events', () => {
 				expect(doc.events).toHaveLength(2)
@@ -75,5 +81,22 @@ describe('setup syntactic sugar', () => {
 				`)
 			})
 		})
+
+    describe('expose', () => {
+      it('should return a doc object containing expose', () => {
+        expect(doc.expose).toHaveLength(1)
+      })
+
+      it('should match the snapshot', () => {
+        expect(doc.expose).toMatchInlineSnapshot(`
+          [
+            {
+              "description": "position of the dash offset",
+              "name": "strokeDashoffset",
+            },
+          ]
+        `)
+      })
+    })
 	})
 })

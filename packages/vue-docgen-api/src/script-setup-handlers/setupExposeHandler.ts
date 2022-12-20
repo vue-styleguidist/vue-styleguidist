@@ -48,7 +48,13 @@ export default async function setupExposedHandler(
 							buildExposedDescriptor(prop.node.key.value, prop)
 						}
 					})
-				}
+				} else if(bt.isArrayExpression(nodePath.get('arguments', 0).node)) {
+          nodePath.get('arguments', 0, 'elements').each((prop: NodePath<bt.Node>) => {
+            if (bt.isStringLiteral(prop.node)) {
+              buildExposedDescriptor(prop.node.value, prop)
+            }
+          })
+        }
 			}
 			return false
 		}

@@ -1,5 +1,5 @@
 import setupEventHandler from './setupEventHandler'
 import setupPropHandler from './setupPropHandler'
-import setupExposedHandler from './setupExposedHandler'
+import setupExposeHandler from './setupExposeHandler'
 
-export default [setupEventHandler, setupPropHandler, setupExposedHandler]
+export default [setupEventHandler, setupPropHandler, setupExposeHandler]

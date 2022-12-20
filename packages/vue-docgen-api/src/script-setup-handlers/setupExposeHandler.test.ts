@@ -1,10 +1,11 @@
 import { ParserPlugin } from '@babel/parser'
+import { expect } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'
 import Documentation, { ExposedDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
-import setupExposedHandler from './setupExposedHandler'
+import setupExposedHandler from './setupExposeHandler'
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -39,6 +40,26 @@ describe('setupExposedHandler', () => {
 		await setupExposedHandler(documentation, stubNodePath!, ast, options)
 		return mockExposedDescriptor
 	}
+
+  it('should resolve Exposed in setup script as an array of strings', async () => {
+		const src = `
+        const testProps = 0
+        defineExpose([
+          /**
+           * Exposed test props
+           */
+          "testProps"
+        ])
+        `
+    const exposed = await parserTest(src)
+		expect(documentation.getExposedDescriptor).toHaveBeenCalledWith('testProps')
+    expect(exposed).toMatchInlineSnapshot(`
+			{
+			  "description": "Exposed test props",
+			  "name": "mockExposed",
+			}
+		`)
+	})
 
 	it('should resolve Exposed in setup script', async () => {
 		const src = `
