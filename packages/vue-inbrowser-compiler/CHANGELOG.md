@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.56.2
+
+### Patch Changes
+
+- [#1449](https://github.com/vue-styleguidist/vue-styleguidist/pull/1449) [`f2cf6fcc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f2cf6fcc02e655e5c399a1e62451cde45c0f6b5d) Thanks [@elevatebart](https://github.com/elevatebart)! - 1447 lack of support for defineexpose in script setup synthax
+
 ## 4.55.0
 
 ### Minor Changes

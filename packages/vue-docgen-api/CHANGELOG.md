@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.56.2
+
+### Patch Changes
+
+- [#1449](https://github.com/vue-styleguidist/vue-styleguidist/pull/1449) [`f2cf6fcc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f2cf6fcc02e655e5c399a1e62451cde45c0f6b5d) Thanks [@elevatebart](https://github.com/elevatebart)! - 1447 lack of support for defineexpose in script setup synthax
+
+- [#1448](https://github.com/vue-styleguidist/vue-styleguidist/pull/1448) [`fbd5fe71`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fbd5fe7199e65184468d9a517bb9d2ee7337ecd4) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: defineEmits can use quote string as key
+
+- Updated dependencies [[`f2cf6fcc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f2cf6fcc02e655e5c399a1e62451cde45c0f6b5d)]:
+  - vue-inbrowser-compiler-independent-utils@4.56.2
+
 ## 4.56.0
 
 ### Minor Changes
