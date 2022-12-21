@@ -1,5 +1,5 @@
 describe('Single component', () => {
-	before(() => {
+	beforeEach(() => {
 		// Open simple button component in isolation
 		cy.visit('/#!/Best Button/1')
 	})

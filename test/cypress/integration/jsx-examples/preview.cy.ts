@@ -1,5 +1,5 @@
 describe('Preview render', () => {
-	before(() => {
+	beforeEach(() => {
 		// Open simple button component in isolation
 		cy.visit('/')
 	})
