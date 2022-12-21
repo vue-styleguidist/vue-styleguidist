@@ -58,6 +58,8 @@ describe('Single component', () => {
       // Here the textarea is not completely visible, so we need to force 
       // the typing to avoid cypress crashing.
 			// eslint-disable-next-line cypress/no-force
+      cy.get('@viewCodeBtn').click()
+      
 			cy.get('@container')
 				.find('textarea')
 				.type(`${'{leftarrow}'.repeat(codeToSkip.length)} Harder`, {
