@@ -64,7 +64,7 @@ export interface EventDescriptor extends DocBlockTags, Descriptor {
 	properties?: EventProperty[]
 }
 
-export interface ExposedDescriptor extends DocBlockTags, Descriptor {
+export interface ExposeDescriptor extends DocBlockTags, Descriptor {
 	name: string
 }
 
@@ -105,7 +105,7 @@ export interface ComponentDoc {
 	methods?: MethodDescriptor[]
 	slots?: SlotDescriptor[]
 	events?: EventDescriptor[]
-	expose?: ExposedDescriptor[]
+	expose?: ExposeDescriptor[]
 	tags: { [key: string]: BlockTag[] }
 	docsBlocks?: string[]
 	[key: string]: any

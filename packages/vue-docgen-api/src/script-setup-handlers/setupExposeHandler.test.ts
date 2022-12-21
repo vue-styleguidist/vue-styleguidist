@@ -1,10 +1,11 @@
 import { ParserPlugin } from '@babel/parser'
+import { expect } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'
-import Documentation, { ExposedDescriptor } from '../Documentation'
+import Documentation, { ExposeDescriptor } from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
-import setupExposedHandler from './setupExposedHandler'
+import setupExposedHandler from './setupExposeHandler'
 
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
@@ -12,7 +13,7 @@ function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 
 describe('setupExposedHandler', () => {
 	let documentation: Documentation
-	let mockExposedDescriptor: ExposedDescriptor
+	let mockExposeDescriptor: ExposeDescriptor
 
 	let stubNodePath: NodePath<any, any> | undefined
 	const options = { filePath: '', validExtends: () => true }
@@ -22,23 +23,43 @@ describe('setupExposedHandler', () => {
 	})
 
 	beforeEach(() => {
-		mockExposedDescriptor = {
+		mockExposeDescriptor = {
 			description: '',
 			name: 'mockExposed'
 		}
 		documentation = new Documentation('test/path')
-		const mockGetPropDescriptor = vi.spyOn(documentation, 'getExposedDescriptor')
-		mockGetPropDescriptor.mockReturnValue(mockExposedDescriptor)
+		const mockGetPropDescriptor = vi.spyOn(documentation, 'getExposeDescriptor')
+		mockGetPropDescriptor.mockReturnValue(mockExposeDescriptor)
 	})
 
 	async function parserTest(
 		src: string,
 		plugins: ParserPlugin[] = ['typescript']
-	): Promise<ExposedDescriptor> {
+	): Promise<ExposeDescriptor> {
 		const ast = parse(src, plugins)
 		await setupExposedHandler(documentation, stubNodePath!, ast, options)
-		return mockExposedDescriptor
+		return mockExposeDescriptor
 	}
+
+  it('should resolve Exposed in setup script as an array of strings', async () => {
+		const src = `
+        const testProps = 0
+        defineExpose([
+          /**
+           * Exposed test props
+           */
+          "testProps"
+        ])
+        `
+    const exposed = await parserTest(src)
+		expect(documentation.getExposeDescriptor).toHaveBeenCalledWith('testProps')
+    expect(exposed).toMatchInlineSnapshot(`
+			{
+			  "description": "Exposed test props",
+			  "name": "mockExposed",
+			}
+		`)
+	})
 
 	it('should resolve Exposed in setup script', async () => {
 		const src = `
@@ -46,7 +67,7 @@ describe('setupExposedHandler', () => {
         defineExpose({ testProps })
         `
 		await parserTest(src)
-		expect(documentation.getExposedDescriptor).toHaveBeenCalledWith('testProps')
+		expect(documentation.getExposeDescriptor).toHaveBeenCalledWith('testProps')
 	})
 
 	it('should resolve Exposed descriptions in setup script', async () => {

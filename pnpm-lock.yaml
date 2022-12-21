@@ -40,7 +40,7 @@ importers:
       cmd-shim: 5.0.0
       core-js: 3.26.1
       cross-env: 5.2.1
-      cypress: 10.11.0
+      cypress: 12.1.0
       danger: 10.9.0
       ejs: 3.1.8
       eslint: 7.32.0
@@ -117,7 +117,7 @@ importers:
       cmd-shim: 5.0.0
       core-js: 3.26.1
       cross-env: 5.2.1
-      cypress: 10.11.0
+      cypress: 12.1.0
       danger: 10.9.0
       ejs: 3.1.8
       eslint: 7.32.0
@@ -1758,7 +1758,7 @@ packages:
       '@babel/helper-compilation-targets': 7.19.0_@babel+core@7.18.9
       '@babel/helper-module-transforms': 7.19.0
       '@babel/helpers': 7.19.0
-      '@babel/parser': 7.19.0
+      '@babel/parser': 7.20.5
       '@babel/template': 7.18.10
       '@babel/traverse': 7.19.0
       '@babel/types': 7.20.5
@@ -9226,7 +9226,7 @@ packages:
   /@vue/compiler-core/3.2.20:
     resolution: {integrity: sha512-vcEXlKXoPwBXFP5aUTHN9GTZaDfwCofa9Yu9bbW2C5O/QSa9Esdt7OG4+0RRd3EHEMxUvEdj4RZrd/KpQeiJbA==}
     dependencies:
-      '@babel/parser': 7.19.0
+      '@babel/parser': 7.20.5
       '@babel/types': 7.15.6
       '@vue/shared': 3.2.20
       estree-walker: 2.0.2
@@ -14245,7 +14245,7 @@ packages:
   /constantinople/4.0.1:
     resolution: {integrity: sha512-vCrqcSIq4//Gx74TXXCGnHpulY1dskqLTFGDmhrGxzeXL8lF8kvXv6mpNWlJj1uD4DW23D4ljAqbY4RRaaUZIw==}
     dependencies:
-      '@babel/parser': 7.19.0
+      '@babel/parser': 7.20.5
       '@babel/types': 7.20.5
 
   /constants-browserify/1.0.0:
@@ -15037,9 +15037,9 @@ packages:
   /cyclist/1.0.1:
     resolution: {integrity: sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=}
 
-  /cypress/10.11.0:
-    resolution: {integrity: sha512-lsaE7dprw5DoXM00skni6W5ElVVLGAdRUUdZjX2dYsGjbY/QnpzWZ95Zom1mkGg0hAaO/QVTZoFVS7Jgr/GUPA==}
-    engines: {node: '>=12.0.0'}
+  /cypress/12.1.0:
+    resolution: {integrity: sha512-7fz8N84uhN1+ePNDsfQvoWEl4P3/VGKKmAg+bJQFY4onhA37Ys+6oBkGbNdwGeC7n2QqibNVPhk8x3YuQLwzfw==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
@@ -18042,17 +18042,6 @@ packages:
       debug:
         optional: true
 
-  /follow-redirects/1.13.3_debug@4.3.1:
-    resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.1_supports-color@6.1.0
-
   /follow-redirects/1.13.3_debug@4.3.2:
     resolution: {integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==}
     engines: {node: '>=4.0'}
@@ -19342,7 +19331,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.13.3_debug@4.3.1
+      follow-redirects: 1.13.3
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -31632,7 +31621,7 @@ packages:
     resolution: {integrity: sha512-RNGKj82nUPg3g5ygxkQl0R937xLyho1J24ItRCBTr/m1YnZkzJy1hUiHUJrc/VlsDQzsCnInEGSg3bci0Lmd4w==}
     engines: {node: '>= 10.0.0'}
     dependencies:
-      '@babel/parser': 7.19.0
+      '@babel/parser': 7.20.5
       '@babel/types': 7.20.5
       assert-never: 1.2.1
       babel-walk: 3.0.0-canary-5

@@ -1,7 +1,7 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
-import Documentation, { DocBlockTags, ExposedDescriptor } from '../Documentation'
+import Documentation, { DocBlockTags, ExposeDescriptor } from '../Documentation'
 import { ParseOptions } from '../parse'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
@@ -19,21 +19,21 @@ export default async function setupExposedHandler(
 	astPath: bt.File,
 	opt: ParseOptions
 ) {
-	function buildExposedDescriptor(exposedName: string, exposedPath: NodePath) {
-		const exposedDescriptor = documentation.getExposedDescriptor(exposedName)
+	function buildExposeDescriptor(exposedName: string, exposedPath: NodePath) {
+		const exposeDescriptor = documentation.getExposeDescriptor(exposedName)
 		const docBlock = getDocblock(exposedPath)
 		if (docBlock) {
 			const jsDoc = getDoclets(docBlock)
-			setExposedDescriptor(exposedDescriptor, jsDoc)
+			setExposeDescriptor(exposeDescriptor, jsDoc)
 		}
 	}
 
-	function setExposedDescriptor(exposedDescriptor: ExposedDescriptor, jsDoc: DocBlockTags) {
+	function setExposeDescriptor(exposeDescriptor: ExposeDescriptor, jsDoc: DocBlockTags) {
 		if (jsDoc.description && jsDoc.description.length) {
-			exposedDescriptor.description = jsDoc.description
+			exposeDescriptor.description = jsDoc.description
 		}
 		if (jsDoc.tags?.length) {
-			exposedDescriptor.tags = jsDoc.tags
+			exposeDescriptor.tags = jsDoc.tags
 		}
 	}
 
@@ -43,12 +43,18 @@ export default async function setupExposedHandler(
 				if (bt.isObjectExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'properties').each((prop: NodePath<bt.ObjectProperty>) => {
 						if (bt.isIdentifier(prop.node.key)) {
-							buildExposedDescriptor(prop.node.key.name, prop)
+							buildExposeDescriptor(prop.node.key.name, prop)
 						} else if (bt.isStringLiteral(prop.node.key)) {
-							buildExposedDescriptor(prop.node.key.value, prop)
+							buildExposeDescriptor(prop.node.key.value, prop)
 						}
 					})
-				}
+				} else if(bt.isArrayExpression(nodePath.get('arguments', 0).node)) {
+          nodePath.get('arguments', 0, 'elements').each((prop: NodePath<bt.Node>) => {
+            if (bt.isStringLiteral(prop.node)) {
+              buildExposeDescriptor(prop.node.value, prop)
+            }
+          })
+        }
 			}
 			return false
 		}

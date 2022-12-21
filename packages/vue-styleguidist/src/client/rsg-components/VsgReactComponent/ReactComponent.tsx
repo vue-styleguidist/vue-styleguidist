@@ -59,9 +59,9 @@ export class VsgReactComponent extends Component<ReactComponentProps> {
 
 		const parentHref = component.props ? getFinalUrl(component.slug || '', this.props.depth) : ''
 
-		return (
+    return (
 			<>
-				<DocumentedComponentContext.Provider value={component}>
+        <DocumentedComponentContext.Provider value={component}>
 					<FinalRsgReactComponent {...this.props} />
 				</DocumentedComponentContext.Provider>
 				{component.subComponents ? (

@@ -5,7 +5,7 @@ import {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
-	ExposedDescriptor,
+	ExposeDescriptor,
 	ComponentDoc,
 	DocBlockTags,
 	BlockTag,
@@ -22,7 +22,7 @@ export {
 	MethodDescriptor,
 	SlotDescriptor,
 	EventDescriptor,
-	ExposedDescriptor,
+	ExposeDescriptor,
 	ComponentDoc,
 	DocBlockTags,
 	BlockTag,
@@ -38,7 +38,7 @@ export default class Documentation {
 	private eventsMap: Map<string, any>
 	private slotsMap: Map<string, SlotDescriptor>
 	private methodsMap: Map<string, MethodDescriptor>
-	private exposedMap: Map<string, ExposedDescriptor>
+	private exposedMap: Map<string, ExposeDescriptor>
 	private dataMap: Map<string, any>
 	private docsBlocks: string[] | undefined
 	private originExtendsMixin: Descriptor
@@ -101,7 +101,7 @@ export default class Documentation {
 		}))
 	}
 
-	public getExposedDescriptor(exposedName: string): ExposedDescriptor {
+	public getExposeDescriptor(exposedName: string): ExposeDescriptor {
 		return this.getDescriptor(exposedName, this.exposedMap, () => ({
 			name: exposedName
 		}))
