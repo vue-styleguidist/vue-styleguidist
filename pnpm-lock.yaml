@@ -1063,7 +1063,7 @@ importers:
       vue: 2.7.14
       vue-class-component: 7.2.6
       vue-clickaway: 2.2.2
-      vue-inbrowser-compiler-independent-utils: ^4.52.0
+      vue-inbrowser-compiler-independent-utils: ^4.56.2
       vue-property-decorator: 7.3.0
       vuetify: 2.6.12
     dependencies:
@@ -1353,8 +1353,8 @@ importers:
       to-ast: ^1.0.0
       typescript: 4.9.3
       vue: 2.7.14
-      vue-docgen-api: ^4.50.0
-      vue-inbrowser-compiler: ^4.54.1
+      vue-docgen-api: ^4.56.2
+      vue-inbrowser-compiler: ^4.56.2
       vue-inbrowser-compiler-utils: ^4.54.1
       vue-template-compiler: 2.7.14
       webpack: 4.46.0

@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.56.2
+
+### Patch Changes
+
+- [#1449](https://github.com/vue-styleguidist/vue-styleguidist/pull/1449) [`f2cf6fcc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f2cf6fcc02e655e5c399a1e62451cde45c0f6b5d) Thanks [@elevatebart](https://github.com/elevatebart)! - 1447 lack of support for defineexpose in script setup synthax
+
+- Updated dependencies [[`f2cf6fcc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f2cf6fcc02e655e5c399a1e62451cde45c0f6b5d), [`fbd5fe71`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fbd5fe7199e65184468d9a517bb9d2ee7337ecd4)]:
+  - vue-docgen-api@4.56.2
+  - vue-inbrowser-compiler@4.56.2
+
 ## 4.54.3
 
 ### Patch Changes
