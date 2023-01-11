@@ -760,6 +760,8 @@ In vue 3, VueJs introduced the [setup syntax](https://v3.vuejs.org/api/sfc-scrip
 
 From version 4.44.0, Vue Styleguidist allows to document the props & events defined with this syntax.
 
+From version 4.56.2, Vue Styleguidist allows the exposed variables from your components
+
 ### Props
 
 In JavaScript, add a comment above the property in the object passed to `defineProps()`. In this comment, use the same principle as regular syntax Props.
@@ -836,6 +838,22 @@ const emit = defineEmits<{
 ```
 
 > **NOTE:** Remember to document complex argument types in the comment above the event. Docgen does not parse types and will only display their names.
+
+### Exposed properties
+
+properties are all exposed using the `defineExpose()` function. Document them in comments before your properties entries.
+
+```js
+const emit = defineExpose({
+  /**
+   * Document your property here
+   * @returns  {string} version - your component version
+   */
+  getVersion() {
+    return 'XX.XX.XX'
+  }
+})
+```
 
 ## Writing code examples
 
