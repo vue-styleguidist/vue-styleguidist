@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.56.3
+
+### Patch Changes
+
+- [#1457](https://github.com/vue-styleguidist/vue-styleguidist/pull/1457) [`d619101c`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d619101cd8deaa3c474ffe9fa8d6b7682c2a663a) Thanks [@ssemenkoff](https://github.com/ssemenkoff)! - fix: scopeId for vue3 single file components in .md examples
+
 ## 4.56.2
 
 ### Patch Changes
