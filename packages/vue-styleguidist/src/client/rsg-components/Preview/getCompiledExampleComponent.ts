@@ -81,7 +81,11 @@ export function getCompiledExampleComponent({
 		extendsComponent = { store: vuex.default }
 	}
 	const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
-	previewComponent._scopeId = 'data-' + moduleId
+	if (isVue3) {
+		previewComponent.__scopeId = 'data-' + moduleId
+	} else {
+		previewComponent._scopeId = 'data-' + moduleId
+	}
 
 	// if we are in local component registration, register current component
 	// NOTA: on independent md files, component.module is undefined
