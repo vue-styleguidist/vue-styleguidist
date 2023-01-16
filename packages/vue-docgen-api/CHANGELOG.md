@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.56.4
+
+### Patch Changes
+
+- [#1461](https://github.com/vue-styleguidist/vue-styleguidist/pull/1461) [`cd7cc3f4`](https://github.com/vue-styleguidist/vue-styleguidist/commit/cd7cc3f45deaeeeeef108ecb372af8decd50eca7) Thanks [@chakAs3](https://github.com/chakAs3)! - fix(docgen-api) fix issue when Props passed as Reference to Local Type
+
 ## 4.56.2
 
 ### Patch Changes
