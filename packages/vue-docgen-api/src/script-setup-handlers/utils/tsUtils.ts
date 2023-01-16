@@ -13,6 +13,12 @@ export function getTypeDefinitionFromIdentifier(
 				typeBody = nodePath.get('body', 'body')
 			}
 			return false
+		},
+		visitTSTypeAliasDeclaration(nodePath) {
+			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
+				typeBody = nodePath.get('typeAnnotation', 'members')
+			}
+			return false
 		}
 	})
 	return typeBody
