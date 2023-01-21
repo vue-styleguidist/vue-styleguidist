@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: cypress/included:12.2.0
+    - image: cypress/included:12.3.0
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -31,6 +31,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: pnpm install
 
       # Build all examples
       - run: npm run build basic -- --ci
@@ -69,6 +72,9 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: pnpm install
+
       # Build all examples
       - run: npm run build jsx -- --ci
       - run: npm run build jsx-examples -- --ci
@@ -90,6 +96,7 @@ jobs:
           at: ~/
 
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run: pnpm install
 
       # run cypress component tests
       - run: 
@@ -130,3 +137,5 @@ workflows:
       - cypress:
           requires:
             - install
+
+# VS Code Extension Version: 1.5.1
