@@ -4,6 +4,7 @@
 		"outDir": "dist",
 		"declaration": true,
 		"sourceMap": false,
+    "declarationMap": true,
 		"skipLibCheck": true
 	},
 	"include": ["src/**/*.ts", "../../@types/**/*"],

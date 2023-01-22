@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"outDir": "lib",
 		"declaration": true,
+    "declarationMap": true,
 		"sourceMap": false,
 		"module": "es2015"
 	},
