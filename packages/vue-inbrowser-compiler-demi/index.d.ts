@@ -41,7 +41,7 @@ export declare const compileTemplate: (options?: {
 		bindingMetadata?: BindingMetadata
 		prefixIdentifiers?: boolean
 	}
-}) => { code: string }
+}) => { code: string, staticRenderFns: string[] }
 
 export declare function parseComponent(...args:Parameters<typeof parse>): ReturnType<typeof parse> & {scriptSetup?:SFCScriptBlock}
 
