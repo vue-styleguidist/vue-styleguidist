@@ -101,6 +101,8 @@ new Vue({
 
 		expect(sut.script).toMatchInlineSnapshot(`
 			"
+
+			const comp = (function() {
 			const vue$0 = require('vue');const Vue = vue$0.default || vue$0;
 			const dog_names$43 = require('../RandomButton/dog-names');const three = dog_names$43.default || dog_names$43;
 
@@ -112,7 +114,11 @@ new Vue({
 					}
 				},
 				template: '<Radio :options=\\"opt\\" />'
-			}"
+			}})()
+			comp.staticRenderFns = []
+			comp.render = function() {with(this){return _c('div',[_v(\\"undefined\\")])}}
+
+			return comp"
 		`)
 	})
 
@@ -165,6 +171,7 @@ new Vue({
 					}
 
 					})()
+			comp.staticRenderFns = []
 			comp.render = function() {with(this){return _c('div')}}
 
 			return comp"

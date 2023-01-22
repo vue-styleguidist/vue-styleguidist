@@ -161,6 +161,7 @@ new Vue({
 							}
 						}
 					}})()
+			comp.staticRenderFns = []
 			comp.render = function() {with(this){return _c('div')}}
 
 			return comp"
