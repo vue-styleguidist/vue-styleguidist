@@ -31,7 +31,7 @@ export function compileTemplateForEval(compiledComponent: EvaluableComponent) {
 		compiledComponent.script = `
 ${isVue3 ? 'const Vue = require("vue")' : ''}
 const comp = (function() {${compiledComponent.script}})()${
-  _compiledTemplate.staticRenderFns ? `
+  _compiledTemplate.staticRenderFns?.length ? `
 comp.staticRenderFns = [${_compiledTemplate.staticRenderFns
 ?.map((fn, i) => {
   return `function(){${fn}}`
