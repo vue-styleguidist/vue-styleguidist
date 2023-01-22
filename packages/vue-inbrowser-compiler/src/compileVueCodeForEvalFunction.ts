@@ -154,6 +154,6 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	return {
 		script: code,
 		style,
-		template: isVue3 ? template : `<div>${template}</div>`
+		template: isVue3 || !template ? template : `<div>${template}</div>`
 	}
 }
