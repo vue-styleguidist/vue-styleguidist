@@ -25,7 +25,7 @@ class PreviewAsync extends Component {
 		vuex: PropTypes.object,
 		component: PropTypes.object,
 		renderRootJsx: PropTypes.object,
-    enhancePreviewApp: PropTypes.func.isRequired
+		enhancePreviewApp: PropTypes.func.isRequired
 	}
 	static contextType = Context
 
@@ -98,6 +98,13 @@ class PreviewAsync extends Component {
 	executeCode(newCode) {
 		import(/* webpackChunkName: "compiler" */ 'vue-inbrowser-compiler')
 			.then(opts => {
+				this.setState({
+					error: null
+				})
+        
+				return opts
+			})
+			.then(opts => {
 				const { compile } = opts
 				try {
 					const example = compile(newCode, {
@@ -111,15 +118,10 @@ class PreviewAsync extends Component {
 					this.handleError(err)
 				}
 			})
-			.then(() => {
-				this.setState({
-					error: null
-				})
-			})
 	}
 
 	setCompiledPreview(example) {
-		const { vuex, component, renderRootJsx,enhancePreviewApp  } = this.props
+		const { vuex, component, renderRootJsx, enhancePreviewApp } = this.props
 		let el = this.mountNode.children[0]
 		if (!el) {
 			this.mountNode.innerHTML = ' '
