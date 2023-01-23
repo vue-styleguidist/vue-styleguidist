@@ -159,6 +159,6 @@ function prepareVueCodeForEvalFunction(
 	return {
 		script: code,
 		style,
-		template
+		template: isVue3 || !template ? template : `<div>${template}</div>`
 	}
 }
