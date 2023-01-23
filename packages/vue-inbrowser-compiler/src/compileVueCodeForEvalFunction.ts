@@ -5,7 +5,7 @@ import {
 	isCodeVueSfc,
 	isVue3,
 	compileTemplateForEval,
-  transformOneImport
+	transformOneImport
 } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -154,6 +154,6 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	return {
 		script: code,
 		style,
-		template
+		template: isVue3 || !template ? template : `<div>${template}</div>`
 	}
 }

@@ -10,7 +10,7 @@ export default defineConfig({
 		coverage: {
 			reporter: ['lcov'],
 			include: ['packages/**/*'],
-			exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**', '**/*.{test,spec}.{ts,js,tsx,jsx}']
+			exclude: ['**/node_modules/**', '**/lib/**', '**/dist/**', '**/*.{test,spec}.{ts,js,tsx,jsx}', 'packages/vue-inbrowser-compiler-demi/**/*']
 		}
 	},
 	plugins: [

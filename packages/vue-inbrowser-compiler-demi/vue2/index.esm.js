@@ -6,8 +6,12 @@ export const h = () => {}
 export const createApp = () => {}
 export const isVue3 = false
 export { Vue as Vue2 }
-export const compileTemplate = ({ source: template }) => ({
-	code: compile(template).render
-})
+export const compileTemplate = ({ source: template }) => {
+	const compiled = compile(template)
+	return {
+		code: compiled.render,
+		staticRenderFns: compiled.staticRenderFns
+	}
+}
 export { parseComponent }
 export const compileScript = () => ({ type: 'script' })

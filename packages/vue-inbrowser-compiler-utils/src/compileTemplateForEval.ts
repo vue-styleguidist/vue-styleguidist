@@ -18,22 +18,30 @@ export function compileTemplateForEval(compiledComponent: EvaluableComponent) {
 				id: '-'
 			}
 		)
+		const _compiledTemplate = compileTemplate({
+			source: compiledComponent.template,
+			filename: EXAMPLE_FILENAME,
+			id: '-',
+			compilerOptions: {
+				bindingMetadata: bindings,
+				prefixIdentifiers: true,
+				mode: 'function'
+			}
+		})
 		compiledComponent.script = `
 ${isVue3 ? 'const Vue = require("vue")' : ''}
-const comp = (function() {${compiledComponent.script}})()
-comp.render = function() {${
-			compileTemplate({
-				source: compiledComponent.template,
-				filename: EXAMPLE_FILENAME,
-				id: '-',
-				compilerOptions: {
-					bindingMetadata: bindings,
-					prefixIdentifiers: true,
-					mode: 'function'
-				}
-			}).code
-		}}
-${isVue3 ? `comp.render = comp.render()` : ``}
+const comp = (function() {${compiledComponent.script}})()${
+  _compiledTemplate.staticRenderFns?.length ? `
+comp.staticRenderFns = [${_compiledTemplate.staticRenderFns
+?.map((fn, i) => {
+  return `function(){${fn}}`
+})
+.join(',')}]` : ''}
+comp.render = function() {${_compiledTemplate.code}}
+${
+	isVue3
+		? `comp.render = comp.render()`:''
+}
 return comp`
 		delete compiledComponent.template
 	}
