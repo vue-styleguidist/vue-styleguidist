@@ -5,4 +5,4 @@
 "vue-styleguidist": patch
 ---
 
-Issue 1458 multiple root elements, impleement staticRenderFns
+Issue 1458 multiple root elements, implement staticRenderFns optimizations in 2.7.14
