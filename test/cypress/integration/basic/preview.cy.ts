@@ -4,7 +4,7 @@ const BTN = '<button />'
 describe('Preview render', () => {
 	const texts = [
 		'Push Me',
-		'Click Me',
+		'Second button',
 		'Push Me',
 		'Next Dog Name',
 		'Count: 42',
