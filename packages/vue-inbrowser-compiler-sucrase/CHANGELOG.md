@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.56.6
+
+### Patch Changes
+
+- [`769921bc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/769921bc17f46c8cb8e23604a0739606b78f44bb) Thanks [@elevatebart](https://github.com/elevatebart)! - deliver the multi components Issue 1458 multiple root elements, implement staticRenderFns optimizations in 2.7.14
+
 ## 4.55.0
 
 ### Minor Changes
