@@ -4,6 +4,7 @@ import {
 	SlotDescriptor,
 	MethodDescriptor,
 	EventDescriptor,
+  ExposeDescriptor,
 	ComponentDoc,
 	parseMulti
 } from 'vue-docgen-api'
@@ -110,6 +111,7 @@ export interface Templates {
 	slots(slots: SlotDescriptor[], opt?: SubTemplateOptions): string
 	methods(methods: MethodDescriptor[], opt?: SubTemplateOptions): string
 	events(events: EventDescriptor[], opt?: SubTemplateOptions): string
+	expose(exposed: ExposeDescriptor[], opt?: SubTemplateOptions): string
 	component(
 		usage: RenderedUsage,
 		doc: ComponentDoc,
@@ -127,5 +129,6 @@ export interface RenderedUsage {
 	slots: string
 	methods: string
 	events: string
+  expose: string
 	functionalTag: string
 }

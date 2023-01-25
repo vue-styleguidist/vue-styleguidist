@@ -1,5 +1,20 @@
 <script setup lang="ts">
+function test() {
+  console.log('test')
+}
+
+defineExpose({
+  /**
+   * test expose
+   * @returns nothing
+   */
+  test
+})
+
 defineProps<{
+  /**
+   * test props
+   */
   msg: string
 }>()
 </script>
@@ -12,6 +27,7 @@ defineProps<{
       <a target="_blank" href="https://vitejs.dev/">Vite</a> +
       <a target="_blank" href="https://vuejs.org/">Vue 3</a>.
     </h3>
+    <button @click="test">try it</button>
   </div>
 </template>
 

@@ -1,4 +1,5 @@
-import { renderTags } from './props'
+import { expect } from 'vitest'
+import { renderTags } from './tags'
 
 describe('renderTags', () => {
 	it('should render tags', () => {

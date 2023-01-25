@@ -1,22 +1,7 @@
-import { ParamTag, PropDescriptor, Tag } from 'vue-docgen-api'
-import { mdclean } from './utils'
+import { PropDescriptor } from 'vue-docgen-api'
 import { SubTemplateOptions } from '../compileTemplates'
-
-function isTag(v: Tag | ParamTag): v is Tag {
-	return !!(v as any).content
-}
-
-export const renderTags = (tags?: { [tag: string]: (Tag | ParamTag)[] }): string => {
-	if (!tags) {
-		return ''
-	}
-	return Object.entries(tags)
-		.map(([tag, values]) => {
-      if(tag === 'type') return ''
-			return values.map(v => `<br/>\`@${tag}\` ${isTag(v) ? v.content : v.description}`).join('')
-		})
-		.join('')
-}
+import { mdclean } from './utils'
+import { renderTags } from './tags'
 
 const tmpl = (props: PropDescriptor[]): string => {
 	let ret = ''
