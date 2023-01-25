@@ -53,6 +53,7 @@ ${frontMatter.join('\n')}
   ${renderedUsage.methods}
   ${renderedUsage.events}
   ${renderedUsage.slots}
+  ${renderedUsage.expose}
   ${docsBlocks ? '---\n' + docsBlocks.join('\n---\n') : ''}
 
   ${

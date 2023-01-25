@@ -56,7 +56,7 @@ export default async function compileTemplates(
 	try {
 		const docs = await config.propsParser(absolutePath, options)
     const components = await Promise.all(docs.map(async (doc) => {
-      const { props: p, events: e, methods: m, slots: s } = doc
+      const { props: p, events: e, methods: m, slots: s, expose: exp } = doc
       const isSubComponent = subComponent
       const hasSubComponents = !!doc.tags?.requires
       const subComponentOptions = { isSubComponent, hasSubComponents }
@@ -66,6 +66,7 @@ export default async function compileTemplates(
         slots: s ? templates.slots(s, subComponentOptions) : '',
         methods: m ? templates.methods(m, subComponentOptions) : '',
         events: e ? templates.events(e, subComponentOptions) : '',
+        expose: exp ? templates.expose(exp, subComponentOptions) : '',
         functionalTag: templates.functionalTag
       }
 
