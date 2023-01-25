@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.57.0
+
+### Minor Changes
+
+- [#1470](https://github.com/vue-styleguidist/vue-styleguidist/pull/1470) [`f2898882`](https://github.com/vue-styleguidist/vue-styleguidist/commit/f28988825d68d932040c4f81c5cacc454769fc11) Thanks [@elevatebart](https://github.com/elevatebart)! - add expose template to docgen-cli
+
 ## 4.56.1
 
 ### Patch Changes
