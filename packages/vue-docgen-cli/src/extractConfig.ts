@@ -5,6 +5,7 @@ import {
 	component,
 	events,
 	methods,
+  expose,
 	props,
 	slots,
 	defaultExample,
@@ -68,6 +69,7 @@ export default (
 		methods,
 		props,
 		slots,
+    expose,
 		defaultExample,
 		functionalTag,
 		...config.templates

@@ -2,6 +2,7 @@ import * as path from 'path'
 import { ComponentDoc, ParamTag } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
+import expose from './templates/expose'
 import slots from './templates/slots'
 import props from './templates/props'
 import component from './templates/component'
@@ -11,7 +12,7 @@ import { SafeDocgenCLIConfig } from './config'
 import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
 
 export { mdclean } from './templates/utils'
-export { events, methods, slots, props, component, defaultExample, functionalTag }
+export { events, methods, slots, props, component, expose, defaultExample, functionalTag }
 export { default as docgen } from './docgen'
 
 export interface ContentAndDependencies {
