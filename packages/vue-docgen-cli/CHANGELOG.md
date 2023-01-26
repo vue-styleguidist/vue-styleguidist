@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.57.1
+
+### Patch Changes
+
+- [`00f0a5b6`](https://github.com/vue-styleguidist/vue-styleguidist/commit/00f0a5b6b6f29ac32234f45e62554eb7a1abf824) Thanks [@elevatebart](https://github.com/elevatebart)! - fix templates.expose is not a function
+
 ## 4.57.0
 
 ### Minor Changes
