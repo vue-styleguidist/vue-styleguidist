@@ -33,7 +33,7 @@
     "npm": ">=3"
   },
   "dependencies": {
-    "@babel/runtime": "7.20.7",
+    "@babel/runtime": "7.20.13",
     "@vxna/mini-html-webpack-template": "^1.0.0",
     "ast-types": "0.14.2",
     "classnames": "^2.3.1",
@@ -113,7 +113,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.20.7",
-    "@babel/core": "7.20.7",
+    "@babel/core": "7.20.12",
     "@testing-library/react": "11.2.7",
     "@types/buble": "0.20.1",
     "@types/cli-progress": "1.8.1",
