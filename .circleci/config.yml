@@ -53,6 +53,7 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run: apt-get -y update; apt-get -y install curl
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
 
@@ -90,6 +91,8 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      # install pnpm
+      - run: apt-get -y update; apt-get -y install curl
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
 
