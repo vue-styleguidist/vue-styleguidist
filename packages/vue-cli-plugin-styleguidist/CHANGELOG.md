@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.57.2
+
+### Patch Changes
+
+- [#1483](https://github.com/vue-styleguidist/vue-styleguidist/pull/1483) [`08f71d13`](https://github.com/vue-styleguidist/vue-styleguidist/commit/08f71d134266ca6ae2307d00f10b7046a500d2cf) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: remove the pages issue
+
 ## 4.54.4
 
 ### Patch Changes
