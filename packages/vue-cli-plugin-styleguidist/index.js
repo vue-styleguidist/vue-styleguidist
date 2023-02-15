@@ -108,6 +108,8 @@ function getStyleguidist(args, api, options) {
 	options.outputDir = sgConf.styleguideDir || configSchema.styleguideDir.default
 	// avoid preload and prefetch errors
 	options.indexHtml = 'app.html'
+	// in styleguidist we only have one page so if users remove it, remove the version
+	options.pages = undefined
 	const cliWebpackConfig = getConfig(api)
 	return styleguidist(
 		sgConf,
