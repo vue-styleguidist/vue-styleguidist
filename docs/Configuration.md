@@ -198,7 +198,7 @@ module.exports = {
 
 Type `String`, optional
 
-Allows in vue 3 styleguides to register **global plugins** and **global directives** in the examples preview.
+Allows to register **global plugins** and **global directives** in the examples preview or **Vue 3** style guides.
 
 For example:
 
@@ -216,7 +216,7 @@ Then update your app in it with whatever you want.
 
 ```js
 // styleguide/preview.js
-import { defineEnhanceApp } from 'vue-styleguidist'
+import { defineEnhanceApp } from 'vue-styleguidist/helpers'
 import focusDirective from '../src/directives/v-focus';
 
 // The export here MUST be default or module.export
@@ -554,6 +554,8 @@ See [Configuring webpack](/docs/Webpack.md) for mode details.
 Type: `String`, optional
 
 Modifies the root component of the previews of the examples, receives as a parameter the preview component, must return a [component jsx](https://vuejs.org/v2/guide/render-function.html). It is useful when you want to create a container to all your examples by default, especially when you use a third library.
+
+> NOTE: if you are using styleguidist with Vue 3, you should use the [enhancePreviewApp](#enhancePreviewApp) option instead of `renderRootJsx` because the latter is not compatible with Vue 3.
 
 An example
 

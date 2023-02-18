@@ -18,6 +18,16 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "license": "MIT",
+	"exports": {
+		".": {
+      "require": "./lib/scripts/index.js",
+			"types": "./lib/scripts/index.d.ts"
+    },
+		"./helpers": {
+			"require": "./lib/scripts/helpers.js",
+			"types": "./lib/scripts/helpers.d.ts"
+		}
+	},
   "main": "lib/scripts/index.js",
   "typings": "lib/scripts/index.d.ts",
   "bin": {
