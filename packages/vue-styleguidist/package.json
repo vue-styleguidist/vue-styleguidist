@@ -26,6 +26,10 @@
 		"./helpers": {
 			"require": "./lib/scripts/helpers.js",
 			"types": "./lib/scripts/helpers.d.ts"
+		},
+		"./lib/scripts/schemas/config": {
+			"require": "./lib/scripts/schemas/config.js",
+			"types": "./lib/scripts/schemas/config.d.ts"
 		}
 	},
   "main": "lib/scripts/index.js",
