@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "4.56.5",
+  "version": "4.58.0",
   "homepage": "https://vue-styleguidist.github.io",
   "scripts": {
     "compile": "pnpm run compile:babel && pnpm run typings",
@@ -18,20 +18,20 @@
     "url": "https://github.com/vue-styleguidist/vue-styleguidist/issues"
   },
   "license": "MIT",
-	"exports": {
-		".": {
+  "exports": {
+    ".": {
       "require": "./lib/scripts/index.js",
-			"types": "./lib/scripts/index.d.ts"
+      "types": "./lib/scripts/index.d.ts"
     },
-		"./helpers": {
-			"require": "./lib/scripts/helpers.js",
-			"types": "./lib/scripts/helpers.d.ts"
-		},
-		"./lib/scripts/schemas/config": {
-			"require": "./lib/scripts/schemas/config.js",
-			"types": "./lib/scripts/schemas/config.d.ts"
-		}
-	},
+    "./helpers": {
+      "require": "./lib/scripts/helpers.js",
+      "types": "./lib/scripts/helpers.d.ts"
+    },
+    "./lib/scripts/schemas/config": {
+      "require": "./lib/scripts/schemas/config.js",
+      "types": "./lib/scripts/schemas/config.d.ts"
+    }
+  },
   "main": "lib/scripts/index.js",
   "typings": "lib/scripts/index.d.ts",
   "bin": {

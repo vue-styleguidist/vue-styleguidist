@@ -1,5 +1,13 @@
 # Change Log
 
+## 4.58.0
+
+### Minor Changes
+
+- [`d41f652e`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d41f652eda897526005dbb4a39fa80d7d5fb91ff) Thanks [@elevatebart](https://github.com/elevatebart)! - allow to require config schema (for plugin testing)
+
+- [`fca702e3`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fca702e309376cdf357d273799a9387584d40237) Thanks [@elevatebart](https://github.com/elevatebart)! - make helper functions available in vue-styleguidist/helpers
+
 ## 4.56.5
 
 ### Patch Changes
