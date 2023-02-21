@@ -44,6 +44,19 @@ Add these scripts to your `package.json`:
 }
 ```
 
+For Vue-CLI 3 use this instead: 
+
+```diff
+{
+  "scripts": {
++    "styleguide": "vue-cli-service styleguidist",
++    "styleguide:build": "vue-cli-service styleguidist:build"
+  }
+}
+```
+
+> NOTE: If you use the command `vue add styleguidist`, the scripts will be added for you in package.json.
+
 ## 4. Start your style guide
 
 Run **`npm run styleguide`** to start style a guide dev server.
