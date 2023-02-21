@@ -55,6 +55,7 @@ For Vue-CLI 3 use this instead:
 }
 ```
 
+> NOTE: If you use the command `vue add styleguidist`, the scripts will be added for you in package.json.
 
 ## 4. Start your style guide
 
