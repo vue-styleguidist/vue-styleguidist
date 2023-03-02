@@ -518,10 +518,17 @@ function getModelPropName(path: NodePath): string | null {
 		return null
 	}
 
-	const modelPropertyNamePath =
+	const modelValue =
 		modelPath.length &&
 		modelPath[0]
 			.get('value')
+
+	if (!bt.isObjectExpression(modelValue.node))  {
+		return null
+	}
+
+	const modelPropertyNamePath =
+		modelValue
 			.get('properties')
 			.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('prop')(p))
 
