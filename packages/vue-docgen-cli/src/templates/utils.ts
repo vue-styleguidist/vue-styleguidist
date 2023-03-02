@@ -8,11 +8,14 @@ import memoize from 'lodash.memoize'
  * @param input
  */
 export function mdclean(input: string): string {
+	if (typeof input !== 'string') {
+		return `${input}`
+	}
 	return input
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
-		.replace(/\r?\n/g, '<br/>')
 		.replace(/\|/g, '\\|')
+		.replace(/\r?\n/g, '<br/>')
 }
 
 const readdirSync = memoize(fs.readdirSync)
