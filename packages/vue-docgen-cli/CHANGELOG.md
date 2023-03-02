@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.59.0
+
+### Minor Changes
+
+- [`40cdd093`](https://github.com/vue-styleguidist/vue-styleguidist/commit/40cdd0931c580a8b3224504a582aab8a818d00c4) Thanks [@elevatebart](https://github.com/elevatebart)! - protect md input that is not string
+
 ## 4.57.1
 
 ### Patch Changes
