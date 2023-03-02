@@ -1,6 +1,6 @@
 {
 	"name": "vue-docgen-cli",
-	"version": "4.57.1",
+	"version": "4.59.0",
 	"scripts": {
 		"compile": "tsc -p ./tsconfig.build.json",
 		"compile:watch": "pnpm run compile --watch"
