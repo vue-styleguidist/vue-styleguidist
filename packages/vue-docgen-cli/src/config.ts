@@ -103,7 +103,7 @@ export interface SafeDocgenCLIConfig {
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
 	templates: Partial<Templates>
-	pages?: DocgenCLIConfig
+	pages?: Partial<DocgenCLIConfig>[]
 }
 
 export interface Templates {
