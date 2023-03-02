@@ -478,11 +478,11 @@ describe('propHandler', () => {
           }
         }
         `
-                        expect(await parserTest(src)).toMatchObject({
-                                description: 'Value of the field'
-                        })
-                        expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
-                        expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
+			expect(await parserTest(src)).toMatchObject({
+				description: 'Value of the field'
+			})
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('value')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('v-model')
 		})
 
 		it('should not set the v-model instead of value if model property has only event', async () => {
@@ -511,10 +511,10 @@ describe('propHandler', () => {
 
 		it('should not set and crash if model is not literal object', async () => {
 			const src = dedent`
-        const getModel = () => ({
-          prop: 'modelValue',
-          event: 'update:modelValue'
-        })
+				const getModel = () => ({
+				  prop: 'modelValue',
+				  event: 'update:modelValue'
+				})
         export default {
           model: getModel(),
           props: {
