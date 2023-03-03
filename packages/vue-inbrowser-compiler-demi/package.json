@@ -16,7 +16,7 @@
   "devDependencies": {
     "vue": "2.7.14",
     "vue-template-compiler": "2.7.14",
-    "@vue/compiler-sfc": "3.2.45"
+    "@vue/compiler-sfc": "3.2.47"
   },
   "peerDependencies": {
     "vue": ">=2",
