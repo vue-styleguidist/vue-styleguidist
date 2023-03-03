@@ -11,6 +11,7 @@ import functionalTag from './templates/functionalTag'
 import { SafeDocgenCLIConfig } from './config'
 import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
 
+export { renderTags } from './templates/tags'
 export { mdclean } from './templates/utils'
 export { events, methods, slots, props, component, expose, defaultExample, functionalTag }
 export { default as docgen } from './docgen'

@@ -4,6 +4,34 @@ import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
 import extractConfig from './extractConfig'
 import getSources from './getSources'
+import {
+	events,
+	methods,
+	slots,
+	props,
+	component,
+	expose,
+	defaultExample,
+	functionalTag,
+	mdclean,
+	renderTags,
+} from './compileTemplates'
+
+/**
+ * expose default rendering templates so they can be enriched
+ */
+export const defaultTemplates = {
+	events,
+	methods,
+	slots,
+	props,
+	component,
+	expose,
+	defaultExample,
+	functionalTag,
+	renderTags,
+	mdclean,
+} as const
 
 export { SafeDocgenCLIConfig as DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
 
@@ -30,16 +58,16 @@ export default async (config: SafeDocgenCLIConfig) => {
 	// avoiding to repeat the start path
 	config.outFile = config.outFile ? path.resolve(config.outDir, config.outFile) : undefined
 
-  // set the default sorting of components to be alphabetical by filepath
-  config.sortComponents = config.sortComponents || ((a, b) => a.filePath.localeCompare(b.filePath))
+	// set the default sorting of components to be alphabetical by filepath
+	config.sortComponents = config.sortComponents || ((a, b) => a.filePath.localeCompare(b.filePath))
 
 	// then create the watcher if necessary
 	const { watcher, componentFiles, docMap } = await getSources(
 		config.components,
 		config.componentsRoot,
 		config.getDocFileName,
-    config.propsParser,
-		config.apiOptions,
+		config.propsParser,
+		config.apiOptions
 	)
 
 	if (config.outFile) {
@@ -56,5 +84,5 @@ export default async (config: SafeDocgenCLIConfig) => {
 }
 
 export function defineConfig(config: Partial<DocgenCLIConfig>) {
-  return config
+	return config
 }
