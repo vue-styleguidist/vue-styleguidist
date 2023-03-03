@@ -508,6 +508,32 @@ describe('propHandler', () => {
 			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
 			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('value')
 		})
+
+		it('should not set and crash if model is not literal object', async () => {
+			const src = dedent`
+				const getModel = () => ({
+				  prop: 'modelValue',
+				  event: 'update:modelValue'
+				})
+        export default {
+          model: getModel(),
+          props: {
+            /**
+             * Value of the field
+             */
+            value: {
+              required: true,
+              type: undefined
+            }
+          }
+        }
+        `
+			expect(await parserTest(src)).toMatchObject({
+				description: 'Value of the field'
+			})
+			expect(documentation.getPropDescriptor).not.toHaveBeenCalledWith('v-model')
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('value')
+		})
 	})
 
 	describe('@values tag parsing', () => {
