@@ -1102,7 +1102,7 @@ importers:
       minimist: ^1.2.5
       mkdirp: ^0.5.5
       prettier: ^1.19.1
-      vue-docgen-api: ^4.45.0
+      vue-docgen-api: ^4.60.0
     dependencies:
       chokidar: 3.5.1
       globby: 10.0.2
@@ -9260,6 +9260,7 @@ packages:
       '@vue/shared': 3.2.45
       estree-walker: 2.0.2
       source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-core/3.2.47:
     resolution: {integrity: sha512-p4D7FDnQb7+YJmO2iPEv0SQNeNzcbHdGByJDsT4lynf63AFkOTFN07HsiRSvjGo0QrxR/o3d0hUyNCUnBU2Tig==}
@@ -10022,6 +10023,7 @@ packages:
 
   /@vue/shared/3.2.45:
     resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
+    dev: true
 
   /@vue/shared/3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
@@ -29537,7 +29539,7 @@ packages:
       vue: '>= 2.6.0'
     dependencies:
       '@babel/runtime': 7.20.13
-      '@vue/compiler-core': 3.2.45
+      '@vue/compiler-core': 3.2.47
       '@vue/compiler-dom': 3.2.47
       acorn: 7.4.1
       core-js: 3.27.2

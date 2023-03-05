@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.60.0
+
+### Patch Changes
+
+- [`762db80e`](https://github.com/vue-styleguidist/vue-styleguidist/commit/762db80e7d8f58a347cfa7d9a92dda53b78acae6) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: expose setup imported variables to template
+
 ## 4.56.6
 
 ### Patch Changes

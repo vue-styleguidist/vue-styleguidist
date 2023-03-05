@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.60.0
+
+### Patch Changes
+
+- [`049306d1`](https://github.com/vue-styleguidist/vue-styleguidist/commit/049306d14c6300c815f6849de0ce3b6e8b453dd1) Thanks [@elevatebart](https://github.com/elevatebart)! - fix(vue-docgen-api): Catch error for model if not literal object
+
 ## 4.56.4
 
 ### Patch Changes
