@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.60.1
+
+### Patch Changes
+
+- [`00254c76`](https://github.com/vue-styleguidist/vue-styleguidist/commit/00254c7649709156a8c9ae2b97912c5ea83b5ca5) Thanks [@elevatebart](https://github.com/elevatebart)! - fix the types of SubTemplateOptions
+
 ## 4.60.0
 
 ### Minor Changes
