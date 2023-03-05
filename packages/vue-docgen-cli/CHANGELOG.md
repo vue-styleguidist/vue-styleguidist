@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.60.0
+
+### Minor Changes
+
+- [`049306d1`](https://github.com/vue-styleguidist/vue-styleguidist/commit/049306d14c6300c815f6849de0ce3b6e8b453dd1) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: expose default markdown docgen templates
+
+### Patch Changes
+
+- Updated dependencies [[`049306d1`](https://github.com/vue-styleguidist/vue-styleguidist/commit/049306d14c6300c815f6849de0ce3b6e8b453dd1)]:
+  - vue-docgen-api@4.60.0
+
 ## 4.59.0
 
 ### Minor Changes
