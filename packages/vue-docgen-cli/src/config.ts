@@ -118,7 +118,7 @@ export interface Templates {
 		config: SafeDocgenCLIConfig,
 		componentRelativePath: string,
 		requiresMd: ContentAndDependencies[],
-		opt?: SubTemplateOptions
+		opt: SubTemplateOptions
 	): string
 	defaultExample(doc: ComponentDoc): string
 	functionalTag: string
