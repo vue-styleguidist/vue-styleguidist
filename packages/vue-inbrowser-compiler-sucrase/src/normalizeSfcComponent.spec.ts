@@ -202,7 +202,28 @@ const STATUS_OK = 200
 			}
 			const STATUS_OK = 200
 
-			return {msg,names,hello,STATUS_OK}
+			return {ref: _vue.ref,msg,names,hello,STATUS_OK}
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+			}"
+		`)
+	})
+
+	it('exposes imported values in script setup', () => {
+		const sut = normalizeSfcComponent(`
+<script setup>
+import { Icon } from 'vue-icon'
+</script>`, (( source: string, opts: any ) => {
+  const { descriptor } = parse(source, opts)
+  return descriptor
+}) as any)
+		expect(evalFunction(sut).setup.toString()).toMatchInlineSnapshot(`
+			"setup(){
+
+			var _vueicon = require('vue-icon');
+
+			return {Icon: _vueicon.Icon}
 			function defineProps(){}
 			function defineEmits(){}
 			function defineExpose(){}

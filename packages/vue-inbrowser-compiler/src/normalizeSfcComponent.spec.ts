@@ -113,4 +113,25 @@ const STATUS_OK = 200
 			}"
 		`)
 	})
+
+	it('exposes imported values in script setup', () => {
+		const sut = normalizeSfcComponent(`
+<script setup>
+import { Icon } from 'vue-icon'
+</script>`, (( source: string, opts: any ) => {
+  const { descriptor } = parse(source, opts)
+  return descriptor
+}) as any)
+		expect(evalFunction(sut).setup.toString()).toMatchInlineSnapshot(`
+			"setup(){
+
+			const vue_icon$0 = require('vue-icon');const Icon = vue_icon$0.Icon;
+
+			return {}
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+			}"
+		`)
+})
 })

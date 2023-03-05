@@ -135,6 +135,21 @@ export function insertCreateElementFunction(before: string, after: string): stri
 export function parseScriptSetupCode(code: string): string {
   const varNames:string[] = []
 	walkes(getAst(code), {
+		ImportDeclaration(node: any) {
+			if (node.specifiers.length === 0) {
+				// import 'foo'
+				return
+			}
+			if (node.specifiers[0].type === 'ImportDefaultSpecifier') {
+				// import foo from 'foo'
+				varNames.push(node.specifiers[0].local.name)
+			} else if (node.specifiers[0].type === 'ImportSpecifier') {
+				// import { foo } from 'foo'
+				node.specifiers.forEach((specifier: any) => {
+					varNames.push(specifier.local.name)
+				})
+			}
+		},
     VariableDeclaration(node: any) {
       node.declarations.forEach((declaration: any) => {
         if (declaration.id.name) {
