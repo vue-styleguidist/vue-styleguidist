@@ -34,6 +34,11 @@ export interface SafeDocgenCLIConfig {
 	 */
 	components?: string | string[]
 	/**
+	 * components to exclude from the generated documentation
+	 * @uitype string
+	 */
+	ignore?: string | string[]
+	/**
 	 * The root folder where components and subcomponents are going to be found
 	 * @description The scaffolding of whatever is below this path will be kept in the `outDir`
 	 */

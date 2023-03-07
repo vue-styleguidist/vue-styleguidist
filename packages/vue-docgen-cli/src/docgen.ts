@@ -14,7 +14,7 @@ import {
 	defaultExample,
 	functionalTag,
 	mdclean,
-	renderTags,
+	renderTags
 } from './compileTemplates'
 
 /**
@@ -30,7 +30,7 @@ export const defaultTemplates = {
 	defaultExample,
 	functionalTag,
 	renderTags,
-	mdclean,
+	mdclean
 } as const
 
 export { SafeDocgenCLIConfig as DocgenCLIConfig, Templates, RenderedUsage, extractConfig }
@@ -64,6 +64,7 @@ export default async (config: SafeDocgenCLIConfig) => {
 	// then create the watcher if necessary
 	const { watcher, componentFiles, docMap } = await getSources(
 		config.components,
+		config.ignore ? (Array.isArray(config.ignore) ? config.ignore : [config.ignore]) : [],
 		config.componentsRoot,
 		config.getDocFileName,
 		config.propsParser,

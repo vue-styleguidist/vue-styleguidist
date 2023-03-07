@@ -12,6 +12,7 @@ import { getDocMap } from './utils'
  */
 export default async function getSources(
 	components: string | string[],
+	ignore: string[],
 	cwd: string,
 	getDocFileName: (componentPath: string) => string | false,
   propsParser: typeof parseMulti,
@@ -23,7 +24,7 @@ export default async function getSources(
 }> {
 	const watcher = chokidar.watch(components, { cwd })
 
-	const allComponentFiles = await glob(components, { cwd })
+	const allComponentFiles = await glob(components, { cwd, ignore })
 
 	// we will parse each of the discovered components looking for @requires
 	// and @example/examples to add them to the watcher.
