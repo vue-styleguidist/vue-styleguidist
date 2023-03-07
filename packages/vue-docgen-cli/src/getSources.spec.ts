@@ -2,6 +2,7 @@ import { SpyInstance } from 'vitest'
 import chokidar from 'chokidar'
 import * as globby from 'globby'
 import getSources from './getSources'
+import { vi, expect } from 'vitest'
 
 vi.mock('chokidar')
 vi.mock('globby')
@@ -49,7 +50,7 @@ describe('getSources', () => {
 	})
 
 	it('should return component files from chokidar', async () => {
-		const { componentFiles } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName, mockParse)
+		const { componentFiles } = await getSources(COMPONENTS_GLOB, [], 'here', getDocFileName, mockParse)
 		expect(componentFiles).toMatchInlineSnapshot(`
 			[
 			  "src/components/Button/Button.vue",
@@ -61,7 +62,7 @@ describe('getSources', () => {
 	})
 
 	it('should return a docMap using the getDocFileName', async () => {
-		const { docMap } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName, mockParse)
+		const { docMap } = await getSources(COMPONENTS_GLOB, [], 'here', getDocFileName, mockParse)
 		expect(docMap).toMatchInlineSnapshot(`
 			{
 			  "../path/to/Readme.md+here/src/components/Button/Button.vue": "src/components/Button/Button.vue",
@@ -73,7 +74,7 @@ describe('getSources', () => {
 	})
 
 	it('should return the watcher so it can be enriched', async () => {
-		const { watcher } = await getSources(COMPONENTS_GLOB, 'here', getDocFileName, mockParse)
+		const { watcher } = await getSources(COMPONENTS_GLOB, [], 'here', getDocFileName, mockParse)
 		expect(watcher).toBe(fakeWatcher)
 	})
 })
