@@ -1,7 +1,7 @@
 import { dirname, join, relative, sep } from 'path'
 import { promises as fs } from 'fs'
 import { ComponentDoc, Tag, ParamTag } from 'vue-docgen-api'
-import { findFileCaseInsensitive } from './utils'
+import { findFileCaseInsensitive, normalizePaths } from './utils'
 
 export function getExamplesFilePaths(
 	tags: { [key: string]: (Tag | ParamTag)[] },
@@ -21,28 +21,32 @@ export function getExamplesFilePaths(
 export default async function getDocsBlocks(
 	absolutePath: string,
 	doc: Pick<ComponentDoc, 'tags' | 'docsBlocks'>,
-	getDocFileName: (file: string) => string | false,
+	getDocFileName: (file: string) => string | string[] | false,
 	rootPath: string,
 	editLinkLabel: string,
 	getRepoEditUrl?: (path: string) => string
 ): Promise<string[]> {
 	const docsBlocks = doc.docsBlocks || []
+	const docFilesPaths = normalizePaths(getDocFileName(absolutePath))
 
-	const docFilePath = getRepoEditUrl
-		? findFileCaseInsensitive(getDocFileName(absolutePath) || '')
-		: getDocFileName(absolutePath)
-	if (docFilePath) {
-		docsBlocks.push(`${
-			getRepoEditUrl
-				? `
+	const docFilePaths = docFilesPaths
+		.map(p => (getRepoEditUrl ? findFileCaseInsensitive(p) : p))
+		.filter(Boolean) as string[]
+
+	Promise.allSettled(
+		docFilePaths.map(async docFilePath => {
+			docsBlocks.push(`${
+				getRepoEditUrl
+					? `
 <a href="${getRepoEditUrl(
-						relativeUrl(rootPath, docFilePath)
-				  )}" class="docgen-edit-link">${editLinkLabel}</a>
+							relativeUrl(rootPath, docFilePath)
+					  )}" class="docgen-edit-link">${editLinkLabel}</a>
 `
-				: ''
-		}
+					: ''
+			}
 ${await fs.readFile(docFilePath, 'utf8')}`)
-	}
+		})
+	)
 
 	// load @examples tags into the docsBlocks
 	if (doc.tags?.example || doc.tags?.examples) {

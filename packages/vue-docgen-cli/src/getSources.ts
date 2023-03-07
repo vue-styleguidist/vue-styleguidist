@@ -14,7 +14,7 @@ export default async function getSources(
 	components: string | string[],
 	ignore: string[],
 	cwd: string,
-	getDocFileName: (componentPath: string) => string | false,
+	getDocFileName: (componentPath: string) => string | string[] | false,
   propsParser: typeof parseMulti,
 	optionsApi: DocGenOptions = {}
 ): Promise<{

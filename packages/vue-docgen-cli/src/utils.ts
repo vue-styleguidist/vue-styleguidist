@@ -42,15 +42,16 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
  */
 export function getDocMap(
 	files: string[],
-	getDocFileName: (file: string) => string | false,
+	getDocFileName: (file: string) => string | string[] | false,
 	root: string
 ): { [filepath: string]: string } {
 	const docMap: { [filepath: string]: string } = {}
 	files.forEach(f => {
-		const docFilePath = getDocFileName(path.join(root, f))
-		if (docFilePath) {
-			docMap[path.relative(root, docFilePath)] = f
-		}
+		const docFilePath = normalizePaths(getDocFileName(path.join(root, f)))
+
+		docFilePath.forEach(doc => {
+			docMap[path.relative(root, doc)] = f
+		})
 	})
 	return docMap
 }
@@ -67,4 +68,9 @@ export function findFileCaseInsensitive(filepath: string): string | undefined {
 	const files = fs.readdirSync(dir)
 	const found = files.find(file => file.toLowerCase() === fileNameLower)
 	return found && path.join(dir, found)
+}
+
+export function normalizePaths(path: string | string[] | false) {
+	if (!path) return []
+	return Array.isArray(path) ? path : [path]
 }

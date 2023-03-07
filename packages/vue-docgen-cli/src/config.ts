@@ -53,7 +53,7 @@ export interface SafeDocgenCLIConfig {
 	 * Use this to point docgen to the files that contain documentation specific to a component.
 	 * @param componentPath the path of the parsed components this doc is attached to
 	 */
-	getDocFileName(componentPath: string): string | false
+	getDocFileName(componentPath: string): string | string[] | false
 	/**
 	 * Function returning the absolute path of the documentation markdown files. If [outFile](#outfile) is used, this config will be ignored.
 	 * @param file original file
