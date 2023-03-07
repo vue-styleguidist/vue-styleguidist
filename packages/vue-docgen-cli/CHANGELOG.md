@@ -1,5 +1,13 @@
 # Change Log
 
+## 4.61.0
+
+### Minor Changes
+
+- [`5058d676`](https://github.com/vue-styleguidist/vue-styleguidist/commit/5058d676ef228b52e929ff390d9c174bd78fc50f) Thanks [@elevatebart](https://github.com/elevatebart)! - allow more than one md file for generation and watch
+
+- [`0d798c12`](https://github.com/vue-styleguidist/vue-styleguidist/commit/0d798c124e3bb4ef0cc2ae9c9b2a23301f2e1476) Thanks [@elevatebart](https://github.com/elevatebart)! - allow to ignore some files
+
 ## 4.60.1
 
 ### Patch Changes
