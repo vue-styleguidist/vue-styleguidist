@@ -33,7 +33,7 @@ export default async function getDocsBlocks(
 		.map(p => (getRepoEditUrl ? findFileCaseInsensitive(p) : p))
 		.filter(Boolean) as string[]
 
-	Promise.allSettled(
+	await Promise.allSettled(
 		docFilePaths.map(async docFilePath => {
 			docsBlocks.push(`${
 				getRepoEditUrl
