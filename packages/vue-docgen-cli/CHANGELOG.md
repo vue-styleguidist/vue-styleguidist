@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.61.2
+
+### Patch Changes
+
+- [`d1cbd701`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d1cbd701b21794e416b7f099e95a5b322999c382) Thanks [@elevatebart](https://github.com/elevatebart)! - make ignore work with the watcher
+
 ## 4.61.1
 
 ### Patch Changes
