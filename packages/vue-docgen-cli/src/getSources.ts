@@ -15,14 +15,14 @@ export default async function getSources(
 	ignore: string[],
 	cwd: string,
 	getDocFileName: (componentPath: string) => string | string[] | false,
-  propsParser: typeof parseMulti,
+	propsParser: typeof parseMulti,
 	optionsApi: DocGenOptions = {}
 ): Promise<{
 	watcher: FSWatcher
 	docMap: { [filepath: string]: string }
 	componentFiles: string[]
 }> {
-	const watcher = chokidar.watch(components, { cwd })
+	const watcher = chokidar.watch(components, { cwd, ignored: ignore })
 
 	const allComponentFiles = await glob(components, { cwd, ignore })
 
@@ -30,7 +30,9 @@ export default async function getSources(
 	// and @example/examples to add them to the watcher.
 	const requiredComponents = (
 		await Promise.all(
-			allComponentFiles.map(compPath => getRequiredComponents(compPath, optionsApi, propsParser, cwd))
+			allComponentFiles.map(compPath =>
+				getRequiredComponents(compPath, optionsApi, propsParser, cwd)
+			)
 		)
 	).reduce((acc, comps) => acc.concat(comps), [])
 
@@ -53,7 +55,7 @@ export default async function getSources(
 async function getRequiredComponents(
 	compPath: string,
 	optionsApi: DocGenOptions,
-  propsParser: typeof parseMulti,
+	propsParser: typeof parseMulti,
 	cwd: string
 ): Promise<string[]> {
 	const compDirName = path.dirname(compPath)
@@ -65,7 +67,10 @@ async function getRequiredComponents(
 			...optionsApi,
 			scriptHandlers: [ScriptHandlers.componentHandler]
 		})
-    const requires = docs.reduce((acc, { tags }) => tags?.requires ? acc.concat(tags.requires) : acc, [] as ParamTag[])
+		const requires = docs.reduce(
+			(acc, { tags }) => (tags?.requires ? acc.concat(tags.requires) : acc),
+			[] as ParamTag[]
+		)
 		if (requires.length) {
 			return requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
 		}
