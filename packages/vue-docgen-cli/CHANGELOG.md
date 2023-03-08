@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.61.1
+
+### Patch Changes
+
+- [`16b4c8e7`](https://github.com/vue-styleguidist/vue-styleguidist/commit/16b4c8e77f55fe864c3aec80e49dcc1d1cb7c6d7) Thanks [@elevatebart](https://github.com/elevatebart)! - await readme before creating md
+
 ## 4.61.0
 
 ### Minor Changes
