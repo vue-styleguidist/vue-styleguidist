@@ -26,6 +26,7 @@ export function compileTemplateForEval(compiledComponent: EvaluableComponent) {
 				bindingMetadata: bindings,
 				prefixIdentifiers: true,
 				mode: 'function'
+
 			}
 		})
 		compiledComponent.script = `
