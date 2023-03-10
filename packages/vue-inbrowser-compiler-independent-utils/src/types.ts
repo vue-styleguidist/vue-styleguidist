@@ -9,6 +9,7 @@ export interface EvaluableComponent {
 	script: string
 	template?: string
 	style?: string
+	setup: boolean
 }
 
 /**

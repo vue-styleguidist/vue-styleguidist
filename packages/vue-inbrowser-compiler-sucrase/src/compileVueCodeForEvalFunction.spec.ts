@@ -2,6 +2,15 @@
 import { expect } from 'vitest'
 import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
+function createFunction(code: string, execute = true) {
+	const fun = new Function('require', code)
+	if(!execute) return fun
+	const requireMock = function(module:string){
+		return {default: {module}}
+	}
+	return fun(requireMock)
+}
+
 describe('compileVueCodeForEvalFunction', () => {
 	it('bake template into a new Vue', () => {
 		const sut = compileVueCodeForEvalFunction(`
@@ -14,7 +23,7 @@ export default {
 	param
 }
 </script>`)
-		const dummySet = new Function(sut.script)()
+		const dummySet = createFunction(sut.script)
 		expect(dummySet).toMatchObject({ param: 'Foo' })
 	})
 
@@ -24,7 +33,7 @@ let param = 'Bar';
 new Vue({
 	param
 });`)
-		const dummySet = new Function(sut.script)()
+		const dummySet = createFunction(sut.script)
 		expect(dummySet).toMatchObject({ param: 'Bar' })
 	})
 
@@ -35,7 +44,7 @@ new Vue({
 			<button> {{param}} </button>
 		</div>
 		`)
-		const dummySet = new Function(sut.script)()
+		const dummySet = createFunction(sut.script)
 		expect(dummySet.data()).toMatchObject({ param: 'BazBaz' })
 	})
 
@@ -50,7 +59,7 @@ new Vue({
 			<MyButton> {{param}} </MyButton>
 		</div>
 		`)
-		const dummySet = new Function('require', sut.script)(() => ({
+		const dummySet = createFunction(sut.script, false)(() => ({
 			default: { component: vi.fn() }
 		}))
 		expect(dummySet.data()).toMatchObject({ param: 'BazFoo' })
@@ -182,6 +191,44 @@ export default {
 	}
 }
 </script>`)
-		expect(() => new Function(sut.script)()).not.toThrow()
+
+		expect(() => createFunction(sut.script)).not.toThrow()
+	})
+
+	it('should compile script setup', () => {
+		let sut = compileVueCodeForEvalFunction(`
+<script lang="ts" setup>
+import { IconSkullAndBones } from 'vue-feather-icons'
+import { h } from 'vue'
+
+const value:number = 1
+const MyButton = () => h('button')
+</script>
+
+<template>
+	<div>{{ value }}</div>
+	<MyButton />
+	<IconSkullAndBones />
+</template>`)
+		expect(sut.script).toMatchInlineSnapshot(`
+			"
+
+			const comp = (function() {\\"use strict\\";;return {setup(){
+
+			var _vuefeathericons = require('vue-feather-icons');
+			var _vue = require('vue');
+
+			const value = 1
+			const MyButton = () => _vue.h.call(void 0, 'button')
+
+			return {IconSkullAndBones: _vuefeathericons.IconSkullAndBones,h: _vue.h,value,MyButton}
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+			}}})()
+			comp.render = function() {with(this){return _c('div',[_v(_s(value))])}}
+
+			return comp"
+		`)
 	})
 })

@@ -5,7 +5,8 @@ import {
 	isCodeVueSfc,
 	isVue3,
 	compileTemplateForEval,
-	transformOneImport
+	transformOneImport,
+	compileTemplateForEvalSetup
 } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, {
 	parseScriptCode,
@@ -47,6 +48,12 @@ export default function compileVueCodeForEvalFunction(
 
 	compileTemplateForEval(compiledComponent)
 
+	if(nonCompiledComponent.setup && isVue3) {
+		compileTemplateForEvalSetup(compiledComponent, code)
+	} else {
+		compileTemplateForEval(compiledComponent)
+	}
+
 	return {
 		...compiledComponent,
 		raw: nonCompiledComponent
@@ -73,7 +80,8 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		if (config.jsx) {
 			const { preprocessing, component, postprocessing } = parseScriptCode(code)
 			return {
-				script: `${preprocessing};return {${component}};${postprocessing}`
+				script: `${preprocessing};return {${component}};${postprocessing}`,
+				setup: false
 			}
 		}
 
@@ -154,6 +162,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 	return {
 		script: code,
 		style,
-		template: isVue3 || !template ? template : `<div>${template}</div>`
+		template: isVue3 || !template ? template : `<div>${template}</div>`,
+		setup: false
 	}
 }

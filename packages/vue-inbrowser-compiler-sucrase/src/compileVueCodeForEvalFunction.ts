@@ -1,19 +1,14 @@
 import { transform, Options as TransformOptions } from 'sucrase'
 import walkes from 'walkes'
-import { isCodeVueSfc, isVue3, compileTemplateForEval } from 'vue-inbrowser-compiler-utils'
+import { isCodeVueSfc, isVue3, compileTemplateForEval, compileTemplateForEvalSetup, EvaluableComponent } from 'vue-inbrowser-compiler-utils'
 import normalizeSfcComponent, {
 	parseScriptCode,
 	getRenderFunctionStart,
 	insertCreateElementFunction,
-	JSX_ADDON_LENGTH
+	JSX_ADDON_LENGTH,
+	
 } from './normalizeSfcComponent'
 import getAst from './getAst'
-
-interface EvaluableComponent {
-	script: string
-	template?: string
-	style?: string
-}
 
 interface EvaluableComponentWithSource extends EvaluableComponent {
 	raw: {
@@ -50,7 +45,11 @@ export default function compileVueCodeForEvalFunction(
 		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 
-	compileTemplateForEval(compiledComponent)
+	if(nonCompiledComponent.setup && isVue3) {
+		compileTemplateForEvalSetup(compiledComponent, code)
+	} else {
+		compileTemplateForEval(compiledComponent)
+	}
 
 	return {
 		...compiledComponent,
@@ -81,7 +80,8 @@ function prepareVueCodeForEvalFunction(
 		if (config.jsxPragma) {
 			const { preprocessing, component } = parseScriptCode(code, config)
 			return {
-				script: `${preprocessing};return {${component}};`
+				script: `${preprocessing};return {${component}};`,
+				setup: false
 			}
 		}
 
@@ -159,6 +159,7 @@ function prepareVueCodeForEvalFunction(
 	return {
 		script: code,
 		style,
-		template: isVue3 || !template ? template : `<div>${template}</div>`
+		template: isVue3 || !template ? template : `<div>${template}</div>`,
+		setup: false
 	}
 }

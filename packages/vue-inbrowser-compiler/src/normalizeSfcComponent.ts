@@ -1,5 +1,5 @@
 import walkes from 'walkes'
-import { parseComponent, isVue3, transformOneImport } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, isVue3, transformOneImport, EvaluableComponent } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 
 const buildStyles = function (styles: string[] | undefined): string | undefined {
@@ -148,11 +148,7 @@ function defineExpose(){}
  * it should as well have been stripped of exports and all imports should have been
  * transformed into requires
  */
-export default function normalizeSfcComponent(code: string, _parseComponent = parseComponent): {
-	script: string
-	style?: string
-	template?: string
-} {
+export default function normalizeSfcComponent(code: string, _parseComponent = parseComponent): EvaluableComponent {
 	const { script, scriptSetup, template, styles } = _parseComponent(code)
 
 	const {
@@ -171,6 +167,7 @@ export default function normalizeSfcComponent(code: string, _parseComponent = pa
 	return {
 		template: template?.content,
 		script: [preprocessing, `return {${component}}`, postprocessing].join('\n'),
-		style: buildStyles(styles.map(styleBlock => styleBlock.content))
+		style: buildStyles(styles.map(styleBlock => styleBlock.content)),
+		setup: !!scriptSetup
 	}
 }
