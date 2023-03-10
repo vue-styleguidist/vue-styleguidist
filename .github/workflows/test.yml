@@ -25,6 +25,9 @@ jobs:
       - name: Run unit tests
         run: pnpm test:vitest --coverage
 
+      - name: Run unit tests vu3
+        run: pnpm test:vue3 --coverage
+
       - name: Clean tmp coverage directory
         run: rm -rf ./coverage/tmp
 

@@ -3,7 +3,7 @@ import { EvaluableComponent } from 'vue-inbrowser-compiler-independent-utils'
 
 const EXAMPLE_FILENAME = 'example.vue'
 
-export function compileTemplateForEval(compiledComponent: EvaluableComponent):void {
+export function compileTemplateForEval(compiledComponent: EvaluableComponent): void {
 	if (compiledComponent.template) {
 		const { bindings } = compileScript(
 			{
@@ -26,44 +26,48 @@ export function compileTemplateForEval(compiledComponent: EvaluableComponent):vo
 				bindingMetadata: bindings,
 				prefixIdentifiers: true,
 				mode: 'function'
-
 			}
 		})
 		setFinalRender(compiledComponent, renderObject)
 	}
 }
 
-export function compileTemplateForEvalSetup(compiledComponent: EvaluableComponent, code:string):void{
+export function compileTemplateForEvalSetup(
+	compiledComponent: EvaluableComponent,
+	code: string
+): void {
 	const descriptor = parseComponent(code)
 	const { bindings } = compileScript(descriptor as any, { id: '-' })
-	const renderObject = compileTemplate({
-		source: code,
-		filename: EXAMPLE_FILENAME,
-		id: '-',
-		compilerOptions: {
-			bindingMetadata: bindings,
-			prefixIdentifiers: true,
-			mode: 'function'
-		},
-	})
-	setFinalRender(compiledComponent, renderObject)
+	if (compiledComponent.template) {
+		const renderObject = compileTemplate({
+			source: compiledComponent.template,
+			filename: EXAMPLE_FILENAME,
+			id: '-',
+			compilerOptions: {
+				bindingMetadata: bindings,
+				prefixIdentifiers: true,
+				mode: 'function'
+			}
+		})
+		setFinalRender(compiledComponent, renderObject)
+	}
 }
 
-function setFinalRender(sfc: EvaluableComponent, renderObject:any):void {
+function setFinalRender(sfc: EvaluableComponent, renderObject: any): void {
 	sfc.script = `
 ${isVue3 ? 'const Vue = require("vue")' : ''}
 const comp = (function() {${sfc.script}})()${
-  renderObject.staticRenderFns?.length ? `
+		renderObject.staticRenderFns?.length
+			? `
 comp.staticRenderFns = [${renderObject.staticRenderFns
-?.map((fn:string) => {
-  return `function(){${fn}}`
-})
-.join(',')}]` : ''}
+					?.map((fn: string) => {
+						return `function(){${fn}}`
+					})
+					.join(',')}]`
+			: ''
+	}
 comp.render = function() {${renderObject.code}}
-${
-	isVue3
-		? `comp.render = comp.render()`:''
-}
+${isVue3 ? `comp.render = comp.render()` : ''}
 return comp`
-		delete sfc.template
+	delete sfc.template
 }
