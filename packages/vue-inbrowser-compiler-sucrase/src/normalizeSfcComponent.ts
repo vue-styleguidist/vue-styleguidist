@@ -1,5 +1,5 @@
 import walkes from 'walkes'
-import { parseComponent, isVue3 } from 'vue-inbrowser-compiler-utils'
+import { parseComponent, isVue3, EvaluableComponent } from 'vue-inbrowser-compiler-utils'
 import getAst from './getAst'
 import transformOneJSXSpread from './transformOneJSXSpread'
 
@@ -186,7 +186,7 @@ function defineExpose(){}
 export default function normalizeSfcComponent(
 	code: string,
 	config: { objectAssign?: string } = {}
-): { script: string; style?: string; template?: string } {
+): EvaluableComponent {
   const { script, scriptSetup, template, styles } = parseComponent(code)
 	const {
 		preprocessing = '',
@@ -202,6 +202,7 @@ export default function normalizeSfcComponent(
 	return {
 		template: template?.content,
 		script: [preprocessing, `return {${component}}`].join(';'),
-		style: buildStyles(styles.map(styleBlock => styleBlock.content))
+		style: buildStyles(styles.map(styleBlock => styleBlock.content)),
+		setup: Boolean(scriptSetup?.content)
 	}
 }
