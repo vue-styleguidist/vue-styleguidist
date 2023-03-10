@@ -153,7 +153,7 @@ new Vue({
 		`).script
 		).toMatchInlineSnapshot(`
 			"
-			const Vue = require(\\"vue\\")
+
 			const comp = (function() {
 					
 			return {
@@ -165,12 +165,8 @@ new Vue({
 					}
 
 					})()
-			comp.render = function() {const { openBlock: _openBlock, createElementBlock: _createElementBlock } = Vue
+			comp.render = function() {with(this){return _c('div')}}
 
-			return function render(_ctx, _cache, $props, $setup, $data, $options) {
-			  return (_openBlock(), _createElementBlock(\\"div\\"))
-			}}
-			comp.render = comp.render()
 			return comp"
 		`)
 	})

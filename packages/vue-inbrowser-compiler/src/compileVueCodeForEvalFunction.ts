@@ -48,7 +48,7 @@ export default function compileVueCodeForEvalFunction(
 
 	compileTemplateForEval(compiledComponent)
 
-	if(nonCompiledComponent.setup) {
+	if(nonCompiledComponent.setup && isVue3) {
 		compileTemplateForEvalSetup(compiledComponent, code)
 	} else {
 		compileTemplateForEval(compiledComponent)

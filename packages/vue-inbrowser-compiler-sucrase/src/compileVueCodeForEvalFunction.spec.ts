@@ -216,7 +216,7 @@ const MyButton = () => h('button')
 </template>`)
 		expect(sut.script).toMatchInlineSnapshot(`
 			"
-			const Vue = require(\\"vue\\")
+
 			const comp = (function() {\\"use strict\\";;return {setup(){
 
 			var _vuefeathericons = require('vue-feather-icons');
@@ -230,19 +230,8 @@ const MyButton = () => h('button')
 			function defineEmits(){}
 			function defineExpose(){}
 			}}})()
-			comp.render = function() {const { toDisplayString: _toDisplayString, createElementVNode: _createElementVNode, resolveComponent: _resolveComponent, createVNode: _createVNode, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = Vue
+			comp.render = function() {with(this){return _c('div',[_v(_s(value))])}}
 
-			return function render(_ctx, _cache, $props, $setup, $data, $options) {
-			  const _component_MyButton = _resolveComponent(\\"MyButton\\")
-			  const _component_IconSkullAndBones = _resolveComponent(\\"IconSkullAndBones\\")
-
-			  return (_openBlock(), _createElementBlock(_Fragment, null, [
-			    _createElementVNode(\\"div\\", null, _toDisplayString(_ctx.value), 1 /* TEXT */),
-			    _createVNode(_component_MyButton),
-			    _createVNode(_component_IconSkullAndBones)
-			  ], 64 /* STABLE_FRAGMENT */))
-			}}
-			comp.render = comp.render()
 			return comp"
 		`)
 	})
