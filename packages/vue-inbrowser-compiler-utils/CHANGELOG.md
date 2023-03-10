@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.62.1
+
+### Patch Changes
+
+- [#1500](https://github.com/vue-styleguidist/vue-styleguidist/pull/1500) [`6027b18c`](https://github.com/vue-styleguidist/vue-styleguidist/commit/6027b18cbfd75dda9f7bc5eb934b5a2482f86dba) Thanks [@elevatebart](https://github.com/elevatebart)! - fix script setup template compilation
+
 ## 4.62.0
 
 ### Minor Changes
