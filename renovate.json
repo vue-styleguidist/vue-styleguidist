@@ -23,6 +23,7 @@
   "major": {
     "schedule": [
       "every 3 months before 3am on the first day of the month"
-    ]
+    ],
+		"enabled": false
   }
 }
