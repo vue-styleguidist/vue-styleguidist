@@ -33,7 +33,7 @@ alt="Chat on Discord">
 
 ## Sponsors
 
-A big thank you to our sponsors. Their contributions pay for the Netlify build minutes.
+A big thank you to our sponsors. 
 
 [Marcello Bachechi](https://github.com/pilotkid), [Walter Tommasi](https://github.com/jtommy), [Luca Ban](https://github.com/mesqueeb) and [Ben Hong](https://github.com/bencodezen)
 
