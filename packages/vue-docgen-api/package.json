@@ -47,7 +47,7 @@
     "@types/pug": "2.0.6",
     "dedent": "0.7.0",
     "globby": "10.0.2",
-    "vue": "2.7.14",
+    "vue": "3.2.47",
     "vue-class-component": "7.2.6",
     "vue-clickaway": "2.2.2",
     "vue-property-decorator": "7.3.0",

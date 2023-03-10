@@ -108,7 +108,7 @@
     "turbo": "^1.8.3",
     "typescript": "4.9.5",
     "vitest": "0.25.3",
-    "vue": "2.7.14",
+    "vue": "3.2.47",
     "vue-cli-plugin-docgen": "*",
     "vue-cli-plugin-styleguidist": "*",
     "vue-inbrowser-compiler-sucrase": "*",

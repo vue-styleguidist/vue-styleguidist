@@ -14,7 +14,7 @@
     "prepublish": "node ./postinstall.js --vue3"
   },
   "devDependencies": {
-    "vue": "2.7.14",
+    "vue": "3.2.47",
     "vue-template-compiler": "2.7.14",
     "@vue/compiler-sfc": "3.2.47"
   },
