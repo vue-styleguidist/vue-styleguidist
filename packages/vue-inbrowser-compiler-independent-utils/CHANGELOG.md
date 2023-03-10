@@ -1,5 +1,11 @@
 # vue-inbrowser-compiler-independent-utils
 
+## 4.62.0
+
+### Minor Changes
+
+- [#1498](https://github.com/vue-styleguidist/vue-styleguidist/pull/1498) [`1990d7f8`](https://github.com/vue-styleguidist/vue-styleguidist/commit/1990d7f8c4601a2af5160aff9e29d12e3e57f727) Thanks [@elevatebart](https://github.com/elevatebart)! - resolve setup imported components
+
 ## 4.56.2
 
 ### Patch Changes
