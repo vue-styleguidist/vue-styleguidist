@@ -199,7 +199,7 @@ export default {
 		expect(() => createFunction(sut.script)).not.toThrow()
 	})
 
-	it.only('should compile script setup', () => {
+	it('should compile script setup', () => {
 		let sut = compileVueCodeForEvalFunction(`
 <script lang="ts" setup>
 import { IconSkullAndBones } from 'vue-feather-icons'
