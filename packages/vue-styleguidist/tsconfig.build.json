@@ -7,5 +7,5 @@
 		"outDir": "lib"
 	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"],
-	"exclude": ["**/*.spec.*", "**/*.cy.*", "**/node_modules/**"]
+	"exclude": ["**/*.spec.*", "**/*.cy.*", "**/node_modules/**", "**/test.vue3.ts"]
 }
