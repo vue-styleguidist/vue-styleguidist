@@ -42,7 +42,6 @@
     "vue-inbrowser-compiler-independent-utils": "^4.56.2"
   },
   "devDependencies": {
-    "@test-vue-docgen/mixins": "^4.44.15",
     "@types/dedent": "0.7.0",
     "@types/pug": "2.0.6",
     "dedent": "0.7.0",
