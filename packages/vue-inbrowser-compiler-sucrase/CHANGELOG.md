@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.62.2
+
+### Patch Changes
+
+- [`5cb25928`](https://github.com/vue-styleguidist/vue-styleguidist/commit/5cb259285870f77f3b0ff2ec1b2bdc298928739b) Thanks [@elevatebart](https://github.com/elevatebart)! - update inborowser-compiler-utils for script setup
+
 ## 4.62.0
 
 ### Minor Changes
