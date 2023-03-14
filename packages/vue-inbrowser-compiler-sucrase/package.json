@@ -22,7 +22,7 @@
     "camelcase": "^5.3.1",
     "detect-browser": "^5.2.0",
     "sucrase": "3.29.0",
-    "vue-inbrowser-compiler-utils": "^4.62.0",
+    "vue-inbrowser-compiler-utils": "^4.62.1",
     "walkes": "^0.2.1"
   },
   "devDependencies": {
