@@ -1,4 +1,4 @@
-import { SpyInstance, expect } from 'vitest'
+import { SpyInstance, expect, vi, describe, beforeEach, it } from 'vitest'
 import adaptCreateElement, { CreateElementFunction } from './adaptCreateElement'
 
 vi.mock('vue-inbrowser-compiler-demi', () => {
