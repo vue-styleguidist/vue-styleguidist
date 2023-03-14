@@ -1134,7 +1134,7 @@ importers:
       tslib: 2.5.0
       typescript: 4.9.5
       vue: 2.7.14
-      vue-inbrowser-compiler-utils: ^4.62.0
+      vue-inbrowser-compiler-utils: ^4.62.1
       vue-template-compiler: 2.7.14
       vue3: npm:vue@3
       walkes: ^0.2.1
@@ -1210,7 +1210,7 @@ importers:
       tslib: 2.5.0
       typescript: 4.9.5
       vue: 2.7.14
-      vue-inbrowser-compiler-utils: ^4.62.0
+      vue-inbrowser-compiler-utils: ^4.62.1
       vue-template-compiler: 2.7.14
       walkes: ^0.2.1
     dependencies:
@@ -29454,16 +29454,16 @@ packages:
       vue-template-compiler: 2.7.14
     dev: false
 
-  /vue-inbrowser-compiler-independent-utils/4.56.2_vue@2.7.14:
-    resolution: {integrity: sha512-szE2vZDSkZlItq+K4MevgvCGKt5IzM6OkIjyCuj/09ty2akixeQGNFRXyDELMdmVVzmN+9nJn02YKnoPkhXHwA==}
+  /vue-inbrowser-compiler-independent-utils/4.62.0_vue@2.7.14:
+    resolution: {integrity: sha512-Xj7phxND9kycttv1KxvzenyqdjVQLf8V5LDREO+x+2FwM99pKhUg2VoxPHlRKghcvOvBv9Fs1iaU9kJCl0DjbQ==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       vue: 2.7.14_26fyyf7iv7yfd4w3hhy5cm2p24
     dev: false
 
-  /vue-inbrowser-compiler-independent-utils/4.56.2_vue@3.2.37:
-    resolution: {integrity: sha512-szE2vZDSkZlItq+K4MevgvCGKt5IzM6OkIjyCuj/09ty2akixeQGNFRXyDELMdmVVzmN+9nJn02YKnoPkhXHwA==}
+  /vue-inbrowser-compiler-independent-utils/4.62.0_vue@3.2.37:
+    resolution: {integrity: sha512-Xj7phxND9kycttv1KxvzenyqdjVQLf8V5LDREO+x+2FwM99pKhUg2VoxPHlRKghcvOvBv9Fs1iaU9kJCl0DjbQ==}
     peerDependencies:
       vue: '>=2'
     dependencies:
@@ -29480,36 +29480,36 @@ packages:
       detect-browser: 5.2.0
       sucrase: 3.24.0
       vue: 3.2.37
-      vue-inbrowser-compiler-utils: 4.56.5_27kt524ck4apxula6vakm6okd4
+      vue-inbrowser-compiler-utils: 4.62.1_27kt524ck4apxula6vakm6okd4
       walkes: 0.2.1
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
     dev: true
 
-  /vue-inbrowser-compiler-utils/4.56.5_27kt524ck4apxula6vakm6okd4:
-    resolution: {integrity: sha512-EYAf8L4ibXJhlPDZDAwDS0eHCek8kU2PoJGrJh0RpIm8AHxuIrLe4mPClWmQ0g9PBNQNdW9JvhWvRpzPD27mmw==}
+  /vue-inbrowser-compiler-utils/4.62.1_27kt524ck4apxula6vakm6okd4:
+    resolution: {integrity: sha512-OBXww64WgfxgAwPalZHWAbrVqcAcmeZbsv74uaOL9eABUAKS6sXEbb+RjSXOjPsgfDONMg9zwCPiMOnPVRXlzQ==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       camelcase: 5.3.1
       vue: 3.2.37
       vue-inbrowser-compiler-demi: 4.56.5_27kt524ck4apxula6vakm6okd4
-      vue-inbrowser-compiler-independent-utils: 4.56.2_vue@3.2.37
+      vue-inbrowser-compiler-independent-utils: 4.62.0_vue@3.2.37
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
     dev: true
 
-  /vue-inbrowser-compiler-utils/4.56.5_rhqkolmkwunxzlyyxxsuwaiuri:
-    resolution: {integrity: sha512-EYAf8L4ibXJhlPDZDAwDS0eHCek8kU2PoJGrJh0RpIm8AHxuIrLe4mPClWmQ0g9PBNQNdW9JvhWvRpzPD27mmw==}
+  /vue-inbrowser-compiler-utils/4.62.1_rhqkolmkwunxzlyyxxsuwaiuri:
+    resolution: {integrity: sha512-OBXww64WgfxgAwPalZHWAbrVqcAcmeZbsv74uaOL9eABUAKS6sXEbb+RjSXOjPsgfDONMg9zwCPiMOnPVRXlzQ==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       camelcase: 5.3.1
       vue: 2.7.14_26fyyf7iv7yfd4w3hhy5cm2p24
       vue-inbrowser-compiler-demi: 4.56.5_rhqkolmkwunxzlyyxxsuwaiuri
-      vue-inbrowser-compiler-independent-utils: 4.56.2_vue@2.7.14
+      vue-inbrowser-compiler-independent-utils: 4.62.0_vue@2.7.14
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
@@ -29526,7 +29526,7 @@ packages:
       camelcase: 5.3.1
       detect-browser: 5.2.0
       vue: 2.7.14_26fyyf7iv7yfd4w3hhy5cm2p24
-      vue-inbrowser-compiler-utils: 4.56.5_rhqkolmkwunxzlyyxxsuwaiuri
+      vue-inbrowser-compiler-utils: 4.62.1_rhqkolmkwunxzlyyxxsuwaiuri
       walkes: 0.2.1
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
