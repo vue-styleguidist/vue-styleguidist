@@ -21,7 +21,7 @@ export default async function(
 ) {
 	const compileWithConfig = _compile.bind(null, config, docMap, watcher)
 
-	await Promise.all(files.map(f => compileWithConfig(f)))
+	await Promise.all(files.map(f => compileWithConfig(f, false)))
 
 	if (config.watch) {
 		watcher
@@ -52,8 +52,12 @@ export async function compile(
 	config: DocgenCLIConfigWithComponents,
 	docMap: { [filepath: string]: string },
 	watcher: FSWatcher,
-	filePath: string
+	filePath: string,
+	fromWatcher: boolean = true
 ) {
+	if(fromWatcher){
+		console.log(`[vue-docgen-cli] File ${filePath} updated`)	
+	}
 	const componentFile = docMap[filePath] || filePath
 	const file = config.getDestFile(componentFile, config)
 
@@ -69,10 +73,11 @@ export async function compile(
 				watcher.add(d)
 				docMap[d] = componentFile
 			})
-			writeDownMdFile(content, file)
+			await writeDownMdFile(content, file)
+			console.log(`[vue-docgen-cli] File ${file} updated.`)
 		} catch (e) {
 			const err = e as Error
-			throw new Error(`Error compiling file ${file}: ${err.message}`)
+			throw new Error(`[vue-docgen-cli] Error compiling file ${file}: ${err.message}`)
 		}
 	}
 }

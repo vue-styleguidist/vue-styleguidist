@@ -65,8 +65,13 @@ export async function compile(
   cachedDocs: { [filepath: string]: ComponentDoc[] },
 	docMap: { [filepath: string]: string },
 	watcher: FSWatcher,
-	changedFilePath?: string
+	changedFilePath?: string,
+	fromWatcher: boolean = true
 ) {
+	if(fromWatcher){
+		console.log(`[vue-docgen-cli] File ${changedFilePath} updated`)	
+	}
+
 	// this local function will enrich the cachedContent with the
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
@@ -105,7 +110,7 @@ export async function compile(
 			await Promise.all(files.map(cacheMarkDownContent))
 		} catch (e) {
 			const err = e as Error
-			throw new Error(`Error compiling file ${config.outFile}: ${err.message}`)
+			throw new Error(`[vue-docgen-cli] Error compiling file ${config.outFile}: ${err.message}`)
 		}
 	}
 
@@ -114,11 +119,11 @@ export async function compile(
 		.map(([filePath, mdValue]) => ({ filePath, mdValue, docs: cachedDocs[filePath] }))
 		.sort(config.sortComponents)
 
-  
-
 	// and finally save all concatenated values to the markdown file
-	writeDownMdFile(
+	await writeDownMdFile(
 		sortedMd.map(part => part.mdValue),
 		config.outFile
 	)
+
+	console.log(`[vue-docgen-cli] File ${config.outFile} updated.`)
 }
