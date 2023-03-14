@@ -37,6 +37,7 @@ export default function compileVueCodeForEvalFunction(
 		production: true,
 		jsxPragma: config.jsxPragma,
 		jsxFragmentPragma: config.jsxFragmentPragma,
+		enableLegacyTypeScriptModuleInterop: true,
 		transforms: ['typescript', 'imports', ...(config.jsxPragma ? (['jsx'] as const) : [])]
 	}
 

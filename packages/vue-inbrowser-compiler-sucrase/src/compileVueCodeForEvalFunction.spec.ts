@@ -109,15 +109,15 @@ new Vue({
 		`)
 
 		expect(sut.script).toMatchInlineSnapshot(`
-			"\\"use strict\\"; function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+			"\\"use strict\\";
 
-			var _dognames = require('../RandomButton/dog-names'); var _dognames2 = _interopRequireDefault(_dognames);
+			var _dognames = require('../RandomButton/dog-names');
 
 			return {
 				data() {
 					let i = 0
 					return {
-						opt: _dognames2.default.map(a => ({ text: a, value: i++ }))
+						opt: _dognames.default.map(a => ({ text: a, value: i++ }))
 					}
 				},
 				template: '<Radio :options=\\"opt\\" />'
