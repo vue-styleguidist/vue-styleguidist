@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.63.0
+
+### Minor Changes
+
+- [`7e6f44b0`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7e6f44b00b21ff558899dfdd9cb43cfd99ea7d99) Thanks [@elevatebart](https://github.com/elevatebart)! - add logs in vue-docgen-cli
+
 ## 4.61.2
 
 ### Patch Changes
