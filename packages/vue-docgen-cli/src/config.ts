@@ -4,7 +4,7 @@ import {
 	SlotDescriptor,
 	MethodDescriptor,
 	EventDescriptor,
-  ExposeDescriptor,
+	ExposeDescriptor,
 	ComponentDoc,
 	parseMulti
 } from 'vue-docgen-api'
@@ -103,7 +103,10 @@ export interface SafeDocgenCLIConfig {
 	/**
 	 * In a single md setup, this function will be called to determine the order of the components on the page
 	 */
-	sortComponents(a:{filePath: string, docs: ComponentDoc[]}, b:{filePath: string, docs: ComponentDoc[]}): 0 | 1 | -1
+	sortComponents(
+		a: { filePath: string; docs: ComponentDoc[] },
+		b: { filePath: string; docs: ComponentDoc[] }
+	): 0 | 1 | -1
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
@@ -134,6 +137,6 @@ export interface RenderedUsage {
 	slots: string
 	methods: string
 	events: string
-  expose: string
+	expose: string
 	functionalTag: string
 }

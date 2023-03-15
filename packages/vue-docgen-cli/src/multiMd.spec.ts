@@ -26,12 +26,12 @@ describe('multiMd', () => {
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: DocgenCLIConfigWithComponents
 	const fakeOn = vi.fn()
-	const w = ({
+	const w = {
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
-	} as unknown) as FSWatcher
+	} as unknown as FSWatcher
 
-	beforeEach(() => {
-		conf = extractConfig(CWD) as DocgenCLIConfigWithComponents
+	beforeEach(async () => {
+		conf = (await extractConfig(CWD)) as DocgenCLIConfigWithComponents
 		conf.components = '**/*.vue'
 		conf.getDocFileName = vi.fn(() => FAKE_COMPONENT_FULL_PATH)
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
