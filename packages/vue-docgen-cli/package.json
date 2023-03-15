@@ -16,7 +16,7 @@
 	"types": "lib/docgen.d.ts",
 	"dependencies": {
 		"chokidar": "^3.5.1",
-		"globby": "^10.0.2",
+		"globby": "^11.1.0",
 		"lodash.memoize": "4.1.2",
 		"minimist": "^1.2.5",
 		"mkdirp": "^0.5.5",
