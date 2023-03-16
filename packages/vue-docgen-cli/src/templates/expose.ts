@@ -1,4 +1,4 @@
-import { ExposeDescriptor, ParamTag, Tag } from 'vue-docgen-api'
+import type { ExposeDescriptor, ParamTag, Tag } from 'vue-docgen-api'
 import { SubTemplateOptions } from '../compileTemplates'
 import { renderTags } from './tags'
 

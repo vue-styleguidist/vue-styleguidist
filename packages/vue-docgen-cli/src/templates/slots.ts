@@ -1,4 +1,4 @@
-import { SlotDescriptor } from 'vue-docgen-api'
+import type { SlotDescriptor } from 'vue-docgen-api'
 import { mdclean } from './utils'
 import { SubTemplateOptions } from '../compileTemplates'
 

@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { ComponentDoc, ParamTag } from 'vue-docgen-api'
+import type { ComponentDoc, ParamTag } from 'vue-docgen-api'
 import events from './templates/events'
 import methods from './templates/methods'
 import expose from './templates/expose'
