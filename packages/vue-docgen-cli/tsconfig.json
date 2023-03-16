@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"lib": ["es2021"],
+		"rootDir": "./src",
+		"outDir": "./lib",
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"strict": true,
+		"declaration": true,
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"composite": true
+	},
+	"include": ["./src/**/*.ts"]
+}
