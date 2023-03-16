@@ -35,6 +35,10 @@ export default async function documentRequiredComponents(
 		]
 	}
 
+	// else if we have an iev (Immediately Exported Variable) we want to create a new doc
+	// for each of them and return them in a flat array
+
+	// first we consolidate all the files we have to parse
 	const files = new Map<string, { exportName: string; varName: string }[]>()
 	for (const varName of Object.keys(varToFilePath)) {
 		const { filePath, exportName } = varToFilePath[varName]
@@ -48,6 +52,9 @@ export default async function documentRequiredComponents(
 		})
 	}
 
+	// by now we should have a set of filePath that we can iterate through to get all missing docs
+
+	// parse all files and get their docs
 	const docsArray = await Promise.all(
 		files.keys().map(async (fullFilePath): Promise<Documentation[]> => {
 			const vars = files.get(fullFilePath) || []
@@ -59,7 +66,7 @@ export default async function documentRequiredComponents(
 				},
 				documentation
 			)
-			// update varnames with the original iev names
+			// then assign each doc in one to the correct exported varname in the root file
 			temporaryDocs.forEach(d =>
 				d.set('exportName', (vars.find(v => v.exportName === d.get('exportName')) || {}).varName)
 			)
@@ -108,6 +115,8 @@ async function enrichDocumentation(
 							},
 							documentation
 						)
+						
+						documentation.sourceFiles.add(fullFilePath)
 						if (documentation && originVar[originObject]) {
 							originVar[originObject].name =
 								documentation.get('displayName') || documentation.get('exportName')

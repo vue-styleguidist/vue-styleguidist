@@ -125,6 +125,10 @@ async function parseScriptTag(
 				/\.tsx?$/i.test(extSrc)
 					? 'ts'
 					: 'js'
+					
+			if (extSrcAbs) {
+				documentation?.sourceFiles.add(extSrcAbs)
+			}
 		}
 	}
 
