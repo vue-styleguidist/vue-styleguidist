@@ -43,8 +43,8 @@
     "bin.js"
   ],
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": ">=10",
+    "npm": ">=6"
   },
   "dependencies": {
     "@babel/runtime": "7.20.13",
@@ -68,7 +68,7 @@
     "github-slugger": "^1.3.0",
     "glob": "^7.1.6",
     "glogg": "^1.0.2",
-    "hash-sum": "^1.0.2",
+    "hash-sum": "^2.0.0",
     "is-directory": "^0.3.1",
     "javascript-stringify": "^1.6.0",
     "jss": "^10.6.0",
@@ -76,7 +76,7 @@
     "leven": "^2.1.0",
     "loader-utils": "^1.4.0",
     "lodash": "^4.17.21",
-    "lru-cache": "^4.1.5",
+    "lru-cache": "^8.0.3",
     "mini-html-webpack-plugin": "^3.1.3",
     "minimist": "^1.2.5",
     "prismjs": "^1.23.0",
