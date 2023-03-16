@@ -21,9 +21,18 @@ function run(config: SafeDocgenCLIConfig) {
 	}
 }
 
-const { _: pathArray, configFile, watch, cwd } = minimist(process.argv.slice(2), {
-	alias: { c: 'configFile', w: 'watch' }
-})
+async function main() {
+	const {
+		_: pathArray,
+		configFile,
+		watch,
+		cwd
+	} = minimist(process.argv.slice(2), {
+		alias: { c: 'configFile', w: 'watch' }
+	})
 
-const conf = extractConfig(cwd || process.cwd(), watch, configFile, pathArray)
-run(conf)
+	const conf = await extractConfig(cwd || process.cwd(), watch, configFile, pathArray)
+	run(conf)
+}
+
+main()

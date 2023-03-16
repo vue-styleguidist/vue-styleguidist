@@ -5,7 +5,7 @@ import {
 	component,
 	events,
 	methods,
-  expose,
+	expose,
 	props,
 	slots,
 	defaultExample,
@@ -14,12 +14,12 @@ import {
 import { SafeDocgenCLIConfig, DocgenCLIConfig } from './config'
 import { findFileCaseInsensitive } from './utils'
 
-export default (
+export default async (
 	cwd: string,
 	watch = false,
 	configFileFromCmd?: string,
 	pathArray: string[] = []
-): SafeDocgenCLIConfig => {
+): Promise<SafeDocgenCLIConfig> => {
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
 		: path.join(cwd, 'docgen.config.js')
@@ -28,7 +28,7 @@ export default (
 	const config: Partial<DocgenCLIConfig> = {
 		cwd,
 		watch,
-    propsParser: parseMulti,
+		propsParser: parseMulti,
 		componentsRoot: path.dirname(configFilePath),
 		components: componentsFromCmd || 'src/components/**/[a-zA-Z]*.{vue,js,jsx,ts,tsx}',
 		outDir: outDirFromCmd,
@@ -51,7 +51,7 @@ export default (
 		getDestFile: (file: string, conf: SafeDocgenCLIConfig): string =>
 			path.resolve(conf.outDir, file).replace(/\.\w+$/, '.md'),
 		editLinkLabel: 'edit on github',
-		...(fs.existsSync(configFilePath) ? require(configFilePath) : undefined)
+		...(fs.existsSync(configFilePath) ? (await import(configFilePath)).default : undefined)
 	}
 
 	if (!config.getRepoEditUrl && config.docsRepo) {
@@ -69,7 +69,7 @@ export default (
 		methods,
 		props,
 		slots,
-    expose,
+		expose,
 		defaultExample,
 		functionalTag,
 		...config.templates

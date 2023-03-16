@@ -15,7 +15,8 @@
 	"main": "lib/docgen.js",
 	"types": "lib/docgen.d.ts",
 	"engines": {
-		"node": ">=10"
+		"node": ">=16.3",
+		"npm": ">=7"
 	},
 	"dependencies": {
 		"chokidar": "^3.5.1",
