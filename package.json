@@ -38,7 +38,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=9",
+    "node": ">=10",
     "npm": ">=5"
   },
   "dependencies": {

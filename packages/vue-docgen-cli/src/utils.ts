@@ -1,10 +1,9 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import { promisify } from 'util'
-import mkdirpNative from 'mkdirp'
 import prettier from 'prettier'
 
-const mkdirp = promisify(mkdirpNative)
+const mkdirp = promisify(fs.mkdir)
 
 /**
  * Prettify then save a markdown content
@@ -17,7 +16,7 @@ export async function writeDownMdFile(content: string | string[], destFilePath: 
 	const prettyMd = (cont: string) =>
 		prettier.format(cont, Object.assign(conf || {}, { parser: 'markdown' }))
 	const destFolder = path.dirname(destFilePath)
-	await mkdirp(destFolder)
+	await mkdirp(destFolder, { recursive: true })
 	const writeStream = fs.createWriteStream(destFilePath)
 	if (Array.isArray(content)) {
 		content.forEach(cont => {

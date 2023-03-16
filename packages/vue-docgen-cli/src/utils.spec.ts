@@ -18,7 +18,8 @@ vi.mock('fs', () => {
 		writeFile: vi.fn((a, b, c) => c()),
 		createWriteStream: () => cws,
 		existsSync: vi.fn(() => false),
-		readdirSync: vi.fn(() => [])
+		readdirSync: vi.fn(() => []),
+		mkdir: vi.fn((a, b, c) => c())
 	}
 
 	mockFs.default = mockFs
@@ -26,9 +27,6 @@ vi.mock('fs', () => {
 })
 
 vi.mock('prettier')
-vi.mock('mkdirp', () => {
-	return { default: vi.fn((p, c) => c()) }
-})
 vi.mock('./compileTemplates')
 
 let mockPrettierFormat: SpyInstance
