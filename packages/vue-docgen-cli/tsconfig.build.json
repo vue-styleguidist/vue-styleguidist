@@ -2,6 +2,8 @@
 	"extends": "../../tsconfig",
 	"compilerOptions": {
 		"outDir": "lib",
+		"target": "ES2021",
+		"moduleResolution": "node16",
 		"declaration": true,
 		"sourceMap": true,
 		"skipLibCheck": true

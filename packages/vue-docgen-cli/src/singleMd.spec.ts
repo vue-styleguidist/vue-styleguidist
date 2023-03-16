@@ -20,8 +20,7 @@ vi.mock('./compileTemplates', () => {
 			return filePath === 'here/two'
 				? Promise.resolve({ content: FAKE_MD_CONTENT_2, dependencies: [] })
 				: Promise.resolve({ content: FAKE_MD_CONTENT_1, dependencies: [] })
-    }
-		)
+		})
 	}
 })
 
@@ -32,12 +31,12 @@ describe('compile', () => {
 	const MD_FILE_PATH = 'files/docs.md'
 	let conf: singleMd.DocgenCLIConfigWithOutFile
 	const fakeOn = vi.fn()
-	const w = ({
+	const w = {
 		on: fakeOn.mockImplementation(() => ({ on: fakeOn }))
-	} as unknown) as FSWatcher
+	} as unknown as FSWatcher
 
-	beforeEach(() => {
-		conf = extractConfig(CWD) as singleMd.DocgenCLIConfigWithOutFile
+	beforeEach(async () => {
+		conf = (await extractConfig(CWD)) as singleMd.DocgenCLIConfigWithOutFile
 		conf.components = '**/*.vue'
 		conf.outFile = 'files/docs.md'
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
@@ -47,13 +46,19 @@ describe('compile', () => {
 	describe('compile', () => {
 		it('should get the current components doc', async () => {
 			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w)
-			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT_1, FAKE_MD_CONTENT_2], MD_FILE_PATH)
+			expect(writeDownMdFile).toHaveBeenCalledWith(
+				[FAKE_MD_CONTENT_1, FAKE_MD_CONTENT_2],
+				MD_FILE_PATH
+			)
 		})
 
-    it('should reverse the order if the sort is reversed', async () => {
-      conf.sortComponents = (a, b) => - (a.filePath.localeCompare(b.filePath)) as any
+		it('should reverse the order if the sort is reversed', async () => {
+			conf.sortComponents = (a, b) => -a.filePath.localeCompare(b.filePath) as any
 			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w)
-			expect(writeDownMdFile).toHaveBeenCalledWith([FAKE_MD_CONTENT_2, FAKE_MD_CONTENT_1], MD_FILE_PATH)
+			expect(writeDownMdFile).toHaveBeenCalledWith(
+				[FAKE_MD_CONTENT_2, FAKE_MD_CONTENT_1],
+				MD_FILE_PATH
+			)
 		})
 	})
 
