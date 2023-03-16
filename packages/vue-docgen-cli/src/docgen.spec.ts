@@ -25,8 +25,8 @@ describe('docgen', () => {
 	let mockSingle: SpyInstance
 	let mockMulti: SpyInstance
 
-	beforeEach(() => {
-		conf = extractConfig(CWD)
+	beforeEach(async () => {
+		conf = await extractConfig(CWD)
 		conf.components = '**/*.vue'
 		conf.getDestFile = vi.fn(() => MD_FILE_PATH)
 
