@@ -109,5 +109,6 @@ export interface ComponentDoc {
 	expose?: ExposeDescriptor[]
 	tags: { [key: string]: BlockTag[] }
 	docsBlocks?: string[]
+	sourceFiles?: string[]
 	[key: string]: any
 }

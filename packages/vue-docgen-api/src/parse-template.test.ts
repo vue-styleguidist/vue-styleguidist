@@ -22,6 +22,9 @@ describe('parse-template', () => {
 			  "methods": undefined,
 			  "props": undefined,
 			  "slots": undefined,
+			  "sourceFiles": [
+			    "file/path",
+			  ],
 			  "tags": {},
 			}
 		`)

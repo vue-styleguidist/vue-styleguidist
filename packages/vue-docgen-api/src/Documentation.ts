@@ -42,6 +42,7 @@ export default class Documentation {
 	private dataMap: Map<string, any>
 	private docsBlocks: string[] | undefined
 	private originExtendsMixin: Descriptor
+	public readonly sourceFiles: Set<string>
 	public readonly componentFullfilePath: string
 
 	public constructor(fullFilePath: string) {
@@ -51,6 +52,7 @@ export default class Documentation {
 		this.slotsMap = new Map()
 		this.methodsMap = new Map()
 		this.exposedMap = new Map()
+		this.sourceFiles = new Set([fullFilePath])
 		this.originExtendsMixin = {}
 
 		this.dataMap = new Map()
@@ -113,6 +115,7 @@ export default class Documentation {
 		const events = this.getObjectFromDescriptor(this.eventsMap)
 		const slots = this.getObjectFromDescriptor(this.slotsMap)
 		const expose = this.getObjectFromDescriptor(this.exposedMap)
+		const sourceFiles = [...this.sourceFiles]
 
 		const obj: { [key: string]: any } = {}
 		this.dataMap.forEach((value, key) => {
@@ -138,7 +141,8 @@ export default class Documentation {
 			props,
 			events,
 			methods,
-			slots
+			slots,
+			sourceFiles
 		}
 	}
 

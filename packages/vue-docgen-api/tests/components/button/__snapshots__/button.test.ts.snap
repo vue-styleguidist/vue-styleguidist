@@ -301,6 +301,14 @@ a factory function",
       "name": "default",
     },
   ],
+  "sourceFiles": [
+    /packages/vue-docgen-api/tests/components/button/Button.vue,
+    /packages/vue-docgen-api/tests/mixins/another/index.js,
+    /packages/vue-docgen-api/tests/components/button/genericMixin.js,
+    /packages/vue-docgen-api/tests/components/button/colorMixin.js,
+    /packages/vue-docgen-api/tests/mixins/multiMixin.js,
+    /packages/vue-docgen-api/tests/components/button/namedMixin.js,
+  ],
   "tags": {
     "author": [
       {

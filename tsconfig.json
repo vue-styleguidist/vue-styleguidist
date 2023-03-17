@@ -25,6 +25,9 @@
 			"path": "./tsconfig.cy.json"
 		},
 		{
+			"path": "./tsconfig.testSetup.json"
+    },
+		{
 			"path": "./packages/vue-docgen-cli/tsconfig.json"
 		},
 		{

@@ -37,6 +37,10 @@ describe('tests button', () => {
 			    },
 			  ],
 			  "slots": undefined,
+			  "sourceFiles": [
+			    /packages/vue-docgen-api/tests/components/class-component/Test.vue,
+			    /packages/vue-docgen-api/tests/mixins/ts.ts,
+			  ],
 			  "tags": {},
 			}
 		`)

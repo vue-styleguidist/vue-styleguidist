@@ -223,6 +223,9 @@ exports[`tests typescript grid > should match the snapshot 1`] = `
       "name": "footer",
     },
   ],
+  "sourceFiles": [
+    /packages/vue-docgen-api/tests/components/grid-typescript/Grid.vue,
+  ],
   "tags": {
     "author": [
       {
