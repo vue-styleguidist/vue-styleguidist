@@ -1,4 +1,4 @@
-import { ComponentDoc, ParamTag } from 'vue-docgen-api'
+import type { ComponentDoc, ParamTag } from 'vue-docgen-api'
 import { RenderedUsage, SafeDocgenCLIConfig, ContentAndDependencies } from '../config'
 import { SubTemplateOptions } from '../compileTemplates'
 

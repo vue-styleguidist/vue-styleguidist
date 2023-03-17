@@ -1,4 +1,4 @@
-import { PropDescriptor } from 'vue-docgen-api'
+import type { PropDescriptor } from 'vue-docgen-api'
 import { SubTemplateOptions } from '../compileTemplates'
 import { mdclean } from './utils'
 import { renderTags } from './tags'

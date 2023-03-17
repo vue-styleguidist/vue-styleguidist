@@ -32,14 +32,14 @@ export default async function(
 	// `content`: markdown compiled for it
 	const fileCache = {}
 	const docsCache = {}
-	const compileSingleDocWithConfig = _compile.bind<null, any, void>(
-		null,
+	const compileSingleDocWithConfig = (changedFilePath?: string) => _compile(
 		config,
 		files,
 		fileCache,
     docsCache,
 		docMap,
-		watcher
+		watcher,
+		changedFilePath,
 	)
 
 	await compileSingleDocWithConfig()

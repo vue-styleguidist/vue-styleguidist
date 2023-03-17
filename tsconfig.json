@@ -10,22 +10,13 @@
 		"noUnusedLocals": true,
 		"sourceMap": true,
 		"noImplicitAny": true,
-		"baseUrl": ".",
-		"paths": {
-			"rsg-components/*": [
-				"packages/vue-styleguidist/src/client/rsg-components/*",
-				"packages/vue-styleguidist/node_modules/react-styleguidist/lib/client/rsg-components/*"
-			]
-		},
 		"strictFunctionTypes": false,
 		"jsx": "react",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"]
 	},
 	"include": [
-		"@types/**/*",
-		"packages/**/*.ts",
-		"packages/**/*.tsx",
+		"test/**/*.ts",
 		"node_modules/react-styleguidist/lib/client/rsg-components/**/*.*"
 	],
 	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
@@ -35,6 +26,12 @@
 		},
 		{
 			"path": "./tsconfig.testSetup.json"
+    },
+		{
+			"path": "./packages/vue-docgen-cli/tsconfig.json"
+		},
+		{
+			"path": "./packages/vue-styleguidist/tsconfig.json"
 		}
 	]
 }

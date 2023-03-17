@@ -59,7 +59,7 @@ export default async (config: SafeDocgenCLIConfig) => {
 	config.outFile = config.outFile ? path.resolve(config.outDir, config.outFile) : undefined
 
 	// set the default sorting of components to be alphabetical by filepath
-	config.sortComponents = config.sortComponents || ((a, b) => a.filePath.localeCompare(b.filePath))
+	config.sortComponents = config.sortComponents || ((a, b) => a.filePath.localeCompare(b.filePath) as any)
 
 	// then create the watcher if necessary
 	const { watcher, componentFiles, docMap } = await getSources(

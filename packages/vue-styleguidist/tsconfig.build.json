@@ -1,11 +1,4 @@
 {
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-		"declaration": true,
-		"lib": ["dom", "esnext"],
-		"skipLibCheck": true,
-		"outDir": "lib"
-	},
-	"include": ["./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"],
+	"extends": "./tsconfig.json",
 	"exclude": ["**/*.spec.*", "**/*.cy.*", "**/node_modules/**", "**/test.vue3.ts"]
 }

@@ -1,0 +1,21 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"declaration": true,
+		"lib": ["dom", "esnext"],
+		"skipLibCheck": true,
+		"outDir": "lib",
+		"composite": true,
+		"baseUrl": ".",
+		"paths": {
+			"rsg-components/*": [
+				"./src/client/rsg-components/*",
+				"./node_modules/react-styleguidist/lib/client/rsg-components/*"
+			]
+		},
+	},
+	"include": [
+		"./node_modules/react-styleguidist/lib/client/rsg-components/**/*.*",
+		"./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"
+	],
+}

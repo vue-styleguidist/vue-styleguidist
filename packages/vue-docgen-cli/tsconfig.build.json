@@ -1,13 +1,4 @@
 {
-	"extends": "../../tsconfig",
-	"compilerOptions": {
-		"outDir": "lib",
-		"target": "ES2021",
-		"moduleResolution": "node16",
-		"declaration": true,
-		"sourceMap": true,
-		"skipLibCheck": true
-	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "src/**/*.spec.ts", "src/**/test.vue3.ts"]
+	"extends": "./tsconfig",
+	"exclude": ["src/**/*.spec.ts", "src/**/test.vue3.ts"]
 }
