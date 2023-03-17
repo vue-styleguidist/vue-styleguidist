@@ -10,6 +10,7 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 *.log
+*.tsbuildinfo
 .nuxt/
 /cypress/
 test/cypress/screenshots/
