@@ -5,5 +5,5 @@
 		"moduleResolution": "Node",
 		"sourceMap": true
 	},
-	"include": ["test/*.ts"]
+	"include": ["test/setup.ts"]
 }
