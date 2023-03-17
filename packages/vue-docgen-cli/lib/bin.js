@@ -1,3 +1,5 @@
 #!/usr/bin/env node
-import './index';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./index");
 //# sourceMappingURL=bin.js.map
