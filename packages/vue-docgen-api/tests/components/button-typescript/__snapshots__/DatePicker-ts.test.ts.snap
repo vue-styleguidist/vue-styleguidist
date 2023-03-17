@@ -64,6 +64,9 @@ exports[`tests datePicker > should match the snapshot 1`] = `
     },
   ],
   "slots": undefined,
+  "sourceFiles": [
+    /packages/vue-docgen-api/tests/components/button-typescript/DatePicker.vue,
+  ],
   "tags": {},
 }
 `;

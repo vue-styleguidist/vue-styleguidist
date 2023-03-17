@@ -111,6 +111,10 @@ exports[`tests button > should match the snapshot 1`] = `
       "name": "empty",
     },
   ],
+  "sourceFiles": [
+    /packages/vue-docgen-api/tests/components/button-external-alias/Button.vue,
+    /packages/vue-docgen-api/tests/components/button-external-alias/script.ts,
+  ],
   "tags": {
     "author": [
       {

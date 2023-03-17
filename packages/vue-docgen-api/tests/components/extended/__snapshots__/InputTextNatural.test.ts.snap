@@ -23,6 +23,10 @@ exports[`tests InputText as a JS file > should match the snapshot 1`] = `
     },
   ],
   "slots": undefined,
+  "sourceFiles": [
+    /packages/vue-docgen-api/tests/components/extended/InputTextNatural.js,
+    /packages/vue-docgen-api/tests/components/extended/Base.vue,
+  ],
   "tags": {},
 }
 `;

@@ -27,6 +27,9 @@ describe('tests button', () => {
 			      "name": "default",
 			    },
 			  ],
+			  "sourceFiles": [
+			    /packages/vue-docgen-api/tests/components/button-ts-v3/Button.vue,
+			  ],
 			  "tags": {
 			    "group": [
 			      {
