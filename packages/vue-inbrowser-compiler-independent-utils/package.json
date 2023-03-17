@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler-independent-utils",
-  "version": "4.62.0",
+  "version": "4.64.0",
   "description": "the part of vue-inbrowser-compiler-utils that contains no vue dependency",
   "module": "lib/vue-inbrowser-compiler-independent-utils.esm.mjs",
   "main": "lib/vue-inbrowser-compiler-independent-utils.umd.js",
