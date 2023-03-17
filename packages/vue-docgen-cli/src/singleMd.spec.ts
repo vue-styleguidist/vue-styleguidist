@@ -1,5 +1,5 @@
 import { FSWatcher } from 'chokidar'
-import { expect } from 'vitest'
+import { expect, vi, describe, beforeEach, it } from 'vitest'
 import * as singleMd from './singleMd'
 import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'
@@ -66,7 +66,7 @@ describe('compile', () => {
 		it('should build one md from merging contents', async () => {
 			vi.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
 			await singleMd.default(FILES, w, conf, {}, singleMd.compile)
-			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, {}, w)
+			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, {}, w, undefined)
 		})
 
 		it('should watch file changes if a watcher is passed', async () => {

@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"outDir": "lib",
+		"target": "ES2021",
+		"moduleResolution": "node16",
+		"rootDir": "./src",
+		"esModuleInterop": true,
+		"module": "CommonJS",
+		"strict": true,
+		"declaration": true,
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"composite": true
+	},
+	"include": ["./src/**/*.ts"]
+}

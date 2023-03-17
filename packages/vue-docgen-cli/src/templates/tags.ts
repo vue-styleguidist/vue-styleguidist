@@ -1,4 +1,4 @@
-import { Tag, ParamTag } from "vue-docgen-api"
+import type { Tag, ParamTag } from "vue-docgen-api"
 
 function isTag(v: Tag | ParamTag): v is Tag {
 	return !!(v as any).content

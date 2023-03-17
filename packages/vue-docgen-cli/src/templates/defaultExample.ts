@@ -1,4 +1,4 @@
-import { ComponentDoc, getDefaultExample } from 'vue-docgen-api'
+import { type ComponentDoc, getDefaultExample } from 'vue-docgen-api'
 
 export default (doc: ComponentDoc): string => {
 	return `

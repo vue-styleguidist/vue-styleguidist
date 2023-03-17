@@ -1,4 +1,4 @@
-import { EventDescriptor } from 'vue-docgen-api'
+import type { EventDescriptor } from 'vue-docgen-api'
 import { mdclean } from './utils'
 import { SubTemplateOptions } from '../compileTemplates'
 
