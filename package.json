@@ -38,7 +38,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=9",
+    "node": ">=10",
     "npm": ">=5"
   },
   "dependencies": {
@@ -87,7 +87,7 @@
     "eslint-plugin-prettier": "3.4.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-vue": "7.20.0",
-    "globby": "9.2.0",
+    "globby": "11.1.0",
     "happy-dom": "5.4.0",
     "jss": "10.9.2",
     "lint-staged": "7.3.0",

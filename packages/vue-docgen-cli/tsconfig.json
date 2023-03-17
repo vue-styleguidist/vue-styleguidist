@@ -1,11 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "es6",
-		"lib": ["es2021"],
+		"outDir": "lib",
+		"target": "ES2021",
+		"moduleResolution": "node16",
 		"rootDir": "./src",
-		"outDir": "./lib",
 		"esModuleInterop": true,
-		"moduleResolution": "node",
 		"module": "CommonJS",
 		"strict": true,
 		"declaration": true,
