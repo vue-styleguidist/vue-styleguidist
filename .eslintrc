@@ -20,14 +20,6 @@
 	"rules": {
 		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
 		"compat/compat": "error",
-		"import/no-unresolved": [
-			"error",
-			{
-				"commonjs": true,
-				"caseSensitive": true,
-				"ignore": ["vue-inbrowser-compiler"]
-			}
-		],
 		"import/export": "error",
 		"import/no-named-as-default-member": "error",
 		"import/no-mutable-exports": "error",
@@ -101,7 +93,7 @@
 			}
 		},
 		{
-			"files": ["**/vue-docgen-api/**"],
+			"files": ["test/setup.ts", "**/vue-docgen-api/**"],
 			"env": {
 				"es6": true
 			},

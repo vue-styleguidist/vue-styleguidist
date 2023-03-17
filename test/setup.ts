@@ -3,7 +3,6 @@ import Vue from 'vue'
 import { URL } from 'url'
 import {resolve} from 'path'
 
-// @ts-expect-error
 const __dirname = new URL('.', import.meta.url).pathname
 
 const rootFolder = resolve(__dirname, '../')

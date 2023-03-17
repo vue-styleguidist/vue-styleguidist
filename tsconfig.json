@@ -26,13 +26,15 @@
 		"@types/**/*",
 		"packages/**/*.ts",
 		"packages/**/*.tsx",
-		"test/**/*.ts",
 		"node_modules/react-styleguidist/lib/client/rsg-components/**/*.*"
 	],
 	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
 	"references": [
 		{
 			"path": "./tsconfig.cy.json"
+		},
+		{
+			"path": "./tsconfig.testSetup.json"
 		}
 	]
 }
