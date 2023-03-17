@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.64.0
+
+### Patch Changes
+
+- [#1510](https://github.com/vue-styleguidist/vue-styleguidist/pull/1510) [`e8902a1a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8902a1afdbffd1b815ebdc1f931b46d8037577e) Thanks [@elevatebart](https://github.com/elevatebart)! - fix typing dependencies
+
+- [#1510](https://github.com/vue-styleguidist/vue-styleguidist/pull/1510) [`e8902a1a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8902a1afdbffd1b815ebdc1f931b46d8037577e) Thanks [@elevatebart](https://github.com/elevatebart)! - Update LRU cache dependency to version 8.x
+
+- Updated dependencies [[`fa34e5cf`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fa34e5cf541aa7078c9605bbea61348f26e27e01), [`e8902a1a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8902a1afdbffd1b815ebdc1f931b46d8037577e)]:
+  - vue-docgen-api@4.64.0
+
 ## 4.58.0
 
 ### Minor Changes
