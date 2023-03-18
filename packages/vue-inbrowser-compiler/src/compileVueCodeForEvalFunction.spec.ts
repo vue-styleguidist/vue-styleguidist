@@ -188,7 +188,7 @@ export default {
 		expect(() => new Function(sut.script)()).not.toThrow()
 	})
 
-	it.only('should handle 2 script tags', () => {
+	it('should handle 2 script tags', () => {
 		let sut = compileVueCodeForEvalFunction(`
 <template>
 	<div>{{ value }}</div>
