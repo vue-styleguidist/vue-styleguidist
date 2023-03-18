@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as path from 'path'
 import { FSWatcher } from 'chokidar'
 import type { ComponentDoc } from 'vue-docgen-api'

@@ -62,7 +62,8 @@
 				"ecmaVersion": 2015
 			},
 			"rules": {
-				"no-unused-vars": 0
+				"no-unused-vars": 0,
+				"no-console": "error"
 			}
 		},
 		{
