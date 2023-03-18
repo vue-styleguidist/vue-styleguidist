@@ -1,5 +1,18 @@
 # Change Log
 
+## 4.64.1
+
+### Patch Changes
+
+- [#1515](https://github.com/vue-styleguidist/vue-styleguidist/pull/1515) [`1502e575`](https://github.com/vue-styleguidist/vue-styleguidist/commit/1502e575835ce72c1b57c249df91cfacd3d2890d) Thanks [@elevatebart](https://github.com/elevatebart)! - fix the natural <br> problem
+
+- [#1512](https://github.com/vue-styleguidist/vue-styleguidist/pull/1512) [`7310095c`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7310095c0de2ad67571d017fdf05891dea78b1d6) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: mixin-error-with-default
+
+- [#1513](https://github.com/vue-styleguidist/vue-styleguidist/pull/1513) [`1b178cad`](https://github.com/vue-styleguidist/vue-styleguidist/commit/1b178cad6a4d2f3e55bc8221f3a344c0031be908) Thanks [@elevatebart](https://github.com/elevatebart)! - fix preprocessing of script setup
+
+- Updated dependencies [[`7310095c`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7310095c0de2ad67571d017fdf05891dea78b1d6), [`1b178cad`](https://github.com/vue-styleguidist/vue-styleguidist/commit/1b178cad6a4d2f3e55bc8221f3a344c0031be908)]:
+  - vue-docgen-api@4.64.1
+
 ## 4.64.0
 
 ### Minor Changes
