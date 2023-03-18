@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { promises as fs } from 'fs'
 import * as path from 'path'
 import { FSWatcher } from 'chokidar'

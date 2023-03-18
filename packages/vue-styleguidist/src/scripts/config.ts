@@ -76,6 +76,7 @@ function postTreatConfig(
 		return sanitizeConfig(config, schema, configDir) as any
 	} catch (exception) {
 		const err = exception as Error
+		// eslint-disable-next-line no-console
 		console.log(exception instanceof StyleguidistError, err.constructor.name)
 		throw err.message
 	}

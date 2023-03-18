@@ -30,6 +30,7 @@ export default function (
 		: webpackNormal
 
 	if (process.env.VSG_WEBPACK_PATH) {
+		// eslint-disable-next-line no-console
 		console.log(`Using webpack from ${process.env.VSG_WEBPACK_PATH}`)
 	}
 
