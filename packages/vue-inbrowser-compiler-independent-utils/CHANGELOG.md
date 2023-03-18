@@ -1,5 +1,11 @@
 # vue-inbrowser-compiler-independent-utils
 
+## 4.64.0
+
+### Minor Changes
+
+- [#1511](https://github.com/vue-styleguidist/vue-styleguidist/pull/1511) [`fa34e5cf`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fa34e5cf541aa7078c9605bbea61348f26e27e01) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: track dependencies of components in vue-docgen-cli
+
 ## 4.62.0
 
 ### Minor Changes

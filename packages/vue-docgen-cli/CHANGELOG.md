@@ -1,5 +1,22 @@
 # Change Log
 
+## 4.64.0
+
+### Minor Changes
+
+- [#1511](https://github.com/vue-styleguidist/vue-styleguidist/pull/1511) [`fa34e5cf`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fa34e5cf541aa7078c9605bbea61348f26e27e01) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: track dependencies of components in vue-docgen-cli
+
+### Patch Changes
+
+- [#1504](https://github.com/vue-styleguidist/vue-styleguidist/pull/1504) [`0cf928e9`](https://github.com/vue-styleguidist/vue-styleguidist/commit/0cf928e9332f99d1168777f38e38bcc8637af0da) Thanks [@susnux](https://github.com/susnux)! - vue-docgen-cli: Allow importing esm config files
+
+- [#1510](https://github.com/vue-styleguidist/vue-styleguidist/pull/1510) [`e8902a1a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8902a1afdbffd1b815ebdc1f931b46d8037577e) Thanks [@elevatebart](https://github.com/elevatebart)! - fix typing dependencies
+
+- [#1505](https://github.com/vue-styleguidist/vue-styleguidist/pull/1505) [`5e247a0b`](https://github.com/vue-styleguidist/vue-styleguidist/commit/5e247a0b90d885fb46f319c26e20138daa95a142) Thanks [@susnux](https://github.com/susnux)! - vue-docgen-cli: Update dependencies
+
+- Updated dependencies [[`fa34e5cf`](https://github.com/vue-styleguidist/vue-styleguidist/commit/fa34e5cf541aa7078c9605bbea61348f26e27e01), [`e8902a1a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/e8902a1afdbffd1b815ebdc1f931b46d8037577e)]:
+  - vue-docgen-api@4.64.0
+
 ## 4.63.0
 
 ### Minor Changes
