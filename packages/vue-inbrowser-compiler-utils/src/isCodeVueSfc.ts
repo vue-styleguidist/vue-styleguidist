@@ -7,5 +7,5 @@ import { parseComponent } from 'vue-inbrowser-compiler-demi'
  */
 export default function isCodeVueSfc(code: string): boolean {
 	const parts = parseComponent(code)
-	return !!parts.script || !!parts.template
+	return !!parts.script || !!parts.scriptSetup || !!parts.template
 }

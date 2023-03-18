@@ -193,7 +193,7 @@ export default function normalizeSfcComponent(
 		component = '',
 	} = scriptSetup
 		? {
-      preprocessing: script, 
+      preprocessing: script?.content, 
       component: parseScriptSetupCode(scriptSetup.content)
     }
 		: script
