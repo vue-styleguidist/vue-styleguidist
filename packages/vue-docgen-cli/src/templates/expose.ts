@@ -1,5 +1,6 @@
 import type { ExposeDescriptor, ParamTag, Tag } from 'vue-docgen-api'
 import { SubTemplateOptions } from '../compileTemplates'
+import { mdclean } from './utils'
 import { renderTags } from './tags'
 
 const tmpl = function (expose: ExposeDescriptor[], subComponent: boolean) {
@@ -9,10 +10,10 @@ const tmpl = function (expose: ExposeDescriptor[], subComponent: boolean) {
 		ret += `
 ${subComponent ? '#' : ''}### ${exp.name ? exp.name : ''}
 
-  > ${exp.description || ''} ${renderTags(exp.tags?.reduce((acc, tag) => {
+  > ${exp.description || ''} ${mdclean(renderTags(exp.tags?.reduce((acc, tag) => {
     acc[tag.title] = [tag]
     return acc
-  }, {} as { [tag: string]: (Tag | ParamTag)[] })) || ''}
+  }, {} as { [tag: string]: (Tag | ParamTag)[] }))) || ''}
 
  `
 	})
