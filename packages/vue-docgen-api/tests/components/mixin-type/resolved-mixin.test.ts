@@ -19,8 +19,8 @@ describe('tests button', () => {
 	})
 
 	describe('props', () => {
-		it('sscscs', () => {
-			expect(getTestDescriptor(docButton.props, 'a').description).toBe('color description')
+		it('should match snapshot', () => {
+			expect(getTestDescriptor(docButton.props, 'a').description).toMatchInlineSnapshot()
 		})
 	})
 })

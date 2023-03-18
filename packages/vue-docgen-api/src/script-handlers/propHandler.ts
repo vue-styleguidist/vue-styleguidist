@@ -208,7 +208,7 @@ export function describeType(
 					return false
 				}
 			})
-			
+
 			if (typeValues) {
 				propDescriptor.values = typeValues
 			} else {
