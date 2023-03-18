@@ -1063,7 +1063,7 @@ importers:
       vue: 2.7.14
       vue-class-component: 7.2.6
       vue-clickaway: 2.2.2
-      vue-inbrowser-compiler-independent-utils: ^4.64.0
+      vue-inbrowser-compiler-independent-utils: ^4.64.1
       vue-property-decorator: 7.3.0
       vuetify: 2.6.14
     dependencies:
@@ -1100,7 +1100,7 @@ importers:
       lodash.memoize: 4.1.2
       minimist: ^1.2.5
       prettier: ^2.8.4
-      vue-docgen-api: ^4.64.0
+      vue-docgen-api: ^4.64.1
     dependencies:
       chokidar: 3.5.1
       globby: 11.1.0
@@ -1130,7 +1130,7 @@ importers:
       tslib: 2.5.0
       typescript: 4.9.5
       vue: 2.7.14
-      vue-inbrowser-compiler-utils: ^4.62.1
+      vue-inbrowser-compiler-utils: ^4.64.1
       vue-template-compiler: 2.7.14
       vue3: npm:vue@3
       walkes: ^0.2.1
@@ -1206,7 +1206,7 @@ importers:
       tslib: 2.5.0
       typescript: 4.9.5
       vue: 2.7.14
-      vue-inbrowser-compiler-utils: ^4.62.1
+      vue-inbrowser-compiler-utils: ^4.64.1
       vue-template-compiler: 2.7.14
       walkes: ^0.2.1
     dependencies:
@@ -1243,7 +1243,7 @@ importers:
       typescript: 4.9.5
       vue: 2.7.14
       vue-inbrowser-compiler-demi: ^4.56.5
-      vue-inbrowser-compiler-independent-utils: ^4.62.0
+      vue-inbrowser-compiler-independent-utils: ^4.64.1
     dependencies:
       camelcase: 5.3.1
       vue-inbrowser-compiler-demi: link:../vue-inbrowser-compiler-demi
@@ -1349,9 +1349,9 @@ importers:
       to-ast: ^1.0.0
       typescript: 4.9.5
       vue: 2.7.14
-      vue-docgen-api: ^4.64.0
-      vue-inbrowser-compiler: ^4.56.5
-      vue-inbrowser-compiler-utils: ^4.56.5
+      vue-docgen-api: ^4.64.1
+      vue-inbrowser-compiler: ^4.64.1
+      vue-inbrowser-compiler-utils: ^4.64.1
       vue-template-compiler: 2.7.14
       webpack: 4.46.0
       webpack-dev-server: ^3.11.2
