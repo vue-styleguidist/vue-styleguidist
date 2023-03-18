@@ -201,13 +201,14 @@ export function describeType(
 						bt.isTSUnionType(typeAnnotation) &&
 						typeAnnotation.types.every(t => bt.isTSLiteralType(t))
 					) {
-						typeValues = typeAnnotation.types.map((t: bt.TSLiteralType) =>
-							bt.isUnaryExpression(t.literal) ? t.literal.argument.toString() : t.literal.value.toString()
+						typeValues = typeAnnotation.types.map((t) =>
+							'literal' in t ? (bt.isUnaryExpression(t.literal) ? t.literal.argument.toString() : t.literal.value.toString()) : t.type.toString()
 						)
 					}
 					return false
 				}
 			})
+			
 			if (typeValues) {
 				propDescriptor.values = typeValues
 			} else {
