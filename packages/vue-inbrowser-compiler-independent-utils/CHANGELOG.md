@@ -1,5 +1,11 @@
 # vue-inbrowser-compiler-independent-utils
 
+## 4.64.1
+
+### Patch Changes
+
+- [#1513](https://github.com/vue-styleguidist/vue-styleguidist/pull/1513) [`1b178cad`](https://github.com/vue-styleguidist/vue-styleguidist/commit/1b178cad6a4d2f3e55bc8221f3a344c0031be908) Thanks [@elevatebart](https://github.com/elevatebart)! - fix preprocessing of script setup
+
 ## 4.64.0
 
 ### Minor Changes
