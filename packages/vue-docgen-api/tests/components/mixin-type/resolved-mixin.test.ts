@@ -20,7 +20,9 @@ describe('tests button', () => {
 
 	describe('props', () => {
 		it('should match snapshot', () => {
-			expect(getTestDescriptor(docButton.props, 'a').description).toMatchInlineSnapshot()
+			expect(getTestDescriptor(docButton.props, 'a').type).toMatchObject({
+				name: 'string'
+			})
 		})
 	})
 })

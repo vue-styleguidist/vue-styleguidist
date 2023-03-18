@@ -213,7 +213,9 @@ export function describeType(
 				propDescriptor.values = typeValues
 			} else {
 				propDescriptor.type = typeDesc
-				return getTypeFromTypePath(typeArray[0].get('value')).name
+				if(typeArray.length){
+					return getTypeFromTypePath(typeArray[0].get('value')).name
+				}
 			}
 		}
 	}
