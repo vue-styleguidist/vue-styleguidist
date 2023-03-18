@@ -1,5 +1,5 @@
 /* eslint-disable no-new-func */
-import { expect } from 'vitest'
+import { describe, it, vi, expect } from 'vitest'
 import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {
@@ -184,6 +184,26 @@ export default {
 		}
 	}
 }
+</script>`)
+		expect(() => new Function(sut.script)()).not.toThrow()
+	})
+
+	it.only('should handle 2 script tags', () => {
+		let sut = compileVueCodeForEvalFunction(`
+<template>
+	<div>{{ value }}</div>
+</template>
+
+<script>
+function foo() {
+	return 1
+}
+</script>
+
+<script setup>
+import { ref } from 'vue'
+
+const value = ref(foo())
 </script>`)
 		expect(() => new Function(sut.script)()).not.toThrow()
 	})
