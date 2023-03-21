@@ -28,8 +28,8 @@ export default async function(
 	if (config.watch) {
 		watcher
 			// on filechange, recompile the corresponding file
-			.on('add', compileWithConfig)
-			.on('change', compileWithConfig)
+			.on('add', compileWithConfig.bind(null, 'add'))
+			.on('change', compileWithConfig.bind(null, 'change'))
 			// on file delete, delete corresponding md file
 			.on('unlink', (relPath: string) => {
 				if (files.includes(relPath)) {
@@ -59,7 +59,7 @@ export async function compile(
 	fromWatcher: boolean = true
 ) {
 	if(fromWatcher){
-		console.log(`[vue-docgen-cli] File ${filePath} updated`)	
+		console.log(`[vue-docgen-cli] ${event} to ${filePath} detected.`)	
 	}
 	const componentFile = docMap[filePath] || filePath
 	const file = config.getDestFile(componentFile, config)
@@ -80,8 +80,13 @@ export async function compile(
 			await writeDownMdFile(content, file)
 			console.log(`[vue-docgen-cli] File ${file} updated.`)
 		} catch (e) {
-			const err = e as Error
-			throw new Error(`[vue-docgen-cli] Error compiling file ${file}: ${err.message}`)
+			if (config.watch) {
+				console.error(`[vue-docgen-cli] Error compiling file ${file}:`)
+				console.error(e)
+			} else {
+				const err = e as Error
+				throw new Error(`[vue-docgen-cli] Error compiling file ${file}: ${err.message}`)
+			}
 		}
 	}
 }

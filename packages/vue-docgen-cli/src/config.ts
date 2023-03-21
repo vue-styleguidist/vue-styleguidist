@@ -21,7 +21,7 @@ type AddParameters<
 
 export type FileEventType = 'add' | 'change' | 'init'
 
-type PropsParser = AddParameters<typeof parseMulti, [event?: FileEventType]>
+export type PropsParser = AddParameters<typeof parseMulti, [event?: FileEventType]>
 
 export interface SafeDocgenCLIConfig {
 	/**

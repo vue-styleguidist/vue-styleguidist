@@ -73,7 +73,7 @@ export async function compile(
 	fromWatcher: boolean = true
 ) {
 	if(fromWatcher){
-		console.log(`[vue-docgen-cli] File ${changedFilePath} updated`)	
+		console.log(`[vue-docgen-cli] ${event} to ${changedFilePath} detected`)	
 	}
 
 	// this local function will enrich the cachedContent with the
