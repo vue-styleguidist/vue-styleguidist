@@ -8,6 +8,7 @@ import {
 	ComponentDoc,
 	parseMulti
 } from 'vue-docgen-api'
+import type { LogLevelDesc } from 'loglevel'
 import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
 export { ContentAndDependencies, SubTemplateOptions }
@@ -122,6 +123,10 @@ export interface SafeDocgenCLIConfig {
 	 * Show the verbose output
 	 */
 	verbose: boolean
+	/**
+	 * The level of verbosity the logger should use	
+	 */
+	logLevel: LogLevelDesc
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {

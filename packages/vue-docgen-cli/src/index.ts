@@ -27,12 +27,13 @@ async function main() {
 		configFile,
 		watch,
 		cwd,
-		verbose
+		verbose,
+		logLevel
 	} = minimist(process.argv.slice(2), {
 		alias: { c: 'configFile', w: 'watch', v: 'verbose' },
 	})
 
-	const conf = await extractConfig(cwd || process.cwd(), watch, configFile, pathArray, verbose)
+	const conf = await extractConfig(cwd || process.cwd(), watch, configFile, pathArray, verbose, logLevel)
 	run(conf)
 }
 
