@@ -93,7 +93,6 @@ export function parseScriptCode(
 	if (startIndex === -1) {
 		throw new Error('Failed to parse single file component: ' + code)
 	}
-	
 	if (renderFunctionStart > 0 && !isVue3) {
 		renderFunctionStart += offset
 		code = insertCreateElementFunction(
