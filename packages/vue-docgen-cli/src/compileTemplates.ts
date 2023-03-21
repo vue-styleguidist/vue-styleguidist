@@ -133,7 +133,8 @@ export default async function compileTemplates(
 			docs
 		}
 	} catch (e) {
-		const err = e as Error
-		throw new Error(`Error parsing file ${absolutePath}:` + err.message)
+		// eslint-disable-next-line no-console
+		console.error('\x1b[31m%s\x1b[0m', `[vue-docgen-cli] Error parsing file ${absolutePath}:`)
+		throw e
 	}
 }

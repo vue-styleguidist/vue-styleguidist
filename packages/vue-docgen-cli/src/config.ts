@@ -19,7 +19,7 @@ type AddParameters<
   ...args: [...Parameters<TFunction>, ...TParameters]
 ) => ReturnType<TFunction>;
 
-export type FileEventType = 'add' | 'change' | 'init'
+export type FileEventType = 'add' | 'change' | 'delete' | 'init'
 
 export type PropsParser = AddParameters<typeof parseMulti, [event?: FileEventType]>
 

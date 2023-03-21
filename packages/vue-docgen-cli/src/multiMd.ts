@@ -14,7 +14,7 @@ import { FileEventType } from './config'
  * @param files
  * @param config
  */
-export default async function(
+export default async function (
 	files: string[],
 	watcher: FSWatcher,
 	config: DocgenCLIConfigWithComponents,
@@ -27,16 +27,20 @@ export default async function(
 
 	if (config.watch) {
 		watcher
-			// on filechange, recompile the corresponding file
-			.on('add', compileWithConfig.bind(null, 'add'))
+			// on fileChange, recompile the corresponding file
+			.on('add', filePath => {
+				files.push(filePath)
+				compileWithConfig('add', filePath)
+			})
 			.on('change', compileWithConfig.bind(null, 'change'))
 			// on file delete, delete corresponding md file
 			.on('unlink', (relPath: string) => {
 				if (files.includes(relPath)) {
+					files.splice(files.indexOf(relPath), 1)
 					fs.unlink(config.getDestFile(relPath, config))
 				} else {
 					// if it's not a main file recompile the file connected to it
-					compileWithConfig('change', docMap[relPath])
+					compileWithConfig('delete', docMap[relPath])
 				}
 			})
 	}
@@ -58,8 +62,8 @@ export async function compile(
 	filePath: string,
 	fromWatcher: boolean = true
 ) {
-	if(fromWatcher){
-		console.log(`[vue-docgen-cli] ${event} to ${filePath} detected.`)	
+	if (fromWatcher) {
+		console.log(`[vue-docgen-cli] ${event} to ${filePath} detected.`)
 	}
 	const componentFile = docMap[filePath] || filePath
 	const file = config.getDestFile(componentFile, config)
@@ -81,7 +85,7 @@ export async function compile(
 			console.log(`[vue-docgen-cli] File ${file} updated.`)
 		} catch (e) {
 			if (config.watch) {
-				console.error(`[vue-docgen-cli] Error compiling file ${file}:`)
+				console.error('\x1b[31m%s\x1b[0m', `[vue-docgen-cli] Error compiling file ${file}:`)
 				console.error(e)
 			} else {
 				const err = e as Error
