@@ -3,6 +3,7 @@ import glob from 'globby'
 import chokidar, { FSWatcher } from 'chokidar'
 import { parseMulti, ParamTag, ScriptHandlers, DocGenOptions } from 'vue-docgen-api'
 import { getDocMap } from './utils'
+import { PropsParser } from './config'
 
 /**
  *
@@ -55,7 +56,7 @@ export default async function getSources(
 async function getRequiredComponents(
 	compPath: string,
 	optionsApi: DocGenOptions,
-	propsParser: typeof parseMulti,
+	propsParser: PropsParser,
 	cwd: string
 ): Promise<string[]> {
 	const compDirName = path.dirname(compPath)
@@ -65,8 +66,8 @@ async function getRequiredComponents(
 			// make sure that this is recognized as an option bag
 			jsx: false,
 			...optionsApi,
-			scriptHandlers: [ScriptHandlers.componentHandler]
-		})
+			scriptHandlers: [ScriptHandlers.componentHandler],
+		}, 'init')
 		const requires = docs.reduce(
 			(acc, { tags }) => (tags?.requires ? acc.concat(tags.requires) : acc),
 			[] as ParamTag[]

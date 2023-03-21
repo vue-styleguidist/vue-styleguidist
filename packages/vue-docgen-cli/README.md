@@ -44,6 +44,26 @@ Specify the path of your configuration file. By default, `docgen` will look for 
 yarn vue-docgen -c config/docgen.config.js
 ```
 
+#### `-v` or `--verbose`
+
+Should vue-docgen output more information?
+
+```sh
+yarn vue-docgen -v
+```	
+
+same as `--logLevel debug`
+
+#### `--logLevel`
+
+Specify the log level. Can be `error`, `warn`, `info`, `debug`, `trace`.
+
+```sh
+yarn vue-docgen --logLevel debug
+```	
+
+default is `error`	
+
 ### Config File
 
 Create a `docgen.config.js` at the root of your project to avoid having to specify command-line arguments everytime.

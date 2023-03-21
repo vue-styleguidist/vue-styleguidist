@@ -1,3 +1,4 @@
+import { vi, expect, it, describe, beforeEach } from 'vitest'
 import { FSWatcher } from 'chokidar'
 import * as multiMd from './multiMd'
 import extractConfig from './extractConfig'
@@ -39,7 +40,7 @@ describe('multiMd', () => {
 
 	describe('compile', () => {
 		it('should get the current components doc', async () => {
-			await multiMd.compile(conf, {}, w, FAKE_COMPONENT_PATH)
+			await multiMd.compile(conf, {}, w, 'change', FAKE_COMPONENT_PATH)
 			expect(writeDownMdFile).toHaveBeenCalledWith(FAKE_MD_CONTENT, MD_FILE_PATH)
 		})
 	})

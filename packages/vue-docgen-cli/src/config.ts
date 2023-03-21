@@ -8,9 +8,21 @@ import {
 	ComponentDoc,
 	parseMulti
 } from 'vue-docgen-api'
+import type { LogLevelDesc } from 'loglevel'
 import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
 export { ContentAndDependencies, SubTemplateOptions }
+
+type AddParameters<
+  TFunction extends (...args: any) => any,
+  TParameters extends [...args: any]
+> = (
+  ...args: [...Parameters<TFunction>, ...TParameters]
+) => ReturnType<TFunction>;
+
+export type FileEventType = 'add' | 'change' | 'delete' | 'init'
+
+export type PropsParser = AddParameters<typeof parseMulti, [event?: FileEventType]>
 
 export interface SafeDocgenCLIConfig {
 	/**
@@ -99,7 +111,7 @@ export interface SafeDocgenCLIConfig {
 	/**
 	 * Parser used to extract props, slots and events from each component
 	 */
-	propsParser: typeof parseMulti
+	propsParser: PropsParser
 	/**
 	 * In a single md setup, this function will be called to determine the order of the components on the page
 	 */
@@ -107,6 +119,14 @@ export interface SafeDocgenCLIConfig {
 		a: { filePath: string; docs: ComponentDoc[] },
 		b: { filePath: string; docs: ComponentDoc[] }
 	): 0 | 1 | -1
+	/**
+	 * Show the verbose output
+	 */
+	verbose: boolean
+	/**
+	 * The level of verbosity the logger should use	
+	 */
+	logLevel: LogLevelDesc
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {

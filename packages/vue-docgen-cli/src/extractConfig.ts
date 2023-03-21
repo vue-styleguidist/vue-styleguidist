@@ -18,7 +18,9 @@ export default async (
 	cwd: string,
 	watch = false,
 	configFileFromCmd?: string,
-	pathArray: string[] = []
+	pathArray: string[] = [],
+	verbose = false,
+	logLevel = 'error', 
 ): Promise<SafeDocgenCLIConfig> => {
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
@@ -62,6 +64,10 @@ export default async (
 
 	// only default outDir if `outFile` is null to avoid confusion
 	config.outDir = config.outDir || (config.outFile ? '.' : 'docs')
+
+	config.verbose = config.verbose ?? verbose
+
+	config.logLevel = config.logLevel ?? logLevel as any
 
 	config.templates = {
 		component,

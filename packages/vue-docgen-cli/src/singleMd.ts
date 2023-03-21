@@ -1,10 +1,11 @@
-/* eslint-disable no-console */
 import * as path from 'path'
 import { FSWatcher } from 'chokidar'
+import * as log from 'loglevel'
 import type { ComponentDoc } from 'vue-docgen-api'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import compileTemplates from './compileTemplates'
+import { FileEventType } from './config'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
 	outFile: string
@@ -19,7 +20,7 @@ export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponent
  * @param config
  * @param _compile
  */
-export default async function(
+export default async function (
 	files: string[],
 	watcher: FSWatcher,
 	config: DocgenCLIConfigWithOutFile,
@@ -33,20 +34,19 @@ export default async function(
 	// `content`: markdown compiled for it
 	const fileCache = {}
 	const docsCache = {}
-	const compileSingleDocWithConfig = (changedFilePath?: string) => _compile(
-		config,
-		files,
-		fileCache,
-    docsCache,
-		docMap,
-		watcher,
-		changedFilePath,
-	)
+	const compileSingleDocWithConfig = (event: FileEventType, changedFilePath?: string) =>
+		_compile(config, files, fileCache, docsCache, docMap, watcher, event, changedFilePath)
 
-	await compileSingleDocWithConfig()
+	await compileSingleDocWithConfig('init')
 
 	if (config.watch) {
-		watcher.on('add', compileSingleDocWithConfig).on('change', compileSingleDocWithConfig)
+		watcher
+			.on('add', (filePath) => {
+				files.push(filePath)
+				compileSingleDocWithConfig('add', filePath)
+			})
+			.on('change', compileSingleDocWithConfig.bind(null, 'change'))
+			.on('unlink', compileSingleDocWithConfig.bind(null, 'delete'))
 	}
 }
 
@@ -63,20 +63,22 @@ export async function compile(
 	config: DocgenCLIConfigWithOutFile,
 	files: string[],
 	cachedContent: { [filepath: string]: string },
-  cachedDocs: { [filepath: string]: ComponentDoc[] },
+	cachedDocs: { [filepath: string]: ComponentDoc[] },
 	docMap: { [filepath: string]: string },
 	watcher: FSWatcher,
+	event: FileEventType,
 	changedFilePath?: string,
 	fromWatcher: boolean = true
 ) {
-	if(fromWatcher){
-		console.log(`[vue-docgen-cli] File ${changedFilePath} updated`)	
+	if (fromWatcher) {
+		log.info(`[vue-docgen-cli] ${event} to ${changedFilePath} detected`)
 	}
 
 	// this local function will enrich the cachedContent with the
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
 		const { content, dependencies, docs } = await compileTemplates(
+			event,
 			path.join(config.componentsRoot, filePath),
 			config,
 			filePath
@@ -88,7 +90,7 @@ export async function compile(
 		})
 
 		cachedContent[filePath] = content
-    cachedDocs[filePath] = docs
+		cachedDocs[filePath] = docs
 		return true
 	}
 
@@ -100,18 +102,33 @@ export async function compile(
 			// is passed as an argument. We only affect the changed file and avoid re-parsing the rest
 			await cacheMarkDownContent(changedFilePath)
 		} catch (e) {
-			const err = e as Error
-			throw new Error(
-				`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${err.message}`
-			)
+			if (config.watch) {
+				log.error(
+					'\x1b[31m%s\x1b[0m',
+					`[vue-docgen-cli] Error compiling file ${config.outFile}:`
+				)
+				log.error(e)
+			} else {
+				const err = e as Error
+				throw new Error(
+					`Error compiling file ${config.outFile} when file ${changedFilePath} has changed: ${err.message}`
+				)
+			}
 		}
 	} else {
 		try {
 			// if we are initializing the current file, parse all components
 			await Promise.all(files.map(cacheMarkDownContent))
 		} catch (e) {
-			const err = e as Error
-			throw new Error(`[vue-docgen-cli] Error compiling file ${config.outFile}: ${err.message}`)
+			if (config.watch) {
+				log.error(
+					`[vue-docgen-cli] Error compiling file ${config.outFile}:`
+				)
+				log.error(e)
+			} else {
+				const err = e as Error
+				throw new Error(`[vue-docgen-cli] Error compiling file ${config.outFile}: ${err.message}`)
+			}
 		}
 	}
 
@@ -126,5 +143,5 @@ export async function compile(
 		config.outFile
 	)
 
-	console.log(`[vue-docgen-cli] File ${config.outFile} updated.`)
+	log.info(`[vue-docgen-cli] File ${config.outFile} updated.`)
 }

@@ -16,7 +16,7 @@ vi.mock('./utils', () => {
 
 vi.mock('./compileTemplates', () => {
 	return {
-		default: vi.fn(filePath => {
+		default: vi.fn((event, filePath) => {
 			return filePath === 'here/two'
 				? Promise.resolve({ content: FAKE_MD_CONTENT_2, dependencies: [] })
 				: Promise.resolve({ content: FAKE_MD_CONTENT_1, dependencies: [] })
@@ -45,7 +45,7 @@ describe('compile', () => {
 
 	describe('compile', () => {
 		it('should get the current components doc', async () => {
-			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w)
+			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w, 'change')
 			expect(writeDownMdFile).toHaveBeenCalledWith(
 				[FAKE_MD_CONTENT_1, FAKE_MD_CONTENT_2],
 				MD_FILE_PATH
@@ -54,7 +54,7 @@ describe('compile', () => {
 
 		it('should reverse the order if the sort is reversed', async () => {
 			conf.sortComponents = (a, b) => -a.filePath.localeCompare(b.filePath) as any
-			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w)
+			await singleMd.compile(conf, [FAKE_COMPONENT_PATH_1, FAKE_COMPONENT_PATH_2], {}, {}, {}, w, 'change')
 			expect(writeDownMdFile).toHaveBeenCalledWith(
 				[FAKE_MD_CONTENT_2, FAKE_MD_CONTENT_1],
 				MD_FILE_PATH
@@ -66,7 +66,7 @@ describe('compile', () => {
 		it('should build one md from merging contents', async () => {
 			vi.spyOn(singleMd, 'compile').mockImplementation(() => Promise.resolve())
 			await singleMd.default(FILES, w, conf, {}, singleMd.compile)
-			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, {}, w, undefined)
+			expect(singleMd.compile).toHaveBeenCalledWith(conf, FILES, {}, {}, {}, w, "init", undefined)
 		})
 
 		it('should watch file changes if a watcher is passed', async () => {

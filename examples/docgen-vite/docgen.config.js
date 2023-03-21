@@ -14,7 +14,10 @@ module.exports = defineConfig({
 	components: './[A-Z]*.vue',
 	outDir: './docs/components',
 	defaultExamples: true,
-  propsParser(componentPath) {
+  propsParser(componentPath, _, event) {
+		if(event === 'add'){
+			checker.reload()
+		}
     const exportNames = checker.getExportNames(componentPath);
     return Promise.resolve(exportNames.map(exportName => {
       const meta = checker.getComponentMeta(componentPath)
