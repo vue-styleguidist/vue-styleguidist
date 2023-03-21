@@ -1,4 +1,5 @@
 import * as path from 'path'
+import * as log from 'loglevel'
 import { SafeDocgenCLIConfig, Templates, RenderedUsage, DocgenCLIConfig } from './config'
 import singleMd, { DocgenCLIConfigWithOutFile } from './singleMd'
 import multiMd from './multiMd'
@@ -44,6 +45,10 @@ function hasComponents(config: SafeDocgenCLIConfig): config is DocgenCLIConfigWi
 }
 
 export default async (config: SafeDocgenCLIConfig) => {
+	if(config.verbose){
+		log.setLevel('debug')
+	}
+
 	// if at a level that has no components (top level) just give up
 	if (!hasComponents(config)) {
 		return

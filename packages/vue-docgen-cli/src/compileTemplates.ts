@@ -1,5 +1,6 @@
 import * as path from 'path'
 import type { ComponentDoc, ParamTag } from 'vue-docgen-api'
+import * as log from 'loglevel'
 import events from './templates/events'
 import methods from './templates/methods'
 import expose from './templates/expose'
@@ -10,6 +11,7 @@ import defaultExample from './templates/defaultExample'
 import functionalTag from './templates/functionalTag'
 import { FileEventType, SafeDocgenCLIConfig } from './config'
 import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
+
 
 export { renderTags } from './templates/tags'
 export { mdclean } from './templates/utils'
@@ -133,8 +135,7 @@ export default async function compileTemplates(
 			docs
 		}
 	} catch (e) {
-		// eslint-disable-next-line no-console
-		console.error('\x1b[31m%s\x1b[0m', `[vue-docgen-cli] Error parsing file ${absolutePath}:`)
+		log.error(`[vue-docgen-cli] Error parsing file ${absolutePath}:`)
 		throw e
 	}
 }

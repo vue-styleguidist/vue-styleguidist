@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import * as path from 'path'
 import { FSWatcher } from 'chokidar'
+import * as log from 'loglevel'
 import type { ComponentDoc } from 'vue-docgen-api'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
@@ -71,7 +71,7 @@ export async function compile(
 	fromWatcher: boolean = true
 ) {
 	if (fromWatcher) {
-		console.log(`[vue-docgen-cli] ${event} to ${changedFilePath} detected`)
+		log.info(`[vue-docgen-cli] ${event} to ${changedFilePath} detected`)
 	}
 
 	// this local function will enrich the cachedContent with the
@@ -103,11 +103,11 @@ export async function compile(
 			await cacheMarkDownContent(changedFilePath)
 		} catch (e) {
 			if (config.watch) {
-				console.error(
+				log.error(
 					'\x1b[31m%s\x1b[0m',
 					`[vue-docgen-cli] Error compiling file ${config.outFile}:`
 				)
-				console.error(e)
+				log.error(e)
 			} else {
 				const err = e as Error
 				throw new Error(
@@ -121,11 +121,10 @@ export async function compile(
 			await Promise.all(files.map(cacheMarkDownContent))
 		} catch (e) {
 			if (config.watch) {
-				console.error(
-					'\x1b[31m%s\x1b[0m',
+				log.error(
 					`[vue-docgen-cli] Error compiling file ${config.outFile}:`
 				)
-				console.error(e)
+				log.error(e)
 			} else {
 				const err = e as Error
 				throw new Error(`[vue-docgen-cli] Error compiling file ${config.outFile}: ${err.message}`)
@@ -144,5 +143,5 @@ export async function compile(
 		config.outFile
 	)
 
-	console.log(`[vue-docgen-cli] File ${config.outFile} updated.`)
+	log.info(`[vue-docgen-cli] File ${config.outFile} updated.`)
 }

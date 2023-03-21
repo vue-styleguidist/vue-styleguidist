@@ -118,6 +118,10 @@ export interface SafeDocgenCLIConfig {
 		a: { filePath: string; docs: ComponentDoc[] },
 		b: { filePath: string; docs: ComponentDoc[] }
 	): 0 | 1 | -1
+	/**
+	 * Show the verbose output
+	 */
+	verbose: boolean
 }
 
 export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' | 'pages'> {
