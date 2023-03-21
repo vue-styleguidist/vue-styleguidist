@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.65.0
+
+### Minor Changes
+
+- [#1516](https://github.com/vue-styleguidist/vue-styleguidist/pull/1516) [`c1ab15f3`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c1ab15f38c2e0b610681bc1a1e37c45b42b5121a) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: pass event type to propsParser to fix some cache issues
+
 ## 4.64.1
 
 ### Patch Changes
