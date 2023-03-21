@@ -1,5 +1,5 @@
 /* eslint-disable no-new-func */
-import { expect } from 'vitest'
+import { expect, describe, it, vi } from 'vitest'
 import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
 function createFunction(code: string, execute = true) {
@@ -229,6 +229,25 @@ const MyButton = () => h('button')
 			comp.render = function() {with(this){return _c('div',[_v(_s(value))])}}
 
 			return comp"
+		`)
+	})
+
+	it('should ignore global imports', () => {
+		let sut = compileVueCodeForEvalFunction(`
+<script lang="ts" setup>
+import './blob/style.css'
+</script>`)
+
+		expect(sut.script).toMatchInlineSnapshot(`
+			"\\"use strict\\";;return {setup(){
+
+			require('./blob/style.css');
+
+			return {}
+			function defineProps(){}
+			function defineEmits(){}
+			function defineExpose(){}
+			}}"
 		`)
 	})
 })

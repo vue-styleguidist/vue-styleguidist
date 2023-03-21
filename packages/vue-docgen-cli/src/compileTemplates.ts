@@ -8,7 +8,7 @@ import props from './templates/props'
 import component from './templates/component'
 import defaultExample from './templates/defaultExample'
 import functionalTag from './templates/functionalTag'
-import { SafeDocgenCLIConfig } from './config'
+import { FileEventType, SafeDocgenCLIConfig } from './config'
 import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
 
 export { renderTags } from './templates/tags'
@@ -55,6 +55,7 @@ export function getDependencies(
  * an array of path to files that should trigger the update of this file
  */
 export default async function compileTemplates(
+	event: FileEventType,
 	absolutePath: string,
 	config: SafeDocgenCLIConfig,
 	componentRelativePath: string,
@@ -62,7 +63,7 @@ export default async function compileTemplates(
 ): Promise<ContentAndDependencies> {
 	const { apiOptions: options, templates, cwd } = config
 	try {
-		const docs = await config.propsParser(absolutePath, options)
+		const docs = await config.propsParser(absolutePath, options, event)
 		const components = await Promise.all(
 			docs.map(async doc => {
 				const { props: p, events: e, methods: m, slots: s, expose: exp } = doc
@@ -101,6 +102,7 @@ export default async function compileTemplates(
 					? await Promise.all(
 							doc.tags.requires.map((requireTag: ParamTag) =>
 								compileTemplates(
+									event,
 									path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
 									config,
 									path.join(componentRelativeDirectoryPath, requireTag.description as string),

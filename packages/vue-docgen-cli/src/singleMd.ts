@@ -5,6 +5,7 @@ import type { ComponentDoc } from 'vue-docgen-api'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import compileTemplates from './compileTemplates'
+import { FileEventType } from './config'
 
 export interface DocgenCLIConfigWithOutFile extends DocgenCLIConfigWithComponents {
 	outFile: string
@@ -40,13 +41,14 @@ export default async function(
     docsCache,
 		docMap,
 		watcher,
+		'init',
 		changedFilePath,
 	)
 
 	await compileSingleDocWithConfig()
 
 	if (config.watch) {
-		watcher.on('add', compileSingleDocWithConfig).on('change', compileSingleDocWithConfig)
+		watcher.on('add', compileSingleDocWithConfig.bind(null, 'add')).on('change', compileSingleDocWithConfig.bind(null, 'change'))
 	}
 }
 
@@ -66,6 +68,7 @@ export async function compile(
   cachedDocs: { [filepath: string]: ComponentDoc[] },
 	docMap: { [filepath: string]: string },
 	watcher: FSWatcher,
+	event: FileEventType,
 	changedFilePath?: string,
 	fromWatcher: boolean = true
 ) {
@@ -77,6 +80,7 @@ export async function compile(
 	// current components documentation
 	const cacheMarkDownContent = async (filePath: string) => {
 		const { content, dependencies, docs } = await compileTemplates(
+			event,
 			path.join(config.componentsRoot, filePath),
 			config,
 			filePath

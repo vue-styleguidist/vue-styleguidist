@@ -5,6 +5,7 @@ import { FSWatcher } from 'chokidar'
 import { writeDownMdFile } from './utils'
 import { DocgenCLIConfigWithComponents } from './docgen'
 import compileTemplates from './compileTemplates'
+import { FileEventType } from './config'
 
 /**
  * Build one md file per given compnent and save it respecting original scaffolding
@@ -22,7 +23,7 @@ export default async function(
 ) {
 	const compileWithConfig = _compile.bind(null, config, docMap, watcher)
 
-	await Promise.all(files.map(f => compileWithConfig(f, false)))
+	await Promise.all(files.map(f => compileWithConfig('init', f, false)))
 
 	if (config.watch) {
 		watcher
@@ -35,7 +36,7 @@ export default async function(
 					fs.unlink(config.getDestFile(relPath, config))
 				} else {
 					// if it's not a main file recompile the file connected to it
-					compileWithConfig(docMap[relPath])
+					compileWithConfig('change', docMap[relPath])
 				}
 			})
 	}
@@ -53,6 +54,7 @@ export async function compile(
 	config: DocgenCLIConfigWithComponents,
 	docMap: { [filepath: string]: string },
 	watcher: FSWatcher,
+	event: FileEventType,
 	filePath: string,
 	fromWatcher: boolean = true
 ) {
@@ -66,6 +68,7 @@ export async function compile(
 	if (file) {
 		try {
 			const { content, dependencies } = await compileTemplates(
+				event,
 				path.join(config.componentsRoot, componentFile),
 				config,
 				componentFile

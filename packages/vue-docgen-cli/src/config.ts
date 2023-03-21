@@ -12,6 +12,17 @@ import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
 export { ContentAndDependencies, SubTemplateOptions }
 
+type AddParameters<
+  TFunction extends (...args: any) => any,
+  TParameters extends [...args: any]
+> = (
+  ...args: [...Parameters<TFunction>, ...TParameters]
+) => ReturnType<TFunction>;
+
+export type FileEventType = 'add' | 'change' | 'init'
+
+type PropsParser = AddParameters<typeof parseMulti, [event?: FileEventType]>
+
 export interface SafeDocgenCLIConfig {
 	/**
 	 * Should we add default examples
@@ -99,7 +110,7 @@ export interface SafeDocgenCLIConfig {
 	/**
 	 * Parser used to extract props, slots and events from each component
 	 */
-	propsParser: typeof parseMulti
+	propsParser: PropsParser
 	/**
 	 * In a single md setup, this function will be called to determine the order of the components on the page
 	 */
