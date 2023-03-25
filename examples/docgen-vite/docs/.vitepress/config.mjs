@@ -20,7 +20,7 @@ export default defineConfig({
         items: sidebarComponents.map(comp => {
           return {
             text: comp.replace(/^components\//, '').replace(/\.md$/, ''),
-            link: comp.replace(/\.md$/, '')
+            link: '/' + comp.replace(/\.md$/, '')
           }
         })
       }
