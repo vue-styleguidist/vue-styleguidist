@@ -47,7 +47,7 @@
 					"node": {
 						"paths": [
 							"packages/vue-styleguidist/src/client",
-							"packages/vue-styleguidist/node_modules/react-styleguidist/lib/client"
+							"node_modules/react-styleguidist/lib/client"
 						],
 						"extensions": [".ts", ".tsx", ".js", ".d.ts"]
 					}

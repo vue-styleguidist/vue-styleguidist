@@ -11,13 +11,11 @@
 		"sourceMap": true,
 		"noImplicitAny": true,
 		"strictFunctionTypes": false,
-		"jsx": "react",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"]
 	},
 	"include": [
 		"test/**/*.ts",
-		"node_modules/react-styleguidist/lib/client/rsg-components/**/*.*"
 	],
 	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
 	"references": [
