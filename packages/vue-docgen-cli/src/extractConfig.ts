@@ -1,6 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import { parseMulti } from 'vue-docgen-api'
+import * as log from 'loglevel'
 import {
 	component,
 	events,
@@ -20,12 +21,17 @@ export default async (
 	configFileFromCmd?: string,
 	pathArray: string[] = [],
 	verbose = false,
-	logLevel = 'error', 
+	logLevel:log.LogLevelDesc = 'error', 
 ): Promise<SafeDocgenCLIConfig> => {
+  log.setLevel(logLevel)
+  
+
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
 		: path.join(cwd, 'docgen.config.js')
 	const [componentsFromCmd, outDirFromCmd] = pathArray
+
+  log.debug('[vue-docgen-cli] extractConfig ', { configFilePath })
 
 	const config: Partial<DocgenCLIConfig> = {
 		cwd,
@@ -53,8 +59,10 @@ export default async (
 		getDestFile: (file: string, conf: SafeDocgenCLIConfig): string =>
 			path.resolve(conf.outDir, file).replace(/\.\w+$/, '.md'),
 		editLinkLabel: 'edit on github',
-		...(fs.existsSync(configFilePath) ? (await import(configFilePath)).default : undefined)
+		...(fs.existsSync(configFilePath) ? (await import(`file://${configFilePath}`)).default : undefined)
 	}
+
+  log.debug('[vue-docgen-cli]', { config })
 
 	if (!config.getRepoEditUrl && config.docsRepo) {
 		const branch = config.docsBranch || 'master'
@@ -68,6 +76,7 @@ export default async (
 	config.verbose = config.verbose ?? verbose
 
 	config.logLevel = config.logLevel ?? logLevel as any
+  config.logLevel = config.logLevel ?? verbose ? 'debug' : 'error'
 
 	config.templates = {
 		component,

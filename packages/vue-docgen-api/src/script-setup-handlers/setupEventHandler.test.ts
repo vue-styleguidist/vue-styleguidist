@@ -1,5 +1,4 @@
 import { ParserPlugin } from '@babel/parser'
-import { expect } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'

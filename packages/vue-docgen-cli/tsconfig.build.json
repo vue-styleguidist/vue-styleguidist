@@ -1,4 +1,4 @@
 {
 	"extends": "./tsconfig",
-	"exclude": ["src/**/*.spec.ts", "src/**/test.vue3.ts"]
+	"exclude": ["src/**/*.spec.ts"]
 }

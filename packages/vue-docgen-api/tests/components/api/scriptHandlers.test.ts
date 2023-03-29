@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import * as path from 'path'
 import { parse } from '../../../src/main'
 

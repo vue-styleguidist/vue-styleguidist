@@ -1,5 +1,4 @@
 import { FSWatcher } from 'chokidar'
-import { expect, vi, describe, beforeEach, it } from 'vitest'
 import * as singleMd from './singleMd'
 import extractConfig from './extractConfig'
 import { writeDownMdFile } from './utils'

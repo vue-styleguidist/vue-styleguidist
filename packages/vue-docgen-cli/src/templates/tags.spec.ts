@@ -1,4 +1,3 @@
-import { expect } from 'vitest'
 import { renderTags } from './tags'
 
 describe('renderTags', () => {

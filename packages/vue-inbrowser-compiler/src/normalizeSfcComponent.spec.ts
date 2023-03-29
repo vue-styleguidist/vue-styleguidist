@@ -1,4 +1,3 @@
-import { expect, vi } from 'vitest'
 import { parse } from '@vue/compiler-sfc'
 import normalizeSfcComponent from './normalizeSfcComponent'
 

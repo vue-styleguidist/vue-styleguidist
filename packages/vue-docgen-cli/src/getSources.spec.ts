@@ -1,6 +1,6 @@
-import { SpyInstance , vi, expect } from 'vitest'
 import chokidar from 'chokidar'
 import * as globby from 'globby'
+import { SpyInstance } from 'vitest'
 import getSources from './getSources'
 
 vi.mock('chokidar')
