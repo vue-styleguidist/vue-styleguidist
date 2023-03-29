@@ -1,5 +1,4 @@
 /* eslint-disable no-new-func */
-import { expect } from 'vitest'
 import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
 function createFunction(code: string, execute = true) {

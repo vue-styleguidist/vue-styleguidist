@@ -1,5 +1,4 @@
 /* eslint-disable no-new-func */
-import { describe, expect, test } from 'vitest'
 import Vue from 'vue'
 import { transform } from 'buble'
 import { adaptCreateElement, concatenate } from 'vue-inbrowser-compiler-utils'

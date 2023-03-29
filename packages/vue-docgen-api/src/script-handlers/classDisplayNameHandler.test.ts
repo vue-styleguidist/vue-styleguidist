@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import babylon from '../babel-parser'
 import Documentation from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'

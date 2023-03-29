@@ -1,4 +1,3 @@
-import { vi, expect, it, describe, beforeEach } from 'vitest'
 import { FSWatcher } from 'chokidar'
 import * as multiMd from './multiMd'
 import extractConfig from './extractConfig'

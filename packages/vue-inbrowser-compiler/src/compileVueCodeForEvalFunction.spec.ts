@@ -1,5 +1,4 @@
 /* eslint-disable no-new-func */
-import { describe, it, vi, expect } from 'vitest'
 import compileVueCodeForEvalFunction from './compileVueCodeForEvalFunction'
 
 describe('compileVueCodeForEvalFunction', () => {

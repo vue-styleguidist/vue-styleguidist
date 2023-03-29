@@ -1,5 +1,4 @@
 import { ParserPlugin } from '@babel/parser'
-import { vi, describe, beforeAll, beforeEach, it, expect, test } from 'vitest'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import dedent from 'dedent'

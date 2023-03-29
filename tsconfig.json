@@ -16,6 +16,8 @@
 	},
 	"include": [
 		"test/**/*.ts",
+    "packages/**/*.spec.ts",
+    "packages/**/*.test.ts"
 	],
 	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
 	"references": [

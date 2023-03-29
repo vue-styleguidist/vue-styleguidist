@@ -1,4 +1,3 @@
-import { expect } from 'vitest'
 import { transform } from 'sucrase'
 import { parse } from '@vue/compiler-sfc'
 import normalizeSfcComponent, { parseScriptCode } from './normalizeSfcComponent'

@@ -1,5 +1,4 @@
 import { NodePath } from 'ast-types/lib/node-path'
-import { expect } from 'vitest'
 import Map from 'ts-map'
 import * as bt from '@babel/types'
 import babylon from '../babel-parser'
