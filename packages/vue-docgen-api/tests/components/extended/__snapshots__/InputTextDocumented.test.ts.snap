@@ -56,8 +56,8 @@ exports[`tests InputTextDoc > should match the snapshot 1`] = `
   "sourceFiles": [
     /packages/vue-docgen-api/tests/components/extended/InputTextDocumented.vue,
     /packages/vue-docgen-api/tests/components/extended/Base.vue,
-    /packages/vue-docgen-api/tests/mixins/otherNamed.js,
     /packages/vue-docgen-api/tests/mixins/multiNamed.js,
+    /packages/vue-docgen-api/tests/mixins/otherNamed.js,
     /packages/vue-docgen-api/tests/mixins/another/deep.js,
   ],
   "tags": {},
