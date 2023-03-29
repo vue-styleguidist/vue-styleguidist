@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.65.1
+
+### Patch Changes
+
+- [#1520](https://github.com/vue-styleguidist/vue-styleguidist/pull/1520) [`ffe42ec5`](https://github.com/vue-styleguidist/vue-styleguidist/commit/ffe42ec55c77732cf116a1a72fb1364683326731) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: bug on windows with native import config file
+
 ## 4.65.0
 
 ### Minor Changes
