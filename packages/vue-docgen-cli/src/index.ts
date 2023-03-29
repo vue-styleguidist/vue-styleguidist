@@ -1,7 +1,10 @@
 import minimist from 'minimist'
+import * as log from 'loglevel'
 import extractConfig from './extractConfig'
 import docgen from './docgen'
 import { SafeDocgenCLIConfig } from './config'
+
+log.debug('[vue-docgen-cli] start')
 
 /**
  * run the `config` recursively on pages
