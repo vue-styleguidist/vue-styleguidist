@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.65.2
+
+### Patch Changes
+
+- [`325b177a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/325b177aacbd8dd4423894ef3bde1f1db9e65d07) Thanks [@elevatebart](https://github.com/elevatebart)! - only show info log when asked
+
 ## 4.65.1
 
 ### Patch Changes
