@@ -117,6 +117,7 @@ jobs:
       # run cypress e2e tests
       - run: 
           command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/integration/basic/*.*\" --record --group main"
+          environment:
             CY_EXAMPLE_FOLDER: basic
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
@@ -124,6 +125,7 @@ jobs:
 
       - run:
           command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --spec \"test/cypress/integration/jsx-examples/*.*\"  --e2e --record --group jsx"
+          environment:
             CY_EXAMPLE_FOLDER: jsx-examples
       - store_artifacts:
           path: /root/vue-styleguidist/test/cypress/screenshots
