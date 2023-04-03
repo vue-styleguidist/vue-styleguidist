@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress'
-import makeWebpackConfig from './src/scripts/make-webpack-config'
 import webpackMerge from 'webpack-merge'
 import * as path from 'path'
+import makeWebpackConfig from './src/scripts/make-webpack-config'
 
 const { resolve } = makeWebpackConfig(
 	{
