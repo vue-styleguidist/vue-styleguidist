@@ -111,8 +111,7 @@ jobs:
       # run cypress component tests vue3
       - run: 
           name: Run Vue 3 component tests
-          command: pnpm install:vue3 && pnpm exec cypress run --component --record --group ct-vue3 --config-file cypress.config.vue3.ts
-          working_directory: packages/vue-styleguidist
+          command: pnpm install:vue3 && pnpm exec cypress run --component --record --group ct-vue3 --config-file packages/vue-styleguidist/cypress.config.vue3.ts
 
       # run cypress e2e tests
       - run: 
