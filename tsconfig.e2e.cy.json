@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"composite": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"allowSyntheticDefaultImports": true,
+		"types": ["cypress"],
+		"sourceMap": true
+	},
+	"include": [
+    "test/cypress/**/*.tsx",
+		"test/cypress/**/*.ts",
+	]
+}

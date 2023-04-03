@@ -214,7 +214,7 @@ export class UnconfiguredEditor extends Component<UnconfiguredEditorProps> {
 	}
 }
 
-const PEditor = polyfill(UnconfiguredEditor)
+const PEditor = polyfill(UnconfiguredEditor) as any
 
 type EditorProps = Omit<UnconfiguredEditorProps, 'jssThemedEditor' | 'jsxInExamples'>
 

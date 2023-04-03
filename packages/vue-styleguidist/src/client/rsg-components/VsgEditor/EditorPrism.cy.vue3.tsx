@@ -3,13 +3,7 @@ import { mount } from 'cypress/react'
 import Context from 'rsg-components/Context/Context'
 import EditorPrism from './EditorPrism'
 
-type ProviderProps = {
-  children?: React.ReactNode
-  jssThemedEditor?: boolean
-  jsxInExamples?: boolean
-};
-
-const Provider: React.FC<ProviderProps> = ({ children, jssThemedEditor = true, jsxInExamples = false }) => (
+const Provider = ({ children, jssThemedEditor = true, jsxInExamples = false }) => (
 	<Context.Provider
 		value={
 			{
@@ -24,7 +18,7 @@ const Provider: React.FC<ProviderProps> = ({ children, jssThemedEditor = true, j
 	</Context.Provider>
 )
 
-describe('EditorPrism', () => {
+describe('EditorPrism Vue3', () => {
 	it('renders typescript', () => {
 		const code = `
 function foo() :string {
@@ -105,6 +99,35 @@ function foo(param: Vue) : { one: number, two: boolean } {
   it('renders vue SFC with style scoped tag', () => {
 		const code = `
 <template>
+  <Checkbox />
+</template>
+<style scoped>
+  .checkbox {
+    color: red;
+  }
+</style>
+    `
+		mount(
+			<Provider jsxInExamples>
+				<EditorPrism code={code} onChange={() => {}} />
+			</Provider>
+		)
+
+    cy.contains('.token.tag', 'Checkbox').should('be.visible')
+	})
+
+  it('renders vue SFC with all the features', () => {
+		const code = `
+<script lang="ts">
+function test(){
+  return 'hello'
+}
+</script>
+<script lang="ts" setup>
+const msg:string = test()
+</script>
+<template>
+  <div>{{ msg }}</div>
   <Checkbox />
 </template>
 <style scoped>
