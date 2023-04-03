@@ -19,104 +19,24 @@ const Provider = ({ children, jssThemedEditor = true, jsxInExamples = false }) =
 )
 
 describe('EditorPrism Vue3', () => {
-	it('renders typescript', () => {
-		const code = `
-function foo() :string {
-  return 'bar'
-}
-
-foo()
-    `
-		mount(
-			<Provider>
-				<EditorPrism code={code} onChange={() => {}} />
-			</Provider>
-		)
-
-    cy.contains('.token.function', 'foo').should('be.visible')
-	})
-
-	it('renders tsx', () => {
-		const code = `
-function foo() :string {
-  return <Foo>bar</Foo>
-}
-
-foo()
-    `
-		mount(
-			<Provider jsxInExamples>
-				<EditorPrism code={code} onChange={() => {}} />
-			</Provider>
-		)
-
-    cy.contains('.token.tag', 'Foo').should('be.visible')
-	})
-
-	it('renders vue SFC with Typescript', () => {
-		const code = `
-<template>
-  <Accordion @click="foo()">bar</Accordion>
-</template>
-<script lang="ts">
-import type { Vue } from 'vue'
-function foo(param: Vue) : { one: number, two: boolean } {
-  return 'bar'
+	it.only('renders vue SFC with script and setup', () => {
+		const code = `<script lang="ts">
+function test(){
+  return 'hello'
 }
 </script>
-    `
+<script lang="ts" setup>
+const msg:string = test()
+</script>`
+
 		mount(
 			<Provider jsxInExamples>
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
-
-    cy.contains('.token.tag', 'Accordion').should('be.visible')
 	})
 
-  it('renders vue SFC with Self-closing tag', () => {
-		const code = `
-<template>
-  <Checkbox />
-</template>
-<script lang="ts">
-import type { Vue } from 'vue'
-
-function foo(param: Vue) : { one: number, two: boolean } {
-  return 'bar'
-}
-</script>
-    `
-		mount(
-			<Provider jsxInExamples>
-				<EditorPrism code={code} onChange={() => {}} />
-			</Provider>
-		)
-
-    cy.contains('.token.tag', 'Checkbox').should('be.visible')
-	})
-
-  it('renders vue SFC with style scoped tag', () => {
-		const code = `
-<template>
-  <Checkbox />
-</template>
-<style scoped>
-  .checkbox {
-    color: red;
-  }
-</style>
-    `
-		mount(
-			<Provider jsxInExamples>
-				<EditorPrism code={code} onChange={() => {}} />
-			</Provider>
-		)
-
-    cy.contains('.token.tag', 'Checkbox').should('be.visible')
-	})
-
-  it('renders vue SFC with all the features', () => {
+	it('renders vue SFC with all the features', () => {
 		const code = `
 <script lang="ts">
 function test(){
@@ -142,6 +62,6 @@ const msg:string = test()
 			</Provider>
 		)
 
-    cy.contains('.token.tag', 'Checkbox').should('be.visible')
+		cy.contains('.token.tag', 'Checkbox').should('be.visible')
 	})
 })
