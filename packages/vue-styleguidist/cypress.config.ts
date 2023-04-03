@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress'
 import makeWebpackConfig from './src/scripts/make-webpack-config'
 import webpackMerge from 'webpack-merge'
+import * as path from 'path'
 
 const { resolve } = makeWebpackConfig(
 	{
@@ -53,9 +54,9 @@ export default defineConfig({
 	videosFolder: '../../test/cypress/videos',
 
 	component: {
-		specPattern: 'src/client/**/*.cy.{js,jsx,ts,tsx}',
-		supportFile: '../../test/cypress/support/component.tsx',
-		indexHtmlFile: '../../test/cypress/support/component-index.html',
+		specPattern: path.resolve(__dirname,'src/client/**/*.cy.{js,jsx,ts,tsx}'),
+		supportFile: path.resolve(__dirname,'../../test/cypress/support/component.tsx'),
+		indexHtmlFile: path.resolve(__dirname,'../../test/cypress/support/component-index.html'),
 		devServer: {
 			framework: 'react',
 			bundler: 'webpack',
