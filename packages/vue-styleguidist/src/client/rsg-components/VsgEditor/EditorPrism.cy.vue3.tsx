@@ -19,7 +19,7 @@ const Provider = ({ children, jssThemedEditor = true, jsxInExamples = false }) =
 )
 
 describe('EditorPrism Vue3', () => {
-	it.only('renders vue SFC with script and setup', () => {
+	it('renders vue SFC with script and setup', () => {
 		const code = `<script lang="ts">
 function test(){
   return 'hello'
@@ -34,6 +34,8 @@ const msg:string = test()
 				<EditorPrism code={code} onChange={() => {}} />
 			</Provider>
 		)
+
+    cy.get('pre').should('have.text', code)
 	})
 
 	it('renders vue SFC with all the features', () => {
@@ -62,6 +64,6 @@ const msg:string = test()
 			</Provider>
 		)
 
-		cy.contains('.token.tag', 'Checkbox').should('be.visible')
+		cy.get('pre').should('have.text', code)
 	})
 })

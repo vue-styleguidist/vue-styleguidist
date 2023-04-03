@@ -22,13 +22,13 @@ import { SanitizedStyleguidistConfig } from '../../../types/StyleGuide'
 
 const VSimpleEditor = SimpleEditor as any
 
-function getSpacer(s :any){
-  return s.setup ? 'setup' : ' '
+function getSpacer(s: any) {
+	return s.setup ? 'setup' : ' '
 }
 
 /**
  * Return SFC code without any script part.
- * Why? Because we want to highlight the script part in a separate manner. 
+ * Why? Because we want to highlight the script part in a separate manner.
  * This will allow us to highlight typescript code.
  * @param code SFC code
  * @param script script part of the parsed SFC
@@ -46,9 +46,9 @@ function getSpacer(s :any){
  *    function hello() {
  *    }
  *    </script>`
- * 
+ *
  *  => Returns
- * 
+ *
  *     `<template>
  *     <div>hello</div>
  *     </template>
@@ -56,21 +56,33 @@ function getSpacer(s :any){
  *     <script lang="ts"> </script>
  */
 function getCodeWithoutScript(code: string, script: any, scriptSetup?: any) {
-  // in vue 3 the structure of the script SCF object is different
-  // the start & stop are in a `loc` object.
-  if(script.loc) {
-    const orderedScripts = scriptSetup ? [scriptSetup, script].sort((s1, s2) => s1.loc.start > s2.loc.start ? 1 : -1) : [script]
-    const firstScript = orderedScripts[0]
-    const nextScript = orderedScripts[1]
-    if(nextScript) {
-      return code.slice(0, firstScript.loc.start) + getSpacer(firstScript) + code.slice(firstScript.loc.end, nextScript.loc.start) + getSpacer(nextScript) + code.slice(nextScript.loc.end)
-    } else {
-      return code.slice(0, firstScript.loc.start) + getSpacer(firstScript) + code.slice(firstScript.loc.end)
-    }
-  }
+	// in vue 3 the structure of the script SCF object is different
+	// the start & stop are in a `loc` object.
+	if (script.loc) {
+		const orderedScripts = scriptSetup
+			? [scriptSetup, script].sort((s1, s2) => (s1.loc.start.offset > s2.loc.start.offset ? 1 : -1))
+			: [script]
+		const firstScript = orderedScripts[0]
+		const nextScript = orderedScripts[1]
+		if (nextScript) {
+			return (
+				code.slice(0, firstScript.loc.start.offset) +
+				getSpacer(firstScript) +
+				code.slice(firstScript.loc.end.offset, nextScript.loc.start.offset) +
+				getSpacer(nextScript) +
+				code.slice(nextScript.loc.end.offset)
+			)
+		} else {
+			return (
+				code.slice(0, firstScript.loc.start.offset) +
+				getSpacer(firstScript) +
+				code.slice(firstScript.loc.end.offset)
+			)
+		}
+	}
 
-  // in vue 2 the start & stop are directly attached to the script member.
-  return code.slice(0, script.start) + ' ' + code.slice(script.end)
+	// in vue 2 the start & stop are directly attached to the script member.
+	return code.slice(0, script.start) + ' ' + code.slice(script.end)
 }
 
 const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: string) => string) => {
@@ -98,26 +110,37 @@ const highlight = (lang: 'vsg' | 'vue-sfc', jsxInExamples: boolean): ((code: str
 			const comp = parseComponent(code)
 
 			const newCode = comp.script ? getCodeWithoutScript(code, comp.script, comp.scriptSetup) : code
-      
 			const htmlHighlighted = prismHighlight(newCode, langScheme, 'html')
 
-			const highlightedScript = comp.script ? htmlHighlighted.replace(
-				new RegExp(`<span class="token language-javascript">${getSpacer(comp.script)}<\\/span>`, 'g'),
-				`<span class="token language-typescript">${prismHighlight(
-					comp.script.content,
-					languages[comp.script.lang || 'ts'],
-					comp.script.lang || 'ts'
-				)}</span>`) : htmlHighlighted
+			const highlightedScript = comp.script
+				? htmlHighlighted.replace(
+						new RegExp(
+							`<span class="token language-javascript">${getSpacer(comp.script)}<\\/span>`,
+							'g'
+						),
+						`<span class="token language-typescript">${prismHighlight(
+							comp.script.content,
+							languages[comp.script.lang || 'ts'],
+							comp.script.lang || 'ts'
+						)}</span>`
+				  )
+				: htmlHighlighted
 
-      const highlightedScriptSetup = comp.scriptSetup ? highlightedScript.replace(
-        new RegExp(`<span class="token language-javascript">${getSpacer(comp.scriptSetup)}<\\/span>`, 'g'),
-        `<span class="token language-typescript">${prismHighlight(
-          comp.scriptSetup.content,
-          languages.ts,
-          'ts'
-        )}</span>`) : highlightedScript
+			const highlightedScriptSetup = comp.scriptSetup
+				? highlightedScript.replace(
+						new RegExp(
+							`<span class="token language-javascript">${getSpacer(comp.scriptSetup)}<\\/span>`,
+							'g'
+						),
+						`<span class="token language-typescript">${prismHighlight(
+							comp.scriptSetup.content,
+							languages.ts,
+							'ts'
+						)}</span>`
+				  )
+				: highlightedScript
 
-        return highlightedScriptSetup
+			return highlightedScriptSetup
 		}
 	}
 }
@@ -226,4 +249,3 @@ function Editor(props: EditorProps) {
 }
 
 export default Styled<EditorProps>(styles as any)(Editor)
-
