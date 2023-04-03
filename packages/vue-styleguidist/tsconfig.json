@@ -19,4 +19,7 @@
 		"../../node_modules/react-styleguidist/lib/client/rsg-components/**/*.*",
 		"./src/**/*.ts", "./src/**/*.tsx", "../../@types/**/*"
 	],
+  "references": [
+    { "path": "./tsconfig.component.cy.json" }
+  ]
 }

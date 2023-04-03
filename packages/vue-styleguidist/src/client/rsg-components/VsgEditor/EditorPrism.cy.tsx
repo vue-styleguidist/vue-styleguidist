@@ -3,7 +3,13 @@ import { mount } from 'cypress/react'
 import Context from 'rsg-components/Context/Context'
 import EditorPrism from './EditorPrism'
 
-const Provider = ({ children, jssThemedEditor = true, jsxInExamples = false }) => (
+type ProviderProps = {
+  children?: React.ReactNode
+  jssThemedEditor?: boolean
+  jsxInExamples?: boolean
+};
+
+const Provider: React.FC<ProviderProps> = ({ children, jssThemedEditor = true, jsxInExamples = false }) => (
 	<Context.Provider
 		value={
 			{
@@ -51,6 +57,8 @@ foo()
 		)
 
     cy.contains('.token.tag', 'Foo').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 
 	it('renders vue SFC with Typescript', () => {
@@ -72,6 +80,8 @@ function foo(param: Vue) : { one: number, two: boolean } {
 		)
 
     cy.contains('.token.tag', 'Accordion').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 
   it('renders vue SFC with Self-closing tag', () => {
@@ -94,6 +104,8 @@ function foo(param: Vue) : { one: number, two: boolean } {
 		)
 
     cy.contains('.token.tag', 'Checkbox').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 
   it('renders vue SFC with style scoped tag', () => {
@@ -114,5 +126,7 @@ function foo(param: Vue) : { one: number, two: boolean } {
 		)
 
     cy.contains('.token.tag', 'Checkbox').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 })

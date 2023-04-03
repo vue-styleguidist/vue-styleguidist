@@ -9404,7 +9404,7 @@ packages:
     resolution: {integrity: sha512-aNmNHyLPsw+sVvlQFQ2/8sjNuLtK54TC6cuKnVzAY93ks4ZBrvwQSnkkIh7bsbNhum5hJBS00wSDipQ937f5DA==}
     dependencies:
       '@babel/parser': 7.20.13
-      postcss: 8.4.16
+      postcss: 8.4.19
       source-map: 0.6.1
 
   /@vue/compiler-sfc@2.7.8:

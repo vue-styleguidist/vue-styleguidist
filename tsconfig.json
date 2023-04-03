@@ -22,7 +22,7 @@
 	"exclude": ["test/**/*.d.ts", "**/*.cy.*", "test/cypress/**/*.ts"],
 	"references": [
 		{
-			"path": "./tsconfig.cy.json"
+			"path": "./tsconfig.e2e.cy.json"
 		},
 		{
 			"path": "./tsconfig.testSetup.json"

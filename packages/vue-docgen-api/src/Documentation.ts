@@ -115,7 +115,7 @@ export default class Documentation {
 		const events = this.getObjectFromDescriptor(this.eventsMap)
 		const slots = this.getObjectFromDescriptor(this.slotsMap)
 		const expose = this.getObjectFromDescriptor(this.exposedMap)
-		const sourceFiles = [...this.sourceFiles]
+		const sourceFiles = [...this.sourceFiles].sort()
 
 		const obj: { [key: string]: any } = {}
 		this.dataMap.forEach((value, key) => {

@@ -24,8 +24,8 @@ exports[`tests InputText > should match the snapshot 1`] = `
   ],
   "slots": undefined,
   "sourceFiles": [
-    /packages/vue-docgen-api/tests/components/extended/InputText.vue,
     /packages/vue-docgen-api/tests/components/extended/Base.vue,
+    /packages/vue-docgen-api/tests/components/extended/InputText.vue,
   ],
   "tags": {},
 }
