@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.65.3
+
+### Patch Changes
+
+- [#1525](https://github.com/vue-styleguidist/vue-styleguidist/pull/1525) [`cc52b780`](https://github.com/vue-styleguidist/vue-styleguidist/commit/cc52b780edc3aad18f582412fc555d4fe93f4486) Thanks [@elevatebart](https://github.com/elevatebart)! - fix vue3 rendering of sfc code
+
 ## 4.64.1
 
 ### Patch Changes
