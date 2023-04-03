@@ -57,6 +57,8 @@ foo()
 		)
 
     cy.contains('.token.tag', 'Foo').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 
 	it('renders vue SFC with Typescript', () => {
@@ -78,6 +80,8 @@ function foo(param: Vue) : { one: number, two: boolean } {
 		)
 
     cy.contains('.token.tag', 'Accordion').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 
   it('renders vue SFC with Self-closing tag', () => {
@@ -100,6 +104,8 @@ function foo(param: Vue) : { one: number, two: boolean } {
 		)
 
     cy.contains('.token.tag', 'Checkbox').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 
   it('renders vue SFC with style scoped tag', () => {
@@ -120,5 +126,7 @@ function foo(param: Vue) : { one: number, two: boolean } {
 		)
 
     cy.contains('.token.tag', 'Checkbox').should('be.visible')
+
+    cy.get('pre').should('have.text', code)
 	})
 })
