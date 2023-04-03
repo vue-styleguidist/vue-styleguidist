@@ -303,11 +303,11 @@ a factory function",
   ],
   "sourceFiles": [
     /packages/vue-docgen-api/tests/components/button/Button.vue,
-    /packages/vue-docgen-api/tests/mixins/another/index.js,
-    /packages/vue-docgen-api/tests/components/button/genericMixin.js,
     /packages/vue-docgen-api/tests/components/button/colorMixin.js,
-    /packages/vue-docgen-api/tests/mixins/multiMixin.js,
+    /packages/vue-docgen-api/tests/components/button/genericMixin.js,
     /packages/vue-docgen-api/tests/components/button/namedMixin.js,
+    /packages/vue-docgen-api/tests/mixins/another/index.js,
+    /packages/vue-docgen-api/tests/mixins/multiMixin.js,
   ],
   "tags": {
     "author": [
