@@ -108,11 +108,6 @@ jobs:
           command: pnpm exec cypress run --component --record --group ct
           working_directory: packages/vue-styleguidist
       
-      # run cypress component tests vue3
-      - run: 
-          name: Run Vue 3 component tests
-          command: pnpm install:vue3 && pnpm exec cypress run --component --record --group ct-vue3 --config-file packages/vue-styleguidist/cypress.config.vue3.ts
-
       # run cypress e2e tests
       - run: 
           command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/integration/basic/*.*\" --record --group main"
@@ -130,6 +125,10 @@ jobs:
           path: /root/vue-styleguidist/test/cypress/screenshots
           destination: cy-screenshots-jsx
 
+      # run cypress component tests vue3
+      - run: 
+          name: Run Vue 3 component tests
+          command: pnpm install:vue3 && pnpm exec cypress run --component --record --group ct-vue3 --config-file packages/vue-styleguidist/cypress.config.vue3.ts
 
 
 workflows:
