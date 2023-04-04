@@ -10,7 +10,7 @@ const tmpl = (props: PropDescriptor[]): string => {
 		const p = pr.name
 		let t = pr.description ?? ''
 		t += renderTags(pr.tags)
-		const n = pr.type?.name ?? ''
+		const n = pr.type?.name ?? '-' + (pr.required ? ` (required)` : '')
 		const v = pr.values?.map(pv => `\`${pv}\``).join(', ') ?? '-'
 		const d = pr.defaultValue?.value ?? ''
 

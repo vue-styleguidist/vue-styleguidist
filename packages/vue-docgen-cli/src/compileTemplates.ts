@@ -12,7 +12,6 @@ import functionalTag from './templates/functionalTag'
 import { FileEventType, SafeDocgenCLIConfig } from './config'
 import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
 
-
 export { renderTags } from './templates/tags'
 export { mdclean } from './templates/utils'
 export { events, methods, slots, props, component, expose, defaultExample, functionalTag }
@@ -74,11 +73,11 @@ export default async function compileTemplates(
 				const subComponentOptions = { isSubComponent, hasSubComponents }
 
 				const renderedUsage = {
-					props: p ? templates.props(p, subComponentOptions) : '',
-					slots: s ? templates.slots(s, subComponentOptions) : '',
-					methods: m ? templates.methods(m, subComponentOptions) : '',
-					events: e ? templates.events(e, subComponentOptions) : '',
-					expose: exp ? templates.expose(exp, subComponentOptions) : '',
+					props: p ? await Promise.resolve(templates.props(p, subComponentOptions)) : '',
+					slots: s ? await Promise.resolve(templates.slots(s, subComponentOptions)) : '',
+					methods: m ? await Promise.resolve(templates.methods(m, subComponentOptions)) : '',
+					events: e ? await Promise.resolve(templates.events(e, subComponentOptions)) : '',
+					expose: exp ? await Promise.resolve(templates.expose(exp, subComponentOptions)) : '',
 					functionalTag: templates.functionalTag
 				}
 
