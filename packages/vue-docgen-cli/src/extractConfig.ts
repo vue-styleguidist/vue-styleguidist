@@ -32,7 +32,11 @@ export default async (
 
 	log.debug('[vue-docgen-cli] extractConfig ', { configFilePath })
 
-	const config: Partial<DocgenCLIConfig> = {
+	const userConfigOrFunction = fs.existsSync(configFilePath)
+		? (await import(`file://${configFilePath}`)).default
+		: {}
+
+	const rootConfig: Partial<DocgenCLIConfig> = {
 		cwd,
 		watch,
 		propsParser: parseMulti,
@@ -57,18 +61,23 @@ export default async (
 		},
 		getDestFile: (file: string, conf: SafeDocgenCLIConfig): string =>
 			path.resolve(conf.outDir, file).replace(/\.\w+$/, '.md'),
-		editLinkLabel: 'edit on github',
-		...(fs.existsSync(configFilePath)
-			? (await import(`file://${configFilePath}`)).default
-			: undefined)
+		editLinkLabel: 'edit on github'
 	}
+
+	const config =
+		typeof userConfigOrFunction === 'function'
+			? await Promise.resolve(userConfigOrFunction(rootConfig))
+			: {
+					...rootConfig,
+					...userConfigOrFunction
+			  }
 
 	log.debug('[vue-docgen-cli]', { config })
 
 	if (!config.getRepoEditUrl && config.docsRepo) {
 		const branch = config.docsBranch || 'master'
 		const dir = config.docsFolder || ''
-		config.getRepoEditUrl = p => `https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}`
+		config.getRepoEditUrl = (p: string) => `https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}`
 	}
 
 	// only default outDir if `outFile` is null to avoid confusion
