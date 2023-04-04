@@ -68,7 +68,7 @@
     "@vue/eslint-config-prettier": "5.1.0",
     "@vue/eslint-config-typescript": "7.0.0",
     "acorn": "6.4.2",
-    "@babel/eslint-parser": "7.11.0",
+    "@babel/eslint-parser": "7.21.3",
     "babel-loader": "8.3.0",
     "c8": "7.13.0",
     "clipboard": "2.0.11",
