@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.66.0
+
+### Minor Changes
+
+- [#1528](https://github.com/vue-styleguidist/vue-styleguidist/pull/1528) [`9978723f`](https://github.com/vue-styleguidist/vue-styleguidist/commit/9978723f902e18c39dee8ce9fe87e97189601e52) Thanks [@elevatebart](https://github.com/elevatebart)! - allow config as a function
+
+- [#1528](https://github.com/vue-styleguidist/vue-styleguidist/pull/1528) [`9978723f`](https://github.com/vue-styleguidist/vue-styleguidist/commit/9978723f902e18c39dee8ce9fe87e97189601e52) Thanks [@elevatebart](https://github.com/elevatebart)! - allow async templates
+
+- [#1528](https://github.com/vue-styleguidist/vue-styleguidist/pull/1528) [`9978723f`](https://github.com/vue-styleguidist/vue-styleguidist/commit/9978723f902e18c39dee8ce9fe87e97189601e52) Thanks [@elevatebart](https://github.com/elevatebart)! - add "(required)" to required props
+
 ## 4.65.2
 
 ### Patch Changes
