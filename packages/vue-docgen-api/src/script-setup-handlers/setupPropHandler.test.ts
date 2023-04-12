@@ -238,7 +238,7 @@ describe('setupPropHandler', () => {
 				})
 			})
 
-      it.only('returns types as a parameter', async () => {
+      it('returns types as a parameter', async () => {
         const src = `
         defineProps({
           foo: {
