@@ -135,11 +135,11 @@ export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' |
 }
 
 export interface Templates {
-	props(props: PropDescriptor[], opt?: SubTemplateOptions): string
-	slots(slots: SlotDescriptor[], opt?: SubTemplateOptions): string
-	methods(methods: MethodDescriptor[], opt?: SubTemplateOptions): string
-	events(events: EventDescriptor[], opt?: SubTemplateOptions): string
-	expose(exposed: ExposeDescriptor[], opt?: SubTemplateOptions): string
+	props(props: PropDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
+	slots(slots: SlotDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
+	methods(methods: MethodDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
+	events(events: EventDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
+	expose(exposed: ExposeDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
 	component(
 		usage: RenderedUsage,
 		doc: ComponentDoc,
@@ -147,8 +147,8 @@ export interface Templates {
 		componentRelativePath: string,
 		requiresMd: ContentAndDependencies[],
 		opt: SubTemplateOptions
-	): string
-	defaultExample(doc: ComponentDoc): string
+	): string | Promise<string>
+	defaultExample(doc: ComponentDoc): string | Promise<string>
 	functionalTag: string
 }
 
