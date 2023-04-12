@@ -201,8 +201,14 @@ export function describeType(
 						bt.isTSUnionType(typeAnnotation) &&
 						typeAnnotation.types.every(t => bt.isTSLiteralType(t))
 					) {
-						typeValues = typeAnnotation.types.map((t) =>
-							'literal' in t ? (bt.isUnaryExpression(t.literal) ? t.literal.argument.toString() : t.literal.value.toString()) : t.type.toString()
+						typeValues = typeAnnotation.types.map(t =>
+							'literal' in t
+								? bt.isUnaryExpression(t.literal)
+									? t.literal.argument.toString()
+									: bt.isTemplateLiteral(t.literal)
+									? t.literal.type
+									: t.literal.value.toString()
+								: t.type.toString()
 						)
 					}
 					return false
@@ -213,7 +219,7 @@ export function describeType(
 				propDescriptor.values = typeValues
 			} else {
 				propDescriptor.type = typeDesc
-				if(typeArray.length){
+				if (typeArray.length) {
 					return getTypeFromTypePath(typeArray[0].get('value')).name
 				}
 			}
@@ -319,7 +325,13 @@ function getValuesFromTypePath(typeAnnotation: bt.TSType): string[] | undefined 
 
 export function getValuesFromTypeAnnotation(type: bt.TSType): string[] | undefined {
 	if (bt.isTSUnionType(type) && type.types.every(t => bt.isTSLiteralType(t))) {
-		return type.types.map(t => ((bt.isTSLiteralType(t) && !bt.isUnaryExpression(t.literal)) ? t.literal.value.toString() : ''))
+		return type.types.map(t =>
+			bt.isTSLiteralType(t) && !bt.isUnaryExpression(t.literal)
+				? bt.isTemplateLiteral(t.literal)
+					? t.literal.type
+					: t.literal.value.toString()
+				: ''
+		)
 	}
 	return undefined
 }
@@ -521,19 +533,15 @@ function getModelPropName(path: NodePath): string | null {
 		return null
 	}
 
-	const modelValue =
-		modelPath.length &&
-		modelPath[0]
-			.get('value')
+	const modelValue = modelPath.length && modelPath[0].get('value')
 
-	if (!bt.isObjectExpression(modelValue.node))  {
+	if (!bt.isObjectExpression(modelValue.node)) {
 		return null
 	}
 
-	const modelPropertyNamePath =
-		modelValue
-			.get('properties')
-			.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('prop')(p))
+	const modelPropertyNamePath = modelValue
+		.get('properties')
+		.filter((p: NodePath) => bt.isObjectProperty(p.node) && getMemberFilter('prop')(p))
 
 	if (!modelPropertyNamePath.length) {
 		return null

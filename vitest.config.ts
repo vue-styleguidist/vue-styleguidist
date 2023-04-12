@@ -17,8 +17,5 @@ export default defineConfig({
 		typescriptPaths({
 			tsConfigPath: './tsconfig.json'
 		})
-	],
-  resolve:{
-    dedupe: ['vue'],
-  }
+	]
 })
