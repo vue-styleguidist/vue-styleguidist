@@ -7,7 +7,7 @@ function parse(src: string): any {
 }
 
 function getAnnotation(code: string): TSTypeAnnotation {
-	const ast = parse(`const a:${code};`)
+	const ast = parse(`const a:${code} = 42;`)
 	return ast.program.body[0].declarations[0].id.typeAnnotation
 }
 
