@@ -13,8 +13,16 @@ vi.mock('./utils', () => {
 	}
 })
 
-vi.mock('./compileTemplates', () => {
+vi.mock('./compileTemplates', async () => {
 	return {
+		component: () => '',
+		props: () => '',
+		slots: () => '',
+		events: () => '',
+		expose: () => '',
+		methods: () => '',
+		defaultExample: () => '',
+		functionalTag: '',
 		default: vi.fn(() => Promise.resolve({ content: FAKE_MD_CONTENT, dependencies: [] }))
 	}
 })
