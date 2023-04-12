@@ -284,26 +284,31 @@ function describeTypeAndValuesFromPath(
 	return propDescriptor.type.name
 }
 
-export function getTypeFromTypePath(typePath: NodePath<bt.TSAsExpression | bt.Identifier>): {
+export function getTypeFromTypePath(
+	typePath: NodePath<bt.TSAsExpression | bt.Identifier | bt.ObjectProperty>
+): {
 	name: string
 	func?: boolean
 } {
 	const typeNode = typePath.node
-	const { typeAnnotation } = typeNode
+	const { typeAnnotation } = typeNode as bt.TSAsExpression
 
-	const typeName =
-		bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters
-			? print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
-			: bt.isArrayExpression(typeNode)
-			? typePath
-					.get('elements')
-					.map((t: NodePath) => getTypeFromTypePath(t).name)
-					.join('|')
-			: typeNode &&
-			  bt.isIdentifier(typeNode) &&
-			  VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
-			? typeNode.name.toLowerCase()
-			: print(typeNode).code
+	const typeName = !typeNode
+		? 'any'
+		: bt.isTSTypeReference(typeAnnotation) && typeAnnotation.typeParameters
+		? print(resolveParenthesis(typeAnnotation.typeParameters.params[0])).code
+		: bt.isArrayExpression(typeNode)
+		? typePath
+				.get('elements')
+				.map((t: NodePath) => getTypeFromTypePath(t).name)
+				.join('|')
+		: bt.isIdentifier(typeNode) && VALID_VUE_TYPES.indexOf(typeNode.name.toLowerCase()) > -1
+		? typeNode.name.toLowerCase()
+		: bt.isObjectProperty(typeNode) &&
+		  bt.isExpression(typeNode.value) &&
+		  bt.isTSInstantiationExpression(typeNode.value)
+		? print(typeNode.value.expression).code + (typeNode.value.typeParameters ? print(typeNode.value.typeParameters).code : '')
+		: print(typeNode).code
 	return {
 		name: typeName === 'function' ? 'func' : typeName
 	}
