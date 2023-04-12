@@ -92,7 +92,7 @@ export default async function compileTemplates(
 					)
 
 					if (!doc.docsBlocks?.length && config.defaultExamples) {
-						doc.docsBlocks = [templates.defaultExample(doc)]
+						doc.docsBlocks = [await Promise.resolve(templates.defaultExample(doc))]
 					}
 				}
 
