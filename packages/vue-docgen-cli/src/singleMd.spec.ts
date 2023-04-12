@@ -15,6 +15,14 @@ vi.mock('./utils', () => {
 
 vi.mock('./compileTemplates', () => {
 	return {
+    component: () => '',
+		props: () => '',
+		slots: () => '',
+		events: () => '',
+		expose: () => '',
+		methods: () => '',
+		defaultExample: () => '',
+		functionalTag: '',
 		default: vi.fn((event, filePath) => {
 			return filePath === 'here/two'
 				? Promise.resolve({ content: FAKE_MD_CONTENT_2, dependencies: [] })
