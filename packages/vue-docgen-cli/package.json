@@ -19,6 +19,7 @@
 		"npm": ">=7"
 	},
 	"dependencies": {
+    "cac": "^6.7.14",
 		"loglevel": "^1.8.1",
 		"chokidar": "^3.5.1",
 		"globby": "^11.1.0",
