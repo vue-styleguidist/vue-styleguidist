@@ -1,8 +1,10 @@
-import minimist from 'minimist'
+import cac from 'cac'
 import * as log from 'loglevel'
 import extractConfig from './extractConfig'
 import docgen from './docgen'
 import { SafeDocgenCLIConfig } from './config'
+
+const CLI = cac('vue-docgen-cli')
 
 log.debug('[vue-docgen-cli] start')
 
@@ -24,20 +26,35 @@ function run(config: SafeDocgenCLIConfig) {
 	}
 }
 
-async function main() {
-	const {
-		_: pathArray,
-		configFile,
-		watch,
-		cwd,
-		verbose,
-		logLevel
-	} = minimist(process.argv.slice(2), {
-		alias: { c: 'configFile', w: 'watch', v: 'verbose' },
+CLI.command('[componentsGlob] [outFile]', 'generate documentation')
+	.option('-c, --configFile <configFile>', 'Path to the config file')
+	.option('-w, --watch', 'turn on watch mode', { default: false })
+	.option('--cwd', 'where to look for the config file')
+	.option('--logLevel <logLevel>', 'level of verbosity the CLI will be', {
+    default: [],
+		type: ['trace', 'debug', 'info', 'warn', 'error']
+	})
+	.option('-v, --verbose', 'equivalent to --logLevel=debug', { default: false })
+	.action(async (componentsGlob, outFile, options) => {
+		const { configFile, watch, cwd, logLevel:[logLevel], verbose } = options
+		const conf = await extractConfig(
+			cwd || process.cwd(),
+			watch,
+			configFile,
+			[componentsGlob, outFile],
+			verbose,
+			logLevel
+		).catch(err => {
+			log.setLevel('error')
+			log.error(err)
+			process.exit(1)
+		})
+
+		run(conf)
 	})
 
-	const conf = await extractConfig(cwd || process.cwd(), watch, configFile, pathArray, verbose, logLevel)
-	run(conf)
-}
+  CLI.help()
 
-main()
+  CLI.parse()
+
+  CLI.version(require('../package.json').version)
