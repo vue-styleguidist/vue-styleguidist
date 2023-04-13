@@ -13,9 +13,7 @@
     "../../test/cypress/support/component/*.tsx",
 		"../../test/cypress/support/component/*.ts",
     "./src/client/**/*.cy.tsx",
-    "./src/client/**/*.cy.vue3.tsx",
-    "./src/client/**/*.tsx",
-    "./src/client/**/*.ts",
+    "./src/client/**/*.cy.vue3.tsx"
 	],
   "exclude": [
 
