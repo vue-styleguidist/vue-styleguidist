@@ -19,11 +19,16 @@ export default async (
 	cwd: string,
 	watch = false,
 	configFileFromCmd?: string,
-	pathArray: string[] = [],
+	pathArray: readonly string[] = [],
 	verbose = false,
-	logLevel: log.LogLevelDesc = 'error'
+	logLevel?: log.LogLevelDesc
 ): Promise<SafeDocgenCLIConfig> => {
-	log.setLevel(logLevel)
+  // the first thing we do, is to set the log level
+  if(logLevel) {
+    log.setLevel(logLevel)
+  } else if(verbose) {
+    log.setLevel('debug')
+  }
 
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
@@ -83,10 +88,14 @@ export default async (
 	// only default outDir if `outFile` is null to avoid confusion
 	config.outDir = config.outDir || (config.outFile ? '.' : 'docs')
 
-	config.verbose = config.verbose ?? verbose
-
-	config.logLevel = config.logLevel ?? (logLevel as any)
-	config.logLevel = config.logLevel ?? (config.verbose ? 'debug' : 'error')
+  // priority is given to the CLI over the config file
+  if(!logLevel && !verbose){
+    if(config.logLevel){
+      log.setLevel(config.logLevel)
+    } else if(config.verbose) {
+      log.setLevel('debug')
+    }
+  }
 
 	config.templates = {
 		component,
