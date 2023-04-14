@@ -42,6 +42,8 @@
 		{
 			"files": ["packages/vue-styleguidist/src/client/**/*.*"],
 			"extends": ["plugin:react/recommended"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["compat", "import"],
 			"settings": {
 				"import/resolver": {
 					"node": {
