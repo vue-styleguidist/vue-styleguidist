@@ -2,7 +2,7 @@ import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
 import Documentation, { DocBlockTags, ExposeDescriptor } from '../Documentation'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 import getDocblock from '../utils/getDocblock'
 import getDoclets from '../utils/getDoclets'
 

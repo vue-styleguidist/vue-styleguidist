@@ -1,11 +1,11 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import Documentation from '../Documentation'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 import resolveLocal from '../utils/resolveLocal'
-import { addDefaultAndExecuteHandlers } from '../parse-script'
+import { addDefaultAndExecuteHandlers } from '../utils/execute-handlers'
 
 /**
  * Returns documentation of the component referenced in the extends property of the component

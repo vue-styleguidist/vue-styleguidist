@@ -1,12 +1,12 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import Documentation from '../Documentation'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 import getProperties from './utils/getProperties'
 import resolveLocal from '../utils/resolveLocal'
-import { addDefaultAndExecuteHandlers } from '../parse-script'
+import { addDefaultAndExecuteHandlers } from '../utils/execute-handlers'
 
 /**
  * Look in the mixin section of a component.

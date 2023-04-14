@@ -14,7 +14,7 @@ import transformTagsIntoObject from '../utils/transformTagsIntoObject'
 import getMemberFilter from '../utils/getPropsFilter'
 import getTemplateExpressionAST from '../utils/getTemplateExpressionAST'
 import parseValidatorForValues from './utils/parseValidator'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 
 type ValueLitteral = bt.StringLiteral | bt.BooleanLiteral | bt.NumericLiteral
 

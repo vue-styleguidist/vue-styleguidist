@@ -8,7 +8,7 @@ const config = ({ input, outputFile, external }) => {
     input,
     output: [
       {
-        file: `${outputFile}.cjs.js`,
+        file: `${outputFile}.cjs`,
         format: 'cjs',
       },
     ],
@@ -17,19 +17,20 @@ const config = ({ input, outputFile, external }) => {
       commonjs(),
       typescript({
         tsconfig: './tsconfig.build.json',
-        sourceMap: false,
-        declaration: false,
-        declarationMap: false,
+        rootDir: '../../',
       }),
     ],
     external,
   }
 }
 
+const deps = {...pkg.dependencies}
+delete deps['ts-map']
+
 export default [
   config({
     input: './src/main.ts',
     outputFile: './dist/main',
-    external: Object.keys(pkg.dependencies),
+    external: Object.keys(deps),
   }),
 ]

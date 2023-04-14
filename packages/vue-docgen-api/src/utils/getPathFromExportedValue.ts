@@ -7,7 +7,7 @@ import { ParserPlugin } from '@babel/parser'
 import { parse } from 'recast'
 import buildParser from '../babel-parser'
 import cacher from './cacher'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 
 const read = promisify(readFile)
 

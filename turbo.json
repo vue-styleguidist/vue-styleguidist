@@ -5,7 +5,7 @@
     "compile": {
       "dependsOn": ["^compile"],
       "outputs": ["lib/**", "dist/**"],
-			"inputs": ["src/**", "tsconfig.build.json", "tsconfig.json"]
+			"inputs": ["src/**", "tsconfig.build.json", "tsconfig.json", "rollup.config.mjs"]
     },
     "lint": {
       "outputs": []

@@ -3,7 +3,7 @@ import { parse, TemplateChildNode, RootNode } from '@vue/compiler-dom'
 import { SFCTemplateBlock } from '@vue/compiler-sfc'
 import Documentation from './Documentation'
 import cacher from './utils/cacher'
-import { ParseOptions } from './parse'
+import type { ParseOptions } from './types'
 
 export interface TemplateParserOptions {
 	functional: boolean
