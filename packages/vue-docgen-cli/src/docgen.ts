@@ -45,13 +45,6 @@ function hasComponents(config: SafeDocgenCLIConfig): config is DocgenCLIConfigWi
 }
 
 export default async (config: SafeDocgenCLIConfig) => {
-	if(config.verbose){
-		log.setLevel('debug')
-	}
-	if(config.logLevel){
-		log.setLevel(config.logLevel)
-	}
-
 	// if at a level that has no components (top level) just give up
 	if (!hasComponents(config)) {
 		return
