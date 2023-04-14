@@ -9,3 +9,4 @@ docs/dist/**/*
 test/cli-packages
 dangerfile.js
 cypress.config.ts
+rollup.config.mjs
