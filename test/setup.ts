@@ -1,14 +1,15 @@
-import { expect } from 'vitest'
 import Vue from 'vue'
+
+Vue.config.productionTip = false
+Vue.config.devtools = false
+
+import { expect } from 'vitest'
 import { URL } from 'url'
 import {resolve} from 'path'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
 const rootFolder = resolve(__dirname, '../')
-
-Vue.config.productionTip = false
-Vue.config.devtools = false
 
 expect.addSnapshotSerializer({
   serialize(val) {
@@ -19,3 +20,4 @@ expect.addSnapshotSerializer({
     return typeof val === 'string' && val.includes(rootFolder)
   },
 })
+

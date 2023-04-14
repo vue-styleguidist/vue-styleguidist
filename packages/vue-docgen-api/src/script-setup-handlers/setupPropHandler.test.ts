@@ -237,6 +237,23 @@ describe('setupPropHandler', () => {
 }`
 				})
 			})
+
+      it('returns types as a parameter', async () => {
+        const src = `
+        defineProps({
+          foo: {
+            type: Map<number, number>,
+          },
+        });`
+
+        const prop = await parserTest(src)
+				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('foo')
+				expect(prop.type).toMatchInlineSnapshot(`
+					{
+					  "name": "Map<number, number>",
+					}
+				`)
+      })
 		})
 
 		describe('local interfaces and types', () => {

@@ -30,7 +30,7 @@ export default function getDocblock(
 ): string | null {
 	commentIndex = commentIndex || 1
 	let comments: bt.Comment[] = []
-	const allComments = path.node.leadingComments
+	const allComments = path.value.leadingComments ?? path.parentPath.value.leadingComments
 	if (allComments) {
 		comments = allComments.filter(
 			(comment: bt.Comment) =>
