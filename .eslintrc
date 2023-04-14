@@ -1,6 +1,6 @@
 {
 	"extends": ["eslint:recommended"],
-	"parser": "babel-eslint",
+	"parser": "@typescript-eslint/parser",
 	"env": {
 		"browser": true,
 		"node": true
@@ -42,7 +42,6 @@
 		{
 			"files": ["packages/vue-styleguidist/src/client/**/*.*"],
 			"extends": ["plugin:react/recommended"],
-      "parser": "@typescript-eslint/parser",
       "plugins": ["compat", "import"],
 			"settings": {
 				"import/resolver": {
@@ -58,7 +57,6 @@
 		},
 		{
 			"files": ["packages/**/*.{ts,tsx}"],
-			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"sourceType": "module",
 				"ecmaVersion": 2015
@@ -70,7 +68,6 @@
 		},
 		{
 			"files": ["packages/vue-styleguidist/**/*.{ts,tsx}"],
-			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"ecmaVersion": 2018,
 				"sourceType": "module"
@@ -106,7 +103,6 @@
 		},
     {
 			"files": ["packages/**/*.{spec,test}.{ts,tsx,js}"],
-			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"sourceType": "module",
 				"ecmaVersion": 2015
@@ -130,7 +126,6 @@
         "packages/**/*.cy.{ts,tsx,js}", 
         "test/cypress/**/*.{ts,tsx,js}"
       ],
-      "parser": "@typescript-eslint/parser",
 			"parserOptions": {
 				"sourceType": "module",
 				"ecmaVersion": 2015
