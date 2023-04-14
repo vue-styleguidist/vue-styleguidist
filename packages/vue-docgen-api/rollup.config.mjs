@@ -22,7 +22,6 @@ export default {
 			tsconfig: './tsconfig.build.json',
 			declaration: false,
       sourceMap: true,
-			rootDir: '../../'
 		})
 	],
 	external: Object.keys(deps)

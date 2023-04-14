@@ -12,7 +12,7 @@
   "exports": {
     ".": {
       "import": "./dist/main.js",
-      "require": "./dist/main.cjs.js",
+      "require": "./dist/main.cjs",
       "types": "./dist/main.d.ts"
     }
   },
