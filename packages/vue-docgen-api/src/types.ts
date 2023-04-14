@@ -1,7 +1,44 @@
+import * as bt from '@babel/types'
+import type Map from 'ts-map'
+import type { NodePath } from 'ast-types/lib/node-path'
+import type {  TemplateChildNode } from '@vue/compiler-dom'
 import type { Options as PugOptions } from 'pug'
-import type { Descriptor } from './Documentation'
-import type { Handler as ScriptHandler } from './parse-script'
-import type { Handler as TemplateHandler } from './parse-template'
+import type { Descriptor, Documentation } from './Documentation'
+
+export type ParseFileFunction = (opt: ParseOptions, documentation?: Documentation) => Promise<Documentation[]>
+
+export type HandlerExecutorsFunction = (
+	componentDefinitions: Map<string, NodePath>,
+	ast: bt.File,
+	options: ParseOptions,
+  deps: {
+    parseFile: ParseFileFunction,
+  },
+	documentation?: Documentation,
+	forceSingleExport?: boolean
+) => Promise<Documentation[] | undefined> 
+
+export type ScriptHandler = (
+	doc: Documentation,
+	componentDefinition: NodePath,
+	ast: bt.File,
+	opt: ParseOptions,
+  deps: {
+    parseFile: ParseFileFunction,
+    addDefaultAndExecuteHandlers: HandlerExecutorsFunction
+  }
+) => Promise<void>
+
+export interface TemplateParserOptions {
+	functional: boolean
+}
+
+export type TemplateHandler = (
+	documentation: Documentation,
+	templateAst: TemplateChildNode,
+	siblings: TemplateChildNode[],
+	options: TemplateParserOptions,
+) => void
 
 export interface ParseOptions extends DocGenOptions, Descriptor {
 	validExtends: (fullFilePath: string) => boolean

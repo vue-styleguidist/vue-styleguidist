@@ -2,19 +2,16 @@ import { ParserPlugin } from '@babel/parser'
 import { parse } from 'recast'
 import buildParser from './babel-parser'
 import Documentation from './Documentation'
-import type { ParseOptions } from './types'
+import type { ParseFileFunction, ParseOptions } from './types'
 import cacher from './utils/cacher'
 import resolveExportedComponent from './utils/resolveExportedComponent'
 import documentRequiredComponents from './utils/documentRequiredComponents'
-import { addDefaultAndExecuteHandlers, type Handler } from './utils/execute-handlers'
-
-export type { Handler }
+import { addDefaultAndExecuteHandlers } from './utils/execute-handlers'
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found'
 
-
-
 export default async function parseScript(
+  parseFile: ParseFileFunction,
 	source: string,
 	options: ParseOptions,
 	documentation?: Documentation,
@@ -40,7 +37,7 @@ export default async function parseScript(
 	if (componentDefinitions.size === 0) {
 		// if there is any immediately exported variable
 		// resolve their documentations
-		const docs = await documentRequiredComponents(documentation, ievSet, undefined, options)
+		const docs = await documentRequiredComponents(parseFile, documentation, ievSet, undefined, options)
 
 		// if we do not find any components, throw
 		if (!docs.length) {
@@ -54,6 +51,9 @@ export default async function parseScript(
 		componentDefinitions,
 		ast,
 		options,
+    {
+      parseFile,
+    },
 		documentation,
 		forceSingleExport
 	)

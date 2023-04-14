@@ -1,10 +1,9 @@
 import { readFile } from 'fs'
 import * as path from 'path'
 import { promisify } from 'util'
-import type { ParseOptions } from './types'
+import type { ParseOptions, ScriptHandler, TemplateHandler } from './types'
 import Documentation from './Documentation'
-import parseScript, { Handler as ScriptHandler } from './parse-script'
-import { Handler as TemplateHandler } from './parse-template'
+import parseScript from './parse-script'
 
 import parseSFC from './parseSFC'
 
@@ -12,7 +11,7 @@ const read = promisify(readFile)
 
 const ERROR_EMPTY_DOCUMENT = 'The passed source is empty'
 
-export { ScriptHandler, TemplateHandler }
+export type { ScriptHandler, TemplateHandler }
 
 /**
  * parses the source at filePath and returns the doc
@@ -61,11 +60,11 @@ export async function parseSource(
 
 	let docs: Documentation[]
 	if (singleFileComponent) {
-		docs = await parseSFC(documentation, source, opt)
+		docs = await parseSFC(parseFile, documentation, source, opt)
 	} else {
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
-		docs = (await parseScript(source, opt, documentation, documentation !== undefined)) || []
+		docs = (await parseScript(parseFile, source, opt, documentation, documentation !== undefined)) || []
 
 		if (docs.length === 1 && !docs[0].get('displayName')) {
 			// give a component a display name if we can

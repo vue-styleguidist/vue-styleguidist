@@ -4,9 +4,9 @@ import { readFile } from 'fs'
 import { promisify } from 'util'
 import templateHandlers from './template-handlers'
 import cacher from './utils/cacher'
-import parseTemplate, { Handler as TemplateHandler } from './parse-template'
+import parseTemplate from './parse-template'
 import Documentation from './Documentation'
-import type { ParseOptions } from './types'
+import type { ParseFileFunction, ParseOptions, TemplateHandler } from './types'
 import parseScript from './parse-script'
 import makePathResolver from './utils/makePathResolver'
 import setupHandlers from './script-setup-handlers'
@@ -14,6 +14,7 @@ import setupHandlers from './script-setup-handlers'
 const read = promisify(readFile)
 
 export default async function parseSFC(
+  parseFile: ParseFileFunction,
 	initialDoc: Documentation | undefined,
 	source: string,
 	opt: ParseOptions
@@ -68,6 +69,7 @@ export default async function parseSFC(
 
 	if (parts.scriptSetup) {
 		docs = await parseScriptTag(
+      parseFile,
 			parts.scriptSetup,
 			pathResolver,
 			opt,
@@ -78,6 +80,7 @@ export default async function parseSFC(
 		)
 	} else if (parts.script) {
 		docs = await parseScriptTag(
+      parseFile,
 			parts.script,
 			pathResolver,
 			opt,
@@ -98,6 +101,7 @@ export default async function parseSFC(
 }
 
 async function parseScriptTag(
+  parseFile: ParseFileFunction,
 	scriptTag: SFCScriptBlock,
 	pathResolver: (filePath: string, overrideRoot?: string) => string | null,
 	opt: ParseOptions,
@@ -142,6 +146,7 @@ async function parseScriptTag(
 
 	const docs: Documentation[] = scriptSource
 		? (await parseScript(
+        parseFile,
 				isSetupScriptOtherScript + '\n' + scriptSource,
 				opt,
 				documentation,

@@ -2,23 +2,19 @@ import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import Map from 'ts-map'
 import Documentation from '../Documentation'
-import type { ParseOptions } from '../types'
+import type { HandlerExecutorsFunction, ParseFileFunction, ParseOptions, ScriptHandler } from '../types'
 import defaultScriptHandlers, { preHandlers } from '../script-handlers'
 
-export type Handler = (
-	doc: Documentation,
-	componentDefinition: NodePath,
-	ast: bt.File,
-	opt: ParseOptions
-) => Promise<void>
-
-export function addDefaultAndExecuteHandlers(
-	componentDefinitions: Map<string, NodePath>,
-	ast: bt.File,
-	options: ParseOptions,
-	documentation?: Documentation,
+export const addDefaultAndExecuteHandlers: HandlerExecutorsFunction = (
+	componentDefinitions,
+	ast,
+	options,
+  deps: {
+    parseFile: ParseFileFunction,
+  },
+	documentation,
 	forceSingleExport = false
-): Promise<Documentation[] | undefined> {
+) => {
 	const handlers = [
 		...(options.scriptHandlers || defaultScriptHandlers),
 		...(options.addScriptHandlers || [])
@@ -31,18 +27,22 @@ export function addDefaultAndExecuteHandlers(
 		ast,
 		options,
 		forceSingleExport,
+    deps,
 		documentation
 	)
 }
 
 async function executeHandlers(
-	preHandlers: Handler[],
-	localHandlers: Handler[],
+	preHandlers: ScriptHandler[],
+	localHandlers: ScriptHandler[],
 	componentDefinitions: Map<string, NodePath>,
 	ast: bt.File,
 	opt: ParseOptions,
 	forceSingleExport: boolean,
-	documentation?: Documentation
+  deps: {
+    parseFile: ParseFileFunction,
+  },
+	documentation?: Documentation,
 ): Promise<Documentation[] | undefined> {
 	const compDefs = componentDefinitions
 		.keys()
@@ -68,10 +68,10 @@ async function executeHandlers(
 			await preHandlers.reduce(async (_, handler) => {
 				await _
 				if (typeof handler === 'function') {
-					return await handler(doc, compDef, ast, opt)
+					return await handler(doc, compDef, ast, opt, {parseFile:deps.parseFile, addDefaultAndExecuteHandlers})
 				}
 			}, Promise.resolve())
-			await Promise.all(localHandlers.map(async handler => await handler(doc, compDef, ast, opt)))
+			await Promise.all(localHandlers.map(async handler => await handler(doc, compDef, ast, opt, {parseFile:deps.parseFile, addDefaultAndExecuteHandlers})))
 			// end with setting of exportname
 			// to avoid dependencies names bleeding on the main components,
 			// do this step at the end of the function
