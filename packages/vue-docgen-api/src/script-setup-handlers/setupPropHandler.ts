@@ -3,7 +3,7 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit, print } from 'recast'
 import getTypeFromAnnotation, { decorateItem } from '../utils/getTypeFromAnnotation'
 import type { Documentation } from '../Documentation'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 import { describePropsFromValue } from '../script-handlers/propHandler'
 import { getTypeDefinitionFromIdentifier } from './utils/tsUtils'
 

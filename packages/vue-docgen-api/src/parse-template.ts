@@ -3,23 +3,16 @@ import { parse, TemplateChildNode, RootNode } from '@vue/compiler-dom'
 import { SFCTemplateBlock } from '@vue/compiler-sfc'
 import Documentation from './Documentation'
 import cacher from './utils/cacher'
-import { ParseOptions } from './parse'
+import type { ParseOptions, TemplateHandler } from './types'
 
 export interface TemplateParserOptions {
 	functional: boolean
 }
 
-export type Handler = (
-	documentation: Documentation,
-	templateAst: TemplateChildNode,
-	siblings: TemplateChildNode[],
-	options: TemplateParserOptions
-) => void
-
 export default function parseTemplate(
 	tpl: Pick<SFCTemplateBlock, 'content' | 'attrs'>,
 	documentation: Documentation,
-	handlers: Handler[],
+	handlers: TemplateHandler[],
 	opts: ParseOptions
 ) {
 	const { filePath, pugOptions } = opts
@@ -57,7 +50,7 @@ function hasChildren(child: any): child is { children: TemplateChildNode[] } {
 export function traverse(
 	templateAst: TemplateChildNode,
 	documentation: Documentation,
-	handlers: Handler[],
+	handlers: TemplateHandler[],
 	siblings: TemplateChildNode[],
 	options: TemplateParserOptions
 ) {

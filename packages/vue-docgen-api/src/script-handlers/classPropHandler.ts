@@ -14,7 +14,7 @@ import propHandler, {
 	getValuesFromTypeAnnotation
 } from './propHandler'
 import getArgFromDecorator from '../utils/getArgFromDecorator'
-import { ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 
 /**
  * Extracts prop information from a class-style VueJs component

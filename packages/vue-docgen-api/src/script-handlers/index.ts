@@ -12,7 +12,7 @@ import propHandler from './propHandler'
 import slotHandler from './slotHandler'
 import slotHandlerFunctional from './slotHandlerFunctional'
 import slotHandlerLitteral from './slotHandlerLiteral'
-import { Handler } from '../parse-script'
+import { ScriptHandler } from '../types'
 
 export {
 	classDisplayNameHandler,
@@ -31,7 +31,7 @@ export {
 	slotHandlerLitteral
 }
 
-const defaultHandlers: Handler[] = [
+const defaultHandlers: ScriptHandler[] = [
 	displayNameHandler,
 	componentHandler,
 	methodHandler,
@@ -46,7 +46,7 @@ const defaultHandlers: Handler[] = [
 	classEventHandler
 ]
 
-export const preHandlers: Handler[] = [
+export const preHandlers: ScriptHandler[] = [
 	// have to be first if they can be overridden
 	extendsHandler,
 	// have to be second as they can be overridden too

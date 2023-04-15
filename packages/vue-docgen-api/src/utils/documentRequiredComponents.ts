@@ -2,7 +2,7 @@ import Map from 'ts-map'
 import * as path from 'path'
 import { ImportedVariableSet } from './resolveRequired'
 import recursiveResolveIEV from '../utils/recursiveResolveIEV'
-import { parseFile, ParseOptions } from '../parse'
+import type { ParseOptions } from '../types'
 import Documentation from '../Documentation'
 import makePathResolver from './makePathResolver'
 
@@ -16,6 +16,7 @@ import makePathResolver from './makePathResolver'
  * @param opt parsing options
  */
 export default async function documentRequiredComponents(
+  parseFile: (opt: ParseOptions, documentation?: Documentation) => Promise<Documentation[]>,
 	documentation: Documentation | undefined,
 	varToFilePath: ImportedVariableSet,
 	originObject: 'extends' | 'mixin' | undefined,
@@ -31,7 +32,7 @@ export default async function documentRequiredComponents(
 	// all props on the current doc, instead of creating another one
 	if (originObject && documentation) {
 		return [
-			await enrichDocumentation(documentation, varToFilePath, originObject, opt, pathResolver)
+			await enrichDocumentation(parseFile, documentation, varToFilePath, originObject, opt, pathResolver)
 		]
 	}
 
@@ -79,6 +80,7 @@ export default async function documentRequiredComponents(
 }
 
 async function enrichDocumentation(
+  parseFile: (opt: ParseOptions, documentation?: Documentation) => Promise<Documentation[]>,
 	documentation: Documentation,
 	varToFilePath: ImportedVariableSet,
 	originObject: 'extends' | 'mixin',

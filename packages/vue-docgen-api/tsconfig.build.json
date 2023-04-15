@@ -1,12 +1,13 @@
 {
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
+    "target": "ES5",
 		"outDir": "dist",
-    "module": "CommonJS",
 		"declaration": true,
 		"sourceMap": false,
+    "downlevelIteration": true,
 		"skipLibCheck": true
 	},
-	"include": ["src/**/*.ts", "../../@types/**/*"],
-	"exclude": ["node_modules", "src/**/*.spec.ts"]
+	"include": ["src/**/*.ts", "../../@types/*.ts"],
+	"exclude": ["node_modules", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

@@ -1,24 +1,20 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation from '../Documentation'
-import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 import resolveLocal from '../utils/resolveLocal'
-import { addDefaultAndExecuteHandlers } from '../parse-script'
+import { ScriptHandler } from '../types'
 
 /**
  * Returns documentation of the component referenced in the extends property of the component
- * @param {NodePath} astPath
- * @param {Array<NodePath>} componentDefinitions
- * @param {string} originalFilePath
  */
-export default async function extendsHandler(
-	documentation: Documentation,
-	componentDefinition: NodePath,
-	astPath: bt.File,
-	opt: ParseOptions
-) {
+const extendsHandler: ScriptHandler = async (
+	documentation,
+	componentDefinition,
+	astPath,
+	opt,
+  deps
+) => {
 	const extendsVariableName = getExtendsVariableName(componentDefinition)
 
 	// if there is no extends or extends is a direct require
@@ -29,13 +25,14 @@ export default async function extendsHandler(
 	const variablesResolvedToCurrentFile = resolveLocal(astPath, [extendsVariableName])
 
 	if (variablesResolvedToCurrentFile.get(extendsVariableName)) {
-		await addDefaultAndExecuteHandlers(
+		await deps.addDefaultAndExecuteHandlers(
 			variablesResolvedToCurrentFile,
 			astPath,
 			{
 				...opt,
 				nameFilter: [extendsVariableName]
 			},
+      deps,
 			documentation
 		)
 	} else {
@@ -43,9 +40,11 @@ export default async function extendsHandler(
 		const extendsFilePath = resolveRequired(astPath, [extendsVariableName])
 
 		// get each doc for each mixin using parse
-		await documentRequiredComponents(documentation, extendsFilePath, 'extends', opt)
+		await documentRequiredComponents(deps.parseFile, documentation, extendsFilePath, 'extends', opt)
 	}
 }
+
+export default extendsHandler
 
 function getExtendsVariableName(compDef: NodePath): string | undefined {
 	const extendsVariable: NodePath | undefined =

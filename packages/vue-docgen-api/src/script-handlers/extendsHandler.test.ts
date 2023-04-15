@@ -7,11 +7,17 @@ import resolveExportedComponent from '../utils/resolveExportedComponent'
 import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
 import extendsHandler from './extendsHandler'
+import { addDefaultAndExecuteHandlers } from '../utils/execute-handlers'
+import { HandlerExecutorsFunction, ParseFileFunction } from '../types'
 
 vi.mock('../utils/resolveRequired')
 vi.mock('../utils/resolvePathFrom')
 
 describe('extendsHandler', () => {
+  let deps: undefined | {
+    parseFile: ParseFileFunction
+    addDefaultAndExecuteHandlers: HandlerExecutorsFunction
+  }
 	let resolveRequiredMock: SpyInstance<
     [ast: bt.File, varNameFilter?: string[]],
     { [key: string]: { filePath: string[], exportName: string } }
@@ -32,17 +38,24 @@ describe('extendsHandler', () => {
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
 		mockParse = vi.spyOn(parse, 'parseFile')
+    deps = {
+      parseFile: parse.parseFile,
+      addDefaultAndExecuteHandlers: vi.fn()
+    }
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})
 
 	async function parseItExtends(src: string) {
 		const ast = babylon().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
-		if (path) {
-			await extendsHandler(doc, path, ast, {
-				filePath: '',
-				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
-			})
+		if (path && deps) {
+      
+
+        await extendsHandler(doc, path, ast, {
+          filePath: '',
+          validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+        }, deps)
+      
 		}
 	}
 

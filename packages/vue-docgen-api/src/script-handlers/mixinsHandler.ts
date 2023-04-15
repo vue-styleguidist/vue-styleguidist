@@ -1,29 +1,24 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation from '../Documentation'
-import { ParseOptions } from '../parse'
 import resolveRequired from '../utils/resolveRequired'
 import documentRequiredComponents from '../utils/documentRequiredComponents'
 import getProperties from './utils/getProperties'
 import resolveLocal from '../utils/resolveLocal'
-import { addDefaultAndExecuteHandlers } from '../parse-script'
+import { ScriptHandler } from '../types'
 
 /**
  * Look in the mixin section of a component.
  * Parse the file mixins point to.
  * Add the necessary info to the current doc object.
  * Must be run first as mixins do not override components.
- * @param documentation
- * @param componentDefinition
- * @param astPath
- * @param opt
  */
-export default async function mixinsHandler(
-	documentation: Documentation,
-	componentDefinition: NodePath,
-	astPath: bt.File,
-	opt: ParseOptions
-) {
+const mixinHandler: ScriptHandler = async (
+	documentation,
+	componentDefinition,
+	astPath,
+	opt,
+  deps
+) => {
 	// filter only mixins
 	const mixinVariableNames = getMixinsVariableNames(componentDefinition)
 
@@ -39,18 +34,19 @@ export default async function mixinsHandler(
 	await mixinVariableNames.reduce(async (_, varName) => {
 		await _
 		if (variablesResolvedToCurrentFile.get(varName)) {
-			await addDefaultAndExecuteHandlers(
+			await deps.addDefaultAndExecuteHandlers(
 				variablesResolvedToCurrentFile,
 				astPath,
 				{
 					...opt,
 					nameFilter: [varName]
 				},
+        deps,
 				documentation
 			)
 		} else {
 			// get each doc for each mixin using parse
-			await documentRequiredComponents(documentation, mixinVarToFilePath, 'mixin', {
+			await documentRequiredComponents(deps.parseFile, documentation, mixinVarToFilePath, 'mixin', {
 				...opt,
 				nameFilter: [varName]
 			})
@@ -59,6 +55,8 @@ export default async function mixinsHandler(
 		return
 	}, Promise.resolve())
 }
+
+export default mixinHandler
 
 function getMixinsVariableNames(compDef: NodePath): string[] {
 	const varNames: string[] = []

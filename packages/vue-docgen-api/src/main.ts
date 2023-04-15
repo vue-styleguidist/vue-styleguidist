@@ -11,7 +11,8 @@ import Documentation, {
 	ParamTag,
 	ParamType
 } from './Documentation'
-import { DocGenOptions, parseFile, ParseOptions, parseSource as _parseSource } from './parse'
+import { parseFile, parseSource as _parseSource } from './parse'
+import type { ParseOptions, DocGenOptions } from './types'
 import * as ScriptHandlers from './script-handlers'
 import * as TemplateHandlers from './template-handlers'
 
