@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.67.0
+
+### Minor Changes
+
+- [#1536](https://github.com/vue-styleguidist/vue-styleguidist/pull/1536) [`68cd825a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/68cd825a22230abfb065e20ae81a3da40d5bb363) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: export an esm version of the api
+
+### Patch Changes
+
+- [#1536](https://github.com/vue-styleguidist/vue-styleguidist/pull/1536) [`68cd825a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/68cd825a22230abfb065e20ae81a3da40d5bb363) Thanks [@elevatebart](https://github.com/elevatebart)! - vue-docgen-api to parse type TSInstantiationExpression
+
+- [#1537](https://github.com/vue-styleguidist/vue-styleguidist/pull/1537) [`7a7d5c41`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a7d5c41debddab37a1a4854753706435e1444ff) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: update recast and ast-types to accept latest syntax
+
 ## 4.64.1
 
 ### Patch Changes

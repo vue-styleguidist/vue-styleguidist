@@ -1,5 +1,18 @@
 # Change Log
 
+## 4.67.0
+
+### Minor Changes
+
+- [#1532](https://github.com/vue-styleguidist/vue-styleguidist/pull/1532) [`d1163d67`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d1163d671464f3e04f1c11576e6f5f5af8f29ebf) Thanks [@elevatebart](https://github.com/elevatebart)! - make template types async
+
+- [#1535](https://github.com/vue-styleguidist/vue-styleguidist/pull/1535) [`09d086f5`](https://github.com/vue-styleguidist/vue-styleguidist/commit/09d086f59a12c847c8818475f6b7424a07841504) Thanks [@elevatebart](https://github.com/elevatebart)! - add CLI help through cac
+
+### Patch Changes
+
+- Updated dependencies [[`68cd825a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/68cd825a22230abfb065e20ae81a3da40d5bb363), [`68cd825a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/68cd825a22230abfb065e20ae81a3da40d5bb363), [`7a7d5c41`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a7d5c41debddab37a1a4854753706435e1444ff)]:
+  - vue-docgen-api@4.67.0
+
 ## 4.66.0
 
 ### Minor Changes
