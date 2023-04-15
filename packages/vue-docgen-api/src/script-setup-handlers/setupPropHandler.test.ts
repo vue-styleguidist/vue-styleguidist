@@ -232,8 +232,8 @@ describe('setupPropHandler', () => {
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('complex')
 				expect(prop.type).toMatchObject({
 					name: `{
-    foo: number
-    bar: boolean
+    foo: number;
+    bar: boolean;
 }`
 				})
 			})

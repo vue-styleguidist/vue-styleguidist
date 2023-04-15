@@ -6,6 +6,17 @@
 </template>
 
 <script lang="ts">
+
+interface Blob {
+  tot: string
+  foo: string
+}
+
+const bob = {
+  tot: 'tot',
+  foo: 'foo'
+} satisfies Blob
+
 import { defineComponent } from 'vue'
 /**
  * Buttons allow users to perform an action or to navigate to another page.
