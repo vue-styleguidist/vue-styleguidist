@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.67.0
+
+### Patch Changes
+
+- [#1537](https://github.com/vue-styleguidist/vue-styleguidist/pull/1537) [`7a7d5c41`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a7d5c41debddab37a1a4854753706435e1444ff) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: update recast and ast-types to accept latest syntax
+
+- Updated dependencies [[`68cd825a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/68cd825a22230abfb065e20ae81a3da40d5bb363), [`68cd825a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/68cd825a22230abfb065e20ae81a3da40d5bb363), [`7a7d5c41`](https://github.com/vue-styleguidist/vue-styleguidist/commit/7a7d5c41debddab37a1a4854753706435e1444ff)]:
+  - vue-docgen-api@4.67.0
+
 ## 4.65.3
 
 ### Patch Changes
