@@ -1572,7 +1572,7 @@ importers:
         specifier: ^2.8.4
         version: 2.8.4
       vue-docgen-api:
-        specifier: ^4.64.1
+        specifier: ^4.67.0
         version: link:../vue-docgen-api
     devDependencies:
       '@types/lodash.memoize':
@@ -1957,7 +1957,7 @@ importers:
         specifier: 4.9.5
         version: 4.9.5
       vue-docgen-api:
-        specifier: ^4.64.1
+        specifier: ^4.67.0
         version: link:../vue-docgen-api
       vue-inbrowser-compiler:
         specifier: ^4.64.1
