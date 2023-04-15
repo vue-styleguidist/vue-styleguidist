@@ -2,16 +2,23 @@ import * as bt from '@babel/types'
 import { SpyInstance } from 'vitest'
 import babelParser from '../babel-parser'
 import Documentation from '../Documentation'
-import * as parse from '../parse'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import resolvePathFrom from '../utils/resolvePathFrom'
 import resolveRequired from '../utils/resolveRequired'
 import mixinsHandler from './mixinsHandler'
+import { HandlerExecutorsFunction, ParseFileFunction } from '../types'
 
 vi.mock('../utils/resolveRequired')
 vi.mock('../utils/resolvePathFrom')
 
+
+
 describe('mixinsHandler', () => {
+  let deps: undefined | {
+    parseFile: ParseFileFunction
+    addDefaultAndExecuteHandlers: HandlerExecutorsFunction
+  }
+
 	let resolveRequiredMock: SpyInstance<
     [ast: bt.File, varNameFilter?: string[]],
     { [key: string]: { filePath: string[], exportName: string } }
@@ -31,7 +38,11 @@ describe('mixinsHandler', () => {
 		mockResolvePathFrom = resolvePathFrom as any
 		mockResolvePathFrom.mockReturnValue('./component/full/path')
 
-		mockParse = vi.spyOn(parse, 'parseFile')
+    deps = {
+      parseFile: vi.fn(),
+      addDefaultAndExecuteHandlers: vi.fn()
+    }
+    mockParse = vi.spyOn(deps, 'parseFile')
 		mockParse.mockReset()
 		mockParse.mockReturnValue({ component: 'documentation' })
 	})
@@ -58,11 +69,11 @@ describe('mixinsHandler', () => {
 	])('should resolve extended modules variables', async src => {
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
-		if (path) {
+		if (path && deps) {
 			await mixinsHandler(doc, path, ast, {
 				filePath: '',
 				validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
-			})
+			}, deps)
 		}
 		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -85,10 +96,12 @@ describe('mixinsHandler', () => {
 		if (!path) {
 			return
 		}
-		await mixinsHandler(doc, path, ast, {
-			filePath: '',
-			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
-		})
+    if(deps){
+      await mixinsHandler(doc, path, ast, {
+        filePath: '',
+        validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
+      }, deps)
+    }
 		expect(mockParse).toHaveBeenCalledWith(
 			expect.objectContaining({
 				filePath: './component/full/path',
@@ -111,10 +124,12 @@ describe('mixinsHandler', () => {
 			return
 		}
 		mockResolvePathFrom.mockReturnValue('foo/node_modules/component/full/path')
+    if(path && deps){
 		await mixinsHandler(doc, path, ast, {
 			filePath: '',
 			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
-		})
+		}, deps)
+  }
 		expect(mockParse).not.toHaveBeenCalled()
 	})
 
@@ -128,13 +143,13 @@ describe('mixinsHandler', () => {
 		].join('\n')
 		const ast = babelParser().parse(src)
 		const path = resolveExportedComponent(ast)[0].get('default')
-		if (!path) {
+		if (!path || !deps) {
 			return
 		}
 		await mixinsHandler(doc, path, ast, {
 			filePath: '',
 			validExtends: (fullFilePath: string) => !/[\\/]node_modules[\\/]/.test(fullFilePath)
-		})
+		}, deps)
 		expect(mockParse).not.toHaveBeenCalled()
 	})
 })
