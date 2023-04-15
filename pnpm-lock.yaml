@@ -1487,8 +1487,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.20
       ast-types:
-        specifier: 0.14.2
-        version: 0.14.2
+        specifier: ^0.16.1
+        version: 0.16.1
       hash-sum:
         specifier: ^2.0.0
         version: 2.0.0
@@ -1499,8 +1499,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       recast:
-        specifier: ^0.22.0
-        version: 0.22.0
+        specifier: ^0.23.1
+        version: 0.23.1
       ts-map:
         specifier: ^1.0.3
         version: 1.0.3
@@ -1807,8 +1807,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       ast-types:
-        specifier: 0.14.2
-        version: 0.14.2
+        specifier: ^0.16.1
+        version: 0.16.1
       classnames:
         specifier: ^2.3.1
         version: 2.3.1
@@ -11435,17 +11435,17 @@ packages:
     resolution: {integrity: sha512-O0yuUDnZeQDL+ncNGlJ78BiO4jnYI3bvMsD5prT0/nsgijG/LpNBIr63gTjVTNsiGkgQhiyCShTgxt8oXOrklA==}
     engines: {node: '>=4'}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
 
-  /ast-types@0.15.2:
-    resolution: {integrity: sha512-c27loCv9QkZinsa5ProX751khO9DJl/AcB5c2KNtA6NRvHKS0PgLfcftz72KVq504vB0Gku5s2kUZzDBvQWvHg==}
+  /ast-types@0.16.1:
+    resolution: {integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg==}
     engines: {node: '>=4'}
     dependencies:
       tslib: 2.5.0
     dev: false
 
   /ast-types@0.7.8:
-    resolution: {integrity: sha1-kC0uDWDQcb3NRtwRXhgJ7RHBOKk=}
+    resolution: {integrity: sha512-RIOpVnVlltB6PcBJ5BMLx+H+6JJ/zjDGU0t7f0L6c2M1dqcK92VQopLBlPQ9R80AVXelfqYgjcPLtHtDbNFg0Q==}
     engines: {node: '>= 0.6'}
     dev: false
 
@@ -24682,12 +24682,12 @@ packages:
       source-map: 0.6.1
       tslib: 2.5.0
 
-  /recast@0.22.0:
-    resolution: {integrity: sha512-5AAx+mujtXijsEavc5lWXBPQqrM4+Dl5qNH96N2aNeuJFUzpiiToKPsxQD/zAIJHspz7zz0maX0PCtCTFVlixQ==}
+  /recast@0.23.1:
+    resolution: {integrity: sha512-RokaBcoxSjXUDzz1TXSZmZsSW6ZpLmlA3GGqJ8uuTrQ9hZhEz+4Tpsc+gRvYRJ2BU4H+ZyUlg91eSGDw7bwy7g==}
     engines: {node: '>= 4'}
     dependencies:
       assert: 2.0.0
-      ast-types: 0.15.2
+      ast-types: 0.16.1
       esprima: 4.0.1
       source-map: 0.6.1
       tslib: 2.5.0
@@ -27073,9 +27073,6 @@ packages:
 
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-
-  /tslib@2.4.1:
-    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
 
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}

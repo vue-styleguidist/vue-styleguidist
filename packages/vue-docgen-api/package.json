@@ -40,11 +40,11 @@
     "@babel/types": "^7.21.4",
     "@vue/compiler-dom": "^3.2.0",
     "@vue/compiler-sfc": "^3.2.0",
-    "ast-types": "0.14.2",
+    "ast-types": "^0.16.1",
     "hash-sum": "^2.0.0",
     "lru-cache": "^8.0.3",
     "pug": "^3.0.2",
-    "recast": "^0.22.0",
+    "recast": "^0.23.1",
     "ts-map": "^1.0.3",
     "vue-inbrowser-compiler-independent-utils": "^4.64.1"
   },

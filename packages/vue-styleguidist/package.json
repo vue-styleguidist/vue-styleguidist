@@ -49,7 +49,7 @@
   "dependencies": {
     "@babel/runtime": "7.20.13",
     "@vxna/mini-html-webpack-template": "^1.0.0",
-    "ast-types": "0.14.2",
+    "ast-types": "^0.16.1",
     "classnames": "^2.3.1",
     "clean-webpack-plugin": "^3.0.0",
     "cli-progress": "^3.9.0",
