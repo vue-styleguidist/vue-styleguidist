@@ -1,0 +1,29 @@
+{
+  "name": "vue-inbrowser-prismjs-highlighter",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "compile": "rollup -c ./rollup.config.mjs",
+    "compile:watch": "pnpm run compile --watch"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs",
+      "types": "./dist/main.d.ts"
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "prismjs": "^1.26.0",
+    "vue-inbrowser-compiler-utils": "^4.64.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/prismjs": "^1.26.0",
+    "rollup": "^3.20.2"
+  }
+}
