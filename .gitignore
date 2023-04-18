@@ -1,6 +1,6 @@
 node_modules/
 
-
+.rollup.cache
 /.publish/
 /coverage/
 .DS_Store
