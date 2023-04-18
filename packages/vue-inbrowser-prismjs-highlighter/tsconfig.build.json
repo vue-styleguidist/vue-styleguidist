@@ -4,7 +4,7 @@
     "target": "ES5",
 		"outDir": "dist",
 		"declaration": true,
-		"sourceMap": false,
+		"sourceMap": true,
     "downlevelIteration": true,
 		"skipLibCheck": true
 	},
