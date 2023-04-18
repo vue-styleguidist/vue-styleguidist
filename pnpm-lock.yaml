@@ -1991,7 +1991,7 @@ importers:
         specifier: ^4.64.1
         version: link:../vue-inbrowser-compiler-utils
       vue-inbrowser-prismjs-highlighter:
-        specifier: ^4.67.2
+        specifier: ^4.68.0
         version: link:../vue-inbrowser-prismjs-highlighter
       webpack-dev-server:
         specifier: ^3.11.2
