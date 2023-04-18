@@ -1,13 +1,4 @@
 {
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-    "target": "ES5",
-		"outDir": "dist",
-		"declaration": true,
-		"sourceMap": true,
-    "downlevelIteration": true,
-		"skipLibCheck": true
-	},
-	"include": ["src/**/*.ts", "../../@types/*.ts"],
+	"extends": "./tsconfig.json",
 	"exclude": ["node_modules", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

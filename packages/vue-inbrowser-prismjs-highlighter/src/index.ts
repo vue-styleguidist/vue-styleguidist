@@ -19,10 +19,10 @@ export const CONFIGURED_LANGS = ['html', 'vsg', 'jsx', 'tsx'] as const
 export type CONFIGURED_LANGS_TYPE = (typeof CONFIGURED_LANGS)[number]
 
 export default async function () {
-	return function (lang: CONFIGURED_LANGS_TYPE, jsxInExamples: boolean) {
+	return function (lang: CONFIGURED_LANGS_TYPE, jsxInExamples: boolean = false) {
 		if (lang === 'vsg') {
 			// render vsg format
-			return (code: string, errorLoc: any) => {
+			return (code: string, errorLoc?: any) => {
 				if (!code) {
 					return ''
 				}
@@ -102,7 +102,7 @@ function renderLines(code: string) {
 	return `<span class='line'>${code.replace(/\n/g, "</span>\n<span class='line'>")}</span>`
 }
 
-function getSquiggles(errorLoc: any, lineOffset = 0) {
+function getSquiggles(errorLoc?: any, lineOffset = 0) {
 	if (!errorLoc) return ''
 	const columnOffSet = errorLoc.start ? 0 : 1
 	const errorWidth = errorLoc.end ? errorLoc.end.column - errorLoc.start.column + 1 : 2
