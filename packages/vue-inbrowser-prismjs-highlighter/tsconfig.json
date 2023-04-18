@@ -1,0 +1,14 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+    "target": "ES5",
+    "composite": true,
+		"outDir": "dist",
+    "rootDir": "src",
+		"declaration": true,
+		"sourceMap": true,
+    "downlevelIteration": true,
+		"skipLibCheck": true
+	},
+	"include": ["src/**/*.ts"],
+}

@@ -1786,6 +1786,31 @@ importers:
         specifier: 2.7.14
         version: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
 
+  packages/vue-inbrowser-prismjs-highlighter:
+    dependencies:
+      prismjs:
+        specifier: ^1.26.0
+        version: 1.28.0
+      vue-inbrowser-compiler-utils:
+        specifier: ^4.64.1
+        version: link:../vue-inbrowser-compiler-utils
+    devDependencies:
+      '@rollup/plugin-commonjs':
+        specifier: ^24.1.0
+        version: 24.1.0(rollup@3.20.2)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.0.2
+        version: 15.0.2(rollup@3.20.2)
+      '@rollup/plugin-typescript':
+        specifier: ^11.1.0
+        version: 11.1.0(rollup@3.20.2)(tslib@2.5.0)(typescript@4.9.5)
+      '@types/prismjs':
+        specifier: ^1.26.0
+        version: 1.26.0
+      rollup:
+        specifier: ^3.20.2
+        version: 3.20.2
+
   packages/vue-simple-docgen-loader:
     dependencies:
       escodegen:
@@ -1965,6 +1990,9 @@ importers:
       vue-inbrowser-compiler-utils:
         specifier: ^4.64.1
         version: link:../vue-inbrowser-compiler-utils
+      vue-inbrowser-prismjs-highlighter:
+        specifier: ^4.67.2
+        version: link:../vue-inbrowser-prismjs-highlighter
       webpack-dev-server:
         specifier: ^3.11.2
         version: 3.11.2(webpack-cli@4.5.0)(webpack@4.46.0)
@@ -19170,7 +19198,7 @@ packages:
   /is-reference@1.2.1:
     resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /is-regex@1.1.4:
@@ -28263,7 +28291,7 @@ packages:
       core-js: 3.27.2
       debounce: 1.2.1
       hash-sum: 2.0.0
-      prismjs: 1.23.0
+      prismjs: 1.29.0
       recast: 0.19.1
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
       vue-inbrowser-compiler: 4.64.1(vue-template-compiler@2.7.14)(vue@2.7.14)
