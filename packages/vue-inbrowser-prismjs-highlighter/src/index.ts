@@ -2,7 +2,7 @@
 // NOTE: this weird way of importing prism is necessary because
 // prism is not a ESM ready library
 import { parseComponent } from 'vue-inbrowser-compiler-utils'
-import pkg from 'prismjs'
+import Prism from 'prismjs'
 import 'prismjs/components/prism-clike.js'
 import 'prismjs/components/prism-markup.js'
 import 'prismjs/components/prism-javascript.js'
@@ -13,7 +13,9 @@ import 'prismjs/components/prism-css.js'
 
 import getScript from './getScript'
 
-const { highlight: prismHighlight, languages } = pkg
+Prism.manual = true
+
+const { highlight: prismHighlight, languages } = Prism
 
 export const CONFIGURED_LANGS = ['html', 'vsg', 'jsx', 'tsx'] as const
 export type CONFIGURED_LANGS_TYPE = (typeof CONFIGURED_LANGS)[number]
