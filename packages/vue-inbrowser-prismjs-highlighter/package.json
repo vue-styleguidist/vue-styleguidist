@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-prismjs-highlighter",
-  "version": "4.67.2",
+  "version": "4.68.0",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "scripts": {

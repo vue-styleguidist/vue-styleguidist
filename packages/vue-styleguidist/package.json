@@ -1,7 +1,7 @@
 {
   "name": "vue-styleguidist",
   "description": "Vue components style guide generator",
-  "version": "4.67.0",
+  "version": "4.68.0",
   "homepage": "https://vue-styleguidist.github.io",
   "scripts": {
     "compile": "pnpm run compile:babel && pnpm run typings",
@@ -102,7 +102,7 @@
     "vue-docgen-api": "^4.67.0",
     "vue-inbrowser-compiler": "^4.64.1",
     "vue-inbrowser-compiler-utils": "^4.64.1",
-    "vue-inbrowser-prismjs-highlighter": "^4.67.2",
+    "vue-inbrowser-prismjs-highlighter": "^4.68.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-filter-warnings-plugin": "^1.2.1",
     "webpack-merge": "^4.2.2"
