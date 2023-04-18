@@ -1,0 +1,22 @@
+pre {
+  white-space: pre-wrap;
+  padding-left: 2.5rem;
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+pre .line {
+  position: relative;
+}
+
+pre .line:before {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  left: -2rem;
+  width: 1rem;
+  margin-right: 1.5rem;
+  display: inline-block;
+  text-align: right;
+  color: rgba(115,138,148,.4)
+}

@@ -4,6 +4,7 @@
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "scripts": {
+    "cy": "cypress open --component",
     "compile": "rollup -c ./rollup.config.mjs",
     "compile:watch": "pnpm run compile --watch"
   },
@@ -23,7 +24,10 @@
     "@rollup/plugin-commonjs": "^24.1.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
+    "@types/dedent": "^0.7.0",
     "@types/prismjs": "^1.26.0",
-    "rollup": "^3.20.2"
+    "dedent": "^0.7.0",
+    "rollup": "^3.20.2",
+    "vite": "^4.2.2"
   }
 }

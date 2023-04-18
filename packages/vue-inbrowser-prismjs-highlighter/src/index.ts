@@ -66,11 +66,11 @@ export default async function () {
 								`<span class="token language-javascript">${getSpacer(comp.script)}<\\/span>`,
 								'g'
 							),
-							`<span class="token language-typescript">${prismHighlight(
+							`${prismHighlight(
 								comp.script.content,
 								languages[comp.script.lang || 'ts'],
 								comp.script.lang || 'ts'
-							)}</span>`
+							)}`
 					  )
 					: htmlHighlighted
 
@@ -80,11 +80,11 @@ export default async function () {
 								`<span class="token language-javascript">${getSpacer(comp.scriptSetup)}<\\/span>`,
 								'g'
 							),
-							`<span class="token language-typescript">${prismHighlight(
+							`${prismHighlight(
 								comp.scriptSetup.content,
 								languages.ts,
 								'ts'
-							)}</span>`
+							)}`
 					  )
 					: highlightedScript
 
@@ -101,7 +101,7 @@ export default async function () {
 }
 
 function renderLines(code: string) {
-	return `<span class='line'>${code.replace(/\n/g, "</span>\n<span class='line'>")}</span>`
+	return `<span class="line">${code.replace(/\n/g, "</span>\n<span class='line'>")}</span>`
 }
 
 function getSquiggles(errorLoc?: any, lineOffset = 0) {
