@@ -124,6 +124,7 @@
     {
 			"files": [
         "packages/**/*.cy.{ts,tsx,js}", 
+        "packages/**/*.cy.vue3.{ts,tsx,js}", 
         "test/cypress/**/*.{ts,tsx,js}"
       ],
 			"parserOptions": {
