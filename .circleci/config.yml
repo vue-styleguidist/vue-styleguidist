@@ -103,14 +103,14 @@ jobs:
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
 
-      # run cypress component tests
+      # run cypress vue-styleguidist component tests
       - run: 
           command: pnpm exec cypress run --component --record --group ct
           working_directory: packages/vue-styleguidist
       
-      # run cypress component tests
+      # run cypress prismjs-highlighter component tests
       - run: 
-          command: pnpm exec cypress run --component --record --group ct
+          command: pnpm exec cypress run --component --record --group ct-prismjs
           working_directory: packages/vue-inbrowser-prismjs-highlighter
       
       # run cypress e2e tests
