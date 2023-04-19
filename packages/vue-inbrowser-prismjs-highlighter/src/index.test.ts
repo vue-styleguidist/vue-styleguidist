@@ -14,7 +14,7 @@ describe('VueInbrowserPrismjsHighlighter', () => {
       {{ a }}
     </div>`
     expect(highlight('vsg')(code)).toMatchInlineSnapshot(`
-      "<span class='line'></span>
+      "<span class=\\"line\\"></span>
       <span class='line'>    <span class=\\"token keyword\\">let</span> a <span class=\\"token operator\\">=</span> <span class=\\"token number\\">1</span></span>
       <span class='line'>    <span class=\\"token tag\\"><span class=\\"token tag\\"><span class=\\"token punctuation\\">&lt;</span>div</span><span class=\\"token punctuation\\">></span></span></span>
       <span class='line'>      {{ a }}</span>
@@ -36,7 +36,7 @@ describe('VueInbrowserPrismjsHighlighter', () => {
       </div>
     </template>`
     expect(highlight('vsg')(code)).toMatchInlineSnapshot(`
-      "<span class='line'></span>
+      "<span class=\\"line\\"></span>
       <span class='line'>    <span class=\\"token tag\\"><span class=\\"token tag\\"><span class=\\"token punctuation\\">&lt;</span>script</span> <span class=\\"token attr-name\\">lang</span><span class=\\"token attr-value\\"><span class=\\"token punctuation attr-equals\\">=</span><span class=\\"token punctuation\\">\\"</span>ts<span class=\\"token punctuation\\">\\"</span></span> <span class=\\"token attr-name\\">setup</span><span class=\\"token punctuation\\">></span></span><span class=\\"token script\\"><span class=\\"token language-javascript\\"></span>
       <span class='line'>    <span class=\\"token keyword\\">let</span> <span class=\\"token literal-property property\\">a</span><span class=\\"token operator\\">:</span>number <span class=\\"token operator\\">=</span> <span class=\\"token number\\">1</span></span>
       <span class='line'>    type <span class=\\"token constant\\">A</span> <span class=\\"token operator\\">=</span> <span class=\\"token punctuation\\">{</span></span>

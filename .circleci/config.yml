@@ -108,6 +108,11 @@ jobs:
           command: pnpm exec cypress run --component --record --group ct
           working_directory: packages/vue-styleguidist
       
+      # run cypress component tests
+      - run: 
+          command: pnpm exec cypress run --component --record --group ct
+          working_directory: packages/vue-inbrowser-prismjs-highlighter
+      
       # run cypress e2e tests
       - run: 
           command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/integration/basic/*.*\" --record --group main"
