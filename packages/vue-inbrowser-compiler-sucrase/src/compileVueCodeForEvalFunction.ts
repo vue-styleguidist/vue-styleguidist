@@ -88,7 +88,7 @@ function prepareVueCodeForEvalFunction(
 		const findStartTemplateMatch = /^\W*</.test(code) ? { index: 0 } : code.match(/\n[\t ]*</)
 		const limitScript =
 			findStartTemplateMatch && findStartTemplateMatch.index !== undefined
-				? findStartTemplateMatch.index
+				? findStartTemplateMatch.index + 1 // we don't want to count the \n in there
 				: -1
 		template = limitScript > -1 ? code.slice(limitScript) : undefined
 		code = limitScript > -1 ? code.slice(0, limitScript) : code
