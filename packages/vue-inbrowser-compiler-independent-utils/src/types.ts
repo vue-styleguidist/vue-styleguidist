@@ -51,6 +51,7 @@ export interface DocBlockTags {
 
 interface EventType {
 	names: string[]
+	elements?: ParamType[]
 }
 
 interface EventProperty {

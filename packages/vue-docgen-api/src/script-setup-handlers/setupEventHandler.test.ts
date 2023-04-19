@@ -184,7 +184,7 @@ describe('setupEventHandler', () => {
 			})
 		})
 
-    it('should handle event definitions wrapped in double quotes', async () => {
+		it('should handle event definitions wrapped in double quotes', async () => {
 			const src = `
       const emit = defineEmits({
         native: null, 
@@ -194,6 +194,22 @@ describe('setupEventHandler', () => {
 			await parserTest(src)
 			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('native')
 			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('double-quotes')
+		})
+
+		it('should accept generic types', async () => {
+			const src = `
+          const emit = defineEmits<{
+            (event: 'save', payload: Record<string, number>): void
+          }>()
+          `
+			const event = await parserTest(src)
+			expect(documentation.getEventDescriptor).toHaveBeenCalledWith('save')
+			expect(event).toMatchObject({
+				type: {
+					names: ['Record'],
+					elements: [{ name: 'string' }, { name: 'number' }]
+				}
+			})
 		})
 	})
 })

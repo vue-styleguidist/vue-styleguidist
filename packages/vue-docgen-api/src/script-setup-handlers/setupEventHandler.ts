@@ -27,9 +27,15 @@ export default async function setupEventHandler(
 
 		const typeParam = eventPath.get('parameters', 1, 'typeAnnotation')
 		if (bt.isTSTypeAnnotation(typeParam.node)) {
-			const type = getTypeFromAnnotation(typeParam.node)?.name
+			const type = getTypeFromAnnotation(typeParam.node)
 			if (type) {
-				eventDescriptor.type = { names: [type] }
+				eventDescriptor.type = {
+					names: [type.name]
+				}
+
+				if (type.elements) {
+					eventDescriptor.type.elements = type.elements
+				}
 			}
 		}
 
