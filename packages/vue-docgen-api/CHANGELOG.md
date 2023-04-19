@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.69.0
+
+### Minor Changes
+
+- [#1538](https://github.com/vue-styleguidist/vue-styleguidist/pull/1538) [`d86476bd`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d86476bdd1fa60917ee0dcbad254fc5a92e369c5) Thanks [@sawmurai](https://github.com/sawmurai)! - Add TypeScript generic type parameters to event payloads
+
+### Patch Changes
+
+- Updated dependencies [[`d86476bd`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d86476bdd1fa60917ee0dcbad254fc5a92e369c5)]:
+  - vue-inbrowser-compiler-independent-utils@4.69.0
+
 ## 4.67.0
 
 ### Minor Changes
