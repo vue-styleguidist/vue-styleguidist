@@ -14,14 +14,14 @@
     "prepublish": "node ./postinstall.js --vue3"
   },
   "devDependencies": {
+    "@vue/compiler-sfc": "3.2.47",
     "vue": "2.7.14",
-    "vue-template-compiler": "2.7.14",
-    "@vue/compiler-sfc": "3.2.47"
+    "vue-template-compiler": "2.7.14"
   },
   "peerDependencies": {
+    "@vue/compiler-sfc": ">=3",
     "vue": ">=2",
-    "vue-template-compiler": ">=2",
-    "@vue/compiler-sfc": ">=3"
+    "vue-template-compiler": ">=2"
   },
   "peerDependenciesMeta": {
     "vue-template-compiler": {
