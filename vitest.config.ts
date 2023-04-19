@@ -17,6 +17,7 @@ export default defineConfig({
     }
 	},
 	plugins: [
+    // @ts-expect-error
 		typescriptPaths({
 			tsConfigPath: './tsconfig.json'
 		})
