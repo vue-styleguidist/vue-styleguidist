@@ -1,5 +1,11 @@
 # vue-inbrowser-prismjs-highlighter
 
+## 4.69.1
+
+### Patch Changes
+
+- [`c956a6e5`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c956a6e5279cabf04d1e0cf0c1fa5b9267a045b9) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: make each line span represent one line only
+
 ## 4.69.0
 
 ### Minor Changes
