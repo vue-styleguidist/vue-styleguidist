@@ -1,5 +1,5 @@
 import { mount } from 'cypress/vue2'
-import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/themes/prism-coy.css";
 import dedent from 'dedent'
 import './index.cy.css'
 import getHighlighter from './index'
@@ -8,21 +8,7 @@ let highlight: Awaited<ReturnType<typeof getHighlighter>>
 
 describe('VueInbrowserPrismjsHighlighter', () => {
   before(async () => {
-    highlight = await getHighlighter()
-  })
-
-  it('highlights code from vsg examples', () => {
-    const code = dedent`
-    let a = 1
-    <div>
-      {{ a }}
-    </div>`
-    mount(({
-      data:() => ({
-        html: highlight('vsg')(code)
-      }),
-      template: `<pre v-html="html" />`}))
-    cy.get('pre').should('have.text', code)
+    highlight = await getHighlighter('error-squiggles')
   })
 
   it('highlights code from vue sfc components', () => {
@@ -45,5 +31,31 @@ describe('VueInbrowserPrismjsHighlighter', () => {
     }),
     template: `<pre v-html="html" />`}))
     cy.get('pre').should('have.text', code)
+  })
+
+  it('highlights code from vsg examples with errors', () => {
+    const code = dedent`
+    let a = 1
+    <div>
+      {{ a }}
+    </div>`
+
+    const errorLoc = {
+      start: {
+        line: 0,
+        column: 0
+      },
+      end: {
+        line: 0,
+        column: 5
+      }
+    }
+
+    mount(({
+      data:() => ({
+        html: highlight('vsg')(code, errorLoc)
+      }),
+      template: `<pre v-html="html" />`}))
+    cy.get('pre').should('have.text', `     ${code}`)
   })
 })

@@ -17,14 +17,24 @@ Prism.manual = true
 
 const { highlight: prismHighlight, languages } = Prism
 
-export const CONFIGURED_LANGS = ['html', 'vsg', 'jsx', 'tsx'] as const
+export const CONFIGURED_LANGS = ['html', 'vue-sfc', 'vsg', 'jsx', 'tsx'] as const
 export type CONFIGURED_LANGS_TYPE = (typeof CONFIGURED_LANGS)[number]
 
-export default async function () {
+/**
+ * Returns a function that returns a function will highlight the code.
+ * @param errorSquigglesClassPrefix class prefix for error squiggles
+ * @returns function that will return the code highlighter for the given language
+ */
+export default async function (errorSquigglesClassPrefix?: string) {
+	/**
+	 * Return a function that will highlight the code.
+	 * @param lang language of the code
+	 * @param jsxInExamples whether to use jsx or tsx for highlighting
+	 */
 	return function (lang: CONFIGURED_LANGS_TYPE, jsxInExamples: boolean = false) {
 		if (lang === 'vsg') {
 			// render vsg format
-			return (code: string, errorLoc?: any) => {
+			return (code: string, errorLoc?: AllPrismError) => {
 				if (!code) {
 					return ''
 				}
@@ -35,23 +45,25 @@ export default async function () {
 					lang
 				)
 				if (code.length === scriptCode.length) {
-					return getSquiggles(errorLoc) + scriptCodeHighlighted
+					return getSquiggles(errorLoc, errorSquigglesClassPrefix) + scriptCodeHighlighted
 				}
 				const templateCode = code.slice(scriptCode.length)
 				const templateHighlighted = prismHighlight(templateCode, languages['html'], lang)
 
 				return (
-					getSquiggles(
-						errorLoc,
-						errorLoc && errorLoc.start ? scriptCode.split('\n').length - 1 : 0
-					) + renderLines(scriptCodeHighlighted + templateHighlighted)
+					(errorLoc
+						? getSquiggles(
+								errorLoc,
+								errorSquigglesClassPrefix
+						  )
+						: '') + renderLines(scriptCodeHighlighted + templateHighlighted)
 				)
 			}
-		} else if (lang === 'html') {
+		} else if (['html', 'vue-sfc'].includes(lang)) {
 			// render vue SFC component format
 			const langScheme = languages.html
 
-			return (code: string) => {
+			return (code: string, errorLoc?: AllPrismError) => {
 				const comp = parseComponent(code)
 
 				const newCode = comp.script
@@ -66,11 +78,11 @@ export default async function () {
 								`<span class="token language-javascript">${getSpacer(comp.script)}<\\/span>`,
 								'g'
 							),
-							`${prismHighlight(
+							prismHighlight(
 								comp.script.content,
 								languages[comp.script.lang || 'ts'],
 								comp.script.lang || 'ts'
-							)}`
+							)
 					  )
 					: htmlHighlighted
 
@@ -80,21 +92,17 @@ export default async function () {
 								`<span class="token language-javascript">${getSpacer(comp.scriptSetup)}<\\/span>`,
 								'g'
 							),
-							`${prismHighlight(
-								comp.scriptSetup.content,
-								languages.ts,
-								'ts'
-							)}`
+							prismHighlight(comp.scriptSetup.content, languages.ts, 'ts')
 					  )
 					: highlightedScript
 
-				return renderLines(highlightedScriptSetup)
+				return getSquiggles(errorLoc, errorSquigglesClassPrefix) + renderLines(highlightedScriptSetup)
 			}
 		} else {
 			// all other formats
 			const langScheme = languages[lang]
-			return (code: string) => {
-				return renderLines(prismHighlight(code, langScheme, lang))
+			return (code: string, errorLoc?: AllPrismError) => {
+				return getSquiggles(errorLoc, errorSquigglesClassPrefix) + renderLines(prismHighlight(code, langScheme, lang))
 			}
 		}
 	}
@@ -104,16 +112,30 @@ function renderLines(code: string) {
 	return `<span class="line">${code.replace(/\n/g, "</span>\n<span class='line'>")}</span>`
 }
 
-function getSquiggles(errorLoc?: any, lineOffset = 0) {
+interface PrismLocation {
+	line: number
+	column: number
+}
+
+interface PrismError {
+	start: PrismLocation
+	end: PrismLocation
+}
+
+type AllPrismError = PrismError | PrismLocation
+
+function getSquiggles(
+	errorLoc?: AllPrismError,
+	errorSquigglesClassPrefix?: string,
+) {
 	if (!errorLoc) return ''
-	const columnOffSet = errorLoc.start ? 0 : 1
-	const errorWidth = errorLoc.end ? errorLoc.end.column - errorLoc.start.column + 1 : 2
-	let { line, column } = errorLoc.start ? errorLoc.start : errorLoc
+	const errorWidth = 'end' in errorLoc ? errorLoc.end.column - errorLoc.start.column + 1 : 2
+	let { line, column } = 'start' in errorLoc ? errorLoc.start : errorLoc
 	return (
-		'<span class="VueLive-squiggles-wrapper">' +
-		Array(line + lineOffset).join('\n') +
-		Array(column + columnOffSet).join(' ') +
-		'<span class="VueLive-squiggles">' +
+		`<span class="${errorSquigglesClassPrefix}-wrapper">` +
+		(line > 0 ? Array(line - 1).join('\n') : '') +
+		Array(column).join(' ') +
+		`<span class="${errorSquigglesClassPrefix}">` +
 		Array(errorWidth).join(' ') +
 		'</span></span>'
 	)
