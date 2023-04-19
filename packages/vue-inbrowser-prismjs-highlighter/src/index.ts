@@ -34,7 +34,7 @@ export default async function (errorSquigglesClassPrefix?: string) {
 	return function (lang: CONFIGURED_LANGS_TYPE, jsxInExamples: boolean = false) {
 		if (lang === 'vsg') {
 			// render vsg format
-			return (code: string, errorLoc?: AllPrismError) => {
+			return (code: string, errorLoc?: VueAllPrismError) => {
 				if (!code) {
 					return ''
 				}
@@ -63,7 +63,7 @@ export default async function (errorSquigglesClassPrefix?: string) {
 			// render vue SFC component format
 			const langScheme = languages.html
 
-			return (code: string, errorLoc?: AllPrismError) => {
+			return (code: string, errorLoc?: VueAllPrismError) => {
 				const comp = parseComponent(code)
 
 				const newCode = comp.script
@@ -101,7 +101,7 @@ export default async function (errorSquigglesClassPrefix?: string) {
 		} else {
 			// all other formats
 			const langScheme = languages[lang]
-			return (code: string, errorLoc?: AllPrismError) => {
+			return (code: string, errorLoc?: VueAllPrismError) => {
 				return getSquiggles(errorLoc, errorSquigglesClassPrefix) + renderLines(prismHighlight(code, langScheme, lang))
 			}
 		}
@@ -112,20 +112,20 @@ function renderLines(code: string) {
 	return `<span class="line">${code.replace(/\n/g, "</span>\n<span class='line'>")}</span>`
 }
 
-interface PrismLocation {
+export interface VuePrismLocation {
 	line: number
 	column: number
 }
 
-interface PrismError {
-	start: PrismLocation
-	end: PrismLocation
+export interface VuePrismError {
+	start: VuePrismLocation
+	end: VuePrismLocation
 }
 
-type AllPrismError = PrismError | PrismLocation
+export type VueAllPrismError = VuePrismError | VuePrismLocation
 
 function getSquiggles(
-	errorLoc?: AllPrismError,
+	errorLoc?: VueAllPrismError,
 	errorSquigglesClassPrefix?: string,
 ) {
 	if (!errorLoc) return ''
