@@ -31,10 +31,10 @@ export default async function (errorSquigglesClassPrefix?: string) {
 	 * @param lang language of the code
 	 * @param jsxInExamples whether to use jsx or tsx for highlighting
 	 */
-	return function (lang: CONFIGURED_LANGS_TYPE, jsxInExamples: boolean = false) {
+	function getHighlighter(lang: CONFIGURED_LANGS_TYPE, jsxInExamples: boolean = false) {
 		if (lang === 'vsg') {
 			// render vsg format
-			return (code: string, errorLoc?: VueAllPrismError) => {
+			return (code: string) => {
 				if (!code) {
 					return ''
 				}
@@ -45,25 +45,20 @@ export default async function (errorSquigglesClassPrefix?: string) {
 					lang
 				)
 				if (code.length === scriptCode.length) {
-					return getSquiggles(errorLoc, errorSquigglesClassPrefix) + scriptCodeHighlighted
+					return scriptCodeHighlighted
 				}
 				const templateCode = code.slice(scriptCode.length)
 				const templateHighlighted = prismHighlight(templateCode, languages['html'], lang)
 
 				return (
-					(errorLoc
-						? getSquiggles(
-								errorLoc,
-								errorSquigglesClassPrefix
-						  )
-						: '') + renderLines(scriptCodeHighlighted + templateHighlighted)
+					renderLines(scriptCodeHighlighted + templateHighlighted)
 				)
 			}
 		} else if (['html', 'vue-sfc'].includes(lang)) {
 			// render vue SFC component format
 			const langScheme = languages.html
 
-			return (code: string, errorLoc?: VueAllPrismError) => {
+			return (code: string) => {
 				const comp = parseComponent(code)
 
 				const newCode = comp.script
@@ -74,10 +69,7 @@ export default async function (errorSquigglesClassPrefix?: string) {
 
 				const highlightedScript = comp.script
 					? htmlHighlighted.replace(
-							new RegExp(
-								`<span class="token language-javascript">${getSpacer(comp.script)}<\\/span>`,
-								'g'
-							),
+            getReplacedTokenRE(comp.script),
 							prismHighlight(
 								comp.script.content,
 								languages[comp.script.lang || 'ts'],
@@ -88,25 +80,31 @@ export default async function (errorSquigglesClassPrefix?: string) {
 
 				const highlightedScriptSetup = comp.scriptSetup
 					? highlightedScript.replace(
-							new RegExp(
-								`<span class="token language-javascript">${getSpacer(comp.scriptSetup)}<\\/span>`,
-								'g'
-							),
+							
+								getReplacedTokenRE(comp.scriptSetup)
+							,
 							prismHighlight(comp.scriptSetup.content, languages.ts, 'ts')
 					  )
 					: highlightedScript
 
-				return getSquiggles(errorLoc, errorSquigglesClassPrefix) + renderLines(highlightedScriptSetup)
+				return renderLines(highlightedScriptSetup)
 			}
 		} else {
 			// all other formats
 			const langScheme = languages[lang]
 			return (code: string, errorLoc?: VueAllPrismError) => {
-				return getSquiggles(errorLoc, errorSquigglesClassPrefix) + renderLines(prismHighlight(code, langScheme, lang))
+				return renderLines(prismHighlight(code, langScheme, lang))
 			}
 		}
 	}
+
+  function addSquigglesManagement(highlight: (code:string) => string) {
+    return (code:string, errorLoc?: VueAllPrismError) => getSquiggles(errorLoc, errorSquigglesClassPrefix) + highlight(code)
+  }
+
+  return (...args:Parameters<typeof getHighlighter>) => addSquigglesManagement(getHighlighter(...args))
 }
+
 
 function renderLines(code: string) {
 	return `<span class="line">${code.replace(/\n/g, "</span>\n<span class='line'>")}</span>`
@@ -202,4 +200,8 @@ function getCodeWithoutScript(code: string, script: any, scriptSetup?: any) {
 
 function getSpacer(s: any) {
 	return s.setup ? 'setup' : ' '
+}
+
+function getReplacedTokenRE(s: any){
+  return new RegExp(`<span class="token script"><span class="token language-javascript">${getSpacer(s)}</span></span>`)
 }
