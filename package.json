@@ -29,6 +29,8 @@
     "cy:open": "cypress open",
     "cy:ct": "cypress open --component -C packages/vue-styleguidist/cypress.config.ts",
     "cy:ct:vue3": "pnpm install:vue3 && cypress open --component -C packages/vue-styleguidist/cypress.config.vue3.ts",
+    "cy:ct:prismjs": "node ./packages/vue-inbrowser-compiler-demi/postinstall.js && cypress open --component -C packages/vue-inbrowser-prismjs-highlighter/cypress.config.ts",
+    "cy:ct:prismjs:vue3": "pnpm install:vue3 && cypress open --component -C packages/vue-inbrowser-prismjs-highlighter/cypress.config.vue3.ts",
     "cy:serve": "node test/run.server.js",
     "cy:run": "cypress run --e2e --spec \"test/cypress/integration/$CY_EXAMPLE_FOLDER/*.cy.ts\"",
     "cy": "start-server-and-test cy:serve http://localhost:6060 cy:run",
