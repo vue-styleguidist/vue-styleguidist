@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.69.2
+
+### Patch Changes
+
+- [`70317379`](https://github.com/vue-styleguidist/vue-styleguidist/commit/703173794ee8c2edc701bb678b9c9e7b34a3e1c1) Thanks [@elevatebart](https://github.com/elevatebart)! - make sure we don't count the \n at the begining of templates
+
 ## 4.69.0
 
 ### Patch Changes
