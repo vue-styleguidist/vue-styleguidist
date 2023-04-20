@@ -85,7 +85,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 			}
 		}
 
-		const findStartTemplateMatch = /^\W*</.test(code) ? { index: 0 } : code.match(/\n[\t ]*</)
+		const findStartTemplateMatch = /^[\t ]*</.test(code) ? { index: -1 } : code.match(/\n[\t ]*</)
 		const limitScript =
 			findStartTemplateMatch && findStartTemplateMatch.index !== undefined
 				? findStartTemplateMatch.index + 1 // we don't want to count the \n in there
@@ -94,6 +94,7 @@ function prepareVueCodeForEvalFunction(code: string, config: any): EvaluableComp
 		code = limitScript > -1 ? code.slice(0, limitScript) : code
 		vsgMode = true
 	}
+
 	const ast = getAst(code)
 	let offset = 0
 	const varNames: string[] = []
