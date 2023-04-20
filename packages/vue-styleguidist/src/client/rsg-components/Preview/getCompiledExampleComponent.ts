@@ -62,14 +62,14 @@ export function getCompiledExampleComponent({
 			}
 		} catch (err) {
 			handleError(err)
-			previewComponent.template = '<div/>'
+			previewComponent = { template: '<div/>' }
 		}
 	}
 	calcOptions()
 
 	// In case the template is inlined in the script,
 	// we need to compile it
-	if (previewComponent.template) {
+	if (previewComponent.template && compiledExample) {
 		compiledExample.template = previewComponent.template
 		compileTemplateForEval(compiledExample)
 		calcOptions()

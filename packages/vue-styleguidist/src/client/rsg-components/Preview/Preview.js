@@ -102,6 +102,7 @@ class Preview extends Component {
 			})
 		} catch (err) {
 			this.handleError(err)
+      return
 		}
 
 		let el = this.mountNode.children[0]
