@@ -16,9 +16,15 @@ import type { ParseOptions, DocGenOptions } from './types'
 import * as ScriptHandlers from './script-handlers'
 import * as TemplateHandlers from './template-handlers'
 
+import getDoclets from './utils/getDoclets';
+import getProperties from './script-handlers/utils/getProperties';
+import getDocblock from './utils/getDocblock';
+
 export { ScriptHandlers }
 export { TemplateHandlers }
-
+export { getDoclets }
+export { getProperties }
+export { getDocblock }
 export { TemplateParserOptions } from './parse-template'
 export { ScriptHandler, TemplateHandler } from './parse'
 export {
