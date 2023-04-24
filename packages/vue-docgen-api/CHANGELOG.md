@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.69.3
+
+### Patch Changes
+
+- [#1546](https://github.com/vue-styleguidist/vue-styleguidist/pull/1546) [`51123822`](https://github.com/vue-styleguidist/vue-styleguidist/commit/511238220bc71e8b5ebb631d6b761d958f6b8147) Thanks [@elevatebart](https://github.com/elevatebart)! - fix: protect invalid pattern
+
 ## 4.69.0
 
 ### Minor Changes
