@@ -46,7 +46,10 @@ export default async function setupEventHandler(
 		}
 	}
 
-	function readEventsTSTypes(refs: any) {
+	function readEventsTSTypes(refs: NodePath) {
+    if(!refs.value){
+      return
+    }
 		refs.each((member: NodePath) => {
 			if (bt.isTSCallSignatureDeclaration(member.node)) {
 				const firstParam = member.node.parameters[0].typeAnnotation

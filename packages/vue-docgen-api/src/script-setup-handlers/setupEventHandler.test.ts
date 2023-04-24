@@ -211,5 +211,13 @@ describe('setupEventHandler', () => {
 				}
 			})
 		})
+
+    it('issue #1545', async () => {
+      const src = `
+      type EmitEvent = (event: 'change', params: any) => void;
+      const emit = defineEmits<EmitEvent>();
+          `
+      expect(() => parserTest(src)).not.toThrow()
+    })
 	})
 })
