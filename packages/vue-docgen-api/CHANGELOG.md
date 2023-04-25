@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.70.0
+
+### Minor Changes
+
+- [#1547](https://github.com/vue-styleguidist/vue-styleguidist/pull/1547) [`8d22c833`](https://github.com/vue-styleguidist/vue-styleguidist/commit/8d22c833de229b29d9c1df97004ba09d96b71eb1) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: expose some utils functions
+
 ## 4.69.3
 
 ### Patch Changes
