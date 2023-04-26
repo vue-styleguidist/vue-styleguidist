@@ -111,5 +111,13 @@ export default function slotHandler(
 				}, [])
 			)
 		}
+
+		const restOfBindings = bindingDescriptors.filter(
+			bindFromComment =>
+				!slotDescriptor.bindings?.some(bindFromData => bindFromData.title === bindFromComment.title)
+		)
+		if (restOfBindings.length) {
+			slotDescriptor.bindings = slotDescriptor.bindings?.concat(restOfBindings)
+		}
 	}
 }
