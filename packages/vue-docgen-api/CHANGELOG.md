@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.71.0
+
+### Minor Changes
+
+- [#1550](https://github.com/vue-styleguidist/vue-styleguidist/pull/1550) [`979c7fdc`](https://github.com/vue-styleguidist/vue-styleguidist/commit/979c7fdc8af8c163d640491b955c6bf9a66e0450) Thanks [@elevatebart](https://github.com/elevatebart)! - allow documentation of implicit slot bindings
+
 ## 4.70.0
 
 ### Minor Changes
