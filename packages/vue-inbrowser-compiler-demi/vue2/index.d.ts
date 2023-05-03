@@ -36,10 +36,12 @@ export declare const compileTemplate: (options?: {
 	source: string
 	filename: string
 	id: string
+  scoped?: boolean,
 	compilerOptions?: {
 		mode?: 'module' | 'function'
 		bindingMetadata?: BindingMetadata
 		prefixIdentifiers?: boolean
+    scopeId?: string
 	}
 }) => { code: string, staticRenderFns: string[] }
 
