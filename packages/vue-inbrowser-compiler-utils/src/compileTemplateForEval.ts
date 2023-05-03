@@ -71,9 +71,9 @@ const __sfc__ = (function() {${sfc.script}})()${
 	}
   __sfc__.render = function() {${renderObject.code}}
 ${isVue3 ? `
-${sfc.scopeId ? `_pushScopeId("${sfc.scopeId}")`: ''}
-__sfc__.render = __sfc__.render()` : ''}
-${sfc.scopeId ? `_popScopeId()`: ''}
+${sfc.scopeId ? `_pushScopeId("${sfc.scopeId}")` : ''}
+__sfc__.render = __sfc__.render()
+${sfc.scopeId ? `_popScopeId()`: ''}` : ''}
 return __sfc__`
 	delete sfc.template
 }
