@@ -172,7 +172,6 @@ new Vue({
 					}})()
 			  __sfc__.render = function() {with(this){return _c('div')}}
 
-
 			return __sfc__"
 		`)
 	})
@@ -227,7 +226,6 @@ const MyButton = () => h('button')
 			function defineExpose(){}
 			}}})()
 			  __sfc__.render = function() {with(this){return _c('div',[_v(_s(value))])}}
-
 
 			return __sfc__"
 		`)

@@ -166,7 +166,6 @@ new Vue({
 					})()
 			  __sfc__.render = function() {with(this){return _c('div')}}
 
-
 			return __sfc__"
 		`)
 	})
