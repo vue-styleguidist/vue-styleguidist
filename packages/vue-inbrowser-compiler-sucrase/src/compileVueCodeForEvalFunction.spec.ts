@@ -162,7 +162,7 @@ new Vue({
 		).toMatchInlineSnapshot(`
 			"
 
-			const comp = (function() {\\"use strict\\";
+			const __sfc__ = (function() {\\"use strict\\";
 					;return {
 						data(){
 							return {
@@ -170,9 +170,10 @@ new Vue({
 							}
 						}
 					}})()
-			comp.render = function() {with(this){return _c('div')}}
+			  __sfc__.render = function() {with(this){return _c('div')}}
 
-			return comp"
+
+			return __sfc__"
 		`)
 	})
 
@@ -212,7 +213,7 @@ const MyButton = () => h('button')
 		expect(sut.script).toMatchInlineSnapshot(`
 			"
 
-			const comp = (function() {\\"use strict\\";;return {setup(){
+			const __sfc__ = (function() {\\"use strict\\";;return {setup(){
 
 			var _vuefeathericons = require('vue-feather-icons');
 			var _vue = require('vue');
@@ -225,9 +226,10 @@ const MyButton = () => h('button')
 			function defineEmits(){}
 			function defineExpose(){}
 			}}})()
-			comp.render = function() {with(this){return _c('div',[_v(_s(value))])}}
+			  __sfc__.render = function() {with(this){return _c('div',[_v(_s(value))])}}
 
-			return comp"
+
+			return __sfc__"
 		`)
 	})
 })

@@ -153,7 +153,7 @@ new Vue({
 		).toMatchInlineSnapshot(`
 			"
 
-			const comp = (function() {
+			const __sfc__ = (function() {
 					
 			return {
 						data(){
@@ -164,9 +164,10 @@ new Vue({
 					}
 
 					})()
-			comp.render = function() {with(this){return _c('div')}}
+			  __sfc__.render = function() {with(this){return _c('div')}}
 
-			return comp"
+
+			return __sfc__"
 		`)
 	})
 
