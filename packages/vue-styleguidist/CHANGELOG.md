@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.71.1
+
+### Patch Changes
+
+- [#1552](https://github.com/vue-styleguidist/vue-styleguidist/pull/1552) [`963853dd`](https://github.com/vue-styleguidist/vue-styleguidist/commit/963853dd45a9008d61968518626bc74b3080ef96) Thanks [@elevatebart](https://github.com/elevatebart)! - allow double styled static heads in sfc examples
+
+- Updated dependencies [[`963853dd`](https://github.com/vue-styleguidist/vue-styleguidist/commit/963853dd45a9008d61968518626bc74b3080ef96)]:
+  - vue-inbrowser-compiler-utils@4.71.1
+  - vue-inbrowser-compiler@4.71.1
+
 ## 4.68.0
 
 ### Minor Changes
