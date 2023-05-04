@@ -11,7 +11,7 @@
   "scripts": {
     "changeset": "changeset",
     "pretest": "pnpm lint",
-    "test": "pnpm test:vitest && pnpm test:plugin && pnpm test:vue3",
+    "test": "pnpm test:vitest run && pnpm test:plugin && pnpm test:vue3 run",
     "test:plugin": "node ./packages/vue-inbrowser-compiler-demi/postinstall.js && rimraf test/cli-packages/* && vitest run -c vitest.config.plugin.ts",
     "test:vitest": "node ./packages/vue-inbrowser-compiler-demi/postinstall.js && vitest --config vitest.config.ts",
     "test:vue3": "pnpm install:vue3 && vitest --config vitest.config.vue3.ts",

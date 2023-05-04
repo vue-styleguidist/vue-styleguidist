@@ -10,6 +10,7 @@ export interface EvaluableComponent {
 	template?: string
 	style?: string
 	setup: boolean
+  scopeId?: string
 }
 
 /**
