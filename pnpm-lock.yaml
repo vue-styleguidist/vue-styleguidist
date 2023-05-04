@@ -1603,7 +1603,7 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0
       vue-inbrowser-compiler-utils:
-        specifier: ^4.64.1
+        specifier: ^4.71.1
         version: link:../vue-inbrowser-compiler-utils
       walkes:
         specifier: ^0.2.1
@@ -1703,7 +1703,7 @@ importers:
         specifier: 3.29.0
         version: 3.29.0
       vue-inbrowser-compiler-utils:
-        specifier: ^4.64.1
+        specifier: ^4.71.1
         version: link:../vue-inbrowser-compiler-utils
       walkes:
         specifier: ^0.2.1
@@ -1749,10 +1749,10 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
       vue-inbrowser-compiler-demi:
-        specifier: ^4.56.5
+        specifier: ^4.71.1
         version: link:../vue-inbrowser-compiler-demi
       vue-inbrowser-compiler-independent-utils:
-        specifier: ^4.64.1
+        specifier: ^4.71.1
         version: link:../vue-inbrowser-compiler-independent-utils
     devDependencies:
       '@rollup/plugin-commonjs':
@@ -1994,10 +1994,10 @@ importers:
         specifier: ^4.67.0
         version: link:../vue-docgen-api
       vue-inbrowser-compiler:
-        specifier: ^4.64.1
+        specifier: ^4.71.1
         version: link:../vue-inbrowser-compiler
       vue-inbrowser-compiler-utils:
-        specifier: ^4.64.1
+        specifier: ^4.71.1
         version: link:../vue-inbrowser-compiler-utils
       vue-inbrowser-prismjs-highlighter:
         specifier: ^4.68.0
@@ -17641,7 +17641,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -28469,16 +28469,16 @@ packages:
       vue-template-compiler: 2.7.14
     dev: false
 
-  /vue-inbrowser-compiler-independent-utils@4.64.1(vue@2.7.14):
-    resolution: {integrity: sha512-Hn32n07XZ8j9W8+fmOXPQL+i+W2e/8i6mkH4Ju3H6nR0+cfvmWM95GhczYi5B27+Y8JlCKgAo04IUiYce4mKAw==}
+  /vue-inbrowser-compiler-independent-utils@4.69.0(vue@2.7.14):
+    resolution: {integrity: sha512-z9BTi8iXqS1ZLDK2quH6mrahMsaT+UuB5InhVPqR2Ft08OJw1Wxtalr9Cp5rRHOUirq9vaklzjEfD8WJGOIpuA==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
     dev: false
 
-  /vue-inbrowser-compiler-independent-utils@4.64.1(vue@3.2.37):
-    resolution: {integrity: sha512-Hn32n07XZ8j9W8+fmOXPQL+i+W2e/8i6mkH4Ju3H6nR0+cfvmWM95GhczYi5B27+Y8JlCKgAo04IUiYce4mKAw==}
+  /vue-inbrowser-compiler-independent-utils@4.69.0(vue@3.2.37):
+    resolution: {integrity: sha512-z9BTi8iXqS1ZLDK2quH6mrahMsaT+UuB5InhVPqR2Ft08OJw1Wxtalr9Cp5rRHOUirq9vaklzjEfD8WJGOIpuA==}
     peerDependencies:
       vue: '>=2'
     dependencies:
@@ -28510,7 +28510,7 @@ packages:
       camelcase: 5.3.1
       vue: 3.2.37
       vue-inbrowser-compiler-demi: 4.56.5(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
-      vue-inbrowser-compiler-independent-utils: 4.64.1(vue@3.2.37)
+      vue-inbrowser-compiler-independent-utils: 4.69.0(vue@3.2.37)
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
@@ -28524,7 +28524,7 @@ packages:
       camelcase: 5.3.1
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
       vue-inbrowser-compiler-demi: 4.56.5(vue-template-compiler@2.7.14)(vue@2.7.14)
-      vue-inbrowser-compiler-independent-utils: 4.64.1(vue@2.7.14)
+      vue-inbrowser-compiler-independent-utils: 4.69.0(vue@2.7.14)
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
