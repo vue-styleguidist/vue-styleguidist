@@ -31,7 +31,7 @@ describe('compileTemplateForEval', () => {
 
 	test('double header style should scope each block', () => {
 		const compiledComponent = {
-			template: '<div class="test">T</div><div class="test2">T2</div>',
+			template: `<svg><path/></svg><div class="test">T</div><div class="test2">T2</div>`,
 			script: 'return { data: 1 }',
 			style: '.test { color: red; } .test2 { color: blue; }',
 			setup: false,
@@ -44,13 +44,17 @@ describe('compileTemplateForEval', () => {
 			const __sfc__ = (function() {return { data: 1 }})()
 			  __sfc__.render = function() {const { createElementVNode: _createElementVNode, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = Vue
 
-			const _hoisted_1 = /*#__PURE__*/_createElementVNode(\\"div\\", { class: \\"test\\" }, \\"T\\", -1 /* HOISTED */)
-			const _hoisted_2 = /*#__PURE__*/_createElementVNode(\\"div\\", { class: \\"test2\\" }, \\"T2\\", -1 /* HOISTED */)
+			const _hoisted_1 = /*#__PURE__*/_createElementVNode(\\"svg\\", null, [
+			  /*#__PURE__*/_createElementVNode(\\"path\\")
+			], -1 /* HOISTED */)
+			const _hoisted_2 = /*#__PURE__*/_createElementVNode(\\"div\\", { class: \\"test\\" }, \\"T\\", -1 /* HOISTED */)
+			const _hoisted_3 = /*#__PURE__*/_createElementVNode(\\"div\\", { class: \\"test2\\" }, \\"T2\\", -1 /* HOISTED */)
 
 			return function render(_ctx, _cache, $props, $setup, $data, $options) {
 			  return (_openBlock(), _createElementBlock(_Fragment, null, [
 			    _hoisted_1,
-			    _hoisted_2
+			    _hoisted_2,
+			    _hoisted_3
 			  ], 64 /* STABLE_FRAGMENT */))
 			}}
 
