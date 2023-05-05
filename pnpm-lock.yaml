@@ -1994,7 +1994,7 @@ importers:
         specifier: ^4.67.0
         version: link:../vue-docgen-api
       vue-inbrowser-compiler:
-        specifier: ^4.71.1
+        specifier: ^4.72.0
         version: link:../vue-inbrowser-compiler
       vue-inbrowser-compiler-utils:
         specifier: ^4.71.1
@@ -28435,8 +28435,8 @@ packages:
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
     dev: false
 
-  /vue-inbrowser-compiler-demi@4.56.5(@vue/compiler-sfc@3.2.45)(vue@3.2.37):
-    resolution: {integrity: sha512-XMu7t+xRpry0vAm3qM07VO8+sF1hVjxuEy0CopsG3Y5h7G8TEpOQLjhgtsmDNzRjPtY2fU3+Wh8ZSFQMw3+7Ng==}
+  /vue-inbrowser-compiler-demi@4.71.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37):
+    resolution: {integrity: sha512-Lv5D++nFXwPk0jN8OLQpQnFvOaBvMZ4ghUCVwnJHkjYOqGJal2QEu5GX6DK4Fa/vdy/kdkWvdlZU4tj1xAEr3g==}
     requiresBuild: true
     peerDependencies:
       '@vue/compiler-sfc': '>=3'
@@ -28452,8 +28452,8 @@ packages:
       vue: 3.2.37
     dev: true
 
-  /vue-inbrowser-compiler-demi@4.56.5(vue-template-compiler@2.7.14)(vue@2.7.14):
-    resolution: {integrity: sha512-XMu7t+xRpry0vAm3qM07VO8+sF1hVjxuEy0CopsG3Y5h7G8TEpOQLjhgtsmDNzRjPtY2fU3+Wh8ZSFQMw3+7Ng==}
+  /vue-inbrowser-compiler-demi@4.71.1(vue-template-compiler@2.7.14)(vue@2.7.14):
+    resolution: {integrity: sha512-Lv5D++nFXwPk0jN8OLQpQnFvOaBvMZ4ghUCVwnJHkjYOqGJal2QEu5GX6DK4Fa/vdy/kdkWvdlZU4tj1xAEr3g==}
     requiresBuild: true
     peerDependencies:
       '@vue/compiler-sfc': '>=3'
@@ -28469,16 +28469,16 @@ packages:
       vue-template-compiler: 2.7.14
     dev: false
 
-  /vue-inbrowser-compiler-independent-utils@4.69.0(vue@2.7.14):
-    resolution: {integrity: sha512-z9BTi8iXqS1ZLDK2quH6mrahMsaT+UuB5InhVPqR2Ft08OJw1Wxtalr9Cp5rRHOUirq9vaklzjEfD8WJGOIpuA==}
+  /vue-inbrowser-compiler-independent-utils@4.71.1(vue@2.7.14):
+    resolution: {integrity: sha512-K3wt3iVmNGaFEOUR4JIThQRWfqokxLfnPslD41FDZB2ajXp789+wCqJyGYlIFsvEQ2P61PInw6/ph5iiqg51gg==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
     dev: false
 
-  /vue-inbrowser-compiler-independent-utils@4.69.0(vue@3.2.37):
-    resolution: {integrity: sha512-z9BTi8iXqS1ZLDK2quH6mrahMsaT+UuB5InhVPqR2Ft08OJw1Wxtalr9Cp5rRHOUirq9vaklzjEfD8WJGOIpuA==}
+  /vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.2.37):
+    resolution: {integrity: sha512-K3wt3iVmNGaFEOUR4JIThQRWfqokxLfnPslD41FDZB2ajXp789+wCqJyGYlIFsvEQ2P61PInw6/ph5iiqg51gg==}
     peerDependencies:
       vue: '>=2'
     dependencies:
@@ -28495,36 +28495,36 @@ packages:
       detect-browser: 5.2.0
       sucrase: 3.24.0
       vue: 3.2.37
-      vue-inbrowser-compiler-utils: 4.64.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
+      vue-inbrowser-compiler-utils: 4.71.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
       walkes: 0.2.1
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
     dev: true
 
-  /vue-inbrowser-compiler-utils@4.64.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37):
-    resolution: {integrity: sha512-ktwiNZvumVHHs80jbU9tgLVb8rx1HXrHcJfprdPbaclJ1yEkJzBNuyr0fYnGK3IQUs6eH0HANkdUP1CeuA2cRw==}
+  /vue-inbrowser-compiler-utils@4.71.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37):
+    resolution: {integrity: sha512-tyxCHpJLj3ii6u2M0xw3N+1+K7qQ+7MsSFUXAXnS1N8z0Rq74WiEfMlJFc+LdRmxiMk6T4eetJlkPzEIrBtmNA==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       camelcase: 5.3.1
       vue: 3.2.37
-      vue-inbrowser-compiler-demi: 4.56.5(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
-      vue-inbrowser-compiler-independent-utils: 4.69.0(vue@3.2.37)
+      vue-inbrowser-compiler-demi: 4.71.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
+      vue-inbrowser-compiler-independent-utils: 4.71.1(vue@3.2.37)
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
     dev: true
 
-  /vue-inbrowser-compiler-utils@4.64.1(vue-template-compiler@2.7.14)(vue@2.7.14):
-    resolution: {integrity: sha512-ktwiNZvumVHHs80jbU9tgLVb8rx1HXrHcJfprdPbaclJ1yEkJzBNuyr0fYnGK3IQUs6eH0HANkdUP1CeuA2cRw==}
+  /vue-inbrowser-compiler-utils@4.71.1(vue-template-compiler@2.7.14)(vue@2.7.14):
+    resolution: {integrity: sha512-tyxCHpJLj3ii6u2M0xw3N+1+K7qQ+7MsSFUXAXnS1N8z0Rq74WiEfMlJFc+LdRmxiMk6T4eetJlkPzEIrBtmNA==}
     peerDependencies:
       vue: '>=2'
     dependencies:
       camelcase: 5.3.1
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-inbrowser-compiler-demi: 4.56.5(vue-template-compiler@2.7.14)(vue@2.7.14)
-      vue-inbrowser-compiler-independent-utils: 4.69.0(vue@2.7.14)
+      vue-inbrowser-compiler-demi: 4.71.1(vue-template-compiler@2.7.14)(vue@2.7.14)
+      vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.14)
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
@@ -28541,7 +28541,7 @@ packages:
       camelcase: 5.3.1
       detect-browser: 5.2.0
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-inbrowser-compiler-utils: 4.64.1(vue-template-compiler@2.7.14)(vue@2.7.14)
+      vue-inbrowser-compiler-utils: 4.71.1(vue-template-compiler@2.7.14)(vue@2.7.14)
       walkes: 0.2.1
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
