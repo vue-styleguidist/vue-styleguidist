@@ -1,6 +1,6 @@
 {
   "name": "vue-inbrowser-compiler-sucrase",
-  "version": "4.71.1",
+  "version": "4.72.0",
   "description": "compile vue single file components right in your browser with support for TypeScript through sucrase",
   "module": "lib/vue-inbrowser-compiler-sucrase.esm.js",
   "main": "lib/vue-inbrowser-compiler-sucrase.cjs.js",

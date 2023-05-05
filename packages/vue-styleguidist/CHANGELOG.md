@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.72.0
+
+### Minor Changes
+
+- [`c972cff3`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c972cff356257b0162a10f8857f33d75dff639c8) Thanks [@elevatebart](https://github.com/elevatebart)! - build compiler using the updated utils
+
+### Patch Changes
+
+- Updated dependencies [[`c972cff3`](https://github.com/vue-styleguidist/vue-styleguidist/commit/c972cff356257b0162a10f8857f33d75dff639c8)]:
+  - vue-inbrowser-compiler@4.72.0
+
 ## 4.71.1
 
 ### Patch Changes
