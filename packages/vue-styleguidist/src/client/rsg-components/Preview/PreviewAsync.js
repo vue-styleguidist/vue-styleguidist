@@ -111,7 +111,8 @@ class PreviewAsync extends Component {
 						...this.context.config.compilerConfig,
 						...(this.context.config.jsxInExamples
 							? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
-							: {})
+							: {}),
+            moduleId,
 					})
 					this.setCompiledPreview(example)
 				} catch (err) {

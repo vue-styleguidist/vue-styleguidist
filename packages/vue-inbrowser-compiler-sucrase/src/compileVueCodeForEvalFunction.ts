@@ -30,7 +30,8 @@ export function compileVue3Template(template: string, component: any): () => any
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: Omit<TransformOptions, 'transforms'> & { objectAssign?: string } = {}
+	config: Omit<TransformOptions, 'transforms'> & { objectAssign?: string } = {},
+  scopeId?: string
 ): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const configWithTransforms: TransformOptions = {
@@ -42,6 +43,7 @@ export default function compileVueCodeForEvalFunction(
 
 	const compiledComponent = {
 		...nonCompiledComponent,
+    scopeId,
 		script: transform(nonCompiledComponent.script, configWithTransforms).code
 	}
 

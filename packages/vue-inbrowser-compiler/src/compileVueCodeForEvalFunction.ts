@@ -36,13 +36,15 @@ interface EvaluableComponentWithSource extends EvaluableComponent {
  */
 export default function compileVueCodeForEvalFunction(
 	code: string,
-	config: TransformOptions = {}
+	config: TransformOptions = {},
+  scopeId?: string
 ): EvaluableComponentWithSource {
 	const nonCompiledComponent = prepareVueCodeForEvalFunction(code, config)
 	const target = typeof window !== 'undefined' ? getTargetFromBrowser() : {}
 
 	const compiledComponent = {
 		...nonCompiledComponent,
+    scopeId,
 		script: transform(nonCompiledComponent.script, { target, ...config }).code
 	}
 
