@@ -105,6 +105,7 @@ class PreviewAsync extends Component {
 				return opts
 			})
 			.then(opts => {
+        const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
 				const { compile } = opts
 				try {
 					const example = compile(newCode, {
@@ -112,16 +113,16 @@ class PreviewAsync extends Component {
 						...(this.context.config.jsxInExamples
 							? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
 							: {}),
-            moduleId,
+              moduleId,
 					})
-					this.setCompiledPreview(example)
+					this.setCompiledPreview(example, moduleId)
 				} catch (err) {
 					this.handleError(err)
 				}
 			})
 	}
 
-	setCompiledPreview(example) {
+	setCompiledPreview(example, moduleId) {
 		const { vuex, component, renderRootJsx, enhancePreviewApp } = this.props
 		let el = this.mountNode.children[0]
 		if (!el) {
@@ -130,7 +131,7 @@ class PreviewAsync extends Component {
 			el = this.mountNode.children[0]
 		}
 
-		const { app, style, moduleId } = getCompiledExampleComponent({
+		const { app, style } = getCompiledExampleComponent({
 			compiledExample: example,
 			evalInContext: this.props.evalInContext,
 			vuex,
@@ -142,7 +143,8 @@ class PreviewAsync extends Component {
 				this.handleError(e)
 			},
 			el,
-			locallyRegisterComponents: this.context.config.locallyRegisterComponents
+			locallyRegisterComponents: this.context.config.locallyRegisterComponents,
+      moduleId,
 		})
 
 		this.vueInstance = app

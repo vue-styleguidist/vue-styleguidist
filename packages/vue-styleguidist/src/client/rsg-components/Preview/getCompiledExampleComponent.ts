@@ -18,6 +18,7 @@ interface InjectedParams {
 	destroyVueInstance: () => void
 	el: HTMLElement
 	locallyRegisterComponents: boolean
+  moduleId: string
 }
 
 export function getCompiledExampleComponent({
@@ -30,7 +31,8 @@ export function getCompiledExampleComponent({
 	handleError,
 	destroyVueInstance,
 	el,
-	locallyRegisterComponents
+	locallyRegisterComponents,
+  moduleId
 }: InjectedParams) {
 	let style
 	let previewComponent: any = {}
@@ -80,7 +82,7 @@ export function getCompiledExampleComponent({
 	if (vuex) {
 		extendsComponent = { store: vuex.default }
 	}
-	const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
+
 	if (isVue3) {
 		previewComponent.__scopeId = 'data-' + moduleId
 	} else {
@@ -128,8 +130,7 @@ export function getCompiledExampleComponent({
 				el,
         enhancePreviewApp
 			),
-			style,
-			moduleId
+			style
 		}
 	} catch (err) {
 		handleError(err)

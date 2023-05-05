@@ -83,9 +83,11 @@ class Preview extends Component {
 	}
 
 	executeCode() {
-		this.setState({
-			error: null
+    this.setState({
+      error: null,
 		})
+
+    const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
 
 		const { code, vuex, component, renderRootJsx, enhancePreviewApp } = this.props
 		if (!code) {
@@ -113,7 +115,7 @@ class Preview extends Component {
 			el = this.mountNode.children[0]
 		}
 
-		const { app, style, moduleId } = getCompiledExampleComponent({
+		const { app, style } = getCompiledExampleComponent({
 			compiledExample: example,
 			evalInContext: this.props.evalInContext,
 			vuex,
@@ -125,7 +127,8 @@ class Preview extends Component {
 				this.handleError(e)
 			},
 			el,
-			locallyRegisterComponents: this.context.config.locallyRegisterComponents
+			locallyRegisterComponents: this.context.config.locallyRegisterComponents,
+      moduleId,
 		})
 
 		this.vueInstance = app
