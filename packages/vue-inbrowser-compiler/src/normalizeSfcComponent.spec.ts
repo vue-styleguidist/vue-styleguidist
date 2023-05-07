@@ -106,8 +106,8 @@ const STATUS_OK = 200
 			const STATUS_OK = 200
 
 			return {msg,names,hello,STATUS_OK}
-			function defineProps(){}
-			function defineEmits(){}
+			function defineProps(props){ return props;}
+			function defineEmits(){ return function emit() {}}
 			function defineExpose(){}
 			}"
 		`)
@@ -127,8 +127,8 @@ import { Icon } from 'vue-icon'
 			const vue_icon$0 = require('vue-icon');const Icon = vue_icon$0.Icon;
 
 			return {}
-			function defineProps(){}
-			function defineEmits(){}
+			function defineProps(props){ return props;}
+			function defineEmits(){ return function emit() {}}
 			function defineExpose(){}
 			}"
 		`)

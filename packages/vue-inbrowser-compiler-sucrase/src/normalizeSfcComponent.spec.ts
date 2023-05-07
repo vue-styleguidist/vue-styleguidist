@@ -202,8 +202,8 @@ const STATUS_OK = 200
 			const STATUS_OK = 200
 
 			return {ref: _vue.ref,msg,names,hello,STATUS_OK}
-			function defineProps(){}
-			function defineEmits(){}
+			function defineProps(props){ return props;}
+			function defineEmits(){ return function emit() {}}
 			function defineExpose(){}
 			}"
 		`)
@@ -223,8 +223,8 @@ import { Icon } from 'vue-icon'
 			var _vueicon = require('vue-icon');
 
 			return {Icon: _vueicon.Icon}
-			function defineProps(){}
-			function defineEmits(){}
+			function defineProps(props){ return props;}
+			function defineEmits(){ return function emit() {}}
 			function defineExpose(){}
 			}"
 		`)
