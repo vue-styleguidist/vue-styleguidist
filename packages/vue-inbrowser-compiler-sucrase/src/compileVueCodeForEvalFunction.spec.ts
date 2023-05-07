@@ -221,8 +221,8 @@ const MyButton = () => h('button')
 			const MyButton = () => _vue.h.call(void 0, 'button')
 
 			return {IconSkullAndBones: _vuefeathericons.IconSkullAndBones,h: _vue.h,value,MyButton}
-			function defineProps(){}
-			function defineEmits(){}
+			function defineProps(props){ return props;}
+			function defineEmits(){ return function emit() {}}
 			function defineExpose(){}
 			}}})()
 			  __sfc__.render = function() {with(this){return _c('div',[_v(_s(value))])}}

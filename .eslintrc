@@ -102,7 +102,7 @@
 			}
 		},
     {
-			"files": ["packages/**/*.{spec,test}.{ts,tsx,js}"],
+			"files": ["packages/**/*.{spec,test}.{vue3.,}{ts,tsx,js}"],
 			"parserOptions": {
 				"sourceType": "module",
 				"ecmaVersion": 2015

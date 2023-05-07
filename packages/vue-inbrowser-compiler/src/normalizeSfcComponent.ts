@@ -137,8 +137,8 @@ export function parseScriptSetupCode(code: string): string {
 	return `setup(){
 ${code}
 return {${varNames.join(',')}}
-function defineProps(){}
-function defineEmits(){}
+function defineProps(props){ return props;}
+function defineEmits(){ return function emit() {}}
 function defineExpose(){}
 }`
 }
