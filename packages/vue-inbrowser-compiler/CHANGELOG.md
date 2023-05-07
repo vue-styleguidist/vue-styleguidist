@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.72.1
+
+### Patch Changes
+
+- [#1556](https://github.com/vue-styleguidist/vue-styleguidist/pull/1556) [`47f96b91`](https://github.com/vue-styleguidist/vue-styleguidist/commit/47f96b915b259e2ff05a5a35c99e1b18a9ee707e) Thanks [@elevatebart](https://github.com/elevatebart)! - implement define functions
+
 ## 4.72.0
 
 ### Minor Changes
