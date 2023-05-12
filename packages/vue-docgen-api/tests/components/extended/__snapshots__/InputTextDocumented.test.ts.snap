@@ -10,12 +10,6 @@ exports[`tests InputTextDoc > should match the snapshot 1`] = `
   "methods": undefined,
   "props": [
     {
-      "name": "question",
-      "type": {
-        "name": "undefined",
-      },
-    },
-    {
       "mixin": {
         "name": "multiNamed",
         "path": "../../mixins/multiNamed.js",
@@ -54,7 +48,6 @@ exports[`tests InputTextDoc > should match the snapshot 1`] = `
   ],
   "slots": undefined,
   "sourceFiles": [
-    /packages/vue-docgen-api/tests/components/extended/Base.vue,
     /packages/vue-docgen-api/tests/components/extended/InputTextDocumented.vue,
     /packages/vue-docgen-api/tests/mixins/another/deep.js,
     /packages/vue-docgen-api/tests/mixins/multiNamed.js,

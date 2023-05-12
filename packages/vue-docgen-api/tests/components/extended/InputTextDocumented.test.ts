@@ -8,7 +8,11 @@ let docInputTextDoc: ComponentDoc
 
 describe('tests InputTextDoc', () => {
 	beforeAll(async () => {
-		docInputTextDoc = await parse(InputTextDoc)
+		docInputTextDoc = await parse(InputTextDoc, {
+			validExtends(fullFilePath) {
+				return !/ignored/i.test(fullFilePath)
+			}
+		})
 	})
 
 	it('should return an object', () => {
@@ -31,7 +35,6 @@ describe('tests InputTextDoc', () => {
 			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name))
 				.toMatchInlineSnapshot(`
 					[
-					  "question",
 					  "importedProp",
 					  "otherMixinProp",
 					  "deep",
