@@ -25,11 +25,14 @@
 		},
 		{
 			"path": "./tsconfig.testSetup.json"
-    },
+		},
 		{
 			"path": "./packages/vue-docgen-cli/tsconfig.json"
 		},
-    {
+		{
+			"path": "./packages/vue-docgen-api/tsconfig.json"
+		},
+		{
 			"path": "./packages/vue-inbrowser-prismjs-highlighter/tsconfig.json"
 		},
 		{
