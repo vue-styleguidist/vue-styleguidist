@@ -1,5 +1,4 @@
 import * as path from 'path'
-import { describe, it, beforeAll, expect } from 'vitest'
 
 import { ComponentDoc } from '../../../src/Documentation'
 import { parse } from '../../../src/main'
