@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.72.2
+
+### Patch Changes
+
+- [#1558](https://github.com/vue-styleguidist/vue-styleguidist/pull/1558) [`14bdb1dd`](https://github.com/vue-styleguidist/vue-styleguidist/commit/14bdb1dd44f750a0032ca91484df4f9f084c07e3) Thanks [@elevatebart](https://github.com/elevatebart)! - fix valid extends
+
 ## 4.71.0
 
 ### Minor Changes
