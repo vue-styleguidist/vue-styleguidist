@@ -144,7 +144,7 @@ Replaces all of the handlers by those specified. If each of those 3 `handlers` a
 > })
 > ```
 
-#### `validExtend`
+#### `validExtends`
 
 Function - Returns true if an extended component should be parsed by docgen.
 
