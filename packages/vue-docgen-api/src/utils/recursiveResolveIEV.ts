@@ -60,7 +60,9 @@ export async function resolveIEV(
 	const filePathToVars = new Map<string, Map<string, string>>()
 	Object.keys(varToFilePath).forEach(k => {
 		const exportedVariable = varToFilePath[k]
-		exportedVariable.filePath.forEach(filePath => {
+		exportedVariable.filePath.forEach((filePath, i) => {
+			// skip if we already explored one path
+			if (i > 0) return
 			const exportToLocalMap = filePathToVars.get(filePath) || new Map<string, string>()
 			exportToLocalMap.set(k, exportedVariable.exportName)
 			filePathToVars.set(filePath, exportToLocalMap)
@@ -69,7 +71,7 @@ export async function resolveIEV(
 
 	// then roll though this map and replace varToFilePath elements with their final destinations
 	// {
-	//	nameOfVariable:{filePath:['filesWhereToFindIt'], exportedName:'nameUsedInExportThatCanBeUsedForFiltering'}
+	//	nameOfVariable: { filePath:['filesWhereToFindIt'], exportedName:'nameUsedInExportThatCanBeUsedForFiltering' }
 	// }
 	await Promise.all(
 		filePathToVars.entries().map(async ([filePath, exportToLocal]) => {
@@ -83,6 +85,12 @@ export async function resolveIEV(
 				try {
 					const fullFilePath = pathResolver(filePath)
 					if (!fullFilePath || !validExtends(fullFilePath)) {
+						exportToLocal.forEach((_, local) => {
+							if (local) {
+								delete varToFilePath[local]
+							}
+						})
+
 						return
 					}
 					const source = await read(fullFilePath, {

@@ -5,7 +5,7 @@
 	</div>
 </template>
 <script>
-import Base from './Base.vue'
+import BaseIgnored from './BaseIgnored.vue'
 import { multi, other } from '../../mixins'
 import { deep } from '../../mixins'
 
@@ -13,7 +13,7 @@ import { deep } from '../../mixins'
  * Description InputTextDocumented
  */
 export default {
-	extends: Base,
+  extends: BaseIgnored,
 	mixins: [multi, other, deep],
 	props: {
 		placeholder: {
