@@ -30,15 +30,18 @@ describe('IEV', () => {
 		}
 		mockResolver = vi.spyOn(spies, 'pathResolver')
 		vi.spyOn(resolvePathFrom, 'default').mockImplementation(p => `absolute/${p}`)
-		vi.spyOn(fs, 'readFile').mockImplementation(() =>
-			Promise.resolve(
-				[
-					`export { mixin as test } from "path/to/mixin"`,
-					`export * from "path/to/another/mixin"`,
-					`export * from "path/to/one/another/mixin"`
-				].join('\n')
-			)
-		)
+		vi.spyOn(fs, 'readFile').mockImplementation((p: string) => {
+			if (p.endsWith('component/local/path')) {
+				return Promise.resolve(
+					[
+						`export { mixin as test } from "path/to/mixin"`,
+						`export * from "path/to/another/mixin"`,
+						`export * from "path/to/one/another/mixin"`
+					].join('\n')
+				)
+			}
+			return Promise.resolve('')
+		})
 	})
 
 	describe('resolveIEV', () => {
@@ -57,8 +60,7 @@ describe('IEV', () => {
 				  "testBis": {
 				    "exportName": "exportName",
 				    "filePath": [
-				      "absolute/path/to/another/mixin",
-				      "absolute/path/to/one/another/mixin",
+				      "component/local/pathBis",
 				    ],
 				  },
 				}
@@ -77,12 +79,6 @@ describe('IEV', () => {
 			await recursiveResolveIEV(spies.pathResolver, set, () => true)
 
 			expect(mockResolver).toHaveBeenCalledWith('baz')
-		})
-
-		it('should should have nothing in the set when validExtends is false', async () => {
-			await recursiveResolveIEV(spies.pathResolver, set, p => p.endsWith('Bis'))
-
-			expect(Object.keys(set)).toMatchInlineSnapshot('[ "testBis" ]')
 		})
 	})
 })

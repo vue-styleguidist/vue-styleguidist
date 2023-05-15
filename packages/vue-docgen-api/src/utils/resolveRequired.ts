@@ -9,6 +9,11 @@ interface ImportedVariable {
 	exportName: string
 }
 
+/**
+ * A set of imported variables
+ * key: local variable name
+ * value: ImportedVariable
+ */
 export interface ImportedVariableSet {
 	[varname: string]: ImportedVariable
 }
