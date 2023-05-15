@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.72.3
+
+### Patch Changes
+
+- [`b05be722`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b05be7220d57c643a3f9d2552bbbb1aae6a52166) Thanks [@elevatebart](https://github.com/elevatebart)! - export-all should not skip all extensions
+
 ## 4.72.2
 
 ### Patch Changes
