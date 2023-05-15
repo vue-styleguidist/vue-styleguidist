@@ -3,7 +3,8 @@
 		"composite": true,
 		"module": "ESNext",
 		"moduleResolution": "Node",
-		"sourceMap": true
+		"sourceMap": true,
+		"types": ["vitest/globals"]
 	},
 	"include": ["test/setup.ts"]
 }

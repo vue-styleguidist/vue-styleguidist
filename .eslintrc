@@ -42,7 +42,7 @@
 		{
 			"files": ["packages/vue-styleguidist/src/client/**/*.*"],
 			"extends": ["plugin:react/recommended"],
-      "plugins": ["compat", "import"],
+			"plugins": ["compat", "import"],
 			"settings": {
 				"import/resolver": {
 					"node": {
@@ -93,7 +93,7 @@
 			}
 		},
 		{
-			"files": ["test/setup.ts", "**/vue-docgen-api/**"],
+			"files": ["**/vue-docgen-api/**"],
 			"env": {
 				"es6": true
 			},
@@ -101,43 +101,45 @@
 				"compat/compat": "off"
 			}
 		},
-    {
-			"files": ["packages/**/*.{spec,test}.{vue3.,}{ts,tsx,js}"],
+		{
+			"files": ["test/setup.ts", "packages/**/*.{spec,test}.{vue3.,}{ts,tsx,js}"],
+			"env": {
+				"es6": true
+			},
 			"parserOptions": {
 				"sourceType": "module",
 				"ecmaVersion": 2015
 			},
 			"rules": {
+				"compat/compat": "off",
 				"no-unused-vars": 0
 			},
-      "globals":{
-        "describe": false,
-        "vi": false,
-        "it": false,
-        "test": false,
-        "beforeAll": false,
-        "expect": false,
-        "beforeEach": false,
-        "afterEach": false
-      }
+			"globals": {
+				"describe": false,
+				"vi": false,
+				"it": false,
+				"test": false,
+				"beforeAll": false,
+				"expect": false,
+				"beforeEach": false,
+				"afterEach": false
+			}
 		},
-    {
+		{
 			"files": [
-        "packages/**/*.cy.{ts,tsx,js}", 
-        "packages/**/*.cy.vue3.{ts,tsx,js}", 
-        "test/cypress/**/*.{ts,tsx,js}"
-      ],
+				"packages/**/*.cy.{ts,tsx,js}",
+				"packages/**/*.cy.vue3.{ts,tsx,js}",
+				"test/cypress/**/*.{ts,tsx,js}"
+			],
 			"parserOptions": {
 				"sourceType": "module",
 				"ecmaVersion": 2015
 			},
-      "plugins": ["cypress", "mocha"],
-      "extends": [
-        "plugin:cypress/recommended"
-      ],
-      "rules": {
-        "mocha/no-exclusive-tests": "error"
+			"plugins": ["cypress", "mocha"],
+			"extends": ["plugin:cypress/recommended"],
+			"rules": {
+				"mocha/no-exclusive-tests": "error"
 			}
-    }
+		}
 	]
 }
