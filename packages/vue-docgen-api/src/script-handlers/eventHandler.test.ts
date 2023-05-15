@@ -25,7 +25,7 @@ describe('eventHandler', () => {
 		mockGetEventDescriptor.mockReturnValue(mockEventDescriptor)
 	})
 
-	it('should find events emmitted', () => {
+	it('should find events emitted', () => {
 		const src = `
     export default {
       methods: {

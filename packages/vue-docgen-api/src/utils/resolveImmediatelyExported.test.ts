@@ -55,13 +55,14 @@ describe('resolveImmediatelyExported', () => {
 		const ast = babylon().parse(
 			[
 				'export foo from "file/path"', // export this one to ignore
-				'export * from "test/path";'
+				'export * from "test/path"',
+				'export * from "another/path"'
 			].join('\n')
 		)
 		const varNames = resolveImmediatelyExported(ast, ['foo', 'baz'])
 		expect(varNames).toMatchObject({
 			foo: { filePath: ['file/path'], exportName: 'foo' },
-			baz: { filePath: ['test/path'], exportName: 'baz' }
+			baz: { filePath: ['test/path', 'another/path'], exportName: 'baz' }
 		})
 	})
 })

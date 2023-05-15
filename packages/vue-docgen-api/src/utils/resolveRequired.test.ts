@@ -3,7 +3,7 @@ import resolveRequired from './resolveRequired'
 
 describe('resolveRequired', () => {
 	it('should resolve imported variables', () => {
-		const ast = babylon().parse('import {test, bonjour} from "test/path";')
+		const ast = babylon().parse('import { test, bonjour } from "test/path";')
 		const varNames = resolveRequired(ast)
 		expect(varNames).toMatchObject({
 			test: { filePath: ['test/path'], exportName: 'test' },
@@ -59,5 +59,24 @@ describe('resolveRequired', () => {
 	it('should not return non required variables', () => {
 		const ast = babylon().parse('const sayonara = "Japanese Hello";')
 		expect(resolveRequired(ast).sayonara).toBeUndefined()
+	})
+
+	it('has multi filePath when using export * from "file/path"', () => {
+		const ast = babylon().parse(
+			[
+				'import my from "other/file/path"', //
+				'export * from "file/path"'
+			].join('\n')
+		)
+		expect(resolveRequired(ast)).toMatchInlineSnapshot(`
+			{
+			  "my": {
+			    "exportName": "default",
+			    "filePath": [
+			      "other/file/path",
+			    ],
+			  },
+			}
+		`)
 	})
 })

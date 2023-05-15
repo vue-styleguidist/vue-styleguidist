@@ -3,7 +3,7 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
 
 interface ImportedVariable {
-	// an imported variable can have mutiple potential filepath
+	// an imported variable can have multiple potential filepath
 	// when it is not imported explicitely but using export * from "path"
 	filePath: string[]
 	exportName: string

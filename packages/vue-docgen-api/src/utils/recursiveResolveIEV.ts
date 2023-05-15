@@ -1,21 +1,16 @@
-import { readFile } from 'fs'
+import { promises as fs } from 'fs'
 import * as path from 'path'
-import { promisify } from 'util'
 import { parse } from 'recast'
 import Map from 'ts-map'
+import hash from 'hash-sum'
 import buildParser from '../babel-parser'
 import cacher from './cacher'
 import resolveImmediatelyExported from './resolveImmediatelyExported'
 import { ImportedVariableSet } from './resolveRequired'
 
-const read = promisify(readFile)
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const hash = require('hash-sum')
-
 /**
  * Recursively resolves specified variables to their actual files
- * Useful when using intermeriary files like this
+ * Useful when using intermediary files like this
  *
  * ```js
  * export mixin from "path/to/mixin"
@@ -41,10 +36,11 @@ export default async function recursiveResolveIEV(
 
 /**
  * Resolves specified variables to their actual files
- * Useful when using intermeriary files like this
+ * Useful when using intermediary files like this
  *
  * ```js
  * export mixin from "path/to/mixin"
+ * export * from "path/to/another/mixin"
  * ```
  *
  * @param pathResolver function to resolve relative to absolute path
@@ -61,8 +57,6 @@ export async function resolveIEV(
 	Object.keys(varToFilePath).forEach(k => {
 		const exportedVariable = varToFilePath[k]
 		exportedVariable.filePath.forEach((filePath, i) => {
-			// skip if we already explored one path
-			if (i > 0) return
 			const exportToLocalMap = filePathToVars.get(filePath) || new Map<string, string>()
 			exportToLocalMap.set(k, exportedVariable.exportName)
 			filePathToVars.set(filePath, exportToLocalMap)
@@ -93,7 +87,7 @@ export async function resolveIEV(
 
 						return
 					}
-					const source = await read(fullFilePath, {
+					const source = await fs.readFile(fullFilePath, {
 						encoding: 'utf-8'
 					})
 					const astRemote = cacher(() => parse(source, { parser: buildParser() }), source)
