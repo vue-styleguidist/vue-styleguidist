@@ -53,6 +53,10 @@ describe('tests InputTextDoc', () => {
 			expect(getTestDescriptor(docInputTextDoc.props, 'placeholder').mixin).toBeUndefined()
 		})
 
+    it('should skip ignored files', () => {
+			expect(docInputTextDoc.props?.find(p => p.name === 'ignored_prop')).toBeUndefined()
+		})
+
 		it('should contain mixin imported props', () => {
 			expect(docInputTextDoc.props && docInputTextDoc.props.map(p => p.name)).toContain(
 				'importedProp'

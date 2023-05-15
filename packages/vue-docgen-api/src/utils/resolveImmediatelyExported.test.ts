@@ -4,7 +4,7 @@ import resolveImmediatelyExported from './resolveImmediatelyExported'
 describe('resolveImmediatelyExported', () => {
 	it('should immediately exported varibles', () => {
 		const ast = babylon().parse('export { test } from "test/path";')
-		const varNames = resolveImmediatelyExported(ast, ['test'])
+		const { variables: varNames } = resolveImmediatelyExported(ast, ['test'])
 		expect(varNames).toMatchObject({
 			test: { filePath: ['test/path'], exportName: 'test' }
 		})
@@ -12,7 +12,7 @@ describe('resolveImmediatelyExported', () => {
 
 	it('should immediately exported varibles with aliases', () => {
 		const ast = babylon().parse('export { test as changedName } from "test/path";')
-		const varNames = resolveImmediatelyExported(ast, ['changedName'])
+		const { variables: varNames } = resolveImmediatelyExported(ast, ['changedName'])
 		expect(varNames).toMatchObject({
 			changedName: { filePath: ['test/path'], exportName: 'test' }
 		})
@@ -25,7 +25,7 @@ describe('resolveImmediatelyExported', () => {
 				'export { middleName as changedName };'
 			].join('\n')
 		)
-		const varNames = resolveImmediatelyExported(ast, ['changedName'])
+		const { variables: varNames } = resolveImmediatelyExported(ast, ['changedName'])
 		expect(varNames).toMatchObject({
 			changedName: { filePath: ['test/path'], exportName: 'test' }
 		})
@@ -35,7 +35,7 @@ describe('resolveImmediatelyExported', () => {
 		const ast = babylon().parse(
 			['import test from "test/path";', 'export { test as changedName };'].join('\n')
 		)
-		const varNames = resolveImmediatelyExported(ast, ['changedName'])
+		const { variables: varNames } = resolveImmediatelyExported(ast, ['changedName'])
 		expect(varNames).toMatchObject({
 			changedName: { filePath: ['test/path'], exportName: 'default' }
 		})
@@ -45,7 +45,7 @@ describe('resolveImmediatelyExported', () => {
 		const ast = babylon().parse(
 			['import { test } from "test/path";', 'export default test;'].join('\n')
 		)
-		const varNames = resolveImmediatelyExported(ast, ['default'])
+		const { variables: varNames } = resolveImmediatelyExported(ast, ['default'])
 		expect(varNames).toMatchObject({
 			default: { filePath: ['test/path'], exportName: 'test' }
 		})
@@ -55,13 +55,14 @@ describe('resolveImmediatelyExported', () => {
 		const ast = babylon().parse(
 			[
 				'export foo from "file/path"', // export this one to ignore
-				'export * from "test/path";'
+				'export * from "test/path"',
+				'export * from "another/path"'
 			].join('\n')
 		)
-		const varNames = resolveImmediatelyExported(ast, ['foo', 'baz'])
+		const { variables: varNames } = resolveImmediatelyExported(ast, ['foo', 'baz'])
 		expect(varNames).toMatchObject({
 			foo: { filePath: ['file/path'], exportName: 'foo' },
-			baz: { filePath: ['test/path'], exportName: 'baz' }
+			baz: { filePath: ['test/path', 'another/path'], exportName: 'baz' }
 		})
 	})
 })

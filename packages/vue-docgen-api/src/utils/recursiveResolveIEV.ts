@@ -1,21 +1,16 @@
-import { readFile } from 'fs'
+import { promises as fs } from 'fs'
 import * as path from 'path'
-import { promisify } from 'util'
 import { parse } from 'recast'
 import Map from 'ts-map'
+import hash from 'hash-sum'
 import buildParser from '../babel-parser'
 import cacher from './cacher'
 import resolveImmediatelyExported from './resolveImmediatelyExported'
 import { ImportedVariableSet } from './resolveRequired'
 
-const read = promisify(readFile)
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const hash = require('hash-sum')
-
 /**
  * Recursively resolves specified variables to their actual files
- * Useful when using intermeriary files like this
+ * Useful when using intermediary files like this
  *
  * ```js
  * export mixin from "path/to/mixin"
@@ -29,22 +24,24 @@ export default async function recursiveResolveIEV(
 	varToFilePath: ImportedVariableSet,
 	validExtends: (fullFilePath: string) => boolean
 ) {
-	// resolve imediately exported variable as many layers as they are burried
-	let hashBefore: any
+	// resolve immediately exported variable as many layers as they are buried
+	const hashes = new Set<string>()
+
 	do {
-		hashBefore = hash(varToFilePath)
 		// in this case I need to resolve IEV in sequence in case they are defined multiple times
 		// eslint-disable-next-line no-await-in-loop
 		await resolveIEV(pathResolver, varToFilePath, validExtends)
-	} while (hashBefore !== hash(varToFilePath))
+		// we iterate until there is no change in the set of variables or there is a loop
+	} while (!hashes.has(hash(varToFilePath)) && hashes.add(hash(varToFilePath)))
 }
 
 /**
  * Resolves specified variables to their actual files
- * Useful when using intermeriary files like this
+ * Useful when using intermediary files like this
  *
  * ```js
  * export mixin from "path/to/mixin"
+ * export * from "path/to/another/mixin"
  * ```
  *
  * @param pathResolver function to resolve relative to absolute path
@@ -59,10 +56,11 @@ export async function resolveIEV(
 	// key: filepath, content: {key: localName, content: exportedName}
 	const filePathToVars = new Map<string, Map<string, string>>()
 	Object.keys(varToFilePath).forEach(k => {
+		// the only way a variable can be exported by multiple files
+		// is if one of those files is exported as follows
+		// export * from 'path/to/file'
 		const exportedVariable = varToFilePath[k]
 		exportedVariable.filePath.forEach((filePath, i) => {
-			// skip if we already explored one path
-			if (i > 0) return
 			const exportToLocalMap = filePathToVars.get(filePath) || new Map<string, string>()
 			exportToLocalMap.set(k, exportedVariable.exportName)
 			filePathToVars.set(filePath, exportToLocalMap)
@@ -85,29 +83,26 @@ export async function resolveIEV(
 				try {
 					const fullFilePath = pathResolver(filePath)
 					if (!fullFilePath || !validExtends(fullFilePath)) {
-						exportToLocal.forEach((_, local) => {
-							if (local) {
-								delete varToFilePath[local]
-							}
-						})
-
+						// if the file is not in scope of the analysis, skip it
+						// if no variable export corresponds to this local name, we delete it at the very end
 						return
 					}
-					const source = await read(fullFilePath, {
+					const source = await fs.readFile(fullFilePath, {
 						encoding: 'utf-8'
 					})
 					const astRemote = cacher(() => parse(source, { parser: buildParser() }), source)
-					const returnedVariables = resolveImmediatelyExported(astRemote, exportedVariableNames)
+					const { variables: returnedVariables } = resolveImmediatelyExported(
+						astRemote,
+						exportedVariableNames
+					)
 					if (Object.keys(returnedVariables).length) {
-						exportToLocal.forEach((exported, local) => {
-							if (exported && local) {
-								const aliasedVariable = returnedVariables[exported]
-								if (aliasedVariable) {
-									aliasedVariable.filePath = aliasedVariable.filePath
-										.map(p => pathResolver(p, path.dirname(fullFilePath)))
-										.filter(a => a) as string[]
-									varToFilePath[local] = aliasedVariable
-								}
+						exportToLocal.forEach((exported: string, local: string) => {
+							const aliasedVariable = returnedVariables[exported]
+							if (aliasedVariable) {
+								aliasedVariable.filePath = aliasedVariable.filePath
+									.map(p => pathResolver(p, path.dirname(fullFilePath)))
+									.filter(a => a) as string[]
+								varToFilePath[local] = aliasedVariable
 							}
 						})
 					}

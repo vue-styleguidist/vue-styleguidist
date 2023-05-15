@@ -3,7 +3,7 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
 import { ImportedVariableSet } from './resolveRequired'
 
-export default function (ast: bt.File, variableFilter: string[]): ImportedVariableSet {
+export default function (ast: bt.File, variableFilter: string[]) {
 	const variables: ImportedVariableSet = {}
 
 	const importedVariablePaths: ImportedVariableSet = {}
@@ -95,5 +95,5 @@ export default function (ast: bt.File, variableFilter: string[]): ImportedVariab
 			})
 	}
 
-	return variables
+	return { variables, exportAll: exportAllFiles.length > 0 }
 }
