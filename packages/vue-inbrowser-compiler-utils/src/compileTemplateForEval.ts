@@ -10,8 +10,14 @@ export function compileTemplateForEval(compiledComponent: EvaluableComponent): v
 				cssVars: [],
 				script: {
 					type: 'script',
-					content: `export default (function () {${compiledComponent.script}})()`
+					content: `export default (function () {${compiledComponent.script}})()`,
+					loc: {
+						start: {
+							offset: 0
+						}
+					}
 				},
+				source: `<script>export default (function () {${compiledComponent.script}})()</script>`,
 				scriptSetup: null
 			} as any,
 			{
