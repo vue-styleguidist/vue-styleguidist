@@ -1456,7 +1456,7 @@ importers:
   packages/vue-cli-plugin-styleguidist:
     dependencies:
       vue-styleguidist:
-        specifier: ^4.47.0
+        specifier: ^4.72.4
         version: link:../vue-styleguidist
       webpack-merge:
         specifier: ^4.2.2
@@ -1606,7 +1606,7 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0
       vue-inbrowser-compiler-utils:
-        specifier: ^4.71.1
+        specifier: ^4.72.4
         version: link:../vue-inbrowser-compiler-utils
       walkes:
         specifier: ^0.2.1
@@ -1706,7 +1706,7 @@ importers:
         specifier: 3.29.0
         version: 3.29.0
       vue-inbrowser-compiler-utils:
-        specifier: ^4.71.1
+        specifier: ^4.72.4
         version: link:../vue-inbrowser-compiler-utils
       walkes:
         specifier: ^0.2.1
@@ -1997,10 +1997,10 @@ importers:
         specifier: ^4.67.0
         version: link:../vue-docgen-api
       vue-inbrowser-compiler:
-        specifier: ^4.72.0
+        specifier: ^4.72.4
         version: link:../vue-inbrowser-compiler
       vue-inbrowser-compiler-utils:
-        specifier: ^4.71.1
+        specifier: ^4.72.4
         version: link:../vue-inbrowser-compiler-utils
       vue-inbrowser-prismjs-highlighter:
         specifier: ^4.68.0
