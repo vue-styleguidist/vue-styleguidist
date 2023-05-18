@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.72.4
+
+### Patch Changes
+
+- [#1563](https://github.com/vue-styleguidist/vue-styleguidist/pull/1563) [`8e0fd2a0`](https://github.com/vue-styleguidist/vue-styleguidist/commit/8e0fd2a0c456d4c5bd1a2b4a3107f1eb5f13e4a7) Thanks [@elevatebart](https://github.com/elevatebart)! - fix compatibility with vue 3.3.2
+
 ## 4.71.1
 
 ### Patch Changes
