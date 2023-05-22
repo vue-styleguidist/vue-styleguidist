@@ -1,5 +1,5 @@
 /// @ts-check
-import { parse } from '@vue/compiler-sfc'
+import { getImports } from './get-imports.mjs'
 
 function addVueLive(md, opts) {
 	const fence = md.renderer.rules.fence
@@ -13,24 +13,13 @@ function addVueLive(md, opts) {
 			return fence(...args)
 		}
 
-		const getImports = code => {
-			// script is at the beginning of a line after a return
-			// In case we are loading a vue component as an example, extract script tag
-			const { descriptor } = parse(code)
-			if (descriptor) {
-				const imports = Object.keys(descriptor?.script?.imports || {})
-				return imports
-			}
-			return []
-		}
-
 		const code = token.content
 
 		// analyze code to find requires
 		// put all requires into a "requires" object
 		// add this as a prop
 		const imports = getImports(code)
-		const requires = imports.map(mod => `'${mod}': require('${mod}')`)
+		const requires = Object.values(imports).map(mod => `'${mod.source}': require('${mod.source}')`)
 		const langArray = lang.split(' ')
 		const langClean = langArray[0]
 		const codeClean = md.utils.escapeHtml(code).replace(/\`/g, '\\`').replace(/\$/g, '\\$')
