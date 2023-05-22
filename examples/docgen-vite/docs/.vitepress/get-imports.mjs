@@ -1,5 +1,4 @@
 import { parse } from '@vue/compiler-sfc'
-import { transform } from 'sucrase'
 import { parse as esParse } from 'es-module-lexer/js'
 
 /**
@@ -99,16 +98,6 @@ export const getImports = code => {
 			return parseImports(
 				descriptor?.script?.content ?? '' + '\n' + descriptor?.scriptSetup?.content ?? ''
 			)
-		}
-	} else {
-		try {
-			const finalCode = transform(code, {
-				transforms: ['typescript', 'jsx']
-			}).code
-
-			return parseImports(finalCode)
-		} catch (e) {
-			// eat the compile or parse error
 		}
 	}
 	return {}
