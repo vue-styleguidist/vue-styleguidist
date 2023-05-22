@@ -535,6 +535,9 @@ importers:
       concurrently:
         specifier: ^4.1.2
         version: 4.1.2
+      es-module-lexer:
+        specifier: ^1.2.1
+        version: 1.2.1
       globby:
         specifier: ^13.1.2
         version: 13.1.2
@@ -15440,6 +15443,10 @@ packages:
     resolution: {integrity: sha512-1HQ2M2sPtxwnvOvT1ZClHyQDiggdNjURWpY2we6aMKCQiUVxTmVs2UYPLIrD84sS+kMdUwfBSylbJPwNnBrnHQ==}
     dev: true
 
+  /es-module-lexer@1.2.1:
+    resolution: {integrity: sha512-9978wrXM50Y4rTMmW5kXIC09ZdXQZqkE4mxhwkd8VbzsGkXGPgV4zWuqQJgCEzYngdo2dYDa0l8xhX4fkSwJSg==}
+    dev: true
+
   /es-shim-unscopables@1.0.0:
     resolution: {integrity: sha512-Jm6GPcCdC30eMLbZ2x8z2WuRwAws3zTBBKuusffYVUrNj/GVSUAZ+xKMaUpfNDR5IbyNA5LJbaecoUVbmUcB1w==}
     dependencies:
@@ -28570,15 +28577,15 @@ packages:
       detect-browser: 5.2.0
       sucrase: 3.24.0
       vue: 3.2.37
-      vue-inbrowser-compiler-utils: 4.71.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
+      vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.45)(vue@3.2.37)
       walkes: 0.2.1
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - vue-template-compiler
     dev: true
 
-  /vue-inbrowser-compiler-utils@4.71.1(@vue/compiler-sfc@3.2.45)(vue@3.2.37):
-    resolution: {integrity: sha512-tyxCHpJLj3ii6u2M0xw3N+1+K7qQ+7MsSFUXAXnS1N8z0Rq74WiEfMlJFc+LdRmxiMk6T4eetJlkPzEIrBtmNA==}
+  /vue-inbrowser-compiler-utils@4.72.4(@vue/compiler-sfc@3.2.45)(vue@3.2.37):
+    resolution: {integrity: sha512-RPMg/Qj6Vbtxao2W/ye8PIkxj8duuv7tqRiuEULSqcs+mm8acboHL4Ui2ClcwgQuArKb/lfUKHVSBN8ZEnTUhA==}
     peerDependencies:
       vue: '>=2'
     dependencies:
@@ -28591,8 +28598,8 @@ packages:
       - vue-template-compiler
     dev: true
 
-  /vue-inbrowser-compiler-utils@4.71.1(vue-template-compiler@2.7.14)(vue@2.7.14):
-    resolution: {integrity: sha512-tyxCHpJLj3ii6u2M0xw3N+1+K7qQ+7MsSFUXAXnS1N8z0Rq74WiEfMlJFc+LdRmxiMk6T4eetJlkPzEIrBtmNA==}
+  /vue-inbrowser-compiler-utils@4.72.4(vue-template-compiler@2.7.14)(vue@2.7.14):
+    resolution: {integrity: sha512-RPMg/Qj6Vbtxao2W/ye8PIkxj8duuv7tqRiuEULSqcs+mm8acboHL4Ui2ClcwgQuArKb/lfUKHVSBN8ZEnTUhA==}
     peerDependencies:
       vue: '>=2'
     dependencies:
@@ -28605,8 +28612,8 @@ packages:
       - vue-template-compiler
     dev: false
 
-  /vue-inbrowser-compiler@4.72.1(vue-template-compiler@2.7.14)(vue@2.7.14):
-    resolution: {integrity: sha512-sV7xODGIoVklKUAA7I4BIGhMPQY7/A6NGMlja0grZ5EntkCDi+1QnB9Mo7xk9g1fQVOt1zLcKuU2d9b2B1aamA==}
+  /vue-inbrowser-compiler@4.72.4(vue-template-compiler@2.7.14)(vue@2.7.14):
+    resolution: {integrity: sha512-3uhtgUm85HY3ma1lue5vZvziEsycj7Lzm7DIl21z+kPlfOKm4/zIlszwya9/JW7bsJnm0gQnWzyEa4v64mwQVg==}
     peerDependencies:
       vue: '>=2'
     dependencies:
@@ -28616,7 +28623,7 @@ packages:
       camelcase: 5.3.1
       detect-browser: 5.2.0
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-inbrowser-compiler-utils: 4.71.1(vue-template-compiler@2.7.14)(vue@2.7.14)
+      vue-inbrowser-compiler-utils: 4.72.4(vue-template-compiler@2.7.14)(vue@2.7.14)
       walkes: 0.2.1
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
@@ -28638,7 +28645,7 @@ packages:
       prismjs: 1.29.0
       recast: 0.19.1
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-inbrowser-compiler: 4.72.1(vue-template-compiler@2.7.14)(vue@2.7.14)
+      vue-inbrowser-compiler: 4.72.4(vue-template-compiler@2.7.14)(vue@2.7.14)
       vue-prism-editor: 1.2.2(vue@2.7.14)
       vue-template-compiler: 2.7.14
     transitivePeerDependencies:
