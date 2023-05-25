@@ -6,7 +6,6 @@ import resolveExportedComponent from '../utils/resolveExportedComponent'
 import Documentation, { PropDescriptor } from '../Documentation'
 import setupPropHandler from './setupPropHandler'
 
-
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
 }
@@ -238,22 +237,22 @@ describe('setupPropHandler', () => {
 				})
 			})
 
-      it('returns types as a parameter', async () => {
-        const src = `
+			it('returns types as a parameter', async () => {
+				const src = `
         defineProps({
           foo: {
             type: Map<number, number>,
           },
         });`
 
-        const prop = await parserTest(src)
+				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('foo')
 				expect(prop.type).toMatchInlineSnapshot(`
 					{
 					  "name": "Map<number, number>",
 					}
 				`)
-      })
+			})
 		})
 
 		describe('local interfaces and types', () => {
@@ -288,6 +287,31 @@ describe('setupPropHandler', () => {
 				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('param')
 				expect(prop.type).toMatchObject({ name: 'LocalType' })
+			})
+
+			it('resolves local enum types', async () => {
+				const src = `
+        type Options = 4 | 5 | 6
+        defineProps<{
+          bar: Options
+        }>()
+					`
+				const prop = await parserTest(src)
+				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('bar')
+				expect(prop.type).toMatchObject({
+					name: 'Options',
+					elements: [
+						{
+							name: '4'
+						},
+						{
+							name: '5'
+						},
+						{
+							name: '6'
+						}
+					]
+				})
 			})
 		})
 
