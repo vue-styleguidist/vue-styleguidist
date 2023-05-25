@@ -41,7 +41,11 @@ function printType(t?: bt.TSType): ParamType {
 		return { name: '' }
 	}
 
-	if (bt.isTSLiteralType(t) && !bt.isUnaryExpression(t.literal) && !bt.isTemplateLiteral(t.literal)) {
+	if (
+		bt.isTSLiteralType(t) &&
+		!bt.isUnaryExpression(t.literal) &&
+		!bt.isTemplateLiteral(t.literal)
+	) {
 		return { name: JSON.stringify(t.literal.value) }
 	}
 
@@ -54,7 +58,7 @@ function printType(t?: bt.TSType): ParamType {
 	if (bt.isTSTypeReference(t) && bt.isIdentifier(t.typeName)) {
 		const out: ParamType = { name: t.typeName.name }
 		if (t.typeParameters?.params) {
-			out.elements = t.typeParameters.params.map(getTypeObjectFromTSType)
+			out.elements = t.typeParameters.params.map(type => getTypeObjectFromTSType(type))
 		}
 		return out
 	}
@@ -66,9 +70,12 @@ function printType(t?: bt.TSType): ParamType {
 	return { name: t.type }
 }
 
-function getTypeObjectFromTSType(type: bt.TSType): ParamType {
+function getTypeObjectFromTSType(type: bt.TSType, astPath?: bt.File): ParamType {
 	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
-		? { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
+		? {
+				name: TS_TYPE_NAME_MAP[type.type],
+				elements: type.types.map(typeLocal => getTypeObjectFromTSType(typeLocal))
+		  }
 		: bt.isTSArrayType(type)
 		? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
 		: printType(type)
@@ -97,19 +104,24 @@ function getTypeObjectFromFlowType(type: bt.FlowType): ParamType {
 	return { name }
 }
 
+/**
+ * Add tags and description to a prop descriptor from a doc block
+ * @param item the ast node for the prop/event/method...
+ * @param descriptor the descriptor to decorate
+ */
 export function decorateItem(
 	item: NodePath,
-	propDescriptor: { description?: string; tags?: Record<string, BlockTag[]> }
+	descriptor: { description?: string; tags?: Record<string, BlockTag[]> }
 ) {
 	const docBlock = getDocblock(item)
 	const jsDoc: DocBlockTags = docBlock ? getDoclets(docBlock) : { description: '', tags: [] }
 	const jsDocTags: BlockTag[] = jsDoc.tags ? jsDoc.tags : []
 
 	if (jsDoc.description) {
-		propDescriptor.description = jsDoc.description
+		descriptor.description = jsDoc.description
 	}
 
 	if (jsDocTags.length) {
-		propDescriptor.tags = transformTagsIntoObject(jsDocTags)
+		descriptor.tags = transformTagsIntoObject(jsDocTags)
 	}
 }
