@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.72.5
+
+### Patch Changes
+
+- [#1573](https://github.com/vue-styleguidist/vue-styleguidist/pull/1573) [`d4c2deca`](https://github.com/vue-styleguidist/vue-styleguidist/commit/d4c2decae791b7311ea1c0988aa3935501ea4024) Thanks [@thibaudszy](https://github.com/thibaudszy)! - improve performance of the path resolution
+
 ## 4.72.3
 
 ### Patch Changes
