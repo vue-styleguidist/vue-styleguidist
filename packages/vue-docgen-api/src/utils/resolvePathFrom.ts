@@ -6,7 +6,7 @@ const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 export default function resolvePathFrom(path: string, from: string[]): string | null {
 	let finalPath: string | null = null
 
-	SUFFIXES.forEach(s => {
+	for (const s of SUFFIXES) {
 		if (!finalPath) {
 			try {
 				finalPath = require.resolve(`${path}${s}`, {
@@ -37,7 +37,10 @@ export default function resolvePathFrom(path: string, from: string[]): string | 
 				}
 			}
 		}
-	})
+		if (finalPath) {
+			break
+		}
+	}
 
 	try {
 		const packagePath = require.resolve(join(path, 'package.json'), {
