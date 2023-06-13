@@ -2,7 +2,7 @@ import { ParserPlugin } from '@babel/parser'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import babylon from '../babel-parser'
-import Documentation, { ExposeDescriptor } from '../Documentation'
+import Documentation from '../Documentation'
 import resolveExportedComponent from '../utils/resolveExportedComponent'
 import setupOptionsHandler from './setupOptionsHandler'
 
