@@ -1,17 +1,18 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import { print } from 'recast'
+import { print, visit } from 'recast'
 import { BlockTag, DocBlockTags, ParamType } from '../Documentation'
 import getDocblock from './getDocblock'
 import getDoclets from './getDoclets'
 import transformTagsIntoObject from './transformTagsIntoObject'
 
 export default function getTypeFromAnnotation(
-	typeNode: bt.TypeAnnotation | bt.TSTypeAnnotation | bt.Noop | null
+	typeNode: bt.TypeAnnotation | bt.TSTypeAnnotation | bt.Noop | null,
+	astPath?: bt.File
 ): ParamType | undefined {
 	if (typeNode) {
 		if (bt.isTSTypeAnnotation(typeNode)) {
-			return getTypeObjectFromTSType(typeNode.typeAnnotation)
+			return getTypeObjectFromTSType(typeNode.typeAnnotation, astPath)
 		} else if (bt.isTypeAnnotation(typeNode)) {
 			return getTypeObjectFromFlowType(typeNode.typeAnnotation)
 		}
@@ -70,6 +71,37 @@ function printType(t?: bt.TSType): ParamType {
 	return { name: t.type }
 }
 
+function getTypeDefinitionFromIdentifier(astPath: bt.File, typeName: string): NodePath | undefined {
+	let typeBody: NodePath | undefined = undefined
+	visit(astPath.program, {
+		visitTSInterfaceDeclaration(nodePath) {
+			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
+				typeBody = nodePath.get('body', 'body')
+			}
+			return false
+		},
+		visitTSTypeAliasDeclaration(nodePath) {
+			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
+				typeBody = nodePath.get('typeAnnotation', 'members')
+			}
+			return false
+		}
+	})
+	return typeBody
+}
+
+function typeFromLocalType(type: bt.TSType, astPath?: bt.File): ParamType {
+	if (astPath && bt.isTSTypeReference(type) && bt.isIdentifier(type.typeName)) {
+		const typeDef = getTypeDefinitionFromIdentifier(astPath, type.typeName.name)
+		if (typeDef && bt.isTSType(typeDef)) {
+			const nakedType = printType(type)
+			const resolvedType = getTypeObjectFromTSType(typeDef)
+			return { ...nakedType, elements: resolvedType.elements }
+		}
+	}
+	return printType(type)
+}
+
 function getTypeObjectFromTSType(type: bt.TSType, astPath?: bt.File): ParamType {
 	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
 		? {
@@ -78,7 +110,7 @@ function getTypeObjectFromTSType(type: bt.TSType, astPath?: bt.File): ParamType 
 		  }
 		: bt.isTSArrayType(type)
 		? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
-		: printType(type)
+		: typeFromLocalType(type, astPath)
 }
 
 const FLOW_TYPE_NAME_MAP: { [name: string]: string } = {

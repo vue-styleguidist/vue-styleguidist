@@ -36,7 +36,7 @@ export default async function setupPropHandler(
 				if ((normalizedNodePath.node as any).typeParameters) {
 					const typeParamsPath = normalizedNodePath.get('typeParameters', 'params', 0)
 					if (bt.isTSTypeLiteral(typeParamsPath.node)) {
-						getPropsFromLiteralType(documentation, typeParamsPath.get('members'))
+						getPropsFromLiteralType(documentation, typeParamsPath.get('members'), astPath)
 					} else if (
 						bt.isTSTypeReference(typeParamsPath.node) &&
 						bt.isIdentifier(typeParamsPath.node.typeName)
@@ -47,7 +47,7 @@ export default async function setupPropHandler(
 						const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName)
 						// use the same process to exact info
 						if (definitionPath) {
-							getPropsFromLiteralType(documentation, definitionPath)
+							getPropsFromLiteralType(documentation, definitionPath, astPath)
 						}
 					}
 				}
@@ -80,7 +80,8 @@ export default async function setupPropHandler(
 
 export function getPropsFromLiteralType(
 	documentation: Documentation,
-	typeParamsPathMembers: any
+	typeParamsPathMembers: any,
+	astPath: bt.File
 ): void {
 	typeParamsPathMembers.each((prop: NodePath) => {
 		if (bt.isTSPropertySignature(prop.node) && bt.isIdentifier(prop.node.key)) {
@@ -90,7 +91,7 @@ export function getPropsFromLiteralType(
 
 			propDescriptor.required = !prop.node.optional
 
-			propDescriptor.type = getTypeFromAnnotation(prop.get('typeAnnotation').value)
+			propDescriptor.type = getTypeFromAnnotation(prop.get('typeAnnotation').value, astPath)
 		}
 	})
 }
