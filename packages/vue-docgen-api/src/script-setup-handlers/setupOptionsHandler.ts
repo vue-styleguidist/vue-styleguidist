@@ -3,6 +3,7 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit } from 'recast'
 import Documentation from '../Documentation'
 import type { ParseOptions } from '../types'
+import handleComponentJSDoc from '../utils/handleComponentJSDoc'
 
 /**
  * Extract information from an setup-style VueJs 3 component
@@ -33,6 +34,8 @@ export default async function setupOptionsHandler(
 						}
 					}
 				})
+
+				handleComponentJSDoc(nodePath, documentation)
 			}
 
 			return false

@@ -33,13 +33,61 @@ describe('setupOptionsHandler', () => {
 		const src = `
         const testProps = 0
         defineOptions({
-          /**
-           * Overridden component name
-           */
           name: "testName"
         })
         `
 		await parserTest(src)
 		expect(documentation.get('name')).toEqual('testName')
+	})
+
+	it('should resolve info from the jsdoc of defineOptions', async () => {
+		const src = `
+        const testProps = 0
+        /**
+         * Overridden component name
+         * @version 12.5.7
+         * @author [Rafael]
+         * @example path/to/example.md
+         * @displayName Best Button Ever
+         */
+        defineOptions({})
+        `
+		await parserTest(src)
+
+		expect(documentation.toObject()).toMatchInlineSnapshot(`
+			{
+			  "description": "Overridden component name",
+			  "displayName": "Best Button Ever",
+			  "events": undefined,
+			  "exportName": undefined,
+			  "expose": undefined,
+			  "methods": undefined,
+			  "props": undefined,
+			  "slots": undefined,
+			  "sourceFiles": [
+			    "test/path",
+			  ],
+			  "tags": {
+			    "author": [
+			      {
+			        "description": "[Rafael]",
+			        "title": "author",
+			      },
+			    ],
+			    "examples": [
+			      {
+			        "content": "path/to/example.md",
+			        "title": "example",
+			      },
+			    ],
+			    "version": [
+			      {
+			        "description": "12.5.7",
+			        "title": "version",
+			      },
+			    ],
+			  },
+			}
+		`)
 	})
 })
