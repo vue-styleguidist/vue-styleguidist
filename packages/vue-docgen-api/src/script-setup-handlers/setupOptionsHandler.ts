@@ -19,8 +19,20 @@ export default async function setupOptionsHandler(
 ) {
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
-			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineOptions') {
-				// here be dragons
+			if (
+				bt.isIdentifier(nodePath.node.callee) &&
+				nodePath.node.callee.name === 'defineOptions' &&
+				bt.isObjectExpression(nodePath.node.arguments[0])
+			) {
+				const options = nodePath.node.arguments[0]
+				options.properties.forEach(property => {
+					if (bt.isObjectProperty(property) && bt.isIdentifier(property.key)) {
+						const key = property.key.name
+						if (key === 'name' && bt.isStringLiteral(property.value)) {
+							documentation.set('name', property.value.value)
+						}
+					}
+				})
 			}
 
 			return false

@@ -32,12 +32,12 @@ describe('setupOptionsHandler', () => {
 	it('should resolve name from defineOptions', async () => {
 		const src = `
         const testProps = 0
-        defineOptions([
+        defineOptions({
           /**
            * Overridden component name
            */
           name: "testName"
-        ])
+        })
         `
 		await parserTest(src)
 		expect(documentation.get('name')).toEqual('testName')
