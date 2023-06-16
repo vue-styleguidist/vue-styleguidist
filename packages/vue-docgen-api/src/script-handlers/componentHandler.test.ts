@@ -18,7 +18,7 @@ describe('componentHandler', () => {
 
 	beforeEach(() => {
 		documentation = new Documentation('dummy/path')
-    vi.spyOn(documentation, 'set')
+		vi.spyOn(documentation, 'set')
 	})
 
 	it('should return the right component name', () => {
@@ -138,9 +138,9 @@ describe('componentHandler', () => {
 
 	it('should extract the @displayName tag seperately', () => {
 		const src = `
-	/**
-	 * @displayName Best Button Ever
-	 */
+    /**
+     * @displayName Best Button Ever
+     */
     export default {
     }
     `

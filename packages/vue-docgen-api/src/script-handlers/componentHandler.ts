@@ -1,10 +1,8 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import Documentation, { Tag } from '../Documentation'
-import getDocblock from '../utils/getDocblock'
-import getDoclets from '../utils/getDoclets'
-import transformTagsIntoObject from '../utils/transformTagsIntoObject'
+import Documentation from '../Documentation'
 import getProperties from './utils/getProperties'
+import handleComponentJSDoc from '../utils/handleComponentJSDoc'
 
 /**
  * Extracts prop information from an object-style VueJs component
@@ -50,36 +48,7 @@ export default function componentHandler(
 			componentCommentedPath = classDeclaration
 		}
 	}
-	const docBlock = getDocblock(componentCommentedPath)
 
-	// if no prop return
-	if (!docBlock || !docBlock.length) {
-		return Promise.resolve()
-	}
-
-	const jsDoc = getDoclets(docBlock)
-
-	documentation.set('description', jsDoc.description)
-
-	if (jsDoc.tags) {
-		const displayNamesTags = jsDoc.tags.filter(t => t.title === 'displayName')
-		if (displayNamesTags.length) {
-			const displayName = displayNamesTags[0] as Tag
-			documentation.set('displayName', displayName.content)
-		}
-
-		const tagsAsObject = transformTagsIntoObject(
-			jsDoc.tags.filter(t => t.title !== 'example' && t.title !== 'displayName') || []
-		)
-
-		const examples = jsDoc.tags.filter(t => t.title === 'example')
-		if (examples.length) {
-			tagsAsObject.examples = examples
-		}
-
-		documentation.set('tags', tagsAsObject)
-	} else {
-		documentation.set('tags', {})
-	}
-	return Promise.resolve()
+	// always return a promise to trigger next handler in chain
+	return handleComponentJSDoc(componentCommentedPath, documentation)
 }
