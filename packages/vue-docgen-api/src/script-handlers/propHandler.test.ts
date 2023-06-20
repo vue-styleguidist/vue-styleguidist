@@ -219,9 +219,45 @@ describe('propHandler', () => {
 		})
 
 		it('should still return props with delegated types', async () => {
-			const src = ['export default {', '  props: {', '    toto', '  }', '}'].join('\n')
+			const src = [
+				'export default {', //
+				'  props: {',
+				'    toto',
+				'  }',
+				'}'
+			].join('\n')
 			expect(await parserTest(src)).toMatchObject({
 				type: {}
+			})
+		})
+
+		it.only('types values with typescript', async () => {
+			const src = [
+				'export default {', //
+				'  props: {',
+				'    toto: Object as PropType<number>',
+				'  }',
+				'}'
+			].join('\n')
+			expect(await parserTest(src, ['typescript'])).toMatchObject({
+				type: {
+					name: 'number'
+				}
+			})
+		})
+
+		it.only('types values with typescript azzed twice', async () => {
+			const src = [
+				'export default {', //
+				'  props: {',
+				'    toto: undefined as unknown as PropType<number>',
+				'  }',
+				'}'
+			].join('\n')
+			expect(await parserTest(src, ['typescript'])).toMatchObject({
+				type: {
+					name: 'number'
+				}
 			})
 		})
 	})
