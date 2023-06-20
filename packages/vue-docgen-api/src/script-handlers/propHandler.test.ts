@@ -231,7 +231,7 @@ describe('propHandler', () => {
 			})
 		})
 
-		it.only('types values with typescript', async () => {
+		it('types values with typescript', async () => {
 			const src = [
 				'export default {', //
 				'  props: {',
@@ -246,7 +246,7 @@ describe('propHandler', () => {
 			})
 		})
 
-		it.only('types values with typescript azzed twice', async () => {
+		it('types values with typescript azzed twice', async () => {
 			const src = [
 				'export default {', //
 				'  props: {',
