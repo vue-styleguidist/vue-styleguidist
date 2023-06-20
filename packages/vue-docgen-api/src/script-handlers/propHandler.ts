@@ -136,9 +136,17 @@ export async function describePropsFromValue(
 				} else if (bt.isTSAsExpression(propValuePath.node)) {
 					const propValuePathExpression = propValuePath.get('expression')
 
-					if (bt.isObjectExpression(propValuePathExpression.node)) {
+					// if user goes through a "as unknown" step to avoid TS errors, we need to get the
+					// final expression instead of the unknown keyword
+					const finalPropValuePathExpression =
+						bt.isTSAsExpression(propValuePathExpression.node) &&
+						bt.isTSUnknownKeyword(propValuePathExpression.get('typeAnnotation').node)
+							? propValuePathExpression.get('expression')
+							: propValuePathExpression
+
+					if (bt.isObjectExpression(finalPropValuePathExpression.node)) {
 						// standard default + type + required with TS as annotation
-						const propPropertiesPath = propValuePathExpression
+						const propPropertiesPath = finalPropValuePathExpression
 							.get('properties')
 							.filter((p: NodePath) => bt.isObjectProperty(p.node)) as NodePath<bt.ObjectProperty>[]
 
@@ -154,7 +162,7 @@ export async function describePropsFromValue(
 							propDescriptor,
 							(propDescriptor.type && propDescriptor.type.name) || ''
 						)
-					} else if (bt.isIdentifier(propValuePathExpression.node)) {
+					} else if (bt.isIdentifier(finalPropValuePathExpression.node)) {
 						describeTypeAndValuesFromPath(propValuePath, propDescriptor)
 					}
 				} else {
@@ -307,7 +315,8 @@ export function getTypeFromTypePath(
 		: bt.isObjectProperty(typeNode) &&
 		  bt.isExpression(typeNode.value) &&
 		  bt.isTSInstantiationExpression(typeNode.value)
-		? print(typeNode.value.expression).code + (typeNode.value.typeParameters ? print(typeNode.value.typeParameters).code : '')
+		? print(typeNode.value.expression).code +
+		  (typeNode.value.typeParameters ? print(typeNode.value.typeParameters).code : '')
 		: print(typeNode).code
 	return {
 		name: typeName === 'function' ? 'func' : typeName
