@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.73.0
+
+### Minor Changes
+
+- [#1576](https://github.com/vue-styleguidist/vue-styleguidist/pull/1576) [`3f1d9216`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3f1d92161ae409cbcd9f3f7794110cfa3e8f115a) Thanks [@elevatebart](https://github.com/elevatebart)! - parse the defineOptions object for values
+
 ## 4.72.5
 
 ### Patch Changes
