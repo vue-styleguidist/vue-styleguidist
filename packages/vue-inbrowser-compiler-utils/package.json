@@ -28,7 +28,7 @@
     "@types/dedent": "0.7.0",
     "@types/domhandler": "2.4.2",
     "dedent": "0.7.0",
-    "tslib": "2.5.0",
+    "tslib": "2.6.0",
     "typescript": "4.9.5",
     "rollup": "2.79.1",
     "vue": "2.7.14"
