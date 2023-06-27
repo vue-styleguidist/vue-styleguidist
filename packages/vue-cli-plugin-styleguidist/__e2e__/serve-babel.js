@@ -18,7 +18,7 @@ async function createAndInstall(name) {
 	pkg.devDependencies['vue-cli-plugin-styleguidist'] = '*'
 	pkg.devDependencies['@vue/cli-plugin-babel'] = '*'
 	pkg.devDependencies['@vue/cli-plugin-eslint'] = '*'
-	pkg.devDependencies['babel-eslint'] = '*'
+	pkg.devDependencies['@babel/eslint-parser'] = '*'
 	pkg.devDependencies['eslint'] = '*'
 	pkg.devDependencies['eslint-plugin-vue'] = '*'
 	pkg['eslintConfig'] = {
@@ -29,7 +29,7 @@ async function createAndInstall(name) {
 		extends: ['plugin:vue/essential', 'eslint:recommended'],
 		rules: {},
 		parserOptions: {
-			parser: 'babel-eslint'
+			parser: '@babel/eslint-parser'
 		}
 	}
 	pkg['browserslist'] = ['> 1%', 'last 2 versions', 'not ie <= 8']

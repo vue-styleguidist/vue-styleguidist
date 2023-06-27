@@ -1,7 +1,7 @@
 {
 	"extends": ["plugin:vue/recommended"],
 	"parserOptions": {
-		"parser": "babel-eslint",
+		"parser": "@babel/eslint-parser",
 		"ecmaVersion": 2017,
 		"sourceType": "module"
 	},
@@ -11,6 +11,6 @@
 		"vue/max-attributes-per-line": 0,
 		"vue/html-self-closing": 0,
 		"vue/html-indent": ["warn", "tab"],
-    "compat/compat": 0
+		"compat/compat": 0
 	}
 }
