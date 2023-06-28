@@ -23,6 +23,10 @@ describe('tests button', () => {
 
 	describe('general information', () => {
 		it('The component name should be buttonComponent', () => {
+			expect(docButton.name).toBe('buttonComponent')
+		})
+
+		it('The component displayName should be Best Button', () => {
 			expect(docButton.displayName).toBe('Best Button')
 		})
 
