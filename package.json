@@ -105,7 +105,7 @@
     "react-test-renderer": "18.2.0",
     "rimraf": "2.7.1",
     "rollup-plugin-typescript-paths": "1.4.0",
-    "semver": "5.7.1",
+    "semver": "5.7.2",
     "start-server-and-test": "1.15.3",
     "strip-shebang": "1.0.2",
     "tslib": "2.5.0",
