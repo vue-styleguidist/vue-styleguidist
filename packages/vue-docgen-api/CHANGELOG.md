@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.73.1
+
+### Patch Changes
+
+- [#1580](https://github.com/vue-styleguidist/vue-styleguidist/pull/1580) [`67ba3b0b`](https://github.com/vue-styleguidist/vue-styleguidist/commit/67ba3b0b31be3b322a4417dba5de633d21c12e13) Thanks [@elevatebart](https://github.com/elevatebart)! - handle type as unknown as PropType<MyPropType>
+
 ## 4.73.0
 
 ### Minor Changes
