@@ -1,43 +1,25 @@
 import fs from 'fs'
-import path from 'path'
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
 import { TSExpressionWithTypeArgumentsKind, TSPropertySignatureKind } from 'ast-types/lib/gen/kinds'
 import { visit } from 'recast'
+import { dirname } from 'path'
 import buildParser from '../../babel-parser'
 import { ParseOptions } from '../../types'
-
-/**
- * Emulate the module import logic as much as necessary to resolve a module containing the
- * interface or type.
- *
- * @param base Path to the file that is importing the module
- * @param module Relative path to the module
- * @returns The absolute path to the file that contains the module to be imported
- */
-const importFilePath = (base: string, module: string) => {
-	const importedPath = path.resolve(path.dirname(base), module)
-	const exists = fs.existsSync(importedPath)
-	const isDir = exists && fs.statSync(importedPath).isDirectory()
-
-	if (exists) {
-		if (isDir) {
-			return `${importedPath}/index.ts`
-		}
-
-		return importedPath
-	}
-
-	return `${importedPath}.ts`
-}
+import makePathResolver from '../../utils/makePathResolver'
 
 const getTypeDefinitionFromIdentifierFromModule = (
 	module: string,
 	typeName: string,
-	opt: ParseOptions
+	opt: ParseOptions,
+	pathResolver: (filePath: string, originalDirNameOverride?: string) => string | null
 ) => {
 	const parser = buildParser({ plugins: ['typescript'] })
-	const filePath = importFilePath(opt.filePath, module)
+	const filePath = pathResolver(module)
+
+	if (!filePath) {
+		return undefined
+	}
 
 	return getTypeDefinitionFromIdentifier(
 		parser.parse(
@@ -59,11 +41,18 @@ export function getTypeDefinitionFromIdentifier(
 	opt: ParseOptions
 ): NodePath | undefined {
 	let typeBody: NodePath | undefined = undefined
+	const pathResolver = makePathResolver(dirname(opt.filePath), opt.alias, opt.modules)
+
 	visit(astPath.program, {
 		visitExportAllDeclaration(nodePath) {
 			typeBody =
 				typeBody ??
-				getTypeDefinitionFromIdentifierFromModule(nodePath.value.source.value, typeName, opt)
+				getTypeDefinitionFromIdentifierFromModule(
+					nodePath.value.source.value,
+					typeName,
+					opt,
+					pathResolver
+				)
 
 			return false
 		},
@@ -72,7 +61,8 @@ export function getTypeDefinitionFromIdentifier(
 				typeBody = getTypeDefinitionFromIdentifierFromModule(
 					nodePath.parent.value.source.value,
 					nodePath.value.local.name,
-					opt
+					opt,
+					pathResolver
 				)
 			}
 
@@ -83,7 +73,8 @@ export function getTypeDefinitionFromIdentifier(
 				typeBody = getTypeDefinitionFromIdentifierFromModule(
 					nodePath.parent.value.source.value,
 					typeName,
-					opt
+					opt,
+					pathResolver
 				)
 			}
 
