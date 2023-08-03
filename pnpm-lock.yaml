@@ -1938,8 +1938,8 @@ importers:
         specifier: ^3.1.3
         version: 3.1.3(webpack@4.46.0)
       minimist:
-        specifier: ^1.2.5
-        version: 1.2.5
+        specifier: ^1.2.6
+        version: 1.2.6
       prismjs:
         specifier: ^1.23.0
         version: 1.23.0
@@ -9641,7 +9641,7 @@ packages:
       lodash.defaultsdeep: 4.6.1
       lodash.mapvalues: 4.6.0
       mini-css-extract-plugin: 2.6.1(webpack@5.74.0)
-      minimist: 1.2.6
+      minimist: 1.2.8
       module-alias: 2.2.2
       portfinder: 1.0.28
       postcss: 8.4.14
@@ -9797,7 +9797,7 @@ packages:
       lodash.defaultsdeep: 4.6.1
       lodash.mapvalues: 4.6.0
       mini-css-extract-plugin: 2.6.1(webpack@5.74.0)
-      minimist: 1.2.6
+      minimist: 1.2.8
       module-alias: 2.2.2
       portfinder: 1.0.28
       postcss: 8.4.14
@@ -9954,7 +9954,7 @@ packages:
       lodash.defaultsdeep: 4.6.1
       lodash.mapvalues: 4.6.0
       mini-css-extract-plugin: 2.6.1(webpack@5.74.0)
-      minimist: 1.2.6
+      minimist: 1.2.8
       module-alias: 2.2.2
       portfinder: 1.0.28
       postcss: 8.4.14
@@ -10112,7 +10112,7 @@ packages:
       lodash.defaultsdeep: 4.6.1
       lodash.mapvalues: 4.6.0
       mini-css-extract-plugin: 2.6.1(webpack@5.74.0)
-      minimist: 1.2.6
+      minimist: 1.2.8
       module-alias: 2.2.2
       portfinder: 1.0.28
       postcss: 8.4.14
@@ -10311,7 +10311,7 @@ packages:
       leven: 3.1.0
       lodash.clonedeep: 4.5.0
       lru-cache: 6.0.0
-      minimist: 1.2.6
+      minimist: 1.2.8
       pkg-dir: 5.0.0
       recast: 0.20.5
       resolve: 1.22.0
@@ -13137,7 +13137,7 @@ packages:
       acorn-jsx: 5.3.1(acorn@6.4.2)
       chalk: 2.4.2
       magic-string: 0.25.7
-      minimist: 1.2.5
+      minimist: 1.2.8
       regexpu-core: 4.5.4
     dev: false
 
@@ -21334,7 +21334,7 @@ packages:
       lazy-cache: 2.0.2
       list-item: 1.1.1
       markdown-link: 0.1.1
-      minimist: 1.2.5
+      minimist: 1.2.8
       mixin-deep: 1.3.2
       object.pick: 1.3.0
       remarkable: 1.7.4
@@ -21721,12 +21721,9 @@ packages:
       kind-of: 6.0.3
     dev: false
 
-  /minimist@1.2.5:
-    resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
-    dev: false
-
   /minimist@1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
+    dev: false
 
   /minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
