@@ -47,9 +47,9 @@ export default async function setupEventHandler(
 	}
 
 	function readEventsTSTypes(refs: NodePath) {
-    if(!refs.value){
-      return
-    }
+		if (!refs.value) {
+			return
+		}
 		refs.each((member: NodePath) => {
 			if (bt.isTSCallSignatureDeclaration(member.node)) {
 				const firstParam = member.node.parameters[0].typeAnnotation
@@ -57,7 +57,7 @@ export default async function setupEventHandler(
 					bt.isTSTypeAnnotation(firstParam) &&
 					bt.isTSLiteralType(firstParam.typeAnnotation) &&
 					!bt.isUnaryExpression(firstParam.typeAnnotation.literal) &&
-          !bt.isTemplateLiteral(firstParam.typeAnnotation.literal) &&
+					!bt.isTemplateLiteral(firstParam.typeAnnotation.literal) &&
 					typeof firstParam.typeAnnotation.literal.value === 'string'
 				) {
 					buildEventDescriptor(firstParam.typeAnnotation.literal.value, member)
@@ -99,7 +99,8 @@ export default async function setupEventHandler(
 						} else if (bt.isTSTypeReference(param.node) && bt.isIdentifier(param.node.typeName)) {
 							const resolvedType = getTypeDefinitionFromIdentifier(
 								astPath,
-								param.node.typeName.name
+								param.node.typeName.name,
+								opt
 							)
 							if (resolvedType) {
 								readEventsTSTypes(resolvedType)

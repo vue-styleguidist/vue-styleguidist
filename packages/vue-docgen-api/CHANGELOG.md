@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.74.0
+
+### Minor Changes
+
+- [#1586](https://github.com/vue-styleguidist/vue-styleguidist/pull/1586) [`1ecc082a`](https://github.com/vue-styleguidist/vue-styleguidist/commit/1ecc082a069193afeb7bae4493641cd81aa93432) Thanks [@sawmurai](https://github.com/sawmurai)! - Add initial support for external types in defineProps and defineEmits
+
+## 4.73.1
+
+### Patch Changes
+
+- [#1580](https://github.com/vue-styleguidist/vue-styleguidist/pull/1580) [`67ba3b0b`](https://github.com/vue-styleguidist/vue-styleguidist/commit/67ba3b0b31be3b322a4417dba5de633d21c12e13) Thanks [@elevatebart](https://github.com/elevatebart)! - handle type as unknown as PropType<MyPropType>
+
 ## 4.73.0
 
 ### Minor Changes

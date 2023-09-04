@@ -44,7 +44,8 @@ export default async function setupPropHandler(
 						// its a reference to an interface or type
 						const typeName = typeParamsPath.node.typeName.name // extract the identifier
 						// find it's definition in the file
-						const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName)
+
+						const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName, opt)
 						// use the same process to exact info
 						if (definitionPath) {
 							getPropsFromLiteralType(documentation, definitionPath)
