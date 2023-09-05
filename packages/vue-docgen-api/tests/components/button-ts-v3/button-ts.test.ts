@@ -20,6 +20,7 @@ describe('tests button', () => {
 			  "exportName": "default",
 			  "expose": undefined,
 			  "methods": undefined,
+			  "name": "DsButton",
 			  "props": undefined,
 			  "slots": [
 			    {

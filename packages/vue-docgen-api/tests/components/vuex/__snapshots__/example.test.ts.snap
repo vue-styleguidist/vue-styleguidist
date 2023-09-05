@@ -69,6 +69,7 @@ exports[`test example vuex > should match the snapshot 1`] = `
       },
     },
   ],
+  "name": "example",
   "props": undefined,
   "slots": undefined,
   "sourceFiles": [
