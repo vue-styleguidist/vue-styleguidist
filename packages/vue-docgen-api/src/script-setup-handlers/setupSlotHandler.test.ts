@@ -51,4 +51,46 @@ describe('setupSlotHandler', () => {
 			}>()`)
 		expect(slotDescriptor.name).toEqual(name)
 	})
+
+	it('should return the correct description', async () => {
+		const description = 'the description expected'
+		const slotDescriptor = await parserTest(`
+			defineSlots<{
+				/**
+				 * ${description}
+				 */
+				test(): any
+			}>()`)
+		expect(slotDescriptor.description).toEqual(description)
+	})
+
+	it('should parse the proper bindings', async () => {
+		const slotDescriptor = await parserTest(`
+			defineSlots<{
+				test(bindings: {
+					/**
+					 * the id of the slot
+					 */
+					id: number,
+					/**
+					 * this is a label
+					 */
+					label: string,
+				}): any
+			}>()`)
+		expect(slotDescriptor.bindings).toMatchInlineSnapshot(`
+			[
+			  {
+			    "description": "the id of the slot",
+			    "name": "id",
+			    "title": "binding",
+			  },
+			  {
+			    "description": "this is a label",
+			    "name": "label",
+			    "title": "binding",
+			  },
+			]
+		`)
+	})
 })
