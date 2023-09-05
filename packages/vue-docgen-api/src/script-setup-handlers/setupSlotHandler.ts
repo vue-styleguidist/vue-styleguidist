@@ -17,7 +17,6 @@ export default defineHandler(async function setupSlotHandler(
 	astPath,
 	opt
 ) {
-	let propsDef: NodePath<any, any> | undefined
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
 			if (

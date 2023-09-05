@@ -25,7 +25,7 @@ describe('setupSlotHandler', () => {
 		mockSlotDescriptor = {
 			description: '',
 			tags: {},
-			name: 'mockProp'
+			name: 'mockSlot'
 		}
 		documentation = new Documentation('test/path')
 		const mockGetPropDescriptor = vi.spyOn(documentation, 'getSlotDescriptor')
@@ -46,9 +46,9 @@ describe('setupSlotHandler', () => {
 	it('should return the correct name', async () => {
 		const name = 'mockName'
 		const slotDescriptor = await parserTest(`
-		defineSlots<
-			${name}(): any
-		>()`)
+			defineSlots<{
+				${name}(): any
+			}>()`)
 		expect(slotDescriptor.name).toEqual(name)
 	})
 })
