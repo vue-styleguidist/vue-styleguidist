@@ -15,7 +15,7 @@ export function defineHandler(
 		componentDefinition: NodePath,
 		astPath: bt.File,
 		opt: ParseOptions
-	) => void
+	) => Promise<void>
 ) {
 	return handler
 }
