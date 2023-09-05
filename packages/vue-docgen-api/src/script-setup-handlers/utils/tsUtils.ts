@@ -50,7 +50,8 @@ const getTypeDefinitionFromIdentifierFromModule = (
 export function getTypeDefinitionFromIdentifier(
 	astPath: bt.File,
 	typeName: string,
-	opt: ParseOptions
+	opt: ParseOptions,
+	importName?: string
 ): NodePath | undefined {
 	let typeBody: NodePath | undefined = undefined
 	const pathResolver = makePathResolver(dirname(opt.filePath), opt.alias, opt.modules)
@@ -84,6 +85,18 @@ export function getTypeDefinitionFromIdentifier(
 			if (!typeBody && nodePath.value.imported.name === typeName) {
 				typeBody = getTypeDefinitionFromIdentifierFromModule(
 					nodePath.parent.value.source.value,
+					typeName,
+					opt,
+					pathResolver
+				)
+			}
+
+			return false
+		},
+		visitImportNamespaceSpecifier(path) {
+			if (!typeBody && path.value.local.name === importName) {
+				typeBody = getTypeDefinitionFromIdentifierFromModule(
+					path.parent.value.source.value,
 					typeName,
 					opt,
 					pathResolver

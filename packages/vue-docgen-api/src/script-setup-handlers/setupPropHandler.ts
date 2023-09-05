@@ -34,18 +34,33 @@ export default defineHandler(async function setupPropHandler(
 					const typeParamsPath = normalizedNodePath.get('typeParameters', 'params', 0)
 					if (bt.isTSTypeLiteral(typeParamsPath.node)) {
 						getPropsFromLiteralType(documentation, typeParamsPath.get('members'))
-					} else if (
-						bt.isTSTypeReference(typeParamsPath.node) &&
-						bt.isIdentifier(typeParamsPath.node.typeName)
-					) {
-						// its a reference to an interface or type
-						const typeName = typeParamsPath.node.typeName.name // extract the identifier
-						// find it's definition in the file
+					} else if (bt.isTSTypeReference(typeParamsPath.node)) {
+						if (bt.isIdentifier(typeParamsPath.node.typeName)) {
+							// its a reference to an interface or type
+							const typeName = typeParamsPath.node.typeName.name // extract the identifier
+							// find it's definition in the file
 
-						const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName, opt)
-						// use the same process to exact info
-						if (definitionPath) {
-							getPropsFromLiteralType(documentation, definitionPath)
+							const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName, opt)
+							// use the same process to exact info
+							if (definitionPath) {
+								getPropsFromLiteralType(documentation, definitionPath)
+							}
+						} else if (bt.isTSQualifiedName(typeParamsPath.node.typeName)) {
+							// its a reference to an interface or type
+							const importName = typeParamsPath.node.typeName.left.name // extract the import identifier
+							const typeName = typeParamsPath.node.typeName.right.name // extract the identifier
+
+							const definitionPath = getTypeDefinitionFromIdentifier(
+								astPath,
+								typeName,
+								opt,
+								importName
+							)
+
+							// use the same process to exact info
+							if (definitionPath) {
+								getPropsFromLiteralType(documentation, definitionPath)
+							}
 						}
 					}
 				} else {
