@@ -1,6 +1,6 @@
 import * as bt from '@babel/types'
 import { NodePath } from 'ast-types/lib/node-path'
-import { visit, print } from 'recast'
+import { visit } from 'recast'
 import { defineHandler, getTypeDefinitionFromIdentifier } from './utils/tsUtils'
 import Documentation from '../Documentation'
 
