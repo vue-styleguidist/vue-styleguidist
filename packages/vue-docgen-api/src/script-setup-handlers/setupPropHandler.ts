@@ -3,9 +3,8 @@ import { NodePath } from 'ast-types/lib/node-path'
 import { visit, print } from 'recast'
 import getTypeFromAnnotation, { decorateItem } from '../utils/getTypeFromAnnotation'
 import type { Documentation } from '../Documentation'
-import type { ParseOptions } from '../types'
 import { describePropsFromValue } from '../script-handlers/propHandler'
-import { getTypeDefinitionFromIdentifier } from './utils/tsUtils'
+import { defineHandler, getTypeDefinitionFromIdentifier } from './utils/tsUtils'
 
 /**
  * Extract information from an setup-style VueJs 3 component
@@ -14,11 +13,11 @@ import { getTypeDefinitionFromIdentifier } from './utils/tsUtils'
  * @param {Array<NodePath>} componentDefinitions
  * @param {string} originalFilePath
  */
-export default async function setupPropHandler(
-	documentation: Documentation,
-	componentDefinition: NodePath,
-	astPath: bt.File,
-	opt: ParseOptions
+export default defineHandler(async function setupPropHandler(
+	documentation,
+	componentDefinition,
+	astPath,
+	opt
 ) {
 	let propsDef: NodePath<any, any> | undefined
 	visit(astPath.program, {
@@ -31,26 +30,41 @@ export default async function setupPropHandler(
 				bt.isIdentifier(normalizedNodePath.node.callee) &&
 				normalizedNodePath.node.callee.name === 'defineProps'
 			) {
-				propsDef = normalizedNodePath.get('arguments', 0)
-
 				if ((normalizedNodePath.node as any).typeParameters) {
 					const typeParamsPath = normalizedNodePath.get('typeParameters', 'params', 0)
 					if (bt.isTSTypeLiteral(typeParamsPath.node)) {
 						getPropsFromLiteralType(documentation, typeParamsPath.get('members'))
-					} else if (
-						bt.isTSTypeReference(typeParamsPath.node) &&
-						bt.isIdentifier(typeParamsPath.node.typeName)
-					) {
-						// its a reference to an interface or type
-						const typeName = typeParamsPath.node.typeName.name // extract the identifier
-						// find it's definition in the file
+					} else if (bt.isTSTypeReference(typeParamsPath.node)) {
+						if (bt.isIdentifier(typeParamsPath.node.typeName)) {
+							// its a reference to an interface or type
+							const typeName = typeParamsPath.node.typeName.name // extract the identifier
+							// find it's definition in the file
 
-						const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName, opt)
-						// use the same process to exact info
-						if (definitionPath) {
-							getPropsFromLiteralType(documentation, definitionPath)
+							const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName, opt)
+							// use the same process to exact info
+							if (definitionPath) {
+								getPropsFromLiteralType(documentation, definitionPath)
+							}
+						} else if (bt.isTSQualifiedName(typeParamsPath.node.typeName)) {
+							// its a reference to an interface or type
+							const importName = typeParamsPath.node.typeName.left.name // extract the import identifier
+							const typeName = typeParamsPath.node.typeName.right.name // extract the identifier
+
+							const definitionPath = getTypeDefinitionFromIdentifier(
+								astPath,
+								typeName,
+								opt,
+								importName
+							)
+
+							// use the same process to exact info
+							if (definitionPath) {
+								getPropsFromLiteralType(documentation, definitionPath)
+							}
 						}
 					}
+				} else {
+					propsDef = normalizedNodePath.get('arguments', 0)
 				}
 
 				// add defaults from withDefaults
@@ -77,7 +91,7 @@ export default async function setupPropHandler(
 	if (propsDef) {
 		await describePropsFromValue(documentation, propsDef, astPath, opt)
 	}
-}
+})
 
 export function getPropsFromLiteralType(
 	documentation: Documentation,
