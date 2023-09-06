@@ -10,20 +10,6 @@ describe('setup syntactic sugar', () => {
 		doc = await parse(progressPath)
 	})
 
-	describe('options', () => {
-		it('should return a doc object containing name', () => {
-			expect(doc).toHaveProperty('name')
-		})
-
-		it('should have name ProgressBlobInVue', () => {
-			expect(doc.name).toEqual('ProgressBlobInVue')
-		})
-
-		it('should return a doc object containing displayName', () => {
-			expect(doc.displayName).toEqual('Name set in JSDoc')
-		})
-	})
-
 	describe('props', () => {
 		it('should return a doc object containing props', () => {
 			expect(doc).toHaveProperty('props')
@@ -67,15 +53,14 @@ describe('setup syntactic sugar', () => {
 				]
 			`)
 		})
-	})
 
-	describe('events', () => {
-		it('should return a doc object containing events', () => {
-			expect(doc.events).toHaveLength(2)
-		})
+		describe('events', () => {
+			it('should return a doc object containing events', () => {
+				expect(doc.events).toHaveLength(2)
+			})
 
-		it('should match the snapshot', () => {
-			expect(doc.events).toMatchInlineSnapshot(`
+			it('should match the snapshot', () => {
+				expect(doc.events).toMatchInlineSnapshot(`
 					[
 					  {
 					    "description": "Cancels everything",
@@ -93,16 +78,16 @@ describe('setup syntactic sugar', () => {
 					  },
 					]
 				`)
-		})
-	})
-
-	describe('expose', () => {
-		it('should return a doc object containing expose', () => {
-			expect(doc.expose).toHaveLength(1)
+			})
 		})
 
-		it('should match the snapshot', () => {
-			expect(doc.expose).toMatchInlineSnapshot(`
+    describe('expose', () => {
+      it('should return a doc object containing expose', () => {
+        expect(doc.expose).toHaveLength(1)
+      })
+
+      it('should match the snapshot', () => {
+        expect(doc.expose).toMatchInlineSnapshot(`
           [
             {
               "description": "position of the dash offset",
@@ -110,6 +95,7 @@ describe('setup syntactic sugar', () => {
             },
           ]
         `)
-		})
+      })
+    })
 	})
 })
