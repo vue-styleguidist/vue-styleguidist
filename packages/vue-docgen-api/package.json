@@ -56,6 +56,7 @@
     "@test-vue-docgen/mixins": "^4.44.15",
     "@types/dedent": "0.7.0",
     "@types/pug": "2.0.6",
+    "@types/hash-sum": "^1.0.0",
     "dedent": "0.7.0",
     "globby": "10.0.2",
     "rollup": "3.20.2",

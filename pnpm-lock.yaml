@@ -1530,6 +1530,9 @@ importers:
       '@types/dedent':
         specifier: 0.7.0
         version: 0.7.0
+      '@types/hash-sum':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@types/pug':
         specifier: 2.0.6
         version: 2.0.6
@@ -2046,6 +2049,9 @@ importers:
       '@types/escodegen':
         specifier: 0.0.7
         version: 0.0.7
+      '@types/hash-sum':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@types/loader-utils':
         specifier: 1.1.6
         version: 1.1.6
@@ -8615,6 +8621,10 @@ packages:
     dependencies:
       '@types/minimatch': 3.0.3
       '@types/node': 16.11.47
+
+  /@types/hash-sum@1.0.0:
+    resolution: {integrity: sha512-FdLBT93h3kcZ586Aee66HPCVJ6qvxVjBlDWNmxSGSbCZe9hTsjRKdSsl4y1T+3zfujxo9auykQMnFsfyHWD7wg==}
+    dev: true
 
   /@types/highlight.js@9.12.4:
     resolution: {integrity: sha512-t2szdkwmg2JJyuCM20e8kR2X59WCE5Zkl4bzm1u1Oukjm79zpbiAv+QjnwLnuuV0WHEcX2NgUItu0pAMKuOPww==}

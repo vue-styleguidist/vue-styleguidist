@@ -7,6 +7,18 @@ import { dirname } from 'path'
 import buildParser from '../../babel-parser'
 import { ParseOptions } from '../../types'
 import makePathResolver from '../../utils/makePathResolver'
+import Documentation from '../../Documentation'
+
+export function defineHandler(
+	handler: (
+		documentation: Documentation,
+		componentDefinition: NodePath,
+		astPath: bt.File,
+		opt: ParseOptions
+	) => Promise<void>
+) {
+	return handler
+}
 
 const getTypeDefinitionFromIdentifierFromModule = (
 	module: string,
