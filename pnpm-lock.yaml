@@ -2049,6 +2049,9 @@ importers:
       '@types/escodegen':
         specifier: 0.0.7
         version: 0.0.7
+      '@types/hash-sum':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@types/loader-utils':
         specifier: 1.1.6
         version: 1.1.6
