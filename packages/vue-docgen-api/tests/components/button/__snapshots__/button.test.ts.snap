@@ -47,7 +47,6 @@ exports[`tests button > should match the snapshot 1`] = `
   "exportName": "default",
   "expose": undefined,
   "methods": undefined,
-  "name": "buttonComponent",
   "props": [
     {
       "defaultValue": {

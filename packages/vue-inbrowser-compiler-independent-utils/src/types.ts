@@ -10,7 +10,7 @@ export interface EvaluableComponent {
 	template?: string
 	style?: string
 	setup: boolean
-	scopeId?: string
+  scopeId?: string
 }
 
 /**
@@ -101,10 +101,6 @@ export interface SlotDescriptor extends Descriptor {
 }
 
 export interface ComponentDoc {
-	/**
-	 * The name option of the component
-	 */
-	name?: string
 	displayName: string
 	exportName: string
 	description?: string

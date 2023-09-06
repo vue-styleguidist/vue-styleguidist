@@ -8,7 +8,6 @@ exports[`tests InputText as a JS file > should match the snapshot 1`] = `
   "exportName": "default",
   "expose": undefined,
   "methods": undefined,
-  "name": "InputText",
   "props": [
     {
       "name": "question",

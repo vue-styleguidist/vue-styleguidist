@@ -112,7 +112,6 @@ exports[`tests typescript grid > should match the snapshot 1`] = `
       },
     },
   ],
-  "name": "grid",
   "props": [
     {
       "defaultValue": {
