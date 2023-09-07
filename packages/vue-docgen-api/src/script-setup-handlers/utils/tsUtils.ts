@@ -150,7 +150,10 @@ export function getTypeDefinitionFromIdentifier(
 		},
 		visitTSTypeAliasDeclaration(nodePath) {
 			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
-				typeBody = nodePath.get('typeAnnotation', 'members')
+				const typeAnnotation = nodePath.get('typeAnnotation', 'members')
+				if(typeAnnotation.value) {
+					typeBody = typeAnnotation
+				}
 			}
 			return false
 		}
