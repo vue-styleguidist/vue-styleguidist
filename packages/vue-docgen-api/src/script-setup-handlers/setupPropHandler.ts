@@ -42,7 +42,7 @@ export default defineHandler(async function setupPropHandler(
 
 							const definitionPath = getTypeDefinitionFromIdentifier(astPath, typeName, opt)
 							// use the same process to exact info
-							if (definitionPath) {
+							if (definitionPath && bt.isTSTypeLiteral(definitionPath.node)) {
 								getPropsFromLiteralType(documentation, definitionPath)
 							}
 						} else if (bt.isTSQualifiedName(typeParamsPath.node.typeName)) {
