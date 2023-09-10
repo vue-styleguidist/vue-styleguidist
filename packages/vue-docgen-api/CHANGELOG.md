@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.74.1
+
+### Patch Changes
+
+- [#1592](https://github.com/vue-styleguidist/vue-styleguidist/pull/1592) [`4dff37d5`](https://github.com/vue-styleguidist/vue-styleguidist/commit/4dff37d57f181807dfeadd38855bd6475f019a13) Thanks [@elevatebart](https://github.com/elevatebart)! - allow to traverse `import * as Interfaces from './test'` since `import { PropTypes } from './test'` already works
+
+- [#1603](https://github.com/vue-styleguidist/vue-styleguidist/pull/1603) [`edbfc729`](https://github.com/vue-styleguidist/vue-styleguidist/commit/edbfc7292bf18b39214adf335c599d8c51165b1e) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: extract slot and property documentation from defineslots
+
+- [`8a24675d`](https://github.com/vue-styleguidist/vue-styleguidist/commit/8a24675db2fecb5efdb7efa52aea1e1962408ffd) Thanks [@elevatebart](https://github.com/elevatebart)! - avoid failure & crash on compositie props
+
 ## 4.74.0
 
 ### Minor Changes
