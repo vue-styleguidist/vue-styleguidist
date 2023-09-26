@@ -1,5 +1,13 @@
 # Change Log
 
+## 4.74.2
+
+### Patch Changes
+
+- [#1609](https://github.com/vue-styleguidist/vue-styleguidist/pull/1609) [`3a36d6ef`](https://github.com/vue-styleguidist/vue-styleguidist/commit/3a36d6ef2a6c8de3ae1460cfedad58ac936647d9) Thanks [@elevatebart](https://github.com/elevatebart)! - add peerDependency for yarn 3 compatibility 😒
+
+  See #1608
+
 ## 4.74.1
 
 ### Patch Changes
