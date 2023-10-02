@@ -81,7 +81,7 @@ exports[`tests button > should match the snapshot 1`] = `
             "name": "boolean",
           },
         ],
-        "name": "union",
+        "name": "string | boolean",
       },
     },
   ],
