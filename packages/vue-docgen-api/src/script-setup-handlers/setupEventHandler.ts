@@ -25,7 +25,9 @@ export default async function setupEventHandler(
 	function buildEventDescriptor(eventName: string, eventPath: NodePath) {
 		const eventDescriptor = documentation.getEventDescriptor(eventName)
 
-		const typeParam = eventPath.get('parameters', 1, 'typeAnnotation')
+		const typeParam = bt.isTSPropertySignature(eventPath.node)
+			? eventPath.get('typeAnnotation')
+			: eventPath.get('parameters', 1, 'typeAnnotation')
 		if (bt.isTSTypeAnnotation(typeParam.node)) {
 			const type = getTypeFromAnnotation(typeParam.node)
 			if (type) {
@@ -61,6 +63,12 @@ export default async function setupEventHandler(
 					typeof firstParam.typeAnnotation.literal.value === 'string'
 				) {
 					buildEventDescriptor(firstParam.typeAnnotation.literal.value, member)
+				}
+			} else if (bt.isTSPropertySignature(member.node)) {
+				if (bt.isIdentifier(member.node.key)) {
+					buildEventDescriptor(member.node.key.name, member)
+				} else if (bt.isStringLiteral(member.node.key)) {
+					buildEventDescriptor(member.node.key.value, member)
 				}
 			}
 		})
