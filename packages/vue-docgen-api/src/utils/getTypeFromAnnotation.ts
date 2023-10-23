@@ -33,7 +33,8 @@ const TS_TYPE_NAME_MAP: { [name: string]: string } = {
 	TSNeverKeyword: 'never',
 	TSArrayType: 'Array',
 	TSUnionType: 'union',
-	TSIntersectionType: 'intersection'
+	TSIntersectionType: 'intersection',
+	TSTupleType: 'tuple'
 }
 
 function printType(t?: bt.TSType): ParamType {
@@ -66,12 +67,27 @@ function printType(t?: bt.TSType): ParamType {
 	return { name: t.type }
 }
 
-function getTypeObjectFromTSType(type: bt.TSType): ParamType {
-	return bt.isTSUnionType(type) || bt.isTSIntersectionType(type)
-		? { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
-		: bt.isTSArrayType(type)
-		? { name: TS_TYPE_NAME_MAP[type.type], elements: [getTypeObjectFromTSType(type.elementType)] }
-		: printType(type)
+function getTypeObjectFromTSType(type: bt.TSType | bt.TSNamedTupleMember): ParamType {
+	if (bt.isTSUnionType(type) || bt.isTSIntersectionType(type)) {
+		return { name: TS_TYPE_NAME_MAP[type.type], elements: type.types.map(getTypeObjectFromTSType) }
+	}
+	if (bt.isTSArrayType(type)) {
+		return {
+			name: TS_TYPE_NAME_MAP[type.type],
+			elements: [getTypeObjectFromTSType(type.elementType)]
+		}
+	}
+	if (bt.isTSTupleType(type)) {
+		return {
+			name: TS_TYPE_NAME_MAP[type.type],
+			elements: type.elementTypes.map(getTypeObjectFromTSType)
+		}
+	}
+	if (bt.isTSNamedTupleMember(type)) {
+		return getTypeObjectFromTSType(type.elementType)
+	}
+
+	return printType(type)
 }
 
 const FLOW_TYPE_NAME_MAP: { [name: string]: string } = {

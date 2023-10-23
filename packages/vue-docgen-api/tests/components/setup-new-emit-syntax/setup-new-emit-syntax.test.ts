@@ -35,41 +35,54 @@ describe.each(['./NewEmitSyntax.vue', './NewEmitSyntaxSeparateType.vue'])(
 
 		describe('events', () => {
 			it('should return a doc object containing events', () => {
-				expect(doc.events).toHaveLength(3)
+				expect(doc.events).toHaveLength(4)
 			})
 
 			it('should match the snapshot', () => {
 				expect(doc.events).toMatchInlineSnapshot(`
-				[
-				  {
-				    "description": "An event without payload",
-				    "name": "eventWithoutPayload",
-				    "type": {
-				      "names": [
-				        "TSTupleType",
-				      ],
-				    },
-				  },
-				  {
-				    "description": "An event with payload",
-				    "name": "eventWithPayload",
-				    "type": {
-				      "names": [
-				        "TSTupleType",
-				      ],
-				    },
-				  },
-				  {
-				    "description": "Event used for v-model",
-				    "name": "update:modelValue",
-				    "type": {
-				      "names": [
-				        "TSTupleType",
-				      ],
-				    },
-				  },
-				]
-			`)
+					[
+					  {
+					    "description": "An event without payload",
+					    "name": "eventWithoutPayload",
+					    "type": undefined,
+					  },
+					  {
+					    "description": "An event with named tuple as payload",
+					    "name": "eventWithNamedPayload",
+					    "type": {
+					      "elements": [
+					        {
+					          "name": "boolean",
+					        },
+					        {
+					          "name": "string",
+					        },
+					      ],
+					      "names": [
+					        "tuple",
+					      ],
+					    },
+					  },
+					  {
+					    "description": "An event with unnamed tuple as payload",
+					    "name": "eventWithUnnamedPayload",
+					    "type": {
+					      "names": [
+					        "number",
+					      ],
+					    },
+					  },
+					  {
+					    "description": "Event used for v-model",
+					    "name": "update:modelValue",
+					    "type": {
+					      "names": [
+					        "string",
+					      ],
+					    },
+					  },
+					]
+				`)
 			})
 		})
 	}

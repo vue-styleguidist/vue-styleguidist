@@ -25,11 +25,16 @@ export default async function setupEventHandler(
 	function buildEventDescriptor(eventName: string, eventPath: NodePath) {
 		const eventDescriptor = documentation.getEventDescriptor(eventName)
 
-		const typeParam = bt.isTSPropertySignature(eventPath.node)
+		const isPropertyEmitSyntax = bt.isTSPropertySignature(eventPath.node)
+		const typeParam = isPropertyEmitSyntax
 			? eventPath.get('typeAnnotation')
 			: eventPath.get('parameters', 1, 'typeAnnotation')
 		if (bt.isTSTypeAnnotation(typeParam.node)) {
-			const type = getTypeFromAnnotation(typeParam.node)
+			let type = getTypeFromAnnotation(typeParam.node)
+			if (isPropertyEmitSyntax && type) {
+				type = type.elements?.[0]
+			}
+
 			if (type) {
 				eventDescriptor.type = {
 					names: [type.name]
