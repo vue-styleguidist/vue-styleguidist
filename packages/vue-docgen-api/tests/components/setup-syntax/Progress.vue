@@ -30,6 +30,10 @@ const emit = defineEmits<{
    * Save the world
    */
   (event: 'save', arg: number): void
+	/**
+	 * Event with tuple payload as first arg
+	 */
+	(event: 'eventWithTuplePayload', arg: [number, string]): void
 }>()
 
 defineExpose([
