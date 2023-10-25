@@ -150,7 +150,16 @@ export function getTypeDefinitionFromIdentifier(
 		},
 		visitTSTypeAliasDeclaration(nodePath) {
 			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
-				typeBody = nodePath.get('typeAnnotation', 'members')
+				const typeAnnotation = nodePath.get('typeAnnotation')
+				if (bt.isTSTypeLiteral(typeAnnotation.node)) {
+					typeBody = typeAnnotation.get('members')
+				} else if (bt.isTSTypeReference(typeAnnotation.node)) {
+					typeBody = getTypeDefinitionFromIdentifier(
+						astPath,
+						typeAnnotation.node.typeName.name,
+						opt
+					)
+				}
 			}
 			return false
 		}
