@@ -56,7 +56,7 @@ describe('setup syntactic sugar', () => {
 
 		describe('events', () => {
 			it('should return a doc object containing events', () => {
-				expect(doc.events).toHaveLength(2)
+				expect(doc.events).toHaveLength(3)
 			})
 
 			it('should match the snapshot', () => {
@@ -73,6 +73,23 @@ describe('setup syntactic sugar', () => {
 					    "type": {
 					      "names": [
 					        "number",
+					      ],
+					    },
+					  },
+					  {
+					    "description": "Event with tuple payload as first arg",
+					    "name": "eventWithTuplePayload",
+					    "type": {
+					      "elements": [
+					        {
+					          "name": "number",
+					        },
+					        {
+					          "name": "string",
+					        },
+					      ],
+					      "names": [
+					        "tuple",
 					      ],
 					    },
 					  },
