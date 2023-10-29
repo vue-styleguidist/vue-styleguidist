@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.75.0
+
+### Minor Changes
+
+- [#1616](https://github.com/vue-styleguidist/vue-styleguidist/pull/1616) [`6b9638c2`](https://github.com/vue-styleguidist/vue-styleguidist/commit/6b9638c2a4bc5c5f06e3eea1243be2019841b21b) Thanks [@pscheede](https://github.com/pscheede)! - Add support for new defineEmits Syntax in Vue 3.3
+
+### Patch Changes
+
+- [#1604](https://github.com/vue-styleguidist/vue-styleguidist/pull/1604) [`b90bc397`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b90bc3970b0e5faf688c1410d5f6294efd9cb512) Thanks [@ryoji-yamauchi-blc](https://github.com/ryoji-yamauchi-blc)! - Avoid parsing error when the type is reference type
+
 ## 4.74.2
 
 ### Patch Changes
