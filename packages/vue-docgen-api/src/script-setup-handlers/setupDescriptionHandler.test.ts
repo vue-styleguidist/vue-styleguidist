@@ -13,7 +13,6 @@ function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 describe.only('setupDescriptionHandler', () => {
 	let documentation: Documentation
 	let stubNodePath: NodePath<any, any> | undefined
-	let mockDescription: string;
 	const options = { filePath: '', validExtends: () => true }
 	beforeAll(() => {
 		const defaultAST = babylon({ plugins: ['typescript'] }).parse('export default {}')
