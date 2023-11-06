@@ -56,11 +56,11 @@ importers:
         specifier: 13.13.52
         version: 13.13.52
       '@types/react':
-        specifier: 18.2.24
-        version: 18.2.24
+        specifier: 18.2.36
+        version: 18.2.36
       '@types/react-dom':
-        specifier: 18.2.8
-        version: 18.2.8
+        specifier: 18.2.14
+        version: 18.2.14
       '@types/webpack-dev-server':
         specifier: 3.11.6
         version: 3.11.6
@@ -556,7 +556,7 @@ importers:
         version: 2.9.16
       vitepress:
         specifier: ^1.0.0-beta.1
-        version: 1.0.0-draft.1(@types/react@18.2.24)
+        version: 1.0.0-draft.1(@types/react@18.2.36)
       vue-component-meta:
         specifier: ^1.0.9
         version: 1.0.9(typescript@4.9.5)
@@ -6839,10 +6839,10 @@ packages:
     resolution: {integrity: sha512-rODCdDtGyudLj+Va8b6w6Y85KE85bXRsps/R4Yjwt5vueXKXZQKYw0aA9knxLBT6a/bI/GMrAcmCR75KYOM6hg==}
     dev: true
 
-  /@docsearch/js@3.3.0(@types/react@18.2.24):
+  /@docsearch/js@3.3.0(@types/react@18.2.36):
     resolution: {integrity: sha512-oFXWRPNvPxAzBhnFJ9UCFIYZiQNc3Yrv6912nZHw/UIGxsyzKpNRZgHq8HDk1niYmOSoLKtVFcxkccpQmYGFyg==}
     dependencies:
-      '@docsearch/react': 3.3.0(@types/react@18.2.24)
+      '@docsearch/react': 3.3.0(@types/react@18.2.36)
       preact: 10.10.0
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -6851,7 +6851,7 @@ packages:
       - react-dom
     dev: true
 
-  /@docsearch/react@3.3.0(@types/react@18.2.24):
+  /@docsearch/react@3.3.0(@types/react@18.2.36):
     resolution: {integrity: sha512-fhS5adZkae2SSdMYEMVg6pxI5a/cE+tW16ki1V0/ur4Fdok3hBRkmN/H8VvlXnxzggkQIIRIVvYPn00JPjen3A==}
     peerDependencies:
       '@types/react': '>= 16.8.0 < 19.0.0'
@@ -6868,7 +6868,7 @@ packages:
       '@algolia/autocomplete-core': 1.7.2
       '@algolia/autocomplete-preset-algolia': 1.7.2(algoliasearch@4.14.2)
       '@docsearch/css': 3.3.0
-      '@types/react': 18.2.24
+      '@types/react': 18.2.36
       algoliasearch: 4.14.2
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -8577,14 +8577,14 @@ packages:
       - debug
     dev: true
 
-  /@types/react-dom@18.2.8:
-    resolution: {integrity: sha512-bAIvO5lN/U8sPGvs1Xm61rlRHHaq5rp5N3kp9C+NJ/Q41P8iqjkXSu0+/qu8POsjH9pNWb0OYabFez7taP7omw==}
+  /@types/react-dom@18.2.14:
+    resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
     dependencies:
-      '@types/react': 18.2.24
+      '@types/react': 18.2.36
     dev: false
 
-  /@types/react@18.2.24:
-    resolution: {integrity: sha512-Ee0Jt4sbJxMu1iDcetZEIKQr99J1Zfb6D4F3qfUWoR1JpInkY1Wdg4WwCyBjL257D0+jGqSl1twBjV8iCaC0Aw==}
+  /@types/react@18.2.36:
+    resolution: {integrity: sha512-o9XFsHYLLZ4+sb9CWUYwHqFVoG61SesydF353vFMMsQziiyRu8np4n2OYMUSDZ8XuImxDr9c5tR7gidlH29Vnw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.1
@@ -28602,13 +28602,13 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitepress@1.0.0-draft.1(@types/react@18.2.24):
+  /vitepress@1.0.0-draft.1(@types/react@18.2.36):
     resolution: {integrity: sha512-9tNpUu0dwd5w5DNCBlgsmw4HlEl55o8jdOk/tQIxQ2j//0UkEAPT32TL5KRuro1Bp5OM6njZ37s8Y8g26MnooQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.3.0
-      '@docsearch/js': 3.3.0(@types/react@18.2.24)
+      '@docsearch/js': 3.3.0(@types/react@18.2.36)
       '@vitejs/plugin-vue': 2.3.4(vite@2.9.16)(vue@3.2.33)
       '@vueuse/core': 8.9.4(vue@3.2.33)
       body-scroll-lock: 4.0.0-beta.0
