@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.75.1
+
+### Patch Changes
+
+- [#1624](https://github.com/vue-styleguidist/vue-styleguidist/pull/1624) [`bc4ff434`](https://github.com/vue-styleguidist/vue-styleguidist/commit/bc4ff434c4fa15df4ca7bc3dc982b86738b23ff9) Thanks [@azhirov](https://github.com/azhirov)! - Include setupSlotHandler in the final build
+
 ## 4.75.0
 
 ### Minor Changes
