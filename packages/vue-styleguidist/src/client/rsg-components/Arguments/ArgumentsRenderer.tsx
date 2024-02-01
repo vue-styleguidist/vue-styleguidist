@@ -34,7 +34,9 @@ export const ArgumentsRenderer: React.FunctionComponent<ArgumentsProps> = ({
 		<div className={classes.root}>
 			{heading && (
 				<div className={classes.headingWrapper}>
-					<Heading level={5}>Arguments</Heading>
+					<Heading level={5} placeholder="args">
+						Arguments
+					</Heading>
 				</div>
 			)}
 			{args.map(arg => (
