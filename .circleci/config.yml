@@ -14,9 +14,14 @@ jobs:
       - restore_cache:
           keys:
             - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-      - run: pnpm config set store-dir ~/.pnpm-store
+
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
       - run: pnpm install
       - save_cache:
           key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
@@ -53,10 +58,14 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
 
+      - run: pnpm install
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
       - run: pnpm test:browser vuecli3
@@ -104,17 +113,17 @@ jobs:
       - run: pnpm install
 
       # run cypress vue-styleguidist component tests
-      - run: 
+      - run:
           command: pnpm exec cypress run --component --record --group ct
           working_directory: packages/vue-styleguidist
-      
+
       # run cypress prismjs-highlighter component tests
-      - run: 
+      - run:
           command: pnpm exec cypress run --component --record --group ct-prismjs
           working_directory: packages/vue-inbrowser-prismjs-highlighter
-      
+
       # run cypress e2e tests
-      - run: 
+      - run:
           command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/integration/basic/*.*\" --record --group main"
           environment:
             CY_EXAMPLE_FOLDER: basic
@@ -131,15 +140,14 @@ jobs:
           destination: cy-screenshots-jsx
 
       # run cypress component tests vue3
-      - run: 
+      - run:
           name: Run Vue 3 component tests for vue-styleguidist
           command: pnpm install:vue3 && pnpm exec cypress run --component --record --group ct-vue3 --config-file packages/vue-styleguidist/cypress.config.vue3.ts
 
       # run cypress component tests vue3
-      - run: 
+      - run:
           name: Run Vue 3 component tests for prismjs highlighter
           command: pnpm exec cypress run --component --record --group ct-prismjs-vue3 --config-file packages/vue-inbrowser-prismjs-highlighter/cypress.config.vue3.ts
-
 
 workflows:
   test:
@@ -157,5 +165,4 @@ workflows:
       - cypress:
           requires:
             - install
-
 # VS Code Extension Version: 1.5.1
