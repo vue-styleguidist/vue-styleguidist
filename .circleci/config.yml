@@ -107,9 +107,13 @@ jobs:
           command: |
             echo 'export CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY' >> "$BASH_ENV"
 
-      # install pnpm
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
       - run: pnpm install
 
       # run cypress vue-styleguidist component tests
