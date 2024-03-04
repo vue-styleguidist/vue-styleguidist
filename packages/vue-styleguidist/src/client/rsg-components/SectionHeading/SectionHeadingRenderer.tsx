@@ -68,7 +68,7 @@ const SectionHeadingRenderer: React.FunctionComponent<SectionHeadingRendererProp
 
 	return (
 		<div className={classes.wrapper}>
-			<Heading level={headingLevel} id={id}>
+			<Heading level={headingLevel} id={id} placeholder="section">
 				{href ? (
 					<a href={href} className={sectionNameClasses}>
 						{children as React.ReactNode}
