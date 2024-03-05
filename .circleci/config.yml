@@ -5,7 +5,7 @@ defaults: &defaults
     - image: cypress/included:cypress-13.6.6-node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
       environment:
         NODE_OPTIONS: '--openssl-legacy-provider'
-  working_directory: vue-styleguidist
+  working_directory: ~/vue-styleguidist
 
 jobs:
   install:
@@ -33,7 +33,7 @@ jobs:
           name: Save pnpm Package Cache
           key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
-            - .pnpm-store
+            - '~/.pnpm-store'
       - persist_to_workspace:
           root: ~/
           paths:
@@ -64,11 +64,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-
-      - restore_cache:
-          name: Restore pnpm Package Cache
-          keys:
-            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
 
       # install pnpm
       - run:
