@@ -12,16 +12,26 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          name: Restore pnpm Package Cache
           keys:
-            - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-      - run: pnpm config set store-dir ~/.pnpm-store
-      - run: pnpm install
+            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+
+      # install pnpm
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
       - save_cache:
-          key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+          name: Save pnpm Package Cache
+          key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
-            - '~/.pnpm-store'
+            - .pnpm-store
       - persist_to_workspace:
           root: ~/
           paths:
@@ -53,9 +63,23 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
+      - restore_cache:
+          name: Restore pnpm Package Cache
+          keys:
+            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+
+      # install pnpm
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
 
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
@@ -70,6 +94,16 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+
+      - restore_cache:
+          name: Restore pnpm Package Cache
+          keys:
+            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
 
       # Build all examples
       - run: npm run build jsx -- --ci
@@ -99,9 +133,17 @@ jobs:
             echo 'export CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY' >> "$BASH_ENV"
 
       # install pnpm
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
 
       # run cypress vue-styleguidist component tests
       - run:
