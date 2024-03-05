@@ -18,7 +18,6 @@ jobs:
           keys:
             - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
 
-      # install pnpm
       - run:
           name: Install pnpm package manager
           command: |
@@ -65,7 +64,6 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      # install pnpm
       - run:
           name: Install pnpm package manager
           command: |
@@ -119,7 +117,6 @@ jobs:
           command: |
             echo 'export CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY' >> "$BASH_ENV"
 
-      # install pnpm
       - run:
           name: Install pnpm package manager
           command: |
