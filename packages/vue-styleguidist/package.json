@@ -154,7 +154,7 @@
     "strip-shebang": "1.0.2",
     "vue": "2.7.14",
     "vue-template-compiler": "2.7.14",
-    "webpack": "4.47.0"
+    "webpack": "4.46.0"
   },
   "resolutions": {
     "**/http-proxy": "1.18.1"
