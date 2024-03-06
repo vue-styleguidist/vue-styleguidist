@@ -1,5 +1,11 @@
 import { join } from 'path'
+import esmResolveNative from 'esm-resolve'
 import missingFilesCache from './missing-files-cache'
+
+// fix issues with babel bundles in cjs
+const esmResolve = (
+	'default' in esmResolveNative ? esmResolveNative.default : esmResolveNative
+) as typeof esmResolveNative
 
 const SUFFIXES = ['', '.js', '.ts', '.vue', '.jsx', '.tsx']
 
@@ -50,8 +56,17 @@ export default function resolvePathFrom(path: string, from: string[]): string | 
 		const pkg = require(packagePath)
 		// if it is an es6 module use the module instead of commonjs
 		finalPath = require.resolve(join(path, pkg.module || pkg.main))
-	} catch (e) {
-		// eat the error
+	} catch (e: any) {
+		// if the error is about the package.json not being found,
+		// try to resolve the path naturally
+		if (e.code === 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+			try {
+				finalPath = esmResolve(from[0])(path) ?? null
+			} catch (e) {
+				// dismiss the error
+			}
+		}
+		// else dismiss the error
 	}
 
 	if (!finalPath) {

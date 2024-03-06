@@ -1496,6 +1496,9 @@ importers:
       ast-types:
         specifier: ^0.16.1
         version: 0.16.1
+      esm-resolve:
+        specifier: ^1.0.8
+        version: 1.0.8
       hash-sum:
         specifier: ^2.0.0
         version: 2.0.0
@@ -17125,6 +17128,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /esm-resolve@1.0.8:
+    resolution: {integrity: sha512-pzYHY8bf7uLpDuefGsI6JtHVS1J3N1uOkIEC36ejvvWhiiMr/xKBX4PrxCtsxeISJbCEMBLkPZvRwZNHgdwn5A==}
+    dev: false
 
   /espree@6.2.1:
     resolution: {integrity: sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==}
