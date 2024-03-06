@@ -32,7 +32,7 @@ jobs:
         run: rm -rf ./coverage/tmp
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v4
 
   test-plugin-github-actions:
     runs-on: ubuntu-latest
@@ -43,6 +43,6 @@ jobs:
 
       - name: Init & Build
         uses: ./.github/actions/build
-        
+
       - name: Run plugin tests
         run: pnpm test:plugin

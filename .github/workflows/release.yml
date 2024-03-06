@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           fetch-depth: 0
@@ -46,8 +46,8 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm exec changeset publish
-          commit: "ci(changesets): version packages"
-          title: "ci(changesets): version packages"
+          commit: 'ci(changesets): version packages'
+          title: 'ci(changesets): version packages'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
