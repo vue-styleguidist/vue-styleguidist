@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.76.0
+
+### Minor Changes
+
+- [#1646](https://github.com/vue-styleguidist/vue-styleguidist/pull/1646) [`454bfe75`](https://github.com/vue-styleguidist/vue-styleguidist/commit/454bfe7573057de806b783ba61d3b30def91078e) Thanks [@elevatebart](https://github.com/elevatebart)! - allow resolving an imported module in a type module package
+
 ## 4.75.1
 
 ### Patch Changes
