@@ -7,7 +7,7 @@ runs:
     - uses: actions/setup-node@v4
 
     - name: Cache pnpm modules
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -15,7 +15,7 @@ runs:
           ${{ runner.os }}-
 
     - name: Install Pnpm
-      uses: pnpm/action-setup@v2.2.4
+      uses: pnpm/action-setup@v3
       with:
         version: latest
         run_install: false
@@ -27,7 +27,7 @@ runs:
         echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
 
     - name: Setup pnpm cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
