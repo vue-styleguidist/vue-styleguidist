@@ -109,7 +109,8 @@ export default function (
 
 	webpackConfig = merge(webpackConfig, {
 		// we need to follow our own entry point
-		entry: config.require.concat([path.resolve(sourceDir, 'index')]) ?? path.resolve(sourceDir, 'index'),
+		entry:
+			config.require.concat([path.resolve(sourceDir, 'index')]) ?? path.resolve(sourceDir, 'index'),
 		plugins: [
 			// in order to avoid collision with the preload plugins
 			// that are loaded by the vue cli
@@ -317,7 +318,9 @@ export default function (
 	// (their aliases should be before this one)
 	const resolve = makeWebpackConfig(config as any, env).resolve
 	if (resolve && resolve.alias) {
-		webpackAlias[RSG_COMPONENTS_ALIAS] = resolve.alias[RSG_COMPONENTS_ALIAS]
+		webpackAlias[RSG_COMPONENTS_ALIAS] = (resolve.alias as Record<string, string>)[
+			RSG_COMPONENTS_ALIAS
+		]
 	}
 
 	// To avoid circular rendering when overriding existing components,

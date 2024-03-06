@@ -2,7 +2,9 @@ version: 2.1
 
 defaults: &defaults
   docker:
-    - image: cypress/included:12.5.0
+    - image: cypress/included:cypress-13.6.6-node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
+      environment:
+        NODE_OPTIONS: '--openssl-legacy-provider'
   working_directory: ~/vue-styleguidist
 
 jobs:
@@ -12,14 +14,23 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          name: Restore pnpm Package Cache
           keys:
-            - v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-      - run: pnpm config set store-dir ~/.pnpm-store
-      - run: pnpm install
+            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
       - save_cache:
-          key: v1-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+          name: Save pnpm Package Cache
+          key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - '~/.pnpm-store'
       - persist_to_workspace:
@@ -53,9 +64,17 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
 
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
@@ -98,23 +117,30 @@ jobs:
           command: |
             echo 'export CYPRESS_RECORD_KEY=$MAIN_RECORD_KEY' >> "$BASH_ENV"
 
-      # install pnpm
-      - run: apt-get -y update; apt-get -y install curl
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
 
       # run cypress vue-styleguidist component tests
-      - run: 
+      - run:
           command: pnpm exec cypress run --component --record --group ct
           working_directory: packages/vue-styleguidist
-      
+
       # run cypress prismjs-highlighter component tests
-      - run: 
+      - run:
           command: pnpm exec cypress run --component --record --group ct-prismjs
           working_directory: packages/vue-inbrowser-prismjs-highlighter
-      
+
       # run cypress e2e tests
-      - run: 
+      - run:
           command: pnpm exec start-server-and-test cy:serve http://localhost:6060 "cypress run --e2e --spec \"test/cypress/integration/basic/*.*\" --record --group main"
           environment:
             CY_EXAMPLE_FOLDER: basic
@@ -131,15 +157,14 @@ jobs:
           destination: cy-screenshots-jsx
 
       # run cypress component tests vue3
-      - run: 
+      - run:
           name: Run Vue 3 component tests for vue-styleguidist
           command: pnpm install:vue3 && pnpm exec cypress run --component --record --group ct-vue3 --config-file packages/vue-styleguidist/cypress.config.vue3.ts
 
       # run cypress component tests vue3
-      - run: 
+      - run:
           name: Run Vue 3 component tests for prismjs highlighter
           command: pnpm exec cypress run --component --record --group ct-prismjs-vue3 --config-file packages/vue-inbrowser-prismjs-highlighter/cypress.config.vue3.ts
-
 
 workflows:
   test:
@@ -157,5 +182,4 @@ workflows:
       - cypress:
           requires:
             - install
-
 # VS Code Extension Version: 1.5.1

@@ -6,6 +6,7 @@
 		"declaration": true,
 		"sourceMap": false,
 		"downlevelIteration": true,
+		"composite": true,
 		"skipLibCheck": true
 	},
 	"include": ["src/**/*.ts", "tests/**/*.ts", "../../@types/*.ts"]
