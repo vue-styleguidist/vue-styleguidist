@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Init & Build
         uses: ./.github/actions/build
@@ -35,8 +35,8 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: yarn release
-          commit: "ci(changesets): version packages"
-          title: "ci(changesets): version packages"
+          commit: 'ci(changesets): version packages'
+          title: 'ci(changesets): version packages'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,4 +53,3 @@ jobs:
           pnpm i --frozen-lockfile=false --ignore-scripts
           git add pnpm-lock.yaml
           git diff --staged --quiet || (git commit -m "chore: update lock file after release [ci skip]" && git push)
-          

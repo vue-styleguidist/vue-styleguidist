@@ -4,7 +4,7 @@ description: Install project dependencies and build
 runs:
   using: composite
   steps:
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v4
 
     - name: Cache pnpm modules
       uses: actions/cache@v3
@@ -24,8 +24,8 @@ runs:
       shell: bash
       id: pnpm-cache
       run: |
-        echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
-    
+        echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
     - name: Setup pnpm cache
       uses: actions/cache@v3
       with:
