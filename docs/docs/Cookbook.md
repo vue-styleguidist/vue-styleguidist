@@ -27,6 +27,32 @@
 
 Styleguidist does not load a `main.js` file. To install plugins and component libraries, you will need to require then somewhere else.
 
+### Vue 3
+
+First create a `.js` file that installs the plugins into an existing Vue app. Then add it into the `styleguide.config.js` file [enhancePreviewApp](/Configuration.md#enhancePreviewApp) option:
+
+`styleguide.config.js`
+
+```javascript
+module.exports = {
+  enhancePreviewApp: [path.join(__dirname, 'styleguide/global.requires.js')]
+}
+```
+
+`styleguide/global.requires.js`
+
+```javascript
+import VCalendar from "v-calendar"
+import "v-calendar/style.css"
+
+export default function (app) {
+  app.use(VCalendar, {})
+}
+```
+
+
+### Vue 2
+
 First create a `.js` file that installs the plugins. Then add it into the `styleguide.config.js` file [require](/Configuration.md#require) option:
 
 `styleguide.config.js`
@@ -52,6 +78,8 @@ Vue.use(VueI18n)
 Vue.use(VeeValidate)
 Vue.use(Vuetify, opts)
 ```
+
+### Changing the root component of preview examples
 
 If you need to change the root component of each preview example, you can change the root component of the preview. Creating a `.js` file that exports the root component as [jsx component](https://vuejs.org/v2/guide/render-function.html) and then adds it into the `styleguide.config.js` file
 
