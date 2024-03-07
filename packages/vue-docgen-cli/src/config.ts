@@ -13,12 +13,9 @@ import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
 
 export { ContentAndDependencies, SubTemplateOptions }
 
-type AddParameters<
-  TFunction extends (...args: any) => any,
-  TParameters extends [...args: any]
-> = (
-  ...args: [...Parameters<TFunction>, ...TParameters]
-) => ReturnType<TFunction>;
+type AddParameters<TFunction extends (...args: any) => any, TParameters extends [...args: any]> = (
+	...args: [...Parameters<TFunction>, ...TParameters]
+) => ReturnType<TFunction>
 
 export type FileEventType = 'add' | 'change' | 'delete' | 'init'
 
@@ -124,7 +121,7 @@ export interface SafeDocgenCLIConfig {
 	 */
 	verbose: boolean
 	/**
-	 * The level of verbosity the logger should use	
+	 * The level of verbosity the logger should use
 	 */
 	logLevel: LogLevelDesc
 }
@@ -135,11 +132,31 @@ export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' |
 }
 
 export interface Templates {
-	props(props: PropDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
-	slots(slots: SlotDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
-	methods(methods: MethodDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
-	events(events: EventDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
-	expose(exposed: ExposeDescriptor[], opt?: SubTemplateOptions): string | Promise<string>
+	props(
+		props: PropDescriptor[],
+		opt?: SubTemplateOptions,
+		doc?: ComponentDoc
+	): string | Promise<string>
+	slots(
+		slots: SlotDescriptor[],
+		opt?: SubTemplateOptions,
+		doc?: ComponentDoc
+	): string | Promise<string>
+	methods(
+		methods: MethodDescriptor[],
+		opt?: SubTemplateOptions,
+		doc?: ComponentDoc
+	): string | Promise<string>
+	events(
+		events: EventDescriptor[],
+		opt?: SubTemplateOptions,
+		doc?: ComponentDoc
+	): string | Promise<string>
+	expose(
+		exposed: ExposeDescriptor[],
+		opt?: SubTemplateOptions,
+		doc?: ComponentDoc
+	): string | Promise<string>
 	component(
 		usage: RenderedUsage,
 		doc: ComponentDoc,

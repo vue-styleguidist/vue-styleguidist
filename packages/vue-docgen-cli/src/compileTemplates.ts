@@ -73,11 +73,11 @@ export default async function compileTemplates(
 				const subComponentOptions = { isSubComponent, hasSubComponents }
 
 				const renderedUsage = {
-					props: p ? await Promise.resolve(templates.props(p, subComponentOptions)) : '',
-					slots: s ? await Promise.resolve(templates.slots(s, subComponentOptions)) : '',
-					methods: m ? await Promise.resolve(templates.methods(m, subComponentOptions)) : '',
-					events: e ? await Promise.resolve(templates.events(e, subComponentOptions)) : '',
-					expose: exp ? await Promise.resolve(templates.expose(exp, subComponentOptions)) : '',
+					props: p ? await Promise.resolve(templates.props(p, subComponentOptions, doc)) : '',
+					slots: s ? await Promise.resolve(templates.slots(s, subComponentOptions, doc)) : '',
+					methods: m ? await Promise.resolve(templates.methods(m, subComponentOptions, doc)) : '',
+					events: e ? await Promise.resolve(templates.events(e, subComponentOptions, doc)) : '',
+					expose: exp ? await Promise.resolve(templates.expose(exp, subComponentOptions, doc)) : '',
 					functionalTag: templates.functionalTag
 				}
 
