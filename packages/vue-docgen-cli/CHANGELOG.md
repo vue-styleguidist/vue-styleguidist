@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.77.0
+
+### Minor Changes
+
+- [`ab2b90a6`](https://github.com/vue-styleguidist/vue-styleguidist/commit/ab2b90a6b566964feae09b413a14e6008a1bb5a2) Thanks [@elevatebart](https://github.com/elevatebart)! - add a param to all templates to access the full doc
+
 ## 4.67.0
 
 ### Minor Changes
