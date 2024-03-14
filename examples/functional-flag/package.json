@@ -21,7 +21,7 @@
     "@znck/prop-types": "^0.6.3",
     "dog-names": "^1.0.2",
     "lodash": "^4.17.21",
-    "vue-types": "^1.7.0"
+    "vue-types": "^5.1.1"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
@@ -41,7 +41,7 @@
     "react": "^17.0.2",
     "sass-loader": "^14.1.1",
     "style-loader": "^3.3.4",
-    "vue": "^2.7.14",
+    "vue": "^3.4.21",
     "vue-loader": "^17.4.2",
     "vue-styleguidist": "^4",
     "webpack": "^5.90.3",

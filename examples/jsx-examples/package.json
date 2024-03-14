@@ -23,7 +23,7 @@
     "@babel/runtime": "^7.13.10",
     "@znck/prop-types": "^0.6.3",
     "dog-names": "^1.0.2",
-    "vue-types": "^1.7.0"
+    "vue-types": "^5.1.1"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",
@@ -40,7 +40,7 @@
     "sass": "^1.34.0",
     "sass-loader": "^14.1.1",
     "style-loader": "^3.3.4",
-    "vue": "^2.7.14",
+    "vue": "^3.4.21",
     "vue-styleguidist": "^4",
     "webpack": "^5.90.3",
     "webpack-bundle-analyzer": "4.10.1"

@@ -9,6 +9,8 @@ export default function server(
 	const env = 'development'
 	const serverInfo = createServer(config, env)
 
+	serverInfo.app.start()
+
 	serverInfo.app.app?.listen(config.serverPort, config.serverHost, callback)
 
 	return serverInfo

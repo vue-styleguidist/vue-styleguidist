@@ -23,7 +23,7 @@
   "dependencies": {
     "dog-names": "^1.0.2",
     "mini-css-extract-plugin": "^0.5.0",
-    "vue": "^2.7.14"
+    "vue": "^3.4.21"
   },
   "scripts": {
     "styleguide": "vue-styleguidist server",

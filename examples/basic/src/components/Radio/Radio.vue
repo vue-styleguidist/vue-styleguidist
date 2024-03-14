@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<template v-for="op in options">
-			<input :key="op.value" type="radio" :value="op.value" name="hello" />
-			<label :key="`${op.value}-label`" :for="op.value">{{ op.text }}</label>
+		<template v-for="op in options" :key="op.value">
+			<input type="radio" :value="op.value" name="hello" />
+			<label :for="op.value">{{ op.text }}</label>
 		</template>
 	</div>
 </template>

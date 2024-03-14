@@ -1,15 +1,14 @@
-import { VueConstructor } from "vue";
+import { Component } from 'vue'
 
-const globalComponents: Record<string, VueConstructor>  = {}
+const globalComponents: Record<string, Component> = {}
 
-export function registerGlobalComponents(app: any): any{
-  Object.entries(globalComponents)
-    .forEach(([name, component]) => {
-      app.component(name, component)
-    })
-  return app
+export function registerGlobalComponents(app: any): any {
+	Object.entries(globalComponents).forEach(([name, component]) => {
+		app.component(name, component)
+	})
+	return app
 }
 
-export function addGlobalComponentToRegistration(name: string, component: VueConstructor) {
-  globalComponents[name] = component
+export function addGlobalComponentToRegistration(name: string, component: Component) {
+	globalComponents[name] = component
 }

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "dog-names": "^1.0.2",
-    "vue": "^2.7.14"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@babel/core": "7.18.6",
@@ -33,7 +33,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "vue-cli-plugin-styleguidist": "^4",
-    "vue-template-compiler": "^2.7.14"
+    "vue-template-compiler": "^2.7.16"
   },
   "eslintConfig": {
     "root": true,
