@@ -27,12 +27,12 @@ export default function createServer(
 		: webpackNormal
 
 	const compiler = webpack(webpackConfig)
-	const devServer = new WebpackDevServer(webpackDevServerConfig, compiler)
+	const app = new WebpackDevServer(webpackDevServerConfig, compiler)
 
 	// User defined customizations
 	if (config.configureServer) {
-		config.configureServer(devServer, env)
+		config.configureServer(app, env)
 	}
 
-	return { app: devServer, compiler }
+	return { app, compiler }
 }
