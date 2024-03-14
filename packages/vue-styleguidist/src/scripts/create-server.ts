@@ -14,7 +14,11 @@ export default function createServer(
 		{
 			devServer: {
 				compress: true,
-				hot: true
+				hot: true,
+				client: {
+					logging: 'none',
+					progress: true
+				}
 			}
 		},
 		{
@@ -26,7 +30,11 @@ export default function createServer(
 		? require(process.env.VSG_WEBPACK_PATH)
 		: webpackNormal
 
-	const compiler = webpack(webpackConfig)
+	const compiler = webpack({
+		...webpackConfig,
+		stats: 'errors-only',
+		infrastructureLogging: { level: 'error' }
+	})
 	const app = new WebpackDevServer(webpackDevServerConfig, compiler)
 
 	// User defined customizations
