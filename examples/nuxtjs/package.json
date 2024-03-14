@@ -32,19 +32,19 @@
     "@babel/preset-env": "^7.13.12",
     "@nuxt/babel-preset-app": "^2.15.3",
     "@nuxt/builder": "^2.15.3",
-    "css-loader": "^3.6.0",
+    "css-loader": "^6.10.0",
     "eslint": "^6",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.7.1",
     "sass": "^1.34.0",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^8.0.2",
-    "vue-loader": "15.9.3",
+    "postcss-loader": "^8.1.1",
+    "sass-loader": "^14.1.1",
+    "vue-loader": "17.4.2",
     "vue-server-renderer": "^2.7.14",
     "vue-style-loader": "^4.1.3",
     "vue-styleguidist": "^4",
     "vue-template-compiler": "^2.7.14",
-    "webpack": "^4.46.0"
+    "webpack": "^5.90.3"
   }
 }

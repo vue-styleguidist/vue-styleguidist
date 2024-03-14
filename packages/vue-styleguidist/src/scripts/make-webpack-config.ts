@@ -102,7 +102,7 @@ export default function (
 
 	// check that the define variables are not set yet
 	const definePluginsVariables = webpackConfig.plugins
-		?.filter(plugin => plugin.constructor.name === 'DefinePlugin')
+		?.filter(plugin => plugin?.constructor.name === 'DefinePlugin')
 		.reduce((acc: string[], plugin: any) => {
 			return acc.concat(Object.keys(plugin.definitions))
 		}, [])
@@ -150,6 +150,7 @@ export default function (
 								ecma: 5,
 								compress: {
 									keep_fnames: true,
+									// @ts-expect-error wp4 compat
 									warnings: false,
 									/**
 									 * Disable reduce_funcs to keep Terser from inlining
@@ -181,6 +182,7 @@ export default function (
 				// only add plugin if assetsDir is specified
 				...(config.assetsDir
 					? [
+							// @ts-expect-error wp4 compat
 							new CopyWebpackPlugin([
 								{
 									from: config.assetsDir
@@ -198,6 +200,7 @@ export default function (
 					publicPath: config.styleguidePublicPath
 				},
 				devServer: {
+					// @ts-ignore wp4 compat
 					publicPath: config.styleguidePublicPath,
 					// Use 'ws' instead of 'sockjs-node' on server since we're using native
 					// websockets in `webpackHotDevClient`.
@@ -223,7 +226,10 @@ export default function (
 	const RSG_COMPONENTS_ALIAS = 'rsg-components'
 	const RSG_COMPONENTS_ALIAS_DEFAULT = `${RSG_COMPONENTS_ALIAS}-default`
 
-	const webpackAlias = (webpackConfig.resolve && webpackConfig.resolve.alias) || {}
+	const webpackAlias =
+		typeof webpackConfig.resolve?.alias === 'object' && !Array.isArray(webpackConfig.resolve?.alias)
+			? webpackConfig.resolve.alias
+			: {}
 
 	// Custom style guide components have priority over vsg components
 	if (config.styleguideComponents) {

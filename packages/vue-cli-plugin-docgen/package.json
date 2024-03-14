@@ -16,9 +16,9 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "null-loader": "^0.1.1",
+    "null-loader": "^4.0.1",
     "vue-docgen-cli": "^4.45.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^5.10.0"
   },
   "peerDependencies": {
     "@vue/cli-service": ">= 3"

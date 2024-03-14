@@ -17,10 +17,14 @@ export default function getParser(
 		process.env.NODE_ENV || 'production'
 	)
 
-	let alias: { [key: string]: string } | undefined
+	let alias: { [key: string]: string | boolean | string[] } = {}
 	let modules: string[] | undefined
 
-	if (webpackConfig.resolve) {
+	if (
+		webpackConfig.resolve &&
+		webpackConfig.resolve.alias &&
+		!Array.isArray(webpackConfig.resolve.alias)
+	) {
 		alias = webpackConfig.resolve.alias
 		modules = webpackConfig.resolve.modules
 	}
@@ -29,11 +33,17 @@ export default function getParser(
 	if (webpackConfig.module && webpackConfig.module.rules) {
 		const { rules } = webpackConfig.module
 		const pugLoader: any =
-			rules.find(r => r.loader === 'pug-loader' || r.use === 'pug-loader') ||
+			rules.find(
+				r => r && typeof r === 'object' && (r.loader === 'pug-loader' || r.use === 'pug-loader')
+			) ||
 			rules
 				.reduce((acc: RuleSetUseItem[], r) => {
-					if (Array.isArray(r.use)) {
-						return acc.concat(r.use)
+					if (r && typeof r === 'object' && Array.isArray(r.use)) {
+						for (const t of r.use) {
+							if (t && typeof t === 'object') {
+								acc.push(t)
+							}
+						}
 					}
 					return acc
 				}, [])
@@ -43,11 +53,10 @@ export default function getParser(
 			pugOptions = pugLoader.options as pug.Options
 		} else {
 			const pugLoaderUse = rules.find(
-				r => typeof r.use === 'object' && (r.use as any).loader === 'pug-loader'
-			)
+				r => r && typeof r === 'object' && r.use && (r.use as any).loader === 'pug-loader'
+			) as { use: RuleSetUseItem | RuleSetUseItem[] }
 			if (
-				pugLoaderUse &&
-				pugLoaderUse.use &&
+				pugLoaderUse?.use &&
 				typeof pugLoaderUse.use === 'object' &&
 				!Array.isArray(pugLoaderUse.use)
 			) {

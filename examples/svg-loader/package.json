@@ -23,7 +23,7 @@
     "vue-cli-plugin-styleguidist": "^4.36.1",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.7.14",
-    "webpack-bundle-analyzer": "^3.9.0"
+    "webpack-bundle-analyzer": "^4.10.1"
   },
   "eslintConfig": {
     "root": true,

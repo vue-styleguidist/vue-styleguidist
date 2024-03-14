@@ -4,7 +4,7 @@ import makeWebpackConfig from './make-webpack-config'
 
 export default function build(
 	config: SanitizedStyleguidistConfig,
-	handler: webpackNormal.Compiler.Handler
+	handler: (err?: Error | null, stats?: webpackNormal.Stats) => void
 ) {
 	const webpack: typeof webpackNormal = process.env.VSG_WEBPACK_PATH
 		? require(process.env.VSG_WEBPACK_PATH)

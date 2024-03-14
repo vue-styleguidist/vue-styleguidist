@@ -57,10 +57,9 @@ export default function () {}
 
 export function pitch(this: StyleguidistContext) {
 	const callback = this.async()
-	const cb = callback ? callback : () => null
 	pitchAsync
 		.call(this)
-		.then(res => cb(undefined, res))
+		.then(res => callback(undefined, res))
 		.catch(e => {
 			throw e
 		})
@@ -95,7 +94,9 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 	const welcomeScreen = allContentPages.length === 0 && allComponentFiles.length === 0
 	const patterns = welcomeScreen ? getComponentPatternsFromSections(config.sections) : undefined
 	const renderRootJsx = config.renderRootJsx ? requireIt(config.renderRootJsx) : undefined
-	const enhancePreviewApp = config.enhancePreviewApp ? requireIt(config.enhancePreviewApp) : () => () => {}
+	const enhancePreviewApp = config.enhancePreviewApp
+		? requireIt(config.enhancePreviewApp)
+		: () => () => {}
 
 	logger.debug('Loading components:\n' + allComponentFiles.join('\n'))
 
@@ -146,7 +147,7 @@ export async function pitchAsync(this: StyleguidistContext): Promise<string> {
 		patterns,
 		sections,
 		renderRootJsx,
-    enhancePreviewApp,
+		enhancePreviewApp
 	}
 
 	return `${generate(b.program(flatten(styleContext)))}

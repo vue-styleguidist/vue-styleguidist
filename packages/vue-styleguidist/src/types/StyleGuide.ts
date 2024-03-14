@@ -11,7 +11,7 @@ import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { compile } from 'vue-inbrowser-compiler'
 import { Styles } from 'jss';
-import { Configuration, loader } from 'webpack'
+import { Configuration, LoaderContext } from 'webpack'
 import * as Rsg from 'react-styleguidist'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
 import { ProcessedSection } from './Section'
@@ -19,11 +19,17 @@ import { LoaderComponentProps } from './Component'
 
 type TransformOptions = Required<Parameters<typeof compile>>[1]
 
-export interface StyleguidistContext extends loader.LoaderContext {
+export interface StyleguidistContext extends LoaderContext<{
+	file:string,
+	displayName:string,
+	noExample: boolean,
+	shouldShowDefaultExample:boolean,
+	customLangs: string[],
+}> {
     _styleguidist: SanitizedStyleguidistConfig
 }
 
-export interface BaseStyleguidistConfig 
+export interface BaseStyleguidistConfig
     extends Omit<
         Rsg.SanitizedStyleguidistConfig,
         'sections' | 'propsParser' | 'sortProps' | 'updateDocs'

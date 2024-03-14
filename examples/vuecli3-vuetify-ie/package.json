@@ -29,13 +29,13 @@
     "@vue/cli-service": "^5.0.8",
     "babel-polyfill": "^6.26.0",
     "sass": "^1.32.8",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^14.1.1",
     "vue-cli-plugin-styleguidist": "^4.36.1",
     "vue-cli-plugin-vuetify": "^2.4.5",
     "vue-template-compiler": "^2.7.14",
     "vuetify": "^2.6.2",
-    "vuetify-loader": "^1.7.2",
-    "webpack": "^4.46.0"
+    "vuetify-loader": "^1.9.2",
+    "webpack": "^5.90.3"
   },
   "browserslist": [
     "> 1%",

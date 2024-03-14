@@ -19,7 +19,7 @@
     "@vue/cli-service": "5.0.8",
     "vue-cli-plugin-styleguidist": "^4",
     "vue-template-compiler": "^2.7.14",
-    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-bundle-analyzer": "^4.10.1",
     "cross-env": "^7.0.3"
   },
   "postcss": {
