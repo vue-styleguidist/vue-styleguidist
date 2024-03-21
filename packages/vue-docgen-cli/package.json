@@ -1,6 +1,6 @@
 {
 	"name": "vue-docgen-cli",
-	"version": "4.77.0",
+	"version": "4.78.0",
 	"scripts": {
 		"compile": "tsc -p ./tsconfig.build.json",
 		"compile:watch": "pnpm run compile --watch"
@@ -25,7 +25,7 @@
 		"globby": "^11.1.0",
 		"lodash.memoize": "4.1.2",
 		"prettier": "^2.8.4",
-		"vue-docgen-api": "^4.67.0"
+		"vue-docgen-api": "^4.78.0"
 	},
 	"devDependencies": {
 		"@types/lodash.memoize": "4.1.7",
