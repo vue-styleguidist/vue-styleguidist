@@ -3,7 +3,7 @@
 import { stringify } from 'q-i'
 import { moveCursor, clearLine } from 'readline'
 import WebpackDevServer from 'webpack-dev-server'
-import { Stats, Compiler, ProgressPlugin as ProgressPluginNormal } from 'webpack'
+import { Stats, Compiler, ProgressPlugin as ProgressPluginNormal, WebpackError } from 'webpack'
 import * as kleur from 'kleur'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import webpackDevServerUtils from 'react-dev-utils/WebpackDevServerUtils'
@@ -65,7 +65,7 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 
 	if (
 		config.progressBar !== false &&
-		!(config.webpackConfig.plugins || []).some(p => p.constructor === ProgressPlugin)
+		!(config.webpackConfig.plugins || []).some(p => p?.constructor === ProgressPlugin)
 	) {
 		const { plugin, bar: localBar } = getProgressPlugin('Building style guide')
 		bar = localBar
@@ -88,7 +88,7 @@ export function commandBuild(config: SanitizedStyleguidistConfig): Compiler {
 
 	// Custom error reporting
 	compiler.hooks.done.tap('vsrDoneBuilding', function (stats: Stats) {
-		const messages = formatWebpackMessages(stats.toJson({}, true))
+		const messages = formatWebpackMessages(stats.toJson({}) as any)
 		const hasErrors = printAllErrorsAndWarnings(messages, stats.compilation)
 		if (bar) {
 			bar.stop()
@@ -116,7 +116,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	if (
 		config.progressBar !== false &&
 		!((config.webpackConfig && config.webpackConfig.plugins) || []).some(
-			p => p.constructor === ProgressPlugin
+			p => p?.constructor === ProgressPlugin
 		)
 	) {
 		const { plugin, bar: localBar } = getProgressPlugin('Compiling')
@@ -165,7 +165,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 			clearLine(process.stdout, 0)
 		}
 
-		const messages = formatWebpackMessages(stats.toJson({}, true))
+		const messages = formatWebpackMessages(stats.toJson({}) as any)
 
 		if (!messages.errors.length && !messages.warnings.length) {
 			printStatus('Compiled successfully!', 'success')
@@ -177,9 +177,7 @@ export function commandServer(config: SanitizedStyleguidistConfig, open?: boolea
 	// kill ghosted threads on exit
 	;(['SIGINT', 'SIGTERM'] as const).forEach(signal => {
 		process.on(signal, () => {
-			app.close(() => {
-				process.exit(0)
-			})
+			app.stop()
 		})
 	})
 
@@ -293,8 +291,8 @@ function printAllErrorsAndWarnings(
 		warnings: string[]
 	},
 	compilation: {
-		errors: string[]
-		warnings: string[]
+		errors: WebpackError[]
+		warnings: WebpackError[]
 	}
 ) {
 	// If errors exist, only show errors
@@ -315,7 +313,7 @@ function printAllErrorsAndWarnings(
  * @param {object} errors
  * @param {object} originalErrors
  */
-function printAllErrors(errors: string[], originalErrors: string[]) {
+function printAllErrors(errors: string[], originalErrors: WebpackError[]) {
 	printStyleguidistError(errors)
 	printNoLoaderError(errors)
 	printErrors('Failed to compile', errors, originalErrors, 'error')
@@ -325,7 +323,7 @@ function printAllErrors(errors: string[], originalErrors: string[]) {
  * @param {object} warnings
  * @param {object} originalWarnings
  */
-function printAllWarnings(warnings: string[], originalWarnings: string[]) {
+function printAllWarnings(warnings: string[], originalWarnings: WebpackError[]) {
 	printErrors('Compiled with warnings', warnings, originalWarnings, 'warning')
 }
 

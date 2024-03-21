@@ -1,7 +1,7 @@
-import { Configuration, Plugin } from 'webpack'
+import { Configuration, WebpackPluginInstance } from 'webpack'
 import isFunction from 'lodash/isFunction'
 import omit from 'lodash/omit'
-import mergeBase from 'webpack-merge'
+import * as mergeBase from 'webpack-merge'
 
 const IGNORE_SECTIONS = ['entry', 'output', 'watch', 'stats', 'styleguidist']
 const IGNORE_SECTIONS_ENV: { [key: string]: string[] } = {
@@ -22,12 +22,13 @@ const IGNORE_PLUGINS = [
 	'HotModuleReplacementPlugin'
 ]
 
-const merge = mergeBase({
+// @ts-expect-error types are outdated
+const merge = mergeBase.mergeWithCustomize({
 	// Ignore user’s plugins to avoid duplicates and issues with our plugins
 	customizeArray: mergeBase.unique(
 		'plugins',
 		IGNORE_PLUGINS,
-		(plugin: Plugin) => plugin.constructor && plugin.constructor.name
+		(plugin: WebpackPluginInstance) => plugin.constructor && plugin.constructor.name
 	)
 })
 

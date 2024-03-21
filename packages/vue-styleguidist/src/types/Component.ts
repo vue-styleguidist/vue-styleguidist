@@ -1,6 +1,6 @@
 import 'react-styleguidist/lib/typings/dependencies/react-docgen'
 
-import { VueConstructor } from 'vue'
+import { Component as VueConstructor } from 'vue'
 import {
 	PropDescriptor,
 	MethodDescriptor,

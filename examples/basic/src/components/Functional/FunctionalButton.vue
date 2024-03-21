@@ -1,4 +1,4 @@
-<template functional>
+<template>
 	<!-- @prop {string} id name attribute of the button -->
 	<button :name="props.id" style="background: pink">
 		<!-- @slot name of the button -->

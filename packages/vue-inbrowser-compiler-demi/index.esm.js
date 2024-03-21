@@ -1,17 +1,12 @@
-import Vue from 'vue'
 // eslint-disable-next-line import/no-unresolved
-import { parseComponent, compile } from 'vue-template-compiler'
+import { parse }  from '@vue/compiler-sfc'
 
-export const h = () => {}
-export const createApp = () => {}
-export const isVue3 = false
-export { Vue as Vue2 }
-export const compileTemplate = ({ source: template }) => {
-	const compiled = compile(template)
-	return {
-		code: compiled.render,
-		staticRenderFns: compiled.staticRenderFns
-	}
+// eslint-disable-next-line import/no-unresolved
+export { compileTemplate, compileScript } from '@vue/compiler-sfc'
+export { h, createApp } from 'vue'
+export const isVue3 = true
+export const Vue2 = () => {}
+export const parseComponent = (source, opts) => {
+  const { descriptor } = parse(source, opts)
+  return descriptor
 }
-export { parseComponent }
-export const compileScript = () => ({ type: 'script' })

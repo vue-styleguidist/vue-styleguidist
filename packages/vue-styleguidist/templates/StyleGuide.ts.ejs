@@ -3,7 +3,7 @@ import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { compile } from 'vue-inbrowser-compiler'
 import { Styles } from 'jss';
-import { Configuration, loader } from 'webpack'
+import { Configuration, LoaderContext } from 'webpack'
 import * as Rsg from 'react-styleguidist'
 import { RecursivePartial } from 'react-styleguidist/lib/typings/RecursivePartial'
 import { ProcessedSection } from './Section'
@@ -11,22 +11,28 @@ import { LoaderComponentProps } from './Component'
 
 type TransformOptions = Required<Parameters<typeof compile>>[1]
 
-export interface StyleguidistContext extends loader.LoaderContext {
+export interface StyleguidistContext extends LoaderContext<{
+	file:string,
+	displayName:string,
+	noExample: boolean,
+	shouldShowDefaultExample:boolean,
+	customLangs: string[],
+}> {
     _styleguidist: SanitizedStyleguidistConfig
 }
 
-export interface BaseStyleguidistConfig 
+export interface BaseStyleguidistConfig
     extends Omit<
         Rsg.SanitizedStyleguidistConfig,
         'sections' | 'propsParser' | 'sortProps' | 'updateDocs'
-    > {<% 
+    > {<%
     Object.keys(schema).forEach(key => {
         const opt = schema[key]
         if(opt.inherit) return;
         const description = opt.description || opt.message
         const defaultShowable = ['boolean', 'number', 'string'].indexOf(typeof opt.default) > -1
 if(description || defaultShowable || opt.deprecated){%>
-    /**<% 
+    /**<%
     if(description) { %>
      * <%- description %> <%
     }
@@ -42,7 +48,7 @@ if(description || defaultShowable || opt.deprecated){%>
      */<%
 }
     %>
-    <%-key %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ? 
+    <%-key %>: <%- schema[key].tstype || (['number', 'boolean', 'string'].indexOf(schema[key].type) > -1 ?
         schema[key].type : schema[key].uitype) || 'any' %>;<%
     });
 %>
