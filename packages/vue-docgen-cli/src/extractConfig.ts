@@ -3,6 +3,7 @@ import * as fs from 'fs'
 import { parseMulti } from 'vue-docgen-api'
 import * as log from 'loglevel'
 import {
+	header,
 	component,
 	events,
 	methods,
@@ -23,12 +24,12 @@ export default async (
 	verbose = false,
 	logLevel?: log.LogLevelDesc
 ): Promise<SafeDocgenCLIConfig> => {
-  // the first thing we do, is to set the log level
-  if(logLevel) {
-    log.setLevel(logLevel)
-  } else if(verbose) {
-    log.setLevel('debug')
-  }
+	// the first thing we do, is to set the log level
+	if (logLevel) {
+		log.setLevel(logLevel)
+	} else if (verbose) {
+		log.setLevel('debug')
+	}
 
 	const configFilePath = configFileFromCmd
 		? path.resolve(cwd, configFileFromCmd)
@@ -82,32 +83,33 @@ export default async (
 	if (!config.getRepoEditUrl && config.docsRepo) {
 		const branch = config.docsBranch || 'master'
 		const dir = config.docsFolder || ''
-		config.getRepoEditUrl = (p: string) => `https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}`
+		config.getRepoEditUrl = (p: string) =>
+			`https://github.com/${config.docsRepo}/edit/${branch}/${dir}/${p}`
 	}
 
 	// only default outDir if `outFile` is null to avoid confusion
 	config.outDir = config.outDir || (config.outFile ? '.' : 'docs')
 
-  // priority is given to the CLI over the config file
-  if(!logLevel && !verbose){
-    if(config.logLevel){
-      log.setLevel(config.logLevel)
-    } else if(config.verbose) {
-      log.setLevel('debug')
-    }
-  }
+	// priority is given to the CLI over the config file
+	if (!logLevel && !verbose) {
+		if (config.logLevel) {
+			log.setLevel(config.logLevel)
+		} else if (config.verbose) {
+			log.setLevel('debug')
+		}
+	}
 
 	config.templates = {
-		component,
-		events,
-		methods,
-		props,
-		slots,
-		expose,
-		defaultExample,
-		functionalTag,
-		...config.templates
-	}
+		header: config.templates?.header ?? header,
+		component: config.templates?.component ?? component,
+		events: config.templates?.events ?? events,
+		methods: config.templates?.methods ?? methods,
+		props: config.templates?.props ?? props,
+		slots: config.templates?.slots ?? slots,
+		expose: config.templates?.expose ?? expose,
+		defaultExample: config.templates?.defaultExample ?? defaultExample,
+		functionalTag: config.templates?.functionalTag ?? functionalTag
+	} satisfies SafeDocgenCLIConfig['templates']
 
 	return config as SafeDocgenCLIConfig
 }

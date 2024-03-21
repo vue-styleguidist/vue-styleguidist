@@ -2,7 +2,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import prettier from 'prettier'
 import { SpyInstance } from 'vitest'
-import { writeDownMdFile, getDocMap } from './utils'
+import { writeDownMdFile, getDocMap, resolveRequiresFromTag } from './utils'
 
 const UGLY_MD = 'ugly'
 const PRETTY_MD = 'pretty'
@@ -93,6 +93,63 @@ describe('utils', () => {
 				  "src/components/Input/Readme.md": "src/components/Input/Input.vue",
 				  "src/components/PushButton/Readme.md": "src/components/PushButton/PushButton.vue",
 				}
+			`)
+		})
+	})
+
+	describe('resolveRequiresFromTag', () => {
+		it('should return the requires from the tags', () => {
+			const tags = [{ description: './file1' }, { description: './file2' }]
+			const requires = resolveRequiresFromTag(tags, MD_FILE_PATH)
+			expect(requires).toMatchInlineSnapshot(`
+				[
+				  "test/file/file1",
+				  "test/file/file2",
+				]
+			`)
+		})
+
+		it('should return the requires from one single tag separated by returns', () => {
+			const tags = [{ content: './file1\n./file2' }]
+			const requires = resolveRequiresFromTag(tags, MD_FILE_PATH)
+			expect(requires).toMatchInlineSnapshot(`
+				[
+				  "test/file/file1",
+				  "test/file/file2",
+				]
+			`)
+		})
+
+		it('should return the requires from one single tag separated by commas', () => {
+			const tags = [{ description: "'./file1','./file2'" }]
+			const requires = resolveRequiresFromTag(tags, MD_FILE_PATH)
+			expect(requires).toMatchInlineSnapshot(`
+				[
+				  "test/file/file1",
+				  "test/file/file2",
+				]
+			`)
+		})
+
+		it('should return the requires from one single tag with single quotes', () => {
+			const tags = [{ content: "'./file1'\n'./file2'" }]
+			const requires = resolveRequiresFromTag(tags, MD_FILE_PATH)
+			expect(requires).toMatchInlineSnapshot(`
+				[
+				  "test/file/file1",
+				  "test/file/file2",
+				]
+			`)
+		})
+
+		it('should return the requires from one single tag with double quotes', () => {
+			const tags = [{ content: '"./file1"\n"./file2"' }]
+			const requires = resolveRequiresFromTag(tags, MD_FILE_PATH)
+			expect(requires).toMatchInlineSnapshot(`
+				[
+				  "test/file/file1",
+				  "test/file/file2",
+				]
 			`)
 		})
 	})

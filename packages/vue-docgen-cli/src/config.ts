@@ -9,7 +9,7 @@ import {
 	parseMulti
 } from 'vue-docgen-api'
 import type { LogLevelDesc } from 'loglevel'
-import { ContentAndDependencies, SubTemplateOptions } from './compileTemplates'
+import { ContentAndDependencies, SubTemplateOptions, component } from './compileTemplates'
 
 export { ContentAndDependencies, SubTemplateOptions }
 
@@ -33,7 +33,7 @@ export interface SafeDocgenCLIConfig {
 	 */
 	outDir: string
 	/**
-	 * File name where the current seciont is going to be output
+	 * File name where the current section is going to be output
 	 */
 	outFile?: string
 	/**
@@ -132,6 +132,12 @@ export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' |
 }
 
 export interface Templates {
+	header(
+		docs: ComponentDoc[],
+		config: SafeDocgenCLIConfig,
+		hasSubComponent: boolean,
+		componentRelativePath: string
+	): string | Promise<string>
 	props(
 		props: PropDescriptor[],
 		opt?: SubTemplateOptions,

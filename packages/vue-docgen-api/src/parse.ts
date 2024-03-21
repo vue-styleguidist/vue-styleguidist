@@ -64,13 +64,27 @@ export async function parseSource(
 	} else {
 		opt.lang = /\.tsx?$/i.test(path.extname(opt.filePath)) ? 'ts' : 'js'
 
-		docs = (await parseScript(parseFile, source, opt, documentation, documentation !== undefined)) || []
+		docs =
+			(await parseScript(parseFile, source, opt, documentation, documentation !== undefined)) || []
 
-		if (docs.length === 1 && !docs[0].get('displayName')) {
-			// give a component a display name if we can
-			const displayName = path.basename(opt.filePath).replace(/\.\w+$/, '')
-			const dirName = path.basename(path.dirname(opt.filePath))
-			docs[0].set('displayName', displayName.toLowerCase() === 'index' ? dirName : displayName)
+		if (docs.length === 1) {
+			if (!docs[0].get('displayName')) {
+				// give a component a display name if we can
+				const displayName = path.basename(opt.filePath).replace(/\.\w+$/, '')
+				const dirName = path.basename(path.dirname(opt.filePath))
+				docs[0].set('displayName', displayName.toLowerCase() === 'index' ? dirName : displayName)
+			}
+		} else {
+			for (const dIndex in docs) {
+				const d = docs[dIndex]
+				const exportName = d.get('exportName')
+				if (!d.get('displayName') && exportName && exportName !== 'default') {
+					// give a component a display name if we can
+					const displayName =
+						exportName ?? `${path.basename(opt.filePath).replace(/\.\w+$/, '')}_${dIndex + 1}`
+					d.set('displayName', displayName)
+				}
+			}
 		}
 	}
 

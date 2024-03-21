@@ -13,5 +13,6 @@
 		"composite": true
 	},
 	"include": ["./src/**/*.ts"],
-	"exclude": ["./src/**/*.spec.ts"]
+	"exclude": ["./src/**/*.spec.ts"],
+	"references": [{ "path": "./tsconfig.test.json" }]
 }

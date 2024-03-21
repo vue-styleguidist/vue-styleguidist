@@ -4,7 +4,7 @@ module.exports = {
 	docsBranch: 'dev',
 	docsFolder: 'examples/docgen',
 	componentsRoot: 'src/components',
-	components: '**/[A-Z]*.vue',
+	components: '**/[A-Z]*.(vue|ts)',
 	outDir: './docs/components',
 	defaultExamples: true
 }
