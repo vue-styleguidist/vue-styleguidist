@@ -69,7 +69,7 @@ export default async function compileTemplates(
 		const components = await Promise.all(
 			docs.map(async doc => {
 				const { props: p, events: e, methods: m, slots: s, expose: exp } = doc
-				const isSubComponent = subComponent
+				const isSubComponent = subComponent || docs.length > 1
 				const hasSubComponents = !!doc.tags?.requires
 				const subComponentOptions = { isSubComponent, hasSubComponents }
 
@@ -125,7 +125,15 @@ export default async function compileTemplates(
 		)
 
 		return {
-			content: (await templates.header(docs)) + '\n' + components.map(c => c.content).join('\n\n'),
+			content:
+				(await templates.header(
+					docs,
+					config,
+					docs.length > 1 || docs.some(d => d.tags?.requires),
+					componentRelativePath
+				)) +
+				'\n' +
+				components.map(c => c.content).join('\n\n'),
 			dependencies: components.map(c => c.dependencies).reduce((acc, curr) => acc.concat(curr), []),
 			docs
 		}

@@ -2,6 +2,7 @@ node_modules
 @types/*
 examples/*/styleguide/*
 examples/*/dist/*
+examples/**/*.ts
 packages/*/lib/**/*
 packages/*/dist/**/*
 coverage/*

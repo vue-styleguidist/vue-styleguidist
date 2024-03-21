@@ -101,14 +101,14 @@ export default async (
 
 	config.templates = {
 		header: config.templates?.header ?? header,
-		component: config.templates?.component && component,
-		events: config.templates?.events && events,
-		methods: config.templates?.methods && methods,
-		props: config.templates?.props && props,
-		slots: config.templates?.slots && slots,
-		expose: config.templates?.expose && expose,
-		defaultExample: config.templates?.defaultExample && defaultExample,
-		functionalTag: config.templates?.functionalTag && functionalTag
+		component: config.templates?.component ?? component,
+		events: config.templates?.events ?? events,
+		methods: config.templates?.methods ?? methods,
+		props: config.templates?.props ?? props,
+		slots: config.templates?.slots ?? slots,
+		expose: config.templates?.expose ?? expose,
+		defaultExample: config.templates?.defaultExample ?? defaultExample,
+		functionalTag: config.templates?.functionalTag ?? functionalTag
 	} satisfies SafeDocgenCLIConfig['templates']
 
 	return config as SafeDocgenCLIConfig
