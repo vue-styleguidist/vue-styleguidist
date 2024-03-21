@@ -132,6 +132,7 @@ export interface DocgenCLIConfig extends Omit<SafeDocgenCLIConfig, 'templates' |
 }
 
 export interface Templates {
+	header(docs: ComponentDoc[]): string | Promise<string>
 	props(
 		props: PropDescriptor[],
 		opt?: SubTemplateOptions,

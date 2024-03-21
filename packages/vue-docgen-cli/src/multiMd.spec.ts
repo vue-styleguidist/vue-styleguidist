@@ -16,6 +16,7 @@ vi.mock('./utils', () => {
 vi.mock('./compileTemplates', async () => {
 	return {
 		component: () => '',
+		header: () => '',
 		props: () => '',
 		slots: () => '',
 		events: () => '',

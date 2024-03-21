@@ -73,3 +73,20 @@ export function normalizePaths(path: string | string[] | false) {
 	if (!path) return []
 	return Array.isArray(path) ? path : [path]
 }
+
+export function resolveRequiresFromTag(requires: any[] | undefined, compDirName: string) {
+	return (
+		requires?.reduce((acc: string[], t: any) => {
+			const requirePath = (t.description ?? t.content) as string
+			requirePath.split('\n').map((p: string) => {
+				p.split(',').map((pMin: string) => {
+					const pMinTrimmed = pMin.trim().replace(/^['"]/, '').replace(/['"]$/, '')
+					if (pMinTrimmed.length === 0) return
+					acc.push(path.join(compDirName, pMinTrimmed))
+				})
+			})
+
+			return acc
+		}, []) ?? []
+	)
+}

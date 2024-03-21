@@ -7,14 +7,16 @@ import expose from './templates/expose'
 import slots from './templates/slots'
 import props from './templates/props'
 import component from './templates/component'
+import header from './templates/header'
 import defaultExample from './templates/defaultExample'
 import functionalTag from './templates/functionalTag'
 import { FileEventType, SafeDocgenCLIConfig } from './config'
 import getDocsBlocks, { getExamplesFilePaths } from './getDocsBlocks'
+import { resolveRequiresFromTag } from './utils'
 
 export { renderTags } from './templates/tags'
 export { mdclean } from './templates/utils'
-export { events, methods, slots, props, component, expose, defaultExample, functionalTag }
+export { events, methods, slots, props, component, header, expose, defaultExample, functionalTag }
 export { default as docgen } from './docgen'
 
 export interface ContentAndDependencies {
@@ -38,8 +40,7 @@ export function getDependencies(
 	if (!doc.tags) {
 		return externalSourceFiles
 	}
-	const requireDep =
-		doc.tags.requires?.map((t: ParamTag) => path.join(compDirName, t.description as string)) || []
+	const requireDep = resolveRequiresFromTag(doc.tags.requires, compDirName)
 	const examplesDep = getExamplesFilePaths(doc.tags, compDirName)
 	return [...externalSourceFiles, ...requireDep, ...examplesDep]
 }
@@ -101,14 +102,9 @@ export default async function compileTemplates(
 
 				const requiresMd = doc.tags?.requires
 					? await Promise.all(
-							doc.tags.requires.map((requireTag: ParamTag) =>
-								compileTemplates(
-									event,
-									path.join(componentAbsoluteDirectoryPath, requireTag.description as string),
-									config,
-									path.join(componentRelativeDirectoryPath, requireTag.description as string),
-									true
-								)
+							resolveRequiresFromTag(doc.tags.requires, componentAbsoluteDirectoryPath).map(
+								(requirePath: string) =>
+									compileTemplates(event, requirePath, config, requirePath, true)
 							)
 					  )
 					: []
@@ -129,7 +125,7 @@ export default async function compileTemplates(
 		)
 
 		return {
-			content: components.map(c => c.content).join('\n\n'),
+			content: (await templates.header(docs)) + '\n' + components.map(c => c.content).join('\n\n'),
 			dependencies: components.map(c => c.dependencies).reduce((acc, curr) => acc.concat(curr), []),
 			docs
 		}

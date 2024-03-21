@@ -2,7 +2,7 @@ import * as path from 'path'
 import glob from 'globby'
 import chokidar, { FSWatcher } from 'chokidar'
 import { parseMulti, ParamTag, ScriptHandlers, DocGenOptions } from 'vue-docgen-api'
-import { getDocMap } from './utils'
+import { getDocMap, resolveRequiresFromTag } from './utils'
 import { PropsParser } from './config'
 
 /**
@@ -62,18 +62,22 @@ async function getRequiredComponents(
 	const compDirName = path.dirname(compPath)
 	const absoluteComponentPath = path.join(cwd, compPath)
 	try {
-		const docs = await propsParser(absoluteComponentPath, {
-			// make sure that this is recognized as an option bag
-			jsx: false,
-			...optionsApi,
-			scriptHandlers: [ScriptHandlers.componentHandler],
-		}, 'init')
+		const docs = await propsParser(
+			absoluteComponentPath,
+			{
+				// make sure that this is recognized as an option bag
+				jsx: false,
+				...optionsApi,
+				scriptHandlers: [ScriptHandlers.componentHandler]
+			},
+			'init'
+		)
 		const requires = docs.reduce(
 			(acc, { tags }) => (tags?.requires ? acc.concat(tags.requires) : acc),
 			[] as ParamTag[]
 		)
 		if (requires.length) {
-			return requires.map((t: ParamTag) => path.join(compDirName, t.description as string))
+			return resolveRequiresFromTag(requires, compDirName)
 		}
 	} catch (e) {
 		const err = e as Error
