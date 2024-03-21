@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.78.0
+
+### Patch Changes
+
+- [#1651](https://github.com/vue-styleguidist/vue-styleguidist/pull/1651) [`b54cbea0`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b54cbea078a6e5b51066f9c26d1d8acb9a1d7b34) Thanks [@elevatebart](https://github.com/elevatebart)! - feat: add header for multi component md
+
+- Updated dependencies [[`b54cbea0`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b54cbea078a6e5b51066f9c26d1d8acb9a1d7b34)]:
+  - vue-docgen-api@4.78.0
+
 ## 4.77.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.78.0
+
+### Minor Changes
+
+- [#1651](https://github.com/vue-styleguidist/vue-styleguidist/pull/1651) [`b54cbea0`](https://github.com/vue-styleguidist/vue-styleguidist/commit/b54cbea078a6e5b51066f9c26d1d8acb9a1d7b34) Thanks [@elevatebart](https://github.com/elevatebart)! - add a default displayName on components that are in the same file
+
 ## 4.76.0
 
 ### Minor Changes
