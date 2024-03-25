@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.79.0
+
+### Minor Changes
+
+- [`bfc5fee5`](https://github.com/vue-styleguidist/vue-styleguidist/commit/bfc5fee575f73fe78efb0b18c4dc7c3297432a7d) Thanks [@elevatebart](https://github.com/elevatebart)! - export default header template
+
 ## 4.78.0
 
 ### Patch Changes
