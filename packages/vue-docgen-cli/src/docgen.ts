@@ -6,6 +6,7 @@ import multiMd from './multiMd'
 import extractConfig from './extractConfig'
 import getSources from './getSources'
 import {
+	header,
 	events,
 	methods,
 	slots,
@@ -22,6 +23,7 @@ import {
  * expose default rendering templates so they can be enriched
  */
 export const defaultTemplates = {
+	header,
 	events,
 	methods,
 	slots,
@@ -60,7 +62,8 @@ export default async (config: SafeDocgenCLIConfig) => {
 	config.outFile = config.outFile ? path.resolve(config.outDir, config.outFile) : undefined
 
 	// set the default sorting of components to be alphabetical by filepath
-	config.sortComponents = config.sortComponents || ((a, b) => a.filePath.localeCompare(b.filePath) as any)
+	config.sortComponents =
+		config.sortComponents || ((a, b) => a.filePath.localeCompare(b.filePath) as any)
 
 	// then create the watcher if necessary
 	const { watcher, componentFiles, docMap } = await getSources(
