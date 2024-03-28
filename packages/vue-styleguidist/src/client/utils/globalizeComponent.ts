@@ -1,4 +1,4 @@
-import { VueConstructor } from 'vue'
+import { Component as VueConstructor } from 'vue'
 import { cleanName, isVue3, Vue2 } from 'vue-inbrowser-compiler-utils'
 import { Component } from '../../types/Component'
 import { addGlobalComponentToRegistration } from './globalComponents'

@@ -3,7 +3,6 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import values from 'lodash/values'
 import flatten from 'lodash/flatten'
-import loaderUtils from 'loader-utils'
 import { generate } from 'escodegen'
 import toAst from 'to-ast'
 import { builders as b } from 'ast-types'
@@ -34,8 +33,7 @@ function isImport(req: any): req is { importPath: string; path: string } {
 
 export default function (this: StyleguidistContext, source: string) {
 	const callback = this.async()
-	const cb = callback ? callback : () => null
-	examplesLoader.call(this, source).then(res => cb(undefined, res))
+	examplesLoader.call(this, source).then(res => callback(undefined, res))
 }
 
 export async function examplesLoader(this: StyleguidistContext, src: string): Promise<string> {
@@ -53,7 +51,7 @@ export async function examplesLoader(this: StyleguidistContext, src: string): Pr
 	const compiler: { compile: typeof compile; getImports: typeof getImports } =
 		config.compilerPackage ? require(config.compilerPackage) : { compile, getImports }
 
-	const options = loaderUtils.getOptions(this) || {}
+	const options = this.getOptions() || {}
 	const { file, displayName, shouldShowDefaultExample, customLangs } = options
 
 	// Replace placeholders (__COMPONENT__) with the passed-in component name
@@ -211,12 +209,12 @@ var evalInContextBase = require(${JSON.stringify(EVAL_IN_CONTEXT_PATH)});${
 			? `
 
 var compilerUtils = require(${JSON.stringify(JSX_COMPILER_UTILS_PATH)});
-var evalInContext = evalInContextBase.bind(null, 
-	${JSON.stringify(generate(requireContextCode))}, 
+var evalInContext = evalInContextBase.bind(null,
+	${JSON.stringify(generate(requireContextCode))},
 	compilerUtils.adaptCreateElement, compilerUtils.concatenate);`
 			: `
-var evalInContext = evalInContextBase.bind(null, 
-	${JSON.stringify(generate(requireContextCode))}, 
+var evalInContext = evalInContextBase.bind(null,
+	${JSON.stringify(generate(requireContextCode))},
 	null, null)`
 	}
 module.exports = ${generate(toAst(examplesWithEval))}`

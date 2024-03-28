@@ -13,26 +13,16 @@ export default function createServer(
 	const { devServer: webpackDevServerConfig } = merge(
 		{
 			devServer: {
-				noInfo: true,
 				compress: true,
-				clientLogLevel: 'none',
 				hot: true,
-				disableHostCheck: true,
-				injectClient: false,
-				watchOptions: {
-					ignored: /node_modules/
-				},
-				watchContentBase: config.assetsDir !== undefined,
-				stats: webpackConfig.stats || false
+				client: {
+					logging: 'none',
+					progress: true
+				}
 			}
 		},
 		{
 			devServer: webpackConfig.devServer
-		},
-		{
-			devServer: {
-				contentBase: config.assetsDir
-			}
 		}
 	)
 
@@ -40,13 +30,17 @@ export default function createServer(
 		? require(process.env.VSG_WEBPACK_PATH)
 		: webpackNormal
 
-	const compiler = webpack(webpackConfig)
-	const devServer = new WebpackDevServer(compiler, webpackDevServerConfig)
+	const compiler = webpack({
+		...webpackConfig,
+		stats: 'errors-only',
+		infrastructureLogging: { level: 'error' }
+	})
+	const app = new WebpackDevServer(webpackDevServerConfig, compiler)
 
 	// User defined customizations
 	if (config.configureServer) {
-		config.configureServer(devServer, env)
+		config.configureServer(app, env)
 	}
 
-	return { app: devServer, compiler }
+	return { app, compiler }
 }

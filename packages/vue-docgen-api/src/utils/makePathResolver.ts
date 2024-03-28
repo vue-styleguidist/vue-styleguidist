@@ -3,7 +3,7 @@ import resolvePathFrom from '../utils/resolvePathFrom'
 
 export default function makePathResolver(
 	refDirName: string,
-	aliases?: { [alias: string]: string | string[] },
+	aliases?: { [alias: string]: string | string[] | boolean },
 	modules?: string[]
 ): (filePath: string, originalDirNameOverride?: string) => string | null {
 	/**
