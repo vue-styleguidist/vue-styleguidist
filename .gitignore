@@ -31,3 +31,5 @@ test/cypress/videos/
 # packages resulting of plugin tests
 /test/cli-packages/
 !/test/cli-packages/.gitkeep
+
+.turbo
