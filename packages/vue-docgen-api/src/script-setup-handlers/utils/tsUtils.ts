@@ -29,7 +29,7 @@ const getTypeDefinitionFromIdentifierFromModule = (
 	const parser = buildParser({ plugins: ['typescript'] })
 	const filePath = pathResolver(module)
 
-	if (!filePath) {
+	if (!filePath || !opt.validExtends(filePath)) {
 		return undefined
 	}
 
