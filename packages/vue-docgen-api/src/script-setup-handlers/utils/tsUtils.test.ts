@@ -51,12 +51,13 @@ describe('getTypeDefinitionFromIdentifier', () => {
 		const parser = buildParser({ plugins: ['typescript'] })
 		const src = `
 		import type {LocalType} from './__fixtures__/types.ts';
-			
+
 		defineProps<LocalType>()
 					`
 		const astFile = parser.parse(src)
 		const nodePath: any = getTypeDefinitionFromIdentifier(astFile, 'LocalType', {
-			filePath: __filename
+			filePath: __filename,
+			validExtends: (path: any) => path.endsWith('.ts')
 		} as ParseOptions)
 		const props = nodePath?.map(
 			(prop: any) => prop.node.key.name + ' ' + prop.node.typeAnnotation.typeAnnotation.type
