@@ -1540,7 +1540,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0(rollup@3.20.2)(tslib@2.5.0)(typescript@4.9.5)
       '@test-vue-docgen/mixins':
-        specifier: '*'
+        specifier: ^4.44.15
         version: link:../docgen-tests
       '@types/dedent':
         specifier: 0.7.0
@@ -33033,7 +33033,7 @@ snapshots:
 
   terser@4.8.0:
     dependencies:
-      acorn: 8.8.2
+      acorn: 8.12.0
       commander: 2.20.3
       source-map: 0.6.1
       source-map-support: 0.5.21
@@ -33041,7 +33041,7 @@ snapshots:
   terser@5.14.2:
     dependencies:
       '@jridgewell/source-map': 0.3.2
-      acorn: 8.8.2
+      acorn: 8.12.0
       commander: 2.20.3
       source-map-support: 0.5.21
 
