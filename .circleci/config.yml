@@ -45,6 +45,7 @@ jobs:
           key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - '~/.pnpm-store'
+
       - persist_to_workspace:
           root: ~/
           paths:
