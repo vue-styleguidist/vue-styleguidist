@@ -64,6 +64,8 @@ jobs:
       - run: npm run build vuex -- --ci
       - run: npm run build functional-flag -- --ci
 
+      - run: npx puppeteer browsers install chrome
+
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser basic
       - run: npm run test:browser customised
@@ -89,6 +91,8 @@ jobs:
           command: |
             pnpm install
 
+      - run: npx puppeteer browsers install chrome
+
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
       - run: pnpm test:browser vuecli3
@@ -109,6 +113,8 @@ jobs:
       - run: npm run build nuxtjs -- --ci
       - run: npm run build vuetify -- --ci
       - run: npm run build docgen-vite
+
+      - run: npx puppeteer browsers install chrome
 
       # Check that examples really works: no JS errors on load
       - run: npm run test:browser jsx
