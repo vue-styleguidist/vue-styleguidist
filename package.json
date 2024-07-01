@@ -113,7 +113,7 @@
     "start-server-and-test": "1.15.3",
     "strip-shebang": "1.0.2",
     "tslib": "2.5.0",
-    "turbo": "^1.9.0",
+    "turbo": "^2.0.6",
     "typescript": "4.9.5",
     "vitest": "0.30.1",
     "vue": "2.7.14",
@@ -167,5 +167,7 @@
     "patchedDependencies": {
       "vue@2.7.14": "patches/vue@2.7.14.patch"
     }
-  }
+  },
+  "packageManager": "pnpm@9.4.0",
+  "name": "vue-styleguidist"
 }
