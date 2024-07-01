@@ -24,10 +24,22 @@ jobs:
             corepack enable
             corepack prepare pnpm@latest-8 --activate
             pnpm config set store-dir .pnpm-store
+
       - run:
           name: Install Dependencies
           command: |
-            pnpm install
+            pnpm install --ignore-scripts
+
+      - run:
+          name: Compile vu-docgen-api
+          command: |
+            pnpm compile --filter=vue-docgen-api
+
+      - run:
+          name: Compile Packages
+          command: |
+            pnpm compile
+
       - save_cache:
           name: Save pnpm Package Cache
           key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
