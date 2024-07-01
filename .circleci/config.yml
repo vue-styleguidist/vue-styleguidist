@@ -127,7 +127,17 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            pnpm install
+            pnpm install --ignore-scripts
+
+      - run:
+          name: Compile vu-docgen-api
+          command: |
+            pnpm compile --filter=vue-docgen-api
+
+      - run:
+          name: Compile Packages
+          command: |
+            pnpm compile
 
       # run cypress vue-styleguidist component tests
       - run:
