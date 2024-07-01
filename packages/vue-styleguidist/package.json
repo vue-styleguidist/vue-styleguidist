@@ -156,8 +156,5 @@
     "vue-template-compiler": "2.7.14",
     "webpack": "4.46.0"
   },
-  "resolutions": {
-    "**/http-proxy": "1.18.1"
-  },
   "author": "Bart Ledoux <ledouxb@me.com>"
 }
