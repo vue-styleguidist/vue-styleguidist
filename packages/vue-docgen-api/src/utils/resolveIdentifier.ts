@@ -28,11 +28,13 @@ export default function resolveIdentifier(ast: bt.File, path: NodePath): NodePat
 		visitForInStatement: ignore,
 
 		visitVariableDeclaration(variablePath) {
-			if (!bt.isVariableDeclaration(variablePath.node)) {
+			if (variablePath.node.type !== 'VariableDeclaration') {
 				return false
 			}
-			const varID = variablePath.node.declarations[0].id
-			if (!varID || !bt.isIdentifier(varID) || varID.name !== varName) {
+			const firstDeclaration = variablePath.node.declarations[0]
+			const varID =
+				firstDeclaration.type === 'VariableDeclarator' ? firstDeclaration.id : firstDeclaration
+			if (!varID || varID.type !== 'Identifier' || varID.name !== varName) {
 				return false
 			}
 
@@ -42,7 +44,7 @@ export default function resolveIdentifier(ast: bt.File, path: NodePath): NodePat
 
 		visitClassDeclaration(classPath) {
 			const classID = classPath.node.id
-			if (!classID || !bt.isIdentifier(classID) || classID.name !== varName) {
+			if (!classID || classID.type !== 'Identifier' || classID.name !== varName) {
 				return false
 			}
 

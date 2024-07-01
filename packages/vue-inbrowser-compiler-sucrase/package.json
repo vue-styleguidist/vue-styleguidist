@@ -18,7 +18,7 @@
     "acorn"
   ],
   "dependencies": {
-    "@babel/parser": "^7.13.12",
+    "@babel/parser": "^7.24.7",
     "camelcase": "^5.3.1",
     "detect-browser": "^5.2.0",
     "sucrase": "3.29.0",
@@ -26,7 +26,7 @@
     "walkes": "^0.2.1"
   },
   "devDependencies": {
-    "@babel/types": "7.23.9",
+    "@babel/types": "7.24.7",
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
     "@rollup/plugin-typescript": "8.5.0",

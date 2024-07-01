@@ -70,7 +70,7 @@ export default function (ast: bt.File, variableFilter: string[]) {
 		visitExportDefaultDeclaration(astPath) {
 			if (variableFilter.indexOf('default') > -1) {
 				const middleNameDeclaration = astPath.node.declaration
-				if (bt.isIdentifier(middleNameDeclaration)) {
+				if (middleNameDeclaration.type === 'Identifier') {
 					const middleName = middleNameDeclaration.name
 					const importedVar = importedVariablePaths[middleName]
 					if (importedVar) {

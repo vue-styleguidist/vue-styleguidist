@@ -62,13 +62,7 @@ function getPropsFromExpression(
 		visitMemberExpression(path) {
 			const obj = path.node ? path.node.object : undefined
 			const propName = path.node ? path.node.property : undefined
-			if (
-				obj &&
-				propName &&
-				bt.isIdentifier(obj) &&
-				obj.name === 'props' &&
-				bt.isIdentifier(propName)
-			) {
+			if (obj?.type === 'Identifier' && obj.name === 'props' && propName?.type === 'Identifier') {
 				const pName = propName.name
 				const p = documentation.getPropDescriptor(pName)
 				propsFound.push(pName)
