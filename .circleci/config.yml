@@ -31,7 +31,7 @@ jobs:
             pnpm install --ignore-scripts
 
       - run:
-          name: Compile vu-docgen-api
+          name: Compile vue-docgen-api
           command: |
             pnpm compile --filter=vue-docgen-api
 
@@ -142,7 +142,7 @@ jobs:
             pnpm install --ignore-scripts
 
       - run:
-          name: Compile vu-docgen-api
+          name: Compile vue-docgen-api
           command: |
             pnpm compile --filter=vue-docgen-api
 
