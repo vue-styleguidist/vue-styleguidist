@@ -9,6 +9,7 @@ export function getVueApp(component: any, el: HTMLElement, enhancePreviewApp: (a
 		app.mount(el)
 		return app
 	} else {
-		return new Vue2(component).$mount(el)
+		const app = new Vue2(component)
+		return app.$mount(el)
 	}
 }
