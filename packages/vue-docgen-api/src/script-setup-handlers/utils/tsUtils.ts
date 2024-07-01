@@ -106,7 +106,7 @@ export function getTypeDefinitionFromIdentifier(
 			return false
 		},
 		visitTSInterfaceDeclaration(nodePath) {
-			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
+			if (nodePath.node.id.type === 'Identifier' && nodePath.node.id.name === typeName) {
 				const interfaceBody = nodePath.get('body', 'body')
 
 				if (!interfaceBody) {
@@ -119,7 +119,7 @@ export function getTypeDefinitionFromIdentifier(
 				if (nodePath.value.extends) {
 					const parentInterfaces = nodePath.value.extends as TSExpressionWithTypeArgumentsKind[]
 					parentInterfaces.forEach(parentInterface => {
-						if (!bt.isIdentifier(parentInterface.expression)) {
+						if (parentInterface.expression.type !== 'Identifier') {
 							return
 						}
 
@@ -133,8 +133,8 @@ export function getTypeDefinitionFromIdentifier(
 							if (
 								!interfaceBody.value.find(
 									(prop: TSPropertySignatureKind) =>
-										bt.isIdentifier(prop.key) &&
-										bt.isIdentifier(parentInterfaceProp.key) &&
+										prop.key.type === 'Identifier' &&
+										parentInterfaceProp.key.type === 'Identifier' &&
 										prop.key.name === parentInterfaceProp.key.name
 								)
 							) {
@@ -149,7 +149,7 @@ export function getTypeDefinitionFromIdentifier(
 			return false
 		},
 		visitTSTypeAliasDeclaration(nodePath) {
-			if (bt.isIdentifier(nodePath.node.id) && nodePath.node.id.name === typeName) {
+			if (nodePath.node.id.type === 'Identifier' && nodePath.node.id.name === typeName) {
 				const typeAnnotation = nodePath.get('typeAnnotation')
 				if (bt.isTSTypeLiteral(typeAnnotation.node)) {
 					typeBody = typeAnnotation.get('members')

@@ -1,4 +1,3 @@
-import * as bt from '@babel/types'
 import { visit } from 'recast'
 import { Node, TemplateChildNode, SimpleExpressionNode } from '@vue/compiler-dom'
 import Documentation, { ParamTag } from '../Documentation'

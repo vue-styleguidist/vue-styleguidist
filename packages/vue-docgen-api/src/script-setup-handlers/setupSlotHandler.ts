@@ -23,7 +23,7 @@ export default defineHandler(async function setupSlotHandler(
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
 			if (
-				bt.isIdentifier(nodePath.node.callee) &&
+				nodePath.node.callee.type === 'Identifier' &&
 				nodePath.node.callee.name === 'defineSlots' &&
 				(nodePath.node as any).typeParameters
 			) {

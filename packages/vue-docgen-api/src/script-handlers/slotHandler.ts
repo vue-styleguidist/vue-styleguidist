@@ -32,19 +32,22 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			// this.$slots.default()
 			visitCallExpression(pathCall) {
 				if (
-					bt.isMemberExpression(pathCall.node.callee) &&
-					bt.isMemberExpression(pathCall.node.callee.object) &&
-					bt.isThisExpression(pathCall.node.callee.object.object) &&
-					bt.isIdentifier(pathCall.node.callee.property) &&
-					bt.isIdentifier(pathCall.node.callee.object.property) &&
+					pathCall.node.callee.type === 'MemberExpression' &&
+					pathCall.node.callee.object.type === 'MemberExpression' &&
+					pathCall.node.callee.object.object.type === 'ThisExpression' &&
+					pathCall.node.callee.property.type === 'Identifier' &&
+					pathCall.node.callee.object.property.type === 'Identifier' &&
 					(pathCall.node.callee.object.property.name === '$slots' ||
 						pathCall.node.callee.object.property.name === '$scopedSlots')
 				) {
 					const doc = documentation.getSlotDescriptor(pathCall.node.callee.property.name)
 					const comment = getSlotComment(pathCall, doc)
 					const bindings = pathCall.node.arguments[0]
-					if (bt.isObjectExpression(bindings) && bindings.properties.length) {
-						doc.bindings = getBindings(bindings, comment ? comment.bindings : undefined)
+					if (bindings?.type === 'ObjectExpression' && bindings.properties.length) {
+						doc.bindings = getBindings(
+							bindings as bt.ObjectExpression,
+							comment ? comment.bindings : undefined
+						)
 					}
 					return false
 				}
@@ -54,12 +57,12 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			// this.$slots.mySlot
 			visitMemberExpression(pathMember) {
 				if (
-					bt.isMemberExpression(pathMember.node.object) &&
-					bt.isThisExpression(pathMember.node.object.object) &&
-					bt.isIdentifier(pathMember.node.object.property) &&
+					pathMember.node.object.type === 'MemberExpression' &&
+					pathMember.node.object.object.type === 'ThisExpression' &&
+					pathMember.node.object.property.type === 'Identifier' &&
 					(pathMember.node.object.property.name === '$slots' ||
 						pathMember.node.object.property.name === '$scopedSlots') &&
-					bt.isIdentifier(pathMember.node.property)
+					pathMember.node.property.type === 'Identifier'
 				) {
 					const doc = documentation.getSlotDescriptor(pathMember.node.property.name)
 					getSlotComment(pathMember, doc)
@@ -71,7 +74,7 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 			visitJSXElement(pathJSX) {
 				const tagName = pathJSX.node.openingElement.name
 				const nodeJSX = pathJSX.node as bt.JSXElement
-				if (bt.isJSXIdentifier(tagName) && tagName.name === 'slot') {
+				if (tagName.type === 'JSXIdentifier' && tagName.name === 'slot') {
 					const doc = documentation.getSlotDescriptor(getName(nodeJSX))
 					const parentNode = pathJSX.parentPath.node
 					let comment: SlotComment | undefined
