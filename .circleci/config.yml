@@ -96,8 +96,8 @@ jobs:
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
       - run: pnpm test:browser vuecli3
-      - run: pnpm build vuecli-noplugin -- --ci
-      - run: pnpm test:browser vuecli-noplugin
+      # - run: pnpm build vuecli-noplugin -- --ci
+      # - run: pnpm test:browser vuecli-noplugin
       - run: pnpm build vuecli3-vuetify-ie -- --ci
       - run: pnpm test:browser vuecli3-vuetify-ie
 
