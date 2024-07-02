@@ -1,3 +1,4 @@
+/* eslint-disable compat/compat */
 /* eslint-disable no-console */
 import { execa } from 'execa'
 import cypress from 'cypress'
@@ -15,19 +16,19 @@ process.on('unhandledRejection', reason => {
 })
 
 async function run() {
-	await execa('http-server', ['-p', '8282', `./examples/${args[0]}/dist`]).stdout.pipe(
-		process.stdout
-	)
+	const [, results] = await Promise.all([
+		execa('http-server', ['-p', '8282', `./examples/${args[0]}/dist`]).stdout.pipe(process.stdout),
 
-	const results = await cypress.run({
-		browser: 'chrome',
-		config: {
-			e2e: {
-				specPattern: `test/cypress/browser/smoke_test.cy.js`,
-				baseUrl: 'http://127.0.0.1:8282'
+		await cypress.run({
+			browser: 'chrome',
+			config: {
+				e2e: {
+					specPattern: `test/cypress/browser/smoke_test.cy.js`,
+					baseUrl: 'http://127.0.0.1:8282'
+				}
 			}
-		}
-	})
+		})
+	])
 
 	if (results.totalFailed > 0) {
 		process.exit(1)
