@@ -19,22 +19,21 @@ async function run() {
 		process.stdout
 	)
 
-	await cypress
-		.run({
-			browser: 'chrome',
-			spec: `test/cypress/integration/smoke_test.cy.js`,
-			config: {
-				e2e: {
-					baseUrl: 'http://127.0.0.1:8282'
-				}
+	const results = await cypress.run({
+		browser: 'chrome',
+		config: {
+			e2e: {
+				specPattern: `test/cypress/browser/smoke_test.cy.js`,
+				baseUrl: 'http://127.0.0.1:8282'
 			}
-		})
-		.then(results => {
-			if (results.totalFailed > 0) {
-				process.exit(1)
-			}
-			process.exit(0)
-		})
+		}
+	})
+
+	if (results.totalFailed > 0) {
+		process.exit(1)
+	}
+
+	process.exit(0)
 }
 
 run()
