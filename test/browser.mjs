@@ -19,7 +19,7 @@ async function run() {
 	const [, results] = await Promise.all([
 		execa('http-server', ['-p', '8282', `./examples/${args[0]}/dist`]).stdout.pipe(process.stdout),
 
-		await cypress.run({
+		cypress.run({
 			browser: 'chrome',
 			config: {
 				e2e: {
