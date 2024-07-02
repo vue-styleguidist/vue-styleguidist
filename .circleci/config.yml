@@ -107,21 +107,33 @@ jobs:
       - attach_workspace:
           at: ~/
 
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
+
       # Build all examples
-      - run: npm run build jsx -- --ci
-      - run: npm run build jsx-examples -- --ci
-      - run: npm run build nuxtjs -- --ci
-      - run: npm run build vuetify -- --ci
-      - run: npm run build docgen-vite
+      - run: pnpm build jsx -- --ci
+      - run: pnpm build jsx-examples -- --ci
+      - run: pnpm build nuxtjs -- --ci
+      - run: pnpm build vuetify -- --ci
+      - run: pnpm build docgen-vite
 
       - run: npx puppeteer browsers install chrome
 
       # Check that examples really works: no JS errors on load
-      - run: npm run test:browser jsx
-      - run: npm run test:browser jsx-examples
-      - run: npm run test:browser nuxtjs
-      - run: npm run test:browser vuetify
-      - run: npm run test:browser docgen-vite
+      - run: pnpm test:browser jsx
+      - run: pnpm test:browser jsx-examples
+      - run: pnpm test:browser nuxtjs
+      - run: pnpm test:browser vuetify
+      - run: pnpm test:browser docgen-vite
 
   cypress:
     <<: *defaults
