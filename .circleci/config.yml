@@ -2,7 +2,7 @@ version: 2.1
 
 defaults: &defaults
   docker:
-    - image: cypress/included:cypress-13.6.6-node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
+    - image: cypress/included:cypress-13.12.0-node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
       environment:
         NODE_OPTIONS: '--openssl-legacy-provider'
   working_directory: ~/vue-styleguidist

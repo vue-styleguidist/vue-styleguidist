@@ -116,8 +116,8 @@ importers:
         specifier: 5.2.1
         version: 5.2.1
       cypress:
-        specifier: 13.6.6
-        version: 13.6.6
+        specifier: 13.12.0
+        version: 13.12.0
       danger:
         specifier: 10.9.0
         version: 10.9.0(@octokit/core@3.6.0)
@@ -4460,11 +4460,8 @@ packages:
     resolution: {integrity: sha512-8q67ORQ9O0Ms0nlqsXTVhaBefRBaLrzPxOewAZhdcO7onHwcO5/wRdWtHhZgfpCZlhY7NogkU16z3WnorSSkEA==}
     peerDependencies:
       '@babel/core': '*'
-      core-js: ^3
       vue: ^2 || ^3.0.0-0
     peerDependenciesMeta:
-      core-js:
-        optional: true
       vue:
         optional: true
 
@@ -6925,8 +6922,8 @@ packages:
   cyclist@1.0.1:
     resolution: {integrity: sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=}
 
-  cypress@13.6.6:
-    resolution: {integrity: sha512-S+2S9S94611hXimH9a3EAYt81QM913ZVA03pUmGDfLTFa5gyp85NJ8dJGSlEAEmyRsYkioS1TtnWtbv/Fzt11A==}
+  cypress@13.12.0:
+    resolution: {integrity: sha512-udzS2JilmI9ApO/UuqurEwOvThclin5ntz7K0BtnHBs+tg2Bl9QShLISXpSEMDv/u8b6mqdoAdyKeZiSqKWL8g==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -18663,7 +18660,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vue/babel-preset-app@4.5.12(@babel/core@7.24.7)(core-js@3.27.2)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))':
+  '@vue/babel-preset-app@4.5.12(@babel/core@7.24.7)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))':
     dependencies:
       '@babel/core': 7.24.7
       '@babel/helper-compilation-targets': 7.23.6
@@ -18678,10 +18675,10 @@ snapshots:
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.24.7)
       '@vue/babel-preset-jsx': 1.2.4(@babel/core@7.24.7)
       babel-plugin-dynamic-import-node: 2.3.3
+      core-js: 3.27.2
       core-js-compat: 3.35.1
       semver: 6.3.1
     optionalDependencies:
-      core-js: 3.27.2
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
     transitivePeerDependencies:
       - supports-color
@@ -20116,7 +20113,7 @@ snapshots:
   '@vuepress/core@1.9.10(@vue/compiler-sfc@3.2.47)(ejs@3.1.8)(pug@3.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/core': 7.24.7
-      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(core-js@3.27.2)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       '@vuepress/markdown': 1.9.10
       '@vuepress/markdown-loader': 1.9.10
       '@vuepress/plugin-last-updated': 1.9.10
@@ -20221,7 +20218,7 @@ snapshots:
   '@vuepress/core@1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))':
     dependencies:
       '@babel/core': 7.24.7
-      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(core-js@3.27.2)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       '@vuepress/markdown': 1.9.7
       '@vuepress/markdown-loader': 1.9.7
       '@vuepress/plugin-last-updated': 1.9.7
@@ -23012,7 +23009,7 @@ snapshots:
 
   cyclist@1.0.1: {}
 
-  cypress@13.6.6:
+  cypress@13.12.0:
     dependencies:
       '@cypress/request': 3.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
