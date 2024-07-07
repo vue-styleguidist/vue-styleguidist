@@ -8,15 +8,11 @@ defaults: &defaults
   working_directory: ~/vue-styleguidist
 
 jobs:
-  install:
+  examples-basic:
     <<: *defaults
-
     steps:
-      - checkout
-      - restore_cache:
-          name: Restore pnpm Package Cache
-          keys:
-            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
+      - attach_workspace:
+          at: ~/
 
       - run:
           name: Install pnpm package manager
@@ -28,34 +24,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            pnpm install --ignore-scripts
-
-      - run:
-          name: Compile vue-docgen-api
-          command: |
-            pnpm compile --filter=vue-docgen-api
-
-      - run:
-          name: Compile Packages
-          command: |
-            pnpm compile
-
-      - save_cache:
-          name: Save pnpm Package Cache
-          key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - '~/.pnpm-store'
-
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - vue-styleguidist
-
-  examples-basic:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/
+            pnpm install
 
       # Build all examples
       - run: npm run build basic -- --ci
@@ -214,17 +183,8 @@ jobs:
 workflows:
   test:
     jobs:
-      - install
-      - examples-basic:
-          requires:
-            - install
-      - examples-vuecli:
-          requires:
-            - install
-      - examples-other:
-          requires:
-            - install
-      - cypress:
-          requires:
-            - install
+      - examples-basic
+      - examples-vuecli
+      - examples-other
+      - cypress
 # VS Code Extension Version: 1.5.1
