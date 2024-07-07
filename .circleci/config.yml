@@ -11,8 +11,7 @@ jobs:
   examples-basic:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
 
       - run:
           name: Install pnpm package manager
@@ -43,8 +42,7 @@ jobs:
   examples-vuecli:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
 
       - run:
           name: Install pnpm package manager
@@ -69,8 +67,7 @@ jobs:
   examples-other:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
 
       - run:
           name: Install pnpm package manager
@@ -111,8 +108,7 @@ jobs:
   cypress:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
 
       - run:
           name: Set Cypress record key
