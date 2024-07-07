@@ -6,7 +6,9 @@ import { addScopedStyle } from 'vue-inbrowser-compiler-utils'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext, EnhanceAppContext } from '../../utils/renderStyleguide'
 import { getCompiledExampleComponent } from './getCompiledExampleComponent'
-import { getVueApp } from './getVueApp'
+import { getVueAppFactory } from './getVueApp'
+
+const getVueApp = getVueAppFactory()
 
 class PreviewAsync extends Component {
 	static propTypes = {
@@ -101,11 +103,11 @@ class PreviewAsync extends Component {
 				this.setState({
 					error: null
 				})
-        
+
 				return opts
 			})
 			.then(opts => {
-        const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
+				const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
 				const { compile } = opts
 				try {
 					const example = compile(newCode, {
@@ -113,7 +115,7 @@ class PreviewAsync extends Component {
 						...(this.context.config.jsxInExamples
 							? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
 							: {}),
-              moduleId,
+						moduleId
 					})
 					this.setCompiledPreview(example, moduleId)
 				} catch (err) {
@@ -144,7 +146,7 @@ class PreviewAsync extends Component {
 			},
 			el,
 			locallyRegisterComponents: this.context.config.locallyRegisterComponents,
-      moduleId,
+			moduleId
 		})
 
 		this.vueInstance = app
