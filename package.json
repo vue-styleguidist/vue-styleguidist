@@ -105,6 +105,7 @@
     "node-fetch": "3.3.0",
     "prettier": "2.8.3",
     "property-information": "5.6.0",
+    "puppeteer": "^22.12.1",
     "raf": "3.4.1",
     "react-styleguidist": "11.2.0",
     "react-test-renderer": "18.2.0",
