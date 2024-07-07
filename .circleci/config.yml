@@ -25,6 +25,8 @@ jobs:
           command: |
             pnpm install
 
+      - run: npx puppeteer browsers install chrome
+
       # Build all examples
       - run: npm run build basic -- --ci
       - run: npm run build customised -- --ci
@@ -55,6 +57,8 @@ jobs:
           name: Install Dependencies
           command: |
             pnpm install
+
+      - run: npx puppeteer browsers install chrome
 
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
@@ -90,6 +94,8 @@ jobs:
           name: Compile Packages
           command: |
             pnpm compile
+
+      - run: npx puppeteer browsers install chrome
 
       # Build all examples
       - run: pnpm build jsx -- --ci
