@@ -5,7 +5,9 @@ import {
 	h,
 	isVue3
 } from 'vue-inbrowser-compiler-utils'
-import { getVueApp } from './getVueApp'
+import { getVueAppFactory } from './getVueApp'
+
+const getVueApp = getVueAppFactory()
 
 interface InjectedParams {
 	compiledExample: EvaluableComponent
@@ -13,12 +15,12 @@ interface InjectedParams {
 	vuex: any
 	component: any
 	renderRootJsx: any
-  enhancePreviewApp: (app: any) => void 
+	enhancePreviewApp: (app: any) => void
 	handleError: (e: any) => void
 	destroyVueInstance: () => void
 	el: HTMLElement
 	locallyRegisterComponents: boolean
-  moduleId: string
+	moduleId: string
 }
 
 export function getCompiledExampleComponent({
@@ -27,12 +29,12 @@ export function getCompiledExampleComponent({
 	vuex,
 	component,
 	renderRootJsx,
-  enhancePreviewApp,
+	enhancePreviewApp,
 	handleError,
 	destroyVueInstance,
 	el,
 	locallyRegisterComponents,
-  moduleId
+	moduleId
 }: InjectedParams) {
 	let style
 	let previewComponent: any = {}
@@ -113,12 +115,13 @@ export function getCompiledExampleComponent({
 	}
 
 	// then we just have to render the setup previewComponent in the prepared slot
-	const rootComponent = typeof renderRootJsx?.default === 'function'
-		? renderRootJsx.default(previewComponent)
-		: {
-				render: (createElement: (comp: any) => any) =>
-					(isVue3 ? h : createElement)(previewComponent)
-		  }
+	const rootComponent =
+		typeof renderRootJsx?.default === 'function'
+			? renderRootJsx.default(previewComponent)
+			: {
+					render: (createElement: (comp: any) => any) =>
+						(isVue3 ? h : createElement)(previewComponent)
+			  }
 	try {
 		destroyVueInstance()
 		return {
@@ -128,7 +131,7 @@ export function getCompiledExampleComponent({
 					...rootComponent
 				},
 				el,
-        enhancePreviewApp
+				enhancePreviewApp
 			),
 			style
 		}
