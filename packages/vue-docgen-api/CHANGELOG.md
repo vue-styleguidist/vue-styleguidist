@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.79.1
+
+### Patch Changes
+
+- [#1672](https://github.com/vue-styleguidist/vue-styleguidist/pull/1672) [`dd8bdd19`](https://github.com/vue-styleguidist/vue-styleguidist/commit/dd8bdd1904589620382381dbdcfcccefdea0ff56) Thanks [@elevatebart](https://github.com/elevatebart)! - - Failed to parse the Props passed to Macro function as Type alias reference,
+
+  i had a bug on Storybook because of this and the problem it not throwing any exception so hard to detected the origin of bug. No breaking changes it will work properly once consumer update his version
+
+- [#1672](https://github.com/vue-styleguidist/vue-styleguidist/pull/1672) [`dd8bdd19`](https://github.com/vue-styleguidist/vue-styleguidist/commit/dd8bdd1904589620382381dbdcfcccefdea0ff56) Thanks [@elevatebart](https://github.com/elevatebart)! - export-all should not skip all extensions
+
+- [#1672](https://github.com/vue-styleguidist/vue-styleguidist/pull/1672) [`dd8bdd19`](https://github.com/vue-styleguidist/vue-styleguidist/commit/dd8bdd1904589620382381dbdcfcccefdea0ff56) Thanks [@elevatebart](https://github.com/elevatebart)! - take validExtends into account for typescript reolution too
+
 ## 4.78.0
 
 ### Minor Changes
