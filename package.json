@@ -1,4 +1,5 @@
 {
+  "name": "vue-styleguidist-repository",
   "private": true,
   "homepage": "https://github.com/vue-styleguidist/vue-styleguidist",
   "repository": {
@@ -170,6 +171,5 @@
       "vue@2.7.14": "patches/vue@2.7.14.patch"
     }
   },
-  "packageManager": "pnpm@9.4.0",
-  "name": "vue-styleguidist"
+  "packageManager": "pnpm@9.4.0"
 }
