@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-const puppeteer = require('puppeteer')
-const path = require('path')
+import puppeteer from 'puppeteer'
+import * as path from 'path'
 
 const args = process.argv.slice(2)
 

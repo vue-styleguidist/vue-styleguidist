@@ -21,15 +21,15 @@ export default async function setupOptionsHandler(
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
 			if (
-				bt.isIdentifier(nodePath.node.callee) &&
+				nodePath.node.callee.type === 'Identifier' &&
 				nodePath.node.callee.name === 'defineOptions' &&
-				bt.isObjectExpression(nodePath.node.arguments[0])
+				nodePath.node.arguments[0].type === 'ObjectExpression'
 			) {
 				const options = nodePath.node.arguments[0]
 				options.properties.forEach(property => {
-					if (bt.isObjectProperty(property) && bt.isIdentifier(property.key)) {
+					if (property.type === 'ObjectProperty' && property.key.type === 'Identifier') {
 						const key = property.key.name
-						if (key === 'name' && bt.isStringLiteral(property.value)) {
+						if (key === 'name' && property.value.type === 'StringLiteral') {
 							documentation.set('name', property.value.value)
 						}
 					}

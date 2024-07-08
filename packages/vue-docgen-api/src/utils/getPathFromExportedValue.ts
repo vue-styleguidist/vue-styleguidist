@@ -1,7 +1,6 @@
 import { readFile } from 'fs'
 import { promisify } from 'util'
 import { NodePath } from 'ast-types/lib/node-path'
-import * as bt from '@babel/types'
 import { ParserPlugin } from '@babel/parser'
 import { parse, visit } from 'recast'
 import buildParser from '../babel-parser'
@@ -31,22 +30,25 @@ export default async function getPathOfExportedValue(
 		let filePlugins = plugins
 		// Fixes SFCs written in JS having their imported modules being assumed to also be JS
 		if (/.tsx?$/.test(currentFilePath)) {
-			filePlugins = filePlugins.map(plugin => plugin === 'flow' ? 'typescript' : plugin)
+			filePlugins = filePlugins.map(plugin => (plugin === 'flow' ? 'typescript' : plugin))
 		}
 
 		const source = await read(currentFilePath, {
 			encoding: 'utf-8'
 		})
-		const ast = cacher(() => parse(source, { parser: buildParser({ plugins: filePlugins }) }), source)
+		const ast = cacher(
+			() => parse(source, { parser: buildParser({ plugins: filePlugins }) }),
+			source
+		)
 
 		visit(ast, {
 			visitExportNamedDeclaration(p) {
 				const masterDeclaration = p.node.declaration
-				if (masterDeclaration && bt.isVariableDeclaration(masterDeclaration)) {
+				if (masterDeclaration?.type === 'VariableDeclaration') {
 					masterDeclaration.declarations.forEach((declaration, i) => {
 						if (
-							bt.isVariableDeclarator(declaration) &&
-							bt.isIdentifier(declaration.id) &&
+							declaration.type === 'VariableDeclarator' &&
+							declaration.id.type === 'Identifier' &&
 							declaration.id.name === exportName
 						) {
 							exportedPath = p.get('declaration', 'declarations', i, 'init')

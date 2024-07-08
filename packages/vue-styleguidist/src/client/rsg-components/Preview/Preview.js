@@ -7,7 +7,9 @@ import Context from 'rsg-components/Context'
 import { DocumentedComponentContext } from '../VsgReactComponent/ReactComponent'
 import { RenderJsxContext, EnhanceAppContext } from '../../utils/renderStyleguide'
 import { getCompiledExampleComponent } from './getCompiledExampleComponent'
-import { getVueApp } from './getVueApp'
+import { getVueAppFactory } from './getVueApp'
+
+const getVueApp = getVueAppFactory()
 
 class Preview extends Component {
 	static propTypes = {
@@ -16,7 +18,7 @@ class Preview extends Component {
 		vuex: PropTypes.object,
 		component: PropTypes.object,
 		renderRootJsx: PropTypes.object,
-    enhancePreviewApp: PropTypes.func.isRequired
+		enhancePreviewApp: PropTypes.func.isRequired
 	}
 	static contextType = Context
 
@@ -83,11 +85,11 @@ class Preview extends Component {
 	}
 
 	executeCode() {
-    this.setState({
-      error: null,
+		this.setState({
+			error: null
 		})
 
-    const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
+		const moduleId = 'v-' + Math.floor(Math.random() * 1000) + 1
 
 		const { code, vuex, component, renderRootJsx, enhancePreviewApp } = this.props
 		if (!code) {
@@ -101,11 +103,11 @@ class Preview extends Component {
 				...(this.context.config.jsxInExamples
 					? { jsx: '__pragma__(h)', objectAssign: 'concatenate' }
 					: {}),
-        moduleId,
+				moduleId
 			})
 		} catch (err) {
 			this.handleError(err)
-      return
+			return
 		}
 
 		let el = this.mountNode.children[0]
@@ -128,7 +130,7 @@ class Preview extends Component {
 			},
 			el,
 			locallyRegisterComponents: this.context.config.locallyRegisterComponents,
-      moduleId,
+			moduleId
 		})
 
 		this.vueInstance = app

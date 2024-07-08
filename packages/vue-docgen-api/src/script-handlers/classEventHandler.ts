@@ -23,8 +23,8 @@ export default function classEventHandler(
 			visitClassMethod(nodePath) {
 				if (
 					nodePath.node.decorators &&
-					bt.isCallExpression(nodePath.node.decorators[0].expression) &&
-					bt.isIdentifier(nodePath.node.decorators[0].expression.callee) &&
+					nodePath.node.decorators[0].expression.type === 'CallExpression' &&
+					nodePath.node.decorators[0].expression.callee.type === 'Identifier' &&
 					nodePath.node.decorators[0].expression.callee.name === 'Emit'
 				) {
 					// fetch the leading comments on the wrapping expression
@@ -48,7 +48,7 @@ export default function classEventHandler(
 							return false
 						}
 						eventName = firstArg.node.value
-					} else if (bt.isIdentifier(nodePath.node.key)) {
+					} else if (nodePath.node.key.type === 'Identifier') {
 						eventName = nodePath.node.key.name
 					} else {
 						return false

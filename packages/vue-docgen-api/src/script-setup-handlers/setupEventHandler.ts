@@ -81,7 +81,10 @@ export default async function setupEventHandler(
 
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
-			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineEmits') {
+			if (
+				nodePath.node.callee.type === 'Identifier' &&
+				nodePath.node.callee.name === 'defineEmits'
+			) {
 				// Array of string where no type is specified
 				if (bt.isArrayExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'elements').each((element: NodePath) => {

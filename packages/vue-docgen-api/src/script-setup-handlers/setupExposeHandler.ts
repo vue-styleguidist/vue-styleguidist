@@ -39,7 +39,10 @@ export default async function setupExposedHandler(
 
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
-			if (bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'defineExpose') {
+			if (
+				nodePath.node.callee.type === 'Identifier' &&
+				nodePath.node.callee.name === 'defineExpose'
+			) {
 				if (bt.isObjectExpression(nodePath.get('arguments', 0).node)) {
 					nodePath.get('arguments', 0, 'properties').each((prop: NodePath<bt.ObjectProperty>) => {
 						if (bt.isIdentifier(prop.node.key)) {
@@ -48,13 +51,13 @@ export default async function setupExposedHandler(
 							buildExposeDescriptor(prop.node.key.value, prop)
 						}
 					})
-				} else if(bt.isArrayExpression(nodePath.get('arguments', 0).node)) {
-          nodePath.get('arguments', 0, 'elements').each((prop: NodePath<bt.Node>) => {
-            if (bt.isStringLiteral(prop.node)) {
-              buildExposeDescriptor(prop.node.value, prop)
-            }
-          })
-        }
+				} else if (bt.isArrayExpression(nodePath.get('arguments', 0).node)) {
+					nodePath.get('arguments', 0, 'elements').each((prop: NodePath<bt.Node>) => {
+						if (bt.isStringLiteral(prop.node)) {
+							buildExposeDescriptor(prop.node.value, prop)
+						}
+					})
+				}
 			}
 			return false
 		}

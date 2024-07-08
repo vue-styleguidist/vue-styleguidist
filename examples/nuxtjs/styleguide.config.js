@@ -14,9 +14,7 @@ const docSiteUrl = process.env.DEPLOY_PRIME_URL || 'https://vue-styleguidist.git
 /** @type import("vue-styleguidist").Config */
 module.exports = async () => {
 	// get the webpack config directly from nuxt
-	const nuxtWebpackConfig = await getWebpackConfig('client', {
-		for: 'dev'
-	})
+	const nuxtWebpackConfig = await getWebpackConfig('client')
 
 	const webpackConfig = {
 		module: {

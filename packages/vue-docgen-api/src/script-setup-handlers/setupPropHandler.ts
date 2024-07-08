@@ -23,7 +23,7 @@ export default defineHandler(async function setupPropHandler(
 	visit(astPath.program, {
 		visitCallExpression(nodePath) {
 			const hasDefaults =
-				bt.isIdentifier(nodePath.node.callee) && nodePath.node.callee.name === 'withDefaults'
+				nodePath.node.callee.type === 'Identifier' && nodePath.node.callee.name === 'withDefaults'
 			const normalizedNodePath = hasDefaults ? nodePath.get('arguments', 0) : nodePath
 
 			if (

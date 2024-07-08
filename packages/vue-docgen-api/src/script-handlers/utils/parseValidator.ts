@@ -36,8 +36,8 @@ export default async function parseValidatorForValues(
 			visitVariableDeclaration(p) {
 				p.node.declarations.forEach((decl, i) => {
 					if (
-						bt.isVariableDeclarator(decl) &&
-						bt.isIdentifier(decl.id) &&
+						decl.type === 'VariableDeclarator' &&
+						decl.id.type === 'Identifier' &&
 						decl.id.name === identifierName
 					) {
 						varPath = p.get('declarations', i, 'init')
