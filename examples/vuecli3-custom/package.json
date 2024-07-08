@@ -23,9 +23,9 @@
     "vue": "^2.7.14"
   },
   "devDependencies": {
-    "@babel/core": "7.18.6",
-    "@babel/preset-env": "^7.13.12",
-    "@babel/preset-react": "^7.12.13",
+    "@babel/core": "7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
     "@vue/babel-preset-app": "^5.0.8",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-service": "^5.0.8",

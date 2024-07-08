@@ -48,9 +48,9 @@ export default function eventHandler(
 	visit(path.node, {
 		visitCallExpression(pathExpression) {
 			if (
-				bt.isMemberExpression(pathExpression.node.callee) &&
-				bt.isThisExpression(pathExpression.node.callee.object) &&
-				bt.isIdentifier(pathExpression.node.callee.property) &&
+				pathExpression.node.callee.type === 'MemberExpression' &&
+				pathExpression.node.callee.object.type === 'ThisExpression' &&
+				pathExpression.node.callee.property.type === 'Identifier' &&
 				pathExpression.node.callee.property.name === '$emit'
 			) {
 				const args = pathExpression.node.arguments
@@ -194,7 +194,7 @@ export function eventHandlerMethods(documentation: Documentation, path: NodePath
 				let currentBlock: DocBlockTags | null
 				let foundEventDescriptor: DocBlockTags | undefined
 				let commentIndex = 1
-				do  {
+				do {
 					currentBlock = getCommentBlockAndTags(commentedMethod, { commentIndex: ++commentIndex })
 					if (
 						currentBlock &&

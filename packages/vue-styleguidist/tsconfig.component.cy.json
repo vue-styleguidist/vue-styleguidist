@@ -1,21 +1,20 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "composite": true,
-    "module": "ESNext",
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"composite": true,
+		"module": "ESNext",
 		"moduleResolution": "Node",
 		"allowSyntheticDefaultImports": true,
-    "jsx": "preserve",
+		"jsx": "preserve",
 		"types": ["cypress"],
 		"sourceMap": true
-  },
+	},
 	"include": [
-    "../../test/cypress/support/component/*.tsx",
+		"../../test/cypress/support/component/*.tsx",
 		"../../test/cypress/support/component/*.ts",
-    "./src/client/**/*.cy.tsx",
-    "./src/client/**/*.cy.vue3.tsx"
+		"../../node_modules/react-styleguidist/lib/client/rsg-components/**/*.*",
+		"./src/client/**/*.cy.tsx",
+		"./src/client/**/*.cy.vue3.tsx"
 	],
-  "exclude": [
-
-  ]
+	"exclude": []
 }

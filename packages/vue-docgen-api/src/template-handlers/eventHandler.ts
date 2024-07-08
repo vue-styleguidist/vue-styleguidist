@@ -1,4 +1,3 @@
-import * as bt from '@babel/types'
 import { visit } from 'recast'
 import { TemplateChildNode, BaseElementNode } from '@vue/compiler-dom'
 import Documentation, { Tag } from '../Documentation'
@@ -41,8 +40,8 @@ function getEventsFromExpression(
 		visitCallExpression(path) {
 			const obj = path.node ? path.node.callee : undefined
 			const args = path.node ? path.node.arguments : undefined
-			if (obj && args && bt.isIdentifier(obj) && obj.name === '$emit' && args.length) {
-				const evtName = bt.isStringLiteral(args[0]) ? args[0].value : '<undefined>'
+			if (obj && args && obj.type === 'Identifier' && obj.name === '$emit' && args.length) {
+				const evtName = args[0].type === 'StringLiteral' ? args[0].value : '<undefined>'
 				documentation.getEventDescriptor(evtName)
 				eventsFound.push(evtName)
 				return false

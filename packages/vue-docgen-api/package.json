@@ -37,8 +37,8 @@
   "author": "elevatebart",
   "license": "MIT",
   "dependencies": {
-    "@babel/parser": "^7.21.4",
-    "@babel/types": "^7.21.4",
+    "@babel/parser": "^7.24.7",
+    "@babel/types": "^7.24.7",
     "@vue/compiler-dom": "^3.2.0",
     "@vue/compiler-sfc": "^3.2.0",
     "ast-types": "^0.16.1",

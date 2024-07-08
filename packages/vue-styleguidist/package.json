@@ -1,5 +1,5 @@
 {
-  "name": "vue-styleguidist",
+  "name": "vue-styleguidist-vue-styleguidist",
   "description": "Vue components style guide generator",
   "version": "4.72.4",
   "homepage": "https://vue-styleguidist.github.io",
@@ -47,7 +47,7 @@
     "npm": ">=6"
   },
   "dependencies": {
-    "@babel/runtime": "7.23.9",
+    "@babel/runtime": "7.24.7",
     "@vxna/mini-html-webpack-template": "^1.0.0",
     "ast-types": "^0.16.1",
     "classnames": "^2.3.1",
@@ -127,8 +127,8 @@
     }
   },
   "devDependencies": {
-    "@babel/cli": "7.23.9",
-    "@babel/core": "7.23.9",
+    "@babel/cli": "7.24.7",
+    "@babel/core": "7.24.7",
     "@testing-library/react": "11.2.7",
     "@types/buble": "0.20.1",
     "@types/cli-progress": "1.8.1",

@@ -1,11 +1,23 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-	"globalDependencies": ["tsconfig.json"],
-  "pipeline": {
+  "globalDependencies": [
+    "tsconfig.json"
+  ],
+  "tasks": {
     "compile": {
-      "dependsOn": ["^compile"],
-      "outputs": ["lib/**", "dist/**"],
-			"inputs": ["src/**", "tsconfig.build.json", "tsconfig.json", "rollup.config.mjs"]
+      "dependsOn": [
+        "^compile"
+      ],
+      "outputs": [
+        "lib/**",
+        "dist/**"
+      ],
+      "inputs": [
+        "src/**",
+        "tsconfig.build.json",
+        "tsconfig.json",
+        "rollup.config.mjs"
+      ]
     },
     "lint": {
       "outputs": []

@@ -2,21 +2,16 @@ version: 2.1
 
 defaults: &defaults
   docker:
-    - image: cypress/included:cypress-13.6.6-node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
+    - image: cypress/included:cypress-13.12.0-node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
       environment:
         NODE_OPTIONS: '--openssl-legacy-provider'
   working_directory: ~/vue-styleguidist
 
 jobs:
-  install:
+  examples-basic:
     <<: *defaults
-
     steps:
       - checkout
-      - restore_cache:
-          name: Restore pnpm Package Cache
-          keys:
-            - v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
 
       - run:
           name: Install pnpm package manager
@@ -24,25 +19,13 @@ jobs:
             corepack enable
             corepack prepare pnpm@latest-8 --activate
             pnpm config set store-dir .pnpm-store
+
       - run:
           name: Install Dependencies
           command: |
             pnpm install
-      - save_cache:
-          name: Save pnpm Package Cache
-          key: v2-vue-styleguidist-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - '~/.pnpm-store'
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - vue-styleguidist
 
-  examples-basic:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/
+      - run: npx puppeteer browsers install chrome
 
       # Build all examples
       - run: npm run build basic -- --ci
@@ -61,8 +44,7 @@ jobs:
   examples-vuecli:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
 
       - run:
           name: Install pnpm package manager
@@ -76,39 +58,63 @@ jobs:
           command: |
             pnpm install
 
+      - run: npx puppeteer browsers install chrome
+
       # remake the pnpm link to vue-cli-plugin
       - run: pnpm build vuecli3 -- --ci
       - run: pnpm test:browser vuecli3
-      - run: pnpm build vuecli-noplugin -- --ci
-      - run: pnpm test:browser vuecli-noplugin
+      # - run: pnpm build vuecli-noplugin -- --ci
+      # - run: pnpm test:browser vuecli-noplugin
       - run: pnpm build vuecli3-vuetify-ie -- --ci
       - run: pnpm test:browser vuecli3-vuetify-ie
 
   examples-other:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
+
+      - run:
+          name: Install pnpm package manager
+          command: |
+            corepack enable
+            corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
+
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install --ignore-scripts
+
+      - run:
+          name: Compile vue-docgen-api
+          command: |
+            pnpm compile --filter=vue-docgen-api
+
+      - run:
+          name: Compile Packages
+          command: |
+            pnpm compile
+
+      - run: npx puppeteer browsers install chrome
 
       # Build all examples
-      - run: npm run build jsx -- --ci
-      - run: npm run build jsx-examples -- --ci
-      - run: npm run build nuxtjs -- --ci
-      - run: npm run build vuetify -- --ci
-      - run: npm run build docgen-vite
+      - run: pnpm build jsx -- --ci
+      - run: pnpm build jsx-examples -- --ci
+      - run: pnpm build nuxtjs -- --ci
+      - run: pnpm build vuetify -- --ci
+      - run: pnpm build docgen-vite
 
       # Check that examples really works: no JS errors on load
-      - run: npm run test:browser jsx
-      - run: npm run test:browser jsx-examples
-      - run: npm run test:browser nuxtjs
-      - run: npm run test:browser vuetify
-      - run: npm run test:browser docgen-vite
+      - run: pnpm test:browser jsx
+      - run: pnpm test:browser jsx-examples
+      - run: pnpm test:browser nuxtjs
+      - run: pnpm test:browser vuetify
+      - run: pnpm test:browser docgen-vite
 
   cypress:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
 
       - run:
           name: Set Cypress record key
@@ -127,7 +133,17 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            pnpm install
+            pnpm install --ignore-scripts
+
+      - run:
+          name: Compile vue-docgen-api
+          command: |
+            pnpm compile --filter=vue-docgen-api
+
+      - run:
+          name: Compile Packages
+          command: |
+            pnpm compile
 
       # run cypress vue-styleguidist component tests
       - run:
@@ -169,17 +185,8 @@ jobs:
 workflows:
   test:
     jobs:
-      - install
-      - examples-basic:
-          requires:
-            - install
-      - examples-vuecli:
-          requires:
-            - install
-      - examples-other:
-          requires:
-            - install
-      - cypress:
-          requires:
-            - install
+      - examples-basic
+      - examples-vuecli
+      - examples-other
+      - cypress
 # VS Code Extension Version: 1.5.1

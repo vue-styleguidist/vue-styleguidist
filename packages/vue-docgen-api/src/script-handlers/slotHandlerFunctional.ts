@@ -40,9 +40,9 @@ export default function slotHandler(documentation: Documentation, path: NodePath
 					// context.children
 					visitMemberExpression(pathMember) {
 						if (
-							bt.isIdentifier(pathMember.node.object) &&
+							pathMember.node.object.type === 'Identifier' &&
 							pathMember.node.object.name === contextVariableName &&
-							bt.isIdentifier(pathMember.node.property) &&
+							pathMember.node.property.type === 'Identifier' &&
 							pathMember.node.property.name === 'children'
 						) {
 							const doc = documentation.getSlotDescriptor('default')
