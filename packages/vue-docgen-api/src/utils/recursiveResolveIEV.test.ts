@@ -1,11 +1,29 @@
 import { SpyInstance } from 'vitest'
-import { promises as fs } from 'fs'
 import makePathResolver from './makePathResolver'
 import recursiveResolveIEV, { resolveIEV } from './recursiveResolveIEV'
 import { ImportedVariableSet } from './resolveRequired'
 import * as resolvePathFrom from './resolvePathFrom'
 
-vi.mock('fs')
+vi.mock('fs', async () => {
+	return {
+		default: {
+			promises: {
+				readFile: (p: string) => {
+					if (p.endsWith('component/local/path')) {
+						return Promise.resolve(
+							[
+								`export { mixin as test } from "path/to/mixin"`,
+								`export * from "path/to/another/mixin"`,
+								`export * from "path/to/one/another/mixin"`
+							].join('\n')
+						)
+					}
+					return Promise.resolve('')
+				}
+			}
+		}
+	}
+})
 vi.mock('./resolvePathFrom')
 
 describe('IEV', () => {
@@ -25,28 +43,17 @@ describe('IEV', () => {
 			},
 			testBis: {
 				filePath: ['component/local/pathBis'],
-				exportName: 'exportName'
+				exportName: 'exportNameBis'
 			}
 		}
 		mockResolver = vi.spyOn(spies, 'pathResolver')
 		vi.spyOn(resolvePathFrom, 'default').mockImplementation(p => `absolute/${p}`)
-		vi.spyOn(fs, 'readFile').mockImplementation((p: string) => {
-			if (p.endsWith('component/local/path')) {
-				return Promise.resolve(
-					[
-						`export { mixin as test } from "path/to/mixin"`,
-						`export * from "path/to/another/mixin"`,
-						`export * from "path/to/one/another/mixin"`
-					].join('\n')
-				)
-			}
-			return Promise.resolve('')
-		})
 	})
 
 	describe('resolveIEV', () => {
 		it('should call the resolver', async () => {
 			await resolveIEV(spies.pathResolver, set, () => true)
+			expect(resolvePathFrom.default).toHaveBeenCalledWith('component/local/path', ['../component'])
 			expect(set).not.toBeUndefined()
 			expect(set).toMatchInlineSnapshot(`
 				{
@@ -58,7 +65,7 @@ describe('IEV', () => {
 				    ],
 				  },
 				  "testBis": {
-				    "exportName": "exportName",
+				    "exportName": "exportNameBis",
 				    "filePath": [
 				      "component/local/pathBis",
 				    ],
