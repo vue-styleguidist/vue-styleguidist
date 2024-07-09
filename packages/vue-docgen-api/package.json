@@ -64,7 +64,7 @@
     "dedent": "0.7.0",
     "globby": "10.0.2",
     "rollup": "3.20.2",
-    "vitest": "0.31.0",
+    "vitest": "0.34.6",
     "vue": "2.7.14",
     "vue-class-component": "7.2.6",
     "vue-clickaway": "2.2.2",

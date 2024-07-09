@@ -7,9 +7,9 @@ Vue.config.devtools = false
 import { URL } from 'url'
 import { resolve } from 'path'
 
-const __dirname = new URL('.', import.meta.url).pathname
+const __dirname = new URL(import.meta.url).pathname
 
-const rootFolder = resolve(__dirname, '../')
+const rootFolder = resolve(__dirname, '../../')
 
 expect.addSnapshotSerializer({
 	serialize(val) {
@@ -20,4 +20,3 @@ expect.addSnapshotSerializer({
 		return typeof val === 'string' && val.includes(rootFolder)
 	}
 })
-
