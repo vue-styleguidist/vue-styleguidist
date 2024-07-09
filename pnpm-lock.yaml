@@ -313,7 +313,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       vue-template-compiler:
         specifier: ^2.7.14
         version: 2.7.14
@@ -441,7 +441,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -507,7 +507,7 @@ importers:
         version: link:../../packages/vue-docgen-cli
       vue-loader:
         specifier: ^15.9.8
-        version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0))
+        version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0))
       vue-server-renderer:
         specifier: ^2.7.14
         version: 2.7.14
@@ -516,7 +516,7 @@ importers:
         version: 2.7.14
       vuepress:
         specifier: ^1.9.7
-        version: 1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))
+        version: 1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))
       vuepress-plugin-live:
         specifier: ^1.6.2
         version: 1.6.2(@vue/compiler-sfc@3.2.47)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
@@ -714,7 +714,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -897,7 +897,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -943,7 +943,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -1320,7 +1320,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -1366,7 +1366,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -1409,7 +1409,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@3.2.37)(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@3.2.37)(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -1452,7 +1452,7 @@ importers:
         version: 15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0)
       vue-styleguidist:
         specifier: ^4
-        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@3.2.37)(webpack@4.46.0)
+        version: 4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@3.2.37)(webpack@4.46.0)
       webpack:
         specifier: ^4.46.0
         version: 4.46.0
@@ -4498,8 +4498,11 @@ packages:
     resolution: {integrity: sha512-8q67ORQ9O0Ms0nlqsXTVhaBefRBaLrzPxOewAZhdcO7onHwcO5/wRdWtHhZgfpCZlhY7NogkU16z3WnorSSkEA==}
     peerDependencies:
       '@babel/core': '*'
+      core-js: ^3
       vue: ^2 || ^3.0.0-0
     peerDependenciesMeta:
+      core-js:
+        optional: true
       vue:
         optional: true
 
@@ -5340,7 +5343,7 @@ packages:
   apollo-datasource@3.3.2:
     resolution: {integrity: sha512-L5TiS8E2Hn/Yz7SSnWIVbZw0ZfEIXZCa5VUiVxD9P53JvSrf4aStvsFDlGWPvpIdCR+aly2CfoB79B9/JjKFqg==}
     engines: {node: '>=12.0'}
-    deprecated: The `apollo-datasource` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+    deprecated: The `apollo-datasource` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023). See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
 
   apollo-reporting-protobuf@3.3.2:
     resolution: {integrity: sha512-j1tx9tmkVdsLt1UPzBrvz90PdjAeKW157WxGn+aXlnnGfVjZLIRXX3x5t1NWtXvB7rVaAsLLILLtDHW382TSoQ==}
@@ -5360,19 +5363,19 @@ packages:
   apollo-server-env@4.2.1:
     resolution: {integrity: sha512-vm/7c7ld+zFMxibzqZ7SSa5tBENc4B0uye9LTfjJwGoQFY5xsUPH5FpO5j0bMUDZ8YYNbrF9SNtzc5Cngcr90g==}
     engines: {node: '>=12.0'}
-    deprecated: The `apollo-server-env` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/utils.fetcher` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+    deprecated: The `apollo-server-env` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023). This package's functionality is now found in the `@apollo/utils.fetcher` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
 
   apollo-server-errors@3.3.1:
     resolution: {integrity: sha512-xnZJ5QWs6FixHICXHxUfm+ZWqqxrNuPlQ+kj5m6RtEgIpekOPssH/SD9gf2B4HuWV0QozorrygwZnux8POvyPA==}
     engines: {node: '>=12.0'}
-    deprecated: The `apollo-server-errors` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+    deprecated: The `apollo-server-errors` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
     peerDependencies:
       graphql: ^15.3.0 || ^16.0.0
 
   apollo-server-express@3.10.0:
     resolution: {integrity: sha512-ww3tZq9I/x3Oxtux8xlHAZcSB0NNQ17lRlY6yCLk1F+jCzdcjuj0x8XNg0GdTrMowt5v43o786bU9VYKD5OVnA==}
     engines: {node: '>=12.0'}
-    deprecated: The `apollo-server-express` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+    deprecated: The `apollo-server-express` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
     peerDependencies:
       express: ^4.17.1
       graphql: ^15.3.0 || ^16.0.0
@@ -8715,7 +8718,7 @@ packages:
   gitlab@10.2.1:
     resolution: {integrity: sha512-z+DxRF1C9uayVbocs9aJkJz+kGy14TSm1noB/rAIEBbXOkOYbjKxyuqJzt+0zeFpXFdgA0yq6DVVbvM7HIfGwg==}
     engines: {node: '>=10.0.0'}
-    deprecated: 'This package has found a new home in the @gitbeaker organization. For the latest GitLab API library for node, browser, and deno usage, check out @gitbeaker/rest. A full list of the features can be found here: https://github.com/jdalrymple/gitbeaker#readme'
+    deprecated: 'The gitlab package has found a new home in the @gitbeaker organization. For the latest gitlab node library, check out @gitbeaker/node. A full list of the features can be found here: https://github.com/jdalrymple/gitbeaker#readme'
 
   glob-parent@3.1.0:
     resolution: {integrity: sha512-E8Ak/2+dZY6fnzlR7+ueWvhsH1SjHr4jjss4YS/h4py44jY9MhK/VFdaZJAWDz6BbL21KeteKxFSFpq8OS5gVA==}
@@ -15763,7 +15766,7 @@ snapshots:
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
       convert-source-map: 2.0.0
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -15920,7 +15923,7 @@ snapshots:
       '@babel/core': 7.24.7
       '@babel/helper-compilation-targets': 7.23.6
       '@babel/helper-plugin-utils': 7.24.7
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       lodash.debounce: 4.0.8
       resolve: 1.22.8
     transitivePeerDependencies:
@@ -16995,7 +16998,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.24.7
       '@babel/types': 7.24.7
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -17040,7 +17043,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.24.7
       '@babel/parser': 7.24.7
       '@babel/types': 7.24.7
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -17355,7 +17358,7 @@ snapshots:
   '@eslint/eslintrc@0.4.3':
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       espree: 7.3.1
       globals: 13.19.0
       ignore: 4.0.6
@@ -17369,7 +17372,7 @@ snapshots:
   '@eslint/eslintrc@1.3.0':
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       espree: 9.3.3
       globals: 13.19.0
       ignore: 5.2.0
@@ -17383,7 +17386,7 @@ snapshots:
   '@eslint/eslintrc@3.1.0':
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       espree: 10.1.0
       globals: 14.0.0
       ignore: 5.2.0
@@ -17432,7 +17435,7 @@ snapshots:
   '@humanwhocodes/config-array@0.10.4':
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -17440,7 +17443,7 @@ snapshots:
   '@humanwhocodes/config-array@0.5.0':
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -18159,8 +18162,8 @@ snapshots:
 
   '@puppeteer/browsers@2.2.3':
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
-      extract-zip: 2.0.1(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
+      extract-zip: 2.0.1
       progress: 2.0.3
       proxy-agent: 6.4.0
       semver: 7.6.0
@@ -18690,7 +18693,7 @@ snapshots:
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/type-utils': 5.62.0(eslint@7.32.0)(typescript@4.9.5)
       '@typescript-eslint/utils': 5.62.0(eslint@7.32.0)(typescript@4.9.5)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       eslint: 7.32.0
       graphemer: 1.4.0
       ignore: 5.2.0
@@ -18707,7 +18710,7 @@ snapshots:
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@4.9.5)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       eslint: 7.32.0
     optionalDependencies:
       typescript: 4.9.5
@@ -18723,7 +18726,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@4.9.5)
       '@typescript-eslint/utils': 5.62.0(eslint@7.32.0)(typescript@4.9.5)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       eslint: 7.32.0
       tsutils: 3.21.0(typescript@4.9.5)
     optionalDependencies:
@@ -18737,7 +18740,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/visitor-keys': 5.62.0
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.6.0
@@ -18945,7 +18948,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vue/babel-preset-app@4.5.12(@babel/core@7.24.7)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))':
+  '@vue/babel-preset-app@4.5.12(@babel/core@7.24.7)(core-js@3.27.2)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))':
     dependencies:
       '@babel/core': 7.24.7
       '@babel/helper-compilation-targets': 7.23.6
@@ -18960,10 +18963,10 @@ snapshots:
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.24.7)
       '@vue/babel-preset-jsx': 1.2.4(@babel/core@7.24.7)
       babel-plugin-dynamic-import-node: 2.3.3
-      core-js: 3.27.2
       core-js-compat: 3.35.1
       semver: 6.3.1
     optionalDependencies:
+      core-js: 3.27.2
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
     transitivePeerDependencies:
       - supports-color
@@ -19283,7 +19286,7 @@ snapshots:
       css-loader: 6.7.1(webpack@5.74.0)
       css-minimizer-webpack-plugin: 3.4.1(webpack@5.74.0)
       cssnano: 5.1.12(postcss@8.4.14)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       default-gateway: 6.0.3
       dotenv: 10.0.0
       dotenv-expand: 5.1.0
@@ -19415,7 +19418,7 @@ snapshots:
       css-loader: 6.7.1(webpack@5.74.0)
       css-minimizer-webpack-plugin: 3.4.1(webpack@5.74.0)
       cssnano: 5.1.12(postcss@8.4.14)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       default-gateway: 6.0.3
       dotenv: 10.0.0
       dotenv-expand: 5.1.0
@@ -19544,7 +19547,7 @@ snapshots:
       css-loader: 6.7.1(webpack@5.74.0)
       css-minimizer-webpack-plugin: 3.4.1(webpack@5.74.0)
       cssnano: 5.1.12(postcss@8.4.14)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       default-gateway: 6.0.3
       dotenv: 10.0.0
       dotenv-expand: 5.1.0
@@ -19674,7 +19677,7 @@ snapshots:
       css-loader: 6.7.1(webpack@5.74.0)
       css-minimizer-webpack-plugin: 3.4.1(webpack@5.74.0)
       cssnano: 5.1.12(postcss@8.4.14)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       default-gateway: 6.0.3
       dotenv: 10.0.0
       dotenv-expand: 5.1.0
@@ -19862,7 +19865,7 @@ snapshots:
       '@vue/cli-ui-addon-widgets': 5.0.8
       boxen: 5.0.0
       commander: 7.2.0
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       deepmerge: 4.2.2
       download-git-repo: 3.0.2
       ejs: 3.1.7
@@ -20465,7 +20468,7 @@ snapshots:
   '@vuepress/core@1.9.10(@vue/compiler-sfc@3.2.47)(ejs@3.1.8)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/core': 7.24.7
-      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(core-js@3.27.2)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       '@vuepress/markdown': 1.9.10
       '@vuepress/markdown-loader': 1.9.10
       '@vuepress/plugin-last-updated': 1.9.10
@@ -20567,10 +20570,10 @@ snapshots:
       - webpack-command
       - whiskers
 
-  '@vuepress/core@1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))':
+  '@vuepress/core@1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))':
     dependencies:
       '@babel/core': 7.24.7
-      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      '@vue/babel-preset-app': 4.5.12(@babel/core@7.24.7)(core-js@3.27.2)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       '@vuepress/markdown': 1.9.7
       '@vuepress/markdown-loader': 1.9.7
       '@vuepress/plugin-last-updated': 1.9.7
@@ -20599,7 +20602,7 @@ snapshots:
       toml: 3.0.0
       url-loader: 1.1.2(webpack@4.46.0(webpack-cli@4.5.0))
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-loader: 15.9.8(@vue/compiler-sfc@3.2.47)(cache-loader@3.0.1(webpack@4.46.0(webpack-cli@4.5.0)))(coffee-script@1.12.7)(css-loader@2.1.1(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0))
+      vue-loader: 15.9.8(@vue/compiler-sfc@3.2.47)(cache-loader@3.0.1(webpack@4.46.0(webpack-cli@4.5.0)))(coffee-script@1.12.7)(css-loader@2.1.1(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0))
       vue-router: 3.5.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-server-renderer: 2.7.14
       vue-template-compiler: 2.7.14
@@ -23494,7 +23497,7 @@ snapshots:
       async-retry: 1.2.3
       chalk: 2.4.2
       commander: 2.20.3
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       fast-json-patch: 3.0.0-1
       get-stdin: 6.0.0
       gitlab: 10.2.1
@@ -24352,7 +24355,7 @@ snapshots:
 
   eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.27.5)(eslint@7.32.0):
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       eslint: 7.32.0
       eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.62.0(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0)
       glob: 7.2.3
@@ -24527,7 +24530,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 2.4.2
       cross-spawn: 6.0.5
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       doctrine: 3.0.0
       eslint-scope: 5.1.1
       eslint-utils: 1.4.3
@@ -24571,7 +24574,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       doctrine: 3.0.0
       enquirer: 2.3.6
       escape-string-regexp: 4.0.0
@@ -24616,7 +24619,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.1.1
@@ -24985,6 +24988,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  extract-zip@2.0.1:
+    dependencies:
+      debug: 4.3.4(supports-color@6.1.0)
+      get-stream: 5.2.0
+      yauzl: 2.10.0
+    optionalDependencies:
+      '@types/yauzl': 2.10.3
+    transitivePeerDependencies:
+      - supports-color
+
   extract-zip@2.0.1(supports-color@8.1.1):
     dependencies:
       debug: 4.3.4(supports-color@8.1.1)
@@ -25280,7 +25293,7 @@ snapshots:
 
   follow-redirects@1.15.5(debug@4.3.4):
     optionalDependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
 
   for-each@0.3.3:
     dependencies:
@@ -30064,7 +30077,7 @@ snapshots:
 
   puppeteer@1.20.0:
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       extract-zip: 1.7.0
       https-proxy-agent: 2.2.4
       mime: 2.5.2
@@ -31756,7 +31769,7 @@ snapshots:
       arg: 5.0.2
       bluebird: 3.7.2
       check-more-types: 2.24.0
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       execa: 5.1.1
       lazy-ass: 1.6.0
       ps-tree: 1.2.0
@@ -33088,7 +33101,7 @@ snapshots:
       '@types/jscodeshift': 0.7.2
       '@vue/compiler-core': 3.2.47
       '@vue/compiler-dom': 3.2.47
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       globby: 11.1.0
       inquirer: 7.3.3
       jscodeshift: 0.11.0(@babel/preset-env@7.24.7(@babel/core@7.24.7))
@@ -33159,7 +33172,7 @@ snapshots:
 
   vue-eslint-parser@7.11.0(eslint@7.32.0):
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4(supports-color@6.1.0)
       eslint: 7.32.0
       eslint-scope: 5.1.1
       eslint-visitor-keys: 1.3.0
@@ -33648,7 +33661,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(cache-loader@3.0.1(webpack@4.46.0(webpack-cli@4.5.0)))(coffee-script@1.12.7)(css-loader@2.1.1(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0)):
+  vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(cache-loader@3.0.1(webpack@4.46.0(webpack-cli@4.5.0)))(coffee-script@1.12.7)(css-loader@2.1.1(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0)):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       css-loader: 2.1.1(webpack@4.46.0(webpack-cli@4.5.0))
@@ -33852,7 +33865,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0)):
+  vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0(webpack-cli@4.5.0)))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0(webpack-cli@4.5.0)):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       css-loader: 3.6.0(webpack@4.46.0(webpack-cli@4.5.0))
@@ -34338,7 +34351,7 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  vue-styleguidist@4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0):
+  vue-styleguidist@4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))(webpack@4.46.0):
     dependencies:
       '@babel/runtime': 7.20.13
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -34414,7 +34427,7 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  vue-styleguidist@4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@3.2.37)(webpack@4.46.0):
+  vue-styleguidist@4.72.4(@vue/compiler-sfc@3.2.47)(eslint@7.32.0)(pug@3.0.3)(vue-loader@15.9.8(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(css-loader@3.6.0(webpack@4.46.0))(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue-template-compiler@2.7.14)(webpack@4.46.0))(vue-template-compiler@2.7.14)(vue@3.2.37)(webpack@4.46.0):
     dependencies:
       '@babel/runtime': 7.20.13
       '@vxna/mini-html-webpack-template': 1.0.0
@@ -34881,9 +34894,9 @@ snapshots:
       - webpack-command
       - whiskers
 
-  vuepress@1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0)):
+  vuepress@1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0)):
     dependencies:
-      '@vuepress/core': 1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))
+      '@vuepress/core': 1.9.7(@vue/compiler-sfc@3.2.47)(coffee-script@1.12.7)(ejs@3.1.8)(hogan.js@3.0.2)(lodash@4.17.21)(pug@3.0.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(webpack-cli@4.5.0(webpack-bundle-analyzer@3.3.2)(webpack-dev-server@3.11.2)(webpack@4.46.0))
       '@vuepress/theme-default': 1.9.7
       '@vuepress/types': 1.9.7
       cac: 6.7.14
