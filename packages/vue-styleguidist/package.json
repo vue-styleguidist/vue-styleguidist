@@ -149,7 +149,7 @@
     "@types/webpack-dev-server": "3.11.6",
     "@types/webpack-merge": "4.1.5",
     "concurrently": "4.1.2",
-    "ejs": "3.1.8",
+    "ejs": "3.1.10",
     "pug": "3.0.3",
     "strip-shebang": "1.0.2",
     "vue": "2.7.14",
