@@ -169,7 +169,7 @@
   ],
   "pnpm": {
     "patchedDependencies": {
-      "vue@2.7.14": "patches/vue@2.7.14.patch"
+      "vue@2.7.16": "patches/vue@2.7.16.patch"
     }
   },
   "packageManager": "pnpm@9.4.0"
