@@ -152,8 +152,8 @@
     "ejs": "3.1.10",
     "pug": "3.0.3",
     "strip-shebang": "1.0.2",
-    "vue": "2.7.14",
-    "vue-template-compiler": "2.7.14",
+    "vue": "2.7.16",
+    "vue-template-compiler": "2.7.16",
     "webpack": "4.46.0"
   },
   "author": "Bart Ledoux <ledouxb@me.com>"
