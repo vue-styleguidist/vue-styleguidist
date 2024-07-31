@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.79.2
+
+### Patch Changes
+
+- [#1679](https://github.com/vue-styleguidist/vue-styleguidist/pull/1679) [`8a2ec6ff`](https://github.com/vue-styleguidist/vue-styleguidist/commit/8a2ec6ff14e09a3f226f2fe0ecf96b0678e6c135) Thanks [@elevatebart](https://github.com/elevatebart)! - fix a bug where interface extension broke the tool
+
 ## 4.79.1
 
 ### Patch Changes
