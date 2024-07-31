@@ -133,8 +133,8 @@ export function getTypeDefinitionFromIdentifier(
 							if (
 								!interfaceBody.value.find(
 									(prop: TSPropertySignatureKind) =>
-										prop.key.type === 'Identifier' &&
-										parentInterfaceProp.key.type === 'Identifier' &&
+										prop.key?.type === 'Identifier' &&
+										parentInterfaceProp.key?.type === 'Identifier' &&
 										prop.key.name === parentInterfaceProp.key.name
 								)
 							) {
