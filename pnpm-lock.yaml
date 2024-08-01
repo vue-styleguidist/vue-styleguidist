@@ -225,7 +225,7 @@ importers:
         version: 2.5.0
       turbo:
         specifier: ^2.0.6
-        version: 2.0.6
+        version: 2.0.11
       typescript:
         specifier: 4.9.5
         version: 4.9.5
@@ -12529,7 +12529,7 @@ packages:
   puppeteer@1.20.0:
     resolution: {integrity: sha512-bt48RDBy2eIwZPrkgbcwHtb51mj2nKvHOPMaSH2IsWiv7lOG9k9zhaRzpDZafrk05ajMc3cu+lSQYYOfH2DkVQ==}
     engines: {node: '>=6.4.0'}
-    deprecated: < 22.6.4 is no longer supported
+    deprecated: < 22.8.2 is no longer supported
 
   puppeteer@22.12.1:
     resolution: {integrity: sha512-1GxY8dnEnHr1SLzdSDr0FCjM6JQfAh2E2I/EqzeF8a58DbGVk9oVjj4lFdqNoVbpgFSpAbz7VER9St7S1wDpNg==}
@@ -14291,38 +14291,38 @@ packages:
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
 
-  turbo-darwin-64@2.0.6:
-    resolution: {integrity: sha512-XpgBwWj3Ggmz/gQVqXdMKXHC1iFPMDiuwugLwSzE7Ih0O13JuNtYZKhQnopvbDQnFQCeRq2Vsm5OTWabg/oB/g==}
+  turbo-darwin-64@2.0.11:
+    resolution: {integrity: sha512-YlHEEhcm+jI1BSZoLugGHUWDfRXaNaQIv7tGQBfadYjo9kixBnqoTOU6s1ubOrQMID+lizZZQs79GXwqM6vohg==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.0.6:
-    resolution: {integrity: sha512-RfeZYXIAkiA21E8lsvfptGTqz/256YD+eI1x37fedfvnHFWuIMFZGAOwJxtZc6QasQunDZ9TRRREbJNI68tkIw==}
+  turbo-darwin-arm64@2.0.11:
+    resolution: {integrity: sha512-K/YW+hWzRQ/wGmtffxllH4M1tgy8OlwgXODrIiAGzkSpZl9+pIsem/F86UULlhsIeavBYK/LS5+dzV3DPMjJ9w==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.0.6:
-    resolution: {integrity: sha512-92UDa0xNQQbx0HdSp9ag3YSS3xPdavhc7q9q9mxIAcqyjjD6VElA4Y85m4F/DDGE5SolCrvBz2sQhVmkOd6Caw==}
+  turbo-linux-64@2.0.11:
+    resolution: {integrity: sha512-mv8CwGP06UPweMh1Vlp6PI6OWnkuibxfIJ4Vlof7xqjohAaZU5FLqeOeHkjQflH/6YrCVuS9wrK0TFOu+meTtA==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.0.6:
-    resolution: {integrity: sha512-eQKu6utCVUkIH2kqOzD8OS6E0ba6COjWm6PRDTNCHQRljZW503ycaTUIdMOiJrVg1MkEjDyOReUg8s8D18aJ4Q==}
+  turbo-linux-arm64@2.0.11:
+    resolution: {integrity: sha512-wLE5tl4oriTmHbuayc0ki0csaCplmVLj+uCWtecM/mfBuZgNS9ICNM9c4sB+Cfl5tlBBFeepqRNgvRvn8WeVZg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.0.6:
-    resolution: {integrity: sha512-+9u4EPrpoeHYCQ46dRcou9kbkSoelhOelHNcbs2d86D6ruYD/oIAHK9qgYK8LeARRz0jxhZIA/dWYdYsxJJWkw==}
+  turbo-windows-64@2.0.11:
+    resolution: {integrity: sha512-tja3zvVCSWu3HizOoeQv0qDJ+GeWGWRFOOM6a8i3BYnXLgGKAaDZFcjwzgC50tWiAw4aowIVR4OouwIyRhLBaQ==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.0.6:
-    resolution: {integrity: sha512-rdrKL+p+EjtdDVg0wQ/7yTbzkIYrnb0Pw4IKcjsy3M0RqUM9UcEi67b94XOAyTa5a0GqJL1+tUj2ebsFGPgZbg==}
+  turbo-windows-arm64@2.0.11:
+    resolution: {integrity: sha512-sYjXP6k94Bqh99R+y3M1Ks6LRIEZybMz+7enA8GKl6JJ2ZFaXxTnS6q+/2+ii1+rRwxohj5OBb4gxODcF8Jd4w==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.0.6:
-    resolution: {integrity: sha512-/Ftmxd5Mq//a9yMonvmwENNUN65jOVTwhhBPQjEtNZutYT9YKyzydFGLyVM1nzhpLWahQSMamRc/RDBv5EapzA==}
+  turbo@2.0.11:
+    resolution: {integrity: sha512-imDlFFAvitbCm1JtDFJ6eG882qwxHUmVT2noPb3p2jq5o5DuXOchMbkVS9kUeC3/4WpY5N0GBZ3RvqNyjHZw1Q==}
     hasBin: true
 
   tweetnacl@0.14.5:
@@ -14910,8 +14910,8 @@ packages:
       '@vue/composition-api':
         optional: true
 
-  vue-docgen-api@4.79.1:
-    resolution: {integrity: sha512-TXUBSSeYvvzICifksCn0FiA5lheTEF108L69YAbxxxEOpvKRFmRJcVHvut3pmwnzm1V58Zxma9BK89K/cWrNfQ==}
+  vue-docgen-api@4.79.2:
+    resolution: {integrity: sha512-n9ENAcs+40awPZMsas7STqjkZiVlIjxIKgiJr5rSohDP0/JCrD9VtlzNojafsA1MChm/hz2h3PDtUedx3lbgfA==}
     peerDependencies:
       vue: '>=2'
 
@@ -33675,32 +33675,32 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  turbo-darwin-64@2.0.6:
+  turbo-darwin-64@2.0.11:
     optional: true
 
-  turbo-darwin-arm64@2.0.6:
+  turbo-darwin-arm64@2.0.11:
     optional: true
 
-  turbo-linux-64@2.0.6:
+  turbo-linux-64@2.0.11:
     optional: true
 
-  turbo-linux-arm64@2.0.6:
+  turbo-linux-arm64@2.0.11:
     optional: true
 
-  turbo-windows-64@2.0.6:
+  turbo-windows-64@2.0.11:
     optional: true
 
-  turbo-windows-arm64@2.0.6:
+  turbo-windows-arm64@2.0.11:
     optional: true
 
-  turbo@2.0.6:
+  turbo@2.0.11:
     optionalDependencies:
-      turbo-darwin-64: 2.0.6
-      turbo-darwin-arm64: 2.0.6
-      turbo-linux-64: 2.0.6
-      turbo-linux-arm64: 2.0.6
-      turbo-windows-64: 2.0.6
-      turbo-windows-arm64: 2.0.6
+      turbo-darwin-64: 2.0.11
+      turbo-darwin-arm64: 2.0.11
+      turbo-linux-64: 2.0.11
+      turbo-linux-arm64: 2.0.11
+      turbo-windows-64: 2.0.11
+      turbo-windows-arm64: 2.0.11
 
   tweetnacl@0.14.5: {}
 
@@ -34341,7 +34341,7 @@ snapshots:
     dependencies:
       vue: 3.2.33
 
-  vue-docgen-api@4.79.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)):
+  vue-docgen-api@4.79.2(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)):
     dependencies:
       '@babel/parser': 7.24.8
       '@babel/types': 7.24.8
@@ -34357,7 +34357,7 @@ snapshots:
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
       vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
 
-  vue-docgen-api@4.79.1(vue@2.7.8):
+  vue-docgen-api@4.79.2(vue@2.7.8):
     dependencies:
       '@babel/parser': 7.24.8
       '@babel/types': 7.24.8
@@ -34373,7 +34373,7 @@ snapshots:
       vue: 2.7.8
       vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.8)
 
-  vue-docgen-api@4.79.1(vue@3.2.37):
+  vue-docgen-api@4.79.2(vue@3.2.37):
     dependencies:
       '@babel/parser': 7.24.8
       '@babel/types': 7.24.8
@@ -35397,7 +35397,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 2.7.8
-      vue-docgen-api: 4.79.1(vue@2.7.8)
+      vue-docgen-api: 4.79.2(vue@2.7.8)
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.8)
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.8)
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.8)
@@ -35473,7 +35473,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-docgen-api: 4.79.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      vue-docgen-api: 4.79.2(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
@@ -35549,7 +35549,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 2.7.8
-      vue-docgen-api: 4.79.1(vue@2.7.8)
+      vue-docgen-api: 4.79.2(vue@2.7.8)
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.8)
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.8)
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.8)
@@ -35625,7 +35625,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-docgen-api: 4.79.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      vue-docgen-api: 4.79.2(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
@@ -35701,7 +35701,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 3.2.37
-      vue-docgen-api: 4.79.1(vue@3.2.37)
+      vue-docgen-api: 4.79.2(vue@3.2.37)
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@3.2.37)
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@3.2.37)
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@3.2.37)
@@ -35777,7 +35777,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-docgen-api: 4.79.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      vue-docgen-api: 4.79.2(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
@@ -35853,7 +35853,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 3.2.37
-      vue-docgen-api: 4.79.1(vue@3.2.37)
+      vue-docgen-api: 4.79.2(vue@3.2.37)
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@3.2.37)
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@3.2.37)
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@3.2.37)
@@ -35929,7 +35929,7 @@ snapshots:
       to-ast: 1.0.0
       typescript: 4.9.5
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
-      vue-docgen-api: 4.79.1(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
+      vue-docgen-api: 4.79.2(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-compiler-utils: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
       vue-inbrowser-prismjs-highlighter: 4.69.1(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
