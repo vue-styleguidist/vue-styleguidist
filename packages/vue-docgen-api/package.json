@@ -65,7 +65,7 @@
     "globby": "10.0.2",
     "rollup": "3.20.2",
     "vitest": "0.31.0",
-    "vue": "2.7.14",
+    "vue": "2.7.16",
     "vue-class-component": "7.2.6",
     "vue-clickaway": "2.2.2",
     "vue-property-decorator": "7.3.0",
