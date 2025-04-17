@@ -181,7 +181,7 @@ By default it will find the `Readme.md` sibling to the component files. Use this
 
 #### getDestFile
 
-> type: `(file: string, config: DocgenCLIConfig) => string`, default: `(file, config) => path.resolve(config.outDir, file).replace(/\.\w+\$/, '.md')`
+> type: `(file: string, config: DocgenCLIConfig) => string`, default: `(file, config) => path.resolve(config.outDir, file).replace(/\.\w+$/, '.md')`
 
 Function returning the absolute path of the documentation markdown files. If [outFile](#outfile) is used, this config will be ignored.
 
