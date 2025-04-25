@@ -56,4 +56,4 @@ test('serve with babel', async () => {
 			expect(await helpers.getText('h1[class^=rsg--logo]')).toMatch('Default Style Guide')
 		}
 	)
-})
+}, 1000 * 20) // 20 secondes

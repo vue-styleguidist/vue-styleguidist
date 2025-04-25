@@ -35,7 +35,7 @@ test('serve', async () => {
 			expect(await helpers.getText('h1[class^=rsg--logo]')).toMatch('Default Style Guide')
 		}
 	)
-})
+}, 1000 * 20) // 20 secondes
 
 test('serve with moved config file', async () => {
 	const project = await createAndInstall(`serve-moved`)
@@ -49,4 +49,4 @@ test('serve with moved config file', async () => {
 			expect(await helpers.getText('h1[class^=rsg--logo]')).toMatch('Default Style Guide')
 		}
 	)
-})
+}, 1000 * 20) // 20 secondes

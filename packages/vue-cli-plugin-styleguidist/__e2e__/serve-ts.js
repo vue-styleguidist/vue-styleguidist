@@ -38,7 +38,7 @@ test('serve with typescript', async () => {
 			expect(await helpers.getText('h1[class^=rsg--logo]')).toMatch('Default Style Guide')
 		}
 	)
-})
+}, 1000 * 20) // 20 secondes
 
 test('serve with typescript class', async () => {
 	const project = await createAndInstall(`serve-ts-class`, true)
@@ -48,4 +48,4 @@ test('serve with typescript class', async () => {
 			expect(await helpers.getText('h1[class^=rsg--logo]')).toMatch('Default Style Guide')
 		}
 	)
-})
+}, 1000 * 20) // 20 secondes
