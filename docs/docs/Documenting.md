@@ -128,7 +128,7 @@ Provide an example of how to use a documented item. The text that follows this t
 
 See also:
 
-- This is a JSDoc tag: [@example](http://usejsdoc.org/tags-example.html)
+- This is a JSDoc tag: [@example](http://jsdoc.app/tags-example.html)
 
 ### @deprecated
 
@@ -144,30 +144,30 @@ The @deprecated tag marks a symbol in your code as being deprecated:
 See also:
 
 - [Live Example](https://vue-styleguidist.github.io/basic/#randombutton)
-- This is a JSDoc tag: [@deprecated](http://usejsdoc.org/tags-deprecated.html)
+- This is a JSDoc tag: [@deprecated](http://jsdoc.app/tags-deprecated.html)
 
 ### @see, @link
 
-- This is a JSDoc tag: [@see, @link](http://usejsdoc.org/tags-see.html)
+- This is a JSDoc tag: [@see, @link](http://jsdoc.app/tags-see.html)
 
 ### @author
 
-- This is a JSDoc tag: [@author](http://usejsdoc.org/tags-author.html)
+- This is a JSDoc tag: [@author](http://jsdoc.app/tags-author.html)
 
 ### @since
 
-- This is a JSDoc tag: [@since](http://usejsdoc.org/tags-since.html)
+- This is a JSDoc tag: [@since](http://jsdoc.app/tags-since.html)
 
 ### @version
 
-- This is a JSDoc tag: [@version](http://usejsdoc.org/tags-version.html)
+- This is a JSDoc tag: [@version](http://jsdoc.app/tags-version.html)
 
 ### @ignore
 
 By default, all props your components have are considered to be public and are published. In some rare cases, you might want to remove a prop from the documentation while keeping it in the code. The `@ignore` tag allows you to do this. See here for more:
 
 - [Ignoring Props](#ignoring-props)
-- This is a JSDoc tag: [@ignore](http://usejsdoc.org/tags-ignore.html)
+- This is a JSDoc tag: [@ignore](http://jsdoc.app/tags-ignore.html)
 
 ## Events
 
@@ -509,7 +509,7 @@ export default {
 
 ## Public methods
 
-By default, any methods your components have are considered to be private and are not published. Mark your public methods with JSDoc [`@public`](http://usejsdoc.org/tags-public.html) tag to get them published in the docs:
+By default, any methods your components have are considered to be private and are not published. Mark your public methods with JSDoc [`@public`](http://jsdoc.app/tags-public.html) tag to get them published in the docs:
 
 ```javascript
 /**
@@ -525,7 +525,7 @@ insertAtCursor(text) {
 
 ## Ignoring props
 
-By default, all props your components have are considered to be public and are published. In some rare cases, you might want to remove a prop from the documentation while keeping it in the code. To do so, mark the prop with JSDoc [`@ignore`](http://usejsdoc.org/tags-ignore.html) tag to remove it from the docs:
+By default, all props your components have are considered to be public and are published. In some rare cases, you might want to remove a prop from the documentation while keeping it in the code. To do so, mark the prop with JSDoc [`@ignore`](http://jsdoc.app/tags-ignore.html) tag to remove it from the docs:
 
 ```javascript
   props: {
@@ -556,11 +556,11 @@ To reference it in examples, one has to call `<WonderfulButton/>`. See to [How t
 
 When documenting methods you can also use:
 
-- [@param, @arg, @argument](http://usejsdoc.org/tags-param.html)
+- [@param, @arg, @argument](http://jsdoc.app/tags-param.html)
 
 Documenting events:
 
-- [@event](http://usejsdoc.org/tags-event.html)
+- [@event](http://jsdoc.app/tags-event.html)
 
 Documenting v-model:
 
@@ -568,7 +568,7 @@ Documenting v-model:
 
 Tags can even render Markdown.
 
-- [@public](http://usejsdoc.org/tags-public.html)
+- [@public](http://jsdoc.app/tags-public.html)
 
 You can mark your public methods with JSDoc `@public` tag to get them published in the docs.
 
