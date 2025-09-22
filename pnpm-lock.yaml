@@ -537,7 +537,7 @@ importers:
     dependencies:
       prismjs:
         specifier: ^1.28.0
-        version: 1.29.0
+        version: 1.30.0
       vue:
         specifier: ^3.2.37
         version: 3.2.37
@@ -1827,7 +1827,7 @@ importers:
     dependencies:
       prismjs:
         specifier: ^1.26.0
-        version: 1.27.0
+        version: 1.30.0
       vue-inbrowser-compiler-utils:
         specifier: ^4.64.1
         version: link:../vue-inbrowser-compiler-utils
@@ -1969,7 +1969,7 @@ importers:
         version: 1.2.6
       prismjs:
         specifier: ^1.23.0
-        version: 1.27.0
+        version: 1.30.0
       process:
         specifier: ^0.11.10
         version: 0.11.10
@@ -12941,12 +12941,12 @@ packages:
     resolution: {integrity: sha512-OtVsCpS5jth8jQPonGGmRpYpUfATBudt0kHkehri7h9jg9WsayPDCD6mneknVluZRfiMMlSS98Z99pl8zJLYtw==}
     hasBin: true
 
-  prismjs@1.27.0:
-    resolution: {integrity: sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==}
-    engines: {node: '>=6'}
-
   prismjs@1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
+
+  prismjs@1.30.0:
+    resolution: {integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==}
     engines: {node: '>=6'}
 
   private@0.1.8:
@@ -13165,11 +13165,12 @@ packages:
   puppeteer@1.20.0:
     resolution: {integrity: sha512-bt48RDBy2eIwZPrkgbcwHtb51mj2nKvHOPMaSH2IsWiv7lOG9k9zhaRzpDZafrk05ajMc3cu+lSQYYOfH2DkVQ==}
     engines: {node: '>=6.4.0'}
-    deprecated: < 22.8.2 is no longer supported
+    deprecated: < 24.10.2 is no longer supported
 
   puppeteer@22.15.0:
     resolution: {integrity: sha512-XjCY1SiSEi1T7iSYuxS82ft85kwDJUS7wj1Z0eGVXKdtr5g4xnVcbjwxhq5xBnpK/E7x1VZZoJDxpjAOasHT4Q==}
     engines: {node: '>=18'}
+    deprecated: < 24.10.2 is no longer supported
     hasBin: true
 
   q-i@2.0.1:
@@ -15044,6 +15045,7 @@ packages:
 
   ua-parser-js@0.7.24:
     resolution: {integrity: sha512-yo+miGzQx5gakzVK3QFfN0/L9uVhosXBBO7qmnk7c2iw1IhL212wfA3zbnI54B0obGwC/5NWub/iT9sReMx+Fw==}
+    deprecated: You are using an outdated version of ua-parser-js. Please update to ua-parser-js v0.7.33 / v1.0.33 / v2.0.0 (or later) to avoid ReDoS vulnerability [CVE-2022-25927](https://github.com/advisories/GHSA-fhg7-m89q-25r3)
 
   uc.micro@1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
@@ -21716,7 +21718,7 @@ snapshots:
       node-notifier: 10.0.1
       parse-git-config: 3.0.0
       portfinder: 1.0.28
-      prismjs: 1.29.0
+      prismjs: 1.30.0
       rss-parser: 3.12.0
       shortid: 2.2.16
       subscriptions-transport-ws: 0.11.0(graphql@15.8.0)
@@ -22571,7 +22573,7 @@ snapshots:
       markdown-it-chain: 1.3.0(markdown-it@8.4.2)
       markdown-it-emoji: 1.4.0
       markdown-it-table-of-contents: 0.4.4
-      prismjs: 1.29.0
+      prismjs: 1.30.0
     transitivePeerDependencies:
       - supports-color
 
@@ -22583,7 +22585,7 @@ snapshots:
       markdown-it-chain: 1.3.0(markdown-it@8.4.2)
       markdown-it-emoji: 1.4.0
       markdown-it-table-of-contents: 0.4.4
-      prismjs: 1.29.0
+      prismjs: 1.30.0
     transitivePeerDependencies:
       - supports-color
 
@@ -31759,9 +31761,9 @@ snapshots:
       colors: 1.4.0
       minimist: 1.2.8
 
-  prismjs@1.27.0: {}
-
   prismjs@1.29.0: {}
+
+  prismjs@1.30.0: {}
 
   private@0.1.8: {}
 
@@ -32460,7 +32462,7 @@ snapshots:
       mini-html-webpack-plugin: 3.1.3(webpack@4.46.0)
       mri: 1.1.6
       ora: 4.1.1
-      prismjs: 1.27.0
+      prismjs: 1.30.0
       prop-types: 15.8.1
       q-i: 2.0.1
       qss: 2.0.3
@@ -32537,7 +32539,7 @@ snapshots:
       mini-html-webpack-plugin: 3.1.3(webpack@4.46.0)
       mri: 1.1.6
       ora: 4.1.1
-      prismjs: 1.27.0
+      prismjs: 1.30.0
       prop-types: 15.8.1
       q-i: 2.0.1
       qss: 2.0.3
@@ -32614,7 +32616,7 @@ snapshots:
       mini-html-webpack-plugin: 3.1.3(webpack@5.74.0)
       mri: 1.1.6
       ora: 4.1.1
-      prismjs: 1.27.0
+      prismjs: 1.30.0
       prop-types: 15.8.1
       q-i: 2.0.1
       qss: 2.0.3
@@ -32691,7 +32693,7 @@ snapshots:
       mini-html-webpack-plugin: 3.1.3(webpack@4.46.0)
       mri: 1.1.6
       ora: 4.1.1
-      prismjs: 1.27.0
+      prismjs: 1.30.0
       prop-types: 15.8.1
       q-i: 2.0.1
       qss: 2.0.3
@@ -35096,7 +35098,7 @@ snapshots:
       '@vitejs/plugin-vue': 2.3.4(vite@2.9.18(sass@1.34.0)(stylus@0.54.8))(vue@3.2.33)
       '@vueuse/core': 8.9.4(vue@3.2.33)
       body-scroll-lock: 4.0.0-beta.0
-      prismjs: 1.29.0
+      prismjs: 1.30.0
       vite: 2.9.18(sass@1.34.0)(stylus@0.54.8)
       vue: 3.2.33
     transitivePeerDependencies:
@@ -35521,7 +35523,7 @@ snapshots:
       core-js: 3.27.2
       debounce: 1.2.1
       hash-sum: 2.0.0
-      prismjs: 1.29.0
+      prismjs: 1.30.0
       recast: 0.19.1
       vue: 2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24)
       vue-inbrowser-compiler: 4.72.4(@vue/compiler-sfc@3.2.47)(vue-template-compiler@2.7.14)(vue@2.7.14(patch_hash=26fyyf7iv7yfd4w3hhy5cm2p24))
@@ -35539,7 +35541,7 @@ snapshots:
       core-js: 3.26.1
       debounce: 1.2.1
       hash-sum: 2.0.0
-      prismjs: 1.29.0
+      prismjs: 1.30.0
       vue: 3.2.37
       vue-inbrowser-compiler-sucrase: 4.72.4(@vue/compiler-sfc@3.2.45)(vue-template-compiler@2.7.14)(vue@3.2.37)
       vue-prism-editor: 2.0.0-alpha.2(vue@3.2.37)
