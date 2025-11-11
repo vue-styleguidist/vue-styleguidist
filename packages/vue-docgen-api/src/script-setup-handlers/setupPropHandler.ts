@@ -85,6 +85,35 @@ export default defineHandler(async function setupPropHandler(
 							}
 						})
 					}
+				} else {
+					// add defaults from Reactive Props Destructure
+					// pattern: const { propName = defaultValue } = defineProps<...>()
+					const parent = nodePath.parent
+					if (
+						parent &&
+						bt.isVariableDeclarator(parent.node) &&
+						bt.isObjectPattern(parent.node.id)
+					) {
+						// iterate over the destructured properties
+						parent
+							.get('id')
+							.get('properties')
+							.each((propPath: NodePath) => {
+								if (
+									bt.isObjectProperty(propPath.node) &&
+									bt.isIdentifier(propPath.node.key) &&
+									bt.isAssignmentPattern(propPath.node.value)
+								) {
+									const propName = propPath.get('key').node.name
+									const defaultValue = propPath.get('value').get('right')
+									const propDescriptor = documentation.getPropDescriptor(propName)
+									propDescriptor.defaultValue = {
+										func: false,
+										value: print(defaultValue).code
+									}
+								}
+							})
+					}
 				}
 			}
 			return false

@@ -6,7 +6,6 @@ import resolveExportedComponent from '../utils/resolveExportedComponent'
 import Documentation, { PropDescriptor } from '../Documentation'
 import setupPropHandler from './setupPropHandler'
 
-
 function parse(src: string, plugins?: ParserPlugin[]): bt.File {
 	return babylon({ plugins }).parse(src)
 }
@@ -238,22 +237,22 @@ describe('setupPropHandler', () => {
 				})
 			})
 
-      it('returns types as a parameter', async () => {
-        const src = `
+			it('returns types as a parameter', async () => {
+				const src = `
         defineProps({
           foo: {
             type: Map<number, number>,
           },
         });`
 
-        const prop = await parserTest(src)
+				const prop = await parserTest(src)
 				expect(documentation.getPropDescriptor).toHaveBeenCalledWith('foo')
 				expect(prop.type).toMatchInlineSnapshot(`
 					{
 					  "name": "Map<number, number>",
 					}
 				`)
-      })
+			})
 		})
 
 		describe('local interfaces and types', () => {
@@ -303,6 +302,20 @@ describe('setupPropHandler', () => {
         })
 				`
 			const prop = await parserTest(src)
+			expect(prop.defaultValue && prop.defaultValue.value).toContain(`myValue: true`)
+		})
+
+		it('extracts defaults from Reactive Props Destructure', async () => {
+			const src = `
+      			const { testProp = { myValue: true } } = defineProps<{
+					/**
+					 * Should the prop be required?
+					 */
+					testProp?: { myValue: boolean }
+				}>()
+				`
+			const prop = await parserTest(src)
+			expect(documentation.getPropDescriptor).toHaveBeenCalledWith('testProp')
 			expect(prop.defaultValue && prop.defaultValue.value).toContain(`myValue: true`)
 		})
 	})
