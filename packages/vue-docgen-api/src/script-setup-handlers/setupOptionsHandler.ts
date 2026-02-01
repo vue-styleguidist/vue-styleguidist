@@ -31,6 +31,7 @@ export default async function setupOptionsHandler(
 						const key = property.key.name
 						if (key === 'name' && property.value.type === 'StringLiteral') {
 							documentation.set('name', property.value.value)
+							documentation.set('displayName', property.value.value)
 						}
 					}
 				})
