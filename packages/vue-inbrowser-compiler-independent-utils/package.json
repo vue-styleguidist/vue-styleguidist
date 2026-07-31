@@ -27,12 +27,12 @@
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
     "@rollup/plugin-typescript": "8.5.0",
-    "@types/dedent": "0.7.0",
-    "@types/domhandler": "2.4.2",
+    "@types/dedent": "0.7.2",
+    "@types/domhandler": "2.4.5",
     "dedent": "0.7.0",
-    "tslib": "2.5.0",
+    "tslib": "2.8.1",
     "typescript": "4.9.5",
-    "rollup": "2.79.2",
+    "rollup": "2.80.0",
     "vue": "2.7.14"
   },
   "peerDependencies": {
