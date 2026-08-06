@@ -38,6 +38,7 @@ describe('setupOptionsHandler', () => {
         `
 		await parserTest(src)
 		expect(documentation.get('name')).toEqual('testName')
+		expect(documentation.get('displayName')).toEqual('testName')
 	})
 
 	it('should resolve info from the jsdoc of defineOptions', async () => {
